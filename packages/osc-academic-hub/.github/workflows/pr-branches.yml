@@ -116,6 +116,7 @@ jobs:
 
       - name: Create volume
         uses: superfly/flyctl-actions@1.1
+        continue-on-error: true
         with:
           args:
             "volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
