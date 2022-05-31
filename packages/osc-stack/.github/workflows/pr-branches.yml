@@ -104,7 +104,7 @@ jobs:
         continue-on-error: true
         with:
           args:
-            "create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college"
+            "create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }} "
 
       - name: Create session secret
         uses: superfly/flyctl-actions@1.1
