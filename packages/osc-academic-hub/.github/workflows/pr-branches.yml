@@ -103,7 +103,7 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         with:
           args:
-            "flyctl volumes create data --region lhr --size 1 --app ${{ steps.app_name.outputs.value }}-branch"
+            "volumes create data --region lhr --size 1 --app ${{ steps.app_name.outputs.value }}-branch"
 
       - name: 🚀 Deploy PR Branch
         if: ${{ github.ref != 'refs/heads/main' }}
