@@ -44,7 +44,6 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
-        <p> test change </p>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
