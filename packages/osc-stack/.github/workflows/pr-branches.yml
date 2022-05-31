@@ -110,7 +110,7 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         with:
           args:
-            "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --ignore"
+            "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
 
 
       - name: Create volume
