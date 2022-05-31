@@ -108,6 +108,7 @@ jobs:
 
       - name: Create session secret
         uses: superfly/flyctl-actions@1.1
+        continue-on-error: true
         with:
           args:
             "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
