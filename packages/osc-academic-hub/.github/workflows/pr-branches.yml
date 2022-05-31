@@ -99,6 +99,13 @@ jobs:
           file: "fly.toml"
           field: "app"
 
+      - name: Create app
+        uses: superfly/flyctl-actions@1.1
+        with:
+          args:
+            "create ${{ steps.app_name.outputs.value }}-branch"
+
+
       - name: Create volume
         uses: superfly/flyctl-actions@1.1
         with:
