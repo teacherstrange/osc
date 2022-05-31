@@ -1,4 +1,4 @@
-name: Staging App
+name: PR Branch App
 on:
   pull_request:
     types: [opened, reopened, synchronize] 
@@ -10,7 +10,7 @@ env:
 jobs:
 
   build:
-    name: 🐳 Build staging
+    name: 🐳 Build PR Branch
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -72,14 +72,14 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
   deploy:
-    name: 🚀 Deploy staging
+    name: 🚀 Deploy PR Branch
     runs-on: ubuntu-latest
 
     # Only run one deployment at a time per PR.
     concurrency:
       group: pr-${{ github.event.number }}
 
-    # Create a GitHub deployment environment per staging app so it shows up
+    # Create a GitHub deployment environment per pr branch app so it shows up
     # in the pull request UI.
     environment:
       name: pr-${{ github.event.number }}
@@ -107,6 +107,6 @@ jobs:
         with:
           org: "open-study-college"
           name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
-          args: "deploy --app ${{ steps.app_name.outputs.value }}-staging --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}"
+          args: "deploy --app ${{ steps.app_name.outputs.value }}-branch --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
