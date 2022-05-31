@@ -1,0 +1,112 @@
+name: Staging App
+on:
+  pull_request:
+    types: [opened, reopened, synchronize] 
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  FLY_REGION: iad
+
+jobs:
+
+  build:
+    name: 🐳 Build staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+      
+      - name: What
+        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.0.0
+        id: app_name
+        with:
+          file: "fly.toml"
+          field: "app"
+
+      - name: log app name
+        run: echo "The selected app name is ${{ steps.app_name.outputs.value }}"
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      # Setup cache 
+      - name: ⚡️ Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx- 
+            
+      - name: 🔑 Fly Registry Auth
+        uses: docker/login-action@v1
+        with:
+          registry: registry.fly.io
+          username: x
+          password: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: 🐳 Docker build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}
+          build-args: |
+            COMMIT_SHA=${{ github.sha }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+
+      # This ugly bit is necessary if you don't want your cache to grow forever
+      # till it hits GitHub's limit of 5GB.
+      # Temp fix
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
+      - name: 🚚 Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+  deploy:
+    name: 🚀 Deploy staging
+    runs-on: ubuntu-latest
+
+    # Only run one deployment at a time per PR.
+    concurrency:
+      group: pr-${{ github.event.number }}
+
+    # Create a GitHub deployment environment per staging app so it shows up
+    # in the pull request UI.
+    environment:
+      name: pr-${{ github.event.number }}
+      url: ${{ steps.deploy_pr.outputs.url }}
+
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.0.0
+        id: app_name
+        with:
+          file: "fly.toml"
+          field: "app"
+
+      - name: 🚀 Deploy PR Branch
+        if: ${{ github.ref != 'refs/heads/main' }}
+        id: deploy_pr
+        uses: superfly/fly-pr-review-apps@1.0.0
+        # uses: superfly/flyctl-actions@1.3
+        with:
+          org: "open-study-college"
+          name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
+          args: "deploy --app ${{ steps.app_name.outputs.value }}-staging --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}"
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
