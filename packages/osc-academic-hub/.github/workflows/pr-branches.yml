@@ -110,7 +110,7 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         with:
           args:
-            "secrets set SESSION_SECRET=$(openssl rand -hex 32) --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} y"
+            "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --detach"
 
 
       - name: Create volume
