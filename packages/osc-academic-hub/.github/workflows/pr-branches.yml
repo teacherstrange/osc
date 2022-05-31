@@ -103,14 +103,14 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         with:
           args:
-            "create ${{ steps.app_name.outputs.value }}-branch --org open-study-college"
+            "create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college"
 
 
       - name: Create volume
         uses: superfly/flyctl-actions@1.1
         with:
           args:
-            "volumes create data --region lhr --size 1 --app ${{ steps.app_name.outputs.value }}-branch"
+            "volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
 
       - name: 🚀 Deploy PR Branch
         if: ${{ github.ref != 'refs/heads/main' }}
@@ -119,6 +119,6 @@ jobs:
         with:
           org: "open-study-college"
           name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
-          args: "deploy --app ${{ steps.app_name.outputs.value }}-branch --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}"
+          args: "deploy --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
