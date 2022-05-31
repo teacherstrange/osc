@@ -103,7 +103,7 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         with:
           args:
-            "create ${{ steps.app_name.outputs.value }}-branch --slug open-study-college"
+            "create ${{ steps.app_name.outputs.value }}-branch --org open-study-college"
 
 
       - name: Create volume
