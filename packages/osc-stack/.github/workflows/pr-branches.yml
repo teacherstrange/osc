@@ -99,11 +99,16 @@ jobs:
           file: "fly.toml"
           field: "app"
 
+      - name: Create volume
+        uses: superfly/flyctl-actions@1.1
+        with:
+          args:
+            "fly volumes create data --size 1 --app ${{ steps.app_name.outputs.value }}-branch"
+
       - name: 🚀 Deploy PR Branch
         if: ${{ github.ref != 'refs/heads/main' }}
         id: deploy_pr
         uses: superfly/fly-pr-review-apps@1.0.0
-        # uses: superfly/flyctl-actions@1.3
         with:
           org: "open-study-college"
           name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
