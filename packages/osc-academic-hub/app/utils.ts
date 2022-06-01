@@ -3,7 +3,7 @@ import { useMemo } from "react";
 
 import type { User } from "~/models/user.server";
 
-const DEFAULT_REDIRECT = "/";
+const DEFAULT_REDIRECT = "/admin";
 
 /**
  * This should be used any time the redirect path is user-provided
@@ -48,6 +48,7 @@ function isUser(user: any): user is User {
   return user && typeof user === "object" && typeof user.email === "string";
 }
 
+// use this when you just want the value of user, ie to redirect
 export function useOptionalUser(): User | undefined {
   const data = useMatchesData("root");
   if (!data || !isUser(data.user)) {
@@ -56,6 +57,7 @@ export function useOptionalUser(): User | undefined {
   return data.user;
 }
 
+// use this when you want to ensure there is a user on the page, or it throws an error
 export function useUser(): User {
   const maybeUser = useOptionalUser();
   if (!maybeUser) {
