@@ -1,12 +1,21 @@
 import { Form, Link } from "@remix-run/react";
+import { json, LoaderFunction, redirect } from "@remix-run/server-runtime";
+import { getUserId } from "~/session.server";
 
 import { useOptionalUser } from "~/utils";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await getUserId(request);
+  if (!userId) return redirect("/");
+  return json({});
+};
 
 export default function Index() {
   const user = useOptionalUser();
   return (
     <div>
-      <h1 className="text-slate-100">This is the index page</h1>
+      <h1 className="text-slate-100">This is the admin index page</h1>
+      <p className="text-slate-100">Welcome {user?.email}</p>
       <Form action="/logout" method="post">
         <button
           type="submit"
