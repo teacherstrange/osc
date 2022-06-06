@@ -12,6 +12,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { ChakraProvider } from "@chakra-ui/react";
+import { withEmotionCache } from "@emotion/react";
+import type { EmotionCache } from "@emotion/react";
+import { useEmotionCache } from "./hooks/useEmotionCache";
+import DOMPurify from "isomorphic-dompurify";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
@@ -36,19 +41,43 @@ export const loader: LoaderFunction = async ({ request }) => {
   });
 };
 
+interface DocumentProps {
+  children: React.ReactNode;
+}
+
+const Document = withEmotionCache(
+  ({ children }: DocumentProps, emotionCache: EmotionCache) => {
+    const serverStyleData = useEmotionCache(emotionCache);
+    return (
+      <html lang="en" className="h-full">
+        <head>
+          <Links />
+          <Meta />
+          {serverStyleData.map(({ key, ids, css }) => (
+            <style
+              key={key}
+              data-emotion={`${key} ${ids.join(" ")}`}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(css) }}
+            />
+          ))}
+        </head>
+        <body>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </body>
+      </html>
+    );
+  }
+);
+
 export default function App() {
   return (
-    <html lang="en" className="h-full">
-      <head>
-        <Meta />
-        <Links />
-      </head>
-      <body className="min-h-screen bg-slate-900">
+    <Document>
+      <ChakraProvider>
         <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
+      </ChakraProvider>
+    </Document>
   );
 }
