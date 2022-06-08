@@ -1,4 +1,5 @@
 import type {
+  HeadersFunction,
   LinksFunction,
   LoaderFunction,
   MetaFunction,
@@ -11,6 +12,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { withEmotionCache } from "@emotion/react";
@@ -20,6 +22,9 @@ import DOMPurify from "isomorphic-dompurify";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
+import { getColorScheme } from "./cookie";
+import lightTheme from "./theme/lightTheme";
+import darkTheme from "./theme/darkTheme";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -33,11 +38,17 @@ export const meta: MetaFunction = () => ({
 
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>;
+  colorScheme: string;
 };
+
+export const headers: HeadersFunction = () => ({
+  "Accept-CH": "Sec-CH-Prefers-Color-Scheme",
+});
 
 export const loader: LoaderFunction = async ({ request }) => {
   return json<LoaderData>({
     user: await getUser(request),
+    colorScheme: await getColorScheme(request),
   });
 };
 
@@ -73,9 +84,10 @@ const Document = withEmotionCache(
 );
 
 export default function App() {
+  const { colorScheme } = useLoaderData();
   return (
     <Document>
-      <ChakraProvider>
+      <ChakraProvider theme={colorScheme === "light" ? lightTheme : darkTheme}>
         <Outlet />
       </ChakraProvider>
     </Document>
