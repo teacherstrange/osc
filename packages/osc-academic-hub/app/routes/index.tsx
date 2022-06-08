@@ -1,9 +1,23 @@
 import { Form } from "@remix-run/react";
+import { Link, useLoaderData, useLocation, useSubmit } from "@remix-run/react";
 
 import { useOptionalUser } from "~/utils";
+import { getColorScheme } from "~/cookie";
+import { LoaderFunction } from "@remix-run/server-runtime";
+import FormToggle from "~/components/FormToggle";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const colorScheme = await getColorScheme(request);
+  return { colorScheme };
+};
 
 export default function Index() {
   const user = useOptionalUser();
+  const props = useLoaderData() ?? undefined;
+  const colorScheme = props ? props.colorScheme : undefined;
+  const submit = useSubmit();
+  const location = useLocation();
   return (
     <div>
       <h1 className="text-slate-100">This is the index page</h1>
@@ -15,6 +29,22 @@ export default function Index() {
           Logout
         </button>
       </Form>
+      {colorScheme && (
+        <FormToggle
+          leftIcon={<MoonIcon color={"secondary"} margin={2} />}
+          rightIcon={<SunIcon color={"secondary"} margin={2} />}
+          isChecked={colorScheme === "light" ? true : false}
+          onToggle={() => {
+            const formData = new FormData();
+            formData.set("pathname", location.pathname);
+            submit(formData, {
+              method: "post",
+              action: "/actions/changeTheme",
+            });
+          }}
+          id="color-mode-toggle"
+        />
+      )}
     </div>
   );
 }
