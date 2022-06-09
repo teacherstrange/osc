@@ -40,7 +40,7 @@ RUN npm run build
 # Finally, build the production image with minimal footprint
 FROM base
 
-ENV DATABASE_URL=file:/data/sqlite.db
+ENV DATABASE_URL=mysql://p1exddxj3evx:pscale_pw_5NxG8YWLIPiXcxlYU5mAneVCEsdOH343oO6eaRJM0Pc@9sjaw7dz29kl.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict
 ENV PORT="8080"
 ENV NODE_ENV="production"
 
