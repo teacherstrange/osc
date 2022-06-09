@@ -105,5 +105,8 @@
   },
   "prisma": {
     "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
-  }
+  },
+  "browserslist": [
+    "last 2 versions, not dead"
+  ]
 }
