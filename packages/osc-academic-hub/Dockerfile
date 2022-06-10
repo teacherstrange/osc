@@ -40,7 +40,7 @@ RUN npm run build
 # Finally, build the production image with minimal footprint
 FROM base
 
-ENV DATABASE_URL='mysql://kqzcnthcrth0:pscale_pw_Gz9v3f3YQ5jMaW_MT_9jlwKHz_FZUcNCIy_donaAypc@qd6hc1lvteex.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict'
+ENV DATABASE_URL='mysql://kqzcnthcrth0:pscale_pw_Gz9v3f3YQ5jMaW_MT_9jlwKHz_FZUcNCIy_donaAypc@qd6hc1lvteex.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=./cert/server-cert.pem'
 ENV PORT="8080"
 ENV NODE_ENV="production"
 
@@ -54,6 +54,10 @@ COPY --from=build /myapp/node_modules/.prisma /myapp/node_modules/.prisma
 
 COPY --from=build /myapp/build /myapp/build
 COPY --from=build /myapp/public /myapp/public
+
+RUN mkdir -p cert
+COPY ./cert /myapp/cert
+
 ADD . .
 
 CMD ["npm", "start"]
