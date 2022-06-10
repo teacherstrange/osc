@@ -40,7 +40,6 @@ RUN npm run build
 # Finally, build the production image with minimal footprint
 FROM base
 ENV DATABASE_URL='mysql://6x0udvoxd02n:pscale_pw_Fg5d9IwNTSX2Iv9oTqtzGN7CcFiJt43uenpuBRQ_gtc@qd6hc1lvteex.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=./cert/server-cert.pem'
-EXPOSE 3306
 ENV PORT="8080"
 ENV NODE_ENV="production"
 
@@ -59,5 +58,8 @@ RUN mkdir -p cert
 COPY ./cert /myapp/cert
 
 ADD . .
+
+EXPOSE 3306
+EXPOSE 8080
 
 CMD ["npm", "start"]
