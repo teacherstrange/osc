@@ -37,9 +37,20 @@ RUN npx prisma generate
 ADD . .
 RUN npm run build
 
+# generate ssl certificate
+RUN apt-get update && \
+    apt-get install -y openssl && \
+    openssl genrsa -des3 -passout pass:x -out server.pass.key 2048 && \
+    openssl rsa -passin pass:x -in server.pass.key -out server.key && \
+    rm server.pass.key && \
+    openssl req -new -key server.key -out server.csr \
+    -subj "/C=UK/ST=Birmingham/L=Birmingham/O=OpenStudyCollege/OU=IT Department/CN=akarim@openstudycollege.com" && \
+    openssl x509 -req -in server.csr -signkey server.key -out /myapp/cert/server.crt
+
+
 # Finally, build the production image with minimal footprint
 FROM base
-ENV DATABASE_URL='mysql://6x0udvoxd02n:pscale_pw_Fg5d9IwNTSX2Iv9oTqtzGN7CcFiJt43uenpuBRQ_gtc@qd6hc1lvteex.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict'
+ENV DATABASE_URL='mysql://6x0udvoxd02n:pscale_pw_Fg5d9IwNTSX2Iv9oTqtzGN7CcFiJt43uenpuBRQ_gtc@qd6hc1lvteex.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=/myapp/cert/server.crt'
 ENV PORT="8080"
 ENV NODE_ENV="production"
 
@@ -53,9 +64,6 @@ COPY --from=build /myapp/node_modules/.prisma /myapp/node_modules/.prisma
 
 COPY --from=build /myapp/build /myapp/build
 COPY --from=build /myapp/public /myapp/public
-
-RUN mkdir -p cert
-COPY ./cert /myapp/cert
 
 ADD . .
 
