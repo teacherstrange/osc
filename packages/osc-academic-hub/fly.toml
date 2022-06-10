@@ -34,7 +34,7 @@ script_checks = [ ]
   port = 443
 
   [[services.ports]]
-  handlers = [ "tls", "http" ]
+  handlers = []
   port = 3306
 
   [[services.tcp_checks]]
