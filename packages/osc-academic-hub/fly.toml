@@ -3,6 +3,9 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
 
+[env]
+  SESSION_SECRET="super-duper-s3cret"
+
 [experimental]
 allowed_public_ports = [3306]
 auto_rollback = true
