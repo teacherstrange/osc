@@ -39,8 +39,7 @@ RUN npm run build
 
 # Finally, build the production image with minimal footprint
 FROM base
-
-ENV DATABASE_URL='mysql://kqzcnthcrth0:pscale_pw_Gz9v3f3YQ5jMaW_MT_9jlwKHz_FZUcNCIy_donaAypc@qd6hc1lvteex.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=./cert/server-cert.pem'
+ENV DATABASE_URL='mysql://o180erx0mpj8:pscale_pw_ORhQ8jz-4UuZ2X3QDEyUdTWDMhuPTC1aXjAjXOEd0FA@qd6hc1lvteex.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=./cert/server-cert.pem'
 ENV PORT="8080"
 ENV NODE_ENV="production"
 
