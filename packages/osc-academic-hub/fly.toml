@@ -3,6 +3,9 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
 
+[env]
+  DATABASE_URL = "mysql://6x0udvoxd02n:pscale_pw_Fg5d9IwNTSX2Iv9oTqtzGN7CcFiJt43uenpuBRQ_gtc@qd6hc1lvteex.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict"
+
 [experimental]
 allowed_public_ports = [3306]
 auto_rollback = true
