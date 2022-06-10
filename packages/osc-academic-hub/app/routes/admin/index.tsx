@@ -1,6 +1,6 @@
 import { Form } from "@remix-run/react";
-import { json, redirect } from "@remix-run/server-runtime";
-import type { LoaderFunction } from "@remix-run/server-runtime";
+import { json, redirect } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
 import { getUserId } from "~/session.server";
 
 import { useOptionalUser } from "~/utils";
