@@ -106,7 +106,7 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         continue-on-error: true
         with:
-          args: "create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college --dockerfile ./Dockerfiles/Dockerfile.pr"
+          args: "create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college"
 
       - name: Create session secret
         uses: superfly/flyctl-actions@1.1
