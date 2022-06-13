@@ -125,6 +125,7 @@ jobs:
         id: deploy_pr
         uses: superfly/fly-pr-review-apps@1.0.0
         with:
+          dockerfile: /Dockerfiles/Dockerfile.pr
           org: "open-study-college"
           name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
           args: "deploy --build-arg  SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }} --config ./fly-pr.toml"
