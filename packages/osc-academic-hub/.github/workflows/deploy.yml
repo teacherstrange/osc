@@ -102,6 +102,9 @@ jobs:
       - name: 🛠 Setup Database
         run: npx prisma migrate reset --force
 
+      - name: 🛠 Generate link beetween Database and schema.prisma
+        run: npm run generate
+
       - name: ⚙️ Build
         run: npm run build
 
