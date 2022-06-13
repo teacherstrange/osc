@@ -127,6 +127,6 @@ jobs:
         with:
           org: "open-study-college"
           name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
-          args: "deploy -f /Dockerfiles/Dockerfile.pr --build-arg  SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}"
+          args: "deploy --f /Dockerfiles/Dockerfile.pr --build-arg  SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
