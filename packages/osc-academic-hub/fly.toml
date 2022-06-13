@@ -5,6 +5,7 @@ processes = [ ]
 
 [env]
   SESSION_SECRET="super-duper-s3cret"
+  DATABASE="mysql://ap2ksarsibr8:pscale_pw_3YndOHxE0_Yv2KFb45MXrs0thMdOoanKlMwY4R_D2FM@3jp0zeck4lsy.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=cacert.pem"
 
 [experimental]
 allowed_public_ports = [3306]
