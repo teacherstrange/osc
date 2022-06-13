@@ -106,7 +106,7 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         continue-on-error: true
         with:
-          args: "create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college"
+          args: "create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college --dockerfile ./Dockerfiles/Dockerfile.pr"
 
       - name: Create session secret
         uses: superfly/flyctl-actions@1.1
@@ -127,6 +127,6 @@ jobs:
         with:
           org: "open-study-college"
           name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
-          args: "deploy --build-arg  SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }} --file ./Dockerfiles/Dockerfile.pr"
+          args: "deploy --build-arg  SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
