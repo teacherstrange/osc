@@ -72,6 +72,7 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
   deploy:
+    if: steps.build.outcome == 'success'
     name: 🚀 Deploy PR Branch
     runs-on: ubuntu-latest
 
