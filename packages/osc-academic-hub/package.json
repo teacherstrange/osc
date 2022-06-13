@@ -19,7 +19,7 @@
     "test": "vitest",
     "test:e2e:dev": "start-server-and-test dev http://localhost:3000 \"npx cypress open\"",
     "pretest:e2e:run": "npm run build",
-    "test:e2e:run": "cross-env PORT=8811 start-server-and-test start:mocks http://localhost:8811 \"npx cypress run\"",
+    "test:e2e:run": "cross-env DATABASE=mysql://ap2ksarsibr8:pscale_pw_3YndOHxE0_Yv2KFb45MXrs0thMdOoanKlMwY4R_D2FM@3jp0zeck4lsy.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=cacert.pem PORT=8811 start-server-and-test start:mocks http://localhost:8811 \"npx cypress run\"",
     "typecheck": "tsc -b && tsc -b cypress",
     "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run"
   },
