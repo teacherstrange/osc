@@ -11,6 +11,7 @@ declare global {
 // create a new connection to the DB with every change either.
 // in production we'll have a single connection to the DB.
 if (process.env.NODE_ENV === "production") {
+  console.log{process.env.NODE_ENV, process.env.DATABASE_URL}
   prisma = new PrismaClient({
     datasources: {
       db: {
