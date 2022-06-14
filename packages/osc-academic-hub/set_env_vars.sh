@@ -1,0 +1,9 @@
+export PLANETSCALE_PRISMA_DATABASE_URL=mysql://ap2ksarsibr8:pscale_pw_3YndOHxE0_Yv2KFb45MXrs0thMdOoanKlMwY4R_D2FM@3jp0zeck4lsy.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=./server-ca.pem
+export SHADOW_DATABASE_URL=mysql://z1f1aqscztwy:pscale_pw_KykZLKn8sk3PnhXN_y0koCJOlpYnwMO0AftFjeRj4Fs@3jp0zeck4lsy.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=./server-ca.pem
+export SESSION_SECRET="super-duper-s3cret"
+export LOAD_PATH="app/styles"
+export PATH_TO_MAIN_SCSS="/app/styles/main.scss"
+export PATH_TO_DEST_MAIN_CSS="/app/styles/dest" 
+export PATH_TO_COMPONENTS="/app/components"
+export SERVICE_ENCRYPTION_IV="uf0k0dx55rp7u1sg"
+export SERVICE_ENCRYPTION_KEY="jc7xh9d2lvw2uluo"

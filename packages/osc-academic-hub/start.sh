@@ -6,5 +6,6 @@
 #!/bin/sh
 
 set -ex
+. set_env_vars.sh
 npx prisma migrate deploy
 npm run start
