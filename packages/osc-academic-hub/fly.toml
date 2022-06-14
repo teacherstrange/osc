@@ -9,7 +9,7 @@ processes = [ ]
 [experimental]
 allowed_public_ports = []
 auto_rollback = true
-cmd = ". ./start.sh"
+cmd = ". start.sh"
 entrypoint = "sh"
 
 [mounts]
