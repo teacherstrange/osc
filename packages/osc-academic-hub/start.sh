@@ -6,6 +6,6 @@
 #!/bin/sh
 
 set -ex
-
+npm run createPemKey
 npx prisma migrate deploy
 npm run start
