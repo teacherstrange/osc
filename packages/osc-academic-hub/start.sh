@@ -6,6 +6,6 @@
 #!/bin/sh
 
 set -ex
-npm run createPemKey
+pscale connect osc-academic-hub main --port 3306
 npx prisma migrate deploy
 npm run start
