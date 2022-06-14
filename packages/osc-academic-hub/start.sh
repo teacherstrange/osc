@@ -6,6 +6,5 @@
 #!/bin/sh
 
 set -ex
-pscale connect osc-academic-hub main --port 3306
 npx prisma migrate deploy
 npm run start
