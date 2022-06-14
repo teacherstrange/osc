@@ -10,14 +10,14 @@ declare global {
 }
 
 fs.writeFile(
-  path.join(process.cwd(), `/server-ca.pem`),
+  path.join(process.cwd(), `/prisma/server-ca.pem`),
   process.env.CLIENT_CERTIFICATE!.replace(/\n/g, " "),
   (err) => {
     if (err) return console.log(err);
   }
 );
 
-console.log(path.join(process.cwd(), `/server-ca.pem`));
+console.log(path.join(process.cwd(), `/prisma/server-ca.pem`));
 
 // this is needed because in development we don't want to restart
 // the server with every change, but we want to make sure we don't

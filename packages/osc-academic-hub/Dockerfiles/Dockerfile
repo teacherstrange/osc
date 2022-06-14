@@ -39,8 +39,8 @@ RUN npm run build
 
 # Finally, build the production image with minimal footprint
 FROM base
-ENV PLANETSCALE_PRISMA_DATABASE_URL='mysql://ap2ksarsibr8:pscale_pw_3YndOHxE0_Yv2KFb45MXrs0thMdOoanKlMwY4R_D2FM@3jp0zeck4lsy.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=../server-ca.pem'
-ENV SHADOW_DATABASE_URL='mysql://z1f1aqscztwy:pscale_pw_KykZLKn8sk3PnhXN_y0koCJOlpYnwMO0AftFjeRj4Fs@3jp0zeck4lsy.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=../server-ca.pem'
+ENV PLANETSCALE_PRISMA_DATABASE_URL='mysql://ap2ksarsibr8:pscale_pw_3YndOHxE0_Yv2KFb45MXrs0thMdOoanKlMwY4R_D2FM@3jp0zeck4lsy.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=./server-ca.pem'
+ENV SHADOW_DATABASE_URL='mysql://z1f1aqscztwy:pscale_pw_KykZLKn8sk3PnhXN_y0koCJOlpYnwMO0AftFjeRj4Fs@3jp0zeck4lsy.eu-west-3.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=./server-ca.pem'
 ENV PORT="8080"
 ENV NODE_ENV="production"
 
