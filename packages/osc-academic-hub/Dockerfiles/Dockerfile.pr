@@ -60,4 +60,4 @@ ADD . .
 EXPOSE 3306
 EXPOSE 8080
 
-CMD export $(cat .env) && ["npm", "start"]
+CMD ["npm", "start"]
