@@ -17,11 +17,11 @@ const getDecryptedSecret = () => {
 };
 
 fs.writeFile(
-  path.join(process.cwd(), `/prisma/server-ca.pem`),
+  path.join(process.cwd(), `/prisma/cacert.pem`),
   getDecryptedSecret(),
   (err) => {
     if (err) return console.log(err);
   }
 );
 
-console.log(path.join(process.cwd(), `/prisma/server-ca.pem`));
+console.log(path.join(process.cwd(), `/prisma/cacert.pem`));

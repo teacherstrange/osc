@@ -11,14 +11,6 @@ declare global {
   var __db__: PrismaClient;
 }
 
-// fs.writeFile(
-//   path.join(process.cwd(), `/prisma/server-ca.pem`),
-//   CLIENT_CERTIFICATE.replace(/\n/g, " "),
-//   (err) => {
-//     if (err) return console.log(err);
-//   }
-// );
-
 const algorithm = "aes-128-cbc";
 const decipher = crypto.createDecipheriv(
   algorithm,
@@ -33,14 +25,14 @@ const getDecryptedSecret = () => {
 };
 
 fs.writeFile(
-  path.join(process.cwd(), `/prisma/server-ca.pem`),
+  path.join(process.cwd(), `/prisma/cacert.pem`),
   getDecryptedSecret(),
   (err) => {
     if (err) return console.log(err);
   }
 );
 
-console.log(path.join(process.cwd(), `/prisma/server-ca.pem`));
+console.log(path.join(process.cwd(), `/prisma/cacert.pem`));
 
 // this is needed because in development we don't want to restart
 // the server with every change, but we want to make sure we don't
