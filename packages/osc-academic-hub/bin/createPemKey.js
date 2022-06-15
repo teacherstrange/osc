@@ -24,3 +24,5 @@ fs.writeFile(
     if (err) return console.log(err);
   }
 );
+
+console.log(path.join(process.cwd(), `/prisma/server-ca.pem`));
