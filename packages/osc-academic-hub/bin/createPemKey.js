@@ -19,7 +19,6 @@ const getDecryptedSecret = () => {
 fs.writeFile(
   path.join(process.cwd(), `/prisma/server-ca.pem`),
   getDecryptedSecret(),
-  "base64",
   (err) => {
     if (err) return console.log(err);
   }
