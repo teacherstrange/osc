@@ -99,9 +99,6 @@ jobs:
         with:
           useLockFile: false
 
-      - name: 🛠 Generate Prisma
-        run: npx prisma generate
-
       - name: 🛠 Setup Database
         run: npx prisma migrate reset --force
 
