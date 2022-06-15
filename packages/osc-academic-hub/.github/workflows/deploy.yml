@@ -101,6 +101,8 @@ jobs:
 
       - name: 🛠 Setup Database
         run: npx prisma migrate reset --force
+        env:
+          PLANETSCALE_PRISMA_DATABASE_URL: mysql://0km8q7u4jdmk:pscale_pw_1Vs3DATSnjpCrMdSprJ8R8u1iQSKEMUXSXdRC-0nYd4@g0gbljs4ymlr.us-east-4.psdb.cloud/osc-academic-hub?sslaccept=strict&sslcert=./cacert.pem
 
       - name: ⚙️ Build
         run: npm run build
