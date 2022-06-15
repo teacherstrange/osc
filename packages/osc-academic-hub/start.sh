@@ -11,5 +11,6 @@ export SHADOW_DATABASE_URL='mysql://yhz8t72trvkt:pscale_pw_z8GYVmz6NNVMgsMR3jD3n
 export SERVICE_ENCRYPTION_IV='uf0k0dx55rp7u1sg'
 export SERVICE_ENCRYPTION_KEY='jc7xh9d2lvw2uluo'
 npm run createPemKey
+npx prisma generate
 npx prisma migrate deploy
 npm run start
