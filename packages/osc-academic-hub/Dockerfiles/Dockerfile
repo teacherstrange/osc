@@ -56,9 +56,11 @@ COPY --from=build /myapp/node_modules/.prisma /myapp/node_modules/.prisma
 
 COPY --from=build /myapp/build /myapp/build
 COPY --from=build /myapp/public /myapp/public
-COPY --from=build /myapp/prisma /myapp/public
 
 ADD . .
+
+RUN mkdir -p prisma
+COPY ./prisma /app/prisma
 
 EXPOSE 3306
 EXPOSE 8080

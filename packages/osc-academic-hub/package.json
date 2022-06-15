@@ -23,8 +23,7 @@
     "typecheck": "tsc -b && tsc -b cypress",
     "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run",
     "reset": "npx prisma migrate reset",
-    "generate": "npx prisma generate",
-    "createPemKey": "node bin/createPemKey.js "
+    "generate": "npx prisma generate"
   },
   "prettier": {},
   "eslintIgnore": [

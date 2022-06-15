@@ -1,38 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-import fs from "fs";
-import { tmpdir } from "os";
-import path from "path";
-import crypto from "crypto";
-import { encrypted } from "../prisma/server-ca-enc";
 
 let prisma: PrismaClient;
 
 declare global {
   var __db__: PrismaClient;
 }
-
-const algorithm = "aes-128-cbc";
-const decipher = crypto.createDecipheriv(
-  algorithm,
-  process.env.SERVICE_ENCRYPTION_KEY!,
-  process.env.SERVICE_ENCRYPTION_IV!
-);
-
-const getDecryptedSecret = () => {
-  let decrypted = decipher.update(encrypted, "base64", "utf8");
-  decrypted += decipher.final("utf8");
-  return decrypted;
-};
-
-fs.writeFile(
-  path.join(process.cwd(), `/prisma/cacert.pem`),
-  getDecryptedSecret(),
-  (err) => {
-    if (err) return console.log(err);
-  }
-);
-
-console.log(path.join(process.cwd(), `/prisma/cacert.pem`));
 
 // this is needed because in development we don't want to restart
 // the server with every change, but we want to make sure we don't
