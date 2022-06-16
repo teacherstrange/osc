@@ -1,4 +1,4 @@
-import { createCookie } from "@remix-run/node";
+import { createCookie } from '@remix-run/node';
 
 // Create a cookie to track color scheme state
 export const colorSchemeCookie = createCookie('color-scheme');
