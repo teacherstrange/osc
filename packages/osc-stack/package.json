@@ -131,14 +131,29 @@
   "browserslist": [
     "last 2 versions, not dead"
   ],
-  
   "lint-staged": {
-    "/": [
-      "npm run build:css",
+    "*.js": [
       "npm run prettier-format",
-      "npm run lint-and-fix",
-      "npm run stylelint-and-fix",
-      "git add"
+      "npm run lint-and-fix"
+    ],
+    "app/*": [
+      "npm run build:css"
+    ],
+    "app/*.ts": [
+      "npm run prettier-format",
+      "npm run lint-and-fix"
+    ],
+    "app/*.tsx": [
+      "npm run prettier-format",
+      "npm run lint-and-fix"
+    ],
+    "aap/*.html": [
+      "npm run prettier-format",
+      "npm run lint-and-fix"
+    ],
+    "app/*.scss": [
+      "npm run prettier-format",
+      "npm run stylelint-and-fix"
     ]
   }
 }
