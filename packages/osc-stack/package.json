@@ -132,24 +132,14 @@
     "last 2 versions, not dead"
   ],
   "lint-staged": {
-    "*.json": [
-      "npm run prettier-format"
-    ],
-    "*.js": [
-      "npm run lint-and-fix",
-      "npm run prettier-format"
-    ],
-    "*.ts": [
-      "npm run lint-and-fix",
-      "npm run prettier-format"
-    ],
-    "*.tsx": [
-      "npm run lint-and-fix",
-      "npm run prettier-format"
-    ],
     "*.scss": [
-      "npm run stylelint-and-fix",
+      "npm run stylelint-and-fix"
+    ],
+    "*.(js|ts|tsx|jsx|json|scss)": [
       "npm run prettier-format"
+    ],
+    "*.(js|ts|tsx)": [
+      "npm run lint-and-fix"
     ]
   }
 }
