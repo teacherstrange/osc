@@ -1,10 +1,12 @@
-import "/app/styles/dest/main.css";
-import "/app/components/avatar/avatar.css";
-import "/app/components/datepicker/datepicker.css";
-import "/app/components/footer/footer.css";
-import "/app/components/logo/logo.css";
-import "/app/components/nav/nav.css";
-import "/app/components/pagination/pagination.css";
+// commented out until i end up importing the components
+// import "/app/styles/dest/main.css";
+// import "/app/components/avatar/avatar.css";
+// import "/app/components/datepicker/datepicker.css";
+// import "/app/components/footer/footer.css";
+// import "/app/components/logo/logo.css";
+// import "/app/components/nav/nav.css";
+// import "/app/components/pagination/pagination.css";
+
 import darkTheme from "../app/theme/darkTheme";
 import lightTheme from "../app/theme/lightTheme";
 import { ChakraProvider } from "@chakra-ui/react";
