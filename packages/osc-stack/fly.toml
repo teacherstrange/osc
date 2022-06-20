@@ -11,6 +11,7 @@ entrypoint = "sh"
 
 [env]
   GA_TRACKING_ID="G-W3M8VV06DE"
+  GTM_TRACKING_ID="GTM-TGRN9Z6"
 
 [mounts]
 source = "data"
