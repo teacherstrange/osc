@@ -71,9 +71,9 @@ export const loader: LoaderFunction = async ({ request }) => {
         user: await getUser(request),
         colorScheme: await getColorScheme(request),
         gaTrackingId:
-            process.env.NODE_ENV === 'development' ? process.env.GA_TRACKING_ID : undefined,
+            process.env.NODE_ENV === 'production' ? process.env.GA_TRACKING_ID : undefined,
         googleTagManagerId:
-            process.env.NODE_ENV === 'development' ? process.env.GTM_TRACKING_ID : undefined
+            process.env.NODE_ENV === 'production' ? process.env.GTM_TRACKING_ID : undefined
     });
 };
 interface DocumentProps {
