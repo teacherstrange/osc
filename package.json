@@ -43,7 +43,8 @@
     "@nrwl/nx-cloud": "latest"
   },
   "dependencies": {
-    "osc-academic-hub": "file:packages/osc-academic-hub"
+    "osc-academic-hub": "file:packages/osc-academic-hub",
+    "header": "file:packages/header"
   },
   "scripts": {
        "build:all": "nx run-many --target=build --all",
