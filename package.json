@@ -38,9 +38,21 @@
     "typescript": "^4.6.4",
     "vite": "^2.9.9",
     "vite-tsconfig-paths": "^3.4.1",
-    "vitest": "^0.12.8"
+    "vitest": "^0.12.8",
+    "nx": "14.3.6",
+    "@nrwl/nx-cloud": "latest"
   },
   "dependencies": {
     "osc-academic-hub": "file:packages/osc-academic-hub"
-  }
+  },
+  "scripts": {
+       "build:all": "nx run-many --target=build --all",
+       "build:app1": "nx build app1",
+       "build:since": "nx affected --target=build",
+       "test:all": "nx run-many --target=test --all",
+       "test:app1": "nx test app1",
+       "test:since": "nx affected --target=test",
+       "dev": "nx run-many --target=dev --all",
+       "dev:app1": "nx dev app1"
+      }
 }

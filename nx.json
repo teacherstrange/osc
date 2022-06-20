@@ -1,0 +1,43 @@
+{
+  "extends": "nx/presets/npm.json",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "build:css",
+          "build:remix",
+          "dev",
+          "dev:css",
+          "dev:remix",
+          "format",
+          "generate:css",
+          "lint",
+          "lint-and-fix",
+          "prettier-format",
+          "stylelint",
+          "stylelint-and-fix",
+          "setup",
+          "test",
+          "test:e2e:dev",
+          "pretest:e2e:run",
+          "test:e2e:run",
+          "typecheck",
+          "validate"
+        ],
+        "accessToken": "NTQ2MTRmNGMtYTc3Ni00ZWM2LTk3ODEtYTk0NzVhMGNmMzM4fHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ]
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
+  }
+}
