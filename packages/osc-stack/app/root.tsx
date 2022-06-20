@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation, useMatches } from '@remix-run/react';
 import type { HeadersFunction } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useLocation } from '@remix-run/react';
 import { getColorScheme } from './cookie';
 import lightTheme from './theme/lightTheme';
 import darkTheme from './theme/darkTheme';
@@ -18,8 +18,6 @@ import { getUser } from './session.server';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 import { PushNotification } from '~/utils/server/pwa-utils.server';
 import * as gtag from '~/utils/gtags.client';
-
-import tailwindStylesheetUrl from './styles/tailwind.css';
 
 let isMount = true;
 export const links: LinksFunction = () => {
@@ -117,7 +115,7 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache: Em
             }
         }
     }, [location, matches]);
-    
+
     const { gaTrackingId, googleTagManagerId } = useLoaderData<LoaderData>();
 
     useEffect(() => {
