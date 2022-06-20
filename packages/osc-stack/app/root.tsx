@@ -14,10 +14,10 @@ import type { EmotionCache } from '@emotion/react';
 import { useEmotionCache } from './hooks/useEmotionCache';
 import DOMPurify from 'isomorphic-dompurify';
 import styles from 'app/styles/dest/main.css';
+import * as gtag from '~/utils/gtags.client';
 import { getUser } from './session.server';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 import { PushNotification } from '~/utils/server/pwa-utils.server';
-import * as gtag from '~/utils/gtags.client';
 
 let isMount = true;
 export const links: LinksFunction = () => {
