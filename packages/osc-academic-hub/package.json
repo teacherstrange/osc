@@ -107,5 +107,6 @@
   },
   "browserslist": [
     "last 2 versions, not dead"
-  ]
+  ],
+  "version": "0.0.1"
 }
