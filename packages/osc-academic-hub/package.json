@@ -3,7 +3,6 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "prepare": "husky install",
     "build": "run-s build:*",
     "build:css": "npm run generate:css -- --minify",
     "build:remix": "remix build",
@@ -34,6 +33,7 @@
     "/public/build"
   ],
   "dependencies": {
+    "header": "*",
     "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11.9.0",
