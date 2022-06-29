@@ -8,8 +8,8 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
-function Header() {
+function Tester() {
     return (React__default["default"].createElement("header", null, "Lerna is the original monorepo tool!"));
 }
 
-exports.Header = Header;
+exports.Tester = Tester;

@@ -54,6 +54,7 @@
        "test:app1": "nx test app1",
        "test:since": "nx affected --target=test",
        "dev": "nx run-many --target=dev --all",
-       "dev:app1": "nx dev app1"
+       "dev:app1": "nx dev app1",
+       "setup": "lerna exec -- npm i && lerna link"
       }
 }
