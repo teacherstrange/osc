@@ -1,4 +1,5 @@
 import typescript from 'rollup-plugin-typescript2';
+import { peerDependencies } from "./package.json";
 
 export default {
     input: ["src/index.tsx"],
@@ -13,5 +14,5 @@ export default {
     plugins: [
         typescript(),
     ],
-    external: ["react"]
+    external: Object.keys(peerDependencies)
 };
