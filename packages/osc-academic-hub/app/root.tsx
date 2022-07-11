@@ -11,7 +11,6 @@ import { withEmotionCache } from '@emotion/react';
 import type { EmotionCache } from '@emotion/react';
 import { useEmotionCache } from './hooks/useEmotionCache';
 import DOMPurify from 'isomorphic-dompurify';
-import { Tester }  from 'header';
 
 import tailwindStylesheetUrl from './styles/tailwind.css';
 import { getUser } from './session.server';
@@ -62,7 +61,6 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache: Em
                 ))} */}
             </head>
             <body>
-                <Tester></Tester>
                 {children}
                 <ScrollRestoration />
                 <Scripts />
