@@ -65,6 +65,6 @@
     "test:since": "nx affected --target=test",
     "dev": "nx run-many --target=dev --all",
     "dev:app1": "nx dev app1",
-    "setup": "npm i && lerna exec -- npm i && lerna link convert && npx prisma generate --schema=packages/osc-academic-hub/prisma/schema.prisma"
+    "setup": "lerna link convert && npm i && npx prisma generate --schema=packages/osc-academic-hub/prisma/schema.prisma"
   }
 }

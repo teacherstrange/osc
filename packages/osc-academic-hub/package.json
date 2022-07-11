@@ -52,9 +52,6 @@
     "react-dom": "^18.2.0",
     "tiny-invariant": "^1.2.0"
   },
-  "engines": {
-    "node": ">=14"
-  },
   "prisma": {
     "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
   },
