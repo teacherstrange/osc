@@ -21,6 +21,9 @@
   },
   "peerDependencies": {
     "@chakra-ui/react": "^2.2.3",
-    "react": "^18.1.0"
+    "react": "^18.1.0",
+    "framer-motion": ">=6",
+    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/system": "^1.12.0"
   }
 }
