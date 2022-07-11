@@ -1,3 +1,0 @@
-export {
-  Tester
-} from './Header';
