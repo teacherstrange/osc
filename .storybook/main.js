@@ -29,6 +29,13 @@ module.exports = {
           }
       };
 
+      config.module.rules.push({
+        test: /\.(js|jsx|ts|tsx)$/,
+        resolve: {
+          fullySpecified: false
+        }
+      });
+
       // Return the altered config
       return config;
   }
