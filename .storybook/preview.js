@@ -31,9 +31,6 @@ addDecorator((story) => {
 });
 
 export const parameters = {
-    // chakra: {
-    //     theme: darkTheme
-    // },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
         matchers: {
@@ -41,17 +38,4 @@ export const parameters = {
             date: /Date$/
         }
     },
-    backgrounds: {
-        default: 'dark',
-        values: [
-            {
-                name: 'dark',
-                value: '#272145'
-            },
-            {
-                name: 'light',
-                value: '#fff'
-            }
-        ]
-    }
 };
