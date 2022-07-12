@@ -19,11 +19,13 @@ jobs:
       - uses: actions/checkout@v1
       - name: Install dependencies
         run: yarn
+        working-directory: frontend
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         # Chromatic GitHub Action options
         with:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
+          workingDir: ./packages/header
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitZeroOnChanges: true # 👈 Option to prevent the workflow from failing
