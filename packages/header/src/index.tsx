@@ -1,3 +1,3 @@
 export {
   Header
-} from './stories/Header/Header';
+} from './components/Header/Header';

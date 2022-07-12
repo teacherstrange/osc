@@ -3,8 +3,8 @@ module.exports = {
       emotionAlias: false
   },
   stories: [
-      '../src/stories/**/*.stories.mdx',
-      '../src/stories/**/*.stories.@(js|jsx|ts|tsx)'
+      '../packages/header/src/stories/**/*.stories.mdx',
+      '../packages/header/src/stories/**/*.stories.@(js|jsx|ts|tsx)'
   ],
   addons: [
       '@chakra-ui/storybook-addon',
