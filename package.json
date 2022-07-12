@@ -69,6 +69,9 @@
     "osc-academic-hub": "file:packages/osc-academic-hub"
   },
   "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "chromatic": "chromatic --exit-zero-on-changes",
     "build:all": "nx run-many --target=build --all",
     "build:app1": "nx build app1",
     "build:since": "nx affected --target=build",

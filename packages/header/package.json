@@ -5,10 +5,7 @@
   "scripts": {
     "build": "rm -rf dist && rollup --config",
     "test": "jest",
-    "dev": "rollup -c -w",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "chromatic": "chromatic --exit-zero-on-changes"
+    "dev": "rollup -c -w"
   },
   "dependencies": {
     "@storybook/addon-a11y": "^6.5.9",
