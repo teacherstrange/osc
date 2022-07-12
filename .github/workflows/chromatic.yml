@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     # Job steps
     steps:
-      - run: cd  ./packages/header
-      
       - uses: actions/checkout@v1
       - name: Install dependencies
       - run: yarn
