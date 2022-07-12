@@ -3,8 +3,8 @@ module.exports = {
       emotionAlias: false
   },
   stories: [
-      '../packages/header/src/stories/**/*.stories.mdx',
-      '../packages/header/src/stories/**/*.stories.@(js|jsx|ts|tsx)'
+      '../packages/header/src/components/**/*.stories.mdx',
+      '../packages/header/src/components/**/*.stories.@(js|jsx|ts|tsx)'
   ],
   addons: [
       '@chakra-ui/storybook-addon',
@@ -29,12 +29,12 @@ module.exports = {
           }
       };
 
-      config.module.rules.push({
-        test: /\.(js|jsx|ts|tsx)$/,
-        resolve: {
-          fullySpecified: false
-        }
-      });
+    //   config.module.rules.push({
+    //     test: /\.(js|jsx|ts|tsx)$/,
+    //     resolve: {
+    //       fullySpecified: false
+    //     }
+    //   });
 
       // Return the altered config
       return config;
