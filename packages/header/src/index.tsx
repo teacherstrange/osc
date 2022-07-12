@@ -1,3 +1,3 @@
 export {
   Header
-} from './Header';
+} from './stories/Header/Header';

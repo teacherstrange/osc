@@ -62,7 +62,6 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache: Em
                 ))} */}
             </head>
             <body>
-                <Header/>
                 {children}
                 <ScrollRestoration />
                 <Scripts />
@@ -77,6 +76,7 @@ export default function App() {
     return (
         <Document>
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
+            <Header bg={'red.500'}/>
                 <Outlet />
             </ChakraProvider>
         </Document>

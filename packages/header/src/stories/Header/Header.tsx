@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { AccordionItem, Accordion, AccordionButton, AccordionIcon,  Box,  AccordionPanel } from '@chakra-ui/react'
-import { ChakraProvider } from '@chakra-ui/react'
 
-export function Header() {
+export interface Props { 
+  [x: string]: string
+}
+
+export const Header: FC<Props> = (props) => {
+  const { ...other } = props
     return (
-      <ChakraProvider>
-<Accordion>
+<Accordion {...other}>
   <AccordionItem>
     <h2>
       <AccordionButton>
@@ -15,7 +18,7 @@ export function Header() {
         <AccordionIcon />
       </AccordionButton>
     </h2>
-    <AccordionPanel bg="red.500" pb={4}>
+    <AccordionPanel  color={'primary'} bg={'secondary'}  pb={4}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -40,6 +43,5 @@ export function Header() {
     </AccordionPanel>
   </AccordionItem>
 </Accordion>
-      </ChakraProvider>
     );
 }
