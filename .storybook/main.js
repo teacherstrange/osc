@@ -1,13 +1,25 @@
+require('dotenv').config;
+
+const stories =
+    process.env.NODE_ENV === 'production'
+        ? [
+              '../packages/header/src/components/**/*.stories.mdx',
+              '../packages/header/src/components/**/*.stories.@(js|jsx|ts|tsx)',
+              '../packages/osc-academic-hub/app/components/**/*.stories.mdx',
+              '../packages/osc-academic-hub/app/components/**/*.stories.@(js|jsx|ts|tsx)'
+          ]
+        : [
+              '../packages/header/src/components/**/*.stories.mdx',
+              '../packages/header/src/components/**/*.stories.@(js|jsx|ts|tsx)',
+              '../app/components/**/*.stories.mdx',
+              '../app/components/**/*.stories.@(js|jsx|ts|tsx)'
+          ];
+
 module.exports = {
     features: {
         emotionAlias: false
     },
-    stories: [
-        '../packages/header/src/components/**/*.stories.mdx',
-        '../packages/header/src/components/**/*.stories.@(js|jsx|ts|tsx)',
-        '../packages/osc-academic-hub/app/components/**/*.stories.mdx',
-        '../packages/osc-academic-hub/app/components/**/*.stories.@(js|jsx|ts|tsx)'
-    ],
+    stories,
     addons: [
         '@chakra-ui/storybook-addon',
         '@storybook/addon-links',

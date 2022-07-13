@@ -79,7 +79,7 @@
     "lint-and-fix": "eslint --cache --cache-location ./node_modules/.cache/eslint --max-warnings 0 --ext .ts,.tsx, .js, .jsx --fix --no-error-on-unmatched-pattern .",
     "prettier-format": "prettier --config .prettierrc.json '*.{js,jsx,ts,tsx,json,scss}' '**/*.{js,jsx,ts,tsx,json,scss}' --write",
     "prepare": "husky install",
-    "build-storybook": "cross-env NODE_ENV=production lerna run build:css && build-storybook",
+    "build-storybook": "cross-env lerna run build:css && build-storybook",
     "storybook": "lerna run build:css && concurrently \"lerna run watch:css --parallel\" \"start-storybook -p 6006\"",
     "chromatic": "chromatic --exit-zero-on-changes",
     "build": "lerna run build",
