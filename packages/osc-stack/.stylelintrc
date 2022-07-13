@@ -22,6 +22,12 @@
         "color-no-invalid-hex": true,
         "function-comma-space-after": "always-single-line",
         "function-comma-space-before": "never",
+        "function-no-unknown": [
+            true,
+            {
+            "ignoreFunctions": ["/^map/", "/^list/"]
+            }
+        ],
         "number-leading-zero": "always",
         "string-quotes": "double",
         "number-max-precision": 3,

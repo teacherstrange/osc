@@ -9,4 +9,11 @@ node_modules
 /prisma/data.db
 /prisma/data.db-journal
 
-/app/styles/tailwind.css
+*.log
+.DS_Store
+/.cache
+*.css.map
+/storybook-static
+package-lock.json
+yarn.lock
+*.css
