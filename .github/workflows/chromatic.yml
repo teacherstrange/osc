@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     # Job steps
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - run: rm -v ./package.json ./.storybook/main.js
       - run: mv -v -f packages/osc-academic-hub/** .
