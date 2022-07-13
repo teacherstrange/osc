@@ -3,7 +3,7 @@ import { useLoaderData, useLocation, useSubmit } from '@remix-run/react';
 
 import { getColorScheme } from '~/cookie';
 import type { LoaderFunction } from '@remix-run/server-runtime';
-import FormToggle from '~/components/FormToggle';
+import { FormToggle } from '~/components/FormToggle';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 export const loader: LoaderFunction = async ({ request }) => {

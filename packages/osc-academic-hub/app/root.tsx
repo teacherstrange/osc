@@ -9,9 +9,7 @@ import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@re
 import { ChakraProvider } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
 import type { EmotionCache } from '@emotion/react';
-import { useEmotionCache } from './hooks/useEmotionCache';
-import DOMPurify from 'isomorphic-dompurify';
-import { Header }  from 'header'
+import { Header } from 'header';
 
 import tailwindStylesheetUrl from './styles/tailwind.css';
 import { getUser } from './session.server';
@@ -47,7 +45,7 @@ interface DocumentProps {
 }
 
 const Document = withEmotionCache(({ children }: DocumentProps, emotionCache: EmotionCache) => {
-//  const serverStyleData = useEmotionCache(emotionCache);
+    //  const serverStyleData = useEmotionCache(emotionCache);
     return (
         <html lang="en" className="h-full">
             <head>
@@ -76,7 +74,7 @@ export default function App() {
     return (
         <Document>
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
-            <Header bg={'red.500'}/>
+                <Header bg={'red.500'} />
                 <Outlet />
             </ChakraProvider>
         </Document>

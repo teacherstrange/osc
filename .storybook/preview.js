@@ -1,5 +1,10 @@
 // commented out until i end up importing the components
-// import "/app/styles/dest/main.css";
+// OSC-UI
+import '../packages/header/src/styles/dest/main.css';
+import '../packages/header/src/components/Header/header.css';
+
+// OSC-ACADEMIC-HUB
+import '../packages/osc-academic-hub/app/styles/dest/main.css';
 // import "/app/components/avatar/avatar.css";
 // import "/app/components/datepicker/datepicker.css";
 // import "/app/components/footer/footer.css";
@@ -7,7 +12,7 @@
 // import "/app/components/nav/nav.css";
 // import "/app/components/pagination/pagination.css";
 
-// Dont think we will need this 
+// Dont think we will need this
 // import darkTheme from '../app/theme/darkTheme';
 // import lightTheme from '../app/theme/lightTheme';
 
@@ -37,5 +42,5 @@ export const parameters = {
             color: /(background|color)$/i,
             date: /Date$/
         }
-    },
+    }
 };

@@ -7,6 +7,7 @@
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@faker-js/faker": "^6.3.1",
+    "@fullhuman/postcss-purgecss": "^4.1.3",
     "@nrwl/nx-cloud": "latest",
     "@remix-run/dev": "^1.5.1",
     "@remix-run/eslint-config": "^1.5.1",
@@ -35,19 +36,26 @@
     "babel-loader": "^8.2.5",
     "binode": "^1.0.5",
     "c8": "^7.11.3",
+    "chromatic": "^6.7.0",
+    "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",
+    "cssnano": "^5.1.12",
     "cypress": "^9.6.1",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "happy-dom": "^3.2.2",
     "husky": "^8.0.1",
     "lerna": "^5.0.0",
+    "lint-staged": "^13.0.1",
     "msw": "^0.40.2",
+    "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
     "nx": "^14.3.6",
     "postcss": "^8.4.14",
     "prettier": "2.6.2",
     "prettier-plugin-tailwindcss": "^0.1.11",
+    "rollup-plugin-import-css": "^3.0.3",
+    "sass": "^1.53.0",
     "start-server-and-test": "^1.14.0",
     "stylelint": "^14.8.2",
     "stylelint-config-prettier": "^9.0.3",
@@ -69,17 +77,29 @@
     "osc-academic-hub": "file:packages/osc-academic-hub"
   },
   "scripts": {
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "stylelint": "npx stylelint \"**/*.scss\" --allow-empty-input",
+    "stylelint-and-fix": "npx stylelint \"**/*.scss\" --allow-empty-input --fix",
+    "lint-and-fix": "eslint --cache --cache-location ./node_modules/.cache/eslint --max-warnings 0 --ext .ts,.tsx, .js, .jsx --fix --no-error-on-unmatched-pattern .",
+    "prettier-format": "prettier --config .prettierrc.json '*.{js,jsx,ts,tsx,json,scss}' '**/*.{js,jsx,ts,tsx,json,scss}' --write",
+    "prepare": "husky install",
+    "build-storybook": "cross-env NODE_ENV=production lerna run build:css && build-storybook",
+    "test-storybook": "start-storybook -p 6006",
+    "storybook": "lerna run build:css && concurrently \"lerna run watch:css --parallel\" \"start-storybook -p 6006\"",
     "chromatic": "chromatic --exit-zero-on-changes",
-    "build:all": "nx run-many --target=build --all",
-    "build:app1": "nx build app1",
-    "build:since": "nx affected --target=build",
-    "test:all": "nx run-many --target=test --all",
-    "test:app1": "nx test app1",
-    "test:since": "nx affected --target=test",
-    "dev": "nx run-many --target=dev --all",
-    "dev:app1": "nx dev app1",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "dev": "lerna run dev",
     "setup": "lerna link convert && npm i && npx prisma generate --schema=packages/osc-academic-hub/prisma/schema.prisma"
+  },
+  "lint-staged": {
+    "*.scss": [
+      "npm run stylelint-and-fix"
+    ],
+    "*.(js|ts|tsx|jsx|json|scss)": [
+      "npm run prettier-format"
+    ],
+    "*.(js|ts|tsx/jsx)": [
+      "npm run lint-and-fix"
+    ]
   }
 }

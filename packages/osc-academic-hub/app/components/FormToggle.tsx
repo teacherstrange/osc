@@ -10,7 +10,7 @@ export interface Props {
     isChecked?: boolean;
 }
 
-const FormCheckbox: FC<Props> = (props) => {
+export const FormToggle: FC<Props> = (props) => {
     const { leftIcon, rightIcon, id, text, onToggle, isChecked } = props;
 
     return (
@@ -29,5 +29,3 @@ const FormCheckbox: FC<Props> = (props) => {
         </Box>
     );
 };
-
-export default FormCheckbox;

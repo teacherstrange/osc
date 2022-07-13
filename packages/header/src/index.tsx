@@ -1,3 +1,3 @@
-export {
-  Header
-} from './components/Header/Header';
+import '../src/styles/dest/main.css';
+
+export { Header } from './components/Header/Header';
