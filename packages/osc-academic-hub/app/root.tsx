@@ -74,7 +74,7 @@ export default function App() {
     return (
         <Document>
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
-                <Header bg={'red.500'} />
+                <Header bg={'green.500'} />
                 <Outlet />
             </ChakraProvider>
         </Document>

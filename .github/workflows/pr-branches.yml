@@ -10,6 +10,10 @@ env:
 
 jobs:
   build:
+  defaults:
+    run:
+      working-directory: packages/osc-academic-hub
+
     name: 🐳 Build PR Branch
     runs-on: ubuntu-latest
     steps:
@@ -72,6 +76,10 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
   deploy:
+    defaults:
+      run:
+        working-directory: packages/osc-academic-hub
+
     name: 🚀 Deploy PR Branch
     runs-on: ubuntu-latest
 
