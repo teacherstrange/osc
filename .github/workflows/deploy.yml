@@ -92,7 +92,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - run: rm -v ./package.json ./.storybook/*
+      - run: rm -v ./package.json ./.storybook/main.js
       - run: mv -v -f packages/osc-academic-hub/* .
 
       - name: 🏄 Copy test env vars
@@ -134,7 +134,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - run: rm -v ./package.json ./.storybook/*
+      - run: rm -v ./package.json ./.storybook/main.js
       - run: mv -v -f packages/osc-academic-hub/* .
 
       - name: 👀 Read app name
@@ -198,7 +198,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - run: rm -v ./package.json ./.storybook/*
+      - run: rm -v ./package.json ./.storybook/main.js
       - run: mv -v -f packages/osc-academic-hub/* .
 
       - name: 👀 Read app name
