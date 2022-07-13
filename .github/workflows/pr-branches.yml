@@ -2,8 +2,8 @@ name: PR Branch App
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-  paths:
-    - "packages/osc-academic-hub/**"
+    paths:
+      - "packages/osc-academic-hub/**"
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   FLY_REGION: iad
