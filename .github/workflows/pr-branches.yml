@@ -97,6 +97,9 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
+      - run: rm -v ./package.json
+      - run: mv -v -f packages/osc-academic-hub/* .
+
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
         id: app_name
