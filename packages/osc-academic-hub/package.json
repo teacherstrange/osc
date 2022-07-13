@@ -40,6 +40,7 @@
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
     "@prisma/client": "^3.15.2",
+    "@remix-run/dev": "^1.5.1",
     "@remix-run/node": "^1.5.1",
     "@remix-run/react": "^1.5.1",
     "@remix-run/serve": "^1.5.1",
@@ -52,7 +53,6 @@
     "prisma": "^3.14.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remix": "^1.6.4",
     "run-s": "^0.0.0",
     "tailwindcss": "^3.0.24",
     "tiny-invariant": "^1.2.0"
