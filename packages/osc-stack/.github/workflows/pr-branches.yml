@@ -21,9 +21,6 @@ jobs:
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
-      - name: What2
-        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
         id: app_name
