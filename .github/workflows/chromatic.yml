@@ -14,6 +14,10 @@ jobs:
     # Job steps
     steps:
       - uses: actions/checkout@v1
+
+      - run: rm -v ./package.json
+      - run: mv -v -f packages/osc-academic-hub/* .
+
       - name: Install dependencies
         run: yarn
         # 👇 Adds Chromatic as a step in the workflow
