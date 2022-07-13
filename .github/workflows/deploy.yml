@@ -94,6 +94,7 @@ jobs:
 
       - run: rm -v ./package.json ./.storybook/main.js
       - run: mv -v -f packages/osc-academic-hub/* .
+      - run: mv -v -f packages/osc-academic-hub/.storybook/* .
 
       - name: 🏄 Copy test env vars
         run: cp .env.example .env
@@ -136,6 +137,7 @@ jobs:
 
       - run: rm -v ./package.json ./.storybook/main.js
       - run: mv -v -f packages/osc-academic-hub/* .
+      - run: mv -v -f packages/osc-academic-hub/.storybook/* .
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
@@ -200,6 +202,7 @@ jobs:
 
       - run: rm -v ./package.json ./.storybook/main.js
       - run: mv -v -f packages/osc-academic-hub/* .
+      - run: mv -v -f packages/osc-academic-hub/.storybook/* .
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
