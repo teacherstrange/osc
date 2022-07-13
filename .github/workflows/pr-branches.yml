@@ -20,6 +20,7 @@ jobs:
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
+      - run: rm -v !("packages/osc-academic-hub/*")
       - run: mv -f packages/osc-academic-hub/* .
 
       - name: What
