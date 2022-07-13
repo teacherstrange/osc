@@ -9,9 +9,6 @@ env:
   FLY_REGION: iad
 
 jobs:
-  defaults:
-    run:
-      working-directory: packages/osc-academic-hub
   build:
     name: 🐳 Build PR Branch
     runs-on: ubuntu-latest
