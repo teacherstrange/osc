@@ -4,6 +4,8 @@ on:
     branches:
       - main
       - dev
+    paths:
+      - "packages/osc-academic-hub/**"
   pull_request: {}
 permissions:
   actions: write
