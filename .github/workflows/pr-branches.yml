@@ -4,6 +4,8 @@ on:
     types: [opened, reopened, synchronize]
     paths:
       - "packages/osc-academic-hub/**"
+      - ".github/workflow/pr-branches.yml"
+      - ".github/workflow/deploy.yml"
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   FLY_REGION: iad
