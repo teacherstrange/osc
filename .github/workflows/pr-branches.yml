@@ -20,7 +20,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - run: rm -v ./package.json
+      - run: rm -v ./package.json ./.storybook/*
       - run: mv -v -f packages/osc-academic-hub/* .
 
       - name: What
@@ -97,7 +97,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
-      - run: rm -v ./package.json
+      - run: rm -v ./package.json ./.storybook/*
       - run: mv -v -f packages/osc-academic-hub/* .
 
       - name: 👀 Read app name

@@ -3,8 +3,8 @@ require('dotenv').config;
 const stories = [
     '../packages/header/src/components/**/*.stories.mdx',
     '../packages/header/src/components/**/*.stories.@(js|jsx|ts|tsx)',
-    '../packages/osc-academic-hub/app/components/**/*.stories.mdx',
-    '../packages/osc-academic-hub/app/components/**/*.stories.@(js|jsx|ts|tsx)'
+    '../app/components/**/*.stories.mdx',
+    '../app/components/**/*.stories.@(js|jsx|ts|tsx)'
 ];
 
 module.exports = {
