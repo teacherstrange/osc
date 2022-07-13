@@ -6,6 +6,7 @@ on:
       - dev
     paths:
       - "packages/osc-academic-hub/**"
+      - ".github/workflow/deploy.yml"
   pull_request: {}
 permissions:
   actions: write
@@ -91,6 +92,9 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
+      - run: rm -v ./package.json
+      - run: mv -v -f packages/osc-academic-hub/* .
+
       - name: 🏄 Copy test env vars
         run: cp .env.example .env
 
@@ -129,6 +133,9 @@ jobs:
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
+
+      - run: rm -v ./package.json
+      - run: mv -v -f packages/osc-academic-hub/* .
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
@@ -190,6 +197,9 @@ jobs:
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
+
+      - run: rm -v ./package.json
+      - run: mv -v -f packages/osc-academic-hub/* .
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
