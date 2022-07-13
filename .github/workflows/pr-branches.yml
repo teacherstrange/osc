@@ -13,12 +13,11 @@ jobs:
     name: 🐳 Build PR Branch
     runs-on: ubuntu-latest
     steps:
-      - run: mv -f packages/osc-academic-hub/* .
-
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
 
       - name: ⬇️ Checkout repo
+      - run: mv -f packages/osc-academic-hub/* .
         uses: actions/checkout@v3
 
       - name: What
