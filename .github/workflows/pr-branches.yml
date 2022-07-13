@@ -20,6 +20,12 @@ jobs:
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm i
+
       - run: rm -v ./package.json ./package-lock.json
       - run: mv -f packages/osc-academic-hub/* .
 
