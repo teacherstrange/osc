@@ -22,7 +22,7 @@ jobs:
 
       - run: rm -v ./package.json ./.storybook/main.js
       - run: mv -v -f packages/osc-academic-hub/* .
-      - run: mv -v -f packages/osc-academic-hub/.storybook/* .
+      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./storybook/
 
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
@@ -100,7 +100,7 @@ jobs:
 
       - run: rm -v ./package.json ./.storybook/main.js
       - run: mv -v -f packages/osc-academic-hub/* .
-      - run: mv -v -f packages/osc-academic-hub/.storybook/* .
+      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./storybook/
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
