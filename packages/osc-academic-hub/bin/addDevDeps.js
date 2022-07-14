@@ -3,6 +3,15 @@ const fs = require('fs');
 try {
     const data = fs.readFileSync('./package.json', 'utf8');
     const devDeps = JSON.stringify({
+        '@chakra-ui/storybook-addon': '^4.0.1',
+        '@storybook/addon-actions': '^6.5.9',
+        '@storybook/addon-essentials': '^6.5.9',
+        '@storybook/addon-interactions': '^6.5.9',
+        '@storybook/addon-links': '^6.5.9',
+        '@storybook/builder-webpack5': '^6.5.9',
+        '@storybook/manager-webpack5': '^6.5.9',
+        '@storybook/react': '^6.5.9',
+        '@storybook/testing-library': '^0.0.11',
         lerna: '^5.0.0',
         '@nrwl/nx-cloud': '^14.2.0',
         nx: '^14.3.6',

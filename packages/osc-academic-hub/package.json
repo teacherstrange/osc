@@ -40,6 +40,7 @@
   ],
   "peerDependencies": {},
   "dependencies": {
+    "@storybook/addon-a11y": "^6.5.9",
     "node-persist": "^3.1.0",
     "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11.9.0",
