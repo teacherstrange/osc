@@ -144,11 +144,19 @@ jobs:
         with:
           path: "./package.json"
 
-      - run: echo (${ steps.read_file.outputs.contents } | grep -o -P '(?<="peerDependencies").*(?=\}))
+      - env:
+          peerDependencies: (${ steps.read_file.outputs.contents } | grep -o -P '(?<="\"devDependencies\"\:").*(?=\}))
 
       - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
       - run: mv -v -f packages/osc-academic-hub/* .
       - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
+
+      - uses: bluwy/substitute-string-action@v1
+        id: sub
+        with:
+          _input-file: ./package.json
+          "{": $peerDependencies
+      - run: echo ${{ steps.sub.outputs.result }} | tee ./package.json # Prints 'package.json with peerdeps from !'
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
