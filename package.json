@@ -98,5 +98,11 @@
     "*.(js|ts|tsx/jsx)": [
       "npm run lint-and-fix"
     ]
-  }
+  },
+  "prisma": {
+    "seed": "cross-env DATABASE_URL=file:./data.db?connection_limit=1 ts-node --require tsconfig-paths/register packages/osc-academic-hub/prisma/seed.ts"
+  },
+  "browserslist": [
+    "last 2 versions, not dead"
+  ]
 }
