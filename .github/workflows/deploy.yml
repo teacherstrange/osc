@@ -95,6 +95,7 @@ jobs:
 
       - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
       - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
+      - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/prisma/* ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
 
