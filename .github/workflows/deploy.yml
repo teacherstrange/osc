@@ -98,6 +98,12 @@ jobs:
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+      - run: npm run addDevDeps
+
       - name: 🏄 Copy test env vars
         run: cp .env.example .env
 
@@ -138,15 +144,16 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: "npm"
       - run: npm run addDevDeps
-      - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
-      - run: mv -v -f packages/osc-academic-hub/* .
-      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
-
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
         id: app_name
@@ -208,15 +215,16 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: "npm"
       - run: npm run addDevDeps
-      - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
-      - run: mv -v -f packages/osc-academic-hub/* .
-      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
-
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
         id: app_name
