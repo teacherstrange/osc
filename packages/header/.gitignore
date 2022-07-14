@@ -1,0 +1,59 @@
+node_modules
+
+/build
+/public/build
+.env
+
+/cypress/screenshots
+/cypress/videos
+/prisma/data.db
+/prisma/data.db-journal
+
+/app/styles/tailwind.css
+
+storybook-static
+
+*.css
+
+# We don't want lockfiles in stacks, as people could use a different package manager
+# This part will be removed by `remix.init`
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+pnpm-lock.yml
+
+# Packages #
+############
+node_modules
+
+# Environment #
+######################
+/build
+/public/build
+.env
+
+# Logs, Caches and Databases #
+######################
+*.log
+/.cache
+/prisma/data.db
+/prisma/data.db-journal
+
+# Compiled Source #
+######################
+/cypress/screenshots
+/cypress/videos
+/storybook-static
+*.css
+*.css.map
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.history/
