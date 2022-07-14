@@ -38,13 +38,12 @@
     "/build",
     "/public/build"
   ],
-  "peerDependencies": {
+  "peerDependencies": {},
+  "dependencies": {
     "@faker-js/faker": "*",
     "cookie": "*",
     "cypress": "*",
-    "@testing-library/cypress": "^*"
-  },
-  "dependencies": {
+    "@testing-library/cypress": "^*",
     "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.1.2",
     "@chakra-ui/storybook-addon": "^4.0.1",
