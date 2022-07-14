@@ -105,7 +105,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npx prisma generate
+      - run: npx prisma generate --schema=prisma/schema.prisma
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
