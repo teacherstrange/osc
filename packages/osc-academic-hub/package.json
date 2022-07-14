@@ -39,10 +39,12 @@
     "/public/build"
   ],
   "peerDependencies": {
-    "@faker-js/faker": "*"
+    "@faker-js/faker": "*",
+    "cookie": "*",
+    "cypress": "*",
+    "@testing-library/cypress": "^*"
   },
   "dependencies": {
-    "cypress": "^9.7.0",
     "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.1.2",
     "@chakra-ui/storybook-addon": "^4.0.1",
