@@ -38,6 +38,9 @@
     "/build",
     "/public/build"
   ],
+  "peerDependencies": {
+    "@faker-js/faker": "*"
+  },
   "dependencies": {
     "cypress": "^9.7.0",
     "@chakra-ui/icons": "^2.0.2",
