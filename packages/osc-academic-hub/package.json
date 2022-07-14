@@ -38,6 +38,7 @@
     "/public/build"
   ],
   "dependencies": {
+    "binode": "^1.0.5",
     "@nrwl/nx-cloud": "latest",
     "nx": "^14.3.6",
     "lerna": "^5.0.0",
