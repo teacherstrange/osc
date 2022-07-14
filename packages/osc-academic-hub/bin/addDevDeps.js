@@ -3,6 +3,9 @@ const fs = require('fs');
 try {
     const data = fs.readFileSync('./package.json', 'utf8');
     const devDeps = JSON.stringify({
+        lerna: '^5.0.0',
+        '@nrwl/nx-cloud': '^14.2.0',
+        nx: '^14.3.6',
         '@chakra-ui/storybook-addon': '^4.0.1',
         '@fullhuman/postcss-purgecss': '^4.1.3',
         cssnano: '^5.1.12',
