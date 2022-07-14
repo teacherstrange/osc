@@ -11,11 +11,11 @@ import { withEmotionCache } from '@emotion/react';
 import type { EmotionCache } from '@emotion/react';
 import { Header } from 'header';
 
-import tailwindStylesheetUrl from './styles/tailwind.css';
+import styles from './styles/dest/main.css';
 import { getUser } from './session.server';
 
 export const links: LinksFunction = () => {
-    return [{ rel: 'stylesheet', href: tailwindStylesheetUrl }];
+    return [{ rel: 'stylesheet', href: styles }];
 };
 
 export const meta: MetaFunction = () => ({
