@@ -38,6 +38,9 @@
     "/build",
     "/public/build"
   ],
+  "peerDependencies": {
+    "cypress": "*"
+  },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.1.2",
