@@ -94,9 +94,9 @@ jobs:
         uses: actions/checkout@v3
 
       - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
-      - run: mv -v -f packages/osc-academic-hub/* .
       - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
       - run: mv -v -f packages/osc-academic-hub/prisma/* ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
 
       - name: 🏄 Copy test env vars
         run: cp .env.example .env
