@@ -2,8 +2,8 @@ name: 🚀 Deploy osc-academic-hub when osc-academic-hub, deploy.yml or osc-ui c
 on:
   push:
     branches:
-      - main
-      - dev
+    # - main
+    # - dev
     paths:
       - "packages/osc-academic-hub/**"
       - ".github/workflow/deploy.yml"
@@ -137,6 +137,14 @@ jobs:
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
+
+      - name: Read file contents
+        id: read_file
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "./package.json"
+
+      - run: echo (${ steps.read_file.outputs.contents } | grep -o -P '(?<="peerDependencies").*(?=\}))
 
       - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
       - run: mv -v -f packages/osc-academic-hub/* .
