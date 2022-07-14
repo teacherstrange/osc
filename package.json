@@ -85,6 +85,7 @@
     "chromatic": "chromatic --exit-zero-on-changes",
     "build": "lerna run build",
     "test": "lerna run test",
+    "test:e2e:dev": "lerna run test:e2e:dev",
     "dev": "lerna run dev",
     "setup": "lerna link convert && npm i && npx prisma generate --schema=packages/osc-academic-hub/prisma/schema.prisma"
   },
