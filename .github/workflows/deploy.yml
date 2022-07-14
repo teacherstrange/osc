@@ -144,8 +144,10 @@ jobs:
         with:
           path: "./package.json"
 
-      - env:
-          peerDependencies: (${ steps.read_file.outputs.contents } | grep -o -P '(?<="\"devDependencies\"\:").*(?=\}))
+      - name: Set the value
+        id: step_one
+        run: |
+          echo "peerDependencies=(${ steps.read_file.outputs.contents } | grep -o -P '(?<="\"devDependencies\"\:").*(?=\}))" >> $GITHUB_ENV
 
       - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
       - run: mv -v -f packages/osc-academic-hub/* .
@@ -155,7 +157,7 @@ jobs:
         id: sub
         with:
           _input-file: ./package.json
-          "{": $peerDependencies
+          "{": echo "${{ env.peerDependencies }}"
       - run: echo ${{ steps.sub.outputs.result }} | tee ./package.json # Prints 'package.json with peerdeps from !'
 
       - name: 👀 Read app name
