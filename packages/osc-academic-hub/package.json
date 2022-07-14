@@ -81,7 +81,7 @@
     "tiny-invariant": "^1.2.0"
   },
   "prisma": {
-    "seed": "ts-node --require tsconfig-paths/register ./prisma/seed.ts"
+    "seed": "cross-env DATABASE_URL=file:./data.db?connection_limit=1 ts-node --require tsconfig-paths/register ./prisma/seed.ts"
   },
   "browserslist": [
     "last 2 versions, not dead"
