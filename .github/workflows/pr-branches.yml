@@ -21,7 +21,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - run: rm -v ./package.json ./.storybook/main.js
+      - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
       - run: mv -v -f packages/osc-academic-hub/* .
       - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
 
@@ -99,9 +99,9 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
-      - run: rm -v ./package.json ./.storybook/main.js
+      - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
       - run: mv -v -f packages/osc-academic-hub/* .
-      - run: mv -v -f packages/osc-academic-hub/.storybook/main.js ./.storybook/main.js
+      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
