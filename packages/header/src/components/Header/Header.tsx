@@ -21,7 +21,7 @@ export const Header: FC<Props> = (props) => {
                 <h2>
                     <AccordionButton>
                         <Box flex="1" textAlign="left">
-                            changed title
+                            changed title 2
                         </Box>
                         <AccordionIcon />
                     </AccordionButton>
