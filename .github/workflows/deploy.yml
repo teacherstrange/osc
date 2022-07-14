@@ -1,4 +1,4 @@
-name: 🚀 Deploy
+name: 🚀 Deploy osc-academic-hub when osc-academic-hub, deploy.yml or osc-ui changes
 on:
   push:
     branches:
