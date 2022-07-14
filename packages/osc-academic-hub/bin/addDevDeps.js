@@ -3,6 +3,20 @@ const fs = require('fs');
 try {
     const data = fs.readFileSync('./package.json', 'utf8');
     const devDeps = JSON.stringify({
+        '@chakra-ui/storybook-addon': '^4.0.1',
+        '@fullhuman/postcss-purgecss': '^4.1.3',
+        cssnano: '^5.1.12',
+        husky: '^8.0.1',
+        nodemon: '^2.0.19',
+        prisma: '^3.14.0',
+        sass: '^1.53.0',
+        stylelint: '^14.8.2',
+        'stylelint-config-prettier': '^9.0.3',
+        'stylelint-config-standard': '^25.0.0',
+        'stylelint-config-standard-scss': '^3.0.0',
+        'stylelint-order': '^5.0.0',
+        'stylelint-prettier': '^2.0.0',
+        'stylelint-selector-bem-pattern': '^2.1.1',
         '@faker-js/faker': '*',
         cookie: '*',
         cypress: '*',
