@@ -8,6 +8,7 @@ import {
     Box,
     AccordionPanel
 } from '@chakra-ui/react';
+import './header.css';
 
 export interface Props {
     [x: string]: string;
@@ -16,7 +17,7 @@ export interface Props {
 export const Header: FC<Props> = (props) => {
     const { ...other } = props;
     return (
-        <Accordion className="accordion-tester" {...other}>
+        <Accordion className="o-header" {...other}>
             <AccordionItem>
                 <h2>
                     <AccordionButton>
