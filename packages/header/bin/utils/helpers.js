@@ -9,11 +9,9 @@ require('dotenv').config();
 
 const transpileCss = async (file, outputFile = undefined) => {
     const loadPath = path.join(process.cwd(), process.env.LOAD_PATH);
-    const transpiledCss = sass
-        .compile(file, {
-            loadPaths: [loadPath]
-        })
-        .css.replace(/@charset.*?;/, '');
+    const transpiledCss = sass.compile(file, {
+        loadPaths: [loadPath]
+    }).css;
     let result;
     if (process.env.NODE_ENV === 'production') {
         result = await postcss([
