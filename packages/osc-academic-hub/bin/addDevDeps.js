@@ -3,7 +3,6 @@ const fs = require('fs');
 try {
     const data = fs.readFileSync('./package.json', 'utf8');
     const devDeps = JSON.stringify({
-        '@chakra-ui/storybook-addon': '^4.0.1',
         '@storybook/addon-actions': '^6.5.9',
         '@storybook/addon-essentials': '^6.5.9',
         '@storybook/addon-interactions': '^6.5.9',
@@ -20,7 +19,6 @@ try {
         cssnano: '^5.1.12',
         husky: '^8.0.1',
         nodemon: '^2.0.19',
-        prisma: '^3.14.0',
         sass: '^1.53.0',
         stylelint: '^14.8.2',
         'stylelint-config-prettier': '^9.0.3',
@@ -29,10 +27,7 @@ try {
         'stylelint-order': '^5.0.0',
         'stylelint-prettier': '^2.0.0',
         'stylelint-selector-bem-pattern': '^2.1.1',
-        '@faker-js/faker': '*',
         cookie: '*',
-        cypress: '*',
-        '@testing-library/cypress': '^*',
         '@commitlint/cli': '^16.2.3',
         '@commitlint/config-conventional': '^16.2.1',
         '@faker-js/faker': '^6.3.1',
@@ -57,7 +52,6 @@ try {
         eslint: '^8.16.0',
         'eslint-config-prettier': '^8.5.0',
         'happy-dom': '^3.2.2',
-        husky: '^7.0.4',
         msw: '^0.40.2',
         'npm-run-all': '^4.1.5',
         postcss: '^8.4.14',
