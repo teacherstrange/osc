@@ -6,7 +6,7 @@ on:
       - dev
     paths:
       - "packages/osc-academic-hub/**"
-      - ".github/workflow/deploy.yml"
+      - ".github/workflow/osc-academic-hub-deploy.yml"
       - "packages/header/**"
   pull_request: {}
 permissions:
