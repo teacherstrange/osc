@@ -23,7 +23,7 @@
     "typecheck": "tsc -b && tsc -b cypress",
     "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run",
     "build-storybook": "npm run build:css && lerna run build:css && build-storybook",
-    "storybook": "npm run build:css && concurrently \"npm run watch:css\" \"start-storybook -p 6006\""
+    "storybook": "npm run build:css && concurrently \"npm run dev:css\" \"start-storybook -p 6006\""
   },
   "prettier": {},
   "eslintIgnore": [

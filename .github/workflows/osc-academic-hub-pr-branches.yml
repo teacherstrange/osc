@@ -1,4 +1,4 @@
-name: PR Branch App
+name: PR Branch App for osc-academic-hub
 on:
   pull_request:
     types: [opened, reopened, synchronize]
