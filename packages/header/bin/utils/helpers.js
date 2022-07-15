@@ -9,9 +9,11 @@ require('dotenv').config();
 
 const transpileCss = async (file, outputFile = undefined) => {
     const loadPath = path.join(process.cwd(), process.env.LOAD_PATH);
-    const transpiledCss = sass.compile(file, {
-        loadPaths: [loadPath]
-    });
+    const transpiledCss = sass
+        .compile(file, {
+            loadPaths: [loadPath]
+        })
+        .css.replace(/@charset.*?;/, '');
     let result;
     if (process.env.NODE_ENV === 'production') {
         result = await postcss([
@@ -26,12 +28,12 @@ const transpileCss = async (file, outputFile = undefined) => {
                 defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
                 variables: false
             })
-        ]).process(transpiledCss.css, {
+        ]).process(transpiledCss, {
             to: file.replace('.scss', '.css'),
             from: undefined
         });
     } else {
-        result = await postcss([autoprefixer]).process(transpiledCss.css, {
+        result = await postcss([autoprefixer]).process(transpiledCss, {
             to: file.replace('.scss', '.css'),
             from: undefined
         });
