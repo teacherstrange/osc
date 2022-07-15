@@ -105,7 +105,7 @@ jobs:
       - run: npm run addDevDeps
 
       - name: 🏄 Copy test env vars
-        run: cp .env.example .env
+        run: cp .env.cypress .env
 
       # - name: ⎔ Setup node
       #   uses: actions/setup-node@v3
