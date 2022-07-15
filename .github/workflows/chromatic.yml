@@ -19,6 +19,7 @@ jobs:
       - run: mkdir ./.storybook
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
+      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
 
       - uses: actions/setup-node@v3
         with:
