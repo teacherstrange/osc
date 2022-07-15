@@ -1,11 +1,11 @@
-name: PR Branch App
+name: PR Branch App for osc-academic-hub
 on:
   pull_request:
     types: [opened, reopened, synchronize]
     paths:
       - "packages/osc-academic-hub/**"
       - "packages/header/**"
-      - ".github/workflow/pr-branches.yml"
+      - ".github/workflow/osc-academic-hub-pr-branches.yml"
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   FLY_REGION: iad
@@ -21,9 +21,16 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
-      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+      - run: npm run addDevDeps
 
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
@@ -99,9 +106,16 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
-      - run: rm -v ./package.json ./.storybook/main.js ./.storybook/preview.js
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
-      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+      - run: npm run addDevDeps
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
@@ -117,7 +131,7 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         continue-on-error: true
         with:
-          args: "create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college"
+          args: "apps create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college"
 
       - name: Create session secret
         uses: superfly/flyctl-actions@1.1

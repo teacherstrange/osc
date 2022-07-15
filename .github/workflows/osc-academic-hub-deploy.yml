@@ -1,9 +1,13 @@
-name: 🚀 Deploy
+name: 🚀 Deploy osc-academic-hub
 on:
   push:
     branches:
       - main
       - dev
+    paths:
+      - "packages/osc-academic-hub/**"
+      - ".github/workflow/osc-academic-hub-deploy.yml"
+      - "packages/header/**"
   pull_request: {}
 permissions:
   actions: write
@@ -77,7 +81,7 @@ jobs:
           useLockFile: false
 
       - name: ⚡ Run vitest
-        run: npm run test -- --coverage
+        run: npm run test
 
   cypress:
     name: ⚫️ Cypress
@@ -89,13 +93,25 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: 🏄 Copy test env vars
-        run: cp .env.example .env
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
 
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: "npm"
+      - run: npm run addDevDeps
+
+      - name: 🏄 Copy test env vars
+        run: cp .env.cypress .env
+
+      # - name: ⎔ Setup node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16
+      # - run: npx prisma generate --schema=prisma/schema.prisma
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
@@ -128,6 +144,16 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+      - run: npm run addDevDeps
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
         id: app_name
@@ -189,6 +215,16 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+      - run: npm run addDevDeps
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
         id: app_name
