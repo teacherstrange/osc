@@ -8,7 +8,7 @@ import {
     Box,
     AccordionPanel
 } from '@chakra-ui/react';
-import './header.css';
+import 'header.css';
 
 export interface Props {
     [x: string]: string;
