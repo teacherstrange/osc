@@ -88,7 +88,7 @@
     "test": "lerna run test",
     "test:e2e:dev": "lerna run test:e2e:dev",
     "dev": "lerna run dev",
-    "setup": "lerna link convert && npm i && npx prisma generate --schema=packages/osc-academic-hub/prisma/schema.prisma"
+    "setup": "lerna link convert && lerna bootstrap && npx prisma generate --schema=packages/osc-academic-hub/prisma/schema.prisma"
   },
   "lint-staged": {
     "*.scss": [
