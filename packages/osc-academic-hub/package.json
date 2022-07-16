@@ -45,7 +45,7 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.1",
     "framer-motion": "^6.3.10",
-    "header": "file:~/header",
+    "header": "~/packages/header",
     "isomorphic-dompurify": "^0.19.0",
     "node-persist": "^3.1.0",
     "react": "^18",
