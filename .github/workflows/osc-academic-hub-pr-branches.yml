@@ -10,10 +10,6 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   FLY_REGION: iad
 
-defaults:
-  run:
-    working-directory: packages/osc-academic-hub
-
 jobs:
   build:
     name: 🐳 Build PR Branch
@@ -25,10 +21,10 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      # - run: rm -v -r ./package.json ./.storybook
-      # - run: mkdir ./.storybook
-      # - run: mkdir ./prisma
-      # - run: mv -v -f packages/osc-academic-hub/* .
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
 
       - uses: actions/setup-node@v3
         with:
