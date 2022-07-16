@@ -24,6 +24,8 @@ jobs:
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
+        with:
+          path: packages/osc-academic-hub
 
       # - run: rm -v -r ./package.json ./.storybook
       # - run: mkdir ./.storybook
