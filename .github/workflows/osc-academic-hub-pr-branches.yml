@@ -14,6 +14,10 @@ jobs:
   build:
     name: 🐳 Build PR Branch
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        # Mobile folder working directory.
+        working-directory: Mobile
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -21,16 +25,16 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - run: rm -v -r ./package.json ./.storybook
-      - run: mkdir ./.storybook
-      - run: mkdir ./prisma
-      - run: mv -v -f packages/osc-academic-hub/* .
+      # - run: rm -v -r ./package.json ./.storybook
+      # - run: mkdir ./.storybook
+      # - run: mkdir ./prisma
+      # - run: mv -v -f packages/osc-academic-hub/* .
 
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: "npm"
-      - run: npm run addDevDeps
+      # - run: npm run addDevDeps
 
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
