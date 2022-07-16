@@ -15,17 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      # - run: rm -v -r ./package.json ./.storybook
-      # - run: mkdir ./.storybook
-      # - run: mkdir ./prisma
-      # - run: mv -v -f packages/osc-academic-hub/* .
-      # - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
+      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
 
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: "npm"
-      # - run: npm run addDevDeps
+      - run: npm run addDevDeps
       - name: Install dependencies
         run: yarn
         # 👇 Adds Chromatic as a step in the workflow
