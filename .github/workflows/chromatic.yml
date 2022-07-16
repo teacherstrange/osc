@@ -26,6 +26,7 @@ jobs:
           node-version: 16
           cache: "npm"
       - run: npm run addDevDeps
+      - run: npm run build:css
 
       - name: Install dependencies
         run: yarn
