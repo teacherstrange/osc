@@ -11,7 +11,7 @@ const transpileCss = async (file, outputFile = undefined) => {
     const loadPath = path.join(process.cwd(), process.env.LOAD_PATH);
     const transpiledCss = sass.compile(file, {
         loadPaths: [loadPath]
-    }).css;
+    });
     let result;
     if (process.env.NODE_ENV === 'production') {
         result = await postcss([
@@ -26,12 +26,12 @@ const transpileCss = async (file, outputFile = undefined) => {
                 defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
                 variables: false
             })
-        ]).process(transpiledCss, {
+        ]).process(transpiledCss.css, {
             to: file.replace('.scss', '.css'),
             from: undefined
         });
     } else {
-        result = await postcss([autoprefixer]).process(transpiledCss, {
+        result = await postcss([autoprefixer]).process(transpiledCss.css, {
             to: file.replace('.scss', '.css'),
             from: undefined
         });
