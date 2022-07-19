@@ -3,4 +3,4 @@
 
 # npm run build:css && npm run prettier-format && npm run lint && npm run stylelint
 npx lerna run build:css
-npx lerna run lint-staged
+npx lint-staged
