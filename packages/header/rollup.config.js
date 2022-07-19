@@ -12,6 +12,12 @@ export default {
             exports: 'named'
         }
     ],
-    plugins: [typescript(), postcss()],
+    plugins: [
+        postcss({
+            sourceMap: false,
+            extract: true
+        }),
+        typescript({ check: false })
+    ],
     external: Object.keys(peerDependencies)
 };

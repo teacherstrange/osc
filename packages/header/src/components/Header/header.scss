@@ -1,3 +1,9 @@
 .o-header {
-    background-color: rgb(173 234 17);
+    width: 50%;
+    background-color: rgb(23 222 219);
+
+    &--full {
+        width: 40%;
+        background-color: rgb(117 2 2);
+    }
 }
