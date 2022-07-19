@@ -14,6 +14,7 @@ WORKDIR /myapp
 
 ADD package.json package-lock.json ./
 COPY ./packages/header/package.json ./packages/header/
+RUN npm install --production=false
 RUN lerna run build --scope header
 RUN npm install --production=false
 
