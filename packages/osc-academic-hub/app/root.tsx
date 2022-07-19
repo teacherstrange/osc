@@ -8,7 +8,6 @@ import { json } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
-import type { EmotionCache } from '@emotion/react';
 import { Header } from 'header';
 import styles from './styles/dest/main.css';
 import appHeaderStyles from './components/header.css';
@@ -16,9 +15,8 @@ import headerStyles from 'header/dist/index.css';
 
 // import headerStyles from './components/header.css';
 import { getUser } from './session.server';
-import { useEmotionCache } from './hooks/useEmotionCache';
-import { useContext, useEffect } from 'react';
-import { ClientStyleContext, ServerStyleContext } from './context';
+import { useContext } from 'react';
+import { ServerStyleContext } from './context';
 
 export const links: LinksFunction = () => {
     return [
@@ -77,7 +75,10 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
                 <Meta />
                 {<Links />}
                 {serverStyleData?.map(({ key, ids, css }) => {
-                    if (key === 'css-global') {
+                    if (
+                        key === 'css-global' ||
+                        (key !== 'css-global' && typeof document !== 'undefined')
+                    ) {
                         return (
                             <style
                                 key={key}
@@ -85,9 +86,9 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
                                 dangerouslySetInnerHTML={{ __html: css }}
                             />
                         );
-                    } else if (typeof document === 'undefined') {
+                    } else {
                         const newCss = css.replace(
-                            /background\:[^;]+;?|background-color\:[^;]+;?|color\:[^;]+;?/g,
+                            /background:[^;]+;?|background-color:[^;]+;?|color:[^;]+;?/g,
                             ''
                         );
                         return (
