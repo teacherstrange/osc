@@ -13,6 +13,7 @@ FROM base as deps
 WORKDIR /myapp
 
 ADD package.json package-lock.json ./
+COPY ./packages/header/package.json ./packages/header/
 RUN lerna run build --scope header
 RUN npm install --production=false
 
