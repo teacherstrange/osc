@@ -29,7 +29,7 @@ jobs:
       # need to delete all other packages in this step
 
       - run: npm run setup
-      - run: npm run build
+      - run: npm run build:header
 
       - run: rm -v -r ./package.json ./.storybook
       - run: mkdir ./.storybook
