@@ -5,6 +5,7 @@ import { getColorScheme } from '~/cookie';
 import type { LoaderFunction } from '@remix-run/server-runtime';
 import { FormToggle } from '~/components/FormToggle';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { Heading } from '@chakra-ui/react';
 
 export const loader: LoaderFunction = async ({ request }) => {
     const colorScheme = await getColorScheme(request);
@@ -18,7 +19,7 @@ export default function Index() {
     const location = useLocation();
     return (
         <div>
-            <h1 className="text-slate-100">This is the index page</h1>
+            <Heading>This is the index page</Heading>
             <Form action="/logout" method="post">
                 <button
                     type="submit"

@@ -15,7 +15,7 @@ import headerStyles from 'header/dist/index.css';
 
 // import headerStyles from './components/header.css';
 import { getUser } from './session.server';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ServerStyleContext } from './context';
 
 export const links: LinksFunction = () => {
@@ -53,53 +53,25 @@ interface DocumentProps {
 }
 const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) => {
     const serverStyleData = useContext(ServerStyleContext);
-    // const clientStyleData = useContext(ClientStyleContext);
 
-    // // Only executed on client
-    // useEffect(() => {
-    //     // re-link sheet container
-    //     emotionCache.sheet.container = document.head;
-    //     // re-inject tags
-    //     const tags = emotionCache.sheet.tags;
-    //     emotionCache.sheet.flush();
-    //     tags.forEach((tag) => {
-    //         (emotionCache.sheet as any)._insertTag(tag);
-    //     });
-    //     // reset cache to reapply global styles
-    //     clientStyleData?.reset();
-    // }, []);
+    useEffect(() => {
+        emotionCache.sheet.flush();
+    }, [emotionCache.sheet]);
 
     return (
         <html lang="en">
             <head>
-                <Meta />
-                {<Links />}
                 {serverStyleData?.map(({ key, ids, css }) => {
-                    if (
-                        key === 'css-global' ||
-                        (key !== 'css-global' && typeof document !== 'undefined')
-                    ) {
-                        return (
-                            <style
-                                key={key}
-                                data-emotion={`${key} ${ids.join(' ')}`}
-                                dangerouslySetInnerHTML={{ __html: css }}
-                            />
-                        );
-                    } else {
-                        const newCss = css.replace(
-                            /background:[^;]+;?|background-color:[^;]+;?|color:[^;]+;?/g,
-                            ''
-                        );
-                        return (
-                            <style
-                                key={key}
-                                // data-emotion={`${key} ${ids.join(' ')}`}
-                                dangerouslySetInnerHTML={{ __html: newCss }}
-                            />
-                        );
-                    }
+                    return (
+                        <style
+                            key={key}
+                            // data-emotion={`${key} ${ids.join(' ')}`}
+                            dangerouslySetInnerHTML={{ __html: css }}
+                        />
+                    );
                 })}
+                {typeof document === 'undefined' && <Meta />}
+                {typeof document === 'undefined' && <Links />}
             </head>
             <body>
                 {children}
@@ -113,6 +85,7 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
 
 export default function App() {
     const { colorScheme } = useLoaderData();
+
     return (
         <Document>
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
