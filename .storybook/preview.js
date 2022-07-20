@@ -1,6 +1,6 @@
 // commented out until i end up importing the components
 // OSC-UI
-import '../packages/header/src/styles/dest/main.css';
+import '../packages/osc-ui/src/styles/dest/main.css';
 
 // OSC-ACADEMIC-HUB
 // import '../packages/osc-academic-hub/app/styles/dest/main.css';

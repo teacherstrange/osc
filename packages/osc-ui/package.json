@@ -1,5 +1,5 @@
 {
-  "name": "header",
+  "name": "osc-ui",
   "version": "0.0.0",
   "main": "dist/index.js",
   "files": [
@@ -11,7 +11,7 @@
     "test": "jest",
     "dev": "npm run build && run-p dev:*",
     "dev:rollup": "rollup -c -w",
-    "dev:css": "PORT=3001 LOAD_PATH=src/styles PATH_TO_MAIN_SCSS=/src/styles/main.scss PATH_TO_DEST_MAIN_CSS=/src/styles/dest node bin/postcss.js"
+    "dev:css": "PORT=3001 LOAD_PATH=src/styles PATH_TO_MAIN_SCSS=/src/styles/main.scss PATH_TO_DEST_MAIN_CSS=/src/styles/dest/main.css node bin/postcss.js"
   },
   "dependencies": {
     "rollup-plugin-postcss": "^4.0.2",

@@ -8,19 +8,18 @@ import { json } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
-import { Header } from 'header';
+import { Header } from 'osc-ui';
 import styles from './styles/dest/main.css';
 import appHeaderStyles from './components/header.css';
-import headerStyles from 'header/dist/index.css';
+import oscUiHeaderStyles from 'osc-ui/dist/index.css';
 
-// import headerStyles from './components/header.css';
 import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
 import { ServerStyleContext } from './context';
 
 export const links: LinksFunction = () => {
     return [
-        { rel: 'stylesheet', href: headerStyles },
+        { rel: 'stylesheet', href: oscUiHeaderStyles },
         { rel: 'stylesheet', href: styles },
         { rel: 'stylesheet', href: appHeaderStyles }
     ];

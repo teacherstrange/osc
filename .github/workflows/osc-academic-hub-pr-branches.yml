@@ -4,7 +4,7 @@ on:
     types: [opened, reopened, synchronize]
     paths:
       - "packages/osc-academic-hub/**"
-      - "packages/header/**"
+      - "packages/osc-ui/**"
       - ".github/workflow/osc-academic-hub-pr-branches.yml"
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
@@ -29,7 +29,7 @@ jobs:
       # need to delete all other packages in this step
 
       - run: npm run setup
-      - run: npm run build:header
+      - run: npm run build:osc-ui
 
       - run: rm -v -r ./package.json ./.storybook ./node_modules
       - run: mkdir ./.storybook

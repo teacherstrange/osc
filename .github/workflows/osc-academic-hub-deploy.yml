@@ -7,7 +7,7 @@ on:
     paths:
       - "packages/osc-academic-hub/**"
       - ".github/workflow/osc-academic-hub-deploy.yml"
-      - "packages/header/**"
+      - "packages/osc-ui/**"
   pull_request: {}
 permissions:
   actions: write
@@ -101,7 +101,7 @@ jobs:
       # need to delete all other packages in this step
 
       - run: npm run setup
-      - run: npm run build:header
+      - run: npm run build:osc-ui
 
       - run: rm -v -r ./package.json ./.storybook ./node_modules
       - run: mkdir ./.storybook
@@ -152,7 +152,7 @@ jobs:
       # need to delete all other packages in this step
 
       - run: npm run setup
-      - run: npm run build:header
+      - run: npm run build:osc-ui
 
       - run: rm -v -r ./package.json ./.storybook ./node_modules
       - run: mkdir ./.storybook

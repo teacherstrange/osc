@@ -71,8 +71,8 @@
     "vitest": "^0.12.8"
   },
   "dependencies": {
-    "header": "file:packages/header",
-    "osc-academic-hub": "file:packages/osc-academic-hub"
+    "osc-academic-hub": "file:packages/osc-academic-hub",
+    "osc-ui": "file:packages/osc-ui"
   },
   "scripts": {
     "prepare": "husky install",
@@ -85,7 +85,7 @@
     "storybook": "lerna run build:css && concurrently \"lerna run watch:css --parallel\" \"start-storybook -p 6006\"",
     "chromatic": "chromatic --exit-zero-on-changes",
     "build": "lerna run build",
-    "build:header": "lerna run build --scope header",
+    "build:osc-ui": "lerna run build --scope osc-ui",
     "test": "lerna run test",
     "test:e2e:dev": "lerna run test:e2e:dev",
     "dev": "lerna run dev",
