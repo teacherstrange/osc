@@ -26,7 +26,6 @@ jobs:
           node-version: 16
           cache: "npm"
       - run: npm run addDevDeps
-
       - name: Install dependencies
         run: yarn
         # 👇 Adds Chromatic as a step in the workflow

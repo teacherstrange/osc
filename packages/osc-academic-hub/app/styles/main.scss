@@ -89,6 +89,7 @@
 //  Keep to DRY principles  ( [D]ont [R]epeat [Y]ourself )
 */
 @use "components/spinner";
+@use "components/header";
 
 /* ============================
 // $UTILITIES
@@ -96,5 +97,6 @@
 // Eliminates the need to create specific classes to perform simple tasks
 // NOTE: Use sparingly
 */
+
 @use "utilities/util";
 @use "utilities/anim";

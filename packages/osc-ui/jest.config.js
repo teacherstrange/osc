@@ -4,5 +4,8 @@ module.exports = {
     transform: {
         '^.+\\.tsx?$': 'ts-jest'
     },
-    setupFilesAfterEnv: ['<rootDir>/jest-setup.ts']
+    setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
+    moduleNameMapper: {
+        '\\.(css)$': '<rootDir>/src/styleMock.tsx'
+    }
 };

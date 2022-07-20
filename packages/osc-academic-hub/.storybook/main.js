@@ -1,8 +1,8 @@
 require('dotenv').config;
 
 const stories = [
-    '../packages/header/src/components/**/*.stories.mdx',
-    '../packages/header/src/components/**/*.stories.@(js|jsx|ts|tsx)',
+    '../packages/osc-ui/src/components/**/*.stories.mdx',
+    '../packages/osc-ui/src/components/**/*.stories.@(js|jsx|ts|tsx)',
     '../app/components/**/*.stories.mdx',
     '../app/components/**/*.stories.@(js|jsx|ts|tsx)'
 ];

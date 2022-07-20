@@ -15,7 +15,7 @@ export const FormToggle: FC<Props> = (props) => {
 
     return (
         <Box flexWrap={'wrap'} mb={5}>
-            <FormControl display="flex" alignItems="center">
+            <FormControl bg={'secondary'} display="flex" alignItems="center">
                 <FormLabel htmlFor={id} mb="0">
                     {text}
                 </FormLabel>

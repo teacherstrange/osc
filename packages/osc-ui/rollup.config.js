@@ -1,5 +1,5 @@
 import typescript from 'rollup-plugin-typescript2';
-import css from 'rollup-plugin-import-css';
+import postcss from 'rollup-plugin-postcss';
 import { peerDependencies } from './package.json';
 
 export default {
@@ -12,6 +12,12 @@ export default {
             exports: 'named'
         }
     ],
-    plugins: [css(), typescript()],
+    plugins: [
+        postcss({
+            sourceMap: false,
+            extract: true
+        }),
+        typescript({ check: false })
+    ],
     external: Object.keys(peerDependencies)
 };

@@ -13,6 +13,8 @@ FROM base as deps
 WORKDIR /myapp
 
 ADD package.json package-lock.json ./
+ADD ./packages/osc-ui/package.json ./packages/osc-ui/
+
 RUN npm install --production=false
 
 # Setup production node_modules

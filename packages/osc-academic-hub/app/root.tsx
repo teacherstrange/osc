@@ -8,14 +8,21 @@ import { json } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
-import type { EmotionCache } from '@emotion/react';
-import { Header } from 'header';
-
+import { Header } from 'osc-ui';
 import styles from './styles/dest/main.css';
+import appHeaderStyles from './components/header.css';
+import oscUiHeaderStyles from 'osc-ui/dist/index.css';
+
 import { getUser } from './session.server';
+import { useContext, useEffect } from 'react';
+import { ServerStyleContext } from './context';
 
 export const links: LinksFunction = () => {
-    return [{ rel: 'stylesheet', href: styles }];
+    return [
+        { rel: 'stylesheet', href: oscUiHeaderStyles },
+        { rel: 'stylesheet', href: styles },
+        { rel: 'stylesheet', href: appHeaderStyles }
+    ];
 };
 
 export const meta: MetaFunction = () => ({
@@ -43,21 +50,27 @@ export const loader: LoaderFunction = async ({ request }) => {
 interface DocumentProps {
     children: React.ReactNode;
 }
+const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) => {
+    const serverStyleData = useContext(ServerStyleContext);
 
-const Document = withEmotionCache(({ children }: DocumentProps, emotionCache: EmotionCache) => {
-    //  const serverStyleData = useEmotionCache(emotionCache);
+    useEffect(() => {
+        emotionCache.sheet.flush();
+    }, [emotionCache.sheet]);
+
     return (
-        <html lang="en" className="h-full">
+        <html lang="en">
             <head>
-                <Links />
-                <Meta />
-                {/* {serverStyleData.map(({ key, ids, css }) => (
-                    <style
-                        key={key}
-                        data-emotion={`${key} ${ids.join(' ')}`}
-                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(css) }}
-                    />
-                ))} */}
+                {serverStyleData?.map(({ key, ids, css }) => {
+                    return (
+                        <style
+                            key={key}
+                            // data-emotion={`${key} ${ids.join(' ')}`}
+                            dangerouslySetInnerHTML={{ __html: css }}
+                        />
+                    );
+                })}
+                {typeof document === 'undefined' && <Meta />}
+                {typeof document === 'undefined' && <Links />}
             </head>
             <body>
                 {children}
@@ -71,10 +84,11 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache: Em
 
 export default function App() {
     const { colorScheme } = useLoaderData();
+
     return (
         <Document>
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
-                <Header bg={'green.500'} />
+                <Header className={'o-header--full'} backgroundColor={'secondary'} />
                 <Outlet />
             </ChakraProvider>
         </Document>

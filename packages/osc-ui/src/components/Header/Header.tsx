@@ -1,3 +1,4 @@
+import './header.css';
 import type { FC } from 'react';
 import React from 'react';
 import {
@@ -14,14 +15,14 @@ export interface Props {
 }
 
 export const Header: FC<Props> = (props) => {
-    const { ...other } = props;
+    const { className, ...other } = props;
     return (
-        <Accordion className="accordion-tester" {...other}>
+        <Accordion className={`o-header ${className}`} {...other}>
             <AccordionItem>
                 <h2>
                     <AccordionButton>
                         <Box flex="1" textAlign="left">
-                            changed title
+                            changed title again
                         </Box>
                         <AccordionIcon />
                     </AccordionButton>
