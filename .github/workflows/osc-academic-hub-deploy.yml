@@ -101,11 +101,6 @@ jobs:
           node-version: 16
           cache: "npm"
 
-      # need to delete all other packages in this step
-
-      - run: npm run setup
-      - run: npm run build:osc-ui
-
       - run: rm -v -r ./package.json ./.storybook ./node_modules
       - run: mkdir ./.storybook
       - run: mkdir ./prisma
