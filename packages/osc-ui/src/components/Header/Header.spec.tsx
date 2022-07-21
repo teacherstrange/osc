@@ -1,10 +1,10 @@
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
 
 import React from 'react';
-import { screen, render } from '@testing-library/react';
 import { Header } from './Header';
+import { screen, render } from '@testing-library/react';
 
 test('renders header', () => {
     render(<Header />);

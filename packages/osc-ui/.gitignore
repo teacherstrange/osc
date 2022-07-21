@@ -56,3 +56,5 @@ node_modules
 ehthumbs.db
 Thumbs.db
 .history/
+
+/coverage
