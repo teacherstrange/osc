@@ -3,10 +3,11 @@
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import libCss from 'vite-plugin-libcss';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-    plugins: [react(), tsconfigPaths()],
+    plugins: [libCss(), react(), tsconfigPaths()],
     test: {
         globals: true,
         environment: 'happy-dom',
