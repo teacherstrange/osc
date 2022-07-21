@@ -67,9 +67,6 @@ jobs:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
 
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
-
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
         with:
@@ -77,6 +74,9 @@ jobs:
 
       - run: npm run setup
       - run: npm run build:osc-ui
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
