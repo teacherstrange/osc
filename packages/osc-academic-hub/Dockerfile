@@ -13,7 +13,7 @@ FROM base as deps
 WORKDIR /myapp
 
 ADD package.json package-lock.json ./
-ADD ./packages/osc-ui/package.json ./packages/osc-ui/
+ADD ./packages/osc-ui/ ./packages/osc-ui/
 
 RUN npm install --production=false
 
