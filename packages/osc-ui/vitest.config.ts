@@ -8,7 +8,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
     plugins: [react(), tsconfigPaths()],
-    css: true as CSSOptions,
+    css: false as CSSOptions,
     test: {
         globals: true,
         environment: 'happy-dom',
