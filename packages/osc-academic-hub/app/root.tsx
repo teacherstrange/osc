@@ -128,7 +128,7 @@ export default function App() {
 
     useEffect(() => {
         // The `console.log` method returns an object with a status of "success" if online and a pass message or a status of "bad" and a fail message if offline
-        checkConnectivity(online, offline).then((data) => console.log(data));
+        checkConnectivity(online, offline);
     }, []);
 
     React.useEffect(() => {
