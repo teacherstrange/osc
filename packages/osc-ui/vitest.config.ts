@@ -9,6 +9,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
     plugins: [libCss(), react(), tsconfigPaths()],
     test: {
+        reporters: ['verbose'],
         globals: true,
         environment: 'happy-dom',
         setupFiles: ['./test/setup-test-env.ts'],
