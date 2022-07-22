@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "test": "vitest --coverage",
-    "test:dev": "vitest --run",
+    "test:dev": "vitest",
     "build": "npm run build:css && rm -rf dist && rollup --config",
     "build:css": "PORT=3001 LOAD_PATH=src/styles PATH_TO_MAIN_SCSS=/src/styles/main.scss PATH_TO_DEST_MAIN_CSS=/src/styles/dest/main.css PATH_TO_COMPONENTS=/src/components node bin/postcssBuild.js",
     "dev": "npm run build && run-p dev:*",
