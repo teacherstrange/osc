@@ -7,7 +7,7 @@ import libCss from 'vite-plugin-libcss';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-    plugins: [libCss(), react(), tsconfigPaths()],
+    plugins: [react(), tsconfigPaths(), libCss()],
     test: {
         reporters: ['verbose'],
         globals: true,
