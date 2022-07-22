@@ -14,9 +14,9 @@ export interface PluginOptions {
 
 let viteConfig;
 
-const importCss = (options: PluginOptions = {}): any => {
+const importCss = (): any => {
     return {
-        name: 'lib-css',
+        name: 'importCss',
         apply: 'build',
         enforce: 'post',
 
@@ -24,7 +24,7 @@ const importCss = (options: PluginOptions = {}): any => {
             viteConfig = resolvedConfig;
         },
 
-        writeBundle(option, bundle) {
+        writeBundle(bundle) {
             // if (!viteConfig.build || !viteConfig.build.lib) {
             //     // only for lib build
             //     console.warn('vite-plugin-libcss only works in lib mode.');
@@ -44,7 +44,7 @@ const importCss = (options: PluginOptions = {}): any => {
                     // only for entry
                     continue;
                 }
-                const outDir = viteConfig.build.outDir || 'dist';
+                const outDir = 'dist';
                 const filePath = resolve(viteConfig.root, outDir, file);
                 const data = fs.readFileSync(filePath, {
                     encoding: 'utf8'
@@ -58,6 +58,7 @@ const importCss = (options: PluginOptions = {}): any => {
 export default defineConfig({
     plugins: [importCss(), react(), tsconfigPaths()],
     test: {
+        reporters: ['verbose'],
         globals: true,
         environment: 'happy-dom',
         setupFiles: ['./test/setup-test-env.ts'],

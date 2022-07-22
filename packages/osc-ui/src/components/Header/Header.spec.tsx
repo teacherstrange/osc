@@ -10,4 +10,5 @@ test('renders header', () => {
     render(<Header />);
     const linkElement = screen.getByText(/changed title/i);
     expect(linkElement).toBeInTheDocument();
+    expect(linkElement.classList.contains('tester').valueOf()).toBe(true);
 });

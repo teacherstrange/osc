@@ -21,7 +21,7 @@ export const Header: FC<Props> = (props) => {
             <AccordionItem>
                 <h2>
                     <AccordionButton>
-                        <Box flex="1" textAlign="left">
+                        <Box className="tester" flex="1" textAlign="left">
                             changed title again
                         </Box>
                         <AccordionIcon />
