@@ -67,6 +67,7 @@
     "tsconfig-paths": "^4.0.0",
     "typescript": "^4.6.4",
     "vite": "^2.9.9",
+    "vite-plugin-css-generator": "^2.5.7",
     "vite-plugin-libcss": "^1.0.5",
     "vite-tsconfig-paths": "^3.4.1",
     "vitest": "^0.18.1"
