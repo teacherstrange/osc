@@ -56,10 +56,13 @@ export const headers: HeadersFunction = () => ({
     'Accept-CH': 'Sec-CH-Prefers-Color-Scheme'
 });
 export const loader: LoaderFunction = async ({ request }) => {
-    await PushNotification({
-      title: "Remix PWA",
-      body: "A server generated text body."
-    }, 1)
+    await PushNotification(
+        {
+            title: 'Remix PWA',
+            body: 'A server generated text body.'
+        },
+        1
+    );
 
     return json<LoaderData>({
         user: await getUser(request),
