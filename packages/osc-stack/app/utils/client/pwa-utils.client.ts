@@ -278,10 +278,10 @@ export async function SendNotification(
                 };
             }
         }
-            return {
-                status: 'bad',
-                message: 'Notification API not supported'
-            };
+        return {
+            status: 'bad',
+            message: 'Notification API not supported'
+        };
     } catch (error) {
         console.debug(error);
         throw new Error('Error sending notification!');
