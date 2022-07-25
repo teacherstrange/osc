@@ -28,7 +28,7 @@
                 $map: map.merge(
                     $map,
                     (
-                        $key: $value,
+                        $key: $value
                     )
                 );
             }

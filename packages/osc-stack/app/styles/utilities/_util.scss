@@ -31,7 +31,7 @@ $property-map: (
     padding-bottom: "pb",
     padding-left: "pl",
     padding: "p",
-    border-radius: "br",
+    border-radius: "br"
 );
 
 global.$prop-config: deep-map-merge.deep-map-merge(
@@ -39,7 +39,7 @@ global.$prop-config: deep-map-merge.deep-map-merge(
         margin-top: (
             0,
             10,
-            20,
+            20
         ),
         margin-bottom: (
             0,
@@ -48,7 +48,7 @@ global.$prop-config: deep-map-merge.deep-map-merge(
             30,
             50,
             110,
-            210,
+            210
         ),
         margin-right: (
             5,
@@ -65,7 +65,7 @@ global.$prop-config: deep-map-merge.deep-map-merge(
             30,
             50,
             110,
-            210,
+            210
         ),
         padding-right: (
             0
@@ -75,7 +75,7 @@ global.$prop-config: deep-map-merge.deep-map-merge(
             30,
             50,
             110,
-            210,
+            210
         ),
         padding-left: (
             0
@@ -112,7 +112,9 @@ global.$prop-config: deep-map-merge.deep-map-merge(
         padding-left: 0;
     }
 }
-.no-padding { padding: 0 !important; }
+.no-padding {
+    padding: 0 !important;
+}
 
 .sr-only:not(:focus):not(:active) {
     position: absolute;
@@ -231,7 +233,7 @@ $line-height-map: (
     "1-25": "1.25",
     "1-33": "1.33",
     "1-5": "1.5",
-    "1-75": "1.75",
+    "1-75": "1.75"
 );
 
 @each $l-class, $l-unit in $line-height-map {
@@ -241,9 +243,15 @@ $line-height-map: (
 }
 
 .u-ov {
-    &-auto { overflow: auto; }
-    &-hid { overflow: hidden; }
-    &-vis { overflow: visible; }
+    &-auto {
+        overflow: auto;
+    }
+    &-hid {
+        overflow: hidden;
+    }
+    &-vis {
+        overflow: visible;
+    }
 }
 
 [data-line-clamp] {
@@ -286,14 +294,13 @@ $line-height-map: (
         right: 0;
         bottom: 0;
         left: 0;
-        background-image:
-            linear-gradient(
-                90deg,
-                rgba(#fff, 0) 0,
-                rgba(#fff, 0.2) 20%,
-                rgba(#fff, 0.5) 60%,
-                rgba(#fff, 0)
-            );
+        background-image: linear-gradient(
+            90deg,
+            rgba(#fff, 0) 0,
+            rgba(#fff, 0.2) 20%,
+            rgba(#fff, 0.5) 60%,
+            rgba(#fff, 0)
+        );
         transform: translateX(-100%);
         animation: shimmer 1s animation.$ease-in-out-cubic infinite;
         content: "";

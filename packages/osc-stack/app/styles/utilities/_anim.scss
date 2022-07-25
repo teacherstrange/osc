@@ -85,12 +85,24 @@
 
     &[data-anim="fade-in-left"],
     & [data-anim="fade-in-left"] {
-        @include tools-animation.animate(fade-in-left, 1.2s, settings-animation.$ease-in-out-circ, 0s, forwards);
+        @include tools-animation.animate(
+            fade-in-left,
+            1.2s,
+            settings-animation.$ease-in-out-circ,
+            0s,
+            forwards
+        );
     }
 
     &[data-anim="fade-in-right"],
     & [data-anim="fade-in-right"] {
-        @include tools-animation.animate(fade-in-right, 1.2s, settings-animation.$ease-in-out-circ, 0s, forwards);
+        @include tools-animation.animate(
+            fade-in-right,
+            1.2s,
+            settings-animation.$ease-in-out-circ,
+            0s,
+            forwards
+        );
     }
 
     // &[data-anim*="reveal"] {
@@ -145,7 +157,13 @@
 
     &[data-anim="block"] {
         &::after {
-            @include tools-animation.animate(slide-in, 1.2s, settings-animation.$ease-in-out-quint, 0s, forwards);
+            @include tools-animation.animate(
+                slide-in,
+                1.2s,
+                settings-animation.$ease-in-out-quint,
+                0s,
+                forwards
+            );
         }
 
         [src] {

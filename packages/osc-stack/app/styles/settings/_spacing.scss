@@ -27,8 +27,13 @@ $global-spacing-factor-xl: 16; // 210px / 21rem
 // It is not recommended that you modify these following variables
 // (it can break your vertical rhythm), but if you need to, you can.
 
-$global-spacing-s: math.round(global.$global-scale-ratio * $global-spacing-factor-s) * global.$global-baseline; // 10
-$global-spacing: math.round(global.$global-scale-ratio * $global-spacing-factor) * global.$global-baseline; // 30
-$global-spacing-m: math.round(global.$global-scale-ratio * $global-spacing-factor-m) * global.$global-baseline; // 50
-$global-spacing-l: math.round(global.$global-scale-ratio * $global-spacing-factor-l) * global.$global-baseline; // 110
-$global-spacing-xl: math.round(global.$global-scale-ratio * $global-spacing-factor-xl) * global.$global-baseline; // 210
+$global-spacing-s: math.round(global.$global-scale-ratio * $global-spacing-factor-s) *
+    global.$global-baseline; // 10
+$global-spacing: math.round(global.$global-scale-ratio * $global-spacing-factor) *
+    global.$global-baseline; // 30
+$global-spacing-m: math.round(global.$global-scale-ratio * $global-spacing-factor-m) *
+    global.$global-baseline; // 50
+$global-spacing-l: math.round(global.$global-scale-ratio * $global-spacing-factor-l) *
+    global.$global-baseline; // 110
+$global-spacing-xl: math.round(global.$global-scale-ratio * $global-spacing-factor-xl) *
+    global.$global-baseline; // 210

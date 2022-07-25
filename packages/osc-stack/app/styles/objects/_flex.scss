@@ -103,7 +103,7 @@
         mob-lrg: settings-mq.$mq-mob--lrg,
         mob-med: settings-mq.$mq-mob--med,
         mob: settings-mq.$mq-mob,
-        mob-sml: settings-mq.$mq-mob--sml,
+        mob-sml: settings-mq.$mq-mob--sml
     );
 
     @each $alias, $mq in $flex-bp {

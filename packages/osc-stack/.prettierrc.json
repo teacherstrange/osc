@@ -9,6 +9,12 @@
       "options": {
         "tabWidth": 2
       }
+    },
+    {
+      "files": ["**/*.css", "**/*.scss", "**/*.html"],
+      "options": {
+        "singleQuote": false
+      }
     }
   ],
   "semi": true,

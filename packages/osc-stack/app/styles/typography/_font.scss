@@ -26,108 +26,108 @@
 $font-sizes: (
     (
         elements: (
-            h1,
+            h1
         ),
         classes: (
-            "alpha",
+            "alpha"
         ),
         font-size: (
             base: typography.$size-beta,
-            settings-mq.$mq-tab--sml: typography.$size-alpha,
-        ),
+            settings-mq.$mq-tab--sml: typography.$size-alpha
+        )
     ),
     (
         elements: (
-            h2,
+            h2
         ),
         classes: (
-            "beta",
+            "beta"
         ),
         font-size: (
             base: typography.$size-gamma,
-            settings-mq.$mq-tab--sml: typography.$size-beta,
-        ),
+            settings-mq.$mq-tab--sml: typography.$size-beta
+        )
     ),
     (
         elements: (
-            h3,
+            h3
         ),
         classes: (
-            "gamma",
+            "gamma"
         ),
         font-size: (
             base: typography.$size-delta,
-            settings-mq.$mq-tab--sml: typography.$size-gamma,
-        ),
+            settings-mq.$mq-tab--sml: typography.$size-gamma
+        )
     ),
     (
         elements: (
-            h4,
+            h4
         ),
         classes: (
-            "delta",
+            "delta"
         ),
         font-size: (
-            base: typography.$size-delta,
-        ),
+            base: typography.$size-delta
+        )
     ),
     (
         elements: (
-            h5,
+            h5
         ),
         classes: (
-            "epsilon",
+            "epsilon"
         ),
         font-size: (
-            base: typography.$size-epsilon,
-        ),
+            base: typography.$size-epsilon
+        )
     ),
     (
         elements: (
-            h6,
+            h6
         ),
         classes: (
-            "zeta",
+            "zeta"
         ),
         font-size: (
-            base: typography.$size-zeta,
-        ),
+            base: typography.$size-zeta
+        )
     ),
     (
         elements: (),
         classes: (
-            "centi",
+            "centi"
         ),
         font-size: (
-            base: typography.$size-centi,
-        ),
+            base: typography.$size-centi
+        )
     ),
     (
         elements: (),
         classes: (
-            "milli",
+            "milli"
         ),
         font-size: (
-            base: typography.$size-milli,
-        ),
+            base: typography.$size-milli
+        )
     ),
     (
         elements: (),
         classes: (
-            "kilo",
+            "kilo"
         ),
         font-size: (
             base: typography.$size-kilo,
-            settings-mq.$mq-desk: typography.$size-mega,
+            settings-mq.$mq-desk: typography.$size-mega
         ),
         line-height: (
-            1,
-        ),
+            1
+        )
     )
 );
 $font-families: (
     "primary": typography.$font-primary,
-    "secondary": typography.$font-secondary,
+    "secondary": typography.$font-secondary
 );
 
 @mixin font-styles($rules, $mq: null, $fs: null) {
