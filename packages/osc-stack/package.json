@@ -4,12 +4,12 @@
   "sideEffects": false,
   "scripts": {
     "prepare": "husky install",
-    "build": "run-s build:*",
-    "build:remix": "remix build",
+    "build": "npm-run-all -p build:*",
+    "build:remix": "cross-env NODE_ENV=production remix build",
     "build:css": "PORT=3001 LOAD_PATH=app/styles PATH_TO_MAIN_SCSS=/app/styles/main.scss PATH_TO_DEST_MAIN_CSS=/app/styles/dest/main.css PATH_TO_COMPONENTS=/app/components node bin/postcssBuild.js",
     "dev:css": "PORT=3001 LOAD_PATH=app/styles PATH_TO_MAIN_SCSS=/app/styles/main.scss PATH_TO_DEST_MAIN_CSS=/app/styles/dest/main.css node bin/postcss.js",
-    "dev:remix": "cross-env NODE_ENV=development binode --require ./mocks -- @remix-run/dev:remix dev",
-    "dev": "cross-env NODE_ENV=development npm run build:css && run-p dev:*",
+    "dev:remix": "cross-env NODE_ENV=development remix dev",
+    "dev": "npm-run-all -p dev:*",
     "format": "prettier --write .",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint --max-warnings 0 --no-error-on-unmatched-pattern .",
     "lint-and-fix": "eslint --cache --cache-location ./node_modules/.cache/eslint --max-warnings 0 --ext .ts,.tsx --fix --no-error-on-unmatched-pattern .",
@@ -24,7 +24,9 @@
     "pretest:e2e:run": "npm run build",
     "test:e2e:run": "cross-env PORT=8811 start-server-and-test start:mocks http://localhost:8811 \"npx cypress run\"",
     "typecheck": "tsc -b && tsc -b cypress",
-    "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run"
+    "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run",
+    "build:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --minify --bundle --format=esm --define:process.env.NODE_ENV='\"production\"'",
+    "dev:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --bundle --format=esm --define:process.env.NODE_ENV='\"development\"' --watch"
   },
   "prettier": {},
   "eslintIgnore": [
@@ -49,7 +51,11 @@
     "node-persist": "^3.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "tiny-invariant": "^1.2.0"
+    "tiny-invariant": "^1.2.0",
+    "web-push": "^3.4.5",
+    "npm-run-all": "^4.1.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.0"
   },
   "devDependencies": {
     "@chakra-ui/storybook-addon": "^4.0.1",
@@ -100,7 +106,8 @@
     "typescript": "^4.6.4",
     "vite": "^2.9.9",
     "vite-tsconfig-paths": "^3.4.1",
-    "vitest": "^0.12.8"
+    "vitest": "^0.12.8",
+    "@types/node-persist": "^3.1.2"
   },
   "engines": {
     "node": ">=14"
