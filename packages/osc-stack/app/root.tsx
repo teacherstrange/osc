@@ -16,6 +16,7 @@ import DOMPurify from 'isomorphic-dompurify';
 import styles from 'app/styles/dest/main.css';
 import { getUser } from './session.server';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
+import { PushNotification } from '~/utils/server/pwa-utils.server';
 
 let isMount = true;
 export const links: LinksFunction = () => {
@@ -55,6 +56,11 @@ export const headers: HeadersFunction = () => ({
     'Accept-CH': 'Sec-CH-Prefers-Color-Scheme'
 });
 export const loader: LoaderFunction = async ({ request }) => {
+    await PushNotification({
+      title: "Remix PWA",
+      body: "A server generated text body."
+    }, 1)
+
     return json<LoaderData>({
         user: await getUser(request),
         colorScheme: await getColorScheme(request)
