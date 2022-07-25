@@ -149,7 +149,7 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache: Em
                 <noscript>
                     <iframe
                         title="gtm"
-                        src="https://www.googletagmanager.com/ns.html?id=GTM-TGRN9Z6"
+                        src={`https://www.googletagmanager.com/ns.html?id=${GTM_TRACKING_ID}`}
                         height="0"
                         width="0"
                         style={{ display: 'none', visibility: 'hidden' }}
