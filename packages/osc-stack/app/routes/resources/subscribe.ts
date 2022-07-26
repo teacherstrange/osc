@@ -1,8 +1,6 @@
 import { SaveSubscription } from '../../utils/server/pwa-utils.server';
 import type { LoaderFunction, ActionFunction } from '@remix-run/node';
 
-const webPush = require('web-push');
-
 export const action: ActionFunction = async ({ request }) => {
     const data = await request.json();
     const subscription = data.subscription;
