@@ -1,7 +1,12 @@
+import * as React from 'react';
 import { RemixBrowser } from '@remix-run/react';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 
-hydrate(<RemixBrowser />, document);
+if (window.requestIdleCallback) {
+    window.requestIdleCallback(hydrate);
+} else {
+    window.setTimeout(hydrate, 1);
+}
 
 if ('serviceWorker' in navigator) {
     // Use the window load event to keep the page load performant
@@ -71,3 +76,14 @@ navigator.serviceWorker.ready
             })
         });
     });
+
+function hydrate() {
+    React.startTransition(() => {
+        hydrateRoot(
+            document,
+            <React.StrictMode>
+                <RemixBrowser />
+            </React.StrictMode>
+        );
+    });
+}

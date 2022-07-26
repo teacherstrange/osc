@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
-import { useLocation, useMatches } from '@remix-run/react';
-import type { HeadersFunction } from '@remix-run/node';
-import { useLoaderData, useLocation } from '@remix-run/react';
+import {
+    useLoaderData,
+    useLocation,
+    useMatches,
+    Links,
+    LiveReload,
+    Meta,
+    Outlet,
+    Scripts,
+    ScrollRestoration
+} from '@remix-run/react';
+import type { HeadersFunction, LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import { getColorScheme } from './cookie';
 import lightTheme from './theme/lightTheme';
 import darkTheme from './theme/darkTheme';
-import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
 import type { EmotionCache } from '@emotion/react';
@@ -17,7 +24,8 @@ import styles from 'app/styles/dest/main.css';
 import * as gtag from '~/utils/gtags.client';
 import { getUser } from './session.server';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
-import { PushNotification } from '~/utils/server/pwa-utils.server';
+// push notifications not working at present, due to wrong sender ID
+// import { PushNotification } from '~/utils/server/pwa-utils.server';
 
 let isMount = true;
 export const links: LinksFunction = () => {
@@ -54,26 +62,20 @@ type LoaderData = {
     colorScheme: string;
     gaTrackingId: string | undefined;
     googleTagManagerId: string | undefined;
+    nodeEnv: string;
 };
 export const headers: HeadersFunction = () => ({
     'Accept-CH': 'Sec-CH-Prefers-Color-Scheme'
 });
 export const loader: LoaderFunction = async ({ request }) => {
-    await PushNotification(
-        {
-            title: 'Remix PWA',
-            body: 'A server generated text body.'
-        },
-        1
-    );
-
     return json<LoaderData>({
         user: await getUser(request),
         colorScheme: await getColorScheme(request),
         gaTrackingId:
             process.env.NODE_ENV === 'production' ? process.env.GA_TRACKING_ID : undefined,
         googleTagManagerId:
-            process.env.NODE_ENV === 'production' ? process.env.GTM_TRACKING_ID : undefined
+            process.env.NODE_ENV === 'production' ? process.env.GTM_TRACKING_ID : undefined,
+        nodeEnv: process.env.NODE_ENV === 'production' ? 'production' : 'development'
     });
 };
 interface DocumentProps {
@@ -116,7 +118,7 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache: Em
         }
     }, [location, matches]);
 
-    const { gaTrackingId, googleTagManagerId } = useLoaderData<LoaderData>();
+    const { gaTrackingId, googleTagManagerId, nodeEnv } = useLoaderData<LoaderData>();
 
     useEffect(() => {
         if (gaTrackingId?.length) {
@@ -128,15 +130,19 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache: Em
             <head>
                 <Links />
                 <Meta />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                {nodeEnv === 'production' && (
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(
+                                `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
                 })(window,document,'script','dataLayer','${googleTagManagerId}');`
-                    }}
-                ></script>
+                            )
+                        }}
+                    ></script>
+                )}
                 {serverStyleData.map(({ key, ids, css }) => (
                     <style
                         key={key}

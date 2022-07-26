@@ -18,7 +18,6 @@ export const loader: LoaderFunction = async () => {
             'You must set the VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY ' +
                 'environment variables. You can use the following ones:'
         );
-        console.log(webPush.generateVAPIDKeys());
         return null;
     }
 
