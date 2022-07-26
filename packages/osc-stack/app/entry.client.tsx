@@ -1,12 +1,7 @@
-import * as React from 'react';
 import { RemixBrowser } from '@remix-run/react';
-import { hydrateRoot } from 'react-dom/client';
+import { hydrate } from 'react-dom';
 
-if (window.requestIdleCallback) {
-    window.requestIdleCallback(hydrate);
-} else {
-    window.setTimeout(hydrate, 1);
-}
+hydrate(<RemixBrowser />, document);
 
 if ('serviceWorker' in navigator) {
     // Use the window load event to keep the page load performant
@@ -76,14 +71,3 @@ navigator.serviceWorker.ready
             })
         });
     });
-
-function hydrate() {
-    React.startTransition(() => {
-        hydrateRoot(
-            document,
-            <React.StrictMode>
-                <RemixBrowser />
-            </React.StrictMode>
-        );
-    });
-}
