@@ -116,6 +116,8 @@ Prior to your first deployment, you'll need to do a few things:
 
 Now that everything is set up you can commit and push your changes to your repo. Every commit to your `main` branch will trigger a deployment to your production environment, and every commit to your `dev` branch will trigger a deployment to your staging environment.
 
+-   When cloning the repo, do not forget to run the "flyctl auth token" and place the value iinside github secrets for ci/cd to work (FLY_API_TOKEN), furthermore, you should create (CHROMATIC_PROJECT_TOKEN) by starting a new project in chromatic and place it inside github secrets, finally, create a FLY_PR_BRANCH_SESSION_SECRET (any value) and place it inside github secrets
+
 ### Connecting to your database
 
 The sqlite database lives at `/data/sqlite.db` in your deployed application. You can connect to the live database by running `fly ssh console -C database-cli`.
