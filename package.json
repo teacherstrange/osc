@@ -68,7 +68,7 @@
     "typescript": "^4.6.4",
     "vite": "^2.9.9",
     "vite-tsconfig-paths": "^3.4.1",
-    "vitest": "^0.12.8"
+    "vitest": "^0.18.1"
   },
   "dependencies": {
     "osc-academic-hub": "file:packages/osc-academic-hub",
@@ -87,6 +87,7 @@
     "build": "lerna run build",
     "build:osc-ui": "lerna run build --scope osc-ui",
     "test": "lerna run test",
+    "test:dev": "lerna run test:dev",
     "test:e2e:dev": "lerna run test:e2e:dev",
     "dev": "lerna run dev",
     "setup": "lerna link convert && npm i && npx prisma generate --schema=packages/osc-academic-hub/prisma/schema.prisma"
