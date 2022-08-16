@@ -1,10 +1,12 @@
-datasource db {
-  provider = "sqlite"
-  url      = env("PLANETSCALE_PRISMA_DATABASE_URL")
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
-generator client {
-  provider = "prisma-client-js"
+datasource db {
+  provider             = "mysql"
+  url                  = env("PLANETSCALE_PRISMA_DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model User {
@@ -13,6 +15,7 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  schemaChange1 DateTime @updatedAt
 
   password Password?
 }
