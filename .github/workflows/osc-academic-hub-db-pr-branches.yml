@@ -151,6 +151,17 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
+      - run: rm -v -r ./package.json ./.storybook
+      - run: mkdir ./.storybook
+      - run: mkdir ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+      - run: npm run addDevDeps
+
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
         id: app_name
