@@ -47,7 +47,7 @@ EOF
 
 . .pscale/cli-helper-scripts/authenticate-ps.sh
 
-create-branch-connection-string "$DB_NAME" "$BRANCH_NAME" "$ORG_NAME" "${BRANCH_NAME}" 
+create-branch-connection-string "$DB_NAME" "$BRANCH_NAME" "$ORG_NAME" "$FROM" 
     # if $2 and $3 are set, generate secret output links
     if [ -n "$2" ] && [ -n "$3" ]; then
         for i in `seq 1 $2`; do
