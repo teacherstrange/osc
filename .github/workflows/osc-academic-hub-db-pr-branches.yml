@@ -46,7 +46,7 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: pr-${{ github.event.number }}
-          FROM: ${{ github.base_ref }}
+          FROM: ${{ github.base_ref }}-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-db-branch-dr-and-connection-pr-branches.sh "$BRANCH_NAME"
 
@@ -134,10 +134,6 @@ jobs:
     name: 🚀 Deploy PR Branch
     runs-on: ubuntu-latest
 
-    # Only run one deployment at a time per PR.
-    concurrency:
-      group: pr-${{ github.event.number }}
-
     # Create a GitHub deployment environment per pr branch app so it shows up
     # in the pull request UI.
     environment:
@@ -212,6 +208,6 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: ${{ env.BASE_REF }}
-          FROM: ${{ env.BASE_REF }}
+          FROM: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh
