@@ -1,14 +1,7 @@
-name: 🚀 Deploy osc-academic-hub
+name: 🚀 Deploy
 on:
-  push:
-    branches:
-      - main
-      - dev
-    paths:
-      - "packages/osc-academic-hub/**"
-      - ".github/workflow/osc-academic-hub-deploy.yml"
-      - "packages/osc-ui/**"
-  pull_request: {}
+  pull_request:
+    types: [opened, reopened, synchronize, edited, closed]
 permissions:
   actions: write
   contents: read
