@@ -9,6 +9,7 @@ function create-branch-connection-string {
     # first, list password if it exists
     local raw_output=`pscale password list "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json `
     # check return code, if not 0 then error
+    echo "$raw_output"
     if [ $? -ne 0 ]; then
         echo "Error: pscale password list returned non-zero exit code $?: $raw_output"
         exit 1

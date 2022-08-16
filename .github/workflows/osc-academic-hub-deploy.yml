@@ -322,17 +322,6 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      - run: rm -v -r ./package.json ./.storybook
-      - run: mkdir ./.storybook
-      - run: mkdir ./prisma
-      - run: mv -v -f packages/osc-academic-hub/* .
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: "npm"
-      - run: npm run addDevDeps
-
       # target staging
       - name: 🚀 Deploy Staging
         id: deploy-staging
