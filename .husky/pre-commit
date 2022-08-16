@@ -7,7 +7,7 @@ npx lint-staged
 #!/bin/sh
 
 # full paths from the repo root separated by newlines
-MUST_NOT_CHANGE='prisma/schema.prisma
+MUST_NOT_CHANGE='packages/osc-academic-hub/prisma/schema.prisma
 '
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
