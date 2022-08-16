@@ -4,27 +4,6 @@ function create-branch-connection-string {
     local ORG_NAME=$3
     local CREDS=${4,,}-cicd-$(uuidgen)
     local secretshare=$5
-
-    # delete password if it already existed
-    # first, list password if it exists
-    local raw_output=`pscale password list "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json `
-    # check return code, if not 0 then error
-    if [ $? -ne 0 ]; then
-        echo "Error: pscale password list returned non-zero exit code $?: $raw_output"
-        exit 1
-    fi
-
-    local output=`echo $raw_output | jq -r "[.[] | select(.display_name == \"$CREDS\") ] | .[0].id "`
-    # if output is not "null", then password exists, delete it
-    if [ "$output" != "null" ]; then
-        echo "Deleting existing password $output"
-        pscale password delete --force "$DB_NAME" "$BRANCH_NAME" "$output" --org "$ORG_NAME"
-        # check return code, if not 0 then error
-        if [ $? -ne 0 ]; then
-            echo "Error: pscale password delete returned non-zero exit code $?"
-            exit 1
-        fi
-    fi
     
     local raw_output=`pscale password create "$DB_NAME" "$BRANCH_NAME" "$CREDS" --org "$ORG_NAME" --format json`
     

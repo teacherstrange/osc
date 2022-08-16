@@ -134,9 +134,7 @@ jobs:
           useLockFile: false
 
       - name: 🛠 Setup Schema
-        run: --mount=type=secret,id=PLANETSCALE_PRISMA_DATABASE_URL_CYPRESS \
-          export PLANETSCALE_PRISMA_DATABASE_URL=$(cat /run/secrets/PLANETSCALE_PRISMA_DATABASE_URL_CYPRESS) && \
-          npx prisma db push --accept-data-loss
+        run: npx prisma db push
 
       - name: ⚙️ Build
         run: npm run build
