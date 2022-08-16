@@ -133,9 +133,6 @@ jobs:
         with:
           useLockFile: false
 
-      - name: 🛠 Setup Schema
-        run: npx prisma db push
-
       - name: ⚙️ Build
         run: npm run build
 
