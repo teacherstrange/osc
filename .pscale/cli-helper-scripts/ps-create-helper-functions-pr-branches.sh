@@ -244,11 +244,11 @@ function create-deployment {
     local DEPLOY_REQUEST_NUMBER=$3
     local ORG_NAME=$4
 
-    local raw_output=`pscale deploy-request diff "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --format json`
+    local raw_output=`pscale deploy-request diff "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --format json --org "$ORG_NAME`
 
     # if array is empty
     if [ -z "$raw_output" ]; then
-        pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" 
+        pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
     else
         echo "Going to deploy deployment request $deploy_request with the following changes: "
 
