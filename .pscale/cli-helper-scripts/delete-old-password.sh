@@ -2,7 +2,7 @@ function delete-branch-connection-string {
     local DB_NAME=$1
     local BRANCH_NAME=$2
     local ORG_NAME=$3
-    local CREDS=${4,,}-cicd-
+    local CREDS=${4,,}-cicd
     local secretshare=$5
 
     # delete password if it already existed
