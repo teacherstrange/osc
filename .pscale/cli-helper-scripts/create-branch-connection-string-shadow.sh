@@ -3,7 +3,7 @@ function create-branch-connection-string {
     local BRANCH_NAME=$2
     local ORG_NAME=$3
     local password=${4,,}-cicd-$(uuidgen)
-    local CREDS="$( echo password | cut -c -62 )"
+    local CREDS="$( echo $password | cut -c -62 )"
     local secretshare=$5
     
     local raw_output=`pscale password create "$DB_NAME" "$BRANCH_NAME" "$CREDS" --org "$ORG_NAME" --format json`
