@@ -260,7 +260,7 @@ function create-deployment {
         if [ $? -ne 0 ]; then
             echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
             echo "Check out the deploy request status at $deploy_request"
-            echp "$DEPLOY_REQUEST_NUMBE" 
+            echp "$DEPLOY_REQUEST_NUMBER" 
             exit 5
         else
             echo "Check out the deploy request at $deploy_request"
