@@ -249,7 +249,7 @@ function create-deployment {
     echo "Going to deploy deployment request $deploy_request with the following changes: "
     # jq -e '.. | select(type == "array" and length == 0)' "$raw_output"
 
-    create-diff-for-ci "$DB_NAME" "$ORG_NAME" "$DEPLOY_REQUEST_NUMBER" "$BRANCH_NAME" "true"
+    create-diff-for-ci "$DB_NAME" "$ORG_NAME" "$DEPLOY_REQUEST_NUMBER" "$BRANCH_NAME"
 
     # if array is empty
     if [ -n "$BRANCH_DIFF" ]; then
@@ -260,7 +260,7 @@ function create-deployment {
         if [ $? -ne 0 ]; then
             echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
             echo "Check out the deploy request status at $deploy_request"
-            echp "$DEPLOY_REQUEST_NUMBER" 
+            echo "$DEPLOY_REQUEST_NUMBER" 
             exit 5
         else
             echo "Check out the deploy request at $deploy_request"
@@ -277,7 +277,7 @@ R
         if [ $? -ne 0 ]; then
             echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
             echo "Check out the deploy request status at $deploy_request"
-            echp "$DEPLOY_REQUEST_NUMBE" 
+            echo "$DEPLOY_REQUEST_NUMBE" 
             exit 5
         else
             echo "Check out the deploy request at $deploy_request"
