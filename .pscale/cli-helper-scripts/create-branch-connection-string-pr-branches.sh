@@ -2,11 +2,11 @@ function create-branch-connection-string {
     local DB_NAME=$1
     local BRANCH_NAME=$2
     local ORG_NAME=$3
-    local CREDS=${4,,}-cicd-$(uuidgen)
+    local CREDS=${4,,}-cicd
     local secretshare=$5
     
     local raw_output=`pscale password create "$DB_NAME" "$BRANCH_NAME" "$CREDS" --org "$ORG_NAME" --format json`
-    echo "$raw_output"
+    
     if [ $? -ne 0 ]; then
         echo "Failed to create credentials for database $DB_NAME branch $BRANCH_NAME: $raw_output"
         exit 1
