@@ -1,20 +1,40 @@
 name: PR Branch App for osc-academic-hub
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
-    paths:
-      - "packages/osc-academic-hub/**"
-      - "packages/osc-ui/**"
-      - ".github/workflow/osc-academic-hub-pr-branches.yml"
+    types: [opened, reopened, synchronize, edited]
+
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   FLY_REGION: iad
 
 jobs:
-  build:
-    name: 🐳 Build PR Branch
+  pre-check:
+    name: check if workflow should run
     runs-on: ubuntu-latest
     steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            osc-academic-hub:
+              - 'packages/osc-academic-hub/**'
+            osc-academic-hub-deploy:
+              - 'packages/osc-ui/**'
+            osc-ui:
+              - '.github/workflow/osc-academic-hub-pr-branches.yml'
+        # run only if some file in 'src' folder was changed
+      - if: steps.changes.outputs.src == 'false'
+        run: exit 1
+
+  build:
+    needs: pre-check
+    name: 🐳 Build PR Branch
+    if: ${{ (!startsWith(github.head_ref, 'db') == true || !startsWith(github.head_ref, 'Db') == true) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo pr title
+        run: echo ${{ github.base_ref }}
+
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
 
@@ -70,6 +90,21 @@ jobs:
           username: x
           password: ${{ secrets.FLY_API_TOKEN }}
 
+      - name: create connection string to PR Branch
+        id: create-cs-main
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: pr
+          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
+
+      # file: ./Dockerfiles/Dockerfile.pr
       - name: 🐳 Docker build
         uses: docker/build-push-action@v2
         with:
@@ -77,7 +112,11 @@ jobs:
           push: true
           tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}
           build-args: |
+            VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY}}
+            VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY}}
+            PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}?sslaccept=strict&sslcert=./cacert.pem
             COMMIT_SHA=${{ github.sha }}
+          file: ./Dockerfiles/Dockerfile.pr
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
@@ -94,10 +133,6 @@ jobs:
     needs: build
     name: 🚀 Deploy PR Branch
     runs-on: ubuntu-latest
-
-    # Only run one deployment at a time per PR.
-    concurrency:
-      group: pr-${{ github.event.number }}
 
     # Create a GitHub deployment environment per pr branch app so it shows up
     # in the pull request UI.
@@ -152,13 +187,27 @@ jobs:
           args: "volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
 
       - name: 🚀 Deploy PR Branch
-        if: ${{ github.ref != 'refs/heads/main' }}
         id: deploy_pr
         uses: superfly/fly-pr-review-apps@1.0.0
         with:
           image: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}
           org: "open-study-college"
           name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
-          args: "deploy --build-arg  SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
+          args: "deploy --build-arg SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: delete old connection string to PR_BRANCHES
+        id: delete-cs
+        if: steps.deploy_pr.conclusion != 'skipped'
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: pr
+          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/delete-old-password.sh

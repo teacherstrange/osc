@@ -105,5 +105,6 @@
   },
   "browserslist": [
     "last 2 versions, not dead"
-  ]
+  ],
+  "name": "osc"
 }
