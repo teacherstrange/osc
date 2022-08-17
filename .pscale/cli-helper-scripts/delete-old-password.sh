@@ -38,4 +38,4 @@ function delete-branch-connection-string {
 
 . .pscale/cli-helper-scripts/authenticate-ps.sh
 
-delete-branch-connection-string "$DB_NAME" "$BRANCH_NAME" "$ORG_NAME" "${BRANCH_NAME}" 
+delete-branch-connection-string "$DB_NAME" "$BRANCH_NAME" "$ORG_NAME" "$PASSWORD_NAME" 

@@ -223,7 +223,7 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: ${{ env.BASE_REF }}
-          FROM: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
 
@@ -238,7 +238,7 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: main
-          FROM: main-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: main-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-branch-connection-string.sh
 
@@ -254,7 +254,7 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: main-shadow
-          FROM: mainShadow-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: main-shadow-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-branch-connection-string-shadow.sh
 
@@ -363,7 +363,6 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: production
-          FROM: main-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 
@@ -379,7 +378,6 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: release
-          FROM: mainShadow-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 
@@ -394,7 +392,7 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: ${{ env.BASE_REF }}
-          FROM: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
 
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh
@@ -410,7 +408,7 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: main
-          FROM: main-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: main-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh
 
@@ -426,6 +424,6 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: main-shadow
-          FROM: main-shadow-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: main-shadow-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh

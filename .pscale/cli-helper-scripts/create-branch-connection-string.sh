@@ -4,7 +4,7 @@ function create-branch-connection-string {
     local ORG_NAME=$3
     local CREDS=${4,,}-cicd-$(uuidgen)
     local secretshare=$5
-
+    
     local raw_output=`pscale password create "$DB_NAME" "$BRANCH_NAME" "$CREDS" --org "$ORG_NAME" --format json`
     
     if [ $? -ne 0 ]; then
@@ -47,7 +47,7 @@ EOF
 
 . .pscale/cli-helper-scripts/authenticate-ps.sh
 
-create-branch-connection-string "$DB_NAME" "$BRANCH_NAME" "$ORG_NAME" "$FROM" 
+create-branch-connection-string "$DB_NAME" "$BRANCH_NAME" "$ORG_NAME" "$PASSWORD_NAME" 
     # if $2 and $3 are set, generate secret output links
     if [ -n "$2" ] && [ -n "$3" ]; then
         for i in `seq 1 $2`; do
