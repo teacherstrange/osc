@@ -183,6 +183,7 @@ function create-diff-for-ci {
         BRANCH_DIFF="${BRANCH_DIFF//'\t'/' '}"
 
         echo "::set-output name=BRANCH_DIFF::$BRANCH_DIFF"
+        echo "$BRANCH_DIFF"
     fi
 }
 
@@ -244,15 +245,23 @@ function create-deployment {
     local DEPLOY_REQUEST_NUMBER=$3
     local ORG_NAME=$4
 
-    local raw_output=`pscale deploy-request diff "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --format json --org "$ORG_NAME"`
+    # local raw_output=`pscale deploy-request diff "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --format json --org "$ORG_NAME"`
+
+    echo "Going to deploy deployment request $deploy_request with the following changes: "
+    # jq -e '.. | select(type == "array" and length == 0)' "$raw_output"
+
+    create-diff-for-ci "$DB_NAME" "$ORG_NAME" "$DEPLOY_REQUEST_NUMBER" "$BRANCH_NAME"
 
     # if array is empty
-    if [ jq -e '.. | select(type == "array" and length == 0)' "$raw_output" ]; then
+    if [ -Z "$BRANCH_DIFF" ]; then
         pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
     else
-        echo "Going to deploy deployment request $deploy_request with the following changes: "
-
-        create-diff-for-ci "$DB_NAME" "$ORG_NAME" "$DEPLOY_REQUEST_NUMBER" "$BRANCH_NAME"
+        pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+        # check return code, if not 0 then error
+        if [ $? -ne 0 ]; then
+            echo "Error: pscale deploy-request deploy returned non-zero exit code"
+            exit 1
+        fi
 
         wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
         if [ $? -ne 0 ]; then
@@ -263,11 +272,5 @@ function create-deployment {
             echo "Check out the deploy request at $deploy_request"
         fi
 
-        pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
-        # check return code, if not 0 then error
-        if [ $? -ne 0 ]; then
-            echo "Error: pscale deploy-request deploy returned non-zero exit code"
-            exit 1
-        fi
     fi
 }
