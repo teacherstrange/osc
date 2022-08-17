@@ -174,17 +174,15 @@ function create-diff-for-ci {
         BRANCH_DIFF=$lines
     fi
 
-    if [ -n "$CI" ]; then
-        BRANCH_DIFF="${BRANCH_DIFF//'"'/''}"
-        BRANCH_DIFF="${BRANCH_DIFF//'%'/'%25'}"
-        BRANCH_DIFF="${BRANCH_DIFF//'\n'/'%0A'}"
-        BRANCH_DIFF="${BRANCH_DIFF//'\r'/'%0D'}"
-        # replace tabs with whitespace
-        BRANCH_DIFF="${BRANCH_DIFF//'\t'/' '}"
+    BRANCH_DIFF="${BRANCH_DIFF//'"'/''}"
+    BRANCH_DIFF="${BRANCH_DIFF//'%'/'%25'}"
+    BRANCH_DIFF="${BRANCH_DIFF//'\n'/'%0A'}"
+    BRANCH_DIFF="${BRANCH_DIFF//'\r'/'%0D'}"
+    # replace tabs with whitespace
+    BRANCH_DIFF="${BRANCH_DIFF//'\t'/' '}"
 
-        echo "::set-output name=BRANCH_DIFF::$BRANCH_DIFF"
-        echo "$BRANCH_DIFF"
-    fi
+    echo "::set-output name=BRANCH_DIFF::$BRANCH_DIFF"
+    echo "$BRANCH_DIFF"
 }
 
 function wait_for_deploy_request_merged {
@@ -244,29 +242,42 @@ function create-deployment {
     local BRANCH_NAME=$2
     local DEPLOY_REQUEST_NUMBER=$3
     local ORG_NAME=$4
+    local ci=true
 
     # local raw_output=`pscale deploy-request diff "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --format json --org "$ORG_NAME"`
 
     echo "Going to deploy deployment request $deploy_request with the following changes: "
     # jq -e '.. | select(type == "array" and length == 0)' "$raw_output"
 
-    create-diff-for-ci "$DB_NAME" "$ORG_NAME" "$DEPLOY_REQUEST_NUMBER" "$BRANCH_NAME"
+    create-diff-for-ci "$DB_NAME" "$ORG_NAME" "$DEPLOY_REQUEST_NUMBER" "$BRANCH_NAME" "true"
 
     # if array is empty
-    if [ -Z "$BRANCH_DIFF" ]; then
+    if [ -n "$BRANCH_DIFF" ]; then
         pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
     else
+
+        wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBE" "$ORG_NAME" 60
+        if [ $? -ne 0 ]; then
+            echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
+            echo "Check out the deploy request status at $deploy_request"
+            echp "$DEPLOY_REQUEST_NUMBE" 
+            exit 5
+        else
+            echo "Check out the deploy request at $deploy_request"
+        fi
+
         pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
         # check return code, if not 0 then error
         if [ $? -ne 0 ]; then
             echo "Error: pscale deploy-request deploy returned non-zero exit code"
             exit 1
         fi
-
-        wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
+R
+        wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBE" "$ORG_NAME" 60
         if [ $? -ne 0 ]; then
             echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
             echo "Check out the deploy request status at $deploy_request"
+            echp "$DEPLOY_REQUEST_NUMBE" 
             exit 5
         else
             echo "Check out the deploy request at $deploy_request"
