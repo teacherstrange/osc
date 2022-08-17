@@ -16,10 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"],
-      "@styles/*": ["./app/styles/*"],
-      "@components/*": ["./app/components/*"],
-      "@*": ["./node_modules/*"]
+      "~/*": ["./app/*"]
     },
     "skipLibCheck": true,
 
