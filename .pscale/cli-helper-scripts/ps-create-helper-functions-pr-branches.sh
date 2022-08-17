@@ -273,11 +273,11 @@ function create-deployment {
             exit 1
         fi
 R
-        wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBE" "$ORG_NAME" 60
+        wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
         if [ $? -ne 0 ]; then
             echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
             echo "Check out the deploy request status at $deploy_request"
-            echo "$DEPLOY_REQUEST_NUMBE" 
+            echo "$DEPLOY_REQUEST_NUMBER" 
             exit 5
         else
             echo "Check out the deploy request at $deploy_request"
