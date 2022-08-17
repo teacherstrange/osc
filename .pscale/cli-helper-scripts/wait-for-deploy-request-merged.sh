@@ -41,7 +41,7 @@ function wait_for_deploy_request_merged {
             echo "show vitess_migrations\G" | pscale shell "$db" main --org "$org"
             echo "Retrying in $wait seconds..."
             sleep $wait
-        elif [ "$output" = "\"complete\"" ] || [ "$output" = "\"complete_pending_revert\"" ]; then
+        elif [ "$output" = "\"ready\"" ] || [ "$output" = "\"no_changes\"" ] || [ "$output" = "\"complete\"" ] || [ "$output" = "\"complete_pending_revert\"" ]; then
             echo  "Deploy-request $number has been deployed successfully."
             return 0
         else
