@@ -226,7 +226,12 @@ function wait_for_deploy_request_merged {
             echo "Retrying in $wait seconds..."
             sleep $wait
         elif [ "$output" = "\"no_changes\"" ] || [ "$output" = "\"ready\"" ] || [ "$output" = "\"complete\"" ] || [ "$output" = "\"complete_pending_revert\"" ]; then
-            echo  "Deploy-request $number has been deployed successfully."
+            if [ "$output" = "\"no_changes\"" ]; then
+                pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+            else
+                pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+                exit 5
+            fi
             return 0
         else
             echo  "Deploy-request $number with unknown status: $output"
