@@ -250,18 +250,18 @@ function create-deployment {
     create-diff-for-ci "$DB_NAME" "$ORG_NAME" "$DEPLOY_REQUEST_NUMBER" "$BRANCH_NAME"
 
     # if array is empty
-    if [ -n "$BRANCH_DIFF" ]; then
-        pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
-    else
-        pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
 
-        wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
-        if [ $? -ne 0 ]; then
-            echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
-            echo "Check out the deploy request status at $deploy_request"
-            exit 5
+    wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
+    if [ $? -ne 0 ]; then
+        echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
+        echo "Check out the deploy request status at $deploy_request"
+        if [ -n "$BRANCH_DIFF" ]; then
+            pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
         else
-            echo "Check out the deploy request at $deploy_request"
+            pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+            exit 5
         fi
+    else
+        echo "Check out the deploy request at $deploy_request"
     fi
 }
