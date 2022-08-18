@@ -59,10 +59,6 @@ function create-deploy-request {
         raw_output=`pscale deploy-request create "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json --deploy-to "main"`
     fi
 
-    if [ $? -ne 0 ]; then
-        echo "Deploy request could not be created: $raw_output"
-        exit 1
-    fi
     local deploy_request_number=`echo $raw_output | jq -r '.number'`
     # if deploy request number is empty, then error
     if [ -z "$deploy_request_number" ]; then
