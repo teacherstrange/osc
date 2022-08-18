@@ -11,6 +11,7 @@ env:
 jobs:
   pre-check:
     name: check if workflow should run
+    if: ${{ github.head_ref != 'staging' && github.head_ref != 'release' && (startsWith(github.head_ref, 'db') == true || startsWith(github.head_ref, 'Db') == true) }}
     runs-on: ubuntu-latest
     steps:
       - uses: dorny/paths-filter@v2
@@ -30,7 +31,6 @@ jobs:
   build:
     needs: pre-check
     name: Build database branch and pr branch
-    if: ${{ github.head_ref != 'staging' && github.head_ref != 'release' && (startsWith(github.head_ref, 'db') == true || startsWith(github.head_ref, 'Db') == true) }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
