@@ -52,17 +52,15 @@ function create-deploy-request {
     local DB_NAME=$1
     local BRANCH_NAME=$2
     local ORG_NAME=$3
-    raw_output=""
+
     if [ "$BRANCH_NAME" == "release" ]; then 
-       raw_output=`pscale deploy-request create "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json --deploy-to "main-shadow"`
-    else 
-        raw_output=`pscale deploy-request create "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json --deploy-to "main"`
+       echo "$DB_NAME" 
+       echo "$BRANCH_NAME" 
+       raw_output=`pscale deploy-request create "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json --deploy-to "main-shadow"`;
+    else        
+       raw_output=`pscale deploy-request create "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json --deploy-to "main"`;
     fi
 
-    if [ $? -ne 0 ]; then
-        echo "Deploy request could not be created: $raw_output"
-        exit 1
-    fi
     local deploy_request_number=`echo $raw_output | jq -r '.number'`
     # if deploy request number is empty, then error
     if [ -z "$deploy_request_number" ]; then
@@ -255,33 +253,6 @@ function create-deployment {
     if [ -n "$BRANCH_DIFF" ]; then
         pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
     else
-
-        wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBE" "$ORG_NAME" 60
-        if [ $? -ne 0 ]; then
-            echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
-            echo "Check out the deploy request status at $deploy_request"
-            echo "$DEPLOY_REQUEST_NUMBER" 
-            exit 5
-        else
-            echo "Check out the deploy request at $deploy_request"
-        fi
-
         pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
-        # check return code, if not 0 then error
-        if [ $? -ne 0 ]; then
-            echo "Error: pscale deploy-request deploy returned non-zero exit code"
-            exit 1
-        fi
-R
-        wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
-        if [ $? -ne 0 ]; then
-            echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
-            echo "Check out the deploy request status at $deploy_request"
-            echo "$DEPLOY_REQUEST_NUMBER" 
-            exit 5
-        else
-            echo "Check out the deploy request at $deploy_request"
-        fi
-
     fi
 }

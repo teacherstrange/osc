@@ -258,6 +258,21 @@ jobs:
         run: |
           ./.pscale/cli-helper-scripts/create-branch-connection-string-shadow.sh
 
+        # added here
+      - name: Create and merge deployment request to main-shadow
+        if: ${{ env.BASE_REF == 'release' && env.PR_CLOSED == 'true' }}
+        id: create-dr-main-shadow
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: release
+        run: |
+          ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
+
       - name: 🐳 Docker build production
         id: docker-build-prod
         if: ${{ env.BASE_REF == 'production' && env.PR_CLOSED == 'true' }}
@@ -363,21 +378,6 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: production
-        run: |
-          ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
-
-      # added here
-      - name: Create and merge deployment request to main-shadow
-        if: ${{ env.BASE_REF == 'release' && env.PR_CLOSED == 'true' }}
-        id: create-dr-main-shadow
-        timeout-minutes: 3
-        env:
-          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          ORG_NAME: ${{secrets.ORG_NAME}}
-          DB_NAME: ${{secrets.DB_NAME}}
-          GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: release
         run: |
           ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 
