@@ -226,7 +226,12 @@ function wait_for_deploy_request_merged {
             echo "Retrying in $wait seconds..."
             sleep $wait
         elif [ "$output" = "\"no_changes\"" ] || [ "$output" = "\"ready\"" ] || [ "$output" = "\"complete\"" ] || [ "$output" = "\"complete_pending_revert\"" ]; then
-            echo  "Deploy-request $number has been deployed successfully."
+            if [ "$output" = "\"no_changes\"" ]; then
+                pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+            else
+                pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+                exit 5
+            fi
             return 0
         else
             echo  "Deploy-request $number with unknown status: $output"
@@ -250,18 +255,12 @@ function create-deployment {
     create-diff-for-ci "$DB_NAME" "$ORG_NAME" "$DEPLOY_REQUEST_NUMBER" "$BRANCH_NAME"
 
     # if array is empty
-    if [ -n "$BRANCH_DIFF" ]; then
-        pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
-    else
-        pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
 
-        wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
-        if [ $? -ne 0 ]; then
-            echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
-            echo "Check out the deploy request status at $deploy_request"
-            exit 5
-        else
-            echo "Check out the deploy request at $deploy_request"
-        fi
+    wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
+    if [ $? -ne 0 ]; then
+        echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
+        echo "Check out the deploy request status at $deploy_request"
+    else
+        echo "Check out the deploy request at $deploy_request"
     fi
 }
