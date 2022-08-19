@@ -271,8 +271,8 @@ jobs:
             "VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY }}"
             "VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY }}"
             "COMMIT_SHA=${{ github.sha }}"
-            "PLANETSCALE_PRISMA_DATABASE_URL_PRODUCTION=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}?sslaccept=strict&sslcert=./cacert.pem"
-            "PLANETSCALE_PRISMA_DATABASE_URL_MAIN=${{ env.MY_DB_URL_MAIN }}${{ secrets.DB_NAME }}?sslaccept=strict&sslcert=./cacert.pem"
+            "PLANETSCALE_PRISMA_DATABASE_URL_PRODUCTION=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}"
+            "PLANETSCALE_PRISMA_DATABASE_URL_MAIN=${{ env.MY_DB_URL_MAIN }}${{ secrets.DB_NAME }}"
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
@@ -288,8 +288,8 @@ jobs:
             "VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY }}"
             "VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY }}"
             "COMMIT_SHA=${{ github.sha }}"
-            "PLANETSCALE_PRISMA_DATABASE_URL_RELEASE=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}?sslaccept=strict&sslcert=./cacert.pem"
-            "PLANETSCALE_PRISMA_DATABASE_URL_MAIN_SHADOW=${{ env.MY_DB_URL_MAIN_SHADOW }}${{ secrets.DB_NAME }}?sslaccept=strict&sslcert=./cacert.pem"
+            "PLANETSCALE_PRISMA_DATABASE_URL_RELEASE=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}"
+            "PLANETSCALE_PRISMA_DATABASE_URL_MAIN_SHADOW=${{ env.MY_DB_URL_MAIN_SHADOW }}${{ secrets.DB_NAME }}"
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
           file: ./Dockerfiles/Dockerfile.release
@@ -306,7 +306,7 @@ jobs:
             "VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY }}"
             "VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY }}"
             "COMMIT_SHA=${{ github.sha }}"
-            "PLANETSCALE_PRISMA_DATABASE_URL_STAGING=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}?sslaccept=strict&sslcert=./cacert.pem"
+            "PLANETSCALE_PRISMA_DATABASE_URL_STAGING=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}"
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
           file: ./Dockerfiles/Dockerfile.staging
