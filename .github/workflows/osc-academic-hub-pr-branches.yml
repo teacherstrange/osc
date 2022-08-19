@@ -96,6 +96,9 @@ jobs:
           push: true
           tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}
           build-args: |
+            VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY}}
+            VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY}}
+            PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
             COMMIT_SHA=${{ github.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
