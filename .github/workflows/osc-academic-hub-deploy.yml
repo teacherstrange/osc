@@ -188,14 +188,101 @@ jobs:
           username: x
           password: ${{ secrets.FLY_API_TOKEN }}
 
-      - name: 🐳 Docker build
+      - name: create connection string to BASE_REF
+        id: create-cs
+        if: ${{ (env.BASE_REF == 'production' || env.BASE_REF == 'release' || env.BASE_REF == 'staging') && env.PR_CLOSED == 'true' }}
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: ${{ env.BASE_REF }}
+          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
+
+      - name: create connection string to MAIN
+        id: create-cs-main
+        if: ${{ env.BASE_REF == 'production' && env.PR_CLOSED == 'true' }}
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: main
+          PASSWORD_NAME: main-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/create-branch-connection-string.sh
+
+      # added here
+      - name: create connection string to MAIN-SHADOW
+        id: create-cs-main-shadow
+        if: ${{ env.BASE_REF == 'release' && env.PR_CLOSED == 'true' }}
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: main-shadow
+          PASSWORD_NAME: main-shadow-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/create-branch-connection-string-shadow.sh
+
+      - name: 🐳 Docker build production
+        id: docker-build-prod
+        if: ${{ env.BASE_REF == 'production' && env.PR_CLOSED == 'true' }}
         uses: docker/build-push-action@v2
+        with:
+          file: ./Dockerfiles/Dockerfile
+          context: .
+          push: true
+          tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.HEAD_REF }}-${{ github.sha }}
+          build-args: |
+            "VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY }}"
+            "VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY }}"
+            "COMMIT_SHA=${{ github.sha }}"
+            "PLANETSCALE_PRISMA_DATABASE_URL_PRODUCTION=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}"
+            "PLANETSCALE_PRISMA_DATABASE_URL_MAIN=${{ env.MY_DB_URL_MAIN }}${{ secrets.DB_NAME }}"
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+
+      - name: 🐳 Docker build release
+        id: "docker-build-release"
+        if: ${{ env.BASE_REF == 'release' && env.PR_CLOSED == 'true' }}
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.HEAD_REF }}-${{ github.sha }}
+          build-args: |
+            "VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY }}"
+            "VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY }}"
+            "COMMIT_SHA=${{ github.sha }}"
+            "PLANETSCALE_PRISMA_DATABASE_URL_RELEASE=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}"
+            "PLANETSCALE_PRISMA_DATABASE_URL_MAIN_SHADOW=${{ env.MY_DB_URL_MAIN_SHADOW }}${{ secrets.DB_NAME }}"
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+          file: ./Dockerfiles/Dockerfile.release
+
+      - name: 🐳 Docker build staging
+        id: docker-build-staging
+        if: ${{ env.BASE_REF == 'staging' && env.PR_CLOSED == 'true' }}
+        uses: docker/build-push-action@v3
         with:
           context: .
           push: true
           tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ github.ref_name }}-${{ github.sha }}
           build-args: |
-            COMMIT_SHA=${{ github.sha }}
+            "VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY }}"
+            "VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY }}"
+            "COMMIT_SHA=${{ github.sha }}"
+            "PLANETSCALE_PRISMA_DATABASE_URL_STAGING=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}"
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
@@ -255,3 +342,79 @@ jobs:
           args: "deploy --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ github.ref_name }}-${{ github.sha }}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Create and merge deployment request to main
+        if: ${{ env.BASE_REF == 'production' && env.PR_CLOSED == 'true' }}
+        id: create-dr
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: production
+        run: |
+          ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
+
+        # added here
+      - name: Create and merge deployment request to main-shadow
+        if: ${{ env.BASE_REF == 'release' && env.PR_CLOSED == 'true' }}
+        id: create-dr-main-shadow
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: release
+        run: |
+          ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
+
+      - name: delete old connection string to BASE_REF
+        id: delete-cs
+        if: steps.deploy-production.conclusion != 'skipped' || steps.deploy-release.conclusion != 'skipped' || steps.deploy-staging.conclusion != 'skipped'
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: ${{ env.BASE_REF }}
+          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+
+        run: |
+          ./.pscale/cli-helper-scripts/delete-old-password.sh
+
+      - name: delete old connection string to MAIN
+        id: delete-cs-main
+        if: steps.create-dr.conclusion != 'skipped'
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: main
+          PASSWORD_NAME: main-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/delete-old-password.sh
+
+      # added here
+      - name: delete old connection string to MAIN-SHADOW
+        id: delete-cs-main-shadow
+        if: steps.create-dr-main-shadow.conclusion != 'skipped'
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: main-shadow
+          PASSWORD_NAME: main-shadow-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/delete-old-password.sh
