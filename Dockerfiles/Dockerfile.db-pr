@@ -41,8 +41,8 @@ RUN npm run build
 FROM base
 ENV PORT="8080"
 ENV NODE_ENV="production"
-ARG MY_DB_URL
-ENV PLANETSCALE_PRISMA_DATABASE_URL="${MY_DB_URL}"
+ARG PLANETSCALE_PRISMA_DATABASE_URL_PR_DB
+ENV PLANETSCALE_PRISMA_DATABASE_URL="${PLANETSCALE_PRISMA_DATABASE_URL_PR_DB}?sslaccept=strict&sslcert=./cacert.pem"
 ARG VAPID_PUBLIC_KEY
 ARG VAPID_PRIVATE_KEY
 ENV VAPID_PUBLIC_KEY="${VAPID_PUBLIC_KEY}"
@@ -55,11 +55,11 @@ COPY --from=build /myapp/node_modules/.prisma /myapp/node_modules/.prisma
 
 COPY --from=build /myapp/build /myapp/build
 COPY --from=build /myapp/public /myapp/public
+COPY --from=build /myapp/package.json /myapp/package.json
+COPY --from=build /myapp/start.sh /myapp/start.sh
+COPY --from=build /myapp/prisma /myapp/prisma
 
 ADD . .
-
-RUN mkdir -p prisma
-COPY ./prisma /app/prisma
 
 EXPOSE 3306
 EXPOSE 8080

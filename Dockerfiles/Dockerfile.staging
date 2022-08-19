@@ -42,7 +42,7 @@ FROM base
 ENV PORT="8080"
 ENV NODE_ENV="production"
 ARG PLANETSCALE_PRISMA_DATABASE_URL_STAGING
-ENV PLANETSCALE_PRISMA_DATABASE_URL="${PLANETSCALE_PRISMA_DATABASE_URL_STAGING}"
+ENV PLANETSCALE_PRISMA_DATABASE_URL="${PLANETSCALE_PRISMA_DATABASE_URL_STAGING}?sslaccept=strict&sslcert=./cacert.pem"
 ARG VAPID_PUBLIC_KEY
 ARG VAPID_PRIVATE_KEY
 ENV VAPID_PUBLIC_KEY="${VAPID_PUBLIC_KEY}"
@@ -55,11 +55,11 @@ COPY --from=build /myapp/node_modules/.prisma /myapp/node_modules/.prisma
 
 COPY --from=build /myapp/build /myapp/build
 COPY --from=build /myapp/public /myapp/public
+COPY --from=build /myapp/package.json /myapp/package.json
+COPY --from=build /myapp/start.sh /myapp/start.sh
+COPY --from=build /myapp/prisma /myapp/prisma
 
 ADD . .
-
-RUN mkdir -p prisma
-COPY ./prisma /app/prisma
 
 EXPOSE 3306
 EXPOSE 8080

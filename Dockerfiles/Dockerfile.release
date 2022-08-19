@@ -41,7 +41,7 @@ RUN npm run build
 FROM base
 
 ARG PLANETSCALE_PRISMA_DATABASE_URL_RELEASE
-ENV PLANETSCALE_PRISMA_DATABASE_URL="${PLANETSCALE_PRISMA_DATABASE_URL_RELEASE}"
+ENV PLANETSCALE_PRISMA_DATABASE_URL="${PLANETSCALE_PRISMA_DATABASE_URL_RELEASE}?sslaccept=strict&sslcert=./cacert.pem"
 ENV PORT="8080"
 ENV NODE_ENV="production"
 ARG VAPID_PUBLIC_KEY
@@ -62,14 +62,14 @@ ADD . .
 EXPOSE 3306
 EXPOSE 8080
 
-RUN mkdir -p prisma
-COPY ./prisma /app/prisma
+# RUN mkdir -p prisma
+# COPY ./prisma /app/prisma
 
 # connect to production and push
 RUN npx prisma db push --accept-data-loss
 
 # connect to main and await dr
 ARG PLANETSCALE_PRISMA_DATABASE_URL_MAIN_SHADOW
-ENV PLANETSCALE_PRISMA_DATABASE_URL="${PLANETSCALE_PRISMA_DATABASE_URL_MAIN_SHADOW}"
+ENV PLANETSCALE_PRISMA_DATABASE_URL="${PLANETSCALE_PRISMA_DATABASE_URL_MAIN_SHADOW}?sslaccept=strict&sslcert=./cacert.pem"
 RUN npx prisma generate
 CMD ["npm", "start"]
