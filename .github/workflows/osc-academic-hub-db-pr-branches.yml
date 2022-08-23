@@ -51,7 +51,8 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: pr-${{ github.event.number }}
-          PASSWORD_NAME: ${{ github.base_ref }}-${{ steps.app_name.outputs.value }}
+          FROM: ${{ github.base_ref }}
+          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-db-branch-dr-and-connection-pr-branches.sh "$BRANCH_NAME"
 
@@ -119,7 +120,7 @@ jobs:
           build-args: |
             VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY}}
             VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY}}
-            PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
+            PLANETSCALE_PRISMA_DATABASE_URL_PR_DB=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
             COMMIT_SHA=${{ github.sha }}
           file: ./Dockerfiles/Dockerfile.db-pr
           cache-from: type=local,src=/tmp/.buildx-cache
@@ -213,6 +214,6 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: ${{ env.BASE_REF }}
-          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh
