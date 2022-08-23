@@ -156,7 +156,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
-      - run: rm -v -r ./package.json ./node_modules
+      - run: rm -v -r ./package.json
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
 
