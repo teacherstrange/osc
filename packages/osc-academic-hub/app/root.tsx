@@ -162,12 +162,29 @@ export default function App() {
         }
     }, [location, matches]);
 
+    interface CustomChakraProviderProps {
+        children: React.ReactNode;
+    }
+
+    const CustomChakraProvider = (props: CustomChakraProviderProps) => {
+        if (typeof document === 'undefined') {
+            return (
+                <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
+                    {props.children}
+                </ChakraProvider>
+            );
+        } else {
+            return <>{props.children}</>;
+        }
+    };
+
     return (
         <Document>
-            <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
+            <CustomChakraProvider>
                 <Header className={'o-header--full'} backgroundColor={'secondary'} />
                 <Outlet />
-            </ChakraProvider>
+                <h1> random change</h1>
+            </CustomChakraProvider>
         </Document>
     );
 }
