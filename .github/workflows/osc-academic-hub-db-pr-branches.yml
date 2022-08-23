@@ -68,8 +68,8 @@ jobs:
 
       # need to delete all other packages in this step
 
-      - run: npm run build:osc-ui
       - run: npm run setup
+      - run: npm run build:osc-ui
 
       - run: rm -v -r ./package.json ./.storybook ./node_modules
       - run: mkdir ./.storybook
