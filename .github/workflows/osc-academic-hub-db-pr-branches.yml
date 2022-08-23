@@ -121,7 +121,7 @@ jobs:
             VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY}}
             PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
             COMMIT_SHA=${{ github.sha }}
-          file: ./Dockerfiles/Dockerfile.pr
+          file: ./Dockerfiles/Dockerfile.db-pr
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
