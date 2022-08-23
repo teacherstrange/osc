@@ -42,11 +42,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: rm -v -r ./package.json ./.storybook
-      - run: mkdir ./.storybook
+      - run: rm -v -r ./package.json ./node_modules
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
-      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
 
       - uses: actions/setup-node@v3
         with:

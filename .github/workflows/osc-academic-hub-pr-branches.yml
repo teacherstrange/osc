@@ -53,8 +53,7 @@ jobs:
       - run: npm run setup
       - run: npm run build:osc-ui
 
-      - run: rm -v -r ./package.json ./.storybook ./node_modules
-      - run: mkdir ./.storybook
+      - run: rm -v -r ./package.json ./node_modules
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
 
@@ -153,8 +152,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
-      - run: rm -v -r ./package.json ./.storybook
-      - run: mkdir ./.storybook
+      - run: rm -v -r ./package.json ./node_modules
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
 
