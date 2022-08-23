@@ -8,7 +8,6 @@ env:
 
 jobs:
   pre-check:
-    if: ${{ github.head_ref != 'staging' && github.head_ref != 'release' && (!startsWith(github.head_ref, 'db') == true || !startsWith(github.head_ref, 'Db') == true) }}
     name: check if workflow should run
     if: ${{ github.head_ref != 'staging' && github.head_ref != 'release' && (!startsWith(github.head_ref, 'db') == true || !startsWith(github.head_ref, 'Db') == true) }}
     runs-on: ubuntu-latest
