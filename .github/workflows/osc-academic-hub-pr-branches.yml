@@ -92,6 +92,21 @@ jobs:
           username: x
           password: ${{ secrets.FLY_API_TOKEN }}
 
+      - name: create connection string to PR Branch
+        id: create-cs-main
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: pr
+          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
+
+      # file: ./Dockerfiles/Dockerfile.pr
       - name: 🐳 Docker build
         uses: docker/build-push-action@v2
         with:
@@ -103,6 +118,7 @@ jobs:
             VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY}}
             PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
             COMMIT_SHA=${{ github.sha }}
+          file: ./Dockerfiles/Dockerfile.pr
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
