@@ -20,7 +20,7 @@ jobs:
               - 'packages/osc-academic-hub/**'
             osc-ui:
               - 'packages/osc-ui/**'
-            osc-academic-hub-pr:
+            osc-academic-hub-db-pr:
               - '.github/workflows/osc-academic-hub-db-pr-branches.yml'
             osc-academic-hub-deploy:
               - '.github/workflows/osc-academic-hub-deploy.yml'
