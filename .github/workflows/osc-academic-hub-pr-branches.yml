@@ -1,11 +1,7 @@
 name: PR Branch App for osc-academic-hub
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
-    paths:
-      - "packages/osc-academic-hub/**"
-      - "packages/osc-ui/**"
-      - ".github/workflow/osc-academic-hub-pr-branches.yml"
+    types: [opened, reopened, synchronize, edited]
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   FLY_REGION: iad

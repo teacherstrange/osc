@@ -8,9 +8,28 @@ env:
   FLY_REGION: iad
 
 jobs:
+  pre-check:
+    name: check if workflow should run
+    if: ${{ github.head_ref != 'staging' && github.head_ref != 'release' && (startsWith(github.head_ref, 'db') == true || startsWith(github.head_ref, 'Db') == true) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            osc-academic-hub:
+              - 'packages/osc-academic-hub/**'
+            osc-academic-hub-deploy:
+              - 'packages/osc-ui/**'
+            osc-ui:
+              - '.github/workflow/osc-academic-hub-pr-branches.yml'
+        # run only if some file in 'src' folder was changed
+      - if: steps.changes.outputs.src == 'false'
+        run: exit 1
+
   destroy_staging_app:
     runs-on: ubuntu-latest
-
+    needs: pre-check
     environment:
       name: pr-${{ github.event.number }}
       url: ${{ steps.deploy.outputs.url }}
