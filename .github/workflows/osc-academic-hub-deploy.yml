@@ -405,7 +405,7 @@ jobs:
         run: |
           ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 
-      # added here
+        # added here
       - name: Create and merge deployment request to main-shadow
         if: ${{ env.BASE_REF == 'release' && env.PR_CLOSED == 'true' }}
         id: create-dr-main-shadow
