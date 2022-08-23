@@ -105,6 +105,9 @@ jobs:
 
   cypress:
     name: ⚫️ Cypress
+    env:
+      PLANETSCALE_PRISMA_DATABASE_URL: ${{ secrets.PLANETSCALE_PRISMA_DATABASE_URL_CYPRESS }}
+      SESSION_SECRET: super-duper-secret
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
