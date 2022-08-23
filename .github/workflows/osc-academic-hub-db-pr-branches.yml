@@ -6,7 +6,6 @@ on:
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   FLY_REGION: iad
-  pscale_base_directory: .pscale
 
 jobs:
   pre-check:
@@ -20,10 +19,16 @@ jobs:
           filters: |
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
-            osc-academic-hub-deploy:
-              - 'packages/osc-ui/**'
             osc-ui:
-              - '.github/workflow/osc-academic-hub-pr-branches.yml'
+              - 'packages/osc-ui/**'
+            osc-academic-hub-db-pr:
+              - '.github/workflows/osc-academic-hub-db-pr-branches.yml'
+            osc-academic-hub-deploy:
+              - '.github/workflows/osc-academic-hub-deploy.yml'
+            osc-academic-hub-destroy-apps:
+              - '.github/workflows/osc-academic-hub-destroy-apps.yml'
+            osc-academic-hub-pr:
+              - '.github/workflows/osc-academic-hub-pr-branches.yml'
         # run only if some file in 'src' folder was changed
       - if: steps.changes.outputs.src == 'false'
         run: exit 1
@@ -46,7 +51,8 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: pr-${{ github.event.number }}
-          PASSWORD_NAME: ${{ github.base_ref }}-${{ steps.app_name.outputs.value }}
+          FROM: ${{ github.base_ref }}
+          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-db-branch-dr-and-connection-pr-branches.sh "$BRANCH_NAME"
 
@@ -66,8 +72,7 @@ jobs:
       - run: npm run setup
       - run: npm run build:osc-ui
 
-      - run: rm -v -r ./package.json ./.storybook ./node_modules
-      - run: mkdir ./.storybook
+      - run: rm -v -r ./package.json ./node_modules
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
 
@@ -114,9 +119,9 @@ jobs:
           build-args: |
             VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY}}
             VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY}}
-            PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
+            PLANETSCALE_PRISMA_DATABASE_URL_PR_DB=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
             COMMIT_SHA=${{ github.sha }}
-          file: ./Dockerfiles/Dockerfile.pr
+          file: ./Dockerfiles/Dockerfile.db-pr
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
@@ -134,6 +139,10 @@ jobs:
     name: 🚀 Deploy PR Branch
     runs-on: ubuntu-latest
 
+    # Only run one deployment at a time per PR.
+    concurrency:
+      group: pr-${{ github.event.number }}
+
     # Create a GitHub deployment environment per pr branch app so it shows up
     # in the pull request UI.
     environment:
@@ -147,8 +156,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
-      - run: rm -v -r ./package.json ./.storybook
-      - run: mkdir ./.storybook
+      - run: rm -v -r ./package.json
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
 
@@ -208,6 +216,6 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: ${{ env.BASE_REF }}
-          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh

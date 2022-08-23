@@ -4,7 +4,8 @@
 name: "Chromatic"
 
 # Event for the workflow
-on: push
+on:
+  push: {}
 
 # List of jobs
 jobs:
@@ -13,21 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     # Job steps
     steps:
-      - uses: actions/checkout@v1
-
-      - run: rm -v -r ./package.json ./.storybook
-      - run: mkdir ./.storybook
-      - run: mkdir ./prisma
-      - run: mv -v -f packages/osc-academic-hub/* .
-      - run: mv -v -f packages/osc-academic-hub/.storybook/* ./.storybook
-
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
         with:
-          node-version: 16
-          cache: "npm"
-      - run: npm run addDevDeps
+          fetch-depth: 0
       - name: Install dependencies
-        run: yarn
+        run: npm run setup --ignore-optional
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         uses: chromaui/action@v1

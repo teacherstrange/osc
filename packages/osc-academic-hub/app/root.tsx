@@ -16,7 +16,7 @@ import appHeaderStyles from './components/header.css';
 import oscUiHeaderStyles from 'osc-ui/dist/index.css';
 import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
-import { ServerStyleContext } from './context';
+import { ClientStyleContext, ServerStyleContext } from './context';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 // import { PushNotification } from '~/utils/server/pwa-utils.server';
 
@@ -84,19 +84,31 @@ interface DocumentProps {
 
 const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) => {
     const serverStyleData = useContext(ServerStyleContext);
+    const clientStyleData = useContext(ClientStyleContext);
 
+    // Only executed on client
     useEffect(() => {
+        // re-link sheet container
+        emotionCache.sheet.container = document.head;
+        // re-inject tags
+        const tags = emotionCache.sheet.tags;
         emotionCache.sheet.flush();
-    }, [emotionCache.sheet]);
+        tags.forEach((tag) => {
+            (emotionCache.sheet as any)._insertTag(tag);
+        });
+        // // reset cache to reapply global styles
+        // clientStyleData?.reset();
+    }, [clientStyleData, emotionCache.sheet]);
 
     return (
         <html lang="en">
             <head>
+                <style id="insertionPoint"></style>
                 {serverStyleData?.map(({ key, ids, css }) => {
                     return (
                         <style
                             key={key}
-                            // data-emotion={`${key} ${ids.join(' ')}`}
+                            data-emotion={`${key} ${ids.join(' ')}`}
                             dangerouslySetInnerHTML={{ __html: css }}
                         />
                     );
@@ -167,6 +179,7 @@ export default function App() {
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
                 <Header className={'o-header--full'} backgroundColor={'secondary'} />
                 <Outlet />
+                <h1> random change</h1>
             </ChakraProvider>
         </Document>
     );
