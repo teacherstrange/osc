@@ -92,8 +92,8 @@ jobs:
         with:
           node-version: 16
 
-      - run: npm run setup
       - run: npm run build:osc-ui
+      - run: npm run setup
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
@@ -118,8 +118,8 @@ jobs:
           node-version: 16
           cache: "npm"
 
-      - run: npm run setup
       - run: npm run build:osc-ui
+      - run: npm run setup
 
       - run: rm -v -r ./package.json ./.storybook ./node_modules
       - run: mkdir ./.storybook
@@ -168,8 +168,8 @@ jobs:
 
       # need to delete all other packages in this step
 
-      - run: npm run setup
       - run: npm run build:osc-ui
+      - run: npm run setup
 
       - run: rm -v -r ./package.json ./.storybook ./node_modules
       - run: mkdir ./.storybook
