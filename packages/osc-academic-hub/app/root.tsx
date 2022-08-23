@@ -162,13 +162,23 @@ export default function App() {
         }
     }, [location, matches]);
 
-    return (
-        <Document>
-            <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
+    if (typeof document === 'undefined') {
+        return (
+            <Document>
+                <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
+                    <Header className={'o-header--full'} backgroundColor={'secondary'} />
+                    <Outlet />
+                    <h1> random change</h1>
+                </ChakraProvider>
+            </Document>
+        );
+    } else {
+        return (
+            <Document>
                 <Header className={'o-header--full'} backgroundColor={'secondary'} />
                 <Outlet />
                 <h1> random change</h1>
-            </ChakraProvider>
-        </Document>
-    );
+            </Document>
+        );
+    }
 }
