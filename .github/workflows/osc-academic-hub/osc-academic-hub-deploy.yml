@@ -17,10 +17,10 @@ jobs:
           filters: |
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
-            osc-academic-hub-deploy:
-              - 'packages/osc-ui/**'
             osc-ui:
-              - '.github/workflow/osc-academic-hub-pr-branches.yml'
+              - 'packages/osc-ui/**'
+            osc-workflows:
+              - '.github/workflow/osc-academic-hub/**'
         # run only if some file in 'src' folder was changed
       - if: steps.changes.outputs.src == 'false'
         run: exit 1
