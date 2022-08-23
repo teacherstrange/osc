@@ -1,6 +1,8 @@
 import { SaveSubscription } from '../../utils/server/pwa-utils.server';
 import type { LoaderFunction, ActionFunction } from '@remix-run/node';
 
+const webPush = require('web-push');
+
 export const action: ActionFunction = async ({ request }) => {
     const data = await request.json();
     const subscription = data.subscription;
@@ -16,6 +18,7 @@ export const loader: LoaderFunction = async () => {
             'You must set the VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY ' +
                 'environment variables. You can use the following ones:'
         );
+        console.log(webPush.generateVAPIDKeys());
         return null;
     }
 

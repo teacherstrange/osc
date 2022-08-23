@@ -1,4 +1,4 @@
-name: 🚀 Deploy
+name: 🚀 Deploy osc-academic-hub
 on:
   pull_request:
     types: [opened, reopened, synchronize, edited, closed]
@@ -17,10 +17,16 @@ jobs:
           filters: |
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
-            osc-academic-hub-deploy:
-              - '.github/workflow/osc-academic-hub-deploy.yml'
             osc-ui:
               - 'packages/osc-ui/**'
+            osc-academic-hub-db-pr:
+              - '.github/workflows/osc-academic-hub-db-pr-branches.yml'
+            osc-academic-hub-deploy:
+              - '.github/workflows/osc-academic-hub-deploy.yml'
+            osc-academic-hub-destroy-apps:
+              - '.github/workflows/osc-academic-hub-destroy-apps.yml'
+            osc-academic-hub-pr:
+              - '.github/workflows/osc-academic-hub-pr-branches.yml'
         # run only if some file in 'src' folder was changed
       - if: steps.changes.outputs.src == 'false'
         run: exit 1
@@ -99,10 +105,10 @@ jobs:
 
   cypress:
     name: ⚫️ Cypress
-    runs-on: ubuntu-latest
     env:
       PLANETSCALE_PRISMA_DATABASE_URL: ${{ secrets.PLANETSCALE_PRISMA_DATABASE_URL_CYPRESS }}
       SESSION_SECRET: super-duper-secret
+    runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -118,8 +124,7 @@ jobs:
       - run: npm run setup
       - run: npm run build:osc-ui
 
-      - run: rm -v -r ./package.json ./.storybook ./node_modules
-      - run: mkdir ./.storybook
+      - run: rm -v -r ./package.json ./node_modules
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
 
@@ -144,25 +149,11 @@ jobs:
         env:
           PORT: "8811"
 
-  build-and-deploy:
-    needs: pre-check
-    permissions: write-all
+  build:
     name: 🐳 Build
+    needs: pre-check
     runs-on: ubuntu-latest
     steps:
-      - name: format head_ref
-        uses: bluwy/substitute-string-action@v1
-        id: findandreplace
-        with:
-          _input-text: ${{ github.head_ref }}
-          /: "-"
-
-      - name: Get PR details
-        run: |
-          echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
-          echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
-          echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
-
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
 
@@ -179,10 +170,22 @@ jobs:
       - run: npm run setup
       - run: npm run build:osc-ui
 
-      - run: rm -v -r ./package.json ./.storybook ./node_modules
-      - run: mkdir ./.storybook
+      - run: rm -v -r ./package.json ./node_modules
       - run: mkdir ./prisma
       - run: mv -v -f packages/osc-academic-hub/* .
+
+      - name: format head_ref
+        uses: bluwy/substitute-string-action@v1
+        id: findandreplace
+        with:
+          _input-text: ${{ github.head_ref }}
+          /: "-"
+
+      - name: Get PR details
+        run: |
+          echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
+          echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
+          echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
 
       - run: npm run addDevDeps
 
@@ -317,10 +320,46 @@ jobs:
       # https://github.com/docker/build-push-action/issues/252
       # https://github.com/moby/buildkit/issues/1896
       - name: 🚚 Move cache
-        if: steps.docker-build-prod.conclusion != 'skipped' && steps.docker-build-release.conclusion != 'skipped' && steps.docker-build-staging.conclusion != 'skipped'
+        if: steps.docker-build-prod.conclusion != 'skipped' || steps.docker-build-release.conclusion != 'skipped' || steps.docker-build-staging.conclusion != 'skipped'
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+  deploy:
+    name: 🚀 Deploy
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - run: rm -v -r ./package.json
+      - run: mkdir ./prisma
+      - run: mv -v -f packages/osc-academic-hub/* .
+
+      - name: format head_ref
+        uses: bluwy/substitute-string-action@v1
+        id: findandreplace
+        with:
+          _input-text: ${{ github.head_ref }}
+          /: "-"
+
+      - name: Get PR details
+        run: |
+          echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
+          echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
+          echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
+
+      - name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.0.0
+        id: app_name
+        with:
+          file: "fly.toml"
+          field: "app"
 
       # target staging
       - name: 🚀 Deploy Staging
@@ -362,7 +401,7 @@ jobs:
           ORG_NAME: ${{secrets.ORG_NAME}}
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: production
+          BRANCH_NAME: ${{ env.BASE_REF }}
         run: |
           ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 
@@ -377,7 +416,7 @@ jobs:
           ORG_NAME: ${{secrets.ORG_NAME}}
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: release
+          BRANCH_NAME: ${{ env.BASE_REF }}
         run: |
           ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 

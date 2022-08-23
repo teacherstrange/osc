@@ -277,11 +277,12 @@ export async function SendNotification(
                     message: 'Denied access to sending notifications!'
                 };
             }
+        } else {
+            return {
+                status: 'bad',
+                message: 'Notification API not supported'
+            };
         }
-        return {
-            status: 'bad',
-            message: 'Notification API not supported'
-        };
     } catch (error) {
         console.debug(error);
         throw new Error('Error sending notification!');
