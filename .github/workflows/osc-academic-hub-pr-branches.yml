@@ -20,6 +20,12 @@ jobs:
               - 'packages/osc-academic-hub/**'
             osc-ui:
               - 'packages/osc-ui/**'
+            prisma:
+              - 'prisma/**'
+            pscale: 
+              - '.pscale/**'
+            Dockerfiles:
+              - 'Dockerfiles/**'
             osc-academic-hub-db-pr:
               - '.github/workflows/osc-academic-hub-db-pr-branches.yml'
             osc-academic-hub-deploy:
