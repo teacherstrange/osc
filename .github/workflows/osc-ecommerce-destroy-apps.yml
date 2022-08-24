@@ -1,0 +1,81 @@
+name: Destroy pr app
+on:
+  pull_request:
+    types: [closed]
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  FLY_REGION: iad
+
+jobs:
+  pre-check:
+    name: check if workflow should run
+    if: ${{ github.head_ref != 'staging' && github.head_ref != 'release' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            osc-ecommerce:
+              - 'packages/osc-ecommerce/**'
+            osc-ui:
+              - 'packages/osc-ui/**'
+            osc-ecommerce-db-pr:
+              - '.github/workflows/osc-ecommerce-db-pr-branches.yml'
+            osc-ecommerce-deploy:
+              - '.github/workflows/osc-ecommerce-deploy.yml'
+            osc-ecommerce-destroy-apps:
+              - '.github/workflows/osc-ecommerce-destroy-apps.yml'
+            osc-ecommerce-pr:
+              - '.github/workflows/osc-ecommerce-pr-branches.yml'
+        # run only if some file in 'src' folder was changed
+      - if: steps.changes.outputs.src == 'false'
+        run: exit 1
+
+  destroy_staging_app:
+    runs-on: ubuntu-latest
+    needs: pre-check
+    environment:
+      name: pr-${{ github.event.number }}
+      url: ${{ steps.deploy.outputs.url }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: rm -v -r ./package.json
+      - run: mv -v -f packages/osc-ecommerce/* .
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+      - run: npm run addDevDeps
+
+      - name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.0.0
+        id: app_name
+        with:
+          file: "fly.toml"
+          field: "app"
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+        if: always()
+        continue-on-error: true
+      - run: flyctl apps destroy pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} -y
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: delete db branch
+        id: delete-db-branch
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/delete-db-branch.sh "$BRANCH_NAME"
