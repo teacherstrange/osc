@@ -61,10 +61,13 @@ jobs:
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
-        id: app_name_build
+        id: app_name
         with:
           file: "fly.toml"
           field: "app"
+
+      - name: log app name
+        run: echo "The selected app name is ${{ steps.app_name.outputs.value }}"
 
       - name: Create database branch - if asked, please click on displayed link to authenticate
         id: create-db-branch
@@ -83,9 +86,6 @@ jobs:
 
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
-      - name: log app name
-        run: echo "The selected app name is ${{ steps.app_name.outputs.value }}"
 
       - name: 🐳 Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
