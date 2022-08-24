@@ -13,10 +13,8 @@ model User {
   id    String @id @default(cuid())
   email String @unique
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  schemaChange1 DateTime @default(now()) @updatedAt
-  schemaChange2 DateTime @default(now()) @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   password Password?
 }
