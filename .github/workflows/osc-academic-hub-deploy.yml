@@ -397,6 +397,7 @@ jobs:
       - name: Create and merge deployment request to main
         if: ${{ env.BASE_REF == 'production' && env.PR_CLOSED == 'true' }}
         id: create-dr
+        continue-on-error: true
         timeout-minutes: 3
         env:
           PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
@@ -412,6 +413,7 @@ jobs:
       - name: Create and merge deployment request to main-shadow
         if: ${{ env.BASE_REF == 'release' && env.PR_CLOSED == 'true' }}
         id: create-dr-main-shadow
+        continue-on-error: true
         timeout-minutes: 3
         env:
           PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
