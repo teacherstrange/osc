@@ -72,6 +72,7 @@
   },
   "dependencies": {
     "osc-academic-hub": "file:packages/osc-academic-hub",
+    "osc-ecommerce": "file:packages/osc-ecommerce",
     "osc-ui": "file:packages/osc-ui"
   },
   "scripts": {
@@ -90,7 +91,7 @@
     "test:dev": "lerna run test:dev",
     "test:e2e:dev": "lerna run test:e2e:dev",
     "dev": "lerna run dev",
-    "setup": "lerna link convert && npm i && npx prisma generate --schema=packages/osc-academic-hub/prisma/schema.prisma"
+    "setup": "lerna link convert && npm i && lerna run generate"
   },
   "lint-staged": {
     "*.scss": [
