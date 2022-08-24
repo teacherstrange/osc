@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # full paths from the repo root separated by newlines
-MUST_NOT_CHANGE='prisma/schema.prisma
-'
+MUST_NOT_CHANGE='packages/osc-academic-hub/prisma/schema.prisma
+packages/osc-ecommerce/prisma/schema.prisma'
 
 z40=0000000000000000000000000000000000000000
 
