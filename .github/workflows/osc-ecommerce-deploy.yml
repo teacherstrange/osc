@@ -125,7 +125,6 @@ jobs:
       - run: npm run build:osc-ui
 
       - run: rm -v -r ./package.json ./node_modules
-      - run: mkdir ./prisma
       - run: mv -v -f packages/osc-ecommerce/* .
 
       - run: npm run addDevDeps
@@ -171,7 +170,6 @@ jobs:
       - run: npm run build:osc-ui
 
       - run: rm -v -r ./package.json ./node_modules
-      - run: mkdir ./prisma
       - run: mv -v -f packages/osc-ecommerce/* .
 
       - name: format head_ref
@@ -338,7 +336,6 @@ jobs:
         uses: actions/checkout@v3
 
       - run: rm -v -r ./package.json
-      - run: mkdir ./prisma
       - run: mv -v -f packages/osc-ecommerce/* .
 
       - name: format head_ref
