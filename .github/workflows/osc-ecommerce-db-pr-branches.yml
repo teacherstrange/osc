@@ -43,7 +43,7 @@ jobs:
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
-        id: app_name_build
+        id: app_name
         with:
           file: "fly.toml"
           field: "app"
@@ -83,13 +83,6 @@ jobs:
 
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
-      - name: 👀 Read app name
-        uses: SebRollen/toml-action@v1.0.0
-        id: app_name
-        with:
-          file: "fly.toml"
-          field: "app"
 
       - name: log app name
         run: echo "The selected app name is ${{ steps.app_name.outputs.value }}"
