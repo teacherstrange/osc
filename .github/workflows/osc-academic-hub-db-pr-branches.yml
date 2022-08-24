@@ -43,7 +43,7 @@ jobs:
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
-        id: app_name
+        id: app_name_build
         with:
           file: "fly.toml"
           field: "app"
