@@ -19,6 +19,12 @@ jobs:
               - 'packages/osc-ecommerce/**'
             osc-ui:
               - 'packages/osc-ui/**'
+            prisma:
+              - 'prisma/**'
+            pscale: 
+              - '.pscale/**'
+            Dockerfiles:
+              - 'Dockerfiles/**'
             osc-ecommerce-db-pr:
               - '.github/workflows/osc-ecommerce-db-pr-branches.yml'
             osc-ecommerce-deploy:
