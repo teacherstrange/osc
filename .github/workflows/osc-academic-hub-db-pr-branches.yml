@@ -50,7 +50,7 @@ jobs:
           ORG_NAME: ${{secrets.ORG_NAME}}
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: pr-${{ github.event.number }}
+          BRANCH_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
           FROM: ${{ github.base_ref }}
           PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
         run: |
