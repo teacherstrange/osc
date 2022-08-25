@@ -179,7 +179,7 @@ export default function App() {
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
                 <Header className={'o-header--full'} backgroundColor={'secondary'} />
                 <Outlet />
-                <h1> random change</h1>
+                <h1> OSC Academic hub</h1>
             </ChakraProvider>
         </Document>
     );

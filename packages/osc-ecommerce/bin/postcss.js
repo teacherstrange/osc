@@ -8,7 +8,7 @@ require('dotenv').config();
 // output to new css file
 
 nodemon({
-    port: 3001,
+    port: 2001,
     ext: 'scss',
     ignore: ['.git', 'node_modules/**/node_modules']
 }).on('restart', (files) => {

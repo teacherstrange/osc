@@ -5,5 +5,6 @@ module.exports = {
     cacheDirectory: './node_modules/.cache/remix',
     ignoredRouteFiles: ['**/.*', '**/*.css', '**/*.test.{js,jsx,ts,tsx}'],
     // serverDependenciesToBundle: [/^header.*/],
-    watchPaths: ['../osc-ui/dist/*']
+    watchPaths: ['../osc-ui/dist/*'],
+    devServerPort: 9002
 };
