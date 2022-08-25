@@ -4,7 +4,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
-
 import fs from 'fs';
 import { resolve } from 'path';
 import type { ResolvedConfig, PluginOption } from 'vite';
@@ -71,12 +70,13 @@ function libInjectCss(): PluginOption {
         }
     };
 }
-
 export default defineConfig({
-    plugins: [react(), tsconfigPaths(), libInjectCss()],
+    plugins: [libInjectCss(), react(), tsconfigPaths()],
     test: {
+        reporters: ['verbose'],
         globals: true,
         environment: 'happy-dom',
-        setupFiles: ['./test/setup-test-env.ts']
+        setupFiles: ['./test/setup-test-env.ts'],
+        include: ['./src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,css}']
     }
 });
