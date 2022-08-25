@@ -73,17 +73,7 @@ function libInjectCss(): PluginOption {
 }
 
 export default defineConfig({
-    plugins: [
-        libInjectCss(),
-        react(),
-        tsconfigPaths(),
-        {
-            enforce: 'pre',
-            transform(code, id) {
-                if (id.endsWith('.css')) return '';
-            }
-        } as PluginOption
-    ],
+    plugins: [react(), tsconfigPaths(), libInjectCss()],
     test: {
         globals: true,
         environment: 'happy-dom',
