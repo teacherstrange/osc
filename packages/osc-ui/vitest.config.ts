@@ -21,8 +21,6 @@ function libInjectCss(): PluginOption {
     return {
         name: 'lib-inject-css',
 
-        apply: 'build',
-
         configResolved(resolvedConfig: ResolvedConfig) {
             viteConfig = resolvedConfig;
         },
