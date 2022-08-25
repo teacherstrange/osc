@@ -73,6 +73,7 @@ function libInjectCss(): PluginOption {
 export default defineConfig({
     plugins: [libInjectCss(), react(), tsconfigPaths()],
     test: {
+        css: true,
         reporters: ['verbose'],
         globals: true,
         environment: 'happy-dom',
