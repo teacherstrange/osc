@@ -6,7 +6,7 @@ import React from 'react';
 import { Footer } from './Footer';
 import { screen, render } from '@testing-library/react';
 
-test('renders header', () => {
+test('renders footer', () => {
     render(<Footer />);
     const linkElement = screen.getByText(/changed title/i);
     expect(linkElement).toBeInTheDocument();
