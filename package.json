@@ -87,8 +87,8 @@
     "chromatic": "chromatic --exit-zero-on-changes",
     "build": "lerna run build",
     "build:osc-ui": "lerna run build --scope osc-ui",
-    "test": "lerna run test",
-    "test:dev": "lerna run test:dev",
+    "test": "lerna run test --skip-nx-cache",
+    "test:dev": "lerna run test:dev --skip-nx-cache",
     "test:e2e:dev": "lerna run test:e2e:dev",
     "dev": "lerna run dev",
     "setup": "lerna link convert && npm i && npx prisma generate"
