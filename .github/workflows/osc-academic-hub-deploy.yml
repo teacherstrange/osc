@@ -96,6 +96,16 @@ jobs:
       - run: npm run setup
       - run: npm run build:osc-ui
 
+      - name: "Check file existence header"
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "/packages/osc-ui/src/components/Header/header.css"
+
+      - name: "Check file existence footer"
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "/packages/osc-ui/src/components/Footer/footer.css"
+
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
         with:
