@@ -1,4 +1,4 @@
-import './header.css';
+import 'header.css';
 import type { FC } from 'react';
 import React from 'react';
 import {
