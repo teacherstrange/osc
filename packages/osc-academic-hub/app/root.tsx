@@ -13,7 +13,7 @@ import { withEmotionCache } from '@emotion/react';
 import { Header } from 'osc-ui';
 import styles from './styles/dest/main.css';
 import appHeaderStyles from './components/header.css';
-import oscUiHeaderStyles from 'osc-ui/dist/index.css';
+import oscUiHeaderStyles from 'osc-ui/dist/header.css';
 import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
