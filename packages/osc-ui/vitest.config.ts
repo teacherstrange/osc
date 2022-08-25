@@ -4,70 +4,41 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import fs from 'fs';
-import { resolve } from 'path';
-import type { ResolvedConfig, PluginOption } from 'vite';
 
-const fileRegex = /\.(css)$/;
+let packageNames = [];
+let viteConfig;
+let IIFEcss;
 
-const injectCode = (code: string) =>
-    `function styleInject(css,ref){if(ref===void 0){ref={}}var insertAt=ref.insertAt;if(!css||typeof document==="undefined"){return}var head=document.head||document.getElementsByTagName("head")[0];var style=document.createElement("style");style.type="text/css";if(insertAt==="top"){if(head.firstChild){head.insertBefore(style,head.firstChild)}else{head.appendChild(style)}}else{head.appendChild(style)}if(style.styleSheet){style.styleSheet.cssText=css}else{style.appendChild(document.createTextNode(css))}};styleInject(\`${code}\`)`;
-const template = `console.warn("__INJECT__")`;
-
-let viteConfig: ResolvedConfig;
-const css: string[] = [];
-
-function libInjectCss(): PluginOption {
+// 将 css 打包到 js 文件中
+function libInjectCss() {
     return {
-        name: 'lib-inject-css',
-
-        configResolved(resolvedConfig: ResolvedConfig) {
-            viteConfig = resolvedConfig;
+        apply: 'build' as 'build',
+        enforce: 'post' as 'post',
+        name: 'pack-css',
+        configResolved(config) {
+            viteConfig = config;
+            packageNames = viteConfig.build.lib.formats.map((format) =>
+                viteConfig.build.lib.fileName(format)
+            );
         },
-
-        transform(code: string, id: string) {
-            if (fileRegex.test(id)) {
-                css.push(code);
-                return {
-                    code: ''
-                };
+        generateBundle(_, bundle) {
+            const cssFileName = 'style.css';
+            const { [cssFileName]: cssBundle } = bundle;
+            if (cssBundle) {
+                IIFEcss = `(function() {try {var elementStyle = document.createElement('style');elementStyle.innerText = ${JSON.stringify(
+                    cssBundle.source
+                )};document.head.appendChild(elementStyle);} catch(error) {console.error(error, 'unable to concat style inside the bundled file')}})()`;
+                delete bundle[cssFileName];
             }
-            if (
-                // @ts-ignore
-                id.includes(viteConfig.build.lib.entry)
-            ) {
-                return {
-                    code: `${code}
-          ${template}`
-                };
-            }
-            return null;
-        },
-
-        async writeBundle(_: any, bundle: any) {
-            for (const file of Object.entries(bundle)) {
-                const { root } = viteConfig;
-                const outDir: string = viteConfig.build.outDir || 'dist';
-                const fileName: string = file[0];
-                const filePath: string = resolve(root, outDir, fileName);
-
-                try {
-                    let data: string = fs.readFileSync(filePath, {
-                        encoding: 'utf8'
-                    });
-
-                    if (data.includes(template)) {
-                        data = data.replace(template, injectCode(css.join('\n')));
-                    }
-
-                    fs.writeFileSync(filePath, data);
-                } catch (e) {
-                    console.error(e);
+            packageNames.forEach((packageName) => {
+                if (bundle[packageName]) {
+                    bundle[packageName].code += IIFEcss;
                 }
-            }
+            });
         }
     };
 }
+
 export default defineConfig({
     plugins: [libInjectCss(), react(), tsconfigPaths()],
     test: {
