@@ -74,6 +74,7 @@ export default defineConfig({
     plugins: [libInjectCss(), react(), tsconfigPaths()],
     test: {
         reporters: ['verbose'],
+        css: false,
         globals: true,
         environment: 'happy-dom',
         setupFiles: ['./test/setup-test-env.ts'],
