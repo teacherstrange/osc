@@ -104,10 +104,10 @@ jobs:
         with:
           files: "${{ github.workspace }}/packages/osc-ui/src/components/Footer/footer.css"
 
-      # - name: 📥 Download deps
-      #   uses: bahmutov/npm-install@v1
-      #   with:
-      #     useLockFile: false
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: false
 
       - name: ⚡ Run vitest
         run: npm run test
