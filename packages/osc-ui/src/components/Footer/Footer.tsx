@@ -1,4 +1,4 @@
-import './header.css';
+import './footer.css';
 import type { FC } from 'react';
 import React from 'react';
 import {
@@ -15,10 +15,10 @@ export interface Props {
     tester: string;
 }
 
-export const Header: FC<Props> = (props) => {
+export const Footer: FC<Props> = (props) => {
     const { className, ...other } = props;
     return (
-        <Accordion className={`o-header ${className}`} {...other}>
+        <Accordion className={`o-footer ${className}`} {...other}>
             <AccordionItem>
                 <h2>
                     <AccordionButton>

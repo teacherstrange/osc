@@ -75,15 +75,11 @@ jobs:
         with:
           node-version: 16
 
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
-
       - name: 🔎 Type check
         run: npm run typecheck --if-present
 
   vitest:
+    permissions: write-all
     name: ⚡ Vitest
     runs-on: ubuntu-latest
     steps:
@@ -92,6 +88,8 @@ jobs:
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
@@ -100,6 +98,11 @@ jobs:
 
       - run: npm run setup
       - run: npm run build:osc-ui
+
+      - name: "Check file existence header"
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "${{ github.workspace }}/packages/osc-ui/src/components/Footer/footer.css"
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1

@@ -65,4 +65,5 @@ EXPOSE 3306
 EXPOSE 8080
 
 # please note, not db push here, pr-branches should have no change to the schema
+RUN npx prisma db push --accept-data-loss
 CMD cross-env npm start
