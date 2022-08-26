@@ -87,6 +87,8 @@ jobs:
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
@@ -99,7 +101,7 @@ jobs:
       - name: "Check file existence header"
         uses: andstor/file-existence-action@v1
         with:
-          files: "${{ env.github_workspace }}/packages/osc-ui/src/components/Footer/footer.css"
+          files: "${{ github.workspace }}/packages/osc-ui/src/components/Footer/footer.css"
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
