@@ -94,13 +94,12 @@ jobs:
           node-version: 16
 
       - run: npm run setup
-      - run: npm run build:osc-ui && \
-          npm run test \
+      - run: npm run build:osc-ui && npm run test
 
       - name: "Check file existence header"
         uses: andstor/file-existence-action@v1
         with:
-          files: "/home/runner/work/osc/osc/packages/osc-ui/src/components/Footer/footer.css"
+          files: "${{ env.github_workspace }}/packages/osc-ui/src/components/Footer/footer.css"
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
