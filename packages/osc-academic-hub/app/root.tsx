@@ -13,7 +13,7 @@ import { withEmotionCache } from '@emotion/react';
 import { Header } from 'osc-ui';
 import styles from './styles/dest/main.css';
 import appHeaderStyles from './components/header.css';
-import oscUiHeaderStyles from 'osc-ui/dist/index.css';
+import oscUiHeaderStyles from 'osc-ui/dist/header.css';
 import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
@@ -179,7 +179,7 @@ export default function App() {
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
                 <Header className={'o-header--full'} backgroundColor={'secondary'} />
                 <Outlet />
-                <h1> random change</h1>
+                <h1> OSC Academic hub</h1>
             </ChakraProvider>
         </Document>
     );
