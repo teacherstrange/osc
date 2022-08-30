@@ -40,6 +40,8 @@ jobs:
           echo steps.changes.outputs && \
           exit 1
 
+      - run: echo echo steps.changes.outputs
+
   build:
     needs: pre-check
     name: 🐳 Build PR Branch
