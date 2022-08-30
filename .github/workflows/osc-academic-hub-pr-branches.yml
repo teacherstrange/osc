@@ -70,11 +70,11 @@ jobs:
       # add dev-dependencies to the osc-academic-hub
       - run: npm run addDevDeps
 
-      # remove all other packages once osc-ui has been built and stored in node modules
-      - run: rm -v -r ./packages
+      # # remove all other packages once osc-ui has been built and stored in node modules
+      # - run: rm -v -r ./packages
 
-      # # delete all other packages in the folder (if symlinked)
-      # - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+      # delete all other packages in the folder (if symlinked)
+      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
