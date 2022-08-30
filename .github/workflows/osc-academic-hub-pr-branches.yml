@@ -70,9 +70,6 @@ jobs:
       # add dev-dependencies to the osc-academic-hub
       - run: npm run addDevDeps
 
-      # # remove all other packages once osc-ui has been built and stored in node modules
-      # - run: rm -v -r ./packages
-
       # delete all other packages in the folder (if symlinked)
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
@@ -177,6 +174,8 @@ jobs:
           node-version: 16
           cache: "npm"
       - run: npm run addDevDeps
+
+      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
