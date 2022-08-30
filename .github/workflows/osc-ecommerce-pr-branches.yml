@@ -37,10 +37,10 @@ jobs:
         # run only if some file in 'src' folder was changed
       - if: steps.changes.outputs == '[]'
         run: |
-          echo steps.changes.outputs && \
+          echo ${{ steps.changes.outputs }} && \
           exit 1
 
-      - run: echo echo steps.changes.outputs
+      - run: echo ${{ steps.changes.outputs }}
 
   build:
     needs: pre-check
