@@ -36,7 +36,7 @@ jobs:
             osc-academic-hub-pr:
               - '.github/workflows/osc-academic-hub-pr-branches.yml'
         # run only if some file in 'src' folder was changed
-      - if: steps.changes.outputs.src == 'false'
+      - if: steps.changes.outputs.changes == '[]'
         run: exit 1
 
   build:
@@ -64,6 +64,8 @@ jobs:
       - run: mv -v -f packages/osc-academic-hub/* .
 
       - run: npm run addDevDeps
+
+      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
@@ -166,6 +168,8 @@ jobs:
           node-version: 16
           cache: "npm"
       - run: npm run addDevDeps
+
+      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0

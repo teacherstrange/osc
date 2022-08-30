@@ -35,7 +35,7 @@ jobs:
             osc-academic-hub-pr:
               - '.github/workflows/osc-academic-hub-pr-branches.yml'
         # run only if some file in 'src' folder was changed
-      - if: steps.changes.outputs.src == 'false'
+      - if: steps.changes.outputs == '[]'
         run: exit 1
 
   build:
@@ -56,13 +56,22 @@ jobs:
 
       # need to delete all other packages in this step
 
+      # install monorepo
       - run: npm run setup
+      # build component library
       - run: npm run build:osc-ui
 
+      # remove package.json and node modules
       - run: rm -v -r ./package.json ./node_modules
+
+      # move osc-academic-hub to the root
       - run: mv -v -f packages/osc-academic-hub/* .
 
+      # add dev-dependencies to the osc-academic-hub
       - run: npm run addDevDeps
+
+      # delete all other packages in the folder (if symlinked)
+      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
@@ -165,6 +174,8 @@ jobs:
           node-version: 16
           cache: "npm"
       - run: npm run addDevDeps
+
+      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
