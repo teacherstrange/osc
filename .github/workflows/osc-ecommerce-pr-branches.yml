@@ -36,7 +36,9 @@ jobs:
               - '.github/workflows/osc-ecommerce-pr-branches.yml'
         # run only if some file in 'src' folder was changed
       - if: steps.changes.outputs == '[]'
-        run: exit 1
+        run: |
+          echo steps.changes.outputs && \
+          exit 1
 
   build:
     needs: pre-check
