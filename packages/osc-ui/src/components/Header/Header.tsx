@@ -12,6 +12,7 @@ import {
 
 export interface Props {
     [x: string]: string;
+    tester: string;
 }
 
 export const Header: FC<Props> = (props) => {
