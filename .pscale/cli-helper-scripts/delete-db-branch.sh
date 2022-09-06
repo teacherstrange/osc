@@ -8,6 +8,7 @@ BRANCH_NAME="$1"
 
 pscale branch delete "$DB_NAME" "$BRANCH_NAME" --force --org "$ORG_NAME"
 
+function delete-pr-app-password {
 # first, list password if it exists
 local raw_output=`pscale password list "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json `
 # check return code, if not 0 then error
@@ -32,3 +33,6 @@ echo $output | jq -r '.[].id' | while read -r password ; do
     fi
     count=$((count+1))
 done
+}
+
+delete-pr-app-password "$DB_NAME" "$BRANCH_NAME" "$ORG_NAME"
