@@ -5,7 +5,6 @@
 . .pscale/cli-helper-scripts/authenticate-ps.sh
 
 BRANCH_NAME="$1"
-CREDS="$2"
 
 pscale branch delete "$DB_NAME" "$BRANCH_NAME" --force --org "$ORG_NAME"
 
@@ -17,7 +16,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-local output=`echo $raw_output | jq -r "[.[] | select(.display_name | startswith(\"$CREDS\")) ]"`
+local output=`echo $raw_output | jq -r "[.[] | select(.display_name | startswith(\"$BRANCH_NAME\")) ]"`
 # if output is not "null", then password exists, delete it
 local count=0
 echo $output | jq -r '.[].id' | while read -r password ; do
