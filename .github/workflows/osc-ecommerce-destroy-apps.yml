@@ -86,4 +86,4 @@ jobs:
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
         run: |
-          ./.pscale/cli-helper-scripts/delete-db-branch.sh "$BRANCH_NAME"
+          ./.pscale/cli-helper-scripts/delete-db-branch.sh "$BRANCH_NAME" creds-${BRANCH_NAME}
