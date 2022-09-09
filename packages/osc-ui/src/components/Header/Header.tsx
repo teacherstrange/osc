@@ -9,6 +9,7 @@ import {
     Box,
     AccordionPanel
 } from '@chakra-ui/react';
+import { Link } from '@remix-run/react';
 
 export interface Props {
     [x: string]: string;
@@ -20,6 +21,7 @@ export const Header: FC<Props> = (props) => {
     return (
         <Accordion className={`o-header ${className}`} {...other}>
             <AccordionItem>
+                <Link to={`/login`}>login link</Link>
                 <h2>
                     <AccordionButton>
                         <Box className="tester" flex="1" textAlign="left">

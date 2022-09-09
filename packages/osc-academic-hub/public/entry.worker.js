@@ -198,7 +198,7 @@ async function appHandleFetch(event, { error, response }) {
     return response;
 }
 /**
- * @remix-run/server-runtime v1.6.5
+ * @remix-run/server-runtime v1.7.0
  *
  * Copyright (c) Remix Software Inc.
  *

@@ -12,7 +12,6 @@ import {
 
 export interface Props {
     [x: string]: string;
-    tester: string;
 }
 
 export const Footer: FC<Props> = (props) => {
