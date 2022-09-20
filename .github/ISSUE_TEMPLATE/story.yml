@@ -1,0 +1,36 @@
+name: "Story"
+description: "Issue for User Stories"
+title: "S1.1 [NAME OF USER STORY]"
+labels: ["story"]
+body:
+  - type: input
+    id: epic-link-id
+    attributes:
+      label: "Epic:"  
+      description: "Add a link to your github issue epic"
+      placeholder: "e.g. #2"
+  - type: "input"
+    id: "user-story"
+    attributes:
+      label: "User Story"
+      description: "Describe the User Story."
+      placeholder: |
+        As a <ROLE>, I want <GOAL/DESIRE> so that <BENEFIT>.
+    validations:
+      required: true
+  - type: "textarea"
+    id: "description"
+    attributes:
+      label: "Description"
+      description: "Please describe your story in more detail (if necessary)."
+  - type: "textarea"
+    id: "task-list"
+    attributes:
+      label: "Linked Tasks"
+      description: |
+        List all tasks associated to this story.
+      value: |
+        - Task 1
+        - Task 2
+        - Task 3
+        '...'
