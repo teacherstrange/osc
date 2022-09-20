@@ -1,0 +1,11 @@
+name: "Epic"
+description: "Issue for Epics"
+labels: ["epic"]
+body:
+  - type: "textarea"
+    id: "description"
+    attributes:
+      label: "Description"
+      description: "Please describe the Epic."
+    validations:
+      required: true
