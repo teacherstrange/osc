@@ -1,0 +1,19 @@
+name: "Task"
+description: "Issue for Tasks"
+labels: ["task"]
+body:
+  - type: input
+    id: task-link-id
+    attributes:
+      label: "Task:"  
+      description: "Add a link to your github issue task"
+      placeholder: "e.g. #3"
+    validations:
+      required: true
+  - type: "textarea"
+    id: "description"
+    attributes:
+      label: "Description"
+      description: "Please describe your task."
+    validations:
+      required: true
