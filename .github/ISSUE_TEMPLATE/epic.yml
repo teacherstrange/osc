@@ -1,5 +1,6 @@
 name: "Epic"
 description: "Issue for Epics"
+title: "[EP1]: "
 labels: ["epic"]
 body:
   - type: "textarea"
