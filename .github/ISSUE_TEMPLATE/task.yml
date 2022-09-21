@@ -5,9 +5,10 @@ body:
   - type: input
     id: task-link-id
     attributes:
-      label: "Task:"  
-      description: "Add a link to your github issue task"
-      placeholder: "e.g. #3"
+      label: "Link task to story"  
+      description: "Add a link to the associated story"
+      placeholder: "e.g. Story: #3"
+      value: "Story: "
     validations:
       required: true
   - type: "textarea"
