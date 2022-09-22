@@ -10,19 +10,16 @@ datasource db {
 }
 
 model User {
-  id    String @id @default(cuid())
-  email String @unique
-
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  schemaChange1 DateTime @default(now()) @updatedAt
-
-  password Password?
+  id            String    @id @default(cuid())
+  email         String    @unique
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  schemaChange1 DateTime  @default(now()) @updatedAt
+  password      Password?
 }
 
 model Password {
-  hash String
-
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  hash   String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
 }
