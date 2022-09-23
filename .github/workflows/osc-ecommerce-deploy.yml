@@ -170,7 +170,7 @@ jobs:
       - name: 🌳 Cypress run
         uses: cypress-io/github-action@v3
         with:
-          start: npm run start:mocks
+          start: npm run test:e2e:run
           wait-on: "http://localhost:8812"
         env:
           PORT: "8812"
