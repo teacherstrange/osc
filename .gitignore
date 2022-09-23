@@ -1,6 +1,16 @@
 node_modules/
 lerna-debug.log
 npm-debug.log
-packages/*/lib
+packages//lib
 .idea
 .env
+.DS_Store
+packages/osc-academic-hub/public/
+packages/osc-ecommerce/public/*
+packages/osc-academic-hub/coverage/**/*
+packages/osc-ecommerce/coverage/*
+packages/osc-ui/coverage/*
+packages/osc-ui/dist/**
+packages/osc-academic-hub/public/entry.worker.js
+packages/osc-ecommerce/public/entry.worker.js
+packages/osc-academic-hub/.DS_Store

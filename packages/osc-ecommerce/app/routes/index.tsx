@@ -2,10 +2,17 @@ import { Form } from '@remix-run/react';
 import { useLoaderData, useLocation, useSubmit } from '@remix-run/react';
 
 import { getColorScheme } from '~/cookie';
-import type { LoaderFunction } from '@remix-run/server-runtime';
+import type { LinksFunction, LoaderFunction } from '@remix-run/server-runtime';
 import { FormToggle } from '~/components/FormToggle';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Heading } from '@chakra-ui/react';
+
+import { Tabs } from 'osc-ui';
+import oscUiTabStyles from 'osc-ui/dist/tabs.css';
+
+export const links: LinksFunction = () => {
+    return [{ rel: 'stylesheet', href: oscUiTabStyles }];
+};
 
 export const loader: LoaderFunction = async ({ request }) => {
     const colorScheme = await getColorScheme(request);
@@ -44,6 +51,25 @@ export default function Index() {
                     id="color-mode-toggle"
                 />
             )}
+            <Tabs
+                tabs={[
+                    {
+                        key: '1',
+                        list: 'One',
+                        panel: 'one!'
+                    },
+                    {
+                        key: '2',
+                        list: 'Two',
+                        panel: 'two!'
+                    },
+                    {
+                        key: '3',
+                        list: 'Three',
+                        panel: 'three!'
+                    }
+                ]}
+            />
         </div>
     );
 }
