@@ -30,9 +30,11 @@ test('renders the tabs with three items', () => {
     const tabList = screen.queryAllByRole('tab');
     // Use querySelector as an escape hatch as queryByRole won't count hidden elements
     const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+    const tabContainer = document.querySelector('.chakra-tabs');
 
     expect(tabList).toHaveLength(3);
     expect(tabPanels).toHaveLength(3);
+    expect(tabContainer).not.toHaveClass('undefined');
 });
 
 test('passes classname to the component', () => {
