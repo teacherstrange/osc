@@ -24,7 +24,7 @@ export const Header: FC<Props> = (props) => {
                 <h2>
                     <AccordionButton>
                         <Box className="tester" flex="1" textAlign="left">
-                            changed title again
+                            changed title again 2
                         </Box>
                         <AccordionIcon />
                     </AccordionButton>
