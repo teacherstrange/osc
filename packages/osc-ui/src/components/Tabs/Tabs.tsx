@@ -20,13 +20,13 @@ export const Tabs: FC<Props> = (props: Props) => {
         <ChakraTabs className={`o-tabs ${className}`} {...other}>
             <TabList>
                 {tabs.map((tab) => (
-                    <Tab key={tab.list}>{tab.list}</Tab>
+                    <Tab key={tab.key}>{tab.list}</Tab>
                 ))}
             </TabList>
 
             <TabPanels>
                 {tabs.map((tab) => (
-                    <TabPanel key={tab.panel}>{tab.panel}</TabPanel>
+                    <TabPanel key={tab.key}>{tab.panel}</TabPanel>
                 ))}
             </TabPanels>
         </ChakraTabs>
