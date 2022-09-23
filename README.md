@@ -27,7 +27,7 @@ npm install
 npm run setup
 ```
 
-Next run `npm run setup` this will run:
+`npm run setup` will run:
 
 -   `npm install`
 -   `prisma generate` - generates prisma client
