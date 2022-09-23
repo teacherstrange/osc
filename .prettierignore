@@ -5,3 +5,9 @@ node_modules
 .env
 
 /app/styles/tailwind.css
+
+packages/osc-academic-hub/public/*
+packages/osc-ecommerce/public/*
+packages/osc-academic-hub/coverage/*
+packages/osc-ecommerce/coverage/*
+packages/osc-ui/coverage/*

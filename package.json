@@ -91,6 +91,8 @@
     "test:dev": "lerna run test:dev",
     "test:e2e:dev": "lerna run test:e2e:dev",
     "dev": "lerna run dev",
+    "dev:osc-ecommerce": "lerna run dev --scope '{osc-ui,osc-ecommerce}'",
+    "dev:osc-academic-hub": "lerna run dev --scope '{osc-ui,osc-academic-hub}'",
     "setup": "lerna link convert && npm i && npx prisma generate"
   },
   "lint-staged": {
