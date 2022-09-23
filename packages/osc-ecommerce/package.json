@@ -19,7 +19,7 @@
     "test:dev": "vitest run",
     "test:e2e:dev": "start-server-and-test dev http://localhost:2000 \"npx cypress open\"",
     "pretest:e2e:run": "npm run build",
-    "test:e2e:run": "cross-env PORT=8812 start-server-and-test start:mocks http://localhost:8812 \"npx cypress run\"",
+    "test:e2e:run": "cross-env PORT=8812 start-server-and-test start:mocks http://localhost:8812 \"DEBUG=cypress:* && npx cypress run\"",
     "typecheck": "tsc -b && tsc -b cypress",
     "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run",
     "build-storybook": "npm run build:css && lerna run build:css && build-storybook",
