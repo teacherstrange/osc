@@ -13,7 +13,6 @@ import { Link } from '@remix-run/react';
 
 export interface Props {
     [x: string]: string;
-    tester: string;
 }
 
 export const Header: FC<Props> = (props) => {
