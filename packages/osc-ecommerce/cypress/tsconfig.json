@@ -2,7 +2,7 @@
   "exclude": ["../node_modules/@types/jest", "../node_modules/@testing-library/jest-dom"],
   "include": [
     "./index.ts",
-    "e2e2/**/*",
+    "e2e/**/*",
     "plugins/**/*",
     "support/**/*",
     "../node_modules/cypress",

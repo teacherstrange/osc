@@ -26,6 +26,7 @@ declare global {
              *    cy.cleanupUser({ email: 'whatever@example.com' })
              */
             cleanupUser: typeof cleanupUser;
+            visitAndCheck: typeof visitAndCheck;
         }
     }
 }
@@ -68,6 +69,11 @@ function deleteUserByEmail(email: string) {
     cy.clearCookie('__session');
 }
 
+function visitAndCheck(url: string, waitTime: number = 1000) {
+    cy.visit(url);
+    cy.location('pathname').should('contain', url).wait(waitTime);
+}
+Cypress.Commands.add('visitAndCheck', visitAndCheck);
 Cypress.Commands.add('login', login);
 Cypress.Commands.add('cleanupUser', cleanupUser);
 
