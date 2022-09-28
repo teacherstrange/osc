@@ -16,6 +16,10 @@ export function resolveProductionUrl(doc) {
     const url = new URL(baseUrl);
 
     switch (doc._type) {
+        case 'home':
+            url.pathname = `/`;
+            break;
+
         case 'post':
             url.pathname = `blog/${slug}`;
             break;
