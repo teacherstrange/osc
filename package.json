@@ -95,7 +95,8 @@
     "dev": "lerna run dev",
     "dev:osc-ecommerce": "lerna run dev --scope '{osc-ui,osc-ecommerce}'",
     "dev:osc-academic-hub": "lerna run dev --scope '{osc-ui,osc-academic-hub}'",
-    "setup": "lerna link convert && npm i && npx prisma generate"
+    "restore:studio-install": "cd packages/osc-studio && npm i --legacy-peer-deps",
+    "setup": "lerna link convert && npm i && npx prisma generate && npm run restore:studio-install"
   },
   "lint-staged": {
     "*.scss": [
