@@ -73,6 +73,7 @@
   "dependencies": {
     "osc-academic-hub": "file:packages/osc-academic-hub",
     "osc-ecommerce": "file:packages/osc-ecommerce",
+    "osc-studio": "file:packages/osc-studio",
     "osc-ui": "file:packages/osc-ui"
   },
   "scripts": {
