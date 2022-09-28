@@ -15,7 +15,8 @@
     "@sanity/desk-tool",
     "media",
     "@sanity/color-input",
-    "dashboard-widget-shopify"
+    "dashboard-widget-shopify",
+    "iframe-pane"
   ],
   "env": {
     "development": {

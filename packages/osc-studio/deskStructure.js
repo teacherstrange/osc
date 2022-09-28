@@ -20,6 +20,8 @@
  */
 
 import S from '@sanity/desk-tool/structure-builder';
+import Iframe from 'sanity-plugin-iframe-pane';
+import { resolveProductionUrl } from './utils/resolveProductionUrl';
 import { collections } from './desk/collections';
 import { home } from './desk/home';
 import { pages } from './desk/pages';
@@ -41,6 +43,25 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
     'post'
 ];
 
+/**
+ * Here we declare which view panes show up for which schema types
+ *
+ * NOTE: This only applies to simple documents such as pages or collections.
+ * Singletons (i.e. home) or complex documents (i.e. products) will need to add the view directly
+ * into the document file.
+ */
+export const getDefaultDocumentNode = ({ schemaType }) => {
+    return S.document().views([
+        S.view.form(),
+        // Including the iframe pane, with a function to create the url
+        S.view
+            .component(Iframe)
+            .options({ url: (doc) => resolveProductionUrl(doc) })
+            .title('Preview')
+    ]);
+};
+
+// Then we export the default list of menu items
 export default () => {
     // prettier-ignore
     return (
