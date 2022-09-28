@@ -1,4 +1,5 @@
 import { MasterDetailIcon } from '@sanity/icons';
+import { validateSlug } from '../../utils/validateSlug';
 
 const TITLE = 'Blog';
 
@@ -19,6 +20,22 @@ export default {
         }
     ],
     fields: [
+        // Title
+        {
+            name: 'title',
+            title: 'Title',
+            type: 'string',
+            validation: (Rule) => Rule.required(),
+            initialValue: TITLE
+        },
+        // Slug
+        {
+            name: 'slug',
+            type: 'slug',
+            options: { source: 'title' },
+            validation: validateSlug,
+            initialValue: TITLE.toLowerCase()
+        },
         // Show hero
         {
             name: 'showHero',
