@@ -29,4 +29,4 @@ export const SANITY_API_VERSION = '2021-10-21';
 // Your Shopify store ID.
 // This is your unique store URL (e.g. 'my-store-name.myshopify.com').
 // Set this to enable helper links in document status banners and shortcut links on products and collections.
-export const SHOPIFY_STORE_ID = '';
+export const SHOPIFY_STORE_ID = 'openstudydev.myshopify.com';
