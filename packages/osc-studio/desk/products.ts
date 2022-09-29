@@ -27,7 +27,13 @@ export const products = S.listItem()
                                         // Including the iframe pane, with a function to create the url
                                         S.view
                                             .component(Iframe)
-                                            .options({ url: (doc) => resolveProductionUrl(doc) })
+                                            .options({
+                                                url: (doc) => resolveProductionUrl(doc),
+                                                reload: {
+                                                    button: true,
+                                                    revision: true
+                                                }
+                                            })
                                             .title('Preview')
                                     ])
                             ),
