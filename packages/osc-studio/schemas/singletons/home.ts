@@ -19,6 +19,21 @@ export default {
         }
     ],
     fields: [
+        // Title
+        {
+            name: 'title',
+            title: 'Title',
+            type: 'string',
+            validation: (Rule) => Rule.required(),
+            initialValue: TITLE
+        },
+        // Slug
+        {
+            name: 'slug',
+            type: 'slug',
+            options: { source: 'title' },
+            readonly: true
+        },
         // Show hero
         {
             name: 'showHero',
