@@ -65,10 +65,7 @@ export interface SanityPage {
     hero: SanityHero;
     showHero: boolean;
     modules: module[] | mediaTextModule[];
-}
-
-export interface SanityCollectionPage extends SanityPage {
-    store: {
+    store?: {
         title: string;
         slug?: {
             current: string;
