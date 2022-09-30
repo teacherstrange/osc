@@ -18,6 +18,9 @@ VAPID_PRIVATE_KEY=""
 DATABASE_URL=""
 ALGOLIA_ID=""
 ALGOLIA_ID_SEARCH_ONLY=""
+SANITY_STUDIO_API_PROJECT_ID=""
+SANITY_STUDIO_API_DATASET="staging"
+SANITY_STUDIO_API_TOKEN=""
 ```
 
 The first time you clone the repo run `npm install` to get the Lerna dependencies etc and then `npm run setup` to install the dependencies for each package:
@@ -35,8 +38,38 @@ npm run setup
 
 Run `npm run dev` to start the development server.
 
+## Setting up Sanity Studio
+
+There's an extra step to get Sanity working.
+
+Navigate into the `osc-studio` package and make a copy of the `.env.sample.development`, rename it `.env.development` and add the following variables to it
+
+```.env
+SANITY_STUDIO_API_PROJECT_ID=""
+SANITY_STUDIO_API_DATASET="staging"
+```
+
+## Development commands
+
+Run `osc-ecommerce`, `osc-academic-hub` and `osc-ui`.
+
+Because `osc-studio` isn't part of the packages array in `lerna.json` then it has to be run as a separate command.
+
 ```sh
 npm run dev
+```
+
+Run `osc-ecommerce` & `osc-ui` or `osc-academic-hub` & `osc-ui`
+
+```sh
+npm run dev:osc-ecommerce
+npm run dev:osc-academic-hub
+```
+
+Run Sanity Studio
+
+```sh
+npm run dev:osc-studio
 ```
 
 This will run osc-ecommerce on [http://localhost:2000](http://localhost:2000) and osc-academic-hub on [http://localhost:3000](http://localhost:3000).

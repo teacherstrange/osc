@@ -22,14 +22,14 @@ It also comes with several convenient layout modules which can be re-used across
 
 No two custom storefronts are the same, and we've taken a few strong opinions on how we've approached this studio.
 
-- Synced Shopify data for `collection`, `product` and `productVariant` documents are stored in a read-only object, `store`
-- Shopify is the source of truth for both product titles, slugs (handles) and thumbnail images
-- Shopify is the source of truth for collections
-- Sanity is used as an additional presentational layer to add custom metadata to both Shopify collections and products
-  - For products: this includes a portable text field with support for editorial modules
-  - For collections: this includes a customizable array of editorial modules
-- Some images (such as product and cart line item thumbnails) are served by Shopify's CDN whilst other images (such as those served in editorial modules) are handled by Sanity's Image API
-- We only concern ourselves with incoming data from Shopify _collections_, _products_ and _product variants_
+-   Synced Shopify data for `collection`, `product` and `productVariant` documents are stored in a read-only object, `store`
+-   Shopify is the source of truth for both product titles, slugs (handles) and thumbnail images
+-   Shopify is the source of truth for collections
+-   Sanity is used as an additional presentational layer to add custom metadata to both Shopify collections and products
+    -   For products: this includes a portable text field with support for editorial modules
+    -   For collections: this includes a customizable array of editorial modules
+-   Some images (such as product and cart line item thumbnails) are served by Shopify's CDN whilst other images (such as those served in editorial modules) are handled by Sanity's Image API
+-   We only concern ourselves with incoming data from Shopify _collections_, _products_ and _product variants_
 
 We believe these rules work well for simpler use cases, and keeping product titles, images and slugs handled by Shopify helps keep content consistent as you navigate from your product views to the cart and ultimately checkout. Managing collections in Shopify gives you the flexibility to take full advantage of manual and automated collections.
 
@@ -54,7 +54,7 @@ See [studio features][studio-features] for more information.
 
 ```javascript
 // constants.js
-SHOPIFY_STORE_ID = 'my-storefront.myshopify.com'
+SHOPIFY_STORE_ID = 'my-storefront.myshopify.com';
 ```
 
 ## Local Development
@@ -62,19 +62,13 @@ SHOPIFY_STORE_ID = 'my-storefront.myshopify.com'
 ### Starting development server
 
 ```sh
-npm start
+npm run dev
 ```
 
-### Deploying the studio
+### Building the studio
 
 ```sh
-npm run deploy
-```
-
-### Upgrading Sanity Studio
-
-```sh
-npm run upgrade
+npm run build
 ```
 
 If you have the [Sanity CLI][docs-cli] installed, you can also run this with `sanity start|deploy|upgrade`. It comes with additional useful functionality.
