@@ -21,6 +21,13 @@ export default {
             title: 'Created at',
             type: 'string'
         },
+        // Updated at
+        {
+            fieldset: 'status',
+            name: 'updatedAt',
+            title: 'Last updated at',
+            type: 'string'
+        },
         // Deleted
         {
             fieldset: 'status',
