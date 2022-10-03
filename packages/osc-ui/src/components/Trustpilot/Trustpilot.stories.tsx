@@ -10,34 +10,34 @@ export default {
 
 const Template: Story<Props> = (args) => <Trustpilot {...args} />;
 
-export const Default = Template.bind({});
+export const Primary = Template.bind({});
 
-Default.args = {};
+Primary.args = {};
 
 export const Slider = Template.bind({});
 Slider.args = {
-    ...Default.args,
+    ...Primary.args,
     template: 'slider',
     height: '240px'
 };
 
 export const Grid = Template.bind({});
 Grid.args = {
-    ...Default.args,
+    ...Primary.args,
     template: 'grid',
     height: '500px'
 };
 
 export const MiniCarousel = Template.bind({});
 MiniCarousel.args = {
-    ...Default.args,
+    ...Primary.args,
     template: 'minicarousel',
     height: '350px'
 };
 
 export const MicroStar = Template.bind({});
 MicroStar.args = {
-    ...Default.args,
+    ...Primary.args,
     template: 'microstar',
     height: '100px'
 };
