@@ -26,6 +26,17 @@ declare global {
              *    cy.cleanupUser({ email: 'whatever@example.com' })
              */
             cleanupUser: typeof cleanupUser;
+
+            /**
+             * visits the URL specified
+             *
+             * @returns {typeof visitAndCheck}
+             * @memberof Chainable
+             * @example
+             *    cy.visit()
+             * @example
+             *    cy.visit('/)
+             */
             visitAndCheck: typeof visitAndCheck;
         }
     }
