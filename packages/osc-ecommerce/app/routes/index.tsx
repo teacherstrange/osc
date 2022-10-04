@@ -1,7 +1,7 @@
 import { Form, useLoaderData, useLocation, useParams, useSubmit } from '@remix-run/react';
 
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { Heading } from '@chakra-ui/react';
+import { Heading, Stack } from '@chakra-ui/react';
 import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useState } from 'react';
@@ -15,6 +15,8 @@ import Preview from '~/components/Preview';
 import getPageData from '~/models/sanity.server';
 import { HOME_QUERY } from '~/queries/sanity/home';
 import type { SanityPage } from '~/types/sanity';
+import Module from '~/components/Module';
+import type { module } from '~/types/sanity';
 
 interface PageData {
     page: SanityPage;
@@ -119,6 +121,13 @@ export default function Index() {
                     }
                 ]}
             />
+            {data?.modules && data?.modules.length > 0 ? (
+                <Stack spacing={16}>
+                    {data?.modules.map((module: module) =>
+                        module ? <Module key={module?._key} module={module} /> : null
+                    )}
+                </Stack>
+            ) : null}
         </div>
     );
 }
