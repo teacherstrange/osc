@@ -22,6 +22,13 @@ export const PAGE_REFERENCES = [
     { type: 'post' }
 ];
 
+// References to include in 'modules' array in documents
+export const MODULES = [
+    { type: 'module.content' },
+    { type: 'module.images' },
+    { type: 'module.trustpilot' }
+];
+
 // API version to use when using the Sanity client within the studio
 // https://www.sanity.io/help/studio-client-specify-api-version
 export const SANITY_API_VERSION = '2021-10-21';

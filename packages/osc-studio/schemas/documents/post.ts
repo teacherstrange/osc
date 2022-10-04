@@ -1,5 +1,6 @@
 import { DocumentIcon } from '@sanity/icons';
 import { validateSlug } from '../../utils/validateSlug';
+import { MODULES } from '../../constants.js';
 
 export default {
     name: 'post',
@@ -50,7 +51,7 @@ export default {
             name: 'modules',
             title: 'Modules',
             type: 'array',
-            of: [{ type: 'module.content' }, { type: 'module.images' }],
+            of: MODULES,
             group: 'editorial'
         },
         // SEO
