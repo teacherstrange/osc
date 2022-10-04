@@ -15,9 +15,7 @@ const Template: Story<ListProps> = ({ children, ...args }) => (
     <List {...args}>
         {Array.isArray(children)
             ? children.map((child: ListItemProps['children'], i: React.Key) => (
-                  <ListItem {...args} key={i}>
-                      {child}
-                  </ListItem>
+                  <ListItem key={i}>{child}</ListItem>
               ))
             : null}
     </List>
