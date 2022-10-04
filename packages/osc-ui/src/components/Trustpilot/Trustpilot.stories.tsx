@@ -39,5 +39,5 @@ export const MicroStar = Template.bind({});
 MicroStar.args = {
     ...Primary.args,
     template: 'microstar',
-    height: '100px'
+    height: '24px'
 };
