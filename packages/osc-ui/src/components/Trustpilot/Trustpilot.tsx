@@ -63,6 +63,7 @@ export const Trustpilot = ({
     const ref = useRef(null);
     // Keep track of script status
     const [status, setStatus] = useState<Status>(src ? 'loading' : 'idle');
+    const [iframeHeight, setIframeHeight] = useState<string>(height);
 
     let templateID: TemplateID;
 
@@ -116,6 +117,46 @@ export const Trustpilot = ({
             }
         };
     }, []);
+
+    // Adjust the height when the screen is resized to ensure things don't get cut off
+    useEffect(() => {
+        const breakpoint = window.matchMedia('(max-width: 300px)');
+
+        const setHeightFromEvent = () => {
+            for (const key in templates) {
+                if (Object.prototype.hasOwnProperty.call(templates, key)) {
+                    const element = templates[key];
+
+                    if (templateID === element.id) {
+                        if (breakpoint.matches) {
+                            setIframeHeight(element.responsiveHeight);
+                            return;
+                        } else {
+                            setIframeHeight(height);
+                            return;
+                        }
+                    }
+                }
+            }
+        };
+
+        if (status === 'ready' || window.Trustpilot) {
+            const iframe = document.querySelector<HTMLElement>(
+                `[data-template-id="${templateID}"] > iframe`
+            );
+
+            if (iframe) {
+                iframe.style.height = iframeHeight;
+                setHeightFromEvent();
+                window.addEventListener('resize', setHeightFromEvent);
+            }
+        }
+
+        // Cleanup event listeners
+        return () => {
+            window.removeEventListener('resize', setHeightFromEvent);
+        };
+    }, [height, iframeHeight, status, templateID, templates]);
 
     return (
         <>
