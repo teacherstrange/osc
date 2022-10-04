@@ -1,11 +1,7 @@
+import { useMemo } from 'react';
 import React, { useEffect, useState, useRef } from 'react';
 
-export interface Props {
-    stars?: string;
-    theme?: 'light' | 'dark';
-    template?: 'slider' | 'grid' | 'minicarousel' | 'microstar';
-    height?: string;
-}
+type TemplateName = 'slider' | 'grid' | 'minicarousel' | 'microstar';
 
 type TemplateID =
     | '539adbd6dec7e10e686debee'
@@ -15,13 +11,54 @@ type TemplateID =
 
 type Status = 'idle' | 'loading' | 'ready' | 'error';
 
+interface Templates {
+    id: TemplateID;
+    name: TemplateName;
+    responsiveHeight: string;
+}
+
+export interface Props {
+    stars?: string;
+    theme?: 'light' | 'dark';
+    template?: TemplateName;
+    height?: string;
+}
+
 export const Trustpilot = ({
     stars = '4,5',
     theme = 'light',
     template = 'slider',
     height = '240px'
 }: Props) => {
-    const src = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
+    const src: string = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
+
+    const templates = useMemo(() => {
+        const templates: Templates[] = [
+            {
+                id: '54ad5defc6454f065c28af8b',
+                name: 'slider',
+                responsiveHeight: '240px'
+            },
+            {
+                id: '539adbd6dec7e10e686debee',
+                name: 'grid',
+                responsiveHeight: '400px'
+            },
+            {
+                id: '539ad0ffdec7e10e686debd7',
+                name: 'minicarousel',
+                responsiveHeight: '350px'
+            },
+            {
+                id: '5419b732fbfb950b10de65e5',
+                name: 'microstar',
+                responsiveHeight: '64px'
+            }
+        ];
+
+        return templates;
+    }, []);
+
     // We need a reference to this element to load the TrustBox
     const ref = useRef(null);
     // Keep track of script status
@@ -30,24 +67,17 @@ export const Trustpilot = ({
     let templateID: TemplateID;
 
     // Apply the appropriate ID depending on the template set
-    switch (template) {
-        case 'slider':
-            templateID = '54ad5defc6454f065c28af8b';
-            break;
+    for (const key in templates) {
+        if (Object.prototype.hasOwnProperty.call(templates, key)) {
+            const element = templates[key];
 
-        case 'grid':
-            templateID = '539adbd6dec7e10e686debee';
-            break;
-
-        case 'minicarousel':
-            templateID = '539ad0ffdec7e10e686debd7';
-            break;
-
-        case 'microstar':
-            templateID = '5419b732fbfb950b10de65e5';
-            break;
+            if (template === element.name) {
+                templateID = element.id;
+            }
+        }
     }
 
+    // Setup the third party script tag and render the TrustPilot widget
     useEffect(() => {
         if (!src) {
             setStatus('idle');
