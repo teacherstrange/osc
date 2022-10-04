@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import '../../mocks/matchMedia'; // Must be imported before the tested file
 import { Trustpilot } from './Trustpilot';
 import { act, screen, render } from '@testing-library/react';
 
