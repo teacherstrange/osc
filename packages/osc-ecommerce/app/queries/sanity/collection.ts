@@ -6,14 +6,7 @@ export const COLLECTION_QUERY = groq`
         _id,
         _rev,
         _type,
-        store {
-            id,
-            gid,
-            title,
-            slug,
-            priceRange,
-            options
-        },
-        ${MODULES},
+        store,
+        ${MODULES}
     }
 `;
