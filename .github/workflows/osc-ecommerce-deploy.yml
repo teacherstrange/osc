@@ -258,7 +258,7 @@ jobs:
       # added here
       - name: create connection string to MAIN-SHADOW
         id: create-cs-main-shadow
-        if: ${{(startsWith(env.BASE_REF, 'release') && env.PR_CLOSED == 'true' }}
+        if: ${{ startsWith(env.BASE_REF, 'release') == true && env.PR_CLOSED == 'true' }}
         timeout-minutes: 3
         env:
           PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
@@ -291,7 +291,7 @@ jobs:
 
       - name: 🐳 Docker build release
         id: "docker-build-release"
-        if: ${{(startsWith(env.BASE_REF, 'release') && env.PR_CLOSED == 'true' }}
+        if: ${{ startsWith(env.BASE_REF, 'release') == true && env.PR_CLOSED == 'true' }}
         uses: docker/build-push-action@v2
         with:
           context: .
