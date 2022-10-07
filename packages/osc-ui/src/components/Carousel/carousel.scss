@@ -1,0 +1,23 @@
+/* stylelint-disable all */
+.embla {
+    overflow: hidden;
+}
+
+.embla__container {
+    display: flex;
+    flex-direction: var(--embla__axis);
+    height: var(--embla__height);
+    align-items: flex-start;
+}
+
+.embla__slide {
+    flex: 0 0 var(--embla__slidesPerPage);
+    margin-right: var(--embla__slidesGap);
+    margin-left: var(--embla__slidesGap);
+    margin-top: var(--embla__slidesGap);
+    margin-bottom: var(--embla__slidesGap);
+}
+
+.embla__slide:nth-child(1) {
+    margin-left: 1px;
+}

@@ -155,6 +155,7 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
         </html>
     );
 });
+
 export default function App() {
     const { colorScheme, SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET } =
         useLoaderData();
