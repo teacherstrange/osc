@@ -291,7 +291,7 @@ jobs:
 
       - name: 🐳 Docker build release
         id: "docker-build-release"
-        if: ${{ (startsWith(env.BASE_REF, 'release') == true && env.PR_CLOSED == 'true' }}
+        if: ${{ (startsWith(env.BASE_REF, 'release') == 'true' && env.PR_CLOSED == 'true' }}
         uses: docker/build-push-action@v2
         with:
           context: .
