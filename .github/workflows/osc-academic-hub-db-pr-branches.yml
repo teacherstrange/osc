@@ -10,7 +10,7 @@ env:
 jobs:
   pre-check:
     name: check if workflow should run
-    if: ${{ (startsWith(github.head_ref, 'db') == true || startsWith(github.head_ref, 'Db') == true }}
+    if: ${{ startsWith(github.head_ref, 'db') == true || startsWith(github.head_ref, 'Db') == true }}
     runs-on: ubuntu-latest
     steps:
       - uses: dorny/paths-filter@v2
