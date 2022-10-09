@@ -222,7 +222,7 @@ jobs:
           ORG_NAME: ${{secrets.ORG_NAME}}
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: ${{ env.BASE_REF }}
+          BRANCH_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
           PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh
