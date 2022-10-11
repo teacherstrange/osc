@@ -129,7 +129,7 @@ jobs:
           ORG_NAME: ${{secrets.ORG_NAME}}
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: pr
+          BRANCH_NAME: staging
           PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
