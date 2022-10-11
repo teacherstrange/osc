@@ -13,30 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            osc-academic-hub:
-              - 'packages/osc-academic-hub/**'
-            osc-ui:
-              - 'packages/osc-ui/**'
-            pscale:
-              - '.pscale/**'
-            Dockerfiles:
-              - 'Dockerfiles/**'
-            osc-academic-hub-db-pr:
-              - '.github/workflows/osc-academic-hub-db-pr-branches.yml'
-            osc-academic-hub-deploy:
-              - '.github/workflows/osc-academic-hub-deploy.yml'
-            osc-academic-hub-destroy-apps:
-              - '.github/workflows/osc-academic-hub-destroy-apps.yml'
-            osc-academic-hub-pr:
-              - '.github/workflows/osc-academic-hub-pr-branches.yml'
-            issue_templates:
-              - '.github/ISSUE_TEMPLATE/**'
-        # run only if some file in 'src' folder was changed
-
-      - uses: dorny/paths-filter@v2
         id: changes-schema
         with:
           filters: |
@@ -44,11 +20,7 @@ jobs:
               - 'prisma/**'
         # run only if some file in 'src' folder was changed
 
-      - run: echo  ${{ steps.changes.outputs.changes }}
-
-      - run: echo  ${{ steps.changes-schema.outputs.changes }}
-
-      - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '[]'
+      - if: steps.changes-schema.outputs.changes == '[]'
         name: "Cancel the self CI workflow run"
         uses: potiuk/cancel-workflow-runs@master
         with:
