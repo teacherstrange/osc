@@ -9,7 +9,7 @@ env:
 jobs:
   pre-check:
     name: check if workflow should run
-    if: ${{ startsWith(github.head_ref, 'db') == false && startsWith(github.head_ref, 'Db') == false && startsWith(github.head_ref, 'release') == false && startsWith(github.head_ref, 'Release') == false }}
+    if: ${{ startsWith(github.head_ref, 'release') == false && startsWith(github.head_ref, 'Release') == false }}
     runs-on: ubuntu-latest
     steps:
       - uses: dorny/paths-filter@v2
@@ -20,8 +20,6 @@ jobs:
               - 'packages/osc-academic-hub/**'
             osc-ui:
               - 'packages/osc-ui/**'
-            prisma:
-              - 'prisma/**'
             pscale:
               - '.pscale/**'
             Dockerfiles:
