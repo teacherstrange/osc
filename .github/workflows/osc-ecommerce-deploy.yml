@@ -39,7 +39,7 @@ jobs:
 
       - name: Get PR details
         run: |
-          echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
+          echo "SHOULD_BUILD=${{ github.base_ref == 'main' && github.event.pull_request.merged == 'true' }}" >> $GITHUB_ENV
           echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
           echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
 
