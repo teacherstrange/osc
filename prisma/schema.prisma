@@ -14,7 +14,7 @@ model User {
   email         String    @unique
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  schemaChange3 DateTime  @default(now()) @updatedAt
+  schemaChange2 DateTime  @default(now()) @updatedAt
   password      Password?
 }
 
