@@ -37,7 +37,7 @@ jobs:
               - '.github/ISSUE_TEMPLATE/**'
         # run only if some file in 'src' folder was changed
       - if: steps.changes.outputs.changes == '[]'
-        run: exit 1
+        run: 0
 
   lint:
     name: ⬣ ESLint
