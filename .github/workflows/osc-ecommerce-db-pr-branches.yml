@@ -48,7 +48,7 @@ jobs:
 
       - run: echo  ${{ steps.changes-schema.outputs.changes }}
 
-      - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '[]'
+      - if: steps.changes-schema.outputs.changes == '[]'
         name: "Cancel the self CI workflow run"
         uses: potiuk/cancel-workflow-runs@master
         with:
