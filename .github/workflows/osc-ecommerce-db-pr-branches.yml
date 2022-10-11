@@ -13,40 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            osc-ecommerce:
-              - 'packages/osc-ecommerce/**'
-            osc-ui:
-              - 'packages/osc-ui/**'
-            pscale:
-              - '.pscale/**'
-            Dockerfiles:
-              - 'Dockerfiles/**'
-            osc-ecommerce-db-pr:
-              - '.github/workflows/osc-ecommerce-db-pr-branches.yml'
-            osc-ecommerce-deploy:
-              - '.github/workflows/osc-ecommerce-deploy.yml'
-            osc-ecommerce-destroy-apps:
-              - '.github/workflows/osc-ecommerce-destroy-apps.yml'
-            osc-ecommerce-pr:
-              - '.github/workflows/osc-ecommerce-pr-branches.yml'
-            issue_templates:
-              - '.github/ISSUE_TEMPLATE/**'
-        # run only if some file in 'src' folder was changed
-
-      - uses: dorny/paths-filter@v2
         id: changes-schema
         with:
           filters: |
             prisma:
               - 'prisma/**'
         # run only if some file in 'src' folder was changed
-
-      - run: echo  ${{ steps.changes.outputs.changes }}
-
-      - run: echo  ${{ steps.changes-schema.outputs.changes }}
 
       - if: steps.changes-schema.outputs.changes == '[]'
         name: "Cancel the self CI workflow run"

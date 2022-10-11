@@ -42,10 +42,6 @@ jobs:
               - 'prisma/**'
         # run only if some file in 'src' folder was changed
 
-      - run: echo  ${{ steps.changes.outputs.changes }}
-
-      - run: echo  ${{ steps.changes-schema.outputs.changes }}
-
       - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
         name: "Cancel the self CI workflow run"
         uses: potiuk/cancel-workflow-runs@master
