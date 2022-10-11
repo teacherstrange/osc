@@ -36,6 +36,13 @@ jobs:
             issue_templates:
               - '.github/ISSUE_TEMPLATE/**'
         # run only if some file in 'src' folder was changed
+
+      - name: Get PR details
+        run: |
+          echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
+          echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
+          echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
+
       - if: steps.changes.outputs.changes == '[]'
         name: "Cancel the self CI workflow run"
         uses: potiuk/cancel-workflow-runs@master
