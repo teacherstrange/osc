@@ -10,7 +10,6 @@ env:
 jobs:
   pre-check:
     name: check if workflow should run
-    if: ${{ github.head_ref != 'staging' && github.head_ref != 'release' }}
     runs-on: ubuntu-latest
     steps:
       - uses: dorny/paths-filter@v2
@@ -23,7 +22,7 @@ jobs:
               - 'packages/osc-ui/**'
             prisma:
               - 'prisma/**'
-            pscale: 
+            pscale:
               - '.pscale/**'
             Dockerfiles:
               - 'Dockerfiles/**'
@@ -39,7 +38,15 @@ jobs:
               - '.github/ISSUE_TEMPLATE/**'
         # run only if some file in 'src' folder was changed
       - if: steps.changes.outputs.changes == '[]'
-        run: exit 1
+        name: "Cancel the self CI workflow run"
+        uses: potiuk/cancel-workflow-runs@master
+        with:
+          selfPreservation: false
+          cancelMode: self
+          notifyPRCancel: true
+          notifyPRCancelMessage: Cancelled.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          sourceRunId: ${{ github.event.workflow_run.id }}
 
   destroy_staging_app:
     runs-on: ubuntu-latest
