@@ -9,7 +9,6 @@ env:
 jobs:
   pre-check:
     name: check if workflow should run
-    if: ${{ startsWith(github.head_ref, 'release') == false && startsWith(github.head_ref, 'Release') == false }}
     runs-on: ubuntu-latest
     steps:
       - uses: dorny/paths-filter@v2
