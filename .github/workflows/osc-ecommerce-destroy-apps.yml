@@ -41,6 +41,7 @@ jobs:
         name: "Cancel the self CI workflow run"
         uses: potiuk/cancel-workflow-runs@master
         with:
+          selfPreservation: false
           cancelMode: self
           notifyPRCancel: true
           notifyPRCancelMessage: Cancelled because image building failed.
