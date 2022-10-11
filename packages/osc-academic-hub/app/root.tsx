@@ -179,7 +179,7 @@ export default function App() {
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
                 <Header className={'o-header--full'} backgroundColor={'secondary'} />
                 <Outlet />
-                <h1> OSC Academic hub testing pre-check</h1>
+                <h1> OSC Academic hub pr test</h1>
             </ChakraProvider>
         </Document>
     );
