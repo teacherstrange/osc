@@ -1,3 +1,12 @@
+## [0.1.1](https://github.com/Open-Study-College/osc/compare/v0.1.0...v0.1.1) (2022-10-11)
+
+
+### Bug Fixes
+
+* update schema.prisma and delete connection strings to staging ([f41b19c](https://github.com/Open-Study-College/osc/commit/f41b19c191d4a84241e1b0ad0f2acfa0efbed04c))
+
+
+
 # [0.1.0](https://github.com/Open-Study-College/osc/compare/v0.0.2...v0.1.0) (2022-10-11)
 
 
