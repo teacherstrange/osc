@@ -1,3 +1,12 @@
+## [0.1.3](https://github.com/Open-Study-College/osc/compare/v0.1.2...v0.1.3) (2022-10-11)
+
+
+### Bug Fixes
+
+* password deletion problem ([a85cca3](https://github.com/Open-Study-College/osc/commit/a85cca39f3f81bee77859ceba041f6d0b1ad22d2))
+
+
+
 ## [0.1.2](https://github.com/Open-Study-College/osc/compare/v0.1.1...v0.1.2) (2022-10-11)
 
 
@@ -848,69 +857,6 @@
 * test without second fly.toml ([dd71cd3](https://github.com/Open-Study-College/osc/commit/dd71cd348834cbc999545048fe49e6bca2fda7bc))
 * testing github actions ([d491975](https://github.com/Open-Study-College/osc/commit/d4919751fec765974f1fe64d972c05ff084c8517))
 * testing github actions ([c43acca](https://github.com/Open-Study-College/osc/commit/c43acca4b110d0ef67483529862a6064615fb088))
-
-
-
-## [0.0.1](https://github.com/Open-Study-College/osc/compare/ab1efca9c035d0cb08fa56138df7bbc50c36d2ab...v0.0.1) (2022-06-20)
-
-
-### Bug Fixes
-
-* added commentt to empty toml ([25b441d](https://github.com/Open-Study-College/osc/commit/25b441d53307cf7a6ea28cb5a2e2b38a591ea4f0))
-* added continue on error to create session secret build step ([c635d5b](https://github.com/Open-Study-College/osc/commit/c635d5bddb5e07a6b0f56fbc83f109725cd53fa3))
-* added continue on error to the create volume step ([ce84771](https://github.com/Open-Study-College/osc/commit/ce8477188d4222c9199c2136ccfbbf2171360488))
-* added echo branch step before deploy step ([5234bb8](https://github.com/Open-Study-College/osc/commit/5234bb8ca786448d12af923e8302081911a2c7e5))
-* added eslint,stylelint, prettier ([39a10f6](https://github.com/Open-Study-College/osc/commit/39a10f615894e5aa46601a93fb7c031019daaded))
-* added header module to the project ([5154c8f](https://github.com/Open-Study-College/osc/commit/5154c8f30c6a5d49d51cb598420617d66010e69d))
-* added image to pr branch creation step ([dba8bfa](https://github.com/Open-Study-College/osc/commit/dba8bfa98909b5e89861be2dc4fb4f06e71fd528))
-* added nvm, browserlist, removed preview.js ([d8f0875](https://github.com/Open-Study-College/osc/commit/d8f0875732ae07853bfc2e56baa9364d72ad622b))
-* added session_secret as a build arg ([348eb97](https://github.com/Open-Study-College/osc/commit/348eb97fab5541f4b228b6e0cd3260f1a468e7d7))
-* changed method for creating pr to flyctl-actions@1.3 ([7fddd1b](https://github.com/Open-Study-College/osc/commit/7fddd1b283b7c5cd9cba05c705884f8b2786a997))
-* deleted all content from fly-pr.toml ([e35ea1c](https://github.com/Open-Study-College/osc/commit/e35ea1ca7ca61008e3e9a3b46aaf8d9ba4592045))
-* edited pre-commit hook, supress error when no files are found --> lint commands ([4568e15](https://github.com/Open-Study-College/osc/commit/4568e153cbb44915a2a1fc345f2fe41035d3bf2a))
-* linted, prettiered, stylelinted ([1c68fdf](https://github.com/Open-Study-College/osc/commit/1c68fdf1be59057513ab3079e3835481e674c156))
-* linter changes ([147c854](https://github.com/Open-Study-College/osc/commit/147c8545ed8ef65480b645f0ecbda36687dafaed))
-* moved husky commit-msg to root directory, moved commitlint config to root directory ([218da2e](https://github.com/Open-Study-College/osc/commit/218da2e695c524648bc39e378e93aacb4a290db3))
-* re-enabled fly-pr.toml config ([b9625d3](https://github.com/Open-Study-College/osc/commit/b9625d31505f5711d3e490a380408d8def02bfe5))
-* re-enabled multi-file fly.toml ([bacc3aa](https://github.com/Open-Study-College/osc/commit/bacc3aa16abaa6a8faf5c2bc0a7a623b7d08649e))
-* reinstalled packages ([60c60ec](https://github.com/Open-Study-College/osc/commit/60c60ec814ee28bae9babc46dfef2c025f41523d))
-* remove old academic hub ([8d86f09](https://github.com/Open-Study-College/osc/commit/8d86f09be7a912904e730e1dc09d59a52fb6b891))
-* removed healthchecks from fly.toml ([7c0a7cd](https://github.com/Open-Study-College/osc/commit/7c0a7cdf2da7ead12b245e158716bc97fbccc239))
-* removed org and name from deploy pr branch step ([46b074c](https://github.com/Open-Study-College/osc/commit/46b074c8753d3bca44ee15e94a7f4abae8ec9408))
-* removed osc-academic hub from packages to import using lerna function ([ab1efca](https://github.com/Open-Study-College/osc/commit/ab1efca9c035d0cb08fa56138df7bbc50c36d2ab))
-* removed test change, removed all data from fly-pr.toml ([5d9b0cf](https://github.com/Open-Study-College/osc/commit/5d9b0cffd98c47f42b02c7d51c29cbe4365d8339))
-* tried adding ignore flag when creating session secret ([45d7ad1](https://github.com/Open-Study-College/osc/commit/45d7ad1d30204b86bfed47ebe14017a58ba42545))
-
-
-### Features
-
-* added --yes flag to create secret command ([dba23a5](https://github.com/Open-Study-College/osc/commit/dba23a5cac971e2442ba2d6f4e4fe9202028848c))
-* added chakra-ui ([7cdbe17](https://github.com/Open-Study-College/osc/commit/7cdbe17e462c6c85151244567363a50c1568d0c4))
-* added commit-lint ([5c30647](https://github.com/Open-Study-College/osc/commit/5c306475072a3e4c117bd487ac37c7c0e3136755))
-* added create session secret and continue on error to the create app step ([455916d](https://github.com/Open-Study-College/osc/commit/455916ded29d2b35d10ddffc7063615a42ad8b61))
-* added custom deployment per branch ([2420b3f](https://github.com/Open-Study-College/osc/commit/2420b3fc465147849143907272a89c40e7ebfb01))
-* added husky and husky prepare script ([12f9ba8](https://github.com/Open-Study-College/osc/commit/12f9ba8799f9a9b39a4a90715fb3db003132d459))
-* added org slug to create app step ([2bd7556](https://github.com/Open-Study-College/osc/commit/2bd7556342e7532a3776be3d948aa24380876102))
-* added org slug to create app step at the end of the statement ([bc41a8d](https://github.com/Open-Study-College/osc/commit/bc41a8df4b9ff010bfd0c523888b6f400feb60e2))
-* added second fly.toml config file because there is no --y flag ([ecbaf43](https://github.com/Open-Study-College/osc/commit/ecbaf43fdcdd30d09c92cdfea5955cbb04500eb0))
-* added theming ([f842f67](https://github.com/Open-Study-College/osc/commit/f842f67c816aac664687e319a7ae1a63ad07c8f0))
-* added yes flag to session secret step ([aaed017](https://github.com/Open-Study-College/osc/commit/aaed0177759aae4201f894aa4e490dc219687b17))
-* attempt to create a volume when pr branch is deployed ([552a590](https://github.com/Open-Study-College/osc/commit/552a590a34de4da6255e75b6ac730b5c753d9126))
-* changed --slug flag to --org flag ([c4d9090](https://github.com/Open-Study-College/osc/commit/c4d9090bdc6c304c1a2deedb9e134ddd8c96d8b8))
-* changed fly to flyctl in creat volume step ([58b04ba](https://github.com/Open-Study-College/osc/commit/58b04ba221dc64204a1f6fa53dce369b1c95a897))
-* create app before creating volume ([aae3ad6](https://github.com/Open-Study-College/osc/commit/aae3ad6e1a85b5eeb8f677f4436224953c07147f))
-* initial commit ([1887103](https://github.com/Open-Study-College/osc/commit/1887103ac8f68d6aff4a68d064f2ddee9b2c5b40))
-* initial commit ([d3efc6e](https://github.com/Open-Study-College/osc/commit/d3efc6e3c0eb1aec2bf215fe96d75b1c69721aad))
-* removed <p> in head, to see what happens when i make a pr to dev ([3514216](https://github.com/Open-Study-College/osc/commit/351421679e005d12cfccdc537f4fa2e6dc91ffea))
-* removed flyctl from volumes command ([4b8e2f4](https://github.com/Open-Study-College/osc/commit/4b8e2f40e3699adea17831e48291a76daeb46f12))
-* removed ignore flag ([1c4fedc](https://github.com/Open-Study-College/osc/commit/1c4fedc60f4b85ee3def6549bbc59def81e08737))
-* removed notes app, added vscode settings (partially) and made some minor alterations to the redirects ([78687a9](https://github.com/Open-Study-College/osc/commit/78687a905d7b2857ec2b6c74af25c6a150ccd4ba))
-* removed org from session secret step ([043d796](https://github.com/Open-Study-College/osc/commit/043d79675248ed40c507cc5e7fa549de4340a34e))
-* renamed stagin to PR Branch ([228e862](https://github.com/Open-Study-College/osc/commit/228e862082ee7ab855d8f68895a7ec2f6eec9b0b))
-* replaced openssl secret with github secret ([00bbcba](https://github.com/Open-Study-College/osc/commit/00bbcbad2e009b3daa7ce1457d6b971a86260b03))
-* test change ([2364535](https://github.com/Open-Study-College/osc/commit/2364535978463a8a1d822a72ef1f6b68b0e61558))
-* test without second fly.toml ([071e0e6](https://github.com/Open-Study-College/osc/commit/071e0e6b22828eb334b16e48fe84c5139bbeeb85))
-* testing github actions ([00d4656](https://github.com/Open-Study-College/osc/commit/00d4656fad46a754635f66aa381c4537bee51d3a))
 
 
 
