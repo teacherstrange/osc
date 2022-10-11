@@ -44,7 +44,7 @@ jobs:
         # run only if some file in 'src' folder was changed
 
       - if: steps.changes.outputs == '[]' || steps.changes-schema.outputs != '[]'
-        run: 0
+        run: exit 0
 
       - name: Dump steps context
         env:
