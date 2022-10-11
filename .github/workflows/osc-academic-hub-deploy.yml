@@ -237,6 +237,21 @@ jobs:
           username: x
           password: ${{ secrets.FLY_API_TOKEN }}
 
+      - name: create connection string to STAGING
+        id: create-cs
+        if: ${{ (env.BASE_REF == 'production' && env.PR_CLOSED == 'true' }}
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: staging
+          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
+
       - name: create connection string to MAIN
         id: create-cs-main
         if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
