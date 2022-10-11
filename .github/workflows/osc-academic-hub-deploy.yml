@@ -37,7 +37,15 @@ jobs:
               - '.github/ISSUE_TEMPLATE/**'
         # run only if some file in 'src' folder was changed
       - if: steps.changes.outputs.changes == '[]'
-        run: exit 1
+        name: "Cancel the self CI workflow run"
+        uses: potiuk/cancel-workflow-runs@master
+        with:
+          selfPreservation: false
+          cancelMode: self
+          notifyPRCancel: true
+          notifyPRCancelMessage: Cancelled.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          sourceRunId: ${{ github.event.workflow_run.id }}
 
   lint:
     name: ⬣ ESLint
@@ -228,6 +236,21 @@ jobs:
           registry: registry.fly.io
           username: x
           password: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: create connection string to STAGING
+        id: create-cs
+        if: ${{ env.BASE_REF == 'production' && env.PR_CLOSED == 'true' }}
+        timeout-minutes: 3
+        env:
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          ORG_NAME: ${{secrets.ORG_NAME}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          GITHUB_USER: ${{github.actor}}
+          BRANCH_NAME: staging
+          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+        run: |
+          ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
 
       - name: create connection string to MAIN
         id: create-cs-main
