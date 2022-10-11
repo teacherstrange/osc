@@ -44,7 +44,7 @@ jobs:
           selfPreservation: false
           cancelMode: self
           notifyPRCancel: true
-          notifyPRCancelMessage: Cancelled because image building failed.
+          notifyPRCancelMessage: Cancelled.
           token: ${{ secrets.GITHUB_TOKEN }}
           sourceRunId: ${{ github.event.workflow_run.id }}
 
