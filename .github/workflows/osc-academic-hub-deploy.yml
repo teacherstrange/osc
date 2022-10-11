@@ -255,7 +255,7 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: staging
-          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: staging-${{ steps.app_name.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
 
@@ -363,7 +363,7 @@ jobs:
         run: |
           ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 
-      - name: delete old connection string to BASE_REF
+      - name: delete old connection string to STAGING
         id: delete-cs
         if: steps.deploy-production.conclusion != 'skipped' || steps.deploy-release.conclusion != 'skipped'
         timeout-minutes: 3
@@ -373,8 +373,8 @@ jobs:
           ORG_NAME: ${{secrets.ORG_NAME}}
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: ${{ env.HEAD_REF }}
-          PASSWORD_NAME: ${{ env.BASE_REF }}-${{ steps.app_name.outputs.value }}
+          BRANCH_NAME: staging
+          PASSWORD_NAME: staging-${{ steps.app_name.outputs.value }}
 
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh
