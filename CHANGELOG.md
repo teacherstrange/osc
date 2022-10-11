@@ -1,3 +1,12 @@
+## [0.1.2](https://github.com/Open-Study-College/osc/compare/v0.1.1...v0.1.2) (2022-10-11)
+
+
+### Bug Fixes
+
+* password problem and merge problem ([7dba63b](https://github.com/Open-Study-College/osc/commit/7dba63b5280082c252e9719b91aa3461db2fc43f))
+
+
+
 ## [0.1.1](https://github.com/Open-Study-College/osc/compare/v0.1.0...v0.1.1) (2022-10-11)
 
 
