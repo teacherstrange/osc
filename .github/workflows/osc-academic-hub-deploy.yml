@@ -39,7 +39,7 @@ jobs:
 
       - name: Get PR details
         run: |
-          echo "SHOULD_BUILD=${{ github.base_ref == "main" && github.event.pull_request.merged == "true" }}" >> $GITHUB_ENV
+          echo "SHOULD_BUILD=${{ github.base_ref == \"main\" && github.event.pull_request.merged == \"true\" }}" >> $GITHUB_ENV
           echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
           echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
 
@@ -178,7 +178,7 @@ jobs:
 
   build:
     name: 🐳 Build
-    if: ${{ github.base_ref == "main" && github.event.pull_request.merged == "true" }}
+    if: ${{ github.base_ref == \"main\" && github.event.pull_request.merged == \"true\" }}
     needs: pre-check
     runs-on: ubuntu-latest
     steps:
