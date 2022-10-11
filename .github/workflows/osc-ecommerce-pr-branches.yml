@@ -45,7 +45,7 @@ jobs:
 
       - if: steps.changes.outputs == '[]' || steps.changes-schema.outputs != '[]'
       - name: "Cancel the self CI workflow run"
-        uses: potiuk/cancel-workflow-runs@master
+      - uses: potiuk/cancel-workflow-runs@master
         with:
           cancelMode: self
           notifyPRCancel: true

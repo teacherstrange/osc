@@ -39,7 +39,7 @@ jobs:
         # run only if some file in 'src' folder was changed
       - if: steps.changes.outputs.changes == '[]'
       - name: "Cancel the self CI workflow run"
-        uses: potiuk/cancel-workflow-runs@master
+      - uses: potiuk/cancel-workflow-runs@master
         with:
           cancelMode: self
           notifyPRCancel: true
