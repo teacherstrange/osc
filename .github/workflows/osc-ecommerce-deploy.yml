@@ -356,7 +356,7 @@ jobs:
           ORG_NAME: ${{secrets.ORG_NAME}}
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: ${{ env.BASE_REF }}
+          BRANCH_NAME: ${{ env.HEAD_REF }}
         run: |
           ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 
@@ -370,7 +370,7 @@ jobs:
           ORG_NAME: ${{secrets.ORG_NAME}}
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: staging
+          BRANCH_NAME: ${{ env.HEAD_REF }}
           PASSWORD_NAME: staging-${{ steps.app_name.outputs.value }}
 
         run: |
