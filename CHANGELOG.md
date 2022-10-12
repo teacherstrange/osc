@@ -1,3 +1,13 @@
+## [0.1.6](https://github.com/Open-Study-College/osc/compare/v0.1.5...v0.1.6) (2022-10-12)
+
+
+### Bug Fixes
+
+* catch output === "error" when create dr ([25268e3](https://github.com/Open-Study-College/osc/commit/25268e327add4156063f3c240ec9871df0f0b2c5))
+* create and merge dr to main before deploying production ([2c94495](https://github.com/Open-Study-College/osc/commit/2c94495b5f99a07f264737ca4f0b200196cd64d9))
+
+
+
 ## [0.1.5](https://github.com/Open-Study-College/osc/compare/v0.1.4...v0.1.5) (2022-10-12)
 
 
@@ -31,15 +41,6 @@
 ### Bug Fixes
 
 * password problem and merge problem ([7dba63b](https://github.com/Open-Study-College/osc/commit/7dba63b5280082c252e9719b91aa3461db2fc43f))
-
-
-
-## [0.1.1](https://github.com/Open-Study-College/osc/compare/v0.1.0...v0.1.1) (2022-10-11)
-
-
-### Bug Fixes
-
-* update schema.prisma and delete connection strings to staging ([f41b19c](https://github.com/Open-Study-College/osc/commit/f41b19c191d4a84241e1b0ad0f2acfa0efbed04c))
 
 
 
