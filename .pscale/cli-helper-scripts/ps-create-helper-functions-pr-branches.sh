@@ -59,10 +59,8 @@ function create-deploy-request {
     # if deploy request number is empty, then error
     if [ -z "$deploy_request_number" ]; then
         echo "Could not retrieve deploy request number: $raw_output"
-        if [ "$raw_output" == "\{\"error\": \"Database branch there is already an open deploy request for this branch\"\}" ]; then 
-            return 0
-        fi 
-        return 1
+        [ "$raw_output" == "\{\"error\": \"Database branch there is already an open deploy request for this branch\"\}" ] && exit 0
+        exit 1
     fi
 
     local deploy_request="https://app.planetscale.com/${ORG_NAME}/${DB_NAME}/deploy-requests/${deploy_request_number}"
@@ -258,9 +256,4 @@ function create-deployment {
     # if array is empty
 
     wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
-    if [ $? -ne 0 ]; then
-        echo "$?"
-        echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
-        return 1;
-    fi
 }
