@@ -1,3 +1,12 @@
+## [0.1.25](https://github.com/Open-Study-College/osc/compare/v0.1.24...v0.1.25) (2022-10-12)
+
+
+### Bug Fixes
+
+* fail bash script and workflow if merging deployment fails ([0a629df](https://github.com/Open-Study-College/osc/commit/0a629df77ed4ee8cc2838b12ca6b0c6e2798b5f6))
+
+
+
 ## [0.1.24](https://github.com/Open-Study-College/osc/compare/v0.1.23...v0.1.24) (2022-10-12)
 
 
@@ -32,15 +41,6 @@
 ### Bug Fixes
 
 * when output is empty, do not wait for dr to be merged ([a26f993](https://github.com/Open-Study-College/osc/commit/a26f993a120dacad0bc7c052ddaeb98bed5560b6))
-
-
-
-## [0.1.20](https://github.com/Open-Study-College/osc/compare/v0.1.19...v0.1.20) (2022-10-12)
-
-
-### Bug Fixes
-
-* echo result of drs being closed ([3ff1dbf](https://github.com/Open-Study-College/osc/commit/3ff1dbf13712754effa49a16976c72e4fbdac7bb))
 
 
 
