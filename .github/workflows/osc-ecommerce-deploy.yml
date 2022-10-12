@@ -337,7 +337,6 @@ jobs:
 
       - name: Create and merge deployment request to main
         if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
-        continue-on-error: true
         id: create-dr
         timeout-minutes: 3
         env:

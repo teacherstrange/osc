@@ -341,7 +341,6 @@ jobs:
       - name: Create and merge deployment request to main
         if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
         id: create-dr
-        continue-on-error: true
         timeout-minutes: 3
         env:
           PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
@@ -356,7 +355,7 @@ jobs:
       # target main, base release
       - name: 🚀 Deploy Production
         id: deploy-production
-        if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
+        if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' &&  }}
         uses: superfly/flyctl-actions@1.3
         with:
           args: "deploy --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.HEAD_REF }}-${{ github.sha }}"
@@ -381,7 +380,7 @@ jobs:
 
       - name: delete old connection string to MAIN
         id: delete-cs-main
-        if: steps.create-dr.conclusion != 'skipped'
+        if: steps.delete-cs.conclusion != 'skipped'
         timeout-minutes: 3
         env:
           PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
