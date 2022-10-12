@@ -1,3 +1,13 @@
+## [0.1.23](https://github.com/Open-Study-College/osc/compare/v0.1.22...v0.1.23) (2022-10-12)
+
+
+### Bug Fixes
+
+* remove a column from the schema ([69ed223](https://github.com/Open-Study-College/osc/commit/69ed223c0afdb0f204dc71070fc2a60b609a8c3d))
+* skip move cache step ([2e4bba9](https://github.com/Open-Study-College/osc/commit/2e4bba9925a86e789edc9c067c5e5081fdbeaafc))
+
+
+
 ## [0.1.22](https://github.com/Open-Study-College/osc/compare/v0.1.21...v0.1.22) (2022-10-12)
 
 
@@ -31,15 +41,6 @@
 ### Bug Fixes
 
 * do not exit 1 after create-dr-to-main ([3c7a5a7](https://github.com/Open-Study-College/osc/commit/3c7a5a78de5141e18feaf248c986e360b39720d5))
-
-
-
-## [0.1.18](https://github.com/Open-Study-College/osc/compare/v0.1.17...v0.1.18) (2022-10-12)
-
-
-### Bug Fixes
-
-* no not fail on pscale dr-create method ([390421d](https://github.com/Open-Study-College/osc/commit/390421d9580b2a058fc9d36403114d43ad256dab))
 
 
 
