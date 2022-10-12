@@ -1,3 +1,12 @@
+## [0.1.16](https://github.com/Open-Study-College/osc/compare/v0.1.15...v0.1.16) (2022-10-12)
+
+
+### Bug Fixes
+
+* double quote string ([7688ae0](https://github.com/Open-Study-College/osc/commit/7688ae0671328dda821a8accc436040588b02c54))
+
+
+
 ## [0.1.15](https://github.com/Open-Study-College/osc/compare/v0.1.14...v0.1.15) (2022-10-12)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * remove quotes surrounding exit status ([3d516c0](https://github.com/Open-Study-College/osc/commit/3d516c0520080ad3e1647beb5d15e87b9c9f417c))
-
-
-
-## [0.1.11](https://github.com/Open-Study-College/osc/compare/v0.1.10...v0.1.11) (2022-10-12)
-
-
-### Bug Fixes
-
-* add url to deployment request and edit schema.prisma ([e536f12](https://github.com/Open-Study-College/osc/commit/e536f121864ed5126da13cdf4d51b866cedb82f0))
 
 
 
