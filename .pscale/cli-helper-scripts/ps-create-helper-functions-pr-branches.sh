@@ -223,9 +223,11 @@ function wait_for_deploy_request_merged {
             sleep $wait
         elif [ "$output" = "\"no_changes\"" ] || [ "$output" = "\"ready\"" ] || [ "$output" = "\"complete\"" ] || [ "$output" = "\"complete_pending_revert\"" ]; then
             if [ "$output" = "\"no_changes\"" ]; then
-                pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+                local raw_output_pr_closed=`pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"`
+                echo "$raw_output_pr_closed"
             else
-                pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+                local raw_output_pr_deployed=`pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"`
+                echo "$raw_output_pr_closed"
             fi
             return 0
         elif [ "$output" = "\"error\"" ]; then
