@@ -223,11 +223,17 @@ function wait_for_deploy_request_merged {
             sleep $wait
         elif [ "$output" = "\"no_changes\"" ] || [ "$output" = "\"ready\"" ] || [ "$output" = "\"complete\"" ] || [ "$output" = "\"complete_pending_revert\"" ]; then
             if [ "$output" = "\"no_changes\"" ]; then
-                local raw_output_pr_closed=`pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"`
-                echo "$raw_output_pr_closed"
+                pscale deploy-request close "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+                if [ $? -ne 0 ]; then
+                    echo "Error: pscale deploy-request deploy returned non-zero exit code"
+                    exit 1
+                fi
             else
-                local raw_output_pr_deployed=`pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"`
-                echo "$raw_output_pr_closed"
+                pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
+                if [ $? -ne 0 ]; then
+                    echo "Error: pscale deploy-request deploy returned non-zero exit code"
+                    exit 1
+                fi
             fi
             return 0
         elif [ "$output" = "\"error\"" ]; then
@@ -258,4 +264,11 @@ function create-deployment {
     # if array is empty
 
     wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
+    if [ $? -ne 0 ]; then
+        echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
+        echo "Check out the deploy request status at $deploy_request"
+        exit 5
+    else
+        echo "Check out the deploy request at $deploy_request"
+    fi
 }
