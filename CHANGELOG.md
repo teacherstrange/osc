@@ -1,3 +1,12 @@
+## [0.1.21](https://github.com/Open-Study-College/osc/compare/v0.1.20...v0.1.21) (2022-10-12)
+
+
+### Bug Fixes
+
+* when output is empty, do not wait for dr to be merged ([a26f993](https://github.com/Open-Study-College/osc/commit/a26f993a120dacad0bc7c052ddaeb98bed5560b6))
+
+
+
 ## [0.1.20](https://github.com/Open-Study-College/osc/compare/v0.1.19...v0.1.20) (2022-10-12)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * echo previous command exit codes ([ce14ae3](https://github.com/Open-Study-College/osc/commit/ce14ae3a34b85afc9e0f934afef5023366fbe41d))
-
-
-
-## [0.1.16](https://github.com/Open-Study-College/osc/compare/v0.1.15...v0.1.16) (2022-10-12)
-
-
-### Bug Fixes
-
-* double quote string ([7688ae0](https://github.com/Open-Study-College/osc/commit/7688ae0671328dda821a8accc436040588b02c54))
 
 
 
