@@ -1,3 +1,12 @@
+## [0.1.9](https://github.com/Open-Study-College/osc/compare/v0.1.8...v0.1.9) (2022-10-12)
+
+
+### Bug Fixes
+
+* exit in current shell not subshell ([a6492fc](https://github.com/Open-Study-College/osc/commit/a6492fc40bf285a2a6c2bdce913deab218dc4d12))
+
+
+
 ## [0.1.8](https://github.com/Open-Study-College/osc/compare/v0.1.7...v0.1.8) (2022-10-12)
 
 
@@ -34,15 +43,6 @@
 ### Bug Fixes
 
 * echo output ([6c69629](https://github.com/Open-Study-College/osc/commit/6c6962968fec1558d9e13553c6b3422c5a9dc9ff))
-
-
-
-## [0.1.4](https://github.com/Open-Study-College/osc/compare/v0.1.3...v0.1.4) (2022-10-11)
-
-
-### Bug Fixes
-
-* create dr from staging ([d9f8599](https://github.com/Open-Study-College/osc/commit/d9f8599fcd7f42894b561d06fe18e98074ba8e66))
 
 
 
