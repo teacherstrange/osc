@@ -1,3 +1,12 @@
+## [0.1.8](https://github.com/Open-Study-College/osc/compare/v0.1.7...v0.1.8) (2022-10-12)
+
+
+### Bug Fixes
+
+* check value of last command, if its not equal to 0, exit the program ([98a53e1](https://github.com/Open-Study-College/osc/commit/98a53e16d4f56241fc9773d978833670c09beeeb))
+
+
+
 ## [0.1.7](https://github.com/Open-Study-College/osc/compare/v0.1.6...v0.1.7) (2022-10-12)
 
 
@@ -34,15 +43,6 @@
 ### Bug Fixes
 
 * create dr from staging ([d9f8599](https://github.com/Open-Study-College/osc/commit/d9f8599fcd7f42894b561d06fe18e98074ba8e66))
-
-
-
-## [0.1.3](https://github.com/Open-Study-College/osc/compare/v0.1.2...v0.1.3) (2022-10-11)
-
-
-### Bug Fixes
-
-* password deletion problem ([a85cca3](https://github.com/Open-Study-College/osc/commit/a85cca39f3f81bee77859ceba041f6d0b1ad22d2))
 
 
 
