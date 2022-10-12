@@ -8,5 +8,4 @@ create-deployment "$DB_NAME" "$BRANCH_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME"
         echo "Error: merging deployment failed"
         return 1;
     else
-        echo "Check out the deploy request at $deploy_request"
     fi
