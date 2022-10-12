@@ -1,3 +1,12 @@
+## [0.1.22](https://github.com/Open-Study-College/osc/compare/v0.1.21...v0.1.22) (2022-10-12)
+
+
+### Bug Fixes
+
+* do not exit with 1 ([650805f](https://github.com/Open-Study-College/osc/commit/650805f9a5c80a3fb3667cd9fad2c12d37e278de))
+
+
+
 ## [0.1.21](https://github.com/Open-Study-College/osc/compare/v0.1.20...v0.1.21) (2022-10-12)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * no not fail on pscale dr-create method ([390421d](https://github.com/Open-Study-College/osc/commit/390421d9580b2a058fc9d36403114d43ad256dab))
-
-
-
-## [0.1.17](https://github.com/Open-Study-College/osc/compare/v0.1.16...v0.1.17) (2022-10-12)
-
-
-### Bug Fixes
-
-* echo previous command exit codes ([ce14ae3](https://github.com/Open-Study-College/osc/commit/ce14ae3a34b85afc9e0f934afef5023366fbe41d))
 
 
 
