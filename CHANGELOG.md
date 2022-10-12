@@ -1,3 +1,12 @@
+## [0.1.15](https://github.com/Open-Study-College/osc/compare/v0.1.14...v0.1.15) (2022-10-12)
+
+
+### Bug Fixes
+
+* typo creating drs ([196d700](https://github.com/Open-Study-College/osc/commit/196d70092153d0d79d367ca0a979db911d718c6c))
+
+
+
 ## [0.1.14](https://github.com/Open-Study-College/osc/compare/v0.1.13...v0.1.14) (2022-10-12)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * add url to deployment request and edit schema.prisma ([e536f12](https://github.com/Open-Study-College/osc/commit/e536f121864ed5126da13cdf4d51b866cedb82f0))
-
-
-
-## [0.1.10](https://github.com/Open-Study-College/osc/compare/v0.1.9...v0.1.10) (2022-10-12)
-
-
-### Bug Fixes
-
-* add exit checks to all subshells ([89645b1](https://github.com/Open-Study-College/osc/commit/89645b1aded76806f33872834d2240b9efa18f20))
 
 
 
