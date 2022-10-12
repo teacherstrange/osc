@@ -7,4 +7,8 @@
 create-schema-change "$DB_NAME" "$BRANCH_NAME" "$ORG_NAME" "$DDL_STATEMENTS"
 create-deploy-request "$DB_NAME" "$BRANCH_NAME" "$ORG_NAME"
 
+if [ $? -ne '0' ]; then 
+  exit 1
+fi 
+
 . .pscale/cli-helper-scripts/merge-or-close-deploy-request.sh "$DB_NAME" "$BRANCH_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME"
