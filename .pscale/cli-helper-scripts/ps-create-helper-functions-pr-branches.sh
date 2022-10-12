@@ -55,11 +55,18 @@ function create-deploy-request {
         
     raw_output=`pscale deploy-request create "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json --deploy-to "main"` || true;
 
+    if [ $? -ne 0 ]; then
+        local deploy_request_error=`echo $raw_output | jq -r '.error'`
+        if [ "$deploy_request_error" == "Database branch there is already an open deploy request for this branch" ]; then
+            exit 0
+        fi
+        echo "Deploy request could not be created: $raw_output"
+        exit 1
+    fi
     local deploy_request_number=`echo $raw_output | jq -r '.number'`
     # if deploy request number is empty, then error
     if [ -z "$deploy_request_number" ]; then
         echo "Could not retrieve deploy request number: $raw_output"
-        [ "$raw_output" == "\{\"error\": \"Database branch there is already an open deploy request for this branch\"\}" ] && exit 0
         exit 1
     fi
 
