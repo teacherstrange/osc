@@ -1,3 +1,12 @@
+## [0.1.24](https://github.com/Open-Study-College/osc/compare/v0.1.23...v0.1.24) (2022-10-12)
+
+
+### Bug Fixes
+
+* schema change test ([474ab64](https://github.com/Open-Study-College/osc/commit/474ab64ad395a375bc59a841c05303d2f445839a))
+
+
+
 ## [0.1.23](https://github.com/Open-Study-College/osc/compare/v0.1.22...v0.1.23) (2022-10-12)
 
 
@@ -32,15 +41,6 @@
 ### Bug Fixes
 
 * echo result of drs being closed ([3ff1dbf](https://github.com/Open-Study-College/osc/commit/3ff1dbf13712754effa49a16976c72e4fbdac7bb))
-
-
-
-## [0.1.19](https://github.com/Open-Study-College/osc/compare/v0.1.18...v0.1.19) (2022-10-12)
-
-
-### Bug Fixes
-
-* do not exit 1 after create-dr-to-main ([3c7a5a7](https://github.com/Open-Study-College/osc/commit/3c7a5a78de5141e18feaf248c986e360b39720d5))
 
 
 
