@@ -1,3 +1,12 @@
+## [0.1.17](https://github.com/Open-Study-College/osc/compare/v0.1.16...v0.1.17) (2022-10-12)
+
+
+### Bug Fixes
+
+* echo previous command exit codes ([ce14ae3](https://github.com/Open-Study-College/osc/commit/ce14ae3a34b85afc9e0f934afef5023366fbe41d))
+
+
+
 ## [0.1.16](https://github.com/Open-Study-College/osc/compare/v0.1.15...v0.1.16) (2022-10-12)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * do not error if a deployment request is already open, and fix typos ([0fb71e1](https://github.com/Open-Study-College/osc/commit/0fb71e12004082214769916e7d73c82f4eddb89c))
-
-
-
-## [0.1.12](https://github.com/Open-Study-College/osc/compare/v0.1.11...v0.1.12) (2022-10-12)
-
-
-### Bug Fixes
-
-* remove quotes surrounding exit status ([3d516c0](https://github.com/Open-Study-College/osc/commit/3d516c0520080ad3e1647beb5d15e87b9c9f417c))
 
 
 
