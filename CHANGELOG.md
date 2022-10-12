@@ -1,3 +1,12 @@
+## [0.1.20](https://github.com/Open-Study-College/osc/compare/v0.1.19...v0.1.20) (2022-10-12)
+
+
+### Bug Fixes
+
+* echo result of drs being closed ([3ff1dbf](https://github.com/Open-Study-College/osc/commit/3ff1dbf13712754effa49a16976c72e4fbdac7bb))
+
+
+
 ## [0.1.19](https://github.com/Open-Study-College/osc/compare/v0.1.18...v0.1.19) (2022-10-12)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * double quote string ([7688ae0](https://github.com/Open-Study-College/osc/commit/7688ae0671328dda821a8accc436040588b02c54))
-
-
-
-## [0.1.15](https://github.com/Open-Study-College/osc/compare/v0.1.14...v0.1.15) (2022-10-12)
-
-
-### Bug Fixes
-
-* typo creating drs ([196d700](https://github.com/Open-Study-College/osc/commit/196d70092153d0d79d367ca0a979db911d718c6c))
 
 
 
