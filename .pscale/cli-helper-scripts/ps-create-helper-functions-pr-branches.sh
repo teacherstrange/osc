@@ -259,6 +259,7 @@ function create-deployment {
 
     wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
     if [ $? -ne 0 ]; then
+        echo "$?"
         echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
         return 1;
     fi
