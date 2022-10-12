@@ -1,3 +1,12 @@
+## [0.1.26](https://github.com/Open-Study-College/osc/compare/v0.1.25...v0.1.26) (2022-10-12)
+
+
+### Bug Fixes
+
+* exit successfully if the reason a dr cannot be created is because one already exists ([44e10dc](https://github.com/Open-Study-College/osc/commit/44e10dc388ec87d5c3f448a0c1e8617228570501))
+
+
+
 ## [0.1.25](https://github.com/Open-Study-College/osc/compare/v0.1.24...v0.1.25) (2022-10-12)
 
 
@@ -32,15 +41,6 @@
 ### Bug Fixes
 
 * do not exit with 1 ([650805f](https://github.com/Open-Study-College/osc/commit/650805f9a5c80a3fb3667cd9fad2c12d37e278de))
-
-
-
-## [0.1.21](https://github.com/Open-Study-College/osc/compare/v0.1.20...v0.1.21) (2022-10-12)
-
-
-### Bug Fixes
-
-* when output is empty, do not wait for dr to be merged ([a26f993](https://github.com/Open-Study-College/osc/commit/a26f993a120dacad0bc7c052ddaeb98bed5560b6))
 
 
 
