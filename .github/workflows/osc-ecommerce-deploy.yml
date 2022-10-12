@@ -377,7 +377,7 @@ jobs:
 
       - name: delete old connection string to MAIN
         id: delete-cs-main
-        if: steps.create-dr.conclusion != 'skipped'
+        if: steps.delete-cs.conclusion != 'skipped'
         timeout-minutes: 3
         env:
           PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
