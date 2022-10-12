@@ -1,3 +1,12 @@
+## [0.1.11](https://github.com/Open-Study-College/osc/compare/v0.1.10...v0.1.11) (2022-10-12)
+
+
+### Bug Fixes
+
+* add url to deployment request and edit schema.prisma ([e536f12](https://github.com/Open-Study-College/osc/commit/e536f121864ed5126da13cdf4d51b866cedb82f0))
+
+
+
 ## [0.1.10](https://github.com/Open-Study-College/osc/compare/v0.1.9...v0.1.10) (2022-10-12)
 
 
@@ -33,16 +42,6 @@
 * do not continue on error when merging dr ([106cfb1](https://github.com/Open-Study-College/osc/commit/106cfb1ae093b449aa1e21f8cc463f25ffe2e347))
 * remove typo ([9e5904e](https://github.com/Open-Study-College/osc/commit/9e5904e106f4c4815d4787c86997d25beada3f8e))
 * update ecommere workflow to be the same as academic ([9567810](https://github.com/Open-Study-College/osc/commit/95678109f32dd1d4d80558bc0b4eeaec68191ff5))
-
-
-
-## [0.1.6](https://github.com/Open-Study-College/osc/compare/v0.1.5...v0.1.6) (2022-10-12)
-
-
-### Bug Fixes
-
-* catch output === "error" when create dr ([25268e3](https://github.com/Open-Study-College/osc/commit/25268e327add4156063f3c240ec9871df0f0b2c5))
-* create and merge dr to main before deploying production ([2c94495](https://github.com/Open-Study-College/osc/commit/2c94495b5f99a07f264737ca4f0b200196cd64d9))
 
 
 
