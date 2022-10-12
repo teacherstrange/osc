@@ -1,3 +1,12 @@
+## [0.1.14](https://github.com/Open-Study-College/osc/compare/v0.1.13...v0.1.14) (2022-10-12)
+
+
+### Bug Fixes
+
+* typo checking if dr is created ([a5637e9](https://github.com/Open-Study-College/osc/commit/a5637e989250ec496e0aa0b4ef8a1bbae01d7815))
+
+
+
 ## [0.1.13](https://github.com/Open-Study-College/osc/compare/v0.1.12...v0.1.13) (2022-10-12)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * add exit checks to all subshells ([89645b1](https://github.com/Open-Study-College/osc/commit/89645b1aded76806f33872834d2240b9efa18f20))
-
-
-
-## [0.1.9](https://github.com/Open-Study-College/osc/compare/v0.1.8...v0.1.9) (2022-10-12)
-
-
-### Bug Fixes
-
-* exit in current shell not subshell ([a6492fc](https://github.com/Open-Study-College/osc/commit/a6492fc40bf285a2a6c2bdce913deab218dc4d12))
 
 
 
