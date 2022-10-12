@@ -233,6 +233,9 @@ function wait_for_deploy_request_merged {
                 pscale deploy-request deploy "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" --org "$ORG_NAME"
             fi
             return 0
+        elif [ "$output" = "\"error\"" ]; then
+            echo "error merging the deployment request, please check the planetscale website for more information"
+            return 1
         else
             echo  "Deploy-request $number with unknown status: $output"
             return 3
