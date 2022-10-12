@@ -1,3 +1,12 @@
+## [0.1.12](https://github.com/Open-Study-College/osc/compare/v0.1.11...v0.1.12) (2022-10-12)
+
+
+### Bug Fixes
+
+* remove quotes surrounding exit status ([3d516c0](https://github.com/Open-Study-College/osc/commit/3d516c0520080ad3e1647beb5d15e87b9c9f417c))
+
+
+
 ## [0.1.11](https://github.com/Open-Study-College/osc/compare/v0.1.10...v0.1.11) (2022-10-12)
 
 
@@ -31,17 +40,6 @@
 ### Bug Fixes
 
 * check value of last command, if its not equal to 0, exit the program ([98a53e1](https://github.com/Open-Study-College/osc/commit/98a53e16d4f56241fc9773d978833670c09beeeb))
-
-
-
-## [0.1.7](https://github.com/Open-Study-College/osc/compare/v0.1.6...v0.1.7) (2022-10-12)
-
-
-### Bug Fixes
-
-* do not continue on error when merging dr ([106cfb1](https://github.com/Open-Study-College/osc/commit/106cfb1ae093b449aa1e21f8cc463f25ffe2e347))
-* remove typo ([9e5904e](https://github.com/Open-Study-College/osc/commit/9e5904e106f4c4815d4787c86997d25beada3f8e))
-* update ecommere workflow to be the same as academic ([9567810](https://github.com/Open-Study-College/osc/commit/95678109f32dd1d4d80558bc0b4eeaec68191ff5))
 
 
 
