@@ -234,7 +234,8 @@ function wait_for_deploy_request_merged {
             fi
             return 0
         elif [ "$output" = "\"error\"" ]; then
-            echo "error merging the deployment request, please check the planetscale website for more information"
+            echo "Error merging the deployment request, please check the Planetscale website for more information"
+            echo "https://app.planetscale.com/open-study-college/$DB_NAME/deploy-requests/$DEPLOY_REQUEST_NUMBER"
             return 1
         else
             echo  "Deploy-request $number with unknown status: $output"
@@ -262,7 +263,6 @@ function create-deployment {
     wait_for_deploy_request_merged 9 "$DB_NAME" "$DEPLOY_REQUEST_NUMBER" "$ORG_NAME" 60
     if [ $? -ne 0 ]; then
         echo "Error: wait-for-deploy-request-merged returned non-zero exit code"
-        echo "Check out the deploy request status at $deploy_request"
         return 1;
     else
         echo "Check out the deploy request at $deploy_request"
