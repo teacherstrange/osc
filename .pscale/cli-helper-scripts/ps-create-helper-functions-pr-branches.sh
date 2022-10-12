@@ -59,7 +59,7 @@ function create-deploy-request {
     # if deploy request number is empty, then error
     if [ -z "$deploy_request_number" ]; then
         echo "Could not retrieve deploy request number: $raw_output"
-        if[ "$raw_output" == `{"error": "Database branch there is already an open deploy request for this branch"}` ]; then 
+        if [ "$raw_output" == `{"error": "Database branch there is already an open deploy request for this branch"}` ]; then 
             exit 0
         fi 
         exit 1
