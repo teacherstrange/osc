@@ -1,3 +1,12 @@
+## [0.1.19](https://github.com/Open-Study-College/osc/compare/v0.1.18...v0.1.19) (2022-10-12)
+
+
+### Bug Fixes
+
+* do not exit 1 after create-dr-to-main ([3c7a5a7](https://github.com/Open-Study-College/osc/commit/3c7a5a78de5141e18feaf248c986e360b39720d5))
+
+
+
 ## [0.1.18](https://github.com/Open-Study-College/osc/compare/v0.1.17...v0.1.18) (2022-10-12)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * typo creating drs ([196d700](https://github.com/Open-Study-College/osc/commit/196d70092153d0d79d367ca0a979db911d718c6c))
-
-
-
-## [0.1.14](https://github.com/Open-Study-College/osc/compare/v0.1.13...v0.1.14) (2022-10-12)
-
-
-### Bug Fixes
-
-* typo checking if dr is created ([a5637e9](https://github.com/Open-Study-College/osc/commit/a5637e989250ec496e0aa0b4ef8a1bbae01d7815))
 
 
 
