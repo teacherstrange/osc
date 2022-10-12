@@ -1,3 +1,14 @@
+## [0.1.7](https://github.com/Open-Study-College/osc/compare/v0.1.6...v0.1.7) (2022-10-12)
+
+
+### Bug Fixes
+
+* do not continue on error when merging dr ([106cfb1](https://github.com/Open-Study-College/osc/commit/106cfb1ae093b449aa1e21f8cc463f25ffe2e347))
+* remove typo ([9e5904e](https://github.com/Open-Study-College/osc/commit/9e5904e106f4c4815d4787c86997d25beada3f8e))
+* update ecommere workflow to be the same as academic ([9567810](https://github.com/Open-Study-College/osc/commit/95678109f32dd1d4d80558bc0b4eeaec68191ff5))
+
+
+
 ## [0.1.6](https://github.com/Open-Study-College/osc/compare/v0.1.5...v0.1.6) (2022-10-12)
 
 
@@ -32,15 +43,6 @@
 ### Bug Fixes
 
 * password deletion problem ([a85cca3](https://github.com/Open-Study-College/osc/commit/a85cca39f3f81bee77859ceba041f6d0b1ad22d2))
-
-
-
-## [0.1.2](https://github.com/Open-Study-College/osc/compare/v0.1.1...v0.1.2) (2022-10-11)
-
-
-### Bug Fixes
-
-* password problem and merge problem ([7dba63b](https://github.com/Open-Study-College/osc/commit/7dba63b5280082c252e9719b91aa3461db2fc43f))
 
 
 
