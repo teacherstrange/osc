@@ -1,3 +1,12 @@
+## [0.1.10](https://github.com/Open-Study-College/osc/compare/v0.1.9...v0.1.10) (2022-10-12)
+
+
+### Bug Fixes
+
+* add exit checks to all subshells ([89645b1](https://github.com/Open-Study-College/osc/commit/89645b1aded76806f33872834d2240b9efa18f20))
+
+
+
 ## [0.1.9](https://github.com/Open-Study-College/osc/compare/v0.1.8...v0.1.9) (2022-10-12)
 
 
@@ -34,15 +43,6 @@
 
 * catch output === "error" when create dr ([25268e3](https://github.com/Open-Study-College/osc/commit/25268e327add4156063f3c240ec9871df0f0b2c5))
 * create and merge dr to main before deploying production ([2c94495](https://github.com/Open-Study-College/osc/commit/2c94495b5f99a07f264737ca4f0b200196cd64d9))
-
-
-
-## [0.1.5](https://github.com/Open-Study-College/osc/compare/v0.1.4...v0.1.5) (2022-10-12)
-
-
-### Bug Fixes
-
-* echo output ([6c69629](https://github.com/Open-Study-College/osc/commit/6c6962968fec1558d9e13553c6b3422c5a9dc9ff))
 
 
 
