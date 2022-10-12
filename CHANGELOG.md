@@ -1,3 +1,12 @@
+## [0.1.13](https://github.com/Open-Study-College/osc/compare/v0.1.12...v0.1.13) (2022-10-12)
+
+
+### Bug Fixes
+
+* do not error if a deployment request is already open, and fix typos ([0fb71e1](https://github.com/Open-Study-College/osc/commit/0fb71e12004082214769916e7d73c82f4eddb89c))
+
+
+
 ## [0.1.12](https://github.com/Open-Study-College/osc/compare/v0.1.11...v0.1.12) (2022-10-12)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * exit in current shell not subshell ([a6492fc](https://github.com/Open-Study-College/osc/commit/a6492fc40bf285a2a6c2bdce913deab218dc4d12))
-
-
-
-## [0.1.8](https://github.com/Open-Study-College/osc/compare/v0.1.7...v0.1.8) (2022-10-12)
-
-
-### Bug Fixes
-
-* check value of last command, if its not equal to 0, exit the program ([98a53e1](https://github.com/Open-Study-College/osc/commit/98a53e16d4f56241fc9773d978833670c09beeeb))
 
 
 
