@@ -53,16 +53,16 @@ function create-deploy-request {
     local BRANCH_NAME=$2
     local ORG_NAME=$3
         
-    raw_output=`pscale deploy-request create "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json --deploy-to "main"`;
+    raw_output=`pscale deploy-request create "$DB_NAME" "$BRANCH_NAME" --org "$ORG_NAME" --format json --deploy-to "main"` || true;
 
     local deploy_request_number=`echo $raw_output | jq -r '.number'`
     # if deploy request number is empty, then error
     if [ -z "$deploy_request_number" ]; then
         echo "Could not retrieve deploy request number: $raw_output"
         if [ "$raw_output" == "\{\"error\": \"Database branch there is already an open deploy request for this branch\"\}" ]; then 
-            exit 0
+            return 0
         fi 
-        exit 1
+        return 1
     fi
 
     local deploy_request="https://app.planetscale.com/${ORG_NAME}/${DB_NAME}/deploy-requests/${deploy_request_number}"
