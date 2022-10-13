@@ -57,6 +57,8 @@ export const meta: MetaFunction = () => ({
 type LoaderData = {
     user: Awaited<ReturnType<typeof getUser>>;
     colorScheme: string;
+    SANITY_STUDIO_API_PROJECT_ID: string | undefined;
+    SANITY_STUDIO_API_DATASET: string | undefined;
 };
 
 export const headers: HeadersFunction = () => ({
@@ -74,7 +76,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 
     return json<LoaderData>({
         user: await getUser(request),
-        colorScheme: await getColorScheme(request)
+        colorScheme: await getColorScheme(request),
+        SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
+        SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET
     });
 };
 
@@ -126,7 +130,8 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
     );
 });
 export default function App() {
-    const { colorScheme } = useLoaderData();
+    const { colorScheme, SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET } =
+        useLoaderData();
     let location = useLocation();
     let matches = useMatches();
 
@@ -176,6 +181,14 @@ export default function App() {
 
     return (
         <Document>
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `document.env = ${JSON.stringify({
+                        SANITY_STUDIO_API_PROJECT_ID,
+                        SANITY_STUDIO_API_DATASET
+                    })}`
+                }}
+            />
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
                 <Header className={'o-header--full'} backgroundColor={'secondary'} />
                 <Outlet />

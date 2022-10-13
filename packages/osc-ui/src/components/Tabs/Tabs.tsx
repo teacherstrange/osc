@@ -17,7 +17,7 @@ export const Tabs: FC<Props> = (props: Props) => {
     const { tabs, className, ...other } = props;
 
     return (
-        <ChakraTabs className={`o-tabs ${className}`} {...other}>
+        <ChakraTabs className={`o-tabs ${className ? className : ''}`} {...other}>
             <TabList>
                 {tabs.map((tab) => (
                     <Tab key={tab.key}>{tab.list}</Tab>
