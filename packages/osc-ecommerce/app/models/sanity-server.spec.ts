@@ -13,8 +13,6 @@ test('returns data from a query to the homepage', async () => {
     if (!data) throw Error('Request failed');
     const { page, isPreview } = data;
 
-    console.log(page);
-
     expect(page?._id).toBe('home');
     expect(isPreview).toBe(false);
 });
