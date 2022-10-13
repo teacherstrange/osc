@@ -5,6 +5,7 @@ import ShopifyIcon from '../../components/icons/Shopify';
 import ProductHiddenInput from '../../components/inputs/ProductHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
 import { getPriceRange } from '../../utils/getPriceRange';
+import { MODULES } from '../../constants.js';
 
 const GROUPS = [
     {
@@ -63,7 +64,7 @@ export default {
             name: 'modules',
             title: 'Modules',
             type: 'array',
-            of: [{ type: 'module.content' }, { type: 'module.images' }],
+            of: MODULES,
             group: 'editorial'
         },
         // Shopify product

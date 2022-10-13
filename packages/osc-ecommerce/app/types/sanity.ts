@@ -32,6 +32,12 @@ export interface mediaTextModule extends module {
     links?: InternalSanityLinkItem[] | ExternalSanityLinkItem[];
 }
 
+export interface trustpilotModule extends module {
+    height: string;
+    stars: string;
+    type: 'slider' | 'grid' | 'minicarousel' | 'microstar';
+}
+
 export interface SanityImage {
     asset: {
         url: string;

@@ -41,6 +41,7 @@ import shopifyProductVariant from './objects/shopifyProductVariant';
 import moduleImage from './objects/module/image';
 import moduleImages from './objects/module/images';
 import moduleContent from './objects/module/content';
+import moduleTrustpilot from './objects/module/trustpilot';
 
 // Build the schemas and export to the Sanity Studio app
 export default createSchema({
@@ -82,6 +83,7 @@ export default createSchema({
         shopifyProductVariant,
         moduleImage,
         moduleImages,
-        moduleContent
+        moduleContent,
+        moduleTrustpilot
     ])
 });

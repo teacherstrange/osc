@@ -8,4 +8,11 @@ declare global {
         interface Assertion extends CustomMatchers {}
         interface AsymmetricMatchersContaining extends CustomMatchers {}
     }
+
+    interface Window {
+        Trustpilot: {
+            Modules: object;
+            loadFromElement: Function;
+        };
+    }
 }
