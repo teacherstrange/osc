@@ -1,6 +1,6 @@
 module.exports = (on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) => {
     const isDev = config.watchForFileChanges;
-    const port = process.env.PORT ?? (isDev ? '3000' : '8811');
+    const port = process.env.PORT ?? (isDev ? '2000' : '8812');
     const configOverrides: Partial<Cypress.PluginConfigOptions> = {
         baseUrl: `http://localhost:${port}`,
         integrationFolder: 'cypress/e2e',

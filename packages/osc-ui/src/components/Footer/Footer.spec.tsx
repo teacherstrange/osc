@@ -12,3 +12,8 @@ test('renders footer', () => {
     expect(linkElement).toBeInTheDocument();
     expect(linkElement.classList.contains('tester').valueOf()).toBe(true);
 });
+
+test('accepts className', () => {
+    const { container } = render(<Footer className={'tester'}></Footer>);
+    expect(container.getElementsByClassName('tester')[0]).toBeInTheDocument();
+});

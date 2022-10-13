@@ -12,4 +12,6 @@ const Template: Story<Props> = (args) => <Header {...args} />;
 
 export const Primary = Template.bind({});
 
-Primary.args = {};
+Primary.args = {
+    tester: 'tester'
+};

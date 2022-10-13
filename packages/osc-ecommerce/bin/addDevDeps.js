@@ -52,7 +52,7 @@ try {
         eslint: '^8.16.0',
         'eslint-config-prettier': '^8.5.0',
         'happy-dom': '^3.2.2',
-        msw: '^0.40.2',
+        msw: '^0.47.3',
         'npm-run-all': '^4.1.5',
         postcss: '^8.4.14',
         prettier: '2.6.2',

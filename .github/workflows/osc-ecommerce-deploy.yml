@@ -129,6 +129,11 @@ jobs:
   cypress:
     name: ⚫️ Cypress
     env:
+      VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
+      VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+      SANITY_STUDIO_API_DATASET: ${{secrets.SANITY_STUDIO_API_DATASET}}
+      SANITY_STUDIO_API_PROJECT_ID: ${{secrets.SANITY_STUDIO_API_PROJECT_ID}}
+      SANITY_STUDIO_API_TOKEN: ${{secrets.SANITY_STUDIO_API_TOKEN}}
       PLANETSCALE_PRISMA_DATABASE_URL: ${{ secrets.PLANETSCALE_PRISMA_DATABASE_URL_CYPRESS }}
       SESSION_SECRET: super-duper-secret
     runs-on: ubuntu-latest
@@ -168,10 +173,10 @@ jobs:
       - name: 🌳 Cypress run
         uses: cypress-io/github-action@v3
         with:
-          start: npm run start:mocks
-          wait-on: "http://localhost:8811"
+          start: npm run test:e2e:run
+          wait-on: "http://localhost:8812"
         env:
-          PORT: "8811"
+          PORT: "8812"
 
   build:
     name: 🐳 Build
@@ -286,6 +291,9 @@ jobs:
             "COMMIT_SHA=${{ github.sha }}"
             "PLANETSCALE_PRISMA_DATABASE_URL_PRODUCTION=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}"
             "PLANETSCALE_PRISMA_DATABASE_URL_MAIN=${{ env.MY_DB_URL_MAIN }}${{ secrets.DB_NAME }}"
+            "SANITY_STUDIO_API_DATASET=${{secrets.SANITY_STUDIO_API_DATASET}}"
+            "SANITY_STUDIO_API_PROJECT_ID=${{secrets.SANITY_STUDIO_API_PROJECT_ID}}"
+            "SANITY_STUDIO_API_TOKEN=${{secrets.SANITY_STUDIO_API_TOKEN}}"
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
