@@ -1,3 +1,32 @@
+# [0.3.0](https://github.com/Open-Study-College/osc/compare/v0.2.0...v0.3.0) (2022-10-13)
+
+
+### Bug Fixes
+
+* removes args from child list to prevent passing props by accident ([804e006](https://github.com/Open-Study-College/osc/commit/804e0068d051a73d3372676128d2fdeca2972123))
+
+
+### Features
+
+* adds a mock function for window.matchMedia ([ce58312](https://github.com/Open-Study-College/osc/commit/ce5831296c27c3d0157ebb5f291fb83a0a4cd102))
+* adds helper function to capitalize first letter of a word ([217d215](https://github.com/Open-Study-College/osc/commit/217d21573f08ca3baa43d405b48351f78d8f42b9))
+* adds list component ([3a7aaf5](https://github.com/Open-Study-College/osc/commit/3a7aaf534b3b784238864793d68e8c500a77aa11))
+* adds listitem component ([9ff3f5e](https://github.com/Open-Study-College/osc/commit/9ff3f5e2a23c10cb8c77cbb0b1839e2dd6ad1aa0))
+* adds module component to loop through modules ([f3f6d45](https://github.com/Open-Study-College/osc/commit/f3f6d4578810530e6ed9125b14a9afcac16ec53f))
+* adds module component to route templates ([7ab1afb](https://github.com/Open-Study-College/osc/commit/7ab1afbef79d26694d7c9050abe304db30d954af))
+* adds modules query ([9697087](https://github.com/Open-Study-College/osc/commit/96970875404aefa1f6662e2df48d0ced5a97767e))
+* adds sanity trustpilot type ([eec94d2](https://github.com/Open-Study-College/osc/commit/eec94d2fe1bad8f7ee678056a9c7c012ea4bce0d))
+* adds stories for list and listitem ([c2530fe](https://github.com/Open-Study-College/osc/commit/c2530fefe69ee168caa6b2fbe22d1089402b61aa))
+* adds tests for list ([2f81031](https://github.com/Open-Study-College/osc/commit/2f81031d4e085c67144d20462c34d6e27fd294eb))
+* adds Trustpilot component ([f873af1](https://github.com/Open-Study-College/osc/commit/f873af122fc507bb83257942ea08785c695c30b5))
+* adds Trustpilot component tests ([a337665](https://github.com/Open-Study-College/osc/commit/a33766526d0f04ae9042fa04545d3b8662782499))
+* adds trustpilot module schema to Sanity ([983e877](https://github.com/Open-Study-College/osc/commit/983e877b6709c5bbc8a69f81ea3da34d741aaad4))
+* adds Trustpilot object to Window interface ([b99dfd8](https://github.com/Open-Study-College/osc/commit/b99dfd84271a61bef4e0b3060ec629e412c8e206))
+* adds useEffect to adjust the height when the browser has a  narrow width ([bb93831](https://github.com/Open-Study-College/osc/commit/bb93831b6819ea63fa637da304d6fa785af47949))
+* export trustpilot component from osc-ui ([23cd742](https://github.com/Open-Study-College/osc/commit/23cd742a0c5fcd1a8c0130372e27be371ea26b5d))
+
+
+
 # [0.2.0](https://github.com/Open-Study-College/osc/compare/v0.1.29...v0.2.0) (2022-10-13)
 
 
@@ -79,15 +108,6 @@
 ### Bug Fixes
 
 * move test for deploy_request_error ([a6d6e78](https://github.com/Open-Study-College/osc/commit/a6d6e789a7be13dbd2c675ba4111a1ad0fd1e5db))
-
-
-
-## [0.1.26](https://github.com/Open-Study-College/osc/compare/v0.1.25...v0.1.26) (2022-10-12)
-
-
-### Bug Fixes
-
-* exit successfully if the reason a dr cannot be created is because one already exists ([44e10dc](https://github.com/Open-Study-College/osc/commit/44e10dc388ec87d5c3f448a0c1e8617228570501))
 
 
 
