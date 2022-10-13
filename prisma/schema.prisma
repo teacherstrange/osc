@@ -15,6 +15,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   schemaChange1 DateTime  @default(now()) @updatedAt
+  test          DateTime  @default(now()) @updatedAt
   password      Password?
 }
 
