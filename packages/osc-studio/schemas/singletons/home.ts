@@ -1,4 +1,5 @@
 import { HomeIcon } from '@sanity/icons';
+import { MODULES } from '../../constants.js';
 
 const TITLE = 'Home';
 
@@ -48,7 +49,7 @@ export default {
             name: 'modules',
             title: 'Modules',
             type: 'array',
-            of: [{ type: 'module.content' }, { type: 'module.images' }],
+            of: MODULES,
             group: 'editorial'
         },
         // SEO

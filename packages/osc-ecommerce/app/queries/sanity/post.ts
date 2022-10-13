@@ -1,4 +1,5 @@
 import groq from 'groq';
+import { MODULES } from './fragments/modules';
 import { SEO } from './fragments/seo';
 
 export const POST_QUERY = groq`
@@ -7,6 +8,7 @@ export const POST_QUERY = groq`
         _rev,
         _type,
         title,
+        ${MODULES},
         ${SEO}
     }
 `;

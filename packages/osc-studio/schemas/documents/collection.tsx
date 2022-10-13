@@ -4,6 +4,7 @@ import React from 'react';
 import ShopifyIcon from '../../components/icons/Shopify';
 import CollectionHiddenInput from '../../components/inputs/CollectionHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
+import { MODULES } from '../../constants.js';
 
 const GROUPS = [
     {
@@ -69,7 +70,7 @@ export default {
             name: 'modules',
             title: 'Modules',
             type: 'array',
-            of: [{ type: 'module.content' }, { type: 'module.images' }],
+            of: MODULES,
             group: 'editorial'
         },
         // Shopify collection

@@ -1,5 +1,5 @@
 import { useLoaderData, useParams } from '@remix-run/react';
-import { Heading } from '@chakra-ui/react';
+import { Heading, Stack } from '@chakra-ui/react';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useState } from 'react';
@@ -8,6 +8,8 @@ import Preview from '~/components/Preview';
 import getPageData from '~/models/sanity.server';
 import { BLOG_QUERY } from '~/queries/sanity/blog';
 import type { SanityPage } from '~/types/sanity';
+import Module from '~/components/Module';
+import type { module } from '~/types/sanity';
 
 interface PageData {
     page: SanityPage;
@@ -62,6 +64,14 @@ export default function Index() {
             ) : null}
 
             <Heading>{data?.title}</Heading>
+
+            {data?.modules && data?.modules.length > 0 ? (
+                <Stack spacing={16}>
+                    {data?.modules.map((module: module) =>
+                        module ? <Module key={module?._key} module={module} /> : null
+                    )}
+                </Stack>
+            ) : null}
         </div>
     );
 }
