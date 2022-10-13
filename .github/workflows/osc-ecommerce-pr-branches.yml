@@ -19,8 +19,6 @@ jobs:
               - 'packages/osc-academic-hub/**'
             osc-ui:
               - 'packages/osc-ui/**'
-            prisma:
-              - 'prisma/**'
             pscale:
               - '.pscale/**'
             Dockerfiles:
@@ -146,9 +144,6 @@ jobs:
             VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY}}
             PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
             COMMIT_SHA=${{ github.sha }}
-            "SANITY_STUDIO_API_DATASET=${{secrets.SANITY_STUDIO_API_DATASET}}"
-            "SANITY_STUDIO_API_PROJECT_ID=${{secrets.SANITY_STUDIO_API_PROJECT_ID}}"
-            "SANITY_STUDIO_API_TOKEN=${{secrets.SANITY_STUDIO_API_TOKEN}}"
           file: ./Dockerfiles/Dockerfile.pr
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
