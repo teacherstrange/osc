@@ -63,14 +63,8 @@ function create-deploy-request {
     # if deploy request number is empty, then error
     if [ -z "$deploy_request_number" ]; then
 
-        local deploy_request_error=`echo $raw_output | jq -r '.error'`
-        if [ "$deploy_request_error" == "Database branch there is already an open deploy request for this branch" ]; then
-            echo "Deploy request could not be created: $raw_output"
-            exit 0
-        fi
-
         echo "Could not retrieve deploy request number: $raw_output"
-        exit 1
+        exit 0
     fi
 
     local deploy_request="https://app.planetscale.com/${ORG_NAME}/${DB_NAME}/deploy-requests/${deploy_request_number}"
