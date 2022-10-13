@@ -1,3 +1,12 @@
+## [0.1.29](https://github.com/Open-Study-College/osc/compare/v0.1.28...v0.1.29) (2022-10-13)
+
+
+### Bug Fixes
+
+* added new field to user model ([0c270ac](https://github.com/Open-Study-College/osc/commit/0c270ac18e91c81f79ed7ec114d31622671a2224))
+
+
+
 ## [0.1.28](https://github.com/Open-Study-College/osc/compare/v0.1.27...v0.1.28) (2022-10-13)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * fail bash script and workflow if merging deployment fails ([0a629df](https://github.com/Open-Study-College/osc/commit/0a629df77ed4ee8cc2838b12ca6b0c6e2798b5f6))
-
-
-
-## [0.1.24](https://github.com/Open-Study-College/osc/compare/v0.1.23...v0.1.24) (2022-10-12)
-
-
-### Bug Fixes
-
-* schema change test ([474ab64](https://github.com/Open-Study-College/osc/commit/474ab64ad395a375bc59a841c05303d2f445839a))
 
 
 
