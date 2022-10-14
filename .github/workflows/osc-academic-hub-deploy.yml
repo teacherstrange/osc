@@ -175,6 +175,7 @@ jobs:
         run: npm run build
 
       - name: 🏃‍♂️ Playwright run
+        uses: ./
         with:
           start: npm run test:e2e:run
           wait-on: "http://localhost:8811"
