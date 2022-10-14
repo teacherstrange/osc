@@ -173,10 +173,6 @@ jobs:
 
       - name: 🏃‍♂️ Playwright run
         run: npm run test:e2e:run
-        with:
-          wait-on: "http://localhost:8811"
-        env:
-          PORT: "8811"
 
       - name: Report
         uses: actions/upload-artifact@v2
