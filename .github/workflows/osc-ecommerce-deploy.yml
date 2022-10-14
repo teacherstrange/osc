@@ -168,6 +168,9 @@ jobs:
         with:
           useLockFile: false
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
       - name: ⚙️ Build
         run: npm run build
 
