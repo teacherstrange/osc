@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/Open-Study-College/osc/compare/v0.4.0...v0.4.1) (2022-10-14)
+
+
+### Bug Fixes
+
+* bundle d.ts file from index.js ([e96d044](https://github.com/Open-Study-College/osc/commit/e96d044f567c86e69c9ca92a8b5dccb9bd47102b))
+
+
+
 # [0.4.0](https://github.com/Open-Study-College/osc/compare/v0.3.0...v0.4.0) (2022-10-14)
 
 
@@ -115,15 +124,6 @@
 ### Bug Fixes
 
 * added new field to user model ([0c270ac](https://github.com/Open-Study-College/osc/commit/0c270ac18e91c81f79ed7ec114d31622671a2224))
-
-
-
-## [0.1.28](https://github.com/Open-Study-College/osc/compare/v0.1.27...v0.1.28) (2022-10-13)
-
-
-### Bug Fixes
-
-* if dr number cannot be accessed, exit and do not fail the workflow ([2a9c28d](https://github.com/Open-Study-College/osc/commit/2a9c28db19bb09ba7fd61fcb3ff553f0040846de))
 
 
 
