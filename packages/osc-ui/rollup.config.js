@@ -39,7 +39,7 @@ export default [
     },
     {
         // path to your declaration files root
-        input: 'dist/index.d.ts',
+        input: 'dist/index.js',
         output: [{ file: 'dist/index.d.ts', format: 'es' }],
         external: [/\.css$/],
         plugins: [dts(), del({ hook: 'buildEnd', targets: './dist/components' })]
