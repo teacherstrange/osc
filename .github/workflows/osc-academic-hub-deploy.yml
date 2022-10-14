@@ -172,9 +172,8 @@ jobs:
         run: npm run build
 
       - name: 🏃‍♂️ Playwright run
-        uses: ./
+        run: npm run test:e2e:run
         with:
-          start: npm run test:e2e:run
           wait-on: "http://localhost:8811"
         env:
           PORT: "8811"
