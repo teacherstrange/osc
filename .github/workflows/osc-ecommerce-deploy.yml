@@ -130,8 +130,8 @@ jobs:
       - name: ⚡ Run vitest
         run: npm run test
 
-  cypress:
-    name: ⚫️ Cypress
+  playwright:
+    name: 🎭 Playwright
     env:
       VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
       VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
@@ -164,7 +164,7 @@ jobs:
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: 🏄 Copy test env vars
-        run: cp .env.cypress .env
+        run: cp .env
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
@@ -174,13 +174,20 @@ jobs:
       - name: ⚙️ Build
         run: npm run build
 
-      - name: 🌳 Cypress run
-        uses: cypress-io/github-action@v3
+      - name: 🏃‍♂️ Playwright run
         with:
           start: npm run test:e2e:run
           wait-on: "http://localhost:8812"
         env:
           PORT: "8812"
+
+      - name: Report
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
 
   build:
     name: 🐳 Build
