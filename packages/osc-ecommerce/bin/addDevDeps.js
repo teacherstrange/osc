@@ -16,6 +16,7 @@ try {
         nx: '^14.3.6',
         '@chakra-ui/storybook-addon': '^4.0.1',
         '@fullhuman/postcss-purgecss': '^4.1.3',
+        '@playwright/test': '^1.27.1',
         cssnano: '^5.1.12',
         husky: '^8.0.1',
         nodemon: '^2.0.19',
