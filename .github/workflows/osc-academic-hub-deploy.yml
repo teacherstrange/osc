@@ -163,9 +163,6 @@ jobs:
 
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
-      - name: 🏄 Copy test env vars
-        run: cp .env
-
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
         with:
