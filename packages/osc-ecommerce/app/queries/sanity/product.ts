@@ -6,17 +6,7 @@ export const PRODUCT_QUERY = groq`
         _id,
         _rev,
         _type,
-        store {
-            id,
-            gid,
-            title,
-            slug,
-            priceRange,
-            variants[]{
-                _key,
-                _ref
-            }
-        },
-        ${MODULES},
+        store,
+        ${MODULES}
     }
 `;

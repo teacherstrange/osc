@@ -4,12 +4,12 @@ import invariant from 'tiny-invariant';
 
 // The document.env should be set in the root.tsx file so we can access it across all routes
 const SANITY_STUDIO_API_PROJECT_ID =
-    typeof document !== 'undefined'
+    typeof document !== 'undefined' && document.env
         ? document.env.SANITY_STUDIO_API_PROJECT_ID
         : process.env.SANITY_STUDIO_API_PROJECT_ID;
 
 const SANITY_STUDIO_API_DATASET =
-    typeof document !== 'undefined'
+    typeof document !== 'undefined' && document.env
         ? document.env.SANITY_STUDIO_API_DATASET
         : process.env.SANITY_STUDIO_API_DATASET;
 
