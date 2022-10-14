@@ -1,3 +1,28 @@
+# [0.4.0](https://github.com/Open-Study-College/osc/compare/v0.3.0...v0.4.0) (2022-10-14)
+
+
+### Bug Fixes
+
+* adds api token to vitest env ([1843f91](https://github.com/Open-Study-College/osc/commit/1843f911f6465b4b56f367e23d1219c2228a2166))
+* adds sanity secrets to vitest workflow ([3e1f834](https://github.com/Open-Study-College/osc/commit/3e1f8341af1eb17174680a6c6ee4d52cf3e0cbec))
+* replace sanityClient with picosanity ([a5341fa](https://github.com/Open-Study-College/osc/commit/a5341fa2f604d48109658e6d03ac28b78e508fea))
+* replaced token with dataset secret ([009abd0](https://github.com/Open-Study-College/osc/commit/009abd063dbbbbe4396d16c9fcdccc6e3a006851))
+* update config to allow vitest to read process.env ([4a3e15e](https://github.com/Open-Study-College/osc/commit/4a3e15e03406c3d3d1a3f8a14563dc56551defc6))
+
+
+### Features
+
+* adds e2e test to test pages don't hang ([7800478](https://github.com/Open-Study-College/osc/commit/78004786ef1f925b123895b6377843244ff66b11))
+* adds mock request object ([ca324b6](https://github.com/Open-Study-College/osc/commit/ca324b6931aa92206ca550fb453dde6f6ed93481))
+* adds unit tests ([31107db](https://github.com/Open-Study-College/osc/commit/31107dbc5d3401d0c0baa77ed44e316f2de89d04))
+
+
+### Reverts
+
+* Revert "test: log result for testing CI" ([1d70bb3](https://github.com/Open-Study-College/osc/commit/1d70bb35a465118d9f55aba06e40a6d3937b165c))
+
+
+
 # [0.3.0](https://github.com/Open-Study-College/osc/compare/v0.2.0...v0.3.0) (2022-10-13)
 
 
@@ -99,15 +124,6 @@
 ### Bug Fixes
 
 * if dr number cannot be accessed, exit and do not fail the workflow ([2a9c28d](https://github.com/Open-Study-College/osc/commit/2a9c28db19bb09ba7fd61fcb3ff553f0040846de))
-
-
-
-## [0.1.27](https://github.com/Open-Study-College/osc/compare/v0.1.26...v0.1.27) (2022-10-13)
-
-
-### Bug Fixes
-
-* move test for deploy_request_error ([a6d6e78](https://github.com/Open-Study-College/osc/commit/a6d6e789a7be13dbd2c675ba4111a1ad0fd1e5db))
 
 
 
