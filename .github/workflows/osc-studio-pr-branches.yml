@@ -22,13 +22,6 @@ jobs:
             osc-studio-pr:
               - '.github/workflows/osc-studio-pr-branches.yml'
         # run only if some file in 'src' folder was changed
-      - uses: dorny/paths-filter@v2
-        id: changes-schema
-        with:
-          filters: |
-            prisma:
-              - 'prisma/**'
-        # run only if some file in 'src' folder was changed
 
       - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
         name: "Cancel the self CI workflow run"
@@ -85,6 +78,18 @@ jobs:
       - name: log app name
         run: echo "The selected app name is ${{ steps.app_name.outputs.value }}"
 
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      # Setup cache
+      - name: ⚡️ Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
       - name: 🔑 Fly Registry Auth
         uses: docker/login-action@v1
         with:
@@ -108,7 +113,18 @@ jobs:
             "SANITY_STUDIO_API_PROJECT_ID=${{secrets.SANITY_STUDIO_API_PROJECT_ID}}"
             "SANITY_STUDIO_API_TOKEN=${{secrets.SANITY_STUDIO_API_TOKEN}}"
           file: ./Dockerfiles/Dockerfile.studio
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
+      # This ugly bit is necessary if you don't want your cache to grow forever
+      # till it hits GitHub's limit of 5GB.
+      # Temp fix
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
+      - name: 🚚 Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
   deploy:
     needs: build
     name: 🚀 Deploy PR Branch
