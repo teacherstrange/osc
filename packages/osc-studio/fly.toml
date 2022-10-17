@@ -1,6 +1,4 @@
-# fly.toml file generated for morning-cloud-4913 on 2022-10-17T12:31:01+01:00
-
-app = "morning-cloud-4913"
+app = "osc-studio"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
