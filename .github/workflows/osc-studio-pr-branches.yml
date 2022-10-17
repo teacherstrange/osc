@@ -1,0 +1,176 @@
+name: PR Branch App for osc-studio
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  FLY_REGION: iad
+  SANITY_STUDIO_API_DATASET: ${{secrets.SANITY_STUDIO_API_DATASET}}
+  SANITY_STUDIO_API_PROJECT_ID: ${{secrets.SANITY_STUDIO_API_PROJECT_ID}}
+
+jobs:
+  pre-check:
+    name: check if workflow should run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            osc-studio:
+              - 'packages/osc-studio/**'
+            osc-studio-deploy:
+              - '.github/workflows/osc-studio-deploy.yml'
+            osc-studio-pr:
+              - '.github/workflows/osc-studio-pr-branches.yml'
+        # run only if some file in 'src' folder was changed
+      - uses: dorny/paths-filter@v2
+        id: changes-schema
+        with:
+          filters: |
+            prisma:
+              - 'prisma/**'
+        # run only if some file in 'src' folder was changed
+
+      - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
+        name: "Cancel the self CI workflow run"
+        uses: potiuk/cancel-workflow-runs@master
+        with:
+          selfPreservation: false
+          cancelMode: self
+          notifyPRCancel: true
+          notifyPRCancelMessage: Cancelled.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          sourceRunId: ${{ github.event.workflow_run.id }}
+
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+
+  build:
+    needs: pre-check
+    name: 🐳 Build PR Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+
+      # need to delete all other packages in this step
+
+      - run: npm run setup
+      - run: npm run build:osc-studio
+
+      - run: rm -v -r ./package.json ./node_modules
+      - run: mv -v -f packages/osc-studio/* .
+
+      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+
+      - name: What
+        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.0.0
+        id: app_name
+        with:
+          file: "fly.toml"
+          field: "app"
+
+      - name: log app name
+        run: echo "The selected app name is ${{ steps.app_name.outputs.value }}"
+
+      - name: 🔑 Fly Registry Auth
+        uses: docker/login-action@v1
+        with:
+          registry: registry.fly.io
+          username: x
+          password: ${{ secrets.FLY_API_TOKEN }}
+
+      # This ugly bit is necessary if you don't want your cache to grow forever
+      # till it hits GitHub's limit of 5GB.
+      # Temp fix
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
+      - name: 🚚 Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+  deploy:
+    needs: build
+    name: 🚀 Deploy PR Branch
+    runs-on: ubuntu-latest
+
+    # Only run one deployment at a time per PR.
+    concurrency:
+      group: pr-${{ github.event.number }}
+
+    # Create a GitHub deployment environment per pr branch app so it shows up
+    # in the pull request UI.
+    environment:
+      name: pr-${{ github.event.number }}
+      url: ${{ steps.deploy_pr.outputs.url }}
+
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - run: rm -v -r ./package.json
+      - run: mv -v -f packages/osc-studio/* .
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+
+      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+
+      - name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.0.0
+        id: app_name
+        with:
+          file: "fly.toml"
+          field: "app"
+
+      - name: What
+        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Create app
+        uses: superfly/flyctl-actions@1.1
+        continue-on-error: true
+        with:
+          args: "apps create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college"
+
+      - name: Create session secret
+        uses: superfly/flyctl-actions@1.1
+        continue-on-error: true
+        with:
+          args: "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
+
+      - name: Create volume
+        uses: superfly/flyctl-actions@1.1
+        continue-on-error: true
+        with:
+          args: "volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
+
+      - name: 🚀 Deploy PR Branch
+        id: deploy_pr
+        uses: superfly/fly-pr-review-apps@1.0.0
+        with:
+          image: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}
+          org: "open-study-college"
+          name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
+          args: "deploy --build-arg SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
