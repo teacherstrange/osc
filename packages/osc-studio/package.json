@@ -23,6 +23,8 @@
     "@sanity/uuid": "^3.0.1",
     "@sanity/vision": "^2.34.0",
     "eslint": "^8.6.0",
+    "express": "^4.18.2",
+    "express-history-api-fallback": "^2.2.1",
     "lodash.get": "^4.4.2",
     "pluralize": "^8.0.0",
     "prop-types": "^15.7",
