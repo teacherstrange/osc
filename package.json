@@ -87,6 +87,7 @@
     "chromatic": "chromatic --exit-zero-on-changes",
     "build": "lerna run build",
     "build:osc-ui": "lerna run build --scope osc-ui --skip-nx-cache",
+    "build:osc-studio": "cd packages/osc-studio && npm run build",
     "test": "npm run build:osc-ui && lerna run test",
     "test:dev": "lerna run test:dev",
     "test:e2e:dev": "lerna run test:e2e:dev",
