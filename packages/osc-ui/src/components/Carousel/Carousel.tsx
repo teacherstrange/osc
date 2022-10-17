@@ -12,16 +12,13 @@ export type Props = {
     height?: string;
     active: boolean;
     align: 'start' | 'center' | 'end';
-    speed: number;
     startIndex: number;
-    inViewThreshold: number;
     mediaArray: any[];
     delay: number;
     slidesPerPage: number;
-    slidesToScroll: number;
+    slidesToScroll: boolean;
     slideGap: number;
     axis: 'x' | 'y';
-    direction: 'ltr' | 'rtl';
     loop: boolean;
 };
 
@@ -30,16 +27,13 @@ export const Carousel: FC<Props> = (props) => {
         height,
         active,
         align,
-        speed,
         startIndex,
-        inViewThreshold,
         mediaArray,
         delay,
         slidesPerPage,
         slidesToScroll,
         slideGap,
         axis,
-        direction,
         loop
     } = props;
 
@@ -52,20 +46,24 @@ export const Carousel: FC<Props> = (props) => {
         return false;
     };
 
-    const emblaPlugins =
-        height != undefined
-            ? [Autoplay({ delay }), ClassNames()]
-            : [AutoHeight(), Autoplay({ delay }), ClassNames()];
+    const emblaPlugins = () => {
+        if (!height && delay) {
+            return [AutoHeight(), Autoplay({ delay }), ClassNames()];
+        } else if (!height && !delay) {
+            return [AutoHeight(), ClassNames()];
+        } else if (height && delay) {
+            return [Autoplay({ delay }), ClassNames()];
+        } else if (height && !delay) {
+            return [ClassNames()];
+        }
+    };
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
             skipSnaps: false,
-            slidesToScroll,
+            slidesToScroll: slidesToScroll ? slidesPerPage : 1,
             containScroll: 'trimSnaps',
             startIndex: startIndex ?? 0,
-            inViewThreshold: inViewThreshold ?? 0.5,
-            speed: speed ?? 10,
-            direction,
             axis,
             loop,
             align: align ?? 'start',
@@ -76,7 +74,7 @@ export const Carousel: FC<Props> = (props) => {
                 '(max-width: 768px)': { active: true }
             }
         },
-        emblaPlugins
+        emblaPlugins()
     );
 
     const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -107,7 +105,7 @@ export const Carousel: FC<Props> = (props) => {
             r.style.setProperty('--embla__slidesPerPage', `calc(${(1 / slidesPerPage) * 100}%)`);
         }
         if (slideGap) {
-            r.style.setProperty('--embla__slidesGap', slideGap + 'px');
+            r.style.setProperty('--embla__slideGap', slideGap + 'px');
         }
         if (slidesPerPage && slideGap) {
             r.style.setProperty(
@@ -135,18 +133,18 @@ export const Carousel: FC<Props> = (props) => {
         }
     }, [emblaApi]);
 
-    var className = carouselVisible ? 'embla-carousel-loaded' : '';
-
     return (
         <>
-            <Box className={`embla ${className}`}>
+            <Box className={`embla ${carouselVisible ? 'embla-carousel-loaded' : ''}`}>
                 <Box className="embla__viewport" ref={emblaRef}>
                     <Box className="embla__container">
-                        {mediaArray.map((q, index) => {
+                        {mediaArray?.map((q, index) => {
                             return (
                                 <Box key={index} className="embla__slide">
-                                    <Text>{q.text}</Text>
-                                    <Image src={q.image}></Image>
+                                    <Text>{q.caption}</Text>
+                                    {q.image && q.image.asset.url && (
+                                        <Image src={q.image.asset.url} alt={q.altText} />
+                                    )}
                                 </Box>
                             );
                         })}
@@ -166,19 +164,24 @@ export const Carousel: FC<Props> = (props) => {
                 </Box>
             </Box>
             <div className="embla__navigator">
-                {scrollSnaps.map((_, indicatorIndex) => (
-                    <Button
-                        className="embla__dots"
-                        key={indicatorIndex + '_indicator'}
-                        style={{
-                            backgroundColor:
-                                selectedIndex === indicatorIndex ? 'lightblue' : 'lightgray'
-                        }}
-                        onClick={() => {
-                            scrollTo(indicatorIndex);
-                        }}
-                    />
-                ))}
+                {scrollSnaps.map((_, indicatorIndex) => {
+                    if (active) {
+                        return (
+                            <Button
+                                className="embla__dots"
+                                key={indicatorIndex + '_indicator'}
+                                style={{
+                                    backgroundColor:
+                                        selectedIndex === indicatorIndex ? 'lightblue' : 'lightgray'
+                                }}
+                                onClick={() => {
+                                    scrollTo(indicatorIndex);
+                                }}
+                            />
+                        );
+                    }
+                    return <></>;
+                })}
             </div>
         </>
     );

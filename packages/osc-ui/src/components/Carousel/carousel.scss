@@ -40,10 +40,10 @@
 
 .embla__slide {
     flex: 0 0 var(--embla__slidesPerPage);
-    margin-right: var(--embla__slidesGap);
-    margin-left: var(--embla__slidesGap);
-    margin-top: var(--embla__slidesGap);
-    margin-bottom: var(--embla__slidesGap);
+    margin-right: var(--embla__slideGap);
+    margin-left: var(--embla__slideGap);
+    margin-top: var(--embla__slideGap);
+    margin-bottom: var(--embla__slideGap);
 }
 
 .embla__navigator {
