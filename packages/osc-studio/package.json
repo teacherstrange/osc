@@ -6,7 +6,7 @@
   "main": "package.json",
   "scripts": {
     "dev": "npx @sanity/cli start",
-    "build": "npx @sanity/cli build"
+    "build": "npx @sanity/cli build public"
   },
   "keywords": [
     "sanity"
