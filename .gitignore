@@ -15,4 +15,4 @@ packages/osc-ui/dist/**
 packages/osc-academic-hub/public/entry.worker.js
 packages/osc-ecommerce/public/entry.worker.js
 packages/osc-academic-hub/.DS_Store
-packages/osc-studio/public
+packages/osc-studio/dist
