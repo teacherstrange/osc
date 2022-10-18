@@ -11,6 +11,7 @@ import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
+import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 
 interface PageData {
     page: SanityPage;
@@ -45,12 +46,16 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     });
 };
 
-export const meta: MetaFunction = ({ data }) => {
-    const { title } = data?.page?.seo?.title ? data?.page?.seo : data?.page;
+export const meta: MetaFunction = ({ data, parentsData }) => {
+    const globalSeoSettings = parentsData.root.siteSettings.seo;
 
-    return {
-        title
-    };
+    const meta = buildHtmlMetaTags({
+        pageData: data.page,
+        globalData: globalSeoSettings,
+        canonicalUrl: data.canonicalUrl
+    });
+
+    return meta;
 };
 
 export default function Index() {
