@@ -18,6 +18,8 @@ import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
+import { getSettingsData } from './models/sanity.server';
+import { SETTINGS_QUERY } from './queries/sanity/settings';
 // import { PushNotification } from '~/utils/server/pwa-utils.server';
 
 let isMount = true;
@@ -48,15 +50,38 @@ export const links: LinksFunction = () => {
     ];
 };
 
-export const meta: MetaFunction = () => ({
-    charset: 'utf-8',
-    title: 'OSC Academic Hub',
-    viewport: 'width=device-width,initial-scale=1'
-});
+export const meta: MetaFunction = ({ data }) => {
+    const { seo: seoSettings } = data.siteSettings;
+
+    const noindex = seoSettings.robots.noIndex && 'noindex';
+    const { asset: organizationAsset } = seoSettings.schema.organizationLogo;
+    const facebook = seoSettings.socials.find((social: string) => social.includes('facebook'));
+    const twitter = seoSettings.socials.find((social: string) => social.includes('twitter'));
+    const twitterHandle = twitter && twitter.substring(twitter.lastIndexOf('/') + 1);
+
+    return {
+        charset: 'utf-8',
+        title: seoSettings?.siteTitle,
+        viewport: 'width=device-width,initial-scale=1',
+        robots: noindex,
+        'og:locale': 'en_GB',
+        'og:type': 'website',
+        'og:title': seoSettings?.siteTitle,
+        'og:url': '',
+        'og:site_name': seoSettings.schema?.organizationName,
+        'article:publisher': facebook,
+        'og:image': organizationAsset?.url,
+        'og:image:width': organizationAsset?.dimensions?.width,
+        'og:image:height': organizationAsset?.dimensions?.height,
+        'twitter:card': 'summary_large_image',
+        'twitter:site': twitterHandle
+    };
+};
 
 type LoaderData = {
     user: Awaited<ReturnType<typeof getUser>>;
     colorScheme: string;
+    siteSettings: object;
     SANITY_STUDIO_API_PROJECT_ID: string | undefined;
     SANITY_STUDIO_API_DATASET: string | undefined;
 };
@@ -74,9 +99,14 @@ export const loader: LoaderFunction = async ({ request }) => {
     //     1
     // );
 
+    const siteSettings = await getSettingsData({
+        query: SETTINGS_QUERY
+    });
+
     return json<LoaderData>({
         user: await getUser(request),
         colorScheme: await getColorScheme(request),
+        siteSettings,
         SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
         SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET
     });
