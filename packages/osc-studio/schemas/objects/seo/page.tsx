@@ -44,6 +44,23 @@ export default {
             name: 'image',
             title: 'Image',
             type: 'image'
+        },
+        {
+            name: 'robots',
+            title: 'Search engine visibility',
+            type: 'object',
+            description: 'It is up to search engines to honor this request.',
+            options: {
+                collapsed: false,
+                collapsible: true
+            },
+            fields: [
+                {
+                    name: 'noIndex',
+                    title: 'Discourage search engines from indexing this page',
+                    type: 'boolean'
+                }
+            ]
         }
     ]
 };
