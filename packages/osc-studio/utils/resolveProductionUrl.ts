@@ -4,8 +4,6 @@ const remoteUrl = `https://your-deployed-website.com`;
 const baseUrl = window?.location?.hostname === 'localhost' ? localUrl : remoteUrl;
 
 export function resolveProductionUrl(doc) {
-    console.log({ doc });
-
     // Fallback and check the store object if slug isn't available on the doc
     const slug = doc?.slug?.current ? doc?.slug?.current : doc?.store?.slug?.current;
 
