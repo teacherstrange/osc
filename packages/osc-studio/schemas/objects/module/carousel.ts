@@ -25,7 +25,7 @@ export default {
             name: 'height',
             type: 'number',
             validation: (Rule) =>
-                Rule.min(1)
+                Rule.min(200)
                     .max(3000)
                     .custom((height, context) => {
                         if (context.parent.axis === 'y' && !height) return 'Height is required';

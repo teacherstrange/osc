@@ -64,6 +64,7 @@ export const Carousel: FC<Props> = (props) => {
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
+            align: 'start',
             skipSnaps: false,
             slidesToScroll: slidesToScroll ? slidesPerPage : 1,
             containScroll: 'trimSnaps',
