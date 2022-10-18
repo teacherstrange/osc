@@ -90,6 +90,12 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
     const serverStyleData = useContext(ServerStyleContext);
     const clientStyleData = useContext(ClientStyleContext);
 
+    const matches = useMatches();
+
+    // The canonicalUrl should be exported from the loader for each page.
+    const findCanonical = matches.find((match) => match.data && match.data.canonicalUrl);
+    const canonical = findCanonical?.data.canonicalUrl;
+
     // Only executed on client
     useEffect(() => {
         // re-link sheet container
@@ -118,6 +124,9 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
                     );
                 })}
                 {typeof document === 'undefined' && <Meta />}
+                {typeof document === 'undefined' && canonical && (
+                    <link rel="canonical" href={canonical} />
+                )}
                 {typeof document === 'undefined' && <Links />}
             </head>
             <body>
