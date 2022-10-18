@@ -61,9 +61,10 @@ export const meta: MetaFunction = ({ data }) => {
 
     return {
         charset: 'utf-8',
-        title: seoSettings?.siteTitle,
         viewport: 'width=device-width,initial-scale=1',
         robots: noindex,
+        title: seoSettings?.siteTitle,
+        description: '', // empty description lets us ensure it always has this position in the DOM
         'og:locale': 'en_GB',
         'og:type': 'website',
         'og:title': seoSettings?.siteTitle,
