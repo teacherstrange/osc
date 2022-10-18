@@ -37,7 +37,7 @@ export const SETTINGS_QUERY = groq`
         'seo': {
             robots,
             'siteTile': seo.title,
-            titleSeparator,
+            "titleSeparator": seo.titleSeparator,
             schema {
                 ...,
                 organizationLogo {
