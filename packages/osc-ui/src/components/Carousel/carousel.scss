@@ -43,10 +43,11 @@
     overflow: hidden;
     height: var(--embla__style_height);
     flex: 0 0 var(--embla__slidesPerPage);
-    margin-right: var(--embla__slideGap);
-    margin-left: var(--embla__slideGap);
-    margin-top: var(--embla__slideGap);
-    margin-bottom: var(--embla__slideGap);
+}
+
+.embla__slide_inner {
+    margin: var(--embla__slideGap);
+    padding: var(--embla__slideGap);
 }
 
 .embla__navigator {

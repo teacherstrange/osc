@@ -65,6 +65,7 @@ export const Carousel: FC<Props> = (props) => {
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
             align: 'start',
+            inViewThreshold: 1,
             skipSnaps: false,
             slidesToScroll: slidesToScroll ? slidesPerPage : 1,
             containScroll: 'trimSnaps',
@@ -109,10 +110,7 @@ export const Carousel: FC<Props> = (props) => {
             r.style.setProperty('--embla__slideGap', slideGap + 'px');
         }
         if (slidesPerPage && slideGap) {
-            r.style.setProperty(
-                '--embla__slidesPerPage',
-                `calc(${(1 / slidesPerPage) * 100}% - ${slideGap}px)`
-            );
+            r.style.setProperty('--embla__slidesPerPage', `calc(${(1 / slidesPerPage) * 100}%)`);
         }
         if (axis) {
             r.style.setProperty('--embla__axis', axis === 'x' ? 'row' : 'column');
@@ -148,10 +146,12 @@ export const Carousel: FC<Props> = (props) => {
                         {mediaArray?.map((q, index) => {
                             return (
                                 <Box key={index} className="embla__slide">
-                                    <Text>{q.caption}</Text>
-                                    {q.image && q.image.asset.url && (
-                                        <Image src={q.image.asset.url} alt={q.altText} />
-                                    )}
+                                    <div className="embla__slide_inner">
+                                        <Text>{q.caption}</Text>
+                                        {q.image && q.image.asset.url && (
+                                            <Image src={q.image.asset.url} alt={q.altText} />
+                                        )}
+                                    </div>
                                 </Box>
                             );
                         })}
