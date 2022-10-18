@@ -119,6 +119,12 @@ export const Carousel: FC<Props> = (props) => {
         }
         if (height) {
             r.style.setProperty('--embla__height', height + 'px');
+            if (axis === 'y') {
+                r.style.setProperty(
+                    '--embla__style_height',
+                    `calc(${parseInt(height, 10) / slidesPerPage}px - ${slideGap * 2}px)`
+                );
+            }
         }
     }
 

@@ -40,6 +40,8 @@
 }
 
 .embla__slide {
+    overflow: hidden;
+    height: var(--embla__style_height);
     flex: 0 0 var(--embla__slidesPerPage);
     margin-right: var(--embla__slideGap);
     margin-left: var(--embla__slideGap);
