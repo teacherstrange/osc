@@ -10,6 +10,7 @@ import { POST_QUERY } from '~/queries/sanity/post';
 import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
+import { buildCanonicalUrl } from '~/utils/buildCanonicalUrl';
 
 interface PageData {
     page: SanityPage;
@@ -31,10 +32,12 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     }
 
     const { page: post, isPreview }: PageData = data;
+    const canonicalUrl = buildCanonicalUrl(request);
 
     return json({
         post,
         isPreview,
+        canonicalUrl,
         query: isPreview ? POST_QUERY : null
     });
 };
