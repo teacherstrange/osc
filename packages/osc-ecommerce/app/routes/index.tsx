@@ -17,7 +17,7 @@ import { HOME_QUERY } from '~/queries/sanity/home';
 import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
-import { buildCanonicalUrl } from '~/utils/buildCanonicalUrl';
+import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 
 interface PageData {
     page: SanityPage;
@@ -42,7 +42,10 @@ export const loader: LoaderFunction = async ({ request }) => {
     }
 
     const { page: home, isPreview }: PageData = data;
-    const canonicalUrl = buildCanonicalUrl(request);
+    const canonicalUrl = buildCanonicalUrl({
+        canonical: home?.seo?.canonicalUrl,
+        request
+    });
 
     return json({
         colorScheme,

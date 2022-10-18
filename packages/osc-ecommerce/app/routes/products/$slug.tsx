@@ -10,7 +10,7 @@ import { PRODUCT_QUERY } from '~/queries/sanity/product';
 import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
-import { buildCanonicalUrl } from '~/utils/buildCanonicalUrl';
+import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 
 interface PageData {
     page: SanityPage;
@@ -32,7 +32,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     }
 
     const { page: product, isPreview }: PageData = data;
-    const canonicalUrl = buildCanonicalUrl(request);
+    const canonicalUrl = buildCanonicalUrl({
+        canonical: product?.seo?.canonicalUrl,
+        request
+    });
 
     return json({
         product,
