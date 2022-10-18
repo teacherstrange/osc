@@ -33,6 +33,18 @@ export default {
                 })
         },
         {
+            name: 'keywords',
+            title: 'Keywords',
+            type: 'string',
+            description: 'Separate with commas'
+        },
+        {
+            name: 'synonyms',
+            title: 'Synonyms',
+            type: 'string',
+            description: 'Similar words to inform the SEO review'
+        },
+        {
             name: 'description',
             title: 'Description',
             type: 'text',
