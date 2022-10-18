@@ -6,7 +6,6 @@ export const MODULE_CAROUSEL = groq`
     _key,
     height,
     active,
-    align,
     startIndex,
     mediaArray[] {
       ...,

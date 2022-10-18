@@ -31,7 +31,6 @@ export default function Module({ module }: { module: module }) {
                     axis={moduleCarousel.axis} // fine
                     height={moduleCarousel.height} // fine
                     loop={moduleCarousel.loop} // fine
-                    align={moduleCarousel.align} // dosent seem to do anything with trimSnaps, there is no white space
                     startIndex={moduleCarousel.startIndex} // fine
                 ></Carousel>
             );

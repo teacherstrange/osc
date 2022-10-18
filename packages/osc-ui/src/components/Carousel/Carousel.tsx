@@ -11,10 +11,9 @@ import ClassNames from 'embla-carousel-class-names';
 export type Props = {
     height?: string;
     active: boolean;
-    align: 'start' | 'center' | 'end';
     startIndex: number;
     mediaArray: any[];
-    delay: number;
+    delay: string;
     slidesPerPage: number;
     slidesToScroll: boolean;
     slideGap: number;
@@ -26,7 +25,6 @@ export const Carousel: FC<Props> = (props) => {
     const {
         height,
         active,
-        align,
         startIndex,
         mediaArray,
         delay,
@@ -36,6 +34,8 @@ export const Carousel: FC<Props> = (props) => {
         axis,
         loop
     } = props;
+
+    const delayInt = parseInt(delay, 10);
 
     const isActive = () => {
         // length / slidesPerPage > 1
@@ -47,13 +47,17 @@ export const Carousel: FC<Props> = (props) => {
     };
 
     const emblaPlugins = () => {
-        if (!height && delay) {
-            return [AutoHeight(), Autoplay({ delay }), ClassNames()];
-        } else if (!height && !delay) {
+        if (!height && delayInt) {
+            return [
+                AutoHeight(),
+                Autoplay({ delay: delayInt, stopOnLastSnap: !loop }),
+                ClassNames()
+            ];
+        } else if (!height && !delayInt) {
             return [AutoHeight(), ClassNames()];
-        } else if (height && delay) {
-            return [Autoplay({ delay }), ClassNames()];
-        } else if (height && !delay) {
+        } else if (height && delayInt) {
+            return [Autoplay({ delay: delayInt, stopOnLastSnap: !loop }), ClassNames()];
+        } else if (height && !delayInt) {
             return [ClassNames()];
         }
     };
@@ -63,10 +67,9 @@ export const Carousel: FC<Props> = (props) => {
             skipSnaps: false,
             slidesToScroll: slidesToScroll ? slidesPerPage : 1,
             containScroll: 'trimSnaps',
-            startIndex: startIndex ?? 0,
+            startIndex: startIndex ? startIndex - 1 : 0,
             axis,
             loop,
-            align: align ?? 'start',
             breakpoints: {
                 '(min-width: 768px)': {
                     active: active !== undefined ? active : isActive()
@@ -77,6 +80,7 @@ export const Carousel: FC<Props> = (props) => {
         emblaPlugins()
     );
 
+    const [carouselVisible, setCarouselVisible] = useState(false);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [scrollSnaps, setScrollSnaps] = React.useState<Array<number>>([]);
     const scrollTo = React.useCallback((index) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
@@ -90,14 +94,10 @@ export const Carousel: FC<Props> = (props) => {
         onSelect();
         setScrollSnaps(emblaApi.scrollSnapList());
         emblaApi.on('select', onSelect);
-    }, [emblaApi, setScrollSnaps, onSelect]);
-
-    const [carouselVisible, setCarouselVisible] = useState(false);
-    if (emblaApi) {
         emblaApi.on('init', () => {
             setCarouselVisible(true);
         });
-    }
+    }, [emblaApi, setScrollSnaps, onSelect]);
 
     if (typeof document !== 'undefined') {
         let r = document.querySelector(':root') as any;

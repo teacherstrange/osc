@@ -36,6 +36,7 @@
     flex-direction: var(--embla__axis);
     height: var(--embla__height);
     align-items: flex-start;
+    transition: height 0.2s;
 }
 
 .embla__slide {
