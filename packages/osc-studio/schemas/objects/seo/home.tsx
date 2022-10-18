@@ -15,6 +15,16 @@ export default {
                 Rule.max(50).warning('Longer titles may be truncated by search engines')
         },
         {
+            name: 'canonicalUrl',
+            title: 'Canonical Url',
+            type: 'url',
+            description: 'Leave blank to use the default url for this page',
+            validation: (Rule) =>
+                Rule.uri({
+                    scheme: ['http', 'https']
+                })
+        },
+        {
             name: 'description',
             title: 'Description',
             type: 'text',
