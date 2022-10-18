@@ -111,7 +111,7 @@ export const Carousel: FC<Props> = (props) => {
         if (slidesPerPage && slideGap) {
             r.style.setProperty(
                 '--embla__slidesPerPage',
-                `calc(${(1 / slidesPerPage) * 100}% - ${slideGap * 2}px)`
+                `calc(${(1 / slidesPerPage) * 100}% - ${slideGap}px)`
             );
         }
         if (axis) {
