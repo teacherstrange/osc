@@ -1,7 +1,12 @@
 /* stylelint-disable all */
+<<<<<<< HEAD
 @use "../../styles/settings/mq" as *;
 @use "../../styles/tools/mq" as *;
 
+=======
+
+// added a comment
+>>>>>>> 674fd72 (fix: upgrade to workspaces, bundle css in a different manner)
 .embla {
     overflow: hidden;
     display: flex;
@@ -47,6 +52,7 @@
 }
 
 .embla__slide {
+<<<<<<< HEAD
     opacity: 0;
     flex: 0 0 100%;
     overflow: hidden;
@@ -63,6 +69,11 @@
         flex: 0 0 50%;
     }
 
+=======
+    flex: 0 0 100%;
+    overflow: hidden;
+
+>>>>>>> 674fd72 (fix: upgrade to workspaces, bundle css in a different manner)
     @include mq($mq-tab) {
         flex: 0 0 var(--embla__slidesPerPage);
     }

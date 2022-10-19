@@ -2,6 +2,7 @@
   "sideEffects": [
     "./index.js"
   ],
+  "module": "ES",
   "scripts": {
     "test": "vitest --coverage --config ./vite.config.ts",
     "test:dev": "vitest run --config ./vite.config.ts",
