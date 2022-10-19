@@ -147,7 +147,12 @@ export const Carousel: FC<Props> = (props) => {
                                     <div className="embla__slide_inner">
                                         <Text>{q.caption}</Text>
                                         {q.image && q.image.asset.url && (
-                                            <Image src={q.image.asset.url} alt={q.altText} />
+                                            <Image
+                                                height={q.image.height}
+                                                width={q.image.width}
+                                                src={q.image.asset.url}
+                                                alt={q.altText}
+                                            />
                                         )}
                                     </div>
                                 </Box>
