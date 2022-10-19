@@ -36,7 +36,7 @@
     "dev:osc-ecommerce": "lerna run dev --scope '{osc-ui,osc-ecommerce}'",
     "dev:osc-academic-hub": "lerna run dev --scope '{osc-ui,osc-academic-hub}'",
     "dev:osc-studio": "cd packages/osc-studio && npm run dev",
-    "setup": "npm i && npx prisma generate"
+    "setup": "npm i && npx prisma generate && cd packages/osc-studio && npm i --legacy-peer-deps"
   },
   "lint-staged": {
     "*.scss": [
@@ -55,6 +55,8 @@
   "name": "osc",
   "version": "0.6.0",
   "workspaces": [
-    "packages/*"
+    "packages/osc-ui",
+    "packages/osc-ecommerce",
+    "packages/osc-academic-hub"
   ]
 }
