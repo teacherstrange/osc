@@ -34,7 +34,7 @@
     "dev:api": "run-p api:dev:*",
     "api:dev:osc-api-auth": "lerna run dev --scope osc-api-auth",
     "api:dev:osc-api-gateway": "lerna run dev --scope osc-api-gateway",
-    "setup": "npm i && npx prisma generate"
+    "setup": "npm i && npx prisma generate && cd packages/osc-studio && npm i --legacy-peer-deps"
   },
   "lint-staged": {
     "*.scss": [
@@ -53,6 +53,8 @@
   "name": "osc",
   "version": "0.4.1",
   "workspaces": [
-    "packages/*"
+    "packages/osc-ui",
+    "packages/osc-ecommerce",
+    "packages/osc-academic-hub"
   ]
 }

@@ -17,6 +17,7 @@
   ],
   "typings": "dist/index.d.ts",
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.6",
     "@storybook/addon-a11y": "^6.5.9",
     "@testing-library/react": "13.3.0",
