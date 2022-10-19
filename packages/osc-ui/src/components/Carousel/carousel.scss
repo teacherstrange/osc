@@ -41,11 +41,11 @@
 
 .embla__slide {
     overflow: hidden;
-    height: var(--embla__style_height);
     flex: 0 0 var(--embla__slidesPerPage);
 }
 
 .embla__slide_inner {
+    height: var(--embla__style_height);
     margin: var(--embla__slideGap);
     padding: var(--embla__slideGap);
 }
