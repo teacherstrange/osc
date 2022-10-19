@@ -2,11 +2,12 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import React, { useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import './carousel.css';
 import { Box, Button, Image, Text } from '@chakra-ui/react';
 import Autoplay from 'embla-carousel-autoplay';
 import AutoHeight from 'embla-carousel-auto-height';
 import ClassNames from 'embla-carousel-class-names';
+
+import './carousel.scss';
 
 export type Props = {
     height?: string;

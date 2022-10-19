@@ -80,8 +80,7 @@
     "osc-api-gateway": "file:packages/osc-api-gateway",
     "osc-ecommerce": "file:packages/osc-ecommerce",
     "osc-studio": "file:packages/osc-studio",
-    "osc-ui": "file:packages/osc-ui",
-    "rollup-plugin-scss": "^3.0.0"
+    "osc-ui": "file:packages/osc-ui"
   },
   "scripts": {
     "prepare": "husky install",
@@ -96,18 +95,20 @@
     "build": "lerna run build",
     "build:osc-ui": "lerna run build --scope osc-ui --skip-nx-cache",
     "build:osc-studio": "cd packages/osc-studio && npm run build",
+    "build:osc-ecommerce": "lerna run build --scope osc-ecommerce --skip-nx-cache",
     "test": "npm run build:osc-ui && lerna run test",
     "test:dev": "lerna run test:dev",
     "test:e2e:dev": "lerna run test:e2e:dev",
     "test:e2e:run": "lerna run build --scope osc-ui && concurrently \"lerna run dev --parallel --scope osc-ui\" \"lerna run test:e2e:run\"",
     "dev": "lerna run dev",
+    "dev:osc-ui": "lerna run dev --scope 'osc-ui'  --skip-nx-cache",
     "dev:osc-ecommerce": "lerna run dev --scope '{osc-ui,osc-ecommerce}'",
     "dev:osc-academic-hub": "lerna run dev --scope '{osc-ui,osc-academic-hub}'",
     "dev:osc-studio": "cd packages/osc-studio && npm run dev",
     "dev:api": "run-p api:dev:*",
     "api:dev:osc-api-auth": "lerna run dev --scope osc-api-auth",
     "api:dev:osc-api-gateway": "lerna run dev --scope osc-api-gateway",
-    "setup": "lerna link convert && npm i && npx prisma generate"
+    "setup": "npm i && npx prisma generate"
   },
   "lint-staged": {
     "*.scss": [

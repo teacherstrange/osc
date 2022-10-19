@@ -159,8 +159,6 @@ jobs:
       - run: rm -v -r ./package.json ./node_modules
       - run: mv -v -f packages/osc-ecommerce/* .
 
-      - run: npm run addDevDeps
-
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: 📥 Download deps
@@ -222,8 +220,6 @@ jobs:
           echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
           echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
           echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
-
-      - run: npm run addDevDeps
 
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 

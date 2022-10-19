@@ -82,9 +82,6 @@ jobs:
       # move osc-academic-hub to the root
       - run: mv -v -f packages/osc-academic-hub/* .
 
-      # add dev-dependencies to the osc-academic-hub
-      - run: npm run addDevDeps
-
       # delete all other packages in the folder (if symlinked)
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
@@ -191,7 +188,6 @@ jobs:
         with:
           node-version: 16
           cache: "npm"
-      - run: npm run addDevDeps
 
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 

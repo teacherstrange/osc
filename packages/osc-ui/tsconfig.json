@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "moduleResolution": "node",
     "declaration": true,
     "declarationDir": "dist/dts",
     "jsx": "react",
@@ -8,7 +9,7 @@
     "allowSyntheticDefaultImports": true
   },
   "files": [],
-  "include": ["./jest-setup.ts"],
+  "include": ["./jest-setup.ts", "src/*"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

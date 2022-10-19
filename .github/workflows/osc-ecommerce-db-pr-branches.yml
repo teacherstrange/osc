@@ -55,8 +55,6 @@ jobs:
       - run: rm -v -r ./package.json ./node_modules
       - run: mv -v -f packages/osc-ecommerce/* .
 
-      - run: npm run addDevDeps
-
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: 👀 Read app name
@@ -162,7 +160,6 @@ jobs:
         with:
           node-version: 16
           cache: "npm"
-      - run: npm run addDevDeps
 
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 

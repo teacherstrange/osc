@@ -2,7 +2,6 @@ import typescript from 'rollup-plugin-typescript2';
 import dts from 'rollup-plugin-dts';
 import del from 'rollup-plugin-delete';
 import scss from 'rollup-plugin-scss';
-import { peerDependencies } from './package.json';
 import dotenv from 'dotenv';
 const transpileCss = require('./bin/utils/helpers');
 const path = require('path');
@@ -32,19 +31,19 @@ export default [
                         );
                     });
                 },
+                check: false,
                 sourceMap: true,
-                failOnError: true,
+                failOnError: false,
                 verbose: true,
-                watch: ['src']
+                watch: ['src/styles', 'src/components']
             })
-        ],
-        external: Object.keys(peerDependencies)
+        ]
     },
     {
         // path to your declaration files root
-        input: 'dist/index.d.ts',
+        input: 'src/index.tsx',
         output: [{ file: 'dist/index.d.ts', format: 'es' }],
-        external: [/\.scss$/],
+        external: [/\.scss$/, /\.css$/],
         plugins: [dts(), del({ hook: 'buildEnd', targets: './dist/components' })]
     }
 ];

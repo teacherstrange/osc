@@ -64,7 +64,6 @@ jobs:
         with:
           node-version: 16
           cache: "npm"
-      - run: npm run addDevDeps
 
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
