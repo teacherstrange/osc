@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDebouncedCallback } from 'use-debounce';
 import './carousel.scss';
 
+import './carousel.scss';
+
 export type Props = {
     height?: string;
     active: boolean;

@@ -1,12 +1,7 @@
 /* stylelint-disable all */
-<<<<<<< HEAD
 @use "../../styles/settings/mq" as *;
 @use "../../styles/tools/mq" as *;
 
-=======
-
-// added a comment
->>>>>>> 674fd72 (fix: upgrade to workspaces, bundle css in a different manner)
 .embla {
     overflow: hidden;
     display: flex;
@@ -39,8 +34,8 @@
     }
 }
 
-.embla .embla-carousel-loaded {
-    opacity: 1;
+.embla.embla-carousel-loaded {
+    opacity: 2;
 }
 
 .embla__container {

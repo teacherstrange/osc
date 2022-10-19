@@ -6,8 +6,7 @@
     "osc-api-gateway": "file:packages/osc-api-gateway",
     "osc-ecommerce": "file:packages/osc-ecommerce",
     "osc-studio": "file:packages/osc-studio",
-    "osc-ui": "file:packages/osc-ui",
-    "rollup-plugin-scss": "^3.0.0"
+    "osc-ui": "file:packages/osc-ui"
   },
   "devDependencies": {
     "@chakra-ui/storybook-addon": "^4.0.12",
@@ -37,9 +36,6 @@
     "dev:osc-ecommerce": "lerna run dev --scope '{osc-ui,osc-ecommerce}'",
     "dev:osc-academic-hub": "lerna run dev --scope '{osc-ui,osc-academic-hub}'",
     "dev:osc-studio": "cd packages/osc-studio && npm run dev",
-    "dev:api": "run-p api:dev:*",
-    "api:dev:osc-api-auth": "lerna run dev --scope osc-api-auth",
-    "api:dev:osc-api-gateway": "lerna run dev --scope osc-api-gateway",
     "setup": "npm i && npx prisma generate"
   },
   "lint-staged": {
