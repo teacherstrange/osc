@@ -15,5 +15,14 @@ module.exports = {
         jest: {
             version: 27
         }
-    }
+    },
+    overrides: [
+        {
+            // playwright uses the same "getBy" method as testing library so we need to ignore this rule
+            files: ['./*/**/e2e/**/*'],
+            rules: {
+                'testing-library/prefer-screen-queries': 'off'
+            }
+        }
+    ]
 };
