@@ -1,4 +1,4 @@
-import './styles/dest/main.css';
+import './styles/main.scss';
 
 export { Header } from './components/Header/Header';
 export { Footer } from './components/Footer/Footer';

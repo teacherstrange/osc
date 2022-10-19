@@ -1,8 +1,7 @@
-@use "../settings/colors";
-@use "../settings/spacing";
+@use "../settings" as s;
 
 table {
-    border-color: colors.$colour-primary;
+    border-color: s.$colour-primary;
 }
 
 tr {
@@ -10,5 +9,5 @@ tr {
 }
 
 td {
-    padding: spacing.$global-spacing-s;
+    padding: s.$global-spacing-s;
 }

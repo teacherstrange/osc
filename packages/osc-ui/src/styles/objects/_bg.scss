@@ -1,19 +1,18 @@
-@use "../tools/position";
-@use "../tools/zindex";
+@use "../tools" as t;
 
 .o-bg {
     $self: &;
 
     position: relative;
 
-    @include zindex.z-index(bg);
+    @include t.z-index(bg);
 
     &::before {
         display: flex;
         width: 100%;
         content: "";
 
-        @include position.position(absolute, 0, 0, null, 0, -1);
+        @include t.position(absolute, 0, 0, null, 0, -1);
 
         background-repeat: repeat-x;
         opacity: 1;

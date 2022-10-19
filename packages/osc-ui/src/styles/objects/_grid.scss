@@ -1,6 +1,5 @@
-@use "../settings/mq" as settings-mq;
-@use "../settings/spacing";
-@use "../tools/mq" as tools-mq;
+@use "../settings" as s;
+@use "../tools" as t;
 
 /* ============================
 // $GRID LAYOUT OBJECT
@@ -21,19 +20,19 @@
     display: grid;
     width: 100%;
     margin: 0;
-    gap: spacing.$global-spacing;
-    grid-auto-rows: spacing.$global-spacing * 2;
+    gap: s.$global-spacing;
+    grid-auto-rows: s.$global-spacing * 2;
     grid-template-columns: repeat(1, 1fr);
 
-    @include tools-mq.mq(settings-mq.$mq-mob--med, min) {
+    @include t.mq(s.$mq-mob--med, min) {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @include tools-mq.mq(settings-mq.$mq-tab--sml, min) {
+    @include t.mq(s.$mq-tab--sml, min) {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @include tools-mq.mq(settings-mq.$mq-desk, min) {
+    @include t.mq(s.$mq-desk, min) {
         grid-template-columns: repeat(5, 1fr);
     }
 
@@ -45,29 +44,29 @@
     &--half {
         grid-auto-rows: auto;
 
-        @include tools-mq.mq(settings-mq.$mq-mob--lrg, min) {
+        @include t.mq(s.$mq-mob--lrg, min) {
             grid-template-columns: repeat(2, 1fr);
-            gap: spacing.$global-spacing;
+            gap: s.$global-spacing;
         }
     }
 
     &--thirds {
         grid-auto-rows: auto;
 
-        @include tools-mq.mq(settings-mq.$mq-tab--sml, min) {
+        @include t.mq(s.$mq-tab--sml, min) {
             grid-template-columns: repeat(3, 1fr);
-            gap: spacing.$global-spacing;
+            gap: s.$global-spacing;
         }
     }
 
     &--quarts {
         grid-auto-rows: auto;
 
-        @include tools-mq.mq(settings-mq.$mq-mob--lrg, min) {
+        @include t.mq(s.$mq-mob--lrg, min) {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        @include tools-mq.mq(settings-mq.$mq-tab--lrg, min) {
+        @include t.mq(s.$mq-tab--lrg, min) {
             grid-template-columns: repeat(4, 1fr);
         }
     }
@@ -75,40 +74,40 @@
     &--fifths {
         grid-auto-rows: auto;
 
-        @include tools-mq.mq(settings-mq.$mq-tab--sml, min) {
+        @include t.mq(s.$mq-tab--sml, min) {
             grid-template-columns: repeat(5, 1fr);
-            gap: spacing.$global-spacing * 2;
+            gap: s.$global-spacing * 2;
         }
     }
 
     &--three-fifths {
         grid-auto-rows: auto;
 
-        @include tools-mq.mq(settings-mq.$mq-tab--sml, min) {
+        @include t.mq(s.$mq-tab--sml, min) {
             grid-template-columns: 60% 40%;
-            gap: spacing.$global-spacing;
+            gap: s.$global-spacing;
         }
     }
 
     &--three-quarts {
         grid-auto-rows: auto;
 
-        @include tools-mq.mq(settings-mq.$mq-tab--sml, min) {
+        @include t.mq(s.$mq-tab--sml, min) {
             grid-template-columns: 25% 70%;
-            gap: spacing.$global-spacing;
+            gap: s.$global-spacing;
         }
     }
 
     &--eighths {
         grid-auto-rows: auto;
         grid-template-columns: repeat(2, 1fr);
-        gap: spacing.$global-spacing-s * 2;
+        gap: s.$global-spacing-s * 2;
 
-        @include tools-mq.mq(settings-mq.$mq-tab--sml, min) {
+        @include t.mq(s.$mq-tab--sml, min) {
             grid-template-columns: repeat(4, 1fr);
         }
 
-        @include tools-mq.mq(settings-mq.$mq-desk--lrg, min) {
+        @include t.mq(s.$mq-desk--lrg, min) {
             grid-template-columns: repeat(8, 1fr);
         }
     }
@@ -116,17 +115,17 @@
     &--flex {
         grid-auto-rows: auto;
         grid-template-columns: repeat(1, 1fr);
-        gap: spacing.$global-spacing;
+        gap: s.$global-spacing;
 
-        @include tools-mq.mq(settings-mq.$mq-mob--med) {
+        @include t.mq(s.$mq-mob--med) {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        @include tools-mq.mq(settings-mq.$mq-tab--sml) {
+        @include t.mq(s.$mq-tab--sml) {
             grid-template-columns: repeat(3, 1fr);
         }
 
-        @include tools-mq.mq(settings-mq.$mq-tab--lrg) {
+        @include t.mq(s.$mq-tab--lrg) {
             grid-template-columns: repeat(var(--grid-count), 1fr);
         }
     }
@@ -155,15 +154,15 @@
     }
 
     &.is-spaced {
-        gap: spacing.$global-spacing * 2;
+        gap: s.$global-spacing * 2;
 
-        @include tools-mq.mq(settings-mq.$mq-mob--lrg, min) {
-            gap: spacing.$global-spacing-l;
+        @include t.mq(s.$mq-mob--lrg, min) {
+            gap: s.$global-spacing-l;
         }
     }
 
     &.is-tight {
-        gap: spacing.$global-spacing-s;
+        gap: s.$global-spacing-s;
     }
 
     &__item {
@@ -187,7 +186,7 @@
 
         &:last-child {
             [data-grid-count="3"] & {
-                @include tools-mq.mq((settings-mq.$mq-mob--med, settings-mq.$mq-tab--sml)) {
+                @include t.mq((s.$mq-mob--med, s.$mq-tab--sml)) {
                     grid-column: 1 / span 2;
                 }
             }

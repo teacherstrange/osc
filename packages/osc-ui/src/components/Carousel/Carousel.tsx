@@ -148,6 +148,7 @@ export const Carousel: FC<Props> = (props) => {
                                         <Text>{q.caption}</Text>
                                         {q.image && q.image.asset.url && (
                                             <Image
+                                                className="o-img o-img--cover"
                                                 height={q.image.height}
                                                 width={q.image.width}
                                                 src={q.image.asset.url}

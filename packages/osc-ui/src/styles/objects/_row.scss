@@ -1,4 +1,4 @@
-@use "../settings/spacing";
+@use "../settings" as s;
 
 /* ============================
 // $ROW WRAPPER
@@ -17,7 +17,7 @@
     display: flex;
     flex-flow: row wrap;
     width: 100%;
-    margin: 0 auto spacing.$global-spacing;
+    margin: 0 auto s.$global-spacing;
     background-size: cover;
 
     // content-visibility: auto;
@@ -28,28 +28,28 @@
     }
 
     &--s {
-        margin-bottom: spacing.$global-spacing-s;
+        margin-bottom: s.$global-spacing-s;
     }
 
     &--m {
-        margin-bottom: spacing.$global-spacing-m;
+        margin-bottom: s.$global-spacing-m;
     }
 
     &--l {
-        margin-bottom: spacing.$global-spacing-l;
+        margin-bottom: s.$global-spacing-l;
     }
 
     &--xl {
-        margin-bottom: spacing.$global-spacing-xl;
+        margin-bottom: s.$global-spacing-xl;
     }
 
     &--padded {
-        padding-top: spacing.$global-spacing-m;
-        padding-bottom: spacing.$global-spacing;
+        padding-top: s.$global-spacing-m;
+        padding-bottom: s.$global-spacing;
 
         &-sml {
-            padding-top: spacing.$global-spacing;
-            padding-bottom: spacing.$global-spacing;
+            padding-top: s.$global-spacing;
+            padding-bottom: s.$global-spacing;
         }
     }
 

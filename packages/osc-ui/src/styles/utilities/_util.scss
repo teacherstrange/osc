@@ -1,12 +1,6 @@
 @use "sass:map";
-@use "../settings/animation";
-@use "../settings/colors";
-@use "../settings/global";
-@use "../settings/mq" as settings-mq;
-@use "../settings/spacing";
-@use "../settings/typography";
-@use "../tools/functions/deep-map-merge";
-@use "../tools/mq" as tools-mq;
+@use "../settings" as s;
+@use "../tools" as t;
 
 ///*----------------------------------*\
 //  #UTILITIES
@@ -34,7 +28,7 @@ $property-map: (
     border-radius: "br"
 );
 
-global.$prop-config: deep-map-merge.deep-map-merge(
+s.$prop-config: t.deep-map-merge(
     (
         margin-top: (
             0,
@@ -88,11 +82,11 @@ global.$prop-config: deep-map-merge.deep-map-merge(
             10
         )
     ),
-    global.$prop-config,
+    s.$prop-config,
     true
 );
 
-@each $property, $values in global.$prop-config {
+@each $property, $values in s.$prop-config {
     $shorthand: map.get($property-map, $property);
 
     @each $num in $values {
@@ -106,7 +100,7 @@ global.$prop-config: deep-map-merge.deep-map-merge(
     }
 }
 
-@include tools-mq.mq(settings-mq.$mq-tab, max) {
+@include t.mq(s.$mq-tab, max) {
     .u-plr-0\@tab {
         padding-right: 0;
         padding-left: 0;
@@ -133,38 +127,38 @@ global.$prop-config: deep-map-merge.deep-map-merge(
 
 .u-hidden {
     &-from\@tab {
-        @include tools-mq.mq(settings-mq.$mq-tab--lrg) {
+        @include t.mq(s.$mq-tab--lrg) {
             display: none;
         }
     }
 
     &-from\@desk-med {
-        @include tools-mq.mq(settings-mq.$mq-desk--med) {
+        @include t.mq(s.$mq-desk--med) {
             display: none;
         }
     }
 
     &-until\@tab {
-        @include tools-mq.mq(settings-mq.$mq-tab--lrg, max) {
+        @include t.mq(s.$mq-tab--lrg, max) {
             display: none;
         }
     }
 
     &-until\@desk {
-        @include tools-mq.mq(settings-mq.$mq-desk, max) {
+        @include t.mq(s.$mq-desk, max) {
             display: none;
         }
     }
 
     &-until\@desk-med {
-        @include tools-mq.mq(settings-mq.$mq-desk--med, max) {
+        @include t.mq(s.$mq-desk--med, max) {
             display: none;
         }
     }
 }
 
 // see: settings/colours
-@each $class, $text-colour in colors.$colours {
+@each $class, $text-colour in s.$colours {
     [data-t-colour="#{$class}"],
     .u-colour-#{$class} {
         color: #{$text-colour};
@@ -172,7 +166,7 @@ global.$prop-config: deep-map-merge.deep-map-merge(
 }
 
 // Backgrounds
-@each $class, $bg-color in colors.$colours {
+@each $class, $bg-color in s.$colours {
     [data-bg-colour="#{$class}"] {
         background-color: #{$bg-color};
     }
@@ -182,11 +176,11 @@ global.$prop-config: deep-map-merge.deep-map-merge(
 // <div class="u-text-bold"></div>
 .u-text {
     &-bold {
-        font-weight: typography.$weight-bold;
+        font-weight: s.$weight-bold;
     }
 
     &-reg {
-        font-weight: typography.$weight-reg;
+        font-weight: s.$weight-reg;
     }
 
     &-italic {
@@ -256,7 +250,7 @@ $line-height-map: (
 
 [data-line-clamp] {
     display: box;
-    margin-bottom: (spacing.$global-spacing-s * 2);
+    margin-bottom: (s.$global-spacing-s * 2);
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
@@ -277,7 +271,7 @@ $line-height-map: (
     display: block;
     width: 100px;
     height: 2px;
-    background-color: colors.$colour-secondary;
+    background-color: s.$colour-secondary;
     transform: scaleY(0.5);
 }
 
@@ -302,7 +296,7 @@ $line-height-map: (
             rgba(#fff, 0)
         );
         transform: translateX(-100%);
-        animation: shimmer 1s animation.$ease-in-out-cubic infinite;
+        animation: shimmer 1s s.$ease-in-out-cubic infinite;
         content: "";
     }
 

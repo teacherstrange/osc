@@ -1,12 +1,11 @@
-@use "../settings/mq" as settings-mq;
-@use "../settings/spacing";
-@use "../tools/mq" as tools-mq;
+@use "../settings" as s;
+@use "../tools" as t;
 
 .o-media {
     $mobile-padding: 1.5rem;
     $desktop-padding: 0;
-    $media-spacing: (spacing.$global-spacing-s * 2);
-    $media-spacing-l: spacing.$global-spacing-m;
+    $media-spacing: (s.$global-spacing-s * 2);
+    $media-spacing-l: s.$global-spacing-m;
 
     display: flex;
     flex-wrap: wrap;
@@ -39,8 +38,8 @@
         }
 
         &--offset {
-            @include tools-mq.mq(settings-mq.$mq-desk--med) {
-                padding-left: spacing.$global-spacing-l;
+            @include t.mq(s.$mq-desk--med) {
+                padding-left: s.$global-spacing-l;
 
                 /* stylelint-disable-next-line plugin/selector-bem-pattern */
                 [class*="--default"] & {
@@ -58,7 +57,7 @@
             padding: 0;
         }
 
-        @include tools-mq.mq(settings-mq.$mq-tab--lrg, min) {
+        @include t.mq(s.$mq-tab--lrg, min) {
             &--1-4 {
                 max-width: 25%;
             }
@@ -82,7 +81,7 @@
     }
 
     &__content {
-        @include tools-mq.mq(settings-mq.$mq-tab--lrg) {
+        @include t.mq(s.$mq-tab--lrg) {
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
             [class*="--alternate"] & {
                 padding-right: 0;
@@ -91,7 +90,7 @@
     }
 
     &__img {
-        @include tools-mq.mq(settings-mq.$mq-tab--lrg) {
+        @include t.mq(s.$mq-tab--lrg) {
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
             [class*="--alternate"] & {
                 padding-right: 0;
