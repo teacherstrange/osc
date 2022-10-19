@@ -143,7 +143,7 @@ export const Carousel: FC<Props> = (props) => {
                     <Box className="embla__container">
                         {mediaArray?.map((q, index) => {
                             return (
-                                <Box key={index} className="embla__slide">
+                                <Box height={height} key={index} className="embla__slide">
                                     <div className="embla__slide_inner">
                                         <Text>{q.caption}</Text>
                                         {q.image && q.image.asset.url && (
