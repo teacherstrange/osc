@@ -1,6 +1,5 @@
 import typescript from 'rollup-plugin-typescript2';
 import dts from 'rollup-plugin-dts';
-import del from 'rollup-plugin-delete';
 import scss from 'rollup-plugin-scss';
 import dotenv from 'dotenv';
 const transpileCss = require('./bin/utils/helpers');
