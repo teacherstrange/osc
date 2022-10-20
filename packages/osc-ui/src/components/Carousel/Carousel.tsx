@@ -20,10 +20,12 @@ export type Props = {
     slideGap: number;
     axis: 'x' | 'y';
     loop: boolean;
+    ssr: boolean;
 };
 
 export const Carousel: FC<Props> = (props) => {
     const {
+        ssr,
         height,
         active,
         startIndex,
@@ -83,7 +85,7 @@ export const Carousel: FC<Props> = (props) => {
         emblaPlugins()
     );
 
-    const [carouselVisible, setCarouselVisible] = useState(false);
+    const [carouselVisible, setCarouselVisible] = useState(ssr ? false : true);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [scrollSnaps, setScrollSnaps] = React.useState<Array<number>>([]);
     const scrollTo = React.useCallback((index) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
@@ -138,13 +140,18 @@ export const Carousel: FC<Props> = (props) => {
     }, [emblaApi]);
 
     return (
-        <>
+        <Box display={'flex'} alignItems="center" flexDirection="column">
             <Box className={`embla ${carouselVisible ? 'embla-carousel-loaded' : ''}`}>
                 <Box className="embla__viewport" ref={emblaRef}>
                     <Box className="embla__container">
                         {mediaArray?.map((q, index) => {
                             return (
-                                <Box height={height} key={index} className="embla__slide">
+                                <Box
+                                    alignSelf="center"
+                                    height={height}
+                                    key={index}
+                                    className="embla__slide"
+                                >
                                     <div className="embla__slide_inner">
                                         <Text>{q.caption}</Text>
                                         {q.image && q.image.asset.url && (
@@ -195,6 +202,6 @@ export const Carousel: FC<Props> = (props) => {
                     return <></>;
                 })}
             </div>
-        </>
+        </Box>
     );
 };
