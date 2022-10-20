@@ -72,6 +72,7 @@
   },
   "dependencies": {
     "osc-academic-hub": "file:packages/osc-academic-hub",
+    "osc-api": "file:packages/osc-api",
     "osc-ecommerce": "file:packages/osc-ecommerce",
     "osc-ui": "file:packages/osc-ui"
   },
@@ -96,6 +97,7 @@
     "dev:osc-ecommerce": "lerna run dev --scope '{osc-ui,osc-ecommerce}'",
     "dev:osc-academic-hub": "lerna run dev --scope '{osc-ui,osc-academic-hub}'",
     "dev:osc-studio": "cd packages/osc-studio && npm run dev",
+    "dev:osc-api": "lerna run dev --scope osc-api",
     "setup": "lerna link convert && npm i && npx prisma generate && cd packages/osc-studio && npm i --legacy-peer-deps"
   },
   "lint-staged": {
