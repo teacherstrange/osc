@@ -15,7 +15,7 @@ describe('Badge component', () => {
     });
     test('renders a Badge with correct default classNames', () => {
         setup({ badgeName: 'Default' });
-        expect(screen.getByText('Default')).toHaveClass('chakra-badge o-badge');
+        expect(screen.getByText('Default')).toHaveClass('chakra-badge');
     });
     test('passes className to the Badge component', () => {
         setup({ badgeName: 'Default', className: 'test-class' });
