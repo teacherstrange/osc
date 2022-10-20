@@ -20,7 +20,6 @@ import { ClientStyleContext, ServerStyleContext } from './context';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 import { getSettingsData } from './models/sanity.server';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
-// import { PushNotification } from '~/utils/server/pwa-utils.server';
 
 let isMount = true;
 export const links: LinksFunction = () => {
@@ -50,6 +49,32 @@ export const links: LinksFunction = () => {
     ];
 };
 
+type LoaderData = {
+    user: Awaited<ReturnType<typeof getUser>>;
+    colorScheme: string;
+    siteSettings: object;
+    SANITY_STUDIO_API_PROJECT_ID: string | undefined;
+    SANITY_STUDIO_API_DATASET: string | undefined;
+};
+
+export const headers: HeadersFunction = () => ({
+    'Accept-CH': 'Sec-CH-Prefers-Color-Scheme'
+});
+
+export const loader: LoaderFunction = async ({ request }) => {
+    const siteSettings = await getSettingsData({
+        query: SETTINGS_QUERY
+    });
+
+    return json<LoaderData>({
+        user: await getUser(request),
+        colorScheme: await getColorScheme(request),
+        siteSettings,
+        SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
+        SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET
+    });
+};
+
 export const meta: MetaFunction = ({ data }) => {
     const { seo: seoSettings } = data.siteSettings;
 
@@ -77,40 +102,6 @@ export const meta: MetaFunction = ({ data }) => {
         'twitter:card': 'summary_large_image',
         'twitter:site': twitterHandle
     };
-};
-
-type LoaderData = {
-    user: Awaited<ReturnType<typeof getUser>>;
-    colorScheme: string;
-    siteSettings: object;
-    SANITY_STUDIO_API_PROJECT_ID: string | undefined;
-    SANITY_STUDIO_API_DATASET: string | undefined;
-};
-
-export const headers: HeadersFunction = () => ({
-    'Accept-CH': 'Sec-CH-Prefers-Color-Scheme'
-});
-
-export const loader: LoaderFunction = async ({ request }) => {
-    // await PushNotification(
-    //     {
-    //         title: 'Remix PWA',
-    //         body: 'A server generated text body.'
-    //     },
-    //     1
-    // );
-
-    const siteSettings = await getSettingsData({
-        query: SETTINGS_QUERY
-    });
-
-    return json<LoaderData>({
-        user: await getUser(request),
-        colorScheme: await getColorScheme(request),
-        siteSettings,
-        SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
-        SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET
-    });
 };
 
 interface DocumentProps {
