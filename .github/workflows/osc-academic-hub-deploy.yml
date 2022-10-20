@@ -173,7 +173,7 @@ jobs:
         run: npm run build
 
       - name: Prisma Generate
-        run: npx prama generate
+        run: npx prisma generate
 
       - name: 🏃‍♂️ Playwright run
         run: npm run test:e2e:run
