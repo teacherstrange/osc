@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function buildHtmlMetaTags({ pageData, globalData, canonicalUrl }: Props) {
-    const isShopifyData = pageData.store ? true : false;
+    const isShopifyData = pageData?.store ? true : false;
     const noindex = pageData?.seo?.robots?.noIndex ? 'noindex' : '';
     let title;
 
@@ -24,7 +24,7 @@ export function buildHtmlMetaTags({ pageData, globalData, canonicalUrl }: Props)
     const image = pageData?.seo?.image;
 
     const meta: HtmlMetaDescriptor = {
-        title: `${title} ${globalData.titleSeparator} ${globalData.siteTile}`,
+        title: `${title} ${globalData?.titleSeparator} ${globalData?.siteTile}`,
         description,
         'og:url': canonicalUrl,
         'og:image': image?.url,
