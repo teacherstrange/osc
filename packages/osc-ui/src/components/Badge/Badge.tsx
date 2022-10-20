@@ -2,8 +2,6 @@ import type { FC } from 'react';
 import React from 'react';
 import { Badge as ChakraBadge } from '@chakra-ui/react';
 
-import './badge.css';
-
 export interface Props {
     color?: string;
     variant?: string;
