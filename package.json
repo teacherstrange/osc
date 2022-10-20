@@ -15,7 +15,7 @@
     "lint-and-fix": "eslint -c ./.eslintrc.js --cache --cache-location ./node_modules/.cache/eslint  --max-warnings 0 --ext .ts,.tsx,.js,.jsx --fix --no-error-on-unmatched-pattern .",
     "prettier-format": "prettier --config .prettierrc.json '*.{js,jsx,ts,tsx,json,scss}' '**/*.{js,jsx,ts,tsx,json,scss}' --write",
     "build-storybook": "cross-env NODE_ENV=production lerna run build:css && build-storybook",
-    "storybook": "lerna run build:css && concurrently \"lerna run watch:css --parallel\" \"start-storybook -p 6006\"",
+    "storybook": "concurrently \"npm run dev:osc-ui --parallel\" \"start-storybook -p 6006\"",
     "chromatic": "chromatic --exit-zero-on-changes",
     "build": "lerna run build",
     "build:osc-ui": "lerna run build --scope osc-ui --skip-nx-cache",

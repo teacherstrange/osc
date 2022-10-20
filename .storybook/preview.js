@@ -1,15 +1,6 @@
-// commented out until i end up importing the components
 // OSC-UI
-import '../packages/osc-ui/src/styles/dest/main.css';
-
-// OSC-ACADEMIC-HUB
-// import '../packages/osc-academic-hub/app/styles/dest/main.css';
-// import "/app/components/avatar/avatar.css";
-// import "/app/components/datepicker/datepicker.css";
-// import "/app/components/footer/footer.css";
-// import "/app/components/logo/logo.css";
-// import "/app/components/nav/nav.css";
-// import "/app/components/pagination/pagination.css";
+import '../packages/osc-ui/src/styles/main.scss';
+import '../packages/osc-ui/src/components/Header/header.scss';
 
 // Dont think we will need this
 // import darkTheme from '../app/theme/darkTheme';

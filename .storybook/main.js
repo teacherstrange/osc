@@ -15,6 +15,7 @@ module.exports = {
     },
     stories,
     addons: [
+        'storybook-addon-sass-postcss',
         '@chakra-ui/storybook-addon',
         '@storybook/addon-links',
         '@storybook/addon-essentials',
