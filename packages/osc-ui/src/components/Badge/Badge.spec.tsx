@@ -9,10 +9,6 @@ describe('Badge component', () => {
             <Badge badgeName={badgeName} className={className} color={color} variant={variant} />
         );
 
-    test('renders a Span element for the Badge component', () => {
-        setup({ badgeName: 'Default' });
-        expect(screen.getByText('Default').nodeName).toBe('SPAN');
-    });
     test('renders a Badge with the correct name', () => {
         setup({ badgeName: 'Default' });
         expect(screen.getByText('Default')).toHaveTextContent('Default');
