@@ -5,7 +5,6 @@
     "osc-api-auth": "file:packages/osc-api-auth",
     "osc-api-gateway": "file:packages/osc-api-gateway",
     "osc-ecommerce": "file:packages/osc-ecommerce",
-    "osc-studio": "file:packages/osc-studio",
     "osc-ui": "file:packages/osc-ui"
   },
   "devDependencies": {
