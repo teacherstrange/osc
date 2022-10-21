@@ -54,8 +54,8 @@ export const CarouselInner: FC<Props> = (props) => {
 
     const setAriaHidden = () => {
         const slides = document.querySelectorAll('.embla__slide');
-        slides.forEach((el, index) => {
-            el.classList.add('embla__slide-loaded');
+        slides.forEach((el) => {
+            el.classList.add('embla-carousel-loaded');
             if (el.classList.contains('is-selected')) {
                 el.ariaHidden = 'false';
             } else {
@@ -123,7 +123,6 @@ export const CarouselInner: FC<Props> = (props) => {
 
     const handleResize = useDebouncedCallback(() => {
         setAriaHidden();
-        setCarouselVisible(true);
     }, 200);
 
     useEffect(() => {
@@ -139,7 +138,7 @@ export const CarouselInner: FC<Props> = (props) => {
             if (slidesPerPage) {
                 r.style.setProperty(
                     '--embla__slidesPerPage',
-                    `calc(${(1 / slidesPerPage) * 100}%)`
+                    `calc(${(1 / slidesPerPage) * 100}% + 1px)`
                 );
             }
             if (slideGap) {
@@ -202,7 +201,9 @@ export const CarouselInner: FC<Props> = (props) => {
                                     alignSelf="center"
                                     height={height}
                                     className={`embla__slide ${
-                                        carouselVisible ? 'embla-carousel-loaded' : ''
+                                        typeof document !== 'undefined' && carouselVisible
+                                            ? 'embla-carousel-loaded'
+                                            : ''
                                     }`}
                                 >
                                     <div className="embla__slide_inner">
