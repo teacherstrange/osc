@@ -188,13 +188,23 @@ export const CarouselInner: FC<Props> = (props) => {
     }, [emblaApi]);
 
     return (
-        <Box display={'flex'} alignItems="center" flexDirection="column">
-            <Box className={`embla`}>
-                <Box aria-roledescription="carousel" className="embla__viewport" ref={emblaRef}>
-                    <Box aria-live={delay ? 'off' : 'polite'} className="embla__container">
+        <Box width={'100%'} display={'flex'} alignItems="center" flexDirection="column">
+            <Box width={'100%'} className={`embla`}>
+                <Box
+                    width={'100%'}
+                    aria-roledescription="carousel"
+                    className="embla__viewport"
+                    ref={emblaRef}
+                >
+                    <Box
+                        width={'100%'}
+                        aria-live={delay ? 'off' : 'polite'}
+                        className="embla__container"
+                    >
                         {mediaArray?.map((q, index) => {
                             return (
                                 <Box
+                                    width={'100%'}
                                     key={`${index}`}
                                     aria-label={`${index + 1} of ${mediaArray?.length}`}
                                     aria-roledescription="slide"
@@ -212,7 +222,7 @@ export const CarouselInner: FC<Props> = (props) => {
                                             <Image
                                                 className="o-img o-img--cover"
                                                 height={q.image.height}
-                                                width={q.image.width}
+                                                width={'100%'}
                                                 src={q.image.asset.url}
                                                 alt={q.altText}
                                             />
@@ -270,6 +280,7 @@ export const Carousel: FC<Props> = (props) => {
 
     return (
         <Box
+            width={'100%'}
             key={` ${carouselKey}-${mediaArray.length}`}
             display={'flex'}
             alignItems="center"

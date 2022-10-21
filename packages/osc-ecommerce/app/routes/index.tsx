@@ -147,7 +147,7 @@ export default function Index() {
                 delay={'3000'} // fine
                 slidesPerPage={2} // fine
                 slidesToScroll={true}
-                slideGap={0} // fine
+                slideGap={10} // fine
                 axis={'y'} // fine
                 height={'1000'} // fine
                 loop={false} // fine
