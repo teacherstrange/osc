@@ -210,7 +210,7 @@ export const CarouselInner: FC<Props> = (props) => {
                                     }`}
                                 >
                                     <div className="embla__slide_inner">
-                                        <Text>{q.caption}</Text>
+                                        <Text className="embla__slide_caption">{q.caption}</Text>
                                         {q.image && q.image.asset.url && (
                                             <Image
                                                 className="o-img o-img--cover"
