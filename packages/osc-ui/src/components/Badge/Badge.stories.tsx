@@ -21,17 +21,22 @@ export default {
 
 const Template: Story<Props> = (args) => <Badge {...args} />;
 
+export const Primary = Template.bind({});
 export const Colour = Template.bind({});
 export const Variant = Template.bind({});
 
-Colour.args = {
-    color: 'blue',
+Primary.args = {
     badgeName: 'default',
+    color: 'blue',
     variant: 'subtle'
 };
 
+Colour.args = {
+    color: 'red',
+    ...Primary.args
+};
+
 Variant.args = {
-    variant: 'subtle',
-    badgeName: 'default',
-    color: 'blue'
+    variant: 'outline',
+    ...Primary.args
 };
