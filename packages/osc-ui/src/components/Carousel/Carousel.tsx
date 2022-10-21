@@ -190,7 +190,7 @@ export const CarouselInner: FC<Props> = (props) => {
 
     return (
         <Box display={'flex'} alignItems="center" flexDirection="column">
-            <Box className={`embla ${carouselVisible ? 'embla-carousel-loaded' : ''}`}>
+            <Box className={`embla`}>
                 <Box aria-roledescription="carousel" className="embla__viewport" ref={emblaRef}>
                     <Box aria-live={delay ? 'off' : 'polite'} className="embla__container">
                         {mediaArray?.map((q, index) => {
@@ -201,7 +201,9 @@ export const CarouselInner: FC<Props> = (props) => {
                                     aria-roledescription="slide"
                                     alignSelf="center"
                                     height={height}
-                                    className="embla__slide"
+                                    className={`embla__slide ${
+                                        carouselVisible ? 'embla-carousel-loaded' : ''
+                                    }`}
                                 >
                                     <div className="embla__slide_inner">
                                         <Text>{q.caption}</Text>
