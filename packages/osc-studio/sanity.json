@@ -16,7 +16,8 @@
     "media",
     "@sanity/color-input",
     "dashboard-widget-shopify",
-    "iframe-pane"
+    "iframe-pane",
+    "seo-pane"
   ],
   "env": {
     "development": {

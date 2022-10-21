@@ -52,9 +52,24 @@ export interface SanityHero {
 }
 
 export interface SanitySEO {
-    title: string;
-    desciprion: string | null;
-    image: SanityImage | null;
+    title?: string;
+    description?: string | null;
+    image: {
+        dimensions: {
+            height: string;
+            width: string;
+        };
+        url: string;
+    } | null;
+    canonicalUrl?: string | null;
+    robots?: {
+        noIndex: boolean;
+    };
+}
+
+export interface SanityGlobalSEO extends SanitySEO {
+    siteTile: string;
+    titleSeparator: string;
 }
 
 export interface SanityPage {
@@ -68,9 +83,9 @@ export interface SanityPage {
           }
         | undefined;
     seo: SanitySEO;
-    hero: SanityHero;
-    showHero: boolean;
-    modules: module[] | mediaTextModule[];
+    hero?: SanityHero;
+    showHero?: boolean;
+    modules?: module[] | mediaTextModule[];
     store?: {
         title: string;
         slug?: {

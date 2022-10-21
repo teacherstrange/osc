@@ -41,14 +41,8 @@ export async function getSettingsData({ query }: { query: string }) {
         const liveSettings = siteSettings.filter(
             (setting: SanitySiteSetting) => !setting._id.includes('drafts')
         )[0];
-        // TODO: Will make this better
-        const headerMenuItems = liveSettings?.menu;
-        const footerSettings = liveSettings?.footer;
 
-        return {
-            headerMenuItems,
-            footerSettings
-        };
+        return liveSettings;
     } catch (err) {
         console.error(err);
     }

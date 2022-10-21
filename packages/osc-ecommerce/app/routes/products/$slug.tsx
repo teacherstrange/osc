@@ -10,6 +10,8 @@ import { PRODUCT_QUERY } from '~/queries/sanity/product';
 import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
+import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
+import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 
 interface PageData {
     page: SanityPage;
@@ -31,20 +33,29 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     }
 
     const { page: product, isPreview }: PageData = data;
+    const canonicalUrl = buildCanonicalUrl({
+        canonical: product?.seo?.canonicalUrl,
+        request
+    });
 
     return json({
         product,
         isPreview,
+        canonicalUrl,
         query: isPreview ? PRODUCT_QUERY : null
     });
 };
 
-export const meta: MetaFunction = ({ data }) => {
-    const { title } = data?.product?.seo?.title ? data?.product?.seo : data?.product.store;
+export const meta: MetaFunction = ({ data, parentsData }) => {
+    const globalSeoSettings = parentsData.root.siteSettings.seo;
 
-    return {
-        title
-    };
+    const meta = buildHtmlMetaTags({
+        pageData: data.product,
+        globalData: globalSeoSettings,
+        canonicalUrl: data.canonicalUrl
+    });
+
+    return meta;
 };
 
 export default function Index() {
