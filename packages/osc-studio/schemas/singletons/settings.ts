@@ -196,17 +196,80 @@ export default {
                     validation: (Rule) => Rule.required()
                 },
                 {
-                    name: 'description',
-                    title: 'Description',
-                    type: 'text',
-                    rows: 2,
-                    validation: (Rule) =>
-                        Rule.max(150).warning(
-                            'Longer descriptions may be truncated by search engines'
-                        )
+                    name: 'titleSeparator',
+                    title: 'Title Separator',
+                    type: 'string',
+                    description:
+                        'Choose the symbol to use as your title separator. This will display, for instance, between your post title and site name.',
+                    options: {
+                        list: ['-', '–', '—', '|'],
+                        layout: 'radio',
+                        direction: 'horizontal'
+                    }
                 }
             ],
             validation: (Rule) => Rule.required()
+        },
+        {
+            name: 'schema',
+            title: 'Knowledge Graph & Schema.org',
+            type: 'object',
+            group: 'seo',
+            description:
+                "This data is shown as metadata in your site. It is intended to appear in Google's Knowledge Graph. You can be either an organization, or a person.",
+            options: {
+                collapsed: false,
+                collapsible: true
+            },
+            fields: [
+                {
+                    name: 'organizationName',
+                    title: 'Organization name',
+                    type: 'string'
+                },
+                {
+                    name: 'organizationLogo',
+                    title: 'Organization logo',
+                    type: 'image'
+                }
+            ]
+        },
+        {
+            name: 'social',
+            title: "Organization's social profiles",
+            type: 'object',
+            group: 'seo',
+            description: 'Input any profiles on the web that belong to your organization.',
+            options: {
+                collapsed: false,
+                collapsible: true
+            },
+            fields: [
+                {
+                    name: 'socialProfile',
+                    title: 'Social Profile',
+                    type: 'array',
+                    of: [{ type: 'string' }]
+                }
+            ]
+        },
+        {
+            name: 'robots',
+            title: 'Search engine visibility',
+            type: 'object',
+            group: 'seo',
+            description: 'It is up to search engines to honor this request.',
+            options: {
+                collapsed: false,
+                collapsible: true
+            },
+            fields: [
+                {
+                    name: 'noIndex',
+                    title: 'Discourage search engines from indexing this site',
+                    type: 'boolean'
+                }
+            ]
         }
     ],
     preview: {

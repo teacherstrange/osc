@@ -18,7 +18,8 @@ import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './context';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
-// import { PushNotification } from '~/utils/server/pwa-utils.server';
+import { getSettingsData } from './models/sanity.server';
+import { SETTINGS_QUERY } from './queries/sanity/settings';
 
 let isMount = true;
 export const links: LinksFunction = () => {
@@ -48,15 +49,10 @@ export const links: LinksFunction = () => {
     ];
 };
 
-export const meta: MetaFunction = () => ({
-    charset: 'utf-8',
-    title: 'OSC Academic Hub',
-    viewport: 'width=device-width,initial-scale=1'
-});
-
 type LoaderData = {
     user: Awaited<ReturnType<typeof getUser>>;
     colorScheme: string;
+    siteSettings: object;
     SANITY_STUDIO_API_PROJECT_ID: string | undefined;
     SANITY_STUDIO_API_DATASET: string | undefined;
 };
@@ -66,20 +62,46 @@ export const headers: HeadersFunction = () => ({
 });
 
 export const loader: LoaderFunction = async ({ request }) => {
-    // await PushNotification(
-    //     {
-    //         title: 'Remix PWA',
-    //         body: 'A server generated text body.'
-    //     },
-    //     1
-    // );
+    const siteSettings = await getSettingsData({
+        query: SETTINGS_QUERY
+    });
 
     return json<LoaderData>({
         user: await getUser(request),
         colorScheme: await getColorScheme(request),
+        siteSettings,
         SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
         SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET
     });
+};
+
+export const meta: MetaFunction = ({ data }) => {
+    const { seo: seoSettings } = data.siteSettings;
+
+    const noindex = seoSettings.robots.noIndex && 'noindex';
+    const { asset: organizationAsset } = seoSettings.schema.organizationLogo;
+    const facebook = seoSettings.socials.find((social: string) => social.includes('facebook'));
+    const twitter = seoSettings.socials.find((social: string) => social.includes('twitter'));
+    const twitterHandle = twitter && twitter.substring(twitter.lastIndexOf('/') + 1);
+
+    return {
+        charset: 'utf-8',
+        viewport: 'width=device-width,initial-scale=1',
+        robots: noindex,
+        title: seoSettings?.siteTitle,
+        description: '', // empty description lets us ensure it always has this position in the DOM
+        'og:locale': 'en_GB',
+        'og:type': 'website',
+        'og:title': seoSettings?.siteTitle,
+        'og:url': '',
+        'og:site_name': seoSettings.schema?.organizationName,
+        'article:publisher': facebook,
+        'og:image': organizationAsset?.url,
+        'og:image:width': organizationAsset?.dimensions?.width,
+        'og:image:height': organizationAsset?.dimensions?.height,
+        'twitter:card': 'summary_large_image',
+        'twitter:site': twitterHandle
+    };
 };
 
 interface DocumentProps {
@@ -89,6 +111,12 @@ interface DocumentProps {
 const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) => {
     const serverStyleData = useContext(ServerStyleContext);
     const clientStyleData = useContext(ClientStyleContext);
+
+    const matches = useMatches();
+
+    // The canonicalUrl should be exported from the loader for each page.
+    const findCanonical = matches.find((match) => match.data && match.data.canonicalUrl);
+    const canonical = findCanonical?.data.canonicalUrl;
 
     // Only executed on client
     useEffect(() => {
@@ -118,6 +146,9 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
                     );
                 })}
                 {typeof document === 'undefined' && <Meta />}
+                {typeof document === 'undefined' && canonical && (
+                    <link rel="canonical" href={canonical} />
+                )}
                 {typeof document === 'undefined' && <Links />}
             </head>
             <body>

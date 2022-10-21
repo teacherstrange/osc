@@ -17,6 +17,8 @@ import { HOME_QUERY } from '~/queries/sanity/home';
 import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
+import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
+import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 
 interface PageData {
     page: SanityPage;
@@ -41,21 +43,30 @@ export const loader: LoaderFunction = async ({ request }) => {
     }
 
     const { page: home, isPreview }: PageData = data;
+    const canonicalUrl = buildCanonicalUrl({
+        canonical: home?.seo?.canonicalUrl,
+        request
+    });
 
     return json({
         colorScheme,
         home,
+        canonicalUrl,
         isPreview,
         query: isPreview ? HOME_QUERY : null
     });
 };
 
-export const meta: MetaFunction = ({ data }) => {
-    const { title } = data?.home?.seo?.title ? data?.home?.seo : data?.home;
+export const meta: MetaFunction = ({ data, parentsData }) => {
+    const globalSeoSettings = parentsData.root.siteSettings.seo;
 
-    return {
-        title
-    };
+    const meta = buildHtmlMetaTags({
+        pageData: data.home,
+        globalData: globalSeoSettings,
+        canonicalUrl: data.canonicalUrl
+    });
+
+    return meta;
 };
 
 export default function Index() {

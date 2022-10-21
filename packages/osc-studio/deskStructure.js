@@ -21,6 +21,7 @@
 
 import S from '@sanity/desk-tool/structure-builder';
 import Iframe from 'sanity-plugin-iframe-pane';
+import SeoPane from 'sanity-plugin-seo-pane';
 import { resolveProductionUrl } from './utils/resolveProductionUrl';
 import { collections } from './desk/collections';
 import { home } from './desk/home';
@@ -63,7 +64,16 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
                     revision: true
                 }
             })
-            .title('Preview')
+            .title('Preview'),
+        S.view
+            .component(SeoPane)
+            .options({
+                // Retrieve the keywords and synonyms at the given dot-notated strings
+                keywords: `seo.keywords`,
+                synonyms: `seo.synonyms`,
+                url: (doc) => resolveProductionUrl(doc)
+            })
+            .title('SEO')
     ]);
 };
 

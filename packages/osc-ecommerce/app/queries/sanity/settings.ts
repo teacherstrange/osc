@@ -2,7 +2,6 @@ import groq from 'groq';
 import { LINK_EXTERNAL } from './fragments/linkExternal';
 import { LINK_INTERNAL } from './fragments/linkInternal';
 import { PORTABLE_TEXT } from './fragments/portableText';
-import { SEO } from './fragments/seo';
 
 export const SETTINGS_QUERY = groq`
     *[ _type == "settings" ] {
@@ -35,6 +34,20 @@ export const SETTINGS_QUERY = groq`
                 ${PORTABLE_TEXT}
             }
         },
-        ${SEO}
+        'seo': {
+            robots,
+            'siteTile': seo.title,
+            "titleSeparator": seo.titleSeparator,
+            schema {
+                ...,
+                organizationLogo {
+                    asset-> {
+                        url,
+                        "dimensions": metadata.dimensions
+                    }
+                }
+            },
+            'socials': social.socialProfile
+        }
     }
 `;
