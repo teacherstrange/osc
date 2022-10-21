@@ -1,42 +1,85 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import type { Props } from './Badge';
 import { Badge } from './Badge';
 
 export default {
     title: 'Badge',
-    component: Badge,
-    argTypes: {
-        color: {
-            options: ['green', 'red', 'blue'],
-            control: { type: 'inline-radio' }
-        },
-        variant: {
-            options: ['subtle', 'solid', 'outline'],
-            control: { type: 'inline-radio' }
-        }
-    }
+    component: Badge
 } as Meta;
 
-const Template: Story<Props> = (args) => <Badge {...args} />;
+const BadgeTemplate: Story = ({ items }) => {
+    return (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {items.map((item, i) => (
+                <div key={i} style={{ margin: '1em' }}>
+                    <Badge {...item} />
+                </div>
+            ))}
+        </div>
+    );
+};
 
-export const Primary = Template.bind({});
-export const Colour = Template.bind({});
-export const Variant = Template.bind({});
+export const Primary = BadgeTemplate.bind({});
+export const SubtleBadge = BadgeTemplate.bind({});
+export const SolidBadge = BadgeTemplate.bind({});
+export const OutlineBadge = BadgeTemplate.bind({});
 
 Primary.args = {
-    badgeName: 'default',
-    color: 'blue',
-    variant: 'subtle'
+    items: [{ badgeName: 'Badge', color: 'blue', variant: 'subtle' }]
 };
 
-Colour.args = {
-    color: 'red',
-    ...Primary.args
+SubtleBadge.args = {
+    items: [
+        {
+            ...Primary.args.items[0],
+            color: 'red'
+        },
+        {
+            ...Primary.args.items[0],
+            color: 'blue'
+        },
+        {
+            ...Primary.args.items[0],
+            color: 'green'
+        }
+    ]
 };
-
-Variant.args = {
-    variant: 'outline',
-    ...Primary.args
+SolidBadge.args = {
+    items: [
+        {
+            ...Primary.args.items[0],
+            color: 'red',
+            variant: 'solid'
+        },
+        {
+            ...Primary.args.items[0],
+            color: 'blue',
+            variant: 'solid'
+        },
+        {
+            ...Primary.args.items[0],
+            color: 'green',
+            variant: 'solid'
+        }
+    ]
+};
+OutlineBadge.args = {
+    items: [
+        {
+            ...Primary.args.items[0],
+            color: 'red',
+            variant: 'outline'
+        },
+        {
+            ...Primary.args.items[0],
+            color: 'blue',
+            variant: 'outline'
+        },
+        {
+            ...Primary.args.items[0],
+            color: 'green',
+            variant: 'outline'
+        }
+    ]
 };
