@@ -168,6 +168,7 @@ export const CarouselInner: FC<Props> = (props) => {
         (index) => {
             if (emblaApi) {
                 emblaApi.scrollTo(index);
+                setAriaHidden();
             }
         },
         [emblaApi]
@@ -176,13 +177,14 @@ export const CarouselInner: FC<Props> = (props) => {
     const scrollPrev = useCallback(() => {
         if (emblaApi) {
             emblaApi.scrollPrev();
-            console.log(emblaApi.selectedScrollSnap());
+            setAriaHidden();
         }
     }, [emblaApi]);
 
     const scrollNext = useCallback(() => {
         if (emblaApi) {
             emblaApi.scrollNext();
+            setAriaHidden();
         }
     }, [emblaApi]);
 
