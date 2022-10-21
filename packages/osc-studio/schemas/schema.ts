@@ -15,6 +15,7 @@ import page from './documents/page';
 import post from './documents/post';
 import product from './documents/product';
 import productVariant from './documents/productVariant';
+import redirects from './documents/redirects';
 
 // Singleton document types
 import home from './singletons/home';
@@ -62,6 +63,7 @@ export default createSchema({
         post,
         product,
         productVariant,
+        redirects,
         // Singleton document types
         home,
         blog,
