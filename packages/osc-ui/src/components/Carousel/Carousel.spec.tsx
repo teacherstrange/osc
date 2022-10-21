@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { Carousel } from './Carousel';
-import { screen, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 const mediaArray = [
     {
@@ -33,7 +33,7 @@ const mediaArray = [
     }
 ];
 
-test('renders the tabs with three items', () => {
+test('renders the carousel with three items', () => {
     render(
         <Carousel
             mediaArray={mediaArray}
@@ -50,12 +50,55 @@ test('renders the tabs with three items', () => {
         ></Carousel>
     );
 
-    const tabList = screen.queryAllByRole('tab');
     // Use querySelector as an escape hatch as queryByRole won't count hidden elements
-    const tabPanels = document.querySelectorAll('embla__slide');
-    const tabContainer = document.querySelector('.chakra-tabs');
+    const carouselSlides = document.querySelectorAll('.embla__slide');
+    expect(carouselSlides).toHaveLength(3);
+});
 
-    expect(tabList).toHaveLength(3);
-    expect(tabPanels).toHaveLength(3);
-    expect(tabContainer).not.toHaveClass('undefined');
+test('carousel is disabled when active is set to false', () => {
+    render(
+        <Carousel
+            mediaArray={mediaArray}
+            active={false} // fine
+            delay={'3000'} // fine
+            slidesPerPage={2} // fine
+            slidesToScroll={true}
+            slideGap={10} // fine
+            axis={'y'} // fine
+            height={'1000'} // fine
+            loop={false} // fine
+            startIndex={4} // fine
+            ssr={false}
+        ></Carousel>
+    );
+
+    // Use querySelector as an escape hatch as queryByRole won't count hidden elements
+    const indicators = document.querySelector('.indicators').children;
+    const embla__navigator = document.querySelector('.embla__navigator').children;
+    expect(indicators).toHaveLength(0);
+    expect(embla__navigator).toHaveLength(0);
+});
+
+test('carousel scrolls when delay is set', () => {
+    render(
+        <Carousel
+            mediaArray={mediaArray}
+            active={false} // fine
+            delay={'3000'} // fine
+            slidesPerPage={2} // fine
+            slidesToScroll={true}
+            slideGap={10} // fine
+            axis={'y'} // fine
+            height={'1000'} // fine
+            loop={false} // fine
+            startIndex={4} // fine
+            ssr={false}
+        ></Carousel>
+    );
+
+    // Use querySelector as an escape hatch as queryByRole won't count hidden elements
+    const indicators = document.querySelector('.indicators').children;
+    const embla__navigator = document.querySelector('.embla__navigator').children;
+    expect(indicators).toHaveLength(0);
+    expect(embla__navigator).toHaveLength(0);
 });

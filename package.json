@@ -23,6 +23,7 @@
     "build:osc-ecommerce": "lerna run build --scope osc-ecommerce --skip-nx-cache",
     "test": "npm run build:osc-ui && lerna run test",
     "test:dev": "lerna run test:dev",
+    "test:dev:osc-ui": "lerna run test:dev --scope 'osc-ui'",
     "test:e2e:dev": "lerna run test:e2e:dev",
     "test:e2e:run": "lerna run build --scope osc-ui && concurrently \"lerna run dev --parallel --scope osc-ui\" \"lerna run test:e2e:run\"",
     "dev": "lerna run dev",

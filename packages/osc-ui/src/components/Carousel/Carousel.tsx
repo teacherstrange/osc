@@ -6,7 +6,8 @@ import { Box, Button, Image, Text } from '@chakra-ui/react';
 import Autoplay from 'embla-carousel-autoplay';
 import AutoHeight from 'embla-carousel-auto-height';
 import ClassNames from 'embla-carousel-class-names';
-
+import { v4 as uuidv4 } from 'uuid';
+import { useDebouncedCallback } from 'use-debounce';
 import './carousel.scss';
 
 export type Props = {
@@ -20,10 +21,11 @@ export type Props = {
     slideGap: number;
     axis: 'x' | 'y';
     loop: boolean;
-    ssr: boolean;
+    ssr?: boolean;
+    carouselKey?: string;
 };
 
-export const Carousel: FC<Props> = (props) => {
+export const CarouselInner: FC<Props> = (props) => {
     const {
         ssr,
         height,
@@ -35,7 +37,8 @@ export const Carousel: FC<Props> = (props) => {
         slidesToScroll,
         slideGap,
         axis,
-        loop
+        loop,
+        carouselKey
     } = props;
 
     const delayInt = parseInt(delay, 10);
@@ -47,6 +50,18 @@ export const Carousel: FC<Props> = (props) => {
             return true;
         }
         return false;
+    };
+
+    const setAriaHidden = () => {
+        const slides = document.querySelectorAll('.embla__slide');
+        slides.forEach((el, index) => {
+            el.classList.add('embla__slide-loaded');
+            if (el.classList.contains('is-selected')) {
+                el.ariaHidden = 'false';
+            } else {
+                el.ariaHidden = 'true';
+            }
+        });
     };
 
     const emblaPlugins = () => {
@@ -88,7 +103,7 @@ export const Carousel: FC<Props> = (props) => {
     const [carouselVisible, setCarouselVisible] = useState(ssr ? false : true);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [scrollSnaps, setScrollSnaps] = React.useState<Array<number>>([]);
-    const scrollTo = React.useCallback((index) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
+
     const onSelect = React.useCallback(() => {
         if (!emblaApi) return;
         setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -100,36 +115,68 @@ export const Carousel: FC<Props> = (props) => {
         setScrollSnaps(emblaApi.scrollSnapList());
         emblaApi.on('select', onSelect);
         emblaApi.on('init', () => {
+            setAriaHidden();
             setCarouselVisible(true);
         });
+        // return () => emblaApi.destroy();
     }, [emblaApi, setScrollSnaps, onSelect]);
 
+    const handleResize = useDebouncedCallback(() => {
+        setAriaHidden();
+        setCarouselVisible(true);
+    }, 200);
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [handleResize]);
+
     if (typeof document !== 'undefined') {
-        let r = document.querySelector(':root') as any;
-        if (slidesPerPage) {
-            r.style.setProperty('--embla__slidesPerPage', `calc(${(1 / slidesPerPage) * 100}%)`);
-        }
-        if (slideGap) {
-            r.style.setProperty('--embla__slideGap', slideGap + 'px');
-        }
-        if (slidesPerPage && slideGap) {
-            r.style.setProperty('--embla__slidesPerPage', `calc(${(1 / slidesPerPage) * 100}%)`);
-        }
-        if (axis) {
-            r.style.setProperty('--embla__axis', axis === 'x' ? 'row' : 'column');
-        }
-        if (height) {
-            r.style.setProperty('--embla__height', height + 'px');
-            r.style.setProperty(
-                '--embla__style_height',
-                `calc(${parseInt(height, 10) / slidesPerPage}px - ${slideGap * 2}px)`
-            );
+        let r = document.querySelector(`.embla__carousel_wrapper_${carouselKey}`) as any;
+        if (r) {
+            if (slidesPerPage) {
+                r.style.setProperty(
+                    '--embla__slidesPerPage',
+                    `calc(${(1 / slidesPerPage) * 100}%)`
+                );
+            }
+            if (slideGap) {
+                r.style.setProperty('--embla__slideGap', slideGap + 'px');
+            }
+            if (slidesPerPage && slideGap) {
+                r.style.setProperty(
+                    '--embla__slidesPerPage',
+                    `calc(${(1 / slidesPerPage) * 100}%)`
+                );
+            }
+            if (axis) {
+                r.style.setProperty('--embla__axis', axis === 'x' ? 'row' : 'column');
+            }
+            if (height) {
+                r.style.setProperty('--embla__height', height + 'px');
+                r.style.setProperty(
+                    '--embla__style_height',
+                    `calc(${parseInt(height, 10) / slidesPerPage}px - ${slideGap * 2}px)`
+                );
+            }
         }
     }
+
+    const scrollTo = React.useCallback(
+        (index) => {
+            if (emblaApi) {
+                emblaApi.scrollTo(index);
+            }
+        },
+        [emblaApi]
+    );
 
     const scrollPrev = useCallback(() => {
         if (emblaApi) {
             emblaApi.scrollPrev();
+            console.log(emblaApi.selectedScrollSnap());
         }
     }, [emblaApi]);
 
@@ -142,14 +189,16 @@ export const Carousel: FC<Props> = (props) => {
     return (
         <Box display={'flex'} alignItems="center" flexDirection="column">
             <Box className={`embla ${carouselVisible ? 'embla-carousel-loaded' : ''}`}>
-                <Box className="embla__viewport" ref={emblaRef}>
-                    <Box className="embla__container">
+                <Box aria-roledescription="carousel" className="embla__viewport" ref={emblaRef}>
+                    <Box aria-live={delay ? 'off' : 'polite'} className="embla__container">
                         {mediaArray?.map((q, index) => {
                             return (
                                 <Box
+                                    key={`${index}`}
+                                    aria-label={`${index + 1} of ${mediaArray?.length}`}
+                                    aria-roledescription="slide"
                                     alignSelf="center"
                                     height={height}
-                                    key={index}
                                     className="embla__slide"
                                 >
                                     <div className="embla__slide_inner">
@@ -202,6 +251,27 @@ export const Carousel: FC<Props> = (props) => {
                     return <></>;
                 })}
             </div>
+        </Box>
+    );
+};
+
+export const Carousel: FC<Props> = (props) => {
+    const { mediaArray } = props;
+    const [carouselKey, setCarouselKey] = useState('');
+
+    useEffect(() => {
+        setCarouselKey(uuidv4());
+    }, []);
+
+    return (
+        <Box
+            key={` ${carouselKey}-${mediaArray.length}`}
+            display={'flex'}
+            alignItems="center"
+            flexDirection="column"
+            className={`embla__carousel_wrapper_${carouselKey}`}
+        >
+            <CarouselInner {...props} carouselKey={carouselKey}></CarouselInner>
         </Box>
     );
 };

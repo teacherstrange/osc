@@ -31,7 +31,7 @@
 }
 
 .embla.embla-carousel-loaded {
-    opacity: 2;
+    opacity: 1;
 }
 
 .embla__container {
@@ -45,6 +45,18 @@
 .embla__slide {
     flex: 0 0 100%;
     overflow: hidden;
+
+    .embla__slide-loaded {
+        overflow: visible;
+    }
+
+    @include mq($mq-mob--sml) {
+        flex: 0 0 100%;
+    }
+
+    @include mq($mq-mob--lrg) {
+        flex: 0 0 50%;
+    }
 
     @include mq($mq-tab) {
         flex: 0 0 var(--embla__slidesPerPage);

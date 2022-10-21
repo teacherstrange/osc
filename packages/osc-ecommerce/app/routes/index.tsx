@@ -116,6 +116,80 @@ export default function Index() {
                     )}
                 </Stack>
             ) : null}
-        </>
+            <Carousel
+                mediaArray={[
+                    {
+                        image: {
+                            asset: {
+                                url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+                                caption: 'test'
+                            }
+                        }
+                    },
+                    {
+                        image: {
+                            asset: {
+                                url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+                                caption: 'test'
+                            }
+                        }
+                    },
+                    {
+                        image: {
+                            asset: {
+                                url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+                                caption: 'test'
+                            }
+                        }
+                    }
+                ]}
+                active={true} // fine
+                delay={'3000'} // fine
+                slidesPerPage={2} // fine
+                slidesToScroll={true}
+                slideGap={10} // fine
+                axis={'y'} // fine
+                height={'1000'} // fine
+                loop={false} // fine
+                startIndex={4} // fine
+            ></Carousel>
+            <Carousel
+                mediaArray={[
+                    {
+                        image: {
+                            asset: {
+                                url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+                                caption: 'test'
+                            }
+                        }
+                    },
+                    {
+                        image: {
+                            asset: {
+                                url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+                                caption: 'test'
+                            }
+                        }
+                    },
+                    {
+                        image: {
+                            asset: {
+                                url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+                                caption: 'test'
+                            }
+                        }
+                    }
+                ]}
+                active={true} // fine
+                delay={'3000'} // fine
+                slidesPerPage={2} // fine
+                slidesToScroll={true}
+                slideGap={10} // fine
+                axis={'x'} // fine
+                height={'1000'} // fine
+                loop={false} // fine
+                startIndex={4} // fine
+            ></Carousel>
+        </div>
     );
 }
