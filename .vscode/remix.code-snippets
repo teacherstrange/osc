@@ -1,0 +1,46 @@
+{
+    "LoaderFunction": {
+        "prefix": "remixLoader",
+        "body": [
+            "type LoaderData = {",
+            "\t$2",
+            "};",
+            "",
+            "export const loader: LoaderFunction = async ({ request }) => {",
+            "\treturn json<LoaderData>({",
+            "\t\t$1",
+            "\t});",
+            "};"
+        ]
+    },
+    "ActionFunction": {
+        "prefix": "remixAction",
+        "body": [
+            "type ActionData = {",
+            "\t$2",
+            "};",
+            "",
+            "export const action: ActionFunction = async ({ request }) => {",
+            "\treturn json<ActionData>($1)",
+            "};"
+        ]
+    },
+    "LinksFunction": {
+        "prefix": "remixLinks",
+        "body": [
+            "export const links: LinksFunction = () => {",
+            "\treturn [{ rel: \"stylesheet\", href: $1 }];",
+            "};"
+        ]
+    },
+    "MetaFunction": {
+        "prefix": "remixMeta",
+        "body": [
+            "export const meta: MetaFunction = () => {",
+            "\treturn {",
+            "\t\ttitle: $1",
+            "\t};",
+            "};"
+        ]
+    }
+}
