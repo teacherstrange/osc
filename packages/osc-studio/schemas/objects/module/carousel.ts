@@ -88,13 +88,6 @@ export default {
             description: 'The number of images to show per Carousel slide'
         },
         {
-            title: 'Scroll multiple images per click',
-            name: 'slidesToScroll',
-            type: 'boolean',
-            description:
-                'Setting this value to true will cause the Carousel to scroll the multiple images per click, if it set to false it will scroll the carousel 1 image per click'
-        },
-        {
             title: 'Slide Gap',
             name: 'slideGap',
             type: 'number',

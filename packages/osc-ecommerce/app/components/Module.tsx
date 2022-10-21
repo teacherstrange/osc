@@ -26,7 +26,6 @@ export default function Module({ module }: { module: module }) {
                     active={moduleCarousel.active} // fine
                     delay={moduleCarousel.delay} // fine
                     slidesPerPage={moduleCarousel.slidesPerPage} // fine
-                    slidesToScroll={moduleCarousel.slidesToScroll}
                     slideGap={moduleCarousel.slideGap} // fine
                     axis={moduleCarousel.axis} // fine
                     height={moduleCarousel.height} // fine

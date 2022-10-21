@@ -17,7 +17,6 @@ export type Props = {
     mediaArray: any[];
     delay: string;
     slidesPerPage: number;
-    slidesToScroll: boolean;
     slideGap: number;
     axis: 'x' | 'y';
     loop: boolean;
@@ -34,7 +33,6 @@ export const CarouselInner: FC<Props> = (props) => {
         mediaArray,
         delay,
         slidesPerPage,
-        slidesToScroll,
         slideGap,
         axis,
         loop,
@@ -42,15 +40,6 @@ export const CarouselInner: FC<Props> = (props) => {
     } = props;
 
     const delayInt = parseInt(delay, 10);
-
-    const isActive = () => {
-        // length / slidesPerPage > 1
-        const length = mediaArray.length;
-        if (length / slidesPerPage > 1) {
-            return true;
-        }
-        return false;
-    };
 
     const setAriaHidden = () => {
         const slides = document.querySelectorAll('.embla__slide');
@@ -62,6 +51,13 @@ export const CarouselInner: FC<Props> = (props) => {
                 el.ariaHidden = 'true';
             }
         });
+    };
+
+    const trueSlidesPerPage = () => {
+        if (typeof window === 'undefined') return 1;
+        if (window.matchMedia('(min-width: 768px)').matches) return slidesPerPage;
+        if (window.matchMedia('(min-width: 640px)').matches) return 2;
+        return 1;
     };
 
     const emblaPlugins = () => {
@@ -82,20 +78,15 @@ export const CarouselInner: FC<Props> = (props) => {
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
+            active,
             align: 'start',
             inViewThreshold: 1,
             skipSnaps: false,
-            slidesToScroll: slidesToScroll ? slidesPerPage : 1,
+            slidesToScroll: trueSlidesPerPage(),
             containScroll: 'trimSnaps',
             startIndex: startIndex ? startIndex - 1 : 0,
             axis,
-            loop,
-            breakpoints: {
-                '(min-width: 768px)': {
-                    active: active !== undefined ? active : isActive()
-                },
-                '(max-width: 768px)': { active: true }
-            }
+            loop
         },
         emblaPlugins()
     );
@@ -122,7 +113,9 @@ export const CarouselInner: FC<Props> = (props) => {
     }, [emblaApi, setScrollSnaps, onSelect]);
 
     const handleResize = useDebouncedCallback(() => {
+        onSelect();
         setAriaHidden();
+        setScrollSnaps(emblaApi.scrollSnapList());
     }, 200);
 
     useEffect(() => {
@@ -233,12 +226,12 @@ export const CarouselInner: FC<Props> = (props) => {
                         })}
                     </Box>
                     <div className="indicators">
-                        {(active !== undefined ? active : isActive()) && (
+                        {scrollSnaps.length != 1 && (
                             <button className="embla__prev" onClick={scrollPrev}>
                                 Prev
                             </button>
                         )}
-                        {(active !== undefined ? active : isActive()) && (
+                        {scrollSnaps.length != 1 && (
                             <button className="embla__next" onClick={scrollNext}>
                                 Next
                             </button>
@@ -248,7 +241,7 @@ export const CarouselInner: FC<Props> = (props) => {
             </Box>
             <div className="embla__navigator">
                 {scrollSnaps.map((_, indicatorIndex) => {
-                    if (active) {
+                    if (scrollSnaps.length != 1) {
                         return (
                             <Button
                                 className="embla__dots"

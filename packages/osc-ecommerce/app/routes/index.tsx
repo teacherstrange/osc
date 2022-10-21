@@ -145,8 +145,7 @@ export default function Index() {
                 ]}
                 active={true} // fine
                 delay={'3000'} // fine
-                slidesPerPage={2} // fine
-                slidesToScroll={true}
+                slidesPerPage={3} // fine
                 slideGap={10} // fine
                 axis={'y'} // fine
                 height={'1000'} // fine
@@ -182,8 +181,7 @@ export default function Index() {
                 ]}
                 active={true} // fine
                 delay={'3000'} // fine
-                slidesPerPage={2} // fine
-                slidesToScroll={true}
+                slidesPerPage={3} // fine
                 slideGap={10} // fine
                 axis={'x'} // fine
                 height={'1000'} // fine

@@ -20,3 +20,5 @@ node_modules
 /packages/osc-ecommerce/app/styles/tools
 /packages/osc-ecommerce/app/styles/utilities
 node_modules
+
+/osc/packages/osc-studio/dist/**/*

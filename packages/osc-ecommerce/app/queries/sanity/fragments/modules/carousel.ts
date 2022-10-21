@@ -18,7 +18,6 @@ export const MODULE_CAROUSEL = groq`
     },
     delay,
     slidesPerPage,
-    slidesToScroll,
     slideGap,
     axis,
     loop,

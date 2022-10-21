@@ -162,7 +162,6 @@ Primary.args = {
     active: true,
     delay: '3000',
     slidesPerPage: 2, // fine
-    slidesToScroll: true,
     slideGap: 10,
     axis: 'y',
     height: 1000,
