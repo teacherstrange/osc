@@ -95,3 +95,21 @@ test('carousel is disabled when active is set to true, but the length of the sli
 //         ></Carousel>
 //     );
 // });
+
+// // need to test aria hidden, it is custom behavior
+// test('correct carousel height is set', () => {
+//     render(
+//         <Carousel
+//             mediaArray={mediaArray}
+//             active={false} // fine
+//             delay={'3000'} // fine
+//             slidesPerPage={2} // fine
+//             slideGap={10} // fine
+//             axis={'y'} // fine
+//             height={'1000'} // fine
+//             loop={false} // fine
+//             startIndex={4} // fine
+//             ssr={false}
+//         ></Carousel>
+//     );
+// });

@@ -102,26 +102,22 @@ export const CarouselInner: FC<Props> = (props) => {
 
     useEffect(() => {
         if (!emblaApi) return;
-        setScrollSnaps(emblaApi.scrollSnapList());
-    }, [emblaApi]);
-
-    useEffect(() => {
-        if (!emblaApi) return;
         onSelect();
         emblaApi.on('select', onSelect);
+        setScrollSnaps(emblaApi.scrollSnapList());
         emblaApi.on('init', () => {
             setAriaHidden();
             setCarouselVisible(true);
         });
         // return () => emblaApi.destroy();
-    }, [emblaApi, setScrollSnaps, onSelect, scrollSnaps]);
+    }, [emblaApi, setScrollSnaps, onSelect]);
 
     const handleResize = useDebouncedCallback(() => {
         if (!emblaApi) return;
         onSelect();
         setAriaHidden();
         setScrollSnaps(emblaApi.scrollSnapList());
-    }, 200);
+    });
 
     useEffect(() => {
         window.addEventListener('resize', handleResize);
