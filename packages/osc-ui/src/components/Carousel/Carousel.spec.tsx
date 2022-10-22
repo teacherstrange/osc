@@ -33,6 +33,7 @@ const mediaArray = [
     }
 ];
 
+// BASIC TESTS
 test('renders the carousel with three items', () => {
     render(
         <Carousel
@@ -54,48 +55,43 @@ test('renders the carousel with three items', () => {
     expect(carouselSlides).toHaveLength(3);
 });
 
-test('carousel is disabled when active is set to false', () => {
+//
+test('carousel is disabled when active is set to true, but the length of the slides === slides per page', () => {
     render(
         <Carousel
             mediaArray={mediaArray}
-            active={false} // fine
+            active={true} // fine
             delay={'3000'} // fine
-            slidesPerPage={2} // fine
+            slidesPerPage={3} // fine
             slideGap={10} // fine
             axis={'y'} // fine
             height={'1000'} // fine
             loop={false} // fine
-            startIndex={4} // fine
+            startIndex={2} // fine
             ssr={false}
         ></Carousel>
     );
 
-    // Use querySelector as an escape hatch as queryByRole won't count hidden elements
     const indicators = document.querySelector('.indicators').children;
     const embla__navigator = document.querySelector('.embla__navigator').children;
     expect(indicators).toHaveLength(0);
     expect(embla__navigator).toHaveLength(0);
 });
 
-test('carousel scrolls when delay is set', () => {
-    render(
-        <Carousel
-            mediaArray={mediaArray}
-            active={false} // fine
-            delay={'3000'} // fine
-            slidesPerPage={2} // fine
-            slideGap={10} // fine
-            axis={'y'} // fine
-            height={'1000'} // fine
-            loop={false} // fine
-            startIndex={4} // fine
-            ssr={false}
-        ></Carousel>
-    );
-
-    // Use querySelector as an escape hatch as queryByRole won't count hidden elements
-    const indicators = document.querySelector('.indicators').children;
-    const embla__navigator = document.querySelector('.embla__navigator').children;
-    expect(indicators).toHaveLength(0);
-    expect(embla__navigator).toHaveLength(0);
-});
+// // need to test height, it is not part of emblaApi
+// test('correct carousel height is set', () => {
+//     render(
+//         <Carousel
+//             mediaArray={mediaArray}
+//             active={false} // fine
+//             delay={'3000'} // fine
+//             slidesPerPage={2} // fine
+//             slideGap={10} // fine
+//             axis={'y'} // fine
+//             height={'1000'} // fine
+//             loop={false} // fine
+//             startIndex={4} // fine
+//             ssr={false}
+//         ></Carousel>
+//     );
+// });
