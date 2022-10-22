@@ -110,9 +110,10 @@ export const CarouselInner: FC<Props> = (props) => {
             setCarouselVisible(true);
         });
         // return () => emblaApi.destroy();
-    }, [emblaApi, setScrollSnaps, onSelect]);
+    }, [emblaApi, setScrollSnaps, onSelect, scrollSnaps]);
 
     const handleResize = useDebouncedCallback(() => {
+        if (!emblaApi) return;
         onSelect();
         setAriaHidden();
         setScrollSnaps(emblaApi.scrollSnapList());
