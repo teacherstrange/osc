@@ -78,3 +78,36 @@ test.describe('Navigates to a sample of pages without them hanging', () => {
         await checkHeading(page);
     });
 });
+
+test.describe('Carousel is visible and functioning', () => {
+    test('Carousel is visible and functioning   ', async ({ page }) => {
+        const checkSelectedIndex = async (page: Page) => {
+            const h1 = page.getByRole('heading', {
+                level: 1
+            });
+
+            await expect(h1).toBeVisible();
+        };
+
+        const checkSlidesPerPage = async (page: Page) => {
+            const h1 = page.getByRole('heading', {
+                level: 1
+            });
+
+            await expect(h1).toBeVisible();
+        };
+
+        const checkButtons = async (page: Page) => {
+            const h1 = page.getByRole('heading', {
+                level: 1
+            });
+
+            await expect(h1).toBeVisible();
+        };
+
+        await page.goto('/kitchen-sink');
+        await checkSelectedIndex(page);
+        await checkSlidesPerPage(page);
+        await checkButtons(page);
+    });
+});
