@@ -10,7 +10,17 @@ export default {
             title: 'From',
             type: 'string',
             description:
-                'The page you want to redirect from. Must be a relative url e.g. /blog/post or /page'
+                'The page you want to redirect from. Must be a relative url e.g. /blog/post or /page',
+            validation: (Rule) =>
+                Rule.required().custom((context) => {
+                    const startsWithSlash = /(^\/\w+)/g;
+
+                    if (!startsWithSlash.test(context)) {
+                        return 'The slug be relative (starts with "/")';
+                    }
+
+                    return true;
+                })
         },
         {
             name: 'destination',
@@ -19,8 +29,9 @@ export default {
             to: PAGE_REFERENCES,
             description: 'The page you want to redirect to',
             options: {
-                disableNew: true
-            }
+                disableNew: true // Stop ability to create new pages from this screen
+            },
+            validation: (Rule) => Rule.required()
         },
         {
             name: 'statusCode',
@@ -31,7 +42,8 @@ export default {
             options: {
                 list: [301, 302],
                 layout: 'dropdown'
-            }
+            },
+            validation: (Rule) => Rule.required()
         }
     ],
     preview: {
