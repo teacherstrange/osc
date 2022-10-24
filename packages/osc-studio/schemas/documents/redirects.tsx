@@ -1,9 +1,11 @@
+import { ArrowRightIcon } from '@sanity/icons';
 import { PAGE_REFERENCES } from '../../constants.js';
 
 export default {
     name: 'redirect',
     title: 'Redirect',
     type: 'document',
+    icon: ArrowRightIcon,
     fields: [
         {
             name: 'source',
