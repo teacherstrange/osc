@@ -3,7 +3,8 @@
     "./packages/osc-ui",
     "./packages/osc-ecommerce",
     "./packages/osc-academic-hub",
-    "./packages/osc-api"
+    "./packages/osc-api-auth",
+    "./packages/osc-api-gateway"
   ],
   "version": "0.0.2",
   "useNx": true

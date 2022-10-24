@@ -9,7 +9,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "module": "NodeNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "target": "ES2022",
     "strict": true,

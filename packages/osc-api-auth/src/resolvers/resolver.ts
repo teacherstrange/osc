@@ -3,16 +3,16 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 type getUserArgs = {
-    id: Number;
+    id: string;
 };
 
 export const resolvers = {
     Query: {
         users: () => {
-            return prisma.User.findMany();
+            return prisma.user.findMany();
         },
         user: (_: undefined, args: getUserArgs) => {
-            return prisma.User.findUnique({
+            return prisma.user.findUnique({
                 where: {
                     id: args.id
                 }
