@@ -1,6 +1,8 @@
 import type { Params } from 'react-router-dom';
 import type { SanityPage, SanitySiteSetting, SanityRedirect } from '~/types/sanity';
 import { getClient } from '~/lib/sanity/getClient.server';
+import { REDIRECT } from '~/queries/sanity/redirects';
+import { redirect } from '@remix-run/server-runtime';
 
 /**
  * Exclude items that contain "drafts" in the _id
@@ -88,24 +90,24 @@ export async function getSettingsData({ query }: { query: string }) {
     }
 }
 
-// export async function shouldRedirect(request: Request) {
-//     if (!request) throw new Error('Request must be passed');
+export async function shouldRedirect(request: Request) {
+    if (!request) throw new Error('Request must be passed');
 
-//     try {
-//         const url = new URL(request.url);
-//         const getRedirect = await getClient().fetch(REDIRECT, { slug: url.pathname });
-//         const redirectObject = getRedirect.filter((item: SanityRedirect) => excludeDrafts(item))[0];
+    try {
+        const url = new URL(request.url);
+        const getRedirect = await getClient().fetch(REDIRECT, { slug: url.pathname });
+        const redirectObject = getRedirect.filter((item: SanityRedirect) => excludeDrafts(item))[0];
 
-//         if (!redirectObject) return;
+        if (!redirectObject) return;
 
-//         const destination = buildUrlPath({
-//             type: redirectObject.destination._type,
-//             url,
-//             slug: redirectObject.destination.slug
-//         });
+        const destination = buildUrlPath({
+            type: redirectObject.destination._type,
+            url,
+            slug: redirectObject.destination.slug
+        });
 
-//         return redirect(destination, redirectObject.statusCode);
-//     } catch (err) {
-//         console.error(err);
-//     }
-// }
+        return redirect(destination, redirectObject.statusCode);
+    } catch (err) {
+        console.error(err);
+    }
+}
