@@ -1,5 +1,6 @@
 import { buildCanonicalUrl } from './buildCanonicalUrl';
-import { mockHomeRequest } from '../../../mocks/requests';
+// eslint-disable-next-line jest/no-mocks-import -- no clear way to intercept a request form remix so we want to use this as a function rather than a true mock -- perhaps this could be done better?
+import { mockHomeRequest } from '../../../__mocks__/requests';
 
 describe('builds canonical from the request', () => {
     test('creates a canonical url for a homepage', () => {
