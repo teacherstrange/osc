@@ -77,7 +77,7 @@ export default function Index() {
                 <Preview data={data} setData={setData} query={query} queryParams={params} />
             ) : null}
 
-            <Heading>{data?.store?.title}</Heading>
+            <Heading as="h1">{data?.store?.title}</Heading>
 
             {data?.modules && data?.modules.length > 0 ? (
                 <Stack spacing={16}>
