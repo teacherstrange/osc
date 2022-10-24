@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useMatches } from '@remix-run/react';
 import type { HeadersFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { getColorScheme } from './cookie';
+import { getColorScheme } from './utils/colorScheme';
 import lightTheme from './theme/lightTheme';
 import darkTheme from './theme/darkTheme';
 import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';

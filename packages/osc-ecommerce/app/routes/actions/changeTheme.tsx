@@ -1,6 +1,6 @@
 import type { ActionFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { colorSchemeCookie, getColorScheme } from '~/cookie';
+import { colorSchemeCookie, getColorScheme } from '~/utils/colorScheme';
 
 export const action: ActionFunction = async ({ request }) => {
     const currentColorScheme = await getColorScheme(request);
