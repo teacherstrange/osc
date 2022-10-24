@@ -2,6 +2,11 @@ import type { Params } from 'react-router-dom';
 import type { SanityPage, SanitySiteSetting } from '~/types/sanity';
 import { getClient } from '~/lib/sanity/getClient.server';
 
+/**
+ * Exclude items that contain "drafts" in the _id
+ */
+export const excludeDrafts = (item: { _id: string }) => !item._id.includes('drafts');
+
 interface Args {
     request: Request;
     params?: Params;
@@ -38,8 +43,8 @@ export async function getSettingsData({ query }: { query: string }) {
 
     try {
         const siteSettings = await getClient().fetch(query);
-        const liveSettings = siteSettings.filter(
-            (setting: SanitySiteSetting) => !setting._id.includes('drafts')
+        const liveSettings = siteSettings.filter((setting: SanitySiteSetting) =>
+            excludeDrafts(setting)
         )[0];
 
         return liveSettings;
