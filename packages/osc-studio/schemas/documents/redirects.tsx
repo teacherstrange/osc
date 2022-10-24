@@ -49,14 +49,15 @@ export default {
     preview: {
         select: {
             title: 'source',
-            subtitle: 'destination.title'
+            subtitle: 'destination.title',
+            storeSubTitle: 'destination.store.title'
         },
         prepare(selection) {
-            const { title, subtitle } = selection;
+            const { title, subtitle, storeSubTitle } = selection;
 
             return {
                 title,
-                subtitle: `Redirected to ${subtitle}`
+                subtitle: `Redirected to ${subtitle ? subtitle : storeSubTitle}`
             };
         }
     }
