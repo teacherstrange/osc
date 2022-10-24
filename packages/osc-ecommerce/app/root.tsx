@@ -10,13 +10,10 @@ import { json } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
-import { Header } from 'osc-ui';
 import styles from './styles/dest/main.css';
-import appHeaderStyles from './components/header.css';
-import oscUiHeaderStyles from 'osc-ui/dist/header.css';
 import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
-import { ClientStyleContext, ServerStyleContext } from './context';
+import { ClientStyleContext, ServerStyleContext } from './utils/context';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 import { getSettingsData } from './models/sanity.server';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
@@ -24,9 +21,7 @@ import { SETTINGS_QUERY } from './queries/sanity/settings';
 let isMount = true;
 export const links: LinksFunction = () => {
     return [
-        { rel: 'stylesheet', href: oscUiHeaderStyles },
         { rel: 'stylesheet', href: styles },
-        { rel: 'stylesheet', href: appHeaderStyles },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
         { rel: 'apple-touch-icon', sizes: '60x60', href: '/icons/apple-icon-60x60.png' },
@@ -221,9 +216,7 @@ export default function App() {
                 }}
             />
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
-                <Header className={'o-header--full'} backgroundColor={'secondary'} />
                 <Outlet />
-                <h1> OSC ECOMMERCE test</h1>
             </ChakraProvider>
         </Document>
     );
