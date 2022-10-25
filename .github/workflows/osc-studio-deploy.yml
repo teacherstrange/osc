@@ -55,9 +55,9 @@ jobs:
 
       # need to delete all other packages in this step
 
-      - name: checkoutCancelSteupBuild
-        uses: ./.github/actions/checkoutCancelSteupBuild
-        id: checkoutCancelSteupBuild
+      - name: checkoutCancelSetupBuild
+        uses: ./.github/actions/checkoutCancelSetupBuild
+        id: checkoutCancelSetupBuild
         with:
           name: "osc-studio"
 

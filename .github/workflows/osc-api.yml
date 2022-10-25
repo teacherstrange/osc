@@ -40,9 +40,9 @@ jobs:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
 
-      - name: checkoutCancelSteupBuild
-        uses: ./.github/actions/checkoutCancelSteupBuild
-        id: checkoutCancelSteupBuild
+      - name: checkoutCancelSetupBuild
+        uses: ./.github/actions/checkoutCancelSetupBuild
+        id: checkoutCancelSetupBuild
         with:
           name: "osc-academic-hub"
 

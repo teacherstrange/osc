@@ -1,4 +1,4 @@
-name: "checkoutCancelSteupBuild"
+name: "checkoutCancelSetupBuild"
 description: "cancel prev runs, checkout repo, setup node, npm run setup, build osc-ui and move to root"
 inputs:
   name: # id of input

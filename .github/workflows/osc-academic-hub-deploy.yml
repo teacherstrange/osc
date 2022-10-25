@@ -188,9 +188,9 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: checkoutCancelSteupBuild
-        uses: ./.github/actions/checkoutCancelSteupBuild
-        id: checkoutCancelSteupBuild
+      - name: checkoutCancelSetupBuild
+        uses: ./.github/actions/checkoutCancelSetupBuild
+        id: checkoutCancelSetupBuild
         with:
           name: "osc-academic-hub"
 
