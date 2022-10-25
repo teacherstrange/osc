@@ -200,7 +200,7 @@ runs:
         build-args: |
           VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
           VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}
-          PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR }}"
+          PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ inputs.DB_NAME }}
           COMMIT_SHA=${{ github.sha }}
           "SANITY_STUDIO_API_DATASET=${{inputs.SANITY_STUDIO_API_DATASET}}"
           "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
