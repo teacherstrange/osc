@@ -137,6 +137,11 @@ runs:
       run: |
         ./.pscale/cli-helper-scripts/create-branch-connection-string.sh
 
+    - name: echo MY_DB_URL
+      shell: bash
+      run: |
+        echo "this is the db url: ${{ env.MY_DB_URL }}"
+
     # we have three versions of docker build, in each one we
     # need to pass in different Planetscale prisma database urls && files to each docker build command
     - name: 🐳 Docker build DB PR Branch
