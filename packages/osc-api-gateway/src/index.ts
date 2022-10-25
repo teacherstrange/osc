@@ -5,8 +5,6 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-console.log('gateway hello');
-
 // If we're in local development we're going to bypass the managed federation and use Introspect and Compose
 // We do not want to provide a routing url to apollo studio pointing at our local as it's not really built for it
 const gateway =
@@ -26,7 +24,7 @@ async function startServer(server: ApolloServer) {
     const { url } = await startStandaloneServer(server, {
         listen: { port: 4000 }
     });
-    console.log(`🚀  Server ready at: ${url}`);
+    console.info(`🚀  Server ready at: ${url}`);
 }
 
 void startServer(server);

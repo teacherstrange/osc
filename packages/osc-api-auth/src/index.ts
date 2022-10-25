@@ -8,8 +8,6 @@ import { buildSubgraphSchema } from '@apollo/subgraph';
 
 dotenv.config();
 
-console.log('auth hello');
-
 const server = new ApolloServer({
     schema: buildSubgraphSchema({ typeDefs, resolvers }),
     validationRules: [depthLimit(7)]
@@ -19,7 +17,7 @@ async function startServer(server: ApolloServer) {
     const { url } = await startStandaloneServer(server, {
         listen: { port: 4001 }
     });
-    console.log(`🚀  Server ready at: ${url}`);
+    console.info(`🚀  Server ready at: ${url}`);
 }
 
 void startServer(server);
