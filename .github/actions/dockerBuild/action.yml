@@ -1,6 +1,9 @@
 name: "dockerBuild"
 description: "setup docker build, cache docker layers, register on fly, create database branch, docker build"
 inputs:
+  BRANCH:
+    required: true
+    description: "the name of the branch in github"
   APP_NAME:
     required: true
     description: "the app name"
@@ -142,7 +145,7 @@ runs:
       with:
         context: .
         push: true
-        tags: registry.fly.io/${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}:${{ steps.readAndLogAppNameAndBranch.outputs.branch }}-${{ github.sha }}
+        tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ inputs.BRANCH }}-${{ github.sha }}
         build-args: |
           VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
           VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}
@@ -163,7 +166,7 @@ runs:
         file: ./Dockerfiles/Dockerfile
         context: .
         push: true
-        tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.HEAD_REF }}-${{ github.sha }}
+        tags: registry.fly.io/${{ inputs.BRANCH }}:${{ env.HEAD_REF }}-${{ github.sha }}
         build-args: |
           "VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY }}"
           "VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY }}"
@@ -183,7 +186,7 @@ runs:
       with:
         context: .
         push: true
-        tags: registry.fly.io/${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}:${{ steps.readAndLogAppNameAndBranch.outputs.branch }}-${{ github.sha }}
+        tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ inputs.BRANCH }}-${{ github.sha }}
         build-args: |
           VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
           VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}

@@ -296,6 +296,7 @@ jobs:
         id: dockerBuild
         with:
           APP_NAME: ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
+          BRANCH: ${{ steps.readAndLogAppNameAndBranch.outputs.branch }}
           PLANETSCALE_SERVICE_TOKEN_ID: ${{ secrets.PLANETSCALE_SERVICE_TOKEN_ID }}
           PLANETSCALE_SERVICE_TOKEN: ${{ secrets.PLANETSCALE_SERVICE_TOKEN }}
           ORG_NAME: ${{ secrets.ORG_NAME }}
