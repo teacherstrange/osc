@@ -107,6 +107,20 @@ runs:
         username: x
         password: ${{ inputs.FLY_API_TOKEN }}
 
+    - name: create connection string to PR Branch
+      shell: bash
+      id: create-cs-main
+      env:
+        PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
+        PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
+        ORG_NAME: ${{inputs.ORG_NAME}}
+        DB_NAME: ${{inputs.DB_NAME}}
+        GITHUB_USER: ${{github.actor}}
+        BRANCH_NAME: staging
+        PASSWORD_NAME: ${{ inputs.PASSWORD_NAME }}
+      run: |
+        ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
+
     - name: create connection string to STAGING
       shell: bash
       id: create-cs
