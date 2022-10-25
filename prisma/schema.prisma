@@ -22,17 +22,311 @@ model User {
   lastLogin   DateTime
   lockedUntil DateTime
 
-  avatar UserAvatar? @relation("userAvatar")
+  avatar                 UserAvatar?             @relation("userAvatar")
+  registrationTokens     UserRegistrationToken[] @relation("userRegistrationTokens")
+  roles                  UserRole[]              @relation("userRoles")
+  userRolesAssigned      UserRole[]              @relation("userRoleCreator")
+  extraPermissions       ExtraPermission[]       @relation("userExtraPermissions")
+  passwordReset          PasswordReset[]         @relation("passwordReset")
+  wishlist               Wishlist[]              @relation("userWishlist")
+  preferences            UserPreference[]        @relation("userPreferences")
+  crmToken               CRMToken[]              @relation("userCRMToken")
+  lmsToken               LMSToken[]              @relation("userLMSToken")
+  tutoring               CourseTutor[]           @relation("courseTutorProfile")
+  courseTutorsAssigned   CourseTutor[]           @relation("courseTutorCreator")
+  studying               CourseStudent[]         @relation("courseStudentProfile")
+  courseStudentsAssigned CourseStudent[]         @relation("courseStudentCreator")
 
   @@map("users")
 }
 
 model UserAvatar {
-  id        Int    @id
-  userId    Int    @unique
-  reference String @db.VarChar(255)
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  reference String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user User @relation("userAvatar", fields: [userId], references: [id])
 
-  @@map("userAvatar")
+  @@map("users.avatar")
+}
+
+model UserRegistrationToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  expres    DateTime
+
+  user User @relation("userRegistrationTokens", fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("users.registrationToken")
+}
+
+model UserRole {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  roleId    Int
+  createdBy Int
+  createdAt DateTime @default(now())
+
+  user    User @relation("userRoles", fields: [userId], references: [id])
+  creator User @relation("userRoleCreator", fields: [createdBy], references: [id])
+  details Role @relation("userRoleDetails", fields: [roleId], references: [id])
+
+  @@index([userId])
+  @@index([roleId])
+  @@map("users.roles")
+}
+
+model ExtraPermission {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  permissionId Int
+  createdBy    Int
+  createdAt    DateTime @default(now())
+
+  user    User       @relation("userExtraPermissions", fields: [userId], references: [id])
+  details Permission @relation("userExtraPermissionDetails", fields: [permissionId], references: [id])
+
+  @@index([userId])
+  @@index([permissionId])
+  @@map("users.extraPermissions")
+}
+
+model PasswordReset {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  expires   DateTime
+
+  user User @relation("passwordReset", fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("users.passwordResets")
+}
+
+model Wishlist {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  title     String   @db.VarChar(64)
+  active    Boolean  @default(true)
+  createdBy Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user  User           @relation("userWishlist", fields: [userId], references: [id])
+  items WishlistItem[] @relation("wishlistItem")
+
+  @@index([userId])
+  @@map("users.wishlist")
+}
+
+model WishlistItem {
+  id         Int      @id @default(autoincrement())
+  wishlistId Int
+  courseId   Int
+  createdBy  Int
+  createdAt  DateTime @default(now())
+
+  wishlist Wishlist @relation("wishlistItem", fields: [wishlistId], references: [id])
+
+  @@index([wishlistId])
+  @@map("users.wishlistItems")
+}
+
+model UserPreference {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  preferenceId Int
+  value        String   @db.VarChar(255)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user    User       @relation("userPreferences", fields: [userId], references: [id])
+  details Preference @relation("userPreferenceDetails", fields: [preferenceId], references: [id])
+
+  @@index([userId])
+  @@index([preferenceId])
+  @@map("users.preferences")
+}
+
+/// Likely going to look at 3-5 failed logins within 10 minutes from the same IP for a given email
+/// would cause an automated lockout for 10 minutes. If 10 failed attemps within 30 minutes
+/// then 30 minute lockout, and trigger an email warning owner?
+model FailedLogin {
+  id        Int      @id @default(autoincrement())
+  email     String   @db.VarChar(255)
+  ipv4      String   @db.Char(15)
+  ipv6      String   @db.Char(32)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@map("users.failedLogins")
+}
+
+model CRM {
+  id        Int        @id @default(autoincrement())
+  title     String     @db.VarChar(64)
+  url       String     @db.VarChar(128)
+  active    Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  CRMToken  CRMToken[] @relation("tokenCRM")
+
+  @@map("crm")
+}
+
+model CRMToken {
+  id        Int      @id @default(autoincrement())
+  crmId     Int
+  userId    Int
+  token     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  crm  CRM  @relation("tokenCRM", fields: [crmId], references: [id])
+  user User @relation("userCRMToken", fields: [userId], references: [id])
+
+  @@index([crmId])
+  @@index([userId])
+  @@map("crm.userTokens")
+}
+
+model LMS {
+  id        Int        @id @default(autoincrement())
+  title     String     @db.VarChar(64)
+  url       String     @db.VarChar(128)
+  active    Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  LMSToken  LMSToken[] @relation("tokenLMS")
+
+  @@map("lms")
+}
+
+model LMSToken {
+  id        Int      @id @default(autoincrement())
+  lmsId     Int
+  userId    Int
+  token     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lms  LMS  @relation("tokenLMS", fields: [lmsId], references: [id])
+  user User @relation("userLMSToken", fields: [userId], references: [id])
+
+  @@index([lmsId])
+  @@index([userId])
+  @@map("LMS.userTokens")
+}
+
+model Course {
+  id          Int           @id @default(autoincrement())
+  title       String        @db.VarChar(64)
+  externalRef String        @db.VarChar(255)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  tutors      CourseTutor[] @relation("courseTutor")
+
+  @@map("courses")
+}
+
+model CourseTutor {
+  id        Int      @id @default(autoincrement())
+  courseId  Int
+  tutorId   Int
+  active    Boolean  @default(true)
+  createdBy Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  course   Course          @relation("courseTutor", fields: [courseId], references: [id])
+  profile  User            @relation("courseTutorProfile", fields: [tutorId], references: [id])
+  creator  User            @relation("courseTutorCreator", fields: [createdBy], references: [id])
+  students CourseStudent[] @relation("studentCourseTutor")
+
+  @@index([courseId])
+  @@index([tutorId])
+  @@index([createdBy])
+  @@map("courses.tutors")
+}
+
+model CourseStudent {
+  id            Int      @id @default(autoincrement())
+  courseTutorId Int
+  studentId     Int
+  active        Boolean  @default(true)
+  createdBy     Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  tutor   CourseTutor @relation("studentCourseTutor", fields: [courseTutorId], references: [id])
+  profile User        @relation("courseStudentProfile", fields: [studentId], references: [id])
+  creator User        @relation("courseStudentCreator", fields: [createdBy], references: [id])
+
+  @@index([courseTutorId])
+  @@index([studentId])
+  @@map("courses.students")
+}
+
+model Exam {
+  id                Int      @id @default(autoincrement())
+  courseId          Int
+  title             String   @db.VarChar(64)
+  date              DateTime
+  gradeContribution Int
+  active            Boolean  @default(true)
+  createdBy         Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([courseId])
+  @@map("courses.exams")
+}
+
+model Role {
+  id     Int     @id @default(autoincrement())
+  title  String  @db.VarChar(64)
+  active Boolean @default(true)
+
+  permissions RolePermission[] @relation("rolePermissions")
+  users       UserRole[]       @relation("userRoleDetails")
+
+  @@map("settings.roles")
+}
+
+model RolePermission {
+  id           Int @id @default(autoincrement())
+  roleId       Int
+  permissionId Int
+
+  role    Role       @relation("rolePermissions", fields: [roleId], references: [id])
+  details Permission @relation("rolePermissionDetails", fields: [permissionId], references: [id])
+
+  @@index([roleId])
+  @@index([permissionId])
+  @@map("settings.rolePermissions")
+}
+
+model Permission {
+  id    Int    @id @default(autoincrement())
+  key   String @unique @db.VarChar(32)
+  title String @db.VarChar(64)
+
+  roles                  RolePermission[]  @relation("rolePermissionDetails")
+  usersAssignedExtraPerm ExtraPermission[] @relation("userExtraPermissionDetails")
+}
+
+model Preference {
+  id    Int    @id @default(autoincrement())
+  key   String @unique @db.VarChar(32)
+  title String @db.VarChar(64)
+
+  UserPreference UserPreference[] @relation("userPreferenceDetails")
+
+  @@map("settings.preferences")
 }
