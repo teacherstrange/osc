@@ -183,7 +183,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkoutCancelSteupBuild
-        uses: ./actions/checkoutCancelSteupBuild
+        uses: ../actions/checkoutCancelSteupBuild
         id: checkoutCancelSteupBuild
         with:
           name: "osc-academic-hub"
