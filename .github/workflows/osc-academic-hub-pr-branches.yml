@@ -56,6 +56,9 @@ jobs:
         uses: ./.github/actions/readAndLogAppNameAndBranch
         id: readAndLogAppNameAndBranch
 
+      - name: echo MY_DB_URL
+        run: echo ${{ env.MY_DB_URL }}
+
       - name: dockerBuild
         uses: ./.github/actions/dockerBuild
         id: dockerBuild
