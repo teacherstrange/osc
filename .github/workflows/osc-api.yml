@@ -66,7 +66,6 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY}}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY}}
-          PLANETSCALE_PRISMA_DATABASE_URL_PR_DB: ${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
           SANITY_STUDIO_API_DATASET: ${{secrets.SANITY_STUDIO_API_DATASET}}
           SANITY_STUDIO_API_PROJECT_ID: ${{secrets.SANITY_STUDIO_API_PROJECT_ID}}
           SANITY_STUDIO_API_TOKEN: ${{secrets.SANITY_STUDIO_API_TOKEN}}

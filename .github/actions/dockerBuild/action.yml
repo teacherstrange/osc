@@ -39,14 +39,6 @@ inputs:
   VAPID_PRIVATE_KEY:
     required: true
     description: "remix pwa private key"
-  PLANETSCALE_PRISMA_DATABASE_URL_PR:
-    description: "the connection string"
-  PLANETSCALE_PRISMA_DATABASE_URL_DB_PR:
-    description: "the connection string"
-  PLANETSCALE_PRISMA_DATABASE_URL_STAGING:
-    description: "the connection string"
-  PLANETSCALE_PRISMA_DATABASE_URL_MAIN:
-    description: "the connection string"
   SANITY_STUDIO_API_DATASET:
     required: true
     description: "content from sanity"
