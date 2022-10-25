@@ -7,12 +7,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: 🛑 Cancel Previous Runs
-      uses: styfle/cancel-workflow-action@0.9.1
-
-    - name: ⬇️ Checkout repo
-      uses: actions/checkout@v3
-
     - uses: actions/setup-node@v3
       with:
         node-version: 16
