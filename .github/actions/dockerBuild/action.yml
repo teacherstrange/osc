@@ -141,7 +141,7 @@ runs:
     # need to pass in different Planetscale prisma database urls && files to each docker build command
     - name: 🐳 Docker build DB PR Branch
       uses: docker/build-push-action@v2
-      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_DB_PR != ""}}
+      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_DB_PR != ''}}
       with:
         context: .
         push: true
