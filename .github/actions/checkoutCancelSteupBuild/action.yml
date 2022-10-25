@@ -1,0 +1,32 @@
+name: "checkoutCancelSteupBuild"
+description: "cancel prev runs, checkout repo, setup node, npm run setup, build osc-ui and move to root"
+inputs:
+  name: # id of input
+    description: "The package to move to the root"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: 🛑 Cancel Previous Runs
+      uses: styfle/cancel-workflow-action@0.9.1
+
+    - name: ⬇️ Checkout repo
+      uses: actions/checkout@v3
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: "npm"
+
+    # need to delete all other packages in this step
+    - run: npm run setup
+      shell: bash
+
+    - run: npm run build:osc-ui
+      shell: bash
+
+    - run: rm -v -r ./package.json ./node_modules
+      shell: bash
+
+    - run: mv -v -f packages/${{ inputs.name }}/* .
+      shell: bash

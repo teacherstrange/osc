@@ -40,24 +40,11 @@ jobs:
     name: 🐳 Build PR Branch
     runs-on: ubuntu-latest
     steps:
-      - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.1
-
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
+      - name: checkoutCancelSteupBuild
+        uses: ./actions/checkoutCancelSteupBuild
+        id: checkoutCancelSteupBuild
         with:
-          node-version: 16
-          cache: "npm"
-
-      # need to delete all other packages in this step
-
-      - run: npm run setup
-      - run: npm run build:osc-ui
-
-      - run: rm -v -r ./package.json ./node_modules
-      - run: mv -v -f packages/osc-ecommerce/* .
+          name: "osc-ecommerce"
 
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
