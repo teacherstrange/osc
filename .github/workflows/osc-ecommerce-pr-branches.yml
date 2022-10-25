@@ -52,11 +52,6 @@ jobs:
         with:
           name: "osc-ecommerce"
 
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
-
-      - name: What
-        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
       - name: readAndLogAppNameAndBranch
         uses: ./.github/actions/readAndLogAppNameAndBranch
         id: readAndLogAppNameAndBranch

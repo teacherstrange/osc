@@ -6,7 +6,7 @@ outputs:
     value: ${{ steps.app_name.outputs.value }}
   branch:
     description: "branch"
-    value: ${{ steps.echo-branch.outputs.value }}
+    value: ${{ env.BRANCH }}
 runs:
   using: "composite"
   steps:
