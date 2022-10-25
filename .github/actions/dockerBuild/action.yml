@@ -151,7 +151,7 @@ runs:
     # need to pass in different Planetscale prisma database urls && files to each docker build command
     - name: 🐳 Docker build DB PR Branch
       uses: docker/build-push-action@v2
-      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_DB_PR != ''}}
+      if: ${{ inputs.BRANCH_NAME != 'main' && inputs.BRANCH_NAME != 'staging' }}
       with:
         context: .
         push: true
@@ -170,7 +170,7 @@ runs:
 
     - name: 🐳 Docker build Production
       id: docker-build-prod
-      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.PLANETSCALE_PRISMA_DATABASE_URL_MAIN != '' && inputs.PLANETSCALE_PRISMA_DATABASE_URL_STAGING != '' }}
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.BRANCH_NAME == 'main' }}
       uses: docker/build-push-action@v2
       with:
         file: ./Dockerfiles/Dockerfile
@@ -191,7 +191,7 @@ runs:
 
       # file: ./Dockerfiles/Dockerfile.pr
     - name: 🐳 Docker build PR branch
-      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR != '' }}
+      if: ${{ inputs.BRANCH_NAME == 'staging' }}
       uses: docker/build-push-action@v2
       with:
         context: .
