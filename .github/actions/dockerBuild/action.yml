@@ -109,7 +109,7 @@ runs:
 
     - name: create connection string to PR Branch
       shell: bash
-      id: create-cs-main
+      id: create-cs-pr
       env:
         PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
         PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
