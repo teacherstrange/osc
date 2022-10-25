@@ -73,7 +73,7 @@ runs:
 
     - name: Create database branch - if asked, please click on displayed link to authenticate
       shell: bash
-      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR && inputs.FROM && inputs.PASSWORD_NAME }}
+      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR != "" && inputs.FROM != "" && inputs.PASSWORD_NAME != "" }}
       id: create-db-branch
       env:
         PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
@@ -141,7 +141,7 @@ runs:
     # need to pass in different Planetscale prisma database urls && files to each docker build command
     - name: 🐳 Docker build DB PR Branch
       uses: docker/build-push-action@v2
-      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_DB_PR }}
+      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_DB_PR != ""}}
       with:
         context: .
         push: true
@@ -149,7 +149,7 @@ runs:
         build-args: |
           VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
           VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}
-          PLANETSCALE_PRISMA_DATABASE_URL_PR_DB=${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR }}
+          PLANETSCALE_PRISMA_DATABASE_URL_PR_DB=${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR_DB }}
           COMMIT_SHA=${{ github.sha }}
           "SANITY_STUDIO_API_DATASET=${{ inputs.SANITY_STUDIO_API_DATASET }}"
           "SANITY_STUDIO_API_PROJECT_ID=${{ inputs.SANITY_STUDIO_API_PROJECT_ID }}"
@@ -160,7 +160,7 @@ runs:
 
     - name: 🐳 Docker build Production
       id: docker-build-prod
-      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.PLANETSCALE_PRISMA_DATABASE_URL_MAIN && inputs.PLANETSCALE_PRISMA_DATABASE_URL_STAGING }}
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.PLANETSCALE_PRISMA_DATABASE_URL_MAIN != '' && inputs.PLANETSCALE_PRISMA_DATABASE_URL_STAGING != '' }}
       uses: docker/build-push-action@v2
       with:
         file: ./Dockerfiles/Dockerfile
@@ -171,8 +171,8 @@ runs:
           "VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY }}"
           "VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY }}"
           "COMMIT_SHA=${{ github.sha }}"
-          "PLANETSCALE_PRISMA_DATABASE_URL_STAGING=${{ env.MY_DB_URL }}${{ inputs.DB_NAME }}"
-          "PLANETSCALE_PRISMA_DATABASE_URL_MAIN=${{ env.MY_DB_URL_MAIN }}${{ inputs.DB_NAME }}"
+          "PLANETSCALE_PRISMA_DATABASE_URL_STAGING=${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_STAGING }}"
+          "PLANETSCALE_PRISMA_DATABASE_URL_MAIN=${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_MAIN }}"
           "SANITY_STUDIO_API_DATASET=${{inputs.SANITY_STUDIO_API_DATASET}}"
           "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
           "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
@@ -181,7 +181,7 @@ runs:
 
       # file: ./Dockerfiles/Dockerfile.pr
     - name: 🐳 Docker build PR branch
-      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR }}
+      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR != '' }}
       uses: docker/build-push-action@v2
       with:
         context: .
@@ -190,7 +190,7 @@ runs:
         build-args: |
           VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
           VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}
-          PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ inputs.DB_NAME }}
+          PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR }}"
           COMMIT_SHA=${{ github.sha }}
           "SANITY_STUDIO_API_DATASET=${{inputs.SANITY_STUDIO_API_DATASET}}"
           "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
