@@ -60,7 +60,7 @@ runs:
 
     - name: Create database branch - if asked, please click on displayed link to authenticate
       shell: bash
-      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR != '' && inputs.FROM != '' && inputs.PASSWORD_NAME != '' }}
+      if: ${{ inputs.BRANCH_NAME != 'main' && inputs.BRANCH_NAME != 'staging' }}
       id: create-db-branch
       env:
         PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
