@@ -46,29 +46,11 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: checkoutCancelSteupBuild
+        uses: ./.github/actions/checkoutCancelSteupBuild
+        id: checkoutCancelSteupBuild
         with:
-          node-version: 16
-          cache: "npm"
-
-      # need to delete all other packages in this step
-
-      # install monorepo
-      - run: npm run setup
-      # build component library
-      - run: npm run build:osc-ui
-
-      # remove package.json and node modules
-      - run: rm -v -r ./package.json ./node_modules
-
-      # move osc-academic-hub to the root
-      - run: mv -v -f packages/osc-academic-hub/* .
-
-      # delete all other packages in the folder (if symlinked)
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
-
-      - name: What
-        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          name: "osc-academic-hub"
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0

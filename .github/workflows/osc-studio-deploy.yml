@@ -55,11 +55,11 @@ jobs:
 
       # need to delete all other packages in this step
 
-      - run: npm run setup
-      - run: npm run build:osc-studio
-
-      - run: rm -v -r ./package.json ./node_modules
-      - run: mv -v -f packages/osc-studio/* .
+      - name: checkoutCancelSteupBuild
+        uses: ./.github/actions/checkoutCancelSteupBuild
+        id: checkoutCancelSteupBuild
+        with:
+          name: "osc-studio"
 
       - name: format head_ref
         uses: bluwy/substitute-string-action@v1

@@ -4,6 +4,8 @@ inputs:
   name: # id of input
     description: "The package to move to the root"
     required: true
+  build-command: # id of input
+    description: "The package to build, if required"
 runs:
   using: "composite"
   steps:
@@ -19,8 +21,19 @@ runs:
     - run: npm run build:osc-ui
       shell: bash
 
+    # - run: npm run build:studio
+    #   if: ${{ inputs.build-command }}
+    #   shell: bash
+
     - run: rm -v -r ./package.json ./node_modules
       shell: bash
 
     - run: mv -v -f packages/${{ inputs.name }}/* .
+      shell: bash
+
+    # add dev-dependencies to the osc-academic-hub
+    - run: npm run addDevDeps
+      shell: bash
+
+    - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
       shell: bash

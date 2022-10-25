@@ -40,20 +40,11 @@ jobs:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
 
-      - uses: actions/setup-node@v3
+      - name: checkoutCancelSteupBuild
+        uses: ./.github/actions/checkoutCancelSteupBuild
+        id: checkoutCancelSteupBuild
         with:
-          node-version: 16
-          cache: "npm"
-
-      # need to delete all other packages in this step
-
-      - run: npm run setup
-      - run: npm run build:osc-ui
-
-      - run: rm -v -r ./package.json ./node_modules
-      - run: mv -v -f packages/osc-academic-hub/* .
-
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+          name: "osc-academic-hub"
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0

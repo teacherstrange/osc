@@ -45,19 +45,11 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: checkoutCancelSteupBuild
+        uses: ./.github/actions/checkoutCancelSteupBuild
+        id: checkoutCancelSteupBuild
         with:
-          node-version: 16
-          cache: "npm"
-
-      # need to delete all other packages in this step
-
-      - run: npm run setup
-
-      - run: rm -v -r ./package.json ./node_modules
-      - run: mv -v -f packages/osc-studio/* .
-
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+          name: "osc-studio"
 
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
