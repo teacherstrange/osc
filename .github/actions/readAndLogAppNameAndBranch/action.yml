@@ -1,9 +1,12 @@
-name: "readAndLogAppName"
+name: "readAndLogAppNameAndBranch"
 description: "read app name, log app name"
 outputs:
   app-name:
     description: "app name"
     value: ${{ steps.app_name.outputs.value }}
+  branch:
+    description: "branch"
+    value: ${{ steps.echo-branch.outputs.value }}
 runs:
   using: "composite"
   steps:
@@ -17,3 +20,8 @@ runs:
     - name: log app name
       shell: bash
       run: echo "The selected app name is ${{ steps.app_name.outputs.value }}"
+
+    - name: Read branch name
+      id: echo-branch
+      shell: bash
+      run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
