@@ -21,11 +21,10 @@ inputs:
     required: true
     description: "DB name"
   BRANCH_NAME:
-    required: false
+    required: true
     description: "Branch name"
     default: Demo
   FROM:
-    required: true
     description: "The branch to clone from"
   PASSWORD_NAME:
     required: true
@@ -34,23 +33,19 @@ inputs:
     required: true
     description: "fly.io api token"
   VAPID_PUBLIC_KEY:
-    required: false
+    required: true
     description: "remix pwa public key"
     default: Demo
   VAPID_PRIVATE_KEY:
     required: true
     description: "remix pwa private key"
   PLANETSCALE_PRISMA_DATABASE_URL_PR:
-    required: true
     description: "the connection string"
   PLANETSCALE_PRISMA_DATABASE_URL_DB_PR:
-    required: true
     description: "the connection string"
   PLANETSCALE_PRISMA_DATABASE_URL_STAGING:
-    required: true
     description: "the connection string"
   PLANETSCALE_PRISMA_DATABASE_URL_MAIN:
-    required: true
     description: "the connection string"
   SANITY_STUDIO_API_DATASET:
     required: true
@@ -109,6 +104,7 @@ runs:
 
     - name: create connection string to PR Branch
       shell: bash
+      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' }}
       id: create-cs-pr
       env:
         PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
