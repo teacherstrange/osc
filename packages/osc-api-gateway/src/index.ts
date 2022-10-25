@@ -8,9 +8,7 @@ dotenv.config();
 console.log('gateway hello');
 
 // If we're in local development we're going to bypass the managed federation and use Introspect and Compose
-// Using managed federation seems to have issues with URLs in local development despite documentation saying it should be fine
-// Current assumption is that federations expects a hosted server.
-// If not development ApolloGateway() will automatically utilise API key/graph ref to query studio
+// We do not want to provide a routing url to apollo studio pointing at our local as it's not really built for it
 const gateway =
     process.env.NODE_ENV === 'development'
         ? new ApolloGateway({

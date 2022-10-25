@@ -103,8 +103,8 @@
     "dev:osc-academic-hub": "lerna run dev --scope '{osc-ui,osc-academic-hub}'",
     "dev:osc-studio": "cd packages/osc-studio && npm run dev",
     "dev:api": "run-p api:dev:*",
-    "api:dev:osc-api-gateway": "lerna run dev --scope osc-api-gateway",
     "api:dev:osc-api-auth": "lerna run dev --scope osc-api-auth",
+    "api:dev:osc-api-gateway": "lerna run dev --scope osc-api-gateway",
     "setup": "lerna link convert && npm i && npx prisma generate && cd packages/osc-studio && npm i --legacy-peer-deps"
   },
   "lint-staged": {
