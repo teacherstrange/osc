@@ -52,15 +52,9 @@ jobs:
         with:
           name: "osc-academic-hub"
 
-      - name: 👀 Read app name
-        uses: SebRollen/toml-action@v1.0.0
-        id: app_name
-        with:
-          file: "fly.toml"
-          field: "app"
-
-      - name: log app name
-        run: echo "The selected app name is ${{ steps.app_name.outputs.value }}"
+      - name: readAndLogAppName
+        uses: ./.github/actions/readAndLogAppName
+        id: readAndLogAppName
 
       - name: 🐳 Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -91,7 +85,7 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: staging
-          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.readAndLogAppName.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
 
@@ -101,7 +95,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}
+          tags: registry.fly.io/${{ steps.readAndLogAppName.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}
           build-args: |
             VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY}}
             VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY}}
@@ -169,13 +163,13 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         continue-on-error: true
         with:
-          args: "apps create pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} --org open-study-college"
+          args: "apps create pr-${{ github.event.number }}-${{ steps.readAndLogAppName.outputs.value }} --org open-study-college"
 
       - name: Create session secret
         uses: superfly/flyctl-actions@1.1
         continue-on-error: true
         with:
-          args: "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
+          args: "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ steps.readAndLogAppName.outputs.value }}"
 
       - name: echo volumes
         run: echo ${{ steps.list-volume }}
@@ -192,16 +186,16 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         continue-on-error: true
         with:
-          args: "volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
+          args: "volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ steps.readAndLogAppName.outputs.value }}"
 
       - name: 🚀 Deploy PR Branch
         id: deploy_pr
         uses: superfly/fly-pr-review-apps@1.0.0
         with:
-          image: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}
+          image: registry.fly.io/${{ steps.readAndLogAppName.outputs.value }}:${{ env.BRANCH }}-${{ github.sha }}
           org: "open-study-college"
-          name: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
-          args: "deploy --build-arg SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
+          name: pr-${{ github.event.number }}-${{ steps.readAndLogAppName.outputs.value }}
+          args: "deploy --build-arg SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.readAndLogAppName.outputs.value }}"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
@@ -216,6 +210,6 @@ jobs:
           DB_NAME: ${{secrets.DB_NAME}}
           GITHUB_USER: ${{github.actor}}
           BRANCH_NAME: pr
-          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
+          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.readAndLogAppName.outputs.value }}
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh

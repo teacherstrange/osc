@@ -1,0 +1,19 @@
+name: "readAndLogAppName"
+description: "read app name, log app name"
+outputs:
+  app-name:
+    description: "app name"
+    value: ${{ steps.app_name.outputs.value }}
+runs:
+  using: "composite"
+  steps:
+    - name: 👀 Read app name
+      uses: SebRollen/toml-action@v1.0.0
+      id: app_name
+      with:
+        file: "fly.toml"
+        field: "app"
+
+    - name: log app name
+      shell: bash
+      run: echo "The selected app name is ${{ steps.app_name.outputs.value }}"
