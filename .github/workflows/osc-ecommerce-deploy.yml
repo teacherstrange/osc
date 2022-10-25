@@ -180,7 +180,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkoutCancelSteupBuild
-        uses: ../actions/checkoutCancelSteupBuild
+        uses: ./.github/actions/checkoutCancelSteupBuild
         id: checkoutCancelSteupBuild
         with:
           name: "osc-ecommerce"
