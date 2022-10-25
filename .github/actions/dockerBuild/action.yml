@@ -1,0 +1,208 @@
+name: "dockerBuild"
+description: "setup docker build, cache docker layers, register on fly, create database branch, docker build"
+inputs:
+  APP_NAME:
+    required: true
+    description: "the app name"
+  PLANETSCALE_SERVICE_TOKEN_ID:
+    required: true
+    description: "planetscale service token id"
+  PLANETSCALE_SERVICE_TOKEN:
+    required: true
+    description: "planetscale service token"
+  ORG_NAME:
+    required: true
+    description: "Organisation name"
+    default: Demo
+  DB_NAME:
+    required: true
+    description: "DB name"
+  BRANCH_NAME:
+    required: false
+    description: "Branch name"
+    default: Demo
+  FROM:
+    required: true
+    description: "The branch to clone from"
+  PASSWORD_NAME:
+    required: true
+    description: "the name of the password in planetscale"
+  FLY_API_TOKEN:
+    required: true
+    description: "fly.io api token"
+  VAPID_PUBLIC_KEY:
+    required: false
+    description: "remix pwa public key"
+    default: Demo
+  VAPID_PRIVATE_KEY:
+    required: true
+    description: "remix pwa private key"
+  PLANETSCALE_PRISMA_DATABASE_URL_PR:
+    required: true
+    description: "the connection string"
+  PLANETSCALE_PRISMA_DATABASE_URL_DB_PR:
+    required: true
+    description: "the connection string"
+  PLANETSCALE_PRISMA_DATABASE_URL_STAGING:
+    required: true
+    description: "the connection string"
+  PLANETSCALE_PRISMA_DATABASE_URL_MAIN:
+    required: true
+    description: "the connection string"
+  SANITY_STUDIO_API_DATASET:
+    required: true
+    description: "content from sanity"
+  SANITY_STUDIO_API_PROJECT_ID:
+    required: true
+    description: "id of content from sanity"
+  SANITY_STUDIO_API_TOKEN:
+    required: true
+    description: "sanity api token"
+runs:
+  using: "composite"
+  steps:
+    - name: Get PR details
+      shell: bash
+      run: |
+        echo "${{ github.base_ref }} == main && ${{ github.event.pull_request.merged }} == true"
+        echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
+        echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
+
+    - name: Create database branch - if asked, please click on displayed link to authenticate
+      shell: bash
+      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR && inputs.FROM && inputs.PASSWORD_NAME }}
+      id: create-db-branch
+      env:
+        PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
+        PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
+        ORG_NAME: ${{inputs.ORG_NAME}}
+        DB_NAME: ${{inputs.DB_NAME}}
+        GITHUB_USER: ${{github.actor}}
+        BRANCH_NAME: ${{ inputs.BRANCH_NAME }}
+        FROM: ${{ inputs.FROM }}
+        PASSWORD_NAME: ${{ inputs.PASSWORD_NAME }}
+      run: |
+        ./.pscale/cli-helper-scripts/create-db-branch-dr-and-connection-pr-branches.sh "$BRANCH_NAME"
+
+    # from here
+    - name: 🐳 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    # Setup cache
+    - name: ⚡️ Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+
+    - name: 🔑 Fly Registry Auth
+      uses: docker/login-action@v1
+      with:
+        registry: registry.fly.io
+        username: x
+        password: ${{ inputs.FLY_API_TOKEN }}
+
+    - name: create connection string to STAGING
+      shell: bash
+      id: create-cs
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
+      env:
+        PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
+        PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
+        ORG_NAME: ${{inputs.ORG_NAME}}
+        DB_NAME: ${{inputs.DB_NAME}}
+        GITHUB_USER: ${{github.actor}}
+        BRANCH_NAME: staging
+        PASSWORD_NAME: staging-${{ inputs.APP_NAME }}
+      run: |
+        ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
+
+    - name: create connection string to MAIN
+      shell: bash
+      id: create-cs-main
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
+      env:
+        PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
+        PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
+        ORG_NAME: ${{inputs.ORG_NAME}}
+        DB_NAME: ${{inputs.DB_NAME}}
+        GITHUB_USER: ${{github.actor}}
+        BRANCH_NAME: main
+        PASSWORD_NAME: main-${{ inputs.APP_NAME }}
+      run: |
+        ./.pscale/cli-helper-scripts/create-branch-connection-string.sh
+
+    # we have three versions of docker build, in each one we
+    # need to pass in different Planetscale prisma database urls && files to each docker build command
+    - name: 🐳 Docker build DB PR Branch
+      uses: docker/build-push-action@v2
+      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_DB_PR }}
+      with:
+        context: .
+        push: true
+        tags: registry.fly.io/${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}:${{ steps.readAndLogAppNameAndBranch.outputs.branch }}-${{ github.sha }}
+        build-args: |
+          VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
+          VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}
+          PLANETSCALE_PRISMA_DATABASE_URL_PR_DB=${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR }}
+          COMMIT_SHA=${{ github.sha }}
+          "SANITY_STUDIO_API_DATASET=${{ inputs.SANITY_STUDIO_API_DATASET }}"
+          "SANITY_STUDIO_API_PROJECT_ID=${{ inputs.SANITY_STUDIO_API_PROJECT_ID }}"
+          "SANITY_STUDIO_API_TOKEN=${{ inputs.SANITY_STUDIO_API_TOKEN }}"
+        file: ./Dockerfiles/Dockerfile.db-pr
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+
+    - name: 🐳 Docker build Production
+      id: docker-build-prod
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.PLANETSCALE_PRISMA_DATABASE_URL_MAIN && inputs.PLANETSCALE_PRISMA_DATABASE_URL_STAGING }}
+      uses: docker/build-push-action@v2
+      with:
+        file: ./Dockerfiles/Dockerfile
+        context: .
+        push: true
+        tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.HEAD_REF }}-${{ github.sha }}
+        build-args: |
+          "VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY }}"
+          "VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY }}"
+          "COMMIT_SHA=${{ github.sha }}"
+          "PLANETSCALE_PRISMA_DATABASE_URL_STAGING=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}"
+          "PLANETSCALE_PRISMA_DATABASE_URL_MAIN=${{ env.MY_DB_URL_MAIN }}${{ secrets.DB_NAME }}"
+          "SANITY_STUDIO_API_DATASET=${{secrets.SANITY_STUDIO_API_DATASET}}"
+          "SANITY_STUDIO_API_PROJECT_ID=${{secrets.SANITY_STUDIO_API_PROJECT_ID}}"
+          "SANITY_STUDIO_API_TOKEN=${{secrets.SANITY_STUDIO_API_TOKEN}}"
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+
+      # file: ./Dockerfiles/Dockerfile.pr
+    - name: 🐳 Docker build PR branch
+      if: ${{ inputs.PLANETSCALE_PRISMA_DATABASE_URL_PR }}
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: registry.fly.io/${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}:${{ steps.readAndLogAppNameAndBranch.outputs.branch }}-${{ github.sha }}
+        build-args: |
+          VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY}}
+          VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY}}
+          PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}
+          COMMIT_SHA=${{ github.sha }}
+          "SANITY_STUDIO_API_DATASET=${{secrets.SANITY_STUDIO_API_DATASET}}"
+          "SANITY_STUDIO_API_PROJECT_ID=${{secrets.SANITY_STUDIO_API_PROJECT_ID}}"
+          "SANITY_STUDIO_API_TOKEN=${{secrets.SANITY_STUDIO_API_TOKEN}}"
+        file: ./Dockerfiles/Dockerfile.pr
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+
+    # This ugly bit is necessary if you don't want your cache to grow forever
+    # till it hits GitHub's limit of 5GB.
+    # Temp fix
+    # https://github.com/docker/build-push-action/issues/252
+    # https://github.com/moby/buildkit/issues/1896
+    - name: 🚚 Move cache
+      shell: bash
+      run: |
+        rm -rf /tmp/.buildx-cache
+        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
