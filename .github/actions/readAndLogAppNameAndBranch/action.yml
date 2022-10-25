@@ -24,4 +24,4 @@ runs:
     - name: Read branch name
       id: echo-branch
       shell: bash
-      run: echo branch=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      run: echo branch="${GITHUB_REF##*/}" >> $GITHUB_ENV
