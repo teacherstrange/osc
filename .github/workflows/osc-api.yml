@@ -112,6 +112,7 @@ jobs:
       - name: What
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
+      # deploying to fly.io
       - name: Create app
         uses: superfly/flyctl-actions@1.1
         continue-on-error: true
@@ -155,3 +156,4 @@ jobs:
           PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
         run: |
           ./.pscale/cli-helper-scripts/delete-old-password.sh
+      # to here
