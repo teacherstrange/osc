@@ -26,7 +26,7 @@ const providerFn = ({ theme, children }) => {
 
 addDecorator(
     withThemes(
-        null,
+        ChakraProvider,
         [lightThemeEcommerce, darkThemeEcommerce, lightThemeAcademic, darkThemeAcademic],
         {
             providerFn
