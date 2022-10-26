@@ -1,6 +1,9 @@
 {
   "private": true,
   "dependencies": {
+    "@chakra-ui/react-utils": "^2.0.8",
+    "@chakra-ui/storybook-addon": "^4.0.12",
+    "@chakra-ui/utils": "^2.0.11",
     "@react-theming/storybook-addon": "^1.1.7",
     "osc-academic-hub": "file:packages/osc-academic-hub",
     "osc-api-auth": "file:packages/osc-api-auth",
