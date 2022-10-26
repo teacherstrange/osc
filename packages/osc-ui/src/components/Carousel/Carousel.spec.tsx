@@ -122,7 +122,6 @@ test('test aria hidden is set on the correct slides - slidesInView0000', () => {
 
     setTimeout(() => {
         const embla__slides = document.querySelectorAll(`.embla__slide.is-selected`);
-        expect(embla__slides.length).toBeGreaterThanOrEqual(1);
         Array.from(embla__slides).forEach((slide) => {
             expect(slide).toHaveAttribute('aria-hidden', 'false');
         });

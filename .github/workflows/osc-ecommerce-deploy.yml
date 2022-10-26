@@ -175,9 +175,6 @@ jobs:
       - name: Prisma Generate
         run: npx prisma generate
 
-      - name: Prisma Generate
-        run: npx prisma generate
-
       - name: 🏃‍♂️ Playwright run
         run: npm run test:e2e:run
 
