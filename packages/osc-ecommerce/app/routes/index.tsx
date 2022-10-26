@@ -73,6 +73,33 @@ export default function Index() {
     const submit = useSubmit();
     const location = useLocation();
 
+    const mediaArray = [
+        {
+            image: {
+                asset: {
+                    url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+                    caption: 'test'
+                }
+            }
+        },
+        {
+            image: {
+                asset: {
+                    url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+                    caption: 'test'
+                }
+            }
+        },
+        {
+            image: {
+                asset: {
+                    url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+                    caption: 'test'
+                }
+            }
+        }
+    ];
+
     /**
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
      */
@@ -114,6 +141,30 @@ export default function Index() {
                     )}
                 </Stack>
             ) : null}
-        </>
+            <Carousel
+                mediaArray={mediaArray}
+                active={true} // fine
+                delay={'3000'} // fine
+                slidesPerPage={3} // fine
+                slideGap={0} // fine
+                axis={'y'} // fine
+                height={'1000'} // fine
+                loop={false} // fine
+                startIndex={2} // fine
+                carouselKey={'1'}
+            ></Carousel>
+            {/* <Carousel
+                mediaArray={mediaArray}
+                active={true} // testing this
+                delay={'3000'}
+                slidesPerPage={3} // testing this
+                slideGap={10} // testing this
+                axis={'y'}
+                height={'1000'} // testing this
+                loop={false}
+                startIndex={2}
+                ssr={false}
+            ></Carousel> */}
+        </div>
     );
 }
