@@ -3,7 +3,7 @@ import { json, redirect } from '@remix-run/server-runtime';
 import type { LoaderFunction } from '@remix-run/server-runtime';
 import { getUserId } from '~/session.server';
 
-import { useOptionalUser } from '~/utils';
+import { useOptionalUser } from '~/utils/_tmp_/user';
 
 export const loader: LoaderFunction = async ({ request }) => {
     const userId = await getUserId(request);

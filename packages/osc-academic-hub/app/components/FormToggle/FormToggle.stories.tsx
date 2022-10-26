@@ -8,6 +8,7 @@ export default {
     component: FormToggle
 } as Meta;
 
+// TODO: ak - sun and moon icons seem to break storybook
 const Template: Story<Props> = (args) => <FormToggle {...args} />;
 
 export const Primary = Template.bind({});

@@ -3,7 +3,9 @@
  */
 
 import React from 'react';
-import '../../mocks/matchMedia'; // Must be imported before the tested file
+
+// eslint-disable-next-line jest/no-mocks-import -- This is how the jest docs suggest to do this https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
+import '../../__mocks__/matchMedia'; // Must be imported before the tested file
 import { Trustpilot } from './Trustpilot';
 import { act, screen, render } from '@testing-library/react';
 

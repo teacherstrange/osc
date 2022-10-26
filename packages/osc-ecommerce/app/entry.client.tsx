@@ -4,7 +4,7 @@ import { hydrate } from 'react-dom';
 import { CacheProvider } from '@emotion/react';
 import { RemixBrowser } from '@remix-run/react';
 
-import { ClientStyleContext } from './context';
+import { ClientStyleContext } from './utils/context';
 import createEmotionCache from './createEmotionCache';
 
 interface ClientCacheProviderProps {
