@@ -125,7 +125,7 @@ test('test aria hidden is set on the correct slides - slidesInView0000', () => {
         Array.from(embla__slides).forEach((slide) => {
             expect(slide).toHaveAttribute('aria-hidden', 'false');
         });
-    }, 50);
+    }, 200);
 });
 
 // need to test aria hidden, it is custom behavior
@@ -174,7 +174,7 @@ test('test slides per page', () => {
     setTimeout(() => {
         const embla__slides = document.querySelectorAll(`.embla__slide.is-selected`);
         expect(Array.from(embla__slides).length).toBe(3);
-    }, 50);
+    }, 200);
 });
 
 test('test slideGap', () => {
