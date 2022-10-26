@@ -11,3 +11,4 @@ packages/osc-ecommerce/public/*
 packages/osc-academic-hub/coverage/*
 packages/osc-ecommerce/coverage/*
 packages/osc-ui/coverage/*
+/packages/osc-studio/dist/**/*

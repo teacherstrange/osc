@@ -89,15 +89,6 @@ export const CarouselInner: FC<Props> = (props) => {
     }, [emblaApi, setSelectedIndex]);
 
     const setAriaHidden = useCallback(() => {
-        // const slides = document.querySelectorAll('.embla__slide');
-        // slides.forEach((el) => {
-        //     el.classList.add('embla-carousel-loaded');
-        //     if (el.classList.contains('is-selected')) {
-        //         el.ariaHidden = 'false';
-        //     } else {
-        //         el.ariaHidden = 'true';
-        //     }
-        // });
         if (!emblaApi) return;
         const slides = emblaApi.slideNodes();
         emblaApi.slidesInView(true).forEach((indexInView) => {
