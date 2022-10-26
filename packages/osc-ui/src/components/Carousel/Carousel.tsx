@@ -41,28 +41,6 @@ export const CarouselInner: FC<Props> = (props) => {
 
     const delayInt = parseInt(delay, 10);
 
-    const setAriaHidden = () => {
-        const slides = document.querySelectorAll('.embla__slide');
-        slides.forEach((el) => {
-            el.classList.add('embla-carousel-loaded');
-            if (el.classList.contains('is-selected')) {
-                el.ariaHidden = 'false';
-            } else {
-                el.ariaHidden = 'true';
-            }
-        });
-        // if (!emblaApi) return;
-        // console.log('slides in view', emblaApi.slidesInView());
-        // console.log('slidesNotInView', emblaApi.slidesNotInView());
-        // const slides = emblaApi.slideNodes();
-        // emblaApi.slidesInView().forEach((indexInView) => {
-        //     slides[indexInView].setAttribute('aria-hidden', 'false');
-        // });
-        // emblaApi.slidesNotInView().forEach((indexNotInView) => {
-        //     slides[indexNotInView].setAttribute('aria-hidden', 'true');
-        // });
-    };
-
     const trueSlidesPerPage = () => {
         if (typeof window === 'undefined') return 1;
         if (window.matchMedia('(min-width: 768px)').matches) return slidesPerPage;
@@ -110,9 +88,29 @@ export const CarouselInner: FC<Props> = (props) => {
         setSelectedIndex(emblaApi.selectedScrollSnap());
     }, [emblaApi, setSelectedIndex]);
 
+    const setAriaHidden = useCallback(() => {
+        // const slides = document.querySelectorAll('.embla__slide');
+        // slides.forEach((el) => {
+        //     el.classList.add('embla-carousel-loaded');
+        //     if (el.classList.contains('is-selected')) {
+        //         el.ariaHidden = 'false';
+        //     } else {
+        //         el.ariaHidden = 'true';
+        //     }
+        // });
+        if (!emblaApi) return;
+        const slides = emblaApi.slideNodes();
+        emblaApi.slidesInView(true).forEach((indexInView) => {
+            slides[indexInView].setAttribute('aria-hidden', 'false');
+        });
+        emblaApi.slidesNotInView(true).forEach((indexNotInView) => {
+            slides[indexNotInView].setAttribute('aria-hidden', 'true');
+        });
+    }, [emblaApi]);
+
     useEffect(() => {
         setAriaHidden();
-    }, [selectedIndex]);
+    }, [selectedIndex, setAriaHidden]);
 
     useEffect(() => {
         if (!emblaApi) return;
