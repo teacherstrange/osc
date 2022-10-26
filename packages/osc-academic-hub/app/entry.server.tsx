@@ -6,7 +6,7 @@ import { RemixServer } from '@remix-run/react';
 import type { EntryContext } from '@remix-run/node'; // Depends on the runtime you choose
 import 'dotenv/config';
 
-import { ServerStyleContext } from './context';
+import { ServerStyleContext } from './utils/context';
 import createEmotionCache from './createEmotionCache';
 
 export default function handleRequest(

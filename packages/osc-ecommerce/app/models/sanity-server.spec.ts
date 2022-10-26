@@ -1,5 +1,6 @@
 import getPageData from './sanity.server';
-import { mockHomeRequest } from '../../mocks/requests';
+// eslint-disable-next-line jest/no-mocks-import -- no clear way to intercept a request form remix so we want to use this as a function rather than a true mock -- perhaps this could be done better?
+import { mockHomeRequest } from '../../__mocks__/requests';
 import { HOME_QUERY } from '~/queries/sanity/home';
 import { COLLECTION_QUERY } from '~/queries/sanity/collection';
 import { PRODUCT_QUERY } from '~/queries/sanity/product';

@@ -7,6 +7,7 @@ export const colorSchemeCookie = createCookie('color-scheme');
 export const getColorSchemeToken = async (request: Request) =>
     await colorSchemeCookie.parse(request.headers.get('Cookie'));
 
+// TODO: sb - need to update this at some point to allow more than two options
 export const getColorScheme = async (request: Request) => {
     // Manually selected theme
     const userSelectedColorScheme = await getColorSchemeToken(request);

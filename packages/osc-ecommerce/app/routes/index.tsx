@@ -2,14 +2,11 @@ import { Form, useLoaderData, useLocation, useParams, useSubmit } from '@remix-r
 
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Heading, Stack } from '@chakra-ui/react';
-import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useState } from 'react';
-import { FormToggle } from '~/components/FormToggle';
-import { getColorScheme } from '~/cookie';
-
-import { Tabs } from 'osc-ui';
-import oscUiTabStyles from 'osc-ui/dist/tabs.css';
+import { FormToggle } from '~/components/FormToggle/FormToggle';
+import { getColorScheme } from '~/utils/colorScheme';
 
 import Preview from '~/components/Preview';
 import getPageData from '~/models/sanity.server';
@@ -19,15 +16,12 @@ import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
+import { useOptionalUser } from '~/utils/_tmp_/user';
 
 interface PageData {
     page: SanityPage;
     isPreview: boolean;
 }
-
-export const links: LinksFunction = () => {
-    return [{ rel: 'stylesheet', href: oscUiTabStyles }];
-};
 
 export const loader: LoaderFunction = async ({ request }) => {
     const colorScheme = await getColorScheme(request);
@@ -71,6 +65,7 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 
 export default function Index() {
     const { colorScheme, home, isPreview, query } = useLoaderData<typeof loader>();
+    const user = useOptionalUser();
     const params = useParams();
 
     // If `preview` mode is active, its component updates this state for us
@@ -83,20 +78,17 @@ export default function Index() {
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
      */
     return (
-        <div>
+        <>
             {isPreview ? (
                 <Preview data={data} setData={setData} query={query} queryParams={params} />
             ) : null}
 
-            <Heading>{data?.title}</Heading>
-            <Form action="/logout" method="post">
-                <button
-                    type="submit"
-                    className="rounded bg-slate-600 py-2 px-4 text-blue-100 hover:bg-blue-500 active:bg-blue-600"
-                >
-                    Logout
-                </button>
-            </Form>
+            {user ? (
+                <Form action="/logout" method="post">
+                    <button type="submit">Logout</button>
+                </Form>
+            ) : null}
+
             {colorScheme && (
                 <FormToggle
                     leftIcon={<MoonIcon color={'secondary'} margin={2} />}
@@ -113,25 +105,9 @@ export default function Index() {
                     id="color-mode-toggle"
                 />
             )}
-            <Tabs
-                tabs={[
-                    {
-                        key: '1',
-                        list: 'One',
-                        panel: 'one!'
-                    },
-                    {
-                        key: '2',
-                        list: 'Two',
-                        panel: 'two!'
-                    },
-                    {
-                        key: '3',
-                        list: 'Three',
-                        panel: 'three!'
-                    }
-                ]}
-            />
+
+            <Heading as="h1">{data?.title}</Heading>
+
             {data?.modules && data?.modules.length > 0 ? (
                 <Stack spacing={16}>
                     {data?.modules.map((module: module) =>
@@ -139,6 +115,6 @@ export default function Index() {
                     )}
                 </Stack>
             ) : null}
-        </div>
+        </>
     );
 }

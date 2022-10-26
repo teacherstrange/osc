@@ -6,7 +6,8 @@ import * as React from 'react';
 import { getUserId, createUserSession } from '~/session.server';
 
 import { createUser, getUserByEmail } from '~/models/user.server';
-import { safeRedirect, validateEmail } from '~/utils';
+import { validateEmail } from '~/utils/_tmp_/validateEmail';
+import { safeRedirect } from '~/utils/_tmp_/safeRedirect';
 
 export const loader: LoaderFunction = async ({ request }) => {
     const userId = await getUserId(request);

@@ -8,14 +8,12 @@
     "dataset": ""
   },
   "plugins": [
-    "@sanity/dashboard",
     "@sanity/base",
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
     "media",
     "@sanity/color-input",
-    "dashboard-widget-shopify",
     "iframe-pane",
     "seo-pane"
   ],
@@ -40,10 +38,6 @@
     {
       "implements": "part:@sanity/form-builder/input/file/asset-sources",
       "path": "./parts/assetSources.js"
-    },
-    {
-      "implements": "part:@sanity/dashboard/config",
-      "path": "./parts/dashboardConfig.js"
     },
     {
       "name": "part:@sanity/base/new-document-structure",
