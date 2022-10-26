@@ -2,6 +2,7 @@ import { extendTheme } from '@chakra-ui/react';
 import colours from './global/colours';
 
 const darkTheme = extendTheme(colours, {
+    name: 'Dark-osc-ecommerce',
     shadows: { outline: 'none' },
     colors: {
         primary: 'var(--colour-navy)',

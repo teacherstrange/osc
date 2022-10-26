@@ -82,32 +82,27 @@ test.describe('Navigates to a sample of pages without them hanging', () => {
 test.describe('Carousel is visible and functioning', () => {
     test('Carousel is visible and functioning   ', async ({ page }) => {
         const checkSelectedIndex = async (page: Page) => {
-            const h1 = page.getByRole('heading', {
-                level: 1
-            });
-
-            await expect(h1).toBeVisible();
+            //Making sure that <, > arrows are correctly displayed - prev next buttons visible
+            //Clicking on <, > changes the slide correctly  —> test prev, next functionaility
+            // get all 'is-selected' slides
+            // store final index
+            // click next slide
+            // repeat steps 1 and 2
+            // compare if final index is final index + 1
+            // click prev buttons
+            // check if final index step 2 value
+            // get indicator buttons
+            // click last one, is-selected.final index === slides.length
+            // click first one, is-selected.final index === slides.length
         };
 
-        const checkSlidesPerPage = async (page: Page) => {
-            const h1 = page.getByRole('heading', {
-                level: 1
-            });
+        const checkCarouselText = async (page: Page) => {};
 
-            await expect(h1).toBeVisible();
-        };
-
-        const checkButtons = async (page: Page) => {
-            const h1 = page.getByRole('heading', {
-                level: 1
-            });
-
-            await expect(h1).toBeVisible();
-        };
+        const checkSlideGap = async (page: Page) => {};
 
         await page.goto('/kitchen-sink');
         await checkSelectedIndex(page);
-        await checkSlidesPerPage(page);
-        await checkButtons(page);
+        await checkCarouselText(page);
+        await checkSlideGap(page);
     });
 });

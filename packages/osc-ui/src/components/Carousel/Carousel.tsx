@@ -51,6 +51,16 @@ export const CarouselInner: FC<Props> = (props) => {
                 el.ariaHidden = 'true';
             }
         });
+        // if (!emblaApi) return;
+        // console.log('slides in view', emblaApi.slidesInView());
+        // console.log('slidesNotInView', emblaApi.slidesNotInView());
+        // const slides = emblaApi.slideNodes();
+        // emblaApi.slidesInView().forEach((indexInView) => {
+        //     slides[indexInView].setAttribute('aria-hidden', 'false');
+        // });
+        // emblaApi.slidesNotInView().forEach((indexNotInView) => {
+        //     slides[indexNotInView].setAttribute('aria-hidden', 'true');
+        // });
     };
 
     const trueSlidesPerPage = () => {
@@ -101,17 +111,20 @@ export const CarouselInner: FC<Props> = (props) => {
     }, [emblaApi, setSelectedIndex]);
 
     useEffect(() => {
+        setAriaHidden();
+    }, [selectedIndex]);
+
+    useEffect(() => {
         if (!emblaApi) return;
         onSelect();
         emblaApi.on('resize', () => {
             onSelect();
-            setAriaHidden();
             setScrollSnaps(emblaApi.scrollSnapList());
         });
         emblaApi.on('select', onSelect);
         emblaApi.on('init', () => {
-            setAriaHidden();
             setCarouselVisible(true);
+            setScrollSnaps(emblaApi.scrollSnapList());
         });
         // return () => emblaApi.destroy();
     }, [emblaApi, setScrollSnaps, onSelect]);
@@ -119,7 +132,6 @@ export const CarouselInner: FC<Props> = (props) => {
     const handleResize = useDebouncedCallback(() => {
         if (!emblaApi) return;
         onSelect();
-        setAriaHidden();
         setScrollSnaps(emblaApi.scrollSnapList());
     }, 200);
 
@@ -136,17 +148,11 @@ export const CarouselInner: FC<Props> = (props) => {
             if (slidesPerPage) {
                 r.style.setProperty(
                     '--embla__slidesPerPage',
-                    `calc(${(1 / slidesPerPage) * 100}% + 1px)`
+                    `calc(${(1 / slidesPerPage) * 100}%)`
                 );
             }
             if (slideGap) {
                 r.style.setProperty('--embla__slideGap', slideGap + 'px');
-            }
-            if (slidesPerPage && slideGap) {
-                r.style.setProperty(
-                    '--embla__slidesPerPage',
-                    `calc(${(1 / slidesPerPage) * 100}%)`
-                );
             }
             if (axis) {
                 r.style.setProperty('--embla__axis', axis === 'x' ? 'row' : 'column');
@@ -165,7 +171,6 @@ export const CarouselInner: FC<Props> = (props) => {
         (index) => {
             if (emblaApi) {
                 emblaApi.scrollTo(index);
-                setAriaHidden();
             }
         },
         [emblaApi]
@@ -174,14 +179,12 @@ export const CarouselInner: FC<Props> = (props) => {
     const scrollPrev = useCallback(() => {
         if (emblaApi) {
             emblaApi.scrollPrev();
-            setAriaHidden();
         }
     }, [emblaApi]);
 
     const scrollNext = useCallback(() => {
         if (emblaApi) {
             emblaApi.scrollNext();
-            setAriaHidden();
         }
     }, [emblaApi]);
 
@@ -231,12 +234,12 @@ export const CarouselInner: FC<Props> = (props) => {
                         })}
                     </Box>
                     <div className="indicators">
-                        {scrollSnaps.length != 1 && (
+                        {scrollSnaps.length > 1 && (
                             <button className="embla__prev" onClick={scrollPrev}>
                                 Prev
                             </button>
                         )}
-                        {scrollSnaps.length != 1 && (
+                        {scrollSnaps.length > 1 && (
                             <button className="embla__next" onClick={scrollNext}>
                                 Next
                             </button>
@@ -246,7 +249,7 @@ export const CarouselInner: FC<Props> = (props) => {
             </Box>
             <div className="embla__navigator">
                 {scrollSnaps.map((_, indicatorIndex) => {
-                    if (scrollSnaps.length != 1) {
+                    if (scrollSnaps.length > 1) {
                         return (
                             <Button
                                 className="embla__dots"
@@ -273,8 +276,9 @@ export const Carousel: FC<Props> = (props) => {
     const [carouselKey, setCarouselKey] = useState('');
 
     useEffect(() => {
-        setCarouselKey(uuidv4());
-    }, []);
+        if (!carouselKey) setCarouselKey(uuidv4());
+        setCarouselKey(props.carouselKey);
+    }, [carouselKey, props.carouselKey]);
 
     return (
         <Box

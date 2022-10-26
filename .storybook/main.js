@@ -15,8 +15,9 @@ module.exports = {
     },
     stories,
     addons: [
+        '@react-theming/storybook-addon',
         'storybook-addon-sass-postcss',
-        '@chakra-ui/storybook-addon',
+        // '@chakra-ui/storybook-addon',
         '@storybook/addon-links',
         '@storybook/addon-essentials',
         '@storybook/addon-interactions',

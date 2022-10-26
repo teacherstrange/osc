@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
+    "@react-theming/storybook-addon": "^1.1.7",
     "osc-academic-hub": "file:packages/osc-academic-hub",
     "osc-api-auth": "file:packages/osc-api-auth",
     "osc-api-gateway": "file:packages/osc-api-gateway",

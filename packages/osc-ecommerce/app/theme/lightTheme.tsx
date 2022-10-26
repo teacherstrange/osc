@@ -2,6 +2,7 @@ import { extendTheme } from '@chakra-ui/react';
 import colours from './global/colours';
 
 const lightTheme = extendTheme(colours, {
+    name: 'Light-osc-ecommerce',
     shadows: {
         outline:
             '0 2.8px 2.2px rgb(0 0 0 / 3.4%), 0 6.7px 5.3px rgb(0 0 0 / 4.8%), 0 12.5px 10px rgb(0 0 0 / 6%), 0 22.3px 17.9px rgb(0 0 0 / 7.2%), 0 41.8px 33.4px rgb(0 0 0 / 8.6%), 0 100px 80px rgb(0 0 0 / 12%)'
