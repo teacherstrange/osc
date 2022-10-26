@@ -116,6 +116,7 @@ export const CarouselInner: FC<Props> = (props) => {
 
     useEffect(() => {
         if (!emblaApi) return;
+        setScrollSnaps(emblaApi.scrollSnapList());
         onSelect();
         emblaApi.on('resize', () => {
             onSelect();
@@ -124,7 +125,6 @@ export const CarouselInner: FC<Props> = (props) => {
         emblaApi.on('select', onSelect);
         emblaApi.on('init', () => {
             setCarouselVisible(true);
-            setScrollSnaps(emblaApi.scrollSnapList());
         });
         // return () => emblaApi.destroy();
     }, [emblaApi, setScrollSnaps, onSelect]);
