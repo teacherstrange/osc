@@ -4,7 +4,6 @@ import '../packages/osc-ui/src/components/Header/header.scss';
 
 import React from 'react';
 import { addDecorator } from '@storybook/react';
-import createCache from '@emotion/cache';
 import { withThemes } from '@react-theming/storybook-addon';
 import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 import { MemoryRouter } from 'react-router';
