@@ -32,7 +32,7 @@ model User {
   preferences            UserPreference[]        @relation("userPreferences")
   crmToken               CRMToken[]              @relation("userCRMToken")
   lmsToken               LMSToken[]              @relation("userLMSToken")
-  tutoring               CourseTutor[]           @relation("courseTutorProfile")
+  coursesTutored         CourseTutor[]           @relation("courseTutorProfile")
   courseTutorsAssigned   CourseTutor[]           @relation("courseTutorCreator")
   studying               CourseStudent[]         @relation("courseStudentProfile")
   courseStudentsAssigned CourseStudent[]         @relation("courseStudentCreator")
