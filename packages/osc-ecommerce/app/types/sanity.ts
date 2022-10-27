@@ -38,6 +38,18 @@ export interface trustpilotModule extends module {
     type: 'slider' | 'grid' | 'minicarousel' | 'microstar';
 }
 
+export interface carouselModule extends module {
+    mediaArray: SanityImage[];
+    active: boolean;
+    delay: string;
+    slidesPerPage: number;
+    slideGap: number;
+    axis: 'x' | 'y';
+    height: string;
+    loop: boolean;
+    startIndex: number;
+}
+
 export interface SanityImage {
     asset: {
         url: string;

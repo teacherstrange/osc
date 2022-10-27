@@ -161,11 +161,32 @@ Primary.args = {
     ],
     active: true,
     delay: '3000',
-    slidesPerPage: 2, // fine
+    slidesPerPage: 3, // fine
     slideGap: 10,
-    axis: 'y',
-    height: 1000,
+    axis: 'x',
+    height: 500,
     loop: false, // fine
     startIndex: 1, // fine
     ssr: false
+};
+
+export const HorizontalOneSlide = Template.bind({});
+HorizontalOneSlide.args = {
+    ...Primary.args,
+    axis: 'x',
+    slidesPerPage: 1
+};
+
+export const VerticalTwoSlide = Template.bind({});
+VerticalTwoSlide.args = {
+    ...Primary.args,
+    axis: 'y',
+    slidesPerPage: 2
+};
+
+export const VerticalMultiSlide = Template.bind({});
+VerticalMultiSlide.args = {
+    ...Primary.args,
+    axis: 'y',
+    slidesPerPage: 3
 };

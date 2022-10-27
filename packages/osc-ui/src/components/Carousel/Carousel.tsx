@@ -178,23 +178,23 @@ export const CarouselInner: FC<Props> = (props) => {
     }, [emblaApi]);
 
     return (
-        <Box width={'100%'} display={'flex'} alignItems="center" flexDirection="column">
-            <Box width={'100%'} className={`embla`}>
+        <Box width="100%" display="flex" alignItems="center" flexDirection="column">
+            <Box width="100%" className="embla">
                 <Box
-                    width={'100%'}
+                    width="100%"
                     aria-roledescription="carousel"
                     className="embla__viewport"
                     ref={emblaRef}
                 >
                     <Box
-                        width={'100%'}
+                        width="100%"
                         aria-live={delay ? 'off' : 'polite'}
                         className="embla__container"
                     >
                         {mediaArray?.map((q, index) => {
                             return (
                                 <Box
-                                    width={'100%'}
+                                    width="100%"
                                     key={`${index}`}
                                     aria-label={`${index + 1} of ${mediaArray?.length}`}
                                     aria-roledescription="slide"
@@ -212,7 +212,7 @@ export const CarouselInner: FC<Props> = (props) => {
                                             <Image
                                                 className="o-img o-img--cover"
                                                 height={q.image.height}
-                                                width={'100%'}
+                                                width="100%"
                                                 src={q.image.asset.url}
                                                 alt={q.altText}
                                             />
@@ -271,9 +271,9 @@ export const Carousel: FC<Props> = (props) => {
 
     return (
         <Box
-            width={'100%'}
-            key={` ${carouselKey}-${mediaArray.length}`}
-            display={'flex'}
+            width="100%"
+            key={`${carouselKey}-${mediaArray.length}`}
+            display="flex"
             alignItems="center"
             flexDirection="column"
             className={`embla__carousel_wrapper_${carouselKey}`}
