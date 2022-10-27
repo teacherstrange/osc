@@ -183,6 +183,7 @@ export const CarouselInner: FC<Props> = (props) => {
                 <Box
                     width="100%"
                     aria-roledescription="carousel"
+                    role="region"
                     className="embla__viewport"
                     ref={emblaRef}
                 >
@@ -196,6 +197,7 @@ export const CarouselInner: FC<Props> = (props) => {
                                 <Box
                                     width="100%"
                                     key={`${index}`}
+                                    role="group"
                                     aria-label={`${index + 1} of ${mediaArray?.length}`}
                                     aria-roledescription="slide"
                                     alignSelf="center"

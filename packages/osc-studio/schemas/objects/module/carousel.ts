@@ -7,20 +7,33 @@ export default {
     title: 'Carousel',
     type: 'object',
     icon: StarIcon,
+    groups: [
+        {
+            name: 'carousel',
+            title: 'Carousel Properties'
+        },
+        {
+            name: 'slide',
+            title: 'Slide Properties'
+        }
+    ],
     fields: [
         {
             title: 'Active',
             name: 'active',
             type: 'boolean',
-            description: 'Whether or not the Carousel is active'
+            description: 'Whether or not the Carousel is active',
+            group: 'carousel'
         },
         {
             title: 'Loop',
             name: 'loop',
             type: 'boolean',
-            description: 'Whether the Carousel should loop when it reaches the last slide'
+            description: 'Whether the Carousel should loop when it reaches the last slide',
+            group: 'carousel'
         },
         {
+            group: 'carousel',
             title: 'Height',
             name: 'height',
             type: 'number',
@@ -35,6 +48,7 @@ export default {
                 'The height of the images carosuel, leave this blank to use the Autoheight feature. The autoheight feature changes the height of the carousel container to fit the height of the highest slide in view. Please note, if the carousel axis is set to vertical, the height must be set.'
         },
         {
+            group: 'carousel',
             title: 'Axis',
             name: 'axis',
             type: 'string',
@@ -48,6 +62,7 @@ export default {
             description: 'Whether the Carousel should scroll horizontally or vertically'
         },
         {
+            group: 'slide',
             title: 'Images',
             name: 'mediaArray',
             type: 'array',
@@ -55,6 +70,7 @@ export default {
             description: 'The images and text within the Carousel'
         },
         {
+            group: 'slide',
             title: 'Starting slide',
             name: 'startIndex',
             type: 'number',
@@ -69,6 +85,7 @@ export default {
         },
         // TODO: ak- add range slider
         {
+            group: 'carousel',
             title: 'Delay',
             name: 'delay',
             type: 'string',
@@ -81,6 +98,7 @@ export default {
             }
         },
         {
+            group: 'carousel',
             title: 'Slides Per Page',
             name: 'slidesPerPage',
             type: 'number',
@@ -88,6 +106,7 @@ export default {
             description: 'The number of images to show per Carousel slide'
         },
         {
+            group: 'slide',
             title: 'Slide Gap',
             name: 'slideGap',
             type: 'number',
