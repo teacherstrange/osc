@@ -48,7 +48,7 @@ export default {
             description: 'Whether the Carousel should scroll horizontally or vertically'
         },
         {
-            title: 'Media Array',
+            title: 'Images',
             name: 'mediaArray',
             type: 'array',
             of: [{ type: 'module.image' }],

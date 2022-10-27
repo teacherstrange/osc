@@ -18,8 +18,6 @@ export default function Module({ module }: { module: module }) {
         case 'module.carousel':
             const moduleCarousel = module as carouselModule;
 
-            console.log(moduleCarousel);
-
             return (
                 <Carousel
                     mediaArray={moduleCarousel.mediaArray}

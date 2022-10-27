@@ -80,10 +80,10 @@ export const CarouselInner: FC<Props> = (props) => {
     );
 
     const [carouselVisible, setCarouselVisible] = useState(ssr ? false : true);
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
-    const [scrollSnaps, setScrollSnaps] = React.useState<Array<number>>([]);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [scrollSnaps, setScrollSnaps] = useState<Array<number>>([]);
 
-    const onSelect = React.useCallback(() => {
+    const onSelect = useCallback(() => {
         if (!emblaApi) return;
         setSelectedIndex(emblaApi.selectedScrollSnap());
     }, [emblaApi, setSelectedIndex]);
@@ -156,7 +156,7 @@ export const CarouselInner: FC<Props> = (props) => {
         }
     }
 
-    const scrollTo = React.useCallback(
+    const scrollTo = useCallback(
         (index) => {
             if (emblaApi) {
                 emblaApi.scrollTo(index);
@@ -214,7 +214,7 @@ export const CarouselInner: FC<Props> = (props) => {
                                                 height={q.image.height}
                                                 width="100%"
                                                 src={q.image.asset.url}
-                                                alt={q.altText}
+                                                alt={q.altText ?? ''}
                                             />
                                         )}
                                     </div>
