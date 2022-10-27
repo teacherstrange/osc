@@ -2,7 +2,7 @@ import { Form, useLoaderData, useLocation, useParams, useSubmit } from '@remix-r
 
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Heading, Stack } from '@chakra-ui/react';
-import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useState } from 'react';
 import { FormToggle } from '~/components/FormToggle/FormToggle';
@@ -15,7 +15,6 @@ import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
 import { Carousel } from 'osc-ui';
-import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 import { useOptionalUser } from '~/utils/_tmp_/user';
@@ -24,10 +23,6 @@ interface PageData {
     page: SanityPage;
     isPreview: boolean;
 }
-
-export const links: LinksFunction = () => {
-    return [{ rel: 'stylesheet', href: oscUiCarouselStyles }];
-};
 
 export const loader: LoaderFunction = async ({ request }) => {
     const colorScheme = await getColorScheme(request);
