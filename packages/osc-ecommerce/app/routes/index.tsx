@@ -2,7 +2,7 @@ import { Form, useLoaderData, useLocation, useParams, useSubmit } from '@remix-r
 
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Heading, Stack } from '@chakra-ui/react';
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useState } from 'react';
 import { FormToggle } from '~/components/FormToggle/FormToggle';
@@ -13,6 +13,8 @@ import { HOME_QUERY } from '~/queries/sanity/home';
 import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
+import { Carousel } from 'osc-ui';
+import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 import { useOptionalUser } from '~/utils/_tmp_/user';
@@ -21,6 +23,10 @@ interface PageData {
     page: SanityPage;
     isPreview: boolean;
 }
+
+export const links: LinksFunction = () => {
+    return [{ rel: 'stylesheet', href: oscUiCarouselStyles }];
+};
 
 export const loader: LoaderFunction = async ({ request }) => {
     const colorScheme = await getColorScheme(request);
@@ -147,13 +153,13 @@ export default function Index() {
                 delay={'3000'} // fine
                 slidesPerPage={3} // fine
                 slideGap={0} // fine
-                axis={'y'} // fine
+                axis={'x'} // fine
                 height={'1000'} // fine
                 loop={false} // fine
                 startIndex={2} // fine
                 carouselKey={'1'}
             ></Carousel>
-            {/* <Carousel
+            <Carousel
                 mediaArray={mediaArray}
                 active={true} // testing this
                 delay={'3000'}
@@ -164,7 +170,7 @@ export default function Index() {
                 loop={false}
                 startIndex={2}
                 ssr={false}
-            ></Carousel> */}
-        </div>
+            ></Carousel>
+        </>
     );
 }
