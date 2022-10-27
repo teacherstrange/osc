@@ -17,7 +17,7 @@ async function startServer(server: ApolloServer) {
     const { url } = await startStandaloneServer(server, {
         listen: { port: 4001 }
     });
-    console.info(`🚀  Server ready at: ${url}`);
+    console.info(`🚀  Auth Microservice ready at: ${url}`);
 }
 
 void startServer(server);
