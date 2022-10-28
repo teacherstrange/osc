@@ -31,9 +31,5 @@ runs:
     - run: mv -v -f packages/${{ inputs.name }}/* .
       shell: bash
 
-    # add dev-dependencies to the osc-academic-hub
-    - run: npm run addDevDeps
-      shell: bash
-
     - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
       shell: bash
