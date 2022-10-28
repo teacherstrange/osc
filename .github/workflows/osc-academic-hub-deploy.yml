@@ -43,9 +43,12 @@ jobs:
           echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
           echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
 
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
       - if: steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
-        run: ./cancel.sh
+        run: ./bin/cancel.sh
 
   lint:
     name: ⬣ ESLint

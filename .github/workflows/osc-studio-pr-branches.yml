@@ -21,11 +21,13 @@ jobs:
               - '.github/workflows/osc-studio-deploy.yml'
             osc-studio-pr:
               - '.github/workflows/osc-studio-pr-branches.yml'
-        # run only if some file in 'src' folder was changed
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
 
       - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]' || github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
-        run: ./cancel.sh
+        run: ./bin/cancel.sh
 
       - name: Dump steps context
         env:
