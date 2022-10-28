@@ -112,7 +112,7 @@ jobs:
           file: "fly.toml"
           field: "app"
 
-      - name: What
+      - name: Echo Branch into variable
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Create app
