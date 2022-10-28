@@ -132,18 +132,13 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      # from here
+      - name: checkoutCancelSetupBuild
+        uses: ./.github/actions/checkoutCancelSetupBuild
+        id: checkoutCancelSetupBuild
         with:
-          node-version: 16
-          cache: "npm"
-
-      - run: npm run setup
-      - run: npm run build:osc-ui
-
-      - run: rm -v -r ./package.json ./node_modules
-      - run: mv -v -f packages/osc-ecommerce/* .
-
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+          name: "osc-ecommerce"
+      # to here
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
@@ -203,8 +198,6 @@ jobs:
           echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
           echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
           echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
-
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
