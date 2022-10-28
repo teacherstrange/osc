@@ -18,8 +18,6 @@ jobs:
           filters: |
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
-            osc-ui:
-              - 'packages/osc-ui/**'
             prisma:
               - 'prisma/**'
             pscale:
@@ -34,8 +32,6 @@ jobs:
               - '.github/workflows/osc-academic-hub-destroy-apps.yml'
             osc-academic-hub-pr:
               - '.github/workflows/osc-academic-hub-pr-branches.yml'
-            issue_templates:
-              - '.github/ISSUE_TEMPLATE/**'
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3

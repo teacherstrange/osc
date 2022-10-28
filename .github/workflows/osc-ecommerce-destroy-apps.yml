@@ -18,8 +18,6 @@ jobs:
           filters: |
             osc-ecommerce:
               - 'packages/osc-ecommerce/**'
-            osc-ui:
-              - 'packages/osc-ui/**'
             prisma:
               - 'prisma/**'
             pscale:
@@ -34,8 +32,6 @@ jobs:
               - '.github/workflows/osc-ecommerce-destroy-apps.yml'
             osc-ecommerce-pr:
               - '.github/workflows/osc-ecommerce-pr-branches.yml'
-            issue_templates:
-              - '.github/ISSUE_TEMPLATE/**'
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3

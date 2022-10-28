@@ -17,8 +17,6 @@ jobs:
           filters: |
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
-            osc-ui:
-              - 'packages/osc-ui/**'
             pscale:
               - '.pscale/**'
             Dockerfiles:
@@ -31,8 +29,6 @@ jobs:
               - '.github/workflows/osc-academic-hub-deploy.yml'
             osc-academic-hub-destroy-apps:
               - '.github/workflows/osc-academic-hub-destroy-apps.yml'
-            issue_templates:
-              - '.github/ISSUE_TEMPLATE/**'
 
       - uses: dorny/paths-filter@v2
         id: changes-schema

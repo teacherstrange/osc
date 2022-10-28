@@ -17,8 +17,6 @@ jobs:
           filters: |
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
-            osc-ui:
-              - 'packages/osc-ui/**'
             prisma:
               - 'prisma/**'
             pscale:
@@ -33,8 +31,6 @@ jobs:
               - '.github/workflows/osc-academic-hub-destroy-apps.yml'
             osc-academic-hub-pr:
               - '.github/workflows/osc-academic-hub-pr-branches.yml'
-            issue_templates:
-              - '.github/ISSUE_TEMPLATE/**'
         # run only if some file in 'src' folder was changed
 
       - name: Get PR details
