@@ -1,3 +1,29 @@
+# [0.6.0](https://github.com/Open-Study-College/osc/compare/v0.5.1...v0.6.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* removed cypress ([44dd2c6](https://github.com/Open-Study-College/osc/commit/44dd2c6d5142a7c7c145706a51c54c98ff034f57))
+* removed npm init test script errors ([1a80c04](https://github.com/Open-Study-College/osc/commit/1a80c0459cb34e8e55340ba72acea4a4e4b8865f))
+* removed/replaced console.log ([a9f3f33](https://github.com/Open-Study-College/osc/commit/a9f3f337efc2e736f566e8f3f3a168746cf8eee4))
+
+
+### Features
+
+* added .env.example to gateway ([d684af4](https://github.com/Open-Study-College/osc/commit/d684af4e1705f99896a544dfb6cfe9d06aaab133))
+* added API packages to Lerna config ([048c04b](https://github.com/Open-Study-College/osc/commit/048c04bcc7c63b2e32a9db486e995fbaa3457342))
+* added auth api base build ([47de2d8](https://github.com/Open-Study-College/osc/commit/47de2d8c41283f9ee872406e476068ee89904985))
+* implements osc-api-gateway run commands ([2491b88](https://github.com/Open-Study-College/osc/commit/2491b88c3516cf412483ceff5833bec4f073f9b3))
+* initial gateway setup ([8ea3c7e](https://github.com/Open-Study-College/osc/commit/8ea3c7e75139c232831998bdf0b62ae70691e229))
+* initial ORM/DB table setup ([6fb8442](https://github.com/Open-Study-College/osc/commit/6fb8442088bde34255a59e4d03782745ef6f9e73))
+* restructured API into individual packages ([4158ed5](https://github.com/Open-Study-College/osc/commit/4158ed5c27b79fb1eb7fe368a8db8de44825eb3c))
+* updated .gitignore files ([cfcb96c](https://github.com/Open-Study-College/osc/commit/cfcb96c092f5ae9ffd6dfd4ea5497193430e4b09))
+* users tables ([3449e78](https://github.com/Open-Study-College/osc/commit/3449e781c1265a2ea6dd65c7b851f243c0f4b535))
+* working barebones of API Gateway ([0ae81e2](https://github.com/Open-Study-College/osc/commit/0ae81e2be90ad59321a8c9a805d6fe1ea1cdb087))
+* working setup of barebones auth subgraph ([14eb6cf](https://github.com/Open-Study-College/osc/commit/14eb6cf45640b9efba31da7b31054fc256b6f647))
+
+
+
 ## [0.5.1](https://github.com/Open-Study-College/osc/compare/v0.5.0...v0.5.1) (2022-10-26)
 
 
@@ -103,35 +129,6 @@
 ### Reverts
 
 * Revert "test: log result for testing CI" ([1d70bb3](https://github.com/Open-Study-College/osc/commit/1d70bb35a465118d9f55aba06e40a6d3937b165c))
-
-
-
-# [0.3.0](https://github.com/Open-Study-College/osc/compare/v0.2.0...v0.3.0) (2022-10-13)
-
-
-### Bug Fixes
-
-* removes args from child list to prevent passing props by accident ([804e006](https://github.com/Open-Study-College/osc/commit/804e0068d051a73d3372676128d2fdeca2972123))
-
-
-### Features
-
-* adds a mock function for window.matchMedia ([ce58312](https://github.com/Open-Study-College/osc/commit/ce5831296c27c3d0157ebb5f291fb83a0a4cd102))
-* adds helper function to capitalize first letter of a word ([217d215](https://github.com/Open-Study-College/osc/commit/217d21573f08ca3baa43d405b48351f78d8f42b9))
-* adds list component ([3a7aaf5](https://github.com/Open-Study-College/osc/commit/3a7aaf534b3b784238864793d68e8c500a77aa11))
-* adds listitem component ([9ff3f5e](https://github.com/Open-Study-College/osc/commit/9ff3f5e2a23c10cb8c77cbb0b1839e2dd6ad1aa0))
-* adds module component to loop through modules ([f3f6d45](https://github.com/Open-Study-College/osc/commit/f3f6d4578810530e6ed9125b14a9afcac16ec53f))
-* adds module component to route templates ([7ab1afb](https://github.com/Open-Study-College/osc/commit/7ab1afbef79d26694d7c9050abe304db30d954af))
-* adds modules query ([9697087](https://github.com/Open-Study-College/osc/commit/96970875404aefa1f6662e2df48d0ced5a97767e))
-* adds sanity trustpilot type ([eec94d2](https://github.com/Open-Study-College/osc/commit/eec94d2fe1bad8f7ee678056a9c7c012ea4bce0d))
-* adds stories for list and listitem ([c2530fe](https://github.com/Open-Study-College/osc/commit/c2530fefe69ee168caa6b2fbe22d1089402b61aa))
-* adds tests for list ([2f81031](https://github.com/Open-Study-College/osc/commit/2f81031d4e085c67144d20462c34d6e27fd294eb))
-* adds Trustpilot component ([f873af1](https://github.com/Open-Study-College/osc/commit/f873af122fc507bb83257942ea08785c695c30b5))
-* adds Trustpilot component tests ([a337665](https://github.com/Open-Study-College/osc/commit/a33766526d0f04ae9042fa04545d3b8662782499))
-* adds trustpilot module schema to Sanity ([983e877](https://github.com/Open-Study-College/osc/commit/983e877b6709c5bbc8a69f81ea3da34d741aaad4))
-* adds Trustpilot object to Window interface ([b99dfd8](https://github.com/Open-Study-College/osc/commit/b99dfd84271a61bef4e0b3060ec629e412c8e206))
-* adds useEffect to adjust the height when the browser has a  narrow width ([bb93831](https://github.com/Open-Study-College/osc/commit/bb93831b6819ea63fa637da304d6fa785af47949))
-* export trustpilot component from osc-ui ([23cd742](https://github.com/Open-Study-College/osc/commit/23cd742a0c5fcd1a8c0130372e27be371ea26b5d))
 
 
 
