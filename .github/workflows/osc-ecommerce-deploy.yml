@@ -114,6 +114,7 @@ jobs:
       - name: ⚡ Run vitest
         run: npm run test
 
+  # // todo - ak - replace pscale db url with new name, playwright related
   playwright:
     name: 🎭 Playwright
     env:
