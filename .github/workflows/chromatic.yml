@@ -5,7 +5,8 @@ name: "Chromatic"
 
 # Event for the workflow
 on:
-  push: {}
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 # List of jobs
 jobs:
@@ -17,7 +18,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - if: $ {{ github.event.pull_request.draft == 'true' }}
+      - if: github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
         run: ./bin/cancel.sh
 

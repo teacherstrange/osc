@@ -1,7 +1,7 @@
 name: 🚀 Deploy osc-studio
 on:
   pull_request:
-    types: [opened, reopened, synchronize, edited, closed]
+    types: [opened, reopened, synchronize]
 permissions:
   actions: write
   contents: read
