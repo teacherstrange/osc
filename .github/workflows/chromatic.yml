@@ -10,11 +10,17 @@ on:
 # List of jobs
 jobs:
   chromatic-deployment:
-    if: github.event.pull_request.draft == false
     # Operating System
     runs-on: ubuntu-latest
     # Job steps
     steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - if: github.event.pull_request.draft == true
+        name: Cancel the self CI workflow run
+        run: ./bin/cancel.sh
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
