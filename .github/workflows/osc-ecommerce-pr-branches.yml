@@ -191,9 +191,6 @@ jobs:
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - name: list volumes
-        run: echo "VOLUMES=${flyctl volumes list --json}" >> $GITHUB_ENV
-
       - name: delete all old volumes
         run: |
           VOLUMES=`flyctl volumes list --json`;
