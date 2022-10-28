@@ -10,6 +10,7 @@ on:
 # List of jobs
 jobs:
   chromatic-deployment:
+    if: github.event.pull_request.draft == false
     # Operating System
     runs-on: ubuntu-latest
     # Job steps
