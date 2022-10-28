@@ -200,10 +200,10 @@ jobs:
 
       - name: delete all old volumes
         run: |
-          VOLUMES=`flyctl volumes list --json`;
+          VOLUMES=`flyctl volumes list --json --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}`;
           echo $VOLUMES | jq -r '.[].id' | while read -r id ; do
-              echo $id
-              flyctl volumes delete $id -y 
+              echo "Deleting ${id}"
+              flyctl volumes delete ${id} -y
           done
 
       - name: Create volume

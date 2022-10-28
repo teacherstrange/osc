@@ -15,7 +15,7 @@ jobs:
         id: changes
         with:
           filters: |
-            osc-api-auth:
+            osc-api-auth: 
               - 'packages/osc-api-auth/**'
             osc-ecommerce:
               - 'packages/osc-ecommerce/**'
@@ -194,7 +194,6 @@ jobs:
       - name: delete all old volumes
         run: |
           VOLUMES=`flyctl volumes list --json --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}`;
-
           echo $VOLUMES | jq -r '.[].id' | while read -r id ; do
               echo "Deleting ${id}"
               flyctl volumes delete ${id} -y
