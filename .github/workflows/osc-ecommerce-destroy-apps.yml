@@ -16,16 +16,12 @@ jobs:
         id: changes
         with:
           filters: |
+            osc-api-auth: 
+              - 'packages/osc-api-auth/**'
             osc-ecommerce:
               - 'packages/osc-ecommerce/**'
-            prisma:
-              - 'prisma/**'
-            pscale:
-              - '.pscale/**'
             Dockerfiles:
               - 'Dockerfiles/**'
-            osc-ecommerce-db-pr:
-              - '.github/workflows/osc-ecommerce-db-pr-branches.yml'
             osc-ecommerce-deploy:
               - '.github/workflows/osc-ecommerce-deploy.yml'
             osc-ecommerce-destroy-apps:

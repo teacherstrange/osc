@@ -16,16 +16,12 @@ jobs:
         id: changes
         with:
           filters: |
+            osc-api-auth: 
+              - 'packages/osc-api-auth/**'
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
-            prisma:
-              - 'prisma/**'
-            pscale:
-              - '.pscale/**'
             Dockerfiles:
               - 'Dockerfiles/**'
-            osc-academic-hub-db-pr:
-              - '.github/workflows/osc-academic-hub-db-pr-branches.yml'
             osc-academic-hub-deploy:
               - '.github/workflows/osc-academic-hub-deploy.yml'
             osc-academic-hub-destroy-apps:

@@ -15,14 +15,12 @@ jobs:
         id: changes
         with:
           filters: |
+            osc-api-auth: 
+              - 'packages/osc-api-auth/**'
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
-            pscale:
-              - '.pscale/**'
             Dockerfiles:
               - 'Dockerfiles/**'
-            osc-academic-hub-db-pr:
-              - '.github/workflows/osc-academic-hub-db-pr-branches.yml'
             osc-academic-hub-pr:
               - '.github/workflows/osc-academic-hub-pr-branches.yml'
             osc-academic-hub-deploy:
@@ -30,17 +28,10 @@ jobs:
             osc-academic-hub-destroy-apps:
               - '.github/workflows/osc-academic-hub-destroy-apps.yml'
 
-      - uses: dorny/paths-filter@v2
-        id: changes-schema
-        with:
-          filters: |
-            prisma:
-              - 'prisma/**'
-
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]' || github.event.pull_request.draft == true
+      - if: steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
         run: ./bin/cancel.sh
 
