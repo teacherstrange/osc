@@ -33,25 +33,17 @@ jobs:
               - '.github/workflows/osc-academic-hub-pr-branches.yml'
             issue_templates:
               - '.github/ISSUE_TEMPLATE/**'
-        # run only if some file in 'src' folder was changed
+
       - uses: dorny/paths-filter@v2
         id: changes-schema
         with:
           filters: |
             prisma:
               - 'prisma/**'
-        # run only if some file in 'src' folder was changed
 
-      - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
-        name: "Cancel the self CI workflow run"
-        uses: potiuk/cancel-workflow-runs@master
-        with:
-          selfPreservation: false
-          cancelMode: self
-          notifyPRCancel: true
-          notifyPRCancelMessage: Cancelled.
-          token: ${{ secrets.GITHUB_TOKEN }}
-          sourceRunId: ${{ github.event.workflow_run.id }}
+      - name: Cancel the self CI workflow run
+        if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
+        run: ./cancel.sh
 
   build:
     needs: pre-check
