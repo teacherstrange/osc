@@ -196,10 +196,10 @@ jobs:
 
       - name: delete all old volumes
         run: |
-          for x in ${{ env.VOLUMES }}; do
-              echo $output | jq -r '.[].id'   
-              flyctl volumes delete jq -r '.[].id' -y  
-              echo volume deleted   
+          VOLUMES=`flyctl volumes list --json`;
+          echo $VOLUMES | jq -r '.[].id' | while read -r id ; do
+              echo $id
+              flyctl volumes delete $id -y 
           done
 
       - name: Create volume
