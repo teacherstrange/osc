@@ -39,6 +39,9 @@ jobs:
             prisma:
               - 'prisma/**'
 
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
       - name: Cancel the self CI workflow run
         if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
         run: ./cancel.sh
