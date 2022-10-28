@@ -20,7 +20,7 @@ jobs:
 
       - if: github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
-        run: ./bin/cancel.sh
+        run: ./workflow-scripts/cancel.sh
 
       - uses: actions/checkout@v3
         with:

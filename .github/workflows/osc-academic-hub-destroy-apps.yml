@@ -34,7 +34,7 @@ jobs:
 
       - if: steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
-        run: ./bin/cancel.sh
+        run: ./workflow-scripts/cancel.sh
 
   destroy_staging_app:
     runs-on: ubuntu-latest
