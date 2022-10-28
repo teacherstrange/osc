@@ -42,7 +42,7 @@ jobs:
               - 'prisma/**'
         # run only if some file in 'src' folder was changed
 
-      - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
+      - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]' || github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
         run: ./cancel.sh
 

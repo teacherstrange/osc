@@ -43,7 +43,7 @@ jobs:
           echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
           echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
 
-      - if: steps.changes.outputs.changes == '[]'
+      - if: steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
         run: ./cancel.sh
 
