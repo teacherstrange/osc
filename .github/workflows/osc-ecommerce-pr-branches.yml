@@ -212,6 +212,17 @@ jobs:
         with:
           args: "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
 
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: list volumes
+        run: echo "VOLUMES=${flyctl volumes list}" >> $GITHUB_ENV
+
+      - name: delete all old volumes
+        run: |
+          for x in ${{ env.BRANCH }}; do
+            flyctl volumes delete "$x"
+          done
+
       - name: Create volume
         uses: superfly/flyctl-actions@1.1
         continue-on-error: true
