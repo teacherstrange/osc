@@ -173,6 +173,14 @@ jobs:
         with:
           args: "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}"
 
+      - name: delete all old volumes
+        run: |
+          VOLUMES=`flyctl volumes list --json`;
+          echo $VOLUMES | jq -r '.[].id' | while read -r id ; do
+              echo $id
+              flyctl volumes delete $id -y 
+          done
+
       - name: Create volume
         uses: superfly/flyctl-actions@1.1
         continue-on-error: true
