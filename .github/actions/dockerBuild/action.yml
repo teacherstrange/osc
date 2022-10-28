@@ -58,22 +58,6 @@ runs:
         echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
         echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
 
-    - name: Create database branch - if asked, please click on displayed link to authenticate
-      shell: bash
-      if: ${{ inputs.BRANCH_NAME != 'main' && inputs.BRANCH_NAME != 'staging' }}
-      id: create-db-branch
-      env:
-        PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
-        PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
-        ORG_NAME: ${{inputs.ORG_NAME}}
-        DB_NAME: ${{inputs.DB_NAME}}
-        GITHUB_USER: ${{github.actor}}
-        BRANCH_NAME: ${{ inputs.BRANCH_NAME }}
-        FROM: ${{ inputs.FROM }}
-        PASSWORD_NAME: ${{ inputs.PASSWORD_NAME }}
-      run: |
-        ./.pscale/cli-helper-scripts/create-db-branch-dr-and-connection-pr-branches.sh "$BRANCH_NAME"
-
     # from here
     - name: 🐳 Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -94,25 +78,10 @@ runs:
         username: x
         password: ${{ inputs.FLY_API_TOKEN }}
 
-    - name: create connection string to PR Branch
-      shell: bash
-      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' }}
-      id: create-cs-pr
-      env:
-        PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
-        PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
-        ORG_NAME: ${{inputs.ORG_NAME}}
-        DB_NAME: ${{inputs.DB_NAME}}
-        GITHUB_USER: ${{github.actor}}
-        BRANCH_NAME: staging
-        PASSWORD_NAME: ${{ inputs.PASSWORD_NAME }}
-      run: |
-        ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
-
     - name: create connection string to STAGING
       shell: bash
+      if: ${{ env.BASE_REF != 'main' }}
       id: create-cs
-      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
       env:
         PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
         PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
@@ -139,30 +108,11 @@ runs:
       run: |
         ./.pscale/cli-helper-scripts/create-branch-connection-string.sh
 
-    # we have three versions of docker build, in each one we
+    # we have two versions of docker build, in each one we
     # need to pass in different Planetscale prisma database urls && files to each docker build command
-    - name: 🐳 Docker build DB PR Branch
-      uses: docker/build-push-action@v2
-      if: ${{ inputs.BRANCH_NAME != 'main' && inputs.BRANCH_NAME != 'staging' }}
-      with:
-        context: .
-        push: true
-        tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ inputs.BRANCH }}-${{ github.sha }}
-        build-args: |
-          VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
-          VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}
-          PLANETSCALE_PRISMA_DATABASE_URL_PR_DB=${{ env.MY_DB_URL }}${{ inputs.DB_NAME }}
-          COMMIT_SHA=${{ github.sha }}
-          "SANITY_STUDIO_API_DATASET=${{ inputs.SANITY_STUDIO_API_DATASET }}"
-          "SANITY_STUDIO_API_PROJECT_ID=${{ inputs.SANITY_STUDIO_API_PROJECT_ID }}"
-          "SANITY_STUDIO_API_TOKEN=${{ inputs.SANITY_STUDIO_API_TOKEN }}"
-        file: ./Dockerfiles/Dockerfile.db-pr
-        cache-from: type=local,src=/tmp/.buildx-cache
-        cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
-
     - name: 🐳 Docker build Production
       id: docker-build-prod
-      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.BRANCH_NAME == 'main' }}
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
       uses: docker/build-push-action@v2
       with:
         file: ./Dockerfiles/Dockerfile
@@ -183,8 +133,8 @@ runs:
 
       # file: ./Dockerfiles/Dockerfile.pr
     - name: 🐳 Docker build PR branch
-      if: ${{ inputs.BRANCH_NAME == 'staging' }}
       uses: docker/build-push-action@v2
+      if: ${{ env.BASE_REF != 'main' }}
       with:
         context: .
         push: true
