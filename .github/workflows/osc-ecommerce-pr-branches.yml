@@ -197,8 +197,7 @@ jobs:
 
           echo $VOLUMES | jq -r '.[].id' | while read -r id ; do
               echo "Deleting ${id}"
-              `flyctl volumes delete ${id} -y`
-              echo "${id} deleted!"
+              flyctl volumes delete ${id} -y
           done
 
       - name: Create volume
