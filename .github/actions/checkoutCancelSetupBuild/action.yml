@@ -25,7 +25,7 @@ runs:
     #   if: ${{ inputs.build-command }}
     #   shell: bash
 
-    - run: rm -v -r ./package.json ./node_modules
+    - run: rm -r ./package.json ./node_modules
       shell: bash
 
     - run: mv -v -f packages/${{ inputs.name }}/* .
