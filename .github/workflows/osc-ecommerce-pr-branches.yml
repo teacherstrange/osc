@@ -43,20 +43,8 @@ jobs:
         # run only if some file in 'src' folder was changed
 
       - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
-        name: "Cancel the self CI workflow run"
-        uses: potiuk/cancel-workflow-runs@master
-        with:
-          selfPreservation: false
-          cancelMode: self
-          notifyPRCancel: true
-          notifyPRCancelMessage: Cancelled.
-          token: ${{ secrets.GITHUB_TOKEN }}
-          sourceRunId: ${{ github.event.workflow_run.id }}
-
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
+        name: Cancel the self CI workflow run
+        run: ./cancel.sh
 
   build:
     needs: pre-check

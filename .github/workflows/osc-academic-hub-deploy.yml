@@ -44,15 +44,8 @@ jobs:
           echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
 
       - if: steps.changes.outputs.changes == '[]'
-        name: "Cancel the self CI workflow run"
-        uses: potiuk/cancel-workflow-runs@master
-        with:
-          selfPreservation: false
-          cancelMode: self
-          notifyPRCancel: true
-          notifyPRCancelMessage: Cancelled.
-          token: ${{ secrets.GITHUB_TOKEN }}
-          sourceRunId: ${{ github.event.workflow_run.id }}
+        name: Cancel the self CI workflow run
+        run: ./cancel.sh
 
   lint:
     name: ⬣ ESLint

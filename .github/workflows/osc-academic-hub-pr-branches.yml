@@ -25,6 +25,8 @@ jobs:
               - 'Dockerfiles/**'
             osc-academic-hub-db-pr:
               - '.github/workflows/osc-academic-hub-db-pr-branches.yml'
+            osc-academic-hub-pr:
+              - '.github/workflows/osc-academic-hub-pr-branches.yml’
             osc-academic-hub-deploy:
               - '.github/workflows/osc-academic-hub-deploy.yml'
             osc-academic-hub-destroy-apps:
@@ -42,8 +44,8 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: Cancel the self CI workflow run
-        if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
+      - if: steps.changes.outputs.changes == '[]' ||  steps.changes-schema.outputs.changes == '["prisma"]'
+        name: Cancel the self CI workflow run
         run: ./cancel.sh
 
   build:
