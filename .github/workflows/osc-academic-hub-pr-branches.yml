@@ -29,8 +29,6 @@ jobs:
               - '.github/workflows/osc-academic-hub-deploy.yml'
             osc-academic-hub-destroy-apps:
               - '.github/workflows/osc-academic-hub-destroy-apps.yml'
-            osc-academic-hub-pr:
-              - '.github/workflows/osc-academic-hub-pr-branches.yml'
             issue_templates:
               - '.github/ISSUE_TEMPLATE/**'
 
