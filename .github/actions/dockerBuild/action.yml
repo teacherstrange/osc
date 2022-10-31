@@ -51,10 +51,18 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: format head_ref
+      uses: bluwy/substitute-string-action@v1
+      id: findandreplace
+      with:
+        _input-text: ${{ github.head_ref }}
+        /: "-"
+
+    # remove this, it is now in the docker build step?
     - name: Get PR details
       shell: bash
       run: |
-        echo "${{ github.base_ref }} == main && ${{ github.event.pull_request.merged }} == true"
+        echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
         echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
         echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
 
