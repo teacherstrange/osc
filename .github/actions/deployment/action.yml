@@ -59,7 +59,7 @@ runs:
 
         # ${{ steps.app_name.outputs.value }}
     - name: delete all old volumes
-      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED == 'true' }}
+      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' }}
       shell: bash
       run: |
         VOLUMES=`flyctl volumes list --json --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}`;
