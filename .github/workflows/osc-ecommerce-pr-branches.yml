@@ -80,7 +80,7 @@ jobs:
 
     # Only run one deployment at a time per PR.
     concurrency:
-      group: pr-${{ github.event.number }}
+      group: pr-${{ github.event.number }}-ecommerce-pr
 
     # Create a GitHub deployment environment per pr branch app so it shows up
     # in the pull request UI.

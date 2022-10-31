@@ -116,7 +116,7 @@ runs:
 
       # deploy pr branches osc-studio
     - name: 🚀 Deploy PR Branch OSC studio
-      id: deploy-pr
+      id: deploy-pr-studio
       if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' && ! inputs.BRANCH }}
       uses: superfly/fly-pr-review-apps@1.0.0
       with:
