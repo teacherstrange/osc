@@ -109,7 +109,7 @@ runs:
       with:
         image: registry.fly.io/${{ inputs.APP_NAME }}:${{ inputs.BRANCH }}-${{ github.sha }}
         org: "open-study-college"
-        name: pr-${{ github.event.number }}-${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
+        name: pr-${{ github.event.number }}-${{ inputs.APP_NAME }}
         args: "deploy --build-arg SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}"
       env:
         FLY_API_TOKEN: ${{ inputs.FLY_API_TOKEN }}
