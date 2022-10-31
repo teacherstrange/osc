@@ -58,7 +58,6 @@ runs:
         _input-text: ${{ github.head_ref }}
         /: "-"
 
-    # remove this, it is now in the docker build step?
     - name: Get PR details
       shell: bash
       run: |

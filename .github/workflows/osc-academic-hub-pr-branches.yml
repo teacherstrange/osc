@@ -94,81 +94,27 @@ jobs:
         uses: styfle/cancel-workflow-action@0.9.1
 
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - run: rm -v -r ./package.json
-      - run: mv -v -f packages/osc-academic-hub/* .
-
-      - uses: actions/setup-node@v3
+      - name: checkoutCancelSetupBuild
+        uses: ./.github/actions/checkoutCancelSetupBuild
+        id: checkoutCancelSetupBuild
         with:
-          node-version: 16
-          cache: "npm"
+          name: "osc-academic-hub"
 
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+      - name: readAndLogAppNameAndBranch
+        uses: ./.github/actions/readAndLogAppNameAndBranch
+        id: readAndLogAppNameAndBranch
 
-      - name: 👀 Read app name
-        uses: SebRollen/toml-action@v1.0.0
-        id: app_name
+      - name: deployment
+        uses: ./.github/actions/deployment
+        id: deployment
         with:
-          file: "fly.toml"
-          field: "app"
-
-      - name: Echo Branch into variable
-        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
-      - name: Create app
-        uses: superfly/flyctl-actions@1.1
-        continue-on-error: true
-        with:
-          args: "apps create pr-${{ github.event.number }}-${{ steps.readAndLogAppNameAndBranch.outputs.app-name }} --org open-study-college"
-
-      - name: Create session secret
-        uses: superfly/flyctl-actions@1.1
-        continue-on-error: true
-        with:
-          args: "secrets set SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}"
-
-      - name: echo volumes
-        run: echo ${{ steps.list-volume }}
-
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-
-      - name: delete all old volumes
-        run: |
-          VOLUMES=`flyctl volumes list --json --app pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}`;
-          echo $VOLUMES | jq -r '.[].id' | while read -r id ; do
-              echo "Deleting ${id}"
-              flyctl volumes delete ${id} -y
-          done
-
-      - name: Create volume
-        uses: superfly/flyctl-actions@1.1
-        continue-on-error: true
-        with:
-          args: "volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}"
-
-      - name: 🚀 Deploy PR Branch
-        id: deploy_pr
-        uses: superfly/fly-pr-review-apps@1.0.0
-        with:
-          image: registry.fly.io/${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}:${{ steps.readAndLogAppNameAndBranch.outputs.branch }}-${{ github.sha }}
-          org: "open-study-college"
-          name: pr-${{ github.event.number }}-${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
-          args: "deploy --build-arg SESSION_SECRET=${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}"
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-      - name: delete old connection string to BASE_REF
-        id: delete-cs
-        if: steps.deploy_pr.conclusion != 'skipped'
-        timeout-minutes: 3
-        env:
-          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          ORG_NAME: ${{secrets.ORG_NAME}}
-          DB_NAME: ${{secrets.DB_NAME}}
-          GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: pr
-          PASSWORD_NAME: pr-${{ github.event.number }}-${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
-        run: |
-          ./.pscale/cli-helper-scripts/delete-old-password.sh
+          APP_NAME: ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
+          BRANCH: ${{ steps.readAndLogAppNameAndBranch.outputs.branch }}
+          FLY_PR_BRANCH_SESSION_SECRET: ${{ secrets.FLY_PR_BRANCH_SESSION_SECRET}}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN}}
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{ secrets.PLANETSCALE_SERVICE_TOKEN_ID }}
+          PLANETSCALE_SERVICE_TOKEN: ${{ secrets.PLANETSCALE_SERVICE_TOKEN }}
+          ORG_NAME: ${{ secrets.ORG_NAME }}
+          DB_NAME: ${{ secrets.DB_NAME }}
