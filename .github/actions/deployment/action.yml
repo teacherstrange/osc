@@ -91,7 +91,7 @@ runs:
       run: |
         ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 
-      # deploy prod and osc-studio
+      # deploy prod and osc-studio prod
     - name: 🚀 Deploy Production
       id: deploy-production
       if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
@@ -101,10 +101,10 @@ runs:
       env:
         FLY_API_TOKEN: ${{ inputs.FLY_API_TOKEN }}
 
-      # ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }} ${{ steps.readAndLogAppNameAndBranch.outputs.branch }} ${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }} ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }} ${{ secrets.FLY_API_TOKEN }}
+      # deploy pr branches and osc-studio pr branches
     - name: 🚀 Deploy PR Branch
       id: deploy-pr
-      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' }}
+      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' && inputs.BRANCH }}
       uses: superfly/fly-pr-review-apps@1.0.0
       with:
         image: registry.fly.io/${{ inputs.APP_NAME }}:${{ inputs.BRANCH }}-${{ github.sha }}
@@ -114,7 +114,19 @@ runs:
       env:
         FLY_API_TOKEN: ${{ inputs.FLY_API_TOKEN }}
 
-      # ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}} ${{secrets.PLANETSCALE_SERVICE_TOKEN}} ${{secrets.ORG_NAME}} ${{secrets.DB_NAME}} ${{ steps.app_name.outputs.value }}
+      # deploy pr branches osc-studio
+    - name: 🚀 Deploy PR Branch OSC studio
+      id: deploy-pr
+      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' && ! inputs.BRANCH }}
+      uses: superfly/fly-pr-review-apps@1.0.0
+      with:
+        image: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
+        org: "open-study-college"
+        name: pr-${{ github.event.number }}-${{ inputs.APP_NAME }}
+        args: "deploy --build-arg SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}"
+      env:
+        FLY_API_TOKEN: ${{ inputs.FLY_API_TOKEN }}
+
     - name: delete old connection string to STAGING (PR Branch)
       shell: bash
       id: delete-cs
