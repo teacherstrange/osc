@@ -4,9 +4,6 @@ inputs:
   APP_NAME:
     required: true
     description: "the app name"
-  BRANCH:
-    required: true
-    description: "the name of the branch in github"
   FLY_PR_BRANCH_SESSION_SECRET:
     required: true
     description: "the secret for fly.io pr apps"
@@ -104,20 +101,7 @@ runs:
       # deploy pr branches and osc-studio pr branches
     - name: 🚀 Deploy PR Branch
       id: deploy-pr
-      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' && inputs.BRANCH }}
-      uses: superfly/fly-pr-review-apps@1.0.0
-      with:
-        image: registry.fly.io/${{ inputs.APP_NAME }}:${{ inputs.BRANCH }}-${{ github.sha }}
-        org: "open-study-college"
-        name: pr-${{ github.event.number }}-${{ inputs.APP_NAME }}
-        args: "deploy --build-arg SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}"
-      env:
-        FLY_API_TOKEN: ${{ inputs.FLY_API_TOKEN }}
-
-      # deploy pr branches osc-studio
-    - name: 🚀 Deploy PR Branch OSC studio
-      id: deploy-pr-studio
-      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' && ! inputs.BRANCH }}
+      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' }}
       uses: superfly/fly-pr-review-apps@1.0.0
       with:
         image: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}

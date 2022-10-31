@@ -61,7 +61,6 @@ jobs:
         id: dockerBuild
         with:
           APP_NAME: ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
-          BRANCH: ${{ steps.readAndLogAppNameAndBranch.outputs.branch }}
           PLANETSCALE_SERVICE_TOKEN_ID: ${{ secrets.PLANETSCALE_SERVICE_TOKEN_ID }}
           PLANETSCALE_SERVICE_TOKEN: ${{ secrets.PLANETSCALE_SERVICE_TOKEN }}
           ORG_NAME: ${{ secrets.ORG_NAME }}
@@ -110,7 +109,6 @@ jobs:
         id: deployment
         with:
           APP_NAME: ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
-          BRANCH: ${{ steps.readAndLogAppNameAndBranch.outputs.branch }}
           FLY_PR_BRANCH_SESSION_SECRET: ${{ secrets.FLY_PR_BRANCH_SESSION_SECRET}}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN}}
           PLANETSCALE_SERVICE_TOKEN_ID: ${{ secrets.PLANETSCALE_SERVICE_TOKEN_ID }}
