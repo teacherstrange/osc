@@ -91,7 +91,7 @@ runs:
       run: |
         ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
 
-      # ${{ steps.app_name.outputs.value }}
+      # deploy prod and osc-studio
     - name: 🚀 Deploy Production
       id: deploy-production
       if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}

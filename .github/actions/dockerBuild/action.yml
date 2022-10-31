@@ -21,9 +21,8 @@ inputs:
     required: true
     description: "DB name"
   BRANCH_NAME:
-    required: true
+    required: false
     description: "Branch name"
-    default: Demo
   FROM:
     description: "The branch to clone from"
   PASSWORD_NAME:
@@ -87,7 +86,7 @@ runs:
 
     - name: create connection string to STAGING
       shell: bash
-      if: ${{ env.BASE_REF != 'main' }}
+      if: ${{ env.BASE_REF != 'main' && inputs.BRANCH_NAME == 'staging' || inputs.BRANCH_NAME == 'main'}}
       id: create-cs
       env:
         PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
@@ -95,23 +94,23 @@ runs:
         ORG_NAME: ${{inputs.ORG_NAME}}
         DB_NAME: ${{inputs.DB_NAME}}
         GITHUB_USER: ${{github.actor}}
-        BRANCH_NAME: staging
-        PASSWORD_NAME: staging-${{ inputs.APP_NAME }}
+        BRANCH_NAME: ${{inputs.BRANCH_NAME }}
+        PASSWORD_NAME: ${{ inputs.BRANCH_NAME }}-${{ inputs.APP_NAME }}
       run: |
         ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
 
     - name: create connection string to MAIN
       shell: bash
       id: create-cs-main
-      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.BRANCH_NAME == 'main' }}
       env:
         PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
         PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
         ORG_NAME: ${{inputs.ORG_NAME}}
         DB_NAME: ${{inputs.DB_NAME}}
         GITHUB_USER: ${{github.actor}}
-        BRANCH_NAME: main
-        PASSWORD_NAME: main-${{ inputs.APP_NAME }}
+        BRANCH_NAME: ${{inputs.BRANCH_NAME }}
+        PASSWORD_NAME: ${{ inputs.BRANCH_NAME }}-${{ inputs.APP_NAME }}
       run: |
         ./.pscale/cli-helper-scripts/create-branch-connection-string.sh
 
@@ -119,7 +118,7 @@ runs:
     # need to pass in different Planetscale prisma database urls && files to each docker build command
     - name: 🐳 Docker build Production
       id: docker-build-prod
-      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.BRANCH_NAME == 'main' }}
       uses: docker/build-push-action@v2
       with:
         file: ./Dockerfiles/Dockerfile
@@ -139,9 +138,10 @@ runs:
         cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
       # file: ./Dockerfiles/Dockerfile.pr
+      # ${{ inputs.BRANCH }}
     - name: 🐳 Docker build PR branch
       uses: docker/build-push-action@v2
-      if: ${{ env.BASE_REF != 'main' }}
+      if: ${{ env.BASE_REF != 'main' && inputs.BRANCH_NAME == 'staging' }}
       with:
         context: .
         push: true
@@ -155,6 +155,26 @@ runs:
           "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
           "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
         file: ./Dockerfiles/Dockerfile.pr
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+
+    # docker build from deploy
+    - name: 🐳 Docker build Studio
+      id: docker-build-studio
+      if: ${{ ! inputs.BRANCH_NAME }}
+      uses: docker/build-push-action@v2
+      with:
+        file: ./Dockerfiles/Dockerfile.studio
+        context: .
+        push: true
+        tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
+        build-args: |
+          "VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY }}"
+          "VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY }}"
+          "COMMIT_SHA=${{ github.sha }}"
+          "SANITY_STUDIO_API_DATASET=${{inputs.SANITY_STUDIO_API_DATASET}}"
+          "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
+          "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
