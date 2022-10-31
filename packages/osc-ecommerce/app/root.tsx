@@ -217,6 +217,7 @@ export default function App() {
                     })}`
                 }}
             />
+            <h1>test</h1>
             <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
                 <Outlet />
             </ChakraProvider>
