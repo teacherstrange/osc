@@ -129,9 +129,13 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: checkoutCancelSetupBuild
-        uses: ./.github/actions/checkoutCancelSetupBuild
-        id: checkoutCancelSetupBuild
+      - name: setupBuild
+        uses: ./.github/actions/setupBuild
+        id: setupBuild
+
+      - name: movePackageToRoot
+        uses: ./.github/actions/movePackageToRoot
+        id: movePackageToRoot
         with:
           name: "osc-academic-hub"
 
@@ -171,9 +175,13 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: checkoutCancelSetupBuild
-        uses: ./.github/actions/checkoutCancelSetupBuild
-        id: checkoutCancelSetupBuild
+      - name: setupBuild
+        uses: ./.github/actions/setupBuild
+        id: setupBuild
+
+      - name: movePackageToRoot
+        uses: ./.github/actions/movePackageToRoot
+        id: movePackageToRoot
         with:
           name: "osc-academic-hub"
 
@@ -209,9 +217,9 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: checkoutCancelSetupBuild
-        uses: ./.github/actions/checkoutCancelSetupBuild
-        id: checkoutCancelSetupBuild
+      - name: movePackageToRoot
+        uses: ./.github/actions/movePackageToRoot
+        id: movePackageToRoot
         with:
           name: "osc-academic-hub"
 

@@ -1,0 +1,17 @@
+name: "movePackageToRoot"
+description: "move the package being built to the root"
+inputs:
+  name: # id of input
+    description: "The package to move to the root"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: rm -r ./package.json ./node_modules
+      shell: bash
+
+    - run: mv -v -f packages/${{ inputs.name }}/* .
+      shell: bash
+
+    - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+      shell: bash
