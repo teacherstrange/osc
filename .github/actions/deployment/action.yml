@@ -55,13 +55,19 @@ runs:
 
         # ${{ steps.app_name.outputs.value }}
     - name: delete all old volumes
+      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED == 'true' }}
       shell: bash
       run: |
         VOLUMES=`flyctl volumes list --json --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}`;
-        echo $VOLUMES | jq -r '.[].id' | while read -r id ; do
-            echo "Deleting ${id}"
-            flyctl volumes delete ${id} -y
-        done
+        if jq -e '(length) > 0' <<< "$VOLUMES"; then
+            echo $VOLUMES | jq -r '.[].id' | while read -r id ; do
+                echo "Deleting ${id}"
+                flyctl volumes delete ${id} -y
+            done
+        else
+            echo 'no volumes to delete'
+            exit 0
+        fi
 
       # ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
     - name: Create volume
