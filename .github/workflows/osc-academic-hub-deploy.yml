@@ -125,7 +125,7 @@ jobs:
     env:
       VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
       VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
-      PLANETSCALE_PRISMA_DATABASE_URL: ${{ secrets.PLANETSCALE_PRISMA_DATABASE_URL_CYPRESS }}
+      PLANETSCALE_PRISMA_DATABASE_URL: ${{ secrets.PLANETSCALE_PRISMA_DATABASE_URL_PLAYWRIGHT }}
       SESSION_SECRET: super-duper-secret
     runs-on: ubuntu-latest
     steps:
