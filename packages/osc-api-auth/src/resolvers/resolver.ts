@@ -12,11 +12,12 @@ export const resolvers = {
             return prisma.user.findMany();
         },
         user: (_: undefined, args: getUserArgs) => {
-            return prisma.user.findUnique({
-                where: {
-                    id: args.id
-                }
-            });
+            // return prisma.user.findUnique({
+            //     where: {
+            //         id: args.id
+            //     }
+            // });
+            return {};
         }
     }
 };

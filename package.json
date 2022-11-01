@@ -59,6 +59,8 @@
   "workspaces": [
     "packages/osc-ui",
     "packages/osc-ecommerce",
-    "packages/osc-academic-hub"
+    "packages/osc-academic-hub",
+    "packages/osc-api-auth",
+    "packages/osc-api-gateway"
   ]
 }
