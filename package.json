@@ -16,7 +16,7 @@
     "stylelint": "npx stylelint \"**/*.scss\" --allow-empty-input --formatter verbose",
     "stylelint-and-fix": "npx stylelint \"**/*.scss\" --allow-empty-input --fix ",
     "lint": "DEBUG=eslint:cli-engine eslint --cache --cache-location ./node_modules/.cache/eslint  -c ./.eslintrc.js --max-warnings 0 --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern .",
-    "lint-and-fix": "eslint -c ./.eslintrc.js --cache --cache-location ./node_modules/.cache/eslint  --max-warnings 0 --ext .ts,.tsx,.js,.jsx --fix --no-error-on-unmatched-pattern .",
+    "lint-and-fix": "eslint -c ./.eslintrc.js --cache --cache-location ./node_modules/.cache/eslint  --max-warnings 0 --ext .ts,.tsx,.js,.jsx --fix --no-error-on-unmatched-pattern",
     "prettier-format": "prettier --config .prettierrc.json '*.{js,jsx,ts,tsx,json,scss}' '**/*.{js,jsx,ts,tsx,json,scss}' --write",
     "build-storybook": "cross-env NODE_ENV=production lerna run build:css && build-storybook",
     "storybook": "concurrently \"npm run dev:osc-ui --parallel\" \"start-storybook -p 6006\"",
