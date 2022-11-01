@@ -1,0 +1,12 @@
+.c-breadcrumb {
+    &__item {
+        &:hover {
+            // standard link hover styles
+            [aria-current="page"] {
+                // non-standard link hover styles
+                text-decoration: none;
+                cursor: text;
+            }
+        }
+    }
+}
