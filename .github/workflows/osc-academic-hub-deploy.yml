@@ -1,7 +1,7 @@
 name: 🚀 Deploy osc-academic-hub
 on:
   pull_request:
-    types: [opened, reopened, synchronize, edited, closed]
+    types: [opened, reopened, synchronize, ready_for_review]
 permissions:
   actions: write
   contents: read
@@ -15,14 +15,10 @@ jobs:
         id: changes
         with:
           filters: |
+            osc-api-auth: 
+              - 'packages/osc-api-auth/**'
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
-            osc-ui:
-              - 'packages/osc-ui/**'
-            prisma:
-              - 'prisma/**'
-            pscale:
-              - '.pscale/**'
             Dockerfiles:
               - 'Dockerfiles/**'
             osc-academic-hub-db-pr:
@@ -33,26 +29,14 @@ jobs:
               - '.github/workflows/osc-academic-hub-destroy-apps.yml'
             osc-academic-hub-pr:
               - '.github/workflows/osc-academic-hub-pr-branches.yml'
-            issue_templates:
-              - '.github/ISSUE_TEMPLATE/**'
         # run only if some file in 'src' folder was changed
 
-      - name: Get PR details
-        run: |
-          echo "${{ github.base_ref }} == main && ${{ github.event.pull_request.merged }} == true"
-          echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
-          echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
 
-      - if: steps.changes.outputs.changes == '[]'
-        name: "Cancel the self CI workflow run"
-        uses: potiuk/cancel-workflow-runs@master
-        with:
-          selfPreservation: false
-          cancelMode: self
-          notifyPRCancel: true
-          notifyPRCancelMessage: Cancelled.
-          token: ${{ secrets.GITHUB_TOKEN }}
-          sourceRunId: ${{ github.event.workflow_run.id }}
+      - if: github.base_ref != 'main' || steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
+        name: Cancel the self CI workflow run
+        run: ./workflow-scripts/cancel.sh
 
   lint:
     name: ⬣ ESLint
@@ -98,10 +82,6 @@ jobs:
   vitest:
     permissions: write-all
     name: ⚡ Vitest
-    env:
-      SANITY_STUDIO_API_DATASET: ${{secrets.SANITY_STUDIO_API_DATASET}}
-      SANITY_STUDIO_API_PROJECT_ID: ${{secrets.SANITY_STUDIO_API_PROJECT_ID}}
-      SANITY_STUDIO_API_TOKEN: ${{secrets.SANITY_STUDIO_API_TOKEN}}
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -133,12 +113,13 @@ jobs:
       - name: ⚡ Run vitest
         run: npm run test
 
+  # // todo - ak - replace pscale db url with new name, playwright related
   playwright:
     name: 🎭 Playwright
     env:
       VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
       VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
-      PLANETSCALE_PRISMA_DATABASE_URL: ${{ secrets.PLANETSCALE_PRISMA_DATABASE_URL_CYPRESS }}
+      PLANETSCALE_PRISMA_DATABASE_URL: ${{ secrets.PLANETSCALE_PRISMA_DATABASE_URL_PLAYWRIGHT }}
       SESSION_SECRET: super-duper-secret
     runs-on: ubuntu-latest
     steps:
@@ -148,18 +129,15 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: setupBuild
+        uses: ./.github/actions/setupBuild
+        id: setupBuild
+
+      - name: movePackageToRoot
+        uses: ./.github/actions/movePackageToRoot
+        id: movePackageToRoot
         with:
-          node-version: 16
-          cache: "npm"
-
-      - run: npm run setup
-      - run: npm run build:osc-ui
-
-      - run: rm -v -r ./package.json ./node_modules
-      - run: mv -v -f packages/osc-academic-hub/* .
-
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+          name: "osc-academic-hub"
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
@@ -173,7 +151,7 @@ jobs:
         run: npm run build
 
       - name: Prisma Generate
-        run: npx prisma generate
+        run: npx prama generate
 
       - name: 🏃‍♂️ Playwright run
         run: npm run test:e2e:run
@@ -188,7 +166,6 @@ jobs:
 
   build:
     name: 🐳 Build
-    if: ${{ github.base_ref }} == main && ${{ github.event.pull_request.merged }} == true
     needs: pre-check
     runs-on: ubuntu-latest
     steps:
@@ -198,127 +175,41 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: setupBuild
+        uses: ./.github/actions/setupBuild
+        id: setupBuild
+
+      - name: movePackageToRoot
+        uses: ./.github/actions/movePackageToRoot
+        id: movePackageToRoot
         with:
-          node-version: 16
-          cache: "npm"
+          name: "osc-academic-hub"
 
-      # need to delete all other packages in this step
+      - name: readAndLogAppNameAndBranch
+        uses: ./.github/actions/readAndLogAppNameAndBranch
+        id: readAndLogAppNameAndBranch
 
-      - run: npm run setup
-      - run: npm run build:osc-ui
-
-      - run: rm -v -r ./package.json ./node_modules
-      - run: mv -v -f packages/osc-academic-hub/* .
-
-      - name: format head_ref
-        uses: bluwy/substitute-string-action@v1
-        id: findandreplace
+      - name: dockerBuild
+        uses: ./.github/actions/dockerBuild
+        id: dockerBuild
         with:
-          _input-text: ${{ github.head_ref }}
-          /: "-"
-
-      - name: Get PR details
-        run: |
-          echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
-          echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
-          echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
-
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
-
-      - name: 👀 Read app name
-        uses: SebRollen/toml-action@v1.0.0
-        id: app_name
-        with:
-          file: "fly.toml"
-          field: "app"
-
-      - name: 🐳 Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      # Setup cache
-      - name: ⚡️ Cache Docker layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-
-      - name: 🔑 Fly Registry Auth
-        uses: docker/login-action@v1
-        with:
-          registry: registry.fly.io
-          username: x
-          password: ${{ secrets.FLY_API_TOKEN }}
-
-      - name: create connection string to STAGING
-        id: create-cs
-        if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
-        timeout-minutes: 3
-        env:
-          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          ORG_NAME: ${{secrets.ORG_NAME}}
-          DB_NAME: ${{secrets.DB_NAME}}
-          GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: staging
-          PASSWORD_NAME: staging-${{ steps.app_name.outputs.value }}
-        run: |
-          ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
-
-      - name: create connection string to MAIN
-        id: create-cs-main
-        if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
-        timeout-minutes: 3
-        env:
-          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          ORG_NAME: ${{secrets.ORG_NAME}}
-          DB_NAME: ${{secrets.DB_NAME}}
-          GITHUB_USER: ${{github.actor}}
+          APP_NAME: ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{ secrets.PLANETSCALE_SERVICE_TOKEN_ID }}
+          PLANETSCALE_SERVICE_TOKEN: ${{ secrets.PLANETSCALE_SERVICE_TOKEN }}
+          ORG_NAME: ${{ secrets.ORG_NAME }}
+          DB_NAME: ${{ secrets.DB_NAME }}
           BRANCH_NAME: main
-          PASSWORD_NAME: main-${{ steps.app_name.outputs.value }}
-        run: |
-          ./.pscale/cli-helper-scripts/create-branch-connection-string.sh
-
-      - name: 🐳 Docker build production
-        id: docker-build-prod
-        if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
-        uses: docker/build-push-action@v2
-        with:
-          file: ./Dockerfiles/Dockerfile
-          context: .
-          push: true
-          tags: registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.HEAD_REF }}-${{ github.sha }}
-          build-args: |
-            "VAPID_PUBLIC_KEY=${{ secrets.VAPID_PUBLIC_KEY }}"
-            "VAPID_PRIVATE_KEY=${{ secrets.VAPID_PRIVATE_KEY }}"
-            "COMMIT_SHA=${{ github.sha }}"
-            "PLANETSCALE_PRISMA_DATABASE_URL_PRODUCTION=${{ env.MY_DB_URL }}${{ secrets.DB_NAME }}"
-            "PLANETSCALE_PRISMA_DATABASE_URL_MAIN=${{ env.MY_DB_URL_MAIN }}${{ secrets.DB_NAME }}"
-            "SANITY_STUDIO_API_DATASET=${{secrets.SANITY_STUDIO_API_DATASET}}"
-            "SANITY_STUDIO_API_PROJECT_ID=${{secrets.SANITY_STUDIO_API_PROJECT_ID}}"
-            "SANITY_STUDIO_API_TOKEN=${{secrets.SANITY_STUDIO_API_TOKEN}}"
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
-
-      # This ugly bit is necessary if you don't want your cache to grow forever
-      # till it hits GitHub's limit of 5GB.
-      # Temp fix
-      # https://github.com/docker/build-push-action/issues/252
-      # https://github.com/moby/buildkit/issues/1896
-      - name: 🚚 Move cache
-        if: steps.docker-build-prod.conclusion != 'skipped'
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY}}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY}}
+          SANITY_STUDIO_API_DATASET: ${{secrets.SANITY_STUDIO_API_DATASET}}
+          SANITY_STUDIO_API_PROJECT_ID: ${{secrets.SANITY_STUDIO_API_PROJECT_ID}}
+          SANITY_STUDIO_API_TOKEN: ${{secrets.SANITY_STUDIO_API_TOKEN}}
 
   deploy:
     name: 🚀 Deploy
     runs-on: ubuntu-latest
     needs: [build]
-
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -326,80 +217,24 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - run: rm -v -r ./package.json
-      - run: mv -v -f packages/osc-academic-hub/* .
-
-      - name: format head_ref
-        uses: bluwy/substitute-string-action@v1
-        id: findandreplace
+      - name: movePackageToRoot
+        uses: ./.github/actions/movePackageToRoot
+        id: movePackageToRoot
         with:
-          _input-text: ${{ github.head_ref }}
-          /: "-"
+          name: "osc-academic-hub"
 
-      - name: Get PR details
-        run: |
-          echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
-          echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
-          echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
+      - name: readAndLogAppNameAndBranch
+        uses: ./.github/actions/readAndLogAppNameAndBranch
+        id: readAndLogAppNameAndBranch
 
-      - name: 👀 Read app name
-        uses: SebRollen/toml-action@v1.0.0
-        id: app_name
+      - name: deployment
+        uses: ./.github/actions/deployment
+        id: deployment
         with:
-          file: "fly.toml"
-          field: "app"
-
-      - name: Create and merge deployment request to main
-        if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
-        id: create-dr
-        timeout-minutes: 3
-        env:
-          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          ORG_NAME: ${{secrets.ORG_NAME}}
-          DB_NAME: ${{secrets.DB_NAME}}
-          GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: staging
-        run: |
-          ./.pscale/cli-helper-scripts/create-dr-to-main.sh "$BRANCH_NAME"
-
-      # target main, base release
-      - name: 🚀 Deploy Production
-        id: deploy-production
-        if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
-        uses: superfly/flyctl-actions@1.3
-        with:
-          args: "deploy --image registry.fly.io/${{ steps.app_name.outputs.value }}:${{ env.HEAD_REF }}-${{ github.sha }}"
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-      - name: delete old connection string to STAGING
-        id: delete-cs
-        if: steps.deploy-production.conclusion != 'skipped' || steps.deploy-release.conclusion != 'skipped'
-        timeout-minutes: 3
-        env:
-          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          ORG_NAME: ${{secrets.ORG_NAME}}
-          DB_NAME: ${{secrets.DB_NAME}}
-          GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: staging
-          PASSWORD_NAME: staging-${{ steps.app_name.outputs.value }}
-
-        run: |
-          ./.pscale/cli-helper-scripts/delete-old-password.sh
-
-      - name: delete old connection string to MAIN
-        id: delete-cs-main
-        if: steps.delete-cs.conclusion != 'skipped'
-        timeout-minutes: 3
-        env:
-          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          ORG_NAME: ${{secrets.ORG_NAME}}
-          DB_NAME: ${{secrets.DB_NAME}}
-          GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: main
-          PASSWORD_NAME: main-${{ steps.app_name.outputs.value }}
-        run: |
-          ./.pscale/cli-helper-scripts/delete-old-password.sh
+          APP_NAME: ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
+          FLY_PR_BRANCH_SESSION_SECRET: ${{ secrets.FLY_PR_BRANCH_SESSION_SECRET}}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN}}
+          PLANETSCALE_SERVICE_TOKEN_ID: ${{ secrets.PLANETSCALE_SERVICE_TOKEN_ID }}
+          PLANETSCALE_SERVICE_TOKEN: ${{ secrets.PLANETSCALE_SERVICE_TOKEN }}
+          ORG_NAME: ${{ secrets.ORG_NAME }}
+          DB_NAME: ${{ secrets.DB_NAME }}
