@@ -2,7 +2,7 @@ import { Form, useLoaderData, useLocation, useParams, useSubmit } from '@remix-r
 
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Heading, Stack } from '@chakra-ui/react';
-import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useState } from 'react';
 import { FormToggle } from '~/components/FormToggle/FormToggle';
@@ -13,8 +13,6 @@ import { HOME_QUERY } from '~/queries/sanity/home';
 import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
 import type { module } from '~/types/sanity';
-import { Carousel } from 'osc-ui';
-import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 import { useOptionalUser } from '~/utils/_tmp_/user';
@@ -23,10 +21,6 @@ interface PageData {
     page: SanityPage;
     isPreview: boolean;
 }
-
-export const links: LinksFunction = () => {
-    return [{ rel: 'stylesheet', href: oscUiCarouselStyles }];
-};
 
 export const loader: LoaderFunction = async ({ request }) => {
     const colorScheme = await getColorScheme(request);
@@ -37,8 +31,8 @@ export const loader: LoaderFunction = async ({ request }) => {
         query: HOME_QUERY
     });
 
-    if (!data?.page) {
-        throw new Response('Not found', { status: 404 });
+    if (!data) {
+        throw new Response('`data` is not defined', { status: 500 });
     }
 
     const { page: home, isPreview }: PageData = data;
@@ -78,33 +72,6 @@ export default function Index() {
 
     const submit = useSubmit();
     const location = useLocation();
-
-    const mediaArray = [
-        {
-            image: {
-                asset: {
-                    url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
-                    caption: 'test'
-                }
-            }
-        },
-        {
-            image: {
-                asset: {
-                    url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
-                    caption: 'test'
-                }
-            }
-        },
-        {
-            image: {
-                asset: {
-                    url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
-                    caption: 'test'
-                }
-            }
-        }
-    ];
 
     /**
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
@@ -147,30 +114,6 @@ export default function Index() {
                     )}
                 </Stack>
             ) : null}
-            <Carousel
-                mediaArray={mediaArray}
-                active={true} // fine
-                delay={'3000'} // fine
-                slidesPerPage={3} // fine
-                slideGap={0} // fine
-                axis={'x'} // fine
-                height={'1000'} // fine
-                loop={false} // fine
-                startIndex={2} // fine
-                carouselKey={'1'}
-            ></Carousel>
-            <Carousel
-                mediaArray={mediaArray}
-                active={true} // testing this
-                delay={'3000'}
-                slidesPerPage={3} // testing this
-                slideGap={10} // testing this
-                axis={'y'}
-                height={'1000'} // testing this
-                loop={false}
-                startIndex={2}
-                ssr={false}
-            ></Carousel>
         </>
     );
 }

@@ -35,16 +35,19 @@
     "dev:osc-ecommerce": "lerna run dev --scope '{osc-ui,osc-ecommerce}'",
     "dev:osc-academic-hub": "lerna run dev --scope '{osc-ui,osc-academic-hub}'",
     "dev:osc-studio": "cd packages/osc-studio && npm run dev",
+    "dev:api": "run-p api:dev:*",
+    "api:dev:osc-api-auth": "lerna run dev --scope osc-api-auth",
+    "api:dev:osc-api-gateway": "lerna run dev --scope osc-api-gateway",
     "setup": "npm i && npx prisma generate && cd packages/osc-studio && npm i --legacy-peer-deps"
   },
   "lint-staged": {
     "*.scss": [
       "npm run stylelint-and-fix"
     ],
-    "*.(js|ts|tsx|jsx|json|scss)": [
+    "*.{js|ts|tsx|jsx|json|scss}": [
       "npm run prettier-format"
     ],
-    "*.(ts|tsx|jsx)": [
+    "*.{ts|tsx|jsx}": [
       "npm run lint-and-fix"
     ]
   },
@@ -56,6 +59,8 @@
   "workspaces": [
     "packages/osc-ui",
     "packages/osc-ecommerce",
-    "packages/osc-academic-hub"
+    "packages/osc-academic-hub",
+    "packages/osc-api-auth",
+    "packages/osc-api-gateway"
   ]
 }

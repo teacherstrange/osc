@@ -1,6 +1,5 @@
 import typescript from 'rollup-plugin-typescript2';
 import dts from 'rollup-plugin-dts';
-import del from 'rollup-plugin-delete';
 import scss from 'rollup-plugin-scss';
 import dotenv from 'dotenv';
 const transpileCss = require('./bin/utils/helpers');
@@ -41,9 +40,9 @@ export default [
     },
     {
         // path to your declaration files root
-        input: 'dist/index.js',
+        input: 'src/index.tsx',
         output: [{ file: 'dist/index.d.ts', format: 'es' }],
         external: [/\.scss$/, /\.css$/],
-        plugins: [dts(), del({ hook: 'buildEnd', targets: './dist/components' })]
+        plugins: [dts()]
     }
 ];

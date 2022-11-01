@@ -10,8 +10,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDebouncedCallback } from 'use-debounce';
 import './carousel.scss';
 
-import './carousel.scss';
-
 export type Props = {
     height?: string;
     active: boolean;
@@ -42,28 +40,6 @@ export const CarouselInner: FC<Props> = (props) => {
     } = props;
 
     const delayInt = parseInt(delay, 10);
-
-    const setAriaHidden = () => {
-        const slides = document.querySelectorAll('.embla__slide');
-        slides.forEach((el) => {
-            el.classList.add('embla-carousel-loaded');
-            if (el.classList.contains('is-selected')) {
-                el.ariaHidden = 'false';
-            } else {
-                el.ariaHidden = 'true';
-            }
-        });
-        // if (!emblaApi) return;
-        // console.log('slides in view', emblaApi.slidesInView());
-        // console.log('slidesNotInView', emblaApi.slidesNotInView());
-        // const slides = emblaApi.slideNodes();
-        // emblaApi.slidesInView().forEach((indexInView) => {
-        //     slides[indexInView].setAttribute('aria-hidden', 'false');
-        // });
-        // emblaApi.slidesNotInView().forEach((indexNotInView) => {
-        //     slides[indexNotInView].setAttribute('aria-hidden', 'true');
-        // });
-    };
 
     const trueSlidesPerPage = () => {
         if (typeof window === 'undefined') return 1;
@@ -112,9 +88,20 @@ export const CarouselInner: FC<Props> = (props) => {
         setSelectedIndex(emblaApi.selectedScrollSnap());
     }, [emblaApi, setSelectedIndex]);
 
+    const setAriaHidden = useCallback(() => {
+        if (!emblaApi) return;
+        const slides = emblaApi.slideNodes();
+        emblaApi.slidesInView(true).forEach((indexInView) => {
+            slides[indexInView].setAttribute('aria-hidden', 'false');
+        });
+        emblaApi.slidesNotInView(true).forEach((indexNotInView) => {
+            slides[indexNotInView].setAttribute('aria-hidden', 'true');
+        });
+    }, [emblaApi]);
+
     useEffect(() => {
         setAriaHidden();
-    }, [selectedIndex]);
+    }, [selectedIndex, setAriaHidden]);
 
     useEffect(() => {
         if (!emblaApi) return;
@@ -127,7 +114,6 @@ export const CarouselInner: FC<Props> = (props) => {
         emblaApi.on('select', onSelect);
         emblaApi.on('init', () => {
             setCarouselVisible(true);
-            setScrollSnaps(emblaApi.scrollSnapList());
         });
         // return () => emblaApi.destroy();
     }, [emblaApi, setScrollSnaps, onSelect]);

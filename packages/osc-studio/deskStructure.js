@@ -30,7 +30,6 @@ import { products } from './desk/products';
 import { settings } from './desk/settings';
 import { blog } from './desk/blog';
 import { posts } from './desk/posts';
-import { redirects } from './desk/redirects';
 
 // If you add document types to desk structure manually, you can add them to this array to prevent duplicates in the root pane
 const DOCUMENT_TYPES_IN_STRUCTURE = [
@@ -42,8 +41,7 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
     'productVariant',
     'settings',
     'blog',
-    'post',
-    'redirect'
+    'post'
 ];
 
 /**
@@ -54,11 +52,6 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
  * into the document file.
  */
 export const getDefaultDocumentNode = ({ schemaType }) => {
-    // Don't add the preview or seo pane to the redirect
-    if (schemaType === 'redirect') {
-        return;
-    }
-
     return S.document().views([
         S.view.form(),
         // Including the iframe pane, with a function to create the url
@@ -87,24 +80,23 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
 // Then we export the default list of menu items
 export default () => {
     // prettier-ignore
-    return S.list()
-        .title('Content')
-        .items([
-            home,
-            pages,
-            S.divider(),
-            blog,
-            posts,
-            S.divider(),
-            collections,
-            products,
-            S.divider(),
-            settings,
-            redirects,
-            S.divider(),
-            // Automatically add new document types to the root pane
-            ...S.documentTypeListItems().filter(
-                (listItem) => !DOCUMENT_TYPES_IN_STRUCTURE.includes(listItem.getId())
-            )
-        ]);
+    return (
+    S.list()
+      .title('Content')
+      .items([
+        home,
+        pages,
+        S.divider(),
+        blog,
+        posts,
+        S.divider(),
+        collections,
+        products,
+        S.divider(),
+        settings,
+        S.divider(),
+        // Automatically add new document types to the root pane
+        ...S.documentTypeListItems().filter(listItem => !DOCUMENT_TYPES_IN_STRUCTURE.includes(listItem.getId()))
+      ])
+  )
 };

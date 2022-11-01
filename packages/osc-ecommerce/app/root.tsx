@@ -11,6 +11,7 @@ import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@re
 import { ChakraProvider } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
 import styles from 'osc-ui/dist/src-styles-main.css';
+import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './utils/context';
