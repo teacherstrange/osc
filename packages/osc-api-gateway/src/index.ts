@@ -1,9 +1,10 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { ApolloServer } from 'apollo-server-express';
 import { ApolloGateway, IntrospectAndCompose } from '@apollo/gateway';
 import * as dotenv from 'dotenv';
+import express from 'express';
 
 dotenv.config();
+const app = express();
 
 // If we're in local development we're going to bypass the managed federation and use Introspect and Compose
 // We do not want to provide a routing url to apollo studio pointing at our local as it's not really built for it
@@ -21,10 +22,11 @@ const server = new ApolloServer({
 });
 
 async function startServer(server: ApolloServer) {
-    const { url } = await startStandaloneServer(server, {
-        listen: { port: 4000 }
-    });
-    console.info(`🚀  API Gateway ready at: ${url}`);
+    await server.start();
+    server.applyMiddleware({ app });
+    app.listen({ port: 4000 }, () =>
+        console.log(`🚀 Gateway ready at http://localhost:4000${server.graphqlPath}`)
+    );
 }
 
 void startServer(server);
