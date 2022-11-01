@@ -34,8 +34,12 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-        # if the pull request has not been merged or the pr has no file changes or the pr is in draft mode then cancel it
-      - if: github.event.pull_request.merged == false || steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
+        # if the target branch is not equal to main
+        # or if the pull request has not been merged
+        # or the pr has no file changes
+        # or the pr is in draft mode
+        # then cancel it
+      - if: github.base_ref != 'main' || github.event.pull_request.merged == false || steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
         run: ./workflow-scripts/cancel.sh
 
