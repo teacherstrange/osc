@@ -14,4 +14,8 @@ export const typeDefs = gql`
         users: [User]
         user(id: ID!): User
     }
+
+    type Mutation {
+        login(email: String!, password: String!): String
+    }
 `;

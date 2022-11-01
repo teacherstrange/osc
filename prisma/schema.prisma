@@ -315,6 +315,7 @@ model RolePermission {
 model Permission {
   id    Int    @id @default(autoincrement())
   key   String @unique @db.VarChar(32)
+  level String @db.VarChar(32)
   title String @db.VarChar(64)
 
   roles                  RolePermission[]  @relation("rolePermissionDetails")
