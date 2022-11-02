@@ -1,7 +1,7 @@
 name: 🚀 Deploy osc-academic-hub
 on:
   pull_request:
-    types: [opened, reopened, synchronize, ready_for_review]
+    types: [opened, reopened, synchronize, ready_for_review, closed]
 permissions:
   actions: write
   contents: read
