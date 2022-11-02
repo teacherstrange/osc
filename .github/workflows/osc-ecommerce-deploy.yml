@@ -210,6 +210,7 @@ jobs:
         uses: ./.github/actions/dockerBuild
         id: dockerBuild
         with:
+          PASSWORD_NAME: ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
           APP_NAME: ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
           PLANETSCALE_SERVICE_TOKEN_ID: ${{ secrets.PLANETSCALE_SERVICE_TOKEN_ID }}
           PLANETSCALE_SERVICE_TOKEN: ${{ secrets.PLANETSCALE_SERVICE_TOKEN }}
