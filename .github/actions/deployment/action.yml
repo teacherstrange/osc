@@ -59,7 +59,7 @@ runs:
 
         # ${{ steps.app_name.outputs.value }}
     - name: delete all old volumes
-      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' }}
+      if: ${{ env.PR_CLOSED != 'true' }}
       shell: bash
       run: |
         VOLUMES=`flyctl volumes list --json --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}`;
@@ -108,7 +108,7 @@ runs:
       # deploy pr branches and osc-studio pr branches
     - name: 🚀 Deploy PR Branch
       id: deploy-pr
-      if: ${{ env.BASE_REF != 'main' && env.PR_CLOSED != 'true' }}
+      if: ${{ env.PR_CLOSED != 'true' }}
       uses: superfly/fly-pr-review-apps@1.0.0
       with:
         image: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
