@@ -99,7 +99,7 @@ runs:
     - name: create connection string to MAIN
       shell: bash
       id: create-cs-main
-      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && && inputs.BRANCH_NAME }}
       env:
         PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
         PLANETSCALE_SERVICE_TOKEN: ${{inputs.PLANETSCALE_SERVICE_TOKEN}}
@@ -157,7 +157,7 @@ runs:
       # file: ./Dockerfiles/Dockerfile.pr
     - name: 🐳 Docker build Studio
       uses: docker/build-push-action@v2
-      if: ${{ env.PR_CLOSED == 'false' && ! inputs.BRANCH_NAME }}
+      if: ${{ ! inputs.BRANCH_NAME }}
       with:
         context: .
         push: true
