@@ -5,7 +5,7 @@ import { json } from '@remix-run/node';
 import { useState } from 'react';
 
 import Preview from '~/components/Preview';
-import getPageData from '~/models/sanity.server';
+import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { COLLECTION_QUERY } from '~/queries/sanity/collection';
 import type { SanityPage } from '~/types/sanity';
 import Module from '~/components/Module';
@@ -28,8 +28,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         query: COLLECTION_QUERY
     });
 
-    if (!data) {
-        throw new Response('`data` is not defined', { status: 500 });
+    if (!data?.page) {
+        const redirect = await shouldRedirect(request);
+
+        if (redirect) {
+            return redirect;
+        } else {
+            throw new Response('Not found', { status: 404 });
+        }
     }
 
     const { page: collection, isPreview }: PageData = data;
