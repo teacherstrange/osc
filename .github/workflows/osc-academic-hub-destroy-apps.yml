@@ -12,27 +12,10 @@ jobs:
     name: check if workflow should run
     runs-on: ubuntu-latest
     steps:
-      - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            osc-api-auth: 
-              - 'packages/osc-api-auth/**'
-            osc-academic-hub:
-              - 'packages/osc-academic-hub/**'
-            Dockerfiles:
-              - 'Dockerfiles/**'
-            osc-academic-hub-deploy:
-              - '.github/workflows/osc-academic-hub-deploy.yml'
-            osc-academic-hub-destroy-apps:
-              - '.github/workflows/osc-academic-hub-destroy-apps.yml'
-            osc-academic-hub-pr:
-              - '.github/workflows/osc-academic-hub-pr-branches.yml'
-
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - if: steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
+      - if: github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
         run: ./workflow-scripts/cancel.sh
 
@@ -45,15 +28,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: rm -v -r ./package.json
-      - run: mv -v -f packages/osc-academic-hub/* .
 
-      - uses: actions/setup-node@v3
+      - name: movePackageToRoot
+        uses: ./.github/actions/movePackageToRoot
+        id: movePackageToRoot
         with:
-          node-version: 16
-          cache: "npm"
-
-      - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+          name: "osc-academic-hub"
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
@@ -68,18 +48,3 @@ jobs:
       - run: flyctl apps destroy pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} -y
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-      - name: delete db branch
-        id: delete-db-branch
-        if: always()
-        continue-on-error: true
-        timeout-minutes: 3
-        env:
-          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          ORG_NAME: ${{secrets.ORG_NAME}}
-          DB_NAME: ${{secrets.DB_NAME}}
-          GITHUB_USER: ${{github.actor}}
-          BRANCH_NAME: pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }}
-        run: |
-          ./.pscale/cli-helper-scripts/delete-db-branch.sh "$BRANCH_NAME"

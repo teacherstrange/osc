@@ -15,6 +15,10 @@ jobs:
         id: changes
         with:
           filters: |
+            composite-actions:
+              - '.github/actions/**'
+            osc-ui:
+              - 'packages/osc-ui/**'
             osc-api-auth: 
               - 'packages/osc-api-auth/**'
             osc-academic-hub:
