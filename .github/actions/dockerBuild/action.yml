@@ -93,7 +93,7 @@ runs:
         DB_NAME: ${{inputs.DB_NAME}}
         GITHUB_USER: ${{github.actor}}
         BRANCH_NAME: ${{inputs.BRANCH_NAME }}
-        PASSWORD_NAME: ${{ inputs.PASSWORD_NAME }}
+        PASSWORD_NAME: staging-${{ inputs.PASSWORD_NAME }}
       run: |
         ./.pscale/cli-helper-scripts/create-branch-connection-string-pr-branches.sh
 
@@ -108,7 +108,7 @@ runs:
         DB_NAME: ${{inputs.DB_NAME}}
         GITHUB_USER: ${{github.actor}}
         BRANCH_NAME: ${{inputs.BRANCH_NAME }}
-        PASSWORD_NAME: ${{ inputs.PASSWORD_NAME }}
+        PASSWORD_NAME: main-${{ inputs.PASSWORD_NAME }}
       run: |
         ./.pscale/cli-helper-scripts/create-branch-connection-string.sh
 
