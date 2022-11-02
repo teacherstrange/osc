@@ -108,7 +108,7 @@ runs:
         DB_NAME: ${{inputs.DB_NAME}}
         GITHUB_USER: ${{github.actor}}
         BRANCH_NAME: ${{inputs.BRANCH_NAME }}
-        PASSWORD_NAME: ${{ inputs.BRANCH_NAME }}-${{ inputs.APP_NAME }}
+        PASSWORD_NAME: ${{ inputs.PASSWORD_NAME }}
       run: |
         ./.pscale/cli-helper-scripts/create-branch-connection-string.sh
 
