@@ -1,7 +1,5 @@
-@use "../settings/colors";
-@use "../settings/spacing";
-@use "../settings/typography";
-@use "../tools/font_size";
+@use "../settings" as s;
+@use "../tools" as t;
 
 ///*----------------------------------*\
 //  #TYPE
@@ -12,7 +10,7 @@
 //\*----------------------------------*/
 
 p {
-    margin: 0 0 spacing.$global-spacing-s * 2;
+    margin: 0 0 s.$global-spacing-s * 2;
 }
 
 a {
@@ -27,7 +25,7 @@ a {
 }
 
 small {
-    @include font_size.font-size(typography.$size-micro);
+    @include t.font-size(s.$size-micro);
 }
 
 a[href],
@@ -36,7 +34,7 @@ input,
 select,
 textarea {
     &:focus {
-        box-shadow: 0 0 0 0.5rem colors.$colour-tertiary, 0 0 0 0.75rem colors.$colour-primary; /* outline color here */
+        box-shadow: 0 0 0 0.5rem s.$colour-tertiary, 0 0 0 0.75rem s.$colour-primary; /* outline color here */
 
         &:not(:focus-visible) {
             box-shadow: none;
@@ -47,5 +45,5 @@ textarea {
 input,
 select,
 textarea {
-    @include font_size.font-size(typography.$base-font-size);
+    @include t.font-size(s.$base-font-size);
 }

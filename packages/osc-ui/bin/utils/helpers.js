@@ -8,10 +8,7 @@ const sass = require('sass');
 require('dotenv').config();
 
 const transpileCss = async (file, outputFile = undefined) => {
-    const loadPath = path.join(process.cwd(), process.env.LOAD_PATH);
-    const transpiledCss = sass.compile(file, {
-        loadPaths: [loadPath]
-    });
+    const transpiledCss = sass.compile(file);
     let result;
     if (process.env.NODE_ENV === 'production') {
         result = await postcss([
@@ -21,7 +18,7 @@ const transpileCss = async (file, outputFile = undefined) => {
                 content: ['**/*.ts', '**/*.tsx', '**/*.mdx', '**/*.svg', './remix.config.js'],
                 css: ['**/*.css'],
                 safelist: {
-                    greedy: [/\b\w*react-datepicker\w*\b/i]
+                    greedy: [/\b\w*react-datepicker\w*\b/i, /\b\w*aa\w*\b/i]
                 },
                 defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
                 variables: false
@@ -38,12 +35,13 @@ const transpileCss = async (file, outputFile = undefined) => {
     }
 
     if (outputFile === undefined) {
+        console.log(outputFile);
         fs.writeFileSync(file.replace('.scss', '.css'), result.css);
         console.log('-- created: ', file.replace('.scss', '.css'));
     } else {
         mkDirByPathSync(path.dirname(outputFile));
-        fs.writeFileSync(outputFile, result.css);
-        console.log('-- created: ', file.replace('.scss', '.css'));
+        fs.writeFileSync(path.join(process.cwd(), outputFile), result.css);
+        console.log('-- created: ', path.join(process.cwd(), outputFile));
     }
 };
 

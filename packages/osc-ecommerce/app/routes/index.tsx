@@ -7,7 +7,6 @@ import { json } from '@remix-run/node';
 import { useState } from 'react';
 import { FormToggle } from '~/components/FormToggle/FormToggle';
 import { getColorScheme } from '~/utils/colorScheme';
-
 import Preview from '~/components/Preview';
 import getPageData from '~/models/sanity.server';
 import { HOME_QUERY } from '~/queries/sanity/home';

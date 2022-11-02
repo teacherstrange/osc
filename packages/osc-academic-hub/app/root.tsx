@@ -10,7 +10,7 @@ import { json } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
-import styles from './styles/dest/main.css';
+import styles from 'osc-ui/dist/src-styles-main.css';
 import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './utils/context';

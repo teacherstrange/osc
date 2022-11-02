@@ -3,3 +3,4 @@
 /packages/osc-academic-hub/build/
 /packages/osc-ecommerce/public/
 /packages/osc-ecommerce/build/
+/packages/osc-studio/dist/**/*

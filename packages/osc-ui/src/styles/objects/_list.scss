@@ -1,6 +1,5 @@
-@use "../settings/colors";
-@use "../settings/spacing";
-@use "../tools/position";
+@use "../settings" as s;
+@use "../tools" as t;
 
 /* ============================
 // $GENERIC LIST OBJECT
@@ -12,14 +11,14 @@
 [class*="free-text"] ul {
     &:not(.is-bare) {
         width: 100%;
-        margin: 0 0 (spacing.$global-spacing-s * 2);
+        margin: 0 0 (s.$global-spacing-s * 2);
         padding: 0;
     }
 
     li {
         position: relative;
         display: list-item;
-        margin-bottom: spacing.$global-spacing-s;
+        margin-bottom: s.$global-spacing-s;
 
         &:last-of-type {
             margin-bottom: 0;
@@ -27,14 +26,14 @@
     }
 
     ul {
-        padding-left: spacing.$global-spacing;
+        padding-left: s.$global-spacing;
 
         &.is-child {
             margin: 0;
         }
 
         ul {
-            margin-top: spacing.$global-spacing-s;
+            margin-top: s.$global-spacing-s;
         }
     }
 
@@ -46,7 +45,7 @@
             list-style: none outside none;
 
             li {
-                padding-left: spacing.$global-spacing-s * 2;
+                padding-left: s.$global-spacing-s * 2;
 
                 &.has-children {
                     padding-left: 0;
@@ -56,11 +55,11 @@
                 &:not(.has-children) {
                     &::before {
                         content: "";
-                        @include position.position(absolute, $bullet, null, null, 0);
+                        @include t.position(absolute, $bullet, null, null, 0);
                         width: $bullet;
                         height: $bullet;
                         margin: auto 0;
-                        background-color: colors.$colour-quaternary;
+                        background-color: s.$colour-quaternary;
                         border-radius: 50%;
                     }
                 }

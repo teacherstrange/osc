@@ -16,37 +16,25 @@ jobs:
         id: changes
         with:
           filters: |
+            osc-api-auth: 
+              - 'packages/osc-api-auth/**'
             osc-ecommerce:
               - 'packages/osc-ecommerce/**'
-            osc-ui:
-              - 'packages/osc-ui/**'
-            prisma:
-              - 'prisma/**'
-            pscale:
-              - '.pscale/**'
             Dockerfiles:
               - 'Dockerfiles/**'
-            osc-ecommerce-db-pr:
-              - '.github/workflows/osc-ecommerce-db-pr-branches.yml'
             osc-ecommerce-deploy:
               - '.github/workflows/osc-ecommerce-deploy.yml'
             osc-ecommerce-destroy-apps:
               - '.github/workflows/osc-ecommerce-destroy-apps.yml'
             osc-ecommerce-pr:
               - '.github/workflows/osc-ecommerce-pr-branches.yml'
-            issue_templates:
-              - '.github/ISSUE_TEMPLATE/**'
-        # run only if some file in 'src' folder was changed
-      - if: steps.changes.outputs.changes == '[]'
-        name: "Cancel the self CI workflow run"
-        uses: potiuk/cancel-workflow-runs@master
-        with:
-          selfPreservation: false
-          cancelMode: self
-          notifyPRCancel: true
-          notifyPRCancelMessage: Cancelled.
-          token: ${{ secrets.GITHUB_TOKEN }}
-          sourceRunId: ${{ github.event.workflow_run.id }}
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - if: steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
+        name: Cancel the self CI workflow run
+        run: ./workflow-scripts/cancel.sh
 
   destroy_staging_app:
     runs-on: ubuntu-latest
@@ -64,7 +52,6 @@ jobs:
         with:
           node-version: 16
           cache: "npm"
-      - run: npm run addDevDeps
 
       - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
 

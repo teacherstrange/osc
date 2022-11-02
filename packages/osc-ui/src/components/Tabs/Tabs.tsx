@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React from 'react';
 import { Tabs as ChakraTabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
-import './tabs.css';
+import './tabs.scss';
 
 export interface Props {
     tabs: {

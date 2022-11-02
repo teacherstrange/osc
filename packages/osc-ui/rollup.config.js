@@ -1,27 +1,10 @@
 import typescript from 'rollup-plugin-typescript2';
-import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
-import del from 'rollup-plugin-delete';
-import { peerDependencies } from './package.json';
-const glob = require('glob');
+import scss from 'rollup-plugin-scss';
+import dotenv from 'dotenv';
+const transpileCss = require('./bin/utils/helpers');
 const path = require('path');
-
-const bundleCss = () => {
-    var config = [];
-    var files = glob.sync(path.resolve(__dirname, '**/*.css'));
-    files.forEach((file) => {
-        var filename = file.substr(file.lastIndexOf('/') + 1, file.length).toLowerCase();
-        config.push(
-            postcss({
-                include: file,
-                extract: path.resolve(`dist/${filename}`),
-                minimize: true,
-                sourceMap: false
-            })
-        );
-    });
-    return config;
-};
+dotenv.config();
 
 export default [
     {
@@ -34,14 +17,32 @@ export default [
                 exports: 'named'
             }
         ],
-        plugins: [...bundleCss(), typescript({ check: false })],
-        external: Object.keys(peerDependencies)
+        plugins: [
+            typescript({ check: false }),
+            scss({
+                output: async function (style, styleNodes) {
+                    Object.entries(styleNodes).map(async (node) => {
+                        var file = node[0];
+                        var filename = path.relative(process.cwd(), file);
+                        await transpileCss(
+                            file,
+                            'dist/' + filename.replaceAll('/', '-').replaceAll('scss', 'css')
+                        );
+                    });
+                },
+                check: false,
+                sourceMap: true,
+                failOnError: false,
+                verbose: true,
+                watch: ['src/styles', 'src/components']
+            })
+        ]
     },
     {
         // path to your declaration files root
-        input: 'dist/index.js',
+        input: 'src/index.tsx',
         output: [{ file: 'dist/index.d.ts', format: 'es' }],
-        external: [/\.css$/],
-        plugins: [dts(), del({ hook: 'buildEnd', targets: './dist/components' })]
+        external: [/\.scss$/, /\.css$/],
+        plugins: [dts()]
     }
 ];

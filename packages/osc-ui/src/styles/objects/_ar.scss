@@ -1,6 +1,6 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 
-@use "../tools/ratio" as ar;
+@use "../tools" as t;
 
 /* ============================
 // $FLEXIBLE MEDIA
@@ -52,7 +52,7 @@ $aspect-ratios: (
         */
 
         &--#{$css_class} {
-            @include ar.ratio($aspect-ratio);
+            @include t.ratio($aspect-ratio);
             @debug $aspect-ratio;
         }
     }

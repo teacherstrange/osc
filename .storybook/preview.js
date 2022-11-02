@@ -1,38 +1,37 @@
-// commented out until i end up importing the components
 // OSC-UI
-import '../packages/osc-ui/src/styles/dest/main.css';
-
-// OSC-ACADEMIC-HUB
-// import '../packages/osc-academic-hub/app/styles/dest/main.css';
-// import "/app/components/avatar/avatar.css";
-// import "/app/components/datepicker/datepicker.css";
-// import "/app/components/footer/footer.css";
-// import "/app/components/logo/logo.css";
-// import "/app/components/nav/nav.css";
-// import "/app/components/pagination/pagination.css";
-
-// Dont think we will need this
-// import darkTheme from '../app/theme/darkTheme';
-// import lightTheme from '../app/theme/lightTheme';
+import '../packages/osc-ui/src/styles/main.scss';
+import '../packages/osc-ui/src/components/Header/header.scss';
 
 import React from 'react';
 import { addDecorator } from '@storybook/react';
+import { withThemes } from '@react-theming/storybook-addon';
+import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 import { MemoryRouter } from 'react-router';
-import { CacheProvider } from '@emotion/react';
-import createCache from '@emotion/cache';
 
-const cache = createCache({
-    key: 'css',
-    prepend: true
-});
+// add prop name to each theme so the buttons have correct title
+import lightThemeEcommerce from '../packages/osc-ecommerce/app/theme/lightTheme';
+import darkThemeEcommerce from '../packages/osc-ecommerce/app/theme/darkTheme';
+import lightThemeAcademic from '../packages/osc-academic-hub/app/theme/lightTheme';
+import darkThemeAcademic from '../packages/osc-academic-hub/app/theme/darkTheme';
 
-addDecorator((story) => {
+const providerFn = ({ theme, children }) => {
+    const extendedTheme = extendTheme(theme);
     return (
-        <CacheProvider value={cache}>
-            <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
-        </CacheProvider>
+        <ChakraProvider theme={extendedTheme}>
+            <MemoryRouter initialEntries={['/']}>{children}</MemoryRouter>
+        </ChakraProvider>
     );
-});
+};
+
+addDecorator(
+    withThemes(
+        ChakraProvider,
+        [lightThemeEcommerce, darkThemeEcommerce, lightThemeAcademic, darkThemeAcademic],
+        {
+            providerFn
+        }
+    )
+);
 
 export const parameters = {
     actions: { argTypesRegex: '^on[A-Z].*' },

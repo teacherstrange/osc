@@ -1,11 +1,11 @@
 {
   "root": true,
+  "api": {
+    "projectId": "v6lebos6",
+    "dataset": "staging"
+  },
   "project": {
     "name": "Open Study College"
-  },
-  "api": {
-    "projectId": "",
-    "dataset": ""
   },
   "plugins": [
     "@sanity/base",

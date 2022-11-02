@@ -1,6 +1,5 @@
-@use "../settings/mq" as settings-mq;
-@use "../settings/spacing";
-@use "../tools/mq" as tools-mq;
+@use "../settings" as s;
+@use "../tools" as t;
 
 /* ============================
 // $FLEX LAYOUT OBJECT
@@ -89,25 +88,25 @@
     }
 
     &--spaced {
-        gap: spacing.$global-spacing;
+        gap: s.$global-spacing;
     }
 
     /* Hooks to hide elements based on the data-mq-hide attribute */
     $flex-bp: (
-        desk-lrg: settings-mq.$mq-desk--lrg,
-        desk-med: settings-mq.$mq-desk--med,
-        desk: settings-mq.$mq-desk,
-        tab-lrg: settings-mq.$mq-tab--lrg,
-        tab: settings-mq.$mq-tab,
-        tab-sml: settings-mq.$mq-tab--sml,
-        mob-lrg: settings-mq.$mq-mob--lrg,
-        mob-med: settings-mq.$mq-mob--med,
-        mob: settings-mq.$mq-mob,
-        mob-sml: settings-mq.$mq-mob--sml
+        desk-lrg: s.$mq-desk--lrg,
+        desk-med: s.$mq-desk--med,
+        desk: s.$mq-desk,
+        tab-lrg: s.$mq-tab--lrg,
+        tab: s.$mq-tab,
+        tab-sml: s.$mq-tab--sml,
+        mob-lrg: s.$mq-mob--lrg,
+        mob-med: s.$mq-mob--med,
+        mob: s.$mq-mob,
+        mob-sml: s.$mq-mob--sml
     );
 
     @each $alias, $mq in $flex-bp {
-        @include tools-mq.mq($mq) {
+        @include t.mq($mq) {
             &[data-flex-reset="#{$alias}"] {
                 flex-direction: column;
             }
@@ -158,7 +157,7 @@
             height: auto;
             overflow: hidden;
 
-            @include tools-mq.mq(settings-mq.$mq-global) {
+            @include t.mq(s.$mq-global) {
                 max-width: 200px;
             }
         }
@@ -196,7 +195,7 @@ $i-list: -1 0 1 2 3 4 5 6 7 8 9 10;
 // ==========================================================================
 @each $i in $i-list {
     [data-flex-order="#{$i}"] {
-        @include tools-mq.mq(settings-mq.$mq-mob--med + 2, max) {
+        @include t.mq(s.$mq-mob--med + 2, max) {
             order: $i;
         }
     }

@@ -41,6 +41,7 @@ EOF
     echo "pscale connect \"$DB_NAME\" \"$BRANCH_NAME\" --org \"$ORG_NAME\""
     export MY_DB_URL=$DB_URL
     echo "MY_DB_URL=$DB_URL" >> $GITHUB_ENV
+    echo "$MY_DB_URL"
 }
 
 

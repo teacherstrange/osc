@@ -1,10 +1,7 @@
 @use "sass:list";
 @use "sass:map";
-@use "../settings/mq" as settings-mq;
-@use "../settings/spacing";
-@use "../settings/typography";
-@use "../tools/font_size";
-@use "../tools/mq" as tools-mq;
+@use "../settings" as s;
+@use "../tools" as t;
 
 /* ============================
 // $FONT STYLES
@@ -32,8 +29,8 @@ $font-sizes: (
             "alpha"
         ),
         font-size: (
-            base: typography.$size-beta,
-            settings-mq.$mq-tab--sml: typography.$size-alpha
+            base: s.$size-beta,
+            s.$mq-tab--sml: s.$size-alpha
         )
     ),
     (
@@ -44,8 +41,8 @@ $font-sizes: (
             "beta"
         ),
         font-size: (
-            base: typography.$size-gamma,
-            settings-mq.$mq-tab--sml: typography.$size-beta
+            base: s.$size-gamma,
+            s.$mq-tab--sml: s.$size-beta
         )
     ),
     (
@@ -56,8 +53,8 @@ $font-sizes: (
             "gamma"
         ),
         font-size: (
-            base: typography.$size-delta,
-            settings-mq.$mq-tab--sml: typography.$size-gamma
+            base: s.$size-delta,
+            s.$mq-tab--sml: s.$size-gamma
         )
     ),
     (
@@ -68,7 +65,7 @@ $font-sizes: (
             "delta"
         ),
         font-size: (
-            base: typography.$size-delta
+            base: s.$size-delta
         )
     ),
     (
@@ -79,7 +76,7 @@ $font-sizes: (
             "epsilon"
         ),
         font-size: (
-            base: typography.$size-epsilon
+            base: s.$size-epsilon
         )
     ),
     (
@@ -90,7 +87,7 @@ $font-sizes: (
             "zeta"
         ),
         font-size: (
-            base: typography.$size-zeta
+            base: s.$size-zeta
         )
     ),
     (
@@ -99,7 +96,7 @@ $font-sizes: (
             "centi"
         ),
         font-size: (
-            base: typography.$size-centi
+            base: s.$size-centi
         )
     ),
     (
@@ -108,7 +105,7 @@ $font-sizes: (
             "milli"
         ),
         font-size: (
-            base: typography.$size-milli
+            base: s.$size-milli
         )
     ),
     (
@@ -117,8 +114,8 @@ $font-sizes: (
             "kilo"
         ),
         font-size: (
-            base: typography.$size-kilo,
-            settings-mq.$mq-desk: typography.$size-mega
+            base: s.$size-kilo,
+            s.$mq-desk: s.$size-mega
         ),
         line-height: (
             1
@@ -126,8 +123,8 @@ $font-sizes: (
     )
 );
 $font-families: (
-    "primary": typography.$font-primary,
-    "secondary": typography.$font-secondary
+    "primary": s.$font-primary,
+    "secondary": s.$font-secondary
 );
 
 @mixin font-styles($rules, $mq: null, $fs: null) {
@@ -135,14 +132,14 @@ $font-families: (
     $font-size: map.get($size, base);
 
     @if $mq != "base" {
-        @include tools-mq.mq($mq, min) {
-            @include font_size.font-size($fs);
+        @include t.mq($mq, min) {
+            @include t.font-size($fs);
         }
     } @else {
         @if map.has-key($rules, line-height) {
-            @include font_size.font-size($font-size, map.get($rules, line-height));
+            @include t.font-size($font-size, map.get($rules, line-height));
         } @else {
-            @include font_size.font-size($font-size);
+            @include t.font-size($font-size);
         }
     }
 }
@@ -155,9 +152,9 @@ h4,
 h5,
 h6,
 [class*="t-font"] {
-    margin: 0 0 spacing.$global-spacing-s;
+    margin: 0 0 s.$global-spacing-s;
     font-style: normal;
-    font-weight: typography.$weight-bold;
+    font-weight: s.$weight-bold;
     text-transform: none;
 }
 

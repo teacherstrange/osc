@@ -10,7 +10,8 @@ import { json } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { withEmotionCache } from '@emotion/react';
-import styles from './styles/dest/main.css';
+import styles from 'osc-ui/dist/src-styles-main.css';
+import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import { getUser } from './session.server';
 import { useContext, useEffect } from 'react';
 import { ClientStyleContext, ServerStyleContext } from './utils/context';
@@ -21,6 +22,7 @@ import { SETTINGS_QUERY } from './queries/sanity/settings';
 let isMount = true;
 export const links: LinksFunction = () => {
     return [
+        { rel: 'stylesheet', href: oscUiCarouselStyles },
         { rel: 'stylesheet', href: styles },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
@@ -155,6 +157,7 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
         </html>
     );
 });
+
 export default function App() {
     const { colorScheme, SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET } =
         useLoaderData();

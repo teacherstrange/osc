@@ -26,7 +26,8 @@ export const PAGE_REFERENCES = [
 export const MODULES = [
     { type: 'module.content' },
     { type: 'module.images' },
-    { type: 'module.trustpilot' }
+    { type: 'module.trustpilot' },
+    { type: 'module.carousel' }
 ];
 
 // API version to use when using the Sanity client within the studio

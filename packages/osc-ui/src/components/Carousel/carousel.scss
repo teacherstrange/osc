@@ -1,0 +1,101 @@
+/* stylelint-disable all */
+@use "../../styles/settings/mq" as *;
+@use "../../styles/tools/mq" as *;
+
+.embla {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    .embla__slide_caption {
+        padding: 0;
+        margin: 0;
+    }
+
+    .indicators {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        color: white;
+
+        .embla__next {
+            position: relative;
+            right: 30px;
+        }
+
+        .embla__prev {
+            position: relative;
+            left: 30px;
+        }
+    }
+}
+
+.embla .embla-carousel-loaded {
+    opacity: 1;
+}
+
+.embla__container {
+    display: flex;
+    flex-direction: var(--embla__axis);
+    height: var(--embla__height);
+    align-items: flex-start;
+    transition: height 0.2s;
+}
+
+.embla__slide {
+    opacity: 0;
+    flex: 0 0 100%;
+    overflow: hidden;
+
+    .embla__slide-loaded {
+        overflow: visible;
+    }
+
+    @include mq($mq-mob--sml) {
+        flex: 0 0 100%;
+    }
+
+    @include mq($mq-mob--lrg) {
+        flex: 0 0 50%;
+    }
+
+    @include mq($mq-tab) {
+        flex: 0 0 var(--embla__slidesPerPage);
+    }
+}
+
+// img {
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+// }
+
+.embla__slide_inner {
+    height: var(--embla__height);
+    margin: var(--embla__slideGap);
+    padding: var(--embla__slideGap);
+}
+
+.embla__navigator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    margin-top: 10px;
+}
+.embla__dots {
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 3px;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+}
+
+// IF slide layout is 3 slides per page
+// 0px -> 560px = width of slide = 100% - 1 slide per page
+// 561px -> 768px = width of slide = 50%
+// 769px ->  = width of slide = 33.33%

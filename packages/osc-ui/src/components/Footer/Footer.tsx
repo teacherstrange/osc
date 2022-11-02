@@ -1,4 +1,4 @@
-import './footer.css';
+import './footer.scss';
 import type { FC } from 'react';
 import React from 'react';
 import {
