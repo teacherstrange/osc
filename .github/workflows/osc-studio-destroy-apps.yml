@@ -33,7 +33,7 @@ jobs:
         uses: ./.github/actions/movePackageToRoot
         id: movePackageToRoot
         with:
-          name: "osc-ecommerce"
+          name: "osc-studio"
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.0
