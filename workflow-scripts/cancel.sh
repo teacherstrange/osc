@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-kill -SIGINT $$
+# add comment
+exit 1
