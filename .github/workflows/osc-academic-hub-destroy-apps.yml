@@ -12,29 +12,10 @@ jobs:
     name: check if workflow should run
     runs-on: ubuntu-latest
     steps:
-      - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            composite-actions:
-              - '.github/actions/**'
-            osc-api-auth: 
-              - 'packages/osc-api-auth/**'
-            osc-academic-hub:
-              - 'packages/osc-academic-hub/**'
-            Dockerfiles:
-              - 'Dockerfiles/**'
-            osc-academic-hub-deploy:
-              - '.github/workflows/osc-academic-hub-deploy.yml'
-            osc-academic-hub-destroy-apps:
-              - '.github/workflows/osc-academic-hub-destroy-apps.yml'
-            osc-academic-hub-pr:
-              - '.github/workflows/osc-academic-hub-pr-branches.yml'
-
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - if: steps.changes.outputs.changes == '[]' || github.event.pull_request.draft == true
+      - if: github.event.pull_request.draft == true
         name: Cancel the self CI workflow run
         run: ./workflow-scripts/cancel.sh
 
