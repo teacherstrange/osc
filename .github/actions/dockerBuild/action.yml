@@ -115,7 +115,7 @@ runs:
     # need to pass in different Planetscale prisma database urls && files to each docker build command
     - name: 🐳 Docker build Production
       id: docker-build-prod
-      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.BRANCH_NAME }}
       uses: docker/build-push-action@v2
       with:
         file: ./Dockerfiles/Dockerfile
