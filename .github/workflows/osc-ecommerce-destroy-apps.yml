@@ -16,6 +16,8 @@ jobs:
         id: changes
         with:
           filters: |
+            composite-actions:
+              - '.github/actions/**'
             osc-api-auth: 
               - 'packages/osc-api-auth/**'
             osc-ecommerce:
