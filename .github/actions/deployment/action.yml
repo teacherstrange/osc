@@ -40,22 +40,22 @@ runs:
         echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
         echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
 
+    - uses: superfly/flyctl-actions/setup-flyctl@master
+      env:
+        FLY_API_TOKEN: ${{ inputs.FLY_API_TOKEN }}
+
     - name: Create app
-      uses: superfly/flyctl-actions@1.1
+      if: ${{ env.PR_CLOSED != 'true' }}
+      shell: bash
       continue-on-error: true
-      with:
-        # ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
-        args: "apps create pr-${{ github.event.number }}-${{ inputs.APP_NAME }} --org open-study-college"
+      run: "flyctl apps create pr-${{ github.event.number }}-${{ inputs.APP_NAME }} --org open-study-college"
 
     - name: Create session secret
-      uses: superfly/flyctl-actions@1.1
+      if: ${{ env.PR_CLOSED != 'true' }}
+      shell: bash
       continue-on-error: true
-      with:
-        # ${{ secrets.FLY_PR_BRANCH_SESSION_SECRET }}  ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
-        args: "secrets set SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}"
-
-    - uses:
-        superfly/flyctl-actions/setup-flyctl@master
+      run:
+        "flyctl secrets set SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --config ./fly-pr.toml --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}"
 
         # ${{ steps.app_name.outputs.value }}
     - name: delete all old volumes
@@ -73,12 +73,11 @@ runs:
             exit 0
         fi
 
-      # ${{ steps.readAndLogAppNameAndBranch.outputs.app-name }}
     - name: Create volume
-      uses: superfly/flyctl-actions@1.1
+      if: ${{ env.PR_CLOSED != 'true' }}
+      shell: bash
       continue-on-error: true
-      with:
-        args: "volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}"
+      run: "flyctl volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}"
 
       # ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}} ${{secrets.PLANETSCALE_SERVICE_TOKEN}} ${{secrets.ORG_NAME}} ${{secrets.DB_NAME}}
     - name: Create and merge deployment request to main
