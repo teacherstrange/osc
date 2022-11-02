@@ -79,10 +79,10 @@ runs:
       continue-on-error: true
       run: "flyctl volumes create data --region lhr --size 1 --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}"
 
-      # ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}} ${{secrets.PLANETSCALE_SERVICE_TOKEN}} ${{secrets.ORG_NAME}} ${{secrets.DB_NAME}}
+      # osc studio is doing this step
     - name: Create and merge deployment request to main
       shell: bash
-      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.BRANCH_NAME }}
+      if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' && inputs.APP_NAME != "osc-studio" }}
       id: create-dr
       env:
         PLANETSCALE_SERVICE_TOKEN_ID: ${{inputs.PLANETSCALE_SERVICE_TOKEN_ID}}
