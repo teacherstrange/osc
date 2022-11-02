@@ -1,6 +1,46 @@
 import type { Params } from 'react-router-dom';
-import type { SanityPage, SanitySiteSetting } from '~/types/sanity';
+import type { SanityPage, SanitySiteSetting, SanityRedirect } from '~/types/sanity';
 import { getClient } from '~/lib/sanity/getClient.server';
+
+/**
+ * Exclude items that contain "drafts" in the _id
+ */
+export const excludeDrafts = (item: { _id: string }) => !item._id.includes('drafts');
+
+/**
+ * Create the url pathname so we can handle subfolders
+ */
+interface BuildUrlArgs {
+    type: SanityRedirect['destination']['_type'];
+    url: URL;
+    slug: SanityRedirect['destination']['slug'];
+}
+
+export const buildUrlPath = ({ type, url, slug }: BuildUrlArgs) => {
+    switch (type) {
+        case 'home':
+            url.pathname = `/`;
+            break;
+
+        case 'post':
+            url.pathname = `blog/${slug}`;
+            break;
+
+        case 'collection':
+            url.pathname = `collections/${slug}`;
+            break;
+
+        case 'product':
+            url.pathname = `products/${slug}`;
+            break;
+
+        default:
+            url.pathname = slug;
+            break;
+    }
+
+    return url.pathname;
+};
 
 interface Args {
     request: Request;
@@ -38,8 +78,8 @@ export async function getSettingsData({ query }: { query: string }) {
 
     try {
         const siteSettings = await getClient().fetch(query);
-        const liveSettings = siteSettings.filter(
-            (setting: SanitySiteSetting) => !setting._id.includes('drafts')
+        const liveSettings = siteSettings.filter((setting: SanitySiteSetting) =>
+            excludeDrafts(setting)
         )[0];
 
         return liveSettings;
