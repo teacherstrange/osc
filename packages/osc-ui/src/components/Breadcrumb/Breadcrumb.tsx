@@ -24,16 +24,16 @@ export const Breadcrumb: FC<Props> = (props: Props) => {
     const { className, matches, separator } = props;
 
     const shouldRenderALinkOrNot = (matches, match, index) => {
-        let breadCrumb;
+        let breadcrumbItem;
         if (matches.length === index + 1) {
             // If it is the current page then don't add Link, and set to 'isCurrentPage'
-            breadCrumb = (
+            breadcrumbItem = (
                 <ChakraBreadcrumbItem key={index} isCurrentPage className="c-breadcrumb__item">
                     <ChakraBreadcrumbLink>{match.title}</ChakraBreadcrumbLink>
                 </ChakraBreadcrumbItem>
             );
         } else {
-            breadCrumb = (
+            breadcrumbItem = (
                 <ChakraBreadcrumbItem key={index} className="c-breadcrumb__item">
                     <ChakraBreadcrumbLink as={Link} to={match.pathname}>
                         {match.title}
@@ -41,7 +41,7 @@ export const Breadcrumb: FC<Props> = (props: Props) => {
                 </ChakraBreadcrumbItem>
             );
         }
-        return breadCrumb;
+        return breadcrumbItem;
     };
 
     return (
@@ -50,8 +50,8 @@ export const Breadcrumb: FC<Props> = (props: Props) => {
             separator={separator}
         >
             {matches.map((match, index) => {
-                let chakraBreadCrumb = shouldRenderALinkOrNot(matches, match, index);
-                return chakraBreadCrumb;
+                const chakraBreadcrumbItem = shouldRenderALinkOrNot(matches, match, index);
+                return chakraBreadcrumbItem;
             })}
         </ChakraBreadcrumb>
     );
