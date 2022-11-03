@@ -17,8 +17,13 @@ export const getComponentStyles = (data: SanityPage) => {
 
     if (!data?.modules) return [];
 
-    for (const module of data?.modules) {
-        switch (module._type) {
+    // We want to create a unique array of module types to loop over.
+    // If we use the original array then we run the risk of including multiple objects
+    // with the same type. Causing multiples of the same stylesheet to be loaded.
+    const moduleTypes = [...new Set(data?.modules.map((module) => module._type))];
+
+    for (const module of moduleTypes) {
+        switch (module) {
             case 'module.content':
                 styles.push({ rel: 'stylesheet', href: contentStyles });
                 break;
