@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import './breadcrumb.css';
+import './breadcrumb.scss';
 
 import {
     Breadcrumb as ChakraBreadcrumb,
