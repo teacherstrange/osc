@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';
 import * as account from '~/utils/account';
 import * as password from '~/utils/password';
@@ -69,12 +70,20 @@ export const resolvers = {
             });
 
             if (!user) {
-                return { error: 'No matching user found' };
+                throw new GraphQLError('No matching user found.', {
+                    extensions: {
+                        code: 'BAD_USER_INPUT'
+                    }
+                });
             }
 
             const passwordMatch = await password.compare(args.password, user.password);
             if (!passwordMatch) {
-                return { error: 'No matching user found' };
+                throw new GraphQLError('No matching user found.', {
+                    extensions: {
+                        code: 'BAD_USER_INPUT'
+                    }
+                });
             }
 
             return jwt.sign(
