@@ -2,8 +2,8 @@ import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData, useParams } from '@remix-run/react';
 import { useState } from 'react';
-
-import Module from '~/components/Module';
+import type { DynamicLinksFunction } from 'remix-utils';
+import Module, { getComponentStyles } from '~/components/Module';
 import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY } from '~/queries/sanity/product';
@@ -49,6 +49,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         query: isPreview ? PRODUCT_QUERY : null
     });
 };
+
+// https://github.com/sergiodxa/remix-utils#dynamiclinks
+export const dynamicLinks: DynamicLinksFunction = ({ data }) => {
+    return getComponentStyles(data.page);
+};
+
+export const handle = { dynamicLinks };
 
 export const meta: MetaFunction = ({ data, parentsData }) => {
     const globalSeoSettings = parentsData.root.siteSettings.seo;
