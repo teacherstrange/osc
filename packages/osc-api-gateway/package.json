@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"There is no spoon\" && exit 0",
-    "dev": "nodemon './src/index.ts' --exec 'ts-node' ./src/index.ts -e ts,graphql"
+    "dev": "nodemon"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +17,24 @@
     "apollo-server-express": "^3.10.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-jwt": "^7.7.7",
     "graphql": "^16.6.0"
   },
   "devDependencies": {
+    "@types/express-jwt": "^7.4.2",
     "wait-on": "^6.0.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/index.ts ",
+    "ext": "ts, graphql"
   }
 }
