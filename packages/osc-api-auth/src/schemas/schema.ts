@@ -10,12 +10,17 @@ export const typeDefs = gql`
         email: String!
     }
 
+    type AuthToken {
+        token: String!
+    }
+
     type Query {
         users: [User]
         user(id: ID!): User
     }
 
     type Mutation {
-        login(email: String!, password: String!): String
+        createUser(firstName: String, lastName: String, email: String, password: String): User
+        login(email: String!, password: String!): AuthToken
     }
 `;
