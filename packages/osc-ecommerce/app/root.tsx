@@ -15,6 +15,7 @@ import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.cs
 import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
 import styles from 'osc-ui/dist/src-styles-main.css';
 import React, { useEffect } from 'react';
+import { DynamicLinks } from 'remix-utils';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 import { getSettingsData } from './models/sanity.server';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
@@ -123,6 +124,7 @@ const Document = ({ children }: DocumentProps) => {
                     <link rel="canonical" href={canonical} />
                 )}
                 {typeof document === 'undefined' && <Links />}
+                {typeof document === 'undefined' && <DynamicLinks />}
             </head>
             <body>
                 {children}
@@ -156,24 +158,21 @@ export default function App() {
         let mounted = isMount;
         isMount = false;
         if ('serviceWorker' in navigator) {
+            const postMessage = {
+                type: 'REMIX_NAVIGATION',
+                isMount: mounted,
+                location,
+                // We need to stringify and parse the matches constant as it includes methods from dynamicLinks which cannot be passed. See https://stackoverflow.com/questions/42376464/uncaught-domexception-failed-to-execute-postmessage-on-window-an-object-co
+                matches: JSON.parse(JSON.stringify(matches)),
+                manifest: window.__remixManifest
+            };
+
             if (navigator.serviceWorker.controller) {
-                navigator.serviceWorker.controller?.postMessage({
-                    type: 'REMIX_NAVIGATION',
-                    isMount: mounted,
-                    location,
-                    matches,
-                    manifest: window.__remixManifest
-                });
+                navigator.serviceWorker.controller?.postMessage(postMessage);
             } else {
                 let listener = async () => {
                     await navigator.serviceWorker.ready;
-                    navigator.serviceWorker.controller?.postMessage({
-                        type: 'REMIX_NAVIGATION',
-                        isMount: mounted,
-                        location,
-                        matches,
-                        manifest: window.__remixManifest
-                    });
+                    navigator.serviceWorker.controller?.postMessage(postMessage);
                 };
                 navigator.serviceWorker.addEventListener('controllerchange', listener);
                 return () => {
