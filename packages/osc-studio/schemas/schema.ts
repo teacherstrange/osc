@@ -7,7 +7,6 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 import annotationLinkEmail from './annotations/linkEmail';
 import annotationLinkExternal from './annotations/linkExternal';
 import annotationLinkInternal from './annotations/linkInternal';
-import annotationProduct from './annotations/product';
 
 // Document types
 import collection from './documents/collection';
@@ -56,7 +55,6 @@ export default createSchema({
         annotationLinkEmail,
         annotationLinkExternal,
         annotationLinkInternal,
-        annotationProduct,
         // Document types
         collection,
         page,
