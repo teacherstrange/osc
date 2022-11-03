@@ -11,8 +11,14 @@ export const LINK_INTERNAL = groq`
         (_type == "home") => {
             "slug": "/",
         },
+        (_type == "blog") => {
+            "slug": '/' + slug.current,
+        },
         (_type == "page") => {
-            "slug": slug.current,
+            "slug": '/' + slug.current,
+        },
+        (_type == "post") => {
+            "slug": "/blog/" + slug.current,
         },
         (_type == "product") => {
             "slug": "/products/" + store.slug.current,
