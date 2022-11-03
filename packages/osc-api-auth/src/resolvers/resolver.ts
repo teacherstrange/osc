@@ -86,8 +86,8 @@ export const resolvers = {
                 });
             }
 
-            return jwt.sign(
-                { user: user.id, permissions: await account.permissions(user.id) },
+            const token = jwt.sign(
+                { user: { id: user.id, permissions: await account.permissions(user.id) } },
                 process.env.JWT_SECRET!,
                 {
                     algorithm: 'HS256',
@@ -95,6 +95,8 @@ export const resolvers = {
                     expiresIn: 86400
                 }
             );
+
+            return { token };
         }
     }
 };

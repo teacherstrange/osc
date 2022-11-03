@@ -26,14 +26,30 @@ export const permissions = async (userId: number) => {
             }
         }
     });
-    console.log(roles);
 
     for (const role of roles) {
-        console.log('role');
-
         for (const rolePerm of role.details.permissions) {
-            permissions[rolePerm.details.level].push(rolePerm.details.key);
+            if (!permissions[rolePerm.details.level].includes(rolePerm.details.key)) {
+                permissions[rolePerm.details.level].push(rolePerm.details.key);
+            }
         }
     }
+
+    const extraPerms = await prisma.extraPermission.findMany({
+        where: {
+            userId: userId
+        },
+        include: {
+            details: true
+        }
+    });
+
+    for (const perm of extraPerms) {
+        if (!permissions[perm.details.level].includes(perm.details.key)) {
+            permissions[perm.details.level].push(perm.details.key);
+        }
+    }
+    console.log(permissions);
+
     return permissions;
 };
