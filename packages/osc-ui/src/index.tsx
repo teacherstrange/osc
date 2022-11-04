@@ -5,5 +5,6 @@ export { Tabs } from './components/Tabs/Tabs';
 export { Badge } from './components/Badge/Badge';
 export { Trustpilot } from './components/Trustpilot/Trustpilot';
 export { Carousel } from './components/Carousel/Carousel';
+export { OSCModal as Modal } from './components/Modal/Modal';
 export { Tag } from './components/Tag/Tag';
 export { Breadcrumb } from './components/Breadcrumb/Breadcrumb';
