@@ -123,8 +123,8 @@ const Document = ({ children }: DocumentProps) => {
                 {typeof document === 'undefined' && canonical && (
                     <link rel="canonical" href={canonical} />
                 )}
-                {typeof document === 'undefined' && <Links />}
                 {typeof document === 'undefined' && <DynamicLinks />}
+                {typeof document === 'undefined' && <Links />}
             </head>
             <body>
                 {children}
