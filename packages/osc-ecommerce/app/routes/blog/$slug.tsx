@@ -51,7 +51,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 // https://github.com/sergiodxa/remix-utils#dynamiclinks
-export const dynamicLinks: DynamicLinksFunction = ({ data }) => {
+const dynamicLinks: DynamicLinksFunction = ({ data }) => {
     return getComponentStyles(data.page);
 };
 
