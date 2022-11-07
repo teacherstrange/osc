@@ -148,3 +148,13 @@ export interface SanitySiteSetting {
     };
     seo: SanitySEO;
 }
+
+export interface SanityRedirect {
+    _id: string;
+    source: string;
+    statusCode: 301 | 302;
+    destination: {
+        _type: string;
+        slug: string;
+    };
+}

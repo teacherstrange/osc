@@ -31,8 +31,8 @@ export const loader: LoaderFunction = async ({ request }) => {
         query: HOME_QUERY
     });
 
-    if (!data) {
-        throw new Response('`data` is not defined', { status: 500 });
+    if (!data?.page) {
+        throw new Response('Not found', { status: 404 });
     }
 
     const { page: home, isPreview }: PageData = data;
