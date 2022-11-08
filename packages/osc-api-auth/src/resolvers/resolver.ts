@@ -1,3 +1,4 @@
+import type { User } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';
@@ -6,14 +7,24 @@ import * as password from '~/utils/password';
 
 const prisma = new PrismaClient();
 
+type getUsersArgs = {
+    orderBy: 'id' | 'firstName' | 'lastName' | 'createdAt' | 'updatedAt' | 'lastLogin';
+    orderDir: 'asc' | 'desc';
+    start: number;
+    limit: number;
+    cursor: number | null;
+    pagination: 'offset' | 'cursor';
+};
 type getUserArgs = {
     id: number;
 };
 type createUserArgs = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
+    input: {
+        firstName: string;
+        lastName: string;
+        email: string;
+        password: string;
+    };
 };
 type loginArgs = {
     email: string;
@@ -22,8 +33,35 @@ type loginArgs = {
 
 export const resolvers = {
     Query: {
-        users: async () => {
-            return await prisma.user.findMany();
+        users: async (
+            _: undefined,
+            {
+                start = 0,
+                limit = 50,
+                cursor = null,
+                pagination = 'offset',
+                orderBy = 'firstName',
+                orderDir = 'asc'
+            }: getUsersArgs
+        ) => {
+            return pagination == 'cursor'
+                ? await prisma.user.findMany({
+                      skip: cursor ? 1 : start,
+                      take: limit,
+                      cursor: {
+                          id: cursor ?? 1
+                      },
+                      orderBy: {
+                          [orderBy]: orderDir
+                      }
+                  })
+                : await prisma.user.findMany({
+                      skip: start,
+                      take: limit,
+                      orderBy: {
+                          [orderBy]: orderDir
+                      }
+                  });
         },
         user: async (_: undefined, args: getUserArgs) => {
             return await prisma.user.findUnique({
@@ -33,12 +71,17 @@ export const resolvers = {
             });
         }
     },
-
+    User: {
+        profile: async (parent: User) => {
+            return await account.profile(parent.id);
+        }
+    },
     Mutation: {
         createUser: async (_: undefined, args: createUserArgs) => {
+            const { input } = args;
             const existingUser = await prisma.user.findUnique({
                 where: {
-                    email: args.email
+                    email: input.email
                 }
             });
 
@@ -50,12 +93,12 @@ export const resolvers = {
                 });
             }
 
-            const hashedPassword = await password.hash(args.password);
+            const hashedPassword = await password.hash(input.password);
             const user = await prisma.user.create({
                 data: {
-                    firstName: args.firstName,
-                    lastName: args.lastName,
-                    email: args.email,
+                    firstName: input.firstName,
+                    lastName: input.lastName,
+                    email: input.email,
                     password: hashedPassword
                 }
             });

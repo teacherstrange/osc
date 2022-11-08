@@ -6,6 +6,16 @@ interface permissionsProps {
     [key: string]: [string?];
 }
 
+export const profile = async (id: number) => {
+    return {
+        avatar: await avatar(id),
+        permissions: await permissions(id),
+        roles: await roles(id),
+        crmTokens: await crmTokens(id),
+        lmsTokens: await lmsTokens(id)
+    };
+};
+
 export const permissions = async (userId: number) => {
     const permissions: permissionsProps = {
         read: [],
@@ -49,7 +59,45 @@ export const permissions = async (userId: number) => {
             permissions[perm.details.level].push(perm.details.key);
         }
     }
-    console.log(permissions);
 
     return permissions;
+};
+
+export const roles = async (id: number) => {
+    return await prisma.userRole.findMany({
+        where: { userId: id },
+        include: {
+            details: true
+        }
+    });
+};
+
+export const avatar = async (id: number) => {
+    return await prisma.userAvatar.findUnique({
+        where: {
+            userId: id
+        }
+    });
+};
+
+export const crmTokens = async (id: number) => {
+    return await prisma.crmToken.findMany({
+        where: {
+            userId: id
+        },
+        include: {
+            crm: true
+        }
+    });
+};
+
+export const lmsTokens = async (id: number) => {
+    return await prisma.lmsToken.findMany({
+        where: {
+            userId: id
+        },
+        include: {
+            lms: true
+        }
+    });
 };
