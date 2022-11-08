@@ -90,10 +90,14 @@ export const typeDefs = gql`
         users(start: Int, limit: Int, pagination: String, cursor: String, orderBy: String, orderDir: String): [User]
         user(id: Int!): User
     }
+    input createUserInput {
+        firstName: String
+        lastName: String
+        email: String @constraint(format: "email", maxLength: 255)
+        password: String
     }
-
     type Mutation {
-        createUser(firstName: String, lastName: String, email: String, password: String): User
+        createUser(input: createUserInput!): User
         login(email: String!, password: String!): AuthToken
     }
 `;
