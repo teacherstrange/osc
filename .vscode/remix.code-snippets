@@ -46,5 +46,45 @@
             "};"
         ],
         "scope": "typescriptreact"
+    },
+    "useLoaderData": {
+        "prefix": "remixUseLoaderData",
+        "body": "const { ${1:data} } = useLoaderData<LoaderData>()",
+        "scope": "typescriptreact"
+    },
+    "useActionData": {
+        "prefix": "remixUseActionData",
+        "body": "const { ${1:data} } = useActionData<ActionData>()",
+        "scope": "typescriptreact"
+    },
+    "useFormAction": {
+        "prefix": "remixUseFormAction",
+        "body": "const formAction = useFormAction()",
+        "scope": "typescriptreact"
+    },
+    "useSubmit": {
+        "prefix": "remixUseSubmit",
+        "body": "const submit = useSubmit()",
+        "scope": "typescriptreact"
+    },
+    "useTransition": {
+        "prefix": "remixUseTransition",
+        "body": "const transition = useTransition()",
+        "scope": "typescriptreact"
+    },
+    "useFetcher": {
+        "prefix": "remixUseFetcher",
+        "body": "const fetcher = useFetcher()",
+        "scope": "typescriptreact"
+    },
+    "useFetchers": {
+        "prefix": "remixUseFetchers",
+        "body": "const fetchers = useFetchers()",
+        "scope": "typescriptreact"
+    },
+    "useMatches": {
+        "prefix": "remixUseMatches",
+        "body": "const matches = useMatches()",
+        "scope": "typescriptreact"
     }
 }
