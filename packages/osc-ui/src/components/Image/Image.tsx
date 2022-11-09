@@ -73,7 +73,7 @@ export const Image: FC<Props<HTMLImageElement>> = (props: Props<HTMLImageElement
             width={width}
             height={height}
             loading={loading}
-            className="o-img"
+            className={`o-img ${className ? className : ''}`}
             {...attr}
         />
     );
@@ -93,12 +93,12 @@ export const Image: FC<Props<HTMLImageElement>> = (props: Props<HTMLImageElement
                     width={width}
                     height={height}
                     loading={loading}
-                    className="o-img"
+                    className={`o-img ${className ? className : ''}`}
                     {...attr}
                 />
             </picture>
         );
     }
 
-    return <div className={`${className ? className : ''}`}>{image}</div>;
+    return <>{image}</>;
 };
