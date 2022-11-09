@@ -1,0 +1,109 @@
+{
+    "LoaderFunction": {
+        "prefix": "remixLoader",
+        "body": [
+            "type LoaderData = {",
+            "\t$2",
+            "};",
+            "",
+            "export const loader: LoaderFunction = async ({ request }) => {",
+            "\treturn json<LoaderData>({",
+            "\t\t$1",
+            "\t});",
+            "};"
+        ],
+        "scope": "typescriptreact"
+    },
+    "ActionFunction": {
+        "prefix": "remixAction",
+        "body": [
+            "type ActionData = {",
+            "\t$2",
+            "};",
+            "",
+            "export const action: ActionFunction = async ({ request }) => {",
+            "\treturn json<ActionData>($1)",
+            "};"
+        ],
+        "scope": "typescriptreact"
+    },
+    "LinksFunction": {
+        "prefix": "remixLinks",
+        "body": [
+            "export const links: LinksFunction = () => {",
+            "\treturn [{ rel: \"stylesheet\", href: $1 }];",
+            "};"
+        ],
+        "scope": "typescriptreact"
+    },
+    "MetaFunction": {
+        "prefix": "remixMeta",
+        "body": [
+            "export const meta: MetaFunction = () => {",
+            "\treturn {",
+            "\t\ttitle: $1",
+            "\t};",
+            "};"
+        ],
+        "scope": "typescriptreact"
+    },
+    "useLoaderData": {
+        "prefix": "remixUseLoaderData",
+        "body": "const { ${1:data} } = useLoaderData<LoaderData>()",
+        "scope": "typescriptreact"
+    },
+    "useActionData": {
+        "prefix": "remixUseActionData",
+        "body": "const { ${1:data} } = useActionData<ActionData>()",
+        "scope": "typescriptreact"
+    },
+    "useFormAction": {
+        "prefix": "remixUseFormAction",
+        "body": "const formAction = useFormAction()",
+        "scope": "typescriptreact"
+    },
+    "useSubmit": {
+        "prefix": "remixUseSubmit",
+        "body": "const submit = useSubmit()",
+        "scope": "typescriptreact"
+    },
+    "useTransition": {
+        "prefix": "remixUseTransition",
+        "body": "const transition = useTransition()",
+        "scope": "typescriptreact"
+    },
+    "useFetcher": {
+        "prefix": "remixUseFetcher",
+        "body": "const fetcher = useFetcher()",
+        "scope": "typescriptreact"
+    },
+    "useFetchers": {
+        "prefix": "remixUseFetchers",
+        "body": "const fetchers = useFetchers()",
+        "scope": "typescriptreact"
+    },
+    "useMatches": {
+        "prefix": "remixUseMatches",
+        "body": "const matches = useMatches()",
+        "scope": "typescriptreact"
+    },
+    "Create a cookie": {
+        "prefix": "remixCookie",
+        "body": [
+            "import { createCookie } from 'remix';",
+            "",
+            "const ${1:cookieId} = createCookie('${2:cookie-id}', {",
+            "  domain: '${3:example.com}',",
+            "  expires: new Date(Date.now() + 60),",
+            "  httpOnly: true,",
+            "  maxAge: 60,",
+            "  path: '/',",
+            "  sameSite: 'lax',",
+            "  secrets: ['s3cret1'],",
+            "  secure: true",
+            "});"
+        ],
+        "description": "Create a logical container for managing a browser cookie from the server",
+        "scope": "typescript"
+    }
+}
