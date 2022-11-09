@@ -1,7 +1,8 @@
 import groq from 'groq';
-import { MODULE_TRUSTPILOT } from './modules/trustpilot';
 import { MODULE_CAROUSEL } from './modules/carousel';
 import { MODULE_CONTENT } from './modules/content';
+import { MODULE_IMAGES } from './modules/images';
+import { MODULE_TRUSTPILOT } from './modules/trustpilot';
 
 export const MODULES = groq`
 modules[] {
@@ -14,6 +15,9 @@ modules[] {
     },
     (_type == "module.content") => {
         ${MODULE_CONTENT}
+    },
+    (_type == "module.images") => {
+        ${MODULE_IMAGES}
     },
 }
 `;

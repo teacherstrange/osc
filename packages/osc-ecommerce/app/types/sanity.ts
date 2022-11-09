@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from '@portabletext/types';
+import type { ImgHTMLAttributes } from 'react';
 
 export interface SanityLinkItem {
     _type: string;
@@ -14,6 +15,23 @@ export interface InternalSanityLinkItem extends SanityLinkItem {
 export interface ExternalSanityLinkItem extends SanityLinkItem {
     newWindow?: boolean;
     url?: string;
+}
+
+interface SanityImage<T> extends ImgHTMLAttributes<T> {
+    _key?: string;
+    _type?: string;
+    height: number;
+    src: string;
+    width: number;
+}
+
+export interface imageModule<T> extends SanityImage<T> {
+    alt: string;
+    responsiveImages?: SanityImage<T>[] | undefined;
+    className?: string;
+    loading?: 'eager' | 'lazy';
+    responsiveWidths?: number[];
+    sizes?: string | undefined;
 }
 
 export interface module {
@@ -34,7 +52,7 @@ export interface contentModule extends module {
 export interface mediaTextModule extends module {
     layout: 'media-left' | 'media-right';
     body?: PortableTextBlock;
-    media?: SanityImage;
+    media?: SanityImage<HTMLImageElement>;
     links?: InternalSanityLinkItem[] | ExternalSanityLinkItem[];
 }
 
@@ -45,7 +63,7 @@ export interface trustpilotModule extends module {
 }
 
 export interface carouselModule extends module {
-    mediaArray: SanityImage[];
+    mediaArray: SanityImage<HTMLImageElement>[];
     active: boolean;
     delay: string;
     slidesPerPage: number;
@@ -56,15 +74,8 @@ export interface carouselModule extends module {
     startIndex: number;
 }
 
-export interface SanityImage {
-    asset: {
-        url: string;
-        altText: string | undefined;
-    };
-}
-
 export interface SanityHero {
-    image?: SanityImage;
+    image?: SanityImage<HTMLImageElement>;
     body: PortableTextBlock;
     links?: InternalSanityLinkItem[] | ExternalSanityLinkItem[] | null;
 }

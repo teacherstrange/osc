@@ -1,9 +1,10 @@
 import type { LinkDescriptor } from '@remix-run/node';
-import { Carousel, Content, Trustpilot } from 'osc-ui';
+import { Carousel, Content, Image, Trustpilot } from 'osc-ui';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
 import type {
     carouselModule,
     contentModule,
+    imageModule,
     module,
     SanityPage,
     trustpilotModule
@@ -46,6 +47,7 @@ export default function Module(props: Props) {
 
             return (
                 <Trustpilot
+                    key={moduleTrustpilot._key}
                     stars={moduleTrustpilot.stars}
                     template={moduleTrustpilot.type}
                     height={moduleTrustpilot.height}
@@ -83,6 +85,20 @@ export default function Module(props: Props) {
                     value={moduleContent.body}
                 />
             ) : null;
+
+        case 'module.images':
+            const moduleImage = module as imageModule<HTMLImageElement>;
+
+            return (
+                <Image
+                    key={moduleImage._key}
+                    src={moduleImage.src}
+                    artDirectedImages={moduleImage.responsiveImages}
+                    alt={moduleImage.alt}
+                    width={moduleImage.width}
+                    height={moduleImage.height}
+                />
+            );
 
         default:
             return null;
