@@ -63,7 +63,7 @@ export const permissions = async (userId: number) => {
     return permissions;
 };
 
-export const roles = async (id: number) => {
+const roles = async (id: number) => {
     return await prisma.userRole.findMany({
         where: { userId: id },
         include: {
@@ -72,7 +72,7 @@ export const roles = async (id: number) => {
     });
 };
 
-export const avatar = async (id: number) => {
+const avatar = async (id: number) => {
     return await prisma.userAvatar.findUnique({
         where: {
             userId: id
@@ -80,7 +80,7 @@ export const avatar = async (id: number) => {
     });
 };
 
-export const crmTokens = async (id: number) => {
+const crmTokens = async (id: number) => {
     return await prisma.crmToken.findMany({
         where: {
             userId: id
