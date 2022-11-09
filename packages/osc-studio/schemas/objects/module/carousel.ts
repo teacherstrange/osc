@@ -66,7 +66,7 @@ export default {
             title: 'Images',
             name: 'mediaArray',
             type: 'array',
-            of: [{ type: 'module.image' }],
+            of: [{ type: 'module.images' }],
             description: 'The images and text within the Carousel'
         },
         {

@@ -6,6 +6,7 @@ import type { FC } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { v4 as uuidv4 } from 'uuid';
+import { Image } from '../Image/Image';
 import './carousel.scss';
 
 export type Props = {
@@ -200,13 +201,14 @@ export const CarouselInner: FC<Props> = (props) => {
                                 >
                                     <div className="embla__slide_inner">
                                         <p className="embla__slide_caption">{q.caption}</p>
-                                        {q.image && q.image.asset.url && (
-                                            <img
+                                        {q.src && (
+                                            <Image
                                                 className="o-img o-img--cover"
-                                                height={q.image.height}
-                                                width="100%"
-                                                src={q.image.asset.url}
-                                                alt={q.altText ?? ''}
+                                                height={q.height}
+                                                width={q.width}
+                                                src={q.src}
+                                                artDirectedImages={q.responsiveImages}
+                                                alt={q.alt ?? ''}
                                             />
                                         )}
                                     </div>
