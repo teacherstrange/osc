@@ -2,22 +2,22 @@ import { ImageIcon } from '@sanity/icons';
 import React from 'react';
 
 export default {
-    name: 'module.images',
-    title: 'Image',
+    name: 'image.tablet',
+    title: 'Tablet Image',
     type: 'object',
     icon: ImageIcon,
     fields: [
-        // Modules (Images)
+        // Image
         {
+            type: 'cloudinary.asset',
             name: 'image',
-            title: 'Image',
-            type: 'image.desktop'
+            description: 'This asset is served from Cloudinary'
         }
     ],
     preview: {
         select: {
-            imageName: 'image.alt',
-            imageUrl: 'image.image.secure_url'
+            imageName: 'image.public_id',
+            imageUrl: 'image.secure_url'
         },
         prepare(selection) {
             const { imageUrl, imageName } = selection;
