@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';
 import type { createUserArgs, getUserArgs, getUsersArgs, loginArgs } from '~/types/arguments';
-import type { authContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
 import * as password from '~/utils/password';
 
@@ -41,7 +40,7 @@ export const resolvers = {
                       }
                   });
         },
-        user: async (_: undefined, args: getUserArgs, { user }: authContext) => {
+        user: async (_: undefined, args: getUserArgs) => {
             return await prisma.user.findUnique({
                 where: {
                     id: args.id ?? 0
