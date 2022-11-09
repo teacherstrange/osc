@@ -2,34 +2,11 @@ import type { User } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';
+import type { createUserArgs, getUserArgs, getUsersArgs, loginArgs } from '~/types/arguments';
 import * as account from '~/utils/account';
 import * as password from '~/utils/password';
 
 const prisma = new PrismaClient();
-
-type getUsersArgs = {
-    orderBy: 'id' | 'firstName' | 'lastName' | 'createdAt' | 'updatedAt' | 'lastLogin';
-    orderDir: 'asc' | 'desc';
-    start: number;
-    limit: number;
-    cursor: number | null;
-    pagination: 'offset' | 'cursor';
-};
-type getUserArgs = {
-    id: number;
-};
-type createUserArgs = {
-    input: {
-        firstName: string;
-        lastName: string;
-        email: string;
-        password: string;
-    };
-};
-type loginArgs = {
-    email: string;
-    password: string;
-};
 
 export const resolvers = {
     Query: {
