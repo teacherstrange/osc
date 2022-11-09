@@ -88,14 +88,18 @@ export const typeDefs = gql`
 
     type Query {
         users(start: Int, limit: Int, pagination: String, cursor: String, orderBy: String, orderDir: String): [User]
-        user(id: Int!): User
+        user(id: Int): User
     }
+
     input createUserInput {
-        firstName: String
-        lastName: String
-        email: String @constraint(format: "email", maxLength: 255)
-        password: String
+        firstName: String! @constraint(maxLength: 128)
+        lastName: String! @constraint(maxLength: 128)
+        email: String! @constraint(format: "email", maxLength: 255)
+        ### Minimum 9 characters, at least one uppercase letter, one lowercase letter and one number. #?!@$%^&*- characters allowed but not required
+        ### Note it seems to break if we use any / in the regex, for example /d for all digits [0-9] 
+        password: String! @constraint(minLength: 9, maxLength: 32, pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9#?!@$%^&*-]{9,}$")
     }
+
     type Mutation {
         createUser(input: createUserInput!): User
         login(email: String!, password: String!): AuthToken
