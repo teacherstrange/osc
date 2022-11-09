@@ -21,6 +21,8 @@
     "graphql": "^16.6.0",
     "graphql-depth-limit": "^1.1.0",
     "graphql-constraint-directive": "^4.1.2",
+    "graphql-middleware": "^6.1.33",
+    "graphql-shield": "^7.6.4",
     "graphql-tools": "^8.3.10",
     "jsonwebtoken": "^8.5.1",
     "tsconfig-paths": "^4.1.0"

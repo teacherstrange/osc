@@ -53,8 +53,9 @@ const gateway =
 const server = new ApolloServer({
     gateway,
     context: ({ req }) => {
-        // const user = req.auth.user || null;
-        // return { user };
+        // @ts-ignore
+        const user = req.auth?.user || null;
+        return { user };
     }
 });
 

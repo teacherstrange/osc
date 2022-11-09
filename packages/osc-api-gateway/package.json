@@ -20,10 +20,6 @@
     "express-jwt": "^7.7.7",
     "graphql": "^16.6.0"
   },
-  "devDependencies": {
-    "@types/express-jwt": "^7.4.2",
-    "wait-on": "^6.0.1"
-  },
   "nodemonConfig": {
     "ignore": [
       "**/*.test.ts",
