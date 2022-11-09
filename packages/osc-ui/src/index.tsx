@@ -8,6 +8,7 @@ export { Content } from './components/Content/Content';
 export { Footer } from './components/Footer/Footer';
 export { Header } from './components/Header/Header';
 export { Icon } from './components/Icon/Icon';
+export { Image } from './components/Image/Image';
 export { List } from './components/List/List';
 export { Modal } from './components/Modal/Modal';
 export { Switch } from './components/Switch/Switch';
