@@ -1,26 +1,25 @@
-import React from 'react';
-import type { FC } from 'react';
-import { Link } from '@remix-run/react';
-import type { PortableTextBlock } from '@portabletext/types';
-import { PortableText as ReactPortableText } from '@portabletext/react';
+import { Box, Link as ChakraLink } from '@chakra-ui/react';
 import type { PortableTextComponents } from '@portabletext/react';
-import { Link as ChakraLink, Box } from '@chakra-ui/react';
+import { PortableText as ReactPortableText } from '@portabletext/react';
+import type { PortableTextBlock } from '@portabletext/types';
+import { Link } from '@remix-run/react';
+import type { FC } from 'react';
+import React from 'react';
 import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
 
 import './content.scss';
 
 type SpacingOptions = 10 | 50 | 110 | 210 | '';
-type ColorOptions = 'primary' | 'secondary' | 'tertiary';
 
 export interface Props {
     align?: 'left' | 'centre' | 'right';
-    backgroundColor?: ColorOptions;
+    backgroundColor?: string;
     className?: string;
     marginBottom?: SpacingOptions;
     paddingBottom?: SpacingOptions;
     paddingTop?: SpacingOptions;
-    textColor?: ColorOptions;
+    textColor?: string;
     value: PortableTextBlock[];
 }
 

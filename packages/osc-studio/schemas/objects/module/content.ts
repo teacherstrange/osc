@@ -68,21 +68,13 @@ export default {
         {
             name: 'backgroundColor',
             title: 'Background Colour',
-            type: 'string',
-            options: {
-                list: ['primary', 'secondary', 'tertiary'],
-                layout: 'dropdown'
-            },
+            type: 'colors',
             group: 'content'
         },
         {
             name: 'textColor',
             title: 'Text Colour',
-            type: 'string',
-            options: {
-                list: ['primary', 'secondary', 'tertiary'],
-                layout: 'dropdown'
-            },
+            type: 'colors',
             group: 'content'
         },
         {

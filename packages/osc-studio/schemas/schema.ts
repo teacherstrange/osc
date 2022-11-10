@@ -26,6 +26,7 @@ import body from './blocks/body';
 
 // Object types
 import collectionRule from './objects/collectionRule';
+import colorPicker from './objects/colorPicker';
 import linkExternal from './objects/linkExternal';
 import linkInternal from './objects/linkInternal';
 import placeholderString from './objects/placeholderString';
@@ -69,6 +70,7 @@ export default createSchema({
         // Block content
         body,
         // Objects
+        colorPicker,
         collectionRule,
         linkExternal,
         linkInternal,

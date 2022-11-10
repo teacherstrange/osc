@@ -15,11 +15,14 @@
     "media",
     "@sanity/color-input",
     "iframe-pane",
-    "seo-pane"
+    "seo-pane",
+    "color-list"
   ],
   "env": {
     "development": {
-      "plugins": ["@sanity/vision"]
+      "plugins": [
+        "@sanity/vision"
+      ]
     }
   },
   "parts": [
