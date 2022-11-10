@@ -12,6 +12,10 @@ interface SanityEntry {
 
 export const loader: LoaderFunction = async ({ request }) => {
     const url = new URL(request?.url);
+    // The request on Fly seems to return http as the protocol so we're forcing it into https
+    const protocol = url.protocol === 'http:' ? 'https:' : url.protocol;
+    const host = url.host;
+
     // Query all of the documents in Sanity that have a slug (indicating that it is a page)
     const querySanityDataset: SanityEntry[] = await getClient()
         .fetch(ALL_PAGE_SLUGS)
@@ -25,7 +29,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     const sitemapEntry = (path: SanityEntry['slug'], lastmod: SanityEntry['_updatedAt']) => {
         return `
             <url>
-                <loc>${url.origin}${path}</loc>
+                <loc>${protocol}//${host}${path}</loc>
                 <lastmod>${lastmod}</lastmod>
             </url>
         `.trim();
