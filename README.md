@@ -80,7 +80,7 @@ This will run osc-ecommerce on [http://localhost:2000](http://localhost:2000) an
 -   Healthcheck endpoint for [Fly backups region fallbacks](https://fly.io/docs/reference/configuration/#services-http_checks)
 -   [GitHub Actions](https://github.com/features/actions) for deploy on merge to production and staging environments
 -   Database ORM with [Prisma](https://prisma.io)
--   UI library [Chakra UI](https://chakra-ui.com/)
+-   UI library [Radix UI Primitives](https://www.radix-ui.com/docs/primitives/overview/getting-started)
 -   Styling with [Sass](https://sass-lang.com/)
 -   End-to-end testing with [Playwright](https://playwright.dev/)
 -   Local third party request mocking with [MSW](https://mswjs.io)
