@@ -100,8 +100,18 @@ export const typeDefs = gql`
         password: String! @constraint(minLength: 9, maxLength: 32, pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9#?!@$%^&*-]{9,}$")
     }
 
+    input loginInput {
+        email: String! @constraint(format: email)
+        password: String! @constraint(minLength: 9, maxLength: 32)
+    }
+
+    input refreshAccessInput {
+        refreshToken: String 
+    }
+
     type Mutation {
         createUser(input: createUserInput!): User
-        login(email: String!, password: String!): AuthToken
+        login(input: loginInput!): AuthTokens
+        refreshAccess(input: refreshAccessInput): refreshToken
     }
 `;

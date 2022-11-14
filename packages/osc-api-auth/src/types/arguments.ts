@@ -9,15 +9,19 @@ export type getUsersArgs = {
 export type getUserArgs = {
     id: number | null;
 };
-export type createUserArgs = {
-    input: {
-        firstName: string;
-        lastName: string;
-        email: string;
-        password: string;
-    };
-};
-export type loginArgs = {
+export type createUserInput = {
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
+};
+export type createUserArgs = {
+    input: createUserInput;
+};
+export type loginArgsInput = {
+    email: string;
+    password: string;
+};
+export type loginArgs = {
+    input: loginArgsInput;
 };

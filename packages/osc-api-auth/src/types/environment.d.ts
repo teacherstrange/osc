@@ -5,6 +5,8 @@ declare global {
             SALT_ROUNDS: number;
             JWT_SECRET: string;
             JWT_AUDIENCE: string;
+            JWT_DURATION: number;
+            JWT_REFRESH_DURATION: number;
         }
     }
 }
