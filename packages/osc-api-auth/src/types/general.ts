@@ -5,3 +5,7 @@ export type userJWT = {
         write: string[];
     };
 };
+
+export type refreshTokenUser = {
+    id: number;
+};

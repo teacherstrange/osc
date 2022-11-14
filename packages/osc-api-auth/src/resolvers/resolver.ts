@@ -1,6 +1,12 @@
 import type { User } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
-import type { createUserArgs, getUserArgs, getUsersArgs, loginArgs } from '~/types/arguments';
+import type {
+    createUserArgs,
+    getUserArgs,
+    getUsersArgs,
+    loginArgs,
+    refreshAccessArgs
+} from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
 
@@ -57,6 +63,10 @@ export const resolvers = {
         login: async (_: undefined, args: loginArgs) => {
             const { input } = args;
             return account.login(input);
+        },
+        refreshAccess: async (_: undefined, args: refreshAccessArgs) => {
+            const { refreshToken } = args;
+            return account.refreshAccess(refreshToken);
         }
     }
 };

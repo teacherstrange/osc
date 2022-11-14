@@ -81,7 +81,7 @@ export const typeDefs = gql`
         url: String
         active: Boolean
     }
-    type refreshToken {
+    type refreshAccess {
         accessToken: String!
     }
     type AuthTokens {
@@ -108,13 +108,9 @@ export const typeDefs = gql`
         password: String! @constraint(minLength: 9, maxLength: 32)
     }
 
-    input refreshAccessInput {
-        refreshToken: String 
-    }
-
     type Mutation {
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
-        refreshAccess(input: refreshAccessInput): refreshToken
+        refreshAccess(refreshToken: String!): refreshAccess
     }
 `;

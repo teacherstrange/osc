@@ -30,3 +30,7 @@ export type loginArgsInput = {
 export type loginArgs = {
     input: loginArgsInput;
 };
+
+export type refreshAccessArgs = {
+    refreshToken: string;
+};

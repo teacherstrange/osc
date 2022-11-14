@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql/error';
-import jwt from 'jsonwebtoken';
 import type { createUserInput, loginArgsInput } from '~/types/arguments';
-import type { permissionsProps } from '~/types/interfaces';
+import type { PermissionsProps } from '~/types/interfaces';
 import * as password from '~/utils/password';
+import * as token from '~/utils/token';
 
 const prisma = new PrismaClient();
 
@@ -68,36 +68,15 @@ export const login = async (input: loginArgsInput) => {
         });
     }
 
-    // Create accessToken - this is what will be used to access restricted areas
-    const accessToken = jwt.sign(
-        { user: { id: user.id, permissions: await permissions(user.id) } },
-        process.env.JWT_SECRET!,
-        {
-            algorithm: 'HS256',
-            audience: process.env.JWT_AUDIENCE,
-            expiresIn: Number(process.env.JWT_DURATION!)
-        }
-    );
-
-    const expires = Math.floor(Date.now() / 1000) + Number(process.env.JWT_REFRESH_DURATION!);
-    // Generate refreshToken - this will be used to generate a new accessToken without needing to authenticate again
-    // Lasts longer than an accessToken, and is stored in the DB so can be deleted to invalidate it for security
-    const refreshToken = jwt.sign({ user: { id: user.id } }, process.env.JWT_SECRET!, {
-        algorithm: 'HS256',
-        audience: process.env.JWT_AUDIENCE,
-        expiresIn: Number(process.env.JWT_REFRESH_DURATION!)
-    });
-
-    // Store refreshToken
-    await prisma.userRefreshToken.create({
-        data: {
-            userId: user.id,
-            token: refreshToken,
-            expires: expires.toLocaleString('en-GB')
-        }
-    });
+    // Generate tokens - this is what will be used to access restricted areas, and refresh an expired token
+    const accessToken = token.access(user.id);
+    const refreshToken = token.refresh(user.id);
 
     return { accessToken, refreshToken };
+};
+
+export const refreshAccess = async (refreshToken: string) => {
+    return { accessToken: await token.refreshAccess(refreshToken) };
 };
 
 export const get = async (id: number) => {
@@ -119,7 +98,7 @@ export const profile = async (id: number) => {
 };
 
 export const permissions = async (userId: number) => {
-    const permissions: permissionsProps = {
+    const permissions: PermissionsProps = {
         read: [],
         write: []
     };

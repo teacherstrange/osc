@@ -1,10 +1,15 @@
 import type { BaseContext } from '@apollo/server';
-import type { userJWT } from './general';
+import type { JwtPayload } from 'jsonwebtoken';
+import type { refreshTokenUser, userJWT } from './general';
 
 export interface AuthContext extends BaseContext {
     user?: userJWT;
 }
 
-export interface permissionsProps {
+export interface PermissionsProps {
     [key: string]: string[];
+}
+
+export interface RefreshToken extends JwtPayload {
+    user: refreshTokenUser;
 }
