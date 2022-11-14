@@ -81,9 +81,12 @@ export const typeDefs = gql`
         url: String
         active: Boolean
     }
-
-    type AuthToken {
-        token: String!
+    type refreshToken {
+        accessToken: String!
+    }
+    type AuthTokens {
+        accessToken: String!
+        refreshToken: String!
     }
 
     type Query {

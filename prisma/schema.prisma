@@ -36,6 +36,7 @@ model User {
   studying               CourseStudent[]         @relation("courseStudentProfile")
   courseStudentsAssigned CourseStudent[]         @relation("courseStudentCreator")
   organisations          UserOrganisation[]      @relation("userOrganisation")
+  userRefreshToken       UserRefreshToken[]      @relation("userRefreshTokens")
 
   @@map("users")
 }
@@ -72,12 +73,25 @@ model UserRegistrationToken {
   userId    Int
   token     String   @db.VarChar(255)
   createdAt DateTime @default(now())
-  expres    DateTime
+  expires   DateTime
 
   user User @relation("userRegistrationTokens", fields: [userId], references: [id])
 
   @@index([userId])
   @@map("users.registrationToken")
+}
+
+model UserRefreshToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @db.VarChar(512)
+  createdAt DateTime @default(now())
+  expires   DateTime
+
+  user User @relation("userRefreshTokens", fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("users.refreshTokens")
 }
 
 model UserRole {
