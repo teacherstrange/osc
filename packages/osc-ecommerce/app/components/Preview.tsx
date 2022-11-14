@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { Center } from '@chakra-ui/react';
-import type { SanityPage } from '~/types/sanity';
-import { usePreviewSubscription } from '~/hooks/usePreviewSubscription';
 import type { Params } from '@remix-run/react';
+import React, { useEffect } from 'react';
+import { usePreviewSubscription } from '~/hooks/usePreviewSubscription';
+import type { SanityPage } from '~/types/sanity';
 
 interface Props {
     data: SanityPage;
@@ -23,5 +22,5 @@ export default function Preview({ data, setData, query, queryParams }: Props) {
         }
     }, [previewData, setData]);
 
-    return <Center>Preview Mode</Center>;
+    return <div>Preview Mode</div>;
 }

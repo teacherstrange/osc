@@ -1,18 +1,14 @@
-import { Form, useLoaderData, useLocation, useParams, useSubmit } from '@remix-run/react';
-
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { Heading, Stack } from '@chakra-ui/react';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
+import { Form, useLoaderData, useLocation, useParams, useSubmit } from '@remix-run/react';
 import { useState } from 'react';
-import { FormToggle } from '~/components/FormToggle/FormToggle';
-import { getColorScheme } from '~/utils/colorScheme';
+import Module from '~/components/Module';
 import Preview from '~/components/Preview';
+import { ThemeSwitcher } from '~/components/ThemeSwitcher/ThemeSwitcher';
 import getPageData from '~/models/sanity.server';
 import { HOME_QUERY } from '~/queries/sanity/home';
-import type { SanityPage } from '~/types/sanity';
-import Module from '~/components/Module';
-import type { module } from '~/types/sanity';
+import type { module, SanityPage } from '~/types/sanity';
+import { getColorScheme } from '~/utils/colorScheme';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 import { useOptionalUser } from '~/utils/_tmp_/user';
@@ -89,30 +85,30 @@ export default function Index() {
             ) : null}
 
             {colorScheme && (
-                <FormToggle
-                    leftIcon={<MoonIcon color={'secondary'} margin={2} />}
-                    rightIcon={<SunIcon color={'secondary'} margin={2} />}
-                    isChecked={colorScheme === 'light' ? true : false}
-                    onToggle={() => {
-                        const formData = new FormData();
-                        formData.set('pathname', location.pathname);
-                        submit(formData, {
-                            method: 'post',
-                            action: '/actions/changeTheme'
-                        });
-                    }}
-                    id="color-mode-toggle"
-                />
+                <Form method="post">
+                    <ThemeSwitcher
+                        label="Toggle colour scheme"
+                        isChecked={colorScheme === 'light' ? true : false}
+                        onToggle={() => {
+                            const formData = new FormData();
+                            formData.set('pathname', location.pathname);
+                            submit(formData, {
+                                method: 'post',
+                                action: '/actions/changeTheme'
+                            });
+                        }}
+                    />
+                </Form>
             )}
 
-            <Heading as="h1">{data?.title}</Heading>
+            <h1>{data?.title}</h1>
 
             {data?.modules && data?.modules.length > 0 ? (
-                <Stack spacing={16}>
+                <>
                     {data?.modules.map((module: module) =>
                         module ? <Module key={module?._key} module={module} /> : null
                     )}
-                </Stack>
+                </>
             ) : null}
         </>
     );

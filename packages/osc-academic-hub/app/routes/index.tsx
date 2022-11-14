@@ -1,10 +1,7 @@
-import { useLoaderData, useLocation, useSubmit } from '@remix-run/react';
-
-import { getColorScheme } from '~/utils/colorScheme';
+import { Form, useLoaderData, useLocation, useSubmit } from '@remix-run/react';
 import type { LoaderFunction } from '@remix-run/server-runtime';
-import { FormToggle } from '~/components/FormToggle/FormToggle';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { Heading } from '@chakra-ui/react';
+import { ThemeSwitcher } from '~/components/ThemeSwitcher/ThemeSwitcher';
+import { getColorScheme } from '~/utils/colorScheme';
 
 export const loader: LoaderFunction = async ({ request }) => {
     const colorScheme = await getColorScheme(request);
@@ -20,22 +17,22 @@ export default function Index() {
     return (
         <>
             {colorScheme && (
-                <FormToggle
-                    leftIcon={<MoonIcon color={'secondary'} margin={2} />}
-                    rightIcon={<SunIcon color={'secondary'} margin={2} />}
-                    isChecked={colorScheme === 'light' ? true : false}
-                    onToggle={() => {
-                        const formData = new FormData();
-                        formData.set('pathname', location.pathname);
-                        submit(formData, {
-                            method: 'post',
-                            action: '/actions/changeTheme'
-                        });
-                    }}
-                    id="color-mode-toggle"
-                />
+                <Form method="post">
+                    <ThemeSwitcher
+                        label="Toggle colour scheme"
+                        isChecked={colorScheme === 'light' ? true : false}
+                        onToggle={() => {
+                            const formData = new FormData();
+                            formData.set('pathname', location.pathname);
+                            submit(formData, {
+                                method: 'post',
+                                action: '/actions/changeTheme'
+                            });
+                        }}
+                    />
+                </Form>
             )}
-            <Heading as="h1">This is the index page</Heading>
+            <h1>This is the index page</h1>
         </>
     );
 }
