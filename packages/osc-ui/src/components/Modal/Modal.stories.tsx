@@ -1,10 +1,10 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { OSCModal as Modal } from './Modal';
 import type { Props } from './Modal';
+import { OSCModal as Modal } from './Modal';
 
 export default {
-    title: 'Modal',
+    title: 'osc-ui/Modal',
     component: Modal
 } as Meta;
 
@@ -19,7 +19,7 @@ Primary.args = {
     size: 'xs',
     hideHeaderCloseButton: false,
     hideFooterCloseButton: false,
-    closeDisabled: false,
+    disableOutsideClick: false,
     overlayColour: 'grey',
     primaryActionButton: false,
     primaryActionButtonText: 'click me',

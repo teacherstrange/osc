@@ -4,7 +4,7 @@ import type { Props } from './Tabs';
 import { Tabs } from './Tabs';
 
 export default {
-    title: 'Tabs',
+    title: 'osc-ui/Tabs',
     component: Tabs
 } as Meta;
 

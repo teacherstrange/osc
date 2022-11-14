@@ -4,7 +4,7 @@ import type { Props } from './Header';
 import { Header } from './Header';
 
 export default {
-    title: 'Header',
+    title: 'osc-ui/Header',
     component: Header
 } as Meta;
 
@@ -13,5 +13,5 @@ const Template: Story<Props> = (args) => <Header {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-    tester: 'tester'
+    className: 'tester'
 };

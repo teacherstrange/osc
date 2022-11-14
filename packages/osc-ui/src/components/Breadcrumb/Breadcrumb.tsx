@@ -1,13 +1,8 @@
-import React from 'react';
-import type { FC } from 'react';
-import './breadcrumb.scss';
-
-import {
-    Breadcrumb as ChakraBreadcrumb,
-    BreadcrumbItem as ChakraBreadcrumbItem,
-    BreadcrumbLink as ChakraBreadcrumbLink
-} from '@chakra-ui/react';
 import { Link } from '@remix-run/react';
+import type { FC } from 'react';
+import React from 'react';
+import { classNames } from '../../utils/classNames';
+import './breadcrumb.scss';
 
 interface Match {
     pathname: string;
@@ -22,37 +17,40 @@ export interface Props {
 
 export const Breadcrumb: FC<Props> = (props: Props) => {
     const { className, matches, separator } = props;
+    const classes = classNames('c-breadcrumb', className);
 
-    const shouldRenderALinkOrNot = (matches, match, index) => {
+    const shouldRenderALinkOrNot = (
+        matches: Props['matches'],
+        match: Match,
+        index: number,
+        separator: any
+    ) => {
         let breadcrumbItem;
+
         if (matches.length === index + 1) {
             // If it is the current page then don't add Link, and set to 'isCurrentPage'
             breadcrumbItem = (
-                <ChakraBreadcrumbItem key={index} isCurrentPage className="c-breadcrumb__item">
-                    <ChakraBreadcrumbLink>{match.title}</ChakraBreadcrumbLink>
-                </ChakraBreadcrumbItem>
+                <li key={index} className="c-breadcrumb__item">
+                    <span aria-current="page">{match.title}</span>
+                </li>
             );
         } else {
             breadcrumbItem = (
-                <ChakraBreadcrumbItem key={index} className="c-breadcrumb__item">
-                    <ChakraBreadcrumbLink as={Link} to={match.pathname}>
-                        {match.title}
-                    </ChakraBreadcrumbLink>
-                </ChakraBreadcrumbItem>
+                <li key={index} className="c-breadcrumb__item">
+                    <Link to={match.pathname}>{match.title}</Link>
+                    <span className="c-breadcrumb__separator">{separator}</span>
+                </li>
             );
         }
         return breadcrumbItem;
     };
 
     return (
-        <ChakraBreadcrumb
-            className={`c-breadcrumb ${className ? className : ''}`}
-            separator={separator}
-        >
+        <ol className={classes}>
             {matches.map((match, index) => {
-                const chakraBreadcrumbItem = shouldRenderALinkOrNot(matches, match, index);
-                return chakraBreadcrumbItem;
+                const breadcrumbItem = shouldRenderALinkOrNot(matches, match, index, separator);
+                return breadcrumbItem;
             })}
-        </ChakraBreadcrumb>
+        </ol>
     );
 };

@@ -1,20 +1,18 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { List } from './List';
-import type { Props as ListProps } from './List';
-import { ListItem } from './ListItem';
-import type { Props as ListItemProps } from './ListItem';
+import type { ListItemProps, ListProps, ListTypes } from './List';
+import { List, ListItem } from './List';
 
 export default {
-    title: 'List',
+    title: 'osc-ui/List',
     component: List,
     subcomponents: { ListItem }
 } as Meta;
 
-const Template: Story<ListProps> = ({ children, ...args }) => (
+const Template: Story<ListProps<ListTypes>> = ({ children, ...args }) => (
     <List {...args}>
         {Array.isArray(children)
-            ? children.map((child: ListItemProps['children'], i: React.Key) => (
+            ? children.map((child: ListItemProps<HTMLLIElement>['children'], i: React.Key) => (
                   <ListItem key={i}>{child}</ListItem>
               ))
             : null}

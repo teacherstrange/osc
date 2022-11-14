@@ -1,0 +1,15 @@
+.c-badge {
+    background-color: var(--colour-primary);
+    color: var(--colour-tertiary);
+
+    &--subtle {
+        background-color: var(--colour-primary);
+        color: var(--colour-tertiary);
+    }
+
+    &--outline {
+        background-color: transparent;
+        border: 1px solid var(--colour-primary);
+        color: var(--colour-primary);
+    }
+}

@@ -1,0 +1,36 @@
+/* stylelint-disable-next-line plugin/selector-bem-pattern */
+button {
+    all: unset;
+}
+
+.c-switch {
+    position: relative;
+    width: 42px;
+    height: 25px;
+    background-color: var(--colour-navy);
+    border-radius: 9999px;
+
+    &:focus {
+        box-shadow: 0 0 0 2px var(--colour-pink);
+    }
+
+    &[data-state="checked"] {
+        background-color: var(--colour-pink);
+    }
+
+    &__thumb {
+        display: block;
+        width: 21px;
+        height: 21px;
+        background-color: var(--colour-white);
+        border-radius: 9999px;
+        box-shadow: 0 2px 2px var(--colour-navy);
+        transform: translateX(2px);
+        transition: transform 100ms;
+        will-change: transform;
+
+        &[data-state="checked"] {
+            transform: translateX(19px);
+        }
+    }
+}

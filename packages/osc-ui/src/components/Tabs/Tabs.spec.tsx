@@ -2,9 +2,9 @@
  * @vitest-environment jsdom
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Tabs } from './Tabs';
-import { screen, render } from '@testing-library/react';
 
 const tabItems = [
     {
@@ -30,7 +30,7 @@ test('renders the tabs with three items', () => {
     const tabList = screen.queryAllByRole('tab');
     // Use querySelector as an escape hatch as queryByRole won't count hidden elements
     const tabPanels = document.querySelectorAll('[role="tabpanel"]');
-    const tabContainer = document.querySelector('.chakra-tabs');
+    const tabContainer = document.querySelector('.c-tabs');
 
     expect(tabList).toHaveLength(3);
     expect(tabPanels).toHaveLength(3);

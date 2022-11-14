@@ -1,10 +1,9 @@
+import { ChevronRightIcon } from '@radix-ui/react-icons';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { Breadcrumb } from './Breadcrumb';
-import { screen, render } from '@testing-library/react';
-import type { Props } from './Breadcrumb';
 import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/jest-dom/extend-expect';
-import { ArrowRightIcon } from '@chakra-ui/icons';
+import type { Props } from './Breadcrumb';
+import { Breadcrumb } from './Breadcrumb';
 
 describe('Breadcrumb component', () => {
     const setup = ({ className, matches, separator }: Props) =>
@@ -27,6 +26,7 @@ describe('Breadcrumb component', () => {
             expect(screen.getByText(`${link.title}`)).toHaveTextContent(`${link.title}`);
         });
     });
+
     test('renders breadcrumbs with anchor tag and correct pathnames', () => {
         setup({
             matches: links,
@@ -38,6 +38,7 @@ describe('Breadcrumb component', () => {
         );
         expect(screen.getByRole('link', { name: `${links[0].title}` }).nodeName).toBe('A');
     });
+
     test('renders a breadcrumb without an anchor tag or pathname when it is the last breadcrumb', () => {
         setup({
             matches: links,
@@ -49,20 +50,22 @@ describe('Breadcrumb component', () => {
         );
         expect(screen.getByText(`${links[2].title}`).nodeName).not.toBe('A');
     });
+
     test('renders a string separator that is passed in', () => {
         setup({
             matches: links,
             separator: '/'
         });
-        expect(screen.getAllByRole('presentation')[0]).toHaveTextContent('/');
-        expect(screen.getAllByRole('presentation')[1]).toHaveTextContent('/');
+        expect(screen.getAllByRole('listitem')[0]).toHaveTextContent('/');
+        expect(screen.getAllByRole('listitem')[1]).toHaveTextContent('/');
     });
+
     test('renders an icon separator that is passed in', () => {
         setup({
             matches: links,
-            separator: <ArrowRightIcon />
+            separator: <ChevronRightIcon />
         });
-        expect(screen.getAllByRole('presentation')[0].childNodes[0].nodeName).toBe('SVG');
-        expect(screen.getAllByRole('presentation')[1].childNodes[0].nodeName).toBe('SVG');
+
+        expect(screen.getAllByRole('listitem')[0].childNodes[1].childNodes[0].nodeName).toBe('SVG');
     });
 });

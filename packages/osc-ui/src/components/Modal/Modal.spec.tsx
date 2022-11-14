@@ -1,11 +1,17 @@
+/**
+ * @vitest-environment jsdom
+ */
+
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { OSCModal as Modal } from './Modal';
-import { screen, render } from '@testing-library/react';
 import type { Props } from './Modal';
+import { OSCModal as Modal } from './Modal';
 
 describe('Modal component', () => {
     const setup = ({
-        Open,
+        open,
+        onOpenChange,
         ModalButtonText,
         title,
         hideFooterCloseButton,
@@ -18,7 +24,8 @@ describe('Modal component', () => {
     }: Props) => {
         render(
             <Modal
-                Open={Open}
+                open={open}
+                onOpenChange={onOpenChange}
                 ModalButtonText={ModalButtonText}
                 hideFooterCloseButton={hideFooterCloseButton}
                 hideHeaderCloseButton={hideHeaderCloseButton}
@@ -33,14 +40,15 @@ describe('Modal component', () => {
         );
     };
 
-    test('renders modal with no close button', () => {
+    test('renders modal with no close button', async () => {
+        const user = userEvent.setup();
+
         setup({
-            Open: true,
             ModalButtonText: 'click to open modal',
             title: 'testing modal',
             size: 'xl',
-            hideHeaderCloseButton: true,
-            hideFooterCloseButton: false,
+            hideHeaderCloseButton: false,
+            hideFooterCloseButton: true,
             closeDisabled: false,
             overlayColour: 'green',
             primaryActionButton: true,
@@ -48,27 +56,38 @@ describe('Modal component', () => {
             onClick: () => {}
         });
 
-        expect(document.querySelector('.chakra-modal__close-btn')).toBeNull();
+        await user.click(screen.getByRole('button', { name: 'click to open modal' }));
+
+        const closeButton = document.querySelector('.c-modal__footer button[aria-label="Close"]');
+        expect(closeButton).not.toBeInTheDocument();
     });
-    test('renders modal with no X button', () => {
+
+    test('renders modal with no X button', async () => {
+        const user = userEvent.setup();
+
         setup({
-            Open: true,
             ModalButtonText: 'click to open modal',
             title: 'testing modal',
             size: 'xl',
             hideHeaderCloseButton: true,
-            hideFooterCloseButton: true,
+            hideFooterCloseButton: false,
             closeDisabled: true,
             overlayColour: 'green',
             primaryActionButton: true,
             primaryActionButtonText: 'click me',
             onClick: () => {}
         });
-        expect(document.querySelector('.o-modal-close')).toBeNull();
+
+        await user.click(screen.getByRole('button', { name: 'click to open modal' }));
+
+        const closeButton = document.querySelector('.c-modal__header button');
+        expect(closeButton).not.toBeInTheDocument();
     });
-    test('renders the primary action button', () => {
+
+    test('renders the primary action button', async () => {
+        const user = userEvent.setup();
+
         setup({
-            Open: true,
             ModalButtonText: 'click to open modal',
             title: 'testing modal',
             size: 'xl',
@@ -80,6 +99,8 @@ describe('Modal component', () => {
             primaryActionButtonText: 'primary action button',
             onClick: () => {}
         });
+
+        await user.click(screen.getByRole('button', { name: 'click to open modal' }));
 
         expect(screen.getByText('primary action button')).toHaveTextContent(
             'primary action button'

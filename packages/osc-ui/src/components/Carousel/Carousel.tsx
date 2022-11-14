@@ -1,13 +1,11 @@
-import type { FC } from 'react';
-import { useEffect, useState } from 'react';
-import React, { useCallback } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
-import { Box, Button, Image, Text } from '@chakra-ui/react';
-import Autoplay from 'embla-carousel-autoplay';
 import AutoHeight from 'embla-carousel-auto-height';
+import Autoplay from 'embla-carousel-autoplay';
 import ClassNames from 'embla-carousel-class-names';
-import { v4 as uuidv4 } from 'uuid';
+import useEmblaCarousel from 'embla-carousel-react';
+import type { FC } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
+import { v4 as uuidv4 } from 'uuid';
 import './carousel.scss';
 
 export type Props = {
@@ -178,30 +176,22 @@ export const CarouselInner: FC<Props> = (props) => {
     }, [emblaApi]);
 
     return (
-        <Box width="100%" display="flex" alignItems="center" flexDirection="column">
-            <Box width="100%" className="embla">
-                <Box
-                    width="100%"
+        <div>
+            <div className="embla">
+                <div
                     aria-roledescription="carousel"
                     role="region"
                     className="embla__viewport"
                     ref={emblaRef}
                 >
-                    <Box
-                        width="100%"
-                        aria-live={delay ? 'off' : 'polite'}
-                        className="embla__container"
-                    >
+                    <div aria-live={delay ? 'off' : 'polite'} className="embla__container">
                         {mediaArray?.map((q, index) => {
                             return (
-                                <Box
-                                    width="100%"
+                                <div
                                     key={`${index}`}
                                     role="group"
                                     aria-label={`${index + 1} of ${mediaArray?.length}`}
                                     aria-roledescription="slide"
-                                    alignSelf="center"
-                                    height={height}
                                     className={`embla__slide ${
                                         typeof document !== 'undefined' && carouselVisible
                                             ? 'embla-carousel-loaded'
@@ -209,9 +199,9 @@ export const CarouselInner: FC<Props> = (props) => {
                                     }`}
                                 >
                                     <div className="embla__slide_inner">
-                                        <Text className="embla__slide_caption">{q.caption}</Text>
+                                        <p className="embla__slide_caption">{q.caption}</p>
                                         {q.image && q.image.asset.url && (
-                                            <Image
+                                            <img
                                                 className="o-img o-img--cover"
                                                 height={q.image.height}
                                                 width="100%"
@@ -220,10 +210,10 @@ export const CarouselInner: FC<Props> = (props) => {
                                             />
                                         )}
                                     </div>
-                                </Box>
+                                </div>
                             );
                         })}
-                    </Box>
+                    </div>
                     <div className="indicators">
                         {scrollSnaps.length > 1 && (
                             <button className="embla__prev" onClick={scrollPrev}>
@@ -236,13 +226,13 @@ export const CarouselInner: FC<Props> = (props) => {
                             </button>
                         )}
                     </div>
-                </Box>
-            </Box>
+                </div>
+            </div>
             <div className="embla__navigator">
                 {scrollSnaps.map((_, indicatorIndex) => {
                     if (scrollSnaps.length > 1) {
                         return (
-                            <Button
+                            <button
                                 className="embla__dots"
                                 key={indicatorIndex + '_indicator'}
                                 style={{
@@ -258,7 +248,7 @@ export const CarouselInner: FC<Props> = (props) => {
                     return <></>;
                 })}
             </div>
-        </Box>
+        </div>
     );
 };
 
@@ -272,15 +262,11 @@ export const Carousel: FC<Props> = (props) => {
     }, [carouselKey, props.carouselKey]);
 
     return (
-        <Box
-            width="100%"
+        <div
             key={`${carouselKey}-${mediaArray.length}`}
-            display="flex"
-            alignItems="center"
-            flexDirection="column"
             className={`embla__carousel_wrapper_${carouselKey}`}
         >
             <CarouselInner {...props} carouselKey={carouselKey}></CarouselInner>
-        </Box>
+        </div>
     );
 };

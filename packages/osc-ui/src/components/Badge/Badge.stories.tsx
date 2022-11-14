@@ -4,7 +4,7 @@ import React from 'react';
 import { Badge } from './Badge';
 
 export default {
-    title: 'Badge',
+    title: 'osc-ui/Badge',
     component: Badge
 } as Meta;
 
@@ -26,22 +26,22 @@ export const SolidBadge = BadgeTemplate.bind({});
 export const OutlineBadge = BadgeTemplate.bind({});
 
 Primary.args = {
-    items: [{ badgeName: 'Badge', color: 'blue', variant: 'subtle' }]
+    items: [{ badgeName: 'Badge', variant: 'subtle' }]
 };
 
 SubtleBadge.args = {
     items: [
         {
             ...Primary.args.items[0],
-            color: 'red'
+            theme: 'primary'
         },
         {
             ...Primary.args.items[0],
-            color: 'blue'
+            theme: 'secondary'
         },
         {
             ...Primary.args.items[0],
-            color: 'green'
+            theme: 'tertiary'
         }
     ]
 };
@@ -49,18 +49,15 @@ SolidBadge.args = {
     items: [
         {
             ...Primary.args.items[0],
-            color: 'red',
-            variant: 'solid'
+            theme: 'primary'
         },
         {
             ...Primary.args.items[0],
-            color: 'blue',
-            variant: 'solid'
+            theme: 'secondary'
         },
         {
             ...Primary.args.items[0],
-            color: 'green',
-            variant: 'solid'
+            theme: 'tertiary'
         }
     ]
 };
@@ -68,17 +65,17 @@ OutlineBadge.args = {
     items: [
         {
             ...Primary.args.items[0],
-            color: 'red',
+            theme: 'primary',
             variant: 'outline'
         },
         {
             ...Primary.args.items[0],
-            color: 'blue',
+            theme: 'secondary',
             variant: 'outline'
         },
         {
             ...Primary.args.items[0],
-            color: 'green',
+            theme: 'tertiary',
             variant: 'outline'
         }
     ]
