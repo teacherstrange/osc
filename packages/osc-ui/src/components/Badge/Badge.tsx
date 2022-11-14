@@ -19,9 +19,9 @@ export interface Props {
 export const Badge: FC<Props> = (props: Props) => {
     const { badgeName, className, fontSize, theme = 'primary', variant } = props;
     const fontSizeClass = useFontSize(fontSize);
-    const vairant = useVariant('c-badge', variant);
+    const variantClass = useVariant('c-badge', variant);
     const themeClass = useTheme(theme);
-    const classes = classNames('c-badge', vairant, fontSizeClass, themeClass, className);
+    const classes = classNames('c-badge', variantClass, fontSizeClass, themeClass, className);
 
     return <span className={classes}>{badgeName}</span>;
 };

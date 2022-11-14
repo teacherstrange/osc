@@ -3,7 +3,7 @@
  *
  * @param classes A comma separated list of classNames
  * @returns A string of classNames
- * @example classNames('c-badge', vairant, fontSizeClass, themeClass, className)
+ * @example classNames('c-badge', variant, fontSizeClass, themeClass, className)
  */
 export const classNames = (...classes: string[]) => {
     // Filter out falsy values such as empty spaces
