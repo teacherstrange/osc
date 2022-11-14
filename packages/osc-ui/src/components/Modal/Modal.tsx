@@ -44,6 +44,7 @@ export interface Props {
     primaryActionButton: boolean;
     primaryActionButtonText: string;
     onClick: () => void;
+    modalDescription: string;
 }
 
 export const Modal: FC<Props> = (props) => {
@@ -59,7 +60,8 @@ export const Modal: FC<Props> = (props) => {
         disableOutsideClick,
         primaryActionButton,
         primaryActionButtonText,
-        onClick
+        onClick,
+        modalDescription
     } = props;
     const width = `c-modal--${size}`;
     const classes = classNames('c-modal', width);
@@ -74,7 +76,6 @@ export const Modal: FC<Props> = (props) => {
                 <Dialog.Overlay className="c-modal__overlay" />
 
                 <Dialog.Content
-                    aria-describedby={undefined}
                     onPointerDownOutside={disableOutsideClick ? (e) => e.preventDefault() : null}
                     className={classes}
                 >
@@ -86,6 +87,9 @@ export const Modal: FC<Props> = (props) => {
                             </ModalCloseButton>
                         ) : null}
                     </header>
+                    <Dialog.Description className="c-modal__description sr-only">
+                        {modalDescription}
+                    </Dialog.Description>
 
                     <div>{children}</div>
 
