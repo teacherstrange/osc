@@ -8,7 +8,7 @@ export interface Props {
     isChecked: boolean;
 }
 
-export const ThemeSwitcher: FC<Props> = (props) => {
+export const ThemeSwitcher: FC<Props> = (props: Props) => {
     const { label, onToggle, isChecked } = props;
 
     return (
