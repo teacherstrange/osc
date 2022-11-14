@@ -8,12 +8,14 @@ import * as password from '~/utils/password';
 const prisma = new PrismaClient();
 
 export const create = async (input: createUserInput) => {
+    // Check for existing user, all emails must be unique
     const existingUser = await prisma.user.findUnique({
         where: {
             email: input.email
         }
     });
 
+    // If user already exists, throw error
     if (existingUser) {
         throw new GraphQLError('An account already exists for the specified email.', {
             extensions: {
@@ -22,7 +24,10 @@ export const create = async (input: createUserInput) => {
         });
     }
 
+    // Hash password
     const hashedPassword = await password.hash(input.password);
+
+    // Create user record
     return await prisma.user.create({
         data: {
             firstName: input.firstName,
@@ -34,12 +39,14 @@ export const create = async (input: createUserInput) => {
 };
 
 export const login = async (input: loginArgsInput) => {
+    // Find matching user
     const user = await prisma.user.findUnique({
         where: {
             email: input.email
         }
     });
 
+    // If no matching user, throw error
     if (!user) {
         throw new GraphQLError('No matching user found.', {
             extensions: {
@@ -48,7 +55,11 @@ export const login = async (input: loginArgsInput) => {
         });
     }
 
+    // Compare input password to hashed password
     const passwordMatch = await password.compare(input.password, user.password);
+
+    // If passwords dont match throw error
+    // We'll hide this behind the same text as no matching user for now to prevent identifying used emails
     if (!passwordMatch) {
         throw new GraphQLError('No matching user found.', {
             extensions: {
@@ -57,6 +68,7 @@ export const login = async (input: loginArgsInput) => {
         });
     }
 
+    // Create accessToken - this is what will be used to access restricted areas
     const accessToken = jwt.sign(
         { user: { id: user.id, permissions: await permissions(user.id) } },
         process.env.JWT_SECRET!,
@@ -68,12 +80,15 @@ export const login = async (input: loginArgsInput) => {
     );
 
     const expires = Math.floor(Date.now() / 1000) + Number(process.env.JWT_REFRESH_DURATION!);
+    // Generate refreshToken - this will be used to generate a new accessToken without needing to authenticate again
+    // Lasts longer than an accessToken, and is stored in the DB so can be deleted to invalidate it for security
     const refreshToken = jwt.sign({ user: { id: user.id } }, process.env.JWT_SECRET!, {
         algorithm: 'HS256',
         audience: process.env.JWT_AUDIENCE,
         expiresIn: Number(process.env.JWT_REFRESH_DURATION!)
     });
 
+    // Store refreshToken
     await prisma.userRefreshToken.create({
         data: {
             userId: user.id,

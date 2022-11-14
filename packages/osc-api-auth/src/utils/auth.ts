@@ -1,6 +1,11 @@
 import type { userJWT } from '~/types/general';
 
 export const userCan = (user: userJWT, desiredPermission: string | []) => {
+    // Currently we're taking a single perm to check, or an array of perms that must ALL match
+    // If desiredPermission is a string,
+    //      THEN see if the desiredPermission exists in users permissoins array
+    // ELSE desiredPermission is an array of strings
+    //      THEN compare loop through desired permissions, and see if they ALL exist in users permissions
     return typeof desiredPermission == 'string'
         ? user.permissions.read.includes(desiredPermission) ||
               user.permissions.write.includes(desiredPermission)

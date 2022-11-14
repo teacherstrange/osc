@@ -11,6 +11,7 @@ export const canReadOwnAccount = rule()((_: undefined, __: undefined, { user }: 
 });
 
 export const isReadingOwnAccount = rule()((_: undefined, { id }, { user }: AuthContext) => {
+    // If ID is supplied in agrs, otherwise resolver defaults to logged in user
     return (id ?? user!.id) === user!.id;
 });
 
