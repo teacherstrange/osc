@@ -18,7 +18,12 @@ const transpileCss = async (file, outputFile = undefined) => {
                 content: ['**/*.ts', '**/*.tsx', '**/*.mdx', '**/*.svg', './remix.config.js'],
                 css: ['**/*.css'],
                 safelist: {
-                    greedy: [/\b\w*react-datepicker\w*\b/i, /\b\w*aa\w*\b/i]
+                    greedy: [
+                        /\b\w*react-datepicker\w*\b/i,
+                        /\b\w*aa\w*\b/i,
+                        /[A-za-z0-9-:\\/]+/, // allow attribute selectors
+                        /sr-only/
+                    ]
                 },
                 defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
                 variables: false
