@@ -56,7 +56,6 @@ export const resolvers = {
         },
         login: async (_: undefined, args: loginArgs) => {
             const { input } = args;
-
             return account.login(input);
         }
     }
