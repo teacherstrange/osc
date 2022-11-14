@@ -1,10 +1,8 @@
 import type { User } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
-import { GraphQLError } from 'graphql';
-import jwt from 'jsonwebtoken';
 import type { createUserArgs, getUserArgs, getUsersArgs, loginArgs } from '~/types/arguments';
+import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
-import * as password from '~/utils/password';
 
 const prisma = new PrismaClient();
 
@@ -40,12 +38,10 @@ export const resolvers = {
                       }
                   });
         },
-        user: async (_: undefined, args: getUserArgs) => {
-            return await prisma.user.findUnique({
-                where: {
-                    id: args.id ?? 0
-                }
-            });
+        user: async (_: undefined, args: getUserArgs, context: AuthContext) => {
+            return args.id ?? context.user ?? false
+                ? await account.get(args.id ?? context.user!.id)
+                : null;
         }
     },
     User: {
@@ -56,67 +52,12 @@ export const resolvers = {
     Mutation: {
         createUser: async (_: undefined, args: createUserArgs) => {
             const { input } = args;
-            const existingUser = await prisma.user.findUnique({
-                where: {
-                    email: input.email
-                }
-            });
-
-            if (existingUser) {
-                throw new GraphQLError('An account already exists for the specified email.', {
-                    extensions: {
-                        code: 'BAD_USER_INPUT'
-                    }
-                });
-            }
-
-            const hashedPassword = await password.hash(input.password);
-            const user = await prisma.user.create({
-                data: {
-                    firstName: input.firstName,
-                    lastName: input.lastName,
-                    email: input.email,
-                    password: hashedPassword
-                }
-            });
-
-            return user;
+            return account.create(input);
         },
         login: async (_: undefined, args: loginArgs) => {
-            const user = await prisma.user.findUnique({
-                where: {
-                    email: args.email
-                }
-            });
+            const { input } = args;
 
-            if (!user) {
-                throw new GraphQLError('No matching user found.', {
-                    extensions: {
-                        code: 'BAD_USER_INPUT'
-                    }
-                });
-            }
-
-            const passwordMatch = await password.compare(args.password, user.password);
-            if (!passwordMatch) {
-                throw new GraphQLError('No matching user found.', {
-                    extensions: {
-                        code: 'BAD_USER_INPUT'
-                    }
-                });
-            }
-
-            const token = jwt.sign(
-                { user: { id: user.id, permissions: await account.permissions(user.id) } },
-                process.env.JWT_SECRET!,
-                {
-                    algorithm: 'HS256',
-                    audience: process.env.JWT_AUDIENCE,
-                    expiresIn: 86400
-                }
-            );
-
-            return { token };
+            return account.login(input);
         }
     }
 };

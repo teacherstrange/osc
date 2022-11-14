@@ -1,10 +1,97 @@
 import { PrismaClient } from '@prisma/client';
+import { GraphQLError } from 'graphql/error';
+import jwt from 'jsonwebtoken';
+import type { createUserInput, loginArgsInput } from '~/types/arguments';
+import type { permissionsProps } from '~/types/interfaces';
+import * as password from '~/utils/password';
 
 const prisma = new PrismaClient();
 
-interface permissionsProps {
-    [key: string]: [string?];
-}
+export const create = async (input: createUserInput) => {
+    const existingUser = await prisma.user.findUnique({
+        where: {
+            email: input.email
+        }
+    });
+
+    if (existingUser) {
+        throw new GraphQLError('An account already exists for the specified email.', {
+            extensions: {
+                code: 'BAD_USER_INPUT'
+            }
+        });
+    }
+
+    const hashedPassword = await password.hash(input.password);
+    return await prisma.user.create({
+        data: {
+            firstName: input.firstName,
+            lastName: input.lastName,
+            email: input.email,
+            password: hashedPassword
+        }
+    });
+};
+
+export const login = async (input: loginArgsInput) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            email: input.email
+        }
+    });
+
+    if (!user) {
+        throw new GraphQLError('No matching user found.', {
+            extensions: {
+                code: 'BAD_USER_INPUT'
+            }
+        });
+    }
+
+    const passwordMatch = await password.compare(input.password, user.password);
+    if (!passwordMatch) {
+        throw new GraphQLError('No matching user found.', {
+            extensions: {
+                code: 'BAD_USER_INPUT'
+            }
+        });
+    }
+
+    const accessToken = jwt.sign(
+        { user: { id: user.id, permissions: await permissions(user.id) } },
+        process.env.JWT_SECRET!,
+        {
+            algorithm: 'HS256',
+            audience: process.env.JWT_AUDIENCE,
+            expiresIn: Number(process.env.JWT_DURATION!)
+        }
+    );
+
+    const expires = Math.floor(Date.now() / 1000) + Number(process.env.JWT_REFRESH_DURATION!);
+    const refreshToken = jwt.sign({ user: { id: user.id } }, process.env.JWT_SECRET!, {
+        algorithm: 'HS256',
+        audience: process.env.JWT_AUDIENCE,
+        expiresIn: Number(process.env.JWT_REFRESH_DURATION!)
+    });
+
+    await prisma.userRefreshToken.create({
+        data: {
+            userId: user.id,
+            token: refreshToken,
+            expires: expires.toLocaleString('en-GB')
+        }
+    });
+
+    return { accessToken, refreshToken };
+};
+
+export const get = async (id: number) => {
+    return await prisma.user.findUnique({
+        where: {
+            id: id
+        }
+    });
+};
 
 export const profile = async (id: number) => {
     return {
