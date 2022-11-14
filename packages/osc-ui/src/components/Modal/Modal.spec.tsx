@@ -14,9 +14,9 @@ describe('Modal component', () => {
         onOpenChange,
         ModalButtonText,
         title,
+        modalDescription,
         hideFooterCloseButton,
         hideHeaderCloseButton,
-        closeDisabled,
         overlayColour,
         primaryActionButton,
         primaryActionButtonText,
@@ -29,8 +29,9 @@ describe('Modal component', () => {
                 ModalButtonText={ModalButtonText}
                 hideFooterCloseButton={hideFooterCloseButton}
                 hideHeaderCloseButton={hideHeaderCloseButton}
-                closeDisabled={closeDisabled}
                 overlayColour={overlayColour}
+                disableOutsideClick={false}
+                modalDescription={modalDescription}
                 primaryActionButton={primaryActionButton}
                 primaryActionButtonText={primaryActionButtonText}
                 onClick={onClick}
@@ -46,10 +47,10 @@ describe('Modal component', () => {
         setup({
             ModalButtonText: 'click to open modal',
             title: 'testing modal',
+            modalDescription: 'An accessible description to be announced when the dialog is opened',
             size: 'xl',
             hideHeaderCloseButton: false,
             hideFooterCloseButton: true,
-            closeDisabled: false,
             overlayColour: 'green',
             primaryActionButton: true,
             primaryActionButtonText: 'click me',
@@ -68,10 +69,10 @@ describe('Modal component', () => {
         setup({
             ModalButtonText: 'click to open modal',
             title: 'testing modal',
+            modalDescription: 'An accessible description to be announced when the dialog is opened',
             size: 'xl',
             hideHeaderCloseButton: true,
             hideFooterCloseButton: false,
-            closeDisabled: true,
             overlayColour: 'green',
             primaryActionButton: true,
             primaryActionButtonText: 'click me',
@@ -90,10 +91,10 @@ describe('Modal component', () => {
         setup({
             ModalButtonText: 'click to open modal',
             title: 'testing modal',
+            modalDescription: 'An accessible description to be announced when the dialog is opened',
             size: 'xl',
             hideHeaderCloseButton: true,
             hideFooterCloseButton: true,
-            closeDisabled: false,
             overlayColour: 'green',
             primaryActionButton: true,
             primaryActionButtonText: 'primary action button',
