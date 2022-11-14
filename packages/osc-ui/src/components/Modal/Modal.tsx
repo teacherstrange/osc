@@ -39,7 +39,7 @@ export interface Props {
     size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
     hideHeaderCloseButton: boolean;
     hideFooterCloseButton: boolean;
-    disableOutsideClick: boolean;
+    disableOutsideClick?: boolean;
     overlayColour: string;
     primaryActionButton: boolean;
     primaryActionButtonText: string;
