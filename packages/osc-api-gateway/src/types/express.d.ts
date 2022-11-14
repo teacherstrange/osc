@@ -1,12 +1,12 @@
 declare global {
     namespace Express {
         export interface Request {
-            auth: {
+            auth?: {
                 user: {
                     id: number;
                     permissions: {
-                        read: [string?];
-                        write: [string?];
+                        read: string[];
+                        write: string[];
                     };
                 };
             };
