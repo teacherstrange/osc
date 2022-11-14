@@ -8,14 +8,23 @@ import {
     createApolloQueryValidationPlugin
 } from 'graphql-constraint-directive';
 import depthLimit from 'graphql-depth-limit';
+import { applyMiddleware } from 'graphql-middleware';
 import { resolvers } from '~/resolvers/resolver';
 import { typeDefs } from '~/schemas/schema';
+import type { AuthContext } from '~/types/interfaces';
+import { shieldPermissions } from './permissions';
 
 export const server = () => {
-    const schema = buildSubgraphSchema({
-        typeDefs: [gql(constraintDirectiveTypeDefs), typeDefs],
-        resolvers
-    });
+    const schema = applyMiddleware(
+        buildSubgraphSchema([
+            {
+                typeDefs,
+                resolvers
+            },
+            { typeDefs: gql(constraintDirectiveTypeDefs) }
+        ]),
+        shieldPermissions
+    );
 
     // Temporary type definition override
     // Waiting on graphql-constraint-directive to patch for v4 of apollo-server
@@ -23,7 +32,7 @@ export const server = () => {
     type validationPluginFactory = (options: { schema: GraphQLSchema }) => ApolloServerPlugin;
     const plugins = [(createApolloQueryValidationPlugin as validationPluginFactory)({ schema })];
 
-    return new ApolloServer({
+    return new ApolloServer<AuthContext>({
         schema,
         plugins,
         validationRules: [depthLimit(7)]
