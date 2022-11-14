@@ -1,0 +1,16 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+@use "settings" as s;
+
+.theme {
+    &--primary {
+        @each $class, $text-colour in s.$colours {
+            --colour-#{$class}: #{$text-colour};
+        }
+    }
+
+    &--secondary {
+        --colour-primary: var(--colour-navy);
+        --colour-seconadary: var(--colour-pink);
+        --colour-tertiary: var(--colour-white);
+    }
+}
