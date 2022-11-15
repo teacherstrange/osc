@@ -1,5 +1,6 @@
 import './styles/main.scss';
 
+export { Alert, AlertDescription, AlertTitle } from './components/Alert/Alert';
 export { Avatar } from './components/Avatar/Avatar';
 export { Badge } from './components/Badge/Badge';
 export { Breadcrumb } from './components/Breadcrumb/Breadcrumb';

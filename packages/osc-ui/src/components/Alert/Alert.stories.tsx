@@ -1,0 +1,97 @@
+import type { Meta, Story } from '@storybook/react';
+import React from 'react';
+
+import { Alert, AlertDescription, AlertTitle } from './Alert';
+import { Cross2Icon } from '@radix-ui/react-icons';
+
+export default {
+    title: 'osc-ui/Alert',
+    component: Alert
+} as Meta;
+
+const AlertTemplateOne: Story = ({ items }) => {
+    return (
+        <div>
+            {items.map((item, i) => (
+                <div key={i} style={{ margin: '1em', width: '30%' }}>
+                    <Alert {...item}>
+                        <AlertTitle title={item.title} />
+                    </Alert>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+const AlertTemplateTwo: Story = (args) => {
+    const { customElement, description, status, title } = args;
+
+    return (
+        <div>
+            <div style={{ margin: '1em', width: '50%' }}>
+                <Alert status={status}>
+                    <AlertTitle className="c-alert__title--bold" title={title} />
+                    <AlertDescription description={description} />
+                    {customElement}
+                </Alert>
+            </div>
+        </div>
+    );
+};
+const AlertTemplateThree: Story = (args) => {
+    const { customElement, status, title } = args;
+
+    return (
+        <div>
+            <div style={{ margin: '1em', width: '30%' }}>
+                <Alert status={status}>
+                    <AlertTitle title={title} />
+                    {customElement}
+                </Alert>
+            </div>
+        </div>
+    );
+};
+
+export const Primary = AlertTemplateOne.bind({});
+export const WithDescription = AlertTemplateTwo.bind({});
+export const NoIcons = AlertTemplateThree.bind({});
+export const CloseButton = AlertTemplateThree.bind({});
+
+Primary.args = {
+    items: [
+        {
+            title: 'This is an information alert!',
+            status: 'info'
+        },
+        {
+            title: 'This is a warning alert!',
+            status: 'warning'
+        },
+        {
+            title: 'This is a success alert!',
+            status: 'success'
+        },
+        {
+            title: 'This is an error alert!',
+            status: 'error'
+        }
+    ]
+};
+
+WithDescription.args = {
+    status: 'error',
+    title: 'Your browser is outdated!',
+    description: 'Chakra experience may be degraded'
+};
+
+NoIcons.args = {
+    displayIcon: false,
+    status: 'info',
+    title: 'OSC is going live on August 30th. Get ready!'
+};
+CloseButton.args = {
+    status: 'warning',
+    title: 'Your account is about expire, upgrade now',
+    customElement: <Cross2Icon width="18" height="18" className="c-alert__button--right" />
+};
