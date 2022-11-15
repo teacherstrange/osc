@@ -1,5 +1,11 @@
 import './styles/main.scss';
 
+export {
+    Accordion,
+    AccordionHeader,
+    AccordionItem,
+    AccordionPanel,
+} from './components/Accordion/Accordion';
 export { Alert, AlertDescription, AlertTitle } from './components/Alert/Alert';
 export { Avatar } from './components/Avatar/Avatar';
 export { Badge } from './components/Badge/Badge';

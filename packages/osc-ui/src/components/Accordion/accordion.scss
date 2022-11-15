@@ -1,0 +1,45 @@
+.c-accordion {
+    &__trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        /* stylelint-disable-next-line selector-class-pattern */
+        &[data-state="open"] > .c-accordion__chevron {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__content {
+        overflow: hidden;
+
+        &[data-state="open"] {
+            animation: slide-down 300ms cubic-bezier(0.87, 0, 0.13, 1);
+        }
+
+        &[data-state="closed"] {
+            animation: slide-up 300ms cubic-bezier(0.87, 0, 0.13, 1);
+        }
+    }
+}
+
+@keyframes slide-down {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: var(--radix-accordion-content-height);
+    }
+}
+
+@keyframes slide-up {
+    from {
+        height: var(--radix-accordion-content-height);
+    }
+
+    to {
+        height: 0;
+    }
+}
