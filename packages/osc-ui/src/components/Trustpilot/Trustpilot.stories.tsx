@@ -1,10 +1,10 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { Trustpilot } from './Trustpilot';
 import type { Props } from './Trustpilot';
+import { Trustpilot } from './Trustpilot';
 
 export default {
-    title: 'Trustpilot',
+    title: 'osc-ui/Trustpilot',
     component: Trustpilot
 } as Meta;
 

@@ -4,7 +4,7 @@ import type { Props } from './Footer';
 import { Footer } from './Footer';
 
 export default {
-    title: 'Footer',
+    title: 'osc-ui/Footer',
     component: Footer
 } as Meta;
 

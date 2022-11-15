@@ -1,15 +1,13 @@
-import { useLoaderData, useParams } from '@remix-run/react';
-import { Heading, Stack } from '@chakra-ui/react';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
+import { useLoaderData, useParams } from '@remix-run/react';
 import { useState } from 'react';
 
+import Module from '~/components/Module';
 import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY } from '~/queries/sanity/product';
-import type { SanityPage } from '~/types/sanity';
-import Module from '~/components/Module';
-import type { module } from '~/types/sanity';
+import type { module, SanityPage } from '~/types/sanity';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 
@@ -78,19 +76,20 @@ export default function Index() {
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
      */
     return (
-        <div>
-            TEST!
+        <>
             {isPreview ? (
                 <Preview data={data} setData={setData} query={query} queryParams={params} />
             ) : null}
-            <Heading as="h1">{data?.store?.title}</Heading>
+
+            <h1>{data?.store?.title}</h1>
+
             {data?.modules && data?.modules.length > 0 ? (
-                <Stack spacing={16}>
+                <>
                     {data?.modules.map((module: module) =>
                         module ? <Module key={module?._key} module={module} /> : null
                     )}
-                </Stack>
+                </>
             ) : null}
-        </div>
+        </>
     );
 }

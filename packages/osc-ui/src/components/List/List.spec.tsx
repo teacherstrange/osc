@@ -2,14 +2,13 @@
  * @vitest-environment jsdom
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { List } from './List';
-import { ListItem } from './ListItem';
-import type { Props as ListItemProps } from './ListItem';
-import { screen, render } from '@testing-library/react';
+import type { ListItemProps } from './List';
+import { List, ListItem } from './List';
 
 const items = ['item 1', 'item 2', 'item 3'];
-const listItem = items.map((item: ListItemProps['children'], i: React.Key) => (
+const listItem = items.map((item: ListItemProps<HTMLLIElement>['children'], i: React.Key) => (
     <ListItem key={i}>{item}</ListItem>
 ));
 
@@ -20,7 +19,6 @@ test('renders a default list of text items', () => {
     const listItems = screen.getAllByRole('listitem');
 
     expect(list).toBeInTheDocument();
-    expect(list).toHaveAttribute('role', 'list');
 
     expect(listItems).toHaveLength(3);
 
@@ -31,7 +29,7 @@ test('renders a default list of text items', () => {
 });
 
 test('renders the unordered type of list items', () => {
-    render(<List type="ul">{listItem}</List>);
+    render(<List variant="ul">{listItem}</List>);
 
     const list = screen.getByRole('list');
 
@@ -39,7 +37,7 @@ test('renders the unordered type of list items', () => {
 });
 
 test('renders the ordered type of list items', () => {
-    render(<List type="ol">{listItem}</List>);
+    render(<List variant="ol">{listItem}</List>);
 
     const list = screen.getByRole('list');
 

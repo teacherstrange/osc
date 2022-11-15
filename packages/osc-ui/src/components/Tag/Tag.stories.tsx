@@ -1,12 +1,11 @@
+import { PlusIcon } from '@radix-ui/react-icons';
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { SmallAddIcon } from '@chakra-ui/icons';
-import { Avatar as ChakraAvatar } from '@chakra-ui/react';
-
+import { Avatar } from '../Avatar/Avatar';
 import { Tag } from './Tag';
 
 export default {
-    title: 'Tag',
+    title: 'osc-ui/Tag',
     component: Tag
 } as Meta;
 
@@ -28,25 +27,27 @@ export const WithRightIcon = TagTemplate.bind({});
 export const WithCustomElement = TagTemplate.bind({});
 
 Primary.args = {
-    items: [{ tagName: 'Tag', theme: { backgroundColor: 'primary', color: 'secondary' } }]
+    items: [{ tagName: 'Tag', theme: 'primary' }]
 };
 WithLeftIcon.args = {
     items: [
         {
-            icon: SmallAddIcon,
+            icon: <PlusIcon />,
+            iconLabel: 'Add',
             iconPosition: 'left',
             tagName: 'Tag with Left Icon',
-            theme: { backgroundColor: 'primary', color: 'secondary' }
+            theme: 'primary'
         }
     ]
 };
 WithRightIcon.args = {
     items: [
         {
-            icon: SmallAddIcon,
+            icon: <PlusIcon />,
+            iconLabel: 'Add',
             iconPosition: 'right',
             tagName: 'Tag with Right Icon',
-            theme: { backgroundColor: 'primary', color: 'secondary' }
+            theme: 'primary'
         }
     ]
 };
@@ -57,8 +58,8 @@ WithCustomElement.args = {
             className: 'u-p-15',
             tagName: 'Tag with Custom Element',
             iconPosition: 'left',
-            customElement: <ChakraAvatar src="https://bit.ly/sage-adebayo" name="Segun Adebayo" />,
-            theme: { backgroundColor: 'primary', color: 'secondary' }
+            customElement: <Avatar src="https://bit.ly/sage-adebayo" name="Segun Adebayo" />,
+            theme: 'primary'
         }
     ]
 };

@@ -1,5 +1,11 @@
 .c-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+
     &__item {
+        display: inline-flex;
+        align-items: center;
+
         &:hover {
             // standard link hover styles
             [aria-current="page"] {
@@ -8,5 +14,10 @@
                 cursor: text;
             }
         }
+    }
+
+    &__separator {
+        margin-inline: 0.25em;
+        display: inline-block;
     }
 }

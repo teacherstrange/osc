@@ -4,7 +4,7 @@ import type { Props } from './Carousel';
 import { Carousel } from './Carousel';
 
 export default {
-    title: 'Carousel',
+    title: 'osc-ui/Carousel',
     component: Carousel
 } as Meta;
 

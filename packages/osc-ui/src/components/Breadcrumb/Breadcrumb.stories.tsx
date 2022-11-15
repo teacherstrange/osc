@@ -1,12 +1,12 @@
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
 
-import { Breadcrumb } from './Breadcrumb';
 import type { Props } from './Breadcrumb';
+import { Breadcrumb } from './Breadcrumb';
 
 export default {
-    title: 'Breadcrumb',
+    title: 'osc-ui/Breadcrumb',
     component: Breadcrumb
 } as Meta;
 

@@ -1,10 +1,10 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { OSCModal as Modal } from './Modal';
 import type { Props } from './Modal';
+import { Modal } from './Modal';
 
 export default {
-    title: 'Modal',
+    title: 'osc-ui/Modal',
     component: Modal
 } as Meta;
 
@@ -16,10 +16,11 @@ Primary.args = {
     children: <p>hello world</p>,
     ModalButtonText: 'Click to open',
     title: 'whats up',
+    modalDescription: 'An accessible description to be announced when the dialog is opened',
     size: 'xs',
     hideHeaderCloseButton: false,
     hideFooterCloseButton: false,
-    closeDisabled: false,
+    disableOutsideClick: false,
     overlayColour: 'grey',
     primaryActionButton: false,
     primaryActionButtonText: 'click me',

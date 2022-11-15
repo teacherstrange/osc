@@ -1,28 +1,31 @@
-import React from 'react';
-import { useLocation, useMatches } from '@remix-run/react';
-import type { HeadersFunction } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
-import { getColorScheme } from './utils/colorScheme';
-import lightTheme from './theme/lightTheme';
-import darkTheme from './theme/darkTheme';
-import type { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { HeadersFunction, LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
-import { ChakraProvider } from '@chakra-ui/react';
-import { withEmotionCache } from '@emotion/react';
-import styles from 'osc-ui/dist/src-styles-main.css';
+import {
+    Links,
+    LiveReload,
+    Meta,
+    Outlet,
+    Scripts,
+    ScrollRestoration,
+    useLoaderData,
+    useLocation,
+    useMatches
+} from '@remix-run/react';
 import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
-import { getUser } from './session.server';
-import { useContext, useEffect } from 'react';
-import { ClientStyleContext, ServerStyleContext } from './utils/context';
+import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
+import styles from 'osc-ui/dist/src-styles-main.css';
+import React, { useEffect } from 'react';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 import { getSettingsData } from './models/sanity.server';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
+import { getUser } from './session.server';
+import { getColorScheme } from './utils/colorScheme';
 
 let isMount = true;
 export const links: LinksFunction = () => {
     return [
         { rel: 'stylesheet', href: oscUiCarouselStyles },
+        { rel: 'stylesheet', href: oscUiSwitchStyles },
         { rel: 'stylesheet', href: styles },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
@@ -105,43 +108,16 @@ interface DocumentProps {
     children: React.ReactNode;
 }
 
-const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) => {
-    const serverStyleData = useContext(ServerStyleContext);
-    const clientStyleData = useContext(ClientStyleContext);
-
+const Document = ({ children }: DocumentProps) => {
     const matches = useMatches();
 
     // The canonicalUrl should be exported from the loader for each page.
     const findCanonical = matches.find((match) => match.data && match.data.canonicalUrl);
     const canonical = findCanonical?.data.canonicalUrl;
 
-    // Only executed on client
-    useEffect(() => {
-        // re-link sheet container
-        emotionCache.sheet.container = document.head;
-        // re-inject tags
-        const tags = emotionCache.sheet.tags;
-        emotionCache.sheet.flush();
-        tags.forEach((tag) => {
-            (emotionCache.sheet as any)._insertTag(tag);
-        });
-        // // reset cache to reapply global styles
-        // clientStyleData?.reset();
-    }, [clientStyleData, emotionCache.sheet]);
-
     return (
         <html lang="en">
             <head>
-                <style id="insertionPoint"></style>
-                {serverStyleData?.map(({ key, ids, css }) => {
-                    return (
-                        <style
-                            key={key}
-                            data-emotion={`${key} ${ids.join(' ')}`}
-                            dangerouslySetInnerHTML={{ __html: css }}
-                        />
-                    );
-                })}
                 {typeof document === 'undefined' && <Meta />}
                 {typeof document === 'undefined' && canonical && (
                     <link rel="canonical" href={canonical} />
@@ -156,11 +132,10 @@ const Document = withEmotionCache(({ children }: DocumentProps, emotionCache) =>
             </body>
         </html>
     );
-});
+};
 
 export default function App() {
-    const { colorScheme, SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET } =
-        useLoaderData();
+    const { SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET } = useLoaderData();
     let location = useLocation();
     let matches = useMatches();
 
@@ -218,9 +193,8 @@ export default function App() {
                     })}`
                 }}
             />
-            <ChakraProvider theme={colorScheme === 'light' ? lightTheme : darkTheme}>
-                <Outlet />
-            </ChakraProvider>
+
+            <Outlet />
         </Document>
     );
 }

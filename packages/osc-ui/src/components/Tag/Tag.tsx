@@ -1,20 +1,17 @@
 import type { FC } from 'react';
 import React from 'react';
-import {
-    Tag as ChakraTag,
-    TagLabel as ChakraTagLabel,
-    TagLeftIcon as ChakraTagLeftIcon,
-    TagRightIcon as ChakraTagRightIcon
-} from '@chakra-ui/react';
-
-import { themeOptions } from '../../constants';
-import type { ThemeProps } from '../../interfaces';
+import { useTheme } from '../../hooks/useTheme';
+import type { Themes } from '../../types';
+import { classNames } from '../../utils/classNames';
+import { Icon } from '../Icon/Icon';
+import './tag.scss';
 
 export interface Props {
-    theme: ThemeProps;
+    theme?: Themes;
     className?: string;
     customElement?: any;
     icon?: any;
+    iconLabel?: string;
     iconPosition?: 'left' | 'right';
     tagName: string;
 }
@@ -24,10 +21,14 @@ export const Tag: FC<Props> = (props: Props) => {
         className,
         customElement,
         icon,
+        iconLabel,
         iconPosition = 'left',
         tagName,
-        theme: { backgroundColor = themeOptions.PRIMARY, color = themeOptions.SECONDARY }
+        theme = 'primary'
     } = props;
+
+    const themeClass = useTheme(theme);
+    const classes = classNames('c-tag', themeClass, className);
 
     if (icon && customElement) {
         console.error(
@@ -40,18 +41,18 @@ export const Tag: FC<Props> = (props: Props) => {
         rightIcon = null;
 
     if (icon) {
-        if (iconPosition === 'left') leftIcon = <ChakraTagLeftIcon as={icon} />;
-        if (iconPosition === 'right') rightIcon = <ChakraTagRightIcon as={icon} />;
+        if (iconPosition === 'left') leftIcon = <Icon label={iconLabel}>{icon}</Icon>;
+        if (iconPosition === 'right') rightIcon = <Icon label={iconLabel}>{icon}</Icon>;
     } else if (customElement) {
         if (iconPosition === 'left') leftIcon = customElement;
         if (iconPosition === 'right') rightIcon = customElement;
     }
 
     return (
-        <ChakraTag backgroundColor={backgroundColor} className={className ? className : ''}>
+        <span className={classes}>
             {leftIcon}
-            <ChakraTagLabel color={color}>{tagName}</ChakraTagLabel>
+            <span className="c-tag__content">{tagName}</span>
             {rightIcon}
-        </ChakraTag>
+        </span>
     );
 };

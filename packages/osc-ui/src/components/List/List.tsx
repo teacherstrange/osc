@@ -1,34 +1,62 @@
+import type { FC, LiHTMLAttributes, OlHTMLAttributes, ReactChildren, ReactNode } from 'react';
 import React from 'react';
-import type { FC, ReactChildren, ReactNode } from 'react';
-import { List as ChakraList, UnorderedList, OrderedList } from '@chakra-ui/react';
+import { classNames } from '../../utils/classNames';
 
-export interface Props {
-    type?: 'ul' | 'ol';
+export interface ListItemProps<T> extends LiHTMLAttributes<T> {
+    children: (string | ReactChildren) & ReactNode;
+    className?: string;
+}
+
+export const ListItem: FC<ListItemProps<HTMLLIElement>> = ({
+    children,
+    className,
+    ...attr
+}: ListItemProps<HTMLLIElement>) => {
+    const classes = classNames(className);
+
+    return (
+        <li className={classes} {...attr}>
+            {children}
+        </li>
+    );
+};
+
+export type ListTypes = HTMLOListElement | HTMLUListElement;
+
+export interface ListProps<T> extends OlHTMLAttributes<T> {
+    variant?: 'ul' | 'ol';
     children: ReactChildren | ReactNode;
     className?: string;
 }
 
-export const List: FC<Props> = ({ type, className, children, ...other }: Props) => {
-    switch (type) {
+export const List: FC<ListProps<ListTypes>> = ({
+    variant,
+    className,
+    children,
+    ...attr
+}: ListProps<ListTypes>) => {
+    const classes = classNames(className);
+
+    switch (variant) {
         case 'ul':
             return (
-                <UnorderedList className={className ? className : ''} {...other}>
+                <ul className={classes} {...attr}>
                     {children}
-                </UnorderedList>
+                </ul>
             );
 
         case 'ol':
             return (
-                <OrderedList className={className ? className : ''} {...other}>
+                <ol className={classes} {...attr}>
                     {children}
-                </OrderedList>
+                </ol>
             );
 
         default:
             return (
-                <ChakraList className={className ? className : ''} {...other}>
+                <ul className={classes} {...attr}>
                     {children}
-                </ChakraList>
+                </ul>
             );
     }
 };

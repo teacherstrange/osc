@@ -1,7 +1,7 @@
+import * as TabPrimitives from '@radix-ui/react-tabs';
 import type { FC } from 'react';
 import React from 'react';
-import { Tabs as ChakraTabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
-
+import { classNames } from '../../utils/classNames';
 import './tabs.scss';
 
 export interface Props {
@@ -15,20 +15,23 @@ export interface Props {
 
 export const Tabs: FC<Props> = (props: Props) => {
     const { tabs, className, ...other } = props;
+    const classes = classNames('c-tabs', className);
 
     return (
-        <ChakraTabs className={`o-tabs ${className ? className : ''}`} {...other}>
-            <TabList>
-                {tabs.map((tab) => (
-                    <Tab key={tab.key}>{tab.list}</Tab>
+        <TabPrimitives.Root className={classes} {...other}>
+            <TabPrimitives.List>
+                {tabs.map((tab, index) => (
+                    <TabPrimitives.Trigger key={tab.key} value={`${index}`}>
+                        {tab.list}
+                    </TabPrimitives.Trigger>
                 ))}
-            </TabList>
+            </TabPrimitives.List>
 
-            <TabPanels>
-                {tabs.map((tab) => (
-                    <TabPanel key={tab.key}>{tab.panel}</TabPanel>
-                ))}
-            </TabPanels>
-        </ChakraTabs>
+            {tabs.map((tab, index) => (
+                <TabPrimitives.Content key={tab.key} value={`${index}`}>
+                    {tab.panel}
+                </TabPrimitives.Content>
+            ))}
+        </TabPrimitives.Root>
     );
 };
