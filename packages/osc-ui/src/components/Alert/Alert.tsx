@@ -50,8 +50,11 @@ export const Alert: FC<Props> = (props: Props) => {
         </span>
     ) : null;
 
+    // Only set role to alert for more critical alerts
+    const setRoleToAlert = Boolean(status === 'error' || status === 'warning');
+
     return (
-        <div role={status === 'error' ? 'alert' : null} className={alertClasses}>
+        <div role={setRoleToAlert ? 'alert' : null} className={alertClasses}>
             {alertIcon}
             {children}
         </div>

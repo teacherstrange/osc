@@ -40,6 +40,22 @@ describe('Alert component', () => {
         const icon = container.querySelector('svg');
         expect(icon).toBeNull();
     });
+    test('should set aria "alert role" if status is "error" or "warning"', () => {
+        render(
+            <Alert status="error">
+                <AlertTitle title="OSC is going live on August 30th" />
+            </Alert>
+        );
+        expect(screen.getByRole('alert')).toBeInTheDocument();
+    });
+    test('should not set aria "alert role" if status is not "error" or "warning"', () => {
+        render(
+            <Alert status="info">
+                <AlertTitle title="OSC is going live on August 30th" />
+            </Alert>
+        );
+        expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    });
 
     // TODO - Reintroduce test when button component is added
     // test('should render a custom component', () => {
