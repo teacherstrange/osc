@@ -25,10 +25,12 @@ import settings from './singletons/settings';
 import body from './blocks/body';
 
 // Object types
+import accordionItem from './objects/accordionItem';
 import collectionRule from './objects/collectionRule';
 import colorPicker from './objects/colorPicker';
 import linkExternal from './objects/linkExternal';
 import linkInternal from './objects/linkInternal';
+import moduleAccordion from './objects/module/accordion';
 import moduleButton from './objects/module/button';
 import moduleButtons from './objects/module/buttons';
 import moduleCarousel from './objects/module/carousel';
@@ -75,6 +77,7 @@ export default createSchema({
         body,
         // Objects
         colorPicker,
+        accordionItem,
         collectionRule,
         linkExternal,
         linkInternal,
@@ -90,12 +93,14 @@ export default createSchema({
         shopifyProductVariant,
         moduleButton,
         moduleButtons,
+        moduleAccordion,
+        moduleImage,
         moduleImages,
         moduleImage,
         moduleImageMobile,
         moduleImageTablet,
         moduleContent,
         moduleTrustpilot,
-        moduleCarousel
-    ])
+        moduleCarousel,
+    ]),
 });
