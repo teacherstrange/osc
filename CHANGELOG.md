@@ -1,3 +1,51 @@
+## [0.9.0](https://github.com/Open-Study-College/osc/compare/v0.8.0...v0.9.0) (2022-11-15)
+
+
+### ♻️ Refactors
+
+* **components:** rename interfaces file as types to match convention in other packages ([a2e8445](https://github.com/Open-Study-College/osc/commit/a2e844570522edeb4727f9b4075615dc2e6bf797))
+* **components:** replace FormToggle with ThemeSwitcher ([6acaeae](https://github.com/Open-Study-College/osc/commit/6acaeae05e37d873a3b9c3610e550ea21ef3ae36))
+
+
+### 📝 Documentation
+
+* replaces chakra mentions with radix ([ca0b7ab](https://github.com/Open-Study-College/osc/commit/ca0b7abb641e3bcc6bec3eee479addd52ceab522))
+
+
+### 🧪 Tests
+
+* **components:** updated modal import in test file ([30b2391](https://github.com/Open-Study-College/osc/commit/30b23919483c225f0ceff54d9e44c758c63239d7))
+* **components:** updated props in modal test ([ee7bd1d](https://github.com/Open-Study-College/osc/commit/ee7bd1df37f232400ffcec2c7271440b01bebd4f))
+
+
+### ✨ Features
+
+* **components:** add accessible description to modal ([a3da92a](https://github.com/Open-Study-College/osc/commit/a3da92ac48075605fafdeac6c5032ab36086a4a6))
+* **components:** add attribute selectors to css purge safelist ([e5a6974](https://github.com/Open-Study-College/osc/commit/e5a6974444c95391f3b3cc87cb1c23d5c8f9ee75))
+* **components:** add classname utility ([d537ede](https://github.com/Open-Study-College/osc/commit/d537edeae8c4a0653671b12a4d38173156e93a03))
+* **components:** add simple theme styles ([69011aa](https://github.com/Open-Study-College/osc/commit/69011aa2e6ce701b64055bb00ba501d32b729639))
+* **components:** add styling hooks ([dc685b4](https://github.com/Open-Study-College/osc/commit/dc685b4c6b21d861324b4cf240033631c364b633))
+* **components:** make type optional in modal ([6b48aa2](https://github.com/Open-Study-College/osc/commit/6b48aa2f3d1716e7f07abdaaf90a628ae92308f2))
+* **components:** replace chakra components with radix primitives ([83e7727](https://github.com/Open-Study-College/osc/commit/83e7727b56f1c9fb3dd2eb5ca256bd266137ed33))
+* **sites:** remove chakra and emotion dependencies ([57b5b9e](https://github.com/Open-Study-College/osc/commit/57b5b9ea0fc9e7d41dfd1b343fc5667f485e92e3))
+* **sites:** remove chakra theme files ([bb6a860](https://github.com/Open-Study-College/osc/commit/bb6a8607b52aa89e909ab0fce3c384152240097d))
+* **sites:** remove chakra ui components ([be4f3c1](https://github.com/Open-Study-College/osc/commit/be4f3c18d6795ffd7caab916ec406240d1bb87f9))
+* **sites:** remove emotion cache ([a6baa57](https://github.com/Open-Study-College/osc/commit/a6baa578ab9382a561bf48ac29e9e420911367dd))
+* **storybook:** remove chakra plugin ([290bf1a](https://github.com/Open-Study-College/osc/commit/290bf1ac81eec394044de1fd2d59c4f295864d58))
+
+
+### 🐛 Bugs
+
+* **components:** fix variant name typo ([88c874a](https://github.com/Open-Study-College/osc/commit/88c874ada3529dd759181310ea42ca88694b2965))
+* **sites:** add props declaration to theme switcher ([543711b](https://github.com/Open-Study-College/osc/commit/543711b796cadb5a3dfc996658b0dca8b990d722))
+* chromatic deployment bug ([d7e05cd](https://github.com/Open-Study-College/osc/commit/d7e05cd049801b3dbe31390ed36314b28059b9be))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* deletes unused constants file ([bdb20cb](https://github.com/Open-Study-College/osc/commit/bdb20cb62090e303fd26bc69952ef9829a7a4c75))
+* **components:** alphabetise exports ([50296b0](https://github.com/Open-Study-College/osc/commit/50296b019799532e2ea705fc8cfa34e673287089))
+
 ## [0.8.0](https://github.com/Open-Study-College/osc/compare/v0.6.0...v0.8.0) (2022-11-15)
 
 
@@ -414,11 +462,4 @@
 * set default positions for meta tags ([58084cc](https://github.com/Open-Study-College/osc/commit/58084cced3f6330da19fbf911e3842125d94a2c7))
 * update buildCanonicalUrl to recieve canonical url from Sanity ([dc7460d](https://github.com/Open-Study-College/osc/commit/dc7460d151014c514751089340d68e8bdbc6a101))
 * updates function to return all settings ([514d3b8](https://github.com/Open-Study-College/osc/commit/514d3b85ddc7ec01282df89c2d237cdca92005e7))
-
-## [0.4.1](https://github.com/Open-Study-College/osc/compare/v0.4.0...v0.4.1) (2022-10-14)
-
-
-### 🐛 Bugs
-
-* bundle d.ts file from index.js ([e96d044](https://github.com/Open-Study-College/osc/commit/e96d044f567c86e69c9ca92a8b5dccb9bd47102b))
 
