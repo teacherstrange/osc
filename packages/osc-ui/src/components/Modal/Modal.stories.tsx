@@ -5,7 +5,56 @@ import { Modal } from './Modal';
 
 export default {
     title: 'osc-ui/Modal',
-    component: Modal
+    component: Modal,
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.'
+            }
+        }
+    },
+    argTypes: {
+        children: {
+            table: {
+                disable: true
+            }
+        },
+        disableOutsideClick: {
+            description: 'Sets whether the user can click outside of the modal to close it'
+        },
+        hideFooterCloseButton: {
+            description: 'Sets whether or not to hide the close button in the footer'
+        },
+        hideHeaderCloseButton: {
+            description: 'Sets whether or not to hide the close button in the header'
+        },
+        ModalButtonText: {
+            description: 'Sets the text of the button that opens the modal'
+        },
+        modalDescription: {
+            description: 'An accessible description to be announced when the dialog is opened'
+        },
+        onClick: {
+            description: 'The function that is passed to the primary action button'
+        },
+        overlayColour: {
+            description: 'Colour of the overlay background'
+        },
+        primaryActionButton: {
+            description: 'Sets whether the primary action button is visible'
+        },
+        primaryActionButtonText: {
+            description: 'Sets the text of the primary action button'
+        },
+        size: {
+            description: 'Sets the size of the modal',
+            control: { type: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl', 'full'] }
+        },
+        title: {
+            description: 'Modal heading'
+        }
+    }
 } as Meta;
 
 const Template: Story<Props> = (args) => <Modal {...args} />;
@@ -29,25 +78,25 @@ Primary.args = {
     }
 };
 
-export const Sm = Template.bind({});
-Sm.args = {
+export const Small = Template.bind({});
+Small.args = {
     ...Primary.args,
     size: 'sm'
 };
-export const Md = Template.bind({});
-Md.args = {
+export const Medium = Template.bind({});
+Medium.args = {
     ...Primary.args,
     size: 'md'
 };
 
-export const Lg = Template.bind({});
-Lg.args = {
+export const Large = Template.bind({});
+Large.args = {
     ...Primary.args,
     size: 'lg'
 };
 
-export const Xl = Template.bind({});
-Xl.args = {
+export const ExtraLarge = Template.bind({});
+ExtraLarge.args = {
     ...Primary.args,
     size: 'xl'
 };

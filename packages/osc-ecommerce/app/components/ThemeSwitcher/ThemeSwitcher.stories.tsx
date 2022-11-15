@@ -4,7 +4,25 @@ import { ThemeSwitcher } from './ThemeSwitcher';
 
 export default {
     title: 'osc-ecommerce/ThemeSwitcher',
-    component: ThemeSwitcher
+    component: ThemeSwitcher,
+    parameters: {
+        docs: {
+            description: {
+                component: 'Controlled theme switcher for toggling between light and dark theme'
+            }
+        }
+    },
+    argTypes: {
+        label: {
+            description: 'Visually hidden label describing the input'
+        },
+        isChecked: {
+            description: 'Conrol that handles toggling the switch'
+        },
+        onToggle: {
+            description: 'Event handler that runs when the `isChecked` prop is changed'
+        }
+    }
 } as Meta;
 
 const Template: Story<Props> = (args) => {
