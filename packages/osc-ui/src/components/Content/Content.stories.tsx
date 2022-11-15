@@ -1,11 +1,11 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
+import type { Props as ContentProps } from './Content';
 import { Content } from './Content';
 import { textContent } from './textContent';
-import type { Props as ContentProps } from './Content';
 
 export default {
-    title: 'Content',
+    title: 'osc-ui/Content',
     component: Content
 } as Meta;
 
