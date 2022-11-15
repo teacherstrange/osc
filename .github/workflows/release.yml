@@ -10,16 +10,29 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: main
+          token: ${{ secrets.CHANGELOG_RELEASE }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - name: Install
+        run: npm install conventional-changelog-conventionalcommits@^5.0.0
 
       - name: conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3.7.1
         with:
-          git-user-name: "OSC Dev"
-          git-user-email: "si@hi-im-si.com"
+          git-user-name: "OSC CI"
+          git-user-email: "simon.shahriveri@openstudycollege.com"
           github-token: ${{ secrets.CHANGELOG_RELEASE }}
-          git-message: "RELEASE: {version}"
-          version-file: "./package.json,./package-lock.json"
+          git-message: 'RELEASE: {version}'
+          version-file: './package.json,./package-lock.json'
+          config-file-path: './changelog.config.js'
 
       - name: create release
         uses: actions/create-release@v1
