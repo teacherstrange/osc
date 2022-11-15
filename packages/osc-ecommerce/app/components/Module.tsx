@@ -1,16 +1,19 @@
 import type { LinkDescriptor } from '@remix-run/node';
 import { Carousel, Content, Image, Trustpilot } from 'osc-ui';
+import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
 import { getTypes } from '~/models/sanity.server';
 import type {
+    accordionModule,
     carouselModule,
     contentModule,
     imageModule,
     module,
     SanityPage,
-    trustpilotModule
+    trustpilotModule,
 } from '~/types/sanity';
+import { AccordionModule } from './Accordion/Accordion';
 
 // So we can dynamically add the styles of each component into remix we need to create an array of stylesheet objects.
 // We will then call this function in each of the `route` files where we have a dynamicLinks.
@@ -27,6 +30,10 @@ export const getComponentStyles = (data: SanityPage) => {
 
     for (const module of moduleTypes) {
         switch (module) {
+            case 'module.accordion':
+                styles.push({ rel: 'stylesheet', href: oscUiAccordionStyles });
+                break;
+
             case 'module.button':
                 styles.push({ rel: 'stylesheet', href: buttonStyles });
                 break;
@@ -48,6 +55,11 @@ export default function Module(props: Props) {
     const { module } = props;
 
     switch (module._type) {
+        case 'module.accordion':
+            const moduleAccordion = module as accordionModule;
+
+            return <AccordionModule module={moduleAccordion} />;
+
         case 'module.trustpilot':
             const moduleTrustpilot = module as trustpilotModule;
 

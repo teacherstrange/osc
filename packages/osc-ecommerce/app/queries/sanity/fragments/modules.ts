@@ -1,4 +1,5 @@
 import groq from 'groq';
+import { MODULE_ACCORDION } from './modules/accordion';
 import { MODULE_CAROUSEL } from './modules/carousel';
 import { MODULE_CONTENT } from './modules/content';
 import { MODULE_IMAGES } from './modules/images';
@@ -7,6 +8,9 @@ import { MODULE_TRUSTPILOT } from './modules/trustpilot';
 export const MODULES = groq`
 modules[] {
     _type,
+    (_type == "module.accordion") => {
+        ${MODULE_ACCORDION}
+    },
     (_type == "module.trustpilot") => {
         ${MODULE_TRUSTPILOT}
     },

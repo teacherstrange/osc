@@ -9,7 +9,7 @@ import {
     ScrollRestoration,
     useLoaderData,
     useLocation,
-    useMatches
+    useMatches,
 } from '@remix-run/react';
 import { SkipLink } from 'osc-ui';
 import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
@@ -45,11 +45,11 @@ export const links: LinksFunction = () => {
             rel: 'icon',
             type: 'image/png',
             sizes: '192x192',
-            href: '/icons/android-icon-192x192.png'
+            href: '/icons/android-icon-192x192.png',
         },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icons/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/icons/favicon-96x96.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icons/favicon-16x16.png' }
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icons/favicon-16x16.png' },
     ];
 };
 
@@ -62,12 +62,12 @@ type LoaderData = {
 };
 
 export const headers: HeadersFunction = () => ({
-    'Accept-CH': 'Sec-CH-Prefers-Color-Scheme'
+    'Accept-CH': 'Sec-CH-Prefers-Color-Scheme',
 });
 
 export const loader: LoaderFunction = async ({ request }) => {
     const siteSettings = await getSettingsData({
-        query: SETTINGS_QUERY
+        query: SETTINGS_QUERY,
     });
 
     return json<LoaderData>({
@@ -75,7 +75,7 @@ export const loader: LoaderFunction = async ({ request }) => {
         colorScheme: await getColorScheme(request),
         siteSettings,
         SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
-        SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET
+        SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET,
     });
 };
 
@@ -104,7 +104,7 @@ export const meta: MetaFunction = ({ data }) => {
         'og:image:width': organizationAsset?.dimensions?.width,
         'og:image:height': organizationAsset?.dimensions?.height,
         'twitter:card': 'summary_large_image',
-        'twitter:site': twitterHandle
+        'twitter:site': twitterHandle,
     };
 };
 
@@ -167,7 +167,7 @@ export default function App() {
                 location,
                 // We need to stringify and parse the matches constant as it includes methods from dynamicLinks which cannot be passed. See https://stackoverflow.com/questions/42376464/uncaught-domexception-failed-to-execute-postmessage-on-window-an-object-co
                 matches: JSON.parse(JSON.stringify(matches)),
-                manifest: window.__remixManifest
+                manifest: window.__remixManifest,
             };
 
             if (navigator.serviceWorker.controller) {
@@ -191,8 +191,8 @@ export default function App() {
                 dangerouslySetInnerHTML={{
                     __html: `document.env = ${JSON.stringify({
                         SANITY_STUDIO_API_PROJECT_ID,
-                        SANITY_STUDIO_API_DATASET
-                    })}`
+                        SANITY_STUDIO_API_DATASET,
+                    })}`,
                 }}
             />
             <SkipLink anchor="main-content">Skip to main content</SkipLink>
