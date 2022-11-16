@@ -66,12 +66,12 @@ const AlertTemplateTwo: Story = (args) => {
     );
 };
 const AlertTemplateThree: Story = (args) => {
-    const { customElement, status, title } = args;
+    const { customElement, displayIcon, status, title } = args;
 
     return (
         <div>
             <div style={{ margin: '1em', width: '30%' }}>
-                <Alert status={status}>
+                <Alert displayIcon={displayIcon} status={status}>
                     <AlertTitle title={title} />
                     {customElement}
                 </Alert>
