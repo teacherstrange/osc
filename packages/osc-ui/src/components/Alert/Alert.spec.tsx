@@ -41,16 +41,29 @@ describe('Alert component', () => {
         expect(icon).toBeNull();
     });
     test('should set aria "alert role" if status is "error" or "warning"', () => {
-        render(
+        const { rerender } = render(
             <Alert status="error">
+                <AlertTitle title="OSC is going live on August 30th" />
+            </Alert>
+        );
+        expect(screen.getByRole('alert')).toBeInTheDocument();
+
+        rerender(
+            <Alert status="warning">
                 <AlertTitle title="OSC is going live on August 30th" />
             </Alert>
         );
         expect(screen.getByRole('alert')).toBeInTheDocument();
     });
     test('should not set aria "alert role" if status is not "error" or "warning"', () => {
-        render(
+        const { rerender } = render(
             <Alert status="info">
+                <AlertTitle title="OSC is going live on August 30th" />
+            </Alert>
+        );
+        expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+        rerender(
+            <Alert status="success">
                 <AlertTitle title="OSC is going live on August 30th" />
             </Alert>
         );
