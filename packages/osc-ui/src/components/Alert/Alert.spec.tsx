@@ -1,5 +1,5 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { screen, render } from '@testing-library/react';
 
 import { Alert, AlertDescription, AlertTitle } from './Alert';
 
@@ -7,8 +7,8 @@ describe('Alert component', () => {
     test('should render the correct text/classes for the title and description', async () => {
         render(
             <Alert status="info">
-                <AlertTitle title="OSC is going live on August 30th" />
-                <AlertDescription description="Make sure you are ready!" />
+                <AlertTitle>OSC is going live on August 30th</AlertTitle>
+                <AlertDescription>Make sure you are ready!</AlertDescription>
             </Alert>
         );
         const title = await screen.findByText('OSC is going live on August 30th');
@@ -22,8 +22,8 @@ describe('Alert component', () => {
     test('should render an SVG for the icon as default', () => {
         const { container } = render(
             <Alert status="warning">
-                <AlertTitle title="OSC is going live on August 30th" />
-                <AlertDescription description="Make sure you are ready!" />
+                <AlertTitle>OSC is going live on August 30th</AlertTitle>
+                <AlertDescription>Make sure you are ready!</AlertDescription>
             </Alert>
         );
 
@@ -33,8 +33,8 @@ describe('Alert component', () => {
     test('should not render an SVG if icon prop is passed in as "false"', () => {
         const { container } = render(
             <Alert displayIcon={false} status="success">
-                <AlertTitle title="OSC is going live on August 30th" />
-                <AlertDescription description="Make sure you are ready!" />
+                <AlertTitle>OSC is going live on August 30th</AlertTitle>
+                <AlertDescription>Make sure you are ready!</AlertDescription>
             </Alert>
         );
         const icon = container.querySelector('svg');
@@ -43,14 +43,14 @@ describe('Alert component', () => {
     test('should set aria "alert role" if status is "error" or "warning"', () => {
         const { rerender } = render(
             <Alert status="error">
-                <AlertTitle title="OSC is going live on August 30th" />
+                <AlertTitle>OSC is going live on August 30th</AlertTitle>
             </Alert>
         );
         expect(screen.getByRole('alert')).toBeInTheDocument();
 
         rerender(
             <Alert status="warning">
-                <AlertTitle title="OSC is going live on August 30th" />
+                <AlertTitle>OSC is going live on August 30th</AlertTitle>
             </Alert>
         );
         expect(screen.getByRole('alert')).toBeInTheDocument();
@@ -58,13 +58,13 @@ describe('Alert component', () => {
     test('should not set aria "alert role" if status is not "error" or "warning"', () => {
         const { rerender } = render(
             <Alert status="info">
-                <AlertTitle title="OSC is going live on August 30th" />
+                <AlertTitle>OSC is going live on August 30th</AlertTitle>
             </Alert>
         );
         expect(screen.queryByRole('alert')).not.toBeInTheDocument();
         rerender(
             <Alert status="success">
-                <AlertTitle title="OSC is going live on August 30th" />
+                <AlertTitle>OSC is going live on August 30th</AlertTitle>
             </Alert>
         );
         expect(screen.queryByRole('alert')).not.toBeInTheDocument();

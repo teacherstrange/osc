@@ -1,8 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Alert, AlertDescription, AlertTitle } from './Alert';
 import { Cross2Icon } from '@radix-ui/react-icons';
+import { Alert, AlertDescription, AlertTitle } from './Alert';
 
 export default {
     title: 'osc-ui/Alert',
@@ -42,7 +42,7 @@ const AlertTemplateOne: Story = ({ items }) => {
             {items.map((item, i) => (
                 <div key={i} style={{ margin: '1em', width: '30%' }}>
                     <Alert {...item}>
-                        <AlertTitle title={item.title} />
+                        <AlertTitle>{item.title}</AlertTitle>
                     </Alert>
                 </div>
             ))}
@@ -57,8 +57,8 @@ const AlertTemplateTwo: Story = (args) => {
         <div>
             <div style={{ margin: '1em', width: '50%' }}>
                 <Alert status={status}>
-                    <AlertTitle className="c-alert__title--bold" title={title} />
-                    <AlertDescription description={description} />
+                    <AlertTitle>{title}</AlertTitle>
+                    <AlertDescription>{description}</AlertDescription>
                     {customElement}
                 </Alert>
             </div>
@@ -72,7 +72,7 @@ const AlertTemplateThree: Story = (args) => {
         <div>
             <div style={{ margin: '1em', width: '30%' }}>
                 <Alert displayIcon={displayIcon} status={status}>
-                    <AlertTitle title={title} />
+                    <AlertTitle>{title}</AlertTitle>
                     {customElement}
                 </Alert>
             </div>

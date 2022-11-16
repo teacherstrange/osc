@@ -3,8 +3,9 @@ import {
     ExclamationTriangleIcon as WarningIcon,
     InfoCircledIcon as InfoIcon
 } from '@radix-ui/react-icons';
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import React from 'react';
+
 import { classNames } from '../../utils/classNames';
 import './alert.scss';
 
@@ -61,24 +62,24 @@ export const Alert: FC<Props> = (props: Props) => {
 
 export interface AlertDescriptionProps {
     className?: string;
-    description: string;
+    children: ReactNode;
 }
 
 export const AlertDescription: FC<AlertDescriptionProps> = (props: AlertDescriptionProps) => {
-    const { className, description } = props;
+    const { className, children } = props;
     const classes = classNames('c-alert__description', className);
 
-    return <div className={classes}>{description}</div>;
+    return <div className={classes}>{children}</div>;
 };
 
 export interface AlertTitleProps {
     className?: string;
-    title: string;
+    children: ReactNode;
 }
 
 export const AlertTitle: FC<AlertTitleProps> = (props: AlertTitleProps) => {
-    const { className, title } = props;
+    const { className, children } = props;
     const classes = classNames('c-alert__title', className);
 
-    return <div className={classes}>{title}</div>;
+    return <div className={classes}>{children}</div>;
 };
