@@ -6,7 +6,34 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 
 export default {
     title: 'osc-ui/Alert',
-    component: Alert
+    component: Alert,
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'Alert component to communicate a state that affects a system, feature or page.'
+            }
+        }
+    },
+    argTypes: {
+        children: {
+            table: {
+                disable: true
+            }
+        },
+        className: {
+            description: 'Custom class'
+        },
+        displayIcon: {
+            description: 'Controls whether Icon is displayed or not'
+        },
+        iconSize: {
+            description: 'Controls size of Icon'
+        },
+        status: {
+            description: 'Sets the type of status to display'
+        }
+    }
 } as Meta;
 
 const AlertTemplateOne: Story = ({ items }) => {

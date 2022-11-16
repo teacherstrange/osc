@@ -11,8 +11,6 @@ import './alert.scss';
 export interface Props {
     children?: React.ReactNode;
     className?: string;
-    customPosition?: 'left' | 'right';
-    description?: string;
     displayIcon?: boolean;
     iconSize?: number;
     status: 'info' | 'warning' | 'success' | 'error';
