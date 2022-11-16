@@ -24,7 +24,7 @@ export default {
             description: 'Sets whether the user can click outside of the modal to close it'
         },
         hideFooterCloseButton: {
-            description: 'Sets whether or not to hide the close button in the footer'
+            description: 'Sets whether or not to prevent rendering of the close button in the footer'
         },
         hideHeaderCloseButton: {
             description: 'Sets whether or not to hide the close button in the header'
