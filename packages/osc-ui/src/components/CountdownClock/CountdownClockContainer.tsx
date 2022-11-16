@@ -46,12 +46,12 @@ export const CountdownClockContainer: FC<Props> = ({
     });
 
     const now = () => new Date().getTime();
-    const distance = () => endDate - now();
+    const remainingDuration = () => endDate - now();
 
-    const days = () => Math.floor(distance() / DAY);
-    const hours = () => Math.floor((distance() % DAY) / HOUR);
-    const minutes = () => Math.floor((distance() % HOUR) / MINUTE);
-    const seconds = () => Math.floor((distance() % MINUTE) / SECOND);
+    const days = () => Math.floor(remainingDuration() / DAY);
+    const hours = () => Math.floor((remainingDuration() % DAY) / HOUR);
+    const minutes = () => Math.floor((remainingDuration() % HOUR) / MINUTE);
+    const seconds = () => Math.floor((remainingDuration() % MINUTE) / SECOND);
 
     const runTimer = () => {
         setTimer((prevState) => ({
@@ -76,12 +76,12 @@ export const CountdownClockContainer: FC<Props> = ({
 
     useEffect(() => {
         // Start straight away (ie before first second elapses in setInterval)
-        if (distance() > 0) {
+        if (remainingDuration() > 0) {
             runTimer();
         }
 
         const interval = setInterval(() => {
-            if (distance() < 0) {
+            if (remainingDuration() < 0) {
                 // Stop Timer
                 endTimer();
                 clearInterval(interval);
