@@ -1,65 +1,89 @@
-import './countdownClock.scss';
-
 import type { FC } from 'react';
-import React, { Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CountdownClockInner } from './CountdownClockInner';
+
+const DAY = 24 * 60 * 60 * 1000;
+const HOUR = 1000 * 60 * 60;
+const MINUTE = 60 * 1000;
+const SECOND = 1000;
 
 export interface Props {
     classNames?: string;
-    icon: any;
+    endDate: number;
+    icon?: any;
     name?: string;
-    timer: any;
 }
 
-const DAYS: string = 'd';
-const HOURS: string = 'h';
-const MINUTES: string = 'm';
-const SECONDS: string = 's';
+interface Timer {
+    active: boolean;
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+}
 
-export const CountdownClock: FC<Props> = ({ classNames, icon, name, timer }: Props) => {
-    const days =
-        // If there are no days then return null
-        timer.days !== '00' ? (
-            <div className="c-countdown-clock__section">
-                <span className="c-countdown-clock__digits">{timer.days}</span>
-                <span>{DAYS}</span>
-            </div>
-        ) : null;
-    const hours =
-        // If there are no hours then return null
-        timer.hours !== '00' ? (
-            <div className="c-countdown-clock__section">
-                <span className="c-countdown-clock__digits">{timer.hours}</span>
-                <span>{HOURS}</span>
-            </div>
-        ) : null;
-    const minutes = (
-        <div className="c-countdown-clock__section">
-            <span className="c-countdown-clock__digits">{timer.minutes}</span>
-            <span>{MINUTES}</span>
-        </div>
-    );
-    const seconds = (
-        <div className="c-countdown-clock__section">
-            <span className="c-countdown-clock__digits">{timer.seconds}</span>
-            <span>{SECONDS}</span>
-        </div>
-    );
-    const countdownIcon = icon ? <div className="c-countdown-clock__icon">{icon}</div> : null;
+export const CountdownClock: FC<Props> = ({ classNames, endDate, icon, name }: Props) => {
+    const [timer, setTimer] = useState<Timer>({
+        active: false,
+        days: '0',
+        hours: '0',
+        minutes: '0',
+        seconds: '0'
+    });
 
-    return (
-        <Fragment>
-            {timer ? (
-                <div role="timer" className="c-countdown-clock__container">
-                    {name ? <div className="c-countdown-clock__title">{name}</div> : null}
-                    <div className="c-countdown-clock__timer">
-                        {countdownIcon}
-                        {days}
-                        {hours}
-                        {minutes}
-                        {seconds}
-                    </div>
-                </div>
-            ) : null}
-        </Fragment>
-    );
+    const now = () => new Date().getTime();
+    const remainingDuration = () => endDate - now();
+
+    const days = () => Math.floor(remainingDuration() / DAY);
+    const hours = () => Math.floor((remainingDuration() % DAY) / HOUR);
+    const minutes = () => Math.floor((remainingDuration() % HOUR) / MINUTE);
+    const seconds = () => Math.floor((remainingDuration() % MINUTE) / SECOND);
+
+    const runTimer = () => {
+        setTimer((prevState) => ({
+            ...prevState,
+            active: true,
+            days: days() < 10 ? `0${days()}` : `${days()}`,
+            hours: hours() < 10 ? `0${hours()}` : `${hours()}`,
+            minutes: minutes() < 10 ? `0${minutes()}` : `${minutes()}`,
+            seconds: seconds() < 10 ? `0${seconds()}` : `${seconds()}`
+        }));
+    };
+
+    const endTimer = () => {
+        setTimer((prevState) => ({
+            ...prevState,
+            days: '0',
+            hours: '0',
+            minutes: '0',
+            seconds: '0'
+        }));
+    };
+
+    useEffect(() => {
+        // Start straight away (ie before first second elapses in setInterval)
+        if (remainingDuration() > 0) {
+            runTimer();
+        }
+
+        const interval = setInterval(() => {
+            if (remainingDuration() < 0) {
+                // Stop Timer
+                endTimer();
+                clearInterval(interval);
+            } else {
+                runTimer();
+            }
+        }, 1000);
+
+        return () => {
+            clearInterval(interval);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // Only return timer once values have been set
+    if (!timer.active) return null;
+
+    return <CountdownClockInner classNames={classNames} icon={icon} name={name} timer={timer} />;
 };

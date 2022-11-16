@@ -1,7 +1,7 @@
 import React from 'react';
-import { CountdownClockContainer } from './CountdownClockContainer';
+import { CountdownClock } from './CountdownClock';
 import { act, screen, render } from '@testing-library/react';
-import type { Props } from './CountdownClockContainer';
+import type { Props } from './CountdownClock';
 import { ClockIcon } from '@radix-ui/react-icons';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -14,15 +14,9 @@ const MINUTES = 'm';
 const SECONDS = 's';
 
 describe('Countdown clock component', () => {
-    const setup = ({ classNames, endDate, icon, name, titles }: Props) =>
+    const setup = ({ classNames, endDate, icon, name }: Props) =>
         render(
-            <CountdownClockContainer
-                classNames={classNames}
-                endDate={endDate}
-                icon={icon}
-                name={name}
-                titles={titles}
-            />
+            <CountdownClock classNames={classNames} endDate={endDate} icon={icon} name={name} />
         );
     const setDate = (length) => new Date().getTime() + length;
     const setPastDate = (length) => new Date().getTime() - length;
@@ -38,12 +32,7 @@ describe('Countdown clock component', () => {
         const date = setDate(SECOND);
         const spy = vi.spyOn(global, 'setInterval');
 
-        render(
-            <CountdownClockContainer
-                endDate={date}
-                titles={{ days: 'd', hours: 'h', minutes: 'm', seconds: 's' }}
-            />
-        );
+        render(<CountdownClock endDate={date} />);
 
         act(() => {
             vi.runOnlyPendingTimers();
@@ -56,8 +45,7 @@ describe('Countdown clock component', () => {
     test('should render a countdown timer when the date is in the future', () => {
         const date = setDate(DAY);
         setup({
-            endDate: date,
-            titles: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' }
+            endDate: date
         });
 
         const result = screen.getByRole('timer');
@@ -68,7 +56,7 @@ describe('Countdown clock component', () => {
     test('should not render a countdown timer when the date is in the past', () => {
         const date = setPastDate(DAY);
 
-        setup({ endDate: date, titles: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' } });
+        setup({ endDate: date });
 
         expect(screen.queryByRole('timer')).not.toBeInTheDocument();
     });
@@ -76,7 +64,7 @@ describe('Countdown clock component', () => {
     test('should call setInterval and run every second when a valid future date is set', () => {
         const date = setDate(DAY);
         const intervalSpy = vi.spyOn(global, 'setInterval');
-        setup({ endDate: date, titles: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' } });
+        setup({ endDate: date });
 
         expect(intervalSpy).toHaveBeenCalledTimes(1);
         expect(intervalSpy).toHaveBeenCalledWith(expect.any(Function), 1000);
@@ -86,8 +74,7 @@ describe('Countdown clock component', () => {
         const date = setDate(DAY);
 
         setup({
-            endDate: date,
-            titles: { days: DAYS, hours: HOURS, minutes: MINUTES, seconds: SECONDS }
+            endDate: date
         });
         const daysOnFirstRender = screen.getByText('d', { exact: true }).previousSibling;
 
@@ -110,8 +97,7 @@ describe('Countdown clock component', () => {
         const date = setDate(MINUTE);
 
         setup({
-            endDate: date,
-            titles: { days: DAYS, hours: HOURS, minutes: MINUTES, seconds: SECONDS }
+            endDate: date
         });
 
         expect(screen.queryByText(DAYS, { exact: true })).not.toBeInTheDocument();
@@ -123,8 +109,7 @@ describe('Countdown clock component', () => {
         const date = setDate(HOUR * 2);
 
         setup({
-            endDate: date,
-            titles: { days: DAYS, hours: HOURS, minutes: MINUTES, seconds: SECONDS }
+            endDate: date
         });
 
         expect(screen.queryByText(DAYS, { exact: true })).not.toBeInTheDocument();
@@ -139,8 +124,7 @@ describe('Countdown clock component', () => {
 
         const { container } = setup({
             endDate: date,
-            icon: <Icon />,
-            titles: { days: DAYS, hours: HOURS, minutes: MINUTES, seconds: SECONDS }
+            icon: <Icon />
         });
 
         expect(container.querySelectorAll('svg').length).toBe(1);
@@ -152,8 +136,7 @@ describe('Countdown clock component', () => {
 
         setup({
             endDate: date,
-            name: title,
-            titles: { days: DAYS, hours: HOURS, minutes: MINUTES, seconds: SECONDS }
+            name: title
         });
 
         expect(screen.getByText(title)).toBeInTheDocument();

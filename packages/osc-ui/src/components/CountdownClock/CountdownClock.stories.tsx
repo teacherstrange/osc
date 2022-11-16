@@ -1,15 +1,15 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { CountdownClockContainer } from './CountdownClockContainer';
-import type { Props } from './CountdownClockContainer';
+import { CountdownClock } from './CountdownClock';
+import type { Props } from './CountdownClock';
 import { ClockIcon } from '@radix-ui/react-icons';
 
 export default {
     title: 'osc-ui/Countdown Clock',
-    component: CountdownClockContainer
+    component: CountdownClock
 } as Meta;
 
-const template: Story<Props> = (args) => <CountdownClockContainer {...args} />;
+const template: Story<Props> = (args) => <CountdownClock {...args} />;
 
 export const Primary = template.bind({});
 export const WithIcon = template.bind({});
@@ -48,10 +48,10 @@ WithMultipleTimers.decorators = [
         return (
             <>
                 <div style={{ margin: '1em 0' }}>
-                    <CountdownClockContainer {...WithMultipleTimers.args[0]} />
+                    <CountdownClock {...WithMultipleTimers.args[0]} />
                 </div>
                 <div style={{ margin: '1em 0' }}>
-                    <CountdownClockContainer {...WithMultipleTimers.args[1]} />
+                    <CountdownClock {...WithMultipleTimers.args[1]} />
                 </div>
             </>
         );
