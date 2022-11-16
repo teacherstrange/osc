@@ -14,10 +14,8 @@ const MINUTES = 'm';
 const SECONDS = 's';
 
 describe('Countdown clock component', () => {
-    const setup = ({ classNames, endDate, icon, name }: Props) =>
-        render(
-            <CountdownClock classNames={classNames} endDate={endDate} icon={icon} name={name} />
-        );
+    const setup = ({ endDate, icon, name }: Props) =>
+        render(<CountdownClock endDate={endDate} icon={icon} name={name} />);
     const setDate = (length) => new Date().getTime() + length;
     const setPastDate = (length) => new Date().getTime() - length;
 

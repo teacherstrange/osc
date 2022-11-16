@@ -4,7 +4,6 @@ import type { FC } from 'react';
 import React, { Fragment } from 'react';
 
 export interface Props {
-    classNames?: string;
     icon: any;
     name?: string;
     timer: any;
@@ -15,7 +14,7 @@ const HOURS: string = 'h';
 const MINUTES: string = 'm';
 const SECONDS: string = 's';
 
-export const CountdownClockInner: FC<Props> = ({ classNames, icon, name, timer }: Props) => {
+export const CountdownClockInner: FC<Props> = ({ icon, name, timer }: Props) => {
     const days =
         // If there are no days then return null
         timer.days !== '00' ? (

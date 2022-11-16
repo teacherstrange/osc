@@ -8,7 +8,6 @@ const MINUTE = 60 * 1000;
 const SECOND = 1000;
 
 export interface Props {
-    classNames?: string;
     endDate: number;
     icon?: any;
     name?: string;
@@ -22,7 +21,7 @@ interface Timer {
     seconds: string;
 }
 
-export const CountdownClock: FC<Props> = ({ classNames, endDate, icon, name }: Props) => {
+export const CountdownClock: FC<Props> = ({ endDate, icon, name }: Props) => {
     const [timer, setTimer] = useState<Timer>({
         active: false,
         days: '0',
@@ -85,5 +84,5 @@ export const CountdownClock: FC<Props> = ({ classNames, endDate, icon, name }: P
     // Only return timer once values have been set
     if (!timer.active) return null;
 
-    return <CountdownClockInner classNames={classNames} icon={icon} name={name} timer={timer} />;
+    return <CountdownClockInner icon={icon} name={name} timer={timer} />;
 };
