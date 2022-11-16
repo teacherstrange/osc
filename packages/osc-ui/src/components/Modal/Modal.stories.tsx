@@ -27,7 +27,7 @@ export default {
             description: 'Sets whether or not to prevent rendering of the close button in the footer'
         },
         hideHeaderCloseButton: {
-            description: 'Sets whether or not to hide the close button in the header'
+            description: 'Sets whether or not to prevent rendering of the close button in the header'
         },
         ModalButtonText: {
             description: 'Sets the text of the button that opens the modal'
