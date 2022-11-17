@@ -1,6 +1,6 @@
-import type { userJWT } from '~/types/general';
+import type { UserCanFn } from '~/types/functions';
 
-export const userCan = (user: userJWT, desiredPermission: string | string[]) => {
+export const userCan: UserCanFn = (user, desiredPermission) => {
     // Currently we're taking a single perm to check, or an array of perms that must ALL match
     // If desiredPermission is a string,
     //      THEN see if the desiredPermission exists in users permissoins array
