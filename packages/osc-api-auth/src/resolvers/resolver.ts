@@ -45,7 +45,7 @@ export const resolvers = {
                   });
         },
         user: async (_: undefined, args: getUserArgs, context: AuthContext) => {
-            await account.get(args.id ?? context.user!.id);
+            return await account.get(args.id ?? context.user!.id);
         }
     },
     User: {
