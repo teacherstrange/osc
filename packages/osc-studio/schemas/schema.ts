@@ -40,6 +40,8 @@ import shopifyCollection from './objects/shopifyCollection';
 import shopifyProduct from './objects/shopifyProduct';
 import shopifyProductVariant from './objects/shopifyProductVariant';
 import moduleImage from './objects/module/image';
+import moduleImageMobile from './objects/module/imageMobile';
+import moduleImageTablet from './objects/module/imageTablet';
 import moduleImages from './objects/module/images';
 import moduleContent from './objects/module/content';
 import moduleTrustpilot from './objects/module/trustpilot';
@@ -84,8 +86,10 @@ export default createSchema({
         shopifyCollection,
         shopifyProduct,
         shopifyProductVariant,
-        moduleImage,
         moduleImages,
+        moduleImage,
+        moduleImageMobile,
+        moduleImageTablet,
         moduleContent,
         moduleTrustpilot,
         moduleCarousel

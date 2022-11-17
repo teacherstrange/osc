@@ -8,28 +8,28 @@ import { render } from '@testing-library/react';
 
 const mediaArray = [
     {
-        image: {
-            asset: {
-                url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
-                caption: 'test'
-            }
-        }
+        _key: '2abff668951c',
+        _type: 'module.images',
+        alt: 'A cartoony shoe',
+        height: 1250,
+        src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
+        width: 1870
     },
     {
-        image: {
-            asset: {
-                url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
-                caption: 'test'
-            }
-        }
+        _key: '2abff668952c',
+        _type: 'module.images',
+        alt: 'A cartoony shoe',
+        height: 1250,
+        src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
+        width: 1870
     },
     {
-        image: {
-            asset: {
-                url: 'https://images.unsplash.com/photo-1646753442357-03c9a927b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
-                caption: 'test'
-            }
-        }
+        _key: '2abff668953c',
+        _type: 'module.images',
+        alt: 'A cartoony shoe',
+        height: 1250,
+        src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
+        width: 1870
     }
 ];
 
