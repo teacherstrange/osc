@@ -98,14 +98,14 @@ export const typeDefs = gql`
         firstName: String! @constraint(maxLength: 128)
         lastName: String! @constraint(maxLength: 128)
         email: String! @constraint(format: "email", maxLength: 255)
-        ### Minimum 9 characters, at least one uppercase letter, one lowercase letter and one number. #?!@$%^&*- characters allowed but not required
-        ### Note it seems to break if we use any / in the regex, for example /d for all digits [0-9] 
-        password: String! @constraint(minLength: 9, maxLength: 32, pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9#?!@$%^&*-]{9,}$")
+        ### Minimum 12 characters for password - length creates greater security than extended charsets or set patterns
+        ### Requiring a set pattern makes it considerably easier to brute force as it narrows the possible range.
+        password: String! @constraint(minLength: 12)
     }
 
     input loginInput {
         email: String! @constraint(format: email)
-        password: String! @constraint(minLength: 9, maxLength: 32)
+        password: String!
     }
 
     type Mutation {
