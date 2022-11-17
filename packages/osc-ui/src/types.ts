@@ -14,3 +14,7 @@ export type Themes =
     | 'duodenary';
 
 export type Variants = 'outline' | 'subtle';
+
+export type Spacing = 10 | 50 | 110 | 210;
+
+export type Direction = 'top' | 'right' | 'bottom' | 'left';

@@ -3,7 +3,7 @@ import React from 'react';
 import { classNames } from '../../utils/classNames';
 
 export interface ListItemProps<T> extends LiHTMLAttributes<T> {
-    children: (string | ReactChildren) & ReactNode;
+    children: (string | number | {} | ReactChildren) & ReactNode;
     className?: string;
 }
 
@@ -15,7 +15,7 @@ export const ListItem: FC<ListItemProps<HTMLLIElement>> = ({
     const classes = classNames(className);
 
     return (
-        <li className={classes} {...attr}>
+        <li className={classes ? classes : null} {...attr}>
             {children}
         </li>
     );
@@ -40,21 +40,21 @@ export const List: FC<ListProps<ListTypes>> = ({
     switch (variant) {
         case 'ul':
             return (
-                <ul className={classes} {...attr}>
+                <ul className={classes ? classes : null} {...attr}>
                     {children}
                 </ul>
             );
 
         case 'ol':
             return (
-                <ol className={classes} {...attr}>
+                <ol className={classes ? classes : null} {...attr}>
                     {children}
                 </ol>
             );
 
         default:
             return (
-                <ul className={classes} {...attr}>
+                <ul className={classes ? classes : null} {...attr}>
                     {children}
                 </ul>
             );

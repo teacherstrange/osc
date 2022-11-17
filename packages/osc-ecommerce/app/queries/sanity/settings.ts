@@ -1,7 +1,6 @@
 import groq from 'groq';
 import { LINK_EXTERNAL } from './fragments/linkExternal';
 import { LINK_INTERNAL } from './fragments/linkInternal';
-import { PORTABLE_TEXT } from './fragments/portableText';
 
 export const SETTINGS_QUERY = groq`
     *[ _type == "settings" ] {
@@ -30,9 +29,7 @@ export const SETTINGS_QUERY = groq`
                     ${LINK_EXTERNAL}
                 }
             },
-            text[] {
-                ${PORTABLE_TEXT}
-            }
+            text[]
         },
         'seo': {
             robots,

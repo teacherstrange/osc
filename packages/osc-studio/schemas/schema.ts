@@ -7,7 +7,6 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 import annotationLinkEmail from './annotations/linkEmail';
 import annotationLinkExternal from './annotations/linkExternal';
 import annotationLinkInternal from './annotations/linkInternal';
-import annotationProduct from './annotations/product';
 
 // Document types
 import collection from './documents/collection';
@@ -27,6 +26,7 @@ import body from './blocks/body';
 
 // Object types
 import collectionRule from './objects/collectionRule';
+import colorPicker from './objects/colorPicker';
 import linkExternal from './objects/linkExternal';
 import linkInternal from './objects/linkInternal';
 import placeholderString from './objects/placeholderString';
@@ -56,7 +56,6 @@ export default createSchema({
         annotationLinkEmail,
         annotationLinkExternal,
         annotationLinkInternal,
-        annotationProduct,
         // Document types
         collection,
         page,
@@ -71,6 +70,7 @@ export default createSchema({
         // Block content
         body,
         // Objects
+        colorPicker,
         collectionRule,
         linkExternal,
         linkInternal,

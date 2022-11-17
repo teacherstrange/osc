@@ -22,7 +22,13 @@ export interface module {
 }
 
 export interface contentModule extends module {
-    body?: PortableTextBlock;
+    backgroundColor?: 'primary' | 'secondary' | 'tertiary';
+    horizontalAlignment?: 'left' | 'centre' | 'right';
+    marginBottom?: 10 | 50 | 110 | 210 | '';
+    paddingBottom?: 10 | 50 | 110 | 210 | '';
+    paddingTop?: 10 | 50 | 110 | 210 | '';
+    textColor?: 'primary' | 'secondary' | 'tertiary';
+    body?: PortableTextBlock[];
 }
 
 export interface mediaTextModule extends module {
@@ -87,7 +93,7 @@ export interface SanityGlobalSEO extends SanitySEO {
 export interface SanityPage {
     _id: string;
     _rev: string;
-    _type?: string;
+    _type: string;
     title?: string;
     slug?:
         | {
@@ -97,7 +103,7 @@ export interface SanityPage {
     seo: SanitySEO;
     hero?: SanityHero;
     showHero?: boolean;
-    modules?: module[] | mediaTextModule[];
+    modules: module[] | contentModule[];
     store?: {
         title: string;
         slug?: {
