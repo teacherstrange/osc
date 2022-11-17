@@ -1,3 +1,38 @@
+## [0.11.0](https://github.com/Open-Study-College/osc/compare/v0.10.0...v0.11.0) (2022-11-17)
+
+
+### 📦 General Housekeeping / Package Updates
+
+* add content module types ([898d3af](https://github.com/Open-Study-College/osc/commit/898d3afe756355bd56d89c68fd8394d406f7f949))
+* install portableText dependency ([3c4de53](https://github.com/Open-Study-College/osc/commit/3c4de5388d2d0852b5dac656e7df2a8a6b90ad53))
+* removed unused product annotation schema ([b6af40f](https://github.com/Open-Study-College/osc/commit/b6af40f3eee37e7b1561053bf9e7edfa0ad2f206))
+
+
+### ♻️ Refactors
+
+* move dynamic links above our static links ([f6e9fc9](https://github.com/Open-Study-College/osc/commit/f6e9fc93a9d1dca210b7c63655e379bfc6bd4b66))
+* remove export from dynamicLinks const ([25f8026](https://github.com/Open-Study-College/osc/commit/25f802653e7d7281f9729a66e06211db3d2f37e4))
+
+
+### 🐛 Bugs
+
+* **list:** add null check for classnames so we don't load an empty class attribute ([e52a975](https://github.com/Open-Study-College/osc/commit/e52a97545eb63f3dd84599493eca7405499d9db5))
+* adds missing page types to query ([a29e997](https://github.com/Open-Study-College/osc/commit/a29e9978ca25b3cd26c2cb823cb6c00b63cd0c7c))
+* make sure only one stylesheet per type of module gets loaded ([f493645](https://github.com/Open-Study-College/osc/commit/f4936452294d8312d40b4ffa14a29e2b8c8b0e37))
+
+
+### ✨ Features
+
+* **content:** replaces chakra components ([154381a](https://github.com/Open-Study-College/osc/commit/154381a39608bb09365e1d56cfcd087f86a07f2e))
+* **hook:** adds spacing hook ([09b4de7](https://github.com/Open-Study-College/osc/commit/09b4de796227494025b18de1976a6f58ab2c7351))
+* add color picker input to sanity ([ba7a45a](https://github.com/Open-Study-College/osc/commit/ba7a45accb61c0b646056b91334f919326c2be71))
+* add content schema to sanity ([9743994](https://github.com/Open-Study-College/osc/commit/9743994ce64bebb5636d70a62c051e3efce3c36c))
+* add query for content component ([2ebb48e](https://github.com/Open-Study-College/osc/commit/2ebb48e8c8c9063e9a32a7a7b096790ee1a6c706))
+* adds content component ([7b0bc9b](https://github.com/Open-Study-College/osc/commit/7b0bc9b4063d733724b2c6c085e81c520ffc35d0))
+* adds content component to modules ([25eacbd](https://github.com/Open-Study-College/osc/commit/25eacbdc0724fc25ee26507328a5f03c94104b0b))
+* adds dynamic links from remix-utils ([089e954](https://github.com/Open-Study-College/osc/commit/089e95469e8575017955cb503deafd4a0e6c0b58))
+* adds dynamic links to routes ([97ea112](https://github.com/Open-Study-College/osc/commit/97ea1128c6b98b5aa5c1cd0e9b0e2a5652d7c75c))
+
 ## [0.10.0](https://github.com/Open-Study-College/osc/compare/v0.9.0...v0.10.0) (2022-11-15)
 
 
@@ -370,12 +405,4 @@
 * removed cypress ([44dd2c6](https://github.com/Open-Study-College/osc/commit/44dd2c6d5142a7c7c145706a51c54c98ff034f57))
 * removed npm init test script errors ([1a80c04](https://github.com/Open-Study-College/osc/commit/1a80c0459cb34e8e55340ba72acea4a4e4b8865f))
 * removed/replaced console.log ([a9f3f33](https://github.com/Open-Study-College/osc/commit/a9f3f337efc2e736f566e8f3f3a168746cf8eee4))
-
-## [0.5.1](https://github.com/Open-Study-College/osc/compare/v0.5.0...v0.5.1) (2022-10-26)
-
-
-### 🐛 Bugs
-
-* update cacert ([e405850](https://github.com/Open-Study-College/osc/commit/e4058509d68e04b0fd26e56479a7372656355f47))
-* update cacert.pem ([f29eb3a](https://github.com/Open-Study-College/osc/commit/f29eb3ae3fc794de4eb6ac7cd079b63d0fb34a3d))
 
