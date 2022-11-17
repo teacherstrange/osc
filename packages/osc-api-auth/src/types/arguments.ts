@@ -3,12 +3,12 @@ export type getUsersArgs = {
     orderDir: 'asc' | 'desc';
     start: number;
     limit: number;
-    cursor: number | null;
+    cursor: number;
     pagination: 'offset' | 'cursor';
 };
 
 export type getUserArgs = {
-    id: number | null;
+    id?: number;
 };
 
 export type createUserInput = {
