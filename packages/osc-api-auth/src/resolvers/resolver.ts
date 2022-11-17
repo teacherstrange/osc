@@ -14,35 +14,36 @@ const prisma = new PrismaClient();
 
 export const resolvers = {
     Query: {
-        users: async (
-            _: undefined,
-            {
+        users: async (_: undefined, args: getUsersArgs) => {
+            const {
                 start = 0,
                 limit = 50,
                 cursor = null,
                 pagination = 'offset',
                 orderBy = 'firstName',
                 orderDir = 'asc'
-            }: getUsersArgs
-        ) => {
-            return pagination == 'cursor'
-                ? await prisma.user.findMany({
-                      skip: cursor ? 1 : start,
-                      take: limit,
-                      cursor: {
-                          id: cursor ?? 1
-                      },
-                      orderBy: {
-                          [orderBy]: orderDir
-                      }
-                  })
-                : await prisma.user.findMany({
-                      skip: start,
-                      take: limit,
-                      orderBy: {
-                          [orderBy]: orderDir
-                      }
-                  });
+            } = args;
+
+            if (pagination == 'cursor' && cursor) {
+                return await prisma.user.findMany({
+                    skip: 1,
+                    take: limit,
+                    cursor: {
+                        id: cursor
+                    },
+                    orderBy: {
+                        [orderBy]: orderDir
+                    }
+                });
+            }
+
+            return await prisma.user.findMany({
+                skip: start,
+                take: limit,
+                orderBy: {
+                    [orderBy]: orderDir
+                }
+            });
         },
         user: async (_: undefined, args: getUserArgs, context: AuthContext) => {
             return await account.get(args.id ?? context.user!.id);
