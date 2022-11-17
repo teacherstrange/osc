@@ -17,7 +17,7 @@ export default {
             description: 'Visually hidden label describing the input'
         },
         isChecked: {
-            description: 'Conrol that handles toggling the switch'
+            description: 'Control that handles toggling the switch'
         },
         onToggle: {
             description: 'Event handler that runs when the `isChecked` prop is changed'

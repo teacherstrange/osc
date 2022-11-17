@@ -24,7 +24,7 @@ export default {
             description: 'An array of objects containing the page titles and pathnames'
         },
         separator: {
-            description: 'Custom sparator, can be a string or a component'
+            description: 'Custom separator, can be a string or a component'
         }
     }
 } as Meta;
