@@ -45,26 +45,24 @@ export const resolvers = {
                 }
             });
         },
-        user: async (_: undefined, args: getUserArgs, context: AuthContext) => {
-            return await account.get(args.id ?? context.user!.id);
+        user: async (_: undefined, args: getUserArgs, { user }: AuthContext) => {
+            return await account.get(args.id ?? user!.id);
         }
     },
     User: {
-        profile: async (parent: User) => {
-            return await account.profile(parent.id);
+        profile: async ({ id }: User) => {
+            return await account.profile(id);
         }
     },
     Mutation: {
-        createUser: async (_: undefined, args: createUserArgs) => {
-            const { input } = args;
+        createUser: async (_: undefined, { input }: createUserArgs) => {
             return account.create(input);
         },
-        login: async (_: undefined, args: loginArgs) => {
-            const { input } = args;
+        login: async (_: undefined, { input }: loginArgs) => {
             return account.login(input);
         },
-        refreshAccess: async (_: undefined, args: refreshAccessArgs) => {
-            const { refreshToken } = args;
+        refreshAccess: async (_: undefined, { refreshToken }: refreshAccessArgs) => {
+            // const { refreshToken } = args;
             return account.refreshAccess(refreshToken);
         }
     }
