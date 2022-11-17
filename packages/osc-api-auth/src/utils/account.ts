@@ -1,13 +1,24 @@
 import { PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql/error';
-import type { createUserInput, loginArgsInput } from '~/types/arguments';
+import type {
+    CreateUserFn,
+    CrmTokensFn,
+    GetUserFn,
+    LmsTokensFn,
+    LoginFn,
+    RefreshAccessFn,
+    UserAvatarFn,
+    UserPermissionsFn,
+    UserProfileFn,
+    UserRolesFn
+} from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import * as password from '~/utils/password';
 import * as token from '~/utils/token';
 
 const prisma = new PrismaClient();
 
-export const create = async (input: createUserInput) => {
+export const create: CreateUserFn = async (input) => {
     // Check for existing user, all emails must be unique
     const existingUser = await prisma.user.findUnique({
         where: {
@@ -38,7 +49,7 @@ export const create = async (input: createUserInput) => {
     });
 };
 
-export const login = async (input: loginArgsInput) => {
+export const login: LoginFn = async (input) => {
     // Find matching user
     const user = await prisma.user.findUnique({
         where: {
@@ -75,29 +86,29 @@ export const login = async (input: loginArgsInput) => {
     return { accessToken, refreshToken };
 };
 
-export const refreshAccess = async (refreshToken: string) => {
+export const refreshAccess: RefreshAccessFn = async (refreshToken) => {
     return { accessToken: await token.refreshAccess(refreshToken) };
 };
 
-export const get = async (id: number) => {
+export const get: GetUserFn = async (userId) => {
     return await prisma.user.findUnique({
         where: {
-            id: id
+            id: userId
         }
     });
 };
 
-export const profile = async (id: number) => {
+export const profile: UserProfileFn = async (userId) => {
     return {
-        avatar: await avatar(id),
-        permissions: await permissions(id),
-        roles: await roles(id),
-        crmTokens: await crmTokens(id),
-        lmsTokens: await lmsTokens(id)
+        avatar: await avatar(userId),
+        permissions: await permissions(userId),
+        roles: await roles(userId),
+        crmTokens: await crmTokens(userId),
+        lmsTokens: await lmsTokens(userId)
     };
 };
 
-export const permissions = async (userId: number) => {
+export const permissions: UserPermissionsFn = async (userId) => {
     const permissions: PermissionsProps = {
         read: [],
         write: []
@@ -144,27 +155,27 @@ export const permissions = async (userId: number) => {
     return permissions;
 };
 
-const roles = async (id: number) => {
+const roles: UserRolesFn = async (userId) => {
     return await prisma.userRole.findMany({
-        where: { userId: id },
+        where: { userId: userId },
         include: {
             details: true
         }
     });
 };
 
-const avatar = async (id: number) => {
+const avatar: UserAvatarFn = async (userId) => {
     return await prisma.userAvatar.findUnique({
         where: {
-            userId: id
+            userId: userId
         }
     });
 };
 
-const crmTokens = async (id: number) => {
+const crmTokens: CrmTokensFn = async (userId) => {
     return await prisma.crmToken.findMany({
         where: {
-            userId: id
+            userId: userId
         },
         include: {
             crm: true
@@ -172,10 +183,10 @@ const crmTokens = async (id: number) => {
     });
 };
 
-export const lmsTokens = async (id: number) => {
+export const lmsTokens: LmsTokensFn = async (userId) => {
     return await prisma.lmsToken.findMany({
         where: {
-            userId: id
+            userId: userId
         },
         include: {
             lms: true
