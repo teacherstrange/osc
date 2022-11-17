@@ -6,7 +6,25 @@ import { ClockIcon } from '@radix-ui/react-icons';
 
 export default {
     title: 'osc-ui/Countdown Clock',
-    component: CountdownClock
+    component: CountdownClock,
+    parameters: {
+        docs: {
+            description: {
+                component: 'Countdown Clock component displays a timer based on a future date'
+            }
+        }
+    },
+    argTypes: {
+        endDate: {
+            description: 'The date when the timer should end'
+        },
+        icon: {
+            description: 'Optional icon that can be rendered alonside the timer'
+        },
+        name: {
+            description: 'Optional title that can be given to the timer'
+        }
+    }
 } as Meta;
 
 const template: Story<Props> = (args) => <CountdownClock {...args} />;
