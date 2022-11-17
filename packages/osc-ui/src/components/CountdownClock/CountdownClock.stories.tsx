@@ -17,29 +17,24 @@ export const WithTitle = template.bind({});
 export const WithMultipleTimers = template.bind({});
 
 Primary.args = {
-    endDate: new Date('Jan 21,2023, 19:20:00'),
-    titles: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' }
+    endDate: new Date('Jan 21,2023, 19:20:00')
 };
 WithIcon.args = {
     endDate: new Date('March 11,2023, 19:20:00'),
-    icon: <ClockIcon />,
-    titles: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' }
+    icon: <ClockIcon />
 };
 WithTitle.args = {
     endDate: new Date('Nov 11,2023, 19:20:00'),
-    name: "Don't miss out!",
-    titles: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' }
+    name: "Don't miss out!"
 };
 WithMultipleTimers.args = [
     {
         endDate: new Date('May 11,2023, 19:20:00'),
-        name: 'Timer 1',
-        titles: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' }
+        name: 'Timer 1'
     },
     {
         endDate: new Date('December 25,2022, 19:20:00'),
-        name: 'Timer 2',
-        titles: { days: 'd', hours: 'h', minutes: 'm', seconds: 's' }
+        name: 'Timer 2'
     }
 ];
 
