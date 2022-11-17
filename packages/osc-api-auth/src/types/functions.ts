@@ -1,4 +1,13 @@
-import type { Crm, CrmToken, Lms, LmsToken, Role, User, UserAvatar, UserRole } from '@prisma/client';
+import type {
+    Crm,
+    CrmToken,
+    Lms,
+    LmsToken,
+    Role,
+    User,
+    UserAvatar,
+    UserRole
+} from '@prisma/client';
 import type { createUserInput, loginArgsInput } from './arguments';
 import type { userJWT } from './general';
 import type { PermissionsProps } from './interfaces';

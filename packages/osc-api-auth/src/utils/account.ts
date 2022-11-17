@@ -13,6 +13,7 @@ import type {
     UserRolesFn
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
+import { wait } from '~/utils';
 import * as password from '~/utils/password';
 import * as token from '~/utils/token';
 
@@ -59,6 +60,7 @@ export const login: LoginFn = async (input) => {
 
     // If no matching user, throw error
     if (!user) {
+        await wait(3000);
         throw new GraphQLError('No matching user found.', {
             extensions: {
                 code: 'BAD_USER_INPUT'
@@ -72,6 +74,7 @@ export const login: LoginFn = async (input) => {
     // If passwords dont match throw error
     // We'll hide this behind the same text as no matching user for now to prevent identifying used emails
     if (!passwordMatch) {
+        await wait(3000);
         throw new GraphQLError('No matching user found.', {
             extensions: {
                 code: 'BAD_USER_INPUT'
