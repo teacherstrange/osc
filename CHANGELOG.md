@@ -1,3 +1,30 @@
+## [0.12.0](https://github.com/Open-Study-College/osc/compare/v0.11.0...v0.12.0) (2022-11-17)
+
+
+### 🧪 Tests
+
+* add tests for image component ([f3ebd60](https://github.com/Open-Study-College/osc/commit/f3ebd605a2de7b5acb7de3c0c29babc6770d823f))
+
+
+### ✨ Features
+
+* add cloudinary image module to sanity ([8364864](https://github.com/Open-Study-College/osc/commit/8364864bc179250c92f913da5361131d0854ddb5))
+* add image component to osc-ui ([ecae6e2](https://github.com/Open-Study-College/osc/commit/ecae6e20d6f6fa47ad1cb02ca320299cae2219bf))
+* add image module to osc-ecommerce ([50ad4e2](https://github.com/Open-Study-College/osc/commit/50ad4e211b8d1627ac19ec027a6a2b1fcd9d794f))
+* replace media plugin with cloudinary ([430c79f](https://github.com/Open-Study-College/osc/commit/430c79f2626b38f1fc4708b917bb2e44c1334787))
+
+
+### ♻️ Refactors
+
+* move classname prop so classes are applied to the image element ([8035eea](https://github.com/Open-Study-College/osc/commit/8035eeabaf5c099666882e255290eead38d10f54))
+* update carousel component to make use of the image component ([e9068b6](https://github.com/Open-Study-College/osc/commit/e9068b6f39216935fcd045e90d46825a55a0a717))
+* update test data to match new shape of image ([ebda4bd](https://github.com/Open-Study-College/osc/commit/ebda4bd05b5542eb06005c54c90c5af5005d3605))
+
+
+### 📝 Documentation
+
+* adds storybook docs ([e920461](https://github.com/Open-Study-College/osc/commit/e92046164c288d62c86248ea98fd45b7f2503065))
+
 ## [0.11.0](https://github.com/Open-Study-College/osc/compare/v0.10.0...v0.11.0) (2022-11-17)
 
 
@@ -347,62 +374,4 @@
 * adds remix hooks to snippets ([7d6823c](https://github.com/Open-Study-College/osc/commit/7d6823cb1d7024ae157d7ea12ff00d6691543f8d))
 * adds remix snippets to project settings ([b735a89](https://github.com/Open-Study-College/osc/commit/b735a89f9fc8d9f0bfc3a2dc2de8f4fca2a3d4b8))
 * adds scope to snippets ([e32169a](https://github.com/Open-Study-College/osc/commit/e32169ae0d214da63427a13535bbde893c0ad4aa))
-
-## [0.6.0](https://github.com/Open-Study-College/osc/compare/v0.5.1...v0.6.0) (2022-10-28)
-
-
-### ✨ Features
-
-* added .env.example to gateway ([d684af4](https://github.com/Open-Study-College/osc/commit/d684af4e1705f99896a544dfb6cfe9d06aaab133))
-* added API packages to Lerna config ([048c04b](https://github.com/Open-Study-College/osc/commit/048c04bcc7c63b2e32a9db486e995fbaa3457342))
-* added auth api base build ([47de2d8](https://github.com/Open-Study-College/osc/commit/47de2d8c41283f9ee872406e476068ee89904985))
-* implements osc-api-gateway run commands ([2491b88](https://github.com/Open-Study-College/osc/commit/2491b88c3516cf412483ceff5833bec4f073f9b3))
-* initial gateway setup ([8ea3c7e](https://github.com/Open-Study-College/osc/commit/8ea3c7e75139c232831998bdf0b62ae70691e229))
-* initial ORM/DB table setup ([6fb8442](https://github.com/Open-Study-College/osc/commit/6fb8442088bde34255a59e4d03782745ef6f9e73))
-* restructured API into individual packages ([4158ed5](https://github.com/Open-Study-College/osc/commit/4158ed5c27b79fb1eb7fe368a8db8de44825eb3c))
-* updated .gitignore files ([cfcb96c](https://github.com/Open-Study-College/osc/commit/cfcb96c092f5ae9ffd6dfd4ea5497193430e4b09))
-* users tables ([3449e78](https://github.com/Open-Study-College/osc/commit/3449e781c1265a2ea6dd65c7b851f243c0f4b535))
-* working barebones of API Gateway ([0ae81e2](https://github.com/Open-Study-College/osc/commit/0ae81e2be90ad59321a8c9a805d6fe1ea1cdb087))
-* working setup of barebones auth subgraph ([14eb6cf](https://github.com/Open-Study-College/osc/commit/14eb6cf45640b9efba31da7b31054fc256b6f647))
-
-
-### 📝 Documentation
-
-* updates cypress mentions in readme ([eca560e](https://github.com/Open-Study-College/osc/commit/eca560e2f6d7a5278f146439c917f4084af6e5e3))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* add .node-persist to gitignore ([62c37fb](https://github.com/Open-Study-College/osc/commit/62c37fbc57cf734c1a7443df2a8f94bc3f21353c))
-* removes duplicate files ([39fc2c2](https://github.com/Open-Study-College/osc/commit/39fc2c25c78138419841a9c1aeff45ce4dfd069e))
-* removes unused file ([988d03f](https://github.com/Open-Study-College/osc/commit/988d03ffd6483122176572a701a7534170bd6f49))
-* renames test directories to use __ naming convention ([4d11cbd](https://github.com/Open-Study-College/osc/commit/4d11cbd93e8e0d71a405894c5ac37465ae45a3b6))
-* tidy root.tsx file ([406f482](https://github.com/Open-Study-College/osc/commit/406f482f851973705cfffc98b627a529f249ad78))
-* tidy route files ([db6229f](https://github.com/Open-Study-College/osc/commit/db6229fdf0dd1674538a9e011f0444b306b240a7))
-* update heading level ([713bccb](https://github.com/Open-Study-College/osc/commit/713bccb6e91e16c6e2a14130f9468180327df9fc))
-* update mock directory path ([fbf5a29](https://github.com/Open-Study-College/osc/commit/fbf5a2935b6fe09fa8309d85a4d0272ddbd8e6ac))
-
-
-### 🧪 Tests
-
-* update test assertion so it's less mad ([89b73f2](https://github.com/Open-Study-College/osc/commit/89b73f23bec104b7ecceb646314e80670499d0b5))
-* update test assertion so it's less mad ([9bc1b6a](https://github.com/Open-Study-College/osc/commit/9bc1b6ac5ff990c54f889ad41c3c3f6e548ca484))
-
-
-### ♻️ Refactors
-
-* changed console.info messages to be more identifiable ([fe012bf](https://github.com/Open-Study-College/osc/commit/fe012bf7503f94df3e73ea24a7c2a1def7ddbb98))
-* moves formtoggle component into it's own directory ([ce9b895](https://github.com/Open-Study-College/osc/commit/ce9b895cfd56997497c21df525926d66c4ee9814))
-* moves util functions into utils directory ([5d6833c](https://github.com/Open-Study-College/osc/commit/5d6833c3ae30bc445c5951087a5cee20b52e8355))
-* remove test scss files ([f9ed36e](https://github.com/Open-Study-College/osc/commit/f9ed36e64ecc2ea8c51b2342180640833605387d))
-* removes depricated dashobard plugin ([a9f7fcc](https://github.com/Open-Study-College/osc/commit/a9f7fccf44a19af5f0b9415ff9e40d87d081d437))
-* renaming tutoring field to coursesTutored to avoid confusion ([17f1e2c](https://github.com/Open-Study-College/osc/commit/17f1e2ccafe4eea2c44521e9110d0aba7c9c8c2f))
-* updated package.json version ([525b8cd](https://github.com/Open-Study-College/osc/commit/525b8cdb3803166ff61eea363a9f393c02b7ec04))
-
-
-### 🐛 Bugs
-
-* removed cypress ([44dd2c6](https://github.com/Open-Study-College/osc/commit/44dd2c6d5142a7c7c145706a51c54c98ff034f57))
-* removed npm init test script errors ([1a80c04](https://github.com/Open-Study-College/osc/commit/1a80c0459cb34e8e55340ba72acea4a4e4b8865f))
-* removed/replaced console.log ([a9f3f33](https://github.com/Open-Study-College/osc/commit/a9f3f337efc2e736f566e8f3f3a168746cf8eee4))
 
