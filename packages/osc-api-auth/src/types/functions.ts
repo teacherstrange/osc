@@ -8,18 +8,21 @@ import type {
     UserAvatar,
     UserRole
 } from '@prisma/client';
-import type { createUserInput, loginArgsInput } from './arguments';
+import type { createUserInput, getUsersArgs, loginArgsInput } from './arguments';
 import type { userJWT } from './general';
 import type { PermissionsProps } from './interfaces';
 
 export type CreateUserFn = (input: createUserInput) => Promise<User>;
 export type GetUserFn = (userId: number) => Promise<User | null>;
-export type RefreshAccessFn = (refreshToken: string) => Promise<{ accessToken: string }>;
+export type GetMultipleUsersFn = (args: getUsersArgs) => Promise<User[]>;
 
-export type LoginFn = (input: loginArgsInput) => Promise<{
-    accessToken: Promise<string>;
-    refreshToken: Promise<string>;
-}>;
+export type LoginFn = (
+    input: loginArgsInput
+) => Promise<{ accessToken: Promise<string>; refreshToken: Promise<string> } | Error>;
+
+export type RefreshAccessFn = (refreshToken: string) => Promise<{ accessToken: string } | Error>;
+export type AccessTokenFn = (userId: number) => Promise<string>;
+export type RefreshTokenFn = (userId: number) => Promise<string>;
 
 export type UserProfileFn = (userId: number) => Promise<{
     avatar: UserAvatar | null;

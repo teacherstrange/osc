@@ -3,6 +3,7 @@ import { GraphQLError } from 'graphql/error';
 import type {
     CreateUserFn,
     CrmTokensFn,
+    GetMultipleUsersFn,
     GetUserFn,
     LmsTokensFn,
     LoginFn,
@@ -90,13 +91,45 @@ export const login: LoginFn = async (input) => {
 };
 
 export const refreshAccess: RefreshAccessFn = async (refreshToken) => {
-    return { accessToken: await token.refreshAccess(refreshToken) };
+    return await token.refreshAccess(refreshToken);
 };
 
 export const get: GetUserFn = async (userId) => {
     return await prisma.user.findUnique({
         where: {
             id: userId
+        }
+    });
+};
+
+export const getMultiple: GetMultipleUsersFn = async (args) => {
+    const {
+        start = 0,
+        limit = 50,
+        cursor = null,
+        pagination = 'offset',
+        orderBy = 'firstName',
+        orderDir = 'asc'
+    } = args;
+
+    if (pagination == 'cursor' && cursor) {
+        return await prisma.user.findMany({
+            skip: 1,
+            take: limit,
+            cursor: {
+                id: cursor
+            },
+            orderBy: {
+                [orderBy]: orderDir
+            }
+        });
+    }
+
+    return await prisma.user.findMany({
+        skip: start,
+        take: limit,
+        orderBy: {
+            [orderBy]: orderDir
         }
     });
 };

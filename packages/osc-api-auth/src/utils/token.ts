@@ -2,12 +2,13 @@ import { PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql/error';
 import jwt from 'jsonwebtoken';
 import { env } from '~/types/environment';
+import type { AccessTokenFn, RefreshAccessFn, RefreshTokenFn } from '~/types/functions';
 import type { RefreshToken } from '~/types/interfaces';
 import { permissions } from './account';
 
 const prisma = new PrismaClient();
 
-export const access = async (userId: number) => {
+export const access: AccessTokenFn = async (userId: number) => {
     const payload = {
         user: { id: userId, permissions: await permissions(userId) }
     };
@@ -19,7 +20,7 @@ export const access = async (userId: number) => {
     });
 };
 
-export const refresh = async (userId: number) => {
+export const refresh: RefreshTokenFn = async (userId: number) => {
     const payload = { user: { id: userId } };
     const expires = Date.now() + Number(env.JWT_REFRESH_DURATION!) * 1000;
 
@@ -43,7 +44,7 @@ export const refresh = async (userId: number) => {
     return refreshToken;
 };
 
-export const refreshAccess = async (refreshToken: string) => {
+export const refreshAccess: RefreshAccessFn = async (refreshToken) => {
     try {
         const payload = jwt.verify(refreshToken, env.JWT_SECRET!, {
             algorithms: ['HS256'],
@@ -68,12 +69,8 @@ export const refreshAccess = async (refreshToken: string) => {
             });
         }
 
-        return await access(user.id);
+        return { accessToken: await access(user.id) };
     } catch (error) {
-        throw new GraphQLError(`Invalid token: ${error}`, {
-            extensions: {
-                code: 'BAD_USER_INPUT'
-            }
-        });
+        return new Error(`Invalid token: ${error}`);
     }
 };
