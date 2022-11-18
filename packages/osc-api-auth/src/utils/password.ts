@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt';
+import { env } from '~/types/environment';
 
 export const hash = async (password: string) => {
-    return await bcrypt.hash(password, Number(process.env.SALT_ROUNDS));
+    return await bcrypt.hash(password, Number(env.SALT_ROUNDS));
 };
 
 export const compare = async (plainTextPassword: string, hashedPassword: string) => {
