@@ -75,8 +75,8 @@ test('renders a custom classname', () => {
             <Content value={textContent.body} className="test-class" />
         </MemoryRouter>
     );
-    const article = screen.getByRole('article');
-    expect(article).toHaveClass('test-class');
+    const content = document.querySelector('.c-content');
+    expect(content).toHaveClass('test-class');
 });
 
 test('renders the correct padding class', () => {
@@ -85,8 +85,8 @@ test('renders the correct padding class', () => {
             <Content value={textContent.body} paddingTop={10} paddingBottom={10} />
         </MemoryRouter>
     );
-    const article = screen.getByRole('article');
-    expect(article).toHaveClass('u-pt-10 u-pb-10');
+    const content = document.querySelector('.c-content');
+    expect(content).toHaveClass('u-pt-10 u-pb-10');
 
     rerender(
         <MemoryRouter>
@@ -94,7 +94,7 @@ test('renders the correct padding class', () => {
         </MemoryRouter>
     );
 
-    expect(article).toHaveClass('u-pt-50 u-pb-110');
+    expect(content).toHaveClass('u-pt-50 u-pb-110');
 });
 
 test('renders the correct margin class', () => {
@@ -103,8 +103,8 @@ test('renders the correct margin class', () => {
             <Content value={textContent.body} marginBottom={10} />
         </MemoryRouter>
     );
-    const article = screen.getByRole('article');
-    expect(article).toHaveClass('u-mb-10');
+    const content = document.querySelector('.c-content');
+    expect(content).toHaveClass('u-mb-10');
 });
 
 test('renders the correct buttons', () => {

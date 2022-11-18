@@ -52,15 +52,15 @@ const portableTextComponents: PortableTextComponents = {
         h4: ({ children }) => <h4>{children}</h4>,
         h5: ({ children }) => <h5>{children}</h5>,
         h6: ({ children }) => <h6>{children}</h6>,
-        normal: ({ children }) => <p>{children}</p>
+        normal: ({ children }) => <p>{children}</p>,
     },
     list: {
         bullet: ({ children }) => <List variant="ul">{children}</List>,
-        number: ({ children }) => <List variant="ol">{children}</List>
+        number: ({ children }) => <List variant="ol">{children}</List>,
     },
     listItem: {
         bullet: ({ children }) => <ListItem>{children}</ListItem>,
-        number: ({ children }) => <ListItem>{children}</ListItem>
+        number: ({ children }) => <ListItem>{children}</ListItem>,
     },
     marks: {
         annotationLinkInternal: ({ value, children }) => {
@@ -81,7 +81,7 @@ const portableTextComponents: PortableTextComponents = {
             const email = value?.email ? `mailto:${value?.email}` : undefined;
 
             return <a href={email}>{children}</a>;
-        }
+        },
     },
     types: {
         image: ({ value }) => {
@@ -90,8 +90,8 @@ const portableTextComponents: PortableTextComponents = {
             return (
                 <img src={url} alt={altText} width={dimensions.width} height={dimensions.height} />
             );
-        }
-    }
+        },
+    },
 };
 
 // TODO: sb - images
@@ -115,7 +115,13 @@ export const Content: FC<Props> = (props: Props) => {
     const paddingTopClass = useSpacing('padding', 'top', paddingTop);
     const paddingBottomClass = useSpacing('padding', 'bottom', paddingBottom);
 
-    const classes = classNames(paddingTopClass, paddingBottomClass, marginBottomClass, className);
+    const classes = classNames(
+        'c-content',
+        paddingTopClass,
+        paddingBottomClass,
+        marginBottomClass,
+        className
+    );
 
     return (
         <article
@@ -123,7 +129,7 @@ export const Content: FC<Props> = (props: Props) => {
             {...other}
             style={{
                 backgroundColor: backgroundColor,
-                color: textColor
+                color: textColor,
             }}
         >
             <div className="c-content">
@@ -142,7 +148,7 @@ export const Content: FC<Props> = (props: Props) => {
                                     slug,
                                     telephone,
                                     type,
-                                    textToCopy
+                                    textToCopy,
                                 } = button;
 
                                 switch (type) {

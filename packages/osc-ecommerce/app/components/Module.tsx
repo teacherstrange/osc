@@ -93,16 +93,17 @@ export default function Module(props: Props) {
             const moduleContent = module as contentModule;
 
             return moduleContent.body ? (
-                <Content
-                    align={moduleContent.horizontalAlignment}
-                    backgroundColor={moduleContent.backgroundColor}
-                    marginBottom={moduleContent.marginBottom}
-                    paddingBottom={moduleContent.paddingBottom}
-                    paddingTop={moduleContent.paddingTop}
-                    textColor={moduleContent.textColor}
-                    value={moduleContent.body}
-                    buttons={moduleContent.buttons}
-                />
+                <article>
+                    <Content
+                        align={moduleContent.horizontalAlignment}
+                        backgroundColor={moduleContent.backgroundColor}
+                        marginBottom={moduleContent.marginBottom}
+                        paddingBottom={moduleContent.paddingBottom}
+                        paddingTop={moduleContent.paddingTop}
+                        textColor={moduleContent.textColor}
+                        value={moduleContent?.body}
+                    />
+                </article>
             ) : null;
 
         case 'module.images':
