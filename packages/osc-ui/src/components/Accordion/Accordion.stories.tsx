@@ -6,7 +6,102 @@ import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './Acc
 
 export default {
     title: 'osc-ui/Accordion',
-    component: Accordion
+    component: Accordion,
+    subcomponents: { AccordionHeader, AccordionItem, AccordionPanel },
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'The accordion component lets users show and hide sections of related content on a page. Extended from the [Radix Accordion primitive](https://www.radix-ui.com/docs/primitives/components/accordion).'
+            }
+        }
+    },
+    argTypes: {
+        children: {
+            table: {
+                disable: true
+            }
+        },
+        className: {
+            description: 'Custom class',
+            type: 'string',
+            table: {
+                type: {
+                    summary: 'string'
+                }
+            }
+        },
+        collapsible: {
+            description:
+                'When `type` is `"single"`, allows closing content when clicking trigger for an open item.',
+            table: {
+                type: {
+                    summary: 'boolean'
+                },
+                defaultValue: {
+                    summary: 'true'
+                }
+            }
+        },
+        disabled: {
+            description:
+                'When true, prevents the user from interacting with the accordion and all its items.',
+            table: {
+                type: {
+                    summary: 'boolean'
+                },
+                defaultValue: {
+                    summary: 'false'
+                }
+            }
+        },
+        defaultValue: {
+            description:
+                'The value of the item to expand when initially rendered and `type` is `"single"`. Use when you do not need to control the state of the items.',
+            type: 'string',
+            table: {
+                type: {
+                    summary: 'string'
+                }
+            }
+        },
+        onValueChange: {
+            description:
+                'Event handler called when the expanded state of an item changes and `type` is `"single"` or `"multiple"`.',
+            table: {
+                type: {
+                    name: 'function',
+                    summary: '(value: string) => void'
+                }
+            }
+        },
+        type: {
+            description: 'Determines whether one or multiple items can be opened at the same time.',
+            type: 'string',
+            table: {
+                type: {
+                    summary: "'single' | 'multiple'"
+                },
+                defaultValue: {
+                    summary: 'single'
+                }
+            },
+            options: ['single', 'multiple'],
+            control: {
+                type: 'select'
+            }
+        },
+        value: {
+            description:
+                'The controlled value of the item to expand when `type` is `"single"` or `"multiple`. Must be used in conjunction with `onValueChange`.',
+            type: 'string',
+            table: {
+                type: {
+                    summary: 'string | string[]'
+                }
+            }
+        }
+    }
 } as Meta;
 
 const Template: Story<AccordionProps> = ({ children, ...args }) => (
@@ -50,17 +145,17 @@ export const Primary = Template.bind({});
 Primary.args = {
     children: [
         {
-            title: 'Section 1 title',
+            title: 'Item 1',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
         },
         {
-            title: 'Section 2 title',
+            title: 'Item 2',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
         },
         {
-            title: 'Section 3 title',
+            title: 'Item 3',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
         }
@@ -77,10 +172,23 @@ AllowMultiple.args = {
     type: 'multiple',
     defaultValue: ['0']
 };
+AllowMultiple.parameters = {
+    docs: {
+        description: {
+            story: 'Allow multiple panels to be open at a time by passing the `type="multiple"` prop.'
+        }
+    }
+};
 
 export const HasHeadingLevel2 = Template2.bind({});
 HasHeadingLevel2.args = {
     ...Primary.args,
-    type: 'multiple',
     defaultValue: ['0']
+};
+HasHeadingLevel2.parameters = {
+    docs: {
+        description: {
+            story: 'Change the heading level by passing `asChild={true}` & `as="h2"` to the `AccordionHeader` subcomponent.'
+        }
+    }
 };
