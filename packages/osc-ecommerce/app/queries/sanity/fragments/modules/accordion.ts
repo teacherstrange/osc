@@ -1,5 +1,5 @@
 import groq from 'groq';
-import { PORTABLE_TEXT } from '../portableText';
+import { MODULE_CONTENT } from './content';
 
 export const MODULE_ACCORDION = groq`
     _key,
@@ -11,14 +11,10 @@ export const MODULE_ACCORDION = groq`
         defaultOpen,
         heading,
         content {
-            body[] {
-                ${PORTABLE_TEXT}
-            }
+            ${MODULE_CONTENT}
         }
     },
     content {
-        body[] {
-            ${PORTABLE_TEXT}
-        }
+        ${MODULE_CONTENT}
     }
 `;
