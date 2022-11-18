@@ -12,7 +12,7 @@ import type { createUserInput, getUsersArgs, loginArgsInput } from './arguments'
 import type { userJWT } from './general';
 import type { PermissionsProps } from './interfaces';
 
-export type CreateUserFn = (input: createUserInput) => Promise<User>;
+export type CreateUserFn = (input: createUserInput) => Promise<User | Error>;
 export type GetUserFn = (userId: number) => Promise<User | null>;
 export type GetMultipleUsersFn = (args: getUsersArgs) => Promise<User[]>;
 

@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { GraphQLError } from 'graphql/error';
 import type {
     CreateUserFn,
     CrmTokensFn,
@@ -30,11 +29,7 @@ export const create: CreateUserFn = async (input) => {
 
     // If user already exists, throw error
     if (existingUser) {
-        throw new GraphQLError('An account already exists for the specified email.', {
-            extensions: {
-                code: 'BAD_USER_INPUT'
-            }
-        });
+        return new Error('An account already exists for the specified email.');
     }
 
     // Hash password
@@ -62,11 +57,7 @@ export const login: LoginFn = async (input) => {
     // If no matching user, throw error
     if (!user) {
         await wait(3000);
-        throw new GraphQLError('No matching user found.', {
-            extensions: {
-                code: 'BAD_USER_INPUT'
-            }
-        });
+        return new Error('No matching user found.');
     }
 
     // Compare input password to hashed password
@@ -76,11 +67,7 @@ export const login: LoginFn = async (input) => {
     // We'll hide this behind the same text as no matching user for now to prevent identifying used emails
     if (!passwordMatch) {
         await wait(3000);
-        throw new GraphQLError('No matching user found.', {
-            extensions: {
-                code: 'BAD_USER_INPUT'
-            }
-        });
+        return new Error('No matching user found.');
     }
 
     // Generate tokens - this is what will be used to access restricted areas, and refresh an expired token
