@@ -6,8 +6,7 @@ import type {
     AccordionSingleProps
 } from '@radix-ui/react-accordion';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-import type { FC, RefAttributes } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, FC, RefAttributes } from 'react';
 import React, { forwardRef } from 'react';
 import { useFontSize } from '../../hooks/useFontSize';
 import { classNames } from '../../utils/classNames';
@@ -17,43 +16,52 @@ import './accordion.scss';
 export type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) &
     RefAttributes<HTMLDivElement>;
 
-export const Accordion: FC<AccordionProps> = forwardRef<
-    React.ElementRef<typeof AccordionPrimitive.Root>,
-    React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
->((props: AccordionProps, forwardedRef) => {
+export const Accordion: FC<AccordionProps> = (props: AccordionProps) => {
     const { children, className } = props;
     const classes = classNames('c-accordion', className);
 
     return (
-        <AccordionPrimitive.Root className={classes} {...props} ref={forwardedRef}>
+        <AccordionPrimitive.Root className={classes} {...props}>
             {children}
         </AccordionPrimitive.Root>
     );
-});
-Accordion.displayName = 'Accordion';
+};
 
-export const AccordionItem: FC<AccordionItemProps> = forwardRef<
-    React.ElementRef<typeof AccordionPrimitive.Item>,
-    React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->((props: AccordionItemProps, forwardedRef) => {
+export const AccordionItem: FC<AccordionItemProps> = (props: AccordionItemProps) => {
     const { children, className } = props;
     const classes = classNames('c-accordion__item', className);
 
     return (
-        <AccordionPrimitive.Item className={classes} {...props} ref={forwardedRef}>
+        <AccordionPrimitive.Item className={classes} {...props}>
             {children}
         </AccordionPrimitive.Item>
     );
-});
-AccordionItem.displayName = 'AccordionItem';
+};
 
+const AccordionIcon = () => {
+    // aria-hidden="true" hides the SVG from screen readers and other assistive technologies
+    // focusable="false" addresses the issue that Internet Explorer/Edge make SVGs focusable by default
+    return (
+        <svg viewBox="0 0 10 10" className="c-accordion__icon" aria-hidden="true" focusable="false">
+            <rect className="c-accordion__icon-vert" height="8" width="2" y="1" x="4" />
+            <rect height="2" width="8" y="4" x="1" />
+        </svg>
+    );
+};
+
+// There may be times where this comes after a h2 so we want it to be h3 (default)
+// but there may also be times where this isn't the case.
+// So we want to be able to swap out which heading level we use.
+// Radix gives us the `asChild` prop to squash the heading from the `AccordionPrimitive.Header`
+// into the Trigger. We're then adding our own heading in its place with the as/Component prop
 export interface AccordionHeadingProps extends AccordionHeaderProps {
     as?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
+// Using a forwardRef so we can pass refs down if we want to handle clicks etc. outside of the component
 export const AccordionHeader: FC<AccordionHeadingProps> = forwardRef<
-    React.ElementRef<typeof AccordionPrimitive.Header>,
-    React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Header>
+    ElementRef<typeof AccordionPrimitive.Header>,
+    ComponentPropsWithoutRef<typeof AccordionPrimitive.Header>
 >((props: AccordionHeadingProps, forwardedRef) => {
     const { as: Component, asChild, children, className } = props;
     const fontSize = useFontSize('delta');
@@ -61,11 +69,11 @@ export const AccordionHeader: FC<AccordionHeadingProps> = forwardRef<
 
     if (asChild && Component) {
         return (
-            <AccordionPrimitive.Header className={classes} {...props} ref={forwardedRef}>
+            <AccordionPrimitive.Header asChild className={classes} {...props} ref={forwardedRef}>
                 <Component>
                     <AccordionPrimitive.Trigger className="c-accordion__trigger">
                         {children}
-                        <ChevronDownIcon className="c-accordion__chevron" aria-hidden />
+                        <AccordionIcon />
                     </AccordionPrimitive.Trigger>
                 </Component>
             </AccordionPrimitive.Header>
@@ -73,27 +81,23 @@ export const AccordionHeader: FC<AccordionHeadingProps> = forwardRef<
     }
 
     return (
-        <AccordionPrimitive.Header className={classes} {...props} ref={forwardedRef}>
+        <AccordionPrimitive.Header className={classes} {...props}>
             <AccordionPrimitive.Trigger className="c-accordion__trigger">
                 {children}
-                <ChevronDownIcon className="c-accordion__chevron" aria-hidden />
+                <AccordionIcon />
             </AccordionPrimitive.Trigger>
         </AccordionPrimitive.Header>
     );
 });
-AccordionHeader.displayName = 'AccordionHeading';
+AccordionHeader.displayName = 'AccordionHeader';
 
-export const AccordionPanel: FC<AccordionContentProps> = forwardRef<
-    React.ElementRef<typeof AccordionPrimitive.Content>,
-    React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->((props: AccordionContentProps, forwardedRef) => {
+export const AccordionPanel: FC<AccordionContentProps> = (props: AccordionContentProps) => {
     const { children, className } = props;
     const classes = classNames('c-accordion__content', className);
 
     return (
-        <AccordionPrimitive.Content className={classes} {...props} ref={forwardedRef}>
-            <div className="c-accordion__content-text">{children}</div>
+        <AccordionPrimitive.Content className={classes} {...props}>
+            {children}
         </AccordionPrimitive.Content>
     );
-});
-AccordionPanel.displayName = 'AccordionPanel';
+};

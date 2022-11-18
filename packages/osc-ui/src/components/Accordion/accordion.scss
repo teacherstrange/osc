@@ -1,4 +1,17 @@
 .c-accordion {
+    --accordion-transition-duration: 300ms;
+    --accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
+
+    &__icon {
+        height: 1em; // make sure the icon matches the height of the text
+    }
+
+    &__icon-vert {
+        transition-duration: var(--accordion-transition-duration);
+        transition-property: opacity visibility;
+        transition-timing-function: var(--accordion-transition-timing-func);
+    }
+
     &__trigger {
         display: flex;
         align-items: center;
@@ -6,8 +19,9 @@
         width: 100%;
 
         /* stylelint-disable-next-line selector-class-pattern */
-        &[data-state="open"] > .c-accordion__chevron {
-            transform: rotate(180deg);
+        &[data-state="open"] .c-accordion__icon-vert {
+            opacity: 0;
+            visibility: hidden;
         }
     }
 
@@ -15,11 +29,11 @@
         overflow: hidden;
 
         &[data-state="open"] {
-            animation: slide-down 300ms cubic-bezier(0.87, 0, 0.13, 1);
+            animation: slide-down var(--accordion-transition-duration) var(--accordion-transition-timing-func);
         }
 
         &[data-state="closed"] {
-            animation: slide-up 300ms cubic-bezier(0.87, 0, 0.13, 1);
+            animation: slide-up var(--accordion-transition-duration) var(--accordion-transition-timing-func);
         }
     }
 }
@@ -30,12 +44,14 @@
     }
 
     to {
+        // Radix specific custom property
         height: var(--radix-accordion-content-height);
     }
 }
 
 @keyframes slide-up {
     from {
+        // Radix specific custom property
         height: var(--radix-accordion-content-height);
     }
 
