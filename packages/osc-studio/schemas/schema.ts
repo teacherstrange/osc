@@ -96,7 +96,6 @@ export default createSchema({
         moduleAccordion,
         moduleImage,
         moduleImages,
-        moduleImage,
         moduleImageMobile,
         moduleImageTablet,
         moduleContent,
