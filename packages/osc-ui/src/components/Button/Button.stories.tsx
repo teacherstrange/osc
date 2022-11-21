@@ -2,11 +2,12 @@ import { EnvelopeClosedIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import type { Props } from './Button';
-import { Button } from './Button';
+import { Button, ButtonGroup } from './Button';
 
 export default {
     title: 'osc-ui/Button',
     component: Button,
+    subcomponents: { ButtonGroup },
     parameters: {
         docs: {
             description: {
@@ -66,9 +67,7 @@ export default {
 
 const Template: Story<Props> = ({ children, ...args }) => <Button {...args}>{children}</Button>;
 const IconsTemplate: Story<Props> = ({ children, ...args }) => (
-    <div
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}
-    >
+    <ButtonGroup direction="column">
         <Button {...args}>
             <EnvelopeClosedIcon aria-hidden="true" />
             Email us
@@ -83,7 +82,7 @@ const IconsTemplate: Story<Props> = ({ children, ...args }) => (
             <span className="sr-only">Search</span>
             <MagnifyingGlassIcon aria-hidden="true" />
         </Button>
-    </div>
+    </ButtonGroup>
 );
 
 export const Primary = Template.bind({});

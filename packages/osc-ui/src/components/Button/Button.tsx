@@ -156,3 +156,17 @@ export const Button: FC<Props> = (props: Props) => {
             );
     }
 };
+
+interface ButtonGroupProps {
+    children: ReactNode;
+    direction?: 'column';
+}
+
+export const ButtonGroup: FC<ButtonGroupProps> = (props: ButtonGroupProps) => {
+    const { children, direction } = props;
+
+    // TODO - sb - update this to use useVariant/modifier
+    const classes = classNames('c-button__group', direction ? `c-button__group--${direction}` : '');
+
+    return <div className={classes}>{children}</div>;
+};
