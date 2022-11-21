@@ -12,6 +12,7 @@ export { Icon } from './components/Icon/Icon';
 export { Image } from './components/Image/Image';
 export { List } from './components/List/List';
 export { Modal } from './components/Modal/Modal';
+export { Popover } from './components/Popover/Popover';
 export { SkipLink } from './components/SkipLink/SkipLink';
 export { Switch } from './components/Switch/Switch';
 export { Tabs } from './components/Tabs/Tabs';
