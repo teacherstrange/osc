@@ -1,7 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
-
 import { vi } from 'vitest';
 
 // Mocks the matchMedia method which is not defined in JSDOM
