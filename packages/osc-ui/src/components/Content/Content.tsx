@@ -5,11 +5,28 @@ import { Link } from '@remix-run/react';
 import type { FC } from 'react';
 import React from 'react';
 import { useSpacing } from '../../hooks/useSpacing';
-import type { Spacing } from '../../types';
+import type { Spacing, Themes } from '../../types';
 import { classNames } from '../../utils/classNames';
+import { Button, ButtonGroup } from '../Button/Button';
 import { List, ListItem } from '../List/List';
 
 import './content.scss';
+
+interface ButtonProps {
+    _key: string;
+    _type: 'button';
+    colour: Themes;
+    externalLink?: {
+        newWindow?: boolean;
+        url: string;
+    };
+    file?: string;
+    label: string;
+    type: string;
+    email?: string;
+    slug?: string;
+    textToCopy?: string;
+}
 
 export interface Props {
     align?: 'left' | 'centre' | 'right';
@@ -20,6 +37,7 @@ export interface Props {
     paddingTop?: Spacing;
     textColor?: string;
     value: PortableTextBlock[];
+    buttons?: ButtonProps[];
 }
 
 // This content component is built around the content that is exported from our Sanity studio.
@@ -75,7 +93,6 @@ const portableTextComponents: PortableTextComponents = {
     }
 };
 
-// TODO: sb - buttons
 // TODO: sb - images
 export const Content: FC<Props> = (props: Props) => {
     const {
@@ -87,6 +104,7 @@ export const Content: FC<Props> = (props: Props) => {
         paddingBottom,
         textColor = 'secondary',
         value,
+        buttons,
         ...other
     } = props;
 
@@ -99,7 +117,6 @@ export const Content: FC<Props> = (props: Props) => {
     const classes = classNames(paddingTopClass, paddingBottomClass, marginBottomClass, className);
 
     return (
-        // Am using Chakra's Box component here so we can pass the background colour prop from our theme correctly
         <article
             className={classes ? classes : null}
             {...other}
@@ -111,6 +128,76 @@ export const Content: FC<Props> = (props: Props) => {
             <div className="c-content">
                 <div className={`c-content__inner ${alignClass}`}>
                     <ReactPortableText value={value} components={portableTextComponents} />
+
+                    {buttons && buttons.length > 0 ? (
+                        <ButtonGroup>
+                            {buttons.map((button) => {
+                                const {
+                                    _key,
+                                    email,
+                                    externalLink,
+                                    file,
+                                    label,
+                                    slug,
+                                    type,
+                                    textToCopy
+                                } = button;
+
+                                switch (type) {
+                                    case 'file':
+                                        return (
+                                            <Button key={_key} action="anchor" href={file}>
+                                                {label}
+                                            </Button>
+                                        );
+
+                                    case 'email':
+                                        return (
+                                            <Button
+                                                key={_key}
+                                                action="anchor"
+                                                href={`mailto:${email}`}
+                                            >
+                                                {label}
+                                            </Button>
+                                        );
+
+                                    case 'external':
+                                        return (
+                                            <Button
+                                                key={_key}
+                                                action="anchor"
+                                                href={externalLink.url}
+                                                target={externalLink.newWindow ? '_blank' : null}
+                                            >
+                                                {label}
+                                            </Button>
+                                        );
+
+                                    case 'internal':
+                                        return (
+                                            <Button key={_key} action="link" to={slug}>
+                                                {label}
+                                            </Button>
+                                        );
+
+                                    case 'copy to clipboard':
+                                        return (
+                                            <Button
+                                                key={_key}
+                                                action="copy"
+                                                textToCopy={textToCopy}
+                                            >
+                                                {label}
+                                            </Button>
+                                        );
+
+                                    default:
+                                        return <Button key={_key}>{label}</Button>;
+                                }
+                            })}
+                        </ButtonGroup>
+                    ) : null}
                 </div>
             </div>
         </article>
