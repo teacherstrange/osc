@@ -3,13 +3,13 @@ import type { JwtPayload } from 'jsonwebtoken';
 import type { refreshTokenUser, userJWT } from './general';
 
 export interface AuthContext extends BaseContext {
-    user?: userJWT;
+    readonly user?: userJWT;
 }
 
 export interface PermissionsProps {
-    [key: string]: string[];
+    readonly [key: string]: string[];
 }
 
 export interface RefreshToken extends JwtPayload {
-    user: refreshTokenUser;
+    readonly user: refreshTokenUser;
 }

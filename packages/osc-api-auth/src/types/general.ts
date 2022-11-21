@@ -1,11 +1,11 @@
 export type userJWT = {
-    id: number;
-    permissions: {
+    readonly id: number;
+    readonly permissions: {
         read: string[];
         write: string[];
     };
 };
 
 export type refreshTokenUser = {
-    id: number;
+    readonly id: number;
 };

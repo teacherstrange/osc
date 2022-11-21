@@ -1,36 +1,36 @@
 export type getUsersArgs = {
-    orderBy: 'id' | 'firstName' | 'lastName' | 'createdAt' | 'updatedAt' | 'lastLogin';
-    orderDir: 'asc' | 'desc';
-    start: number;
-    limit: number;
-    cursor: number;
-    pagination: 'offset' | 'cursor';
+    readonly orderBy: 'id' | 'firstName' | 'lastName' | 'createdAt' | 'updatedAt' | 'lastLogin';
+    readonly orderDir: 'asc' | 'desc';
+    readonly start: number;
+    readonly limit: number;
+    readonly cursor: number;
+    readonly pagination: 'offset' | 'cursor';
 };
 
 export type getUserArgs = {
-    id?: number;
+    readonly id?: number;
 };
 
 export type createUserInput = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
+    readonly firstName: string;
+    readonly lastName: string;
+    readonly email: string;
+    readonly password: string;
 };
 
 export type createUserArgs = {
-    input: createUserInput;
+    readonly input: createUserInput;
 };
 
 export type loginArgsInput = {
-    email: string;
-    password: string;
+    readonly email: string;
+    readonly password: string;
 };
 
 export type loginArgs = {
-    input: loginArgsInput;
+    readonly input: loginArgsInput;
 };
 
 export type refreshAccessArgs = {
-    refreshToken: string;
+    readonly refreshToken: string;
 };
