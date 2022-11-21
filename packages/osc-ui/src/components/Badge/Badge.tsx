@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import React from 'react';
 import { useFontSize } from '../../hooks/useFontSize';
+import { useModifier } from '../../hooks/useModifier';
 import { useTheme } from '../../hooks/useTheme';
-import { useVariant } from '../../hooks/useVariant';
 import type { Sizes, Themes, Variants } from '../../types';
 import { classNames } from '../../utils/classNames';
 
@@ -19,7 +19,7 @@ export interface Props {
 export const Badge: FC<Props> = (props: Props) => {
     const { badgeName, className, fontSize, theme = 'primary', variant } = props;
     const fontSizeClass = useFontSize(fontSize);
-    const variantClass = useVariant('c-badge', variant);
+    const variantClass = useModifier('c-badge', variant);
     const themeClass = useTheme(theme);
     const classes = classNames('c-badge', variantClass, fontSizeClass, themeClass, className);
 

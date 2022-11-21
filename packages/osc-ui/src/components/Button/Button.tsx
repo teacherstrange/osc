@@ -2,7 +2,7 @@ import type { LinkProps as RemixLinkProps } from '@remix-run/react';
 import { Link } from '@remix-run/react';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, FC, MouseEvent, ReactNode } from 'react';
 import React from 'react';
-import { useVariant } from '../../hooks/useVariant';
+import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 
 import './button.scss';
@@ -79,7 +79,7 @@ export const Button: FC<Props> = (props: Props) => {
         isDisabled,
         isLoading,
         loadingText,
-        size = 'md',
+        size,
         target,
         to,
         type,
@@ -87,9 +87,8 @@ export const Button: FC<Props> = (props: Props) => {
         ...attr
     } = props;
 
-    // TODO - sb - useVariant should probably be called useModifier - would match up with BEM better
-    const sizeModifier = useVariant('c-button', size);
-    const variantModifier = useVariant('c-button', variant);
+    const sizeModifier = useModifier('c-button', size);
+    const variantModifier = useModifier('c-button', variant);
     const classes = classNames('c-button', sizeModifier, variantModifier, className);
 
     const buttonInner = isLoading ? (
@@ -164,9 +163,8 @@ interface ButtonGroupProps {
 
 export const ButtonGroup: FC<ButtonGroupProps> = (props: ButtonGroupProps) => {
     const { children, direction } = props;
-
-    // TODO - sb - update this to use useVariant/modifier
-    const classes = classNames('c-button__group', direction ? `c-button__group--${direction}` : '');
+    const directionModifier = useModifier('c-button-group', direction);
+    const classes = classNames('c-button-group', directionModifier);
 
     return <div className={classes}>{children}</div>;
 };
