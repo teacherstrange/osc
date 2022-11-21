@@ -17,8 +17,8 @@ import productVariant from './documents/productVariant';
 import redirects from './documents/redirects';
 
 // Singleton document types
-import home from './singletons/home';
 import blog from './singletons/blog';
+import home from './singletons/home';
 import settings from './singletons/settings';
 
 // Block content
@@ -29,6 +29,15 @@ import collectionRule from './objects/collectionRule';
 import colorPicker from './objects/colorPicker';
 import linkExternal from './objects/linkExternal';
 import linkInternal from './objects/linkInternal';
+import moduleButton from './objects/module/button';
+import moduleButtons from './objects/module/buttons';
+import moduleCarousel from './objects/module/carousel';
+import moduleContent from './objects/module/content';
+import moduleImage from './objects/module/image';
+import moduleImageMobile from './objects/module/imageMobile';
+import moduleImages from './objects/module/images';
+import moduleImageTablet from './objects/module/imageTablet';
+import moduleTrustpilot from './objects/module/trustpilot';
 import placeholderString from './objects/placeholderString';
 import productOption from './objects/productOption';
 import productWithVariant from './objects/productWithVariant';
@@ -39,13 +48,6 @@ import seoShopify from './objects/seo/shopify';
 import shopifyCollection from './objects/shopifyCollection';
 import shopifyProduct from './objects/shopifyProduct';
 import shopifyProductVariant from './objects/shopifyProductVariant';
-import moduleImage from './objects/module/image';
-import moduleImageMobile from './objects/module/imageMobile';
-import moduleImageTablet from './objects/module/imageTablet';
-import moduleImages from './objects/module/images';
-import moduleContent from './objects/module/content';
-import moduleTrustpilot from './objects/module/trustpilot';
-import moduleCarousel from './objects/module/carousel';
 
 // Build the schemas and export to the Sanity Studio app
 export default createSchema({
@@ -86,6 +88,8 @@ export default createSchema({
         shopifyCollection,
         shopifyProduct,
         shopifyProductVariant,
+        moduleButton,
+        moduleButtons,
         moduleImages,
         moduleImage,
         moduleImageMobile,
