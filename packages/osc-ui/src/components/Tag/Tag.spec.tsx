@@ -54,7 +54,7 @@ describe('Tag component', () => {
 
         const result = getChildrenNodes(container);
         // Check whether first child is an SVG
-        expect(result[0].nodeName).toBe('SVG');
+        expect(result[0].nodeName).toBe('svg');
     });
     test('renders an svg to the right of the text when icon position is set to "right"', () => {
         const { container } = setup({
@@ -65,7 +65,7 @@ describe('Tag component', () => {
         });
         const result = getChildrenNodes(container);
         // Check whether second child is an SVG
-        expect(result[1].nodeName).toBe('SVG');
+        expect(result[1].nodeName).toBe('svg');
     });
     test('renders an svg to the left of the text as default when icon position is not set', () => {
         const { container } = setup({
@@ -74,7 +74,7 @@ describe('Tag component', () => {
             theme: 'primary'
         });
         const result = getChildrenNodes(container);
-        expect(result[0].nodeName).toBe('SVG');
+        expect(result[0].nodeName).toBe('svg');
     });
     test('renders an svg to left position as default if "icon" prop is passed in without an "iconPosition" prop', () => {
         const { container } = setup({
@@ -83,7 +83,7 @@ describe('Tag component', () => {
             theme: 'primary'
         });
         const result = getChildrenNodes(container);
-        expect(result[0].nodeName).toBe('SVG');
+        expect(result[0].nodeName).toBe('svg');
     });
     test('fails to render an svg if "icon" prop is not passed in', () => {
         const { container } = setup({

@@ -66,6 +66,6 @@ describe('Breadcrumb component', () => {
             separator: <ChevronRightIcon />
         });
 
-        expect(screen.getAllByRole('listitem')[0].childNodes[1].childNodes[0].nodeName).toBe('SVG');
+        expect(screen.getAllByRole('listitem')[0].childNodes[1].childNodes[0].nodeName).toBe('svg');
     });
 });
