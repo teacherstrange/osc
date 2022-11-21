@@ -1,7 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
-
 import React from 'react';
 
 // eslint-disable-next-line jest/no-mocks-import -- This is how the jest docs suggest to do this https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom

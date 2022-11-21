@@ -1,7 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
-
 import React from 'react';
 import { Image } from './Image';
 import { imageData, largeImageData, noImageWidthData, imageDataNoTransforms } from './imageData';
