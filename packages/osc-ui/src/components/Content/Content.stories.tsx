@@ -17,21 +17,33 @@ export default {
     },
     argTypes: {
         value: {
-            table: {
-                disable: true
-            }
+            description:
+                'The content to display, this is a portable text object that is exported from Sanity.',
+            control: false
         },
         buttons: {
-            table: {
-                disable: true
-            }
+            description:
+                'The buttons to display, this is an array of button objects that is exported from Sanity.',
+            control: false
         },
         align: {
             description: 'Sets the alignment of the content',
-            control: 'select'
+            control: 'select',
+            defaultValue: 'left',
+            table: {
+                defaultValue: {
+                    summary: 'left'
+                }
+            }
         },
         backgroundColor: {
-            description: 'Sets the background colour of the content'
+            description: 'Sets the background colour of the content',
+            defaultValue: 'primary',
+            table: {
+                defaultValue: {
+                    summary: 'primary'
+                }
+            }
         },
         className: {
             description: 'Custom class'
@@ -49,7 +61,13 @@ export default {
             control: 'select'
         },
         textColor: {
-            description: 'Sets the text colour of the content'
+            description: 'Sets the text colour of the content',
+            defaultValue: 'secondary',
+            table: {
+                defaultValue: {
+                    summary: 'secondary'
+                }
+            }
         }
     }
 } as Meta;

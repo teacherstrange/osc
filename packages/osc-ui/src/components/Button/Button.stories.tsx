@@ -25,7 +25,13 @@ export default {
         action: {
             description:
                 'Sets the button action, if its set to `link` then it will change the button to an `a` tag',
-            control: 'select'
+            control: 'select',
+            defaultValue: 'default',
+            table: {
+                defaultValue: {
+                    summary: 'default'
+                }
+            }
         },
         className: {
             description: 'Custom class'
@@ -60,7 +66,13 @@ export default {
         },
         variant: {
             description: 'Sets the style of the button, solid, outline etc.',
-            control: 'select'
+            control: 'select',
+            defaultValue: 'solid',
+            table: {
+                defaultValue: {
+                    summary: 'solid'
+                }
+            }
         }
     }
 } as Meta;
@@ -111,7 +123,7 @@ Anchor.args = {
 Anchor.parameters = {
     docs: {
         description: {
-            story: 'Using `action="anchor"` transforms our button into an `a` tag, which means it can take any anchor element attributes such as `target="_blank"`.'
+            story: 'Using `action="anchor"` transforms our button into an `a` tag, which means it can take any anchor element attributes such as `target="_blank"`.<br>Note: when using `target="_blank"` `rel="noopener noreferrer"` is automatically added.'
         }
     }
 };
