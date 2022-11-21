@@ -53,7 +53,11 @@ export const Alert: FC<Props> = (props: Props) => {
     const setRoleToAlert = Boolean(status === 'error' || status === 'warning');
 
     return (
-        <div role={setRoleToAlert ? 'alert' : null} className={alertClasses}>
+        <div
+            role={setRoleToAlert ? 'alert' : null}
+            aria-live={!setRoleToAlert ? 'polite' : null}
+            className={alertClasses}
+        >
             {alertIcon}
             {children}
         </div>
