@@ -5,6 +5,9 @@
     --button-foreground-color: var(--colour-white);
 
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
     padding: 0;
     background-color: var(--button-background-color);
@@ -23,10 +26,10 @@
         position: relative;
         display: inline-flex;
         align-items: center;
-        gap: 0.25em; // good enough support to use now?
-        justify-content: flex-start;
-        pointer-events: none;
+        justify-content: center;
         font-size: inherit;
+        gap: 0.25em; // good enough support to use now?
+        pointer-events: none;
     }
 
     svg {
