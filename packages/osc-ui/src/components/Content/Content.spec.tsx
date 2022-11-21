@@ -1,13 +1,13 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Content } from './Content';
 import { textContent } from './textContent';
-import { screen, render } from '@testing-library/react';
 // TODO: sb - test background color -- think we need theme setup in storybook?
 test('renders the correct elements', () => {
     render(
         <MemoryRouter>
-            <Content value={textContent} />
+            <Content value={textContent.body} />
         </MemoryRouter>
     );
 
@@ -48,7 +48,7 @@ test('renders the correct elements', () => {
 test('renders the correct alignment class', () => {
     const { rerender } = render(
         <MemoryRouter>
-            <Content value={textContent} align="left" />
+            <Content value={textContent.body} align="left" />
         </MemoryRouter>
     );
     const contentInner = document.querySelector('.c-content__inner');
@@ -56,14 +56,14 @@ test('renders the correct alignment class', () => {
 
     rerender(
         <MemoryRouter>
-            <Content value={textContent} align="centre" />
+            <Content value={textContent.body} align="centre" />
         </MemoryRouter>
     );
     expect(contentInner).toHaveClass('c-content__inner--centre');
 
     rerender(
         <MemoryRouter>
-            <Content value={textContent} align="right" />
+            <Content value={textContent.body} align="right" />
         </MemoryRouter>
     );
     expect(contentInner).toHaveClass('c-content__inner--right');
@@ -72,7 +72,7 @@ test('renders the correct alignment class', () => {
 test('renders a custom classname', () => {
     render(
         <MemoryRouter>
-            <Content value={textContent} className="test-class" />
+            <Content value={textContent.body} className="test-class" />
         </MemoryRouter>
     );
     const article = screen.getByRole('article');
@@ -82,7 +82,7 @@ test('renders a custom classname', () => {
 test('renders the correct padding class', () => {
     const { rerender } = render(
         <MemoryRouter>
-            <Content value={textContent} paddingTop={10} paddingBottom={10} />
+            <Content value={textContent.body} paddingTop={10} paddingBottom={10} />
         </MemoryRouter>
     );
     const article = screen.getByRole('article');
@@ -90,7 +90,7 @@ test('renders the correct padding class', () => {
 
     rerender(
         <MemoryRouter>
-            <Content value={textContent} paddingTop={50} paddingBottom={110} />
+            <Content value={textContent.body} paddingTop={50} paddingBottom={110} />
         </MemoryRouter>
     );
 
@@ -100,7 +100,7 @@ test('renders the correct padding class', () => {
 test('renders the correct margin class', () => {
     render(
         <MemoryRouter>
-            <Content value={textContent} marginBottom={10} />
+            <Content value={textContent.body} marginBottom={10} />
         </MemoryRouter>
     );
     const article = screen.getByRole('article');
