@@ -16,18 +16,42 @@ export default {
     argTypes: {
         height: {
             description:
-                'Sets the height of the iframe container. This prevents the content being hidden by an overflow'
+                'Sets the height of the iframe container. This prevents the content being hidden by an overflow',
+            defaultValue: '240px',
+            table: {
+                defaultValue: {
+                    summary: '240px'
+                }
+            }
         },
         stars: {
-            description: 'Sets the review star levels shown'
+            description: 'Sets the review star levels shown',
+            defaultValue: '4,5',
+            table: {
+                defaultValue: {
+                    summary: '4,5'
+                }
+            }
         },
         theme: {
             description: 'Sets the light or dark theme',
-            control: 'select'
+            control: 'select',
+            defaultValue: 'light',
+            table: {
+                defaultValue: {
+                    summary: 'light'
+                }
+            }
         },
         template: {
             description: 'Sets the style of the reviews widget',
-            control: 'select'
+            control: 'select',
+            defaultValue: 'slider',
+            table: {
+                defaultValue: {
+                    summary: 'slider'
+                }
+            }
         }
     }
 } as Meta;

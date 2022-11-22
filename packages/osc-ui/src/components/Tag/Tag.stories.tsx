@@ -30,7 +30,13 @@ export default {
         },
         iconPosition: {
             description: 'Position of the icon in relation to the `tagName`',
-            control: 'select'
+            control: 'select',
+            defaultValue: 'left',
+            table: {
+                defaultValue: {
+                    summary: 'left'
+                }
+            }
         },
         items: {
             table: {
@@ -41,7 +47,13 @@ export default {
             description: 'Content of the badge'
         },
         theme: {
-            description: 'Sets theme colour class'
+            description: 'Sets theme colour class',
+            defaultValue: 'primary',
+            table: {
+                defaultValue: {
+                    summary: 'primary'
+                }
+            }
         }
     }
 } as Meta;

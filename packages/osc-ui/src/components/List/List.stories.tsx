@@ -25,7 +25,13 @@ export default {
         },
         variant: {
             description: 'Sets the list as either a `ul` or an `ol`',
-            control: 'select'
+            control: 'select',
+            defaultValue: 'ul',
+            table: {
+                defaultValue: {
+                    summary: 'ul'
+                }
+            }
         }
     }
 } as Meta;

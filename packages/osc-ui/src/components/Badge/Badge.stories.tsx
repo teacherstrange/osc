@@ -29,10 +29,19 @@ export default {
             }
         },
         theme: {
-            description: 'Sets theme colour class'
+            description: 'Sets theme colour class',
+            defaultValue: 'primary',
+            table: {
+                defaultValue: {
+                    summary: 'primary'
+                }
+            }
         },
         variant: {
-            description: 'Sets variant modifier class'
+            description: 'Sets variant modifier class',
+            control: {
+                type: 'select'
+            }
         }
     }
 } as Meta;
