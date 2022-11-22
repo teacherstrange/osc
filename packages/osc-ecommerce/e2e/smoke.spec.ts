@@ -79,3 +79,18 @@ test.describe('Navigates to a sample of pages without them hanging', () => {
         await checkHeading(page);
     });
 });
+
+test('skips focus into the main content', async ({ page }) => {
+    await page.goto('/');
+
+    const skipLink = page.getByRole('link', { name: 'Skip to main content' });
+    const main = page.getByRole('main');
+
+    await skipLink.focus();
+
+    await page.keyboard.press('Tab');
+    await expect(skipLink).toBeFocused();
+
+    await page.keyboard.press('Enter');
+    await expect(main).toBeFocused();
+});
