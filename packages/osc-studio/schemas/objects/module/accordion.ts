@@ -40,15 +40,23 @@ export default {
             },
             validation: (Rule) =>
                 Rule.required().custom((value, { parent }) => {
-                    if (typeof value === 'undefined') {
+                    if (typeof value === 'undefined' || !parent.content) {
                         return true;
                     }
 
                     const contentBody = parent?.content?.body;
 
-                    const lastHeading = contentBody.findLast((item) =>
+                    const findLastHeading = contentBody.findLast((item) =>
                         HEADING_LEVELS.includes(item.style)
-                    ).style;
+                    );
+
+                    // If there are no headings in the content body, pass the validation early
+                    // so we're not restricting users to having to include a heading in the content block
+                    if (!findLastHeading) {
+                        return true;
+                    }
+
+                    const lastHeading = findLastHeading.style;
 
                     const getDigit = (string: string) => Number(string.match(/\d+/)[0]);
 
