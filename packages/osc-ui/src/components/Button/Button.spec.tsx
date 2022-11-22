@@ -105,8 +105,10 @@ describe('anchor button', () => {
                 Test Button
             </Button>
         );
+        const link = screen.getByRole('link');
 
-        expect(screen.getByRole('link')).toHaveAttribute('rel', 'noopener noreferrer');
+        expect(link).toHaveAttribute('target', '_blank');
+        expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
 });
 
