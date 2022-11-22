@@ -32,15 +32,15 @@ const config: PlaywrightTestConfig = {
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
     reporter: 'html',
     /* Handle functions to run before and after all tests, e.g. seeding the db with a user. See https://playwright.dev/docs/test-advanced#global-setup-and-teardown */
-    globalSetup: require.resolve('./e2e/globalSetup'),
-    globalTeardown: require.resolve('./e2e/globalTeardown'),
+    //! globalSetup: require.resolve('./e2e/globalSetup'), Skip for now until auth is merged into main
+    //! globalTeardown: require.resolve('./e2e/globalTeardown'), Skip for now until auth is merged into main
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
         actionTimeout: 0,
         /* Base URL to use in actions like `await page.goto('/')`. */
         baseURL: `http://localhost:${process.env.PORT}`,
-        storageState: './e2e/storageState.json',
+        //! storageState: './e2e/storageState.json', Skip for now until auth is merged into main
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry'
     },
