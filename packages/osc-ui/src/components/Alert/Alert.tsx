@@ -1,7 +1,8 @@
 import {
     CheckCircledIcon as SuccessIcon,
     ExclamationTriangleIcon as WarningIcon,
-    InfoCircledIcon as InfoIcon
+    InfoCircledIcon as InfoIcon,
+    CrossCircledIcon as ErrorIcon
 } from '@radix-ui/react-icons';
 import type { FC, ReactNode } from 'react';
 import React from 'react';
@@ -24,7 +25,7 @@ export const Alert: FC<Props> = (props: Props) => {
 
     switch (status) {
         case 'error':
-            Icon = WarningIcon;
+            Icon = ErrorIcon;
             break;
         case 'success':
             Icon = SuccessIcon;
