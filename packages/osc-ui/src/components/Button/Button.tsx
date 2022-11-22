@@ -141,6 +141,7 @@ export const Button: FC<Props> = (props: Props) => {
                     href={href}
                     rel={isBlank ? 'noopener noreferrer' : null}
                     className={classes}
+                    target={target ? target : null}
                     {...attr}
                 >
                     <span>{children}</span>
