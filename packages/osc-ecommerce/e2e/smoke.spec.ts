@@ -14,7 +14,7 @@ test.describe('User login', () => {
     });
 });
 
-// We had an isse where certain pages were hanging when querying the SanityClient
+// We had an issue where certain pages were hanging when querying the SanityClient
 // Since changing out the SanityClient package with PicoSanity We want to check that this is or isn't happening.
 // As we're testing that the query in the backend isn't hanging we only need to assert that the page loads
 // so we'll check that there's a h1 element.
