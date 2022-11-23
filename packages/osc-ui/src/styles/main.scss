@@ -15,8 +15,6 @@
 	6 	$STYLEGUIDE
 */
 
-@use "theme";
-
 /* ============================
 // $ELEMENTS
 // Single HTML element selectors without classes
@@ -44,7 +42,7 @@
 @use "objects/row";
 @use "objects/grid";
 @use "objects/bg";
-@use "objects/list" as list2;
+@use "objects/list" as objects-list;
 @use "objects/main";
 
 /* ============================

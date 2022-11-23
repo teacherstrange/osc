@@ -6,7 +6,7 @@
 */
 @mixin object-fit($fit: fill, $position: null) {
     object-fit: $fit;
-
+    // todo: reivew this
     @if $position {
         object-position: $position;
         font-family: "object-fit: #{$fit}; object-position: #{$position}";

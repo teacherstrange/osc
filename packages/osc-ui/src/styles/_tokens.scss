@@ -1,0 +1,33 @@
+$colors: (
+    default: (
+        primary: hsl(335deg 85% 49%),
+        secondary: hsl(250deg 35% 20%),
+        tertiary: hsl(0deg 0% 100%),
+        quaternary: hsl(171deg 50% 50%),
+        quinary: hsl(0deg 0% 95%),
+        senary: hsl(0deg 0% 7%),
+        septenary: hsl(331deg 73% 83%),
+        octonary: hsl(183deg 47% 70%),
+        nonary: hsl(236deg 38% 43%),
+        denary: hsl(9deg 81% 57%),
+        duodenary: hsl(55deg 72% 69%),
+        error: hsl(0deg 61% 44%),
+        success: hsl(107deg 49% 38%),
+        notice: hsl(34deg 100% 42%),
+        disabled: hsl(220deg 4% 87%),
+        shadow: hsla(0deg 0% 7% / 50%),
+        shadow-l: hsla(204deg 204% 204% / 100%)
+    ),
+    dark: (
+        primary: hsl(335deg 85% 49%)
+    )
+);
+$typography: (
+    weight-reg: 400,
+    weight-bold: 700,
+    fontsize: (
+        small: 0.875rem,
+        medium: 1rem,
+        large: 2rem
+    )
+);

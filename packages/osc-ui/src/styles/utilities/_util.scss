@@ -1,6 +1,8 @@
 @use "sass:map";
+@use "../tokens" as *;
 @use "../settings" as s;
 @use "../tools" as t;
+@use "../tools/functions" as *;
 
 ///*----------------------------------*\
 //  #UTILITIES
@@ -157,18 +159,19 @@ s.$prop-config: t.deep-map-merge(
     }
 }
 
-// see: settings/colours
-@each $class, $text-colour in s.$colours {
-    [data-t-colour="#{$class}"],
-    .u-colour-#{$class} {
-        color: #{$text-colour};
+// generate classes for each custom property in settings/_colors.scss
+// we're assuming the default map will include the same keys as the other themes
+@each $name, $value in get(default, $colors) {
+    [data-t-colour="#{$name}"],
+    .u-colour-#{$name} {
+        color: var(--color-#{$name});
     }
 }
 
 // Backgrounds
-@each $class, $bg-color in s.$colours {
-    [data-bg-colour="#{$class}"] {
-        background-color: #{$bg-color};
+@each $name, $value in get(default, $colors) {
+    [data-bg-colour="#{$name}"] {
+        background-color: var(--color-#{$name});
     }
 }
 
@@ -271,7 +274,7 @@ $line-height-map: (
     display: block;
     width: 100px;
     height: 2px;
-    background-color: s.$colour-secondary;
+    background-color: var(--color-secondary);
     transform: scaleY(0.5);
 }
 

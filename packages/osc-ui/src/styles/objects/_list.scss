@@ -59,7 +59,7 @@
                         width: $bullet;
                         height: $bullet;
                         margin: auto 0;
-                        background-color: s.$colour-quaternary;
+                        background-color: var(--color-quaternary);
                         border-radius: 50%;
                     }
                 }
