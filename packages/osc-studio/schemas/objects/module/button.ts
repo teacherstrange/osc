@@ -29,7 +29,7 @@ export default {
             title: 'Type',
             type: 'string',
             options: {
-                list: ['file', 'email', 'external', 'internal', 'no link', 'copy to clipboard'],
+                list: ['file', 'email', 'external', 'internal', 'telephone', 'copy to clipboard'],
                 layout: 'radio',
                 direction: 'horizontal'
             }
@@ -65,6 +65,12 @@ export default {
                 }
             ],
             hidden: ({ parent }) => parent?.type !== 'external'
+        },
+        {
+            name: 'telephone',
+            title: 'Telephone number',
+            type: 'string',
+            hidden: ({ parent }) => parent?.type !== 'telephone'
         },
         {
             name: 'reference',

@@ -7,24 +7,26 @@ import React from 'react';
 import { useSpacing } from '../../hooks/useSpacing';
 import type { Spacing, Themes } from '../../types';
 import { classNames } from '../../utils/classNames';
-import { Button, ButtonGroup } from '../Button/Button';
+import { Button, ButtonGroup, CopyButton } from '../Button/Button';
 import { List, ListItem } from '../List/List';
 
 import './content.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
     _key: string;
-    _type: 'button';
+    _type: string;
     colour: Themes;
     externalLink?: {
         newWindow?: boolean;
-        url: string;
+        url?: string;
     };
     file?: string;
     label: string;
+    reference?: object;
     type: string;
     email?: string;
     slug?: string;
+    telephone?: string;
     textToCopy?: string;
 }
 
@@ -41,7 +43,7 @@ export interface Props {
 }
 
 // This content component is built around the content that is exported from our Sanity studio.
-// The portabletext component allows us to take the array generated and move through it, assiging the correct components to each child.
+// The portabletext component allows us to take the array generated and move through it, assigning the correct components to each child.
 // https://github.com/portabletext/react-portabletext
 const portableTextComponents: PortableTextComponents = {
     block: {
@@ -139,6 +141,7 @@ export const Content: FC<Props> = (props: Props) => {
                                     file,
                                     label,
                                     slug,
+                                    telephone,
                                     type,
                                     textToCopy
                                 } = button;
@@ -146,18 +149,21 @@ export const Content: FC<Props> = (props: Props) => {
                                 switch (type) {
                                     case 'file':
                                         return (
-                                            <Button key={_key} action="anchor" href={file}>
+                                            <Button key={_key} as="a" href={file} download>
                                                 {label}
                                             </Button>
                                         );
 
                                     case 'email':
                                         return (
-                                            <Button
-                                                key={_key}
-                                                action="anchor"
-                                                href={`mailto:${email}`}
-                                            >
+                                            <Button key={_key} as="a" href={`mailto:${email}`}>
+                                                {label}
+                                            </Button>
+                                        );
+
+                                    case 'telephone':
+                                        return (
+                                            <Button key={_key} as="a" href={`tel:${telephone}`}>
                                                 {label}
                                             </Button>
                                         );
@@ -166,7 +172,7 @@ export const Content: FC<Props> = (props: Props) => {
                                         return (
                                             <Button
                                                 key={_key}
-                                                action="anchor"
+                                                as="a"
                                                 href={externalLink.url}
                                                 target={externalLink.newWindow ? '_blank' : null}
                                             >
@@ -176,20 +182,16 @@ export const Content: FC<Props> = (props: Props) => {
 
                                     case 'internal':
                                         return (
-                                            <Button key={_key} action="link" to={slug}>
+                                            <Button key={_key} as="link" to={slug}>
                                                 {label}
                                             </Button>
                                         );
 
                                     case 'copy to clipboard':
                                         return (
-                                            <Button
-                                                key={_key}
-                                                action="copy"
-                                                textToCopy={textToCopy}
-                                            >
+                                            <CopyButton key={_key} textToCopy={textToCopy}>
                                                 {label}
-                                            </Button>
+                                            </CopyButton>
                                         );
 
                                     default:
