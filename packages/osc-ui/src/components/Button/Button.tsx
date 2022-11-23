@@ -1,5 +1,5 @@
 import type { LinkProps as RemixLinkProps } from '@remix-run/react';
-import { Link } from '@remix-run/react';
+import { Link as RemixLink } from '@remix-run/react';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, FC, MouseEvent, ReactNode } from 'react';
 import React from 'react';
 import { useModifier } from '../../hooks/useModifier';
@@ -7,32 +7,11 @@ import { classNames } from '../../utils/classNames';
 
 import './button.scss';
 
-type ButtonOptions = HTMLAnchorElement | HTMLButtonElement | RemixLinkProps;
+type buttonTypes = HTMLAnchorElement | HTMLButtonElement;
 
-interface SharedProps {
-    children: ReactNode;
-    className?: string;
-    size?: 'sm' | 'md' | 'lg' | 'full';
-    variant?: 'solid' | 'outline';
-    isDisabled?: boolean;
-    isLoading?: boolean;
-    loadingText?: string;
-}
-
-interface DefaultProps extends ButtonHTMLAttributes<ButtonOptions> {
-    action?: 'default';
-    type?: 'submit' | 'reset' | 'button';
-
-    // Error on these types
-    textToCopy?: never;
-    href?: never;
-    target?: never;
-    to?: never;
-}
-
-interface CopyButtonProps extends ButtonHTMLAttributes<ButtonOptions> {
-    action: 'copy';
-    textToCopy: string;
+interface DefaultButtonProps extends ButtonHTMLAttributes<buttonTypes> {
+    /** Will be a button by default */
+    as?: 'button';
     type?: 'submit' | 'reset' | 'button';
 
     // Error on these types
@@ -41,49 +20,57 @@ interface CopyButtonProps extends ButtonHTMLAttributes<ButtonOptions> {
     to?: never;
 }
 
-interface LinkProps extends AnchorHTMLAttributes<ButtonOptions> {
-    action: 'link';
-    to: string;
-
-    // Error on these types
-    textToCopy?: never;
-    isDisabled?: never;
-    isLoading?: never;
-    loadingText?: never;
-    target?: never;
-    href?: never;
-}
-
-interface AnchorProps extends AnchorHTMLAttributes<ButtonOptions> {
-    action: 'anchor';
+interface AnchorProps extends AnchorHTMLAttributes<buttonTypes> {
+    /** Set the button as an anchor element */
+    as: 'a';
     href: string;
     target?: string;
 
     // Error on these types
-    textToCopy?: never;
     isDisabled?: never;
     isLoading?: never;
     loadingText?: never;
     to?: never;
+    type?: never;
 }
 
-export type Props = SharedProps & (DefaultProps | CopyButtonProps | AnchorProps | LinkProps);
+interface LinkProps extends RemixLinkProps {
+    /** Set the button as a RemixLink component */
+    as: 'link';
+    to: RemixLinkProps['to'];
 
-export const Button: FC<Props> = (props: Props) => {
+    // Error on these types
+    isDisabled?: never;
+    isLoading?: never;
+    loadingText?: never;
+    target?: never;
+    type?: never;
+    href?: never;
+}
+
+export interface SharedProps {
+    children: ReactNode;
+    className?: string;
+    isDisabled?: boolean;
+    isLoading?: boolean;
+    loadingText?: string;
+    size?: 'sm' | 'md' | 'lg' | 'full';
+    variant?: 'solid' | 'outline' | 'ghost';
+}
+
+export type ButtonProps = SharedProps & (DefaultButtonProps | AnchorProps | LinkProps);
+
+export const Button: FC<ButtonProps> = (props: ButtonProps) => {
     const {
-        action = 'default',
+        as,
         className,
-        textToCopy,
         children,
-        href,
         isDisabled,
         isLoading,
         loadingText,
-        size,
-        target,
-        to,
-        type,
+        size = 'md',
         variant = 'solid',
+        target,
         ...attr
     } = props;
 
@@ -91,71 +78,80 @@ export const Button: FC<Props> = (props: Props) => {
     const variantModifier = useModifier('c-button', variant);
     const classes = classNames('c-button', sizeModifier, variantModifier, className);
 
+    // Set our component as either the passed element or a button
+    let Component;
+
+    if (as === 'link') {
+        Component = RemixLink;
+    } else if (as === 'a') {
+        Component = 'a';
+    } else {
+        Component = 'button';
+    }
+
+    const isBlank = target === '_blank' ? true : false;
+
     const buttonInner = isLoading ? (
         <span>{loadingText ? loadingText : 'loading...'}</span>
     ) : (
         <span>{children}</span>
     );
 
-    switch (action) {
-        case 'copy':
-            const handleCopyClick = (e: MouseEvent<HTMLButtonElement>) => {
-                const target = e.target as HTMLButtonElement;
-
-                let originalButtonText = target.innerHTML;
-
-                navigator.clipboard.writeText(textToCopy);
-
-                target.innerHTML = '<span>Copied!</span>';
-
-                setTimeout(() => {
-                    return (target.innerHTML = originalButtonText);
-                }, 300);
-            };
-
-            return (
-                <button
-                    className={classes}
-                    onClick={handleCopyClick}
-                    disabled={isDisabled ? isDisabled : null}
-                    {...attr}
-                >
-                    {buttonInner}
-                </button>
-            );
-
-        case 'link':
-            return (
-                <Link to={to} className={classes} {...attr}>
-                    <span>{children}</span>
-                </Link>
-            );
-
-        case 'anchor':
-            const isBlank = target === '_blank' ? true : false;
-
-            return (
-                // If we're opening in a new window set the noopener and noreferrer tags
-                // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#security_and_privacy
-                <a
-                    href={href}
-                    rel={isBlank ? 'noopener noreferrer' : null}
-                    className={classes}
-                    target={target ? target : null}
-                    {...attr}
-                >
-                    <span>{children}</span>
-                </a>
-            );
-
-        default:
-            return (
-                <button className={classes} disabled={isDisabled ? isDisabled : null} {...attr}>
-                    {buttonInner}
-                </button>
-            );
-    }
+    // If we're opening in a new window set the noopener and noreferrer tags
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#security_and_privacy
+    return (
+        <Component
+            className={classes}
+            disabled={isDisabled ? isDisabled : null}
+            rel={isBlank ? 'noopener noreferrer' : null}
+            target={target ? target : null}
+            {...attr}
+        >
+            {buttonInner}
+        </Component>
+    );
 };
+
+/**
+ * CopyButton
+ *
+ * Component for copying text to the clipboard, is an extension of the Button component
+ */
+
+export interface CopyButtonProps extends SharedProps, ButtonHTMLAttributes<HTMLButtonElement> {
+    textToCopy: string;
+    children: ReactNode;
+}
+
+export const CopyButton: FC<CopyButtonProps> = (props: CopyButtonProps) => {
+    const { textToCopy, children, isDisabled, ...attr } = props;
+
+    const handleCopyClick = (e: MouseEvent<HTMLButtonElement>) => {
+        const target = e.target as HTMLButtonElement;
+
+        let originalButtonText = target.innerHTML;
+
+        navigator.clipboard.writeText(textToCopy);
+
+        target.innerHTML = '<span>Copied!</span>';
+
+        setTimeout(() => {
+            return (target.innerHTML = originalButtonText);
+        }, 300);
+    };
+
+    return (
+        <Button onClick={handleCopyClick} disabled={isDisabled ? isDisabled : null} {...attr}>
+            {children}
+        </Button>
+    );
+};
+
+/**
+ * ButtonGroup
+ *
+ * Component for grouping buttons together
+ */
 
 interface ButtonGroupProps {
     children: ReactNode;
