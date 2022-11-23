@@ -3,6 +3,7 @@ import { Link as RemixLink } from '@remix-run/react';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, FC, MouseEvent, ReactNode } from 'react';
 import React from 'react';
 import { useModifier } from '../../hooks/useModifier';
+import type { StrictUnion } from '../../types';
 import { classNames } from '../../utils/classNames';
 
 import './button.scss';
@@ -13,11 +14,6 @@ interface DefaultButtonProps extends ButtonHTMLAttributes<buttonTypes> {
     /** Will be a button by default */
     as?: 'button';
     type?: 'submit' | 'reset' | 'button';
-
-    // Error on these types
-    href?: never;
-    target?: never;
-    to?: never;
 }
 
 interface AnchorProps extends AnchorHTMLAttributes<buttonTypes> {
@@ -25,27 +21,12 @@ interface AnchorProps extends AnchorHTMLAttributes<buttonTypes> {
     as: 'a';
     href: string;
     target?: string;
-
-    // Error on these types
-    isDisabled?: never;
-    isLoading?: never;
-    loadingText?: never;
-    to?: never;
-    type?: never;
 }
 
 interface LinkProps extends RemixLinkProps {
     /** Set the button as a RemixLink component */
     as: 'link';
     to: RemixLinkProps['to'];
-
-    // Error on these types
-    isDisabled?: never;
-    isLoading?: never;
-    loadingText?: never;
-    target?: never;
-    type?: never;
-    href?: never;
 }
 
 export interface SharedProps {
@@ -58,7 +39,7 @@ export interface SharedProps {
     variant?: 'solid' | 'outline' | 'ghost';
 }
 
-export type ButtonProps = SharedProps & (DefaultButtonProps | AnchorProps | LinkProps);
+export type ButtonProps = SharedProps & StrictUnion<DefaultButtonProps | AnchorProps | LinkProps>;
 
 export const Button: FC<ButtonProps> = (props: ButtonProps) => {
     const {
