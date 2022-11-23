@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Content } from './Content';
-import { textContent } from './textContent';
+import { textContent, textContentHasButtons } from './textContent';
 // TODO: sb - test background color -- think we need theme setup in storybook?
 test('renders the correct elements', () => {
     render(
@@ -105,4 +105,32 @@ test('renders the correct margin class', () => {
     );
     const article = screen.getByRole('article');
     expect(article).toHaveClass('u-mb-10');
+});
+
+test('renders the correct buttons', () => {
+    render(
+        <MemoryRouter>
+            <Content value={textContentHasButtons.body} buttons={textContentHasButtons.buttons} />
+        </MemoryRouter>
+    );
+
+    const buttons = document.querySelectorAll('.c-button');
+    expect(buttons).toHaveLength(6);
+
+    const fileDownloadButton = screen.getByRole('link', { name: /file download/i });
+    const emailButton = screen.getByRole('link', { name: /email/i });
+    const externalButton = screen.getByRole('link', { name: /external link/i });
+    const internalLinkButton = screen.getByRole('link', { name: /internal link/i });
+    const telephoneButton = screen.getByRole('link', { name: /telephone/i });
+    const copyToClipboardButton = screen.getByRole('button', { name: /copy to clipboard/i });
+
+    expect(fileDownloadButton).toHaveAttribute(
+        'href',
+        'https://cdn.sanity.io/files/v6lebos6/staging/bfd009f500c057195ffde66fae64f92fa5f59b72.pdf'
+    );
+    expect(emailButton).toHaveAttribute('href', 'mailto:test@example.com');
+    expect(externalButton).toHaveAttribute('href', 'https://example.com');
+    expect(internalLinkButton).toHaveAttribute('href', '/');
+    expect(telephoneButton).toHaveAttribute('href', 'tel:01234567890');
+    expect(copyToClipboardButton).toBeInTheDocument();
 });
