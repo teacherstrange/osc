@@ -5,7 +5,3 @@ export type userJWT = {
         write: string[];
     };
 };
-
-export type refreshTokenUser = {
-    readonly id: number;
-};

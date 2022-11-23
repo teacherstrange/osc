@@ -8,7 +8,7 @@ import { permissions } from './account';
 
 const prisma = new PrismaClient();
 
-export const access: AccessTokenFn = async (userId: number) => {
+export const access: AccessTokenFn = async (userId) => {
     const payload = {
         user: { id: userId, permissions: await permissions(userId) }
     };
@@ -20,7 +20,7 @@ export const access: AccessTokenFn = async (userId: number) => {
     });
 };
 
-export const refresh: RefreshTokenFn = async (userId: number) => {
+export const refresh: RefreshTokenFn = async (userId) => {
     const payload = { user: { id: userId } };
     const expires = Date.now() + Number(env.JWT_REFRESH_DURATION!) * 1000;
 

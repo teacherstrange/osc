@@ -25,6 +25,7 @@
     "graphql-shield": "^7.6.4",
     "graphql-tools": "^8.3.10",
     "jsonwebtoken": "^8.5.1",
+    "osc-api": "^0.1.0",
     "zod": "^3.19.1"
   },
   "devDependencies": {

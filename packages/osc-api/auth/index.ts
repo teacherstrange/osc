@@ -1,4 +1,4 @@
-import type { UserCanFn } from '~/types/functions';
+import type { UserCanFn } from './types';
 
 export const userCan: UserCanFn = (user, desiredPermission) => {
     // Currently we're taking a single perm to check, or an array of perms that must ALL match

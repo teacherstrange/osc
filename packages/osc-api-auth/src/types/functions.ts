@@ -9,7 +9,6 @@ import type {
     UserRole
 } from '@prisma/client';
 import type { createUserInput, getUsersArgs, loginArgsInput } from './arguments';
-import type { userJWT } from './general';
 import type { PermissionsProps } from './interfaces';
 
 export type CreateUserFn = (input: createUserInput) => Promise<User | Error>;
@@ -56,5 +55,3 @@ export type LmsTokensFn = (userId: number) => Promise<
         lms: Lms;
     })[]
 >;
-
-export type UserCanFn = (user: userJWT, desiredPermission: string | string[]) => boolean;

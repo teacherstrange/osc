@@ -1,6 +1,6 @@
 import { rule } from 'graphql-shield';
+import { userCan } from 'osc-api';
 import type { AuthContext } from '~/types/interfaces';
-import { userCan } from '~/utils/auth';
 
 export const isAuthenticated = rule()((_: undefined, __: undefined, { user }: AuthContext) => {
     return user !== null;

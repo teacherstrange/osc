@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { wait } from 'osc-api';
 import type {
     CreateUserFn,
     CrmTokensFn,
@@ -13,7 +14,6 @@ import type {
     UserRolesFn
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
-import { wait } from '~/utils';
 import * as password from '~/utils/password';
 import * as token from '~/utils/token';
 

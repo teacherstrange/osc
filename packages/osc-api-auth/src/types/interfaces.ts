@@ -1,6 +1,6 @@
 import type { BaseContext } from '@apollo/server';
 import type { JwtPayload } from 'jsonwebtoken';
-import type { refreshTokenUser, userJWT } from './general';
+import type { userJWT } from 'osc-api';
 
 export interface AuthContext extends BaseContext {
     readonly user?: userJWT;
@@ -11,5 +11,7 @@ export interface PermissionsProps {
 }
 
 export interface RefreshToken extends JwtPayload {
-    readonly user: refreshTokenUser;
+    readonly user: {
+        readonly id: number;
+    };
 }

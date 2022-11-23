@@ -3,10 +3,11 @@
   "dependencies": {
     "conventional-changelog-conventionalcommits": "^5.0.0",
     "osc-academic-hub": "file:packages/osc-academic-hub",
-    "osc-api-auth": "file:packages/osc-api-auth",
-    "osc-api-gateway": "file:packages/osc-api-gateway",
     "osc-ecommerce": "file:packages/osc-ecommerce",
-    "osc-ui": "file:packages/osc-ui"
+    "osc-ui": "file:packages/osc-ui",
+    "osc-api": "file:packages/osc-api",
+    "osc-api-auth": "file:packages/osc-api-auth",
+    "osc-api-gateway": "file:packages/osc-api-gateway"
   },
   "scripts": {
     "prepare": "husky install",
@@ -58,6 +59,7 @@
     "packages/osc-ecommerce",
     "packages/osc-academic-hub",
     "packages/osc-api-auth",
-    "packages/osc-api-gateway"
+    "packages/osc-api-gateway",
+    "packages/osc-api"
   ]
 }

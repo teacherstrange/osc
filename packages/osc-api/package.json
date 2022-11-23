@@ -1,0 +1,12 @@
+{
+  "name": "osc-api",
+  "version": "0.1.0",
+  "main": "./index.ts",
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.7.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.6.4"
+  }
+}
