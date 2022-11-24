@@ -5,7 +5,7 @@ import { Link } from '@remix-run/react';
 import type { FC } from 'react';
 import React from 'react';
 import { useSpacing } from '../../hooks/useSpacing';
-import type { Spacing, Themes } from '../../types';
+import type { Spacing } from '../../types';
 import { classNames } from '../../utils/classNames';
 import { Button, ButtonGroup, CopyButton } from '../Button/Button';
 import { List, ListItem } from '../List/List';
@@ -15,7 +15,6 @@ import './content.scss';
 export interface ButtonProps {
     _key: string;
     _type: string;
-    colour: Themes;
     externalLink?: {
         newWindow?: boolean;
         url?: string;
