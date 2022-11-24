@@ -334,7 +334,6 @@ export const textContentHasButtons: TextContent = {
         {
             _key: '4e7732fa8971',
             _type: 'module.button',
-            colour: 'primary',
             externalLink: {
                 newWindow: true
             },
@@ -345,7 +344,6 @@ export const textContentHasButtons: TextContent = {
         {
             _key: '87d2da567fc3',
             _type: 'module.button',
-            colour: 'primary',
             email: 'test@example.com',
             externalLink: {
                 newWindow: true
@@ -356,7 +354,6 @@ export const textContentHasButtons: TextContent = {
         {
             _key: '22c5463fb02a',
             _type: 'module.button',
-            colour: 'primary',
             externalLink: {
                 newWindow: true,
                 url: 'https://example.com'
@@ -367,7 +364,6 @@ export const textContentHasButtons: TextContent = {
         {
             _key: '021e29125841',
             _type: 'module.button',
-            colour: 'primary',
             externalLink: {
                 newWindow: true
             },
@@ -383,7 +379,6 @@ export const textContentHasButtons: TextContent = {
         {
             _key: 'b35023227e69',
             _type: 'module.button',
-            colour: 'primary',
             externalLink: {
                 newWindow: true
             },
@@ -394,7 +389,6 @@ export const textContentHasButtons: TextContent = {
         {
             _key: '2a645e6bf859',
             _type: 'module.button',
-            colour: 'primary',
             externalLink: {
                 newWindow: true
             },

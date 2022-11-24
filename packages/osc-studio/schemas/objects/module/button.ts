@@ -1,23 +1,12 @@
-import { SquareIcon } from '@sanity/icons';
+import { ButtonIcon } from '@radix-ui/react-icons';
 import { PAGE_REFERENCES } from '../../../constants';
 
 export default {
     name: 'module.button',
     title: 'Button',
     type: 'object',
-    icon: SquareIcon,
+    icon: ButtonIcon,
     fields: [
-        {
-            name: 'colour',
-            title: 'Colour',
-            type: 'string',
-            initialValue: 'primary',
-            options: {
-                list: ['primary', 'secondary', 'tertiary', 'quaternary'],
-                layout: 'radio',
-                direction: 'horizontal'
-            }
-        },
         {
             name: 'label',
             title: 'Label',
