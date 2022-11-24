@@ -18,6 +18,6 @@
     }
   ],
   "semi": true,
-  "trailingComma": "none",
+  "trailingComma": "es5",
   "singleQuote": true
 }
