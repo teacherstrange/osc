@@ -39,14 +39,33 @@ export interface module {
     _key?: string;
 }
 
+interface buttonModule extends module {
+    _key: string;
+    _type: string;
+    externalLink?: {
+        newWindow?: boolean;
+        url?: string;
+    };
+    documentType?: string;
+    file?: string;
+    label: string;
+    reference?: object;
+    type: string;
+    email?: string;
+    slug?: string;
+    telephone?: string;
+    textToCopy?: string;
+}
+
 export interface contentModule extends module {
     backgroundColor?: 'primary' | 'secondary' | 'tertiary';
     horizontalAlignment?: 'left' | 'centre' | 'right';
-    marginBottom?: 10 | 50 | 110 | 210 | '';
-    paddingBottom?: 10 | 50 | 110 | 210 | '';
-    paddingTop?: 10 | 50 | 110 | 210 | '';
+    marginBottom?: 10 | 50 | 110 | 210;
+    paddingBottom?: 10 | 50 | 110 | 210;
+    paddingTop?: 10 | 50 | 110 | 210;
     textColor?: 'primary' | 'secondary' | 'tertiary';
     body?: PortableTextBlock[];
+    buttons?: buttonModule[];
 }
 
 export interface mediaTextModule extends module {
