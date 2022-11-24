@@ -1,6 +1,8 @@
 import type { LinkDescriptor } from '@remix-run/node';
 import { Carousel, Content, Image, Trustpilot } from 'osc-ui';
+import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
+import { getTypes } from '~/models/sanity.server';
 import type {
     carouselModule,
     contentModule,
@@ -21,10 +23,14 @@ export const getComponentStyles = (data: SanityPage) => {
     // We want to create a unique array of module types to loop over.
     // If we use the original array then we run the risk of including multiple objects
     // with the same type. Causing multiples of the same stylesheet to be loaded.
-    const moduleTypes = [...new Set(data?.modules.map((module) => module._type))];
+    const moduleTypes = [...new Set(getTypes(data))];
 
     for (const module of moduleTypes) {
         switch (module) {
+            case 'module.button':
+                styles.push({ rel: 'stylesheet', href: buttonStyles });
+                break;
+
             case 'module.content':
                 styles.push({ rel: 'stylesheet', href: contentStyles });
                 break;

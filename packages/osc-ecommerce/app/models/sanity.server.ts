@@ -1,8 +1,8 @@
+import { redirect } from '@remix-run/server-runtime';
 import type { Params } from 'react-router-dom';
-import type { SanityPage, SanitySiteSetting, SanityRedirect } from '~/types/sanity';
 import { getClient } from '~/lib/sanity/getClient.server';
 import { REDIRECT } from '~/queries/sanity/redirects';
-import { redirect } from '@remix-run/server-runtime';
+import type { SanityPage, SanityRedirect, SanitySiteSetting } from '~/types/sanity';
 
 /**
  * Exclude items that contain "drafts" in the _id
@@ -111,3 +111,34 @@ export async function shouldRedirect(request: Request) {
         console.error(err);
     }
 }
+
+/**
+ * Recursively search for all types in a Sanity schema and filter them by type
+ *
+ * @param sanityData - The Sanity data to extract modules from
+ * @return An non unique array of all modules in the Sanity data
+ */
+export const getTypes = (sanityData: SanityPage) => {
+    const types: string[] = [];
+
+    const recurse = (obj: SanityPage) => {
+        for (const key in obj) {
+            // Check whether the key exists in our object
+            if (obj.hasOwnProperty(key)) {
+                // IF the key is equal to `_type` push it into the types array
+                // ELSE if the key is an object, recurse into it
+                if (key === '_type') {
+                    types.push(obj[key]);
+                } else if (typeof obj[key as keyof SanityPage] === 'object') {
+                    // @ts-ignore -- we can safely ignore this error because we're already checking the type of the key
+                    recurse(obj[key as keyof SanityPage]);
+                }
+            }
+        }
+    };
+    recurse(sanityData);
+
+    const filteredTypes = types.filter((type) => type.includes('module.'));
+
+    return filteredTypes;
+};
