@@ -75,5 +75,18 @@ export default {
             description: 'If left blank this will default to the button label',
             hidden: ({ parent }) => parent?.type !== 'copy to clipboard'
         }
-    ]
+    ],
+    preview: {
+        select: {
+            title: 'label',
+            subtitle: 'type'
+        },
+        prepare(selection) {
+            const { title, subtitle } = selection;
+            return {
+                title,
+                subtitle: subtitle.charAt(0).toUpperCase() + subtitle.slice(1)
+            };
+        }
+    }
 };
