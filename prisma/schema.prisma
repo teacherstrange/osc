@@ -10,17 +10,16 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  firstName   String   @db.VarChar(64)
-  lastName    String   @db.VarChar(64)
-  email       String   @unique @db.VarChar(255)
-  password    String   @db.VarChar(512)
-  salt        Int
-  active      Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  lastLogin   DateTime
-  lockedUntil DateTime
+  id          Int       @id @default(autoincrement())
+  firstName   String    @db.VarChar(128)
+  lastName    String    @db.VarChar(128)
+  email       String    @unique @db.VarChar(255)
+  password    String    @db.VarChar(512)
+  active      Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+  lastLogin   DateTime?
+  lockedUntil DateTime?
 
   avatar                 UserAvatar?             @relation("userAvatar")
   registrationTokens     UserRegistrationToken[] @relation("userRegistrationTokens")
@@ -30,26 +29,43 @@ model User {
   passwordReset          PasswordReset[]         @relation("passwordReset")
   wishlist               Wishlist[]              @relation("userWishlist")
   preferences            UserPreference[]        @relation("userPreferences")
-  crmToken               CRMToken[]              @relation("userCRMToken")
-  lmsToken               LMSToken[]              @relation("userLMSToken")
+  crmToken               CrmToken[]              @relation("userCRMToken")
+  lmsToken               LmsToken[]              @relation("userLMSToken")
   coursesTutored         CourseTutor[]           @relation("courseTutorProfile")
   courseTutorsAssigned   CourseTutor[]           @relation("courseTutorCreator")
   studying               CourseStudent[]         @relation("courseStudentProfile")
   courseStudentsAssigned CourseStudent[]         @relation("courseStudentCreator")
+  organisations          UserOrganisation[]      @relation("userOrganisation")
+  userRefreshToken       UserRefreshToken[]      @relation("userRefreshTokens")
 
   @@map("users")
 }
 
 model UserAvatar {
-  id        Int      @id @default(autoincrement())
-  userId    Int      @unique
-  reference String   @db.VarChar(255)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int       @id @default(autoincrement())
+  userId    Int       @unique
+  reference String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   user User @relation("userAvatar", fields: [userId], references: [id])
 
   @@map("users.avatar")
+}
+
+model UserOrganisation {
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  organisationId Int
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime? @updatedAt
+
+  user    User         @relation("userOrganisation", fields: [userId], references: [id])
+  details Organisation @relation("userOrganisationDetails", fields: [organisationId], references: [id])
+
+  @@index([userId])
+  @@index([organisationId])
+  @@map("users.organisations")
 }
 
 model UserRegistrationToken {
@@ -57,12 +73,25 @@ model UserRegistrationToken {
   userId    Int
   token     String   @db.VarChar(255)
   createdAt DateTime @default(now())
-  expres    DateTime
+  expires   DateTime
 
   user User @relation("userRegistrationTokens", fields: [userId], references: [id])
 
   @@index([userId])
   @@map("users.registrationToken")
+}
+
+model UserRefreshToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @db.VarChar(512)
+  createdAt DateTime @default(now())
+  expires   DateTime
+
+  user User @relation("userRefreshTokens", fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("users.refreshTokens")
 }
 
 model UserRole {
@@ -110,13 +139,13 @@ model PasswordReset {
 }
 
 model Wishlist {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   userId    Int
-  title     String   @db.VarChar(64)
-  active    Boolean  @default(true)
+  title     String    @db.VarChar(64)
+  active    Boolean   @default(true)
   createdBy Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   user  User           @relation("userWishlist", fields: [userId], references: [id])
   items WishlistItem[] @relation("wishlistItem")
@@ -139,12 +168,12 @@ model WishlistItem {
 }
 
 model UserPreference {
-  id           Int      @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   userId       Int
   preferenceId Int
-  value        String   @db.VarChar(255)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  value        String    @db.VarChar(255)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
 
   user    User       @relation("userPreferences", fields: [userId], references: [id])
   details Preference @relation("userPreferenceDetails", fields: [preferenceId], references: [id])
@@ -168,27 +197,27 @@ model FailedLogin {
   @@map("users.failedLogins")
 }
 
-model CRM {
+model Crm {
   id        Int        @id @default(autoincrement())
   title     String     @db.VarChar(64)
   url       String     @db.VarChar(128)
   active    Boolean    @default(true)
   createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  CRMToken  CRMToken[] @relation("tokenCRM")
+  updatedAt DateTime?  @updatedAt
+  CRMToken  CrmToken[] @relation("tokenCRM")
 
   @@map("crm")
 }
 
-model CRMToken {
-  id        Int      @id @default(autoincrement())
+model CrmToken {
+  id        Int       @id @default(autoincrement())
   crmId     Int
   userId    Int
-  token     String   @db.VarChar(255)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  token     String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
-  crm  CRM  @relation("tokenCRM", fields: [crmId], references: [id])
+  crm  Crm  @relation("tokenCRM", fields: [crmId], references: [id])
   user User @relation("userCRMToken", fields: [userId], references: [id])
 
   @@index([crmId])
@@ -196,27 +225,27 @@ model CRMToken {
   @@map("crm.userTokens")
 }
 
-model LMS {
+model Lms {
   id        Int        @id @default(autoincrement())
   title     String     @db.VarChar(64)
   url       String     @db.VarChar(128)
   active    Boolean    @default(true)
   createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  LMSToken  LMSToken[] @relation("tokenLMS")
+  updatedAt DateTime?  @updatedAt
+  LMSToken  LmsToken[] @relation("tokenLMS")
 
   @@map("lms")
 }
 
-model LMSToken {
-  id        Int      @id @default(autoincrement())
+model LmsToken {
+  id        Int       @id @default(autoincrement())
   lmsId     Int
   userId    Int
-  token     String   @db.VarChar(255)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  token     String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
-  lms  LMS  @relation("tokenLMS", fields: [lmsId], references: [id])
+  lms  Lms  @relation("tokenLMS", fields: [lmsId], references: [id])
   user User @relation("userLMSToken", fields: [userId], references: [id])
 
   @@index([lmsId])
@@ -229,20 +258,20 @@ model Course {
   title       String        @db.VarChar(64)
   externalRef String        @db.VarChar(255)
   createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  updatedAt   DateTime?     @updatedAt
   tutors      CourseTutor[] @relation("courseTutor")
 
   @@map("courses")
 }
 
 model CourseTutor {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   courseId  Int
   tutorId   Int
-  active    Boolean  @default(true)
+  active    Boolean   @default(true)
   createdBy Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   course   Course          @relation("courseTutor", fields: [courseId], references: [id])
   profile  User            @relation("courseTutorProfile", fields: [tutorId], references: [id])
@@ -256,13 +285,13 @@ model CourseTutor {
 }
 
 model CourseStudent {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   courseTutorId Int
   studentId     Int
-  active        Boolean  @default(true)
+  active        Boolean   @default(true)
   createdBy     Int
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime? @updatedAt
 
   tutor   CourseTutor @relation("studentCourseTutor", fields: [courseTutorId], references: [id])
   profile User        @relation("courseStudentProfile", fields: [studentId], references: [id])
@@ -274,18 +303,29 @@ model CourseStudent {
 }
 
 model Exam {
-  id                Int      @id @default(autoincrement())
+  id                Int       @id @default(autoincrement())
   courseId          Int
-  title             String   @db.VarChar(64)
+  title             String    @db.VarChar(64)
   date              DateTime
   gradeContribution Int
-  active            Boolean  @default(true)
+  active            Boolean   @default(true)
   createdBy         Int
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime? @updatedAt
 
   @@index([courseId])
   @@map("courses.exams")
+}
+
+model Organisation {
+  id        Int                @id @default(autoincrement())
+  name      String             @db.VarChar(64)
+  url       String             @db.VarChar(128)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime?          @updatedAt
+  members   UserOrganisation[] @relation("userOrganisationDetails")
+
+  @@map("organisations")
 }
 
 model Role {
@@ -315,6 +355,7 @@ model RolePermission {
 model Permission {
   id    Int    @id @default(autoincrement())
   key   String @unique @db.VarChar(32)
+  level String @db.VarChar(32)
   title String @db.VarChar(64)
 
   roles                  RolePermission[]  @relation("rolePermissionDetails")

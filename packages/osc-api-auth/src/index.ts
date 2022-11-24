@@ -1,23 +1,18 @@
-import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import depthLimit from 'graphql-depth-limit';
 import * as dotenv from 'dotenv';
-import { typeDefs } from './schemas/schema';
-import { resolvers } from './resolvers/resolver';
-import { buildSubgraphSchema } from '@apollo/subgraph';
-
+import { server } from './server';
 dotenv.config();
 
-const server = new ApolloServer({
-    schema: buildSubgraphSchema({ typeDefs, resolvers }),
-    validationRules: [depthLimit(7)]
-});
-
-async function startServer(server: ApolloServer) {
-    const { url } = await startStandaloneServer(server, {
+async function startServer() {
+    const { url } = await startStandaloneServer(server(), {
+        context: async ({ req }) => {
+            // @ts-ignore - Type 'string[]' is not assignable to type 'string'. user will never be an array (comes from gateway)
+            const user = req.headers.user ? JSON.parse(req.headers.user) : null;
+            return { user };
+        },
         listen: { port: 4001 }
     });
-    console.info(`🚀  Auth Microservice ready at: ${url}`);
+    console.info(`🚀 Auth Microservice ready at: ${url}`);
 }
 
-void startServer(server);
+void startServer();
