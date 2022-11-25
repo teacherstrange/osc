@@ -91,3 +91,24 @@ test('accepts content component as child', async () => {
     expect(region).toHaveAttribute('data-state', 'open');
     expect(content).toBeVisible();
 });
+
+test('changes the icon to a chevron', () => {
+    render(
+        <Accordion type="single">
+            <AccordionItem value="0">
+                <AccordionHeader icon="chevron">Heading</AccordionHeader>
+                <AccordionPanel>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam amet culpa ea
+                    praesentium officiis doloribus commodi earum voluptas doloremque fugiat
+                    similique, voluptatibus corporis. Vero laboriosam nihil esse dolores impedit
+                    aut!
+                </AccordionPanel>
+            </AccordionItem>
+        </Accordion>
+    );
+
+    const plusminus = document.querySelector('.c-accordion__icon--plusminus');
+    const chevron = document.querySelector('.c-accordion__icon--chevron');
+    expect(plusminus).not.toBeInTheDocument();
+    expect(chevron).toBeInTheDocument();
+});

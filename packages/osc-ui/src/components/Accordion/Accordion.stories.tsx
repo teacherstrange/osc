@@ -140,6 +140,19 @@ const Template2: Story<AccordionProps> = ({ children, ...args }) => (
     </Accordion>
 );
 
+const IconTemplate: Story<AccordionProps> = ({ children, ...args }) => (
+    <Accordion {...args}>
+        {Array.isArray(children)
+            ? children.map((child, i: Key) => (
+                  <AccordionItem key={i} value={`${i}`}>
+                      <AccordionHeader icon="chevron">{child.title}</AccordionHeader>
+                      <AccordionPanel>{child.content}</AccordionPanel>
+                  </AccordionItem>
+              ))
+            : null}
+    </Accordion>
+);
+
 export const Primary = Template.bind({});
 
 Primary.args = {
@@ -166,7 +179,6 @@ Primary.args = {
 };
 
 export const AllowMultiple = Template.bind({});
-
 AllowMultiple.args = {
     ...Primary.args,
     type: 'multiple',
@@ -189,6 +201,18 @@ HasHeadingLevel2.parameters = {
     docs: {
         description: {
             story: 'Change the heading level by passing `asChild={true}` & `as="h2"` to the `AccordionHeader` subcomponent.'
+        }
+    }
+};
+
+export const HasChevronIcon = IconTemplate.bind({});
+HasChevronIcon.args = {
+    ...Primary.args
+};
+HasChevronIcon.parameters = {
+    docs: {
+        description: {
+            story: 'Change the icon by passing `icon="chevron"` to the `AccordionHeader` subcomponent.'
         }
     }
 };

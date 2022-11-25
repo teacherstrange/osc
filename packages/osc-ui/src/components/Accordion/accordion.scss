@@ -3,13 +3,14 @@
     --accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
 
     &__icon {
-        height: 1em; // make sure the icon matches the height of the text
+        width: 1em; // make sure the icon matches the height of the text
+        height: 1em; // make sure the icon matches the width of the text
+        transition-duration: var(--accordion-transition-duration);
+        transition-timing-function: var(--accordion-transition-timing-func);
     }
 
     &__icon-vert {
-        transition-duration: var(--accordion-transition-duration);
         transition-property: opacity visibility;
-        transition-timing-function: var(--accordion-transition-timing-func);
     }
 
     &__trigger {
@@ -19,9 +20,14 @@
         width: 100%;
 
         /* stylelint-disable-next-line selector-class-pattern */
-        &[data-state="open"] .c-accordion__icon-vert {
+        &[data-state="open"] .c-accordion__icon--plusminus > :first-child {
             opacity: 0;
             visibility: hidden;
+        }
+
+        /* stylelint-disable-next-line selector-class-pattern */
+        &[data-state="open"] .c-accordion__icon--chevron {
+            transform: rotate(180deg);
         }
     }
 
