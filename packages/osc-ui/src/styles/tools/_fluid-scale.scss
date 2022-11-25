@@ -1,0 +1,39 @@
+@use "sass:math";
+@use "sass:list";
+@use "../tools/functions" as *;
+@use "../tokens" as *;
+
+@mixin fluid-scale() {
+    // Set a prefix for our custom properties
+    $prefix: "step";
+    // Get the from our tokens
+    $steps: get("steps", $fluid-scale);
+    // Get the position of the value we want to use as the base for the scale
+    // This will be used to set the correct exponent for each step of the scale
+    $base-index: list.index($steps, "zeta");
+
+    // Get our size values from the tokens
+    $min-viewport: get("min-viewport.width", $fluid-scale);
+    $max-viewport: get("max-viewport.width", $fluid-scale);
+    $min-font-size: get("min-viewport.font-size", $fluid-scale);
+    $max-font-size: get("max-viewport.font-size", $fluid-scale);
+    $min-scale: get("min-viewport.scale", $fluid-scale);
+    $max-scale: get("max-viewport.scale", $fluid-scale);
+
+    @for $i from 1 through length($steps) {
+        $step: list.nth($steps, $i);
+
+        // We’re doing $i - $type-base-index for each step’s minimum font size since our base modular step need not be the first element in the list
+        // We get its index and subtract it from the current index to obtain the correct offset for the min exponent.
+        $power: $i - $base-index;
+        $min: $min-font-size * math.pow($min-scale, $power);
+        $max: $max-font-size * math.pow($max-scale, $power);
+
+        // modular scale should be calculated like this
+        // 1 * 1.5; // 1.5
+        // 1.5 * 1.5; // 2.25
+        // 1.5 * 1.5 * 1.5; // 3.375
+
+        --scale-#{$step}: #{clamped($min, $max, $min-viewport, $max-viewport)};
+    }
+}

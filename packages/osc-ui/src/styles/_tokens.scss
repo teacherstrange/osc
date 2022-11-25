@@ -22,12 +22,46 @@ $colors: (
         primary: hsl(335deg 85% 49%)
     )
 );
-$typography: (
-    weight-reg: 400,
-    weight-bold: 700,
-    fontsize: (
-        small: 0.875rem,
-        medium: 1rem,
-        large: 2rem
+$fluid-scale: (
+    base-font-size: 10,
+    steps: (
+        micro,
+        milli,
+        centi,
+        zeta,
+        epsilon,
+        delta,
+        gamma,
+        beta,
+        alpha,
+        omega,
+        kilo,
+        mega
+    ),
+    min-viewport: (
+        width: 375,
+        font-size: 16,
+        scale: 1.2
+    ),
+    max-viewport: (
+        width: 1440,
+        font-size: 20,
+        scale: 1.33
     )
+);
+$typography: (
+    font-primary: (
+        "Roboto",
+        helvetica,
+        arial,
+        sans-serif
+    ),
+    font-secondary: (
+        "Roboto Condensed",
+        helvetica,
+        arial,
+        sans-serif
+    ),
+    weight-reg: 400,
+    weight-bold: 700
 );

@@ -15,7 +15,7 @@ html {
 body {
     overflow-x: hidden;
 
-    @include t.font-size(s.$base-font-size, s.$base-line-height);
+    font-size: var(--scale-zeta);
 
     font-family: s.$font-primary;
     -webkit-font-smoothing: antialiased;

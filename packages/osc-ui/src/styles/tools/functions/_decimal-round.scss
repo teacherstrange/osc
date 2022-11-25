@@ -1,0 +1,54 @@
+@use "sass:math";
+
+// ---------------------------------------------------------
+// Rounds a number to decimal places.
+//
+// @example
+//     decimal-round(0.333)    => 0
+//     decimal-round(0.333, 1) => 0.3
+//     decimal-round(0.333, 2) => 0.33
+//     decimal-round(0.666)    => 1
+//     decimal-round(0.666, 1) => 0.7
+//     decimal-round(0.666, 2) => 0.67
+//
+// @param  {number} $number A number to round
+// @param  {number} [$digits:0] Digits to output
+// @param  {string} [$mode:round] (round|ceil|floor) How to round a number
+// @return {number} A rounded number
+//
+// @see https://stackoverflow.com/a/34982673
+// ---------------------------------------------------------
+@function decimal-round($number, $digits: 0, $mode: round) {
+    $n: 1;
+    // $number must be a number
+    @if type-of($number) != number {
+        @warn '#{ $number } is not a number.';
+        @return $number;
+    }
+
+    // $digits must be a unitless number
+    @if type-of($digits) != number {
+        @warn '#{ $digits } is not a number.';
+        @return $number;
+    } @else if not unitless($digits) {
+        @warn '#{ $digits } has a unit.';
+        @return $number;
+    }
+
+    @if $digits > 0 {
+        @for $i from 1 through $digits {
+            $n: $n * 10;
+        }
+    }
+
+    @if $mode == round {
+        @return math.div(math.round($number * $n), $n);
+    } @else if $mode == ceil {
+        @return math.div(math.ceil($number * $n), $n);
+    } @else if $mode == floor {
+        @return math.div(math.floor($number * $n), $n);
+    } @else {
+        @warn '#{ $mode } is undefined keyword.';
+        @return $number;
+    }
+}

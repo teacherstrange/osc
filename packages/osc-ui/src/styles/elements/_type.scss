@@ -25,7 +25,7 @@ a {
 }
 
 small {
-    @include t.font-size(s.$size-micro);
+    font-size: var(--scale-micro);
 }
 
 a[href],
@@ -45,5 +45,5 @@ textarea {
 input,
 select,
 textarea {
-    @include t.font-size(s.$base-font-size);
+    font-size: var(--scale-zeta);
 }

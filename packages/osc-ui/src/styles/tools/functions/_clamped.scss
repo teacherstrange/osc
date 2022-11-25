@@ -1,0 +1,39 @@
+@use "sass:math";
+@use "./decimal-round" as *;
+@use "./rem" as *;
+
+// ---------------------------------------------------------
+// clamped
+// Generates the ideal clamp value for fluid type scale.
+// https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/
+//
+// Assuming we have four values:
+// - A minimum font size (16px).
+// - A maximum font size (19px).
+// - The breakpoint up until which clamp should use the minimum value (400px).
+// - The breakpoint at which clamp should begin using the maximum value (1000px).
+//
+// Since the minimum breakpoint corresponds to the minimum font size and the maximum breakpoint corresponds to the maximum font size,
+// it makes more sense for us to pair these values together as a set of two (x, y) points of the form (screenWidth, fontSize):
+// Minimum: (400px, 16px)
+// Maximum: (1000px, 19px)
+//
+// If you were to look at this on a graph, you would see that the line connecting these two points is a sloping straight line.
+// This is the ideal value for our clamp.
+// ---------------------------------------------------------
+@function clamped($min-px, $max-px, $min-bp, $max-bp) {
+    // The equation for a line is given by the slope-intercept form: `y = mx + b`.
+    // In this notation, `m` is the slope of the line and denotes the rate of change for the `y` values (font size) relative to the `x` values (viewport width); meanwhile, `b` denotes the y-intercept.
+    // To find the slope of this line (`m`), we get the difference between the two y-values (font sizes) and divide that by the difference between the x-values (viewport widths):
+    // m = (maxFontSize - minFontSize) / (maxBreakpoint - minBreakpoint)
+    $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+    $y-intercept: decimal-round(rem($min-px - $slope * $min-bp), 2);
+
+    // We'll need to express the slope using proper viewport units, which is done by multiplying the slope by 100 to get a percentage.
+    $slope-vw: decimal-round($slope * 100, 2);
+
+    $min-rems: decimal-round(rem($min-px), 2);
+    $max-rems: decimal-round(rem($max-px), 2);
+
+    @return clamp(#{$min-rems}, #{$slope-vw}vw + #{$y-intercept}, #{$max-rems});
+}

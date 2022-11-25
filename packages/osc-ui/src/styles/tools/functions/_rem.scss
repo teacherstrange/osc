@@ -1,0 +1,23 @@
+@use "sass:math";
+@use "../../tokens" as *;
+@use "./get" as *;
+
+// ---------------------------------------------------------
+// rem
+// Calculates rem based on the number of pixels passed, calculated against the base-font-size.
+//
+// @example
+//   font-size: rem(16);
+//
+// @param {number} $size
+//   The pixel size to be converted.
+// @return {number} $rem
+//   The calculated size in rem units.
+// ---------------------------------------------------------
+
+@function rem($size) {
+    $base-size: get("base-font-size", $fluid-scale);
+    $rem: math.div($size, $base-size) * 1rem;
+
+    @return $rem;
+}

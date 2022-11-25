@@ -27,10 +27,6 @@ $font-sizes: (
         ),
         classes: (
             "alpha"
-        ),
-        font-size: (
-            base: s.$size-beta,
-            s.$mq-tab--sml: s.$size-alpha
         )
     ),
     (
@@ -39,10 +35,6 @@ $font-sizes: (
         ),
         classes: (
             "beta"
-        ),
-        font-size: (
-            base: s.$size-gamma,
-            s.$mq-tab--sml: s.$size-beta
         )
     ),
     (
@@ -51,10 +43,6 @@ $font-sizes: (
         ),
         classes: (
             "gamma"
-        ),
-        font-size: (
-            base: s.$size-delta,
-            s.$mq-tab--sml: s.$size-gamma
         )
     ),
     (
@@ -63,9 +51,6 @@ $font-sizes: (
         ),
         classes: (
             "delta"
-        ),
-        font-size: (
-            base: s.$size-delta
         )
     ),
     (
@@ -74,9 +59,6 @@ $font-sizes: (
         ),
         classes: (
             "epsilon"
-        ),
-        font-size: (
-            base: s.$size-epsilon
         )
     ),
     (
@@ -85,40 +67,24 @@ $font-sizes: (
         ),
         classes: (
             "zeta"
-        ),
-        font-size: (
-            base: s.$size-zeta
         )
     ),
     (
         elements: (),
         classes: (
             "centi"
-        ),
-        font-size: (
-            base: s.$size-centi
         )
     ),
     (
         elements: (),
         classes: (
             "milli"
-        ),
-        font-size: (
-            base: s.$size-milli
         )
     ),
     (
         elements: (),
         classes: (
             "kilo"
-        ),
-        font-size: (
-            base: s.$size-kilo,
-            s.$mq-desk: s.$size-mega
-        ),
-        line-height: (
-            1
         )
     )
 );
@@ -144,6 +110,10 @@ $font-families: (
     }
 }
 
+:root {
+    @include t.fluid-scale;
+}
+
 /* postcss-bem-linter: ignore */
 h1,
 h2,
@@ -152,7 +122,7 @@ h4,
 h5,
 h6,
 [class*="t-font"] {
-    margin: 0 0 s.$global-spacing-s;
+    margin: 0 0 var(--scale-zeta);
     font-style: normal;
     font-weight: s.$weight-bold;
     text-transform: none;
@@ -175,22 +145,18 @@ h6,
 @each $rule in $font-sizes {
     $elements: map.get($rule, elements);
     $classes: map.get($rule, classes);
-    $sizes: map.get($rule, font-size);
 
-    @each $size in $sizes {
-        $mq: list.nth($size, 1);
-        $fs: list.nth($size, 2);
-
-        @each $element in $elements {
+    @each $element in $elements {
+        @each $class in $classes {
             #{$element} {
-                @include font-styles($rule, $mq, $fs);
+                font-size: var(--scale-#{$class});
             }
         }
+    }
 
-        @each $class in $classes {
-            .t-font-#{$class} {
-                @include font-styles($rule, $mq, $fs);
-            }
+    @each $class in $classes {
+        .t-font-#{$class} {
+            font-size: var(--scale-#{$class});
         }
     }
 }
