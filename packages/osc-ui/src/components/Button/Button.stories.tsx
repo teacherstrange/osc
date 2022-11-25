@@ -66,11 +66,18 @@ export default {
             }
         },
         target: {
-            description: 'Sets the target of the button, used in conjunction with `as="a"`'
+            description: 'Sets the target of the button, used in conjunction with `as="a"`',
+            table: {
+                type: {
+                    summary: 'string'
+                }
+            },
+            control: 'text'
         },
         to: {
             description:
-                'Sets the url the button links to when using Remix `<Link>`, used in conjunction with `as="link"`'
+                'Sets the url the button links to when using Remix `<Link>`, used in conjunction with `as="link"`',
+            control: 'text'
         },
         type: {
             description: 'Sets the html attribute `type` of button',
