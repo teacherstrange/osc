@@ -86,6 +86,7 @@ export const Button: FC<ButtonProps> = (props: ButtonProps) => {
             disabled={isDisabled ? isDisabled : null}
             rel={isBlank ? 'noopener noreferrer' : null}
             target={target ? target : null}
+            to={as === 'link' && attr.to ? attr.to : '/'} // fallback to homepage if to prop is missing from link
             {...attr}
         >
             {buttonInner}

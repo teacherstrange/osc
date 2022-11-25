@@ -111,9 +111,20 @@ describe('link button', () => {
     test('has a href attribute', () => {
         render(
             <MemoryRouter>
-                <Button as="link" to="/">
+                <Button as="link" to="/blog">
                     Test Button
                 </Button>
+            </MemoryRouter>
+        );
+
+        expect(screen.getByRole('link')).toHaveAttribute('href', '/blog');
+    });
+
+    test('href falls back to homepage url if `to` prop is missing', () => {
+        render(
+            <MemoryRouter>
+                {/* @ts-ignore -- we want to test that the to prop is missing, even though ts will shout */}
+                <Button as="link">Test Button</Button>
             </MemoryRouter>
         );
 
