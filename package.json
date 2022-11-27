@@ -37,7 +37,7 @@
     "api:dev:osc-api-auth": "lerna run dev --scope osc-api-auth",
     "api:dev:osc-api-gateway": "lerna run dev --scope osc-api-gateway",
     "setup": "npm i && npx prisma generate && cd packages/osc-studio && npm i --legacy-peer-deps",
-    "tokens:generate": "json-to-scss ./tokens/**/*.* ./packages/osc-ui/src/styles/_tokens.scss --tn 2"
+    "tokens:generate": "json-to-scss ./tokens/**/*.* ./packages/osc-ui/src/styles/settings/_tokens.scss --tn 2"
   },
   "lint-staged": {
     "*.scss": [
