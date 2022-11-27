@@ -7,13 +7,20 @@
 /*
   Contents
   --------
-	0 	$ELEMENTS
+	0 	$THEME
+	1 	$ELEMENTS
 	2 	$OBJECTS
 	3 	$COMPONENTS
 	4	$LAYOUT
 	5 	$UTILITIES
 	6 	$STYLEGUIDE
 */
+
+/* ============================
+// $THEME
+// Define your colour themes
+*/
+@use "theme/theme";
 
 /* ============================
 // $ELEMENTS

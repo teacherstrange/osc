@@ -19,7 +19,7 @@
 //
 // @return Anything
 // ---------------------------------------------------------
-@function get($key, $map: global.$prop-config) {
+@function get($key, $map: global.$osc-config) {
     $keys: str-explode.str-explode($key, ".");
 
     @if not deep-map-check.deep-map-check($map, $keys...) {

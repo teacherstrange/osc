@@ -24,20 +24,7 @@ $colors: (
 );
 $fluid-scale: (
     base-font-size: 10,
-    steps: (
-        micro,
-        milli,
-        centi,
-        zeta,
-        epsilon,
-        delta,
-        gamma,
-        beta,
-        alpha,
-        omega,
-        kilo,
-        mega
-    ),
+    steps: (micro, milli, centi, zeta, epsilon, delta, gamma, beta, alpha, omega, kilo, mega),
     min-viewport: (
         width: 375,
         font-size: 16,
@@ -49,19 +36,20 @@ $fluid-scale: (
         scale: 1.33
     )
 );
+$media-queries: (
+    mq-mob: 360,
+    mq-mob--med: 420,
+    mq-mob--lrg: 560,
+    mq-tab: 768,
+    mq-tab--med: 820,
+    mq-tab--lrg: 960,
+    mq-desk: 1024,
+    mq-desk--med: 1280,
+    mq-desk--lrg: 1440
+);
 $typography: (
-    font-primary: (
-        "Roboto",
-        helvetica,
-        arial,
-        sans-serif
-    ),
-    font-secondary: (
-        "Roboto Condensed",
-        helvetica,
-        arial,
-        sans-serif
-    ),
+    font-primary: ("Roboto", helvetica, arial, sans-serif),
+    font-secondary: ("Roboto Condensed", helvetica, arial, sans-serif),
     weight-reg: 400,
     weight-bold: 700
 );

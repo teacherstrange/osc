@@ -2,12 +2,12 @@
 // $SETTINGS
 // Preprocessor variables and methods
 */
-@forward "animation";
-@forward "colors";
+@forward "tokens";
+
 @forward "global";
+@forward "animation";
 @forward "containers";
-@forward "mq";
-@forward "spacing";
+@forward "spacing"; // to be converted to fluid scale
 @forward "typography";
 @forward "zindex";
 @forward "radius";

@@ -30,7 +30,7 @@ $property-map: (
     border-radius: "br"
 );
 
-s.$prop-config: t.deep-map-merge(
+s.$osc-config: t.deep-map-merge(
     (
         margin-top: (
             0,
@@ -84,11 +84,11 @@ s.$prop-config: t.deep-map-merge(
             10
         )
     ),
-    s.$prop-config,
+    s.$osc-config,
     true
 );
 
-@each $property, $values in s.$prop-config {
+@each $property, $values in s.$osc-config {
     $shorthand: map.get($property-map, $property);
 
     @each $num in $values {

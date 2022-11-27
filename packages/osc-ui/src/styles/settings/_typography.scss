@@ -8,6 +8,8 @@
 //  #TYPOGRAPHY SETTINGS
 //\*----------------------------------*/
 //
+// @TODO: rewrite this to reflect new typography scale
+
 //  Set the Typography scales for your site inc. Font Sizes/Weights/Styles
 //  Uses Modular Scale as defined in settings/global
 //  The defined Modular Scale calculates your font sizes based on your $base-font-size and $global-scale-ratio
@@ -25,7 +27,6 @@
 //
 //\*----------------------------------*/
 
-// $font-primary: "Roboto", helvetica, arial, sans-serif;
 $font-primary: get("font-primary", $typography);
 $font-secondary: get("font-secondary", $typography);
 $weight-reg: get("weight-reg", $typography);
@@ -34,28 +35,3 @@ $weight-bold: get("weight-bold", $typography);
 // Base Sizes
 $base-font-size: get("base-font-size", $fluid-scale);
 $base-line-height: get("max-viewport.scale", $fluid-scale);
-
-// In Ascending Order to adhere to SASS scope / cascade
-// $size-micro: 10;
-// $size-milli: 12;
-// $size-centi: 14;
-// $size-zeta: $base-font-size; // 16px / 1.6rem
-// $size-epsilon: global.fs($size-zeta); // 21px / 2.1rem
-// $size-delta: global.fs($size-epsilon); // 28px / 2.8rem
-// $size-gamma: global.fs($size-delta); // 37px / 3.7rem
-// $size-beta: global.fs($size-gamma); // 49px / 4.9rem
-// $size-alpha: global.fs($size-beta); // 65px / 6.5rem
-
-// $size-kilo: global.fs($size-epsilon * 3.4); // 139px / 13.9rem
-// $size-mega: global.fs($size-epsilon * 5); // 139px / 13.9rem
-
-// // Do some checks to ensure correct values are being passed
-// @each $_font-globals in $base-font-size $base-line-height {
-//     @if meta.type-of($_font-globals) == number {
-//         @if math.is-unitless($_font-globals) == false {
-//             @error "`#{$_spacing-unit}` needs to be unitless.";
-//         }
-//     } @else {
-//         @error "`#{$_font-globals}` needs to be a number.";
-//     }
-// }
