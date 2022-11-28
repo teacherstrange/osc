@@ -1,7 +1,6 @@
 @use "sass:map";
-@use "../tokens" as *;
-@use "../settings" as s;
-@use "../tools" as t;
+@use "../settings" as *;
+@use "../tools" as *;
 @use "../tools/functions" as *;
 
 ///*----------------------------------*\
@@ -30,7 +29,7 @@ $property-map: (
     border-radius: "br"
 );
 
-s.$osc-config: t.deep-map-merge(
+$osc-config: deep-map-merge(
     (
         margin-top: (
             0,
@@ -84,11 +83,11 @@ s.$osc-config: t.deep-map-merge(
             10
         )
     ),
-    s.$osc-config,
+    $osc-config,
     true
 );
 
-@each $property, $values in s.$osc-config {
+@each $property, $values in $osc-config {
     $shorthand: map.get($property-map, $property);
 
     @each $num in $values {
@@ -102,7 +101,7 @@ s.$osc-config: t.deep-map-merge(
     }
 }
 
-@include t.mq(s.$mq-tab, max) {
+@include mq(get('mq-tab', $media-queries), max) {
     .u-plr-0\@tab {
         padding-right: 0;
         padding-left: 0;
@@ -129,31 +128,31 @@ s.$osc-config: t.deep-map-merge(
 
 .u-hidden {
     &-from\@tab {
-        @include t.mq(s.$mq-tab--lrg) {
+        @include mq(get('mq-tab', $media-queries)--lrg) {
             display: none;
         }
     }
 
     &-from\@desk-med {
-        @include t.mq(s.$mq-desk--med) {
+        @include mq(get('mq-desk--med', $media-queries)) {
             display: none;
         }
     }
 
     &-until\@tab {
-        @include t.mq(s.$mq-tab--lrg, max) {
+        @include mq(get('mq-tab', $media-queries), max) {
             display: none;
         }
     }
 
     &-until\@desk {
-        @include t.mq(s.$mq-desk, max) {
+        @include mq(get('mq-desk', $media-queries), max) {
             display: none;
         }
     }
 
     &-until\@desk-med {
-        @include t.mq(s.$mq-desk--med, max) {
+        @include mq(get('mq-desk--med', $media-queries), max) {
             display: none;
         }
     }
@@ -179,11 +178,11 @@ s.$osc-config: t.deep-map-merge(
 // <div class="u-text-bold"></div>
 .u-text {
     &-bold {
-        font-weight: s.$weight-bold;
+        font-weight: $weight-bold;
     }
 
     &-reg {
-        font-weight: s.$weight-reg;
+        font-weight: $weight-reg;
     }
 
     &-italic {
@@ -253,7 +252,7 @@ $line-height-map: (
 
 [data-line-clamp] {
     display: box;
-    margin-bottom: (s.$global-spacing-s * 2);
+    margin-bottom: ($global-spacing-s * 2);
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
@@ -299,7 +298,7 @@ $line-height-map: (
             rgba(#fff, 0)
         );
         transform: translateX(-100%);
-        animation: shimmer 1s s.$ease-in-out-cubic infinite;
+        animation: shimmer 1s $ease-in-out-cubic infinite;
         content: "";
     }
 

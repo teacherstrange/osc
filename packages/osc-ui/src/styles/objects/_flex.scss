@@ -1,5 +1,6 @@
-@use "../settings" as s;
-@use "../tools" as t;
+/* stylelint-disable function-no-unknown -- TODO: Check why this isn't working as expected */
+@use "../settings" as *;
+@use "../tools" as *;
 
 /* ============================
 // $FLEX LAYOUT OBJECT
@@ -88,25 +89,25 @@
     }
 
     &--spaced {
-        gap: s.$global-spacing;
+        gap: $global-spacing;
     }
 
     /* Hooks to hide elements based on the data-mq-hide attribute */
     $flex-bp: (
-        desk-lrg: s.$mq-desk--lrg,
-        desk-med: s.$mq-desk--med,
-        desk: s.$mq-desk,
-        tab-lrg: s.$mq-tab--lrg,
-        tab: s.$mq-tab,
-        tab-sml: s.$mq-tab--sml,
-        mob-lrg: s.$mq-mob--lrg,
-        mob-med: s.$mq-mob--med,
-        mob: s.$mq-mob,
-        mob-sml: s.$mq-mob--sml
+        desk-lrg: get("mq-desk--lrg", $media-queries),
+        desk-med: get("mq-desk--med", $media-queries),
+        desk: get("mq-desk", $media-queries),
+        tab-lrg: get("mq-tab--lrg", $media-queries),
+        tab: get("mq-tab", $media-queries),
+        tab-sml: get("mq-tab", $media-queries),
+        mob-lrg: get("mq-mob--lrg", $media-queries),
+        mob-med: get("mq-mob--med", $media-queries),
+        mob: get("mq-mob", $media-queries),
+        mob-sml: get("mq-mob", $media-queries)
     );
 
     @each $alias, $mq in $flex-bp {
-        @include t.mq($mq) {
+        @include mq($mq) {
             &[data-flex-reset="#{$alias}"] {
                 flex-direction: column;
             }
@@ -157,7 +158,7 @@
             height: auto;
             overflow: hidden;
 
-            @include t.mq(s.$mq-global) {
+            @include mq(get("mq-tab", $media-queries)) {
                 max-width: 200px;
             }
         }
@@ -195,7 +196,7 @@ $i-list: -1 0 1 2 3 4 5 6 7 8 9 10;
 // ==========================================================================
 @each $i in $i-list {
     [data-flex-order="#{$i}"] {
-        @include t.mq(s.$mq-mob--med + 2, max) {
+        @include mq(get("mq-mob--med", $media-queries) + 2, max) {
             order: $i;
         }
     }

@@ -24,15 +24,15 @@
     $max: max-#{$constraint2};
 
     @if $constraint1 == max {
-        get(#{$viewports}, $media-queries): get(#{$viewports}, $media-queries) - 1;
+        $viewports: $viewports - 1;
     }
 
-    @if meta.type-of(get(#{$viewports}, $media-queries)) == number {
-        @media screen and (#{$constraint1}-#{$constraint2}: get(#{$viewports}, $media-queries)) {
+    @if meta.type-of($viewports) == number {
+        @media screen and (#{$constraint1}-#{$constraint2}: $viewports) {
             @content;
         }
     } @else {
-        @media screen and ($min: list.nth(get(#{$viewports}, $media-queries), 1)) and ($max: list.nth(get(#{$viewports}, $media-queries), 2)) {
+        @media screen and ($min: list.nth($viewports, 1)) and ($max: list.nth($viewports, 2)) {
             @content;
         }
     }

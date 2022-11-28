@@ -29,6 +29,8 @@
     $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
     $y-intercept: decimal-round(rem($min-px - $slope * $min-bp), 2);
 
+    @debug $max-px;
+
     // We'll need to express the slope using proper viewport units, which is done by multiplying the slope by 100 to get a percentage.
     $slope-vw: decimal-round($slope * 100, 2);
 
