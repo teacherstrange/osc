@@ -1,6 +1,5 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import type { Props } from './Popover';
 import {
     Popover,
     PopoverAnchor,
@@ -45,7 +44,6 @@ export default {
         modal: {
             name: 'modal',
             type: 'boolean',
-            defaultValue: 'false',
             description:
                 'The modality of the popover. When set to true, interaction with outside elements will be disabled and only popover content will be visible to screen readers.'
         }
@@ -59,17 +57,62 @@ export default {
     }
 } as Meta;
 
-const Template: Story<Props> = (args) => (
-    <Popover>
-        {args.children[0]}
-        <PopoverContent {...args}>
-            Example Popover
-            {args.children[1]}
-        </PopoverContent>
-    </Popover>
-);
+const Template: Story = (args) => {
+    const triggerContent = args.children[0];
+    const popoverContent = args.children[1];
 
-const WithAnchorTemplate: Story<Props> = (args) => (
+    return (
+        <Popover>
+            <PopoverTrigger className={args.className}>{triggerContent}</PopoverTrigger>
+            <PopoverContent>{popoverContent}</PopoverContent>
+        </Popover>
+    );
+};
+
+const WithIconTemplate: Story = (args) => {
+    const triggerContent = args.children[0];
+    const popoverContent = args.children[1];
+
+    return (
+        <Popover>
+            <PopoverTrigger className={args.className}>{triggerContent}</PopoverTrigger>
+            <PopoverContent>{popoverContent}</PopoverContent>
+        </Popover>
+    );
+};
+
+const WithContentArrowTemplate: Story = (args) => {
+    const triggerContent = args.children[0];
+    const popoverContent = args.children[1];
+    const popoverArrow = args.children[2];
+
+    return (
+        <Popover>
+            <PopoverTrigger className={args.className}>{triggerContent}</PopoverTrigger>
+            <PopoverContent>
+                {popoverContent}
+                {popoverArrow}
+            </PopoverContent>
+        </Popover>
+    );
+};
+const WithContentCloseIconTemplate: Story = (args) => {
+    const triggerContent = args.children[0];
+    const popoverContent = args.children[1];
+    const closeIcon = args.children[2];
+
+    return (
+        <Popover>
+            <PopoverTrigger className={args.className}>{triggerContent}</PopoverTrigger>
+            <PopoverContent>
+                {popoverContent}
+                {closeIcon}
+            </PopoverContent>
+        </Popover>
+    );
+};
+
+const WithAnchorTemplate: Story = (args) => (
     <Popover>
         <PopoverTrigger>Click to toggle</PopoverTrigger>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -81,28 +124,19 @@ const WithAnchorTemplate: Story<Props> = (args) => (
 );
 
 export const Primary = Template.bind({});
-export const WithIcon = Template.bind({});
-export const WithPopoverArrow = Template.bind({});
-export const WithPopoverCloseIcon = Template.bind({});
+export const WithIcon = WithIconTemplate.bind({});
+export const WithContentArrow = WithContentArrowTemplate.bind({});
+export const WithContentCloseIcon = WithContentCloseIconTemplate.bind({});
 export const WithAnchor = WithAnchorTemplate.bind({});
-WithAnchor.parameters = {
-    docs: {
-        description: {
-            story: 'Anchor is an optional element to position Popover "Content" against. If not used, the content will position alongside the Popover "Trigger"'
-        }
-    }
-};
 
 Primary.args = {
-    children: [<PopoverTrigger key={0}>Click to toggle</PopoverTrigger>]
+    children: ['Click to Toggle', 'Example Content'],
+    contentClasses: 'class-test'
 };
 
 WithIcon.args = {
-    children: [
-        <PopoverTrigger className="c-popover__icon-button" aria-label="Update dimensions" key={0}>
-            <MixerHorizontalIcon />
-        </PopoverTrigger>
-    ]
+    children: [<MixerHorizontalIcon key={0} />, 'Example Content'],
+    className: 'c-popover__icon-button'
 };
 WithIcon.parameters = {
     docs: {
@@ -112,10 +146,10 @@ WithIcon.parameters = {
     }
 };
 
-WithPopoverArrow.args = {
-    children: [<PopoverTrigger key={0}>Click to toggle</PopoverTrigger>, <PopoverArrow key={1} />]
+WithContentArrow.args = {
+    children: ['Click to Toggle', 'Example Content', <PopoverArrow key={1} />]
 };
-WithPopoverArrow.parameters = {
+WithContentArrow.parameters = {
     docs: {
         description: {
             story: 'Creates an arrow icon in the Popover "Content" that points to the trigger'
@@ -123,11 +157,20 @@ WithPopoverArrow.parameters = {
     }
 };
 
-WithPopoverCloseIcon.args = {
+WithContentCloseIcon.args = {
     children: [
-        <PopoverTrigger key={0}>Click to toggle</PopoverTrigger>,
+        'Click to toggle',
+        'Example Content',
         <PopoverClose className="c-popover__close" aria-label="Close" key={1}>
             <Cross2Icon />
         </PopoverClose>
     ]
+};
+
+WithAnchor.parameters = {
+    docs: {
+        description: {
+            story: 'Anchor is an optional element to position Popover "Content" against. If not used, the content will position alongside the Popover "Trigger"'
+        }
+    }
 };
