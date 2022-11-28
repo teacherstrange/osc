@@ -1,6 +1,7 @@
 @use "sass:math";
 @use "sass:meta";
 @use "global";
+@use "../tools/fluid-scale" as *;
 @use "../tools/functions/get-tokens" as *;
 @use "../settings/tokens" as *;
 
@@ -26,6 +27,10 @@
 //  Ref: https://medium.com/codyhouse/create-your-design-system-part-1-typography-7c630d9092bd
 //
 //\*----------------------------------*/
+
+:root {
+    @include fluid-scale("font");
+}
 
 $font-primary: typography-token("font-primary");
 $font-secondary: typography-token("font-secondary");

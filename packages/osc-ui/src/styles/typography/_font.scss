@@ -110,10 +110,6 @@ $font-families: (
     }
 }
 
-:root {
-    @include fluid-scale("font");
-}
-
 /* postcss-bem-linter: ignore */
 h1,
 h2,
