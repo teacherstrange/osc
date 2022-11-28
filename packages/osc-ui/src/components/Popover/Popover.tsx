@@ -25,13 +25,11 @@ export const PopoverContent: FC<PopoverProps> = forwardRef<
     const contentClasses = classNames('c-popover__content', className);
 
     return (
-        <div className="c-popover">
-            <PopoverPrimitive.Portal>
-                <PopoverPrimitive.Content className={contentClasses} {...props} ref={forwardedRef}>
-                    {children}
-                </PopoverPrimitive.Content>
-            </PopoverPrimitive.Portal>
-        </div>
+        <PopoverPrimitive.Portal>
+            <PopoverPrimitive.Content className={contentClasses} {...props} ref={forwardedRef}>
+                {children}
+            </PopoverPrimitive.Content>
+        </PopoverPrimitive.Portal>
     );
 });
 
