@@ -6,7 +6,7 @@
     $padding-alt: $global-spacing-m;
 
     width: 100%;
-    max-width: #{$global-base-width}px;
+    max-width: #{$container-size}px;
     margin-right: auto;
     margin-left: auto;
     padding-right: $padding;
@@ -17,13 +17,13 @@
         padding-left: 0;
 
         &-alt-r {
-            @include mq(get("mq-tab", $media-queries), max) {
+            @include mq(mq-token("mq-tab"), max) {
                 padding-right: 0;
             }
         }
 
         &-alt-l {
-            @include mq(get("mq-tab", $media-queries), max) {
+            @include mq(mq-token("mq-tab"), max) {
                 padding-left: 0;
             }
         }
@@ -32,7 +32,7 @@
     &--pad-r {
         padding-right: 0;
 
-        @include mq(get("mq-tab", $media-queries)) {
+        @include mq(mq-token("mq-tab")) {
             padding-right: $global-spacing;
         }
     }
@@ -40,7 +40,7 @@
     &--pad-l {
         padding-left: 0;
 
-        @include mq(get("mq-tab", $media-queries)) {
+        @include mq(mq-token("mq-tab")) {
             padding-left: $global-spacing;
         }
     }
