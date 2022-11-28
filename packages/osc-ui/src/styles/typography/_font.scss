@@ -1,7 +1,7 @@
 @use "sass:list";
 @use "sass:map";
-@use "../settings" as s;
-@use "../tools" as t;
+@use "../settings" as *;
+@use "../tools" as *;
 
 /* ============================
 // $FONT STYLES
@@ -89,8 +89,8 @@ $font-sizes: (
     )
 );
 $font-families: (
-    "primary": s.$font-primary,
-    "secondary": s.$font-secondary
+    "primary": $font-primary,
+    "secondary": $font-secondary
 );
 
 @mixin font-styles($rules, $mq: null, $fs: null) {
@@ -98,20 +98,20 @@ $font-families: (
     $font-size: map.get($size, base);
 
     @if $mq != "base" {
-        @include t.mq($mq, min) {
-            @include t.font-size($fs);
+        @include mq($mq, min) {
+            @include font-size($fs);
         }
     } @else {
         @if map.has-key($rules, line-height) {
-            @include t.font-size($font-size, map.get($rules, line-height));
+            @include font-size($font-size, map.get($rules, line-height));
         } @else {
-            @include t.font-size($font-size);
+            @include font-size($font-size);
         }
     }
 }
 
 :root {
-    @include t.fluid-scale;
+    @include fluid-scale("font");
 }
 
 /* postcss-bem-linter: ignore */
@@ -122,9 +122,9 @@ h4,
 h5,
 h6,
 [class*="t-font"] {
-    margin: 0 0 var(--scale-zeta);
+    margin: 0 0 $global-spacing-relative-s;
     font-style: normal;
-    font-weight: s.$weight-bold;
+    font-weight: $weight-bold;
     text-transform: none;
 }
 
@@ -149,14 +149,14 @@ h6,
     @each $element in $elements {
         @each $class in $classes {
             #{$element} {
-                font-size: var(--scale-#{$class});
+                @include font-size(var(--font-scale-#{$class}), $base-line-height);
             }
         }
     }
 
     @each $class in $classes {
         .t-font-#{$class} {
-            font-size: var(--scale-#{$class});
+            @include font-size(var(--font-scale-#{$class}), $base-line-height);
         }
     }
 }

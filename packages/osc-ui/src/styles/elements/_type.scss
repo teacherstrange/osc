@@ -1,5 +1,5 @@
-@use "../settings" as s;
-@use "../tools" as t;
+@use "../settings" as *;
+@use "../tools" as *;
 
 ///*----------------------------------*\
 //  #TYPE
@@ -10,7 +10,7 @@
 //\*----------------------------------*/
 
 p {
-    margin: 0 0 s.$global-spacing-s * 2;
+    margin: 0 0 $global-spacing-relative-s;
 }
 
 a {
@@ -25,7 +25,7 @@ a {
 }
 
 small {
-    font-size: var(--scale-micro);
+    @include font-size(var(--font-scale-micro));
 }
 
 a[href],

@@ -21,7 +21,7 @@
     width: 100%;
     margin: 0;
     gap: $global-spacing;
-    grid-auto-rows: $global-spacing * 2;
+    grid-auto-rows: $global-spacing;
     grid-template-columns: repeat(1, 1fr);
 
     @include mq(get("mq-mob--med", $media-queries), min) {
@@ -76,7 +76,7 @@
 
         @include mq(get("mq-tab", $media-queries), min) {
             grid-template-columns: repeat(5, 1fr);
-            gap: $global-spacing * 2;
+            gap: $global-spacing;
         }
     }
 
@@ -101,7 +101,7 @@
     &--eighths {
         grid-auto-rows: auto;
         grid-template-columns: repeat(2, 1fr);
-        gap: $global-spacing-s * 2;
+        gap: $global-spacing-s;
 
         @include mq(get("mq-tab", $media-queries), min) {
             grid-template-columns: repeat(4, 1fr);
@@ -154,7 +154,7 @@
     }
 
     &.is-spaced {
-        gap: $global-spacing * 2;
+        gap: $global-spacing;
 
         @include mq(get("mq-mob--lrg", $media-queries), min) {
             gap: $global-spacing-l;

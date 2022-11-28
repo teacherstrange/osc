@@ -11,7 +11,7 @@
 [class*="free-text"] ul {
     &:not(.is-bare) {
         width: 100%;
-        margin: 0 0 (s.$global-spacing-s * 2);
+        margin: 0 0 s.$global-spacing-s;
         padding: 0;
     }
 
@@ -45,7 +45,7 @@
             list-style: none outside none;
 
             li {
-                padding-left: s.$global-spacing-s * 2;
+                padding-left: s.$global-spacing-s;
 
                 &.has-children {
                     padding-left: 0;

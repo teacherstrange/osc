@@ -3,9 +3,23 @@
 @use "../tools/functions" as *;
 @use "../settings/tokens" as *;
 
-@mixin fluid-scale() {
-    // Set a prefix for our custom properties
-    $prefix: "step";
+//*----------------------------------*\
+//  #FLUID SCALE
+//\*----------------------------------*/
+//
+// Creates the css custom properties for the fluid scale
+//
+// Takes a $prefix and a $unit parameter
+// The $prefix is used to create the custom property name
+// The $unit is used to set the units our scale is based on (e.g. rem or px)
+//
+// Usage:
+// @include fluid-scale('font');
+// @include fluid-scale('space', 'px');
+//\*----------------------------------*/
+
+
+@mixin fluid-scale($prefix, $unit: rem) {
     // Get the from our tokens
     $steps: get("steps", $fluid-scale);
     // Get the position of the value we want to use as the base for the scale
@@ -29,11 +43,6 @@
         $min: $min-font-size * math.pow($min-scale, $power);
         $max: $max-font-size * math.pow($max-scale, $power);
 
-        // modular scale should be calculated like this
-        // 1 * 1.5; // 1.5
-        // 1.5 * 1.5; // 2.25
-        // 1.5 * 1.5 * 1.5; // 3.375
-
-        --scale-#{$step}: #{clamped($min, $max, $min-viewport, $max-viewport)};
+        --#{$prefix}-scale-#{$step}: #{clamped($min, $max, $min-viewport, $max-viewport, $unit)};
     }
 }

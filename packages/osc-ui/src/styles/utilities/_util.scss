@@ -252,7 +252,7 @@ $line-height-map: (
 
 [data-line-clamp] {
     display: box;
-    margin-bottom: ($global-spacing-s * 2);
+    margin-bottom: $global-spacing-s;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;

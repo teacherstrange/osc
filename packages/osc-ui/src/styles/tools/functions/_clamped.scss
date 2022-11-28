@@ -5,6 +5,10 @@
 // ---------------------------------------------------------
 // clamped
 // Generates the ideal clamp value for fluid type scale.
+//
+// @example
+//      clamped($min, $max, $min-viewport, $max-viewport)
+//
 // https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/
 //
 // Assuming we have four values:
@@ -21,21 +25,23 @@
 // If you were to look at this on a graph, you would see that the line connecting these two points is a sloping straight line.
 // This is the ideal value for our clamp.
 // ---------------------------------------------------------
-@function clamped($min-px, $max-px, $min-bp, $max-bp) {
+@function clamped($min-px, $max-px, $min-bp, $max-bp, $unit) {
     // The equation for a line is given by the slope-intercept form: `y = mx + b`.
     // In this notation, `m` is the slope of the line and denotes the rate of change for the `y` values (font size) relative to the `x` values (viewport width); meanwhile, `b` denotes the y-intercept.
     // To find the slope of this line (`m`), we get the difference between the two y-values (font sizes) and divide that by the difference between the x-values (viewport widths):
     // m = (maxFontSize - minFontSize) / (maxBreakpoint - minBreakpoint)
     $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
-    $y-intercept: decimal-round(rem($min-px - $slope * $min-bp), 2);
-
-    @debug $max-px;
+    $y-intercept: decimal-round($min-px - $slope * $min-bp, 2);
 
     // We'll need to express the slope using proper viewport units, which is done by multiplying the slope by 100 to get a percentage.
     $slope-vw: decimal-round($slope * 100, 2);
 
-    $min-rems: decimal-round(rem($min-px), 2);
-    $max-rems: decimal-round(rem($max-px), 2);
+    $min: decimal-round($min-px, 2);
+    $max: decimal-round($max-px, 2);
 
-    @return clamp(#{$min-rems}, #{$slope-vw}vw + #{$y-intercept}, #{$max-rems});
+    @if ($unit == rem) {
+        @return "clamp(#{rem($min)}, #{$slope-vw}vw + #{rem($y-intercept)}, #{rem($max)})";
+    } @else {
+        @return "clamp(#{$min}px, #{$slope-vw}vw + #{$y-intercept}px, #{$max}px)";
+    }
 }

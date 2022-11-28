@@ -4,7 +4,7 @@
 .o-media {
     $mobile-padding: 1.5rem;
     $desktop-padding: 0;
-    $media-spacing: ($global-spacing-s * 2);
+    $media-spacing: $global-spacing-s;
     $media-spacing-l: $global-spacing-m;
 
     display: flex;

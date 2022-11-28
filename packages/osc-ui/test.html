@@ -10,40 +10,40 @@
     <body>
         <style>
             .micro {
-                font-size: var(--scale-micro);
+                font-size: var(--font-scale-micro);
             }
             .milli {
-                font-size: var(--scale-milli);
+                font-size: var(--font-scale-milli);
             }
             .centi {
-                font-size: var(--scale-centi);
+                font-size: var(--font-scale-centi);
             }
             .zeta {
-                font-size: var(--scale-zeta);
+                font-size: var(--font-scale-zeta);
             }
             .epsilon {
-                font-size: var(--scale-epsilon);
+                font-size: var(--font-scale-epsilon);
             }
             .delta {
-                font-size: var(--scale-delta);
+                font-size: var(--font-scale-delta);
             }
             .gamma {
-                font-size: var(--scale-gamma);
+                font-size: var(--font-scale-gamma);
             }
             .beta {
-                font-size: var(--scale-beta);
+                font-size: var(--font-scale-beta);
             }
             .alpha {
-                font-size: var(--scale-alpha);
+                font-size: var(--font-scale-alpha);
             }
             .omega {
-                font-size: var(--scale-omega);
+                font-size: var(--font-scale-omega);
             }
             .kilo {
-                font-size: var(--scale-kilo);
+                font-size: var(--font-scale-kilo);
             }
             .mega {
-                font-size: var(--scale-mega);
+                font-size: var(--font-scale-mega);
             }
             .text-wrapper {
                 display: flex;
@@ -56,38 +56,32 @@
                 flex-shrink: 0;
                 font-size: 16px;
             }
+            .boxes {
+                display: flex;
+                gap: var(--space-scale-epsilon);
+            }
+            .boxes > div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+            }
+            .boxes p {
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+            }
+            .box {
+                --box-size: var(--font-scale-zeta);
+                width: var(--box-size);
+                height: var(--box-size);
+                background-color: var(--color-primary);
+            }
         </style>
-        <div class="o-container o-container--medium">
+        <div class="o-container o-container--large u-pb-110">
             <h1 class="alpha">Fluid Typescale Test!</h1>
 
-            <!-- <div class="text-wrapper">
-                <h1>Heading 1</h1>
-            </div>
-            <div class="text-wrapper">
-                <h2>Heading 2</h2>
-            </div>
-            <div class="text-wrapper">
-                <h3>Heading 3</h3>
-            </div>
-            <div class="text-wrapper">
-                <h4>Heading 4</h4>
-            </div>
-            <div class="text-wrapper">
-                <h5>Heading 5</h5>
-            </div>
-            <div class="text-wrapper">
-                <h6>Heading 6</h6>
-            </div>
-
-            <div class="text-wrapper">
-                <p class="t-font-zeta">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. A qui rem modi, id
-                    expedita ea ipsum iusto! Ullam molestias nostrum doloribus officia ut. Similique
-                    facere tempora aut id, optio nesciunt.
-                </p>
-            </div> -->
-
-            <section>
+            <section class="u-mb-110">
+                <h2>Font scale</h2>
                 <div class="text-wrapper">
                     <p class="t-font mega">Scale mega</p>
                 </div>
@@ -123,6 +117,72 @@
                 </div>
                 <div class="text-wrapper">
                     <p class="t-font micro">Scale micro</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Space scale</h2>
+                <p class="t-font-zeta">Follows the same size scale as our font.</p>
+                <p class="t-font-zeta">Only difference is it uses px instead of rems by default.</p>
+                <div class="boxes t-font-milli">
+                    <div>
+                        <p>Micro</p>
+                        <div class="box" style="--box-size: var(--space-scale-micro)"></div>
+                    </div>
+                    <div>
+                        <p>Milli</p>
+                        <div class="box" style="--box-size: var(--space-scale-milli)"></div>
+                    </div>
+
+                    <div>
+                        <p>Centi</p>
+                        <div class="box" style="--box-size: var(--space-scale-centi)"></div>
+                    </div>
+
+                    <div>
+                        <p>Zeta</p>
+                        <div class="box" style="--box-size: var(--space-scale-zeta)"></div>
+                    </div>
+
+                    <div>
+                        <p>Epsilon</p>
+                        <div class="box" style="--box-size: var(--space-scale-epsilon)"></div>
+                    </div>
+
+                    <div>
+                        <p>Delta</p>
+                        <div class="box" style="--box-size: var(--space-scale-delta)"></div>
+                    </div>
+
+                    <div>
+                        <p>Gamma</p>
+                        <div class="box" style="--box-size: var(--space-scale-gamma)"></div>
+                    </div>
+
+                    <div>
+                        <p>Beta</p>
+                        <div class="box" style="--box-size: var(--space-scale-beta)"></div>
+                    </div>
+
+                    <div>
+                        <p>Alpha</p>
+                        <div class="box" style="--box-size: var(--space-scale-alpha)"></div>
+                    </div>
+
+                    <div>
+                        <p>Omega</p>
+                        <div class="box" style="--box-size: var(--space-scale-omega)"></div>
+                    </div>
+
+                    <div>
+                        <p>Kilo</p>
+                        <div class="box" style="--box-size: var(--space-scale-kilo)"></div>
+                    </div>
+
+                    <div>
+                        <p>Mega</p>
+                        <div class="box" style="--box-size: var(--space-scale-mega)"></div>
+                    </div>
                 </div>
             </section>
         </div>
