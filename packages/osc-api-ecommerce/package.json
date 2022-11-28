@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"There is no spoon\" && exit 0",
-    "dev": "nodemon -e ts,graphql"
+    "dev": "nodemon"
   },
   "keywords": [],
   "author": "",
@@ -51,7 +51,7 @@
     "watch": [
       "src"
     ],
-    "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/index.ts -e ts,graphql ",
-    "ext": "ts, js"
+    "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/index.ts ",
+    "ext": "ts, graphql"
   }
 }
