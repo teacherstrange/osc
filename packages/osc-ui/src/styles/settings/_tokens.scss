@@ -24,7 +24,20 @@ $colors: (
 );
 $fluid-scale: (
     base-font-size: 10,
-    steps: (micro, milli, centi, zeta, epsilon, delta, gamma, beta, alpha, omega, kilo, mega),
+    steps: (
+        micro,
+        milli,
+        centi,
+        zeta,
+        epsilon,
+        delta,
+        gamma,
+        beta,
+        alpha,
+        omega,
+        kilo,
+        mega
+    ),
     min-viewport: (
         width: 375,
         font-size: 16,
@@ -48,8 +61,18 @@ $media-queries: (
     mq-desk--lrg: 1440
 );
 $typography: (
-    font-primary: ("Roboto", helvetica, arial, sans-serif),
-    font-secondary: ("Roboto Condensed", helvetica, arial, sans-serif),
+    font-primary: (
+        "Roboto",
+        helvetica,
+        arial,
+        sans-serif
+    ),
+    font-secondary: (
+        "Roboto Condensed",
+        helvetica,
+        arial,
+        sans-serif
+    ),
     weight-reg: 400,
     weight-bold: 700
 );
