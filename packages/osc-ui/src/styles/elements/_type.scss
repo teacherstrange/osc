@@ -45,5 +45,5 @@ textarea {
 input,
 select,
 textarea {
-    font-size: var(--scale-zeta);
+    @include font-size(var(--scale-zeta));
 }
