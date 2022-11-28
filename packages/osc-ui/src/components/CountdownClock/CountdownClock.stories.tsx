@@ -18,8 +18,11 @@ export default {
         endDate: {
             description: 'The date when the timer should end'
         },
+        onComplete: {
+            description: 'Display onComplete message or link'
+        },
         icon: {
-            description: 'Optional icon that can be rendered alonside the timer'
+            description: 'Optional icon that can be rendered alongside the timer'
         },
         name: {
             description: 'Optional title that can be given to the timer'
@@ -33,25 +36,34 @@ export const Primary = template.bind({});
 export const WithIcon = template.bind({});
 export const WithTitle = template.bind({});
 export const WithMultipleTimers = template.bind({});
+export const FinishedTimer = template.bind({});
+
+const date = new Date();
+
+const TWO_DAYS = new Date(date.getTime() + 24 * 60 * 60 * 1000 * 2);
+const DAY = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+const HOUR = new Date(date.getTime() + 1000 * 60 * 60);
+const MINUTE = new Date(date.getTime() + 60 * 1000);
+const THREE_SECONDS = new Date(date.getTime() + 1000 * 3);
 
 Primary.args = {
-    endDate: new Date('Jan 21,2023, 19:20:00')
+    endDate: TWO_DAYS
 };
 WithIcon.args = {
-    endDate: new Date('March 11,2023, 19:20:00'),
+    endDate: HOUR,
     icon: <ClockIcon />
 };
 WithTitle.args = {
-    endDate: new Date('Nov 11,2023, 19:20:00'),
+    endDate: MINUTE,
     name: "Don't miss out!"
 };
 WithMultipleTimers.args = [
     {
-        endDate: new Date('May 11,2023, 19:20:00'),
+        endDate: DAY,
         name: 'Timer 1'
     },
     {
-        endDate: new Date('December 25,2022, 19:20:00'),
+        endDate: THREE_SECONDS,
         name: 'Timer 2'
     }
 ];
@@ -65,6 +77,36 @@ WithMultipleTimers.decorators = [
                 </div>
                 <div style={{ margin: '1em 0' }}>
                     <CountdownClock {...WithMultipleTimers.args[1]} />
+                </div>
+            </>
+        );
+    }
+];
+
+FinishedTimer.args = [
+    {
+        endDate: THREE_SECONDS,
+        onComplete: 'Sale is over!'
+    },
+    {
+        endDate: THREE_SECONDS,
+        onComplete: (
+            <div>
+                <a href="/">Sale Finished! See other offers</a>
+            </div>
+        )
+    }
+];
+
+FinishedTimer.decorators = [
+    () => {
+        return (
+            <>
+                <div style={{ margin: '1em 0' }}>
+                    <CountdownClock {...FinishedTimer.args[0]} />
+                </div>
+                <div style={{ margin: '1em 0' }}>
+                    <CountdownClock {...FinishedTimer.args[1]} />
                 </div>
             </>
         );

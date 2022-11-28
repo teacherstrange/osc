@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CountdownClockInner } from './CountdownClockInner';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -10,20 +10,21 @@ const SECOND = 1000;
 export interface Props {
     endDate: number;
     icon?: any;
+    onComplete: string | React.ReactNode;
     name?: string;
 }
 
 interface Timer {
-    active: boolean;
+    status: 'inactive' | 'active' | 'complete';
     days: string;
     hours: string;
     minutes: string;
     seconds: string;
 }
 
-export const CountdownClock: FC<Props> = ({ endDate, icon, name }: Props) => {
+export const CountdownClock: FC<Props> = ({ endDate, icon, name, onComplete }: Props) => {
     const [timer, setTimer] = useState<Timer>({
-        active: false,
+        status: 'inactive',
         days: '0',
         hours: '0',
         minutes: '0',
@@ -41,7 +42,7 @@ export const CountdownClock: FC<Props> = ({ endDate, icon, name }: Props) => {
     const runTimer = () => {
         setTimer((prevState) => ({
             ...prevState,
-            active: true,
+            status: 'active',
             days: days() < 10 ? `0${days()}` : `${days()}`,
             hours: hours() < 10 ? `0${hours()}` : `${hours()}`,
             minutes: minutes() < 10 ? `0${minutes()}` : `${minutes()}`,
@@ -52,6 +53,7 @@ export const CountdownClock: FC<Props> = ({ endDate, icon, name }: Props) => {
     const endTimer = () => {
         setTimer((prevState) => ({
             ...prevState,
+            status: 'complete',
             days: '0',
             hours: '0',
             minutes: '0',
@@ -82,7 +84,15 @@ export const CountdownClock: FC<Props> = ({ endDate, icon, name }: Props) => {
     }, []);
 
     // Only return timer once values have been set
-    if (!timer.active) return null;
+    if (timer.status === 'inactive') return null;
 
-    return <CountdownClockInner icon={icon} name={name} timer={timer} />;
+    return (
+        <CountdownClockInner
+            icon={icon}
+            onComplete={onComplete}
+            name={name}
+            status={timer.status}
+            timer={timer}
+        />
+    );
 };

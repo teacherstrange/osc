@@ -6,6 +6,8 @@ import React, { Fragment } from 'react';
 export interface Props {
     icon: any;
     name?: string;
+    onComplete: string | React.ReactNode;
+    status: string;
     timer: any;
 }
 
@@ -14,7 +16,13 @@ const HOURS: string = 'h';
 const MINUTES: string = 'm';
 const SECONDS: string = 's';
 
-export const CountdownClockInner: FC<Props> = ({ icon, name, timer }: Props) => {
+export const CountdownClockInner: FC<Props> = ({
+    onComplete,
+    icon,
+    name,
+    status,
+    timer
+}: Props) => {
     const days =
         // If there are no days then return null
         timer.days !== '00' ? (
@@ -52,10 +60,16 @@ export const CountdownClockInner: FC<Props> = ({ icon, name, timer }: Props) => 
                     {name ? <div className="c-countdown-clock__title">{name}</div> : null}
                     <div className="c-countdown-clock__timer">
                         {countdownIcon}
-                        {days}
-                        {hours}
-                        {minutes}
-                        {seconds}
+                        {status === 'active' ? (
+                            <div className="c-countdown-clock__timer--inner">
+                                {days}
+                                {hours}
+                                {minutes}
+                                {seconds}
+                            </div>
+                        ) : (
+                            <div>{onComplete}</div>
+                        )}
                     </div>
                 </div>
             ) : null}

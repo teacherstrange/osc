@@ -14,8 +14,10 @@ const MINUTES = 'm';
 const SECONDS = 's';
 
 describe('Countdown clock component', () => {
-    const setup = ({ endDate, icon, name }: Props) =>
-        render(<CountdownClock endDate={endDate} icon={icon} name={name} />);
+    const setup = ({ endDate, icon, name, onComplete }: Props) =>
+        render(
+            <CountdownClock endDate={endDate} icon={icon} name={name} onComplete={onComplete} />
+        );
     const setDate = (length) => new Date().getTime() + length;
     const setPastDate = (length) => new Date().getTime() - length;
 
@@ -43,7 +45,8 @@ describe('Countdown clock component', () => {
     test('should render a countdown timer when the date is in the future', () => {
         const date = setDate(DAY);
         setup({
-            endDate: date
+            endDate: date,
+            onComplete: 'Time up'
         });
 
         const result = screen.getByRole('timer');
@@ -54,7 +57,7 @@ describe('Countdown clock component', () => {
     test('should not render a countdown timer when the date is in the past', () => {
         const date = setPastDate(DAY);
 
-        setup({ endDate: date });
+        setup({ endDate: date, onComplete: 'Time up' });
 
         expect(screen.queryByRole('timer')).not.toBeInTheDocument();
     });
@@ -62,7 +65,7 @@ describe('Countdown clock component', () => {
     test('should call setInterval and run every second when a valid future date is set', () => {
         const date = setDate(DAY);
         const intervalSpy = vi.spyOn(global, 'setInterval');
-        setup({ endDate: date });
+        setup({ endDate: date, onComplete: 'Time up' });
 
         expect(intervalSpy).toHaveBeenCalledTimes(1);
         expect(intervalSpy).toHaveBeenCalledWith(expect.any(Function), 1000);
@@ -72,7 +75,8 @@ describe('Countdown clock component', () => {
         const date = setDate(DAY);
 
         setup({
-            endDate: date
+            endDate: date,
+            onComplete: 'Time up'
         });
         const daysOnFirstRender = screen.getByText('d', { exact: true }).previousSibling;
 
@@ -95,7 +99,8 @@ describe('Countdown clock component', () => {
         const date = setDate(MINUTE);
 
         setup({
-            endDate: date
+            endDate: date,
+            onComplete: 'Time up'
         });
 
         expect(screen.queryByText(DAYS, { exact: true })).not.toBeInTheDocument();
@@ -107,7 +112,8 @@ describe('Countdown clock component', () => {
         const date = setDate(HOUR * 2);
 
         setup({
-            endDate: date
+            endDate: date,
+            onComplete: 'Time up'
         });
 
         expect(screen.queryByText(DAYS, { exact: true })).not.toBeInTheDocument();
@@ -122,7 +128,8 @@ describe('Countdown clock component', () => {
 
         const { container } = setup({
             endDate: date,
-            icon: <Icon />
+            icon: <Icon />,
+            onComplete: 'Time up'
         });
 
         expect(container.querySelectorAll('svg').length).toBe(1);
@@ -134,10 +141,28 @@ describe('Countdown clock component', () => {
 
         setup({
             endDate: date,
-            name: title
+            name: title,
+            onComplete: 'Time up'
         });
 
         expect(screen.getByText(title)).toBeInTheDocument();
         expect(screen.getByText(title)).toHaveTextContent(title);
+    });
+    test('should render onComplete message once the timer is finished', () => {
+        const date = setDate(SECOND);
+        const title = 'Time is running out!';
+
+        setup({
+            endDate: date,
+            name: title,
+            onComplete: 'Time up'
+        });
+
+        act(() => {
+            vi.runOnlyPendingTimers();
+            vi.runOnlyPendingTimers();
+        });
+
+        expect(screen.queryByText(/Time up/i, { exact: true })).toHaveTextContent('Time up');
     });
 });
