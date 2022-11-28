@@ -10,13 +10,13 @@
         animation-duration: 400ms;
         animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         will-change: transform, opacity;
-    }
 
-    &__content:focus {
-        box-shadow:
-            hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
-            hsl(206deg 22% 7% / 20%) 0 10px 20px -15px,
-            0 0 0 2px rgb(237 237 237);
+        &:focus {
+            box-shadow:
+                hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
+                hsl(206deg 22% 7% / 20%) 0 10px 20px -15px,
+                0 0 0 2px rgb(237 237 237);
+        }
     }
 
     &__close {
@@ -30,14 +30,14 @@
         height: 25px;
         border-radius: 100%;
         font-family: inherit;
-    }
 
-    &__close:hover {
-        background-color: rgb(237 237 237);
-    }
+        &:hover {
+            background-color: rgb(237 237 237);
+        }
 
-    &__close:focus {
-        box-shadow: 0 0 0 2px rgb(237 237 237);
+        &:focus {
+            box-shadow: 0 0 0 2px rgb(237 237 237);
+        }
     }
 
     &__icon-button {
@@ -50,13 +50,13 @@
         border-radius: 100%;
         color: rgb(0 0 0);
         font-family: inherit;
-    }
 
-    &__icon-button:hover {
-        background-color: rgb(237 237 237);
-    }
+        &:hover {
+            background-color: rgb(237 237 237);
+        }
 
-    &__icon-button:focus {
-        box-shadow: 0 0 0 2px rgb(0 0 0);
+        &:focus {
+            box-shadow: 0 0 0 2px rgb(0 0 0);
+        }
     }
 }
