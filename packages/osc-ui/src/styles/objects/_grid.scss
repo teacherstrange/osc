@@ -24,15 +24,15 @@
     grid-auto-rows: $global-spacing;
     grid-template-columns: repeat(1, 1fr);
 
-    @include mq(get("mq-mob--med", $media-queries), min) {
+    @include mq(mq-token("mq-mob--med"), min) {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @include mq(get("mq-tab", $media-queries), min) {
+    @include mq(mq-token("mq-tab"), min) {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @include mq(get("mq-desk", $media-queries), min) {
+    @include mq(mq-token("mq-desk",), min) {
         grid-template-columns: repeat(5, 1fr);
     }
 
@@ -44,7 +44,7 @@
     &--half {
         grid-auto-rows: auto;
 
-        @include mq(get("mq-mob--lrg", $media-queries), min) {
+        @include mq(mq-token("mq-mob--lrg"), min) {
             grid-template-columns: repeat(2, 1fr);
             gap: $global-spacing;
         }
@@ -53,7 +53,7 @@
     &--thirds {
         grid-auto-rows: auto;
 
-        @include mq(get("mq-tab", $media-queries), min) {
+        @include mq(mq-token("mq-tab"), min) {
             grid-template-columns: repeat(3, 1fr);
             gap: $global-spacing;
         }
@@ -62,11 +62,11 @@
     &--quarts {
         grid-auto-rows: auto;
 
-        @include mq(get("mq-mob--lrg", $media-queries), min) {
+        @include mq(mq-token("mq-mob--lrg"), min) {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        @include mq(get("mq-tab--lrg", $media-queries), min) {
+        @include mq(mq-token("mq-tab--lrg"), min) {
             grid-template-columns: repeat(4, 1fr);
         }
     }
@@ -74,7 +74,7 @@
     &--fifths {
         grid-auto-rows: auto;
 
-        @include mq(get("mq-tab", $media-queries), min) {
+        @include mq(mq-token("mq-tab"), min) {
             grid-template-columns: repeat(5, 1fr);
             gap: $global-spacing;
         }
@@ -83,7 +83,7 @@
     &--three-fifths {
         grid-auto-rows: auto;
 
-        @include mq(get("mq-tab", $media-queries), min) {
+        @include mq(mq-token("mq-tab"), min) {
             grid-template-columns: 60% 40%;
             gap: $global-spacing;
         }
@@ -92,7 +92,7 @@
     &--three-quarts {
         grid-auto-rows: auto;
 
-        @include mq(get("mq-tab", $media-queries), min) {
+        @include mq(mq-token("mq-tab"), min) {
             grid-template-columns: 25% 70%;
             gap: $global-spacing;
         }
@@ -103,11 +103,11 @@
         grid-template-columns: repeat(2, 1fr);
         gap: $global-spacing-s;
 
-        @include mq(get("mq-tab", $media-queries), min) {
+        @include mq(mq-token("mq-tab"), min) {
             grid-template-columns: repeat(4, 1fr);
         }
 
-        @include mq(get("mq-desk", $media-queries)--lrg, min) {
+        @include mq(mq-token("mq-desk")--lrg, min) {
             grid-template-columns: repeat(8, 1fr);
         }
     }
@@ -117,15 +117,15 @@
         grid-template-columns: repeat(1, 1fr);
         gap: $global-spacing;
 
-        @include mq(get("mq-mob--med", $media-queries)) {
+        @include mq(mq-token("mq-mob--med")) {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        @include mq(get("mq-tab", $media-queries)) {
+        @include mq(mq-token("mq-tab")) {
             grid-template-columns: repeat(3, 1fr);
         }
 
-        @include mq(get("mq-tab--lrg", $media-queries)) {
+        @include mq(mq-token("mq-tab--lrg")) {
             grid-template-columns: repeat(var(--grid-count), 1fr);
         }
     }
@@ -156,7 +156,7 @@
     &.is-spaced {
         gap: $global-spacing;
 
-        @include mq(get("mq-mob--lrg", $media-queries), min) {
+        @include mq(mq-token("mq-mob--lrg"), min) {
             gap: $global-spacing-l;
         }
     }
@@ -186,7 +186,7 @@
 
         &:last-child {
             [data-grid-count="3"] & {
-                @include mq((get("mq-mob--med", $media-queries), get("mq-tab", $media-queries))) {
+                @include mq((mq-token("mq-mob--med"), mq-token("mq-tab"))) {
                     grid-column: 1 / span 2;
                 }
             }

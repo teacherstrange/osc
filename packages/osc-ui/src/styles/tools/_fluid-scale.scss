@@ -21,18 +21,18 @@
 
 @mixin fluid-scale($prefix, $unit: rem) {
     // Get the from our tokens
-    $steps: get("steps", $fluid-scale);
+    $steps: scale-token("steps");
     // Get the position of the value we want to use as the base for the scale
     // This will be used to set the correct exponent for each step of the scale
     $base-index: list.index($steps, "zeta");
 
     // Get our size values from the tokens
-    $min-viewport: get("min-viewport.width", $fluid-scale);
-    $max-viewport: get("max-viewport.width", $fluid-scale);
-    $min-font-size: get("min-viewport.font-size", $fluid-scale);
-    $max-font-size: get("max-viewport.font-size", $fluid-scale);
-    $min-scale: get("min-viewport.scale", $fluid-scale);
-    $max-scale: get("max-viewport.scale", $fluid-scale);
+    $min-viewport: scale-token("min-viewport.width");
+    $max-viewport: scale-token("max-viewport.width");
+    $min-font-size: scale-token("min-viewport.font-size");
+    $max-font-size: scale-token("max-viewport.font-size");
+    $min-scale: scale-token("min-viewport.scale");
+    $max-scale: scale-token("max-viewport.scale");
 
     @for $i from 1 through length($steps) {
         $step: list.nth($steps, $i);

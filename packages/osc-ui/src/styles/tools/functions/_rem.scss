@@ -1,6 +1,6 @@
 @use "sass:math";
 @use "../../settings/tokens" as *;
-@use "./get" as *;
+@use "./get-tokens" as *;
 
 // ---------------------------------------------------------
 // rem
@@ -16,7 +16,7 @@
 // ---------------------------------------------------------
 
 @function rem($size) {
-    $base-size: get("base-font-size", $fluid-scale);
+    $base-size: scale-token("base-font-size");
     $rem: math.div($size, $base-size) * 1rem;
 
     @return $rem;

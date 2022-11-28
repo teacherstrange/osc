@@ -1,0 +1,41 @@
+@use "../../settings/tokens" as *;
+@use "./get" as *;
+
+// ---------------------------------------------------------
+// A collection of wrapper functions to get tokens from the theme.
+//
+// Search for any value contained within the token map, by using
+// dot notation as the key argument
+//
+// Required arguments:
+// `$key` String
+//
+// Example of use:
+// color('primary')
+// container('container-size-sml');
+//
+// Dependencies:
+// get
+//
+// @return Anything
+// ---------------------------------------------------------
+
+@function color-token($key) {
+    @return get($key, $colors);
+}
+
+@function container-token($key) {
+    @return get($key, $containers);
+}
+
+@function scale-token($key) {
+    @return get($key, $fluid-scale);
+}
+
+@function mq-token($key) {
+    @return get($key, $media-queries);
+}
+
+@function typography-token($key) {
+    @return get($key, $typography);
+}

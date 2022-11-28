@@ -38,7 +38,7 @@
         }
 
         &--offset {
-            @include mq(get("mq-desk--med", $media-queries)) {
+            @include mq(mq-token("mq-desk--med")) {
                 padding-left: $global-spacing-l;
 
                 /* stylelint-disable-next-line plugin/selector-bem-pattern */
@@ -57,7 +57,7 @@
             padding: 0;
         }
 
-        @include mq(get("mq-tab--lrg", $media-queries), min) {
+        @include mq(mq-token("mq-tab--lrg"), min) {
             &--1-4 {
                 max-width: 25%;
             }
@@ -81,7 +81,7 @@
     }
 
     &__content {
-        @include mq(get("mq-tab--lrg", $media-queries)) {
+        @include mq(mq-token("mq-tab--lrg")) {
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
             [class*="--alternate"] & {
                 padding-right: 0;
@@ -90,7 +90,7 @@
     }
 
     &__img {
-        @include mq(get("mq-tab--lrg", $media-queries)) {
+        @include mq(mq-token("mq-tab--lrg")) {
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
             [class*="--alternate"] & {
                 padding-right: 0;

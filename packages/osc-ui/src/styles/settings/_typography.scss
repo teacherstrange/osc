@@ -27,11 +27,11 @@
 //
 //\*----------------------------------*/
 
-$font-primary: get("font-primary", $typography);
-$font-secondary: get("font-secondary", $typography);
-$weight-reg: get("weight-reg", $typography);
-$weight-bold: get("weight-bold", $typography);
+$font-primary: typography-token("font-primary");
+$font-secondary: typography-token("font-secondary");
+$weight-reg: typography-token("weight-reg");
+$weight-bold: typography-token("weight-bold");
 
 // Base Sizes
-$base-font-size: get("base-font-size", $fluid-scale);
-$base-line-height: get("max-viewport.scale", $fluid-scale);
+$base-font-size: scale-token("base-font-size");
+$base-line-height: scale-token("max-viewport.scale");

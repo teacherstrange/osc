@@ -21,7 +21,7 @@
 
 // SETUP CSS COLOUR VARIABLES
 :root {
-    @each $name, $value in get(default, $colors) {
+    @each $name, $value in color-token("default") {
         --color-#{$name}: #{$value};
     }
 }
