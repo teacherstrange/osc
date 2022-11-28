@@ -16,7 +16,7 @@
 
 :root {
     // We're using px to define the values in this scale so we don't adjust the spacing along with the font size
-    // This helps to keep the spacing from increasing along with the font size if a user changes their prefernces.
+    // This helps to keep the spacing from increasing along with the font size if a user changes their preferences.
     // Ref: https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/#strategic-unit-deployment
     @include fluid-scale("space", "px");
 }
@@ -37,4 +37,3 @@ $global-spacing-relative: var(--space-font-zeta);
 $global-spacing-relative-m: var(--font-scale-epsilon);
 $global-spacing-relative-l: var(--font-scale-delta);
 $global-spacing-relative-xl: var(--font-scale-gamma);
-

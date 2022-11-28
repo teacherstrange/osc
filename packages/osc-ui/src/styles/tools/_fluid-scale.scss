@@ -18,7 +18,6 @@
 // @include fluid-scale('space', 'px');
 //\*----------------------------------*/
 
-
 @mixin fluid-scale($prefix, $unit: rem) {
     // Get the from our tokens
     $steps: scale-token("steps");

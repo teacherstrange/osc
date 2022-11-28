@@ -14,6 +14,7 @@
 //
 // @include font-size($size-alpha);
 // @include font-size($size-alpha, $line-height); // overrides line-height
+// @include font-size($size-alpha, null); // overrides line-height
 
 @mixin font-size($font-size, $line-height: $base-line-height) {
     font-size: $font-size;

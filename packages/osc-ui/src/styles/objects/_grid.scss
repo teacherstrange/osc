@@ -32,7 +32,7 @@
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @include mq(mq-token("mq-desk",), min) {
+    @include mq(mq-token("mq-desk"), min) {
         grid-template-columns: repeat(5, 1fr);
     }
 
@@ -107,7 +107,7 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
-        @include mq(mq-token("mq-desk")--lrg, min) {
+        @include mq(mq-token("mq-desk--lrg"), min) {
             grid-template-columns: repeat(8, 1fr);
         }
     }

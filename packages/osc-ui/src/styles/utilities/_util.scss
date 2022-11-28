@@ -101,7 +101,7 @@ $osc-config: deep-map-merge(
     }
 }
 
-@include mq(mq-token('mq-tab'), max) {
+@include mq(mq-token("mq-tab"), max) {
     .u-plr-0\@tab {
         padding-right: 0;
         padding-left: 0;
@@ -128,31 +128,31 @@ $osc-config: deep-map-merge(
 
 .u-hidden {
     &-from\@tab {
-        @include mq(mq-token('mq-tab--lrg')) {
+        @include mq(mq-token("mq-tab--lrg")) {
             display: none;
         }
     }
 
     &-from\@desk-med {
-        @include mq(mq-token('mq-desk--med')) {
+        @include mq(mq-token("mq-desk--med")) {
             display: none;
         }
     }
 
     &-until\@tab {
-        @include mq(mq-token('mq-tab'), max) {
+        @include mq(mq-token("mq-tab"), max) {
             display: none;
         }
     }
 
     &-until\@desk {
-        @include mq(mq-token('mq-desk'), max) {
+        @include mq(mq-token("mq-desk"), max) {
             display: none;
         }
     }
 
     &-until\@desk-med {
-        @include mq(mq-token('mq-desk--med'), max) {
+        @include mq(mq-token("mq-desk--med"), max) {
             display: none;
         }
     }
@@ -160,7 +160,7 @@ $osc-config: deep-map-merge(
 
 // generate classes for each custom property in settings/_colors.scss
 // we're assuming the default map will include the same keys as the other themes
-@each $name, $value in color-token('default') {
+@each $name, $value in color-token("default") {
     [data-t-colour="#{$name}"],
     .u-colour-#{$name} {
         color: var(--color-#{$name});
@@ -168,7 +168,7 @@ $osc-config: deep-map-merge(
 }
 
 // Backgrounds
-@each $name, $value in color-token('default') {
+@each $name, $value in color-token("default") {
     [data-bg-colour="#{$name}"] {
         background-color: var(--color-#{$name});
     }
