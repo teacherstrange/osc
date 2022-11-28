@@ -1,65 +1,22 @@
-import { ApolloServer } from 'apollo-server-express';
-import { ApolloGateway, IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
 import * as dotenv from 'dotenv';
 import express from 'express';
 import { expressjwt } from 'express-jwt';
+import { server } from '~/server';
+import { env } from '~/types/environment';
 
 dotenv.config();
 const app = express();
 
 app.use(
     expressjwt({
-        secret: process.env.JWT_SECRET!,
-        audience: process.env.JWT_AUDIENCE!,
+        secret: env.JWT_SECRET!,
+        audience: env.JWT_AUDIENCE!,
         algorithms: ['HS256'],
         credentialsRequired: false
     })
 );
 
-// If we're in local development we're going to bypass the managed federation and use Introspect and Compose
-// We do not want to provide a routing url to apollo studio pointing at our local as it's not really built for it
-const gateway =
-    process.env.NODE_ENV === 'development'
-        ? new ApolloGateway({
-              supergraphSdl: new IntrospectAndCompose({
-                  subgraphs: [{ name: 'OSC-Auth', url: process.env.AUTH_API_URL }]
-              }),
-              buildService({ name, url }) {
-                  return new RemoteGraphQLDataSource({
-                      url,
-                      willSendRequest({ request, context }) {
-                          request?.http?.headers.set(
-                              'user',
-                              context.user ? JSON.stringify(context.user) : ''
-                          );
-                      }
-                  });
-              }
-          })
-        : new ApolloGateway({
-              buildService({ name, url }) {
-                  return new RemoteGraphQLDataSource({
-                      url,
-                      willSendRequest({ request, context }) {
-                          request?.http?.headers.set(
-                              'user',
-                              context.user ? JSON.stringify(context.user) : ''
-                          );
-                      }
-                  });
-              }
-          });
-
-const server = new ApolloServer({
-    gateway,
-    context: ({ req }) => {
-        // @ts-ignore
-        const user = req.auth?.user || null;
-        return { user };
-    }
-});
-
-async function startServer(server: ApolloServer) {
+async function startServer() {
     await server.start();
     server.applyMiddleware({ app });
     app.listen({ port: 4000 }, () =>
@@ -67,4 +24,4 @@ async function startServer(server: ApolloServer) {
     );
 }
 
-void startServer(server);
+void startServer();
