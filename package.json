@@ -5,6 +5,7 @@
     "osc-academic-hub": "file:packages/osc-academic-hub",
     "osc-api": "file:packages/osc-api",
     "osc-api-auth": "file:packages/osc-api-auth",
+    "osc-api-ecommerce": "file:packages/osc-api-ecommerce",
     "osc-api-gateway": "file:packages/osc-api-gateway",
     "osc-ecommerce": "file:packages/osc-ecommerce",
     "osc-ui": "file:packages/osc-ui"
@@ -62,7 +63,9 @@
     "packages/osc-ui",
     "packages/osc-ecommerce",
     "packages/osc-academic-hub",
+    "packages/osc-api",
     "packages/osc-api-auth",
+    "packages/osc-api-ecommerce",
     "packages/osc-api-gateway",
     "packages/osc-api"
   ],
