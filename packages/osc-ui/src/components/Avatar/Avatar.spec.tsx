@@ -9,6 +9,9 @@ const NAME = 'Colm Tuite';
 
 describe('Avatar component', () => {
     const originalGlobalImage = window.Image;
+    const initial = NAME.split(' ')
+        .map((x) => x.charAt(0).toUpperCase())
+        .join('');
 
     beforeAll(() => {
         (window.Image as any) = class MockImage {
