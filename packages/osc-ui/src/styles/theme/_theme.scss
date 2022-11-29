@@ -25,3 +25,9 @@
         --color-#{$name}: #{$value};
     }
 }
+
+.theme--dark {
+    @each $name, $value in color-token("dark") {
+        --color-#{$name}: #{$value};
+    }
+}

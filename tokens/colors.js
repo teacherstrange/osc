@@ -44,6 +44,8 @@ module.exports = {
         'shadow-l': colorShadowL
     },
     dark: {
-        primary: colorPink
+        primary: colorPink,
+        secondary: colorWhite,
+        tertiary: colorNavy
     }
 };
