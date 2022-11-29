@@ -1,5 +1,5 @@
 /* stylelint-disable all */
-@use "../../styles/settings/mq" as *;
+@use "../../styles/tools/functions/get-tokens" as *;
 @use "../../styles/tools/mq" as *;
 
 .embla {
@@ -55,15 +55,15 @@
         overflow: visible;
     }
 
-    @include mq($mq-mob--sml) {
+    @include mq(mq-token('mq-mob')) {
         flex: 0 0 100%;
     }
 
-    @include mq($mq-mob--lrg) {
+    @include mq(mq-token('mq-mob--lrg')) {
         flex: 0 0 50%;
     }
 
-    @include mq($mq-tab) {
+    @include mq(mq-token('mq-tab')) {
         flex: 0 0 var(--embla__slidesPerPage);
     }
 }
