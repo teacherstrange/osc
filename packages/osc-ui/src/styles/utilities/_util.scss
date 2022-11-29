@@ -8,94 +8,153 @@
 //\*----------------------------------*/
 //
 //  A collection of utilities that allow for quickly applying small styling tweaks to components.
-//  NOTE: Use Sparingly.
+//  NOTE: We are using PurgeCss to remove unused classes however please use this file sparingly.
 //
 //\*----------------------------------*/
 //
 // Usage:
-// <div class="u-mt-10"></div>
+// <div class="u-mt-micro"></div>
 
-$property-map: (
-    margin-top: "mt",
-    margin-right: "mr",
-    margin-bottom: "mb",
-    margin-left: "ml",
-    margin: "m",
-    padding-top: "pt",
-    padding-right: "pr",
-    padding-bottom: "pb",
-    padding-left: "pl",
-    padding: "p",
-    border-radius: "br"
-);
+@function scales-map($scale: 'fixed') {
+    $map: ();
 
-$osc-config: deep-map-merge(
-    (
-        margin-top: (
-            0,
-            10,
-            20
-        ),
-        margin-bottom: (
-            0,
-            10,
-            20,
-            30,
-            50,
-            110,
-            210
-        ),
-        margin-right: (
-            5,
-            10
-        ),
-        margin-left: (
-            0,
-            5,
-            10
-        ),
-        margin: (),
-        padding-top: (
-            10,
-            30,
-            50,
-            110,
-            210
-        ),
-        padding-right: (
-            0
-        ),
-        padding-bottom: (
-            10,
-            30,
-            50,
-            110,
-            210
-        ),
-        padding-left: (
-            0
-        ),
-        padding: (
-            0,
-            15
-        ),
-        border-radius: (
-            10
+    @each $step in scale-token("steps") {
+        @if ($scale == 'relative') {
+            $map: map.set($map, $step, var(--font-scale-#{$step}));
+        } @else {
+            $map: map.set($map, $step, var(--space-scale-#{$step}));
+        }
+    }
+
+    @return $map;
+}
+
+$osc-config: (
+    margin-top: (
+        prefix: "mt",
+        values: (
+            scales-map('relative')
         )
     ),
-    $osc-config,
-    true
+    margin-bottom: (
+        prefix: "mb",
+        values: (
+            scales-map('relative')
+        )
+    ),
+    margin-right: (
+        prefix: "mr",
+        values: (
+            scales-map('relative')
+        )
+    ),
+    margin-left: (
+        prefix: "ml",
+        values: (
+            scales-map('relative')
+        )
+    ),
+    margin: (
+        prefix: "m",
+        values: (
+            scales-map('relative')
+        )
+    ),
+    padding-top: (
+        prefix: "pt",
+        values: (
+            scales-map()
+        )
+    ),
+    padding-right: (
+        prefix: "pr",
+        values: (
+            scales-map()
+        )
+    ),
+    padding-bottom: (
+        prefix: "pb",
+        values: (
+            scales-map()
+        )
+    ),
+    padding-left: (
+        prefix: "pl",
+        values: (
+            scales-map()
+        )
+    ),
+    padding: (
+        prefix: "p",
+        values: (
+            scales-map()
+        )
+    ),
+    border-radius: (
+        prefix: "br",
+        values: (
+            10px
+        )
+    ),
+    line-height: (
+        prefix: "lh",
+        values: (
+            "1": 1,
+            "1-25": 1.25,
+            "1-33": 1.33,
+            "1-5": 1.5,
+            "1-75": 1.75
+        )
+    ),
+    overflow: (
+        prefix: "ov",
+        values: (
+            auto,
+            hidden,
+            visible,
+        )
+    ),
+    font-weight: (
+        prefix: "text",
+        values: (
+            "bold": $weight-bold,
+            "reg": $weight-reg,
+        )
+    ),
+    font-style: (
+        prefix: "text",
+        values: (
+            italic,
+        )
+    ),
+    text-transform: (
+        prefix: "text",
+        values: (
+            uppercase,
+            lowercase,
+            underline,
+        )
+    ),
+    text-align: (
+        prefix: "text",
+        values: (
+            center,
+            right,
+            left,
+        )
+    ),
 );
 
 @each $property, $values in $osc-config {
-    $shorthand: map.get($property-map, $property);
+    $prefix: map.get($values, prefix);
+    $values: map.get($values, values);
 
-    @each $num in $values {
-        .u-#{$shorthand}-#{$num} {
-            @if is-number($num) {
-                #{$property}: #{$num}px;
+    @each $key, $value in $values {
+        .u-#{$prefix}-#{strip-unit($key)} {
+            @if($value) {
+                #{$property}: $value;
             } @else {
-                #{$property}: #{$num};
+                #{$property}: $key;
             }
         }
     }
@@ -106,9 +165,6 @@ $osc-config: deep-map-merge(
         padding-right: 0;
         padding-left: 0;
     }
-}
-.no-padding {
-    padding: 0 !important;
 }
 
 .sr-only:not(:focus):not(:active) {
@@ -174,79 +230,18 @@ $osc-config: deep-map-merge(
     }
 }
 
+// Text utilities which can't be generated by our map
 // Usage:
-// <div class="u-text-bold"></div>
+// <div class="u-text-reset"></div>
 .u-text {
-    &-bold {
-        font-weight: $weight-bold;
-    }
-
-    &-reg {
-        font-weight: $weight-reg;
-    }
-
-    &-italic {
-        font-style: italic;
-    }
-
-    &-upper {
-        text-transform: uppercase;
-    }
-
-    &-lower {
-        text-transform: lowercase;
-    }
-
-    &-underline {
-        text-decoration: underline;
-    }
-
     &-reset {
         text-decoration: none;
         text-transform: none;
     }
 
-    &-left {
-        text-align: left;
-    }
-
-    &-right {
-        text-align: right;
-    }
-
-    &-center {
-        text-align: center;
-    }
-
     &-baseline {
         display: block;
         line-height: 1;
-    }
-}
-
-$line-height-map: (
-    "1": "1",
-    "1-25": "1.25",
-    "1-33": "1.33",
-    "1-5": "1.5",
-    "1-75": "1.75"
-);
-
-@each $l-class, $l-unit in $line-height-map {
-    .u-lh-#{$l-class} {
-        line-height: #{$l-unit};
-    }
-}
-
-.u-ov {
-    &-auto {
-        overflow: auto;
-    }
-    &-hid {
-        overflow: hidden;
-    }
-    &-vis {
-        overflow: visible;
     }
 }
 
