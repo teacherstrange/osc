@@ -8,8 +8,7 @@ const IMAGE_URL =
 const NAME = 'Colm Tuite';
 
 describe('Avatar component', () => {
-    const orignalGlobalImage = window.Image;
-    const initial = NAME.charAt(0);
+    const originalGlobalImage = window.Image;
 
     beforeAll(() => {
         (window.Image as any) = class MockImage {
@@ -25,7 +24,7 @@ describe('Avatar component', () => {
     });
 
     afterAll(() => {
-        window.Image = orignalGlobalImage;
+        window.Image = originalGlobalImage;
     });
 
     test('should render fallback initially ', () => {
