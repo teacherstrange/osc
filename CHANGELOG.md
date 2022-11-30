@@ -1,3 +1,26 @@
+## [0.14.0](https://github.com/Open-Study-College/osc/compare/v0.13.1...v0.14.0) (2022-11-30)
+
+
+### ✨ Features
+
+* **academic-hub:** adds skiplink to the academic hub ([2e5f9d4](https://github.com/Open-Study-College/osc/commit/2e5f9d44ad5f34629e047c6619fd3d4ce02c6e5e))
+* **ecommerce:** adds skiplink to the ecommerce site ([9b81737](https://github.com/Open-Study-College/osc/commit/9b817372b7e05a7f19b5d9fdf425bad1437ff428))
+* adds a skiplink component ([d695d5f](https://github.com/Open-Study-College/osc/commit/d695d5f91b7bcd803a6baa568d5cf746f9dd593f))
+* adds a visually hidden component ([922a552](https://github.com/Open-Study-College/osc/commit/922a5523bd2539645b503f1c0846fb62fb4bbfb5))
+* export visually hidden and skip link ([b1a7bb6](https://github.com/Open-Study-College/osc/commit/b1a7bb61a60812585269b2c915310f7df4e99b52))
+
+
+### 🧪 Tests
+
+* **academic-hub:** adds smoke test for the skiplink ([12fcfe3](https://github.com/Open-Study-College/osc/commit/12fcfe3461ab6d8770240617bb10b86d773eefaf))
+* **ecommerce:** adds smoke test for the skiplink ([295c1a1](https://github.com/Open-Study-College/osc/commit/295c1a192f9abba97ae2ccfa19032b989d0d5cb1))
+* temporarily skip auth dependant test hooks ([58a454c](https://github.com/Open-Study-College/osc/commit/58a454cb2bbacc65120a3e30f069bf2c1d420784))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **ecommerce:** fixes typo ([958baf6](https://github.com/Open-Study-College/osc/commit/958baf6a2c5c489ef90d3f700f8a7beb604ec506))
+
 ## [0.13.1](https://github.com/Open-Study-College/osc/compare/v0.13.0...v0.13.1) (2022-11-29)
 
 
@@ -132,17 +155,4 @@
 * adds content component to modules ([25eacbd](https://github.com/Open-Study-College/osc/commit/25eacbdc0724fc25ee26507328a5f03c94104b0b))
 * adds dynamic links from remix-utils ([089e954](https://github.com/Open-Study-College/osc/commit/089e95469e8575017955cb503deafd4a0e6c0b58))
 * adds dynamic links to routes ([97ea112](https://github.com/Open-Study-College/osc/commit/97ea1128c6b98b5aa5c1cd0e9b0e2a5652d7c75c))
-
-## [0.10.0](https://github.com/Open-Study-College/osc/compare/v0.9.0...v0.10.0) (2022-11-15)
-
-
-### ✨ Features
-
-* adds robots.txt resource route ([7149f8d](https://github.com/Open-Study-College/osc/commit/7149f8db223506ee4c57f2714c6d11764f8da687))
-* adds sitemap resource route ([29d1e5b](https://github.com/Open-Study-College/osc/commit/29d1e5b4c195112dbf071281de290dd708ccb914))
-
-
-### 🐛 Bugs
-
-* ensure protocol to return https ([194991f](https://github.com/Open-Study-College/osc/commit/194991fbbcc30367a1b4cb6936443a0643fb4d5c))
 
