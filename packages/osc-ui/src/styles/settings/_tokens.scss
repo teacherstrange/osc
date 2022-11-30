@@ -19,7 +19,9 @@ $colors: (
         shadow-l: hsla(204deg 204% 204% / 100%)
     ),
     dark: (
-        primary: hsl(335deg 85% 49%)
+        primary: hsl(335deg 85% 49%),
+        secondary: hsl(0deg 0% 100%),
+        tertiary: hsl(250deg 35% 20%)
     )
 );
 $containers: (
@@ -32,8 +34,21 @@ $containers: (
     container-size-lrg: 1680
 );
 $fluid-scale: (
-    base-font-size: 10,
-    steps: (micro, milli, centi, zeta, epsilon, delta, gamma, beta, alpha, omega, kilo, mega),
+    base-font-size: 16,
+    steps: (
+        micro,
+        milli,
+        centi,
+        zeta,
+        epsilon,
+        delta,
+        gamma,
+        beta,
+        alpha,
+        omega,
+        kilo,
+        mega
+    ),
     min-viewport: (
         width: 375,
         font-size: 16,
@@ -57,8 +72,18 @@ $media-queries: (
     mq-desk--lrg: 1440
 );
 $typography: (
-    font-primary: ("Roboto", helvetica, arial, sans-serif),
-    font-secondary: ("Roboto Condensed", helvetica, arial, sans-serif),
+    font-primary: (
+        "Roboto",
+        helvetica,
+        arial,
+        sans-serif
+    ),
+    font-secondary: (
+        "Roboto Condensed",
+        helvetica,
+        arial,
+        sans-serif
+    ),
     weight-reg: 400,
     weight-bold: 700
 );

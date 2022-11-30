@@ -8,9 +8,9 @@ const withTheme = (story, context) => {
     const { theme } = context.globals;
 
     if (theme === 'dark') {
-        document.body.classList.add('theme--dark');
+        document.documentElement.classList.add('theme--dark');
     } else {
-        document.body.classList.remove('theme--dark');
+        document.documentElement.classList.remove('theme--dark');
     }
 
     return <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>;
