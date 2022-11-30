@@ -1,0 +1,62 @@
+.c-popover {
+    &__content {
+        width: 260px;
+        padding: 20px;
+        background-color: rgb(255 255 255);
+        border-radius: 4px;
+        box-shadow:
+            hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
+            hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
+        animation-duration: 400ms;
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform, opacity;
+
+        &:focus {
+            box-shadow:
+                hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
+                hsl(206deg 22% 7% / 20%) 0 10px 20px -15px,
+                0 0 0 2px rgb(237 237 237);
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+        font-family: inherit;
+
+        &:hover {
+            background-color: rgb(237 237 237);
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 2px rgb(237 237 237);
+        }
+    }
+
+    &__icon-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        background-color: rgb(255 255 255);
+        border-radius: 100%;
+        color: rgb(0 0 0);
+        font-family: inherit;
+
+        &:hover {
+            background-color: rgb(237 237 237);
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 2px rgb(0 0 0);
+        }
+    }
+}
