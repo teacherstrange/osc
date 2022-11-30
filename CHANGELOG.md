@@ -1,3 +1,17 @@
+## [0.15.1](https://github.com/Open-Study-College/osc/compare/v0.15.0...v0.15.1) (2022-11-30)
+
+
+### 📦 General Housekeeping / Package Updates
+
+* uninstall happy-dom ([b84687b](https://github.com/Open-Study-College/osc/commit/b84687b714a217f8de7babb064841be7f3dbb66c))
+
+
+### ♻️ Refactors
+
+* remove manual environment setter ([ad6e134](https://github.com/Open-Study-College/osc/commit/ad6e134a242a809658634f5698359d4667b0099e))
+* update environment to jsdom ([6dcf774](https://github.com/Open-Study-College/osc/commit/6dcf774b8d4065c615e2e5341c91496ff990dbdb))
+* update nodeName references to match jsdom lowercase ([c9427df](https://github.com/Open-Study-College/osc/commit/c9427df66a743d3cab6eb288e1f45a89b0f6fa35))
+
 ## [0.15.0](https://github.com/Open-Study-College/osc/compare/v0.14.0...v0.15.0) (2022-11-30)
 
 
@@ -116,31 +130,4 @@
 * **auth:** corrected type definition for permission matcher ([c6d4cbe](https://github.com/Open-Study-College/osc/commit/c6d4cbe1163e67af7056d1307b8193894cdede79))
 * **auth:** replace osc-api dependency version with symlink ([f2efcfc](https://github.com/Open-Study-College/osc/commit/f2efcfc51447ef3d04a2fed9466438f2e893d789))
 * **auth:** return errors instead of throwing as per `graphql-shield` docs ([f8ff33c](https://github.com/Open-Study-College/osc/commit/f8ff33cbf717b6751f6389d0e8fb29939b6547a3))
-
-## [0.12.0](https://github.com/Open-Study-College/osc/compare/v0.11.0...v0.12.0) (2022-11-17)
-
-
-### 🧪 Tests
-
-* add tests for image component ([f3ebd60](https://github.com/Open-Study-College/osc/commit/f3ebd605a2de7b5acb7de3c0c29babc6770d823f))
-
-
-### ✨ Features
-
-* add cloudinary image module to sanity ([8364864](https://github.com/Open-Study-College/osc/commit/8364864bc179250c92f913da5361131d0854ddb5))
-* add image component to osc-ui ([ecae6e2](https://github.com/Open-Study-College/osc/commit/ecae6e20d6f6fa47ad1cb02ca320299cae2219bf))
-* add image module to osc-ecommerce ([50ad4e2](https://github.com/Open-Study-College/osc/commit/50ad4e211b8d1627ac19ec027a6a2b1fcd9d794f))
-* replace media plugin with cloudinary ([430c79f](https://github.com/Open-Study-College/osc/commit/430c79f2626b38f1fc4708b917bb2e44c1334787))
-
-
-### ♻️ Refactors
-
-* move classname prop so classes are applied to the image element ([8035eea](https://github.com/Open-Study-College/osc/commit/8035eeabaf5c099666882e255290eead38d10f54))
-* update carousel component to make use of the image component ([e9068b6](https://github.com/Open-Study-College/osc/commit/e9068b6f39216935fcd045e90d46825a55a0a717))
-* update test data to match new shape of image ([ebda4bd](https://github.com/Open-Study-College/osc/commit/ebda4bd05b5542eb06005c54c90c5af5005d3605))
-
-
-### 📝 Documentation
-
-* adds storybook docs ([e920461](https://github.com/Open-Study-College/osc/commit/e92046164c288d62c86248ea98fd45b7f2503065))
 
