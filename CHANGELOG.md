@@ -1,3 +1,26 @@
+## [0.15.0](https://github.com/Open-Study-College/osc/compare/v0.14.0...v0.15.0) (2022-11-30)
+
+
+### ✨ Features
+
+* add component, styling and stories ([d26e81a](https://github.com/Open-Study-College/osc/commit/d26e81af44f88d9ebef8715c80c042dfe980f468))
+
+
+### 🧪 Tests
+
+* add new test assertions ([fbef5af](https://github.com/Open-Study-College/osc/commit/fbef5af68a50d3a67ee6db8cbc96cd9bfd1aabf8))
+* add tests ([5f43d91](https://github.com/Open-Study-College/osc/commit/5f43d916b534dbbcb5cc57285284b3a35f75e997))
+
+
+### ♻️ Refactors
+
+* add error icon ([f2d7663](https://github.com/Open-Study-College/osc/commit/f2d7663c976f6d80695821a9c0b60957b5f3b5dc))
+* add parameters and argTypes to storybook and remove redundant props ([ecb2a07](https://github.com/Open-Study-College/osc/commit/ecb2a07f406ffa0a277fc58ff26bec0e5ff26af4))
+* fix story to not display the icon ([2b3b992](https://github.com/Open-Study-College/osc/commit/2b3b99299d1ef3e55c9faa575b63f1f4865bd93d))
+* make setting role='alert' more clear and add tests ([af774f5](https://github.com/Open-Study-College/osc/commit/af774f5d97c461ce2cbe33198fc3f52ca872dad2))
+* set aria-live to polite for non-urgent alerts ([6680928](https://github.com/Open-Study-College/osc/commit/6680928cc85f8acc7753c710d3c0c5e5513d8692))
+* use children props in Title and Description components ([8787d48](https://github.com/Open-Study-College/osc/commit/8787d48a77822b447a924853d69f19c7e8da025f))
+
 ## [0.14.0](https://github.com/Open-Study-College/osc/compare/v0.13.1...v0.14.0) (2022-11-30)
 
 
@@ -120,39 +143,4 @@
 ### 📝 Documentation
 
 * adds storybook docs ([e920461](https://github.com/Open-Study-College/osc/commit/e92046164c288d62c86248ea98fd45b7f2503065))
-
-## [0.11.0](https://github.com/Open-Study-College/osc/compare/v0.10.0...v0.11.0) (2022-11-17)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* add content module types ([898d3af](https://github.com/Open-Study-College/osc/commit/898d3afe756355bd56d89c68fd8394d406f7f949))
-* install portableText dependency ([3c4de53](https://github.com/Open-Study-College/osc/commit/3c4de5388d2d0852b5dac656e7df2a8a6b90ad53))
-* removed unused product annotation schema ([b6af40f](https://github.com/Open-Study-College/osc/commit/b6af40f3eee37e7b1561053bf9e7edfa0ad2f206))
-
-
-### ♻️ Refactors
-
-* move dynamic links above our static links ([f6e9fc9](https://github.com/Open-Study-College/osc/commit/f6e9fc93a9d1dca210b7c63655e379bfc6bd4b66))
-* remove export from dynamicLinks const ([25f8026](https://github.com/Open-Study-College/osc/commit/25f802653e7d7281f9729a66e06211db3d2f37e4))
-
-
-### 🐛 Bugs
-
-* **list:** add null check for classnames so we don't load an empty class attribute ([e52a975](https://github.com/Open-Study-College/osc/commit/e52a97545eb63f3dd84599493eca7405499d9db5))
-* adds missing page types to query ([a29e997](https://github.com/Open-Study-College/osc/commit/a29e9978ca25b3cd26c2cb823cb6c00b63cd0c7c))
-* make sure only one stylesheet per type of module gets loaded ([f493645](https://github.com/Open-Study-College/osc/commit/f4936452294d8312d40b4ffa14a29e2b8c8b0e37))
-
-
-### ✨ Features
-
-* **content:** replaces chakra components ([154381a](https://github.com/Open-Study-College/osc/commit/154381a39608bb09365e1d56cfcd087f86a07f2e))
-* **hook:** adds spacing hook ([09b4de7](https://github.com/Open-Study-College/osc/commit/09b4de796227494025b18de1976a6f58ab2c7351))
-* add color picker input to sanity ([ba7a45a](https://github.com/Open-Study-College/osc/commit/ba7a45accb61c0b646056b91334f919326c2be71))
-* add content schema to sanity ([9743994](https://github.com/Open-Study-College/osc/commit/9743994ce64bebb5636d70a62c051e3efce3c36c))
-* add query for content component ([2ebb48e](https://github.com/Open-Study-College/osc/commit/2ebb48e8c8c9063e9a32a7a7b096790ee1a6c706))
-* adds content component ([7b0bc9b](https://github.com/Open-Study-College/osc/commit/7b0bc9b4063d733724b2c6c085e81c520ffc35d0))
-* adds content component to modules ([25eacbd](https://github.com/Open-Study-College/osc/commit/25eacbdc0724fc25ee26507328a5f03c94104b0b))
-* adds dynamic links from remix-utils ([089e954](https://github.com/Open-Study-College/osc/commit/089e95469e8575017955cb503deafd4a0e6c0b58))
-* adds dynamic links to routes ([97ea112](https://github.com/Open-Study-College/osc/commit/97ea1128c6b98b5aa5c1cd0e9b0e2a5652d7c75c))
 
