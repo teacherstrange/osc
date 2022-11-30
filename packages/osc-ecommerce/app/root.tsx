@@ -11,7 +11,9 @@ import {
     useLocation,
     useMatches
 } from '@remix-run/react';
+import { SkipLink } from 'osc-ui';
 import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
+import oscUiSkipLinkStyle from 'osc-ui/dist/src-components-SkipLink-skip-link.css';
 import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
 import styles from 'osc-ui/dist/src-styles-main.css';
 import React, { useEffect } from 'react';
@@ -27,6 +29,7 @@ export const links: LinksFunction = () => {
     return [
         { rel: 'stylesheet', href: oscUiCarouselStyles },
         { rel: 'stylesheet', href: oscUiSwitchStyles },
+        { rel: 'stylesheet', href: oscUiSkipLinkStyle },
         { rel: 'stylesheet', href: styles },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
@@ -192,8 +195,10 @@ export default function App() {
                     })}`
                 }}
             />
-
-            <Outlet />
+            <SkipLink anchor="main-content">Skip to main content</SkipLink>
+            <main id="main-content" tabIndex={-1}>
+                <Outlet />
+            </main>
         </Document>
     );
 }

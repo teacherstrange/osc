@@ -1,0 +1,16 @@
+.c-skip-link {
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    z-index: 10;
+    padding: 1rem 1.5rem;
+    background-color: var(--colour-yellow);
+    border: 5px solid currentcolor;
+    color: var(--colour-navy);
+
+    &:focus {
+        position: static;
+        display: block;
+        text-decoration: underline;
+    }
+}

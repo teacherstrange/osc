@@ -1,8 +1,9 @@
-import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('User login', () => {
-    test('confirm that the user is logged in', async ({ page }) => {
+    // Skip for now until auth is merged into main
+    test.skip('confirm that the user is logged in', async ({ page }) => {
         await page.goto('/admin');
 
         const h1 = page.getByRole('heading', {
@@ -13,7 +14,7 @@ test.describe('User login', () => {
     });
 });
 
-// We had an isse where certain pages were hanging when querying the SanityClient
+// We had an issue where certain pages were hanging when querying the SanityClient
 // Since changing out the SanityClient package with PicoSanity We want to check that this is or isn't happening.
 // As we're testing that the query in the backend isn't hanging we only need to assert that the page loads
 // so we'll check that there's a h1 element.
@@ -77,4 +78,19 @@ test.describe('Navigates to a sample of pages without them hanging', () => {
         await page.goto('/collections/science');
         await checkHeading(page);
     });
+});
+
+test('skips focus into the main content', async ({ page }) => {
+    await page.goto('/');
+
+    const skipLink = page.getByRole('link', { name: 'Skip to main content' });
+    const main = page.getByRole('main');
+
+    await skipLink.focus();
+
+    await page.keyboard.press('Tab');
+    await expect(skipLink).toBeFocused();
+
+    await page.keyboard.press('Enter');
+    await expect(main).toBeFocused();
 });
