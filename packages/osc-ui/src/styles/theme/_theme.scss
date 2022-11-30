@@ -20,14 +20,18 @@
 //\*----------------------------------*/
 
 // SETUP CSS COLOUR VARIABLES
-:root {
-    @each $name, $value in color-token("default") {
-        --color-#{$name}: #{$value};
-    }
-}
-
-.theme--dark {
-    @each $name, $value in color-token("dark") {
-        --color-#{$name}: #{$value};
+@each $class, $colors-values in $colors {
+    @if ($class == default) {
+        :root {
+            @each $name, $value in $colors-values {
+                --color-#{$name}: #{$value};
+            }
+        }
+    } @else {
+        .theme--#{$class} {
+            @each $name, $value in $colors-values {
+                --color-#{$name}: #{$value};
+            }
+        }
     }
 }
