@@ -8,7 +8,10 @@ const gateway =
     env.NODE_ENV === 'development'
         ? new ApolloGateway({
               supergraphSdl: new IntrospectAndCompose({
-                  subgraphs: [{ name: 'OSC-Auth', url: env.AUTH_API_URL }]
+                  subgraphs: [
+                      { name: 'OSC-Auth', url: env.AUTH_API_URL },
+                      { name: 'OSC-Ecommerce', url: env.ECOMMERCE_API_URL }
+                  ]
               }),
               buildService({ name, url }) {
                   return new RemoteGraphQLDataSource({
