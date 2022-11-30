@@ -1,5 +1,6 @@
 @use "sass:list";
 @use "sass:meta";
+@use "./functions/rem" as *;
 
 ///*----------------------------------*\
 //  #MEDIA QUERY
@@ -28,11 +29,11 @@
     }
 
     @if meta.type-of($viewports) == number {
-        @media screen and (#{$constraint1}-#{$constraint2}: $viewports) {
+        @media screen and (#{$constraint1}-#{$constraint2}: rem($viewports)) {
             @content;
         }
     } @else {
-        @media screen and ($min: list.nth($viewports, 1)) and ($max: list.nth($viewports, 2)) {
+        @media screen and ($min: rem(list.nth($viewports, 1))) and ($max: rem(list.nth($viewports, 2))) {
             @content;
         }
     }
