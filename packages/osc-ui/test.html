@@ -78,11 +78,11 @@
                 --box-size: var(--font-scale-zeta);
                 width: var(--box-size);
                 height: var(--box-size);
-                background-color: var(--color-primary);
+                background-image: var(--color-gradient-primary);
             }
-            .box.o-grid__item {
-                width: auto;
-                background-color: var(--color-secondary);
+            [class*="o-grid__col"] {
+                height: var(--font-scale-zeta);
+                background-image: var(--color-gradient-septenary);
                 color: var(--color-tertiary);
             }
         </style>
@@ -202,18 +202,48 @@
             <section>
                 <h2>Grid</h2>
                 <div class="o-grid u-mb-zeta">
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
-                    <div class="box o-grid__item"></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                </div>
+                <h3>Offsets</h3>
+                <div class="o-grid u-mb-zeta">
+                    <div class="o-grid__col--12 o-grid__col--4@mob o-grid__col--start-2@mob"></div>
+                    <div class="o-grid__col--12 o-grid__col--4@mob o-grid__col--start-4@mob"></div>
+                    <div class="o-grid__col--12 o-grid__col--4@mob o-grid__col--start-6@mob"></div>
                 </div>
             </section>
         </div>
