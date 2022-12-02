@@ -4,6 +4,7 @@
 /packages/osc-ui/src/styles/tools
 /packages/osc-ui/src/styles/utilities
 node_modules
+/osc/packages/osc-ui/styles/settings/_tokens.scss
 
 /packages/osc-academic-hub/app/components/datepicker/datepicker.scss
 /packages/osc-academic-hub/app/styles/mixins
