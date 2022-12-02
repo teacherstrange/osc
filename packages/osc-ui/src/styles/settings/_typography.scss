@@ -28,6 +28,14 @@
 //
 //\*----------------------------------*/
 
+@font-face {
+    font-family: "Outfit";
+    src: url("./fonts/Outfit-VariableFont_wght.woff2") format("woff2") tech("variations"),
+        url("./fonts/Outfit-VariableFont_wght.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+}
+
 :root {
     @include fluid-scale("font");
 }
