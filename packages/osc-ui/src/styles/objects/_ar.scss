@@ -53,7 +53,8 @@ $aspect-ratios: (
 
         &--#{$css_class} {
             @include ratio($aspect-ratio);
-            @debug $aspect-ratio;
+
+            // @debug $aspect-ratio;
         }
     }
 
