@@ -15,11 +15,11 @@
 // Usage:
 // <div class="u-mt-micro"></div>
 
-@function scales-map($scale: 'fixed') {
+@function scales-map($scale: "fixed") {
     $map: ();
 
     @each $step in scale-token("steps") {
-        @if ($scale == 'relative') {
+        @if ($scale == "relative") {
             $map: map.set($map, $step, var(--font-scale-#{$step}));
         } @else {
             $map: map.set($map, $step, var(--space-scale-#{$step}));
@@ -33,31 +33,31 @@ $osc-config: (
     margin-top: (
         prefix: "mt",
         values: (
-            scales-map('relative')
+            scales-map("relative")
         )
     ),
     margin-bottom: (
         prefix: "mb",
         values: (
-            scales-map('relative')
+            scales-map("relative")
         )
     ),
     margin-right: (
         prefix: "mr",
         values: (
-            scales-map('relative')
+            scales-map("relative")
         )
     ),
     margin-left: (
         prefix: "ml",
         values: (
-            scales-map('relative')
+            scales-map("relative")
         )
     ),
     margin: (
         prefix: "m",
         values: (
-            scales-map('relative')
+            scales-map("relative")
         )
     ),
     padding-top: (
@@ -111,20 +111,20 @@ $osc-config: (
         values: (
             auto,
             hidden,
-            visible,
+            visible
         )
     ),
     font-weight: (
         prefix: "text",
         values: (
             "bold": $weight-bold,
-            "reg": $weight-reg,
+            "reg": $weight-reg
         )
     ),
     font-style: (
         prefix: "text",
         values: (
-            italic,
+            italic
         )
     ),
     text-transform: (
@@ -132,7 +132,7 @@ $osc-config: (
         values: (
             uppercase,
             lowercase,
-            underline,
+            underline
         )
     ),
     text-align: (
@@ -140,9 +140,9 @@ $osc-config: (
         values: (
             center,
             right,
-            left,
+            left
         )
-    ),
+    )
 );
 
 @each $property, $values in $osc-config {
@@ -151,7 +151,7 @@ $osc-config: (
 
     @each $key, $value in $values {
         .u-#{$prefix}-#{strip-unit($key)} {
-            @if($value) {
+            @if ($value) {
                 #{$property}: $value;
             } @else {
                 #{$property}: $key;
@@ -160,7 +160,7 @@ $osc-config: (
     }
 }
 
-@include mq(mq-token("mq-tab"), max) {
+@include mq(mq-token("tab"), max) {
     .u-plr-0\@tab {
         padding-right: 0;
         padding-left: 0;
@@ -184,31 +184,31 @@ $osc-config: (
 
 .u-hidden {
     &-from\@tab {
-        @include mq(mq-token("mq-tab--lrg")) {
+        @include mq(mq-token("tab-lrg")) {
             display: none;
         }
     }
 
     &-from\@desk-med {
-        @include mq(mq-token("mq-desk--med")) {
+        @include mq(mq-token("desk-med")) {
             display: none;
         }
     }
 
     &-until\@tab {
-        @include mq(mq-token("mq-tab"), max) {
+        @include mq(mq-token("tab"), max) {
             display: none;
         }
     }
 
     &-until\@desk {
-        @include mq(mq-token("mq-desk"), max) {
+        @include mq(mq-token("desk"), max) {
             display: none;
         }
     }
 
     &-until\@desk-med {
-        @include mq(mq-token("mq-desk--med"), max) {
+        @include mq(mq-token("desk-med"), max) {
             display: none;
         }
     }

@@ -17,13 +17,13 @@
         padding-left: 0;
 
         &-alt-r {
-            @include mq(mq-token("mq-tab"), max) {
+            @include mq(mq-token("tab"), max) {
                 padding-right: 0;
             }
         }
 
         &-alt-l {
-            @include mq(mq-token("mq-tab"), max) {
+            @include mq(mq-token("tab"), max) {
                 padding-left: 0;
             }
         }
@@ -32,7 +32,7 @@
     &--pad-r {
         padding-right: 0;
 
-        @include mq(mq-token("mq-tab")) {
+        @include mq(mq-token("tab")) {
             padding-right: $global-spacing;
         }
     }
@@ -40,7 +40,7 @@
     &--pad-l {
         padding-left: 0;
 
-        @include mq(mq-token("mq-tab")) {
+        @include mq(mq-token("tab")) {
             padding-left: $global-spacing;
         }
     }

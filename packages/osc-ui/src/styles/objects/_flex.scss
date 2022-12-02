@@ -94,16 +94,16 @@
 
     /* Hooks to hide elements based on the data-mq-hide attribute */
     $flex-bp: (
-        desk-lrg: mq-token("mq-desk--lrg"),
-        desk-med: mq-token("mq-desk--med"),
-        desk: mq-token("mq-desk"),
-        tab-lrg: mq-token("mq-tab--lrg"),
-        tab: mq-token("mq-tab"),
-        tab-sml: mq-token("mq-tab"),
-        mob-lrg: mq-token("mq-mob--lrg"),
-        mob-med: mq-token("mq-mob--med"),
-        mob: mq-token("mq-mob"),
-        mob-sml: mq-token("mq-mob")
+        desk-lrg: mq-token("desk-lrg"),
+        desk-med: mq-token("desk-med"),
+        desk: mq-token("desk"),
+        tab-lrg: mq-token("tab-lrg"),
+        tab: mq-token("tab"),
+        tab-sml: mq-token("tab"),
+        mob-lrg: mq-token("mob-lrg"),
+        mob-med: mq-token("mob-med"),
+        mob: mq-token("mob"),
+        mob-sml: mq-token("mob")
     );
 
     @each $alias, $mq in $flex-bp {
@@ -158,7 +158,7 @@
             height: auto;
             overflow: hidden;
 
-            @include mq(mq-token("mq-tab")) {
+            @include mq(mq-token("tab")) {
                 max-width: 200px;
             }
         }
@@ -196,7 +196,7 @@ $i-list: -1 0 1 2 3 4 5 6 7 8 9 10;
 // ==========================================================================
 @each $i in $i-list {
     [data-flex-order="#{$i}"] {
-        @include mq(mq-token("mq-mob--med") + 2, max) {
+        @include mq(mq-token("mob-med") + 2, max) {
             order: $i;
         }
     }

@@ -55,15 +55,15 @@
         overflow: visible;
     }
 
-    @include mq(mq-token('mq-mob')) {
+    @include mq(mq-token("mob")) {
         flex: 0 0 100%;
     }
 
-    @include mq(mq-token('mq-mob--lrg')) {
+    @include mq(mq-token("mob-lrg")) {
         flex: 0 0 50%;
     }
 
-    @include mq(mq-token('mq-tab')) {
+    @include mq(mq-token("tab")) {
         flex: 0 0 var(--embla__slidesPerPage);
     }
 }

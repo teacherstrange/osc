@@ -13,12 +13,12 @@
 
 // Usage:
 //
-// @include mq(mq-mob) { ... }; // min-width
-// @include mq(mq-mob, max) { ... }; // max-width
-// @include mq((mq-mob, mq-tab)) { ... }; // min-max
-// @include mq(mq-mob, max, height) { ... }; // max-height
-// @include mq(mq-mob, min, height) { ... }; // min-height
-// @include mq((mq-mob, mq-tab), null, height) { ... }; // min-max height
+// @include mq(mob) { ... }; // min-width
+// @include mq(mob, max) { ... }; // max-width
+// @include mq((mob, tab)) { ... }; // min-max
+// @include mq(mob, max, height) { ... }; // max-height
+// @include mq(mob, min, height) { ... }; // min-height
+// @include mq((mob, tab), null, height) { ... }; // min-max height
 
 @mixin mq($viewports, $constraint1: min, $constraint2: width) {
     $min: min-#{$constraint2};
