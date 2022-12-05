@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:string";
 @use "../settings" as *;
 @use "../tools" as *;
 @use "../tools/functions" as *;
@@ -217,16 +218,24 @@ $osc-config: (
 // generate classes for each custom property in settings/_colors.scss
 // we're assuming the default map will include the same keys as the other themes
 @each $name, $value in color-token("default") {
-    [data-t-colour="#{$name}"],
-    .u-colour-#{$name} {
-        color: var(--color-#{$name});
+    // Skip over the gradients for text colour
+    @if (string.index($name, 'gradient') == null) {
+        [data-t-color="#{$name}"],
+        .u-color-#{$name} {
+            color: var(--color-#{$name});
+        }
     }
 }
 
 // Backgrounds
 @each $name, $value in color-token("default") {
-    [data-bg-colour="#{$name}"] {
-        background-color: var(--color-#{$name});
+    [data-bg-color="#{$name}"],
+    .u-bg-color-#{$name} {
+        @if (string.index($name, 'gradient')) {
+            background-image: var(--color-#{$name});
+        } @else {
+            background-color: var(--color-#{$name});
+        }
     }
 }
 
