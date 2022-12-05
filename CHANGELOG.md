@@ -1,3 +1,27 @@
+## [0.17.0](https://github.com/Open-Study-College/osc/compare/v0.16.1...v0.17.0) (2022-12-05)
+
+
+### ✨ Features
+
+* add component, styling and stories ([364eb36](https://github.com/Open-Study-College/osc/commit/364eb369fcab14d65f3f0a24500d914a402c967d))
+
+
+### 🧪 Tests
+
+* add tests ([9cb762c](https://github.com/Open-Study-College/osc/commit/9cb762c77c93cb019c357ce9363edd84eb1faf3f))
+
+
+### ♻️ Refactors
+
+* add component and prop descriptions ([a9703d2](https://github.com/Open-Study-College/osc/commit/a9703d23770472b214ccdbb6ce7c42333b77ea90))
+* add onComplete functionality ([86eff55](https://github.com/Open-Study-College/osc/commit/86eff5515ea4d6486817574bef738848c779066d))
+* change component names and update tests ([21853cf](https://github.com/Open-Study-College/osc/commit/21853cfce342b21436e9621bf89c6e362223d710))
+* remove 'titles' argument ([1d9fa4b](https://github.com/Open-Study-College/osc/commit/1d9fa4b72ed226b674b78cafbbab21f1f0bc0df4))
+* remove classNames prop ([784b54b](https://github.com/Open-Study-College/osc/commit/784b54b9101a21d52e4a0a09281ab13899a6ac9e))
+* remove use of 'titles' prop ([9bcb77a](https://github.com/Open-Study-College/osc/commit/9bcb77a9cccf5e56fe8147fdd6695fe87f74d973))
+* rename 'distance' to 'remainingDuration' ([2748a53](https://github.com/Open-Study-College/osc/commit/2748a53391549bafa5eb9e2dec0dc4bda8b33bbc))
+* uncomment styling ([a6fa8c1](https://github.com/Open-Study-College/osc/commit/a6fa8c1c7971f679292c85bcb6f7b82a25d8b948))
+
 ## [0.16.1](https://github.com/Open-Study-College/osc/compare/v0.16.0...v0.16.1) (2022-12-05)
 
 
@@ -63,27 +87,4 @@
 * make setting role='alert' more clear and add tests ([af774f5](https://github.com/Open-Study-College/osc/commit/af774f5d97c461ce2cbe33198fc3f52ca872dad2))
 * set aria-live to polite for non-urgent alerts ([6680928](https://github.com/Open-Study-College/osc/commit/6680928cc85f8acc7753c710d3c0c5e5513d8692))
 * use children props in Title and Description components ([8787d48](https://github.com/Open-Study-College/osc/commit/8787d48a77822b447a924853d69f19c7e8da025f))
-
-## [0.14.0](https://github.com/Open-Study-College/osc/compare/v0.13.1...v0.14.0) (2022-11-30)
-
-
-### ✨ Features
-
-* **academic-hub:** adds skiplink to the academic hub ([2e5f9d4](https://github.com/Open-Study-College/osc/commit/2e5f9d44ad5f34629e047c6619fd3d4ce02c6e5e))
-* **ecommerce:** adds skiplink to the ecommerce site ([9b81737](https://github.com/Open-Study-College/osc/commit/9b817372b7e05a7f19b5d9fdf425bad1437ff428))
-* adds a skiplink component ([d695d5f](https://github.com/Open-Study-College/osc/commit/d695d5f91b7bcd803a6baa568d5cf746f9dd593f))
-* adds a visually hidden component ([922a552](https://github.com/Open-Study-College/osc/commit/922a5523bd2539645b503f1c0846fb62fb4bbfb5))
-* export visually hidden and skip link ([b1a7bb6](https://github.com/Open-Study-College/osc/commit/b1a7bb61a60812585269b2c915310f7df4e99b52))
-
-
-### 🧪 Tests
-
-* **academic-hub:** adds smoke test for the skiplink ([12fcfe3](https://github.com/Open-Study-College/osc/commit/12fcfe3461ab6d8770240617bb10b86d773eefaf))
-* **ecommerce:** adds smoke test for the skiplink ([295c1a1](https://github.com/Open-Study-College/osc/commit/295c1a192f9abba97ae2ccfa19032b989d0d5cb1))
-* temporarily skip auth dependant test hooks ([58a454c](https://github.com/Open-Study-College/osc/commit/58a454cb2bbacc65120a3e30f069bf2c1d420784))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **ecommerce:** fixes typo ([958baf6](https://github.com/Open-Study-College/osc/commit/958baf6a2c5c489ef90d3f700f8a7beb604ec506))
 
