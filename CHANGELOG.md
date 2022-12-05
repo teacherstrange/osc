@@ -1,3 +1,10 @@
+## [0.16.1](https://github.com/Open-Study-College/osc/compare/v0.16.0...v0.16.1) (2022-12-05)
+
+
+### 🐛 Bugs
+
+* db url updates ([d796e0c](https://github.com/Open-Study-College/osc/commit/d796e0c0155bfebf5209e92f1bda7f4046ec924e))
+
 ## [0.16.0](https://github.com/Open-Study-College/osc/compare/v0.15.1...v0.16.0) (2022-11-30)
 
 
@@ -79,11 +86,4 @@
 ### 📦 General Housekeeping / Package Updates
 
 * **ecommerce:** fixes typo ([958baf6](https://github.com/Open-Study-College/osc/commit/958baf6a2c5c489ef90d3f700f8a7beb604ec506))
-
-## [0.13.1](https://github.com/Open-Study-College/osc/compare/v0.13.0...v0.13.1) (2022-11-29)
-
-
-### ♻️ Refactors
-
-* **prettier:** set `trailingCommas` to `es5` ([164f0d1](https://github.com/Open-Study-College/osc/commit/164f0d1913d2f673eadb40d74704a81803cc76d5))
 
