@@ -6,6 +6,7 @@ export { Badge } from './components/Badge/Badge';
 export { Breadcrumb } from './components/Breadcrumb/Breadcrumb';
 export { Carousel } from './components/Carousel/Carousel';
 export { Content } from './components/Content/Content';
+export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export { Footer } from './components/Footer/Footer';
 export { Header } from './components/Header/Header';
 export { Icon } from './components/Icon/Icon';

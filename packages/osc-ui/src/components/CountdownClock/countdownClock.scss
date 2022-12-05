@@ -1,0 +1,35 @@
+.c-countdown-clock {
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &__section {
+        padding: 0 0.2em;
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &__digits {
+        font-feature-settings: "tnum";
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &__icon {
+        display: flex;
+        padding: 0 0.5em;
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &__timer {
+        display: flex;
+        align-items: center;
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        &--inner {
+            display: flex;
+        }
+    }
+}
