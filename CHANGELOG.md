@@ -1,3 +1,19 @@
+## [0.17.1](https://github.com/Open-Study-College/osc/compare/v0.17.0...v0.17.1) (2022-12-05)
+
+
+### ♻️ Refactors
+
+* fix typos ([2bf4804](https://github.com/Open-Study-College/osc/commit/2bf4804b792039f3fdc62766537ef00541b06995))
+* update wording from hide to prevent rendering ([ae1cd53](https://github.com/Open-Study-College/osc/commit/ae1cd533ccd3cd9f74899dd2060480f13b6c9115))
+* update wording from hide to prevent rendering ([8e6b5f9](https://github.com/Open-Study-College/osc/commit/8e6b5f90e40fdbdff1673ecb21fb183e02db7561))
+
+
+### 📝 Documentation
+
+* adds default values to storybook table ([3a925a2](https://github.com/Open-Study-College/osc/commit/3a925a2b2c153dbbebed61b25a0ca4ca94bb1810))
+* adds types and required values to storybook table ([ea58fa4](https://github.com/Open-Study-College/osc/commit/ea58fa447e6b29de44c927961d70f250869c5960))
+* **components:** adds props descriptions to storybook ([355e6c3](https://github.com/Open-Study-College/osc/commit/355e6c3cba53bf3bf17268339955acf9d1837479))
+
 ## [0.17.0](https://github.com/Open-Study-College/osc/compare/v0.16.1...v0.17.0) (2022-12-05)
 
 
@@ -64,27 +80,4 @@
 * remove manual environment setter ([ad6e134](https://github.com/Open-Study-College/osc/commit/ad6e134a242a809658634f5698359d4667b0099e))
 * update environment to jsdom ([6dcf774](https://github.com/Open-Study-College/osc/commit/6dcf774b8d4065c615e2e5341c91496ff990dbdb))
 * update nodeName references to match jsdom lowercase ([c9427df](https://github.com/Open-Study-College/osc/commit/c9427df66a743d3cab6eb288e1f45a89b0f6fa35))
-
-## [0.15.0](https://github.com/Open-Study-College/osc/compare/v0.14.0...v0.15.0) (2022-11-30)
-
-
-### ✨ Features
-
-* add component, styling and stories ([d26e81a](https://github.com/Open-Study-College/osc/commit/d26e81af44f88d9ebef8715c80c042dfe980f468))
-
-
-### 🧪 Tests
-
-* add new test assertions ([fbef5af](https://github.com/Open-Study-College/osc/commit/fbef5af68a50d3a67ee6db8cbc96cd9bfd1aabf8))
-* add tests ([5f43d91](https://github.com/Open-Study-College/osc/commit/5f43d916b534dbbcb5cc57285284b3a35f75e997))
-
-
-### ♻️ Refactors
-
-* add error icon ([f2d7663](https://github.com/Open-Study-College/osc/commit/f2d7663c976f6d80695821a9c0b60957b5f3b5dc))
-* add parameters and argTypes to storybook and remove redundant props ([ecb2a07](https://github.com/Open-Study-College/osc/commit/ecb2a07f406ffa0a277fc58ff26bec0e5ff26af4))
-* fix story to not display the icon ([2b3b992](https://github.com/Open-Study-College/osc/commit/2b3b99299d1ef3e55c9faa575b63f1f4865bd93d))
-* make setting role='alert' more clear and add tests ([af774f5](https://github.com/Open-Study-College/osc/commit/af774f5d97c461ce2cbe33198fc3f52ca872dad2))
-* set aria-live to polite for non-urgent alerts ([6680928](https://github.com/Open-Study-College/osc/commit/6680928cc85f8acc7753c710d3c0c5e5513d8692))
-* use children props in Title and Description components ([8787d48](https://github.com/Open-Study-College/osc/commit/8787d48a77822b447a924853d69f19c7e8da025f))
 
