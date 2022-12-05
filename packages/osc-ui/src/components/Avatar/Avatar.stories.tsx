@@ -6,7 +6,25 @@ import { Avatar } from './Avatar';
 
 export default {
     title: 'osc-ui/Avatar',
-    component: Avatar
+    component: Avatar,
+    parameters: {
+        docs: {
+            description: {
+                component: "Avatar component for displaying a user's profile picture or initials."
+            }
+        }
+    },
+    argTypes: {
+        className: {
+            description: 'Custom class'
+        },
+        name: {
+            description: "User's name"
+        },
+        src: {
+            description: 'An image url'
+        }
+    }
 } as Meta;
 
 const Template: Story<AvatarProps> = ({ ...args }) => <Avatar {...args} />;
@@ -22,4 +40,11 @@ export const Fallback = Template.bind({});
 Fallback.args = {
     ...Primary.args,
     src: ''
+};
+Fallback.parameters = {
+    docs: {
+        description: {
+            story: "The user's initial will be displayed if there is no src or the url is invalid."
+        }
+    }
 };

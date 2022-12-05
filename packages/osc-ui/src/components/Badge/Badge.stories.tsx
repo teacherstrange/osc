@@ -5,7 +5,45 @@ import { Badge } from './Badge';
 
 export default {
     title: 'osc-ui/Badge',
-    component: Badge
+    component: Badge,
+    parameters: {
+        docs: {
+            description: {
+                component: "Badges are used to highlight an item's status for quick recognition."
+            }
+        }
+    },
+    argTypes: {
+        badgeName: {
+            description: 'Content of the badge'
+        },
+        className: {
+            description: 'Custom class'
+        },
+        fontSize: {
+            description: 'Sets the font size class'
+        },
+        items: {
+            table: {
+                disable: true
+            }
+        },
+        theme: {
+            description: 'Sets theme colour class',
+            defaultValue: 'primary',
+            table: {
+                defaultValue: {
+                    summary: 'primary'
+                }
+            }
+        },
+        variant: {
+            description: 'Sets variant modifier class',
+            control: {
+                type: 'select'
+            }
+        }
+    }
 } as Meta;
 
 const BadgeTemplate: Story = ({ items }) => {
@@ -45,6 +83,19 @@ SubtleBadge.args = {
         }
     ]
 };
+SubtleBadge.parameters = {
+    docs: {
+        description: {
+            story: 'The subtle badge variant. Add the `variant="subtle"` prop.'
+        },
+        source: {
+            code: '<Badge badgeName="Badge" theme="primary" variant="subtle"/>',
+            language: 'ts',
+            type: 'auto'
+        }
+    }
+};
+
 SolidBadge.args = {
     items: [
         {
@@ -61,6 +112,19 @@ SolidBadge.args = {
         }
     ]
 };
+SolidBadge.parameters = {
+    docs: {
+        description: {
+            story: 'The solid badge variant. Add the `variant="solid"` prop.'
+        },
+        source: {
+            code: '<Badge badgeName="Badge" theme="primary" variant="solid"/>',
+            language: 'ts',
+            type: 'auto'
+        }
+    }
+};
+
 OutlineBadge.args = {
     items: [
         {
@@ -79,4 +143,16 @@ OutlineBadge.args = {
             variant: 'outline'
         }
     ]
+};
+OutlineBadge.parameters = {
+    docs: {
+        description: {
+            story: 'The outline badge variant. Add the `variant="outline"` prop.'
+        },
+        source: {
+            code: '<Badge badgeName="Badge" theme="primary" variant="outline"/>',
+            language: 'ts',
+            type: 'auto'
+        }
+    }
 };

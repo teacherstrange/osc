@@ -7,7 +7,26 @@ import { Breadcrumb } from './Breadcrumb';
 
 export default {
     title: 'osc-ui/Breadcrumb',
-    component: Breadcrumb
+    component: Breadcrumb,
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'The breadcrumbs component helps users to understand where they are within a website’s structure and move between levels.'
+            }
+        }
+    },
+    argTypes: {
+        className: {
+            description: 'Custom class'
+        },
+        matches: {
+            description: 'An array of objects containing the page titles and pathnames'
+        },
+        separator: {
+            description: 'Custom separator, can be a string or a component'
+        }
+    }
 } as Meta;
 
 const Template: Story<Props> = (args) => <Breadcrumb {...args} />;
@@ -35,4 +54,11 @@ CustomIcon.args = {
         }
     ],
     separator: <ChevronRightIcon />
+};
+CustomIcon.parameters = {
+    docs: {
+        description: {
+            story: 'Uses a component as the separator.'
+        }
+    }
 };

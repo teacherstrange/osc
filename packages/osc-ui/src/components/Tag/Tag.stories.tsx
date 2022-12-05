@@ -6,7 +6,56 @@ import { Tag } from './Tag';
 
 export default {
     title: 'osc-ui/Tag',
-    component: Tag
+    component: Tag,
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'Tag component is used for items that need to be labeled, categorized, or organized using keywords that describe them.'
+            }
+        }
+    },
+    argTypes: {
+        className: {
+            description: 'Custom class'
+        },
+        customElement: {
+            description: 'Include a component such as an `Avatar` within the tag'
+        },
+        icon: {
+            description: 'Custom icon to display within the tag'
+        },
+        iconLabel: {
+            description: 'Accessible icon label'
+        },
+        iconPosition: {
+            description: 'Position of the icon in relation to the `tagName`',
+            control: 'select',
+            defaultValue: 'left',
+            table: {
+                defaultValue: {
+                    summary: 'left'
+                }
+            }
+        },
+        items: {
+            table: {
+                disable: true
+            }
+        },
+        tagName: {
+            description: 'Content of the badge'
+        },
+        theme: {
+            description: 'Sets theme colour class',
+            defaultValue: 'primary',
+            table: {
+                defaultValue: {
+                    summary: 'primary'
+                }
+            }
+        }
+    }
 } as Meta;
 
 const TagTemplate: Story = ({ items }) => {
