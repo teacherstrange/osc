@@ -7,9 +7,21 @@ import { imageGrid2x2, imageGrid3x3, singleImageData } from './imageGalleryData'
 export default {
     title: 'osc-ui/ImageGallery',
     component: ImageGallery,
-    // TODO
-    // Add parameters
-    // Add description
+    parameters: {
+        docs: {
+            description: {
+                component: 'Image Gallery with Lightbox features',
+            },
+        },
+    },
+    argTypes: {
+        images: {
+            description: 'A list of images wrapped in the Image component',
+        },
+        variant: {
+            description: 'Variants for grid layout',
+        },
+    },
 } as Meta;
 
 const Template: Story<Props> = (args) => <ImageGallery {...args} />;

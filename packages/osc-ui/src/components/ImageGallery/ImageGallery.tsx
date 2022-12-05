@@ -29,9 +29,6 @@ export const ImageGallery: FC<Props> = (props: Props) => {
     const variantClass = useVariant('c-image-gallery__img', variant);
     const imageClasses = classNames('c-image-gallery__img', variantClass);
 
-    // Remove CSS out of node_modules if they're just being imported directly?
-    // Breakpoints need to be set properly
-
     // More info can be found about this lightbox at www.lightgalleryjs.com
     // There are a variety of methods (e.g. onInit, onBeforeSlide), modes and plugins that can be
     // utilised if required. All documentation is available on the website.
