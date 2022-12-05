@@ -10,6 +10,7 @@ export { Footer } from './components/Footer/Footer';
 export { Header } from './components/Header/Header';
 export { Icon } from './components/Icon/Icon';
 export { Image } from './components/Image/Image';
+export { ImageGallery } from './components/ImageGallery/ImageGallery';
 export { List } from './components/List/List';
 export { Modal } from './components/Modal/Modal';
 export { Popover } from './components/Popover/Popover';
