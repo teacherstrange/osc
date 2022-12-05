@@ -1,5 +1,5 @@
 // *----------------------------------*/
-//  #CONTAINER WIDTH SETTINGS
+//  #CONTAINER WIDTH TOKENS
 // *----------------------------------*/
 //
 //  Defines global container widths

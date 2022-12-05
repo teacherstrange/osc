@@ -1,3 +1,12 @@
+// *----------------------------------*/
+//  #MEDIA QUERY TOKENS
+// *----------------------------------*/
+//
+//  Defines global container widths
+//  (values are in px)
+//
+// *----------------------------------*/
+
 module.exports = {
     mob: 360,
     'mob-med': 420,

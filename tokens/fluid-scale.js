@@ -1,3 +1,12 @@
+// *----------------------------------*/
+//  #FLUID SCALE TOKENS
+// *----------------------------------*/
+//
+//  Defines global settings for the fluid scale.
+//  (values are in px)
+//
+// *----------------------------------*/
+
 // Every spacing metric should be based on this. 16px is the default font size set by bowsers.
 const baseFontSize = 16;
 

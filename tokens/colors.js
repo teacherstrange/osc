@@ -1,3 +1,11 @@
+// *----------------------------------*/
+//  #COLOUR TOKENS
+// *----------------------------------*/
+//
+//  Defines global colours for use in the theme.
+//
+// *----------------------------------*/
+
 // Navy and white
 const colorNavy = 'hsl(205deg 79% 11%)';
 const colorWhite = 'hsl(0deg 0% 100%)';
