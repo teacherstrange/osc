@@ -31,6 +31,7 @@ describe('Image Gallery Component', () => {
     });
 
     test('should open the lightgallery when the image is clicked', async () => {
+        // eslint-disable-next-line testing-library/render-result-naming-convention -- render is in setup function
         const user = userEvent.setup();
 
         await setup({ images: singleImageData });
