@@ -7,7 +7,7 @@ test.describe('User login', () => {
         await page.goto('/admin');
 
         const h1 = page.getByRole('heading', {
-            level: 1
+            level: 1,
         });
 
         await expect(h1).toBeVisible();
@@ -21,7 +21,7 @@ test.describe('User login', () => {
 test.describe('Navigates to a sample of pages without them hanging', () => {
     const checkHeading = async (page: Page) => {
         const h1 = page.getByRole('heading', {
-            level: 1
+            level: 1,
         });
 
         await expect(h1).toBeVisible();
@@ -88,7 +88,6 @@ test('skips focus into the main content', async ({ page }) => {
 
     await skipLink.focus();
 
-    await page.keyboard.press('Tab');
     await expect(skipLink).toBeFocused();
 
     await page.keyboard.press('Enter');
