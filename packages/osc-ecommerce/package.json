@@ -26,7 +26,7 @@
     "build:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --minify --bundle --format=esm --define:process.env.NODE_ENV='\"production\"'",
     "dev:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --bundle --format=esm --define:process.env.NODE_ENV='\"development\"' --watch",
     "copy-fonts:from-ui": "cp -R ../osc-ui/src/fonts public",
-    "copy-fonts:from-remix": "mv public/fonts public/build/_assets",
+    "copy-fonts:from-remix": "cp -R public/fonts public/build/_assets",
     "copy-fonts": "run-s copy-fonts:*"
   },
   "dependencies": {
