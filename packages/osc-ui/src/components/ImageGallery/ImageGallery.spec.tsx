@@ -34,7 +34,7 @@ describe('Image Gallery Component', () => {
         // eslint-disable-next-line testing-library/render-result-naming-convention -- render is in setup function
         const user = userEvent.setup();
 
-        await setup({ images: singleImageData });
+        setup({ images: singleImageData });
 
         expect(screen.getByRole('dialog')).not.toHaveClass('lg-show');
         expect(screen.getAllByAltText(/A cartoony shoe/i).length).toBe(1);
