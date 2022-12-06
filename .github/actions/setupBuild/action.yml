@@ -15,5 +15,5 @@ runs:
     - run: npm run build:osc-ui
       shell: bash
 
-    - run: npm run copy-fonts
+    - run: npm run copy-fonts:from-ui
       shell: bash
