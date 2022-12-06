@@ -7,8 +7,7 @@
     "test:dev": "vitest run --config ./vite.config.ts",
     "build": "rm -rf dist && NODE_ENV=production LOAD_PATH=src rollup --config",
     "dev": "run-p dev:*",
-    "dev:rollup": " LOAD_PATH=src rollup -c -w",
-    "dev:sass": "sass --watch src:dist --style compressed"
+    "dev:rollup": " LOAD_PATH=src rollup -c -w"
   },
   "name": "osc-ui",
   "version": "0.0.0",
