@@ -25,7 +25,7 @@
     "storybook": "npm run build:css && concurrently \"npm run dev:css\" \"start-storybook -p 6006\"",
     "build:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --minify --bundle --format=esm --define:process.env.NODE_ENV='\"production\"'",
     "dev:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --bundle --format=esm --define:process.env.NODE_ENV='\"development\"' --watch",
-    "install:fonts": "rsync -r ../osc-ui/src/fonts public/build/_assets"
+    "install:fonts": "cp -R ../osc-ui/src/fonts public/build/_assets"
   },
   "dependencies": {
     "@prisma/client": "^4.2.1",
