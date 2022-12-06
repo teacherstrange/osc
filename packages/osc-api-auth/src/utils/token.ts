@@ -12,6 +12,7 @@ export const access: AccessTokenFn = async (userId) => {
     const payload = {
         user: { id: userId, permissions: await permissions(userId) }
     };
+
     // Create accessToken - this is what will be used to access restricted areas
     return jwt.sign(payload, env.JWT_SECRET!, {
         algorithm: 'HS256',

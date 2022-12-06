@@ -10,6 +10,7 @@ async function startServer() {
     const { url } = await startStandaloneServer(server(), {
         context: async ({ req }) => {
             const algolia = algoliasearch(env.ALGOLIA_APP_ID, env.ALGOLIA_SEARCH_KEY);
+            const algoliaProducts = algolia.initIndex(env.ALGOLIA_PRODUCT_INDEX);
 
             const shopify = new Shopify({
                 shopName: env.SHOPIFY_STORE_NAME,
@@ -21,6 +22,7 @@ async function startServer() {
 
             return {
                 algolia,
+                algoliaProducts,
                 shopify,
                 user
             };
