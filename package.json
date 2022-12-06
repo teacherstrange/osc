@@ -38,7 +38,7 @@
     "api:dev:osc-api-gateway": "lerna run dev --scope osc-api-gateway",
     "setup": "npm i && npx prisma generate && cd packages/osc-studio && npm i --legacy-peer-deps",
     "tokens:generate": "json-to-scss ./tokens/**/*.* ./packages/osc-ui/src/styles/settings/_tokens.scss --tn 2",
-    "install:fonts": "lerna run install:fonts"
+    "copy-fonts": "lerna run copy-fonts"
   },
   "lint-staged": {
     "*.scss": [
