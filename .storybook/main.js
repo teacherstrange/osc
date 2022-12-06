@@ -43,10 +43,7 @@ module.exports = {
             },
             // Alias the font path in osc-ui so storybook can find it
             alias: {
-                './fonts/Outfit-VariableFont_wght.woff2': path.resolve(
-                    __dirname,
-                    '../packages/osc-ui/src/fonts/Outfit-VariableFont_wght.woff2'
-                )
+                './fonts': path.resolve(__dirname, '../packages/osc-ui/src/fonts')
             }
         };
 
