@@ -72,7 +72,7 @@ The fluid scale is defined in the `tokens/typography.js` file and based on those
 
 **Note:** You will notice that the space-scale variables use px whereas the font-scale variables use rem. This is to combat an interesting case where increasing the font size will also increase the padding/margin of the box. You can read more about this here: https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/#bonus-rem-quality-of-life
 
-Following that you can either use `--space-*` or `--font-*` to set the spacing depending on you need.
+Following that you can either use `--space-*` or `--font-*` to set the spacing depending on your need.
 
 ## Media Queries
 
@@ -80,7 +80,7 @@ Media queries are handled by the `tokens/breakpoints.js` file. These are used to
 
 ### Usage
 
-We have a mixing defined called `mq` located in `styles/tools/_mq.scss`.
+We have a mixin defined called `mq` located in `styles/tools/_mq.scss`.
 
 ```scss
 @include mq(mq-token('mob')) {
