@@ -1,0 +1,75 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-button {
+    --button-background-color: var(--colour-pink);
+    --button-foreground-color: var(--colour-white);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    background-color: var(--button-background-color);
+    border: none;
+    border-radius: 0;
+    color: var(--button-foreground-color);
+    font: inherit;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    letter-spacing: 0;
+    cursor: pointer;
+    pointer-events: auto;
+
+    > span {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: inherit;
+        gap: 0.25em; // good enough support to use now?
+        pointer-events: none;
+    }
+
+    svg {
+        flex-shrink: 0;
+        height: 1em;
+    }
+
+    &[disabled] {
+        --button-background-color: var(--colour-light-pink);
+
+        cursor: not-allowed;
+    }
+
+    // Variant modifiers
+    &--outline {
+        --button-background-color: transparent;
+        --button-foreground-color: var(--colour-pink);
+
+        border: 2px solid currentcolor;
+    }
+
+    // Size modifiers
+    // &--sm {}
+
+    // &--md {}
+
+    // &--lg {}
+
+    &--full {
+        width: 100%;
+    }
+}
+
+.c-button-group {
+    display: flex;
+    gap: 0.5em;
+    flex-wrap: wrap;
+
+    &--column {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

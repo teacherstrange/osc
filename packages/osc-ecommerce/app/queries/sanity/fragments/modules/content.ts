@@ -13,15 +13,27 @@ export const MODULE_CONTENT = groq`
     "textColor": textColor.value,
     body[] {
         ...,
-    ${IMAGE},
-    markDefs[] {
+        ${IMAGE},
+        markDefs[] {
+            ...,
+            (_type == 'annotationLinkInternal') => {
+                ${LINK_INTERNAL}
+            },
+            (_type == 'annotationLinkExternal') => {
+                ${LINK_EXTERNAL}
+            }
+        }
+    },
+    buttons[] {
         ...,
-        (_type == 'annotationLinkInternal') => {
-            ${LINK_INTERNAL}
+        (type == "file") => {
+          "file": file.asset->url
         },
-        (_type == 'annotationLinkExternal') => {
+        (type == "internal") => {
+             ${LINK_INTERNAL}
+        },
+        (type == "external") => {
             ${LINK_EXTERNAL}
         }
     }
-    },
 `;

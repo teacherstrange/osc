@@ -82,6 +82,13 @@ export default {
             title: 'Body',
             type: 'body',
             group: 'content'
+        },
+        {
+            name: 'buttons',
+            title: 'Buttons',
+            type: 'array',
+            of: [{ type: 'module.button' }],
+            group: 'content'
         }
     ],
     preview: {
