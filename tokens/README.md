@@ -26,14 +26,14 @@ Similarly you should avoid camelCasing your token as this will not be converted 
 // Bad
 module.exports = {
     default: {
-        gradientPrimary: gradientPinkLightOrange
-    }
+        gradientPrimary: gradientPinkLightOrange,
+    },
 };
 // Good
 module.exports = {
     default: {
-        'gradient-primary': gradientPinkLightOrange
-    }
+        'gradient-primary': gradientPinkLightOrange,
+    },
 };
 ```
 
@@ -44,10 +44,10 @@ If there is anything you want to loop over within your Scss you should add your 
 ```js
 // Bad
 module.exports = {
-    'font-primary': '"Outfit", helvetica, arial, sans-serif' // Compile error
+    'font-primary': '"Outfit", helvetica, arial, sans-serif', // Compile error
 };
 // Good
 module.exports = {
-    'font-primary': ['"Outfit", helvetica, arial, sans-serif']
+    'font-primary': ['"Outfit", helvetica, arial, sans-serif'],
 };
 ```
