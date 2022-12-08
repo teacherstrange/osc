@@ -28,7 +28,7 @@ describe('Alert component', () => {
         );
 
         const icon = container.querySelector('svg');
-        expect(icon.nodeName).toBe('SVG');
+        expect(icon.nodeName).toBe('svg');
     });
     test('should not render an SVG if icon prop is passed in as "false"', () => {
         const { container } = render(
