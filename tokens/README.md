@@ -12,7 +12,7 @@ To update any of our tokens, you will need to edit the `.js` files in this direc
 npm run tokens:generate
 ```
 
-This will compile the tokens into Scss and output them to `packages/osc-ui/settings/_tokens.scss`.
+This will compile the tokens into Scss and output them to `packages/osc-ui/src/styles/settings/_tokens.scss`.
 
 **Note:** Tokens should not change very often and should be considered a source of truth for our design system.
 

@@ -10,7 +10,7 @@ Classnames are named following the [BEMIT methodology](https://csswizardry.com/2
 
 ## Using token values
 
-There will be times where you want to use a token value in your Scss. To do this you can use the one of the `get-token` functions located in `styles/tools/_get-tokens`. This function takes a token name and returns the value of that token. E.g.
+There will be times where you want to use a token value in your Scss. To do this you can use the one of the `get-token` functions located in `styles/tools/functions/_get-tokens`. This function takes a token name and returns the value of that token. E.g.
 
 ```scss
 p {
