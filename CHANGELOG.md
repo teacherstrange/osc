@@ -1,3 +1,24 @@
+## [0.19.0](https://github.com/Open-Study-College/osc/compare/v0.18.0...v0.19.0) (2022-12-08)
+
+
+### ✨ Features
+
+* add ImageGallery component and stories ([26fb5b2](https://github.com/Open-Study-College/osc/commit/26fb5b28b76f39e7d9d7ea56924fddf165e25c45))
+
+
+### 🧪 Tests
+
+* add eslint disable next-line ([6cf6b6f](https://github.com/Open-Study-College/osc/commit/6cf6b6f78dea93bc111b7444fbb9dcaea7c7dbf8))
+* add ImageGallery tests ([430724c](https://github.com/Open-Study-College/osc/commit/430724ca7102be5db1e098bf837f0234fc239504))
+* remove unecessary "await" ([70fc212](https://github.com/Open-Study-College/osc/commit/70fc212ea39df963d0f599a6153b47b001f88f18))
+
+
+### ♻️ Refactors
+
+* add storybook documentation and remove comments ([659676e](https://github.com/Open-Study-College/osc/commit/659676ef0f21e16cff23cce90fa2fff5c31f1a89))
+* move custom styles to end of stylesheet ([8060488](https://github.com/Open-Study-College/osc/commit/806048856cea583e9d9a76b8d0c25ce1503b6c60))
+* remove jsDoc annotation ([399331b](https://github.com/Open-Study-College/osc/commit/399331bbf95b4dfb26826e3a73c4331a84d372f5))
+
 ## [0.18.0](https://github.com/Open-Study-College/osc/compare/v0.17.1...v0.18.0) (2022-12-08)
 
 
@@ -96,26 +117,4 @@
 ### 🐛 Bugs
 
 * db url updates ([d796e0c](https://github.com/Open-Study-College/osc/commit/d796e0c0155bfebf5209e92f1bda7f4046ec924e))
-
-## [0.16.0](https://github.com/Open-Study-College/osc/compare/v0.15.1...v0.16.0) (2022-11-30)
-
-
-### ✨ Features
-
-* add component, styling and stories ([953ef9c](https://github.com/Open-Study-College/osc/commit/953ef9cd3209fa775b18fbb7d85e917fc56c2781))
-
-
-### 🧪 Tests
-
-* add more  tests and add resize-observer polyfill ([359e81a](https://github.com/Open-Study-College/osc/commit/359e81a9da0e398cc0e5aeaff63a1ead342a9b57))
-* add tests ([ad16695](https://github.com/Open-Study-College/osc/commit/ad166952b6d38c9e6d9e112bb7dcfcfa544bbf55))
-
-
-### ♻️ Refactors
-
-* create subComponents, use children for args and add descriptions ([075a643](https://github.com/Open-Study-College/osc/commit/075a6439b4a806f51e5ca76fc40a79bc01a6d2ad))
-* intsall radix popover package ([dea0e15](https://github.com/Open-Study-College/osc/commit/dea0e1528e9bcdfc93fbe38eb3b647a24f2d0723))
-* nest selectors ([daf6c29](https://github.com/Open-Study-College/osc/commit/daf6c29152e27687bc54e0324a30210f9380804f))
-* remove wrapper div element ([dcff2ce](https://github.com/Open-Study-College/osc/commit/dcff2ce4a3a6991ffacfdfcad271ce9e63e561a2))
-* update to use children for passing in content ([7c40e10](https://github.com/Open-Study-College/osc/commit/7c40e106e0866e6d1c57d08a1c5634528dc4a46f))
 
