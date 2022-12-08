@@ -1,5 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
+import { Image } from '../Image/Image';
 import type { Props } from './Carousel';
 import { Carousel } from './Carousel';
 
@@ -9,155 +10,223 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: 'Carousel component for displaying various content types'
-            }
-        }
+                component: 'Carousel component for displaying various content types.',
+            },
+        },
     },
     argTypes: {
-        active: {
-            description: 'Setting this to false will not activate or deactivate the carousel.'
+        autoplay: {
+            control: {
+                type: 'select',
+            },
         },
-        axis: {
-            description: 'Direction of the carousel'
+        carouselName: {
+            table: {
+                defaultValue: {
+                    summary: '',
+                },
+            },
         },
-        carouselKey: {
-            description:
-                'ensure the css variables for the height, slidegap, etc. are locally scoped',
-            control: false
+        justifyDotNav: {
+            control: {
+                type: 'select',
+            },
         },
-        delay: {
-            description: 'Delay between transitions in milliseconds'
+        slideOrigin: {
+            table: {
+                defaultValue: {
+                    summary: '"auto"',
+                },
+            },
+            control: {
+                type: 'select',
+            },
         },
-        height: {
-            description: 'Height of the carousel items in pixels'
-        },
-        loop: {
-            description: 'Whether or not the carousel should loop back around to the start'
-        },
-        mediaArray: {
-            description: 'Array of objects containing image urls and alt text',
-            control: false
-        },
-        slideGap: {
-            description: 'The gap between each slide in pixels'
-        },
-        slidesPerPage: {
-            description: 'Number of slides shown per page'
-        },
-        ssr: {
-            description: 'Controls if the carousel is visible before embla-api inits',
-            control: false
-        },
-        startIndex: {
-            description: 'The slide number we should start on'
-        }
-    }
+    },
 } as Meta;
 
-const Template: Story<Props> = (args) => <Carousel {...args} />;
+const Template: Story<Props> = (args) => (
+    <Carousel {...args}>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: '100px' }}>
+            1
+        </div>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: '100px' }}>
+            2
+        </div>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: '100px' }}>
+            3
+        </div>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: '100px' }}>
+            4
+        </div>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: '100px' }}>
+            5
+        </div>
+    </Carousel>
+);
+
+const AdaptiveHeightTemplate: Story<Props> = (args) => (
+    <Carousel {...args}>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: 200 }}>
+            200px
+        </div>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: 100 }}>
+            100px
+        </div>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: 75 }}>
+            75px
+        </div>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: 100 }}>
+            100px
+        </div>
+        <div className="" style={{ backgroundColor: 'lightgreen', height: 150 }}>
+            150px
+        </div>
+    </Carousel>
+);
+
+const ImagesTemplate: Story<Props> = (args) => (
+    <Carousel {...args}>
+        <Image
+            src="https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg"
+            width={1870}
+            height={1250}
+            alt="A cartoony shoe"
+        />
+        <Image
+            src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1665669940/cld-sample.jpg"
+            width={1870}
+            height={1250}
+            alt="A woman and a dog"
+        />
+
+        <Image
+            src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1665669942/cld-sample-4.jpg"
+            width={1870}
+            height={1250}
+            alt="Some food"
+        />
+
+        <Image
+            src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1665669941/cld-sample-2.jpg"
+            width={1870}
+            height={1250}
+            alt="A mountain"
+        />
+
+        <Image
+            src="https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg"
+            width={1870}
+            height={1250}
+            alt="A cartoony shoe"
+        />
+    </Carousel>
+);
 
 export const Primary = Template.bind({});
-
 Primary.args = {
-    mediaArray: [
-        {
-            _key: '2abff668951c',
-            _type: 'module.images',
-            alt: 'A cartoony shoe',
-            height: 1250,
-            src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-            width: 1870
+    carouselName: 'Primary',
+};
+
+export const AutoplaySmooth = Template.bind({});
+AutoplaySmooth.args = {
+    ...Primary.args,
+    carouselName: 'AutoPlay Smooth',
+    dotNav: false,
+    autoplay: 'smooth',
+    loop: true,
+};
+AutoplaySmooth.parameters = {
+    docs: {
+        description: {
+            story: 'Plays the carousel automatically, with a smooth transition between slides',
         },
-        {
-            _key: '2abff668952c',
-            _type: 'module.images',
-            alt: 'A cartoony shoe',
-            height: 1250,
-            src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-            width: 1870
+    },
+};
+
+export const AutoplaySwitch = Template.bind({});
+AutoplaySwitch.args = {
+    ...Primary.args,
+    carouselName: 'AutoPlay Switch',
+    autoplay: 'switch',
+    autoPlaySpeed: 2_000,
+    loop: true,
+};
+AutoplaySwitch.parameters = {
+    docs: {
+        description: {
+            story: 'Plays the carousel automatically, stepping through each slide.',
         },
-        {
-            _key: '2abff668953c',
-            _type: 'module.images',
-            alt: 'A cartoony shoe',
-            height: 1250,
-            src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-            width: 1870
+    },
+};
+
+export const AdaptiveHeight = AdaptiveHeightTemplate.bind({});
+AdaptiveHeight.args = {
+    ...Primary.args,
+    carouselName: 'Adaptive Height',
+    adaptiveHeight: true,
+};
+AdaptiveHeight.parameters = {
+    docs: {
+        description: {
+            story: 'Changes the height of the carousel to fit the height of the largest slide in view.',
         },
-        {
-            _key: '2abff668954c',
-            _type: 'module.images',
-            alt: 'A cartoony shoe',
-            height: 1250,
-            src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-            width: 1870
+    },
+};
+
+export const Images = ImagesTemplate.bind({});
+Images.args = {
+    ...Primary.args,
+    carouselName: 'Images',
+};
+Images.parameters = {
+    docs: {
+        description: {
+            story: 'Carousel through images, which are lazy loaded with the native loading attribute.',
         },
-        {
-            _key: '2abff668955c',
-            _type: 'module.images',
-            alt: 'A cartoony shoe',
-            height: 1250,
-            src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-            width: 1870
+    },
+};
+
+export const Breakpoints = Template.bind({});
+Breakpoints.args = {
+    ...Primary.args,
+    carouselName: 'Breakpoints',
+    slidesPerView: 2,
+    breakpoints: {
+        '(min-width: 768px)': {
+            slides: {
+                origin: 'auto',
+                perView: 3,
+                spacing: 16,
+            },
         },
-        {
-            _key: '2abff668956c',
-            _type: 'module.images',
-            alt: 'A cartoony shoe',
-            height: 1250,
-            src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-            width: 1870
-        }
-    ],
-    active: true,
-    delay: '3000',
-    slidesPerPage: 3,
-    slideGap: 10,
-    axis: 'x',
-    height: 500,
+        '(min-width: 1440px)': {
+            slides: {
+                origin: 'auto',
+                perView: 4,
+                spacing: 16,
+            },
+        },
+    },
+};
+Breakpoints.parameters = {
+    docs: {
+        description: {
+            story: 'Can change the settings of the slide based on a custom breakpoint.',
+        },
+    },
+};
+
+export const CenterOrigin = Template.bind({});
+CenterOrigin.args = {
+    ...Primary.args,
+    slideOrigin: 'center',
     loop: false,
-    startIndex: 1,
-    ssr: false
 };
-
-export const HorizontalOneSlide = Template.bind({});
-HorizontalOneSlide.args = {
-    ...Primary.args,
-    axis: 'x',
-    slidesPerPage: 1
-};
-HorizontalOneSlide.parameters = {
+CenterOrigin.parameters = {
     docs: {
         description: {
-            story: 'Changes one slide at a time.'
-        }
-    }
-};
-
-export const VerticalTwoSlide = Template.bind({});
-VerticalTwoSlide.args = {
-    ...Primary.args,
-    axis: 'y',
-    slidesPerPage: 2
-};
-VerticalTwoSlide.parameters = {
-    docs: {
-        description: {
-            story: 'Changes two slides at a time vetically.'
-        }
-    }
-};
-
-export const VerticalMultiSlide = Template.bind({});
-VerticalMultiSlide.args = {
-    ...Primary.args,
-    axis: 'y',
-    slidesPerPage: 3
-};
-VerticalMultiSlide.parameters = {
-    docs: {
-        description: {
-            story: 'Changes three slides at a time vetically.'
-        }
-    }
+            story: 'Starts carousel with the initial slide in the center.',
+        },
+    },
 };
