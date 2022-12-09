@@ -1,7 +1,9 @@
-import typescript from 'rollup-plugin-typescript2';
+import dotenv from 'dotenv';
+import copy from 'rollup-plugin-copy';
 import dts from 'rollup-plugin-dts';
 import scss from 'rollup-plugin-scss';
-import dotenv from 'dotenv';
+import typescript from 'rollup-plugin-typescript2';
+
 const transpileCss = require('./bin/utils/helpers');
 const path = require('path');
 dotenv.config();
@@ -19,6 +21,10 @@ export default [
         ],
         plugins: [
             typescript({ check: false }),
+            // Copy the fonts into our dist folder
+            copy({
+                targets: [{ src: 'src/fonts', dest: 'dist' }]
+            }),
             scss({
                 output: async function (style, styleNodes) {
                     Object.entries(styleNodes).map(async (node) => {

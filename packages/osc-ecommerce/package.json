@@ -8,8 +8,8 @@
     "seed": "cross-env DATABASE_URL=file:./data.db?connection_limit=1 ts-node --require tsconfig-paths/register prisma/seed.ts",
     "build": "run-s build:*",
     "build:css": "PORT=2001 LOAD_PATH=app/styles PATH_TO_MAIN_SCSS=/app/styles/main.scss PATH_TO_DEST_MAIN_CSS=/app/styles/dest/main.css PATH_TO_COMPONENTS=/app/components node bin/postcssBuild.js",
-    "build:remix": "cross-env NODE_ENV=production remix build",
-    "dev": "cross-env NODE_ENV=development npm run build:css && run-p dev:*",
+    "build:remix": "cross-env NODE_ENV=production remix build && npm run copy-fonts:from-remix",
+    "dev": "cross-env NODE_ENV=development npm run copy-fonts:from-ui && npm run build && run-p dev:*",
     "dev:css": "PORT=2001 LOAD_PATH=app/styles PATH_TO_MAIN_SCSS=/app/styles/main.scss PATH_TO_DEST_MAIN_CSS=/app/styles/dest/main.css node bin/postcss.js",
     "dev:remix": "cross-env PORT=2000 NODE_ENV=development binode --require ./__mocks__ -- @remix-run/dev:remix dev",
     "start": "remix-serve build",
@@ -24,7 +24,10 @@
     "build-storybook": "npm run build:css && lerna run build:css && build-storybook",
     "storybook": "npm run build:css && concurrently \"npm run dev:css\" \"start-storybook -p 6006\"",
     "build:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --minify --bundle --format=esm --define:process.env.NODE_ENV='\"production\"'",
-    "dev:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --bundle --format=esm --define:process.env.NODE_ENV='\"development\"' --watch"
+    "dev:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --bundle --format=esm --define:process.env.NODE_ENV='\"development\"' --watch",
+    "copy-fonts:from-ui": "cp -R ../osc-ui/src/fonts public",
+    "copy-fonts:from-remix": "cp -R public/fonts public/build/_assets",
+    "copy-fonts": "run-s copy-fonts:*"
   },
   "dependencies": {
     "@prisma/client": "^4.2.1",

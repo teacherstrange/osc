@@ -1,4 +1,5 @@
 require('dotenv').config;
+const path = require('path');
 
 const stories = [
     '../packages/osc-ui/src/components/**/*.stories.mdx',
@@ -17,7 +18,12 @@ module.exports = {
     addons: [
         'storybook-addon-sass-postcss',
         '@storybook/addon-links',
-        '@storybook/addon-essentials',
+        {
+            name: '@storybook/addon-essentials',
+            options: {
+                backgrounds: false
+            }
+        },
         '@storybook/addon-interactions',
         '@storybook/addon-a11y'
     ],
@@ -34,6 +40,10 @@ module.exports = {
                 stream: false,
                 os: false,
                 emotionAlias: false
+            },
+            // Alias the font path in osc-ui so storybook can find it
+            alias: {
+                './fonts': path.resolve(__dirname, '../packages/osc-ui/src/fonts')
             }
         };
 

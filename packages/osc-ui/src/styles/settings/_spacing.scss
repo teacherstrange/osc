@@ -1,39 +1,39 @@
 @use "sass:math";
 @use "global";
+@use "../tools/fluid-scale" as *;
 
 ///*----------------------------------*\
 //  #SPACING SETTINGS
 //\*----------------------------------*/
 //
 // The spacing system is created by defining a scale of non-linear (spacing) values using our
-// base values ($global-scale-ratio / $global-baseline) and a multiplier ($global-spacing-factor).
-// Should you need to change how the spacing works you can update the values in settings/global.
-//
-//  Ref: https://medium.com/codyhouse/create-your-design-system-part-4-spacing-895c9213e2b9
+// base values from the fluid scale in our tokens. This matches the scale used for the font sizes to create
+// a consistent vertical rhythm.
+// Should you need to change how the spacing works you can update the values in the tokens/fluid-scale.js file.
+// NOTE: This will also affect the font sizes.
 //
 //\*----------------------------------*/
 
-// How many grid lines should our spacing unit variants span?
-// Each value should be an unitless integer.
-// Based on a fibonacci sequence
+:root {
+    // We're using px to define the values in this scale so we don't adjust the spacing along with the font size
+    // This helps to keep the spacing from increasing along with the font size if a user changes their preferences.
+    // Ref: https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/#strategic-unit-deployment
+    @include fluid-scale("space", "px");
+}
 
-$global-spacing-factor-s: 1; // 10px / 1rem
-$global-spacing-factor: 2; // 30px / 3rem
-$global-spacing-factor-m: 4; // 50px / 5rem
-$global-spacing-factor-l: 8; // 110px / 11rem
-$global-spacing-factor-xl: 16; // 210px / 21rem
-
-// Spacing values are determined based on your project’s global baseline grid.
+// Spacing values are determined based on your project’s fluid scale.
 // It is not recommended that you modify these following variables
 // (it can break your vertical rhythm), but if you need to, you can.
+$global-spacing-s: var(--space-scale-milli);
+$global-spacing: var(--space-scale-zeta);
+$global-spacing-m: var(--space-scale-epsilon);
+$global-spacing-l: var(--space-scale-delta);
+$global-spacing-xl: var(--space-scale-gamma);
 
-$global-spacing-s: math.round(global.$global-scale-ratio * $global-spacing-factor-s) *
-    global.$global-baseline; // 10
-$global-spacing: math.round(global.$global-scale-ratio * $global-spacing-factor) *
-    global.$global-baseline; // 30
-$global-spacing-m: math.round(global.$global-scale-ratio * $global-spacing-factor-m) *
-    global.$global-baseline; // 50
-$global-spacing-l: math.round(global.$global-scale-ratio * $global-spacing-factor-l) *
-    global.$global-baseline; // 110
-$global-spacing-xl: math.round(global.$global-scale-ratio * $global-spacing-factor-xl) *
-    global.$global-baseline; // 210
+// For instances when we want the spacing to scale with the user's font size
+// i.e. adding a margin bottom to a paragraph, we would expect that to increase with the font size
+$global-spacing-relative-s: var(--font-scale-milli);
+$global-spacing-relative: var(--space-font-zeta);
+$global-spacing-relative-m: var(--font-scale-epsilon);
+$global-spacing-relative-l: var(--font-scale-delta);
+$global-spacing-relative-xl: var(--font-scale-gamma);

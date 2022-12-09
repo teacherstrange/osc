@@ -3,7 +3,7 @@ import React from 'react';
 import { Image } from '../Image/Image';
 
 import LightGallery from 'lightgallery/react';
-import { useVariant } from '../../hooks/useVariant';
+import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
@@ -26,7 +26,7 @@ export interface Props {
 export const ImageGallery: FC<Props> = (props: Props) => {
     const { images, variant } = props;
 
-    const variantClass = useVariant('c-image-gallery__img', variant);
+    const variantClass = useModifier('c-image-gallery__img', variant);
     const imageClasses = classNames('c-image-gallery__img', variantClass);
 
     // More info can be found about this lightbox at www.lightgalleryjs.com

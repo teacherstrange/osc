@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./dist/src-styles-main.css" />
+        <title>Style test</title>
+    </head>
+    <body>
+        <style>
+            section {
+                padding: var(--space-scale-epsilon) 0;
+                border-bottom: 1px solid hsl(0, 0%, 80%);
+            }
+            .micro {
+                font-size: var(--font-scale-micro);
+            }
+            .milli {
+                font-size: var(--font-scale-milli);
+            }
+            .centi {
+                font-size: var(--font-scale-centi);
+            }
+            .zeta {
+                font-size: var(--font-scale-zeta);
+            }
+            .epsilon {
+                font-size: var(--font-scale-epsilon);
+            }
+            .delta {
+                font-size: var(--font-scale-delta);
+            }
+            .gamma {
+                font-size: var(--font-scale-gamma);
+            }
+            .beta {
+                font-size: var(--font-scale-beta);
+            }
+            .alpha {
+                font-size: var(--font-scale-alpha);
+            }
+            .omega {
+                font-size: var(--font-scale-omega);
+            }
+            .kilo {
+                font-size: var(--font-scale-kilo);
+            }
+            .mega {
+                font-size: var(--font-scale-mega);
+            }
+            .text-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-right: 2rem;
+            }
+            .calculated-font {
+                flex-shrink: 0;
+                font-size: 16px;
+            }
+            .boxes {
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--space-scale-epsilon);
+            }
+            .boxes > div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+            }
+            .boxes p {
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+            }
+            .box {
+                --box-size: var(--font-scale-zeta);
+                width: var(--box-size);
+                height: var(--box-size);
+            }
+            [class*="o-grid__col"] {
+                height: var(--font-scale-zeta);
+                color: var(--color-tertiary);
+            }
+        </style>
+        <div class="o-container o-container--large u-pb-delta">
+            <h1 class="alpha">Style test</h1>
+
+            <section>
+                <h2>Font scale</h2>
+                <p>
+                    A fluid typescale which will scale with the viewport width between an upper and
+                    lower bound.
+                </p>
+                <div class="text-wrapper">
+                    <p class="t-font mega">Mega</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font kilo">Kilo</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font omega">Omega</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font alpha">Alpha</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font beta">Beta</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font gamma">Gamma</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font delta">Delta</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font epsilon">Epsilon</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font zeta">Zeta</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font centi">Centi</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font milli">Milli</p>
+                </div>
+                <div class="text-wrapper">
+                    <p class="t-font micro">Micro</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Space scale</h2>
+                <p>Follows the same size scale as our font.</p>
+                <p>Only difference is it uses px instead of rems by default.</p>
+                <div class="boxes t-font-milli">
+                    <div>
+                        <p>Micro</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-micro)"
+                        ></div>
+                    </div>
+                    <div>
+                        <p>Milli</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-milli)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Centi</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-centi)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Zeta</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-zeta)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Epsilon</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-epsilon)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Delta</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-delta)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Gamma</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-gamma)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Beta</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-beta)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Alpha</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-alpha)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Omega</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-omega)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Kilo</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-kilo)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>Mega</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-mega)"
+                        ></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Grid</h2>
+                <div class="o-grid u-mb-zeta">
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
+                    ></div>
+                </div>
+                <h3>Offsets</h3>
+                <div class="o-grid u-mb-zeta">
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--4@mob o-grid__col--start-2@mob"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--4@mob o-grid__col--start-4@mob"
+                    ></div>
+                    <div
+                        class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--4@mob o-grid__col--start-6@mob"
+                    ></div>
+                </div>
+            </section>
+        </div>
+
+        <script>
+            (function () {
+                const container = document.querySelector(".o-container");
+                const wrappers = document.querySelectorAll(".text-wrapper");
+
+                for (const wrapper of [...wrappers]) {
+                    wrapper.insertAdjacentHTML(
+                        "beforeend",
+                        `<span class="calculated-font"></span>`
+                    );
+                }
+
+                const observer = new ResizeObserver((entries) => {
+                    for (const wrapper of [...wrappers]) {
+                        const text = wrapper.firstElementChild;
+
+                        const fontSize = window.getComputedStyle(text).fontSize;
+
+                        const calculatedFont = wrapper.querySelector(".calculated-font");
+
+                        calculatedFont.innerHTML = fontSize;
+                    }
+                });
+
+                observer.observe(container);
+            })();
+        </script>
+    </body>
+</html>

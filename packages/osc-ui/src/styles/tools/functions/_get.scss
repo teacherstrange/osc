@@ -12,14 +12,14 @@
 // `$key` String
 //
 // Example of use:
-// get('border.radius.xs')
+// get('border.radius.xs', $borders)
 //
 // Dependencies:
 // deep-map-check, deep-map-get, str-explode
 //
 // @return Anything
 // ---------------------------------------------------------
-@function get($key, $map: global.$prop-config) {
+@function get($key, $map: global.$osc-config) {
     $keys: str-explode.str-explode($key, ".");
 
     @if not deep-map-check.deep-map-check($map, $keys...) {

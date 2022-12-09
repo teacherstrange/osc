@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "../settings/typography" as *;
 
 ///*----------------------------------*\
 //  #FONT-SIZE
@@ -13,9 +14,10 @@
 //
 // @include font-size($size-alpha);
 // @include font-size($size-alpha, $line-height); // overrides line-height
+// @include font-size($size-alpha, null); // overrides line-height
 
-@mixin font-size($font-size, $line-height: null) {
-    font-size: math.div($font-size, 10) + rem;
+@mixin font-size($font-size, $line-height: $base-line-height) {
+    font-size: $font-size;
 
     @if $line-height != null {
         line-height: $line-height;

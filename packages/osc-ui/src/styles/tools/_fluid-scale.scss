@@ -1,0 +1,47 @@
+@use "sass:math";
+@use "sass:list";
+@use "../tools/functions" as *;
+@use "../settings/tokens" as *;
+
+//*----------------------------------*\
+//  #FLUID SCALE
+//\*----------------------------------*/
+//
+// Creates the css custom properties for the fluid scale
+//
+// Takes a $prefix and a $unit parameter
+// The $prefix is used to create the custom property name
+// The $unit is used to set the units our scale is based on (e.g. rem or px)
+//
+// Usage:
+// @include fluid-scale('font');
+// @include fluid-scale('space', 'px');
+//\*----------------------------------*/
+
+@mixin fluid-scale($prefix, $unit: rem) {
+    // Get the from our tokens
+    $steps: scale-token("steps");
+    // Get the position of the value we want to use as the base for the scale
+    // This will be used to set the correct exponent for each step of the scale
+    $base-index: list.index($steps, "zeta");
+
+    // Get our size values from the tokens
+    $min-viewport: scale-token("min-viewport.width");
+    $max-viewport: scale-token("max-viewport.width");
+    $min-font-size: scale-token("min-viewport.font-size");
+    $max-font-size: scale-token("max-viewport.font-size");
+    $min-scale: scale-token("min-viewport.scale");
+    $max-scale: scale-token("max-viewport.scale");
+
+    @for $i from 1 through length($steps) {
+        $step: list.nth($steps, $i);
+
+        // We’re doing $i - $type-base-index for each step’s minimum font size since our base modular step need not be the first element in the list
+        // We get its index and subtract it from the current index to obtain the correct offset for the min exponent.
+        $power: $i - $base-index;
+        $min: $min-font-size * math.pow($min-scale, $power);
+        $max: $max-font-size * math.pow($max-scale, $power);
+
+        --#{$prefix}-scale-#{$step}: #{clamped($min, $max, $min-viewport, $max-viewport, $unit)};
+    }
+}

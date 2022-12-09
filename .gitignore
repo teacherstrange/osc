@@ -6,15 +6,17 @@ packages/lib
 .env
 .env.development
 .DS_Store
+packages/osc-academic-hub/.DS_Store
 packages/osc-academic-hub/public/**/*
-packages/osc-ecommerce/public/**/*
+packages/osc-academic-hub/public/entry.worker.js
 packages/osc-academic-hub/coverage/**/*
+
+packages/osc-ecommerce/public/build/**/*
+packages/osc-ecommerce/public/entry.worker.js
 packages/osc-ecommerce/coverage/*
+
 packages/osc-ui/coverage/*
 packages/osc-ui/dist/**
-packages/osc-academic-hub/public/entry.worker.js
-packages/osc-ecommerce/public/entry.worker.js
-packages/osc-academic-hub/.DS_Store
 packages/osc-studio/dist
 
 packages/**/.node-persist

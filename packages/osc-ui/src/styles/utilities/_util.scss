@@ -1,113 +1,171 @@
 @use "sass:map";
-@use "../settings" as s;
-@use "../tools" as t;
+@use "sass:string";
+@use "../settings" as *;
+@use "../tools" as *;
+@use "../tools/functions" as *;
 
 ///*----------------------------------*\
 //  #UTILITIES
 //\*----------------------------------*/
 //
 //  A collection of utilities that allow for quickly applying small styling tweaks to components.
-//  NOTE: Use Sparingly.
+//  NOTE: We are using PurgeCss to remove unused classes however please use this file sparingly.
 //
 //\*----------------------------------*/
 //
 // Usage:
-// <div class="u-mt-10"></div>
+// <div class="u-mt-micro"></div>
 
-$property-map: (
-    margin-top: "mt",
-    margin-right: "mr",
-    margin-bottom: "mb",
-    margin-left: "ml",
-    margin: "m",
-    padding-top: "pt",
-    padding-right: "pr",
-    padding-bottom: "pb",
-    padding-left: "pl",
-    padding: "p",
-    border-radius: "br"
-);
+@function scales-map($scale: "fixed") {
+    $map: ();
 
-s.$prop-config: t.deep-map-merge(
-    (
-        margin-top: (
-            0,
-            10,
-            20
-        ),
-        margin-bottom: (
-            0,
-            10,
-            20,
-            30,
-            50,
-            110,
-            210
-        ),
-        margin-right: (
-            5,
-            10
-        ),
-        margin-left: (
-            0,
-            5,
-            10
-        ),
-        margin: (),
-        padding-top: (
-            10,
-            30,
-            50,
-            110,
-            210
-        ),
-        padding-right: (
-            0
-        ),
-        padding-bottom: (
-            10,
-            30,
-            50,
-            110,
-            210
-        ),
-        padding-left: (
-            0
-        ),
-        padding: (
-            0,
-            15
-        ),
-        border-radius: (
-            10
+    @each $step in scale-token("steps") {
+        @if ($scale == "relative") {
+            $map: map.set($map, $step, var(--font-scale-#{$step}));
+        } @else {
+            $map: map.set($map, $step, var(--space-scale-#{$step}));
+        }
+    }
+
+    @return $map;
+}
+
+$osc-config: (
+    margin-top: (
+        prefix: "mt",
+        values: (
+            scales-map("relative")
         )
     ),
-    s.$prop-config,
-    true
+    margin-bottom: (
+        prefix: "mb",
+        values: (
+            scales-map("relative")
+        )
+    ),
+    margin-right: (
+        prefix: "mr",
+        values: (
+            scales-map("relative")
+        )
+    ),
+    margin-left: (
+        prefix: "ml",
+        values: (
+            scales-map("relative")
+        )
+    ),
+    margin: (
+        prefix: "m",
+        values: (
+            scales-map("relative")
+        )
+    ),
+    padding-top: (
+        prefix: "pt",
+        values: (
+            scales-map()
+        )
+    ),
+    padding-right: (
+        prefix: "pr",
+        values: (
+            scales-map()
+        )
+    ),
+    padding-bottom: (
+        prefix: "pb",
+        values: (
+            scales-map()
+        )
+    ),
+    padding-left: (
+        prefix: "pl",
+        values: (
+            scales-map()
+        )
+    ),
+    padding: (
+        prefix: "p",
+        values: (
+            scales-map()
+        )
+    ),
+    border-radius: (
+        prefix: "br",
+        values: (
+            10px
+        )
+    ),
+    line-height: (
+        prefix: "lh",
+        values: (
+            "1": 1,
+            "1-25": 1.25,
+            "1-33": 1.33,
+            "1-5": 1.5,
+            "1-75": 1.75
+        )
+    ),
+    overflow: (
+        prefix: "ov",
+        values: (
+            auto,
+            hidden,
+            visible
+        )
+    ),
+    font-weight: (
+        prefix: "text",
+        values: (
+            "bold": $weight-bold,
+            "reg": $weight-reg
+        )
+    ),
+    font-style: (
+        prefix: "text",
+        values: (
+            italic
+        )
+    ),
+    text-transform: (
+        prefix: "text",
+        values: (
+            uppercase,
+            lowercase,
+            underline
+        )
+    ),
+    text-align: (
+        prefix: "text",
+        values: (
+            center,
+            right,
+            left
+        )
+    )
 );
 
-@each $property, $values in s.$prop-config {
-    $shorthand: map.get($property-map, $property);
+@each $property, $values in $osc-config {
+    $prefix: map.get($values, prefix);
+    $values: map.get($values, values);
 
-    @each $num in $values {
-        .u-#{$shorthand}-#{$num} {
-            @if is-number($num) {
-                #{$property}: #{$num}px;
+    @each $key, $value in $values {
+        .u-#{$prefix}-#{strip-unit($key)} {
+            @if ($value) {
+                #{$property}: $value;
             } @else {
-                #{$property}: #{$num};
+                #{$property}: $key;
             }
         }
     }
 }
 
-@include t.mq(s.$mq-tab, max) {
+@include mq(mq-token("tab"), max) {
     .u-plr-0\@tab {
         padding-right: 0;
         padding-left: 0;
     }
-}
-.no-padding {
-    padding: 0 !important;
 }
 
 .sr-only:not(:focus):not(:active) {
@@ -127,93 +185,67 @@ s.$prop-config: t.deep-map-merge(
 
 .u-hidden {
     &-from\@tab {
-        @include t.mq(s.$mq-tab--lrg) {
+        @include mq(mq-token("tab-lrg")) {
             display: none;
         }
     }
 
     &-from\@desk-med {
-        @include t.mq(s.$mq-desk--med) {
+        @include mq(mq-token("desk-med")) {
             display: none;
         }
     }
 
     &-until\@tab {
-        @include t.mq(s.$mq-tab--lrg, max) {
+        @include mq(mq-token("tab"), max) {
             display: none;
         }
     }
 
     &-until\@desk {
-        @include t.mq(s.$mq-desk, max) {
+        @include mq(mq-token("desk"), max) {
             display: none;
         }
     }
 
     &-until\@desk-med {
-        @include t.mq(s.$mq-desk--med, max) {
+        @include mq(mq-token("desk-med"), max) {
             display: none;
         }
     }
 }
 
-// see: settings/colours
-@each $class, $text-colour in s.$colours {
-    [data-t-colour="#{$class}"],
-    .u-colour-#{$class} {
-        color: #{$text-colour};
+// generate classes for each custom property in settings/_colors.scss
+// we're assuming the default map will include the same keys as the other themes
+@each $name, $value in color-token("default") {
+    // Skip over the gradients for text colour
+    @if (string.index($name, 'gradient') == null) {
+        [data-t-color="#{$name}"],
+        .u-color-#{$name} {
+            color: var(--color-#{$name});
+        }
     }
 }
 
 // Backgrounds
-@each $class, $bg-color in s.$colours {
-    [data-bg-colour="#{$class}"] {
-        background-color: #{$bg-color};
+@each $name, $value in color-token("default") {
+    [data-bg-color="#{$name}"],
+    .u-bg-color-#{$name} {
+        @if (string.index($name, 'gradient')) {
+            background-image: var(--color-#{$name});
+        } @else {
+            background-color: var(--color-#{$name});
+        }
     }
 }
 
+// Text utilities which can't be generated by our map
 // Usage:
-// <div class="u-text-bold"></div>
+// <div class="u-text-reset"></div>
 .u-text {
-    &-bold {
-        font-weight: s.$weight-bold;
-    }
-
-    &-reg {
-        font-weight: s.$weight-reg;
-    }
-
-    &-italic {
-        font-style: italic;
-    }
-
-    &-upper {
-        text-transform: uppercase;
-    }
-
-    &-lower {
-        text-transform: lowercase;
-    }
-
-    &-underline {
-        text-decoration: underline;
-    }
-
     &-reset {
         text-decoration: none;
         text-transform: none;
-    }
-
-    &-left {
-        text-align: left;
-    }
-
-    &-right {
-        text-align: right;
-    }
-
-    &-center {
-        text-align: center;
     }
 
     &-baseline {
@@ -222,35 +254,9 @@ s.$prop-config: t.deep-map-merge(
     }
 }
 
-$line-height-map: (
-    "1": "1",
-    "1-25": "1.25",
-    "1-33": "1.33",
-    "1-5": "1.5",
-    "1-75": "1.75"
-);
-
-@each $l-class, $l-unit in $line-height-map {
-    .u-lh-#{$l-class} {
-        line-height: #{$l-unit};
-    }
-}
-
-.u-ov {
-    &-auto {
-        overflow: auto;
-    }
-    &-hid {
-        overflow: hidden;
-    }
-    &-vis {
-        overflow: visible;
-    }
-}
-
 [data-line-clamp] {
     display: box;
-    margin-bottom: (s.$global-spacing-s * 2);
+    margin-bottom: $global-spacing-s;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
@@ -271,7 +277,7 @@ $line-height-map: (
     display: block;
     width: 100px;
     height: 2px;
-    background-color: s.$colour-secondary;
+    background-color: var(--color-secondary);
     transform: scaleY(0.5);
 }
 
@@ -296,7 +302,7 @@ $line-height-map: (
             rgba(#fff, 0)
         );
         transform: translateX(-100%);
-        animation: shimmer 1s s.$ease-in-out-cubic infinite;
+        animation: shimmer 1s $ease-in-out-cubic infinite;
         content: "";
     }
 

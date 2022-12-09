@@ -2,11 +2,11 @@
 // $SETTINGS
 // Preprocessor variables and methods
 */
-@forward "animation";
-@forward "colors";
+@forward "tokens";
+
 @forward "global";
+@forward "animation";
 @forward "containers";
-@forward "mq";
 @forward "spacing";
 @forward "typography";
 @forward "zindex";

@@ -1,4 +1,5 @@
-@use "global";
+@use "./tokens" as *;
+@use "../tools/functions/get-tokens" as *;
 
 ///*----------------------------------*\
 //  #CONTAINER WIDTH SETTINGS
@@ -8,11 +9,11 @@
 //
 //\*----------------------------------*/
 
-$container-size: global.$global-base-width; // 1440
+$container-size: container-token("container-size"); // 1440
 
-$container-size-xxxsml: 610;
-$container-size-xxsml: 960;
-$container-size-xsml: 1020;
-$container-size-sml: 1140;
-$container-size-med: 1280;
-$container-size-lrg: 1680;
+$container-size-xxxsml: container-token("container-size-xxxsml");
+$container-size-xxsml: container-token("container-size-xxsml");
+$container-size-xsml: container-token("container-size-xsml");
+$container-size-sml: container-token("container-size-sml");
+$container-size-med: container-token("container-size-med");
+$container-size-lrg: container-token("container-size-lrg");

@@ -1,3 +1,5 @@
+import colors from '../../../../tokens/colors';
+
 export default {
     title: 'Color List',
     name: 'colors',
@@ -9,7 +11,8 @@ export default {
             { title: 'Teal', value: '#88c6db' },
             { title: 'Purple', value: '#aca0cc' },
             { title: 'Green', value: '#bdcdcb' },
-            { title: 'White', value: 'white' }
+            { title: 'White', value: 'white' },
+            { title: 'Primary', value: colors.primary }
         ]
     }
 };

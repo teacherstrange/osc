@@ -1,7 +1,7 @@
 @use "../settings" as s;
 
 table {
-    border-color: s.$colour-primary;
+    border-color: var(--color-primary);
 }
 
 tr {

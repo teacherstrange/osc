@@ -1,5 +1,5 @@
 @use "../settings" as s;
 
 .o-main {
-    background-color: s.$colour-tertiary;
+    background-color: var(--color-tertiary);
 }
