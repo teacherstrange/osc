@@ -192,8 +192,8 @@ WithRadioItems.args = {
     courses: [
         { disabled: false, id: 1, value: 'Red' },
         { disabled: true, id: 2, value: 'Yellow' },
-        { disabled: false, id: 2, value: 'Green' },
-        { disabled: false, id: 2, value: 'Blue' },
+        { disabled: false, id: 3, value: 'Green' },
+        { disabled: false, id: 4, value: 'Blue' },
     ],
 };
 WithSubMenu.args = {
