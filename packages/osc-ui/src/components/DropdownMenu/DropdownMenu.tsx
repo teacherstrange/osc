@@ -52,6 +52,7 @@ export const DropdownMenuCheckboxItem: FC<CheckboxProps> = forwardRef<
         <DropdownMenuPrimitive.CheckboxItem
             className="c-dropdown-menu__checkbox-item"
             {...props}
+            onSelect={(e) => e.preventDefault()}
             ref={forwardedRef}
         >
             <DropdownMenuPrimitive.ItemIndicator className="c-dropdown-menu__indicator">
@@ -77,6 +78,7 @@ export const DropdownMenuRadioItem: FC<RadioProps> = forwardRef<
         <DropdownMenuPrimitive.RadioItem
             className="c-dropdown-menu__radio-item"
             {...props}
+            onSelect={(e) => e.preventDefault()}
             ref={forwardedRef}
         >
             {children}
