@@ -12,48 +12,48 @@ export default {
         docs: {
             description: {
                 component:
-                    'The accordion component lets users show and hide sections of related content on a page. Extended from the [Radix Accordion primitive](https://www.radix-ui.com/docs/primitives/components/accordion).'
-            }
-        }
+                    'The accordion component lets users show and hide sections of related content on a page. Extended from the [Radix Accordion primitive](https://www.radix-ui.com/docs/primitives/components/accordion).',
+            },
+        },
     },
     argTypes: {
         children: {
             table: {
-                disable: true
-            }
+                disable: true,
+            },
         },
         className: {
             description: 'Custom class',
             type: 'string',
             table: {
                 type: {
-                    summary: 'string'
-                }
-            }
+                    summary: 'string',
+                },
+            },
         },
         collapsible: {
             description:
                 'When `type` is `"single"`, allows closing content when clicking trigger for an open item.',
             table: {
                 type: {
-                    summary: 'boolean'
+                    summary: 'boolean',
                 },
                 defaultValue: {
-                    summary: 'true'
-                }
-            }
+                    summary: 'true',
+                },
+            },
         },
         disabled: {
             description:
                 'When true, prevents the user from interacting with the accordion and all its items.',
             table: {
                 type: {
-                    summary: 'boolean'
+                    summary: 'boolean',
                 },
                 defaultValue: {
-                    summary: 'false'
-                }
-            }
+                    summary: 'false',
+                },
+            },
         },
         defaultValue: {
             description:
@@ -61,9 +61,9 @@ export default {
             type: 'string',
             table: {
                 type: {
-                    summary: 'string'
-                }
-            }
+                    summary: 'string',
+                },
+            },
         },
         onValueChange: {
             description:
@@ -71,25 +71,25 @@ export default {
             table: {
                 type: {
                     name: 'function',
-                    summary: '(value: string) => void'
-                }
-            }
+                    summary: '(value: string) => void',
+                },
+            },
         },
         type: {
             description: 'Determines whether one or multiple items can be opened at the same time.',
             type: 'string',
             table: {
                 type: {
-                    summary: "'single' | 'multiple'"
+                    summary: "'single' | 'multiple'",
                 },
                 defaultValue: {
-                    summary: 'single'
-                }
+                    summary: 'single',
+                },
             },
             options: ['single', 'multiple'],
             control: {
-                type: 'select'
-            }
+                type: 'select',
+            },
         },
         value: {
             description:
@@ -97,11 +97,24 @@ export default {
             type: 'string',
             table: {
                 type: {
-                    summary: 'string | string[]'
-                }
-            }
-        }
-    }
+                    summary: 'string | string[]',
+                },
+            },
+        },
+        variant: {
+            description: 'Sets the variant style of the accordion.',
+            type: 'string',
+            table: {
+                type: {
+                    summary: 'primary | secondary | tertiary',
+                },
+            },
+            options: ['primary', 'secondary', 'tertiary'],
+            control: {
+                type: 'select',
+            },
+        },
+    },
 } as Meta;
 
 const Template: Story<AccordionProps> = ({ children, ...args }) => (
@@ -140,6 +153,35 @@ const Template2: Story<AccordionProps> = ({ children, ...args }) => (
     </Accordion>
 );
 
+const NestedTemplate: Story<AccordionProps> = ({ children, ...args }) => (
+    <Accordion {...args} variant="secondary">
+        {Array.isArray(children)
+            ? children.map((child, i: Key) => (
+                  <AccordionItem key={i} value={`${i}`}>
+                      <AccordionHeader icon="chevron" asChild={true} as="h2">
+                          {child.title}
+                      </AccordionHeader>
+                      <AccordionPanel>
+                          <Accordion type="single" variant="tertiary">
+                              <AccordionItem value="child">
+                                  <AccordionHeader icon="chevron" asChild={true} as="h3">
+                                      Heading
+                                  </AccordionHeader>
+                                  <AccordionPanel>
+                                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt
+                                      ipsam temporibus et veniam eveniet dolorum? Eaque alias
+                                      voluptate quis perferendis repellat omnis temporibus maiores
+                                      dolores ad, amet, rerum sed nesciunt!
+                                  </AccordionPanel>
+                              </AccordionItem>
+                          </Accordion>
+                      </AccordionPanel>
+                  </AccordionItem>
+              ))
+            : null}
+    </Accordion>
+);
+
 const IconTemplate: Story<AccordionProps> = ({ children, ...args }) => (
     <Accordion {...args}>
         {Array.isArray(children)
@@ -154,65 +196,88 @@ const IconTemplate: Story<AccordionProps> = ({ children, ...args }) => (
 );
 
 export const Primary = Template.bind({});
-
 Primary.args = {
     children: [
         {
-            title: 'Item 1',
+            title: 'What is included in the cost of my course?',
             content:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         },
         {
-            title: 'Item 2',
+            title: 'Do I have to sit an exam?',
             content:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         },
         {
-            title: 'Item 3',
+            title: 'How will my work get assessed?',
             content:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        }
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        },
     ],
     type: 'single',
     defaultValue: '0',
-    collapsible: true
+    collapsible: true,
+};
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+    ...Primary.args,
+    variant: 'secondary',
+};
+
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+    ...Primary.args,
+    variant: 'tertiary',
 };
 
 export const AllowMultiple = Template.bind({});
 AllowMultiple.args = {
     ...Primary.args,
     type: 'multiple',
-    defaultValue: ['0']
+    defaultValue: ['0'],
 };
 AllowMultiple.parameters = {
     docs: {
         description: {
-            story: 'Allow multiple panels to be open at a time by passing the `type="multiple"` prop.'
-        }
-    }
+            story: 'Allow multiple panels to be open at a time by passing the `type="multiple"` prop.',
+        },
+    },
 };
 
 export const HasHeadingLevel2 = Template2.bind({});
 HasHeadingLevel2.args = {
     ...Primary.args,
-    defaultValue: ['0']
+    defaultValue: ['0'],
 };
 HasHeadingLevel2.parameters = {
     docs: {
         description: {
-            story: 'Change the heading level by passing `asChild={true}` & `as="h2"` to the `AccordionHeader` subcomponent.'
-        }
-    }
+            story: 'Change the heading level by passing `asChild={true}` & `as="h2"` to the `AccordionHeader` subcomponent.',
+        },
+    },
 };
 
 export const HasChevronIcon = IconTemplate.bind({});
 HasChevronIcon.args = {
-    ...Primary.args
+    ...Primary.args,
 };
 HasChevronIcon.parameters = {
     docs: {
         description: {
-            story: 'Change the icon by passing `icon="chevron"` to the `AccordionHeader` subcomponent.'
-        }
-    }
+            story: 'Change the icon by passing `icon="chevron"` to the `AccordionHeader` subcomponent.',
+        },
+    },
+};
+
+export const HasNestedAccordion = NestedTemplate.bind({});
+HasNestedAccordion.args = {
+    ...Primary.args,
+};
+HasNestedAccordion.parameters = {
+    docs: {
+        description: {
+            story: 'You can nest accordions by passing an `Accordion` component as a child to the `AccordionPanel` subcomponent.',
+        },
+    },
 };

@@ -3,23 +3,25 @@ import type {
     AccordionHeaderProps,
     AccordionItemProps,
     AccordionMultipleProps,
-    AccordionSingleProps
+    AccordionSingleProps,
 } from '@radix-ui/react-accordion';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
 import type { ComponentPropsWithoutRef, ElementRef, FC, RefAttributes } from 'react';
 import React, { forwardRef } from 'react';
 import { useFontSize } from '../../hooks/useFontSize';
+import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 
 import './accordion.scss';
 
-export type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) &
-    RefAttributes<HTMLDivElement>;
+export type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) & {
+    variant?: 'primary' | 'secondary' | 'tertiary';
+} & RefAttributes<HTMLDivElement>;
 
 export const Accordion: FC<AccordionProps> = (props: AccordionProps) => {
-    const { children, className } = props;
-    const classes = classNames('c-accordion', className);
+    const { children, className, variant } = props;
+    const modifierClass = useModifier('c-accordion', variant);
+    const classes = classNames('c-accordion', className, modifierClass);
 
     return (
         <AccordionPrimitive.Root className={classes} {...props}>
@@ -50,11 +52,14 @@ const AccordionIcon = (props: AccordionIconProps) => {
 
     if (icon === 'chevron') {
         return (
-            <ChevronDownIcon
+            <svg
+                viewBox="0 0 20 22"
                 className="c-accordion__icon c-accordion__icon--chevron"
                 aria-hidden="true"
                 focusable="false"
-            />
+            >
+                <path d="M10.355 11.66 4.67 5.991l-2.791 2.8 8.451 8.424 8.495-8.442-2.79-2.79-5.679 5.677Z" />
+            </svg>
         );
     }
 
@@ -95,7 +100,7 @@ export const AccordionHeader: FC<AccordionHeadingProps> = forwardRef<
             <AccordionPrimitive.Header asChild className={classes} {...props} ref={forwardedRef}>
                 <Component>
                     <AccordionPrimitive.Trigger className="c-accordion__trigger">
-                        {children}
+                        <span>{children}</span>
                         <AccordionIcon icon={icon} />
                     </AccordionPrimitive.Trigger>
                 </Component>
@@ -106,7 +111,7 @@ export const AccordionHeader: FC<AccordionHeadingProps> = forwardRef<
     return (
         <AccordionPrimitive.Header className={classes} {...props}>
             <AccordionPrimitive.Trigger className="c-accordion__trigger">
-                {children}
+                <span>{children}</span>
                 <AccordionIcon icon={icon} />
             </AccordionPrimitive.Trigger>
         </AccordionPrimitive.Header>
@@ -120,7 +125,7 @@ export const AccordionPanel: FC<AccordionContentProps> = (props: AccordionConten
 
     return (
         <AccordionPrimitive.Content className={classes} {...props}>
-            {children}
+            <div className="c-accordion__text">{children}</div>
         </AccordionPrimitive.Content>
     );
 };

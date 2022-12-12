@@ -1,38 +1,92 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/tools/" as *;
+
 .c-accordion {
-    --accordion-transition-duration: 300ms;
+    // Sizes
+    --accordion-icon-base-size: 1em; // make sure the icon matches the height of the text
+    --accordion-icon-size: 1.1rem;
+    --accordion-trigger-font-size: #{rem(20)}; // design has this fixed across breakpoints
+    --accordion-content-font-size: 1rem; // design has this fixed across breakpoints
+
+    // Layout
+    --accordion-trigger-grid-columns: 1fr auto;
+    --accordion-trigger-padding: #{rem(26)}; // design has this fixed across breakpoints
+    --accordion-item-border: 1px solid var(--color-quinary);
+
+    // Transitions
+    --accordion-transition-duration: 0.3s;
     --accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
 
-    &__icon {
-        width: 1em; // make sure the icon matches the height of the text
-        height: 1em; // make sure the icon matches the width of the text
-        transition-duration: var(--accordion-transition-duration);
-        transition-timing-function: var(--accordion-transition-timing-func);
+    &__item {
+        &:not(:last-child) {
+            padding-bottom: var(--accordion-trigger-padding);
+            border-bottom: var(--accordion-item-border);
+        }
     }
 
-    &__icon-vert {
-        transition-property: opacity visibility;
+    &__header {
+        margin-bottom: 0;
+    }
+
+    &__icon {
+        width: var(--accordion-icon-base-size);
+        height: var(--accordion-icon-base-size);
+        margin-top: 0.125em; // align the icon with the middle of the text
+        color: var(--accordion-icon-color);
+        font-size: var(--accordion-icon-size);
+
+        &--plusminus > :first-child {
+            transition:
+                opacity var(--accordion-transition-duration) var(--accordion-transition-timing-func),
+                visibility var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+        }
+
+        &--chevron {
+            transition: transform var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+        }
     }
 
     &__trigger {
-        display: flex;
+        position: relative;
+        display: grid;
         align-items: center;
-        justify-content: space-between;
+        box-sizing: border-box;
         width: 100%;
+        padding: var(--accordion-trigger-padding) 0 0;
+        font-size: var(--accordion-trigger-font-size);
+        text-align: left;
+        transition: color var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+        cursor: pointer;
+        grid-template-columns: var(--accordion-trigger-grid-columns);
 
-        /* stylelint-disable-next-line selector-class-pattern */
+        @include mq(mq-token("mob")) {
+            gap: var(--space-scale-gamma);
+        }
+
+        &:hover {
+            color: var(--color-quaternary);
+        }
+
         &[data-state="open"] .c-accordion__icon--plusminus > :first-child {
             opacity: 0;
             visibility: hidden;
         }
 
-        /* stylelint-disable-next-line selector-class-pattern */
         &[data-state="open"] .c-accordion__icon--chevron {
             transform: rotate(180deg);
+        }
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        > span {
+            grid-column: 1 / 2;
         }
     }
 
     &__content {
+        max-width: 64ch;
         overflow: hidden;
+        font-size: var(--accordion-content-font-size);
+        font-weight: 300;
 
         &[data-state="open"] {
             animation: slide-down var(--accordion-transition-duration) var(--accordion-transition-timing-func);
@@ -40,6 +94,112 @@
 
         &[data-state="closed"] {
             animation: slide-up var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+        }
+    }
+
+    &__text {
+        padding: var(--font-scale-milli) 0;
+    }
+
+    // *----------------------------------*/
+    //  Variants
+    // --primary not included as it would be the default
+    // *----------------------------------*/
+    &--secondary {
+        --accordion-icon-size: 1.6em;
+        --accordion-trigger-font-size: var(--font-scale-centi);
+
+        // Add new column to the grid so we can centre the text accurately
+        --accordion-trigger-grid-columns: minmax(0, var(--accordion-icon-size)) 1fr auto;
+
+        .c-accordion__item {
+            border: var(--accordion-item-border);
+
+            &:not(:last-child) {
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+        }
+
+        .c-accordion__trigger {
+            padding:
+                var(--space-scale-epsilon)
+                var(--space-scale-delta);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.188em;
+
+            /* stylelint-disable-next-line plugin/selector-bem-pattern */
+            > span {
+                grid-column: 2 / 3;
+            }
+
+            @include mq(mq-token("mob")) {
+                gap: var(--space-scale-zeta);
+            }
+
+            &[data-state="open"] {
+                color: var(--color-quaternary);
+            }
+        }
+
+        .c-accordion__icon {
+            grid-column: 3 / -1;
+            color: currentcolor;
+        }
+
+        .c-accordion__content {
+            max-width: 100%;
+        }
+
+        .c-accordion__text {
+            padding: 0 var(--space-scale-delta) var(--space-scale-delta);
+        }
+    }
+
+    &--tertiary {
+        --accordion-trigger-font-size: var(--font-scale-delta);
+        --accordion-trigger-grid-columns: 1fr auto;
+
+        /* stylelint-disable-next-line no-descending-specificity */
+        .c-accordion__item {
+            padding-bottom: 0;
+            border: var(--accordion-item-border);
+        }
+
+        .c-accordion__item + .c-accordion__item {
+            margin-top: var(--space-scale-gamma);
+        }
+
+        .c-accordion__trigger {
+            padding: var(--space-scale-micro) var(--space-scale-epsilon);
+            background-color: hsl(0deg 0% 96% / 100%);
+            color: var(--color-quaternary);
+            text-align: left;
+            transition: background-color var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+
+            &:hover {
+                background-color: var(--color-quinary);
+            }
+
+            /* stylelint-disable-next-line plugin/selector-bem-pattern */
+            > span {
+                grid-column: 1 / 2;
+            }
+        }
+
+        .c-accordion__icon {
+            @include mq(mq-token("mob"), max) {
+                display: none;
+            }
+        }
+
+        .c-accordion__content {
+            max-width: 100%;
+        }
+
+        .c-accordion__text {
+            padding: var(--space-scale-gamma) var(--space-scale-gamma);
         }
     }
 }
