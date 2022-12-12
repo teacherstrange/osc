@@ -86,9 +86,8 @@
         width: 100%;
         padding: var(--space-scale-centi) var(--space-scale-epsilon);
         background-color: var(--btn-bg-color);
-        transition:
-            background-color var(--btn-transition-duration)
-            var(--btn-transition-timing-function),
+        transition: background-color var(--btn-transition-duration)
+                var(--btn-transition-timing-function),
             transform var(--btn-transition-duration) var(--btn-transition-timing-function);
         gap: 0.6em;
         pointer-events: none; // We will want to prevent bubbling/capturing of events on the inner span
@@ -133,10 +132,9 @@
 
         /* stylelint-disable-next-line no-descending-specificity */
         > span {
-            transition:
-                color var(--btn-transition-duration) var(--btn-transition-timing-function),
+            transition: color var(--btn-transition-duration) var(--btn-transition-timing-function),
                 background-color var(--btn-transition-duration)
-                var(--btn-transition-timing-function);
+                    var(--btn-transition-timing-function);
         }
 
         &:hover {
@@ -146,7 +144,7 @@
 
     /* stylelint-disable-next-line no-descending-specificity */
     &--tertiary {
-        border: 1px solid var(--color-quinary); // should be mid-grey?
+        border: 1px solid var(--color-quinary);
         font-weight: $weight-light;
 
         @include reset-typography;
@@ -200,9 +198,9 @@
     }
 
     &--octonary {
-        --btn-bg-color: hsl(0deg 0% 0%);
+        --btn-bg-color: var(--color-undenary);
         --btn-fg-color: var(--color-tertiary);
-        --btn-hover-bg-color: hsl(0deg 0% 0%);
+        --btn-hover-bg-color: var(--color-undenary);
     }
 
     // *----------------------------------*/
