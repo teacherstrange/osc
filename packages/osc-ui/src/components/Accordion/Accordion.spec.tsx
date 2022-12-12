@@ -112,3 +112,38 @@ test('changes the icon to a chevron', () => {
     expect(plusminus).not.toBeInTheDocument();
     expect(chevron).toBeInTheDocument();
 });
+
+test('renders the correct variant classname', () => {
+    const { rerender } = render(
+        <Accordion type="single" variant="secondary">
+            <AccordionItem value="O">
+                <AccordionHeader>Heading level 3</AccordionHeader>
+                <AccordionPanel>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam amet culpa ea
+                    praesentium officiis doloribus commodi earum voluptas doloremque fugiat
+                    similique, voluptatibus corporis. Vero laboriosam nihil esse dolores impedit
+                    aut!
+                </AccordionPanel>
+            </AccordionItem>
+        </Accordion>
+    );
+
+    const accordion = document.querySelector('.c-accordion');
+    expect(accordion).toHaveClass('c-accordion--secondary');
+
+    rerender(
+        <Accordion type="single" variant="tertiary">
+            <AccordionItem value="O">
+                <AccordionHeader>Heading level 3</AccordionHeader>
+                <AccordionPanel>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam amet culpa ea
+                    praesentium officiis doloribus commodi earum voluptas doloremque fugiat
+                    similique, voluptatibus corporis. Vero laboriosam nihil esse dolores impedit
+                    aut!
+                </AccordionPanel>
+            </AccordionItem>
+        </Accordion>
+    );
+
+    expect(accordion).toHaveClass('c-accordion--tertiary');
+});
