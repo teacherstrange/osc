@@ -136,16 +136,15 @@ export const CopyButton: FC<CopyButtonProps> = (props: CopyButtonProps) => {
 
     const handleCopyClick = (e: MouseEvent<HTMLButtonElement>) => {
         const target = e.target as HTMLButtonElement;
-        const inner = target.querySelector('.c-btn__inner') as HTMLSpanElement;
 
-        let originalButtonText = inner.innerText;
+        let originalButtonText = target.innerHTML;
 
         navigator.clipboard.writeText(textToCopy);
 
-        inner.innerText = 'Copied!';
+        target.innerHTML = '<span class="c-btn__inner">Copied!</span>';
 
         setTimeout(() => {
-            return (inner.innerText = originalButtonText);
+            return (target.innerHTML = originalButtonText);
         }, 300);
     };
 

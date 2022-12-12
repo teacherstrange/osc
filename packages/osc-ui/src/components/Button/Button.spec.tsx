@@ -32,7 +32,7 @@ describe('default button', () => {
         const button = screen.getByRole('button');
 
         await user.click(button);
-        expect(button).toHaveTextContent('loading...');
+        expect(button).toHaveTextContent('Loading');
     });
 
     test('has custom loading text', () => {
@@ -142,7 +142,7 @@ describe('button group', () => {
             </ButtonGroup>
         );
 
-        const group = document.querySelector('.c-button-group');
-        expect(group).toHaveClass('c-button-group--column');
+        const group = document.querySelector('.c-btn-group');
+        expect(group).toHaveClass('c-btn-group--column');
     });
 });
