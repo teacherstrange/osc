@@ -1,7 +1,7 @@
 import type { LinkProps as RemixLinkProps } from '@remix-run/react';
 import { Link as RemixLink } from '@remix-run/react';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, FC, MouseEvent, ReactNode } from 'react';
-import React from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import type { StrictUnion } from '../../types';
 import { classNames } from '../../utils/classNames';
@@ -35,64 +35,88 @@ export interface SharedProps {
     isDisabled?: boolean;
     isLoading?: boolean;
     loadingText?: string;
-    size?: 'sm' | 'md' | 'lg' | 'full';
-    variant?: 'solid' | 'outline' | 'ghost';
+    size?: 'sm' | 'full';
+    variant?:
+        | 'primary'
+        | 'secondary'
+        | 'tertiary'
+        | 'quaternary'
+        | 'quinary'
+        | 'septenary'
+        | 'octonary';
 }
 
 export type ButtonProps = SharedProps & StrictUnion<DefaultButtonProps | AnchorProps | LinkProps>;
 
-export const Button: FC<ButtonProps> = (props: ButtonProps) => {
-    const {
-        as,
-        className,
-        children,
-        isDisabled,
-        isLoading,
-        loadingText,
-        size = 'md',
-        variant = 'solid',
-        target,
-        ...attr
-    } = props;
+export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
+    (props: ButtonProps, forwardedRef) => {
+        const {
+            as,
+            className,
+            children,
+            isDisabled,
+            isLoading,
+            loadingText = 'Loading',
+            size,
+            variant = 'solid',
+            target,
+            ...attr
+        } = props;
 
-    const sizeModifier = useModifier('c-button', size);
-    const variantModifier = useModifier('c-button', variant);
-    const classes = classNames('c-button', sizeModifier, variantModifier, className);
+        const sizeModifier = useModifier('c-btn', size);
+        const variantModifier = useModifier('c-btn', variant);
+        const classes = classNames(
+            'c-btn',
+            sizeModifier,
+            variantModifier,
+            className,
+            isLoading && 'is-loading'
+        );
 
-    // Set our component as either the passed element or a button
-    let Component;
+        // Set our component as either the passed element or a button
+        let Component;
 
-    if (as === 'link') {
-        Component = RemixLink;
-    } else if (as === 'a') {
-        Component = 'a';
-    } else {
-        Component = 'button';
+        if (as === 'link') {
+            Component = RemixLink;
+        } else if (as === 'a') {
+            Component = 'a';
+        } else {
+            Component = 'button';
+        }
+
+        const isBlank = target === '_blank' ? true : false;
+
+        const buttonInner = isLoading ? (
+            <span className="c-btn__inner">
+                {loadingText && loadingText}{' '}
+                <span className="c-btn-loader">
+                    <span className="c-btn-loader__dot"></span>
+                    <span className="c-btn-loader__dot"></span>
+                    <span className="c-btn-loader__dot"></span>
+                </span>
+            </span>
+        ) : (
+            <span className="c-btn__inner">{children}</span>
+        );
+
+        // If we're opening in a new window set the noopener and noreferrer tags
+        // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#security_and_privacy
+        return (
+            <Component
+                className={classes}
+                disabled={isDisabled ? isDisabled : null}
+                rel={isBlank ? 'noopener noreferrer' : null}
+                target={target ? target : null}
+                to={as === 'link' && attr.to ? attr.to : '/'} // fallback to homepage if to prop is missing from link
+                {...attr}
+                ref={forwardedRef}
+            >
+                {buttonInner}
+            </Component>
+        );
     }
-
-    const isBlank = target === '_blank' ? true : false;
-
-    const buttonInner = isLoading ? (
-        <span>{loadingText ? loadingText : 'loading...'}</span>
-    ) : (
-        <span>{children}</span>
-    );
-
-    // If we're opening in a new window set the noopener and noreferrer tags
-    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#security_and_privacy
-    return (
-        <Component
-            className={classes}
-            disabled={isDisabled ? isDisabled : null}
-            rel={isBlank ? 'noopener noreferrer' : null}
-            target={target ? target : null}
-            to={as === 'link' && attr.to ? attr.to : '/'} // fallback to homepage if to prop is missing from link
-            {...attr}
-        >
-            {buttonInner}
-        </Component>
-    );
-};
+);
+Button.displayName = 'Button';
 
 /**
  * CopyButton
@@ -107,23 +131,43 @@ export interface CopyButtonProps extends SharedProps, ButtonHTMLAttributes<HTMLB
 
 export const CopyButton: FC<CopyButtonProps> = (props: CopyButtonProps) => {
     const { textToCopy, children, isDisabled, ...attr } = props;
+    const ref = useRef(null);
+    const [width, setWidth] = useState(0);
 
     const handleCopyClick = (e: MouseEvent<HTMLButtonElement>) => {
         const target = e.target as HTMLButtonElement;
+        const inner = target.querySelector('.c-btn__inner') as HTMLSpanElement;
 
-        let originalButtonText = target.innerHTML;
+        let originalButtonText = inner.innerText;
 
         navigator.clipboard.writeText(textToCopy);
 
-        target.innerHTML = '<span>Copied!</span>';
+        inner.innerText = 'Copied!';
 
         setTimeout(() => {
-            return (target.innerHTML = originalButtonText);
+            return (inner.innerText = originalButtonText);
         }, 300);
     };
 
+    useEffect(() => {
+        // Abort setting the offsetWidth if the button is full width
+        if (ref.current.className.includes('c-btn--full')) {
+            return;
+        }
+
+        setWidth(ref.current.offsetWidth);
+    }, []);
+
     return (
-        <Button onClick={handleCopyClick} disabled={isDisabled ? isDisabled : null} {...attr}>
+        <Button
+            onClick={handleCopyClick}
+            disabled={isDisabled ? isDisabled : null}
+            {...attr}
+            ref={ref}
+            // Set a min width to the button so it doesn't resize when the text changes if the text is shorter than the original text
+            // we want to allow it to resize if the text is longer than the original text so we don't get an overflow of content.
+            style={width ? { minWidth: `${width}px` } : null}
+        >
             {children}
         </Button>
     );
@@ -142,8 +186,8 @@ interface ButtonGroupProps {
 
 export const ButtonGroup: FC<ButtonGroupProps> = (props: ButtonGroupProps) => {
     const { children, direction } = props;
-    const directionModifier = useModifier('c-button-group', direction);
-    const classes = classNames('c-button-group', directionModifier);
+    const directionModifier = useModifier('c-btn-group', direction);
+    const classes = classNames('c-btn-group', directionModifier);
 
     return <div className={classes}>{children}</div>;
 };
