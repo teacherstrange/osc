@@ -47,8 +47,7 @@
     --btn-fg-color: var(--color-tertiary);
     --btn-hover-fg-color: var(--color-primary);
 
-    // Here we're using a global background colour, to give the illusion that the border is transparent while still
-    // being able to use a box-shadow for the offset effect.
+    // Border
     --btn-border: solid 3px var(--btn-bg-color);
 
     // Offset the pseudo element to create the shadow effect
@@ -86,8 +85,9 @@
         width: 100%;
         padding: var(--space-scale-centi) var(--space-scale-epsilon);
         background-color: var(--btn-bg-color);
-        transition: background-color var(--btn-transition-duration)
-                var(--btn-transition-timing-function),
+        transition:
+            background-color var(--btn-transition-duration)
+            var(--btn-transition-timing-function),
             transform var(--btn-transition-duration) var(--btn-transition-timing-function);
         gap: 0.6em;
         pointer-events: none; // We will want to prevent bubbling/capturing of events on the inner span
@@ -132,9 +132,10 @@
 
         /* stylelint-disable-next-line no-descending-specificity */
         > span {
-            transition: color var(--btn-transition-duration) var(--btn-transition-timing-function),
+            transition:
+                color var(--btn-transition-duration) var(--btn-transition-timing-function),
                 background-color var(--btn-transition-duration)
-                    var(--btn-transition-timing-function);
+                var(--btn-transition-timing-function);
         }
 
         &:hover {
