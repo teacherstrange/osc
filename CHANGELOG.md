@@ -1,3 +1,23 @@
+## [0.21.0](https://github.com/Open-Study-College/osc/compare/v0.20.1...v0.21.0) (2022-12-13)
+
+
+### ✨ Features
+
+* add DropdownMenu component and stories ([acfa3b2](https://github.com/Open-Study-College/osc/commit/acfa3b2303b7977b8aaa47bad2da0007105175e3))
+
+
+### 🧪 Tests
+
+* add dropdown menu tests ([eb48020](https://github.com/Open-Study-College/osc/commit/eb48020bd3c734c0869e189631fa9d3ba82ffd0a))
+
+
+### ♻️ Refactors
+
+* add "preventDefault" to onSelect handler ([77a2d8e](https://github.com/Open-Study-College/osc/commit/77a2d8e54f6297dcc0d3ceb823d9451e205915f7))
+* move fonts to font directory and redirect imports ([8e08bdc](https://github.com/Open-Study-College/osc/commit/8e08bdc65d06fc6267e20f7c62c20b8ef015ccde))
+* remove jsDoc annotation ([e8f6908](https://github.com/Open-Study-College/osc/commit/e8f69086b3fadcc293c7c620d5f7d5bd1941772b))
+* update ids to remove duplicates ([81785c0](https://github.com/Open-Study-College/osc/commit/81785c0ccad8e8e0ca49ec0a4dc170ce713015da))
+
 ## [0.20.1](https://github.com/Open-Study-College/osc/compare/v0.20.0...v0.20.1) (2022-12-13)
 
 
@@ -155,20 +175,4 @@
 
 * **button:** update storybook control type ([5e26aca](https://github.com/Open-Study-College/osc/commit/5e26acaf04d3c51a67b32d90a19ca5d29711029d))
 * **button:** updates storybook docs to account for new props ([8b3d147](https://github.com/Open-Study-College/osc/commit/8b3d14717c5f2acbc6233beaac4d09c83de928b7))
-
-## [0.17.1](https://github.com/Open-Study-College/osc/compare/v0.17.0...v0.17.1) (2022-12-05)
-
-
-### ♻️ Refactors
-
-* fix typos ([2bf4804](https://github.com/Open-Study-College/osc/commit/2bf4804b792039f3fdc62766537ef00541b06995))
-* update wording from hide to prevent rendering ([ae1cd53](https://github.com/Open-Study-College/osc/commit/ae1cd533ccd3cd9f74899dd2060480f13b6c9115))
-* update wording from hide to prevent rendering ([8e6b5f9](https://github.com/Open-Study-College/osc/commit/8e6b5f90e40fdbdff1673ecb21fb183e02db7561))
-
-
-### 📝 Documentation
-
-* adds default values to storybook table ([3a925a2](https://github.com/Open-Study-College/osc/commit/3a925a2b2c153dbbebed61b25a0ca4ca94bb1810))
-* adds types and required values to storybook table ([ea58fa4](https://github.com/Open-Study-College/osc/commit/ea58fa447e6b29de44c927961d70f250869c5960))
-* **components:** adds props descriptions to storybook ([355e6c3](https://github.com/Open-Study-College/osc/commit/355e6c3cba53bf3bf17268339955acf9d1837479))
 
