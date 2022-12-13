@@ -5,8 +5,8 @@
   "description": "",
   "main": "package.json",
   "scripts": {
-    "dev": "npx @sanity/cli start",
-    "build": "npx @sanity/cli build"
+    "dev": "npx @sanity/cli@2.29.3 start",
+    "build": "npx @sanity/cli@2.29.3 build"
   },
   "keywords": [
     "sanity"
