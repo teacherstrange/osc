@@ -1,25 +1,11 @@
 /packages/osc-ui/src/styles/mixins
 /packages/osc-ui/src/styles/settings
+/packages/osc-ui/src/styles/generic
 /packages/osc-ui/src/styles/elements
 /packages/osc-ui/src/styles/tools
 /packages/osc-ui/src/styles/utilities
-node_modules
 /osc/packages/osc-ui/styles/settings/_tokens.scss
 
-/packages/osc-academic-hub/app/components/datepicker/datepicker.scss
-/packages/osc-academic-hub/app/styles/mixins
-/packages/osc-academic-hub/app/styles/settings
-/packages/osc-academic-hub/app/styles/elements
-/packages/osc-academic-hub/app/styles/tools
-/packages/osc-academic-hub/app/styles/utilities
-node_modules
-
-/packages/osc-ecommerce/app/components/datepicker/datepicker.scss
-/packages/osc-ecommerce/app/styles/mixins
-/packages/osc-ecommerce/app/styles/settings
-/packages/osc-ecommerce/app/styles/elements
-/packages/osc-ecommerce/app/styles/tools
-/packages/osc-ecommerce/app/styles/utilities
 node_modules
 
 /osc/packages/osc-studio/dist/**/*
