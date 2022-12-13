@@ -1,3 +1,10 @@
+## [0.20.1](https://github.com/Open-Study-College/osc/compare/v0.20.0...v0.20.1) (2022-12-13)
+
+
+### 🐛 Bugs
+
+* **alerts:** updates icon assertion in alert test ([6f737e8](https://github.com/Open-Study-College/osc/commit/6f737e84c01086ad861520e9a8e88204694fd020))
+
 ## [0.20.0](https://github.com/Open-Study-College/osc/compare/v0.19.0...v0.20.0) (2022-12-09)
 
 
@@ -164,28 +171,4 @@
 * adds default values to storybook table ([3a925a2](https://github.com/Open-Study-College/osc/commit/3a925a2b2c153dbbebed61b25a0ca4ca94bb1810))
 * adds types and required values to storybook table ([ea58fa4](https://github.com/Open-Study-College/osc/commit/ea58fa447e6b29de44c927961d70f250869c5960))
 * **components:** adds props descriptions to storybook ([355e6c3](https://github.com/Open-Study-College/osc/commit/355e6c3cba53bf3bf17268339955acf9d1837479))
-
-## [0.17.0](https://github.com/Open-Study-College/osc/compare/v0.16.1...v0.17.0) (2022-12-05)
-
-
-### ✨ Features
-
-* add component, styling and stories ([364eb36](https://github.com/Open-Study-College/osc/commit/364eb369fcab14d65f3f0a24500d914a402c967d))
-
-
-### 🧪 Tests
-
-* add tests ([9cb762c](https://github.com/Open-Study-College/osc/commit/9cb762c77c93cb019c357ce9363edd84eb1faf3f))
-
-
-### ♻️ Refactors
-
-* add component and prop descriptions ([a9703d2](https://github.com/Open-Study-College/osc/commit/a9703d23770472b214ccdbb6ce7c42333b77ea90))
-* add onComplete functionality ([86eff55](https://github.com/Open-Study-College/osc/commit/86eff5515ea4d6486817574bef738848c779066d))
-* change component names and update tests ([21853cf](https://github.com/Open-Study-College/osc/commit/21853cfce342b21436e9621bf89c6e362223d710))
-* remove 'titles' argument ([1d9fa4b](https://github.com/Open-Study-College/osc/commit/1d9fa4b72ed226b674b78cafbbab21f1f0bc0df4))
-* remove classNames prop ([784b54b](https://github.com/Open-Study-College/osc/commit/784b54b9101a21d52e4a0a09281ab13899a6ac9e))
-* remove use of 'titles' prop ([9bcb77a](https://github.com/Open-Study-College/osc/commit/9bcb77a9cccf5e56fe8147fdd6695fe87f74d973))
-* rename 'distance' to 'remainingDuration' ([2748a53](https://github.com/Open-Study-College/osc/commit/2748a53391549bafa5eb9e2dec0dc4bda8b33bbc))
-* uncomment styling ([a6fa8c1](https://github.com/Open-Study-College/osc/commit/a6fa8c1c7971f679292c85bcb6f7b82a25d8b948))
 
