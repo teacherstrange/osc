@@ -167,7 +167,7 @@
     }
 
     &--tertiary {
-        --accordion-trigger-font-size: var(--font-scale-delta);
+        --accordion-trigger-font-size: #{rem(24)}; // design has this fixed across breakpoints
         --accordion-trigger-grid-columns: 1fr auto;
 
         /* stylelint-disable-next-line no-descending-specificity */
@@ -185,6 +185,8 @@
             background-color: hsl(0deg 0% 96% / 100%);
             color: var(--color-quaternary);
             text-align: left;
+            text-transform: none;
+            letter-spacing: normal;
             transition: background-color var(--accordion-transition-duration) var(--accordion-transition-timing-func);
 
             &:hover {
