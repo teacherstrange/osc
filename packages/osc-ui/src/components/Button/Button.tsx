@@ -58,7 +58,7 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             isLoading,
             loadingText = 'Loading',
             size,
-            variant = 'solid',
+            variant = 'primary',
             target,
             ...attr
         } = props;

@@ -79,12 +79,12 @@ export default {
             control: 'select',
         },
         variant: {
-            description: 'Sets the style of the button, solid, outline etc.',
+            description: 'Sets the style of the button, primary, secondary etc.',
             control: 'select',
-            defaultValue: 'solid',
+            defaultValue: 'primary',
             table: {
                 defaultValue: {
-                    summary: 'solid',
+                    summary: 'primary',
                 },
             },
         },
