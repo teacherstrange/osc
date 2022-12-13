@@ -1,3 +1,10 @@
+## [0.21.1](https://github.com/Open-Study-College/osc/compare/v0.21.0...v0.21.1) (2022-12-13)
+
+
+### ♻️ Refactors
+
+* enforce sanity cli version ([b47845d](https://github.com/Open-Study-College/osc/commit/b47845d052ef1e23f6d561f0dc5ae3cbd9d1541b))
+
 ## [0.21.0](https://github.com/Open-Study-College/osc/compare/v0.20.1...v0.21.0) (2022-12-13)
 
 
@@ -123,56 +130,4 @@
 * add storybook documentation and remove comments ([659676e](https://github.com/Open-Study-College/osc/commit/659676ef0f21e16cff23cce90fa2fff5c31f1a89))
 * move custom styles to end of stylesheet ([8060488](https://github.com/Open-Study-College/osc/commit/806048856cea583e9d9a76b8d0c25ce1503b6c60))
 * remove jsDoc annotation ([399331b](https://github.com/Open-Study-College/osc/commit/399331bbf95b4dfb26826e3a73c4331a84d372f5))
-
-## [0.18.0](https://github.com/Open-Study-College/osc/compare/v0.17.1...v0.18.0) (2022-12-08)
-
-
-### 🐛 Bugs
-
-* **button:** add missing target prop ([798d1d1](https://github.com/Open-Study-College/osc/commit/798d1d1cc2b4c522420e3fb6b877fa0dd9120b5a))
-* **button:** make sure inner content in centered all the time ([8a97fc5](https://github.com/Open-Study-College/osc/commit/8a97fc5f0d7e766d55a50bb5eb31d789617838c9))
-
-
-### 🧪 Tests
-
-* **button:** add assertion that the target is set on the button ([e7b8bec](https://github.com/Open-Study-College/osc/commit/e7b8bec0159d81aa6937632f4c66b63ec76aa6ad))
-* **button:** adds button component tests ([a5e7fa8](https://github.com/Open-Study-College/osc/commit/a5e7fa8377bee68c636115ac64af7eef7e2cf343))
-* **button:** updates tests to take new props ([da6d7a5](https://github.com/Open-Study-College/osc/commit/da6d7a543e44131d6aa30398a25381e68716ff7b))
-* **content:** add button tests to content component ([a2388da](https://github.com/Open-Study-College/osc/commit/a2388daad5b2b03462c5685d7086b0035ccbe862))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **button:** add button type ([ccbc780](https://github.com/Open-Study-College/osc/commit/ccbc780c95661aa3ddf3dda6a05e33b54025b0fd))
-* **content:** update sample content data to take in buttons option ([9b39546](https://github.com/Open-Study-College/osc/commit/9b39546e07f188df4fa72942bc2d0f2a7de683c7))
-* update package-lock ([a0e8bc8](https://github.com/Open-Study-College/osc/commit/a0e8bc82ab2efa5165edba5a5246cf5820d823b1))
-
-
-### ♻️ Refactors
-
-* **button:** removes colour picker from button in studio ([9e234b7](https://github.com/Open-Study-College/osc/commit/9e234b76de9387245fb9e602c417e55a320f0d85))
-* **button:** simplifies button component markup ([6dac2c8](https://github.com/Open-Study-College/osc/commit/6dac2c81b78d24bf23b7cc356dab946c09b8e60e))
-* **hooks:** change useVariant to useModifier so it fits with BEM naming better ([914dd29](https://github.com/Open-Study-College/osc/commit/914dd29587a9848b0ff82b127f93be58f2d265a3))
-* **styles:** renamed button group class so it's not an element of the button ([adbcd31](https://github.com/Open-Study-College/osc/commit/adbcd31d599ccf6157f2b9e801310eaffb083a8d))
-
-
-### ✨ Features
-
-* **button:** add fallback for missing  prop ([fbec8e3](https://github.com/Open-Study-College/osc/commit/fbec8e3641cc8d63d1b3c19fe9bf027de17fc51f))
-* **button:** add StrictUnion helper to consolidate types ([541d05b](https://github.com/Open-Study-College/osc/commit/541d05bbe6762eb338a0f29c2a47b0090fbbe8db))
-* **button:** adds button group component ([855e534](https://github.com/Open-Study-College/osc/commit/855e5348a5d96227b6d099af8582c0ee776e29c8))
-* **button:** adds initial button component ([fb1f972](https://github.com/Open-Study-College/osc/commit/fb1f972a36e70fbe7e7a0c85c6142c22de28b914))
-* **button:** adds preview to button module in sanity ([4c61e04](https://github.com/Open-Study-College/osc/commit/4c61e04656c4f2b7a8f965a08ae2f2820e412bfa))
-* **content:** add buttons to content component ([3e16add](https://github.com/Open-Study-College/osc/commit/3e16add68f8eb745b5763d219f2d254dd005c6b1))
-* **content:** add telephone option to button selector ([7cb408d](https://github.com/Open-Study-College/osc/commit/7cb408d012b7c4262ece3a9208d240ff5e51e5d1))
-* **ecommerce:** adds button module to content module in ecommerce ([8378545](https://github.com/Open-Study-College/osc/commit/8378545529ab4fc78227b5b23309fb192d915866))
-* **studio:** adds button schema ([45aafd3](https://github.com/Open-Study-College/osc/commit/45aafd32cb40b4b8cc3e4a0d06c4939fc3716255))
-* **styles:** adds a function to search the sanity data for all modules ([3d83303](https://github.com/Open-Study-College/osc/commit/3d83303eecd3cf63cd8565be56e0c8cb41f160ab))
-* updates stories ([01096ad](https://github.com/Open-Study-College/osc/commit/01096ad9dec563468dd03747a2b1b6f811617953))
-
-
-### 📝 Documentation
-
-* **button:** update storybook control type ([5e26aca](https://github.com/Open-Study-College/osc/commit/5e26acaf04d3c51a67b32d90a19ca5d29711029d))
-* **button:** updates storybook docs to account for new props ([8b3d147](https://github.com/Open-Study-College/osc/commit/8b3d14717c5f2acbc6233beaac4d09c83de928b7))
 
