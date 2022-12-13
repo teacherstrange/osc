@@ -10,6 +10,15 @@ import { Content } from '../Content/Content';
 import { textContent } from '../Content/textContent';
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from './Accordion';
 
+beforeEach(() => {
+    // Mock resizeObserver
+    window.ResizeObserver = vi.fn().mockImplementation(() => ({
+        observe: vi.fn(),
+        unobserve: vi.fn(),
+        disconnect: vi.fn(),
+    }));
+});
+
 test('has the correct heading level', () => {
     const { rerender } = render(
         <Accordion type="single">
