@@ -6,6 +6,7 @@ export const env = z
         JWT_SECRET: z.string(),
         JWT_AUDIENCE: z.string(),
         AUTH_API_URL: z.string(),
-        ECOMMERCE_API_URL: z.string()
+        CRM_API_URL: z.string(),
+        ECOMMERCE_API_URL: z.string(),
     })
     .parse(process.env);
