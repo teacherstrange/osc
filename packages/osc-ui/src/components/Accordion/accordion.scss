@@ -93,6 +93,7 @@
         }
 
         &[data-state="closed"] {
+            height: 0;
             animation: slide-up var(--accordion-transition-duration) var(--accordion-transition-timing-func);
         }
     }
@@ -143,6 +144,7 @@
             }
         }
 
+        /* stylelint-disable-next-line no-descending-specificity */
         .c-accordion__icon {
             grid-column: 3 / -1;
             color: currentcolor;
@@ -188,6 +190,7 @@
             }
         }
 
+        /* stylelint-disable-next-line no-descending-specificity */
         .c-accordion__icon {
             @include mq(mq-token("mob"), max) {
                 display: none;

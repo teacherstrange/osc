@@ -7,7 +7,7 @@ import type {
 } from '@radix-ui/react-accordion';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import type { ComponentPropsWithoutRef, ElementRef, FC, RefAttributes } from 'react';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import { useFontSize } from '../../hooks/useFontSize';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -120,11 +120,48 @@ export const AccordionHeader: FC<AccordionHeadingProps> = forwardRef<
 AccordionHeader.displayName = 'AccordionHeader';
 
 export const AccordionPanel: FC<AccordionContentProps> = (props: AccordionContentProps) => {
+    const ref = useRef(null);
     const { children, className } = props;
     const classes = classNames('c-accordion__content', className);
 
+    useEffect(() => {
+        // Because we're using the `forceMount` prop on the AccordionPrimitive.Content
+        // we need to manually set the height of the content so that the animation works smoothly.
+        // Because Radix removes the css variable when the content is collapsed the animation looks
+        // a bit janky as the height gets added during the open state.
+        if (ref.current) {
+            const accordionParent = ref.current.closest('.c-accordion__item');
+            const content = ref.current.querySelector('.c-accordion__text');
+
+            // We're using ResizeObserver to get the height of the content and then setting it
+            // as a CSS variable on the parent element so that we can use it in the animation.
+            const resizeObserver = new ResizeObserver((entries) => {
+                for (const entry of entries) {
+                    if (entry.contentBoxSize) {
+                        const height = entry.borderBoxSize[0].blockSize;
+
+                        if (height) {
+                            accordionParent.style.setProperty(
+                                '--radix-collapsible-content-height',
+                                `${height}px`
+                            );
+                        }
+                    }
+                }
+            });
+
+            resizeObserver.observe(content);
+
+            // Clean up the observer
+            return () => {
+                resizeObserver.unobserve(content);
+            };
+        }
+    }, []);
+
     return (
-        <AccordionPrimitive.Content className={classes} {...props}>
+        // Use `forceMount` to keep the content in the DOM and prevent it from being unmounted when closed.
+        <AccordionPrimitive.Content className={classes} {...props} forceMount ref={ref}>
             <div className="c-accordion__text">{children}</div>
         </AccordionPrimitive.Content>
     );
