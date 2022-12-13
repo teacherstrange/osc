@@ -1,3 +1,16 @@
+## [0.21.2](https://github.com/Open-Study-College/osc/compare/v0.21.1...v0.21.2) (2022-12-13)
+
+
+### 🧪 Tests
+
+* add tests for Avatar component ([bc3f08c](https://github.com/Open-Study-College/osc/commit/bc3f08cbb3b7c815a937342d17a21aa353db7122))
+* fix typo ([d58a0c2](https://github.com/Open-Study-College/osc/commit/d58a0c21f40517a5dd75f49ea5209d266d273efb))
+
+
+### ♻️ Refactors
+
+* display full initials ([9dc5621](https://github.com/Open-Study-College/osc/commit/9dc56212a618f88f4f2f0a9b26534a47d10a1dfd))
+
 ## [0.21.1](https://github.com/Open-Study-College/osc/compare/v0.21.0...v0.21.1) (2022-12-13)
 
 
@@ -109,25 +122,4 @@
 * typo ([d3b408e](https://github.com/Open-Study-College/osc/commit/d3b408e8faae2f56665788dc0c75afb0669201e8))
 * typo ([0f6c156](https://github.com/Open-Study-College/osc/commit/0f6c156aad1a13bbc98d0ab04530735cbc9174cd))
 * **prettier:** prettier fixing format of files ([fb31129](https://github.com/Open-Study-College/osc/commit/fb311291db0e9b68c3c932c9a0999686855d20e5))
-
-## [0.19.0](https://github.com/Open-Study-College/osc/compare/v0.18.0...v0.19.0) (2022-12-08)
-
-
-### ✨ Features
-
-* add ImageGallery component and stories ([26fb5b2](https://github.com/Open-Study-College/osc/commit/26fb5b28b76f39e7d9d7ea56924fddf165e25c45))
-
-
-### 🧪 Tests
-
-* add eslint disable next-line ([6cf6b6f](https://github.com/Open-Study-College/osc/commit/6cf6b6f78dea93bc111b7444fbb9dcaea7c7dbf8))
-* add ImageGallery tests ([430724c](https://github.com/Open-Study-College/osc/commit/430724ca7102be5db1e098bf837f0234fc239504))
-* remove unecessary "await" ([70fc212](https://github.com/Open-Study-College/osc/commit/70fc212ea39df963d0f599a6153b47b001f88f18))
-
-
-### ♻️ Refactors
-
-* add storybook documentation and remove comments ([659676e](https://github.com/Open-Study-College/osc/commit/659676ef0f21e16cff23cce90fa2fff5c31f1a89))
-* move custom styles to end of stylesheet ([8060488](https://github.com/Open-Study-College/osc/commit/806048856cea583e9d9a76b8d0c25ce1503b6c60))
-* remove jsDoc annotation ([399331b](https://github.com/Open-Study-College/osc/commit/399331bbf95b4dfb26826e3a73c4331a84d372f5))
 
