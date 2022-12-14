@@ -7,14 +7,22 @@
 /*
   Contents
   --------
-	0 	$THEME
-	1 	$ELEMENTS
-	2 	$OBJECTS
-	3 	$COMPONENTS
-	4	$LAYOUT
-	5 	$UTILITIES
-	6 	$STYLEGUIDE
+    0 	$GENERIC
+	1 	$THEME
+	2 	$ELEMENTS
+	3 	$OBJECTS
+	4 	$TYPOGRAPHY
+	5	$COMPONENTS
+	6 	$UTILITIES
 */
+
+/* ============================
+// $GENERIC
+// High Level Styles i.e. Normalize//CSS Resets
+// --- Can be employed across multiple sites without the need to edit or adjust
+*/
+@use "generic/reset";
+@use "generic/normalize";
 
 /* ============================
 // $THEME
@@ -26,7 +34,6 @@
 // $ELEMENTS
 // Single HTML element selectors without classes
 */
-@use "elements/normalize";
 @use "elements/address";
 @use "elements/iframe";
 @use "elements/image";
