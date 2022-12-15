@@ -36,6 +36,7 @@
     "embla-carousel-class-names": "^7.0.3",
     "embla-carousel-react": "^7.0.3",
     "lightgallery": "^2.7.0",
+    "keen-slider": "^6.8.5",
     "rollup": "^2.60.2",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-postcss": "^4.0.2",

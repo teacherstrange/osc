@@ -1,101 +1,117 @@
-/* stylelint-disable all */
-@use "../../styles/tools/functions/get-tokens" as *;
-@use "../../styles/tools/mq" as *;
+/* stylelint-disable selector-class-pattern */
+.c-carousel {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
 
-.embla {
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    position: relative;
+    &__inner {
+        grid-column: 1 / -1;
 
-    .embla__slide_caption {
-        padding: 0;
-        margin: 0;
+        // Required Keen styles
+        &:not([data-keen-slider-disabled]) {
+            position: relative;
+            display: flex;
+            align-content: flex-start;
+            width: 100%;
+            overflow: hidden;
+            -webkit-touch-callout: none;
+            touch-action: pan-y;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        &:not([data-keen-slider-disabled]) .keen-slider__slide {
+            position: relative;
+            width: 100%;
+            min-height: 100%;
+            overflow: hidden;
+        }
+
+        &:not([data-keen-slider-disabled])[data-keen-slider-reverse] {
+            flex-direction: row-reverse;
+        }
+
+        &:not([data-keen-slider-disabled])[data-keen-slider-v] {
+            flex-wrap: wrap;
+        }
+
+        // End required Keen styles
     }
 
-    .indicators {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
+    // Arrows
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &.has-adaptive-height .c-carousel__slide {
+        min-height: auto;
+    }
+
+    &__arrow {
+        width: 30px;
+        height: 30px;
+        color: hsl(0deg 0% 73%); // TODO: Use a variable
+        cursor: pointer;
+
+        &--left {
+            grid-column: 1 / 2;
+        }
+
+        &--right {
+            grid-column: 3 / 4;
+        }
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        &[disabled] {
+            color: hsl(0deg 0% 73% / 50%);
+            cursor: auto;
+        }
+    }
+
+    // DotNav
+    &__dots {
         display: flex;
-        justify-content: space-between;
-        color: white;
+        padding: 10px 0;
 
-        .embla__next {
-            position: relative;
-            right: 30px;
+        &--start {
+            justify-content: flex-start;
         }
 
-        .embla__prev {
-            position: relative;
-            left: 30px;
+        &--end {
+            justify-content: flex-end;
+        }
+
+        &--center {
+            justify-content: center;
+        }
+    }
+
+    &__dot {
+        width: 12px;
+        height: 12px;
+        margin: 0 2px;
+        background: hsl(0deg 0% 100% / 0%); // TODO: Use a variable
+        border: 1px solid hsl(0deg 0% 73%); // TODO: Use a variable
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+
+        &.is-active {
+            background: hsl(0deg 0% 73%); // TODO: Use a variable
+        }
+    }
+
+    &.has-arrows {
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+
+        .c-carousel__inner,
+        .c-carousel__dots {
+            grid-column: 2 / 3;
+        }
+
+        .c-carousel__inner,
+        .c-carousel__arrow {
+            grid-row: 1;
         }
     }
 }
-
-.embla .embla-carousel-loaded {
-    opacity: 1;
-}
-
-.embla__container {
-    display: flex;
-    flex-direction: var(--embla__axis);
-    height: var(--embla__height);
-    align-items: flex-start;
-    transition: height 0.2s;
-}
-
-.embla__slide {
-    opacity: 0;
-    flex: 0 0 100%;
-    overflow: hidden;
-
-    .embla__slide-loaded {
-        overflow: visible;
-    }
-
-    @include mq(mq-token("mob")) {
-        flex: 0 0 100%;
-    }
-
-    @include mq(mq-token("mob-lrg")) {
-        flex: 0 0 50%;
-    }
-
-    @include mq(mq-token("tab")) {
-        flex: 0 0 var(--embla__slidesPerPage);
-    }
-}
-
-// img {
-//     width: 100%;
-//     height: 100%;
-//     object-fit: cover;
-// }
-
-.embla__slide_inner {
-    height: var(--embla__height);
-    margin: var(--embla__slideGap);
-    padding: var(--embla__slideGap);
-}
-
-.embla__navigator {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 24px;
-    margin-top: 10px;
-}
-.embla__dots {
-    cursor: pointer;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin: 3px;
-    box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
-}
-
-// IF slide layout is 3 slides per page
-// 0px -> 560px = width of slide = 100% - 1 slide per page
-// 561px -> 768px = width of slide = 50%
-// 769px ->  = width of slide = 33.33%

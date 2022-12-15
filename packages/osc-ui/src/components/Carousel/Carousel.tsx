@@ -1,274 +1,444 @@
-import AutoHeight from 'embla-carousel-auto-height';
-import Autoplay from 'embla-carousel-autoplay';
-import ClassNames from 'embla-carousel-class-names';
-import useEmblaCarousel from 'embla-carousel-react';
-import type { FC } from 'react';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
-import { v4 as uuidv4 } from 'uuid';
-import { Image } from '../Image/Image';
+import type { KeenSliderPlugin } from 'keen-slider/react';
+import { useKeenSlider } from 'keen-slider/react';
+import type { FC, ReactNode } from 'react';
+import React, { Children, useState } from 'react';
+import mq from '../../../../../tokens/media-queries';
+import { classNames } from '../../utils/classNames';
+import { rem } from '../../utils/rem';
+
 import './carousel.scss';
+import { Arrow } from './CarouselArrows';
+import { CarouselDots } from './CarouselDots';
 
-export type Props = {
-    height?: string;
-    active: boolean;
-    startIndex: number;
-    mediaArray: any[];
-    delay: string;
-    slidesPerPage: number;
-    slideGap: number;
-    axis: 'x' | 'y';
-    loop: boolean;
-    ssr?: boolean;
-    carouselKey?: string;
-};
+type SlideOrigin = 'auto' | 'center';
 
-export const CarouselInner: FC<Props> = (props) => {
+interface Breakpoints {
+    [key: string]: {
+        slides: {
+            origin: SlideOrigin;
+            perView: number;
+            spacing: number;
+        };
+    };
+}
+
+export interface Props {
+    /**
+     * Whether the carousel should change height based on the height of the slides
+     * @default false
+     */
+    adaptiveHeight?: boolean;
+
+    /**
+     * Whether the carousel should have arrows
+     * @default false
+     */
+    arrows?: boolean;
+
+    /**
+     * The type of autoplay we want to use, requires loop to be true
+     * @default false
+     */
+    autoplay?: 'smooth' | 'switch' | false;
+
+    /**
+     * The speed of the autoplay in ms
+     * @default 10_000
+     */
+    autoPlaySpeed?: number;
+
+    /**
+     * We can pass breakpoints in as an object so we can define settings in certain instances
+     */
+    breakpoints?: Breakpoints;
+
+    /**
+     * The accessible name of the carousel
+     * @default ''
+     */
+    carouselName: string;
+
+    /**
+     * The slides to render in the carousel
+     */
+    children: ReactNode | ReactNode[];
+
+    /**
+     * Whether the carousel should have dots
+     * @default true
+     */
+    dotNav?: boolean;
+
+    /**
+     * The gap between slides in px
+     * @default 16
+     */
+    gap?: number;
+
+    /**
+     * The position of the dotnav
+     */
+    justifyDotNav?: 'start' | 'center' | 'end';
+
+    /**
+     * Whether the carousel should loop
+     * @default true
+     */
+    loop?: boolean;
+
+    /**
+     * The number of slides to show per view
+     * @default 1
+     */
+    slidesPerView?: number;
+
+    /**
+     * The index of the slide to start on
+     * @default 0
+     */
+    startIndex?: number;
+
+    /**
+     * The origin of the slides, controls how the slides are positioned on load
+     * @default 'auto'
+     */
+    slideOrigin?: SlideOrigin;
+}
+
+export const Carousel: FC<Props> = (props: Props) => {
     const {
-        ssr,
-        height,
-        active,
-        startIndex,
-        mediaArray,
-        delay,
-        slidesPerPage,
-        slideGap,
-        axis,
-        loop,
-        carouselKey
+        carouselName,
+        adaptiveHeight = false,
+        autoplay = false, // loop must also be true for autoplay to work -- manage this with typescript?
+        autoPlaySpeed = 10_000, // ms
+        loop = true,
+        children,
+        slidesPerView = 1,
+        arrows = false,
+        dotNav = true,
+        justifyDotNav = 'end',
+        slideOrigin = 'auto',
+        startIndex = 0,
+        gap = 16, //px
+        breakpoints = {
+            [`(min-width: ${rem(mq['tab'])}rem)`]: {
+                slides: {
+                    origin: slideOrigin,
+                    perView: 2,
+                    spacing: gap,
+                },
+            },
+            [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
+                slides: {
+                    origin: slideOrigin,
+                    perView: 3,
+                    spacing: gap,
+                },
+            },
+        },
     } = props;
 
-    const delayInt = parseInt(delay, 10);
+    const [currentSlide, setCurrentSlide] = useState<number>(startIndex);
+    const [sliderHasLoaded, setSliderHasLoaded] = useState<boolean>(false);
+    const classes = classNames(
+        'c-carousel',
+        arrows && 'has-arrows',
+        adaptiveHeight && 'has-adaptive-height'
+    );
 
-    const trueSlidesPerPage = () => {
-        if (typeof window === 'undefined') return 1;
-        if (window.matchMedia('(min-width: 768px)').matches) return slidesPerPage;
-        if (window.matchMedia('(min-width: 640px)').matches) return 2;
-        return 1;
-    };
+    // Keep track of which slides are in view by assigning their index to an array
+    // Keen slider does expose a property called "portion" which indicates how much of the slide is visible in the viewport
+    // however this doesn't always match with what we'd expect. I.e. it might look like the whole slide is visible but the portion is 0.5
+    // or 0.4, meaning we are getting an inaccurate result when trying to access the slides in view. Similarly the slide may be completely out
+    // of view but the portion is 0.5.
+    // What I've done here is use the IntersectionObserver API to get the slides in that are intersecting with the slider container
+    // and push them into an array. This is a more accurate way of getting the slides that are in view.
+    const saveSlidesInView = (entries: IntersectionObserverEntry[], array: string[]) => {
+        for (const entry of entries) {
+            const target = entry.target as HTMLElement;
 
-    const emblaPlugins = () => {
-        if (!height && delayInt) {
-            return [
-                AutoHeight(),
-                Autoplay({ delay: delayInt, stopOnLastSnap: !loop }),
-                ClassNames()
-            ];
-        } else if (!height && !delayInt) {
-            return [AutoHeight(), ClassNames()];
-        } else if (height && delayInt) {
-            return [Autoplay({ delay: delayInt, stopOnLastSnap: !loop }), ClassNames()];
-        } else if (height && !delayInt) {
-            return [ClassNames()];
+            if (entry.isIntersecting) {
+                array.push(target?.dataset.slideIndex);
+            } else {
+                // Find the index of the slideIndex that is no longer in view
+                const index = array.findIndex((element) => element === target?.dataset.slideIndex);
+
+                // Index will be -1 if the slideIndex is not found so we are checking that it exists
+                index >= 0 && array.splice(index, 1);
+            }
         }
     };
 
-    const [emblaRef, emblaApi] = useEmblaCarousel(
-        {
-            active,
-            align: 'start',
-            inViewThreshold: 1,
-            skipSnaps: false,
-            slidesToScroll: trueSlidesPerPage(),
-            containScroll: 'trimSnaps',
-            startIndex: startIndex ? startIndex - 1 : 0,
-            axis,
-            loop
-        },
-        emblaPlugins()
-    );
+    // Handle setting the aria-hidden attribute on the slides
+    const AriaPlugin: KeenSliderPlugin = (slider) => {
+        const setAriaHidden = () => {
+            const slidesInView = [];
 
-    const [carouselVisible, setCarouselVisible] = useState(ssr ? false : true);
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const [scrollSnaps, setScrollSnaps] = useState<Array<number>>([]);
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    saveSlidesInView(entries, slidesInView);
 
-    const onSelect = useCallback(() => {
-        if (!emblaApi) return;
-        setSelectedIndex(emblaApi.selectedScrollSnap());
-    }, [emblaApi, setSelectedIndex]);
+                    for (const slide of slider.slides) {
+                        if (slidesInView.includes(slide.dataset.slideIndex)) {
+                            slide.setAttribute('aria-hidden', 'false');
+                        } else {
+                            slide.setAttribute('aria-hidden', 'true');
+                        }
+                    }
+                },
+                {
+                    root: slider.container,
+                    rootMargin: '0px',
+                    threshold: 0,
+                }
+            );
 
-    const setAriaHidden = useCallback(() => {
-        if (!emblaApi) return;
-        const slides = emblaApi.slideNodes();
-        emblaApi.slidesInView(true).forEach((indexInView) => {
-            slides[indexInView].setAttribute('aria-hidden', 'false');
-        });
-        emblaApi.slidesNotInView(true).forEach((indexNotInView) => {
-            slides[indexNotInView].setAttribute('aria-hidden', 'true');
-        });
-    }, [emblaApi]);
-
-    useEffect(() => {
-        setAriaHidden();
-    }, [selectedIndex, setAriaHidden]);
-
-    useEffect(() => {
-        if (!emblaApi) return;
-        setScrollSnaps(emblaApi.scrollSnapList());
-        onSelect();
-        emblaApi.on('resize', () => {
-            onSelect();
-            setScrollSnaps(emblaApi.scrollSnapList());
-        });
-        emblaApi.on('select', onSelect);
-        emblaApi.on('init', () => {
-            setCarouselVisible(true);
-        });
-        // return () => emblaApi.destroy();
-    }, [emblaApi, setScrollSnaps, onSelect]);
-
-    const handleResize = useDebouncedCallback(() => {
-        if (!emblaApi) return;
-        onSelect();
-        setScrollSnaps(emblaApi.scrollSnapList());
-    }, 200);
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
+            for (const slide of slider.slides) {
+                observer.observe(slide);
+            }
         };
-    }, [handleResize]);
 
-    if (typeof document !== 'undefined') {
-        let r = document.querySelector(`.embla__carousel_wrapper_${carouselKey}`) as any;
-        if (r) {
-            if (slidesPerPage) {
-                r.style.setProperty(
-                    '--embla__slidesPerPage',
-                    `calc(${(1 / slidesPerPage) * 100}%)`
-                );
+        slider.on('created', setAriaHidden);
+        slider.on('updated', setAriaHidden);
+        slider.on('slideChanged', setAriaHidden);
+    };
+
+    // Handle the adaptive height of the carousel
+    const AdaptiveHeight: KeenSliderPlugin = (slider) => {
+        if (!adaptiveHeight) return;
+
+        // We want to make sure that the slides don't stretch to fill the height of the container
+        slider.container.style.alignItems = 'flex-start';
+
+        const updateHeight = () => {
+            const slidesInView = [];
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    saveSlidesInView(entries, slidesInView);
+
+                    let largestSlideHeight: number =
+                        slider.slides[slider.track.details.rel].offsetHeight;
+
+                    for (const slide of slidesInView) {
+                        if (slider.slides[slide]?.offsetHeight > largestSlideHeight) {
+                            largestSlideHeight = slider.slides[slide]?.offsetHeight;
+                        }
+                    }
+                    slider.container.style.height = largestSlideHeight + 'px';
+                },
+                {
+                    root: slider.container,
+                    rootMargin: '0px',
+                    threshold: 0.5, // Fire when 50% of the slide is in view
+                }
+            );
+
+            for (const slide of slider.slides) {
+                observer.observe(slide);
             }
-            if (slideGap) {
-                r.style.setProperty('--embla__slideGap', slideGap + 'px');
-            }
-            if (axis) {
-                r.style.setProperty('--embla__axis', axis === 'x' ? 'row' : 'column');
-            }
-            if (height) {
-                r.style.setProperty('--embla__height', height + 'px');
-                r.style.setProperty(
-                    '--embla__style_height',
-                    `calc(${parseInt(height, 10) / slidesPerPage}px - ${slideGap * 2}px)`
-                );
-            }
+        };
+        slider.on('created', updateHeight);
+        slider.on('updated', updateHeight);
+        slider.on('slideChanged', updateHeight);
+    };
+
+    // Handle the animation of the slides, this is a "plugin" for keen-slider and gets called in the useKeenSlider hook
+    const AutoPlay: KeenSliderPlugin = (slider) => {
+        switch (autoplay) {
+            case 'switch':
+                let timeout: ReturnType<typeof setTimeout>;
+                let mouseOver = false;
+
+                function clearNextTimeout() {
+                    clearTimeout(timeout);
+                }
+
+                function nextTimeout() {
+                    clearTimeout(timeout);
+
+                    if (mouseOver) return;
+
+                    timeout = setTimeout(() => {
+                        slider.next();
+                    }, autoPlaySpeed);
+                }
+
+                slider.on('created', () => {
+                    slider.container.addEventListener('mouseover', () => {
+                        mouseOver = true;
+                        clearNextTimeout();
+                    });
+
+                    slider.container.addEventListener('mouseout', () => {
+                        mouseOver = false;
+                        nextTimeout();
+                    });
+
+                    nextTimeout();
+                });
+
+                slider.on('dragStarted', clearNextTimeout);
+                slider.on('animationEnded', nextTimeout);
+                slider.on('updated', nextTimeout);
+                slider.on('destroyed', clearNextTimeout); // Prevent memory leak
+                break;
+
+            case 'smooth':
+                const animation = { duration: autoPlaySpeed, easing: (t: number) => t };
+
+                slider.on('created', () => {
+                    // Decrement slides length by 1 as we are targeting the index rather than the count
+                    slider.moveToIdx(slider.track.details.slides.length - 1, true, animation);
+                });
+
+                slider.on('updated', () => {
+                    // Update function called due to a size change or other trigger.
+                    slider.moveToIdx(
+                        slider.track.details.abs + (slider.track.details.slides.length - 1),
+                        true,
+                        animation
+                    );
+                });
+
+                slider.on('animationEnded', () => {
+                    slider.moveToIdx(
+                        slider.track.details.abs + (slider.track.details.slides.length - 1),
+                        true,
+                        animation
+                    );
+                });
+                break;
+
+            default:
+                break;
         }
-    }
+    };
 
-    const scrollTo = useCallback(
-        (index) => {
-            if (emblaApi) {
-                emblaApi.scrollTo(index);
+    // Control the carousel with the keyboard
+    const KeyboardControls: KeenSliderPlugin = (slider) => {
+        let focused = false;
+
+        const eventFocus = () => {
+            focused = true;
+        };
+
+        const eventBlur = () => {
+            focused = false;
+        };
+
+        const eventKeydown = (e: KeyboardEvent) => {
+            if (!focused) return;
+
+            switch (e.key) {
+                case 'Left':
+                case 'ArrowLeft':
+                    slider.prev();
+                    break;
+
+                case 'Right':
+                case 'ArrowRight':
+                    slider.next();
+                    break;
+
+                default:
+                    break;
             }
+        };
+
+        slider.on('created', () => {
+            slider.container.setAttribute('tabindex', '0');
+            slider.container.addEventListener('focus', eventFocus);
+            slider.container.addEventListener('blur', eventBlur);
+            slider.container.addEventListener('keydown', eventKeydown);
+        });
+    };
+
+    // Handle keen-slider settings and call plugins
+    const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
+        {
+            initial: startIndex,
+            created() {
+                setSliderHasLoaded(true);
+            },
+            slideChanged(slider) {
+                setCurrentSlide(slider.track.details.rel);
+            },
+            loop: loop,
+            slides: {
+                origin: slideOrigin,
+                perView: slidesPerView,
+                spacing: gap,
+            },
+            breakpoints,
         },
-        [emblaApi]
+        [
+            // add plugins here
+            AdaptiveHeight,
+            AutoPlay,
+            AriaPlugin,
+            KeyboardControls,
+        ]
     );
-
-    const scrollPrev = useCallback(() => {
-        if (emblaApi) {
-            emblaApi.scrollPrev();
-        }
-    }, [emblaApi]);
-
-    const scrollNext = useCallback(() => {
-        if (emblaApi) {
-            emblaApi.scrollNext();
-        }
-    }, [emblaApi]);
 
     return (
-        <div>
-            <div className="embla">
-                <div
-                    aria-roledescription="carousel"
-                    role="region"
-                    className="embla__viewport"
-                    ref={emblaRef}
-                >
-                    <div aria-live={delay ? 'off' : 'polite'} className="embla__container">
-                        {mediaArray?.map((q, index) => {
-                            return (
-                                <div
-                                    key={`${index}`}
-                                    role="group"
-                                    aria-label={`${index + 1} of ${mediaArray?.length}`}
-                                    aria-roledescription="slide"
-                                    className={`embla__slide ${
-                                        typeof document !== 'undefined' && carouselVisible
-                                            ? 'embla-carousel-loaded'
-                                            : ''
-                                    }`}
-                                >
-                                    <div className="embla__slide_inner">
-                                        <p className="embla__slide_caption">{q.caption}</p>
-                                        {q.src && (
-                                            <Image
-                                                className="o-img o-img--cover"
-                                                height={q.height}
-                                                width={q.width}
-                                                src={q.src}
-                                                artDirectedImages={q.responsiveImages}
-                                                alt={q.alt ?? ''}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                    <div className="indicators">
-                        {scrollSnaps.length > 1 && (
-                            <button className="embla__prev" onClick={scrollPrev}>
-                                Prev
-                            </button>
-                        )}
-                        {scrollSnaps.length > 1 && (
-                            <button className="embla__next" onClick={scrollNext}>
-                                Next
-                            </button>
-                        )}
-                    </div>
-                </div>
-            </div>
-            <div className="embla__navigator">
-                {scrollSnaps.map((_, indicatorIndex) => {
-                    if (scrollSnaps.length > 1) {
-                        return (
-                            <button
-                                className="embla__dots"
-                                key={indicatorIndex + '_indicator'}
-                                style={{
-                                    backgroundColor:
-                                        selectedIndex === indicatorIndex ? 'lightblue' : 'lightgray'
-                                }}
-                                onClick={() => {
-                                    scrollTo(indicatorIndex);
-                                }}
-                            />
-                        );
-                    }
-                    return <></>;
+        <section
+            className={classes}
+            aria-label={carouselName}
+            aria-roledescription="carousel"
+            // If autoplay is enabled, we don't want to announce the slides as they change
+            // See basic carousel elements: https://www.w3.org/WAI/ARIA/apg/patterns/carousel/
+            aria-live={autoplay ? 'off' : 'polite'}
+            aria-atomic="true"
+        >
+            <div ref={sliderRef} className="c-carousel__inner keen-slider">
+                {Children.map(children, (child, index) => {
+                    const numberOfChildren = Children.count(children);
+
+                    return (
+                        // We need the keen-slider__slide class to be able to use the keen-slider
+                        <div
+                            role="group"
+                            aria-label={`${index + 1} of ${numberOfChildren}`}
+                            aria-roledescription="slide"
+                            className="c-carousel__slide keen-slider__slide"
+                            key={index}
+                            data-slide-index={index}
+                        >
+                            {child}
+                        </div>
+                    );
                 })}
             </div>
-        </div>
-    );
-};
 
-export const Carousel: FC<Props> = (props) => {
-    const { mediaArray } = props;
-    const [carouselKey, setCarouselKey] = useState('');
+            {/* IF we have arrows enabled AND the slider has loaded AND the current object is available on the instance */}
+            {arrows && sliderHasLoaded && instanceRef.current && (
+                <>
+                    <Arrow
+                        left
+                        onClick={(e: any) => e.stopPropagation() || instanceRef.current?.prev()}
+                        // IF the loop is false AND the current slide is the first slide
+                        disabled={!loop && currentSlide === 0}
+                    />
 
-    useEffect(() => {
-        if (!carouselKey) setCarouselKey(uuidv4());
-        setCarouselKey(props.carouselKey);
-    }, [carouselKey, props.carouselKey]);
+                    <Arrow
+                        onClick={(e: any) => e.stopPropagation() || instanceRef.current?.next()}
+                        // IF the loop is false AND the current slide matches the max index
+                        disabled={
+                            !loop && currentSlide === instanceRef.current.track.details.maxIdx
+                        }
+                    />
+                </>
+            )}
 
-    return (
-        <div
-            key={`${carouselKey}-${mediaArray.length}`}
-            className={`embla__carousel_wrapper_${carouselKey}`}
-        >
-            <CarouselInner {...props} carouselKey={carouselKey}></CarouselInner>
-        </div>
+            {/* IF we have dots enabled AND the slider has loaded AND the current object is available on the instance */}
+            {dotNav && sliderHasLoaded && instanceRef.current && (
+                <CarouselDots
+                    instanceRef={instanceRef}
+                    currentSlide={currentSlide}
+                    justifyDotNav={justifyDotNav}
+                />
+            )}
+        </section>
     );
 };

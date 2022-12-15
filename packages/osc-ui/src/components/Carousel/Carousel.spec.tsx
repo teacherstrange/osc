@@ -1,127 +1,163 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Carousel } from './Carousel';
-import { render } from '@testing-library/react';
 
-const mediaArray = [
-    {
-        _key: '2abff668951c',
-        _type: 'module.images',
-        alt: 'A cartoony shoe',
-        height: 1250,
-        src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-        width: 1870
-    },
-    {
-        _key: '2abff668952c',
-        _type: 'module.images',
-        alt: 'A cartoony shoe',
-        height: 1250,
-        src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-        width: 1870
-    },
-    {
-        _key: '2abff668953c',
-        _type: 'module.images',
-        alt: 'A cartoony shoe',
-        height: 1250,
-        src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-        width: 1870
-    }
-];
+beforeEach(() => {
+    // IntersectionObserver isn't available in test environment
+    const mockIntersectionObserver = vi.fn();
 
-// BASIC TEST
-test('renders the carousel with three items', () => {
-    render(
-        <Carousel
-            mediaArray={mediaArray}
-            active={true} // fine
-            delay={'3000'} // fine
-            slidesPerPage={2} // fine
-            slideGap={10} // fine
-            axis={'y'} // fine
-            height={'1000'} // fine
-            loop={false} // fine
-            startIndex={4} // fine
-            ssr={false}
-        ></Carousel>
-    );
-
-    // Use querySelector as an escape hatch as queryByRole won't count hidden elements
-    const carouselSlides = document.querySelectorAll('.embla__slide');
-    expect(carouselSlides).toHaveLength(3);
+    mockIntersectionObserver.mockReturnValue({
+        observe: () => vi.fn(),
+        unobserve: () => vi.fn(),
+        disconnect: () => vi.fn(),
+    });
+    window.IntersectionObserver = mockIntersectionObserver;
 });
 
-// if carousel is active when there is less than one page
-test('carousel is disabled when active is set to true, but scrollSnaps.length <= 1', () => {
+test('renders the default carousel with three items', () => {
     render(
-        <Carousel
-            mediaArray={mediaArray}
-            active={true} // testing this
-            delay={'3000'}
-            slidesPerPage={3} // testing this
-            slideGap={10} // testing this
-            axis={'y'}
-            height={'1000'} // testing this
-            loop={false}
-            startIndex={2}
-            ssr={false}
-        ></Carousel>
+        <Carousel carouselName="Test">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </Carousel>
     );
 
-    const indicators = document.querySelector('.indicators').children;
-    const embla__navigator = document.querySelector('.embla__navigator').children;
-    expect(indicators).toHaveLength(0);
-    expect(embla__navigator).toHaveLength(0);
+    const carouselContainer = screen.getByRole('region', { name: 'Test' });
+    const slides = screen.getAllByRole('group');
+    const dots = screen.getAllByRole('button', { name: /Go to slide/i });
+
+    expect(carouselContainer).toBeInTheDocument();
+    expect(carouselContainer).toHaveAttribute('aria-live', 'polite');
+    expect(carouselContainer).toHaveAttribute('aria-atomic', 'true');
+    expect(carouselContainer).toHaveAttribute('aria-roledescription', 'carousel');
+
+    expect(slides).toHaveLength(3);
+    slides.forEach((slide, index) => {
+        expect(slide).toHaveAccessibleName(`${index + 1} of 3`);
+        expect(slide).toHaveAttribute('data-slide-index', `${index}`);
+    });
+
+    expect(dots).toHaveLength(3);
+    dots.forEach((dot, index) => {
+        expect(dot).toHaveAccessibleName(`Go to slide ${index + 1}`);
+    });
 });
 
-// need to test height, it is not part of emblaApi
-test('correct carousel height is set', () => {
-    render(
-        <Carousel
-            mediaArray={mediaArray}
-            active={false} // fine
-            delay={'3000'} // fine
-            slidesPerPage={2} // fine
-            slideGap={10} // fine
-            axis={'y'} // fine
-            height={'1000'} // fine
-            loop={false} // fine
-            startIndex={4} // fine
-            ssr={false}
-            carouselKey={'1'}
-        ></Carousel>
-    );
+describe('arrow navigation', () => {
+    test('renders a carousel with arrows', () => {
+        render(
+            <Carousel carouselName="Test" arrows={true}>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </Carousel>
+        );
 
-    const embla__slide_wrapper = document.querySelector(`.embla__carousel_wrapper_${'1'}`);
-    const height = window
-        .getComputedStyle(embla__slide_wrapper)
-        .getPropertyValue('--embla__height');
-    expect(height).toBe('1000px');
+        const prevButton = screen.getByRole('button', { name: 'Previous slide' });
+        const nextButton = screen.getByRole('button', { name: 'Next slide' });
+
+        expect(prevButton).toBeInTheDocument();
+        expect(nextButton).toBeInTheDocument();
+    });
+
+    test('first arrow is disabled when loop is false', () => {
+        render(
+            <Carousel carouselName="Test" arrows={true} loop={false}>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </Carousel>
+        );
+
+        const prevButton = screen.getByRole('button', { name: 'Previous slide' });
+
+        expect(prevButton).toBeDisabled();
+    });
 });
 
-test('test slideGap', () => {
-    const slideGap = 10;
+describe('a11y', () => {
+    test('sets aria-live to off when autoplay is active', () => {
+        render(
+            <Carousel carouselName="Test" autoplay="smooth" loop={true}>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </Carousel>
+        );
 
-    render(
-        <Carousel
-            mediaArray={mediaArray}
-            active={false} // fine
-            delay={'3000'} // fine
-            slidesPerPage={1} // fine
-            slideGap={slideGap} // fine
-            axis={'y'} // fine
-            height={'1000'} // fine
-            loop={false} // fine
-            startIndex={4} // fine
-            ssr={false}
-            carouselKey={'1'}
-        ></Carousel>
-    );
+        const carouselContainer = screen.getByRole('region', { name: 'Test' });
 
-    const embla__slide_wrapper = document.querySelector(`.embla__carousel_wrapper_${'1'}`);
+        expect(carouselContainer).toHaveAttribute('aria-live', 'off');
+    });
 
-    const computedSlideGap = window
-        .getComputedStyle(embla__slide_wrapper)
-        .getPropertyValue('--embla__slideGap');
-    expect(computedSlideGap).toBe(slideGap.toString() + 'px');
+    test('sets aria-hidden=true when slides are not intersecting with the viewport', () => {
+        const mockEntry = { isIntersecting: false };
+        const mockIntersectionObserver = vi.fn();
+
+        mockIntersectionObserver.mockReturnValue({
+            observe: () => {},
+            disconnect: () => vi.fn(),
+        });
+        window.IntersectionObserver = mockIntersectionObserver;
+
+        render(
+            <Carousel carouselName="Test" loop={true}>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </Carousel>
+        );
+
+        const observerCallback = mockIntersectionObserver.mock.calls[0][0];
+        observerCallback([mockEntry]);
+
+        // Look for hidden slides
+        const slides = screen.getAllByRole('group', { hidden: true });
+
+        expect(slides[2]).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    test('carousel inner is in the focus tree', () => {
+        render(
+            <Carousel carouselName="Test" loop={true}>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </Carousel>
+        );
+
+        const carouselInner = document.querySelector('.c-carousel__inner');
+        expect(carouselInner).toHaveAttribute('tabindex', '0');
+    });
+});
+
+describe('adaptive height', () => {
+    test('sets the height of the carousel to the tallest item intersecting the viewport', () => {
+        const mockEntry = { isIntersecting: true };
+        const mockIntersectionObserver = vi.fn();
+
+        mockIntersectionObserver.mockReturnValue({
+            observe: () => {},
+            disconnect: () => vi.fn(),
+        });
+        window.IntersectionObserver = mockIntersectionObserver;
+
+        render(
+            <Carousel carouselName="Test" loop={true} adaptiveHeight={true}>
+                <div style={{ height: '200px' }}>200px</div>
+                <div style={{ height: '100px' }}>100px</div>
+                <div style={{ height: '75px' }}>75px</div>
+                <div style={{ height: '100px' }}>100px</div>
+                <div style={{ height: '150px' }}>150px</div>
+            </Carousel>
+        );
+
+        const observerCallback = mockIntersectionObserver.mock.calls[0][0];
+        observerCallback([mockEntry]);
+
+        const carouselInner = document.querySelector('.c-carousel__inner');
+
+        expect(carouselInner).toHaveStyle('align-items: flex-start;');
+    });
 });
