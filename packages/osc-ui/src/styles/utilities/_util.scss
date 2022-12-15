@@ -34,68 +34,68 @@ $osc-config: (
     margin-top: (
         prefix: "mt",
         values: (
-            scales-map("relative"),
-        ),
+            scales-map("relative")
+        )
     ),
     margin-bottom: (
         prefix: "mb",
         values: (
-            scales-map("relative"),
-        ),
+            scales-map("relative")
+        )
     ),
     margin-right: (
         prefix: "mr",
         values: (
-            scales-map("relative"),
-        ),
+            scales-map("relative")
+        )
     ),
     margin-left: (
         prefix: "ml",
         values: (
-            scales-map("relative"),
-        ),
+            scales-map("relative")
+        )
     ),
     margin: (
         prefix: "m",
         values: (
-            scales-map("relative"),
-        ),
+            scales-map("relative")
+        )
     ),
     padding-top: (
         prefix: "pt",
         values: (
-            scales-map(),
-        ),
+            scales-map()
+        )
     ),
     padding-right: (
         prefix: "pr",
         values: (
-            scales-map(),
-        ),
+            scales-map()
+        )
     ),
     padding-bottom: (
         prefix: "pb",
         values: (
-            scales-map(),
-        ),
+            scales-map()
+        )
     ),
     padding-left: (
         prefix: "pl",
         values: (
-            scales-map(),
-        ),
+            scales-map()
+        )
     ),
     padding: (
         prefix: "p",
         values: (
-            scales-map(),
-        ),
+            scales-map()
+        )
     ),
     border-radius: (
         prefix: "br",
         values: (
-            10px,
-        ),
+            10px
+        )
     ),
     line-height: (
         prefix: "lh",
@@ -104,47 +104,47 @@ $osc-config: (
             "1-25": 1.25,
             "1-33": 1.33,
             "1-5": 1.5,
-            "1-75": 1.75,
-        ),
+            "1-75": 1.75
+        )
     ),
     overflow: (
         prefix: "ov",
         values: (
             auto,
             hidden,
-            visible,
-        ),
+            visible
+        )
     ),
     font-weight: (
         prefix: "text",
         values: (
             "bold": $weight-bold,
             "med": $weight-med,
-            "reg": $weight-reg,
-        ),
+            "reg": $weight-reg
+        )
     ),
     font-style: (
         prefix: "text",
         values: (
-            italic,
-        ),
+            italic
+        )
     ),
     text-transform: (
         prefix: "text",
         values: (
             uppercase,
             lowercase,
-            underline,
-        ),
+            underline
+        )
     ),
     text-align: (
         prefix: "text",
         values: (
             center,
             right,
-            left,
-        ),
-    ),
+            left
+        )
+    )
 );
 
 @each $property, $values in $osc-config {
