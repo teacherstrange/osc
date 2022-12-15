@@ -152,7 +152,16 @@ h6,
 
     @each $class in $classes {
         .t-font-#{$class} {
-            @include font-size(var(--font-scale-#{$class}), $base-line-height);
+            @if $class == "gamma" or
+                $class == "beta" or
+                $class == "alpha" or
+                $class == "omega" {
+                @include font-size(var(--font-scale-#{$class}), 1.2);
+            } @else if $class == "kilo" or $class == "mega" {
+                @include font-size(var(--font-scale-#{$class}), 1);
+            } @else {
+                @include font-size(var(--font-scale-#{$class}), $base-line-height);
+            }
         }
     }
 }
