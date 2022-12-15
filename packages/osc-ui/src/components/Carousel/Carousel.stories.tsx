@@ -1,5 +1,7 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
+import mq from '../../../../../tokens/media-queries';
+import { rem } from '../../utils/rem';
 import { Image } from '../Image/Image';
 import type { Props } from './Carousel';
 import { Carousel } from './Carousel';
@@ -193,14 +195,14 @@ Breakpoints.args = {
     carouselName: 'Breakpoints',
     slidesPerView: 2,
     breakpoints: {
-        '(min-width: 768px)': {
+        [`(min-width: ${rem(mq['tab'])}rem)`]: {
             slides: {
                 origin: 'auto',
                 perView: 3,
                 spacing: 16,
             },
         },
-        '(min-width: 1440px)': {
+        [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
             slides: {
                 origin: 'auto',
                 perView: 4,

@@ -2,7 +2,9 @@ import type { KeenSliderPlugin } from 'keen-slider/react';
 import { useKeenSlider } from 'keen-slider/react';
 import type { FC, ReactNode } from 'react';
 import React, { Children, useState } from 'react';
+import mq from '../../../../../tokens/media-queries';
 import { classNames } from '../../utils/classNames';
+import { rem } from '../../utils/rem';
 
 import './carousel.scss';
 import { Arrow } from './CarouselArrows';
@@ -119,15 +121,14 @@ export const Carousel: FC<Props> = (props: Props) => {
         startIndex = 0,
         gap = 16, //px
         breakpoints = {
-            // TODO: Update to pull breakpoints from our design tokens & should be rem
-            '(min-width: 48rem)': {
+            [`(min-width: ${rem(mq['tab'])}rem)`]: {
                 slides: {
                     origin: slideOrigin,
                     perView: 2,
                     spacing: gap,
                 },
             },
-            '(min-width: 90rem)': {
+            [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
                 slides: {
                     origin: slideOrigin,
                     perView: 3,
