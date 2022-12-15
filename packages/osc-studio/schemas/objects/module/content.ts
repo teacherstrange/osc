@@ -1,7 +1,6 @@
 import { EditIcon } from '@sanity/icons';
 import VariantPicker from '../../../components/inputs/VariantPicker/VariantPicker';
-
-const SPACING = [10, 50, 110, 210];
+import { SPACING } from '../../../constants';
 
 export default {
     name: 'module.content',
@@ -23,7 +22,7 @@ export default {
         {
             name: 'marginBottom',
             title: 'Push Region',
-            type: 'number',
+            type: 'string',
             description: 'Spacing you would like between this region and the next.',
             options: {
                 list: SPACING,
@@ -34,7 +33,7 @@ export default {
         {
             name: 'paddingTop',
             title: 'Inner Padding Top',
-            type: 'number',
+            type: 'string',
             description: 'Inner padding at the top of the region.',
             options: {
                 list: SPACING,
@@ -45,7 +44,7 @@ export default {
         {
             name: 'paddingBottom',
             title: 'Inner Padding Bottom',
-            type: 'number',
+            type: 'string',
             description: 'Inner padding at the bottom of the region.',
             options: {
                 list: SPACING,

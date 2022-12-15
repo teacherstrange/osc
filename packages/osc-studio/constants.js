@@ -19,7 +19,7 @@ export const PAGE_REFERENCES = [
     { type: 'page' },
     { type: 'product' },
     { type: 'blog' },
-    { type: 'post' }
+    { type: 'post' },
 ];
 
 // References to include in 'modules' array in documents
@@ -28,7 +28,23 @@ export const MODULES = [
     { type: 'module.content' },
     { type: 'module.images' },
     { type: 'module.trustpilot' },
-    { type: 'module.carousel' }
+    { type: 'module.carousel' },
+];
+
+// Space values to use in the 'spacing' field type
+export const SPACING = [
+    'micro',
+    'milli',
+    'centi',
+    'zeta',
+    'epsilon',
+    'delta',
+    'gamma',
+    'beta',
+    'alpha',
+    'omega',
+    'kilo',
+    'mega',
 ];
 
 // API version to use when using the Sanity client within the studio

@@ -100,8 +100,7 @@ export default function Module(props: Props) {
                         marginBottom={moduleContent.marginBottom}
                         paddingBottom={moduleContent.paddingBottom}
                         paddingTop={moduleContent.paddingTop}
-                        textColor={moduleContent.textColor}
-                        value={moduleContent?.body}
+                        value={moduleContent.body}
                         buttons={moduleContent.buttons}
                     />
                 </article>

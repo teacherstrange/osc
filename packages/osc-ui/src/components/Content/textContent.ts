@@ -1,9 +1,12 @@
 import type { PortableTextBlock } from '@portabletext/types';
-import type { Themes } from '../../types';
+import type { Spacing, Themes } from '../../types';
 import type { ButtonProps } from './Content';
 
 interface TextContent {
     backgroundColor?: Themes;
+    paddingTop?: Spacing;
+    paddingBottom?: Spacing;
+    marginBottom?: Spacing;
     body: PortableTextBlock[];
     buttons?: ButtonProps[];
 }
@@ -630,4 +633,6 @@ export const textContentWithBackgroundColor: TextContent = {
             style: 'normal',
         },
     ],
+    paddingBottom: 'centi',
+    paddingTop: 'centi',
 };

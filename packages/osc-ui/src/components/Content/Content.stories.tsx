@@ -83,8 +83,8 @@ export const BackgroundColour = Template.bind({});
 BackgroundColour.args = {
     backgroundColor: textContentWithBackgroundColor.backgroundColor,
     value: textContentWithBackgroundColor.body,
-    paddingTop: 'centi',
-    paddingBottom: 'centi',
+    paddingTop: textContentWithBackgroundColor.paddingTop,
+    paddingBottom: textContentWithBackgroundColor.paddingBottom,
 };
 
 export const TextSizes = Template.bind({});
