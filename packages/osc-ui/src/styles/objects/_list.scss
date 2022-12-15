@@ -8,6 +8,7 @@
 // stylelint-disable
 .o-list,
 [class*="c-content"] ul,
+[class*="c-content"] ol,
 [class*="free-text"] ul {
     &:not(.is-bare) {
         width: 100%;
@@ -37,9 +38,9 @@
         }
     }
 
-    &,
+    &:where(ul),
     &--bullet {
-        $bullet: 7px;
+        $bullet: 0.25em;
 
         &:not(.is-bare) {
             list-style: none outside none;
@@ -55,16 +56,23 @@
                 &:not(.has-children) {
                     &::before {
                         content: "";
-                        @include t.position(absolute, $bullet, null, null, 0);
+                        @include t.position(absolute, 0.75em, null, null, 0);
                         width: $bullet;
                         height: $bullet;
                         margin: auto 0;
-                        background-color: var(--color-quaternary);
+                        background-color: currentColor;
                         border-radius: 50%;
                     }
                 }
             }
         }
+    }
+
+    &:where(ol) {
+         &:not(.is-bare) {
+            padding-left: s.$global-spacing-s;
+            list-style-position: outside;
+         }
     }
 
     &--square {
