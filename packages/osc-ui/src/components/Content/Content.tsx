@@ -4,6 +4,9 @@ import type { PortableTextBlock } from '@portabletext/types';
 import { Link } from '@remix-run/react';
 import type { FC } from 'react';
 import React from 'react';
+import colors from '../../../../../tokens/colors';
+import sizes from '../../../../../tokens/fluid-scale';
+import typography from '../../../../../tokens/typography';
 import { useSpacing } from '../../hooks/useSpacing';
 import type { Spacing } from '../../types';
 import { classNames } from '../../utils/classNames';
@@ -42,6 +45,34 @@ export interface Props {
     buttons?: ButtonProps[];
 }
 
+// Create the decorator markup
+const setDecorators = () => {
+    const decorator = {};
+
+    Object.keys(colors.default).forEach((color) => {
+        decorator[`span u-color-${color}`] = ({ children }) => {
+            return <span className={`u-color-${color}`}>{children}</span>;
+        };
+    });
+
+    sizes.steps.forEach((size) => {
+        decorator[`span t-font-${size}`] = ({ children }) => {
+            return <span className={`t-font-${size}`}>{children}</span>;
+        };
+    });
+
+    Object.keys(typography)
+        .filter((type) => type.includes('font'))
+        .forEach((type) => {
+            // Exclude the -font- prefix as it's part of the object key
+            decorator[`span t-${type}`] = ({ children }) => {
+                return <span className={`t-${type}`}>{children}</span>;
+            };
+        });
+
+    return decorator;
+};
+
 // This content component is built around the content that is exported from our Sanity studio.
 // The portabletext component allows us to take the array generated and move through it, assigning the correct components to each child.
 // https://github.com/portabletext/react-portabletext
@@ -64,6 +95,10 @@ const portableTextComponents: PortableTextComponents = {
         number: ({ children }) => <ListItem>{children}</ListItem>,
     },
     marks: {
+        ...setDecorators(),
+        'strong u-text-med': ({ children }) => {
+            return <strong className="u-text-med">{children}</strong>;
+        },
         annotationLinkInternal: ({ value, children }) => {
             // If there is no slug fallback to the home path
             // This helps to stop Remix throwing when links are being applied in preview
@@ -85,26 +120,27 @@ const portableTextComponents: PortableTextComponents = {
         },
     },
     types: {
-        image: ({ value }) => {
-            const { altText, dimensions, url } = value?.asset;
+        'module.images': ({ value }) => {
+            const { alt, image } = value;
+            const src = image.image.derived
+                ? image.image.derived[0].secure_url
+                : image.image.secure_url;
+            const { width, height } = image.image;
 
-            return (
-                <img src={url} alt={altText} width={dimensions.width} height={dimensions.height} />
-            );
+            return <Image alt={alt} src={src} width={width} height={height} />;
         },
     },
 };
 
-// TODO: sb - images
 export const Content: FC<Props> = (props: Props) => {
     const {
         align = 'left',
-        backgroundColor = 'primary',
+        backgroundColor,
         className,
         marginBottom,
         paddingTop,
         paddingBottom,
-        textColor = 'secondary',
+        textColor,
         value,
         buttons,
         ...other
@@ -128,10 +164,10 @@ export const Content: FC<Props> = (props: Props) => {
         <article
             className={classes ? classes : null}
             {...other}
-            style={{
-                backgroundColor: backgroundColor,
-                color: textColor,
-            }}
+            // style={{
+            //     backgroundColor: backgroundColor,
+            //     color: textColor,
+            // }}
         >
             <div className="c-content">
                 <div className={`c-content__inner ${alignClass}`}>

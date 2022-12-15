@@ -19,11 +19,11 @@ export const textContent: TextContent = {
                     _key: 'add1ad894075',
                     _type: 'span',
                     marks: [],
-                    text: 'Heading 1'
-                }
+                    text: 'Heading 1',
+                },
             ],
             markDefs: [],
-            style: 'h1'
+            style: 'h1',
         },
         {
             _key: '25e75b5aa5d6',
@@ -33,11 +33,11 @@ export const textContent: TextContent = {
                     _key: 'c353d4602892',
                     _type: 'span',
                     marks: [],
-                    text: 'Heading 2'
-                }
+                    text: 'Heading 2',
+                },
             ],
             markDefs: [],
-            style: 'h2'
+            style: 'h2',
         },
         {
             _key: '67130c03b412',
@@ -47,11 +47,11 @@ export const textContent: TextContent = {
                     _key: '7ab89b8a8f9c',
                     _type: 'span',
                     marks: [],
-                    text: 'Heading 3'
-                }
+                    text: 'Heading 3',
+                },
             ],
             markDefs: [],
-            style: 'h3'
+            style: 'h3',
         },
         {
             _key: '67130c03b413',
@@ -61,11 +61,11 @@ export const textContent: TextContent = {
                     _key: '7ab89b8a8f9c',
                     _type: 'span',
                     marks: [],
-                    text: 'Heading 4'
-                }
+                    text: 'Heading 4',
+                },
             ],
             markDefs: [],
-            style: 'h4'
+            style: 'h4',
         },
         {
             _key: '67130c03b414',
@@ -75,11 +75,11 @@ export const textContent: TextContent = {
                     _key: '7ab89b8a8f9c',
                     _type: 'span',
                     marks: [],
-                    text: 'Heading 5'
-                }
+                    text: 'Heading 5',
+                },
             ],
             markDefs: [],
-            style: 'h5'
+            style: 'h5',
         },
         {
             _key: '67130c03b415',
@@ -89,11 +89,11 @@ export const textContent: TextContent = {
                     _key: '7ab89b8a8f9c',
                     _type: 'span',
                     marks: [],
-                    text: 'Heading 6'
-                }
+                    text: 'Heading 6',
+                },
             ],
             markDefs: [],
-            style: 'h6'
+            style: 'h6',
         },
         {
             _key: 'ae0615968daf',
@@ -103,35 +103,35 @@ export const textContent: TextContent = {
                     _key: '2a9c73ab09540',
                     _type: 'span',
                     marks: [],
-                    text: 'Lorem ipsum dolor sit, amet '
+                    text: 'Lorem ipsum dolor sit, amet ',
                 },
                 {
                     _key: '69d0f1d5b5ad',
                     _type: 'span',
                     marks: ['strong'],
-                    text: 'consectetur'
+                    text: 'consectetur',
                 },
                 {
                     _key: '20c1cccfb300',
                     _type: 'span',
                     marks: [],
-                    text: ' adipisicing elit. Dicta ipsum quos reiciendis maiores voluptatum nihil. '
+                    text: ' adipisicing elit. Dicta ipsum quos reiciendis maiores voluptatum nihil. ',
                 },
                 {
                     _key: '8a74442ac941',
                     _type: 'span',
                     marks: ['em'],
-                    text: 'Rerum'
+                    text: 'Rerum',
                 },
                 {
                     _key: '2ff620684880',
                     _type: 'span',
                     marks: [],
-                    text: ' nobis ea deserunt, incidunt quod ab non quasi repellat itaque consectetur officia in sunt.'
-                }
+                    text: ' nobis ea deserunt, incidunt quod ab non quasi repellat itaque consectetur officia in sunt.',
+                },
             ],
             markDefs: [],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: 'e38afdc673fc',
@@ -141,8 +141,8 @@ export const textContent: TextContent = {
                     _key: '1e39a513ee7f',
                     _type: 'span',
                     marks: ['fc7211fe8b77'],
-                    text: 'Internal link'
-                }
+                    text: 'Internal link',
+                },
             ],
             markDefs: [
                 {
@@ -152,12 +152,12 @@ export const textContent: TextContent = {
                     reference: {
                         _ref: '74ed3155-eb70-4938-80bc-4e6747537f9c',
                         _type: 'reference',
-                        _weak: true
+                        _weak: true,
                     },
-                    slug: '/blog/test-post'
-                }
+                    slug: '/blog/test-post',
+                },
             ],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: '70d2a46f7293',
@@ -167,18 +167,18 @@ export const textContent: TextContent = {
                     _key: 'bc560eb9d24b',
                     _type: 'span',
                     marks: ['fb290b94285a'],
-                    text: 'External link'
-                }
+                    text: 'External link',
+                },
             ],
             markDefs: [
                 {
                     _key: 'fb290b94285a',
                     _type: 'annotationLinkExternal',
                     newWindow: true,
-                    url: 'https://example.com'
-                }
+                    url: 'https://example.com',
+                },
             ],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: 'ee838d1f79da',
@@ -188,17 +188,17 @@ export const textContent: TextContent = {
                     _key: '1c71ad550385',
                     _type: 'span',
                     marks: ['337c0734cee1'],
-                    text: 'Email link'
-                }
+                    text: 'Email link',
+                },
             ],
             markDefs: [
                 {
                     _key: '337c0734cee1',
                     _type: 'annotationLinkEmail',
-                    email: 'test@example.com'
-                }
+                    email: 'test@example.com',
+                },
             ],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: '0eee0c7ce3c5',
@@ -208,11 +208,11 @@ export const textContent: TextContent = {
                     _key: '4c09a2e3b4e9',
                     _type: 'span',
                     marks: [],
-                    text: ''
-                }
+                    text: '',
+                },
             ],
             markDefs: [],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: '578279b652c8',
@@ -222,13 +222,13 @@ export const textContent: TextContent = {
                     _key: '9fe2f90fe3b1',
                     _type: 'span',
                     marks: [],
-                    text: 'List items'
-                }
+                    text: 'List items',
+                },
             ],
             level: 1,
             listItem: 'bullet',
             markDefs: [],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: '88ffa9154b4e',
@@ -238,13 +238,13 @@ export const textContent: TextContent = {
                     _key: 'f303edf120dd',
                     _type: 'span',
                     marks: [],
-                    text: 'List items'
-                }
+                    text: 'List items',
+                },
             ],
             level: 1,
             listItem: 'bullet',
             markDefs: [],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: 'a7a166ee2f52',
@@ -254,13 +254,13 @@ export const textContent: TextContent = {
                     _key: '31e23068abf8',
                     _type: 'span',
                     marks: [],
-                    text: 'List items'
-                }
+                    text: 'List items',
+                },
             ],
             level: 1,
             listItem: 'bullet',
             markDefs: [],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: '80b6f50542c1',
@@ -270,13 +270,13 @@ export const textContent: TextContent = {
                     _key: 'b019637320bf',
                     _type: 'span',
                     marks: [],
-                    text: 'One'
-                }
+                    text: 'One',
+                },
             ],
             level: 1,
             listItem: 'number',
             markDefs: [],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: '2ee3a1914b62',
@@ -286,13 +286,13 @@ export const textContent: TextContent = {
                     _key: '9b59a473b089',
                     _type: 'span',
                     marks: [],
-                    text: 'Two'
-                }
+                    text: 'Two',
+                },
             ],
             level: 1,
             listItem: 'number',
             markDefs: [],
-            style: 'normal'
+            style: 'normal',
         },
         {
             _key: '1a65382b6756',
@@ -302,15 +302,15 @@ export const textContent: TextContent = {
                     _key: '775ec860f180',
                     _type: 'span',
                     marks: [],
-                    text: 'Three'
-                }
+                    text: 'Three',
+                },
             ],
             level: 1,
             listItem: 'number',
             markDefs: [],
-            style: 'normal'
-        }
-    ]
+            style: 'normal',
+        },
+    ],
 };
 
 export const textContentHasButtons: TextContent = {
@@ -323,78 +323,285 @@ export const textContentHasButtons: TextContent = {
                     _key: 'e37a08625abd',
                     _type: 'span',
                     marks: [],
-                    text: 'Has Buttons'
-                }
+                    text: 'Has Buttons',
+                },
             ],
             markDefs: [],
-            style: 'h2'
-        }
+            style: 'h2',
+        },
     ],
     buttons: [
         {
             _key: '4e7732fa8971',
             _type: 'module.button',
             externalLink: {
-                newWindow: true
+                newWindow: true,
             },
             file: 'https://cdn.sanity.io/files/v6lebos6/staging/bfd009f500c057195ffde66fae64f92fa5f59b72.pdf',
             label: 'File download',
-            type: 'file'
+            type: 'file',
         },
         {
             _key: '87d2da567fc3',
             _type: 'module.button',
             email: 'test@example.com',
             externalLink: {
-                newWindow: true
+                newWindow: true,
             },
             label: 'Email',
-            type: 'email'
+            type: 'email',
         },
         {
             _key: '22c5463fb02a',
             _type: 'module.button',
             externalLink: {
                 newWindow: true,
-                url: 'https://example.com'
+                url: 'https://example.com',
             },
             label: 'External link',
-            type: 'external'
+            type: 'external',
         },
         {
             _key: '021e29125841',
             _type: 'module.button',
             externalLink: {
-                newWindow: true
+                newWindow: true,
             },
             label: 'Internal link',
             reference: {
                 _ref: 'home',
                 _type: 'reference',
-                _weak: true
+                _weak: true,
             },
             slug: '/',
-            type: 'internal'
+            type: 'internal',
         },
         {
             _key: 'b35023227e69',
             _type: 'module.button',
             externalLink: {
-                newWindow: true
+                newWindow: true,
             },
             label: 'Telephone',
             telephone: '01234567890',
-            type: 'telephone'
+            type: 'telephone',
         },
         {
             _key: '2a645e6bf859',
             _type: 'module.button',
             externalLink: {
-                newWindow: true
+                newWindow: true,
             },
             label: 'Copy to clipboard',
             textToCopy: 'This is copied text',
-            type: 'copy to clipboard'
-        }
-    ]
+            type: 'copy to clipboard',
+        },
+    ],
+};
+
+export const textContentWithTextColor: TextContent = {
+    body: [
+        {
+            _key: '055cea62b7f1',
+            _type: 'block',
+            children: [
+                {
+                    _key: 'c0acf5edaaff0',
+                    _type: 'span',
+                    marks: [
+                        'span t-font-gamma',
+                        'span u-color-gradient-quaternary',
+                        'strong u-text-med',
+                    ],
+                    text: 'Everyone’s journey, whatever that may be, is personal, different, exciting and sometimes difficult. We know that we are in the privileged position of being the enablers of positive, life altering change. We are here to do what we can to help people achieve their goals and thrive in life – we are an expert, a friendly ear, a 24/7 support and a wildly enthusiastic cheerleader!',
+                },
+            ],
+            markDefs: [],
+            style: 'normal',
+        },
+    ],
+};
+
+export const textContentSizes: TextContent = {
+    body: [
+        {
+            _key: 'ea7df8dd139a',
+            _type: 'block',
+            children: [
+                {
+                    _key: 'df1597a476c10',
+                    _type: 'span',
+                    marks: ['span t-font-micro'],
+                    text: 'micro',
+                },
+                {
+                    _key: '73012266f0f1',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: '48f7519b50d4',
+                    _type: 'span',
+                    marks: ['span t-font-milli'],
+                    text: 'milli',
+                },
+                {
+                    _key: 'f78211c80404',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: '70fe2d690d1a',
+                    _type: 'span',
+                    marks: ['span t-font-centi'],
+                    text: 'centi',
+                },
+                {
+                    _key: 'd4c1a45e913d',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: '61e4bbd4db60',
+                    _type: 'span',
+                    marks: ['span t-font-zeta'],
+                    text: 'zeta',
+                },
+                {
+                    _key: 'd551b5cf0476',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: '699dc21e9654',
+                    _type: 'span',
+                    marks: ['span t-font-epsilon'],
+                    text: 'epsilon',
+                },
+                {
+                    _key: '4c126e64eef5',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: '03909b3afe21',
+                    _type: 'span',
+                    marks: ['span t-font-delta'],
+                    text: 'delta',
+                },
+                {
+                    _key: '3babf2ee030b',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: 'ceaad69b0e00',
+                    _type: 'span',
+                    marks: ['span t-font-gamma'],
+                    text: 'gamma',
+                },
+                {
+                    _key: '16844938fc62',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: '125ab9f022bc',
+                    _type: 'span',
+                    marks: ['span t-font-beta'],
+                    text: 'beta',
+                },
+                {
+                    _key: '10de04979d94',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: '0fe32c2a1a96',
+                    _type: 'span',
+                    marks: ['span t-font-alpha'],
+                    text: 'alpha',
+                },
+                {
+                    _key: 'bc0f65767fac',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: '81d443e81e60',
+                    _type: 'span',
+                    marks: ['span t-font-omega'],
+                    text: 'omega',
+                },
+                {
+                    _key: '3048bdff37bf',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: '01168998a671',
+                    _type: 'span',
+                    marks: ['span t-font-kilo'],
+                    text: 'kilo',
+                },
+                {
+                    _key: '40528d7ac28f',
+                    _type: 'span',
+                    marks: [],
+                    text: '\n',
+                },
+                {
+                    _key: 'fc6724e0193d',
+                    _type: 'span',
+                    marks: ['span t-font-mega'],
+                    text: 'mega',
+                },
+            ],
+            markDefs: [],
+            style: 'normal',
+        },
+    ],
+};
+
+export const textContentFonts: TextContent = {
+    body: [
+        {
+            _key: '6b0ddee623bd',
+            _type: 'block',
+            children: [
+                {
+                    _key: '6f41298ed3e9',
+                    _type: 'span',
+                    marks: ['span t-font-secondary', 'span t-font-kilo'],
+                    text: 'Judge',
+                },
+            ],
+            markDefs: [],
+            style: 'normal',
+        },
+        {
+            _key: 'be742489a4d9',
+            _type: 'block',
+            children: [
+                {
+                    _key: '605995e34058',
+                    _type: 'span',
+                    marks: ['span t-font-primary', 'span t-font-alpha'],
+                    text: 'Outfit',
+                },
+            ],
+            markDefs: [],
+            style: 'normal',
+        },
+    ],
 };
