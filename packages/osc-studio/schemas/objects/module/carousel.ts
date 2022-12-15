@@ -94,16 +94,22 @@ export default {
                     name: 'mobile',
                     title: 'Mobile',
                     type: 'number',
+                    description:
+                        'The number of slides to show on small screens, smaller than 768px. This will default to 1 if not set.',
                 },
                 {
                     name: 'tablet',
                     title: 'Tablet',
                     type: 'number',
+                    description:
+                        'The number of slides to show on screens larger than 768px. This will default to 2 if not set.',
                 },
                 {
                     name: 'desktop',
                     title: 'Desktop',
                     type: 'number',
+                    description:
+                        'The number of slides to show on screens larger than 1440px. This will default to 3 if not set.',
                 },
             ],
         },
