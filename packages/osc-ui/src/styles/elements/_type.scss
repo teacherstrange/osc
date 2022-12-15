@@ -24,6 +24,10 @@ a {
     }
 }
 
+strong {
+    font-weight: $weight-bold;
+}
+
 small {
     @include font-size(var(--font-scale-micro));
 }

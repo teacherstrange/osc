@@ -23,92 +23,92 @@
 $font-sizes: (
     (
         elements: (
-            h1
+            h1,
         ),
         classes: (
-            "beta"
-        )
+            "beta",
+        ),
     ),
     (
         elements: (
-            h2
+            h2,
         ),
         classes: (
-            "gamma"
-        )
+            "gamma",
+        ),
     ),
     (
         elements: (
-            h3
+            h3,
         ),
         classes: (
-            "delta"
-        )
+            "delta",
+        ),
     ),
     (
         elements: (
-            h4
+            h4,
         ),
         classes: (
-            "epsilon"
-        )
+            "epsilon",
+        ),
     ),
     (
         elements: (
-            h5
+            h5,
         ),
         classes: (
-            "zeta"
-        )
+            "zeta",
+        ),
     ),
     (
         elements: (
-            h6
+            h6,
         ),
         classes: (
-            "centi"
-        )
+            "centi",
+        ),
     ),
     (
         elements: (),
         classes: (
-            "milli"
-        )
+            "milli",
+        ),
     ),
     (
         elements: (),
         classes: (
-            "micro"
-        )
+            "micro",
+        ),
     ),
     (
         elements: (),
         classes: (
-            "alpha"
-        )
+            "alpha",
+        ),
     ),
     (
         elements: (),
         classes: (
-            "omega"
-        )
+            "omega",
+        ),
     ),
     (
         elements: (),
         classes: (
-            "kilo"
-        )
+            "kilo",
+        ),
     ),
     (
         elements: (),
         classes: (
-            "mega"
-        )
+            "mega",
+        ),
     )
 );
 $font-families: (
     "primary": $font-primary,
-    "secondary": $font-secondary
+    "secondary": $font-secondary,
 );
 
 @mixin font-styles($rules, $mq: null, $fs: null) {
@@ -142,6 +142,11 @@ h6,
     text-transform: none;
 }
 
+/* stylelint-disable-next-line plugin/selector-bem-pattern */
+[class*="t-font"] {
+    font-weight: $weight-reg;
+}
+
 // Font Family
 .t-font {
     @each $name, $font-family in $font-families {
@@ -170,10 +175,7 @@ h6,
 
     @each $class in $classes {
         .t-font-#{$class} {
-            @if $class == "gamma" or
-                $class == "beta" or
-                $class == "alpha" or
-                $class == "omega" {
+            @if $class == "gamma" or $class == "beta" or $class == "alpha" or $class == "omega" {
                 @include font-size(var(--font-scale-#{$class}), 1.2);
             } @else if $class == "kilo" or $class == "mega" {
                 @include font-size(var(--font-scale-#{$class}), 1);
