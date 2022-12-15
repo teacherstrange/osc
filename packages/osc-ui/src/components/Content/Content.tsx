@@ -40,7 +40,6 @@ export interface Props {
     marginBottom?: Spacing;
     paddingBottom?: Spacing;
     paddingTop?: Spacing;
-    textColor?: string;
     value: PortableTextBlock[];
     buttons?: ButtonProps[];
 }
@@ -140,7 +139,6 @@ export const Content: FC<Props> = (props: Props) => {
         marginBottom,
         paddingTop,
         paddingBottom,
-        textColor,
         value,
         buttons,
         ...other
@@ -157,124 +155,85 @@ export const Content: FC<Props> = (props: Props) => {
         paddingTopClass,
         paddingBottomClass,
         marginBottomClass,
+        backgroundColor && `u-bg-color-${backgroundColor}`,
         className
     );
 
     return (
-        <article
-            className={classes ? classes : null}
-            {...other}
-            // style={{
-            //     backgroundColor: backgroundColor,
-            //     color: textColor,
-            // }}
-        >
-            <div className="c-content">
-                <div className={`c-content__inner ${alignClass}`}>
-                    <ReactPortableText value={value} components={portableTextComponents} />
+        <div className={classes ? classes : null} {...other}>
+            <div className={`c-content__inner ${alignClass}`}>
+                <ReactPortableText value={value} components={portableTextComponents} />
 
-                    {buttons && buttons.length > 0 ? (
-                        <ButtonGroup>
-                            {buttons.map((button) => {
-                                const {
-                                    _key,
-                                    email,
-                                    externalLink,
-                                    file,
-                                    label,
-                                    slug,
-                                    telephone,
-                                    type,
-                                    textToCopy,
-                                    variant,
-                                } = button;
+                {buttons && buttons.length > 0 ? (
+                    <ButtonGroup>
+                        {buttons.map((button) => {
+                            const {
+                                _key,
+                                email,
+                                externalLink,
+                                file,
+                                label,
+                                slug,
+                                telephone,
+                                type,
+                                textToCopy,
+                            } = button;
 
-                                switch (type) {
-                                    case 'file':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="a"
-                                                href={file}
-                                                download
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                            switch (type) {
+                                case 'file':
+                                    return (
+                                        <Button key={_key} as="a" href={file} download>
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'email':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="a"
-                                                href={`mailto:${email}`}
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                                case 'email':
+                                    return (
+                                        <Button key={_key} as="a" href={`mailto:${email}`}>
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'telephone':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="a"
-                                                href={`tel:${telephone}`}
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                                case 'telephone':
+                                    return (
+                                        <Button key={_key} as="a" href={`tel:${telephone}`}>
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'external':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="a"
-                                                href={externalLink.url}
-                                                target={externalLink.newWindow ? '_blank' : null}
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                                case 'external':
+                                    return (
+                                        <Button
+                                            key={_key}
+                                            as="a"
+                                            href={externalLink.url}
+                                            target={externalLink.newWindow ? '_blank' : null}
+                                        >
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'internal':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="link"
-                                                to={slug}
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                                case 'internal':
+                                    return (
+                                        <Button key={_key} as="link" to={slug}>
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'copy to clipboard':
-                                        return (
-                                            <CopyButton
-                                                key={_key}
-                                                variant={variant}
-                                                textToCopy={textToCopy}
-                                            >
-                                                {label}
-                                            </CopyButton>
-                                        );
+                                case 'copy to clipboard':
+                                    return (
+                                        <CopyButton key={_key} textToCopy={textToCopy}>
+                                            {label}
+                                        </CopyButton>
+                                    );
 
-                                    default:
-                                        return (
-                                            <Button key={_key} variant={variant}>
-                                                {label}
-                                            </Button>
-                                        );
-                                }
-                            })}
-                        </ButtonGroup>
-                    ) : null}
-                </div>
+                                default:
+                                    return <Button key={_key}>{label}</Button>;
+                            }
+                        })}
+                    </ButtonGroup>
+                ) : null}
             </div>
-        </article>
+        </div>
     );
 };

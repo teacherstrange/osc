@@ -1,5 +1,5 @@
 import { EditIcon } from '@sanity/icons';
-import VariantPicker from '../../../components/inputs/VariantPicker';
+import VariantPicker from '../../../components/inputs/VariantPicker/VariantPicker';
 
 const SPACING = [10, 50, 110, 210];
 
@@ -66,22 +66,11 @@ export default {
             },
             group: 'content',
         },
-        // {
-        //     name: 'backgroundColor',
-        //     title: 'Background Colour',
-        //     type: 'colors',
-        //     group: 'content',
-        // },
-        // {
-        //     name: 'textColor',
-        //     title: 'Text Colour',
-        //     type: 'colors',
-        //     group: 'content',
-        // },
         {
-            name: 'variant',
-            title: 'Variant',
+            name: 'backgroundColor',
+            title: 'Background Colour',
             type: 'string',
+            initialValue: 'tertiary',
             inputComponent: VariantPicker,
             group: 'content',
         },

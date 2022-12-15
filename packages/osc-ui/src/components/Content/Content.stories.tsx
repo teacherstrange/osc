@@ -7,6 +7,7 @@ import {
     textContentFonts,
     textContentHasButtons,
     textContentSizes,
+    textContentWithBackgroundColor,
     textContentWithTextColor,
 } from './textContent';
 
@@ -76,6 +77,14 @@ Primary.args = {
 export const TextColour = Template.bind({});
 TextColour.args = {
     value: textContentWithTextColor.body,
+};
+
+export const BackgroundColour = Template.bind({});
+BackgroundColour.args = {
+    backgroundColor: textContentWithBackgroundColor.backgroundColor,
+    value: textContentWithBackgroundColor.body,
+    paddingTop: 'centi',
+    paddingBottom: 'centi',
 };
 
 export const TextSizes = Template.bind({});

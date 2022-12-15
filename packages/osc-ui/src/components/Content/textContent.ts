@@ -1,7 +1,9 @@
 import type { PortableTextBlock } from '@portabletext/types';
+import type { Themes } from '../../types';
 import type { ButtonProps } from './Content';
 
 interface TextContent {
+    backgroundColor?: Themes;
     body: PortableTextBlock[];
     buttons?: ButtonProps[];
 }
@@ -598,6 +600,30 @@ export const textContentFonts: TextContent = {
                     _type: 'span',
                     marks: ['span t-font-primary', 'span t-font-alpha'],
                     text: 'Outfit',
+                },
+            ],
+            markDefs: [],
+            style: 'normal',
+        },
+    ],
+};
+
+export const textContentWithBackgroundColor: TextContent = {
+    backgroundColor: 'quinary',
+    body: [
+        {
+            _key: '055cea62b7f1',
+            _type: 'block',
+            children: [
+                {
+                    _key: 'c0acf5edaaff0',
+                    _type: 'span',
+                    marks: [
+                        'span t-font-gamma',
+                        'span u-color-gradient-quaternary',
+                        'strong u-text-med',
+                    ],
+                    text: 'Everyone’s journey, whatever that may be, is personal, different, exciting and sometimes difficult. We know that we are in the privileged position of being the enablers of positive, life altering change. We are here to do what we can to help people achieve their goals and thrive in life – we are an expert, a friendly ear, a 24/7 support and a wildly enthusiastic cheerleader!',
                 },
             ],
             markDefs: [],
