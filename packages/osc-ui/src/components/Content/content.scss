@@ -1,8 +1,33 @@
+@use "../../styles/settings" as *;
+
 .c-content {
+    --content-decoration-color: var(--color-quaternary);
+    --content-decoration-size: 0.1em;
+
     display: flex;
     flex-grow: 1;
     flex-direction: column;
     width: 100%;
+
+    // Ensure the links are underlined unless they are buttons or has been specifically reset
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    a[href]:not(.c-btn):not(.u-text-reset) {
+        text-decoration:
+            underline
+            solid
+            currentcolor
+            var(--content-decoration-size);
+        transition: text-decoration $timing-s $ease-out;
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        &:hover {
+            text-decoration:
+                underline
+                solid
+                var(--content-decoration-color)
+                var(--content-decoration-size);
+        }
+    }
 
     &__inner {
         display: flex;
