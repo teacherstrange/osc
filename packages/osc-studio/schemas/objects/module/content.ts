@@ -1,4 +1,5 @@
 import { EditIcon } from '@sanity/icons';
+import VariantPicker from '../../../components/inputs/VariantPicker';
 
 const SPACING = [10, 50, 110, 210];
 
@@ -11,12 +12,12 @@ export default {
         {
             default: true,
             name: 'spacing',
-            title: 'Spacing'
+            title: 'Spacing',
         },
         {
             name: 'content',
-            title: 'Content'
-        }
+            title: 'Content',
+        },
     ],
     fields: [
         {
@@ -26,9 +27,9 @@ export default {
             description: 'Spacing you would like between this region and the next.',
             options: {
                 list: SPACING,
-                layout: 'dropdown'
+                layout: 'dropdown',
             },
-            group: 'spacing'
+            group: 'spacing',
         },
         {
             name: 'paddingTop',
@@ -37,9 +38,9 @@ export default {
             description: 'Inner padding at the top of the region.',
             options: {
                 list: SPACING,
-                layout: 'dropdown'
+                layout: 'dropdown',
             },
-            group: 'spacing'
+            group: 'spacing',
         },
         {
             name: 'paddingBottom',
@@ -48,9 +49,9 @@ export default {
             description: 'Inner padding at the bottom of the region.',
             options: {
                 list: SPACING,
-                layout: 'dropdown'
+                layout: 'dropdown',
             },
-            group: 'spacing'
+            group: 'spacing',
         },
         {
             name: 'horizontalAlignment',
@@ -61,47 +62,54 @@ export default {
             options: {
                 list: ['left', 'centre', 'right'],
                 layout: 'radio',
-                direction: 'horizontal'
+                direction: 'horizontal',
             },
-            group: 'content'
+            group: 'content',
         },
+        // {
+        //     name: 'backgroundColor',
+        //     title: 'Background Colour',
+        //     type: 'colors',
+        //     group: 'content',
+        // },
+        // {
+        //     name: 'textColor',
+        //     title: 'Text Colour',
+        //     type: 'colors',
+        //     group: 'content',
+        // },
         {
-            name: 'backgroundColor',
-            title: 'Background Colour',
-            type: 'colors',
-            group: 'content'
-        },
-        {
-            name: 'textColor',
-            title: 'Text Colour',
-            type: 'colors',
-            group: 'content'
+            name: 'variant',
+            title: 'Variant',
+            type: 'string',
+            inputComponent: VariantPicker,
+            group: 'content',
         },
         {
             name: 'body',
             title: 'Body',
             type: 'body',
-            group: 'content'
+            group: 'content',
         },
         {
             name: 'buttons',
             title: 'Buttons',
             type: 'array',
             of: [{ type: 'module.button' }],
-            group: 'content'
-        }
+            group: 'content',
+        },
     ],
     preview: {
         select: {
-            title: 'body'
+            title: 'body',
         },
         prepare(selection: Record<string, any>) {
             const title = selection.title[0].children[0].text; // display the first item from the body content
 
             return {
                 subtitle: 'Content',
-                title
+                title,
             };
-        }
-    }
+        },
+    },
 };
