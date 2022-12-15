@@ -53,23 +53,23 @@ export default {
             group: 'settings',
         },
         {
-            name: 'autoplay',
-            title: 'Autoplay',
-            type: 'string',
-            options: {
-                list: ['smooth', 'switch'],
-            },
-            description:
-                'Whether the Carousel should autoplay. Note: That "loop" must be enabled for this to work',
-            group: 'settings',
-        },
-        {
             title: 'Loop',
             name: 'loop',
             type: 'boolean',
             initialValue: true,
             description: 'Whether the Carousel should loop when it reaches the last slide',
             group: 'settings',
+        },
+        {
+            name: 'autoplay',
+            title: 'Autoplay',
+            type: 'string',
+            options: {
+                list: ['smooth', 'switch'],
+            },
+            description: 'Whether the Carousel should autoplay',
+            group: 'settings',
+            hidden: ({ parent }) => parent.loop !== true,
         },
         {
             title: 'Starting slide',
