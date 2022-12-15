@@ -1,7 +1,7 @@
 import type { KeenSliderHooks, KeenSliderInstance } from 'keen-slider/react';
 import type { FC, MutableRefObject } from 'react';
 import React from 'react';
-import { useVariant } from '../../hooks/useVariant';
+import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 
@@ -13,7 +13,7 @@ interface Props {
 
 export const CarouselDots: FC<Props> = (props: Props) => {
     const { instanceRef, currentSlide } = props;
-    const justify = useVariant('c-carousel__dots', props.justifyDotNav);
+    const justify = useModifier('c-carousel__dots', props.justifyDotNav);
 
     const classes = classNames('c-carousel__dots', justify);
 
