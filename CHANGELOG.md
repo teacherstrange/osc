@@ -1,3 +1,24 @@
+## [0.24.0](https://github.com/Open-Study-College/osc/compare/v0.23.0...v0.24.0) (2022-12-15)
+
+
+### ♻️ Refactors
+
+* **api:** removed duplicated params from package.json scripts ([7cf283e](https://github.com/Open-Study-College/osc/commit/7cf283e79dcc15f23aaa15465b3d8de1a9dab83a))
+* **gateway:** abstracted server config ([3c41746](https://github.com/Open-Study-College/osc/commit/3c417468f448a2319be825fab646632d3b3bedbd))
+
+
+### ✨ Features
+
+* **api-ecommerce:** initial setup ([c3fd297](https://github.com/Open-Study-College/osc/commit/c3fd2975d5ed0866e4eb2d22751f10debf8d2832))
+* **ecommerce-api:** added basic endpoint ([d669f12](https://github.com/Open-Study-College/osc/commit/d669f1237d0cb7d54ae5824e09e6f9a3cfb1284e))
+* **ecommerce-api:** added dev script ([83415c0](https://github.com/Open-Study-College/osc/commit/83415c0ec45bb7f421eab4ac7f0e5715770dd26a))
+* **ecommerce-api:** added ecomm SDKs to context ([e329c3f](https://github.com/Open-Study-College/osc/commit/e329c3f18001224712842afb65c19f5348443aa0))
+* **ecommerce-api:** added generic product query types ([f324790](https://github.com/Open-Study-College/osc/commit/f3247900673c08491de6ae93381322a176a7a864))
+* **ecommerce-api:** adding SDK dependencies ([bf4003d](https://github.com/Open-Study-College/osc/commit/bf4003d0e92e04172e5d3caa2373b3e45117f58c))
+* **gateway:** added dev `wait-on` for ecommerce api ([4e0a357](https://github.com/Open-Study-College/osc/commit/4e0a3578d4b5905466f037225865e653a226b380))
+* **gateway:** added ecommerce api subgraph url ([9c8bfc0](https://github.com/Open-Study-College/osc/commit/9c8bfc0052011ff4eea54186c9ffc2c062140875))
+* **gateway:** implemented zod for typing `.env` ([8a75577](https://github.com/Open-Study-College/osc/commit/8a7557770c816d167a43c6e1bd72e9cdc0fb1b50))
+
 ## [0.23.0](https://github.com/Open-Study-College/osc/compare/v0.22.0...v0.23.0) (2022-12-15)
 
 
@@ -62,24 +83,4 @@
 ### ♻️ Refactors
 
 * enforce sanity cli version ([b47845d](https://github.com/Open-Study-College/osc/commit/b47845d052ef1e23f6d561f0dc5ae3cbd9d1541b))
-
-## [0.21.0](https://github.com/Open-Study-College/osc/compare/v0.20.1...v0.21.0) (2022-12-13)
-
-
-### ✨ Features
-
-* add DropdownMenu component and stories ([acfa3b2](https://github.com/Open-Study-College/osc/commit/acfa3b2303b7977b8aaa47bad2da0007105175e3))
-
-
-### 🧪 Tests
-
-* add dropdown menu tests ([eb48020](https://github.com/Open-Study-College/osc/commit/eb48020bd3c734c0869e189631fa9d3ba82ffd0a))
-
-
-### ♻️ Refactors
-
-* add "preventDefault" to onSelect handler ([77a2d8e](https://github.com/Open-Study-College/osc/commit/77a2d8e54f6297dcc0d3ceb823d9451e205915f7))
-* move fonts to font directory and redirect imports ([8e08bdc](https://github.com/Open-Study-College/osc/commit/8e08bdc65d06fc6267e20f7c62c20b8ef015ccde))
-* remove jsDoc annotation ([e8f6908](https://github.com/Open-Study-College/osc/commit/e8f69086b3fadcc293c7c620d5f7d5bd1941772b))
-* update ids to remove duplicates ([81785c0](https://github.com/Open-Study-College/osc/commit/81785c0ccad8e8e0ca49ec0a4dc170ce713015da))
 
