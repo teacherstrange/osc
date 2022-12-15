@@ -67,8 +67,7 @@
     "packages/osc-api",
     "packages/osc-api-auth",
     "packages/osc-api-ecommerce",
-    "packages/osc-api-gateway",
-    "packages/osc-api"
+    "packages/osc-api-gateway"
   ],
   "devDependencies": {
     "json-to-scss": "^1.6.2"
