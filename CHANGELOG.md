@@ -1,3 +1,11 @@
+## [0.24.1](https://github.com/Open-Study-College/osc/compare/v0.24.0...v0.24.1) (2022-12-19)
+
+
+### 🐛 Bugs
+
+* removes duplicate packages from workspaces ([dcfa2c2](https://github.com/Open-Study-College/osc/commit/dcfa2c21d460e5d2f8ff7a11cb7961d3ff921120))
+* **build:** adds commonjs plugin to bundle our tokens correctly ([f1a49c9](https://github.com/Open-Study-College/osc/commit/f1a49c90d7c422e281f4aa27d19e764a80ab62e1))
+
 ## [0.24.0](https://github.com/Open-Study-College/osc/compare/v0.23.0...v0.24.0) (2022-12-15)
 
 
@@ -76,11 +84,4 @@
 ### ♻️ Refactors
 
 * display full initials ([9dc5621](https://github.com/Open-Study-College/osc/commit/9dc56212a618f88f4f2f0a9b26534a47d10a1dfd))
-
-## [0.21.1](https://github.com/Open-Study-College/osc/compare/v0.21.0...v0.21.1) (2022-12-13)
-
-
-### ♻️ Refactors
-
-* enforce sanity cli version ([b47845d](https://github.com/Open-Study-College/osc/commit/b47845d052ef1e23f6d561f0dc5ae3cbd9d1541b))
 
