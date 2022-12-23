@@ -4,6 +4,7 @@ import copy from 'rollup-plugin-copy';
 import dts from 'rollup-plugin-dts';
 import scss from 'rollup-plugin-scss';
 import typescript from 'rollup-plugin-typescript2';
+import createSpritesheet from './bin/rollup-plugin-createSpritesheet';
 
 const transpileCss = require('./bin/utils/helpers');
 const path = require('path');
@@ -43,6 +44,9 @@ export default [
                 failOnError: false,
                 verbose: true,
                 watch: ['src/styles', 'src/components'],
+            }),
+            createSpritesheet({
+                targets: [{ src: 'src/icons', dest: 'dist' }],
             }),
         ],
     },
