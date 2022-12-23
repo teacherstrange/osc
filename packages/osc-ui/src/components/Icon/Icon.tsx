@@ -1,14 +1,56 @@
-import * as AccessibleIcon from '@radix-ui/react-accessible-icon';
+import * as AccessibleIconPrimitive from '@radix-ui/react-accessible-icon';
 import type { ReactNode } from 'react';
-import React from 'react';
+import React, { forwardRef } from 'react';
+import { classNames } from '../../utils/classNames';
 
-interface Props {
+export interface IconProps {
+    /**
+     * The class name to apply to the icon
+     */
+    className?: string;
+
+    /**
+     * The id of the icon to reference from the spritesheet
+     */
+    id: string;
+}
+
+export const Icon = forwardRef<SVGSVGElement, IconProps>((props, forwardedRef) => {
+    const { className, id, ...attr } = props;
+    const classes = classNames('o-icon', className);
+    const size = 30; // an arbitrary size that constrains the width and height of the icon if css isn't loaded for whatever reason
+
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={size}
+            height={size}
+            viewBox={`0 0 ${size} ${size}`}
+            fill="none"
+            className={classes}
+            {...attr}
+            ref={forwardedRef}
+        >
+            <use href={`./spritesheet.svg#${id}`} />
+        </svg>
+    );
+});
+Icon.displayName = 'Icon';
+
+// Accessible icon wrapper: https://www.radix-ui.com/docs/primitives/utilities/accessible-icon
+interface AccessibleIconProps {
+    /**
+     * Pass an icon as a child
+     */
     children: ReactNode;
+    /**
+     * The accessible label for the icon
+     */
     label: string;
 }
 
-export const Icon = (props: Props) => {
+export const AccessibleIcon = (props: AccessibleIconProps) => {
     const { children, label } = props;
 
-    return <AccessibleIcon.Root label={label}>{children}</AccessibleIcon.Root>;
+    return <AccessibleIconPrimitive.Root label={label}>{children}</AccessibleIconPrimitive.Root>;
 };
