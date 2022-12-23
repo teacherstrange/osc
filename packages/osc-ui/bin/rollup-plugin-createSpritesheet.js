@@ -26,7 +26,7 @@ export default function createSpritesheet(options = {}) {
                     // this makes styling easier in the long run
                     // Note: this will ignore named values; e.g. fill="red" or fill="transparent"
                     const transformedContent = contents.replace(
-                        /fill="#[0-9a-fA-F]{3,6}"/,
+                        /fill="#[0-9a-fA-F]{3,6}"/g,
                         'fill="currentColor"'
                     );
 
