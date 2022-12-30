@@ -1,0 +1,166 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-select {
+    &__trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 30ch;
+        max-width: 60ch;
+        height: 35px;
+        padding: 0 var(--space-scale-centi);
+        background-color: var(--color-tertiary);
+        border: 1px solid var(--color-quinary);
+        font-size: var(--font-scale-centi);
+        line-height: 1;
+        gap: 5px;
+
+        &:hover {
+            // TODO - Need to change to another grey, but quinary and disabled are the only greys
+            // and they seem to come out exacty the same.
+            background-color: hsl(294deg 5.5% 95.3%);
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 2px var(--color-primary);
+        }
+
+        &[data-placeholder] {
+            color: var(--color-secondary);
+        }
+
+        &[data-disabled] {
+            background-color: #fafafa;
+            color: hsl(255deg 3.7% 78.8%);
+            pointer-events: none;
+        }
+
+        .c-select__icon {
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+    &__content {
+        overflow: hidden;
+        background-color: var(--color-tertiary);
+        box-shadow: 0 10px 38px -10px rgb(22 23 24 / 35%), 0 10px 20px -15px rgb(22 23 24 / 20%);
+
+        .c-select__scroll-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 25px;
+            background-color: var(--color-tertiary);
+            cursor: default;
+        }
+
+        .c-select__viewport {
+            padding: var(--space-scale-micro);
+        }
+    }
+
+    &__item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 25px;
+        padding: 0 35px 0 25px;
+        font-size: var(--font-scale-centi);
+        line-height: 1;
+        user-select: none;
+
+        &[data-highlighted] {
+            background-color: var(--color-disabled);
+            outline: none;
+        }
+
+        .c-select__item-indicator {
+            position: absolute;
+            left: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+        }
+    }
+
+    &--inline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &--bold {
+        .c-label {
+            font-weight: $weight-bold;
+        }
+    }
+
+    &--secondary {
+        .c-select__trigger {
+            background-color: var(--color-quinary);
+        }
+
+        .c-select__content {
+            background-color: var(--color-quinary);
+
+            .c-select__scroll-button {
+                background-color: var(--color-quinary);
+            }
+        }
+
+        .c-select__item[data-highlighted] {
+            background-color: hsl(294deg 5.5% 95.3%);
+        }
+
+        .c-label {
+            font-weight: $weight-bold;
+        }
+    }
+
+    &--tertiary {
+        .c-select__trigger {
+            min-width: 5ch;
+            padding: 0;
+            background: none;
+            border: none;
+
+            &[data-highlighted] {
+                background: none;
+            }
+        }
+    }
+
+    &--error {
+        .c-select__trigger {
+            background-color: rgb(247 34 34 / 20%);
+            border: 1px solid #f72222;
+        }
+
+        .c-select__icon {
+            color: #f72222;
+        }
+
+        .c-select__error-message {
+            color: #f72222;
+            font-size: var(--font-scale-centi);
+        }
+
+        &.c-select--tertiary {
+            .c-select__trigger {
+                background: none;
+                border: none;
+                color: #f72222;
+            }
+
+            .c-select--error {
+                display: none;
+            }
+        }
+    }
+}
