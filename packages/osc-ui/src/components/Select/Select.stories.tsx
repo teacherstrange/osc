@@ -52,7 +52,7 @@ const Template: Story = ({ selects }) => {
                             placeholder={select.placeholder}
                             ref={select.ref ? selectRef : null}
                             selectName={select.selectName}
-                            wasSubmitted={false}
+                            wasSubmitted={select.wasSubmitted}
                         >
                             {items.map((item, index) => {
                                 return (
@@ -160,11 +160,10 @@ Primary.args = {
             attributes: { required: true },
             description: { label: 'Courses' },
             editor: 'select',
-            errorMessage: 'There is an error message',
-            groupVariants: ['error'],
             items: courseItems,
             selectName: 'courses-5',
             state: 'hasValidation',
+            wasSubmitted: true,
         },
         {
             attributes: {},
@@ -221,14 +220,14 @@ Secondary.args = {
             state: 'isDisabled',
         },
         {
-            attributes: {},
+            attributes: { required: true },
             description: { label: 'Courses' },
             editor: 'select',
-            errorMessage: 'There is an error message',
-            groupVariants: ['error', 'secondary'],
+            groupVariants: ['secondary'],
             items: courseItems,
             selectName: 'courses-5',
             state: 'hasValidation',
+            wasSubmitted: true,
         },
         {
             attributes: {},
@@ -285,13 +284,14 @@ Tertiary.args = {
             state: 'isDisabled',
         },
         {
-            attributes: {},
+            attributes: { required: true },
             editor: 'select',
-            groupVariants: ['error', 'tertiary'],
+            groupVariants: ['tertiary'],
             items: viewItems,
-            placeholder: 'List View',
+            placeholder: 'Please Select',
             selectName: 'view-4',
             state: 'hasValidation',
+            wasSubmitted: true,
         },
         {
             attributes: {},
