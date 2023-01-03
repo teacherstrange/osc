@@ -40,16 +40,14 @@
         font-size: var(--accordion-icon-size);
 
         &--plusminus > :first-child {
-            transition:
-                opacity var(--accordion-transition-duration)
-                var(--accordion-transition-timing-func),
+            transition: opacity var(--accordion-transition-duration)
+                    var(--accordion-transition-timing-func),
                 visibility var(--accordion-transition-duration)
-                var(--accordion-transition-timing-func);
+                    var(--accordion-transition-timing-func);
         }
 
         &--chevron {
-            transition:
-                transform var(--accordion-transition-duration)
+            transition: transform var(--accordion-transition-duration)
                 var(--accordion-transition-timing-func);
         }
     }
@@ -63,8 +61,7 @@
         padding: var(--accordion-trigger-padding) 0 0;
         font-size: var(--accordion-trigger-font-size);
         text-align: left;
-        transition:
-            color var(--accordion-transition-duration)
+        transition: color var(--accordion-transition-duration)
             var(--accordion-transition-timing-func);
         cursor: pointer;
         grid-template-columns: var(--accordion-trigger-grid-columns);
@@ -103,15 +100,13 @@
         font-weight: $weight-light;
 
         &[data-state="open"] {
-            animation:
-                slide-down var(--accordion-transition-duration)
+            animation: slide-down var(--accordion-transition-duration)
                 var(--accordion-transition-timing-func);
         }
 
         &[data-state="closed"] {
             height: 0;
-            animation:
-                slide-up var(--accordion-transition-duration)
+            animation: slide-up var(--accordion-transition-duration)
                 var(--accordion-transition-timing-func);
         }
     }
@@ -144,7 +139,7 @@
             padding: var(--space-scale-epsilon) var(--space-scale-delta);
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 0.118em;
+            letter-spacing: $letter-spacing-sml;
 
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
             > span {
@@ -196,8 +191,7 @@
             text-align: left;
             text-transform: none;
             letter-spacing: normal;
-            transition:
-                background-color var(--accordion-transition-duration)
+            transition: background-color var(--accordion-transition-duration)
                 var(--accordion-transition-timing-func);
 
             &:hover {

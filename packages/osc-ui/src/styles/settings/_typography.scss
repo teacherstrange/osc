@@ -84,6 +84,9 @@ $weight-light: typography-token("weight-light");
 $weight-reg: typography-token("weight-reg");
 $weight-bold: typography-token("weight-bold");
 
+// Letter Spacing
+$letter-spacing-sml: typography-token("letter-spacing-sml");
+
 // Base Sizes
 $base-font-size: scale-token("base-font-size");
 $base-line-height: scale-token("max-viewport.scale");
