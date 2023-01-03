@@ -1,3 +1,4 @@
+/* stylelint-disable max-line-length */
 @use "../../styles/tools" as *;
 
 /* stylelint-disable-next-line plugin/selector-bem-pattern */
@@ -10,41 +11,48 @@ button {
     --switch-radius: 9999px;
     --switch-width: #{rem(50)};
     --switch-height: #{rem(28)};
-    --switch-thumb-offset: 2px;
+    --switch-thumb-offset: 1px;
+    --switch-border-width: 1px;
     --switch-thumb-size: #{rem(24)};
+    --switch-background-color: transparent;
+    --switch-thumb-color: var(--color-secondary);
     --switch-transition-duration: 0.2s;
 
     position: relative;
     width: var(--switch-width);
     height: var(--switch-height);
-    background-color: hsl(0deg 0% 79%);
+    background-color: var(--switch-background-color);
+    border: var(--switch-border-width) solid var(--switch-thumb-color);
     border-radius: var(--switch-radius);
     transition: filter var(--switch-transition-duration);
     cursor: pointer;
 
     &:focus {
-        box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary);
+        box-shadow: 0 0 0 0 var(--color-tertiary), 0 0 0 0.188rem var(--color-primary);
     }
 
-    &:not([disabled]):hover {
+    &:not([data-disabled]):hover {
         filter: brightness(0.95);
     }
 
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    &[disabled] {
-        opacity: 0.5;
+    &[data-disabled] {
+        --switch-thumb-color: var(--color-tertiary);
+        --switch-background-color: var(--color-quinary);
+
+        border-color: var(--switch-background-color);
         cursor: not-allowed;
     }
 
     &[data-state="checked"] {
-        background-color: var(--color-primary);
+        --switch-thumb-color: var(--color-primary);
     }
 
     &__thumb {
         display: block;
         width: var(--switch-thumb-size);
         height: var(--switch-thumb-size);
-        background-color: var(--color-tertiary);
+        background-color: var(--switch-thumb-color);
         border-radius: var(--switch-radius);
         transform: translateX(var(--switch-thumb-offset));
         transition: transform var(--switch-transition-duration);
@@ -52,9 +60,12 @@ button {
 
         &[data-state="checked"] {
             transform:
-                // width of the switch minus the width of the thumb size minus the offset (50 - 24 - 2)
-                translateX(
-                    calc(var(--switch-width) - var(--switch-thumb-size) - var(--switch-thumb-offset))
+                // width of the switch minus the width of the thumb size minus the border plus the offset
+                // we multiply the border by 2 because we have a border on the left and right
+            translateX(
+                    calc(
+                        var(--switch-width) - var(--switch-thumb-size) - ((var(--switch-border-width) * 2) + var(--switch-thumb-offset))
+                    )
                 );
         }
     }
