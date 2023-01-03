@@ -1,7 +1,8 @@
+import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import type { Props } from './Switch';
-import { Switch } from './Switch';
+import { Switch, SwitchGroup } from './Switch';
 
 export default {
     title: 'osc-ui/Switch',
@@ -101,6 +102,14 @@ const sizesTemplate: Story<Props> = (args) => (
     </div>
 );
 
+const hasIconsTemplate: Story<Props> = (args) => (
+    <SwitchGroup>
+        <MoonIcon />
+        <Switch {...args} />
+        <SunIcon />
+    </SwitchGroup>
+);
+
 export const Primary = Template.bind({});
 Primary.args = {};
 
@@ -126,6 +135,18 @@ Sizes.parameters = {
     docs: {
         description: {
             story: 'Switches come in three sizes: `small`, `medium`, and `large`. The default size is `large`.',
+        },
+    },
+};
+
+export const HasIcons = hasIconsTemplate.bind({});
+HasIcons.args = {
+    ...Primary.args,
+};
+HasIcons.parameters = {
+    docs: {
+        description: {
+            story: 'Switches can have icons on either side. Wrap your `Switch` in a `SwitchGroup` and this will layout the icons inline with the `Switch` component and change the colour of the right icon to match the `Switch` colour when it is checked.',
         },
     },
 };

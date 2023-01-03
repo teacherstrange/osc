@@ -117,3 +117,28 @@ button {
         --switch-thumb-size: #{rem(16)};
     }
 }
+
+// *----------------------------------*/
+//  Switch group
+// *----------------------------------*/
+.c-switch-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-scale-micro);
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    > svg {
+        width: 1em;
+        height: 1em;
+        font-size: var(--font-scale-zeta);
+        transition: color var(--switch-transition-duration);
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    .c-switch {
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        &[data-state="checked"] + svg {
+            color: var(--color-primary);
+        }
+    }
+}

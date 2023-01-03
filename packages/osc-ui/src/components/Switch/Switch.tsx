@@ -1,7 +1,7 @@
 import { CheckIcon } from '@radix-ui/react-icons';
 import type { SwitchProps } from '@radix-ui/react-switch';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import type { ComponentPropsWithoutRef, ElementRef, FC } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, FC, HTMLAttributes, ReactNode } from 'react';
 import React, { forwardRef } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -56,3 +56,20 @@ export const Switch: FC<Props> = forwardRef<
 });
 
 Switch.displayName = 'Switch';
+
+interface SwitchGroupProps extends HTMLAttributes<HTMLDivElement> {
+    /**
+     * The children of the switch group
+     */
+    children: ReactNode;
+}
+
+export const SwitchGroup = (props: SwitchGroupProps) => {
+    const { children, ...attr } = props;
+
+    return (
+        <div className="c-switch-group" {...attr}>
+            {children}
+        </div>
+    );
+};
