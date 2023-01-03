@@ -87,7 +87,7 @@ export default {
 
 const Template: Story<Props> = (args) => <Switch {...args} />;
 
-const variantsTemplate: Story<Props> = (args) => (
+const sizesTemplate: Story<Props> = (args) => (
     <div
         style={{
             display: 'flex',
@@ -104,11 +104,25 @@ const variantsTemplate: Story<Props> = (args) => (
 export const Primary = Template.bind({});
 Primary.args = {};
 
-export const Variants = variantsTemplate.bind({});
-Variants.args = {
+export const Secondary = Template.bind({});
+Secondary.args = {
+    ...Primary.args,
+    variant: 'secondary',
+    defaultChecked: true,
+};
+Secondary.parameters = {
+    docs: {
+        description: {
+            story: 'Switches can be styled with the `secondary` variant. This adds a visible checkmark when the switch is checked.',
+        },
+    },
+};
+
+export const Sizes = sizesTemplate.bind({});
+Sizes.args = {
     ...Primary.args,
 };
-Variants.parameters = {
+Sizes.parameters = {
     docs: {
         description: {
             story: 'Switches come in three sizes: `small`, `medium`, and `large`. The default size is `large`.',

@@ -72,6 +72,37 @@ button {
 
     // *----------------------------------*/
     //  Variants
+    // --primary is the default
+    // *----------------------------------*/
+    &--secondary {
+        /* stylelint-disable-next-line selector-class-pattern */
+        .c-switch__thumb {
+            display: grid;
+            place-items: center;
+            color: var(--color-tertiary);
+        }
+
+        /* stylelint-disable-next-line selector-class-pattern */
+        .c-switch__thumb-icon {
+            width: 1em;
+            height: 1em;
+            font-size: 1.25rem;
+            transition: opacity var(--switch-transition-duration), visibility var(--switch-transition-duration);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &[data-state="checked"] {
+            /* stylelint-disable-next-line selector-class-pattern */
+            .c-switch__thumb-icon {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    // *----------------------------------*/
+    //  Sizes
     // --large is the default
     // *----------------------------------*/
     &--small {

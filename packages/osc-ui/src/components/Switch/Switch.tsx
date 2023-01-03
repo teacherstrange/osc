@@ -1,3 +1,4 @@
+import { CheckIcon } from '@radix-ui/react-icons';
 import type { SwitchProps } from '@radix-ui/react-switch';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import type { ComponentPropsWithoutRef, ElementRef, FC } from 'react';
@@ -21,19 +22,35 @@ export interface Props extends SwitchProps {
      * @default 'large'
      */
     size?: 'small' | 'medium' | 'large';
+    /**
+     * The variant of the switch
+     * @default 'primary'
+     */
+    variant?: 'primary' | 'secondary';
 }
 
 export const Switch: FC<Props> = forwardRef<
     ElementRef<typeof SwitchPrimitive.Root>,
     ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>
 >((props: Props, forwardedRef) => {
-    const { className, id, size = 'large' } = props;
-    const modifier = useModifier('c-switch', size);
-    const classes = classNames('c-switch', modifier, className);
+    const { className, id, size = 'large', variant = 'primary' } = props;
+    const sizeModifier = useModifier('c-switch', size);
+    const variantModifier = useModifier('c-switch', variant);
+    const classes = classNames('c-switch', sizeModifier, variantModifier, className);
 
     return (
         <SwitchPrimitive.Root id={id} className={classes} {...props} ref={forwardedRef}>
-            <SwitchPrimitive.Thumb className="c-switch__thumb" />
+            <SwitchPrimitive.Thumb className="c-switch__thumb" asChild>
+                <span>
+                    {variant === 'secondary' ? (
+                        <CheckIcon
+                            className="c-switch__thumb-icon"
+                            aria-hidden="true"
+                            focusable="false"
+                        />
+                    ) : null}
+                </span>
+            </SwitchPrimitive.Thumb>
         </SwitchPrimitive.Root>
     );
 });
