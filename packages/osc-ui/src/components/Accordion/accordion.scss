@@ -1,5 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 @use "../../styles/tools/" as *;
+@use "../../styles/settings/" as *;
 
 .c-accordion {
     // Colors
@@ -40,12 +41,16 @@
 
         &--plusminus > :first-child {
             transition:
-                opacity var(--accordion-transition-duration) var(--accordion-transition-timing-func),
-                visibility var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+                opacity var(--accordion-transition-duration)
+                var(--accordion-transition-timing-func),
+                visibility var(--accordion-transition-duration)
+                var(--accordion-transition-timing-func);
         }
 
         &--chevron {
-            transition: transform var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+            transition:
+                transform var(--accordion-transition-duration)
+                var(--accordion-transition-timing-func);
         }
     }
 
@@ -58,7 +63,9 @@
         padding: var(--accordion-trigger-padding) 0 0;
         font-size: var(--accordion-trigger-font-size);
         text-align: left;
-        transition: color var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+        transition:
+            color var(--accordion-transition-duration)
+            var(--accordion-transition-timing-func);
         cursor: pointer;
         grid-template-columns: var(--accordion-trigger-grid-columns);
 
@@ -93,15 +100,19 @@
         max-width: 64ch;
         overflow: hidden;
         font-size: var(--accordion-content-font-size);
-        font-weight: 300;
+        font-weight: $weight-light;
 
         &[data-state="open"] {
-            animation: slide-down var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+            animation:
+                slide-down var(--accordion-transition-duration)
+                var(--accordion-transition-timing-func);
         }
 
         &[data-state="closed"] {
             height: 0;
-            animation: slide-up var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+            animation:
+                slide-up var(--accordion-transition-duration)
+                var(--accordion-transition-timing-func);
         }
     }
 
@@ -130,12 +141,10 @@
         }
 
         .c-accordion__trigger {
-            padding:
-                var(--space-scale-epsilon)
-                var(--space-scale-delta);
+            padding: var(--space-scale-epsilon) var(--space-scale-delta);
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 0.188em;
+            letter-spacing: 0.118em;
 
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
             > span {
@@ -187,7 +196,9 @@
             text-align: left;
             text-transform: none;
             letter-spacing: normal;
-            transition: background-color var(--accordion-transition-duration) var(--accordion-transition-timing-func);
+            transition:
+                background-color var(--accordion-transition-duration)
+                var(--accordion-transition-timing-func);
 
             &:hover {
                 background-color: var(--color-quinary);
