@@ -191,7 +191,7 @@
 
         .c-accordion__trigger {
             padding: var(--space-scale-micro) var(--space-scale-epsilon);
-            background-color: hsl(0deg 0% 96% / 100%);
+            background-color: hsl(0deg 0% 96% / 100%); // TODO: Update this to use neutral colour token
             color: var(--color-quaternary);
             text-align: left;
             text-transform: none;
