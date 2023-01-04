@@ -20,7 +20,7 @@ export const PopoverTrigger = PopoverPrimitive.Trigger;
 export const PopoverContent = forwardRef<
     ElementRef<typeof PopoverPrimitive.Content>,
     ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->((props: PopoverProps, forwardedRef) => {
+>((props: Props, forwardedRef) => {
     const { className, children } = props;
     const contentClasses = classNames('c-popover__content', className);
 
