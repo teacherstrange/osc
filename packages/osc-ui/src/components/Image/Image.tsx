@@ -1,4 +1,4 @@
-import type { FC, ImgHTMLAttributes } from 'react';
+import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import {
     addAutoTransformations,
@@ -7,7 +7,7 @@ import {
     buildSrcSets,
     CONSTANTS,
     getTransformationString,
-    replaceSizeTransformation
+    replaceSizeTransformation,
 } from './utils';
 
 // We want to overwrite some types that have an overlap with the ImgHTMLAttributes type
@@ -30,7 +30,7 @@ export interface Props<T> extends ImageData<T> {
     sizes?: string | undefined;
 }
 
-export const Image: FC<Props<HTMLImageElement>> = (props: Props<HTMLImageElement>) => {
+export const Image = (props: Props<HTMLImageElement>) => {
     const {
         alt,
         artDirectedImages,
@@ -53,7 +53,7 @@ export const Image: FC<Props<HTMLImageElement>> = (props: Props<HTMLImageElement
         alteredTransformationString = replaceSizeTransformation(alteredTransformationString, width);
         alteredTransformationString = addAutoTransformations(alteredTransformationString, [
             CONSTANTS.F_AUTO,
-            CONSTANTS.Q_AUTO
+            CONSTANTS.Q_AUTO,
         ]);
     } else {
         // If there are no transformations then we want to set some defaults

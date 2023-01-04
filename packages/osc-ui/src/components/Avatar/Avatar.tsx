@@ -1,13 +1,12 @@
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import type { FC } from 'react';
 import React from 'react';
 import hash from 'string-hash';
 import color from 'tinycolor2';
 import { countLimiter } from '../../utils/countLimiter';
 
 import { classNames } from '../../utils/classNames';
-import './avatar.scss';
 import { Badge } from '../Badge/Badge';
+import './avatar.scss';
 
 const FallbackGradient = ({ name }) => {
     const hashed = hash(name);
@@ -36,7 +35,7 @@ export interface AvatarProps {
     src?: string;
 }
 
-export const Avatar: FC<AvatarProps> = (props: AvatarProps) => {
+export const Avatar = (props: AvatarProps) => {
     const { className, name, notification = { show: false }, src } = props;
     const classes = classNames('c-avatar', className);
     const initials = name

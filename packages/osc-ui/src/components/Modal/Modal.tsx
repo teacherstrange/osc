@@ -1,12 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import type {
-    ButtonHTMLAttributes,
-    ComponentPropsWithoutRef,
-    ElementRef,
-    FC,
-    ReactNode
-} from 'react';
+import type { ButtonHTMLAttributes, ComponentPropsWithoutRef, ElementRef, ReactNode } from 'react';
 import React, { forwardRef } from 'react';
 import { classNames } from '../../utils/classNames';
 import './modal.scss';
@@ -15,7 +9,7 @@ interface CloseProps<T> extends ButtonHTMLAttributes<T> {
     children: ReactNode;
 }
 
-const ModalCloseButton: FC<CloseProps<HTMLButtonElement>> = forwardRef<
+const ModalCloseButton = forwardRef<
     ElementRef<typeof Dialog.Close>,
     ComponentPropsWithoutRef<typeof Dialog.Close>
 >((props: CloseProps<HTMLButtonElement>, forwardedRef) => {
@@ -47,7 +41,7 @@ export interface Props {
     modalDescription: string;
 }
 
-export const Modal: FC<Props> = (props) => {
+export const Modal = (props: Props) => {
     const {
         open,
         onOpenChange,
@@ -61,7 +55,7 @@ export const Modal: FC<Props> = (props) => {
         primaryActionButton,
         primaryActionButtonText,
         onClick,
-        modalDescription
+        modalDescription,
     } = props;
     const width = `c-modal--${size}`;
     const classes = classNames('c-modal', width);

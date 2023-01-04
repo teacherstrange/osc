@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import React from 'react';
 import { Image } from '../Image/Image';
 
@@ -23,7 +22,7 @@ export interface Props {
     variant?: string;
 }
 
-export const ImageGallery: FC<Props> = (props: Props) => {
+export const ImageGallery = (props: Props) => {
     const { images, variant } = props;
 
     const variantClass = useModifier('c-image-gallery__img', variant);

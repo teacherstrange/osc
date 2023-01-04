@@ -1,6 +1,5 @@
 import './countdownClock.scss';
 
-import type { FC } from 'react';
 import React, { Fragment } from 'react';
 
 export interface Props {
@@ -16,13 +15,7 @@ const HOURS: string = 'h';
 const MINUTES: string = 'm';
 const SECONDS: string = 's';
 
-export const CountdownClockInner: FC<Props> = ({
-    onComplete,
-    icon,
-    name,
-    status,
-    timer
-}: Props) => {
+export const CountdownClockInner = ({ onComplete, icon, name, status, timer }: Props) => {
     const days =
         // If there are no days then return null
         timer.days !== '00' ? (

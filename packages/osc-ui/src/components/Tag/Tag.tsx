@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import React from 'react';
 import { useTheme } from '../../hooks/useTheme';
 import type { Themes } from '../../types';
@@ -16,7 +15,7 @@ export interface Props {
     tagName: string;
 }
 
-export const Tag: FC<Props> = (props: Props) => {
+export const Tag = (props: Props) => {
     const {
         className,
         customElement,
@@ -24,7 +23,7 @@ export const Tag: FC<Props> = (props: Props) => {
         iconLabel,
         iconPosition = 'left',
         tagName,
-        theme = 'primary'
+        theme = 'primary',
     } = props;
 
     const themeClass = useTheme(theme);

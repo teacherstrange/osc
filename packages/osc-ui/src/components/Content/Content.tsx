@@ -2,7 +2,6 @@ import type { PortableTextComponents } from '@portabletext/react';
 import { PortableText as ReactPortableText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
 import { Link } from '@remix-run/react';
-import type { FC } from 'react';
 import React from 'react';
 import colors from '../../../../../tokens/colors';
 import sizes from '../../../../../tokens/fluid-scale';
@@ -132,7 +131,8 @@ const portableTextComponents: PortableTextComponents = {
     },
 };
 
-export const Content: FC<Props> = (props: Props) => {
+// TODO: sb - images
+export const Content = (props: Props) => {
     const {
         align = 'left',
         backgroundColor,

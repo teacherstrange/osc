@@ -5,7 +5,7 @@ import type {
 } from '@radix-ui/react-dropdown-menu';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CheckIcon, DividerHorizontalIcon } from '@radix-ui/react-icons';
-import type { ComponentPropsWithoutRef, ElementRef, FC } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef } from 'react';
 import React, { forwardRef } from 'react';
 
 import './dropdown-menu.scss';
@@ -18,10 +18,10 @@ export interface ContentProps extends DropdownMenuContentProps {
     children?: React.ReactNode;
 }
 
-export const DropdownMenuContent: FC<ContentProps> = forwardRef<
+export const DropdownMenuContent = forwardRef<
     ElementRef<typeof DropdownMenuPrimitive.Content>,
     ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
->(({ children, ...props }, forwardedRef) => {
+>(({ children, ...props }: ContentProps, forwardedRef) => {
     return (
         <DropdownMenuPrimitive.Portal>
             <DropdownMenuPrimitive.Content
@@ -44,10 +44,10 @@ export interface CheckboxProps extends DropdownMenuCheckboxItemProps {
     className?: string;
 }
 
-export const DropdownMenuCheckboxItem: FC<CheckboxProps> = forwardRef<
+export const DropdownMenuCheckboxItem = forwardRef<
     ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
     ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
->(({ children, ...props }, forwardedRef) => {
+>(({ children, ...props }: CheckboxProps, forwardedRef) => {
     return (
         <DropdownMenuPrimitive.CheckboxItem
             className="c-dropdown-menu__checkbox-item"
@@ -70,10 +70,10 @@ export interface RadioProps extends DropdownMenuRadioItemProps {
     className?: string;
 }
 
-export const DropdownMenuRadioItem: FC<RadioProps> = forwardRef<
+export const DropdownMenuRadioItem = forwardRef<
     ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
     ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
->(({ children, ...props }, forwardedRef) => {
+>(({ children, ...props }: RadioProps, forwardedRef) => {
     return (
         <DropdownMenuPrimitive.RadioItem
             className="c-dropdown-menu__radio-item"

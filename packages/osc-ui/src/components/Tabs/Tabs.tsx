@@ -1,5 +1,4 @@
 import * as TabPrimitives from '@radix-ui/react-tabs';
-import type { FC } from 'react';
 import React from 'react';
 import { classNames } from '../../utils/classNames';
 import './tabs.scss';
@@ -13,7 +12,7 @@ export interface Props {
     className?: string;
 }
 
-export const Tabs: FC<Props> = (props: Props) => {
+export const Tabs = (props: Props) => {
     const { tabs, className, ...other } = props;
     const classes = classNames('c-tabs', className);
 

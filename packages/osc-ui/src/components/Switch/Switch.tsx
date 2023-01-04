@@ -1,7 +1,7 @@
 import { CheckIcon } from '@radix-ui/react-icons';
 import type { SwitchProps } from '@radix-ui/react-switch';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import type { ComponentPropsWithoutRef, ElementRef, FC, HTMLAttributes, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, ReactNode } from 'react';
 import React, { forwardRef } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -29,7 +29,7 @@ export interface Props extends SwitchProps {
     variant?: 'primary' | 'secondary';
 }
 
-export const Switch: FC<Props> = forwardRef<
+export const Switch = forwardRef<
     ElementRef<typeof SwitchPrimitive.Root>,
     ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>
 >((props: Props, forwardedRef) => {

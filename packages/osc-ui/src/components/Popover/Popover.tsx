@@ -1,5 +1,5 @@
 import type { PopoverProps } from '@radix-ui/react-popover';
-import type { ComponentPropsWithoutRef, ElementRef, FC, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, ReactNode } from 'react';
 import React, { forwardRef } from 'react';
 
 import * as PopoverPrimitive from '@radix-ui/react-popover';
@@ -17,10 +17,10 @@ export const PopoverArrow = PopoverPrimitive.Arrow;
 export const PopoverClose = PopoverPrimitive.Close;
 export const PopoverTrigger = PopoverPrimitive.Trigger;
 
-export const PopoverContent: FC<PopoverProps> = forwardRef<
+export const PopoverContent = forwardRef<
     ElementRef<typeof PopoverPrimitive.Content>,
     ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->((props: Props, forwardedRef) => {
+>((props: PopoverProps, forwardedRef) => {
     const { className, children } = props;
     const contentClasses = classNames('c-popover__content', className);
 
