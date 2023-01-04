@@ -39,6 +39,7 @@ export interface Props {
     primaryActionButtonText: string;
     onClick: () => void;
     modalDescription: string;
+    children: ReactNode;
 }
 
 export const Modal = (props: Props) => {
