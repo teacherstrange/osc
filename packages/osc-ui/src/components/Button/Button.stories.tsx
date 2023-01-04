@@ -18,50 +18,19 @@ export default {
     },
     argTypes: {
         children: {
-            description: 'The content of the button.',
             control: false,
         },
         as: {
-            description:
-                'Set the button as an anchor element, a button element, or a Remix `<Link>` component. Leave blank for a button element.',
             control: {
                 type: 'select',
             },
         },
-        className: {
-            description: 'Custom class',
-        },
-        href: {
-            description: 'Sets the url the button links to, used in conjunction with `as="a"`',
-        },
-        isDisabled: {
-            description: 'Sets the disabled state of the button and whether it is usable',
-            defaultValue: false,
-            table: {
-                defaultValue: {
-                    summary: false,
-                },
-            },
-        },
-        isLoading: {
-            description: 'Sets the loading state of the button and whether it is usable',
-            defaultValue: false,
-            table: {
-                defaultValue: {
-                    summary: false,
-                },
-            },
-        },
-        loadingText: {
-            description:
-                'Sets the loading text of the button, used in conjunction with `isLoading`',
-        },
         size: {
-            description: 'Sets the size of the button',
-            control: 'select',
+            control: {
+                type: 'select',
+            },
         },
         target: {
-            description: 'Sets the target of the button, used in conjunction with `as="a"`',
             table: {
                 type: {
                     summary: 'string',
@@ -70,22 +39,11 @@ export default {
             control: 'text',
         },
         to: {
-            description:
-                'Sets the url the button links to when using Remix `<Link>`, used in conjunction with `as="link"`',
             control: 'text',
         },
         type: {
-            description: 'Sets the html attribute `type` of button',
-            control: 'select',
-        },
-        variant: {
-            description: 'Sets the style of the button, primary, secondary etc.',
-            control: 'select',
-            defaultValue: 'primary',
-            table: {
-                defaultValue: {
-                    summary: 'primary',
-                },
+            control: {
+                type: 'select',
             },
         },
     },

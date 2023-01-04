@@ -11,31 +11,75 @@ import './button.scss';
 type buttonTypes = HTMLAnchorElement | HTMLButtonElement;
 
 interface DefaultButtonProps extends ButtonHTMLAttributes<buttonTypes> {
-    /** Will be a button by default */
+    /**
+     * Set the button as an anchor element, a button element, or a Remix `<Link>` component. Leave blank for a button element.
+     * @default button
+     */
     as?: 'button';
+    /**
+     * 'Sets the html attribute `type` of button'
+     */
     type?: 'submit' | 'reset' | 'button';
 }
 
 interface AnchorProps extends AnchorHTMLAttributes<buttonTypes> {
-    /** Set the button as an anchor element */
+    /**
+     * Set the button as an anchor element, a button element, or a Remix `<Link>` component. Leave blank for a button element.
+     */
     as: 'a';
+    /**
+     * 'Sets the url the button links to, used in conjunction with `as="a"`'
+     */
     href: string;
+    /**
+     * 'Sets the target of the button, used in conjunction with `as="a"`'
+     */
     target?: string;
 }
 
 interface LinkProps extends RemixLinkProps {
-    /** Set the button as a RemixLink component */
+    /**
+     * Set the button as an anchor element, a button element, or a Remix `<Link>` component. Leave blank for a button element.
+     */
     as: 'link';
+    /**
+     * 'Sets the url the button links to when using Remix `<Link>`, used in conjunction with `as="link"`'
+     */
     to: RemixLinkProps['to'];
 }
 
 export interface SharedProps {
+    /**
+     * 'The content of the button.'
+     */
     children: ReactNode;
+    /**
+     * 'Custom class'
+     */
     className?: string;
+    /**
+     * 'Sets the disabled state of the button and whether it is usable'
+     * @default false
+     */
     isDisabled?: boolean;
+    /**
+     * 'Sets the loading state of the button and whether it is usable',
+     * @default false
+     */
     isLoading?: boolean;
+    /**
+     * 'Sets the loading text of the button, used in conjunction with `isLoading`'
+     * @default Loading
+     */
     loadingText?: string;
+    /**
+     * 'Sets the size of the button'
+     */
     size?: 'sm' | 'full';
+    /**
+     * 'Sets the style of the button, primary, secondary etc.'
+     * @default primary
+     */
     variant?:
         | 'primary'
         | 'secondary'
