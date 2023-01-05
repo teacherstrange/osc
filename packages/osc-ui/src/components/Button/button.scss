@@ -1,9 +1,14 @@
-/* stylelint-disable selector-class-pattern */
-@use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
+@use "sass:map";
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
 
-// Remove the pseudo element and hover effect for the button variants
-@mixin remove-pseudo-element {
+// Set the border radius for the button variants, mostly for use on the academic hub buttons
+@mixin pill($outer, $size: "") {
+    $btn-radius: 40px;
+
+    border-radius: $btn-radius;
+
     &::after,
     > span::after {
         display: none;
@@ -12,90 +17,125 @@
     &:hover > span {
         transform: none;
     }
-}
 
-// Set disabled styles for the button variants
-@mixin variant-disabled-state {
-    &[disabled] {
-        --btn-bg-color: transparent;
-
-        &:hover {
-            --btn-fg-color: var(--color-secondary);
+    #{$outer}__inner {
+        @if $size == "sm" {
+            padding: var(--space-scale-micro) var(--space-scale-zeta);
+        } @else {
+            padding: var(--space-scale-milli) var(--space-scale-zeta);
         }
+
+        border-radius: $btn-radius;
     }
 }
 
-// Reset the typography for the button variants
-@mixin reset-typography {
-    text-transform: none;
-    letter-spacing: initial;
-}
-
-.c-btn,
-.c-btn__inner {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
+$btn-sizes: (
+    sm: (
+        padding: var(--space-scale-milli) var(--space-scale-zeta),
+    ),
+    full: (
+        width: 100%,
+    ),
+);
+$btn-properties: (
+    primary: (
+        bg-color: var(--color-secondary),
+        bg-hover-color: var(--color-primary),
+        fg-color: var(--color-tertiary),
+        font-weight: $weight-bold,
+        font-size: var(--font-scale-centi),
+        letter-spacing: $letter-spacing-sml,
+        text-transform: uppercase,
+        padding: var(--space-scale-centi) var(--space-scale-epsilon),
+        border: solid 3px var(--color-secondary),
+        offset: 6px,
+        after: (
+            position: absolute,
+            bottom: calc(var(--btn-offset) * -1),
+            // negative offset
+            left: var(--btn-offset),
+            width: 100%,
+            height: 100%,
+            background-color: transparent,
+            border-right: var(--btn-border),
+            border-bottom: var(--btn-border),
+            content: "",
+        ),
+    ),
+    secondary: (
+        bg-color: transparent,
+        bg-hover-color: var(--color-secondary),
+        fg-color: var(--color-secondary),
+        fg-hover-color: var(--color-tertiary),
+        font-weight: $weight-bold,
+        font-size: var(--font-scale-centi),
+        letter-spacing: $letter-spacing-sml,
+        text-transform: uppercase,
+        padding: var(--space-scale-centi) var(--space-scale-epsilon),
+        border: solid 1px var(--color-secondary),
+    ),
+    tertiary: (
+        bg-color: transparent,
+        bg-hover-color: var(--color-secondary),
+        fg-color: var(--color-secondary),
+        fg-hover-color: var(--color-tertiary),
+        font-weight: $weight-light,
+        font-size: var(--font-scale-centi),
+        padding: var(--space-scale-centi) var(--space-scale-epsilon),
+        border: 1px solid var(--color-quinary),
+    ),
+    quaternary: (
+        bg-color: transparent,
+        bg-hover-color: transparent,
+        fg-color: var(--color-secondary),
+        fg-hover-color: var(--color-primary),
+        font-weight: $weight-reg,
+        font-size: var(--font-scale-centi),
+        gap: 0.8em,
+    ),
+    quinary: (
+        bg-color: var(--color-septenary),
+        bg-hover-color: var(--color-primary),
+        fg-color: var(--color-secondary),
+        fg-hover-color: var(--color-tertiary),
+        font-weight: $weight-bold,
+        font-size: var(--font-scale-centi),
+        letter-spacing: $letter-spacing-sml,
+        text-transform: uppercase,
+        padding: var(--space-scale-centi) var(--space-scale-epsilon),
+    ),
+);
 
 .c-btn {
-    // Colours
-    --btn-bg-color: var(--color-secondary);
-    --btn-hover-bg-color: var(--color-primary);
-    --btn-fg-color: var(--color-tertiary);
-    --btn-hover-fg-color: var(--color-primary);
+    $self: &;
 
-    // Border
-    --btn-border: solid 3px var(--btn-bg-color);
-
-    // Offset the pseudo element to create the shadow effect
-    --btn-offset: 6px;
-
-    // Transitions
-    --btn-transition-duration: 0.2s;
-    --btn-transition-timing-function: ease-in;
-
-    color: var(--btn-fg-color);
-    font-size: var(--font-scale-centi);
-    font-weight: $weight-bold;
+    color: inherit;
+    font: inherit;
     text-align: center;
     text-decoration: none;
-    text-transform: uppercase;
     white-space: nowrap;
-    letter-spacing: 0.188em;
+    letter-spacing: normal;
     cursor: pointer;
     pointer-events: auto;
 
-    &::after {
-        position: absolute;
-        bottom: calc(var(--btn-offset) * -1); // negative offset
-        left: var(--btn-offset);
-        width: 100%;
-        height: 100%;
-        background-color: transparent;
-        border-right: var(--btn-border);
-        border-bottom: var(--btn-border);
-        content: "";
+    &,
+    &__inner {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary);
     }
 
     &__inner {
-        z-index: 1;
         width: 100%;
-        padding: var(--space-scale-centi) var(--space-scale-epsilon);
-        background-color: var(--btn-bg-color);
-        transition:
-            background-color var(--btn-transition-duration)
-            var(--btn-transition-timing-function),
-            transform var(--btn-transition-duration) var(--btn-transition-timing-function);
         gap: 0.6em;
         pointer-events: none; // We will want to prevent bubbling/capturing of events on the inner span
-    }
-
-    &:hover > span {
-        background-color: var(--btn-hover-bg-color);
-        transform: translate(var(--btn-offset), var(--btn-offset));
+        transition: all $timing-s $ease-in;
     }
 
     svg {
@@ -105,120 +145,11 @@
         font-size: 1.4em;
     }
 
-    &[disabled] {
-        opacity: 0.75;
+    // *----------------------------------*/
+    //  Disabled
+    // *----------------------------------*/
+    &[data-disabled] {
         cursor: not-allowed;
-
-        &:hover > span {
-            background-color: var(--btn-bg-color);
-            transform: none;
-        }
-    }
-
-    // *----------------------------------*/
-    //  Variants
-    // --primary not included as it would be the default
-    // *----------------------------------*/
-    &--secondary,
-    &--tertiary {
-        --btn-bg-color: transparent;
-        --btn-fg-color: var(--color-secondary);
-        --btn-hover-bg-color: var(--color-secondary);
-
-        border: 1px solid var(--color-secondary);
-
-        @include variant-disabled-state;
-        @include remove-pseudo-element;
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        > span {
-            transition:
-                color var(--btn-transition-duration) var(--btn-transition-timing-function),
-                background-color var(--btn-transition-duration)
-                var(--btn-transition-timing-function);
-        }
-
-        &:hover {
-            --btn-fg-color: var(--color-tertiary);
-        }
-    }
-
-    /* stylelint-disable-next-line no-descending-specificity */
-    &--tertiary {
-        border: 1px solid var(--color-quinary);
-        font-weight: $weight-light;
-
-        @include reset-typography;
-    }
-
-    &--quaternary {
-        --btn-bg-color: transparent;
-        --btn-hover-bg-color: transparent;
-        --btn-fg-color: var(--color-secondary);
-
-        border: none;
-        font-weight: $weight-reg;
-
-        @include reset-typography;
-        @include variant-disabled-state;
-        @include remove-pseudo-element;
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        > span {
-            padding: 0;
-            gap: 0.8em;
-        }
-
-        &:hover {
-            --btn-fg-color: var(--btn-hover-fg-color);
-        }
-
-        &.c-btn--sm {
-            padding: 0;
-        }
-    }
-
-    &--quinary {
-        --btn-bg-color: var(--color-septenary);
-        --btn-fg-color: var(--color-secondary);
-        --btn-hover-fg-color: var(--color-tertiary);
-
-        border: none;
-
-        @include remove-pseudo-element;
-
-        &:hover {
-            --btn-fg-color: var(--btn-hover-fg-color);
-        }
-    }
-
-    &--septenary {
-        --btn-bg-color: var(--color-tertiary);
-        --btn-hover-bg-color: var(--color-tertiary);
-        --btn-fg-color: var(--color-secondary);
-    }
-
-    &--octonary {
-        --btn-bg-color: var(--color-undenary);
-        --btn-fg-color: var(--color-tertiary);
-        --btn-hover-bg-color: var(--color-undenary);
-    }
-
-    // *----------------------------------*/
-    //  Sizes
-    //  --md not included as it would be the default
-    // *----------------------------------*/
-    &--sm {
-        /* stylelint-disable-next-line no-descending-specificity */
-        > span {
-            padding: var(--space-scale-milli) var(--space-scale-zeta);
-        }
-    }
-
-    /* stylelint-disable-next-line no-descending-specificity */
-    &--full,
-    &--full > span {
-        width: 100%;
     }
 
     // *----------------------------------*/
@@ -227,6 +158,94 @@
     &.is-loading {
         cursor: auto;
         pointer-events: none;
+    }
+
+    // *----------------------------------*/
+    // Rounded borders
+    // *----------------------------------*/
+    &.is-pill {
+        @include pill($self);
+    }
+
+    // *----------------------------------*/
+    //  Variants
+    // *----------------------------------*/
+    @each $class, $property in $btn-properties {
+        &--#{$class} {
+            --btn-offset: #{map.get($property, offset)};
+            --btn-border: #{map.get($property, border)};
+
+            color: map.get($property, fg-color);
+            font-size: map.get($property, font-size);
+            font-weight: map.get($property, font-weight);
+            text-transform: map.get($property, text-transform);
+            letter-spacing: map.get($property, letter-spacing);
+
+            @if $class != "primary" {
+                border: map.get($property, border);
+            }
+
+            @if $class == "quaternary" {
+                &#{$self}--sm #{$self}__inner {
+                    padding: 0;
+                }
+            }
+
+            @if map.has-key($property, after) {
+                &::after {
+                    @each $key, $value in map.get($property, after) {
+                        #{$key}: $value;
+                    }
+                }
+            }
+
+            #{$self}__inner {
+                padding: map.get($property, padding);
+                background-color: map.get($property, bg-color);
+                gap: map.get($property, gap);
+
+                @include z-index(button);
+            }
+
+            &:hover,
+            &:active {
+                color: map.get($property, fg-hover-color);
+
+                > #{$self}__inner {
+                    background-color: map.get($property, bg-hover-color);
+                    transform: translate(var(--btn-offset), var(--btn-offset));
+                }
+            }
+
+            &[data-disabled] {
+                opacity: 0.75;
+                &:hover > #{$self}__inner {
+                    background-color: map.get($property, bg-color);
+                    color: map.get($property, fg-color);
+                    transform: none;
+                }
+            }
+        }
+    }
+
+    // *----------------------------------*/
+    //  Sizes
+    // *----------------------------------*/
+    @each $class, $property in $btn-sizes {
+        &--#{$class} {
+            &,
+            #{$self}__inner {
+                width: map.get($property, width);
+            }
+
+            #{$self}__inner {
+                padding: map.get($property, padding);
+            }
+
+            &.is-pill {
+                @include pill($self, $class);
+            }
+        }
     }
 }
 
