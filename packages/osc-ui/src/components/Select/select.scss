@@ -4,6 +4,8 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-select {
+    --select-font-size: var(--font-scale-centi);
+
     &__trigger {
         display: flex;
         align-items: center;
@@ -14,7 +16,7 @@
         padding: 0 var(--space-scale-centi);
         background-color: var(--color-tertiary);
         border: 1px solid var(--color-quinary);
-        font-size: var(--font-scale-centi);
+        font-size: var(--select-font-size);
         line-height: 1;
         gap: 5px;
 
@@ -73,7 +75,7 @@
         align-items: center;
         height: 25px;
         padding: 0 35px 0 25px;
-        font-size: var(--font-scale-centi);
+        font-size: var(--select-font-size);
         line-height: 1;
         user-select: none;
 
@@ -151,7 +153,7 @@
 
         .c-select__error-message {
             color: hsl(0deg 93% 55%);
-            font-size: var(--font-scale-centi);
+            font-size: var(--select-font-size);
         }
 
         &.c-select--tertiary {
