@@ -78,8 +78,14 @@
 
 $font-primary: typography-token("font-primary");
 $font-secondary: typography-token("font-secondary");
+
+// Font Weights
+$weight-light: typography-token("weight-light");
 $weight-reg: typography-token("weight-reg");
 $weight-bold: typography-token("weight-bold");
+
+// Letter Spacing
+$letter-spacing-sml: typography-token("letter-spacing-sml");
 
 // Base Sizes
 $base-font-size: scale-token("base-font-size");

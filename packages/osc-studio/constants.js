@@ -24,6 +24,7 @@ export const PAGE_REFERENCES = [
 
 // References to include in 'modules' array in documents
 export const MODULES = [
+    { type: 'module.accordion' },
     { type: 'module.content' },
     { type: 'module.images' },
     { type: 'module.trustpilot' },

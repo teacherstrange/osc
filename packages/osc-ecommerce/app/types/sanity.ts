@@ -68,6 +68,18 @@ export interface contentModule extends module {
     buttons?: buttonModule[];
 }
 
+export interface accordionModule extends module {
+    accordionHeadingLevels: 'string';
+    accordionItem?: {
+        _key: string;
+        _type: string;
+        content?: contentModule;
+        defaultOpen?: boolean;
+        heading: string;
+    }[];
+    content?: contentModule;
+}
+
 export interface mediaTextModule extends module {
     layout: 'media-left' | 'media-right';
     body?: PortableTextBlock;
