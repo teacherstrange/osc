@@ -6,22 +6,36 @@
 //
 // *----------------------------------*/
 
-// Navy and white
-const colorNavy = 'hsl(205deg 79% 11%)';
-const colorWhite = 'hsl(0deg 0% 100%)';
-
-// Gray
-const colorGray = 'hsl(0deg 0% 87%)';
-
-// Bright colours
+// Brand colours
 const colorPink = 'hsl(335deg 85% 49%)';
-const colorCandyPink = 'hsl(334deg 79% 89%)';
-const colorOrange = 'hsl(11deg 81% 55%)';
-const colorLightOrange = 'hsl(31deg 94% 65%)';
-const colorLemon = 'hsl(56deg 100% 73%)';
-const colorBlue = 'hsl(237deg 41% 44%)';
+const colorNavy = 'hsl(205deg 79% 11%)';
 const colorTeal = 'hsl(175deg 100% 36%)';
+const colorLightOrange = 'hsl(31deg 94% 65%)';
+const colorCandyPink = 'hsl(334deg 79% 89%)';
 const colorCyan = 'hsl(179deg 92% 77%)';
+const colorBlue = 'hsl(237deg 41% 44%)';
+const colorOrange = 'hsl(11deg 81% 55%)';
+const colorLemon = 'hsl(56deg 100% 73%)';
+
+// Neutral colours
+const colorWhite = 'hsl(0deg 0% 100%)';
+const colorLightestGrey = 'hsl(0deg 0% 98%)';
+const colorSoftGrey = 'hsl(0deg 0% 96%)';
+const colorPaleGrey = 'hsl(0deg 0% 93%)';
+const colorGrey = 'hsl(0deg 0% 87%)';
+const colorMidGrey = 'hsl(0deg 0% 79%)';
+const colorDarkGrey = 'hsl(0deg 0% 73%)';
+const colorDarkestGrey = 'hsl(0deg 0% 60%)';
+
+// Semantic colours
+const colorError = 'hsl(0deg 92% 55%)';
+const colorError20 = 'hsl(0deg 92% 55% / 20%)';
+const colorNotice = 'hsl(202deg 92% 55%)';
+const colorNotice20 = 'hsl(202deg 92% 55% / 20%)';
+const colorSuccess = 'hsl(144deg 67% 55%)';
+const colorSuccess20 = 'hsl(144deg 67% 55% / 20%)';
+const colorWarning = 'hsl(47deg 98% 67%)';
+const colorWarning20 = 'hsl(47deg 98% 67% / 20%)';
 
 // Gradients
 // https://www.joshwcomeau.com/gradient-generator?colors=faa751|e6126a&angle=0&colorMode=hsl&precision=8&easingCurve=0.333|1|0.666|0
@@ -52,35 +66,33 @@ const gradientOrangeLemon =
 const gradientLemonCyan =
     'linear-gradient(90deg, hsl(56deg 100% 73%) 0%, hsl(68deg 92% 75%) 21%, hsl(83deg 96% 78%) 30%, hsl(100deg 100% 82%) 39%, hsl(123deg 100% 84%) 46%, hsl(142deg 100% 81%) 54%, hsl(156deg 100% 79%) 61%, hsl(165deg 99% 78%) 69%, hsl(172deg 96% 77%) 79%, hsl(179deg 92% 77%) 100%)';
 
-// States
-const colorError = 'hsl(0deg 61% 44%)';
-const colorSuccess = 'hsl(107deg 49% 38%)';
-const colorNotice = 'hsl(34deg 100% 42%)';
-const colorDisabled = 'hsl(220deg 4% 87%)';
-
-// Shadows
-const colorShadow = 'hsla(0deg 0% 7% / 50%)';
-const colorShadowL = 'hsla(204deg 204% 204% / 100%)';
-
 module.exports = {
     default: {
         primary: colorPink,
         secondary: colorNavy,
         tertiary: colorWhite,
         quaternary: colorTeal,
-        quinary: colorGray,
+        quinary: colorGrey,
         senary: colorLightOrange,
         septenary: colorCandyPink,
         octonary: colorCyan,
         nonary: colorBlue,
         denary: colorOrange,
         duodenary: colorLemon,
+        'neutral-100': colorLightestGrey,
+        'neutral-200': colorSoftGrey,
+        'neutral-300': colorPaleGrey,
+        'neutral-400': colorMidGrey,
+        'neutral-500': colorDarkGrey,
+        'neutral-600': colorDarkestGrey,
         error: colorError,
+        'error-20': colorError20,
         success: colorSuccess,
+        'success-20': colorSuccess20,
         notice: colorNotice,
-        disabled: colorDisabled,
-        shadow: colorShadow,
-        'shadow-l': colorShadowL,
+        'notice-20': colorNotice20,
+        warning: colorWarning,
+        'warning-20': colorWarning20,
         'gradient-primary': gradientPinkLightOrange,
         'gradient-secondary': gradientPinkCyan,
         'gradient-tertiary': gradientTealLemon,
@@ -89,11 +101,11 @@ module.exports = {
         'gradient-senary': gradientCyanTeal,
         'gradient-septenary': gradientBlueTeal,
         'gradient-octonary': gradientOrangeLemon,
-        'gradient-nonary': gradientLemonCyan
+        'gradient-nonary': gradientLemonCyan,
     },
     dark: {
         primary: colorPink,
         secondary: colorWhite,
-        tertiary: colorNavy
-    }
+        tertiary: colorNavy,
+    },
 };
