@@ -1,3 +1,28 @@
+## [0.26.0](https://github.com/Open-Study-College/osc/compare/v0.25.0...v0.26.0) (2023-01-05)
+
+
+### 🧪 Tests
+
+* **switch:** adds tests ([748bbeb](https://github.com/Open-Study-College/osc/commit/748bbebaccd993ea9c9754fa02b5b604d45eef23))
+
+
+### ♻️ Refactors
+
+* **switch:** update colour values ([2981b1f](https://github.com/Open-Study-College/osc/commit/2981b1fa9a20b9d2abef69785c8119ef3c9e4c72))
+
+
+### ✨ Features
+
+* **switch:** adds a group wrapper for the switch so we can style sibling icons ([48e299f](https://github.com/Open-Study-College/osc/commit/48e299f4008a3d9101de7db614da61fea9d3df9c))
+* **switch:** adds a secondary variant to the switch ([09168e6](https://github.com/Open-Study-College/osc/commit/09168e64a97e3e1dd483d81e35074cb19fb0dec1))
+* **switch:** adds sizes to switch ([a468605](https://github.com/Open-Study-College/osc/commit/a46860597b79a15eedc58ebd053d6137939b9b79))
+* **switch:** adds styles to switch ([19c6f20](https://github.com/Open-Study-College/osc/commit/19c6f201eba5d50a0e4ccfb172cf1cf1c709d812))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* update lock file ([b6be3e0](https://github.com/Open-Study-College/osc/commit/b6be3e046af821641b5a66f7e010f5f29155ee19))
+
 ## [0.25.0](https://github.com/Open-Study-College/osc/compare/v0.24.1...v0.25.0) (2023-01-05)
 
 
@@ -106,21 +131,4 @@
 ### 🐛 Bugs
 
 * **carousel:** updates useVariant hook to useModifier ([9842ae2](https://github.com/Open-Study-College/osc/commit/9842ae20ec5dd6371fa27efcbe779d041cbaddd2))
-
-## [0.22.0](https://github.com/Open-Study-College/osc/compare/v0.21.2...v0.22.0) (2022-12-14)
-
-
-### ✨ Features
-
-* **css:** adds css reset and reintroduces the generic directory ([22623f4](https://github.com/Open-Study-College/osc/commit/22623f451975e06ecedb4f160065d9d2bf589a95))
-
-
-### ♻️ Refactors
-
-* **git:** adds scss generic folder to gitignore ([796e0e8](https://github.com/Open-Study-College/osc/commit/796e0e84aa78a972180a4a111bd51f4da3b88e8c))
-
-
-### 🐛 Bugs
-
-* **css:** stylelint applying autofix to box-shadow declaration ([bf71745](https://github.com/Open-Study-College/osc/commit/bf71745f08efe50ecd9869af9f866d398914f48b))
 
