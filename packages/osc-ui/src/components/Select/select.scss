@@ -1,5 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 @use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-select {
@@ -49,6 +50,8 @@
         overflow: hidden;
         background-color: var(--color-tertiary);
         box-shadow: 0 10px 38px -10px hsl(210deg 4% 9% / 35%), 0 10px 20px -15px hsl(210deg 4% 9% / 20%);
+
+        @include z-index(select);
 
         .c-select__scroll-button {
             display: flex;
