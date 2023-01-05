@@ -1,36 +1,144 @@
+/* stylelint-disable max-line-length */
+@use "../../styles/tools" as *;
+
 /* stylelint-disable-next-line plugin/selector-bem-pattern */
 button {
-    all: unset;
+    all: unset; // Reset all button styles
+    box-sizing: border-box;
 }
 
 .c-switch {
+    --switch-radius: 9999px;
+    --switch-width: #{rem(50)};
+    --switch-height: #{rem(28)};
+    --switch-thumb-offset: 1px;
+    --switch-border-width: 1px;
+    --switch-thumb-size: #{rem(24)};
+    --switch-background-color: transparent;
+    --switch-thumb-color: var(--color-secondary);
+    --switch-transition-duration: 0.2s;
+
     position: relative;
-    width: 42px;
-    height: 25px;
-    background-color: var(--colour-navy);
-    border-radius: 9999px;
+    width: var(--switch-width);
+    height: var(--switch-height);
+    background-color: var(--switch-background-color);
+    border: var(--switch-border-width) solid var(--switch-thumb-color);
+    border-radius: var(--switch-radius);
+    transition: filter var(--switch-transition-duration);
+    cursor: pointer;
 
     &:focus {
-        box-shadow: 0 0 0 2px var(--colour-pink);
+        box-shadow: 0 0 0 0 var(--color-tertiary), 0 0 0 0.188rem var(--color-primary);
+    }
+
+    &:not([data-disabled]):hover {
+        filter: brightness(0.95);
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &[data-disabled] {
+        --switch-thumb-color: var(--color-tertiary);
+        --switch-background-color: var(--color-quinary);
+
+        border-color: var(--switch-background-color);
+        cursor: not-allowed;
     }
 
     &[data-state="checked"] {
-        background-color: var(--colour-pink);
+        --switch-thumb-color: var(--color-primary);
     }
 
     &__thumb {
         display: block;
-        width: 21px;
-        height: 21px;
-        background-color: var(--colour-white);
-        border-radius: 9999px;
-        box-shadow: 0 2px 2px var(--colour-navy);
-        transform: translateX(2px);
-        transition: transform 100ms;
+        width: var(--switch-thumb-size);
+        height: var(--switch-thumb-size);
+        background-color: var(--switch-thumb-color);
+        border-radius: var(--switch-radius);
+        transform: translateX(var(--switch-thumb-offset));
+        transition: transform var(--switch-transition-duration);
         will-change: transform;
 
         &[data-state="checked"] {
-            transform: translateX(19px);
+            transform:
+                // width of the switch minus the width of the thumb size minus the border plus the offset
+                // we multiply the border by 2 because we have a border on the left and right
+            translateX(
+                    calc(
+                        var(--switch-width) - var(--switch-thumb-size) - ((var(--switch-border-width) * 2) + var(--switch-thumb-offset))
+                    )
+                );
+        }
+    }
+
+    // *----------------------------------*/
+    //  Variants
+    // --primary is the default
+    // *----------------------------------*/
+    &--secondary {
+        /* stylelint-disable-next-line selector-class-pattern */
+        .c-switch__thumb {
+            display: grid;
+            place-items: center;
+            color: var(--color-tertiary);
+        }
+
+        /* stylelint-disable-next-line selector-class-pattern */
+        .c-switch__thumb-icon {
+            width: 1em;
+            height: 1em;
+            font-size: 1.25rem;
+            transition: opacity var(--switch-transition-duration), visibility var(--switch-transition-duration);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        &[data-state="checked"] {
+            /* stylelint-disable-next-line selector-class-pattern */
+            .c-switch__thumb-icon {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    // *----------------------------------*/
+    //  Sizes
+    // --large is the default
+    // *----------------------------------*/
+    &--small {
+        --switch-width: #{rem(26)};
+        --switch-height: #{rem(16)};
+        --switch-thumb-size: #{rem(12)};
+    }
+
+    &--medium {
+        --switch-width: #{rem(34)};
+        --switch-height: #{rem(20)};
+        --switch-thumb-size: #{rem(16)};
+    }
+}
+
+// *----------------------------------*/
+//  Switch group
+// *----------------------------------*/
+.c-switch-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-scale-micro);
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    > svg {
+        width: 1em;
+        height: 1em;
+        font-size: var(--font-scale-zeta);
+        transition: color var(--switch-transition-duration);
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    .c-switch {
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        &[data-state="checked"] + svg {
+            color: var(--color-primary);
         }
     }
 }
