@@ -1,3 +1,55 @@
+## [0.25.0](https://github.com/Open-Study-College/osc/compare/v0.24.1...v0.25.0) (2023-01-05)
+
+
+### 📝 Documentation
+
+* **accordion:** update storybook docs ([7ef9ff0](https://github.com/Open-Study-College/osc/commit/7ef9ff0b3977fca6dcdfbd32102a1db3e27c91f1))
+
+
+### 🐛 Bugs
+
+* **studio:** add logic to bail out of validation if there are no heading levels set ([5728a18](https://github.com/Open-Study-College/osc/commit/5728a18eb4fe3751a0c206db037047b17621724e))
+* **studio:** remove duplicate schema ([8c58fc3](https://github.com/Open-Study-College/osc/commit/8c58fc3df33a65881805c4ebb202ddb9c94dfd55))
+
+
+### 🧪 Tests
+
+* **accordion:** add content test to accordion ([42a409d](https://github.com/Open-Study-College/osc/commit/42a409d6c23e85d9dd6a8fb43b5a488679e56172))
+* **accordion:** adds accordion tests ([a2311b7](https://github.com/Open-Study-College/osc/commit/a2311b7cfb9a984dab31d1e7689b96502c865866))
+* **accordion:** adds resize observer mock ([a8441db](https://github.com/Open-Study-College/osc/commit/a8441dbbcffec01daa0496c4d182e10b703750af))
+* **accordion:** updates tests to check for variant class ([1ff180a](https://github.com/Open-Study-College/osc/commit/1ff180ab9b857a1db34eef7342850115bd7c6251))
+
+
+### ✨ Features
+
+* **accordion:** add fixed fontsize for tertiary accordion ([0979c91](https://github.com/Open-Study-College/osc/commit/0979c91c8e932a5f6d6b52cbee88fa9bed4156f4))
+* **accordion:** add focus styles ([201c835](https://github.com/Open-Study-College/osc/commit/201c8351749401c827068c2d922f9fad477b3254))
+* **accordion:** adds accordion component to osc-ui ([79b83be](https://github.com/Open-Study-College/osc/commit/79b83be2d1261643a9e5e52f5c382bc6d0e83a82))
+* **accordion:** adds accordion styles and variants ([c696620](https://github.com/Open-Study-College/osc/commit/c6966200c317fe425d9dc6f78e75c66a6a5047d7))
+* **accordion:** allow user to switch icon between plusminus or chevron ([49dbcda](https://github.com/Open-Study-College/osc/commit/49dbcda098bbc146984977de5c3e8d365e5c4b58))
+* **accordion:** update accordion to forceMount the content ([fa07058](https://github.com/Open-Study-College/osc/commit/fa07058494c48f0cf574bb54f0f0b4b58535816c))
+* **ecommerce:** adds accordion module ([b6637c2](https://github.com/Open-Study-College/osc/commit/b6637c2c40b27aeda31e5ea4e4a3cd3b5eedcc1e))
+* **ecommerce:** adds content to accordion module in ecommerce ([ee322ba](https://github.com/Open-Study-College/osc/commit/ee322ba3accd85195a6add88fb0876785fea59b7))
+* **studio:** adds accordion schema ([3ce9bec](https://github.com/Open-Study-College/osc/commit/3ce9bec80e149cff97638cf99abb97772eb3b030))
+* **tokens:** adds light font-weight token ([e08db6b](https://github.com/Open-Study-College/osc/commit/e08db6b203e2397242a59d6b20f82027aa0e52f5))
+* **tokens:** adds small letter spacing token ([ec3b580](https://github.com/Open-Study-College/osc/commit/ec3b58018695d4b9075876558617920231c8857c))
+
+
+### ♻️ Refactors
+
+* **accordion:** remove forwardRefs to simplify markup ([66a00b0](https://github.com/Open-Study-College/osc/commit/66a00b078652a57df663e5d97986f38a423a4497))
+* **accordion:** update font size vars to use base-font-size calculation ([48d1a82](https://github.com/Open-Study-College/osc/commit/48d1a82821d0eb79c534dc973a9e595466a7cb52))
+* **accordion:** update nesting of icon styles ([2a3ab2f](https://github.com/Open-Study-College/osc/commit/2a3ab2f46f3b054601562baf1f1a818ec6007915))
+* **content component:** remove article tag to make more generic ([4b82672](https://github.com/Open-Study-College/osc/commit/4b82672f081dac26af668747dd189ec209c32774))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* adds todo ([ec662c6](https://github.com/Open-Study-College/osc/commit/ec662c686e6131e87e707a3add86f28b9c9e81d7))
+* update lock file ([ae0be86](https://github.com/Open-Study-College/osc/commit/ae0be86ac146347d56e8018b655a19a6ed1bc925))
+* update package-lock ([7f59ab2](https://github.com/Open-Study-College/osc/commit/7f59ab241cb508a9c1d0de1b9d5150a6cf4d0ee0))
+* **studio:** updates ts target so we can use newer js features ([40eb9e7](https://github.com/Open-Study-College/osc/commit/40eb9e7cbafced2d85011e52676a18782d6a0d19))
+
 ## [0.24.1](https://github.com/Open-Study-College/osc/compare/v0.24.0...v0.24.1) (2022-12-19)
 
 
@@ -71,17 +123,4 @@
 ### 🐛 Bugs
 
 * **css:** stylelint applying autofix to box-shadow declaration ([bf71745](https://github.com/Open-Study-College/osc/commit/bf71745f08efe50ecd9869af9f866d398914f48b))
-
-## [0.21.2](https://github.com/Open-Study-College/osc/compare/v0.21.1...v0.21.2) (2022-12-13)
-
-
-### 🧪 Tests
-
-* add tests for Avatar component ([bc3f08c](https://github.com/Open-Study-College/osc/commit/bc3f08cbb3b7c815a937342d17a21aa353db7122))
-* fix typo ([d58a0c2](https://github.com/Open-Study-College/osc/commit/d58a0c21f40517a5dd75f49ea5209d266d273efb))
-
-
-### ♻️ Refactors
-
-* display full initials ([9dc5621](https://github.com/Open-Study-College/osc/commit/9dc56212a618f88f4f2f0a9b26534a47d10a1dfd))
 
