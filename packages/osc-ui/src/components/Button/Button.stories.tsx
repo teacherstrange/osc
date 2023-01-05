@@ -1,4 +1,4 @@
-import { EnvelopeClosedIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { ChevronRightIcon, EnvelopeClosedIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import type { ButtonProps, CopyButtonProps } from './Button';
@@ -30,6 +30,11 @@ export default {
                 type: 'select',
             },
         },
+        shape: {
+            control: {
+                type: 'select',
+            },
+        },
         target: {
             table: {
                 type: {
@@ -41,7 +46,7 @@ export default {
         to: {
             control: 'text',
         },
-        type: {
+        variant: {
             control: {
                 type: 'select',
             },
@@ -53,27 +58,41 @@ const Template: Story<ButtonProps> = ({ children, ...args }) => (
     <Button {...args}>{children}</Button>
 );
 const VariationsTemplate: Story<ButtonProps> = ({ children, ...args }) => (
+    <>
+        <h4>Ecommerce</h4>
+        <ButtonGroup>
+            <Button {...args} variant="primary">
+                Primary
+            </Button>
+            <Button {...args} variant="secondary">
+                Secondary
+            </Button>
+            <Button {...args} variant="tertiary">
+                Tertiary
+            </Button>
+            <Button {...args} variant="quaternary">
+                Quaternary
+            </Button>
+            <Button {...args} variant="quinary">
+                Quinary
+            </Button>
+        </ButtonGroup>
+        <h4 style={{ paddingTop: '1em' }}>Academic Hub</h4>
+        <ButtonGroup>
+            <Button {...args} variant="primary" size="sm" shape="pill">
+                Primary
+            </Button>
+            {/* <Button {...args} variant="secondary">
+                Secondary
+            </Button> */}
+        </ButtonGroup>
+    </>
+);
+const ShapeVariationsTemplate: Story<ButtonProps> = ({ children, ...args }) => (
     <ButtonGroup>
-        <Button {...args} variant="primary">
-            Primary
-        </Button>
-        <Button {...args} variant="secondary">
-            Secondary
-        </Button>
-        <Button {...args} variant="tertiary">
-            Tertiary
-        </Button>
-        <Button {...args} variant="quaternary">
-            Quaternary
-        </Button>
-        <Button {...args} variant="quinary">
-            Quinary
-        </Button>
-        <Button {...args} variant="septenary">
-            Septenary
-        </Button>
-        <Button {...args} variant="octonary">
-            Octonary
+        <Button {...args}>{children}</Button>
+        <Button {...args} shape="pill">
+            {children}
         </Button>
     </ButtonGroup>
 );
@@ -103,6 +122,10 @@ const IconsTemplate: Story<ButtonProps> = ({ children, ...args }) => (
             <span className="sr-only">Search</span>
             <MagnifyingGlassIcon aria-hidden="true" />
         </Button>
+        <Button {...args} shape="pill">
+            <span className="sr-only">Search</span>
+            <ChevronRightIcon aria-hidden="true" />
+        </Button>
     </ButtonGroup>
 );
 const CopyTemplate: Story<CopyButtonProps> = ({ children, ...args }) => (
@@ -116,6 +139,18 @@ Primary.args = {
 
 export const Variations = VariationsTemplate.bind({});
 Variations.args = {};
+
+export const ShapeVariations = ShapeVariationsTemplate.bind({});
+ShapeVariations.args = {
+    ...Primary.args,
+};
+ShapeVariations.parameters = {
+    docs: {
+        description: {
+            story: 'You can change the shape of the button by passing the `shape` prop with the value `pill`.<br>The button will render as a square by default.',
+        },
+    },
+};
 
 export const DisabledAndLoading = DisabledLoadingTemplate.bind({});
 DisabledAndLoading.args = {

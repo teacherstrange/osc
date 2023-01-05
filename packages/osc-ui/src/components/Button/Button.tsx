@@ -1,6 +1,13 @@
 import type { LinkProps as RemixLinkProps } from '@remix-run/react';
 import { Link as RemixLink } from '@remix-run/react';
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, FC, MouseEvent, ReactNode } from 'react';
+import type {
+    AnchorHTMLAttributes,
+    ButtonHTMLAttributes,
+    FC,
+    HTMLAttributes,
+    MouseEvent,
+    ReactNode,
+} from 'react';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import type { StrictUnion } from '../../types';
@@ -17,7 +24,7 @@ interface DefaultButtonProps extends ButtonHTMLAttributes<buttonTypes> {
      */
     as?: 'button';
     /**
-     * 'Sets the html attribute `type` of button'
+     * Sets the html attribute `type` of button
      */
     type?: 'submit' | 'reset' | 'button';
 }
@@ -73,6 +80,11 @@ export interface SharedProps {
      */
     loadingText?: string;
     /**
+     * Sets the button to be a pill shape
+     * @default square
+     */
+    shape?: 'pill';
+    /**
      * 'Sets the size of the button'
      */
     size?: 'sm' | 'full';
@@ -80,14 +92,7 @@ export interface SharedProps {
      * 'Sets the style of the button, primary, secondary etc.'
      * @default primary
      */
-    variant?:
-        | 'primary'
-        | 'secondary'
-        | 'tertiary'
-        | 'quaternary'
-        | 'quinary'
-        | 'septenary'
-        | 'octonary';
+    variant?: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
 }
 
 export type ButtonProps = SharedProps & StrictUnion<DefaultButtonProps | AnchorProps | LinkProps>;
@@ -100,6 +105,7 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             children,
             isDisabled,
             isLoading,
+            shape,
             loadingText = 'Loading',
             size,
             variant = 'primary',
@@ -114,7 +120,8 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             sizeModifier,
             variantModifier,
             className,
-            isLoading && 'is-loading'
+            isLoading && 'is-loading',
+            shape === 'pill' && 'is-pill'
         );
 
         // Set our component as either the passed element or a button
@@ -149,6 +156,7 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             <Component
                 className={classes}
                 disabled={isDisabled ? isDisabled : null}
+                data-disabled={isDisabled ? isDisabled : null}
                 rel={isBlank ? 'noopener noreferrer' : null}
                 target={target ? target : null}
                 to={as === 'link' && attr.to ? attr.to : '/'} // fallback to homepage if to prop is missing from link
@@ -222,15 +230,19 @@ export const CopyButton: FC<CopyButtonProps> = (props: CopyButtonProps) => {
  * Component for grouping buttons together
  */
 
-interface ButtonGroupProps {
+interface ButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
     children: ReactNode;
     direction?: 'column';
 }
 
 export const ButtonGroup: FC<ButtonGroupProps> = (props: ButtonGroupProps) => {
-    const { children, direction } = props;
+    const { children, direction, ...attr } = props;
     const directionModifier = useModifier('c-btn-group', direction);
     const classes = classNames('c-btn-group', directionModifier);
 
-    return <div className={classes}>{children}</div>;
+    return (
+        <div className={classes} {...attr}>
+            {children}
+        </div>
+    );
 };
