@@ -71,6 +71,7 @@ export const Select = React.forwardRef<ElementRef<typeof SelectPrimitive.Trigger
                         className="c-select__trigger"
                         id={name}
                         ref={forwardedRef}
+                        aria-label={name}
                     >
                         <SelectPrimitive.Value placeholder={placeholder} />
                         <SelectPrimitive.Icon className="c-select__icon">
