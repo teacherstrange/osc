@@ -11,6 +11,7 @@ import { useSpacing } from '../../hooks/useSpacing';
 import type { Spacing } from '../../types';
 import { classNames } from '../../utils/classNames';
 import { Button, ButtonGroup, CopyButton } from '../Button/Button';
+import { Image } from '../Image/Image';
 import { List, ListItem } from '../List/List';
 
 import './content.scss';
