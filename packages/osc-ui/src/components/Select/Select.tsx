@@ -30,7 +30,7 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
      * A boolean that alerts when form is submitted for error handling
      * @default false
      */
-    wasSubmitted: boolean;
+    wasSubmitted?: boolean;
 }
 
 export const Select = React.forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(

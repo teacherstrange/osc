@@ -4,7 +4,7 @@ import { Select, SelectItem } from './Select';
 
 test('should render a select component', async () => {
     render(
-        <Select selectName="courses-1" wasSubmitted>
+        <Select name="courses-1">
             <SelectItem value="a-level-psychology"> A Level Psychology </SelectItem>
         </Select>
     );
@@ -13,20 +13,20 @@ test('should render a select component', async () => {
 });
 test('should render a disabled select component', async () => {
     const { container } = render(
-        <Select attributes={{ disabled: true }} selectName="courses-1" wasSubmitted>
+        <Select disabled={true} name="courses-1">
             <SelectItem value="a-level-psychology"> A Level Psychology </SelectItem>
         </Select>
-    ) as any;
+    );
 
     expect(container.querySelector(`button[data-disabled]`)).toBeInTheDocument();
     expect(container.querySelector(`button[disabled]`)).toBeInTheDocument();
 });
 test('should render a placeholder in the select component', async () => {
     const { container } = render(
-        <Select placeholder="Please Select" selectName="courses-1" wasSubmitted>
+        <Select placeholder="Please Select" name="courses-1">
             <SelectItem value="a-level-psychology"> A Level Psychology </SelectItem>
         </Select>
-    ) as any;
+    );
 
     expect(screen.getByText('Please Select')).toHaveTextContent('Please Select');
     expect(container.querySelector(`button[data-placeholder]`)).toBeInTheDocument();
