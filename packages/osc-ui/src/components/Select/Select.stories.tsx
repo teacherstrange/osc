@@ -7,8 +7,29 @@ import { Select, SelectItem } from './Select';
 export default {
     title: 'osc-ui/Select',
     component: Select,
-    subcomponents: {},
-    argTypes: {},
+    argTypes: {
+        defaultValue: {
+            description:
+                'The value of the select when initially rendered. Use when you do not need to control the state of the select.',
+        },
+        description: {
+            description: 'Description for the Select, can be a Label or an Icon',
+        },
+        disabled: {
+            description: 'Sets a Select component as disabled',
+        },
+        groupVariants: { description: 'Sets the custom styles, e.g. "Secondary", "Tertiary"' },
+        placeholder: { description: 'A placeholder value for the Select, e.g. "Please Select"' },
+        ref: { description: 'A ref that is forwarded to the Select component' },
+        required: { description: 'Sets a Select as being a required field' },
+        name: {
+            description:
+                'The name of the select.  Submitted with its owning form as part of a name/value pair.',
+        },
+        wasSubmitted: {
+            description: 'A boolean that alerts when form is submitted for error handling',
+        },
+    },
     parameters: {
         docs: {
             description: {
