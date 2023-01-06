@@ -84,6 +84,10 @@
             outline: none;
         }
 
+        &[data-disabled] {
+            color: hsl(255deg 3.7% 78.8%);
+        }
+
         .c-select__item-indicator {
             position: absolute;
             left: 0;

@@ -9,65 +9,67 @@ import { Icon } from '../Icon/Icon';
 import { Label } from '../Label/Label';
 import './select.scss';
 
-type SelectAttributes = {
-    disabled?: boolean;
-    required?: boolean;
-};
-
 type Description = {
-    label: string;
-    icon: React.ReactNode;
+    label?: string;
+    icon?: React.ReactNode;
 };
 export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root> {
-    attributes?: SelectAttributes;
+    /**
+     * Description for the Select, can be a Label or an Icon
+     */
     description?: Description;
+    /**
+     * Sets the custom styles, e.g. "Secondary", "Tertiary"
+     */
     groupVariants?: string[];
+    /**
+     * A placeholder value for the Select, e.g. "Please Select"
+     */
     placeholder?: string;
-    selectName: string;
+    /**
+     * A boolean that alerts when form is submitted for error handling
+     * @default false
+     */
     wasSubmitted: boolean;
 }
 
 export const Select = React.forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(
     (props: Props, forwardedRef) => {
         const {
-            attributes,
             children,
             description,
+            disabled,
             groupVariants,
             placeholder,
-            selectName,
+            required,
+            name,
             wasSubmitted = false,
         } = props;
-
         const [value, setValue] = useState('');
 
-        const errorMessage = getFieldError(value, attributes?.required);
+        const errorMessage = getFieldError(value, required);
         const displayError = wasSubmitted && errorMessage;
 
         const modifiers = useModifier('c-select', groupVariants);
         const selectClasses = classNames('c-select', modifiers);
 
         const setDescription = (desc: Props['description']) => {
-            if (desc?.label)
-                return (
-                    <Label htmlFor={selectName} name={desc.label} required={attributes?.required} />
-                );
-            if (desc?.icon) return <Icon label={selectName}>{desc.icon}</Icon>;
+            if (desc?.label) return <Label htmlFor={name} name={desc.label} required={required} />;
+            if (desc?.icon) return <Icon label={name}>{desc.icon}</Icon>;
         };
-
         return (
             <div className={displayError ? `${selectClasses} c-select--error` : selectClasses}>
                 {setDescription(description)}
                 <SelectPrimitive.Root
                     {...props}
-                    disabled={attributes?.disabled}
-                    name={selectName}
+                    disabled={disabled}
+                    name={name}
                     onValueChange={(value) => setValue(value)}
-                    required={attributes?.required}
+                    required={required}
                 >
                     <SelectPrimitive.Trigger
                         className="c-select__trigger"
-                        id={selectName}
+                        id={name}
                         ref={forwardedRef}
                     >
                         <SelectPrimitive.Value placeholder={placeholder} />
@@ -95,9 +97,7 @@ export const Select = React.forwardRef<ElementRef<typeof SelectPrimitive.Trigger
     }
 );
 
-export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.Item> {
-    className?: string;
-}
+export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.Item> {}
 
 export const SelectItem: FC<ItemProps> = React.forwardRef<
     ElementRef<typeof SelectPrimitive.Item>,

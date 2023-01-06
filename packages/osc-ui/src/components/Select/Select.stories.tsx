@@ -66,18 +66,19 @@ const Template: Story = ({ selects }) => {
                     <div key={i} style={{ margin: '1.5em 1em' }}>
                         <p style={{ fontWeight: '700' }}>{states[select.state]}</p>
                         <Select
-                            attributes={select.attributes}
                             defaultValue={select.defaultValue}
                             description={select.description}
+                            disabled={select.disabled}
                             groupVariants={select.groupVariants}
                             placeholder={select.placeholder}
                             ref={select.ref ? selectRef : null}
-                            selectName={select.selectName}
+                            required={select.required}
+                            name={select.name}
                             wasSubmitted={select.wasSubmitted}
                         >
                             {items.map((item, index) => {
                                 return (
-                                    <SelectItem key={index} value={item.value}>
+                                    <SelectItem key={index} {...item}>
                                         {item.name}
                                     </SelectItem>
                                 );
@@ -96,40 +97,35 @@ export const Tertiary = Template.bind({});
 
 const courseItems = [
     {
-        itemAttributes: {},
         name: 'A Level Psychology',
         value: 'a-level-psychology',
+        disabled: true,
     },
     {
-        itemAttributes: {},
         name: 'A Level Computer Science',
         value: 'a-level-computer-science',
     },
-    { itemAttributes: {}, name: 'A Level History', value: 'a-level-history' },
+    { name: 'A Level History', value: 'a-level-history' },
     {
-        itemAttributes: {},
         name: 'A Level Sociology',
         value: 'a-level-sociology',
+        disabled: true,
     },
     {
-        itemAttributes: {},
         name: 'A Level Geography',
         value: 'a-level-geography',
     },
-    { itemAttributes: {}, name: 'A Level French', value: 'a-level-french' },
+    { name: 'A Level French', value: 'a-level-french' },
     {
-        itemAttributes: {},
         name: 'A Level German',
         value: 'a-level-german',
     },
     {
-        itemAttributes: {},
         name: 'A Level Maths',
         value: 'a-level-maths',
     },
-    { itemAttributes: {}, name: 'A Level Physics', value: 'a-level-physics' },
+    { name: 'A Level Physics', value: 'a-level-physics' },
     {
-        itemAttributes: {},
         name: 'A Level Biology',
         value: 'a-level-biology',
     },
@@ -138,61 +134,58 @@ const courseItems = [
 Primary.args = {
     selects: [
         {
-            attributes: { required: true },
             description: { label: 'Courses' },
             editor: 'select',
             groupVariants: [],
             items: courseItems,
-            selectName: 'courses-1',
+            name: 'courses-1',
+            required: true,
             state: 'default',
         },
         {
-            attributes: {},
             description: { label: 'Courses' },
-            defaultValue: 'a-level-psychology',
+            defaultValue: 'a-level-history',
             editor: 'select',
             groupVariants: [],
             items: courseItems,
-            selectName: 'courses-2',
+            name: 'courses-2',
             state: 'selectedOption',
         },
         {
-            attributes: {},
             description: { label: 'Courses' },
-            defaultValue: 'a-level-psychology',
+            defaultValue: 'a-level-history',
             editor: 'select',
             groupVariants: [],
             items: courseItems,
             ref: true,
-            selectName: 'courses-3',
+            name: 'courses-3',
             state: 'hasFocus',
         },
         {
-            attributes: { disabled: true },
             defaultValue: 'a-level-maths',
             description: { label: 'Courses' },
+            disabled: true,
             editor: 'select',
             groupVariants: [],
             items: courseItems,
-            selectName: 'courses-4',
+            name: 'courses-4',
             state: 'isDisabled',
         },
         {
-            attributes: { required: true },
             description: { label: 'Courses' },
             editor: 'select',
             items: courseItems,
-            selectName: 'courses-5',
+            name: 'courses-5',
+            required: true,
             state: 'hasValidation',
             wasSubmitted: true,
         },
         {
-            attributes: {},
             description: { label: 'Courses' },
             editor: 'select',
             groupVariants: ['inline'],
             items: courseItems,
-            selectName: 'courses-6',
+            name: 'courses-6',
             state: 'inline',
         },
     ],
@@ -201,62 +194,59 @@ Primary.args = {
 Secondary.args = {
     selects: [
         {
-            attributes: { required: true },
             description: { label: 'Courses' },
             editor: 'select',
             groupVariants: ['secondary'],
             items: courseItems,
-            selectName: 'courses-1',
+            name: 'courses-1',
+            required: true,
             state: 'default',
         },
         {
-            attributes: {},
             description: { label: 'Courses' },
             defaultValue: 'a-level-psychology',
             editor: 'select',
             groupVariants: ['secondary'],
             items: courseItems,
-            selectName: 'courses-2',
+            name: 'courses-2',
             state: 'selectedOption',
         },
         {
-            attributes: {},
             description: { label: 'Courses' },
             defaultValue: 'a-level-psychology',
             editor: 'select',
             groupVariants: ['secondary'],
             items: courseItems,
             ref: true,
-            selectName: 'courses-3',
+            name: 'courses-3',
             state: 'hasFocus',
         },
         {
-            attributes: { disabled: true },
             defaultValue: 'a-level-maths',
             description: { label: 'Courses' },
+            disabled: true,
             editor: 'select',
             groupVariants: ['secondary'],
             items: courseItems,
-            selectName: 'courses-4',
+            name: 'courses-4',
             state: 'isDisabled',
         },
         {
-            attributes: { required: true },
             description: { label: 'Courses' },
             editor: 'select',
             groupVariants: ['secondary'],
             items: courseItems,
-            selectName: 'courses-5',
+            name: 'courses-5',
+            required: true,
             state: 'hasValidation',
             wasSubmitted: true,
         },
         {
-            attributes: {},
             description: { label: 'Courses' },
             editor: 'select',
             groupVariants: ['inline', 'secondary'],
             items: courseItems,
-            selectName: 'courses-6',
+            name: 'courses-6',
             state: 'inline',
         },
     ],
@@ -264,12 +254,10 @@ Secondary.args = {
 
 const viewItems = [
     {
-        itemAttributes: {},
         name: 'List View',
         value: 'list-view',
     },
     {
-        itemAttributes: {},
         name: 'Grid View',
         value: 'grid-view',
     },
@@ -278,60 +266,56 @@ const viewItems = [
 Tertiary.args = {
     selects: [
         {
-            attributes: {},
             editor: 'select',
             groupVariants: ['tertiary'],
             items: viewItems,
             placeholder: 'Please Select',
-            selectName: 'view-1',
+            name: 'view-1',
             state: 'default',
         },
         {
-            attributes: {},
             editor: 'select',
             groupVariants: ['tertiary'],
             items: viewItems,
             placeholder: 'List View',
-            selectName: 'view-2',
+            name: 'view-2',
             state: 'selectedOption',
         },
         {
-            attributes: { disabled: true },
+            disabled: true,
             editor: 'select',
             groupVariants: ['tertiary'],
             items: viewItems,
             placeholder: 'List View',
-            selectName: 'view-3',
+            name: 'view-3',
             state: 'isDisabled',
         },
         {
-            attributes: { required: true },
             editor: 'select',
             groupVariants: ['tertiary'],
             items: viewItems,
             placeholder: 'Please Select',
-            selectName: 'view-4',
+            name: 'view-4',
+            required: true,
             state: 'hasValidation',
             wasSubmitted: true,
         },
         {
-            attributes: {},
             description: { label: 'Sort By: ' },
             editor: 'select',
             groupVariants: ['inline', 'tertiary', 'bold'],
             items: viewItems,
             placeholder: 'List View',
-            selectName: 'view-5',
+            name: 'view-5',
             state: 'inline',
         },
         {
-            attributes: {},
             description: { icon: <ListBulletIcon /> },
             editor: 'select',
             groupVariants: ['inline', 'tertiary', 'bold'],
             items: viewItems,
             placeholder: 'List View',
-            selectName: 'view-6',
+            name: 'view-6',
             state: 'inlineIcon',
         },
     ],
