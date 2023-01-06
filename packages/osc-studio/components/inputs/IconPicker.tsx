@@ -73,7 +73,6 @@ const icons: { value: string }[] = [
     { value: 'list' },
     { value: 'mail' },
     { value: 'minus' },
-    { value: 'mobile-menu' },
     { value: 'notifications' },
     { value: 'payments' },
     { value: 'phone' },

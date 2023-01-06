@@ -28,7 +28,6 @@ const icons: string[] = [
     'list',
     'mail',
     'minus',
-    'mobile-menu',
     'notifications',
     'payments',
     'phone',
