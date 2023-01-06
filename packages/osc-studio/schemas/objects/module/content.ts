@@ -1,5 +1,6 @@
 import { EditIcon } from '@sanity/icons';
-import VariantPicker from '../../../components/inputs/VariantPicker/VariantPicker';
+// import VariantPicker from '../../../components/inputs/VariantPicker/VariantPicker';
+import { ColorPicker } from '../../../components/inputs/ColorPicker';
 import { SPACING } from '../../../constants';
 
 export default {
@@ -70,7 +71,7 @@ export default {
             title: 'Background Colour',
             type: 'string',
             initialValue: 'tertiary',
-            inputComponent: VariantPicker,
+            inputComponent: ColorPicker,
             group: 'content',
         },
         {
