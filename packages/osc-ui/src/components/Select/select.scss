@@ -5,6 +5,7 @@
 
 .c-select {
     --select-font-size: var(--font-scale-centi);
+    --secondary-background-color: var(--color-quinary);
 
     &__trigger {
         display: flex;
@@ -112,14 +113,14 @@
 
     &--secondary {
         .c-select__trigger {
-            background-color: var(--color-quinary);
+            background-color: var(--secondary-background-color);
         }
 
         .c-select__content {
-            background-color: var(--color-quinary);
+            background-color: var(--secondary-background-color);
 
             .c-select__scroll-button {
-                background-color: var(--color-quinary);
+                background-color: var(--secondary-background-color);
             }
         }
 
