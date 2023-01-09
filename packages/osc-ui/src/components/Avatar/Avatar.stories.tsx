@@ -10,21 +10,21 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: "Avatar component for displaying a user's profile picture or initials."
-            }
-        }
+                component: "Avatar component for displaying a user's profile picture or initials.",
+            },
+        },
     },
     argTypes: {
         className: {
-            description: 'Custom class'
+            description: 'Custom class',
         },
         name: {
-            description: "User's name"
+            description: "User's name",
         },
         src: {
-            description: 'An image url'
-        }
-    }
+            description: 'An image url',
+        },
+    },
 } as Meta;
 
 const Template: Story<AvatarProps> = ({ ...args }) => <Avatar {...args} />;
@@ -32,19 +32,36 @@ const Template: Story<AvatarProps> = ({ ...args }) => <Avatar {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
+    name: 'Colm Tuite',
     src: 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80',
-    name: 'Colm Tuite'
+};
+
+export const Notification = Template.bind({});
+
+Notification.args = {
+    name: 'Colm Tuite',
+    notification: true,
+    src: 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80',
+};
+
+export const NotificationWithCount = Template.bind({});
+
+NotificationWithCount.args = {
+    count: 2,
+    name: 'Colm Tuite',
+    notification: true,
+    src: 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80',
 };
 
 export const Fallback = Template.bind({});
 Fallback.args = {
     ...Primary.args,
-    src: ''
+    src: '',
 };
 Fallback.parameters = {
     docs: {
         description: {
-            story: "The user's initial will be displayed if there is no src or the url is invalid."
-        }
-    }
+            story: "The user's initial will be displayed if there is no src or the url is invalid.",
+        },
+    },
 };

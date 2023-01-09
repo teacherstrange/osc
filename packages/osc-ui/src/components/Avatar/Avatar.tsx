@@ -6,12 +6,14 @@ import './avatar.scss';
 
 export interface AvatarProps {
     className?: string;
-    src?: string;
+    count?: number;
     name: string;
+    notification: boolean;
+    src?: string;
 }
 
 export const Avatar: FC<AvatarProps> = (props: AvatarProps) => {
-    const { className, src, name } = props;
+    const { className, count, name, notification, src } = props;
     const classes = classNames('c-avatar', className);
     const initials = name
         ? name
@@ -23,6 +25,11 @@ export const Avatar: FC<AvatarProps> = (props: AvatarProps) => {
     return (
         <AvatarPrimitive.Root className={classes}>
             <AvatarPrimitive.Image className="c-avatar__image" src={src} alt={name} />
+            {notification ? (
+                <div className="c-avatar__notification-badge">
+                    <span className="c-avatar__notification-badge--count">{count}</span>
+                </div>
+            ) : null}
             <AvatarPrimitive.Fallback className="c-avatar__fallback">
                 {initials}
             </AvatarPrimitive.Fallback>
