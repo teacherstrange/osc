@@ -10,11 +10,37 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: 'Input component',
+                component: 'Text Input component with Label for inputting form data',
             },
         },
     },
-    argTypes: {},
+    argTypes: {
+        action: { description: 'An action, such as a button which accepts an icon and a label' },
+        defaultValue: {
+            description: 'The value of the select when initially rendered.',
+        },
+        disabled: {
+            description: 'Sets a Select component as disabled',
+        },
+        id: {
+            description:
+                'The id of the select. Submitted with its owning form as part of a name/value pair.',
+        },
+        icon: {
+            description:
+                'An icon to be used with the input which requires both the Icon and a label for accessibility',
+        },
+        name: {
+            description: 'The name of input shown to the user which is displayed in the Label',
+        },
+        placeholder: { description: 'A placeholder value for the input field' },
+        ref: { description: 'A ref that is forwarded to the TextInput component' },
+        required: { description: 'Sets a Select as being a required field' },
+        variants: { description: 'Sets the custom styles, e.g. "Secondary", "Tertiary"' },
+        wasSubmitted: {
+            description: 'A boolean that alerts when form is submitted for error handling',
+        },
+    },
 } as Meta;
 
 const states = {
