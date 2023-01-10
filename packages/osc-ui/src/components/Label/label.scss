@@ -1,0 +1,18 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-label {
+    font-size: var(--font-scale-centi);
+    font-weight: $weight-reg;
+    cursor: pointer;
+
+    &--bold {
+        font-weight: $weight-bold;
+    }
+}
+
+.c-label__required {
+    padding-left: 1px;
+    font-size: var(--font-scale-centi);
+}
