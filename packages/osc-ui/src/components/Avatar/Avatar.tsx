@@ -8,12 +8,12 @@ export interface AvatarProps {
     className?: string;
     count?: number;
     name: string;
-    notification: boolean;
+    notification?: { show: boolean; count?: number };
     src?: string;
 }
 
 export const Avatar: FC<AvatarProps> = (props: AvatarProps) => {
-    const { className, count, name, notification, src } = props;
+    const { className, name, notification = { show: false }, src } = props;);
     const classes = classNames('c-avatar', className);
     const initials = name
         ? name
@@ -25,9 +25,11 @@ export const Avatar: FC<AvatarProps> = (props: AvatarProps) => {
     return (
         <AvatarPrimitive.Root className={classes}>
             <AvatarPrimitive.Image className="c-avatar__image" src={src} alt={name} />
-            {notification ? (
+            {notification.show ? (
                 <div className="c-avatar__notification-badge">
-                    <span className="c-avatar__notification-badge--count">{count}</span>
+                    <span className="c-avatar__notification-badge--count">
+                        {notification.count}
+                    </span>
                 </div>
             ) : null}
             <AvatarPrimitive.Fallback className="c-avatar__fallback">
