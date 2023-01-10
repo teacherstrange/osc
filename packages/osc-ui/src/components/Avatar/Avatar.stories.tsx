@@ -56,6 +56,7 @@ NotificationWithCount.args = {
 export const Fallback = Template.bind({});
 Fallback.args = {
     ...Primary.args,
+    className: 'fallback',
     src: '',
 };
 Fallback.parameters = {
