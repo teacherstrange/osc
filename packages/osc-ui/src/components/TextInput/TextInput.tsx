@@ -1,4 +1,4 @@
-import type { HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from 'react';
+import type { InputHTMLAttributes, ReactNode } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { useElement } from '../../hooks/useElement';
 import { useModifier } from '../../hooks/useModifier';
@@ -9,16 +9,32 @@ import './text-input.scss';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 
+type IconType = {
+    content: ReactNode;
+    label: string;
+};
+
 type Action = {
-    label?: string;
-    icon?: ReactNode;
+    icon?: IconType;
     type: string;
 };
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+    /**
+     * An object that contains the type of action, e.g. Submit, plus an optional icon and label for accessibility
+     */
     action?: Action;
-    icon?: { content: ReactNode; label: string };
-    type: HTMLInputTypeAttribute;
+    /**
+     * An object that contains an Icon and a label for accessibility
+     */
+    icon?: IconType;
+    /**
+     * Sets the custom styles, e.g. "Secondary", "Tertiary"
+     */
     variants?: string[];
+    /**
+     * A boolean that alerts when form is submitted for error handling
+     * @default false
+     */
     wasSubmitted?: boolean;
 }
 
@@ -99,7 +115,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
             </div>
             {action?.type === 'submit' ? (
                 <Button className="c-input__button">
-                    <Icon label={action?.label}>{action?.icon}</Icon>
+                    <Icon label={action?.icon?.label}>{action?.icon?.content}</Icon>
                 </Button>
             ) : null}
         </div>

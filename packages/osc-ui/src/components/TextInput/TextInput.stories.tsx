@@ -233,7 +233,10 @@ Tertiary.args = {
 Quaternary.args = {
     items: [
         {
-            action: { type: 'submit', icon: <MagnifyingGlassIcon />, label: 'Magnifying Glass' },
+            action: {
+                type: 'submit',
+                icon: { content: <MagnifyingGlassIcon />, label: 'Magnifying Glass' },
+            },
             editor: 'input',
             id: 'search',
             name: 'Search',
@@ -242,7 +245,10 @@ Quaternary.args = {
             variants: ['quaternary'],
         },
         {
-            action: { type: 'submit', icon: <MagnifyingGlassIcon />, label: 'Magnifying Glass' },
+            action: {
+                type: 'submit',
+                icon: { content: <MagnifyingGlassIcon />, label: 'Magnifying Glass' },
+            },
             defaultValue: 'GCSE English',
             editor: 'input',
             id: 'search-1',

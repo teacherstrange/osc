@@ -33,7 +33,10 @@ test('should render a button with icon if action is set to type "submit" and pas
             type="text"
             id="test-input"
             name="Test Input"
-            action={{ label: 'Magnifying Glass', icon: <MagnifyingGlassIcon />, type: 'submit' }}
+            action={{
+                icon: { content: <MagnifyingGlassIcon />, label: 'Magnifying Glass' },
+                type: 'submit',
+            }}
         />
     );
     expect(screen.getByRole('button')).toBeInTheDocument();
