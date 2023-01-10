@@ -53,7 +53,7 @@ export const Select = React.forwardRef<ElementRef<typeof SelectPrimitive.Trigger
         const modifiers = useModifier('c-select', groupVariants);
         const selectClasses = classNames('c-select', modifiers);
 
-        const setDescription = (desc: Props['description']) => {
+        const setDescription = (desc: Description) => {
             if (desc?.label) return <Label htmlFor={name} name={desc.label} required={required} />;
             if (desc?.icon) return <Icon label={name}>{desc.icon}</Icon>;
         };
