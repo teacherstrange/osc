@@ -13,7 +13,7 @@ export interface AvatarProps {
 }
 
 export const Avatar: FC<AvatarProps> = (props: AvatarProps) => {
-    const { className, name, notification = { show: false }, src } = props;);
+    const { className, name, notification = { show: false }, src } = props;
     const classes = classNames('c-avatar', className);
     const initials = name
         ? name
@@ -23,7 +23,7 @@ export const Avatar: FC<AvatarProps> = (props: AvatarProps) => {
         : null;
 
     return (
-        <AvatarPrimitive.Root className={classes}>
+        <AvatarPrimitive.Root className={src ? classes : `${classes} c-avatar__fallback`}>
             <AvatarPrimitive.Image className="c-avatar__image" src={src} alt={name} />
             {notification.show ? (
                 <div className="c-avatar__notification-badge">
@@ -32,7 +32,7 @@ export const Avatar: FC<AvatarProps> = (props: AvatarProps) => {
                     </span>
                 </div>
             ) : null}
-            <AvatarPrimitive.Fallback className="c-avatar__fallback">
+            <AvatarPrimitive.Fallback className="c-avatar__fallback--initials">
                 {initials}
             </AvatarPrimitive.Fallback>
         </AvatarPrimitive.Root>
