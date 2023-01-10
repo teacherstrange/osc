@@ -1,7 +1,7 @@
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import type { ComponentPropsWithRef, ElementRef, FC } from 'react';
-import React, { useState } from 'react';
+import type { ComponentPropsWithRef, ElementRef, ReactNode } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 import { getFieldError } from '../../utils/getFieldError';
@@ -11,7 +11,7 @@ import './select.scss';
 
 type Description = {
     label?: string;
-    icon?: React.ReactNode;
+    icon?: ReactNode;
 };
 export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root> {
     /**
@@ -33,7 +33,7 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
     wasSubmitted?: boolean;
 }
 
-export const Select = React.forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(
+export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(
     (props: Props, forwardedRef) => {
         const {
             children,
@@ -100,7 +100,7 @@ export const Select = React.forwardRef<ElementRef<typeof SelectPrimitive.Trigger
 
 export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.Item> {}
 
-export const SelectItem = React.forwardRef<ElementRef<typeof SelectPrimitive.Item>, ItemProps>(
+export const SelectItem = forwardRef<ElementRef<typeof SelectPrimitive.Item>, ItemProps>(
     ({ children, ...props }, forwardedRef) => {
         return (
             <SelectPrimitive.Item {...props} ref={forwardedRef} className="c-select__item">
