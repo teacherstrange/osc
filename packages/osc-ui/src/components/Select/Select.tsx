@@ -100,19 +100,18 @@ export const Select = React.forwardRef<ElementRef<typeof SelectPrimitive.Trigger
 
 export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.Item> {}
 
-export const SelectItem: FC<ItemProps> = React.forwardRef<
-    ElementRef<typeof SelectPrimitive.Item>,
-    ItemProps
->(({ children, ...props }, forwardedRef) => {
-    return (
-        <SelectPrimitive.Item {...props} ref={forwardedRef} className="c-select__item">
-            <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-            <SelectPrimitive.ItemIndicator className="c-select__item-indicator">
-                <CheckIcon />
-            </SelectPrimitive.ItemIndicator>
-        </SelectPrimitive.Item>
-    );
-});
+export const SelectItem = React.forwardRef<ElementRef<typeof SelectPrimitive.Item>, ItemProps>(
+    ({ children, ...props }, forwardedRef) => {
+        return (
+            <SelectPrimitive.Item {...props} ref={forwardedRef} className="c-select__item">
+                <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+                <SelectPrimitive.ItemIndicator className="c-select__item-indicator">
+                    <CheckIcon />
+                </SelectPrimitive.ItemIndicator>
+            </SelectPrimitive.Item>
+        );
+    }
+);
 
 Select.displayName = 'Select';
 SelectItem.displayName = 'SelectItem';
