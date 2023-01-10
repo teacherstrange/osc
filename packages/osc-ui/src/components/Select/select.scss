@@ -7,6 +7,10 @@
     --select-font-size: var(--font-scale-centi);
     --secondary-background-color: var(--color-quinary);
 
+    .c-label {
+        cursor: default;
+    }
+
     &__trigger {
         display: flex;
         align-items: center;
