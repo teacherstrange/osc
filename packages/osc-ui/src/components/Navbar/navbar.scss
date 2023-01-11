@@ -1,0 +1,56 @@
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+/* stylelint-disable plugin/selector-bem-pattern */
+.c-nav {
+    $self: &;
+
+    position: relative;
+    padding-bottom: 33px; // TODO
+    font-size: rem($base-font-size);
+    line-height: 1.5; // TODO: Check this against PR: 643 once merged
+
+    button,
+    a {
+        &:focus-visible {
+            box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary);
+        }
+    }
+
+    &,
+    &__list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &[data-state="open"] {
+            background-color: var(--color-quinary);
+        }
+    }
+
+    &__content {
+        position: relative;
+
+        // top: 0;
+        // left: 0;
+        width: 100%;
+
+        // &--level-0 {
+        //     font-size: var(--font-scale-zeta);
+        //     font-weight: $weight-bold;
+        // }
+
+        &[data-state="closed"] {
+            display: none;
+        }
+
+        &[data-state="open"] {
+            display: block;
+        }
+    }
+}
