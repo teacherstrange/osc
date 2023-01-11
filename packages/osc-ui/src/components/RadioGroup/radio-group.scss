@@ -1,0 +1,101 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625em;
+
+    &__item-container {
+        display: flex;
+        align-items: center;
+    }
+
+    &__item {
+        width: 1.25em;
+        height: 1.25em;
+        background-color: var(--color-tertiary);
+        border: solid 1px var(--color-quinary);
+        border-radius: 100%;
+
+        &:hover {
+            background-color: hsl(252deg 96.9% 97.4%);
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 2px var(--color-primary);
+        }
+    }
+
+    &__indicator {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+        &::after {
+            display: block;
+            width: 0.875em;
+            height: 0.875em;
+            background-color: var(--color-quaternary);
+            border-radius: 50%;
+            content: "";
+        }
+    }
+
+    &__description {
+        font-size: var(--font-scale-centi);
+    }
+
+    &--error {
+        .c-radio-group__item {
+            background-color: hsl(0deg 92% 55% / 20%);
+            border: solid 1px hsl(0deg 92% 55%);
+        }
+
+        .c-radio-group__error-message {
+            color: hsl(0deg 93% 55%);
+            font-size: var(--font-scale-centi);
+        }
+    }
+
+    &--secondary {
+        .c-radio-group__item {
+            border: solid 1px var(--color-secondary);
+        }
+
+        .c-radio-group__indicator {
+            &::after {
+                background-color: var(--color-secondary);
+            }
+        }
+
+        .c-label {
+            font-weight: $weight-bold;
+        }
+
+        &[data-disabled] {
+            .c-radio-group__item {
+                border: solid 1px var(--color-quinary);
+            }
+        }
+
+        &.c-radio-group--error {
+            .c-radio-group__item {
+                border: solid 1px hsl(0deg 92% 55%);
+            }
+        }
+    }
+
+    .c-label {
+        padding-left: 0.625em;
+    }
+
+    &[data-disabled] {
+        color: #b9b9b9;
+        pointer-events: none;
+    }
+}
