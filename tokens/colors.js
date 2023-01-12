@@ -29,7 +29,7 @@ const colorDarkestGrey = 'hsl(0deg 0% 60%)';
 
 // Semantic colours
 const colorError = 'hsl(0deg 93% 48%)';
-const colorError20 = 'hsl(0deg 93% 55% / 20%)';
+const colorError20 = 'hsl(0deg 93% 48% / 20%)';
 const colorNotice = 'hsl(202deg 93% 55%)';
 const colorNotice20 = 'hsl(202deg 93% 55% / 20%)';
 const colorSuccess = 'hsl(144deg 66% 55%)';
