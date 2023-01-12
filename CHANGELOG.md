@@ -1,3 +1,13 @@
+## [0.26.1](https://github.com/Open-Study-College/osc/compare/v0.26.0...v0.26.1) (2023-01-12)
+
+
+### ♻️ Refactors
+
+* update colour tokens ([e6827df](https://github.com/Open-Study-College/osc/commit/e6827df39b265c8814ef93ed708d37e7df10333b))
+* update error20 to match error ([d0d0fad](https://github.com/Open-Study-College/osc/commit/d0d0fad05cae6c818c2990f9c8681d6eb97613fc))
+* **tokens:** adds gradient direction options ([0d2a89f](https://github.com/Open-Study-College/osc/commit/0d2a89fb447f79aeeeb2c5330e39bfc4e99c0e79))
+* **tokens:** updates colour tokens ([a1eae17](https://github.com/Open-Study-College/osc/commit/a1eae17a51871d14dc12c05fd677ba1942c8333c))
+
 ## [0.26.0](https://github.com/Open-Study-College/osc/compare/v0.25.0...v0.26.0) (2023-01-05)
 
 
@@ -103,32 +113,4 @@
 * **gateway:** added dev `wait-on` for ecommerce api ([4e0a357](https://github.com/Open-Study-College/osc/commit/4e0a3578d4b5905466f037225865e653a226b380))
 * **gateway:** added ecommerce api subgraph url ([9c8bfc0](https://github.com/Open-Study-College/osc/commit/9c8bfc0052011ff4eea54186c9ffc2c062140875))
 * **gateway:** implemented zod for typing `.env` ([8a75577](https://github.com/Open-Study-College/osc/commit/8a7557770c816d167a43c6e1bd72e9cdc0fb1b50))
-
-## [0.23.0](https://github.com/Open-Study-College/osc/compare/v0.22.0...v0.23.0) (2022-12-15)
-
-
-### ♻️ Refactors
-
-* **carousel:** update base carousel styles ([edfed36](https://github.com/Open-Study-College/osc/commit/edfed36960fd6ea53f875dd01607d196978849ac))
-* **carousel:** update carousel from embla to keen-slider ([27f5e02](https://github.com/Open-Study-College/osc/commit/27f5e02e44bd3dfbed908eb007752d1d1efef89e))
-* **carousel:** update carousel stories ([37757fa](https://github.com/Open-Study-College/osc/commit/37757fa286b98213627fb9dd4a2f91fb2aed1ee0))
-* **carousel:** update carousel tests ([3a70e3d](https://github.com/Open-Study-College/osc/commit/3a70e3dc12e3686930ee524f75b70c81f0af074d))
-* **carousel:** update sanity schema ([5b1fcf8](https://github.com/Open-Study-College/osc/commit/5b1fcf8984a8dc6b40dccf82b81798f08e0988b2))
-* **studio:** updates the schema to hide the autoplay if loop isn't enabled ([573b30c](https://github.com/Open-Study-College/osc/commit/573b30c03617c0fa6644af8c3083a4745e5c57cd))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **carousel:** update typescript target ([e5f9d04](https://github.com/Open-Study-College/osc/commit/e5f9d04e0cded2d720c381bcf6f41ed098bac424))
-* **studio:** update description to breakpoints fields ([495b2ca](https://github.com/Open-Study-College/osc/commit/495b2ca1926ed217b44c1a1657b54030596b954b))
-
-
-### ✨ Features
-
-* **util:** adds utility function to calculate rem in ts files ([3d11317](https://github.com/Open-Study-College/osc/commit/3d11317cfcf8da6d07a498abe19fce7ae8a0953e))
-
-
-### 🐛 Bugs
-
-* **carousel:** updates useVariant hook to useModifier ([9842ae2](https://github.com/Open-Study-College/osc/commit/9842ae20ec5dd6371fa27efcbe779d041cbaddd2))
 
