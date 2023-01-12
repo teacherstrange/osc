@@ -56,9 +56,11 @@ export const RadioGroup = (props: RadioGroupProps) => {
 
     return (
         <div>
-            <p className="c-radio-group__description" id={description?.id}>
-                {description?.value}
-            </p>
+            {description ? (
+                <p className="c-radio-group__description" id={description?.id}>
+                    {description?.value}
+                </p>
+            ) : null}
             <RadioGroupPrimitive.Root
                 aria-label={name}
                 aria-labelledby={description?.id}
