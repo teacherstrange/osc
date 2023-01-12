@@ -9,7 +9,7 @@
 // Brand colours
 const colorPink = 'hsl(335deg 85% 49%)';
 const colorNavy = 'hsl(205deg 79% 11%)';
-const colorTeal = 'hsl(175deg 100% 36%)';
+const colorTeal = 'hsl(175deg 100% 33%)';
 const colorLightOrange = 'hsl(31deg 94% 65%)';
 const colorCandyPink = 'hsl(334deg 79% 89%)';
 const colorCyan = 'hsl(179deg 92% 77%)';
@@ -28,14 +28,14 @@ const colorDarkGrey = 'hsl(0deg 0% 73%)';
 const colorDarkestGrey = 'hsl(0deg 0% 60%)';
 
 // Semantic colours
-const colorError = 'hsl(0deg 92% 55%)';
-const colorError20 = 'hsl(0deg 92% 55% / 20%)';
-const colorNotice = 'hsl(202deg 92% 55%)';
-const colorNotice20 = 'hsl(202deg 92% 55% / 20%)';
-const colorSuccess = 'hsl(144deg 67% 55%)';
-const colorSuccess20 = 'hsl(144deg 67% 55% / 20%)';
-const colorWarning = 'hsl(47deg 98% 67%)';
-const colorWarning20 = 'hsl(47deg 98% 67% / 20%)';
+const colorError = 'hsl(0deg 93% 48%)';
+const colorError20 = 'hsl(0deg 93% 55% / 20%)';
+const colorNotice = 'hsl(202deg 93% 55%)';
+const colorNotice20 = 'hsl(202deg 93% 55% / 20%)';
+const colorSuccess = 'hsl(144deg 66% 55%)';
+const colorSuccess20 = 'hsl(144deg 66% 55% / 20%)';
+const colorWarning = 'hsl(47deg 96% 50%)';
+const colorWarning20 = 'hsl(47deg 96% 50% / 20%)';
 
 // Gradients
 // https://www.joshwcomeau.com/gradient-generator?colors=faa751|e6126a&angle=0&colorMode=hsl&precision=8&easingCurve=0.333|1|0.666|0
