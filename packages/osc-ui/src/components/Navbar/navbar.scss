@@ -6,14 +6,93 @@
     $self: &;
 
     position: relative;
-    padding-bottom: 33px; // TODO
     font-size: rem($base-font-size);
+    font-weight: $weight-bold;
     line-height: 1.5; // TODO: Check this against PR: 643 once merged
+
+    @include mq(mq-token("desk")) {
+        font-weight: $weight-reg;
+    }
 
     button,
     a {
         &:focus-visible {
-            box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary);
+            box-shadow: 0 0 0 0.2rem var(--color-primary);
+        }
+    }
+
+    &__trigger,
+    &__link {
+        padding: var(--space-scale-gamma) var(--space-scale-zeta);
+        border-block-end: solid 1px var(--color-quinary);
+
+        @include mq(mq-token("desk")) {
+            padding: 0;
+            border-block-end: none;
+        }
+
+        // Style triggers and links within the content block
+        #{$self}__content & {
+            padding-block: var(--space-scale-epsilon);
+
+            @include mq(mq-token("desk")) {
+                padding-block: 0;
+            }
+        }
+
+        // Style triggers and links within the content block where they are not the top level
+        #{$self}__submenu:not(:where([data-level="0"])) & {
+            @include mq(mq-token("desk")) {
+                padding-block: var(--space-scale-delta) var(--space-scale-micro);
+                border-bottom: solid 1px var(--color-quinary);
+                font-weight: $weight-bold;
+            }
+        }
+    }
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        cursor: pointer;
+
+        &--close {
+            background-color: hsl(0deg 0% 96%); // TODO: Update this to variable
+            border-bottom: none;
+
+            @include mq(mq-token("desk")) {
+                width: auto;
+                justify-self: flex-end;
+            }
+
+            > span {
+                margin-inline: auto;
+            }
+
+            #{$self}__trigger-icon {
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    &__trigger-icon {
+        @include mq(mq-token("desk"), max) {
+            transform: rotate(-90deg);
+        }
+
+        #{$self}__trigger[data-state="open"] & {
+            @include mq(mq-token("desk")) {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &__link {
+        display: flex;
+
+        @include mq(mq-token("desk")) {
+            display: inline-block;
         }
     }
 
@@ -21,36 +100,183 @@
     &__list {
         display: flex;
         flex-direction: column;
-    }
 
-    &__trigger {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-
-        &[data-state="open"] {
-            background-color: var(--color-quinary);
+        @include mq(mq-token("desk")) {
+            flex-direction: row;
         }
     }
 
+    &__list {
+        --navbar-list-gap: var(--space-scale-delta);
+
+        @include mq(mq-token("desk")) {
+            column-gap: var(--navbar-list-gap);
+        }
+
+        // Style the list when the content block isn't the top level
+        #{$self}__content:not([data-level="0"]) & {
+            @include mq(mq-token("desk")) {
+                flex-direction: column;
+                column-gap: var(--navbar-list-gap);
+            }
+        }
+
+        // Lists within the columns
+        #{$self}__item--column & {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &__item {
+        @include mq(mq-token("desk")) {
+            flex: 0 1 calc(25% - var(--navbar-list-gap));
+        }
+
+        // Reset the flex value on the very top level list items
+        #{$self} > #{$self}__list > & {
+            flex: auto;
+        }
+
+        &--feature {
+            border-bottom: solid 1px var(--color-quinary);
+            font-size: var(--font-scale-delta);
+            padding-block: var(--space-scale-zeta);
+
+            @include mq(mq-token("desk"), max) {
+                order: 0;
+            }
+
+            @include mq(mq-token("desk")) {
+                flex: 1 1 100%;
+                border-bottom: none;
+            }
+
+            #{$self}__list {
+                @include mq(mq-token("desk")) {
+                    flex-direction: column;
+                }
+            }
+
+            #{$self}__link {
+                padding-block: 0;
+                border-bottom: none;
+            }
+        }
+
+        &--column {
+            @include mq(mq-token("desk"), max) {
+                order: 1;
+            }
+        }
+
+        [data-level="0"] & {
+            @include mq(mq-token("desk")) {
+                padding-left: 0;
+            }
+        }
+    }
+
+    /*
+     * CSS trick to animate the height to "auto"
+     * https://chriscoyier.net/2022/12/21/things-css-could-still-use-heading-into-2023/#animate-to-auto
+     *
+     * [1] Set the display of the container to a grid
+     * [2] Set the template rows to 0fr -- this will make them take up a 0 height space
+     * [3] Set the inner element to have a min-height of 0, this is required to make the above step work
+     * [4] Set the overflow to hidden for obvious reasons
+     * [5] When the state is open set the template rows to 1fr
+     *
+     */
     &__content {
-        position: relative;
-
-        // top: 0;
-        // left: 0;
+        position: absolute;
         width: 100%;
+        min-height: 100vh;
+        background-color: var(--color-tertiary);
+        transition: transform $timing $ease-out-sine, grid-template-rows $timing $ease-out-sine;
+        inset: 0;
 
-        // &--level-0 {
-        //     font-size: var(--font-scale-zeta);
-        //     font-weight: $weight-bold;
-        // }
+        @include mq(mq-token("desk")) {
+            display: grid; /* [1]  */
+        }
+
+        #{$self}__list {
+            @include mq(mq-token("desk")) {
+                min-height: 0; /* [3] */
+            }
+        }
+
+        #{$self}__item--feature #{$self}__link {
+            font-weight: $weight-bold;
+        }
+
+        // If menu has no further children
+        &:not(:where(#{$self}__content #{$self}__content)) {
+            #{$self}__link {
+                border-bottom: none;
+                font-weight: $weight-light;
+
+                @include mq(mq-token("desk")) {
+                    padding-block: 6px;
+                }
+            }
+        }
+
+        @include mq(mq-token("desk")) {
+            left: 0;
+            min-height: unset;
+            background-color: hsl(0deg 0% 96%); // TODO: Update this to variable
+            inset: unset;
+
+            #{$self}__content {
+                position: relative;
+                overflow: hidden; /* [4] */
+            }
+        }
+
+        &[data-level="0"] {
+            @include mq(mq-token("desk")) {
+                padding-block: var(--space-scale-epsilon) var(--space-scale-gamma);
+                padding-inline: var(--space-scale-epsilon);
+            }
+
+            > #{$self}__list {
+                @include mq(mq-token("desk")) {
+                    padding-inline: var(--space-scale-beta) var(--space-scale-delta);
+                    flex-wrap: wrap;
+                }
+            }
+
+            &[data-state="closed"] {
+                @include mq(mq-token("desk")) {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+
+            &[data-state="open"] {
+                @include mq(mq-token("desk")) {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
 
         &[data-state="closed"] {
-            display: none;
+            transform: translateX(100vw);
+
+            @include mq(mq-token("desk")) {
+                transform: translateX(0);
+                grid-template-rows: 0fr; /* [2] */
+            }
         }
 
         &[data-state="open"] {
-            display: block;
+            transform: translateX(0);
+
+            @include mq(mq-token("desk")) {
+                grid-template-rows: 1fr; /* [5] */
+            }
         }
     }
 }
