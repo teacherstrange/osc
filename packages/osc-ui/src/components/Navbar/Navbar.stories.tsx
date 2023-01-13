@@ -42,7 +42,7 @@ const SubMenuTemplate: Story<NavProps> = ({ ...args }) => (
             {subMenuNav.map((item, index) => (
                 <NavItem key={index}>
                     {item.subMenu ? (
-                        <NavSubMenu level={0}>
+                        <NavSubMenu level={0} label={item.label}>
                             <NavTrigger>{item.label}</NavTrigger>
                             <NavContent level={0}>
                                 <NavList>
@@ -70,26 +70,67 @@ const NestedSubMenuTemplate: Story<NavProps> = ({ ...args }) => {
         label: string;
         href?: string;
         isExternal?: boolean;
+        featured?: Item[];
         subMenu?: Item[];
+        column?: Item[];
     };
     const RecursiveNavItemWrapper = (props: { item: Item; level: number; value: string }) => {
         const { item, level } = props;
 
+        if (item.featured) {
+            return (
+                <NavItem className="c-nav__item--feature">
+                    <NavList>
+                        {item.featured.map((item, index) => {
+                            return (
+                                <NavItem key={index}>
+                                    <NavLink href={item.href} isExternal={item.isExternal}>
+                                        {item.label}
+                                    </NavLink>
+                                </NavItem>
+                            );
+                        })}
+                    </NavList>
+                </NavItem>
+            );
+        }
+
+        if (item.column) {
+            return (
+                <NavItem className="c-nav__item--column">
+                    <NavList>
+                        {item.column.map((subItem, subIndex) => {
+                            return (
+                                <RecursiveNavItemWrapper
+                                    key={subIndex}
+                                    item={subItem}
+                                    level={level + 1}
+                                    value={subItem?.label.toLocaleLowerCase()}
+                                />
+                            );
+                        })}
+                    </NavList>
+                </NavItem>
+            );
+        }
+
         return (
             <NavItem>
                 {item.subMenu ? (
-                    <NavSubMenu level={level}>
+                    <NavSubMenu level={level} label={item.label}>
                         <NavTrigger>{item.label}</NavTrigger>
                         <NavContent level={level}>
                             <NavList>
-                                {item.subMenu.map((subItem, subIndex) => (
-                                    <RecursiveNavItemWrapper
-                                        key={subIndex}
-                                        item={subItem}
-                                        level={level + 1}
-                                        value={subItem.label.toLocaleLowerCase()}
-                                    />
-                                ))}
+                                {item.subMenu.map((subItem, subIndex) => {
+                                    return (
+                                        <RecursiveNavItemWrapper
+                                            key={subIndex}
+                                            item={subItem}
+                                            level={level + 1}
+                                            value={subItem?.label.toLocaleLowerCase()}
+                                        />
+                                    );
+                                })}
                             </NavList>
                         </NavContent>
                     </NavSubMenu>
@@ -110,7 +151,7 @@ const NestedSubMenuTemplate: Story<NavProps> = ({ ...args }) => {
                         key={index}
                         item={item}
                         level={0}
-                        value={item.label.toLocaleLowerCase()}
+                        value={item?.label.toLocaleLowerCase()}
                     />
                 ))}
             </NavList>

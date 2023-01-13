@@ -1,109 +1,210 @@
-export const simpleNav = [
+const subMenu = [
     {
-        label: 'Item 1',
+        label: 'Sub category',
         href: '/',
     },
     {
-        label: 'Item 2',
-        href: '/foo',
+        label: 'Sub category',
+        href: '/',
     },
     {
-        label: 'Item 3',
-        href: '/bar',
+        label: 'Sub category',
+        href: '/',
+    },
+    {
+        label: 'View all',
+        href: '/',
+    },
+];
+
+export const simpleNav = [
+    {
+        label: 'Courses',
+        href: '/',
+    },
+    {
+        label: 'How it works',
+        href: '/',
+    },
+    {
+        label: 'Special offers',
+        href: '/baz',
     },
 ];
 
 export const subMenuNav = [
     {
-        label: 'Item 1',
+        label: 'Courses',
         isExternal: false,
         subMenu: [
             {
-                label: 'Sub Item 1',
+                label: 'Childcare & education',
                 href: '/',
             },
             {
-                label: 'Sub Item 2',
-                href: '/foo',
+                label: 'Health & social care',
+                href: '/',
             },
             {
-                label: 'Sub Item 3',
-                href: '/bar',
+                label: 'Access to HE',
+                href: '/',
+            },
+            {
+                label: 'Hair, beauty & nails',
+                href: '/',
             },
         ],
     },
     {
-        label: 'Item 2',
-        href: '/baz',
+        label: 'How it works',
+        href: '/',
     },
     {
-        label: 'Item 3',
-        href: '/biz',
+        label: 'Special offers',
+        href: '/baz',
     },
 ];
 
 export const nestedSubMenuNav = [
     {
-        label: 'Item 1',
+        label: 'Courses',
         isExternal: false,
         subMenu: [
             {
-                label: 'Sub Item 1',
-                href: 'https://www.google.com',
-                isExternal: true,
-            },
-            {
-                label: 'Sub Item 2',
-                href: '/',
-                subMenu: [
+                label: 'Column 1',
+                column: [
                     {
-                        label: 'Sub Item 1',
-                        href: 'https://www.google.com',
-                        isExternal: true,
+                        label: 'Childcare & education',
+                        href: '/',
+                        subMenu,
                     },
                     {
-                        label: 'Sub Item 2',
-                        href: '/foo',
+                        label: 'Health & social care',
+                        href: '/',
+                        subMenu,
                     },
                     {
-                        label: 'Sub Item 3',
-                        href: '/bar',
-                        subMenu: [
-                            {
-                                label: 'Sub Item 1',
-                                href: 'https://www.google.com',
-                                isExternal: true,
-                            },
-                            {
-                                label: 'Sub Item 2',
-                                href: '/foo',
-                            },
-                            {
-                                label: 'Sub Item 3',
-                                href: '/bar',
-                            },
-                        ],
+                        label: 'Access to HE',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Hair, beauty & nails',
+                        href: '/',
+                        subMenu,
                     },
                 ],
             },
             {
-                label: 'Sub Item 3',
-                href: '/biz',
+                label: 'Column 2',
+                column: [
+                    {
+                        label: 'Counselling & psychology',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Accounting & bookkeeping',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Business',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Computers & IT',
+                        href: '/',
+                        subMenu,
+                    },
+                ],
             },
-        ],
-    },
-    {
-        label: 'Item 2',
-        href: '/bar',
-        subMenu: [
             {
-                label: 'Sub Item 1',
-                href: 'https://www.google.com',
+                label: 'Column 3',
+                column: [
+                    {
+                        label: 'Health & safety',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Health, fitness & nutrition',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Animal care',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Higher education',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Languages',
+                        href: '/',
+                        subMenu,
+                    },
+                ],
+            },
+            {
+                label: 'Column 4',
+                column: [
+                    {
+                        label: 'Creative',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Property & home',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'History',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Law & politics',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Maths & science',
+                        href: '/',
+                        subMenu,
+                    },
+                ],
+            },
+            {
+                label: 'featured',
+                featured: [
+                    {
+                        label: 'A levels',
+                        href: '/',
+                    },
+                    {
+                        label: 'GCSEs',
+                        href: '/',
+                    },
+                    {
+                        label: 'Discover all courses',
+                        href: '/',
+                    },
+                ],
             },
         ],
     },
     {
-        label: 'Item 3',
+        label: 'How it works',
+        href: '/',
+    },
+    {
+        label: 'Special offers',
         href: '/baz',
     },
 ];
