@@ -155,6 +155,10 @@ export const NavTrigger = forwardRef<
     const { isOpen, level, setIsOpen, contentId, triggerId } = useSubNavContext();
     const desk = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
+    // IF the level is equal/greater than 0 OR isOpen set the tabindex to 0 else set to -1
+    // This prevents hidden elements from being tabbed to
+    const tabIndex = level >= 0 || isOpen ? 0 : -1;
+
     return (
         <button
             id={triggerId}
@@ -164,6 +168,7 @@ export const NavTrigger = forwardRef<
             aria-expanded={isOpen}
             aria-controls={contentId}
             className={classes}
+            tabIndex={tabIndex}
             {...attr}
             ref={forwardedRef}
             onClick={() => setIsOpen(!isOpen)}
@@ -343,8 +348,19 @@ export const NavLink = forwardRef<ElementRef<NavLinkRef>, ComponentPropsWithoutR
         const { href = '/', isExternal = false, children, target, ...attr } = props;
         const context = useSubNavContext();
 
+        // IF the level is NOT set OR isOpen set the tabindex to 0 else set to -1
+        // This prevent hidden elements from being tabbed to
+        const tabIndex = !context?.level || context?.isOpen ? 0 : -1;
+
         return isExternal ? (
-            <a className="c-nav__link" href={href} target={target} {...attr} ref={forwardedRef}>
+            <a
+                className="c-nav__link"
+                href={href}
+                target={target}
+                tabIndex={tabIndex}
+                {...attr}
+                ref={forwardedRef}
+            >
                 {children}
             </a>
         ) : (
@@ -352,6 +368,7 @@ export const NavLink = forwardRef<ElementRef<NavLinkRef>, ComponentPropsWithoutR
                 to={href}
                 className="c-nav__link"
                 target={target}
+                tabIndex={tabIndex}
                 {...attr}
                 ref={forwardedRef}
             >

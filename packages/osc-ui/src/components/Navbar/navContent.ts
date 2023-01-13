@@ -208,3 +208,60 @@ export const nestedSubMenuNav = [
         href: '/baz',
     },
 ];
+
+// Smaller version of the nestedSubMenuNav so tests aren't so hefty
+export const testNestedSubMenuNav = [
+    {
+        label: 'Courses',
+        isExternal: false,
+        subMenu: [
+            {
+                label: 'Column 1',
+                column: [
+                    {
+                        label: 'Childcare & education',
+                        href: '/',
+                        subMenu,
+                    },
+                    {
+                        label: 'Health & social care',
+                        href: '/',
+                    },
+                    {
+                        label: 'Access to HE',
+                        href: '/',
+                    },
+                    {
+                        label: 'Hair, beauty & nails',
+                        href: '/',
+                    },
+                ],
+            },
+            {
+                label: 'featured',
+                featured: [
+                    {
+                        label: 'A levels',
+                        href: '/',
+                    },
+                    {
+                        label: 'GCSEs',
+                        href: '/',
+                    },
+                    {
+                        label: 'Discover all courses',
+                        href: '/',
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        label: 'How it works',
+        href: '/',
+    },
+    {
+        label: 'Special offers',
+        href: '/baz',
+    },
+];

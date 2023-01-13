@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Navbar, NavContent, NavItem, NavLink, NavList, NavSubMenu, NavTrigger } from './Navbar';
-import { nestedSubMenuNav, simpleNav, subMenuNav } from './navContent';
+import { nestedSubMenuNav, simpleNav, subMenuNav, testNestedSubMenuNav } from './navContent';
 
 beforeEach(() => {
     // Mock resizeObserver
@@ -47,7 +47,7 @@ test('renders a nav with a submenu', async () => {
                     {subMenuNav.map((item, index) => (
                         <NavItem key={index}>
                             {item.subMenu ? (
-                                <NavSubMenu level={0}>
+                                <NavSubMenu level={0} label={item.label}>
                                     <NavTrigger>{item.label}</NavTrigger>
                                     <NavContent level={0}>
                                         <NavList>
@@ -76,9 +76,9 @@ test('renders a nav with a submenu', async () => {
     // Setup our user
     const user = userEvent.setup();
 
-    const navTrigger = screen.getByRole('button');
+    const navTrigger = screen.getByRole('button', { name: 'Courses' });
 
-    expect(screen.getAllByRole('listitem')).toHaveLength(6);
+    expect(screen.getAllByRole('listitem')).toHaveLength(7);
 
     expect(navTrigger).toBeInTheDocument();
     expect(navTrigger).toHaveAttribute('aria-expanded', 'false');
@@ -95,26 +95,67 @@ describe('Nested sub menus', () => {
         label: string;
         href?: string;
         isExternal?: boolean;
+        featured?: Item[];
         subMenu?: Item[];
+        column?: Item[];
     };
     const RecursiveNavItemWrapper = (props: { item: Item; level: number; value: string }) => {
         const { item, level } = props;
 
+        if (item.featured) {
+            return (
+                <NavItem className="c-nav__item--feature">
+                    <NavList>
+                        {item.featured.map((item, index) => {
+                            return (
+                                <NavItem key={index}>
+                                    <NavLink href={item.href} isExternal={item.isExternal}>
+                                        {item.label}
+                                    </NavLink>
+                                </NavItem>
+                            );
+                        })}
+                    </NavList>
+                </NavItem>
+            );
+        }
+
+        if (item.column) {
+            return (
+                <NavItem className="c-nav__item--column">
+                    <NavList>
+                        {item.column.map((subItem, subIndex) => {
+                            return (
+                                <RecursiveNavItemWrapper
+                                    key={subIndex}
+                                    item={subItem}
+                                    level={level}
+                                    value={subItem?.label.toLocaleLowerCase()}
+                                />
+                            );
+                        })}
+                    </NavList>
+                </NavItem>
+            );
+        }
+
         return (
             <NavItem>
                 {item.subMenu ? (
-                    <NavSubMenu level={level}>
+                    <NavSubMenu level={level} label={item.label}>
                         <NavTrigger>{item.label}</NavTrigger>
                         <NavContent level={level}>
                             <NavList>
-                                {item.subMenu.map((subItem, subIndex) => (
-                                    <RecursiveNavItemWrapper
-                                        key={subIndex}
-                                        item={subItem}
-                                        level={level + 1}
-                                        value={subItem.label}
-                                    />
-                                ))}
+                                {item.subMenu.map((subItem, subIndex) => {
+                                    return (
+                                        <RecursiveNavItemWrapper
+                                            key={subIndex}
+                                            item={subItem}
+                                            level={level + 1}
+                                            value={subItem?.label.toLocaleLowerCase()}
+                                        />
+                                    );
+                                })}
                             </NavList>
                         </NavContent>
                     </NavSubMenu>
@@ -132,7 +173,7 @@ describe('Nested sub menus', () => {
             <MemoryRouter>
                 <Navbar>
                     <NavList>
-                        {nestedSubMenuNav.map((item, index) => (
+                        {testNestedSubMenuNav.map((item, index) => (
                             <RecursiveNavItemWrapper
                                 key={index}
                                 item={item}
@@ -148,9 +189,9 @@ describe('Nested sub menus', () => {
         // Setup our user
         const user = userEvent.setup();
 
-        expect(screen.getAllByRole('listitem')).toHaveLength(13);
+        expect(screen.getAllByRole('listitem')).toHaveLength(16);
 
-        const navTrigger = screen.getByRole('button', { name: 'Item 1' });
+        const navTrigger = screen.getByRole('button', { name: 'Courses' });
 
         expect(navTrigger).toBeInTheDocument();
         expect(navTrigger).toHaveAttribute('aria-expanded', 'false');
@@ -161,7 +202,7 @@ describe('Nested sub menus', () => {
         expect(navTrigger).toHaveAttribute('aria-expanded', 'true');
         expect(navTrigger).toHaveAttribute('data-state', 'open');
 
-        const nestedNavTrigger = screen.getByRole('button', { name: 'Sub Item 2' });
+        const nestedNavTrigger = screen.getByRole('button', { name: 'Childcare & education' });
         expect(nestedNavTrigger).toHaveAttribute('aria-expanded', 'false');
         expect(nestedNavTrigger).toHaveAttribute('data-state', 'closed');
 
@@ -215,7 +256,7 @@ describe('Nested sub menus', () => {
         // Setup our user
         const user = userEvent.setup();
 
-        const navTrigger = screen.getByRole('button', { name: 'Item 1' });
+        const navTrigger = screen.getByRole('button', { name: 'Courses' });
 
         expect(navTrigger).toHaveAttribute('aria-expanded', 'false');
         expect(navTrigger).toHaveAttribute('data-state', 'closed');
@@ -251,7 +292,7 @@ describe('Nested sub menus', () => {
         // Setup our user
         const user = userEvent.setup();
 
-        const navTrigger = screen.getByRole('button', { name: 'Item 1' });
+        const navTrigger = screen.getByRole('button', { name: 'Courses' });
 
         expect(navTrigger).toHaveAttribute('aria-expanded', 'false');
         expect(navTrigger).toHaveAttribute('data-state', 'closed');
@@ -265,5 +306,47 @@ describe('Nested sub menus', () => {
 
         expect(navTrigger).toHaveAttribute('aria-expanded', 'false');
         expect(navTrigger).toHaveAttribute('data-state', 'closed');
+    });
+
+    test('opening a submenu sets the correct tabindex', async () => {
+        render(
+            <MemoryRouter>
+                <Navbar>
+                    <NavList>
+                        {testNestedSubMenuNav.map((item, index) => (
+                            <RecursiveNavItemWrapper
+                                key={index}
+                                item={item}
+                                level={0}
+                                value={item.label}
+                            />
+                        ))}
+                    </NavList>
+                </Navbar>
+            </MemoryRouter>
+        );
+
+        const navTrigger = screen.getByRole('button', { name: 'Courses' });
+        const nestedNavTrigger = screen.getByRole('button', { name: 'Childcare & education' });
+        // Top level items should have a tabindex of 0
+        expect(navTrigger).toHaveAttribute('tabindex', '0');
+        expect(screen.getByRole('link', { name: 'How it works' })).toHaveAttribute('tabindex', '0');
+        expect(screen.getByRole('link', { name: 'Special offers' })).toHaveAttribute(
+            'tabindex',
+            '0'
+        );
+
+        for (const item of screen.getAllByRole('link', { name: 'Sub category' })) {
+            expect(item).toHaveAttribute('tabindex', '-1');
+        }
+
+        const user = userEvent.setup();
+
+        // Click on one of the nested items
+        await user.click(nestedNavTrigger);
+
+        for (const item of screen.getAllByRole('link', { name: 'Sub category' })) {
+            expect(item).toHaveAttribute('tabindex', '0');
+        }
     });
 });
