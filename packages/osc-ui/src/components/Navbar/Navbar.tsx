@@ -1,4 +1,3 @@
-import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { NavLink as RemixNavLink } from '@remix-run/react';
 import uniqueId from 'lodash.uniqueid';
 import type {
@@ -155,7 +154,8 @@ export const NavTrigger = forwardRef<
 >((props: NavTriggerProps, forwardedRef) => {
     const { children, className, disabled, ...attr } = props;
     const classes = classNames('c-nav__trigger', className);
-    const { isOpen, setIsOpen, contentId, triggerId } = useContext(SubNavContext);
+    const { isOpen, level, setIsOpen, contentId, triggerId } = useContext(SubNavContext);
+    const desk = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
     return (
         <button
@@ -172,8 +172,24 @@ export const NavTrigger = forwardRef<
         >
             {children}
 
-            {/* TODO: Update this icon */}
-            <ChevronRightIcon className="c-nav__trigger-icon" aria-hidden />
+            {/* Only show the icon if the level is > 0 or were not on a desktop */}
+            {level !== 0 || !desk ? (
+                // TODO: Update this icon to use our Icons
+                <svg
+                    width="15"
+                    height="10"
+                    viewBox="0 0 15 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="c-nav__trigger-icon"
+                    aria-hidden
+                >
+                    <path
+                        d="M7.72284 5.42052L3.17348 0.885194L0.940918 3.12477L7.70178 9.86457L14.4977 3.11073L12.2652 0.878174L7.72284 5.42052Z"
+                        fill="#062134"
+                    />
+                </svg>
+            ) : null}
         </button>
     );
 });
@@ -182,20 +198,18 @@ NavTrigger.displayName = TRIGGER_NAME;
 /* -------------------------------------------------------------------------------------------------
  * NavContent
  * -----------------------------------------------------------------------------------------------*/
-const CONTENT_NAME = 'NavContent';
 interface NavContentProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * The depth of the submenu
+     */
     level: number;
 }
-type NavContentRef = ForwardRefExoticComponent<NavContentProps & RefAttributes<HTMLDivElement>>;
 
-export const NavContent = forwardRef<
-    ElementRef<NavContentRef>,
-    ComponentPropsWithoutRef<NavContentRef>
->((props: NavContentProps, forwardedRef) => {
+export const NavContent = (props: NavContentProps) => {
     const { children, className, level, ...attr } = props;
-
     const classes = classNames('c-nav__content', className);
-    const { isOpen, contentId, triggerId } = useContext(SubNavContext);
+    const { isOpen, setIsOpen, contentId, triggerId, triggerLabel } = useContext(SubNavContext);
+    const desk = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
     return (
         <div
@@ -205,13 +219,66 @@ export const NavContent = forwardRef<
             aria-labelledby={triggerId}
             className={classes}
             {...attr}
-            ref={forwardedRef}
         >
+            {/* Remove button from DOM on desktop */}
+            {!desk ? (
+                <button
+                    aria-controls={contentId}
+                    aria-expanded={isOpen}
+                    className="c-nav__trigger c-nav__trigger--close"
+                    onClick={() => setIsOpen(false)}
+                    aria-label={`Close ${triggerLabel}`}
+                >
+                    {/* TODO: Update with Icon component */}
+                    <svg
+                        width="15"
+                        height="10"
+                        viewBox="0 0 15 10"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="c-nav__trigger-icon"
+                        aria-hidden
+                    >
+                        <path
+                            d="M7.72284 5.42052L3.17348 0.885194L0.940918 3.12477L7.70178 9.86457L14.4977 3.11073L12.2652 0.878174L7.72284 5.42052Z"
+                            fill="#062134"
+                        />
+                    </svg>
+
+                    <span>{triggerLabel}</span>
+                </button>
+            ) : null}
+
+            {/* Add button to DOM on desktop & top level submenu */}
+            {desk && level === 0 ? (
+                <button
+                    aria-controls={contentId}
+                    aria-expanded={isOpen}
+                    className="c-nav__trigger c-nav__trigger--close"
+                    onClick={() => setIsOpen(false)}
+                    aria-label={`Close ${triggerLabel}`}
+                >
+                    {/* TODO: Update with Icon component */}
+                    <svg
+                        width="18"
+                        height="19"
+                        viewBox="0 0 18 19"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden
+                    >
+                        <path
+                            d="M17.5104 5.40608L13.3112 1.24051L9.0593 5.49807L4.51783 0.951416L0.331787 5.14327L4.88642 9.67678L0.608224 13.9606L4.79427 18.1393L9.07246 13.8686L13.2717 18.0473L17.4577 13.8686L13.2453 9.67678L17.5104 5.40608Z"
+                            fill="#062134"
+                        />
+                    </svg>
+                </button>
+            ) : null}
+
             {children}
         </div>
     );
-});
-NavContent.displayName = CONTENT_NAME;
+};
 
 /* -------------------------------------------------------------------------------------------------
  * NavList
