@@ -44,7 +44,7 @@
         #{$self}__submenu:not(:where([data-level="0"])) & {
             @include mq(mq-token("desk")) {
                 padding-block: var(--space-scale-delta) var(--space-scale-micro);
-                border-bottom: solid 1px var(--color-quinary);
+                border-block-end: solid 1px var(--color-quinary);
                 font-weight: $weight-bold;
             }
         }
@@ -59,7 +59,7 @@
 
         &--close {
             background-color: hsl(0deg 0% 96%); // TODO: Update this to variable
-            border-bottom: none;
+            border-block-end: none;
 
             @include mq(mq-token("desk")) {
                 width: auto;
@@ -139,7 +139,7 @@
         }
 
         &--feature {
-            border-bottom: solid 1px var(--color-quinary);
+            border-block-end: solid 1px var(--color-quinary);
             font-size: var(--font-scale-delta);
             padding-block: var(--space-scale-zeta);
 
@@ -149,7 +149,7 @@
 
             @include mq(mq-token("desk")) {
                 flex: 1 1 100%;
-                border-bottom: none;
+                border-block-end: none;
             }
 
             #{$self}__list {
@@ -160,7 +160,7 @@
 
             #{$self}__link {
                 padding-block: 0;
-                border-bottom: none;
+                border-block-end: none;
             }
         }
 
@@ -193,7 +193,11 @@
         width: 100%;
         min-height: 100vh;
         background-color: var(--color-tertiary);
-        transition: transform $timing $ease-out-sine, grid-template-rows $timing $ease-out-sine;
+        transition:
+            transform $timing $ease-out-sine,
+            grid-template-rows $timing $ease-out-sine,
+            opacity $timing-s $ease-out,
+            visibility $timing-s $ease-out;
         inset: 0;
 
         @include mq(mq-token("desk")) {
@@ -213,7 +217,7 @@
         // If menu has no further children
         &:not(:where(#{$self}__content #{$self}__content)) {
             #{$self}__link {
-                border-bottom: none;
+                border-block-end: none;
                 font-weight: $weight-light;
 
                 @include mq(mq-token("desk")) {
