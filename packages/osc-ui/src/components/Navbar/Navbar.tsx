@@ -11,9 +11,20 @@ import type {
     ReactNode,
     RefAttributes,
 } from 'react';
-import React, { createContext, forwardRef, useContext, useEffect, useRef, useState } from 'react';
+import React, {
+    createContext,
+    forwardRef,
+    useContext,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
+import breakpoints from '../../../../../tokens/media-queries';
 import { useInteractOutside } from '../../hooks/useInteractOutside';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { classNames } from '../../utils/classNames';
+import { rem } from '../../utils/rem';
 
 import './navbar.scss';
 
@@ -64,17 +75,40 @@ const SUBMENU_NAME = 'NavSubMenu';
 const SubNavContext = createContext(null);
 
 export interface NavSubMenuProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * The depth of the submenu
+     */
     level: number;
+    /**
+     * The accessible name of the navigation menu
+     */
+    label: string;
 }
 
 export const NavSubMenu = (props: NavSubMenuProps) => {
-    const { children, className, level, ...attr } = props;
-    const [isOpen, setIsOpen] = useState(false);
-    const contentId = uniqueId('content:');
-    const triggerId = uniqueId('content:');
-    const classes = classNames('c-nav__submenu', className);
+    const { children, className, level, label, ...attr } = props;
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const ref = useRef<HTMLDivElement>(null);
 
+    // IDs get regenerated on every render so we're memoizing them here to preserve them
+    const contentId = useMemo(() => uniqueId('content:'), []);
+    const triggerId = useMemo(() => uniqueId('trigger:'), []);
+
+    const context = {
+        name: SUBMENU_NAME,
+        level,
+        isOpen,
+        setIsOpen,
+        contentId,
+        triggerId,
+        triggerLabel: label,
+    };
+
+    const parentClassName = level === 0 ? 'c-nav__submenu--parent' : '';
+
+    const classes = classNames('c-nav__submenu', parentClassName, className);
+
+    // close menu when user clicks outside
     useInteractOutside(ref, () => setIsOpen(false), ['mouseup', 'touchstart', 'keyup']);
 
     useEffect(() => {
@@ -93,16 +127,7 @@ export const NavSubMenu = (props: NavSubMenuProps) => {
     }, []);
 
     return (
-        <SubNavContext.Provider
-            value={{
-                name: SUBMENU_NAME,
-                level,
-                isOpen,
-                setIsOpen,
-                contentId,
-                triggerId,
-            }}
-        >
+        <SubNavContext.Provider value={context}>
             <div data-level={level} className={classes} ref={ref} {...attr}>
                 {children}
             </div>
