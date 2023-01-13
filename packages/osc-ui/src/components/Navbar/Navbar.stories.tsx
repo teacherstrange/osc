@@ -104,7 +104,7 @@ const NestedSubMenuTemplate: Story<NavProps> = ({ ...args }) => {
                                 <RecursiveNavItemWrapper
                                     key={subIndex}
                                     item={subItem}
-                                    level={level + 1}
+                                    level={level}
                                     value={subItem?.label.toLocaleLowerCase()}
                                 />
                             );
