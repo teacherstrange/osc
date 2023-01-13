@@ -103,9 +103,7 @@ export const NavSubMenu = (props: NavSubMenuProps) => {
         triggerLabel: label,
     };
 
-    const parentClassName = level === 0 ? 'c-nav__submenu--parent' : '';
-
-    const classes = classNames('c-nav__submenu', parentClassName, className);
+    const classes = classNames('c-nav__submenu', className);
 
     // close menu when user clicks outside
     useInteractOutside(ref, () => setIsOpen(false), ['mouseup', 'touchstart', 'keyup']);
@@ -154,7 +152,7 @@ export const NavTrigger = forwardRef<
 >((props: NavTriggerProps, forwardedRef) => {
     const { children, className, disabled, ...attr } = props;
     const classes = classNames('c-nav__trigger', className);
-    const { isOpen, level, setIsOpen, contentId, triggerId } = useContext(SubNavContext);
+    const { isOpen, level, setIsOpen, contentId, triggerId } = useSubNavContext();
     const desk = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
     return (
@@ -208,7 +206,7 @@ interface NavContentProps extends SharedNavProps, HTMLAttributes<HTMLDivElement>
 export const NavContent = (props: NavContentProps) => {
     const { children, className, level, ...attr } = props;
     const classes = classNames('c-nav__content', className);
-    const { isOpen, setIsOpen, contentId, triggerId, triggerLabel } = useContext(SubNavContext);
+    const { isOpen, setIsOpen, contentId, triggerId, triggerLabel } = useSubNavContext();
     const desk = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
     return (
@@ -343,6 +341,7 @@ type NavLinkRef = ForwardRefExoticComponent<NavLinkProps & RefAttributes<HTMLAnc
 export const NavLink = forwardRef<ElementRef<NavLinkRef>, ComponentPropsWithoutRef<NavLinkRef>>(
     (props: NavLinkProps, forwardedRef) => {
         const { href = '/', isExternal = false, children, target, ...attr } = props;
+        const context = useSubNavContext();
 
         return isExternal ? (
             <a className="c-nav__link" href={href} target={target} {...attr} ref={forwardedRef}>
@@ -362,3 +361,17 @@ export const NavLink = forwardRef<ElementRef<NavLinkRef>, ComponentPropsWithoutR
     }
 );
 NavLink.displayName = LINK_NAME;
+
+/* -------------------------------------------------------------------------------------------------
+ * useSubNavContext
+ * -----------------------------------------------------------------------------------------------*/
+const useSubNavContext = () => {
+    const context = useContext(SubNavContext);
+
+    // if `undefined`, throw an error
+    if (context === undefined) {
+        throw new Error('useSubNavContext was used outside of its Provider');
+    }
+
+    return context;
+};
