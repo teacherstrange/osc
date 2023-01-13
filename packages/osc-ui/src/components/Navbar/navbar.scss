@@ -233,7 +233,8 @@
 
         // If menu has no further children
         &:where(#{$self}__content #{$self}__content:last-of-type) {
-            #{$self}__link {
+            #{$self}__link,
+            #{$self}__trigger:not(#{$self}__trigger--close) {
                 border-block-end: none;
                 font-weight: $weight-light;
 
