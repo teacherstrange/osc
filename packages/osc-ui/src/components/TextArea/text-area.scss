@@ -1,0 +1,63 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-textarea__outer-container {
+    display: flex;
+}
+
+.c-textarea__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .c-textarea {
+        padding: 0.875em 2.186em 0.875em 1.25em;
+        border: solid 1px var(--color-quinary);
+        font-size: var(--font-scale-centi);
+
+        &:focus {
+            outline: 3px solid transparent;
+            box-shadow: 0 0 0 2px var(--color-primary);
+        }
+
+        &__icon {
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
+        }
+
+        &[disabled] {
+            background-color: hsl(0deg 0% 98%);
+            color: hsl(0deg 0% 73%);
+            pointer-events: none;
+        }
+    }
+
+    .c-label {
+        display: block;
+    }
+
+    &--error {
+        .c-textarea {
+            padding: 0.875em 3.375em 0.875em 1.25em;
+            background-color: hsl(0deg 93% 55% / 20%);
+            border: 1px solid hsl(0deg 92% 55%);
+            box-shadow: 0 1px 2px hsl(220deg 43% 11% / 5%), 0 0 5px 3px hsl(334deg 79% 89%);
+
+            &__error-message {
+                order: 2;
+                color: hsl(0deg 92% 55%);
+                font-size: var(--font-scale-centi);
+            }
+
+            &__icon {
+                &--error {
+                    color: hsl(0deg 92% 55%);
+                }
+            }
+        }
+    }
+}
