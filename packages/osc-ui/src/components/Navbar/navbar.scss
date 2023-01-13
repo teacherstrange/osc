@@ -41,11 +41,25 @@
         }
 
         // Style triggers and links within the content block where they are not the top level
-        #{$self}__submenu:not(:where([data-level="0"])) & {
+        #{$self}__content:where([data-level="0"]) & {
             @include mq(mq-token("desk")) {
+                display: flex;
                 padding-block: var(--space-scale-delta) var(--space-scale-micro);
                 border-block-end: solid 1px var(--color-quinary);
                 font-weight: $weight-bold;
+                transition: border-block-end-color $timing $ease-in-out;
+
+                &:hover {
+                    border-block-end-color: var(--color-primary);
+                }
+            }
+
+            &--close {
+                @include mq(mq-token("desk")) {
+                    padding-block: 0;
+                }
+
+                border-block-end: none;
             }
         }
     }
@@ -59,7 +73,6 @@
 
         &--close {
             background-color: hsl(0deg 0% 96%); // TODO: Update this to variable
-            border-block-end: none;
 
             @include mq(mq-token("desk")) {
                 width: auto;
@@ -190,6 +203,9 @@
      */
     &__content {
         position: absolute;
+
+        // top: var(--nav-trigger-distance); // Hmmmmm
+        inset: 0;
         width: 100%;
         min-height: 100vh;
         background-color: var(--color-tertiary);
@@ -198,7 +214,8 @@
             grid-template-rows $timing $ease-out-sine,
             opacity $timing-s $ease-out,
             visibility $timing-s $ease-out;
-        inset: 0;
+
+        @include z-index("sub-navigation");
 
         @include mq(mq-token("desk")) {
             display: grid; /* [1]  */
@@ -215,7 +232,7 @@
         }
 
         // If menu has no further children
-        &:not(:where(#{$self}__content #{$self}__content)) {
+        &:where(#{$self}__content #{$self}__content:last-of-type) {
             #{$self}__link {
                 border-block-end: none;
                 font-weight: $weight-light;
