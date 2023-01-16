@@ -21,6 +21,12 @@ export default {
         name: {
             description: "User's name",
         },
+        notification: {
+            description: 'Sets a notification dot with an option to show the number',
+            control: {
+                type: 'object',
+            },
+        },
         src: {
             description: 'An image url',
         },
@@ -48,7 +54,7 @@ export const NotificationWithCount = Template.bind({});
 
 NotificationWithCount.args = {
     name: 'Colm Tuite',
-    notification: { show: true, count: 2 },
+    notification: { show: true, count: '200' },
     src: 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80',
 };
 
