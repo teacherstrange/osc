@@ -18,6 +18,7 @@
         background-color: var(--color-tertiary);
         border: solid 1px var(--color-quinary);
         border-radius: 100%;
+        cursor: pointer;
 
         &:hover {
             background-color: hsl(252deg 96.9% 97.4%);
