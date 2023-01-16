@@ -108,12 +108,15 @@ Primary.args = {
         {
             name: 'Full Name',
             editor: 'input',
-            icon: { content: <ExclamationTriangleIcon />, label: 'Exclamation Triangle Icon' },
+            icon: {
+                content: <ExclamationTriangleIcon />,
+                label: 'Exclamation Triangle Icon',
+                type: 'error',
+            },
             id: 'full-name-4',
             required: true,
             type: 'text',
             state: 'hasValidation',
-            variants: ['error'],
             wasSubmitted: true,
         },
         {
@@ -159,11 +162,15 @@ Secondary.args = {
         {
             name: 'Full Name',
             editor: 'input',
-            icon: { content: <ExclamationTriangleIcon />, label: 'Exclamation Triangle Icon' },
+            icon: {
+                content: <ExclamationTriangleIcon />,
+                label: 'Exclamation Triangle Icon',
+                type: 'error',
+            },
             id: 'full-name-4',
             required: true,
             type: 'text',
-            variants: ['secondary', 'error'],
+            variants: ['secondary'],
             state: 'hasValidation',
             wasSubmitted: true,
         },
@@ -210,12 +217,16 @@ Tertiary.args = {
         {
             name: 'Full Name',
             editor: 'input',
-            icon: { content: <ExclamationTriangleIcon />, label: 'Exclamation Triangle Icon' },
+            icon: {
+                content: <ExclamationTriangleIcon />,
+                label: 'Exclamation Triangle Icon',
+                type: 'error',
+            },
             id: 'full-name-4',
             required: true,
             state: 'hasValidation',
             type: 'text',
-            variants: ['tertiary', 'error'],
+            variants: ['tertiary'],
             wasSubmitted: true,
         },
         {

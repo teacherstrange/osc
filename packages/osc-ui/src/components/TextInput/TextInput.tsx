@@ -12,6 +12,7 @@ import { Icon } from '../Icon/Icon';
 type IconType = {
     content: ReactNode;
     label: string;
+    type?: string;
 };
 
 type Action = {
@@ -102,15 +103,20 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     required={required}
                     variants={value ? ['filled'] : null}
                 />
-                {icon ? (
+                {icon && icon.type !== 'error' ? (
                     <div className={iconClasses}>
                         <Icon label={icon.label}>{icon.content}</Icon>
                     </div>
                 ) : null}
                 {displayError ? (
-                    <span className="c-input__error-message" role="alert" id={`${id}-error`}>
-                        {errorMessage}
-                    </span>
+                    <>
+                        <div className="c-input__icon c-input__icon--error">
+                            <Icon label={icon?.label}>{icon?.content}</Icon>
+                        </div>
+                        <span className="c-input__error-message" role="alert" id={`${id}-error`}>
+                            {errorMessage}
+                        </span>
+                    </>
                 ) : null}
             </div>
             {action?.type === 'submit' ? (

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { TextInput } from './TextInput';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { ExclamationTriangleIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import userEvent from '@testing-library/user-event';
 
 test('should render a text input component and a label', () => {
@@ -49,16 +49,9 @@ test('should disable the input when disabled prop is true', () => {
 });
 
 test('should render correct variant classes', () => {
-    render(
-        <TextInput
-            type="text"
-            id="test-input"
-            name="Test Input"
-            variants={['secondary', 'error']}
-        />
-    );
+    render(<TextInput type="text" id="test-input" name="Test Input" variants={['secondary']} />);
     expect(screen.getByLabelText('Test Input')).toHaveClass(
-        'c-input__text c-input__text--secondary c-input__text--error'
+        'c-input__text c-input__text--secondary'
     );
 });
 
@@ -67,9 +60,13 @@ test('should render error message if "wasSubmitted" is true, the field is requir
         <TextInput
             type="text"
             id="test-input"
+            icon={{
+                content: <ExclamationTriangleIcon />,
+                label: 'Exclamation Triangle Icon',
+                type: 'error',
+            }}
             name="Test Input"
             required={true}
-            variants={['error']}
             wasSubmitted={true}
         />
     );
