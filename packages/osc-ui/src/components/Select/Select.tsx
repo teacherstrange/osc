@@ -13,6 +13,10 @@ type Description = {
     label?: string;
     icon?: ReactNode;
 };
+
+type GroupVariants = 'secondary' | 'tertiary' | 'inline' | 'bold';
+
+// type Ex1 = GroupVariants<{ firstName: string }>;
 export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root> {
     /**
      * Description for the Select, can be a Label or an Icon
@@ -21,7 +25,7 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
     /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
-    groupVariants?: string[];
+    groupVariants?: GroupVariants[];
     /**
      * A placeholder value for the Select, e.g. "Please Select"
      */
