@@ -1,0 +1,65 @@
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+$burger-size: 20px;
+$burger-bar-height: 4px;
+$burger-gap: 4px;
+
+.c-burger {
+    $self: &;
+
+    position: relative;
+    display: block;
+    width: $burger-size;
+    height: $burger-size;
+    cursor: pointer;
+
+    @include z-index("hamburger");
+
+    &__bar {
+        position: absolute;
+        width: 100%;
+        height: $burger-bar-height;
+        background-color: var(--color-secondary);
+        transition:
+            transform $timing $ease-in-out,
+            width $timing $ease-in-out,
+            opacity $timing $ease-in-out-quart,
+            visibility $timing $ease-in-out-quart;
+
+        &:nth-child(1) {
+            top: 0;
+        }
+
+        &:nth-child(2) {
+            top: 50%;
+            width: $burger-size - 5;
+            transform: translateY(-50%);
+        }
+
+        &:nth-child(3) {
+            position: absolute;
+            bottom: 0;
+            width: $burger-size - 9;
+        }
+    }
+
+    &[data-state="open"] {
+        #{$self}__bar {
+            &:nth-child(1) {
+                transform: translateY($burger-bar-height * 2) rotate(45deg);
+            }
+
+            &:nth-child(2) {
+                transform: translateY(-50%) translateX($burger-size * -1);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            &:nth-child(3) {
+                width: 100%;
+                transform: translateY($burger-bar-height * -2) rotate(-45deg);
+            }
+        }
+    }
+}
