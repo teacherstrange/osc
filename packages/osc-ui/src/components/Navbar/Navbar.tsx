@@ -7,6 +7,7 @@ import type {
     ElementRef,
     ForwardRefExoticComponent,
     HTMLAttributes,
+    MouseEvent,
     ReactNode,
     RefAttributes,
 } from 'react';
@@ -87,6 +88,7 @@ export interface NavSubMenuProps extends SharedNavProps, HTMLAttributes<HTMLDivE
 export const NavSubMenu = (props: NavSubMenuProps) => {
     const { children, className, level, label, ...attr } = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [scrollPosition, setScrollPosition] = useState<number>(0);
     const ref = useRef<HTMLDivElement>(null);
 
     // IDs get regenerated on every render so we're memoizing them here to preserve them
@@ -101,6 +103,8 @@ export const NavSubMenu = (props: NavSubMenuProps) => {
         contentId,
         triggerId,
         triggerLabel: label,
+        scrollPosition,
+        setScrollPosition,
     };
 
     const classes = classNames('c-nav__submenu', className);
@@ -152,8 +156,31 @@ export const NavTrigger = forwardRef<
 >((props: NavTriggerProps, forwardedRef) => {
     const { children, className, disabled, ...attr } = props;
     const classes = classNames('c-nav__trigger', className);
-    const { isOpen, level, setIsOpen, contentId, triggerId } = useSubNavContext();
-    const desk = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
+    const { isOpen, level, setIsOpen, setScrollPosition, contentId, triggerId } =
+        useSubNavContext();
+    const isDesktop = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
+
+    const handleClick = (e: MouseEvent) => {
+        // IF previous level is open, set the overflow to hidden
+        const previousLevel = level - 1;
+        const target = e.currentTarget as HTMLElement;
+
+        if (previousLevel >= 0) {
+            const previousContent: HTMLDivElement = target.closest(
+                `.c-nav__content[data-level="${previousLevel}"]`
+            );
+
+            previousContent && setScrollPosition(previousContent.scrollTop);
+
+            if (!isDesktop) {
+                previousContent && !isOpen
+                    ? (previousContent.style.overflowY = 'hidden')
+                    : (previousContent.style.overflowY = 'auto');
+            }
+        }
+
+        setIsOpen(!isOpen);
+    };
 
     // IF the level is equal/greater than 0 OR isOpen set the tabindex to 0 else set to -1
     // This prevents hidden elements from being tabbed to
@@ -171,28 +198,9 @@ export const NavTrigger = forwardRef<
             tabIndex={tabIndex}
             {...attr}
             ref={forwardedRef}
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={(e) => handleClick(e)}
         >
             {children}
-
-            {/* Only show the icon if the level is > 0 or were not on a desktop */}
-            {level !== 0 || !desk ? (
-                // TODO: Update this icon to use our Icons
-                <svg
-                    width="15"
-                    height="10"
-                    viewBox="0 0 15 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="c-nav__trigger-icon"
-                    aria-hidden
-                >
-                    <path
-                        d="M7.72284 5.42052L3.17348 0.885194L0.940918 3.12477L7.70178 9.86457L14.4977 3.11073L12.2652 0.878174L7.72284 5.42052Z"
-                        fill="#062134"
-                    />
-                </svg>
-            ) : null}
         </button>
     );
 });
@@ -211,8 +219,8 @@ interface NavContentProps extends SharedNavProps, HTMLAttributes<HTMLDivElement>
 export const NavContent = (props: NavContentProps) => {
     const { children, className, level, ...attr } = props;
     const classes = classNames('c-nav__content', className);
-    const { isOpen, setIsOpen, contentId, triggerId, triggerLabel } = useSubNavContext();
-    const desk = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
+    const { isOpen, contentId, scrollPosition, triggerId, triggerLabel } = useSubNavContext();
+    const isDesktop = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
     return (
         <div
@@ -221,15 +229,18 @@ export const NavContent = (props: NavContentProps) => {
             data-level={level}
             aria-labelledby={triggerId}
             className={classes}
+            style={{
+                ...attr.style,
+                ['--nav-trigger-distance' as string]: !isDesktop && `${scrollPosition}px`,
+            }}
             {...attr}
         >
             {/* Remove button from DOM on desktop */}
-            {!desk ? (
-                <button
+            {!isDesktop ? (
+                <NavTrigger
                     aria-controls={contentId}
                     aria-expanded={isOpen}
-                    className="c-nav__trigger c-nav__trigger--close"
-                    onClick={() => setIsOpen(false)}
+                    className="c-nav__trigger--close"
                     aria-label={`Close ${triggerLabel}`}
                 >
                     {/* TODO: Update with Icon component */}
@@ -249,16 +260,15 @@ export const NavContent = (props: NavContentProps) => {
                     </svg>
 
                     <span>{triggerLabel}</span>
-                </button>
+                </NavTrigger>
             ) : null}
 
             {/* Add button to DOM on desktop & top level submenu */}
-            {desk && level === 0 ? (
-                <button
+            {isDesktop && level === 0 ? (
+                <NavTrigger
                     aria-controls={contentId}
                     aria-expanded={isOpen}
-                    className="c-nav__trigger c-nav__trigger--close"
-                    onClick={() => setIsOpen(false)}
+                    className="c-nav__trigger--close"
                     aria-label={`Close ${triggerLabel}`}
                 >
                     {/* TODO: Update with Icon component */}
@@ -275,7 +285,7 @@ export const NavContent = (props: NavContentProps) => {
                             fill="#062134"
                         />
                     </svg>
-                </button>
+                </NavTrigger>
             ) : null}
 
             {children}

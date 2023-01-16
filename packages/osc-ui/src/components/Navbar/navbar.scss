@@ -5,7 +5,6 @@
 .c-nav {
     $self: &;
 
-    position: relative;
     font-size: rem($base-font-size);
     font-weight: $weight-bold;
     line-height: 1.5; // TODO: Check this against PR: 643 once merged
@@ -202,10 +201,10 @@
      *
      */
     &__content {
-        position: absolute;
-
-        // top: var(--nav-trigger-distance); // Hmmmmm
-        inset: 0;
+        position: fixed;
+        top: var(--nav-trigger-distance, 0);
+        bottom: 0;
+        left: 0;
         width: 100%;
         min-height: 100vh;
         background-color: var(--color-tertiary);
@@ -214,10 +213,12 @@
             grid-template-rows $timing $ease-out-sine,
             opacity $timing-s $ease-out,
             visibility $timing-s $ease-out;
+        overflow-x: hidden;
 
         @include z-index("sub-navigation");
 
         @include mq(mq-token("desk")) {
+            position: absolute;
             display: grid; /* [1]  */
         }
 
@@ -245,7 +246,7 @@
         }
 
         @include mq(mq-token("desk")) {
-            left: 0;
+            inset-block-start: 0;
             min-height: unset;
             background-color: hsl(0deg 0% 96%); // TODO: Update this to variable
             inset: unset;
