@@ -113,7 +113,6 @@ export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.
 
 export const SelectItem = forwardRef<ElementRef<typeof SelectPrimitive.Item>, ItemProps>(
     ({ children, ...props }, forwardedRef) => {
-        console.log('PROPS', props);
         return (
             <SelectPrimitive.Item {...props} ref={forwardedRef} className="c-select__item">
                 <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
