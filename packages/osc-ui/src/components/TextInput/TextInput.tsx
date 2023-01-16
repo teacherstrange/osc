@@ -76,6 +76,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         if (defaultValue) {
             setValue(defaultValue);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- only needs to run on mount
     }, []);
 
     return (
