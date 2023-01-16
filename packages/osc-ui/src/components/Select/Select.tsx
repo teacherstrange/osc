@@ -46,6 +46,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             wasSubmitted = false,
         } = props;
         const [value, setValue] = useState('');
+        const [isOpen, setIsOpen] = useState(false);
 
         const errorMessage = getFieldError(value, required);
         const displayError = wasSubmitted && errorMessage;
@@ -54,7 +55,15 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
         const selectClasses = classNames('c-select', modifiers);
 
         const setDescription = (desc: Description) => {
-            if (desc?.label) return <Label htmlFor={name} name={desc.label} required={required} />;
+            if (desc?.label)
+                return (
+                    <Label
+                        htmlFor={name}
+                        name={desc.label}
+                        onClickHandler={() => setIsOpen(!isOpen)}
+                        required={required}
+                    />
+                );
             if (desc?.icon) return <Icon label={name}>{desc.icon}</Icon>;
         };
         return (
@@ -62,9 +71,11 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                 {setDescription(description)}
                 <SelectPrimitive.Root
                     {...props}
+                    onOpenChange={() => setIsOpen(!isOpen)}
                     disabled={disabled}
                     name={name}
                     onValueChange={(value) => setValue(value)}
+                    open={isOpen}
                     required={required}
                 >
                     <SelectPrimitive.Trigger
@@ -102,6 +113,7 @@ export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.
 
 export const SelectItem = forwardRef<ElementRef<typeof SelectPrimitive.Item>, ItemProps>(
     ({ children, ...props }, forwardedRef) => {
+        console.log('PROPS', props);
         return (
             <SelectPrimitive.Item {...props} ref={forwardedRef} className="c-select__item">
                 <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
