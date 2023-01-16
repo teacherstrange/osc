@@ -8,7 +8,7 @@
     --secondary-background-color: var(--color-quinary);
 
     .c-label {
-        cursor: default;
+        cursor: pointer;
     }
 
     &__trigger {
@@ -17,22 +17,21 @@
         justify-content: space-between;
         min-width: 30ch;
         max-width: 60ch;
-        height: 35px;
+        height: 2.2em;
         padding: 0 var(--space-scale-centi);
         background-color: var(--color-tertiary);
         border: 1px solid var(--color-quinary);
         font-size: var(--select-font-size);
         line-height: 1;
-        gap: 5px;
+        gap: 0.313em;
+        cursor: pointer;
 
         &:hover {
-            // TODO - Need to change to another grey, but quinary and disabled are the only greys
-            // and they seem to come out exacty the same.
-            background-color: hsl(294deg 5.5% 95.3%);
+            background-color: var(--color-neutral-300);
         }
 
         &:focus {
-            box-shadow: 0 0 0 2px var(--color-primary);
+            box-shadow: 0 0 0 0.125em var(--color-primary);
         }
 
         &[data-placeholder] {
@@ -40,15 +39,15 @@
         }
 
         &[data-disabled] {
-            background-color: hsl(0deg 0% 98%);
-            color: hsl(255deg 3.7% 78.8%);
+            background-color: var(--color-neutral-200);
+            color: var(--color-neutral-500);
             pointer-events: none;
         }
 
         .c-select__icon {
             svg {
-                width: 20px;
-                height: 20px;
+                width: 1.25em;
+                height: 1.25em;
             }
         }
     }
@@ -56,7 +55,7 @@
     &__content {
         overflow: hidden;
         background-color: var(--color-tertiary);
-        box-shadow: 0 10px 38px -10px var(--color-shadow), 0 10px 20px -15px var(--color-shadow);
+        box-shadow: 0 10px 38px -10px var(--color-neutral-400), 0 10px 20px -15px var(--color-neutral-400);
 
         @include z-index(select);
 
@@ -67,6 +66,11 @@
             height: 1.563em;
             background-color: var(--color-tertiary);
             cursor: default;
+
+            svg {
+                width: 1em;
+                height: 1em;
+            }
         }
 
         .c-select__viewport {
@@ -78,19 +82,19 @@
         position: relative;
         display: flex;
         align-items: center;
-        height: 25px;
-        padding: 0 35px 0 25px;
+        height: 1.8em;
+        padding: 0 2.2em 0 1.8em;
         font-size: var(--select-font-size);
         line-height: 1;
         user-select: none;
 
         &[data-highlighted] {
-            background-color: var(--color-disabled);
+            background-color: var(--color-neutral-300);
             outline: none;
         }
 
         &[data-disabled] {
-            color: hsl(255deg 3.7% 78.8%);
+            color: var(--color-neutral-500);
         }
 
         .c-select__item-indicator {
@@ -99,14 +103,19 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 25px;
+            width: 2em;
+
+            svg {
+                width: 1em;
+                height: 1em;
+            }
         }
     }
 
     &--inline {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 0.625em;
     }
 
     &--bold {
@@ -129,7 +138,7 @@
         }
 
         .c-select__item[data-highlighted] {
-            background-color: hsl(294deg 5.5% 95.3%);
+            background-color: var(--color-neutral-200);
         }
 
         .c-label {
@@ -152,16 +161,16 @@
 
     &--error {
         .c-select__trigger {
-            background-color: hsl(0deg 93% 55% / 20%);
-            border: 1px solid hsl(0deg 93% 55%);
+            background-color: var(--color-error-20);
+            border: 1px solid var(--color-error);
         }
 
         .c-select__icon {
-            color: hsl(0deg 93% 55%);
+            color: var(--color-error);
         }
 
         .c-select__error-message {
-            color: hsl(0deg 93% 55%);
+            color: var(--color-error);
             font-size: var(--select-font-size);
         }
 
@@ -169,7 +178,7 @@
             .c-select__trigger {
                 background: none;
                 border: none;
-                color: hsl(0deg 93% 55%);
+                color: var(--color-error);
             }
 
             .c-select--error {
