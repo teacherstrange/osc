@@ -27,14 +27,7 @@ export interface ButtonProps {
     slug?: string;
     telephone?: string;
     textToCopy?: string;
-    variant?:
-        | 'primary'
-        | 'secondary'
-        | 'tertiary'
-        | 'quaternary'
-        | 'quinary'
-        | 'septenary'
-        | 'octonary';
+    variant?: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary'; // TODO: This and the button component should share this
 }
 
 export interface Props {
