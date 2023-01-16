@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 /* stylelint-disable selector-class-pattern */
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
@@ -21,7 +22,7 @@
         cursor: pointer;
 
         &:hover {
-            background-color: hsl(252deg 96.9% 97.4%);
+            background-color: var(--color-neutral-300);
         }
 
         &:focus {
@@ -51,18 +52,6 @@
         font-size: var(--font-scale-centi);
     }
 
-    &--error {
-        .c-radio-group__item {
-            background-color: hsl(0deg 92% 55% / 20%);
-            border: solid 1px hsl(0deg 92% 55%);
-        }
-
-        .c-radio-group__error-message {
-            color: hsl(0deg 93% 55%);
-            font-size: var(--font-scale-centi);
-        }
-    }
-
     &--secondary {
         .c-radio-group__item {
             border: solid 1px var(--color-secondary);
@@ -83,11 +72,17 @@
                 border: solid 1px var(--color-quinary);
             }
         }
+    }
 
-        &.c-radio-group--error {
-            .c-radio-group__item {
-                border: solid 1px hsl(0deg 92% 55%);
-            }
+    &--error {
+        .c-radio-group__item {
+            background-color: var(--color-error-20);
+            border: solid 1px var(--color-error);
+        }
+
+        .c-radio-group__error-message {
+            color: var(--color-error);
+            font-size: var(--font-scale-centi);
         }
     }
 
@@ -96,7 +91,7 @@
     }
 
     &[data-disabled] {
-        color: #b9b9b9;
+        color: var(--color-neutral-500);
         pointer-events: none;
     }
 }
