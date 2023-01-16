@@ -78,7 +78,7 @@ const Template: Story = ({ selects }) => {
                         >
                             {items.map((item, index) => {
                                 return (
-                                    <SelectItem key={index} value={item.value}>
+                                    <SelectItem key={index} {...item}>
                                         {item.name}
                                     </SelectItem>
                                 );
