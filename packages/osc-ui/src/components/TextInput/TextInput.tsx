@@ -19,6 +19,9 @@ type Action = {
     icon?: IconType;
     type: string;
 };
+
+type Variants = 'secondary' | 'tertiary' | 'quaternary';
+
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
     /**
      * An object that contains the type of action, e.g. Submit, plus an optional icon and label for accessibility
@@ -31,7 +34,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
     /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
-    variants?: string[];
+    variants?: Variants[];
     /**
      * A boolean that alerts when form is submitted for error handling
      * @default false
