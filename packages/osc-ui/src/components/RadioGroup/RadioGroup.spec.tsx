@@ -11,7 +11,10 @@ const radioItems = [
 
 test('should render a RadioGroup with three RadioItems', () => {
     render(
-        <RadioGroup name="newsletter">
+        <RadioGroup
+            description={{ id: 'receive-newsletter-1', value: 'Receive Newsletter' }}
+            name="newsletter"
+        >
             {radioItems.map(({ id, name, value }, index) => (
                 <RadioItem key={index} id={id} name={name} value={value} />
             ))}
@@ -28,7 +31,12 @@ test('should render a RadioGroup with three RadioItems', () => {
 
 test('should render an error message when form is submitted and no value is selected', () => {
     render(
-        <RadioGroup name="newsletter" required={true} wasSubmitted={true}>
+        <RadioGroup
+            description={{ id: 'receive-newsletter-1', value: 'Receive Newsletter' }}
+            name="newsletter"
+            required={true}
+            wasSubmitted={true}
+        >
             {radioItems.map(({ id, name, value }, index) => (
                 <RadioItem key={index} id={id} name={name} value={value} />
             ))}
@@ -54,7 +62,12 @@ test('should render a description for the RadioGroup', () => {
 
 test('should change focus to second input when using an arrow key', async () => {
     render(
-        <RadioGroup name="newsletter" required={true} wasSubmitted={true}>
+        <RadioGroup
+            description={{ id: 'receive-newsletter-1', value: 'Receive Newsletter' }}
+            name="newsletter"
+            required={true}
+            wasSubmitted={true}
+        >
             {radioItems.map(({ id, name, value }, index) => (
                 <RadioItem key={index} id={id} name={name} value={value} />
             ))}

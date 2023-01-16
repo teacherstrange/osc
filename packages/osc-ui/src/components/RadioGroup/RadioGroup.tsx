@@ -16,9 +16,9 @@ export interface RadioGroupProps extends ComponentPropsWithoutRef<typeof RadioGr
      */
     children: ReactNode;
     /**
-     * An optional description for the radio group
+     * A description for the radio group
      */
-    description?: { id: string; value: string };
+    description: { id: string; value: string };
     /**
      * The name of the group. Submitted with its owning form as part of a name/value pair.
      */
@@ -55,15 +55,12 @@ export const RadioGroup = (props: RadioGroupProps) => {
     const displayError = wasSubmitted && errorMessage;
 
     return (
-        <div>
-            {description ? (
-                <p className="c-radio-group__description" id={description?.id}>
-                    {description?.value}
-                </p>
-            ) : null}
+        <fieldset>
+            <legend className="c-radio-group__description" id={description.id}>
+                {description.value}
+            </legend>
             <RadioGroupPrimitive.Root
-                aria-label={name}
-                aria-labelledby={description?.id}
+                aria-labelledby={description.id}
                 className={
                     displayError ? `${radioGroupClasses} c-radio-group--error` : radioGroupClasses
                 }
@@ -80,7 +77,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
                     </div>
                 ) : null}
             </RadioGroupPrimitive.Root>
-        </div>
+        </fieldset>
     );
 };
 
