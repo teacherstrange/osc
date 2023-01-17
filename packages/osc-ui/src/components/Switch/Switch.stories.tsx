@@ -150,3 +150,9 @@ HasIcons.parameters = {
         },
     },
 };
+
+export const HasValidation = Template.bind({});
+HasValidation.args = {
+    ...Primary.args,
+    required: true,
+};
