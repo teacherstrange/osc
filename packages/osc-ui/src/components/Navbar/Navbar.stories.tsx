@@ -10,6 +10,7 @@ import { nestedSubMenuNav, simpleNav, subMenuNav } from './navContent';
 export default {
     title: 'osc-ui/Navbar',
     component: Navbar,
+    subcomponents: { NavContent, NavItem, NavLink, NavList, NavSubMenu, NavTrigger },
     parameters: {
         docs: {
             description: {
@@ -46,24 +47,7 @@ const SubMenuTemplate: Story<NavProps> = ({ ...args }) => (
                 <NavItem key={index}>
                     {item.subMenu ? (
                         <NavSubMenu level={0} label={item.label}>
-                            <NavTrigger>
-                                {item.label}
-                                {/* // TODO: Update this icon to use our Icons */}
-                                <svg
-                                    width="15"
-                                    height="10"
-                                    viewBox="0 0 15 10"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="c-nav__trigger-icon"
-                                    aria-hidden
-                                >
-                                    <path
-                                        d="M7.72284 5.42052L3.17348 0.885194L0.940918 3.12477L7.70178 9.86457L14.4977 3.11073L12.2652 0.878174L7.72284 5.42052Z"
-                                        fill="#062134"
-                                    />
-                                </svg>
-                            </NavTrigger>
+                            <NavTrigger>{item.label}</NavTrigger>
                             <NavContent level={0}>
                                 <NavList>
                                     {item.subMenu.map((subItem, subIndex) => (

@@ -130,11 +130,16 @@ export const Header = (props: HeaderProps) => {
  * Header nav
  * -----------------------------------------------------------------------------------------------*/
 export interface HeaderNavProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Sets the data-state attribute of the button.
+     *
+     * @default false
+     */
     isOpen: boolean;
 }
 
 export const HeaderNav = (props: HeaderNavProps) => {
-    const { className, children, isOpen, ...attr } = props;
+    const { className, children, isOpen = false, ...attr } = props;
     const classes = classNames('c-header__nav', className);
     const isDesktop = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
@@ -188,7 +193,7 @@ const useHeight = (ref: RefObject<HTMLElement | null>) => {
         // Get the bottom position of the current ref
         // This will allow us to take into account thing like padding on the body
         const handleResize = () => {
-            setHeaderHeight(ref.current.getBoundingClientRect().bottom);
+            setHeaderHeight(ref.current.offsetHeight);
         };
 
         // Triggered at the first client-side load and if query changes

@@ -9,7 +9,8 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: '',
+                component:
+                    'Burger component is used to toggle an action or event such as opening a Dialog and will visually change to show this has happened.',
             },
         },
     },
@@ -45,4 +46,23 @@ IsOpen.args = {
 export const IsControlled = ControlledTemplate.bind({});
 IsControlled.args = {
     ...Primary.args,
+};
+IsControlled.parameters = {
+    docs: {
+        source: {
+            code: `
+const [isOpen, setIsOpen] = useState<boolean>(false);
+
+return (
+    <Burger
+        onClick={() => {
+            setIsOpen(!isOpen);
+        }}
+        isOpen={isOpen}
+        label="Open menu"
+    />
+);
+            `,
+        },
+    },
 };
