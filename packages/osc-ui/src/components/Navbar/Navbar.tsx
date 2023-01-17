@@ -222,6 +222,23 @@ export const NavContent = (props: NavContentProps) => {
     const { isOpen, contentId, scrollPosition, triggerId, triggerLabel } = useSubNavContext();
     const isDesktop = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
+    // Reset scroll position when isOpen is false
+    useEffect(() => {
+        if (!isOpen) {
+            const content = document.getElementById(contentId);
+
+            // Reset the overflow to auto
+            content.style.overflowY = 'auto';
+
+            // Scroll the content back to the top of the trigger.
+            // This will only fire when isOpen is set outside of the nav,
+            // so we can keep the position if the close trigger is clicked
+            content.scrollTo({
+                top: 0,
+            });
+        }
+    }, [contentId, isOpen]);
+
     return (
         <div
             id={contentId}

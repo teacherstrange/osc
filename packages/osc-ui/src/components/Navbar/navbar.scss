@@ -9,6 +9,8 @@
     font-weight: $weight-bold;
     line-height: 1.5; // TODO: Check this against PR: 643 once merged
 
+    @include z-index("navigation");
+
     @include mq(mq-token("desk")) {
         font-weight: $weight-reg;
     }
@@ -121,6 +123,8 @@
     &__list {
         --navbar-list-gap: var(--space-scale-delta);
 
+        // z-index: -1;
+
         @include mq(mq-token("desk")) {
             column-gap: var(--navbar-list-gap);
         }
@@ -132,6 +136,10 @@
                 column-gap: var(--navbar-list-gap);
             }
         }
+
+        // .c-header__nav[data-state="open"] & {
+        //     z-index: -1;
+        // }
 
         // Lists within the columns
         #{$self}__item--column & {
@@ -206,7 +214,6 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        min-height: 100vh;
         background-color: var(--color-tertiary);
         transition:
             transform $timing $ease-out-sine,
@@ -234,6 +241,7 @@
 
         // If menu has no further children
         &:where(#{$self}__content #{$self}__content:last-of-type) {
+            min-height: 100vh;
             #{$self}__link,
             #{$self}__trigger:not(#{$self}__trigger--close) {
                 border-block-end: none;
