@@ -5,7 +5,6 @@ import { server } from './server';
 import { env } from './types/environment';
 dotenv.config();
 
-console.log(env.HUBSPOT_ACCESS_TOKEN);
 async function startServer() {
     const { url } = await startStandaloneServer(server(), {
         context: async ({ req }) => {

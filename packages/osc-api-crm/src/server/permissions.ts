@@ -3,7 +3,7 @@ import { isAuthenticated } from './rules';
 
 export const shieldPermissions = shield({
     Query: {
-        sync: isAuthenticated,
+        crmStudent: isAuthenticated,
     },
     // Mutation: {},
 });
