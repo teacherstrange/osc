@@ -182,9 +182,10 @@ export const NavTrigger = forwardRef<
 
         // IF we're on the top level on mobile then set the parent header nav to overflow-y: hidden
         if (level === 0 && !isDesktop) {
-            const header: HTMLDivElement = target.closest('.c-header__nav');
+            const headerNav: HTMLDivElement = target.closest('.c-header__nav');
 
-            !isOpen ? (header.style.overflowY = 'hidden') : (header.style.overflowY = 'auto');
+            // IF closed then set the overflow to hidden else set it to auto
+            !isOpen ? (headerNav.style.overflowY = 'hidden') : (headerNav.style.overflowY = 'auto');
         }
 
         setIsOpen(!isOpen);
@@ -236,7 +237,7 @@ export const NavContent = (props: NavContentProps) => {
             const content = document.getElementById(contentId);
 
             // Reset the overflow to auto
-            content.style.overflowY = 'auto';
+            !isDesktop ? (content.style.overflowY = 'auto') : (content.style.overflowY = 'hidden');
 
             // Scroll the content back to the top of the trigger.
             // This will only fire when isOpen is set outside of the nav,
@@ -245,7 +246,7 @@ export const NavContent = (props: NavContentProps) => {
                 top: 0,
             });
         }
-    }, [contentId, isOpen]);
+    }, [contentId, isDesktop, isOpen]);
 
     return (
         <div
