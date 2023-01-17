@@ -1,15 +1,35 @@
 @use "../settings" as *;
 @use "../tools" as *;
 
+/* ============================
+// CONTAINER OBJECT
+// A wrapper to go around objects that sets a max width for our content
+//
+// 1. $global-spacing-xxxl is a fluid scale, it's max size is 83px so we're adding 17px
+// to round it out to 100px as per design file
+*/
+
+/* ============================
+//  Usage:
+//
+//  <div class="o-container"> ... </div>
+*/
+
 .o-container {
-    $padding: $space-s;
+    $padding: calc($space-5xl + 4px); /* [1] */
+    $padding-alt: $space-l;
 
     width: 100%;
     max-width: #{$container-m}px;
     margin-right: auto;
     margin-left: auto;
-    padding-right: $padding;
-    padding-left: $padding;
+    padding-right: $padding-alt;
+    padding-left: $padding-alt;
+
+    @include mq(mq-token("desk")) {
+        padding-right: $padding;
+        padding-left: $padding;
+    }
 
     &--flush {
         padding-right: 0;
