@@ -137,10 +137,6 @@
             }
         }
 
-        // .c-header__nav[data-state="open"] & {
-        //     z-index: -1;
-        // }
-
         // Lists within the columns
         #{$self}__item--column & {
             display: flex;
