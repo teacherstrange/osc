@@ -45,7 +45,6 @@
      *
      * [1] Set the initial position of the __nav to fixed
      * [2] Set the overflow-x to hidden to hide any children
-     * [3] When state is open, change the position of the __nav to absolute so we can continue to scroll
      */
     &__nav {
         position: fixed; /* [1] */
@@ -72,7 +71,6 @@
 
         &[data-state="open"] {
             @include mq(mq-token("desk"), max) {
-                // position: absolute; /* [3] */
                 transform: translateX(0);
             }
         }
