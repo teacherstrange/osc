@@ -51,7 +51,7 @@
                 transition: border-block-end-color $timing $ease-in-out;
 
                 &:hover {
-                    border-block-end-color: var(--color-primary);
+                    border-block-end-color: var(--color-secondary);
                 }
             }
 
