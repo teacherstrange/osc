@@ -161,7 +161,6 @@ export const NavTrigger = forwardRef<
     const isDesktop = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
     const handleClick = (e: MouseEvent) => {
-        // IF previous level is open, set the overflow to hidden
         const previousLevel = level - 1;
         const target = e.currentTarget as HTMLElement;
 
@@ -170,6 +169,8 @@ export const NavTrigger = forwardRef<
                 `.c-nav__content[data-level="${previousLevel}"]`
             );
 
+            // Set the scroll position to the top of the previous content,
+            // keeps the current target in view
             previousContent && setScrollPosition(previousContent.scrollTop);
 
             if (!isDesktop) {
@@ -177,6 +178,13 @@ export const NavTrigger = forwardRef<
                     ? (previousContent.style.overflowY = 'hidden')
                     : (previousContent.style.overflowY = 'auto');
             }
+        }
+
+        // IF we're on the top level on mobile then set the parent header nav to overflow-y: hidden
+        if (level === 0 && !isDesktop) {
+            const header: HTMLDivElement = target.closest('.c-header__nav');
+
+            !isOpen ? (header.style.overflowY = 'hidden') : (header.style.overflowY = 'auto');
         }
 
         setIsOpen(!isOpen);
