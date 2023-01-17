@@ -67,7 +67,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
         const checkboxClasses = classNames('c-checkbox__container', modifiers);
 
         return (
-            <div
+            <fieldset
                 className={
                     displayError
                         ? `${checkboxClasses} c-checkbox__container--error`
@@ -75,9 +75,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                 }
             >
                 {description ? (
-                    <p className="c-checkbox__description" id={description?.id}>
-                        {description?.value}
-                    </p>
+                    <legend className="c-checkbox__description">{description?.value}</legend>
                 ) : null}
                 <CheckboxPrimitive.Root
                     aria-label={name}
@@ -102,7 +100,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                         {errorMessage}
                     </div>
                 ) : null}
-            </div>
+            </fieldset>
         );
     }
 );
