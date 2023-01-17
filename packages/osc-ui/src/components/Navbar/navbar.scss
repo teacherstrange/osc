@@ -73,7 +73,7 @@
         cursor: pointer;
 
         &--close {
-            background-color: hsl(0deg 0% 96%); // TODO: Update this to variable
+            background-color: var(--color-neutral-200);
 
             @include mq(mq-token("desk")) {
                 width: auto;
@@ -256,7 +256,7 @@
         @include mq(mq-token("desk")) {
             inset-block-start: 0;
             min-height: unset;
-            background-color: hsl(0deg 0% 96%); // TODO: Update this to variable
+            background-color: var(--color-neutral-200);
             inset: unset;
 
             #{$self}__content {
