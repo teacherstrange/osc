@@ -27,7 +27,7 @@ export interface BurgerProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'ch
      *
      * @default false
      */
-    isOpen?: boolean;
+    isOpen: boolean;
 }
 type BurgerRef = ForwardRefExoticComponent<BurgerProps & RefAttributes<HTMLButtonElement>>;
 
