@@ -185,7 +185,11 @@ const useHeight = (ref: RefObject<HTMLElement | null>) => {
     const [headerHeight, setHeaderHeight] = useState<number>(0);
 
     useEffect(() => {
-        const handleResize = () => setHeaderHeight(ref.current.offsetHeight);
+        // Get the bottom position of the current ref
+        // This will allow us to take into account thing like padding on the body
+        const handleResize = () => {
+            setHeaderHeight(ref.current.getBoundingClientRect().bottom);
+        };
 
         // Triggered at the first client-side load and if query changes
         handleResize();
