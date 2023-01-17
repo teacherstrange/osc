@@ -21,9 +21,10 @@
         height: 1.25em;
         background-color: var(--color-tertiary);
         border: 1px solid var(--color-quinary);
+        cursor: pointer;
 
         &:hover {
-            background-color: hsl(252deg 96.9% 97.4%);
+            background-color: var(--color-neutral-300);
         }
 
         &:focus {
@@ -31,10 +32,11 @@
         }
 
         &[data-disabled] {
-            background-color: hsl(0deg 0% 98%);
+            background-color: var(--color-quinary);
+            pointer-events: none;
 
             + .c-label {
-                color: hsl(255deg 3.7% 78.8%);
+                color: var(--color-neutral-500);
                 pointer-events: none;
             }
         }
@@ -74,13 +76,14 @@
 
     &--error {
         .c-checkbox {
-            background-color: hsl(0deg 93% 55% / 20%);
-            border: 1px solid hsl(0deg 93% 55%);
+            background-color: var(--color-error-20);
+            border: 1px solid var(--color-error);
         }
 
         .c-checkbox__error-message {
             flex: 1 100%;
-            color: hsl(0deg 93% 55%);
+            padding-top: 0.875em;
+            color: var(--color-error);
             font-size: var(--font-scale-centi);
         }
     }
