@@ -40,7 +40,7 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     (props: TextAreaProps, forwardedRef) => {
-        const { icon, id, name, required, variants, wasSubmitted, ...rest } = props;
+        const { disabled, icon, id, name, required, variants, wasSubmitted, ...rest } = props;
         const [value, setValue] = useState('');
 
         const errorMessage = getFieldError(value, required);
@@ -58,18 +58,22 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                             : textareaClasses
                     }
                 >
-                    <Label htmlFor={id} name={name} required={required} />
-                    <div>
-                        <textarea
-                            className="c-textarea"
-                            id={id}
-                            name={name}
-                            onChange={(event) => setValue(event.currentTarget.value)}
-                            ref={forwardedRef}
-                            required={required}
-                            {...rest}
-                        />
-                    </div>
+                    <Label
+                        htmlFor={id}
+                        name={name}
+                        variants={disabled ? ['disabled'] : null}
+                        required={required}
+                    />
+                    <textarea
+                        className="c-textarea"
+                        disabled={disabled}
+                        id={id}
+                        name={name}
+                        onChange={(event) => setValue(event.currentTarget.value)}
+                        ref={forwardedRef}
+                        required={required}
+                        {...rest}
+                    />
                     {displayError ? (
                         <>
                             {icon && icon.content ? (
