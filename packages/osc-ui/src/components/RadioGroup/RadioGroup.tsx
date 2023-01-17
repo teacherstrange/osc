@@ -60,7 +60,6 @@ export const RadioGroup = (props: RadioGroupProps) => {
                 {description.value}
             </legend>
             <RadioGroupPrimitive.Root
-                aria-labelledby={description.id}
                 className={
                     displayError ? `${radioGroupClasses} c-radio-group--error` : radioGroupClasses
                 }
