@@ -1,3 +1,4 @@
+import { NavLink as RemixNavLink } from '@remix-run/react';
 import type { HTMLAttributes, ReactNode, RefObject } from 'react';
 import React, { useEffect, useState } from 'react';
 import breakpoints from '../../../../../tokens/media-queries';
@@ -10,7 +11,7 @@ import './header.scss';
 
 // TODO: Move logo into spritesheet and remove this
 export const Logo = () => (
-    <a href="/" className="c-header__logo">
+    <RemixNavLink to="/" className="c-header__logo">
         <Icon label="Open Study College">
             <svg
                 width="278"
@@ -85,7 +86,7 @@ export const Logo = () => (
                 />
             </svg>
         </Icon>
-    </a>
+    </RemixNavLink>
 );
 
 export interface SharedNavProps {
