@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { wait } from 'osc-api';
+import { getUserByEmail, getUserById, wait } from 'osc-api';
 import type {
     CreateUserFn,
     CrmTokensFn,
@@ -11,7 +11,7 @@ import type {
     UserAvatarFn,
     UserPermissionsFn,
     UserProfileFn,
-    UserRolesFn
+    UserRolesFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import * as password from '~/utils/password';
@@ -21,11 +21,7 @@ const prisma = new PrismaClient();
 
 export const create: CreateUserFn = async (input) => {
     // Check for existing user, all emails must be unique
-    const existingUser = await prisma.user.findUnique({
-        where: {
-            email: input.email
-        }
-    });
+    const existingUser = await getUserByEmail(input.email);
 
     // If user already exists, throw error
     if (existingUser) {
@@ -41,18 +37,14 @@ export const create: CreateUserFn = async (input) => {
             firstName: input.firstName,
             lastName: input.lastName,
             email: input.email,
-            password: hashedPassword
-        }
+            password: hashedPassword,
+        },
     });
 };
 
 export const login: LoginFn = async (input) => {
     // Find matching user
-    const user = await prisma.user.findUnique({
-        where: {
-            email: input.email
-        }
-    });
+    const user = await getUserByEmail(input.email);
 
     // If no matching user, throw error
     if (!user) {
@@ -82,11 +74,7 @@ export const refreshAccess: RefreshAccessFn = async (refreshToken) => {
 };
 
 export const get: GetUserFn = async (userId) => {
-    return await prisma.user.findUnique({
-        where: {
-            id: userId
-        }
-    });
+    return await getUserById(userId);
 };
 
 export const getMultiple: GetMultipleUsersFn = async (args) => {
@@ -96,7 +84,7 @@ export const getMultiple: GetMultipleUsersFn = async (args) => {
         cursor = null,
         pagination = 'offset',
         orderBy = 'firstName',
-        orderDir = 'asc'
+        orderDir = 'asc',
     } = args;
 
     if (pagination == 'cursor' && cursor) {
@@ -104,11 +92,11 @@ export const getMultiple: GetMultipleUsersFn = async (args) => {
             skip: 1,
             take: limit,
             cursor: {
-                id: cursor
+                id: cursor,
             },
             orderBy: {
-                [orderBy]: orderDir
-            }
+                [orderBy]: orderDir,
+            },
         });
     }
 
@@ -116,8 +104,8 @@ export const getMultiple: GetMultipleUsersFn = async (args) => {
         skip: start,
         take: limit,
         orderBy: {
-            [orderBy]: orderDir
-        }
+            [orderBy]: orderDir,
+        },
     });
 };
 
@@ -127,14 +115,14 @@ export const profile: UserProfileFn = async (userId) => {
         permissions: await permissions(userId),
         roles: await roles(userId),
         crmTokens: await crmTokens(userId),
-        lmsTokens: await lmsTokens(userId)
+        lmsTokens: await lmsTokens(userId),
     };
 };
 
 export const permissions: UserPermissionsFn = async (userId) => {
     const permissions: PermissionsProps = {
         read: [],
-        write: []
+        write: [],
     };
 
     const roles = await prisma.userRole.findMany({
@@ -144,12 +132,12 @@ export const permissions: UserPermissionsFn = async (userId) => {
                 include: {
                     permissions: {
                         include: {
-                            details: true
-                        }
-                    }
-                }
-            }
-        }
+                            details: true,
+                        },
+                    },
+                },
+            },
+        },
     });
 
     for (const role of roles) {
@@ -162,11 +150,11 @@ export const permissions: UserPermissionsFn = async (userId) => {
 
     const extraPerms = await prisma.extraPermission.findMany({
         where: {
-            userId: userId
+            userId: userId,
         },
         include: {
-            details: true
-        }
+            details: true,
+        },
     });
 
     for (const perm of extraPerms) {
@@ -182,37 +170,37 @@ const roles: UserRolesFn = async (userId) => {
     return await prisma.userRole.findMany({
         where: { userId: userId },
         include: {
-            details: true
-        }
+            details: true,
+        },
     });
 };
 
 const avatar: UserAvatarFn = async (userId) => {
     return await prisma.userAvatar.findUnique({
         where: {
-            userId: userId
-        }
+            userId: userId,
+        },
     });
 };
 
 const crmTokens: CrmTokensFn = async (userId) => {
     return await prisma.crmToken.findMany({
         where: {
-            userId: userId
+            userId: userId,
         },
         include: {
-            crm: true
-        }
+            crm: true,
+        },
     });
 };
 
 export const lmsTokens: LmsTokensFn = async (userId) => {
     return await prisma.lmsToken.findMany({
         where: {
-            userId: userId
+            userId: userId,
         },
         include: {
-            lms: true
-        }
+            lms: true,
+        },
     });
 };
