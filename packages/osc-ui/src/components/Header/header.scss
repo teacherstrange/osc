@@ -1,9 +1,144 @@
-.o-header {
-    width: 50%;
-    background-color: rgb(41 52 52);
+/* stylelint-disable plugin/selector-bem-pattern */
+@use "../../styles/tools/" as *;
+@use "../../styles/settings/" as *;
 
-    &--full {
-        width: 40%;
-        background-color: rgb(117 2 2);
+.c-header {
+    $self: &;
+
+    position: relative;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+    padding-block: var(--space-scale-delta);
+
+    @include z-index("header");
+
+    @include mq(mq-token("desk")) {
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, 1fr);
+        gap: var(--space-scale-micro);
+    }
+
+    &__logo {
+        display: block;
+        margin-inline: auto;
+        grid-column: 2 / 3;
+
+        @include mq(mq-token("desk")) {
+            margin-inline: 0;
+            grid-column: 1 / 2;
+            grid-row: 2;
+        }
+
+        > svg {
+            max-width: 192px;
+        }
+    }
+
+    /*
+     * Fix overflow issue on IOS devices
+     *
+     * On IOS there is an issue where if you set the body and html elements to have overflow hidden
+     * then the overflow-y on the __nav will become visible when a child is set to overflow-y hidden -_-.
+     * By removing the overflow-y on the html element and setting the __nav to position: absolute;
+     * then you are still able to horizontally scroll and we continue to have an overflow.
+     *
+     * [1] Set the initial position of the __nav to fixed
+     * [2] Set the overflow-x to hidden to hide any children
+     * [3] When state is open, change the position of the __nav to absolute so we can continue to scroll
+     */
+    &__nav {
+        position: fixed; /* [1] */
+        top: var(--header-height, 0);
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transition: transform $timing $ease-out-sine;
+        overflow-x: hidden; /* [2] */
+
+        @include mq(mq-token("desk")) {
+            position: static;
+            display: flex;
+            justify-content: flex-end;
+            grid-column: 2 / -1;
+            grid-row: 2;
+        }
+
+        &[data-state="closed"] {
+            @include mq(mq-token("desk"), max) {
+                transform: translateX(100vw);
+            }
+        }
+
+        &[data-state="open"] {
+            @include mq(mq-token("desk"), max) {
+                // position: absolute; /* [3] */
+                transform: translateX(0);
+            }
+        }
+
+        .c-nav {
+            @include mq(mq-token("desk"), max) {
+                border-top: 1px solid var(--color-secondary);
+            }
+        }
+
+        /* stylelint-disable-next-line selector-class-pattern */
+        .c-nav__content[data-level="0"] {
+            left: 0;
+
+            @include mq(mq-token("desk")) {
+                top: var(--header-height, 0);
+            }
+        }
+    }
+
+    &__action-bar {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--space-scale-delta);
+        font-weight: $weight-light;
+
+        @include mq(mq-token("desk")) {
+            padding-inline-end: var(--space-scale-micro);
+            grid-column: 2 / -1;
+            grid-row: 1;
+        }
+
+        > a,
+        > button {
+            display: block;
+            cursor: pointer;
+
+            svg {
+                flex-shrink: 0;
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        #{$self}__nav & {
+            background-color: var(--color-secondary);
+            color: var(--color-tertiary);
+            gap: 0;
+
+            a,
+            button {
+                display: flex;
+                flex: 0 1 50%;
+                align-items: center;
+                justify-content: center;
+                padding: var(--space-scale-centi) var(--space-scale-zeta);
+                gap: var(--space-scale-milli);
+
+                &:not(:last-child) {
+                    border-right: 1px solid var(--color-tertiary);
+                }
+            }
+        }
+    }
+
+    > .c-burger {
+        grid-column: 1 / 2;
     }
 }
