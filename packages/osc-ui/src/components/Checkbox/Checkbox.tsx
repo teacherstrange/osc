@@ -78,8 +78,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     <legend className="c-checkbox__description">{description?.value}</legend>
                 ) : null}
                 <CheckboxPrimitive.Root
-                    aria-label={name}
-                    aria-labelledby={description?.id}
+                    aria-label={value}
                     className="c-checkbox"
                     defaultChecked={defaultChecked}
                     disabled={disabled}
