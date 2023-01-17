@@ -181,11 +181,17 @@ export const NavTrigger = forwardRef<
         }
 
         // IF we're on the top level on mobile then set the parent header nav to overflow-y: hidden
+        // Not sure if this should be in here as it's technically affecting a parent that _might_ not
+        // exist. However this is the best way I can get this to work :S
         if (level === 0 && !isDesktop) {
             const headerNav: HTMLDivElement = target.closest('.c-header__nav');
 
-            // IF closed then set the overflow to hidden else set it to auto
-            !isOpen ? (headerNav.style.overflowY = 'hidden') : (headerNav.style.overflowY = 'auto');
+            if (headerNav) {
+                // IF closed then set the overflow to hidden else set it to auto
+                !isOpen
+                    ? (headerNav.style.overflowY = 'hidden')
+                    : (headerNav.style.overflowY = 'auto');
+            }
         }
 
         setIsOpen(!isOpen);
@@ -228,25 +234,29 @@ interface NavContentProps extends SharedNavProps, HTMLAttributes<HTMLDivElement>
 export const NavContent = (props: NavContentProps) => {
     const { children, className, level, ...attr } = props;
     const classes = classNames('c-nav__content', className);
+    const ref = useRef<HTMLDivElement>(null);
     const { isOpen, contentId, scrollPosition, triggerId, triggerLabel } = useSubNavContext();
     const isDesktop = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
     // Reset scroll position when isOpen is false
     useEffect(() => {
         if (!isOpen) {
-            const content = document.getElementById(contentId);
-
             // Reset the overflow to auto
-            !isDesktop ? (content.style.overflowY = 'auto') : (content.style.overflowY = 'hidden');
+            !isDesktop
+                ? (ref.current.style.overflowY = 'auto')
+                : (ref.current.style.overflowY = 'hidden');
 
             // Scroll the content back to the top of the trigger.
             // This will only fire when isOpen is set outside of the nav,
             // so we can keep the position if the close trigger is clicked
-            content.scrollTo({
-                top: 0,
-            });
+
+            if (ref.current.scrollTo !== undefined) {
+                ref.current.scrollTo({
+                    top: 0,
+                });
+            }
         }
-    }, [contentId, isDesktop, isOpen]);
+    }, [isDesktop, isOpen]);
 
     return (
         <div
@@ -260,6 +270,7 @@ export const NavContent = (props: NavContentProps) => {
                 ['--nav-trigger-distance' as string]: !isDesktop && `${scrollPosition}px`,
             }}
             {...attr}
+            ref={ref}
         >
             {/* Remove button from DOM on desktop */}
             {!isDesktop ? (

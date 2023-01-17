@@ -207,6 +207,22 @@ export const nestedSubMenuNav = [
         label: 'Special offers',
         href: '/baz',
     },
+    {
+        label: 'Corporate',
+        href: '/baz',
+    },
+    {
+        label: 'Blog',
+        href: '/baz',
+    },
+    {
+        label: 'About',
+        href: '/baz',
+    },
+    {
+        label: 'Contact',
+        href: '/baz',
+    },
 ];
 
 // Smaller version of the nestedSubMenuNav so tests aren't so hefty
