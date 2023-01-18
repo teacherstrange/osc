@@ -9,6 +9,7 @@ export const getUserById: GetUserByIdFn = async (id) => {
         where: {
             id,
         },
+        include: userInclude(),
     });
 };
 
@@ -17,5 +18,21 @@ export const getUserByEmail: GetUserByEmailFn = async (email) => {
         where: {
             email,
         },
+        include: userInclude(),
     });
+};
+
+const userInclude = () => {
+    return {
+        crmLink: {
+            select: {
+                externalId: true,
+            },
+        },
+        lmsLink: {
+            select: {
+                externalId: true,
+            },
+        },
+    };
 };

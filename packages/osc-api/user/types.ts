@@ -7,6 +7,13 @@ export type userJWT = {
         write: string[];
     };
 };
-
-export type GetUserByIdFn = (id: number) => Promise<User | null>;
-export type GetUserByEmailFn = (email: string) => Promise<User | null>;
+type UserObject = User & {
+    crmLink: {
+        externalId: number;
+    }[];
+    lmsLink: {
+        externalId: number;
+    }[];
+};
+export type GetUserByIdFn = (id: number) => Promise<UserObject | null>;
+export type GetUserByEmailFn = (email: string) => Promise<UserObject | null>;

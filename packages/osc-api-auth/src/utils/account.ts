@@ -186,10 +186,12 @@ const avatar: UserAvatarFn = async (userId) => {
 const crmTokens: CrmTokensFn = async (userId) => {
     return await prisma.crmToken.findMany({
         where: {
-            userId: userId,
+            crmUser: {
+                userId,
+            },
         },
         include: {
-            crm: true,
+            crmUser: true,
         },
     });
 };
@@ -197,10 +199,12 @@ const crmTokens: CrmTokensFn = async (userId) => {
 export const lmsTokens: LmsTokensFn = async (userId) => {
     return await prisma.lmsToken.findMany({
         where: {
-            userId: userId,
+            lmsUser: {
+                userId,
+            },
         },
         include: {
-            lms: true,
+            lmsUser: true,
         },
     });
 };
