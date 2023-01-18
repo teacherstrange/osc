@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import React from 'react';
 import hash from 'string-hash';
 import color from 'tinycolor2';
+import { countLimiter } from '../../utils/countLimiter';
 
 import { classNames } from '../../utils/classNames';
 import './avatar.scss';
@@ -55,7 +56,11 @@ export const Avatar: FC<AvatarProps> = (props: AvatarProps) => {
                             ? 'c-avatar__badge c-avatar__badge--count'
                             : 'c-avatar__badge'
                     }
-                    badgeName={+notification.count > 99 ? '99+' : notification.count}
+                    badgeName={
+                        notification.count
+                            ? countLimiter(notification.count, 99, '+').toString()
+                            : null
+                    }
                 />
             ) : null}
 
