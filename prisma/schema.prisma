@@ -29,8 +29,8 @@ model User {
   passwordReset          PasswordReset[]         @relation("passwordReset")
   wishlist               Wishlist[]              @relation("userWishlist")
   preferences            UserPreference[]        @relation("userPreferences")
-  crmToken               CrmToken[]              @relation("userCRMToken")
-  lmsToken               LmsToken[]              @relation("userLMSToken")
+  crmLink                CrmUserLink[]           @relation("crmUserLinkUser")
+  lmsLink                LmsUserLink[]           @relation("lmsUserLinkUser")
   coursesTutored         CourseTutor[]           @relation("courseTutorProfile")
   courseTutorsAssigned   CourseTutor[]           @relation("courseTutorCreator")
   studying               CourseStudent[]         @relation("courseStudentProfile")
@@ -198,58 +198,87 @@ model FailedLogin {
 }
 
 model Crm {
-  id        Int        @id @default(autoincrement())
-  title     String     @db.VarChar(64)
-  url       String     @db.VarChar(128)
-  active    Boolean    @default(true)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime?  @updatedAt
-  CRMToken  CrmToken[] @relation("tokenCRM")
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(64)
+  url       String    @db.VarChar(128)
+  active    Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  CrmUserLink CrmUserLink[] @relation("crmUserLinkCrm")
 
   @@map("crm")
 }
 
+model CrmUserLink {
+  id         Int       @id @default(autoincrement())
+  crmId      Int
+  userId     Int
+  externalId Int
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
+
+  crm      Crm        @relation("crmUserLinkCrm", fields: [crmId], references: [id])
+  user     User       @relation("crmUserLinkUser", fields: [userId], references: [id])
+  crmToken CrmToken[] @relation("tokenCRM")
+
+  @@index([crmId])
+  @@index([userId])
+  @@map("crm.userLinks")
+}
+
 model CrmToken {
   id        Int       @id @default(autoincrement())
-  crmId     Int
-  userId    Int
+  crmUserId Int
   token     String    @db.VarChar(255)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
-  crm  Crm  @relation("tokenCRM", fields: [crmId], references: [id])
-  user User @relation("userCRMToken", fields: [userId], references: [id])
+  crmUser CrmUserLink @relation("tokenCRM", fields: [crmUserId], references: [id])
 
-  @@index([crmId])
-  @@index([userId])
+  @@index([crmUserId])
   @@map("crm.userTokens")
 }
 
 model Lms {
-  id        Int        @id @default(autoincrement())
-  title     String     @db.VarChar(64)
-  url       String     @db.VarChar(128)
-  active    Boolean    @default(true)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime?  @updatedAt
-  LMSToken  LmsToken[] @relation("tokenLMS")
+  id        Int           @id @default(autoincrement())
+  title     String        @db.VarChar(64)
+  url       String        @db.VarChar(128)
+  active    Boolean       @default(true)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime?     @updatedAt
+  lmsUsers  LmsUserLink[] @relation("lmsUserLinkLms")
 
   @@map("lms")
 }
 
+model LmsUserLink {
+  id         Int       @id @default(autoincrement())
+  lmsId      Int
+  userId     Int
+  externalId Int
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
+
+  lms    Lms        @relation("lmsUserLinkLms", fields: [lmsId], references: [id])
+  user   User       @relation("lmsUserLinkUser", fields: [userId], references: [id])
+  tokens LmsToken[] @relation("tokenLMS")
+
+  @@index([lmsId])
+  @@index([userId])
+  @@map("lms.userLinks")
+}
+
 model LmsToken {
   id        Int       @id @default(autoincrement())
-  lmsId     Int
-  userId    Int
+  lmsUserId Int
   token     String    @db.VarChar(255)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
-  lms  Lms  @relation("tokenLMS", fields: [lmsId], references: [id])
-  user User @relation("userLMSToken", fields: [userId], references: [id])
+  lmsUser LmsUserLink @relation("tokenLMS", fields: [lmsUserId], references: [id])
 
-  @@index([lmsId])
-  @@index([userId])
+  @@index([lmsUserId])
   @@map("LMS.userTokens")
 }
 
