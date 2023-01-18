@@ -19,6 +19,13 @@
         gap: var(--space-scale-micro);
     }
 
+    a,
+    button {
+        &:focus-visible {
+            box-shadow: 0 0 0 0.25rem var(--color-primary);
+        }
+    }
+
     &__logo {
         display: block;
         margin-inline: auto;
@@ -61,6 +68,7 @@
             justify-content: flex-end;
             grid-column: 2 / -1;
             grid-row: 2;
+            overflow-x: initial;
         }
 
         &[data-state="closed"] {
@@ -103,6 +111,7 @@
             grid-row: 1;
         }
 
+        /* stylelint-disable-next-line no-descending-specificity */
         > a,
         > button {
             display: block;
