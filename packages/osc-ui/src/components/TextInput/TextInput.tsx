@@ -57,7 +57,9 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         ...rest
     } = props;
 
-    const [value, setValue] = useState<string | number | readonly string[]>('');
+    const [value, setValue] = useState<string | number | readonly string[]>(
+        defaultValue ? defaultValue : ''
+    );
 
     const errorMessage = getFieldError(value, required);
     const displayError = wasSubmitted && errorMessage;
@@ -71,13 +73,6 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
 
     const iconModifier = useModifier('c-input__icon', variants);
     const iconClasses = classNames('c-input__icon', iconModifier);
-
-    useEffect(() => {
-        if (defaultValue) {
-            setValue(defaultValue);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps -- only needs to run on mount
-    }, []);
 
     return (
         <div className="c-input__outer-container">
