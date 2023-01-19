@@ -268,7 +268,7 @@ export const NavContent = (props: NavContentProps) => {
             className={classes}
             style={{
                 ...attr.style,
-                ['--nav-trigger-distance' as string]: !isDesktop && `${scrollPosition}px`,
+                ['--nav-trigger-distance' as string]: `${scrollPosition}px`,
             }}
             {...attr}
             ref={ref}
