@@ -211,9 +211,7 @@ export interface SanitySiteSetting {
         links: InternalSanityLinkItem[] | ExternalSanityLinkItem[];
         text: PortableTextBlock;
     };
-    menu: {
-        links: InternalSanityLinkItem[] | ExternalSanityLinkItem[];
-    };
+    mainNavigationId: string;
     seo: SanitySEO;
 }
 
@@ -225,4 +223,17 @@ export interface SanityRedirect {
         _type: string;
         slug: string;
     };
+}
+
+export interface SanityNavItem extends module {
+    _type?: 'column' | 'feature';
+    navigationLabel: string;
+    internalLink?: {
+        title: string;
+        slug: string;
+    };
+    externalLink?: string;
+    target?: 'Internal' | 'External' | 'Trigger';
+    featured?: SanityNavItem[];
+    items?: SanityNavItem[];
 }
