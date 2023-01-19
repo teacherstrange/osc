@@ -39,8 +39,8 @@ export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, Slider
     (props, forwardedRef) => {
         const { name, prefix, variants, ...rest } = props;
 
-        const [sliderValues, setSliderValues] = useState([]);
         const value = props.value || props.defaultValue;
+        const [sliderValues, setSliderValues] = useState(value);
 
         const onHandleChange = (event: number[]) => {
             setSliderValues(event);
@@ -48,10 +48,6 @@ export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, Slider
 
         const modifier = useModifier('c-slider', variants);
         const sliderClasses = classNames('c-slider', modifier);
-
-        useEffect(() => {
-            setSliderValues(value);
-        }, []);
 
         return (
             <SliderPrimitive.Slider
