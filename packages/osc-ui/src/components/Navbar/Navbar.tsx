@@ -1,5 +1,4 @@
 import { NavLink as RemixNavLink } from '@remix-run/react';
-import uniqueId from 'lodash.uniqueid';
 import type {
     AnchorHTMLAttributes,
     ButtonHTMLAttributes,
@@ -11,18 +10,11 @@ import type {
     ReactNode,
     RefAttributes,
 } from 'react';
-import React, {
-    createContext,
-    forwardRef,
-    useContext,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import React, { createContext, forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import breakpoints from '../../../../../tokens/media-queries';
 import { useInteractOutside } from '../../hooks/useInteractOutside';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useUniqueId } from '../../hooks/useUniqueId';
 import { classNames } from '../../utils/classNames';
 import { rem } from '../../utils/rem';
 import { Icon } from '../Icon/Icon';
@@ -101,8 +93,8 @@ export const NavSubMenu = (props: NavSubMenuProps) => {
     const ref = useRef<HTMLDivElement>(null);
 
     // IDs get regenerated on every render so we're memoizing them here to preserve them
-    const contentId = useMemo(() => uniqueId('content:'), []);
-    const triggerId = useMemo(() => uniqueId('trigger:'), []);
+    const contentId = useUniqueId('content:');
+    const triggerId = useUniqueId('trigger:');
 
     const context = {
         name: SUBMENU_NAME,
