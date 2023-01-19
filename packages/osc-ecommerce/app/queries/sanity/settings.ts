@@ -7,17 +7,7 @@ export const SETTINGS_QUERY = groq`
         _id,
         _rev,
         _type,
-        menu {
-            links[] {
-                (_type == 'linkInternal') => {
-                    title,
-                    ${LINK_INTERNAL}
-                },
-                (_type == 'linkExternal') => {
-                    ${LINK_EXTERNAL}
-                }
-            },
-        },
+        "mainNavigationId": mainNavigation->navigationId.current,
         footer {
             _type,
             links[] {
