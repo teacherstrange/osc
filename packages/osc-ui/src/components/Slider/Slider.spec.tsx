@@ -3,7 +3,13 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Slider } from './Slider';
 
-global.ResizeObserver = require('resize-observer-polyfill');
+beforeEach(() => {
+    window.ResizeObserver = vi.fn().mockImplementation(() => ({
+        observe: vi.fn(),
+        unobserve: vi.fn(),
+        disconnect: vi.fn(),
+    }));
+});
 
 test('should render a text input component and a label', () => {
     render(<Slider min={0} max={1000} name="Price" defaultValue={[25, 500]} />);
