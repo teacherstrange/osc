@@ -6,6 +6,7 @@
     padding: 0.875em 2.186em 0.875em 1.25em;
     border: solid 1px var(--color-quinary);
     font-size: var(--font-scale-centi);
+    resize: vertical;
 
     &__outer-container {
         display: flex;
