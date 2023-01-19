@@ -75,11 +75,13 @@ export default async function getPageData({ request, params, query }: Args) {
     }
 }
 
-export async function getSettingsData({ query }: { query: string }) {
+export async function getSettingsData({ query, params }: Omit<Args, 'request'>) {
     if (!query) throw new Error('Query must be passed');
 
     try {
-        const siteSettings = await getClient().fetch(query);
+        const param = params ?? {};
+
+        const siteSettings = await getClient().fetch(query, param);
         const liveSettings = siteSettings.filter((setting: SanitySiteSetting) =>
             excludeDrafts(setting)
         )[0];
@@ -103,7 +105,7 @@ export async function shouldRedirect(request: Request) {
         const destination = buildUrlPath({
             type: redirectObject.destination._type,
             url,
-            slug: redirectObject.destination.slug
+            slug: redirectObject.destination.slug,
         });
 
         return redirect(destination, redirectObject.statusCode);
