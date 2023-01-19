@@ -273,39 +273,37 @@ export const NavContent = (props: NavContentProps) => {
             ref={ref}
         >
             {/* Remove button from DOM on desktop */}
-            {!isDesktop ? (
-                <NavTrigger
-                    aria-controls={contentId}
-                    aria-expanded={isOpen}
-                    className="c-nav__trigger--close"
-                    aria-label={`Close ${triggerLabel}`}
+            <NavTrigger
+                aria-controls={contentId}
+                aria-expanded={isOpen}
+                className="c-nav__trigger--close u-hidden-from@desk"
+                aria-label={`Close ${triggerLabel}`}
+            >
+                {/* TODO: Update with Icon component */}
+                <svg
+                    width="15"
+                    height="10"
+                    viewBox="0 0 15 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="c-nav__trigger-icon"
+                    aria-hidden
                 >
-                    {/* TODO: Update with Icon component */}
-                    <svg
-                        width="15"
-                        height="10"
-                        viewBox="0 0 15 10"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="c-nav__trigger-icon"
-                        aria-hidden
-                    >
-                        <path
-                            d="M7.72284 5.42052L3.17348 0.885194L0.940918 3.12477L7.70178 9.86457L14.4977 3.11073L12.2652 0.878174L7.72284 5.42052Z"
-                            fill="#062134"
-                        />
-                    </svg>
+                    <path
+                        d="M7.72284 5.42052L3.17348 0.885194L0.940918 3.12477L7.70178 9.86457L14.4977 3.11073L12.2652 0.878174L7.72284 5.42052Z"
+                        fill="#062134"
+                    />
+                </svg>
 
-                    <span>{triggerLabel}</span>
-                </NavTrigger>
-            ) : null}
+                <span>{triggerLabel}</span>
+            </NavTrigger>
 
             {/* Add button to DOM on desktop & top level submenu */}
-            {isDesktop && level === 0 ? (
+            {level === 0 ? (
                 <NavTrigger
                     aria-controls={contentId}
                     aria-expanded={isOpen}
-                    className="c-nav__trigger--close"
+                    className="c-nav__trigger--close u-hidden-until@desk"
                     aria-label={`Close ${triggerLabel}`}
                 >
                     {/* TODO: Update with Icon component */}
