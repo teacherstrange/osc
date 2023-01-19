@@ -1,6 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
-import React, { useEffect, useRef } from 'react';
-
+import React from 'react';
+import type { SliderProps } from './Slider';
 import { Slider } from './Slider';
 
 export default {
@@ -37,54 +37,34 @@ export default {
     },
 } as Meta;
 
-const states = {
-    default: 'Default',
-    hasFocus: 'Has Focus',
-    isDisabled: 'Is Disabled',
-    isHovered: 'Is Hovered',
-};
-
-const Template: Story = ({ variations }) => {
-    const selectRef = useRef(null);
-
-    useEffect(() => {
-        selectRef.current?.focus();
-    }, []);
-
-    return variations.map((variation, index) => {
-        return (
-            <div key={index} style={{ margin: '1.5em 1em', width: '300px' }}>
-                <p style={{ fontWeight: '700', marginBottom: '3em' }}>{states[variation.state]}</p>
-                <Slider {...variation} ref={variation.ref ? selectRef : null} />
-            </div>
-        );
-    });
-};
+const Template: Story<SliderProps> = ({ ...args }) => (
+    <div style={{ margin: '1.5em 1em', width: '300px' }}>
+        <Slider {...args} />
+    </div>
+);
 
 export const Primary = Template.bind({});
+export const isDisabled = Template.bind({});
 
 Primary.args = {
-    variations: [
-        {
-            defaultValue: [200, 1200],
-            minStepsBetweenThumbs: 30,
-            min: 0,
-            max: 2000,
-            name: 'Price',
-            prefix: '£',
-            state: 'default',
-            step: 10,
-        },
-        {
-            defaultValue: [150, 500],
-            disabled: true,
-            minStepsBetweenThumbs: 10,
-            min: 0,
-            max: 1000,
-            name: 'Price',
-            prefix: '£',
-            state: 'isDisabled',
-            step: 10,
-        },
-    ],
+    defaultValue: [200, 1200],
+    minStepsBetweenThumbs: 30,
+    min: 0,
+    max: 2000,
+    name: 'Price',
+    prefix: '£',
+    state: 'Default',
+    step: 10,
+};
+
+isDisabled.args = {
+    defaultValue: [150, 500],
+    disabled: true,
+    minStepsBetweenThumbs: 10,
+    min: 0,
+    max: 1000,
+    name: 'Price',
+    prefix: '£',
+    state: 'isDisabled',
+    step: 10,
 };
