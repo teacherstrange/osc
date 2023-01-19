@@ -3,160 +3,160 @@
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
-.c-input__outer-container {
+.c-input {
     display: flex;
-}
+    order: 1;
+    min-width: 20ch;
+    max-width: 30ch;
+    padding: 0.375em 2.563em 0.375em 1.25em;
+    border: solid 1px var(--color-quinary);
+    font-size: var(--font-scale-centi);
+    cursor: text;
 
-.c-input__container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+    &:focus {
+        outline: 3px solid transparent;
+        box-shadow: 0 0 0 2px var(--color-primary);
+    }
 
-    .c-input {
+    &[disabled] {
+        background-color: var(--color-neutral-100);
+        color: var(--color-neutral-500);
+        pointer-events: none;
+    }
+
+    &__number {
+        padding: 0.375em 0.375em 0.375em 1.25em;
+    }
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        right: 5%;
+        transform: translateY(-50%);
+    }
+
+    &__outer-container {
         display: flex;
-        order: 1;
-        min-width: 20ch;
-        max-width: 30ch;
-        padding: 0.375em 2.563em 0.375em 1.25em;
-        border: solid 1px var(--color-quinary);
-        font-size: var(--font-scale-centi);
-        cursor: text;
+    }
 
-        &:focus {
-            outline: 3px solid transparent;
-            box-shadow: 0 0 0 2px var(--color-primary);
+    &__container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        &--secondary {
+            .c-input {
+                border-radius: 6px;
+            }
         }
 
-        &[disabled] {
-            background-color: var(--color-neutral-100);
-            color: var(--color-neutral-500);
-            pointer-events: none;
+        &--tertiary,
+        &--quaternary {
+            position: relative;
+
+            .c-label {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                transform: scale(1);
+                transform-origin: top left;
+                transition: 100ms ease-in-out;
+                pointer-events: none;
+
+                &.c-label--filled {
+                    transform: translate(0, -1.25em) scale(0.8);
+                }
+            }
+
+            .c-label,
+            .c-input {
+                height: 1.875em;
+            }
+
+            .c-input {
+                &__text {
+                    border: none;
+                    border-bottom: solid 2px var(--color-secondary);
+                }
+
+                &[disabled] {
+                    background: none;
+                    pointer-events: cursor;
+                    border-bottom: solid 2px var(--color-neutral-500);
+
+                    + .c-label {
+                        color: var(--color-neutral-500);
+                    }
+                }
+            }
+
+            .c-input:focus {
+                box-shadow: none;
+            }
+
+            .c-input:focus + .c-label {
+                transform: translate(0, -1.25em) scale(0.8);
+            }
         }
 
-        &__number {
-            padding: 0.375em 0.375em 0.375em 1.25em;
+        &--tertiary {
+            .c-input__icon {
+                top: 35%;
+            }
         }
 
-        &__icon {
-            position: absolute;
-            top: 50%;
-            right: 5%;
-            transform: translateY(-50%);
+        &--quaternary {
+            .c-input {
+                padding: 0.375em 2.563em 0.375em 0;
+                color: var(--color-neutral-600);
+            }
+
+            .c-label {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+        }
+
+        &--quaternary + .c-input__button {
+            svg {
+                width: 1.875em;
+                height: 1.875em;
+            }
+        }
+
+        &--error {
+            .c-input {
+                background-color: var(--color-error-20);
+                border: 1px solid var(--color-error);
+                box-shadow: 0 1px 2px var(--color-neutral-500), 0 0 5px 3px var(--color-septenary);
+
+                &__error-message {
+                    order: 2;
+                    color: var(--color-error);
+                    font-size: var(--font-scale-centi);
+                }
+
+                &__icon {
+                    &--error {
+                        color: var(--color-error);
+                    }
+                }
+            }
+
+            &.c-input__container--tertiary {
+                .c-input {
+                    background: none;
+                    border: none;
+                    border-bottom: solid 0.125em var(--color-error);
+                    box-shadow: none;
+                }
+            }
         }
     }
 
     .c-label {
         cursor: text;
-    }
-
-    &--secondary {
-        .c-input {
-            border-radius: 6px;
-        }
-    }
-
-    &--tertiary,
-    &--quaternary {
-        position: relative;
-
-        .c-label {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            transform: scale(1);
-            transform-origin: top left;
-            transition: 100ms ease-in-out;
-            pointer-events: none;
-
-            &.c-label--filled {
-                transform: translate(0, -1.25em) scale(0.8);
-            }
-        }
-
-        .c-label,
-        .c-input {
-            height: 1.875em;
-        }
-
-        .c-input {
-            &__text {
-                border: none;
-                border-bottom: solid 2px var(--color-secondary);
-            }
-
-            &[disabled] {
-                background: none;
-                pointer-events: cursor;
-                border-bottom: solid 2px var(--color-neutral-500);
-
-                + .c-label {
-                    color: var(--color-neutral-500);
-                }
-            }
-        }
-
-        .c-input:focus {
-            box-shadow: none;
-        }
-
-        .c-input:focus + .c-label {
-            transform: translate(0, -1.25em) scale(0.8);
-        }
-    }
-
-    &--tertiary {
-        .c-input__icon {
-            top: 35%;
-        }
-    }
-
-    &--quaternary {
-        .c-input {
-            padding: 0.375em 2.563em 0.375em 0;
-            color: var(--color-neutral-600);
-        }
-
-        .c-label {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
-    }
-
-    &--quaternary + .c-input__button {
-        svg {
-            width: 1.875em;
-            height: 1.875em;
-        }
-    }
-
-    &--error {
-        .c-input {
-            background-color: var(--color-error-20);
-            border: 1px solid var(--color-error);
-            box-shadow: 0 1px 2px var(--color-neutral-500), 0 0 5px 3px var(--color-septenary);
-
-            &__error-message {
-                order: 2;
-                color: var(--color-error);
-                font-size: var(--font-scale-centi);
-            }
-
-            &__icon {
-                &--error {
-                    color: var(--color-error);
-                }
-            }
-        }
-
-        &.c-input__container--tertiary {
-            .c-input {
-                background: none;
-                border: none;
-                border-bottom: solid 0.125em var(--color-error);
-                box-shadow: none;
-            }
-        }
     }
 }
 
