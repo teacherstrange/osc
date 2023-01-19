@@ -1,5 +1,5 @@
 import type {
-    ComponentPropsWithoutRef,
+    ComponentPropsWithRef,
     ElementRef,
     ForwardRefExoticComponent,
     HTMLAttributes,
@@ -31,7 +31,7 @@ export interface BurgerProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'ch
 }
 type BurgerRef = ForwardRefExoticComponent<BurgerProps & RefAttributes<HTMLButtonElement>>;
 
-export const Burger = forwardRef<ElementRef<BurgerRef>, ComponentPropsWithoutRef<BurgerRef>>(
+export const Burger = forwardRef<ElementRef<BurgerRef>, ComponentPropsWithRef<BurgerRef>>(
     (props: BurgerProps, forwardedRef) => {
         const { className, label, isOpen = false, ...attr } = props;
 
