@@ -10,6 +10,7 @@ import annotationLinkInternal from './annotations/linkInternal';
 
 // Document types
 import collection from './documents/collection';
+import navigation from './documents/navigation';
 import page from './documents/page';
 import post from './documents/post';
 import product from './documents/product';
@@ -40,6 +41,8 @@ import moduleImages from './objects/module/images';
 import moduleImageTablet from './objects/module/imageTablet';
 import moduleTrustpilot from './objects/module/trustpilot';
 import moduleVideo from './objects/module/video';
+import navigationItem from './objects/navigationItem';
+import navigationLink from './objects/navigationLink';
 import placeholderString from './objects/placeholderString';
 import productOption from './objects/productOption';
 import productWithVariant from './objects/productWithVariant';
@@ -64,6 +67,7 @@ export default createSchema({
         annotationLinkInternal,
         // Document types
         collection,
+        navigation,
         page,
         post,
         product,
@@ -80,6 +84,8 @@ export default createSchema({
         collectionRule,
         linkExternal,
         linkInternal,
+        navigationItem,
+        navigationLink,
         placeholderString,
         productOption,
         productWithVariant,
