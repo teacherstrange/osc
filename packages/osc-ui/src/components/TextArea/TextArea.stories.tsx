@@ -14,7 +14,7 @@ export default {
             },
         },
     },
-};
+} as Meta;
 
 const states = {
     default: 'Default',
