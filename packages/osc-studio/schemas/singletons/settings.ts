@@ -1,4 +1,4 @@
-import { CogIcon, PackageIcon } from '@sanity/icons';
+import { CogIcon } from '@sanity/icons';
 
 const TITLE = 'Settings';
 
@@ -11,80 +11,30 @@ export default {
         {
             default: true,
             name: 'navigation',
-            title: 'Navigation'
+            title: 'Navigation',
         },
         {
             name: 'productOptions',
-            title: 'Product options'
+            title: 'Product options',
         },
         {
             name: 'notFoundPage',
-            title: '404 page'
+            title: '404 page',
         },
         {
             name: 'seo',
-            title: 'SEO'
-        }
+            title: 'SEO',
+        },
     ],
     fields: [
         // Menu
         {
-            name: 'menu',
-            title: 'Menu',
-            type: 'object',
+            name: 'mainNavigation',
+            title: 'Main Navigation',
+            description: 'Select the menu for the main nav on the site',
+            type: 'reference',
+            to: { type: 'navigation' },
             group: 'navigation',
-            options: {
-                collapsed: false,
-                collapsible: true
-            },
-            fields: [
-                // Links
-                {
-                    name: 'links',
-                    title: 'Links',
-                    type: 'array',
-                    of: [
-                        {
-                            name: 'collectionGroup',
-                            title: 'Collection group',
-                            type: 'object',
-                            icon: PackageIcon,
-                            fields: [
-                                {
-                                    name: 'title',
-                                    title: 'Title',
-                                    type: 'string',
-                                    validation: (Rule) => Rule.required()
-                                },
-                                {
-                                    name: 'collectionLinks',
-                                    title: 'Collection links',
-                                    type: 'array',
-                                    validation: (Rule) => Rule.unique().max(4),
-                                    of: [
-                                        {
-                                            name: 'collection',
-                                            type: 'reference',
-                                            weak: true,
-                                            to: [{ type: 'collection' }]
-                                        }
-                                    ]
-                                },
-                                {
-                                    name: 'collectionProducts',
-                                    title: 'Collection products',
-                                    type: 'reference',
-                                    description: 'Products from this collection will be listed',
-                                    weak: true,
-                                    to: [{ type: 'collection' }]
-                                }
-                            ]
-                        },
-                        { type: 'linkInternal' },
-                        { type: 'linkExternal' }
-                    ]
-                }
-            ]
         },
         // Footer
         {
@@ -94,7 +44,7 @@ export default {
             group: 'navigation',
             options: {
                 collapsed: false,
-                collapsible: true
+                collapsible: true,
             },
             fields: [
                 // Links
@@ -102,7 +52,7 @@ export default {
                     name: 'links',
                     title: 'Links',
                     type: 'array',
-                    of: [{ type: 'linkInternal' }, { type: 'linkExternal' }]
+                    of: [{ type: 'linkInternal' }, { type: 'linkExternal' }],
                 },
                 // Text
                 {
@@ -118,30 +68,30 @@ export default {
                                     {
                                         title: 'Email',
                                         name: 'annotationLinkEmail',
-                                        type: 'annotationLinkEmail'
+                                        type: 'annotationLinkEmail',
                                     },
                                     // Internal link
                                     {
                                         title: 'Internal page',
                                         name: 'annotationLinkInternal',
-                                        type: 'annotationLinkInternal'
+                                        type: 'annotationLinkInternal',
                                     },
                                     // URL
                                     {
                                         title: 'URL',
                                         name: 'annotationLinkExternal',
-                                        type: 'annotationLinkExternal'
-                                    }
+                                        type: 'annotationLinkExternal',
+                                    },
                                 ],
-                                decorators: []
+                                decorators: [],
                             },
                             // Block styles
                             styles: [{ title: 'Normal', value: 'normal' }],
-                            type: 'block'
-                        }
-                    ]
-                }
-            ]
+                            type: 'block',
+                        },
+                    ],
+                },
+            ],
         },
         // Not found page
         {
@@ -154,13 +104,13 @@ export default {
                     name: 'title',
                     title: 'Title',
                     type: 'string',
-                    validation: (Rule) => Rule.required()
+                    validation: (Rule) => Rule.required(),
                 },
                 {
                     name: 'body',
                     title: 'Body',
                     type: 'text',
-                    rows: 2
+                    rows: 2,
                 },
                 {
                     name: 'collection',
@@ -171,11 +121,11 @@ export default {
                     to: [
                         {
                             name: 'collection',
-                            type: 'collection'
-                        }
-                    ]
-                }
-            ]
+                            type: 'collection',
+                        },
+                    ],
+                },
+            ],
         },
         // SEO
         {
@@ -186,14 +136,14 @@ export default {
             description: 'Defaults for every page',
             options: {
                 collapsed: false,
-                collapsible: true
+                collapsible: true,
             },
             fields: [
                 {
                     name: 'title',
                     title: 'Site title',
                     type: 'string',
-                    validation: (Rule) => Rule.required()
+                    validation: (Rule) => Rule.required(),
                 },
                 {
                     name: 'titleSeparator',
@@ -204,11 +154,11 @@ export default {
                     options: {
                         list: ['-', '–', '—', '|'],
                         layout: 'radio',
-                        direction: 'horizontal'
-                    }
-                }
+                        direction: 'horizontal',
+                    },
+                },
             ],
-            validation: (Rule) => Rule.required()
+            validation: (Rule) => Rule.required(),
         },
         {
             name: 'schema',
@@ -219,20 +169,20 @@ export default {
                 "This data is shown as metadata in your site. It is intended to appear in Google's Knowledge Graph. You can be either an organization, or a person.",
             options: {
                 collapsed: false,
-                collapsible: true
+                collapsible: true,
             },
             fields: [
                 {
                     name: 'organizationName',
                     title: 'Organization name',
-                    type: 'string'
+                    type: 'string',
                 },
                 {
                     name: 'organizationLogo',
                     title: 'Organization logo',
-                    type: 'image'
-                }
-            ]
+                    type: 'image',
+                },
+            ],
         },
         {
             name: 'social',
@@ -242,16 +192,16 @@ export default {
             description: 'Input any profiles on the web that belong to your organization.',
             options: {
                 collapsed: false,
-                collapsible: true
+                collapsible: true,
             },
             fields: [
                 {
                     name: 'socialProfile',
                     title: 'Social Profile',
                     type: 'array',
-                    of: [{ type: 'string' }]
-                }
-            ]
+                    of: [{ type: 'string' }],
+                },
+            ],
         },
         {
             name: 'robots',
@@ -261,22 +211,22 @@ export default {
             description: 'It is up to search engines to honor this request.',
             options: {
                 collapsed: false,
-                collapsible: true
+                collapsible: true,
             },
             fields: [
                 {
                     name: 'noIndex',
                     title: 'Discourage search engines from indexing this site',
-                    type: 'boolean'
-                }
-            ]
-        }
+                    type: 'boolean',
+                },
+            ],
+        },
     ],
     preview: {
         prepare() {
             return {
-                title: TITLE
+                title: TITLE,
             };
-        }
-    }
+        },
+    },
 };
