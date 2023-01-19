@@ -132,6 +132,7 @@
                 box-shadow: 0 1px 2px var(--color-neutral-500), 0 0 5px 3px var(--color-septenary);
 
                 &__error-message {
+                    display: flex;
                     order: 2;
                     color: var(--color-error);
                     font-size: var(--font-scale-centi);
