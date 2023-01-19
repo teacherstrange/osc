@@ -62,17 +62,15 @@ export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, Slider
                     <SliderPrimitive.Range className="c-slider__range" />
                 </SliderPrimitive.Track>
                 {value?.map((_, i) => (
-                    <>
-                        <SliderPrimitive.SliderThumb className="c-slider__thumb" key={i}>
-                            <div className="c-slider__value-container">
-                                <div className="c-slider__value">
-                                    {prefix}
-                                    {sliderValues[i]}
-                                    <div className="c-slider__value--arrow"></div>
-                                </div>
+                    <SliderPrimitive.SliderThumb className="c-slider__thumb" key={i}>
+                        <div className="c-slider__value-container">
+                            <div className="c-slider__value">
+                                {prefix}
+                                {sliderValues[i]}
+                                <div className="c-slider__value--arrow"></div>
                             </div>
-                        </SliderPrimitive.SliderThumb>
-                    </>
+                        </div>
+                    </SliderPrimitive.SliderThumb>
                 ))}
             </SliderPrimitive.Slider>
         );
