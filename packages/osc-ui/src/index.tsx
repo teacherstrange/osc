@@ -1,5 +1,6 @@
 import './styles/main.scss';
 
+// Components
 export {
     Accordion,
     AccordionHeader,
@@ -38,3 +39,5 @@ export { Tag } from './components/Tag/Tag';
 export { Trustpilot } from './components/Trustpilot/Trustpilot';
 export { VideoPlayer } from './components/VideoPlayer/VideoPlayer';
 export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
+// Utils
+export { rem } from './utils/rem';
