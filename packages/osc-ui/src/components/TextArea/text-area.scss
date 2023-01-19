@@ -1,38 +1,46 @@
-/* stylelint-disable no-descending-specificity */
 /* stylelint-disable selector-class-pattern */
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
-.c-textarea__outer-container {
-    display: flex;
-}
+.c-textarea {
+    padding: 0.875em 2.186em 0.875em 1.25em;
+    border: solid 1px var(--color-quinary);
+    font-size: var(--font-scale-centi);
 
-.c-textarea__container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+    &__outer-container {
+        display: flex;
+    }
 
-    .c-textarea {
-        padding: 0.875em 2.186em 0.875em 1.25em;
-        border: solid 1px var(--color-quinary);
-        font-size: var(--font-scale-centi);
+    &__icon {
+        position: absolute;
+        top: 50%;
+        right: 5%;
+        transform: translateY(-50%);
+    }
 
-        &:focus {
-            outline: 3px solid transparent;
-            box-shadow: 0 0 0 2px var(--color-primary);
-        }
+    &__container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
 
-        &__icon {
-            position: absolute;
-            top: 50%;
-            right: 5%;
-            transform: translateY(-50%);
-        }
+        &--error {
+            .c-textarea {
+                padding: 0.875em 3.375em 0.875em 1.25em;
+                background-color: var(--color-error-20);
+                border: 1px solid var(--color-error);
+                box-shadow: 0 1px 2px var(--color-neutral-500), 0 0 5px 3px var(--color-septenary);
 
-        &[disabled] {
-            background-color: var(--color-neutral-100);
-            color: var(--color-neutral-500);
-            pointer-events: none;
+                &__error-message {
+                    color: var(--color-error);
+                    font-size: var(--font-scale-centi);
+                }
+
+                &__icon {
+                    &--error {
+                        color: var(--color-error);
+                    }
+                }
+            }
         }
     }
 
@@ -44,23 +52,14 @@
         }
     }
 
-    &--error {
-        .c-textarea {
-            padding: 0.875em 3.375em 0.875em 1.25em;
-            background-color: var(--color-error-20);
-            border: 1px solid var(--color-error);
-            box-shadow: 0 1px 2px var(--color-neutral-500), 0 0 5px 3px var(--color-septenary);
+    &:focus {
+        outline: 3px solid transparent;
+        box-shadow: 0 0 0 2px var(--color-primary);
+    }
 
-            &__error-message {
-                color: var(--color-error);
-                font-size: var(--font-scale-centi);
-            }
-
-            &__icon {
-                &--error {
-                    color: var(--color-error);
-                }
-            }
-        }
+    &[disabled] {
+        background-color: var(--color-neutral-100);
+        color: var(--color-neutral-500);
+        pointer-events: none;
     }
 }
