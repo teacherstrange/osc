@@ -114,17 +114,29 @@ export const NavSubMenu = (props: NavSubMenuProps) => {
     useInteractOutside(ref, () => setIsOpen(false), ['mouseup', 'touchstart', 'keyup']);
 
     useEffect(() => {
+        const navLinks = document.querySelectorAll('.c-nav__link');
+
         // close menu when user presses escape
         const handleEscape = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
                 setIsOpen(false);
             }
         };
-
         document.addEventListener('keyup', handleEscape);
+
+        // As we're using the Remix Link component we need to make sure the menu is closed as expected when a link is clicked
+        // otherwise we end up with the menu remaining open.
+        const handleClick = () => setIsOpen(false);
+        navLinks.forEach((link) => {
+            link.addEventListener('click', handleClick);
+        });
 
         return () => {
             document.removeEventListener('keyup', handleEscape);
+
+            navLinks.forEach((link) => {
+                link.removeEventListener('click', handleClick);
+            });
         };
     }, []);
 
@@ -390,6 +402,7 @@ export const NavLink = forwardRef<ElementRef<NavLinkRef>, ComponentPropsWithoutR
                 tabIndex={tabIndex}
                 {...attr}
                 ref={forwardedRef}
+                prefetch="intent"
             >
                 {children}
             </RemixNavLink>
