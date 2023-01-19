@@ -7,12 +7,12 @@
     font-weight: $weight-reg;
     cursor: pointer;
 
+    &__required {
+        padding-left: 0.063em;
+        font-size: var(--font-scale-centi);
+    }
+
     &--bold {
         font-weight: $weight-bold;
     }
-}
-
-.c-label__required {
-    padding-left: 1px;
-    font-size: var(--font-scale-centi);
 }
