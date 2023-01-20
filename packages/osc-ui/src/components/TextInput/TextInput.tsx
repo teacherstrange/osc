@@ -49,7 +49,6 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         id,
         icon,
         name,
-        placeholder,
         required,
         type,
         variants,
@@ -91,7 +90,6 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     id={id}
                     name={id}
                     onChange={(event) => setValue(event.currentTarget.value)}
-                    placeholder={placeholder}
                     ref={forwardedRef}
                     type={type}
                     {...rest}
