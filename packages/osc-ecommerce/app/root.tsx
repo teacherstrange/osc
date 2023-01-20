@@ -1,6 +1,7 @@
 import type { HeadersFunction, LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import {
+    Link,
     Links,
     LiveReload,
     Meta,
@@ -275,7 +276,7 @@ export default function App() {
                         </Icon>
                     </button>
 
-                    <a href="#" className="u-hidden-until@desk">
+                    <Link to="/" className="u-hidden-until@desk">
                         <Icon label="My account">
                             {/* // TODO: Update icon with Icon component */}
                             <svg
@@ -295,9 +296,9 @@ export default function App() {
                                 />
                             </svg>
                         </Icon>
-                    </a>
+                    </Link>
 
-                    <a href="#" className="u-hidden-until@desk">
+                    <Link to="/" className="u-hidden-until@desk">
                         <Icon label="Wishlist">
                             {/* // TODO: Update icon with Icon component */}
                             <svg
@@ -313,7 +314,7 @@ export default function App() {
                                 />
                             </svg>
                         </Icon>
-                    </a>
+                    </Link>
 
                     <button>
                         <Icon label="Bag">
