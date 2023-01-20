@@ -19,7 +19,7 @@ const config: PlaywrightTestConfig = {
          * Maximum time expect() should wait for the condition to be met.
          * For example in `await expect(locator).toHaveText();`
          */
-        timeout: 5000
+        timeout: 5000,
     },
     /* Run tests in files in parallel */
     fullyParallel: true,
@@ -42,7 +42,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `http://localhost:${process.env.PORT}`,
         //! storageState: './e2e/storageState.json', Skip for now until auth is merged into main
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-        trace: 'on-first-retry'
+        trace: 'on-first-retry',
         // Tell all tests to load signed-in state from 'storageState.json'.
         // storageState: 'storageState.json'
     },
@@ -52,37 +52,37 @@ const config: PlaywrightTestConfig = {
         {
             name: 'chromium',
             use: {
-                ...devices['Desktop Chrome']
-            }
+                ...devices['Desktop Chrome'],
+            },
         },
 
         {
             name: 'firefox',
             use: {
-                ...devices['Desktop Firefox']
-            }
+                ...devices['Desktop Firefox'],
+            },
         },
 
         {
             name: 'webkit',
             use: {
-                ...devices['Desktop Safari']
-            }
-        }
+                ...devices['Desktop Safari'],
+            },
+        },
 
         /* Test against mobile viewports. */
-        // {
-        //   name: 'Mobile Chrome',
-        //   use: {
-        //     ...devices['Pixel 5'],
-        //   },
-        // },
-        // {
-        //   name: 'Mobile Safari',
-        //   use: {
-        //     ...devices['iPhone 12'],
-        //   },
-        // },
+        {
+            name: 'Mobile Chrome',
+            use: {
+                ...devices['Pixel 5'],
+            },
+        },
+        {
+            name: 'Mobile Safari',
+            use: {
+                ...devices['iPhone 12'],
+            },
+        },
 
         /* Test against branded browsers. */
         // {
@@ -100,7 +100,7 @@ const config: PlaywrightTestConfig = {
     ],
 
     /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-    outputDir: 'test-results/'
+    outputDir: 'test-results/',
 };
 
 export default config;
