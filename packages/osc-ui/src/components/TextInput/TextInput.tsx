@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes, ReactNode } from 'react';
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { useElement } from '../../hooks/useElement';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
