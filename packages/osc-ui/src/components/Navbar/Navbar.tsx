@@ -402,7 +402,6 @@ export const NavLink = forwardRef<ElementRef<NavLinkRef>, ComponentPropsWithoutR
                 tabIndex={tabIndex}
                 {...attr}
                 ref={forwardedRef}
-                prefetch="intent"
             >
                 {children}
             </RemixNavLink>
