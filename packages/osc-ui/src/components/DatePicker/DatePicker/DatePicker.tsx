@@ -5,8 +5,8 @@ import React, { useRef } from 'react';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { Icon } from '../../Icon/Icon';
 import { Calendar } from '../Calendar/Calendar';
-import './date-picker.scss';
 import { DateField } from '../DateField/DateField';
+import '../date-picker.scss';
 
 import {
     ReactAriaButton,
