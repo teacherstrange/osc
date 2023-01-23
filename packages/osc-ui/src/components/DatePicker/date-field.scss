@@ -1,0 +1,53 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-date-field {
+    display: inline-flex;
+    min-width: 30ch;
+    max-width: 40ch;
+    padding: 0.375em 2.563em 0.375em 0.625em;
+    border: solid 1px var(--color-quinary);
+    border-radius: 4px;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .c-label {
+            --label-font-size: var(--font-scale-centi);
+
+            color: var(--color-neutral-600);
+            font-size: var(--label-font-size);
+            font-weight: $weight-reg;
+            cursor: pointer;
+
+            &__required {
+                padding-left: 0.063em;
+                font-size: var(--label-font-size);
+            }
+        }
+    }
+
+    &__segment {
+        padding: 0 0.063em;
+        font-variant-numeric: tabular-nums;
+        text-align: end;
+
+        .c-date-field__segment {
+            color: var(--color-secondary);
+        }
+
+        &:focus {
+            background: var(--color-primary);
+            border-radius: 2px;
+            outline: none;
+            color: var(--color-tertiary);
+        }
+    }
+
+    &:focus-within {
+        border: 2px solid var(--color-primary);
+    }
+}

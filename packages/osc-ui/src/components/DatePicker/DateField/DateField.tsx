@@ -1,0 +1,68 @@
+import React, { useRef } from 'react';
+import { useDateField, useDateSegment } from '@react-aria/datepicker';
+import { useLocale } from '@react-aria/i18n';
+import { useDateFieldState } from '@react-stately/datepicker';
+import { GregorianCalendar } from '@internationalized/date';
+import '../date-field.scss';
+
+// Ensure that we just use the Gregorian Calendar to limit package size.
+// If needed more can be added in at a later point. See below link for example:
+// https://react-spectrum.adobe.com/react-aria/useDateField.html#reducing-bundle-size
+const createCalendar = (identifier) => {
+    switch (identifier) {
+        case 'gregory':
+            return new GregorianCalendar();
+        default:
+            throw new Error(`Unsupported calendar ${identifier}`);
+    }
+};
+
+// TODO -
+// 1) Error handling - DONE
+// 2) Add validationstate - confirmation when valid as well as invalid? See:
+// react-spectrum.adobe.com/react-spectrum/DateField.html#minimum-and-maximum-values
+
+export const DateField = (props) => {
+    let { locale } = useLocale();
+
+    let state = useDateFieldState({
+        ...props,
+        locale,
+        createCalendar,
+    });
+
+    let ref = useRef();
+    let { labelProps, fieldProps } = useDateField(props, state, ref);
+
+    return (
+        <div className="c-date-field__wrapper">
+            <span {...labelProps} className="c-label">
+                {props.label}
+            </span>
+            <div {...fieldProps} ref={ref} className="c-date-field">
+                {state.segments.map((segment, i) => (
+                    <DateSegment key={i} segment={segment} state={state} name="datepicker" />
+                ))}
+                {/* TODO - Needs updating to use correct error validation formatting */}
+                {state.validationState === 'invalid' ? <span aria-hidden="true">🚫</span> : null}
+            </div>
+        </div>
+    );
+};
+
+const DateSegment = ({ segment, state, name }) => {
+    let ref = useRef();
+    let { segmentProps } = useDateSegment(segment, state, ref);
+
+    return (
+        <div
+            {...segmentProps}
+            ref={ref}
+            className={`c-date-field__segment ${
+                segment.isPlaceholder ? 'c-date-field__placeholder' : ''
+            }`}
+        >
+            {segment.text}
+        </div>
+    );
+};
