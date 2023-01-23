@@ -1,5 +1,5 @@
 import type { Meta, Story } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { I18nProvider } from '@react-aria/i18n';
 import { DatePicker } from './DatePicker';
 import { parseDate } from '@internationalized/date';
@@ -10,8 +10,7 @@ export default {
 } as Meta;
 
 const Template: Story = (args) => {
-    let [date, setDate] = React.useState(parseDate('2020-02-03'));
-    console.log('VALUE', date);
+    let [date, setDate] = useState(args.defaultValue ? parseDate(args.defaultValue) : null);
 
     return (
         // Passing the 118nProvider because locale was defaulting to en-US - This is
@@ -23,7 +22,11 @@ const Template: Story = (args) => {
 };
 
 export const Primary = Template.bind({});
+export const DefaultDate = Template.bind({});
 
 Primary.args = {
     label: 'Date',
+};
+DefaultDate.args = {
+    defaultValue: '2022-02-03',
 };
