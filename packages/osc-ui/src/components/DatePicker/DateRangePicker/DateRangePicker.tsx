@@ -4,7 +4,7 @@ import { useDateRangePickerState } from '@react-stately/datepicker';
 import React, { useRef } from 'react';
 import { Icon } from '../../Icon/Icon';
 import { DateField } from '../DateField/DateField';
-import { RangeCalendar } from '../RangeCalendar/RangeCalendar';
+import { RangeCalendarContainer } from '../RangeCalendar/RangeCalendarContainer';
 import {
     ReactAriaButton,
     ReactAriaDialog,
@@ -57,7 +57,7 @@ export const DateRangePicker = (props) => {
             {state.isOpen && (
                 <ReactAriaPopover state={state} triggerRef={ref} placement="bottom start">
                     <ReactAriaDialog {...dialogProps}>
-                        <RangeCalendar {...calendarProps} />
+                        <RangeCalendarContainer />
                     </ReactAriaDialog>
                 </ReactAriaPopover>
             )}
