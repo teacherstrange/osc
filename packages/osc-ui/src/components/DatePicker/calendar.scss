@@ -1,0 +1,120 @@
+// /* stylelint-disable selector-class-pattern */
+// @use "../../styles/settings" as *;
+// /* stylelint-disable plugin/selector-bem-pattern */
+
+// .c-calendar {
+//     width: max-content;
+
+//     &__header {
+//         display: flex;
+//         align-items: center;
+//         justify-content: space-between;
+//         gap: 4px;
+//         margin: 0 8px;
+
+//         h2 {
+//             flex: 1;
+//             margin: 0;
+//         }
+//     }
+
+//     table {
+//         width: 100%;
+//     }
+
+//     &__month,
+//     &__year {
+//         margin: 0 0.188em;
+//     }
+
+//     &__year {
+//         color: #00a698;
+//     }
+
+//     td {
+//         height: 40px;
+//     }
+
+//     &__cell {
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         width: 40px;
+//         height: 40px;
+//         color: #062134;
+//         text-align: center;
+//         cursor: default;
+
+//         &:focus {
+//             border: 3px solid var(--color-secondary);
+//             border-radius: 4px;
+//         }
+
+//         &--selected {
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             width: 40px;
+//             height: 40px;
+//             background: #00a698;
+//             border: solid 2px var(--color-primary);
+//             border-radius: 4px;
+//             color: white;
+//         }
+
+//         &--disabled {
+//             color: gray;
+//         }
+
+//         &--unavailable {
+//             color: red;
+//         }
+//     }
+
+//     &__date-range-picker {
+//         .c-react-aria-button {
+//             position: absolute;
+//             right: 0;
+//             bottom: 0;
+//             transform: translate(-50%, -50%);
+//             cursor: pointer;
+
+//             svg {
+//                 height: unset;
+//             }
+//         }
+//     }
+
+//     &__table-head {
+//         background: #f5f5f5;
+
+//         th {
+//             display: table-cell;
+//             vertical-align: middle;
+//             width: 40px;
+//             height: 40px;
+//             text-align: center;
+//         }
+//     }
+
+//     &__buttons {
+//         .c-react-aria-button {
+//             cursor: pointer;
+
+//             &:focus {
+//                 border: 2px solid var(--color-primary);
+//                 border-radius: 4px;
+//             }
+
+//             svg {
+//                 width: 30px;
+//                 height: 30px;
+//             }
+//         }
+//     }
+// }
+
+// table {
+//     border-collapse: separate;
+//     text-indent: initial;
+// }
