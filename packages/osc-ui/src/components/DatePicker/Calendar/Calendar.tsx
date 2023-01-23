@@ -7,7 +7,7 @@ import { Icon } from '../../Icon/Icon';
 import { CalendarGrid } from './CalendarGrid';
 import { ChevronRightIcon, ChevronLeftIcon } from '@radix-ui/react-icons';
 import '../calendar.scss';
-import { ReactAriaButton } from '../ReactAriaButton/ReactAriaButton';
+import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
 
 const createCalendar = (identifier) => {
     switch (identifier) {
@@ -30,12 +30,12 @@ export const Calendar = (props) => {
         createCalendar,
     });
 
-    let { calendarProps, errorMessageProps, nextButtonProps, prevButtonProps, title } = useCalendar(
+    let { calendarProps, errorMessageProps, nextButtonProps, prevButtonProps } = useCalendar(
         props,
         state
     );
 
-    // Customsie to shorthand months, format and split out the month & year
+    // Customise to shorthand months, format and split out the month & year
     const [month, year] = useDateFormatter({
         month: 'short',
         year: 'numeric',
