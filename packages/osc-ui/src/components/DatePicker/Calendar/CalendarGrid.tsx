@@ -1,7 +1,7 @@
-import React from 'react';
+import { endOfMonth, getWeeksInMonth } from '@internationalized/date';
 import { useCalendarGrid } from '@react-aria/calendar';
-import { getWeeksInMonth, endOfMonth } from '@internationalized/date';
 import { useLocale } from '@react-aria/i18n';
+import React from 'react';
 import { CalendarCell } from './CalendarCell';
 
 export const CalendarGrid = ({ state, offset = {}, ...props }) => {

@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
 import { useCalendarCell } from '@react-aria/calendar';
-import { useLocale } from '@react-aria/i18n';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
+import React, { useRef } from 'react';
 
-import { isSameDay, getDayOfWeek, isSameMonth } from '@internationalized/date';
+import { isSameMonth } from '@internationalized/date';
 
 export const CalendarCell = ({ state, date, currentMonth }) => {
     let ref = useRef();

@@ -1,13 +1,13 @@
-import React from 'react';
-import { useCalendar } from '@react-aria/calendar';
-import { useLocale, useDateFormatter } from '@react-aria/i18n';
-import { useCalendarState } from '@react-stately/calendar';
 import { GregorianCalendar } from '@internationalized/date';
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { useCalendar } from '@react-aria/calendar';
+import { useDateFormatter, useLocale } from '@react-aria/i18n';
+import { useCalendarState } from '@react-stately/calendar';
+import React from 'react';
 import { Icon } from '../../Icon/Icon';
-import { CalendarGrid } from './CalendarGrid';
-import { ChevronRightIcon, ChevronLeftIcon } from '@radix-ui/react-icons';
 import '../calendar.scss';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
+import { CalendarGrid } from './CalendarGrid';
 
 const createCalendar = (identifier) => {
     switch (identifier) {
