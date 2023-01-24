@@ -26,6 +26,8 @@ export const PAGE_REFERENCES = [
 export const MODULES = [
     { type: 'module.accordion' },
     { type: 'module.content' },
+    { type: 'module.cards' },
+    { type: 'module.carousel' },
     { type: 'module.images' },
     { type: 'module.trustpilot' },
     { type: 'module.carousel' },

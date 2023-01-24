@@ -35,6 +35,12 @@ import linkInternal from './objects/linkInternal';
 import moduleAccordion from './objects/module/accordion';
 import moduleButton from './objects/module/button';
 import moduleButtons from './objects/module/buttons';
+import moduleCardBio from './objects/module/cardBio';
+import moduleCardCollection from './objects/module/cardCollection';
+import moduleCardCourse from './objects/module/cardCourse';
+import moduleCardPost from './objects/module/cardPost';
+import moduleCards from './objects/module/cards';
+import moduleCardStatic from './objects/module/cardStatic';
 import moduleCarousel from './objects/module/carousel';
 import moduleContent from './objects/module/content';
 import moduleImage from './objects/module/image';
@@ -103,6 +109,12 @@ export default createSchema({
         moduleButton,
         moduleButtons,
         moduleAccordion,
+        moduleCardBio,
+        moduleCardCourse,
+        moduleCardCollection,
+        moduleCardPost,
+        moduleCardStatic,
+        moduleCards,
         moduleImage,
         moduleImages,
         moduleImageMobile,
