@@ -30,7 +30,11 @@ export const DateRangePickerContainer = ({ presets }) => {
         );
     }
 
-    const ClearSelection = () => <div onClick={() => setValue(null)}>Clear Selection</div>;
+    const ClearSelection = () => (
+        <div className="c-calendar__range--clear-selection" onClick={() => setValue(null)}>
+            Clear Selection
+        </div>
+    );
 
     return (
         <>

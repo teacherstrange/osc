@@ -39,42 +39,49 @@ export const RangeCalendar = (props) => {
         timeZone: state.timeZone,
     });
 
+    const startAndEndDate = ['start', 'end'].map((res, i) => (
+        <h3 key={i}>
+            {formatDate(res, formattedDate, state).map((res, i) => {
+                const period = ['month', 'year'];
+                return (
+                    <span key={i} className={`c-calendar__${period[i]}`}>
+                        {res}
+                    </span>
+                );
+            })}
+        </h3>
+    ));
+
     return (
         <div {...calendarProps} ref={ref} className="c-calendar c-calendar__range">
             <div className="c-calendar__header">
-                <div className="c-calendar__buttons">
-                    {/* Add a screen reader only description of the entire visible range rather than
-                     * a separate heading above each month grid. This is placed first in the DOM order
-                     * so that it is the first thing a touch screen reader user encounters.
-                     * In addition, VoiceOver on iOS does not announce the aria-label of the grid
-                     * elements, so the aria-label of the Calendar is included here as well. */}
-                    <VisuallyHidden>
-                        <h2>{calendarProps['aria-label']}</h2>
-                    </VisuallyHidden>
-                    <ReactAriaButton {...prevButtonProps}>
-                        <Icon label="chevron-left">
-                            <ChevronLeftIcon />
-                        </Icon>
-                    </ReactAriaButton>
+                <div className="c-calendar__header--inner">
+                    <div className="c-calendar__buttons">
+                        {/* Add a screen reader only description of the entire visible range rather than
+                         * a separate heading above each month grid. This is placed first in the DOM order
+                         * so that it is the first thing a touch screen reader user encounters.
+                         * In addition, VoiceOver on iOS does not announce the aria-label of the grid
+                         * elements, so the aria-label of the Calendar is included here as well. */}
+                        <VisuallyHidden>
+                            <h2>{calendarProps['aria-label']}</h2>
+                        </VisuallyHidden>
+                        <ReactAriaButton {...prevButtonProps}>
+                            <Icon label="chevron-left">
+                                <ChevronLeftIcon />
+                            </Icon>
+                        </ReactAriaButton>
+                    </div>
+                    {startAndEndDate[0]}
                 </div>
-                {['start', 'end'].map((res, i) => (
-                    <h3 key={i}>
-                        {formatDate(res, formattedDate, state).map((res, i) => {
-                            const period = ['month', 'year'];
-                            return (
-                                <span key={i} className={`c-calendar__${period[i]}`}>
-                                    {res}
-                                </span>
-                            );
-                        })}
-                    </h3>
-                ))}
-                <div className="c-calendar__buttons">
-                    <ReactAriaButton {...nextButtonProps}>
-                        <Icon label="chevron-right">
-                            <ChevronRightIcon />
-                        </Icon>
-                    </ReactAriaButton>
+                <div className="c-calendar__header--inner">
+                    {startAndEndDate[1]}
+                    <div className="c-calendar__buttons">
+                        <ReactAriaButton {...nextButtonProps}>
+                            <Icon label="chevron-right">
+                                <ChevronRightIcon />
+                            </Icon>
+                        </ReactAriaButton>
+                    </div>
                 </div>
             </div>
             <div className="c-calendar__grid-container">

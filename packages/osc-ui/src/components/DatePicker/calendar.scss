@@ -8,8 +8,7 @@
 //     &__header {
 //         display: flex;
 //         align-items: center;
-//         justify-content: space-between;
-//         gap: 4px;
+//         gap: 1em;
 //         margin: 0 8px;
 
 //         h2 {
@@ -25,6 +24,7 @@
 //     &__month,
 //     &__year {
 //         margin: 0 0.188em;
+//         font-size: var(--font-scale-zeta);
 //     }
 
 //     &__year {
@@ -56,7 +56,7 @@
 //             justify-content: center;
 //             width: 40px;
 //             height: 40px;
-//             background: #00a698;
+//             background: var(--color-quaternary);
 //             border: solid 2px var(--color-primary);
 //             border-radius: 4px;
 //             color: white;
@@ -85,7 +85,7 @@
 
 //     &__buttons {
 //         display: flex;
-
+//         justify-content: center;
 //         .c-react-aria-button {
 //             cursor: pointer;
 
@@ -109,6 +109,7 @@
 //         }
 //         &--inner-container-1 {
 //             display: flex;
+
 //             flex: 1 100%;
 //             .c-calendar__range--time-presets {
 //                 :first-child {
@@ -126,15 +127,18 @@
 //         &--inner-container-2 {
 //             display: flex;
 //             justify-content: space-between;
+//             align-items: center;
 //             flex: 1 100%;
 //             &-options {
 //                 display: flex;
+//                 align-items: center;
 //                 gap: 1em;
 //                 div {
 //                     cursor: pointer;
 //                 }
 //             }
 //         }
+
 //         &--time-presets {
 //             display: flex;
 //             flex-direction: column;
@@ -142,9 +146,28 @@
 //             gap: 1em;
 //         }
 
+//         &--clear-selection {
+//             color: var(--color-neutral-600);
+//             font-weight: $weight-bold;
+//             border-bottom: 1px solid var(--color-neutral-600);
+//         }
+
+//         &--today {
+//             border: solid 1px var(--color-neutral-400);
+//             border-radius: 4px;
+//             padding: 0.375em 1.125em;
+//         }
+
 //         .c-calendar__grid-container {
 //             display: flex;
-//             gap: 8px;
+//             gap: 1em;
+//         }
+
+//         .c-calendar__header--inner {
+//             display: flex;
+//             justify-content: space-between;
+//             align-items: center;
+//             flex: 1;
 //         }
 //     }
 // }
