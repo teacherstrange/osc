@@ -1,0 +1,89 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+.c-card {
+    $self: &;
+
+    width: 100%;
+    max-width: 400px; // TODO: Remove this -- should be controlled by container?
+    background-color: var(--color-tertiary);
+    box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+    font-weight: $weight-light;
+    line-height: 1.4; // TODO: Update this to variable
+
+    &,
+    &__inner,
+    &__header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__img {
+        img {
+            max-height: 250px;
+            object-fit: cover;
+        }
+    }
+
+    &__inner {
+        padding: var(--space-scale-zeta) var(--space-scale-delta) var(--space-scale-delta);
+    }
+
+    &__header {
+        margin-block-end: var(--space-scale-zeta);
+
+        // Reverse the order so we can maintain the header order while displaying the subtitle above the title
+        flex-direction: column-reverse;
+    }
+
+    &__ttl,
+    &__subttl {
+        margin-block-end: 0;
+    }
+
+    &__ttl {
+        font-size: var(--font-scale-epsilon);
+    }
+
+    &__subttl {
+        color: var(--color-neutral-600);
+        font-size: 16px; // TODO: Update this to variable
+    }
+
+    &__footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding-block-start: var(--space-scale-micro);
+
+        > * {
+            margin-bottom: 0;
+        }
+    }
+
+    &--post {
+        --card-footer-border: solid 1px var(--color-neutral-400);
+
+        max-width: 610px; // TODO: Remove this -- should be controlled by container?
+        box-shadow: none;
+
+        #{$self}__subttl {
+            color: var(--color-secondary);
+
+            &::before {
+                content: "/";
+                margin-inline-end: 0.15em;
+            }
+        }
+
+        #{$self}__footer {
+            border-top: var(--card-footer-border);
+            border-bottom: var(--card-footer-border);
+            margin-block-start: var(--space-scale-delta);
+            padding-block: var(--space-scale-delta);
+            font-size: var(--font-scale-centi);
+            font-weight: $weight-reg;
+        }
+    }
+}
