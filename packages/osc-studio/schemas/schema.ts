@@ -16,6 +16,7 @@ import post from './documents/post';
 import product from './documents/product';
 import productVariant from './documents/productVariant';
 import redirects from './documents/redirects';
+import team from './documents/team';
 
 // Singleton document types
 import blog from './singletons/blog';
@@ -26,6 +27,7 @@ import settings from './singletons/settings';
 import body from './blocks/body';
 
 // Object types
+import bodyNoHeadings from './blocks/bodyNoHeadings';
 import accordionItem from './objects/accordionItem';
 import collectionRule from './objects/collectionRule';
 import linkExternal from './objects/linkExternal';
@@ -73,12 +75,14 @@ export default createSchema({
         product,
         productVariant,
         redirects,
+        team,
         // Singleton document types
         home,
         blog,
         settings,
         // Block content
         body,
+        bodyNoHeadings,
         // Objects
         accordionItem,
         collectionRule,

@@ -31,6 +31,8 @@ import { posts } from './desk/posts';
 import { products } from './desk/products';
 import { redirects } from './desk/redirects';
 import { settings } from './desk/settings';
+import { team } from './desk/team';
+
 import { resolveProductionUrl } from './utils/resolveProductionUrl';
 
 // If you add document types to desk structure manually, you can add them to this array to prevent duplicates in the root pane
@@ -46,6 +48,7 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
     'post',
     'redirect',
     'navigation',
+    'team',
 ];
 
 /**
@@ -57,7 +60,7 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
  */
 export const getDefaultDocumentNode = ({ schemaType }) => {
     // Don't add the preview or seo pane to the redirect
-    if (schemaType === 'redirect' || schemaType === 'navigation') {
+    if (schemaType === 'redirect' || schemaType === 'navigation' || schemaType === 'team') {
         return;
     }
 
@@ -100,6 +103,8 @@ export default () => {
             S.divider(),
             collections,
             products,
+            S.divider(),
+            team,
             S.divider(),
             settings,
             navigation,
