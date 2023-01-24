@@ -5,10 +5,7 @@ import { DateRangePicker } from './DateRangePicker';
 import { createTimePresets } from '../utils';
 
 export const DateRangePickerContainer = ({ presets }) => {
-    let [value, setValue] = useState({
-        start: parseDate('2020-02-03'),
-        end: parseDate('2020-02-08'),
-    });
+    let [value, setValue] = useState(null);
 
     let TimePresets: FunctionComponent;
 
