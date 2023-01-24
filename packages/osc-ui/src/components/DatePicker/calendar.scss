@@ -3,7 +3,7 @@
 // /* stylelint-disable plugin/selector-bem-pattern */
 
 // .c-calendar {
-//     width: max-content;
+//     width: 100%;
 
 //     &__header {
 //         display: flex;
@@ -43,10 +43,10 @@
 //         height: 40px;
 //         color: #062134;
 //         text-align: center;
-//         cursor: default;
+//         cursor: pointer;
 
 //         &:focus {
-//             border: 3px solid var(--color-secondary);
+//             border: 3px solid var(--color-primary);
 //             border-radius: 4px;
 //         }
 
@@ -71,20 +71,6 @@
 //         }
 //     }
 
-//     &__date-range-picker {
-//         .c-react-aria-button {
-//             position: absolute;
-//             right: 0;
-//             bottom: 0;
-//             transform: translate(-50%, -50%);
-//             cursor: pointer;
-
-//             svg {
-//                 height: unset;
-//             }
-//         }
-//     }
-
 //     &__table-head {
 //         background: #f5f5f5;
 
@@ -98,6 +84,8 @@
 //     }
 
 //     &__buttons {
+//         display: flex;
+
 //         .c-react-aria-button {
 //             cursor: pointer;
 
@@ -110,6 +98,53 @@
 //                 width: 30px;
 //                 height: 30px;
 //             }
+//         }
+//     }
+
+//     &__range {
+//         &--container {
+//             display: flex;
+//             flex-wrap: wrap;
+//             gap: 2em;
+//         }
+//         &--inner-container-1 {
+//             display: flex;
+//             flex: 1 100%;
+//             .c-calendar__range--time-presets {
+//                 :first-child {
+//                     font-weight: $weight-bold;
+//                 }
+//                 flex: 1;
+//                 border-right: solid 1px var(--color-neutral-300);
+//                 margin: 0 1em;
+//             }
+//             .c-calendar__range--calendar {
+//                 flex: 6;
+//             }
+//         }
+
+//         &--inner-container-2 {
+//             display: flex;
+//             justify-content: space-between;
+//             flex: 1 100%;
+//             &-options {
+//                 display: flex;
+//                 gap: 1em;
+//                 div {
+//                     cursor: pointer;
+//                 }
+//             }
+//         }
+//         &--time-presets {
+//             display: flex;
+//             flex-direction: column;
+//             justify-content: space-evenly;
+//             gap: 1em;
+//         }
+
+//         .c-calendar__grid-container {
+//             display: flex;
+//             gap: 8px;
 //         }
 //     }
 // }

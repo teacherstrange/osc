@@ -51,7 +51,7 @@ export const Calendar = (props) => {
                     <span className="c-calendar__month">{month} </span>
                     <span className="c-calendar__year">{year} </span>
                 </h3>
-                <div className="c-calendar__buttons" style={{ display: 'flex' }}>
+                <div className="c-calendar__buttons">
                     <ReactAriaButton {...prevButtonProps}>
                         <Icon label="chevron-left">
                             <ChevronLeftIcon />

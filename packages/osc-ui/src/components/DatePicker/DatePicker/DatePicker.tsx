@@ -32,7 +32,7 @@ export const DatePicker = (props) => {
     } = useDatePicker(props, state, ref);
 
     return (
-        <div className="c-datepicker" style={{ display: 'inline-flex', flexDirection: 'column' }}>
+        <div className="c-datepicker">
             <div {...labelProps}>{props.label}</div>
             <div className="c-datepicker__date-field-container" {...groupProps} ref={ref}>
                 <DateField {...fieldProps} />

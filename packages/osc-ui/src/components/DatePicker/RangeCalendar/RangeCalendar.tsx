@@ -22,16 +22,17 @@ const createCalendar = (identifier) => {
 
 export const RangeCalendar = (props) => {
     let { locale } = useLocale();
+    // Set up the state for the calendar using 2 visible months
     let state = useRangeCalendarState({
         ...props,
         visibleDuration: { months: 2 },
         locale,
         createCalendar,
     });
-
     let ref = useRef();
     let { calendarProps, prevButtonProps, nextButtonProps } = useRangeCalendar(props, state, ref);
 
+    // Format date to use shorthand for months
     const formattedDate = useDateFormatter({
         month: 'short',
         year: 'numeric',
@@ -76,7 +77,7 @@ export const RangeCalendar = (props) => {
                     </ReactAriaButton>
                 </div>
             </div>
-            <div className="c-calendar__grid-container" style={{ display: 'flex', gap: '8px' }}>
+            <div className="c-calendar__grid-container">
                 <CalendarGrid state={state} />
                 <CalendarGrid state={state} offset={{ months: 1 }} />
             </div>

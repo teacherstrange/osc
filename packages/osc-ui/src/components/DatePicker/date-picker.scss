@@ -3,8 +3,8 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-datepicker {
-    display: "inline-flex";
-    flex-direction: "column";
+    display: inline-flex;
+    flex-direction: column;
 
     &__date-field-container {
         position: relative;
@@ -19,6 +19,17 @@
             svg {
                 height: unset;
             }
+        }
+    }
+
+    &__range {
+        .c-datepicker__date-field-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .c-datepicker__date-field-inner-container {
+            position: relative;
         }
     }
 }
