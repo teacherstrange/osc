@@ -7,7 +7,7 @@ import { Image } from '../Image/Image';
 import { imageData } from '../Image/imageData';
 import type { CardProps } from './Card';
 import { Card, CardBody, CardFooter, CardHeader, CardImage, CardInner, CardTitle } from './Card';
-import { bioCardData, postCardData } from './cardData';
+import { bioCardData, collectionCardData, postCardData } from './cardData';
 
 export default {
     title: 'osc-ui/Card',
@@ -93,7 +93,6 @@ const PostTemplate: Story<CardProps> = ({ ...args }) => (
         </CardImage>
         <CardInner>
             <CardHeader>
-                {/* // TODO: Should this be a separate component? */}
                 <CardTitle>{postCardData.title}</CardTitle>
                 <CardTitle as="h3" is="subtitle">
                     {postCardData.subtitle}
@@ -108,6 +107,29 @@ const PostTemplate: Story<CardProps> = ({ ...args }) => (
                 <time dateTime="2022-10-08">Wednesday 8th October</time>
                 <Button>Read more</Button>
             </CardFooter>
+        </CardInner>
+    </Card>
+);
+
+const aspectTemplate: Story<CardProps> = ({ ...args }) => (
+    <Card {...args}>
+        <CardImage>
+            <Image
+                src={collectionCardData.image.secure_url}
+                alt={collectionCardData.image.alt}
+                width={collectionCardData.image.width}
+                height={collectionCardData.image.height}
+            />
+        </CardImage>
+        <CardInner>
+            <CardHeader>
+                <CardTitle>{collectionCardData.title}</CardTitle>
+            </CardHeader>
+
+            <CardBody>
+                <p>{truncate(collectionCardData.body)}</p>
+                <Button>23 Courses</Button>
+            </CardBody>
         </CardInner>
     </Card>
 );
@@ -131,4 +153,10 @@ Post.parameters = {
             story: 'The post variant of the card is mainly used for displaying blog post content from the cms.<br> Add the `variant="post"` to the `<Card>` to apply the modifier.',
         },
     },
+};
+
+export const AspectCard = aspectTemplate.bind({});
+AspectCard.args = {
+    ...Primary.args,
+    variant: 'aspectCard',
 };

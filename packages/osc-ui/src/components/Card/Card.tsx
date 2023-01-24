@@ -22,7 +22,7 @@ export interface SharedCardProps {
 }
 
 export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {
-    variant?: 'post';
+    variant?: 'post' | 'aspectCard';
 }
 
 /* -------------------------------------------------------------------------------------------------

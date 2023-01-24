@@ -38,3 +38,15 @@ export const postCardData = {
     subtitle: 'News',
     body: 'Following a year of huge growth, the next generation of our family-owned and run business are now the principal drivers taking it forward into its 16th year. Our Co-founder and former Chairman, Mark Rutter, who this year celebrates 30 years in the distance learning sector, will be assuming a new role as Non-Executive Director. Meanwhile, etc. etc. etc.',
 };
+
+export const collectionCardData = {
+    image: {
+        alt: '',
+        secure_url:
+            'https://res.cloudinary.com/de2iu8gkv/image/upload/v1674577946/cat-img_rwumo5.png',
+        width: 610,
+        height: 557,
+    },
+    title: 'Property and home',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra duis vehicula justo, sagittis quam nam nisi.',
+};

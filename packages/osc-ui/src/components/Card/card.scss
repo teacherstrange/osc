@@ -9,14 +9,14 @@
     max-width: 400px; // TODO: Remove this -- should be controlled by container?
     background-color: var(--color-tertiary);
     box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+    font-size: 16px; // TODO: Update this to variable
     font-weight: $weight-light;
     line-height: 1.4; // TODO: Update this to variable
 
     &,
     &__inner,
     &__header {
-        display: flex;
-        flex-direction: column;
+        display: grid;
     }
 
     &__img {
@@ -32,9 +32,6 @@
 
     &__header {
         margin-block-end: var(--space-scale-zeta);
-
-        // Reverse the order so we can maintain the header order while displaying the subtitle above the title
-        flex-direction: column-reverse;
     }
 
     &__ttl,
@@ -49,6 +46,7 @@
     &__subttl {
         color: var(--color-neutral-600);
         font-size: 16px; // TODO: Update this to variable
+        grid-row: 1;
     }
 
     &__footer {
@@ -84,6 +82,46 @@
             padding-block: var(--space-scale-delta);
             font-size: var(--font-scale-centi);
             font-weight: $weight-reg;
+        }
+    }
+
+    &--aspectCard {
+        max-width: 610px; // TODO: Remove this -- should be controlled by container?
+        box-shadow: none;
+        grid-template-rows: 1fr auto;
+
+        #{$self}__img {
+            grid-column: 1;
+
+            @include mq(mq-token("mob-lrg")) {
+                grid-row: 1 / -1;
+                margin-block-end: 80px; // ? Best approach?
+            }
+
+            img {
+                max-height: unset;
+                object-fit: cover;
+            }
+        }
+
+        #{$self}__inner {
+            grid-column: 1;
+            grid-row: 2;
+            align-self: end;
+            max-width: 42ch;
+            padding-inline: var(--space-scale-epsilon);
+
+            @include mq(mq-token("mob-lrg"), max) {
+                padding-block-start: 0;
+            }
+
+            @include mq(mq-token("mob-lrg")) {
+                padding-inline-end: 0;
+            }
+        }
+
+        #{$self}__ttl {
+            font-size: var(--font-scale-delta);
         }
     }
 }
