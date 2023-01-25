@@ -9,7 +9,7 @@ export default {
     component: DatePicker,
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story = ({ minValue, maxValue, ...args }) => {
     let [date, setDate] = useState(args.defaultValue ? parseDate(args.defaultValue) : null);
 
     return (
@@ -18,8 +18,8 @@ const Template: Story = (args) => {
         <I18nProvider locale="en-GB">
             <DatePicker
                 value={date}
-                minValue={args.minValue && parseDate('2023-02-03')}
-                maxValue={args.maxValue && parseDate('2023-02-20')}
+                minValue={minValue && parseDate('2023-02-03')}
+                maxValue={maxValue && parseDate('2023-02-20')}
                 onChange={setDate}
                 {...args}
             />
