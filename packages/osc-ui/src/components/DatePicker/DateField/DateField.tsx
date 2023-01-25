@@ -17,11 +17,6 @@ const createCalendar = (identifier) => {
     }
 };
 
-// TODO -
-// 1) Error handling - DONE
-// 2) Add validationstate - confirmation when valid as well as invalid? See:
-// react-spectrum.adobe.com/react-spectrum/DateField.html#minimum-and-maximum-values
-
 export const DateField = (props) => {
     let { locale } = useLocale();
 
