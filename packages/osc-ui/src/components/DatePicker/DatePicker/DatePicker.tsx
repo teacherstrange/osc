@@ -1,12 +1,14 @@
+import type { AriaDatePickerProps } from '@react-aria/datepicker';
 import { useDatePicker } from '@react-aria/datepicker';
 import { useDatePickerState } from '@react-stately/datepicker';
 import React, { useRef } from 'react';
 
 import { CalendarIcon } from '@radix-ui/react-icons';
+import type { DateValue } from '@react-types/calendar';
 import { Icon } from '../../Icon/Icon';
 import { Calendar } from '../Calendar/Calendar';
-import { DateField } from '../DateField/DateField';
 import '../date-picker.scss';
+import { DateField } from '../DateField/DateField';
 
 import {
     ReactAriaButton,
@@ -14,11 +16,7 @@ import {
     ReactAriaPopover,
 } from '../ReactAriaComponents/ReactAriaComponents';
 
-// TODO:
-// 1) Error Handling
-// 2) TS
-
-export const DatePicker = (props) => {
+export const DatePicker = (props: AriaDatePickerProps<DateValue>) => {
     let state = useDatePickerState({ ...props, shouldCloseOnSelect: false });
     let ref = useRef();
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
@@ -26,7 +24,9 @@ export const DatePicker = (props) => {
 
     return (
         <div className="c-datepicker">
-            <div {...labelProps}>{props.label}</div>
+            <div {...labelProps} className="c-datepicker__label">
+                {props.label}
+            </div>
             <div className="c-datepicker__date-field-container" {...groupProps} ref={ref}>
                 <DateField {...fieldProps} />
                 <ReactAriaButton {...buttonProps}>

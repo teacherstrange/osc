@@ -1,7 +1,10 @@
 import { ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { useDateRangePicker } from '@react-aria/datepicker';
+import type { AriaDateRangePickerProps } from '@react-aria/datepicker';
+
 import { useDateRangePickerState } from '@react-stately/datepicker';
 import React, { useRef } from 'react';
+import type { ReactNode } from 'react';
 import { Icon } from '../../Icon/Icon';
 import { DateField } from '../DateField/DateField';
 import { RangeCalendarContainer } from '../RangeCalendar/RangeCalendarContainer';
@@ -10,11 +13,18 @@ import {
     ReactAriaDialog,
     ReactAriaPopover,
 } from '../ReactAriaComponents/ReactAriaComponents';
+import type { DateValue } from '@react-types/calendar';
 
-// TODO - Need to get the datepicker and the DateRangeCalendar connected - ie if you
-// set a date on the calendar the datepicker doesn't pick this up
+interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
+    timePresets: ReactNode;
+    clearSelection: ReactNode;
+}
 
-export const DateRangePicker = ({ timePresets, clearSelection, ...props }) => {
+export const DateRangePicker = ({
+    timePresets,
+    clearSelection,
+    ...props
+}: DateRangePickerProps) => {
     let state = useDateRangePickerState({ ...props, shouldCloseOnSelect: false });
     let ref = useRef();
     let {
@@ -29,7 +39,9 @@ export const DateRangePicker = ({ timePresets, clearSelection, ...props }) => {
 
     return (
         <div className="c-datepicker c-datepicker__range">
-            <div {...labelProps}>{props.label}</div>
+            <div className="c-datepicker__label" {...labelProps}>
+                {props.label}
+            </div>
             <div {...groupProps} ref={ref}>
                 <div className="c-datepicker__date-field-container">
                     <div className="c-datepicker__date-field-inner-container">

@@ -21,6 +21,7 @@ const Template: Story = (args) => {
                 minValue={args.minValue && parseDate('2023-02-03')}
                 maxValue={args.maxValue && parseDate('2023-02-20')}
                 onChange={setDate}
+                {...args}
             />
         </I18nProvider>
     );
@@ -35,8 +36,10 @@ Primary.args = {
 };
 DefaultDate.args = {
     defaultValue: '2022-02-03',
+    label: 'Date',
 };
 MinAndMaxDates.args = {
+    label: 'Date',
     minValue: true,
     maxValue: true,
 };

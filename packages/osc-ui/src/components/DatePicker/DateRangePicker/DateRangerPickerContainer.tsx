@@ -2,8 +2,18 @@ import React, { useState } from 'react';
 import type { FunctionComponent } from 'react';
 import { DateRangePicker } from './DateRangePicker';
 import { createTimePresets } from '../utils';
+import type { AriaDateRangePickerProps } from '@react-aria/datepicker';
+import type { DateValue } from '@react-types/calendar';
 
-export const DateRangePickerContainer = ({ defaultValue, presets, ...props }) => {
+interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateValue> {
+    presets: { name: string; length: number }[];
+}
+
+export const DateRangePickerContainer = ({
+    defaultValue,
+    presets,
+    ...props
+}: DateRangePickerContainerProps) => {
     let [value, setValue] = useState(defaultValue ? defaultValue : null);
 
     let TimePresets: FunctionComponent;

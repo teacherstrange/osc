@@ -37,7 +37,7 @@ const Template: Story = (args) => {
                 minValue={args.minValue && parseDate(todaysDate)}
                 maxValue={args.maxValue ? nextWeek : null}
                 placeholderValue={args.placeholder ? today(getLocalTimeZone()) : null}
-                label={args.date}
+                label={args.label}
             />
         </I18nProvider>
     );

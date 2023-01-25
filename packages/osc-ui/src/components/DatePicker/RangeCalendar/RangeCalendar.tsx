@@ -1,6 +1,7 @@
 import { GregorianCalendar } from '@internationalized/date';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { useRangeCalendar } from '@react-aria/calendar';
+import type { AriaRangeCalendarProps } from '@react-aria/calendar';
 import { useDateFormatter, useLocale } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useRangeCalendarState } from '@react-stately/calendar';
@@ -10,6 +11,7 @@ import '../calendar.scss';
 import { CalendarGrid } from '../Calendar/CalendarGrid';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
 import { formatDate } from '../utils';
+import type { DateValue } from '@react-types/calendar';
 
 const createCalendar = (identifier) => {
     switch (identifier) {
@@ -20,7 +22,7 @@ const createCalendar = (identifier) => {
     }
 };
 
-export const RangeCalendar = (props) => {
+export const RangeCalendar = (props: AriaRangeCalendarProps<DateValue>) => {
     let { locale } = useLocale();
     // Set up the state for the calendar using 2 visible months
     let state = useRangeCalendarState({

@@ -1,8 +1,10 @@
-import React, { useRef } from 'react';
+import { GregorianCalendar } from '@internationalized/date';
+import type { AriaDateFieldProps } from '@react-aria/datepicker';
 import { useDateField, useDateSegment } from '@react-aria/datepicker';
 import { useLocale } from '@react-aria/i18n';
 import { useDateFieldState } from '@react-stately/datepicker';
-import { GregorianCalendar } from '@internationalized/date';
+import type { DateValue } from '@react-types/calendar';
+import React, { useRef } from 'react';
 import '../date-field.scss';
 
 // Ensure that we just use the Gregorian Calendar to limit package size.
@@ -17,7 +19,7 @@ const createCalendar = (identifier) => {
     }
 };
 
-export const DateField = (props) => {
+export const DateField = (props: AriaDateFieldProps<DateValue>) => {
     let { locale } = useLocale();
 
     let state = useDateFieldState({
@@ -37,7 +39,7 @@ export const DateField = (props) => {
                     : `c-date-field__wrapper`
             }
         >
-            <span {...labelProps} className="c-label">
+            <span {...labelProps} className="c-date-field__label">
                 {props.label}
             </span>
             <div {...fieldProps} ref={ref} className="c-date-field">

@@ -4,7 +4,7 @@
 
 // *********** REACT ARIA BUTTON ************
 
-.c-react-aria-button {
+.c-react-aria__button {
     &:focus {
         outline: 2px solid var(--color-primary);
     }
@@ -12,13 +12,13 @@
 
 // *********** REACT ARIA DIALOG ************
 
-.c-react-aria-dialog {
+.c-react-aria__dialog {
     padding: 1.875em;
 }
 
 // *********** REACT ARIA POPUP ************
 
-.c-react-aria-popup {
+.c-react-aria__popup {
     position: fixed;
     inset: 0;
 }

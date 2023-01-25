@@ -16,20 +16,6 @@
         flex-direction: column;
         align-items: flex-start;
 
-        .c-label {
-            --label-font-size: var(--font-scale-centi);
-
-            color: var(--color-neutral-600);
-            font-size: var(--label-font-size);
-            font-weight: $weight-reg;
-            cursor: pointer;
-
-            &__required {
-                padding-left: 0.063em;
-                font-size: var(--label-font-size);
-            }
-        }
-
         &--error {
             .c-date-field {
                 border: solid 1px var(--color-error);
@@ -56,6 +42,15 @@
 
     &:focus-within {
         border: 2px solid var(--color-primary);
+    }
+
+    &__label {
+        --label-font-size: var(--font-scale-centi);
+
+        color: var(--color-neutral-600);
+        font-size: var(--label-font-size);
+        font-weight: $weight-reg;
+        cursor: pointer;
     }
 
     &__error {
