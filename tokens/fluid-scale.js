@@ -14,7 +14,7 @@ const minViewportWidth = 375;
 const maxViewportWidth = 1440;
 
 const minScale = 1.2;
-const maxScale = 1.33;
+const maxScale = 1.3;
 
 const minFontSize = 16;
 const maxFontSize = 20;
@@ -33,16 +33,16 @@ module.exports = {
         'alpha', // fluid sizing (min - max) = 39px - 83px
         'omega', // fluid sizing (min - max) = 47px - 110px
         'kilo', // fluid sizing (min - max) = 57px - 147px
-        'mega' // fluid sizing (min - max) = 68px - 195px
+        'mega', // fluid sizing (min - max) = 68px - 195px
     ],
     'min-viewport': {
         width: minViewportWidth,
         'font-size': minFontSize,
-        scale: minScale
+        scale: minScale,
     },
     'max-viewport': {
         width: maxViewportWidth,
         'font-size': maxFontSize,
-        scale: maxScale
-    }
+        scale: maxScale,
+    },
 };
