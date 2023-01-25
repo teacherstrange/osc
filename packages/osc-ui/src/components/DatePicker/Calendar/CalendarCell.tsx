@@ -1,11 +1,20 @@
+import type { AriaCalendarCellProps } from '@react-aria/calendar';
 import { useCalendarCell } from '@react-aria/calendar';
+
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import React, { useRef } from 'react';
 
+import type { CalendarDate } from '@internationalized/date';
 import { isSameMonth } from '@internationalized/date';
+import type { CalendarState } from '@react-stately/calendar';
 
-export const CalendarCell = ({ state, date, currentMonth }) => {
+interface CellProps extends AriaCalendarCellProps {
+    currentMonth: CalendarDate;
+    state: CalendarState;
+}
+
+export const CalendarCell = ({ currentMonth, date, state }: CellProps) => {
     let ref = useRef();
     let { buttonProps, cellProps, formattedDate, isDisabled, isSelected, isUnavailable } =
         useCalendarCell({ date }, state, ref);

@@ -1,10 +1,17 @@
 import { endOfMonth, getWeeksInMonth } from '@internationalized/date';
+import type { AriaCalendarGridProps } from '@react-aria/calendar';
 import { useCalendarGrid } from '@react-aria/calendar';
 import { useLocale } from '@react-aria/i18n';
+import type { CalendarState, RangeCalendarState } from '@react-stately/calendar';
 import React from 'react';
 import { CalendarCell } from './CalendarCell';
 
-export const CalendarGrid = ({ state, offset = {}, ...props }) => {
+interface GridProps extends AriaCalendarGridProps {
+    offset?: {};
+    state: CalendarState | RangeCalendarState;
+}
+
+export const CalendarGrid = ({ state, offset = {} }: GridProps) => {
     let { locale } = useLocale();
 
     // If there is an offset (used for the range calender then apply to the start date)

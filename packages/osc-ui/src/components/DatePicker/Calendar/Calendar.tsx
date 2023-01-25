@@ -1,8 +1,10 @@
 import { GregorianCalendar } from '@internationalized/date';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import type { AriaCalendarProps } from '@react-aria/calendar';
 import { useCalendar } from '@react-aria/calendar';
 import { useDateFormatter, useLocale } from '@react-aria/i18n';
 import { useCalendarState } from '@react-stately/calendar';
+import type { DateValue } from '@react-types/calendar';
 import React from 'react';
 import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
@@ -18,11 +20,7 @@ const createCalendar = (identifier) => {
     }
 };
 
-// TODO:
-// 1) Add Error handling
-// 2) Add TS
-
-export const Calendar = (props) => {
+export const Calendar = (props: AriaCalendarProps<DateValue>) => {
     let { locale } = useLocale();
     let state = useCalendarState({
         ...props,
@@ -30,10 +28,7 @@ export const Calendar = (props) => {
         createCalendar,
     });
 
-    let { calendarProps, errorMessageProps, nextButtonProps, prevButtonProps } = useCalendar(
-        props,
-        state
-    );
+    let { calendarProps, nextButtonProps, prevButtonProps } = useCalendar(props, state);
 
     // Customise to shorthand months, format and split out the month & year
     const [month, year] = useDateFormatter({
