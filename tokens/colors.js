@@ -140,5 +140,11 @@ module.exports = {
         primary: colorPink,
         secondary: colorWhite,
         tertiary: colorNavy,
+        'neutral-100': colorDarkestGrey,
+        'neutral-200': colorDarkGrey,
+        'neutral-300': colorMidGrey,
+        'neutral-400': colorPaleGrey,
+        'neutral-500': colorSoftGrey,
+        'neutral-600': colorLightestGrey,
     },
 };

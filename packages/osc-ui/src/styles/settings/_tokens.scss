@@ -18,7 +18,7 @@ $colors: (
         neutral-500: hsl(0deg 0% 73%),
         neutral-600: hsl(0deg 0% 60%),
         error: hsl(0deg 93% 48%),
-        error-20: hsl(0deg 93% 55% / 20%),
+        error-20: hsl(0deg 93% 48% / 20%),
         success: hsl(144deg 66% 55%),
         success-20: hsl(144deg 66% 55% / 20%),
         notice: hsl(202deg 93% 55%),
@@ -534,6 +534,12 @@ $colors: (
         primary: hsl(335deg 85% 49%),
         secondary: hsl(0deg 0% 100%),
         tertiary: hsl(205deg 79% 11%),
+        neutral-100: hsl(0deg 0% 60%),
+        neutral-200: hsl(0deg 0% 73%),
+        neutral-300: hsl(0deg 0% 79%),
+        neutral-400: hsl(0deg 0% 93%),
+        neutral-500: hsl(0deg 0% 96%),
+        neutral-600: hsl(0deg 0% 98%),
     ),
 );
 $containers: (
