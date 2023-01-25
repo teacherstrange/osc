@@ -3,9 +3,9 @@ import { Link as RemixLink } from '@remix-run/react';
 import type {
     AnchorHTMLAttributes,
     ButtonHTMLAttributes,
-    FC,
     HTMLAttributes,
     MouseEvent,
+    ReactElement,
     ReactNode,
 } from 'react';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
@@ -14,6 +14,10 @@ import type { StrictUnion } from '../../types';
 import { classNames } from '../../utils/classNames';
 
 import './button.scss';
+
+/* -------------------------------------------------------------------------------------------------
+ * Button
+ * -----------------------------------------------------------------------------------------------*/
 
 type buttonTypes = HTMLAnchorElement | HTMLButtonElement;
 
@@ -178,18 +182,21 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-/**
+/* -------------------------------------------------------------------------------------------------
  * CopyButton
- *
- * Component for copying text to the clipboard, is an extension of the Button component
- */
-
+ * -----------------------------------------------------------------------------------------------*/
 export interface CopyButtonProps extends SharedProps, ButtonHTMLAttributes<HTMLButtonElement> {
+    /**
+     * Text to add to the clipboard when pressed
+     */
     textToCopy: string;
+    /**
+     * The content of the button
+     */
     children: ReactNode;
 }
 
-export const CopyButton: FC<CopyButtonProps> = (props: CopyButtonProps) => {
+export const CopyButton = (props: CopyButtonProps) => {
     const { textToCopy, children, isDisabled, ...attr } = props;
     const ref = useRef(null);
     const [width, setWidth] = useState(0);
@@ -232,19 +239,23 @@ export const CopyButton: FC<CopyButtonProps> = (props: CopyButtonProps) => {
     );
 };
 
-/**
+/* -------------------------------------------------------------------------------------------------
  * ButtonGroup
- *
- * Component for grouping buttons together
- */
-
+ * -----------------------------------------------------------------------------------------------*/
 interface ButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
-    children: ReactNode;
-    direction?: 'column';
+    /**
+     * The content of the button group
+     */
+    children: ReactElement<ButtonProps> | ReactElement<ButtonProps>[];
+    /**
+     * Sets the direction of the button group
+     * @default row
+     */
+    direction?: 'row' | 'column';
 }
 
-export const ButtonGroup: FC<ButtonGroupProps> = (props: ButtonGroupProps) => {
-    const { children, direction, ...attr } = props;
+export const ButtonGroup = (props: ButtonGroupProps) => {
+    const { children, direction = 'row', ...attr } = props;
     const directionModifier = useModifier('c-btn-group', direction);
     const classes = classNames('c-btn-group', directionModifier);
 
