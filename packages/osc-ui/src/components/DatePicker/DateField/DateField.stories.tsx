@@ -2,7 +2,7 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { I18nProvider } from '@react-aria/i18n';
 import { DateField } from './DateField';
-import { getLocalTimeZone, today, CalendarDate, parseDate } from '@internationalized/date';
+import { getLocalTimeZone, today, parseDate } from '@internationalized/date';
 
 export default {
     title: 'osc-ui/DateField',
@@ -34,7 +34,7 @@ const Template: Story = (args) => {
         <I18nProvider locale="en-GB">
             <DateField
                 defaultValue={args.defaultValue ? parseDate('2022-01-02') : null}
-                minValue={args.minValue && today(getLocalTimeZone())}
+                minValue={args.minValue && parseDate(todaysDate)}
                 maxValue={args.maxValue ? nextWeek : null}
                 placeholderValue={args.placeholder ? today(getLocalTimeZone()) : null}
                 label={args.date}
@@ -47,6 +47,7 @@ export const Primary = Template.bind({});
 export const MinAndMax = Template.bind({});
 export const DefaultValue = Template.bind({});
 export const Placeholder = Template.bind({});
+export const Validation = Template.bind({});
 
 Primary.args = {
     label: 'Date',
@@ -58,6 +59,10 @@ MinAndMax.args = {
 };
 DefaultValue.args = {
     defaultValue: true,
+};
+Validation.args = {
+    defaultValue: true,
+    minValue: true,
 };
 Placeholder.args = {
     placeholder: true,

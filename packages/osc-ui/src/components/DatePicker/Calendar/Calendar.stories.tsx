@@ -13,13 +13,17 @@ const Template: Story = (args) => {
         // Passing the 118nProvider because locale was defaulting to en-US - This is
         // required to change the date order to dd-mm-YYYY rather than US mm-dd-YYYY
         <I18nProvider locale="en-GB">
-            <Calendar granularity="second" {...args} />
+            <Calendar minValue={args.minValue} {...args} />
         </I18nProvider>
     );
 };
 
 export const Primary = Template.bind({});
+export const MinValue = Template.bind({});
 
 Primary.args = {
+    label: 'Date',
+};
+MinValue.args = {
     label: 'Date',
 };
