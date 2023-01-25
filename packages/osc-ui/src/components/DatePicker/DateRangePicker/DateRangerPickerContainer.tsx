@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import type { FunctionComponent } from 'react';
-import { parseDate } from '@internationalized/date';
 import { DateRangePicker } from './DateRangePicker';
 import { createTimePresets } from '../utils';
 
