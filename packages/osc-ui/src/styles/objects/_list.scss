@@ -71,7 +71,7 @@
     &:where(ol) {
          &:not(.is-bare) {
             padding-left: s.$global-spacing-s;
-            list-style-position: outside;
+            list-style: numeric outside none;
          }
     }
 
