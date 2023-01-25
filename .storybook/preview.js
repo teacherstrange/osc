@@ -7,9 +7,6 @@ import { MemoryRouter } from 'react-router';
 const withTheme = (story, context) => {
     const { theme } = context.globals;
 
-    // Add a light grey background so things like white buttons are visible
-    document.documentElement.style.backgroundColor = 'whitesmoke';
-
     if (theme === 'dark') {
         document.documentElement.classList.add('theme--dark');
     } else {
