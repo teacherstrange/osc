@@ -83,16 +83,24 @@ export interface SharedProps {
      * Sets the button to be a pill shape
      * @default square
      */
-    shape?: 'pill';
+    shape?: 'square' | 'pill';
     /**
      * 'Sets the size of the button'
+     * @default md
      */
-    size?: 'sm' | 'full';
+    size?: 'sm' | 'md' | 'full';
     /**
      * 'Sets the style of the button, primary, secondary etc.'
      * @default primary
      */
-    variant?: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary';
+    variant?:
+        | 'primary'
+        | 'secondary'
+        | 'tertiary'
+        | 'quaternary'
+        | 'quinary'
+        | 'primary-gradient'
+        | 'secondary-gradient';
 }
 
 export type ButtonProps = SharedProps & StrictUnion<DefaultButtonProps | AnchorProps | LinkProps>;
@@ -105,9 +113,9 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             children,
             isDisabled,
             isLoading,
-            shape,
+            shape = 'square',
             loadingText = 'Loading',
-            size,
+            size = 'md',
             variant = 'primary',
             target,
             ...attr
