@@ -12,7 +12,7 @@ app.use(
         secret: env.JWT_SECRET!,
         audience: env.JWT_AUDIENCE!,
         algorithms: ['HS256'],
-        credentialsRequired: false
+        credentialsRequired: false,
     })
 );
 

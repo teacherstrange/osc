@@ -1,13 +1,5 @@
-import type {
-    Crm,
-    CrmToken,
-    Lms,
-    LmsToken,
-    Role,
-    User,
-    UserAvatar,
-    UserRole
-} from '@prisma/client';
+import type { User, UserAvatar } from '@prisma/client';
+import type { CrmTokensAPI, LmsTokensAPI, UserRolesAPI } from '.';
 import type { createUserInput, getUsersArgs, loginArgsInput } from './arguments';
 import type { PermissionsProps } from './interfaces';
 
@@ -26,32 +18,17 @@ export type RefreshTokenFn = (userId: number) => Promise<string>;
 export type UserProfileFn = (userId: number) => Promise<{
     avatar: UserAvatar | null;
     permissions: PermissionsProps;
-    roles: (UserRole & {
-        details: Role;
-    })[];
-    crmTokens: (CrmToken & {
-        crm: Crm;
-    })[];
-    lmsTokens: (LmsToken & {
-        lms: Lms;
-    })[];
+    roles: UserRolesAPI;
+    crmTokens: CrmTokensAPI;
+    lmsTokens: LmsTokensAPI;
 }>;
 
 export type UserPermissionsFn = (userId: number) => Promise<PermissionsProps>;
-export type UserRolesFn = (userId: number) => Promise<
-    (UserRole & {
-        details: Role;
-    })[]
->;
+
+export type UserRolesFn = (userId: number) => Promise<UserRolesAPI>;
 
 export type UserAvatarFn = (userId: number) => Promise<UserAvatar | null>;
-export type CrmTokensFn = (userId: number) => Promise<
-    (CrmToken & {
-        crm: Crm;
-    })[]
->;
-export type LmsTokensFn = (userId: number) => Promise<
-    (LmsToken & {
-        lms: Lms;
-    })[]
->;
+
+export type CrmTokensFn = (userId: number) => Promise<CrmTokensAPI>;
+
+export type LmsTokensFn = (userId: number) => Promise<LmsTokensAPI>;

@@ -7,6 +7,7 @@
     "osc-api-auth": "file:packages/osc-api-auth",
     "osc-api-ecommerce": "file:packages/osc-api-ecommerce",
     "osc-api-gateway": "file:packages/osc-api-gateway",
+    "osc-api-crm": "file:packages/osc-api-crm",
     "osc-ecommerce": "file:packages/osc-ecommerce",
     "osc-ui": "file:packages/osc-ui"
   },
@@ -37,6 +38,7 @@
     "dev:api": "run-p api:dev:*",
     "api:dev:osc-api-auth": "lerna run dev --scope osc-api-auth",
     "api:dev:osc-api-ecommerce": "lerna run dev --scope osc-api-ecommerce",
+    "api:dev:osc-api-crm": "lerna run dev --scope osc-api-crm",
     "api:dev:osc-api-gateway": "lerna run dev --scope osc-api-gateway",
     "setup": "npm i && npx prisma generate && cd packages/osc-studio && npm i --legacy-peer-deps",
     "tokens:generate": "json-to-scss ./tokens/**/*.* ./packages/osc-ui/src/styles/settings/_tokens.scss --tn 2",
@@ -67,6 +69,7 @@
     "packages/osc-api",
     "packages/osc-api-auth",
     "packages/osc-api-ecommerce",
+    "packages/osc-api-crm",
     "packages/osc-api-gateway"
   ],
   "devDependencies": {
