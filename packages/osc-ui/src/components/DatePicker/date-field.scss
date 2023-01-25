@@ -3,6 +3,7 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-date-field {
+    position: relative;
     display: inline-flex;
     min-width: 20ch;
     max-width: 30ch;
@@ -28,6 +29,12 @@
                 font-size: var(--label-font-size);
             }
         }
+
+        &--error {
+            .c-date-field {
+                border: solid 1px var(--color-error);
+            }
+        }
     }
 
     &__segment {
@@ -49,5 +56,15 @@
 
     &:focus-within {
         border: 2px solid var(--color-primary);
+    }
+
+    &__error {
+        &--text {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: var(--color-error);
+            font-size: var(--font-scale-centi);
+        }
     }
 }
