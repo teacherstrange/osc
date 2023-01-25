@@ -1,3 +1,19 @@
+## [0.27.0](https://github.com/Open-Study-College/osc/compare/v0.26.1...v0.27.0) (2023-01-25)
+
+
+### ♻️ Refactors
+
+* **osc-api:** added util for getting user by id/email ([03b8f26](https://github.com/Open-Study-College/osc/commit/03b8f26018b99cd3adf5d03e7c3534f3e334fbfd))
+* **osc-api:** restructured third party system links ([f75b46c](https://github.com/Open-Study-College/osc/commit/f75b46c659b0beca6c7bc5f381e30c0c193e501b))
+* **osc-api:** third party platforms prisma update ([8515a9d](https://github.com/Open-Study-College/osc/commit/8515a9df24db4620bb3a7075e9946be29a13d513))
+
+
+### ✨ Features
+
+* **api-crm:** adding query for getting student from CRM ([28dae88](https://github.com/Open-Study-College/osc/commit/28dae885dce29d916c738f2fbc09f90b56da1bff))
+* **crm-api:** added query to get students CRM record ([c0557f7](https://github.com/Open-Study-College/osc/commit/c0557f7832ca31dcf617d79e3658ac263d16d0c8))
+* **crm-api:** initial setup ([a71878e](https://github.com/Open-Study-College/osc/commit/a71878e5de71d7ae6ebc3a4a2043a76eea2dee66))
+
 ## [0.26.1](https://github.com/Open-Study-College/osc/compare/v0.26.0...v0.26.1) (2023-01-12)
 
 
@@ -92,25 +108,4 @@
 
 * removes duplicate packages from workspaces ([dcfa2c2](https://github.com/Open-Study-College/osc/commit/dcfa2c21d460e5d2f8ff7a11cb7961d3ff921120))
 * **build:** adds commonjs plugin to bundle our tokens correctly ([f1a49c9](https://github.com/Open-Study-College/osc/commit/f1a49c90d7c422e281f4aa27d19e764a80ab62e1))
-
-## [0.24.0](https://github.com/Open-Study-College/osc/compare/v0.23.0...v0.24.0) (2022-12-15)
-
-
-### ♻️ Refactors
-
-* **api:** removed duplicated params from package.json scripts ([7cf283e](https://github.com/Open-Study-College/osc/commit/7cf283e79dcc15f23aaa15465b3d8de1a9dab83a))
-* **gateway:** abstracted server config ([3c41746](https://github.com/Open-Study-College/osc/commit/3c417468f448a2319be825fab646632d3b3bedbd))
-
-
-### ✨ Features
-
-* **api-ecommerce:** initial setup ([c3fd297](https://github.com/Open-Study-College/osc/commit/c3fd2975d5ed0866e4eb2d22751f10debf8d2832))
-* **ecommerce-api:** added basic endpoint ([d669f12](https://github.com/Open-Study-College/osc/commit/d669f1237d0cb7d54ae5824e09e6f9a3cfb1284e))
-* **ecommerce-api:** added dev script ([83415c0](https://github.com/Open-Study-College/osc/commit/83415c0ec45bb7f421eab4ac7f0e5715770dd26a))
-* **ecommerce-api:** added ecomm SDKs to context ([e329c3f](https://github.com/Open-Study-College/osc/commit/e329c3f18001224712842afb65c19f5348443aa0))
-* **ecommerce-api:** added generic product query types ([f324790](https://github.com/Open-Study-College/osc/commit/f3247900673c08491de6ae93381322a176a7a864))
-* **ecommerce-api:** adding SDK dependencies ([bf4003d](https://github.com/Open-Study-College/osc/commit/bf4003d0e92e04172e5d3caa2373b3e45117f58c))
-* **gateway:** added dev `wait-on` for ecommerce api ([4e0a357](https://github.com/Open-Study-College/osc/commit/4e0a3578d4b5905466f037225865e653a226b380))
-* **gateway:** added ecommerce api subgraph url ([9c8bfc0](https://github.com/Open-Study-College/osc/commit/9c8bfc0052011ff4eea54186c9ffc2c062140875))
-* **gateway:** implemented zod for typing `.env` ([8a75577](https://github.com/Open-Study-College/osc/commit/8a7557770c816d167a43c6e1bd72e9cdc0fb1b50))
 
