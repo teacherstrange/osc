@@ -1,6 +1,7 @@
-import { ChevronRightIcon, EnvelopeClosedIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import type { ButtonProps, CopyButtonProps } from './Button';
 import { Button, ButtonGroup, CopyButton } from './Button';
 
@@ -57,45 +58,7 @@ export default {
 const Template: Story<ButtonProps> = ({ children, ...args }) => (
     <Button {...args}>{children}</Button>
 );
-const VariationsTemplate: Story<ButtonProps> = ({ children, ...args }) => (
-    <>
-        <h4>Ecommerce</h4>
-        <ButtonGroup>
-            <Button {...args} variant="primary">
-                Primary
-            </Button>
-            <Button {...args} variant="secondary">
-                Secondary
-            </Button>
-            <Button {...args} variant="tertiary">
-                Tertiary
-            </Button>
-            <Button {...args} variant="quaternary">
-                Quaternary
-            </Button>
-            <Button {...args} variant="quinary">
-                Quinary
-            </Button>
-        </ButtonGroup>
-        <h4 style={{ paddingTop: '1em' }}>Academic Hub</h4>
-        <ButtonGroup>
-            <Button {...args} variant="primary" size="sm" shape="pill">
-                Primary
-            </Button>
-            {/* <Button {...args} variant="secondary">
-                Secondary
-            </Button> */}
-        </ButtonGroup>
-    </>
-);
-const ShapeVariationsTemplate: Story<ButtonProps> = ({ children, ...args }) => (
-    <ButtonGroup>
-        <Button {...args}>{children}</Button>
-        <Button {...args} shape="pill">
-            {children}
-        </Button>
-    </ButtonGroup>
-);
+
 const DisabledLoadingTemplate: Story<ButtonProps> = ({ children, ...args }) => (
     <ButtonGroup>
         <Button {...args} isDisabled>
@@ -106,6 +69,7 @@ const DisabledLoadingTemplate: Story<ButtonProps> = ({ children, ...args }) => (
         </Button>
     </ButtonGroup>
 );
+
 const IconsTemplate: Story<ButtonProps> = ({ children, ...args }) => (
     <ButtonGroup direction="column">
         <Button {...args}>
@@ -115,39 +79,66 @@ const IconsTemplate: Story<ButtonProps> = ({ children, ...args }) => (
 
         <Button {...args}>
             Search
-            <MagnifyingGlassIcon aria-hidden="true" />
+            <EnvelopeClosedIcon aria-hidden="true" />
         </Button>
 
         <Button {...args}>
-            <span className="sr-only">Search</span>
-            <MagnifyingGlassIcon aria-hidden="true" />
-        </Button>
-        <Button {...args} shape="pill">
-            <span className="sr-only">Search</span>
-            <ChevronRightIcon aria-hidden="true" />
+            <VisuallyHidden>Search</VisuallyHidden>
+            <EnvelopeClosedIcon aria-hidden="true" />
         </Button>
     </ButtonGroup>
 );
+
 const CopyTemplate: Story<CopyButtonProps> = ({ children, ...args }) => (
     <CopyButton {...args}>{children}</CopyButton>
 );
 
 export const Primary = Template.bind({});
 Primary.args = {
-    children: 'Special offers',
+    children: 'Button',
+    variant: 'primary',
+};
+export const Secondary = Template.bind({});
+Secondary.args = {
+    children: 'Button',
+    variant: 'secondary',
+};
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+    children: 'Button',
+    variant: 'tertiary',
+};
+export const Quaternary = Template.bind({});
+Quaternary.args = {
+    children: 'Button',
+    variant: 'quaternary',
+};
+export const Quinary = Template.bind({});
+Quinary.args = {
+    children: 'Button',
+    variant: 'quinary',
+};
+export const PrimaryGradient = Template.bind({});
+PrimaryGradient.args = {
+    children: 'Button',
+    variant: 'primary-gradient',
+};
+export const SecondaryGradient = Template.bind({});
+SecondaryGradient.args = {
+    children: 'Button',
+    variant: 'secondary-gradient',
 };
 
-export const Variations = VariationsTemplate.bind({});
-Variations.args = {};
-
-export const ShapeVariations = ShapeVariationsTemplate.bind({});
-ShapeVariations.args = {
-    ...Primary.args,
+export const FullWidth = Template.bind({});
+FullWidth.args = {
+    children: 'Button',
+    variant: 'primary',
+    className: 'is-full',
 };
-ShapeVariations.parameters = {
+FullWidth.parameters = {
     docs: {
         description: {
-            story: 'You can change the shape of the button by passing the `shape` prop with the value `pill`.<br>The button will render as a square by default.',
+            story: 'To set a button to fill the width of the container, add the `is-full` className.',
         },
     },
 };
@@ -162,37 +153,6 @@ IncludesIcon.parameters = {
     docs: {
         description: {
             story: 'Add an icon as a child to include within the button.<br>If you wrap the text in a `<VisuallyHidden>` component you can make an accessible icon only button.',
-        },
-    },
-};
-
-export const Anchor = Template.bind({});
-Anchor.args = {
-    ...Primary.args,
-    children: 'External link',
-    as: 'a',
-    href: 'https://example.com',
-    target: '_blank',
-};
-Anchor.parameters = {
-    docs: {
-        description: {
-            story: 'Using `as="a"` transforms our button into an `<a>` tag, which means it can take any anchor element attributes such as `target="_blank"`.<br>Note: when using `target="_blank"` `rel="noopener noreferrer"` is automatically added for security purposes.',
-        },
-    },
-};
-
-export const Link = Template.bind({});
-Link.args = {
-    ...Primary.args,
-    children: 'Internal link',
-    as: 'link',
-    to: '/test-page',
-};
-Link.parameters = {
-    docs: {
-        description: {
-            story: 'Using `as="link"` transforms our button into a `<Link>` component from Remix, which allows us to pass a url path to the `to` attribute.',
         },
     },
 };
