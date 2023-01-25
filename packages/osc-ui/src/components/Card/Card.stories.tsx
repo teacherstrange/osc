@@ -7,7 +7,7 @@ import { Image } from '../Image/Image';
 import { imageData } from '../Image/imageData';
 import type { CardProps } from './Card';
 import { Card, CardBody, CardFooter, CardHeader, CardImage, CardInner, CardTitle } from './Card';
-import { bioCardData, collectionCardData, postCardData } from './cardData';
+import { bioCardData, collectionCardData, collectionCardDataHzntl, postCardData } from './cardData';
 
 export default {
     title: 'osc-ui/Card',
@@ -112,26 +112,58 @@ const PostTemplate: Story<CardProps> = ({ ...args }) => (
 );
 
 const aspectTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
-        <CardImage>
-            <Image
-                src={collectionCardData.image.secure_url}
-                alt={collectionCardData.image.alt}
-                width={collectionCardData.image.width}
-                height={collectionCardData.image.height}
-            />
-        </CardImage>
-        <CardInner>
-            <CardHeader>
-                <CardTitle>{collectionCardData.title}</CardTitle>
-            </CardHeader>
+    <>
+        <Card {...args}>
+            <CardImage>
+                <Image
+                    src={collectionCardData.image.secure_url}
+                    alt={collectionCardData.image.alt}
+                    width={collectionCardData.image.width}
+                    height={collectionCardData.image.height}
+                />
+            </CardImage>
+            <CardInner>
+                <CardHeader>
+                    <CardTitle>{collectionCardData.title}</CardTitle>
+                </CardHeader>
 
-            <CardBody>
-                <p>{truncate(collectionCardData.body)}</p>
-                <Button>23 Courses</Button>
-            </CardBody>
-        </CardInner>
-    </Card>
+                <CardBody>
+                    <p>{truncate(collectionCardData.body)}</p>
+                    <Button>23 Courses</Button>
+                </CardBody>
+            </CardInner>
+        </Card>
+
+        <h2
+            className="t-font-gamma"
+            style={{
+                marginTop: '1em',
+                marginBottom: '0.5em',
+            }}
+        >
+            Horizontal
+        </h2>
+        <Card {...args} direction="horizontal">
+            <CardImage>
+                <Image
+                    src={collectionCardDataHzntl.image.secure_url}
+                    alt={collectionCardDataHzntl.image.alt}
+                    width={collectionCardDataHzntl.image.width}
+                    height={collectionCardDataHzntl.image.height}
+                />
+            </CardImage>
+            <CardInner>
+                <CardHeader>
+                    <CardTitle>{collectionCardDataHzntl.title}</CardTitle>
+                </CardHeader>
+
+                <CardBody>
+                    <p>{truncate(collectionCardDataHzntl.body)}</p>
+                    <Button>23 Courses</Button>
+                </CardBody>
+            </CardInner>
+        </Card>
+    </>
 );
 
 export const Primary = Template.bind({});
@@ -159,4 +191,11 @@ export const AspectCard = aspectTemplate.bind({});
 AspectCard.args = {
     ...Primary.args,
     variant: 'aspectCard',
+};
+AspectCard.parameters = {
+    docs: {
+        description: {
+            story: 'The aspect card variation is mostly controlled by the images aspect ratio. You can further refine the positioning of the card contents by using the `direction="horizontal"` or `direction="vertical"` properties.',
+        },
+    },
 };

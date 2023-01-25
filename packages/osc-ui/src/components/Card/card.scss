@@ -87,7 +87,6 @@
 
     &--aspectCard {
         max-width: 610px; // TODO: Remove this -- should be controlled by container?
-        box-shadow: none;
         grid-template-rows: 1fr auto;
 
         #{$self}__img {
@@ -108,8 +107,8 @@
             grid-column: 1;
             grid-row: 2;
             align-self: end;
-            max-width: 42ch;
             padding-inline: var(--space-scale-epsilon);
+            padding-block-end: 50px; // ? Best approach?
 
             @include mq(mq-token("mob-lrg"), max) {
                 padding-block-start: 0;
@@ -120,8 +119,42 @@
             }
         }
 
+        #{$self}__body {
+            > *:not(.c-btn) {
+                @include mq(mq-token("mob-lrg")) {
+                    max-width: 38ch;
+                }
+            }
+        }
+
         #{$self}__ttl {
             font-size: var(--font-scale-delta);
+        }
+
+        &.is-horizontal {
+            #{$self}__img {
+                grid-row: 1;
+
+                @include mq(mq-token("mob-lrg")) {
+                    margin-block-end: 0;
+                }
+            }
+
+            #{$self}__inner {
+                grid-row: 1;
+                align-self: center;
+                padding-block: 35px;
+            }
+
+            #{$self}__body {
+                > *:not(.c-btn) {
+                    max-width: 22ch;
+
+                    @include mq(mq-token("mob-lrg")) {
+                        max-width: 26ch;
+                    }
+                }
+            }
         }
     }
 }

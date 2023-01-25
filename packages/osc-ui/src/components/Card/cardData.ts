@@ -50,3 +50,15 @@ export const collectionCardData = {
     title: 'Property and home',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra duis vehicula justo, sagittis quam nam nisi.',
 };
+
+export const collectionCardDataHzntl = {
+    image: {
+        alt: '',
+        secure_url:
+            'https://res.cloudinary.com/de2iu8gkv/image/upload/v1674658470/cat-img-2_ggyvg3.png',
+        width: 610,
+        height: 310,
+    },
+    title: 'A Levels',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra duis vehicula justo, sagittis quam nam nisi.',
+};

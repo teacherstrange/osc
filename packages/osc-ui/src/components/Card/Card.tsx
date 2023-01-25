@@ -22,16 +22,29 @@ export interface SharedCardProps {
 }
 
 export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Card variation
+     */
     variant?: 'post' | 'aspectCard';
+    /**
+     * The direction of the card
+     * @default vertical
+     */
+    direction?: 'vertical' | 'horizontal';
 }
 
 /* -------------------------------------------------------------------------------------------------
  * Card
  * -----------------------------------------------------------------------------------------------*/
 export const Card = (props: CardProps) => {
-    const { children, className, variant, ...attr } = props;
+    const { children, className, direction = 'vertical', variant, ...attr } = props;
     const variantModifier = useModifier('c-card', variant);
-    const classes = classNames('c-card', variantModifier, className);
+    const classes = classNames(
+        'c-card',
+        variantModifier,
+        direction === 'horizontal' && 'is-horizontal',
+        className
+    );
 
     return (
         <div className={classes} {...attr}>
