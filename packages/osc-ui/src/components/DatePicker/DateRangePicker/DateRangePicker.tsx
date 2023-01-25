@@ -45,7 +45,6 @@ export const DateRangePicker = ({ timePresets, clearSelection, ...props }) => {
                     </Icon>
                     <div className="c-datepicker__date-field-inner-container">
                         <DateField {...endFieldProps} />
-                        {state.validationState === 'invalid' && <span aria-hidden="true">🚫</span>}
                         <ReactAriaButton {...buttonProps}>
                             <Icon label="calendar">
                                 <CalendarIcon width={20} height={20} />

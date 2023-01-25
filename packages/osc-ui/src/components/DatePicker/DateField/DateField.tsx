@@ -35,7 +35,13 @@ export const DateField = (props) => {
     let { labelProps, fieldProps } = useDateField(props, state, ref);
 
     return (
-        <div className="c-date-field__wrapper">
+        <div
+            className={
+                state.validationState === 'invalid'
+                    ? `c-date-field__wrapper c-date-field__wrapper--error`
+                    : `c-date-field__wrapper`
+            }
+        >
             <span {...labelProps} className="c-label">
                 {props.label}
             </span>
@@ -43,9 +49,10 @@ export const DateField = (props) => {
                 {state.segments.map((segment, i) => (
                     <DateSegment key={i} segment={segment} state={state} name="datepicker" />
                 ))}
-                {/* TODO - Needs updating to use correct error validation formatting */}
-                {state.validationState === 'invalid' ? <span aria-hidden="true">🚫</span> : null}
             </div>
+            {state.validationState === 'invalid' ? (
+                <div className="c-date-field__error--text">Invalid Date</div>
+            ) : null}
         </div>
     );
 };

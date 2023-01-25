@@ -21,15 +21,8 @@ import {
 export const DatePicker = (props) => {
     let state = useDatePickerState({ ...props, shouldCloseOnSelect: false });
     let ref = useRef();
-    let {
-        buttonProps,
-        calendarProps,
-        dialogProps,
-        errorMessageProps,
-        fieldProps,
-        groupProps,
-        labelProps,
-    } = useDatePicker(props, state, ref);
+    let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
+        useDatePicker(props, state, ref);
 
     return (
         <div className="c-datepicker">
