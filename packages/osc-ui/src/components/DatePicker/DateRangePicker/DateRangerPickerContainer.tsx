@@ -4,8 +4,8 @@ import { parseDate } from '@internationalized/date';
 import { DateRangePicker } from './DateRangePicker';
 import { createTimePresets } from '../utils';
 
-export const DateRangePickerContainer = ({ presets }) => {
-    let [value, setValue] = useState(null);
+export const DateRangePickerContainer = ({ defaultValue, presets, ...props }) => {
+    let [value, setValue] = useState(defaultValue ? defaultValue : null);
 
     let TimePresets: FunctionComponent;
 
@@ -44,6 +44,7 @@ export const DateRangePickerContainer = ({ presets }) => {
                 label="Date range"
                 value={value}
                 onChange={setValue}
+                {...props}
             />
         </>
     );
