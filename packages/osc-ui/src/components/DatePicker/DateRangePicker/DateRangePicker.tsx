@@ -15,7 +15,7 @@ import {
 // set a date on the calendar the datepicker doesn't pick this up
 
 export const DateRangePicker = ({ timePresets, clearSelection, ...props }) => {
-    let state = useDateRangePickerState(props);
+    let state = useDateRangePickerState({ ...props, shouldCloseOnSelect: false });
     let ref = useRef();
     let {
         labelProps,

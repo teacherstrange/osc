@@ -19,7 +19,7 @@ import {
 // 2) TS
 
 export const DatePicker = (props) => {
-    let state = useDatePickerState(props);
+    let state = useDatePickerState({ ...props, shouldCloseOnSelect: false });
     let ref = useRef();
     let {
         buttonProps,
