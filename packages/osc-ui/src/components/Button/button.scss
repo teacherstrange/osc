@@ -4,26 +4,6 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
-// Set the border radius for the button variants, mostly for use on the academic hub buttons
-@mixin pill($outer, $size: "") {
-    $btn-radius: 40px;
-
-    &,
-    #{$outer}__inner,
-    &::before {
-        border-radius: $btn-radius;
-    }
-
-    &::after,
-    > span::after {
-        display: none;
-    }
-
-    &:hover > span {
-        transform: none;
-    }
-}
-
 $btn-primary-border: solid 3px var(--color-secondary);
 $btn-primary-offset: 6px;
 $btn-properties: (
@@ -224,7 +204,22 @@ $btn-properties: (
     // Rounded borders
     // *----------------------------------*/
     &.is-pill {
-        @include pill($self);
+        $btn-radius: 40px;
+
+        &,
+        #{$self}__inner,
+        &::before {
+            border-radius: $btn-radius;
+        }
+
+        &::after,
+        > span::after {
+            display: none;
+        }
+
+        &:hover > span {
+            transform: none;
+        }
     }
 
     // *----------------------------------*/
