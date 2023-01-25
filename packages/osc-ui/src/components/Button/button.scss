@@ -33,11 +33,12 @@ $btn-properties: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
             ),
             md: (
-                padding: var(--space-scale-centi) var(--space-scale-epsilon),
+                padding: var(--space-scale-centi) var(--space-scale-beta),
             ),
-            full: (
-                width: 100%,
-            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-omega),
+                font-size: var(--font-scale-zeta)
+            )
         )
     ),
     secondary: (
@@ -55,9 +56,10 @@ $btn-properties: (
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
             ),
-            full: (
-                width: 100%,
-            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-delta),
+                font-size: var(--font-scale-zeta)
+            )
         )
     ),
     tertiary: (
@@ -75,9 +77,10 @@ $btn-properties: (
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
             ),
-            full: (
-                width: 100%,
-            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-delta),
+                font-size: var(--font-scale-zeta)
+            )
         )
     ),
     quaternary: (
@@ -88,6 +91,11 @@ $btn-properties: (
         font-weight: $weight-reg,
         font-size: var(--font-scale-centi),
         gap: 0.8em,
+        sizes: (
+            lg: (
+                font-size: var(--font-scale-zeta)
+            )
+        )
     ),
     quinary: (
         bg-color: var(--color-septenary),
@@ -103,9 +111,10 @@ $btn-properties: (
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
             ),
-            full: (
-                width: 100%,
-            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-delta),
+                font-size: var(--font-scale-zeta)
+            )
         )
     ),
     primary-gradient: (
@@ -121,9 +130,10 @@ $btn-properties: (
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-gamma),
             ),
-            full: (
-                width: 100%,
-            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-beta),
+                font-size: var(--font-scale-zeta)
+            )
         )
     ),
     secondary-gradient: (
@@ -139,9 +149,10 @@ $btn-properties: (
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-gamma),
             ),
-            full: (
-                width: 100%,
-            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-beta),
+                font-size: var(--font-scale-zeta)
+            )
         )
     )
 );
@@ -238,8 +249,19 @@ $btn-properties: (
                 border: map.get($property, border);
             }
 
+            // If we're on a gradient modifier then set the background image
             @if string.index($class, "-gradient") {
                 background-color: map.get($property, bg-color);
+                background-image: map.get($property, bg-image);
+
+                // Use a pseudo element to imitate changing the background-color as we
+                // can't transition a background-image into a color
+                &::before {
+                    position: absolute;
+                    content: "";
+                    inset: 0;
+                    transition: all $timing-m $ease-in-out;
+                }
             }
 
             @if map.has-key($property, after) {
@@ -280,20 +302,6 @@ $btn-properties: (
                 @include z-index(button);
             }
 
-            // If we're on a gradient modifier then set the background image
-            @if string.index($class, "-gradient") {
-                background-image: map.get($property, bg-image);
-
-                // Use a pseudo element to imitate changing the background-color as we
-                // can't transition a background-image into a color
-                &::before {
-                    position: absolute;
-                    content: "";
-                    inset: 0;
-                    transition: all $timing-m $ease-in-out;
-                }
-            }
-
             &:hover,
             &:active {
                 @if $class != "primary" {
@@ -322,6 +330,23 @@ $btn-properties: (
                     background-color: map.get($property, bg-color);
                     color: map.get($property, fg-color);
                     transform: none;
+                }
+            }
+        }
+
+        // *----------------------------------*/
+        //  Dark mode / inverse overrides
+        // *----------------------------------*/
+        @if string.index($class, "-gradient") {
+            .theme--dark &--#{$class} {
+                background-color: var(--color-secondary);
+                background-image: none;
+
+                &:hover,
+                &:active {
+                    &::before {
+                        background-color: var(--color-secondary);
+                    }
                 }
             }
         }

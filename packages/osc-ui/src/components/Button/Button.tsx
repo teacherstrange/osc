@@ -88,7 +88,7 @@ export interface SharedProps {
      * 'Sets the size of the button'
      * @default md
      */
-    size?: 'sm' | 'md' | 'full';
+    size?: 'sm' | 'md' | 'lg';
     /**
      * 'Sets the style of the button, primary, secondary etc.'
      * @default primary
