@@ -31,9 +31,9 @@ export const DateRangePickerContainer = ({ presets }) => {
     }
 
     const ClearSelection = () => (
-        <div className="c-calendar__range--clear-selection" onClick={() => setValue(null)}>
+        <button className="c-calendar__range--clear-selection" onClick={() => setValue(null)}>
             Clear Selection
-        </div>
+        </button>
     );
 
     return (

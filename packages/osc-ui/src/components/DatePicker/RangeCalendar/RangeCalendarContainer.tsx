@@ -27,12 +27,12 @@ export const RangeCalendarContainer = ({ clearSelection, timePresets, ...rest })
                 <div>Now Select an End Date</div>
                 <div className="c-calendar__range--inner-container-2-options">
                     {clearSelection}
-                    <div
+                    <button
                         className="c-calendar__range--today"
                         onClick={() => setFocusedDate(today(getLocalTimeZone()))}
                     >
                         Jump to Today
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>

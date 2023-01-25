@@ -118,6 +118,13 @@
 //                 flex: 1;
 //                 border-right: solid 1px var(--color-neutral-300);
 //                 margin: 0 1em;
+
+//                 button {
+//                     &:focus {
+//                         border: solid 2px var(--color-primary);
+//                         border-radius: 4px;
+//                     }
+//                 }
 //             }
 //             .c-calendar__range--calendar {
 //                 flex: 6;
@@ -133,8 +140,13 @@
 //                 display: flex;
 //                 align-items: center;
 //                 gap: 1em;
-//                 div {
+//                 .c-calendar__range--today,
+//                 .c-calendar__range--clear-selection {
 //                     cursor: pointer;
+//                     &:focus {
+//                         border: solid 2px var(--color-primary);
+//                         border-radius: 4px;
+//                     }
 //                 }
 //             }
 //         }
