@@ -153,11 +153,29 @@ export const CardBody = (props: CardBodyProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Card Footer
  * -----------------------------------------------------------------------------------------------*/
-export interface CardFooterProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {}
+export interface CardFooterProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Adds the `has-border-top` class to the footer
+     *
+     * @default false
+     */
+    hasBorderTop?: boolean;
+    /**
+     * Adds the `has-border-bottom` class to the footer
+     *
+     * @default false
+     */
+    hasBorderBottom?: boolean;
+}
 
 export const CardFooter = (props: CardFooterProps) => {
-    const { children, className, ...attr } = props;
-    const classes = classNames('c-card__footer', className);
+    const { children, className, hasBorderTop, hasBorderBottom, ...attr } = props;
+    const classes = classNames(
+        'c-card__footer',
+        hasBorderTop && 'has-border-top',
+        hasBorderBottom && 'has-border-bottom',
+        className
+    );
 
     return (
         <footer className={classes} {...attr}>
