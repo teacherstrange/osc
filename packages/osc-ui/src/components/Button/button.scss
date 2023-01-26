@@ -30,9 +30,11 @@ $btn-properties: (
         sizes: (
             sm: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
             ),
             md: (
-                padding: var(--space-scale-centi) var(--space-scale-beta),
+                padding: var(--space-scale-centi) var(--space-scale-delta),
+                font-size: var(--font-scale-centi)
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-omega),
@@ -46,14 +48,17 @@ $btn-properties: (
         fg-color: var(--color-secondary),
         fg-hover-color: var(--color-tertiary),
         font-weight: $weight-bold,
-        font-size: var(--font-scale-centi),
-        letter-spacing: $letter-spacing-sml,
+        letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
         border: solid 1px var(--color-secondary),
         sizes: (
-            sm: (),
+            sm: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-centi)
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-delta),
@@ -67,14 +72,17 @@ $btn-properties: (
         fg-color: var(--color-neutral-600),
         fg-hover-color: var(--color-tertiary),
         font-weight: $weight-bold,
-        font-size: var(--font-scale-centi),
-        letter-spacing: $letter-spacing-sml,
+        letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
         border: 1px solid var(--color-neutral-400),
         sizes: (
-            sm: (),
+            sm: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-centi)
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-delta),
@@ -88,9 +96,14 @@ $btn-properties: (
         fg-color: var(--color-secondary),
         fg-hover-color: var(--color-primary),
         font-weight: $weight-reg,
-        font-size: var(--font-scale-centi),
         gap: 0.8em,
         sizes: (
+            sm: (
+                font-size: var(--font-scale-milli)
+            ),
+            md: (
+                font-size: var(--font-scale-centi)
+            ),
             lg: (
                 font-size: var(--font-scale-zeta),
             ),
@@ -102,13 +115,16 @@ $btn-properties: (
         fg-color: var(--color-secondary),
         fg-hover-color: var(--color-tertiary),
         font-weight: $weight-bold,
-        font-size: var(--font-scale-centi),
-        letter-spacing: $letter-spacing-sml,
+        letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
         sizes: (
-            sm: (),
+            sm: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-centi)
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-delta),
@@ -121,13 +137,16 @@ $btn-properties: (
         bg-hover-color: var(--color-nonary),
         fg-color: var(--color-tertiary),
         font-weight: $weight-bold,
-        font-size: var(--font-scale-centi),
-        letter-spacing: $letter-spacing-sml,
+        letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
         sizes: (
-            sm: (),
+            sm: (
+                padding: var(--space-scale-micro) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-gamma),
+                font-size: var(--font-scale-centi),
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-beta),
@@ -141,10 +160,13 @@ $btn-properties: (
         fg-color: var(--color-tertiary),
         font-weight: $weight-bold,
         font-size: var(--font-scale-centi),
-        letter-spacing: $letter-spacing-sml,
+        letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
         sizes: (
-            sm: (),
+            sm: (
+                padding: var(--space-scale-micro) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
             md: (
                 padding: var(--space-scale-milli) var(--space-scale-gamma),
             ),
