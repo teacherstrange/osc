@@ -4,7 +4,7 @@ import type { AriaDialogProps } from '@react-aria/dialog';
 import { useDialog } from '@react-aria/dialog';
 import { DismissButton, Overlay, usePopover } from '@react-aria/overlays';
 import type { AriaPopoverProps } from '@react-aria/overlays';
-import type { ForwardRefExoticComponent, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import React, { useRef } from 'react';
 import type { DatePickerState, DateRangePickerState } from '@react-stately/datepicker';
 
@@ -43,8 +43,7 @@ interface PopoverProps extends AriaPopoverProps {
 }
 
 export const ReactAriaPopover = ({ children, state, ...props }: PopoverProps) => {
-    let ref = useRef();
-    let { popoverRef = ref } = props;
+    let popoverRef = useRef();
 
     // TODO - temporarily assigned to any to shut TS up.
     let { popoverProps, underlayProps } = usePopover(

@@ -66,7 +66,12 @@ export const DateRangePicker = ({
                 </div>
             </div>
             {state.isOpen && (
-                <ReactAriaPopover state={state} triggerRef={ref} placement="bottom start">
+                <ReactAriaPopover
+                    state={state}
+                    triggerRef={ref}
+                    popoverRef={ref}
+                    placement="bottom start"
+                >
                     <ReactAriaDialog {...dialogProps}>
                         <RangeCalendarContainer
                             {...calendarProps}

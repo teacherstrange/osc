@@ -1,6 +1,12 @@
 import { getLocalTimeZone, today } from '@internationalized/date';
+import type { DateFormatter } from '@internationalized/date';
+import type { RangeCalendarState } from '@react-stately/calendar';
 
-export const formatDate = (visibleRange, formattedDate, state) => {
+export const formatDate = (
+    visibleRange: 'start' | 'end',
+    formattedDate: DateFormatter,
+    state: RangeCalendarState
+): string[] => {
     if (visibleRange === 'start') {
         const [startMonth, startYear] = formattedDate
             .format(state.visibleRange.start.toDate(state.timeZone))
@@ -11,10 +17,11 @@ export const formatDate = (visibleRange, formattedDate, state) => {
     if (visibleRange === 'end') {
         return formattedDate.format(state.visibleRange.end.toDate(state.timeZone)).split(' ');
     }
-    return null;
 };
 
-export const createTimePresets = (presets) =>
+export const createTimePresets = (
+    presets: { name: string; length: number }[]
+): { startDate: string; endDate: string; name: string }[] =>
     presets.map((preset) => {
         let startDate, endDate;
         if (preset.length > 0) {

@@ -36,7 +36,12 @@ export const DatePicker = (props: AriaDatePickerProps<DateValue>) => {
                 </ReactAriaButton>
             </div>
             {state.isOpen && (
-                <ReactAriaPopover state={state} triggerRef={ref} placement="bottom start">
+                <ReactAriaPopover
+                    state={state}
+                    popoverRef={ref}
+                    triggerRef={ref}
+                    placement="bottom start"
+                >
                     <ReactAriaDialog {...dialogProps}>
                         <Calendar {...calendarProps} />
                     </ReactAriaDialog>

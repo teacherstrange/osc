@@ -23,6 +23,7 @@ const createCalendar = (identifier) => {
 };
 
 export const RangeCalendar = (props: AriaRangeCalendarProps<DateValue>) => {
+    const RANGES = ['start', 'end'];
     let { locale } = useLocale();
     // Set up the state for the calendar using 2 visible months
     let state = useRangeCalendarState({
@@ -41,18 +42,20 @@ export const RangeCalendar = (props: AriaRangeCalendarProps<DateValue>) => {
         timeZone: state.timeZone,
     });
 
-    const startAndEndDate = ['start', 'end'].map((res, i) => (
-        <h3 key={i}>
-            {formatDate(res, formattedDate, state).map((res, i) => {
-                const period = ['month', 'year'];
-                return (
-                    <span key={i} className={`c-calendar__${period[i]}`}>
-                        {res}
-                    </span>
-                );
-            })}
-        </h3>
-    ));
+    const startAndEndDate = RANGES.map((range: 'start' | 'end', index: number) => {
+        return (
+            <h3 key={index}>
+                {formatDate(range, formattedDate, state).map((date, idx) => {
+                    const dateSegment = ['month', 'year'];
+                    return (
+                        <span key={idx} className={`c-calendar__${dateSegment[idx]}`}>
+                            {date}
+                        </span>
+                    );
+                })}
+            </h3>
+        );
+    });
 
     return (
         <div {...calendarProps} ref={ref} className="c-calendar c-calendar__range">

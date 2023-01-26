@@ -1,8 +1,20 @@
 import { getLocalTimeZone, today } from '@internationalized/date';
+import type { AriaRangeCalendarProps } from '@react-aria/calendar';
+import type { DateValue } from '@react-types/calendar';
+import type { ReactNode } from 'react';
 import React, { useState } from 'react';
 import { RangeCalendar } from './RangeCalendar';
 
-export const RangeCalendarContainer = ({ clearSelection, timePresets, ...rest }) => {
+interface RangeCalendarContainerProps extends AriaRangeCalendarProps<DateValue> {
+    timePresets: ReactNode;
+    clearSelection: ReactNode;
+}
+
+export const RangeCalendarContainer = ({
+    clearSelection,
+    timePresets,
+    ...rest
+}: RangeCalendarContainerProps) => {
     let [value, setValue] = useState(null);
     let [focusedDate, setFocusedDate] = useState(today(getLocalTimeZone()));
 
