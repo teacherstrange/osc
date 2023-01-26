@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { I18nProvider } from '@react-aria/i18n';
 import { DatePicker } from './DatePicker';
 import { parseDate } from '@internationalized/date';
+import type { DateValue } from '@react-types/calendar';
 
 export default {
     title: 'osc-ui/DatePicker',
@@ -10,7 +11,9 @@ export default {
 } as Meta;
 
 const Template: Story = ({ minValue, maxValue, ...args }) => {
-    let [date, setDate] = useState(args.defaultValue ? parseDate(args.defaultValue) : null);
+    let [date, setDate] = useState<DateValue | undefined>(
+        args.defaultValue ? parseDate(args.defaultValue) : null
+    );
 
     return (
         // Passing the 118nProvider because locale was defaulting to en-US - This is
