@@ -53,11 +53,18 @@ export const Card = (props: CardProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Card Image
  * -----------------------------------------------------------------------------------------------*/
-export interface CardImageProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {}
+export interface CardImageProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Sets the `is-rounded` className for the image
+     *
+     * @default false
+     */
+    isRounded?: boolean;
+}
 
 export const CardImage = (props: CardImageProps) => {
-    const { children, className, ...attr } = props;
-    const classes = classNames('c-card__img', className);
+    const { children, className, isRounded, ...attr } = props;
+    const classes = classNames('c-card__img', isRounded && 'is-rounded', className);
 
     return (
         <div className={classes} {...attr}>
