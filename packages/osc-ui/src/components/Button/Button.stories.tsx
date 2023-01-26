@@ -128,7 +128,7 @@ export const FullWidth = Template.bind({});
 FullWidth.args = {
     children: 'Button',
     variant: 'primary',
-    className: 'is-full',
+    isFull: true,
 };
 FullWidth.parameters = {
     docs: {

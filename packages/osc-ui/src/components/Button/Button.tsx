@@ -74,6 +74,11 @@ export interface SharedProps {
      */
     isDisabled?: boolean;
     /**
+     * Makes the button fill the width of its container
+     * @default false
+     */
+    isFull?: boolean;
+    /**
      * 'Sets the loading state of the button and whether it is usable',
      * @default false
      */
@@ -123,6 +128,7 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             isLoading,
             isPill,
             isInversed,
+            isFull,
             loadingText = 'Loading',
             size = 'md',
             variant = 'primary',
@@ -137,6 +143,7 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             sizeModifier,
             variantModifier,
             className,
+            isFull && 'is-full',
             isLoading && 'is-loading',
             isPill && 'is-pill',
             isInversed && 'is-inversed'
