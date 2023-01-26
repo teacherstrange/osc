@@ -1,4 +1,4 @@
-export type Sizes = '4xl' | '3xl' | '2xl' | 'xl' | 'l' | 'm';
+export type Sizes = '4xl' | '3xl' | '2xl' | 'xl' | 'l' | 'm' | 's';
 
 export type Themes =
     | 'primary'
