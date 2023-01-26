@@ -247,10 +247,10 @@ $osc-config: (
 @each $name, $value in color-token("default") {
     [data-bg-color="#{$name}"],
     .u-bg-color-#{$name} {
-        @if (string.index($name, "gradient")) {
-            background-image: var(--color-#{$name});
+        @if (string.index($name, 'gradient')) {
+            background-image: var(--color-#{$name}) !important; // Make sure we override our component styles
         } @else {
-            background-color: var(--color-#{$name});
+            background-color: var(--color-#{$name}) !important; // Make sure we override our component styles
         }
     }
 }
