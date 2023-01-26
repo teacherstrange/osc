@@ -16,6 +16,9 @@ $btn-properties: (
         text-transform: uppercase,
         border: $btn-primary-border,
         offset: $btn-primary-offset,
+        inverse-bg-color: var(--color-tertiary),
+        inverse-bg-hover-color: var(--color-tertiary),
+        inverse-fg-color: var(--color-secondary),
         after: (
             position: absolute,
             bottom: calc($btn-primary-offset * -1),
@@ -40,7 +43,7 @@ $btn-properties: (
                 padding: var(--space-scale-zeta) var(--space-scale-omega),
                 font-size: var(--font-scale-zeta),
             ),
-        ),
+        )
     ),
     secondary: (
         bg-color: transparent,
@@ -51,6 +54,9 @@ $btn-properties: (
         letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
         border: solid 1px var(--color-secondary),
+        inverse-bg-hover-color: var(--color-tertiary),
+        inverse-fg-color: var(--color-tertiary),
+        inverse-fg-hover-color: var(--color-secondary),
         sizes: (
             sm: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
@@ -75,6 +81,9 @@ $btn-properties: (
         letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
         border: 1px solid var(--color-neutral-400),
+        inverse-bg-hover-color: var(--color-neutral-100),
+        inverse-fg-color: var(--color-neutral-100),
+        inverse-fg-hover-color: var(--color-secondary),
         sizes: (
             sm: (
                 padding: var(--space-scale-milli) var(--space-scale-zeta),
@@ -97,6 +106,7 @@ $btn-properties: (
         fg-hover-color: var(--color-primary),
         font-weight: $weight-reg,
         gap: 0.8em,
+        inverse-fg-color: var(--color-tertiary),
         sizes: (
             sm: (
                 font-size: var(--font-scale-milli)
@@ -139,6 +149,10 @@ $btn-properties: (
         font-weight: $weight-bold,
         letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
+        inverse-bg-color: var(--color-tertiary),
+        inverse-bg-hover-color: transparent,
+        inverse-fg-color: var(--color-secondary),
+        inverse-fg-hover-color: var(--color-tertiary),
         sizes: (
             sm: (
                 padding: var(--space-scale-micro) var(--space-scale-zeta),
@@ -162,6 +176,10 @@ $btn-properties: (
         font-size: var(--font-scale-centi),
         letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
+        inverse-bg-color: var(--color-tertiary),
+        inverse-bg-hover-color: transparent,
+        inverse-fg-color: var(--color-secondary),
+        inverse-fg-hover-color: var(--color-tertiary),
         sizes: (
             sm: (
                 padding: var(--space-scale-micro) var(--space-scale-zeta),
@@ -300,25 +318,6 @@ $btn-properties: (
                 }
             }
 
-            // *----------------------------------*/
-            //  Sizes
-            // *----------------------------------*/
-            @each $size, $properties in map.get($property, sizes) {
-                @if $class == "primary" {
-                    &#{$self}--#{$size} #{$self}__inner {
-                        @each $property, $value in $properties {
-                            #{$property}: $value;
-                        }
-                    }
-                } @else {
-                    &#{$self}--#{$size} {
-                        @each $property, $value in $properties {
-                            #{$property}: $value;
-                        }
-                    }
-                }
-            }
-
             #{$self}__inner {
                 gap: map.get($property, gap);
 
@@ -360,21 +359,86 @@ $btn-properties: (
                     transform: none;
                 }
             }
+
+            // *----------------------------------*/
+            //  Sizes
+            // *----------------------------------*/
+            @each $size, $properties in map.get($property, sizes) {
+                @if $class == "primary" {
+                    &#{$self}--#{$size} #{$self}__inner {
+                        @each $property, $value in $properties {
+                            #{$property}: $value;
+                        }
+                    }
+                } @else {
+                    &#{$self}--#{$size} {
+                        @each $property, $value in $properties {
+                            #{$property}: $value;
+                        }
+                    }
+                }
+            }
         }
 
         // *----------------------------------*/
         //  Dark mode / inverse overrides
         // *----------------------------------*/
+        &.is-inversed {
+            @each $class, $property in $btn-properties {
+                &#{$self}--#{$class} {
+                    @if $class != "primary" {
+                        background-color: map.get($property, inverse-bg-color);
+                    }
+
+                    @if string.index($class, "-gradient") {
+                        background-color: map.get($property, inverse-bg-color);
+                        background-image: none;
+
+                        &::before {
+                            display: none;
+                        }
+                    }
+
+                    border-color: map.get($property, inverse-fg-color);
+                    color: map.get($property, inverse-fg-color);
+
+                    @if map.has-key($property, after) {
+                        &::after {
+                            border-color: map.get($property, inverse-bg-color);
+                        }
+                    }
+
+                    &:hover,
+                    &:active {
+                        @if $class != "primary" {
+                            background-color: map.get($property, inverse-bg-hover-color);
+                        }
+
+                        color: map.get($property, inverse-fg-hover-color);
+                    }
+
+                    #{$self}__inner {
+                        @if $class == "primary" {
+                            background-color: map.get($property, inverse-bg-color);
+                        }
+                    }
+                }
+            }
+        }
+
         @if string.index($class, "-gradient") {
             .theme--dark &--#{$class} {
                 background-color: var(--color-secondary);
                 background-image: none;
 
+                &::before {
+                    display: none;
+                }
+
                 &:hover,
                 &:active {
-                    &::before {
-                        background-color: var(--color-secondary);
-                    }
+                    background-color: transparent;
+                    color: var(--color-secondary);
                 }
             }
         }

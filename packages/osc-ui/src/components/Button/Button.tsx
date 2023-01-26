@@ -79,15 +79,19 @@ export interface SharedProps {
      */
     isLoading?: boolean;
     /**
-     * 'Sets the loading text of the button, used in conjunction with `isLoading`'
-     * @default Loading
-     */
-    loadingText?: string;
-    /**
      * Sets the button to be a pill shape
      * @default false
      */
     isPill?: boolean;
+    /**
+     * Inverses the colours of the button
+     */
+    isInversed?: boolean;
+    /**
+     * 'Sets the loading text of the button, used in conjunction with `isLoading`'
+     * @default Loading
+     */
+    loadingText?: string;
     /**
      * 'Sets the size of the button'
      * @default md
@@ -118,6 +122,7 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             isDisabled,
             isLoading,
             isPill,
+            isInversed,
             loadingText = 'Loading',
             size = 'md',
             variant = 'primary',
@@ -133,7 +138,8 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             variantModifier,
             className,
             isLoading && 'is-loading',
-            isPill && 'is-pill'
+            isPill && 'is-pill',
+            isInversed && 'is-inversed'
         );
 
         // Set our component as either the passed element or a button
