@@ -23,23 +23,34 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
     /**
      * Card variation
      */
-    variant?: 'blog' | 'collection' | 'course';
+    variant?: 'blog' | 'blog-featured' | 'collection' | 'course';
     /**
      * Sets the size of the card
      *
      * @default md
      */
     size?: 'sm' | 'md' | 'lg';
+    /**
+     * Makes the card fill the width of its container
+     * @default false
+     */
+    isFull?: boolean;
 }
 
 /* -------------------------------------------------------------------------------------------------
  * Card
  * -----------------------------------------------------------------------------------------------*/
 export const Card = (props: CardProps) => {
-    const { children, className, size = 'md', variant, ...attr } = props;
+    const { children, className, isFull, size = 'md', variant, ...attr } = props;
     const variantModifier = useModifier('c-card', variant);
     const sizeModifier = useModifier('c-card', size);
-    const classes = classNames('c-card', variantModifier, sizeModifier, className);
+    const classes = classNames(
+        'c-card',
+        variantModifier,
+        sizeModifier,
+        isFull && 'is-full',
+        className
+    );
 
     return (
         <div className={classes} {...attr}>

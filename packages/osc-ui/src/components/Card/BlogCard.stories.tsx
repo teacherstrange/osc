@@ -15,7 +15,7 @@ export default {
         docs: {
             description: {
                 component:
-                    'The post variant of the card is mainly used for displaying blog post content from the cms.<br> Add the `variant="post"` to the `<Card>` to apply the modifier.',
+                    'The blog variant of the card is mainly used for displaying blog post content from the cms.<br> Add the `variant="blog"` to the `<Card>` to apply the modifier.',
             },
         },
     },
@@ -34,7 +34,7 @@ const Template: Story<CardProps> = ({ ...args }) => (
         <CardInner>
             <CardHeader>
                 <CardTitle>{postCardData.title}</CardTitle>
-                <CardTitle as="h3" is="subtitle">
+                <CardTitle as="h3" subtitle>
                     {postCardData.subtitle}
                 </CardTitle>
             </CardHeader>
@@ -44,7 +44,7 @@ const Template: Story<CardProps> = ({ ...args }) => (
             </CardBody>
 
             <CardFooter hasBorderTop hasBorderBottom>
-                <time dateTime="2022-10-08" className="u-text-bold">
+                <time dateTime="2022-10-08" className="u-text-reg">
                     Wednesday 8th October
                 </time>
                 <Button>Read more</Button>
@@ -53,7 +53,59 @@ const Template: Story<CardProps> = ({ ...args }) => (
     </Card>
 );
 
+const FeaturedTemplate: Story<CardProps> = ({ ...args }) => (
+    <div className="o-container">
+        <Card {...args}>
+            <CardImage>
+                <Image
+                    src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1674744069/db8cdf9db0ec39f88706516410a64ed7_kxoiou.png"
+                    alt=""
+                    width={400}
+                    height={460}
+                />
+            </CardImage>
+            <CardInner>
+                <CardHeader>
+                    <CardTitle>
+                        A third of women change their career after having children
+                    </CardTitle>
+                    <CardTitle as="h3" subtitle>
+                        Study tips
+                    </CardTitle>
+                </CardHeader>
+
+                <CardBody>
+                    <p>December 29th, 2021</p>
+                </CardBody>
+
+                <CardFooter>
+                    <Button>Read more</Button>
+                </CardFooter>
+            </CardInner>
+        </Card>
+    </div>
+);
+
 export const Primary = Template.bind({});
 Primary.args = {
     variant: 'blog',
+};
+
+export const MediaObject = Template.bind({});
+MediaObject.args = {
+    ...Primary.args,
+};
+
+export const Featured = FeaturedTemplate.bind({});
+Featured.args = {
+    ...Primary.args,
+    variant: 'blog-featured',
+};
+
+export const FeaturedFullWidth = FeaturedTemplate.bind({});
+FeaturedFullWidth.args = {
+    ...Primary.args,
+    variant: 'blog-featured',
+    isFull: true,
+    className: 'u-bg-color-nonary',
 };
