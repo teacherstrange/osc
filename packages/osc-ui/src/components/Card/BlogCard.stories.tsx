@@ -53,6 +53,31 @@ const Template: Story<CardProps> = ({ ...args }) => (
     </Card>
 );
 
+const MediaObjectTemplate: Story<CardProps> = ({ ...args }) => (
+    <Card {...args}>
+        <CardImage isRounded>
+            <Image
+                src={postCardData.image.secure_url}
+                alt={postCardData.image.alt}
+                width={postCardData.image.width}
+                height={postCardData.image.height}
+            />
+        </CardImage>
+        <CardInner>
+            <CardHeader>
+                <CardTitle>{postCardData.title}</CardTitle>
+                <CardTitle as="h3" subtitle>
+                    {postCardData.subtitle}
+                </CardTitle>
+            </CardHeader>
+
+            <CardFooter hasBorderBottom>
+                <Button>Read more</Button>
+            </CardFooter>
+        </CardInner>
+    </Card>
+);
+
 const FeaturedTemplate: Story<CardProps> = ({ ...args }) => (
     <div className="o-container">
         <Card {...args}>
@@ -91,9 +116,10 @@ Primary.args = {
     variant: 'blog',
 };
 
-export const MediaObject = Template.bind({});
+export const MediaObject = MediaObjectTemplate.bind({});
 MediaObject.args = {
     ...Primary.args,
+    variant: 'media-object',
 };
 
 export const Featured = FeaturedTemplate.bind({});

@@ -23,7 +23,7 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
     /**
      * Card variation
      */
-    variant?: 'blog' | 'blog-featured' | 'collection' | 'course';
+    variant?: 'blog' | 'blog-featured' | 'media-object' | 'collection' | 'course';
     /**
      * Sets the size of the card
      *

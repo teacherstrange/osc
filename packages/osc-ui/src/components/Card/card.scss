@@ -3,6 +3,7 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
+// TODO: consolidate some of these blog styles
 $card-footer-border: solid 1px var(--color-neutral-400);
 
 @mixin before-subttl {
@@ -104,7 +105,7 @@ $card-footer-border: solid 1px var(--color-neutral-400);
     }
 
     // *----------------------------------*/
-    //  Variants
+    //  Variant - Blog
     // *----------------------------------*/
     &--blog {
         max-width: 610px; // TODO: Remove this -- should be controlled by container?
@@ -127,6 +128,9 @@ $card-footer-border: solid 1px var(--color-neutral-400);
         }
     }
 
+    // *----------------------------------*/
+    //  Variant - Blog Featured
+    // *----------------------------------*/
     &--blog-featured {
         grid-template-rows: 1fr;
         color: var(--color-septenary);
@@ -240,120 +244,66 @@ $card-footer-border: solid 1px var(--color-neutral-400);
         }
     }
 
-    /*
-    &--collection {
-        max-width: 610px; // TODO: Remove this -- should be controlled by container?
-        grid-template-rows: 1fr auto;
+    // *----------------------------------*/
+    //  Variant - Media object
+    // *----------------------------------*/
+    &--media-object {
+        --card-image-size: 105px;
+
+        max-width: 566px;
+        grid-template-rows: 1fr;
+        grid-template-columns: minmax(0, var(--card-image-size)) minmax(0, 1fr);
+        gap: var(--space-scale-micro);
+        box-shadow: none;
+        color: var(--color-secondary);
+
+        @include mq(mq-token("tab")) {
+            --card-image-size: 160px;
+
+            gap: var(--space-scale-delta);
+        }
 
         #{$self}__img {
+            grid-row: 1;
             grid-column: 1;
-
-            @include mq(mq-token("mob-lrg")) {
-                grid-row: 1 / -1;
-            }
-
-            img {
-                max-height: unset;
-                object-fit: cover;
-            }
+            width: var(--card-image-size);
+            height: var(--card-image-size);
+            margin-top: 0;
         }
 
         #{$self}__header {
-            margin-block-end: 0;
-        }
-
-        #{$self}__inner {
-            grid-column: 1;
-            grid-row: 2;
-            align-self: end;
-            padding-inline: var(--space-scale-epsilon);
-
-            @include mq(mq-token("mob-lrg"), max) {
-                padding-block-start: 0;
-            }
-
-            @include mq(mq-token("mob-lrg")) {
-                padding-inline-end: 0;
-            }
-        }
-
-        #{$self}__body {
-            > *:not(.c-btn) {
-                @include mq(mq-token("mob-lrg")) {
-                    max-width: 38ch;
-                }
-            }
-        }
-
-        #{$self}__footer {
-            padding-block: 16px; // TODO: Update this to variable
+            margin-block-end: var(--space-scale-micro);
         }
 
         #{$self}__ttl {
-            font-size: var(--font-scale-delta);
-        }
+            font-size: var(--font-scale-gamma);
 
-        &#{$self}--lg {
-            #{$self}__img {
-                @include mq(mq-token("mob-lrg")) {
-                    margin-block-end: 50px; // ? Best approach?
-                }
-            }
-
-            #{$self}__inner {
-                padding-block-end: 40px; // ? Best approach?
+            @include mq(mq-token("mob-lrg")) {
+                max-width: 24ch;
+                font-size: var(--font-scale-epsilon);
             }
         }
 
-        &#{$self}--sm {
-            grid-template-rows: auto auto;
+        #{$self}__subttl {
+            color: var(--color-secondary);
 
-            #{$self}__img {
-                @include mq(mq-token("mob-lrg")) {
-                    margin-block-end: 10px; // ? Best approach?
-                }
-            }
-
-            #{$self}__inner {
-                padding: 0;
-            }
-
-            #{$self}__body {
-                margin-block-end: var(--space-scale-zeta);
-            }
-
-            #{$self}__header,
-            #{$self}__body,
-            #{$self}__footer {
-                padding-inline: var(--space-scale-epsilon);
-            }
+            @include before-subttl;
         }
 
-        &.is-horizontal {
-            #{$self}__img {
-                grid-row: 1;
+        #{$self}__inner {
+            padding: 0;
+        }
 
-                @include mq(mq-token("mob-lrg")) {
-                    margin-block-end: 0;
-                }
-            }
-
-            #{$self}__inner {
-                grid-row: 1;
-                align-self: center;
-                padding-block: 35px;
-            }
-
-            #{$self}__body {
-                > *:not(.c-btn) {
-                    max-width: 22ch;
-
-                    @include mq(mq-token("mob-lrg")) {
-                        max-width: 26ch;
-                    }
-                }
-            }
+        #{$self}__footer {
+            justify-content: flex-end;
+            padding-block: 0 var(--space-scale-delta);
         }
     }
-    */
+
+    // *----------------------------------*/
+    //  Variant - Collection
+    // *----------------------------------*/
+    &--collection {
+        max-width: 610px; // TODO: Remove this -- should be controlled by container?
+    }
 }
