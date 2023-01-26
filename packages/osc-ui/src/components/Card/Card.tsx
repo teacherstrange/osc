@@ -1,13 +1,11 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import type { Headings } from '../../types';
-// import type { PortableTextComponents } from '@portabletext/react';
 import React from 'react';
+import { useModifier } from '../../hooks/useModifier';
+import type { Headings } from '../../types';
 import { classNames } from '../../utils/classNames';
 
-import { useModifier } from '../../hooks/useModifier';
 import './card.scss';
 
-// TODO: Course card (separate component)
 // TODO: Layout (grid/carousel)
 
 export interface SharedCardProps {
@@ -106,7 +104,7 @@ export const CardHeader = (props: CardHeaderProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Card Heading
+ * Card Title
  * -----------------------------------------------------------------------------------------------*/
 export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
     /**
@@ -117,15 +115,21 @@ export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
     as?: Headings;
     /**
      * Set the style of the heading element
+     * @default false
      */
-    is?: 'subtitle';
+    subtitle?: boolean;
+    /**
+     * Sets the size of the title
+     * @default false
+     */
+    isSmall?: boolean;
 }
 
 export const CardTitle = (props: CardTitleProps) => {
-    const { as: Component = 'h2', children, className, is, ...attr } = props;
+    const { as: Component = 'h2', children, className, isSmall, subtitle, ...attr } = props;
 
-    const elementClass = is ? 'c-card__subttl' : 'c-card__ttl';
-    const classes = classNames(elementClass, className);
+    const elementClass = subtitle ? 'c-card__subttl' : 'c-card__ttl';
+    const classes = classNames(elementClass, isSmall && 'is-small', className);
 
     return (
         <Component className={classes} {...attr}>
