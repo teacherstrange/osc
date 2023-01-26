@@ -62,3 +62,15 @@ export const collectionCardDataHzntl = {
     title: 'A Levels',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra duis vehicula justo, sagittis quam nam nisi.',
 };
+
+export const collectionCardDataSml = {
+    image: {
+        alt: '',
+        secure_url:
+            'https://res.cloudinary.com/de2iu8gkv/image/upload/v1674658470/cat-img-3_qrlvcq.png',
+        width: 452,
+        height: 310,
+    },
+    title: 'A Levels',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra duis vehicula justo, sagittis quam nam nisi.',
+};
