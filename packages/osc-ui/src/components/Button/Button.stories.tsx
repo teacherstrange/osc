@@ -31,11 +31,6 @@ export default {
                 type: 'select',
             },
         },
-        shape: {
-            control: {
-                type: 'select',
-            },
-        },
         target: {
             table: {
                 type: {

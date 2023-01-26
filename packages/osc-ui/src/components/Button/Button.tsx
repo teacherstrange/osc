@@ -85,9 +85,9 @@ export interface SharedProps {
     loadingText?: string;
     /**
      * Sets the button to be a pill shape
-     * @default square
+     * @default false
      */
-    shape?: 'square' | 'pill';
+    isPill?: boolean;
     /**
      * 'Sets the size of the button'
      * @default md
@@ -117,7 +117,7 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             children,
             isDisabled,
             isLoading,
-            shape = 'square',
+            isPill,
             loadingText = 'Loading',
             size = 'md',
             variant = 'primary',
@@ -133,7 +133,7 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             variantModifier,
             className,
             isLoading && 'is-loading',
-            shape === 'pill' && 'is-pill'
+            isPill && 'is-pill'
         );
 
         // Set our component as either the passed element or a button
