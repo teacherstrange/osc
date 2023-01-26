@@ -12,7 +12,11 @@ const gateway =
                       { name: 'OSC-Auth', url: env.AUTH_API_URL },
                       { name: 'OSC-Ecommerce', url: env.ECOMMERCE_API_URL },
                       { name: 'OSC-CRM', url: env.CRM_API_URL },
+<<<<<<< HEAD
                       { name: 'OSC-Admin', url: env.ADMIN_API_URL },
+=======
+                      { name: 'OSC-LMS', url: env.LMS_API_URL },
+>>>>>>> 59965727 (feat(api-gateway): added LMS API to gateway)
                   ],
               }),
               buildService({ name, url }) {
