@@ -5,7 +5,7 @@ import type { AriaDateRangePickerProps } from '@react-aria/datepicker';
 import type { DateValue } from '@react-types/calendar';
 
 interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateValue> {
-    presets: { name: string; length: number }[];
+    presets?: { name: string; length: number }[];
 }
 
 export const DateRangePickerContainer = ({
