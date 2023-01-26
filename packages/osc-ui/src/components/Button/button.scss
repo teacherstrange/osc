@@ -12,8 +12,7 @@ $btn-properties: (
         bg-hover-color: var(--color-primary),
         fg-color: var(--color-tertiary),
         font-weight: $weight-bold,
-        font-size: var(--font-scale-centi),
-        letter-spacing: $letter-spacing-sml,
+        letter-spacing: $letter-spacing-xsml,
         text-transform: uppercase,
         border: $btn-primary-border,
         offset: $btn-primary-offset,
@@ -37,9 +36,9 @@ $btn-properties: (
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-omega),
-                font-size: var(--font-scale-zeta)
-            )
-        )
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
     ),
     secondary: (
         bg-color: transparent,
@@ -58,9 +57,9 @@ $btn-properties: (
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-delta),
-                font-size: var(--font-scale-zeta)
-            )
-        )
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
     ),
     tertiary: (
         bg-color: transparent,
@@ -79,9 +78,9 @@ $btn-properties: (
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-delta),
-                font-size: var(--font-scale-zeta)
-            )
-        )
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
     ),
     quaternary: (
         bg-color: transparent,
@@ -93,9 +92,9 @@ $btn-properties: (
         gap: 0.8em,
         sizes: (
             lg: (
-                font-size: var(--font-scale-zeta)
-            )
-        )
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
     ),
     quinary: (
         bg-color: var(--color-septenary),
@@ -113,9 +112,9 @@ $btn-properties: (
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-delta),
-                font-size: var(--font-scale-zeta)
-            )
-        )
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
     ),
     primary-gradient: (
         bg-image: var(--color-gradient-quaternary-90),
@@ -132,9 +131,9 @@ $btn-properties: (
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-beta),
-                font-size: var(--font-scale-zeta)
-            )
-        )
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
     ),
     secondary-gradient: (
         bg-image: var(--color-gradient-septenary-90),
@@ -151,10 +150,10 @@ $btn-properties: (
             ),
             lg: (
                 padding: var(--space-scale-zeta) var(--space-scale-beta),
-                font-size: var(--font-scale-zeta)
-            )
-        )
-    )
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
+    ),
 );
 
 .c-btn {
