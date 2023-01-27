@@ -1,6 +1,7 @@
 import { EditIcon } from '@sanity/icons';
-
-const SPACING = [10, 50, 110, 210];
+// import VariantPicker from '../../../components/inputs/VariantPicker/VariantPicker';
+import { ColorPicker } from '../../../components/inputs/ColorPicker';
+import { SPACING } from '../../../constants';
 
 export default {
     name: 'module.content',
@@ -11,46 +12,46 @@ export default {
         {
             default: true,
             name: 'spacing',
-            title: 'Spacing'
+            title: 'Spacing',
         },
         {
             name: 'content',
-            title: 'Content'
-        }
+            title: 'Content',
+        },
     ],
     fields: [
         {
             name: 'marginBottom',
             title: 'Push Region',
-            type: 'number',
+            type: 'string',
             description: 'Spacing you would like between this region and the next.',
             options: {
                 list: SPACING,
-                layout: 'dropdown'
+                layout: 'dropdown',
             },
-            group: 'spacing'
+            group: 'spacing',
         },
         {
             name: 'paddingTop',
             title: 'Inner Padding Top',
-            type: 'number',
+            type: 'string',
             description: 'Inner padding at the top of the region.',
             options: {
                 list: SPACING,
-                layout: 'dropdown'
+                layout: 'dropdown',
             },
-            group: 'spacing'
+            group: 'spacing',
         },
         {
             name: 'paddingBottom',
             title: 'Inner Padding Bottom',
-            type: 'number',
+            type: 'string',
             description: 'Inner padding at the bottom of the region.',
             options: {
                 list: SPACING,
-                layout: 'dropdown'
+                layout: 'dropdown',
             },
-            group: 'spacing'
+            group: 'spacing',
         },
         {
             name: 'horizontalAlignment',
@@ -61,47 +62,43 @@ export default {
             options: {
                 list: ['left', 'centre', 'right'],
                 layout: 'radio',
-                direction: 'horizontal'
+                direction: 'horizontal',
             },
-            group: 'content'
+            group: 'content',
         },
         {
             name: 'backgroundColor',
             title: 'Background Colour',
-            type: 'colors',
-            group: 'content'
-        },
-        {
-            name: 'textColor',
-            title: 'Text Colour',
-            type: 'colors',
-            group: 'content'
+            type: 'string',
+            initialValue: 'tertiary',
+            inputComponent: ColorPicker,
+            group: 'content',
         },
         {
             name: 'body',
             title: 'Body',
             type: 'body',
-            group: 'content'
+            group: 'content',
         },
         {
             name: 'buttons',
             title: 'Buttons',
             type: 'array',
             of: [{ type: 'module.button' }],
-            group: 'content'
-        }
+            group: 'content',
+        },
     ],
     preview: {
         select: {
-            title: 'body'
+            title: 'body',
         },
         prepare(selection: Record<string, any>) {
             const title = selection.title[0].children[0].text; // display the first item from the body content
 
             return {
                 subtitle: 'Content',
-                title
+                title,
             };
-        }
-    }
+        },
+    },
 };

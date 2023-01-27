@@ -3,6 +3,9 @@
   "bracketSpacing": true,
   "tabWidth": 4,
   "printWidth": 100,
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
   "overrides": [
     {
       "files": "*.json",
@@ -13,11 +16,9 @@
     {
       "files": ["**/*.css", "**/*.scss", "**/*.html"],
       "options": {
-        "singleQuote": false
+        "singleQuote": false,
+        "trailingComma": "none"
       }
     }
-  ],
-  "semi": true,
-  "trailingComma": "es5",
-  "singleQuote": true
+  ]
 }

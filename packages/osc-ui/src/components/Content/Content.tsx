@@ -4,10 +4,14 @@ import type { PortableTextBlock } from '@portabletext/types';
 import { Link } from '@remix-run/react';
 import type { FC } from 'react';
 import React from 'react';
+import colors from '../../../../../tokens/colors';
+import sizes from '../../../../../tokens/fluid-scale';
+import typography from '../../../../../tokens/typography';
 import { useSpacing } from '../../hooks/useSpacing';
 import type { Spacing } from '../../types';
 import { classNames } from '../../utils/classNames';
 import { Button, ButtonGroup, CopyButton } from '../Button/Button';
+import { Image } from '../Image/Image';
 import { List, ListItem } from '../List/List';
 
 import './content.scss';
@@ -37,10 +41,37 @@ export interface Props {
     marginBottom?: Spacing;
     paddingBottom?: Spacing;
     paddingTop?: Spacing;
-    textColor?: string;
     value: PortableTextBlock[];
     buttons?: ButtonProps[];
 }
+
+// Create the decorator markup
+const setDecorators = () => {
+    const decorator = {};
+
+    Object.keys(colors.default).forEach((color) => {
+        decorator[`span u-color-${color}`] = ({ children }) => {
+            return <span className={`u-color-${color}`}>{children}</span>;
+        };
+    });
+
+    sizes.steps.forEach((size) => {
+        decorator[`span t-font-${size}`] = ({ children }) => {
+            return <span className={`t-font-${size}`}>{children}</span>;
+        };
+    });
+
+    Object.keys(typography)
+        .filter((type) => type.includes('font'))
+        .forEach((type) => {
+            // Exclude the -font- prefix as it's part of the object key
+            decorator[`span t-${type}`] = ({ children }) => {
+                return <span className={`t-${type}`}>{children}</span>;
+            };
+        });
+
+    return decorator;
+};
 
 // This content component is built around the content that is exported from our Sanity studio.
 // The portabletext component allows us to take the array generated and move through it, assigning the correct components to each child.
@@ -64,6 +95,10 @@ const portableTextComponents: PortableTextComponents = {
         number: ({ children }) => <ListItem>{children}</ListItem>,
     },
     marks: {
+        ...setDecorators(),
+        'strong u-text-med': ({ children }) => {
+            return <strong className="u-text-med">{children}</strong>;
+        },
         annotationLinkInternal: ({ value, children }) => {
             // If there is no slug fallback to the home path
             // This helps to stop Remix throwing when links are being applied in preview
@@ -85,26 +120,26 @@ const portableTextComponents: PortableTextComponents = {
         },
     },
     types: {
-        image: ({ value }) => {
-            const { altText, dimensions, url } = value?.asset;
+        'module.images': ({ value }) => {
+            const { alt, image } = value;
+            const src = image.image.derived
+                ? image.image.derived[0].secure_url
+                : image.image.secure_url;
+            const { width, height } = image.image;
 
-            return (
-                <img src={url} alt={altText} width={dimensions.width} height={dimensions.height} />
-            );
+            return <Image alt={alt} src={src} width={width} height={height} />;
         },
     },
 };
 
-// TODO: sb - images
 export const Content: FC<Props> = (props: Props) => {
     const {
         align = 'left',
-        backgroundColor = 'primary',
+        backgroundColor,
         className,
         marginBottom,
         paddingTop,
         paddingBottom,
-        textColor = 'secondary',
         value,
         buttons,
         ...other
@@ -121,124 +156,85 @@ export const Content: FC<Props> = (props: Props) => {
         paddingTopClass,
         paddingBottomClass,
         marginBottomClass,
+        backgroundColor && `u-bg-color-${backgroundColor}`,
         className
     );
 
     return (
-        <article
-            className={classes ? classes : null}
-            {...other}
-            style={{
-                backgroundColor: backgroundColor,
-                color: textColor,
-            }}
-        >
-            <div className="c-content">
-                <div className={`c-content__inner ${alignClass}`}>
-                    <ReactPortableText value={value} components={portableTextComponents} />
+        <div className={classes ? classes : null} {...other}>
+            <div className={`c-content__inner ${alignClass}`}>
+                <ReactPortableText value={value} components={portableTextComponents} />
 
-                    {buttons && buttons.length > 0 ? (
-                        <ButtonGroup>
-                            {buttons.map((button) => {
-                                const {
-                                    _key,
-                                    email,
-                                    externalLink,
-                                    file,
-                                    label,
-                                    slug,
-                                    telephone,
-                                    type,
-                                    textToCopy,
-                                    variant,
-                                } = button;
+                {buttons && buttons.length > 0 ? (
+                    <ButtonGroup>
+                        {buttons.map((button) => {
+                            const {
+                                _key,
+                                email,
+                                externalLink,
+                                file,
+                                label,
+                                slug,
+                                telephone,
+                                type,
+                                textToCopy,
+                            } = button;
 
-                                switch (type) {
-                                    case 'file':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="a"
-                                                href={file}
-                                                download
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                            switch (type) {
+                                case 'file':
+                                    return (
+                                        <Button key={_key} as="a" href={file} download>
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'email':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="a"
-                                                href={`mailto:${email}`}
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                                case 'email':
+                                    return (
+                                        <Button key={_key} as="a" href={`mailto:${email}`}>
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'telephone':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="a"
-                                                href={`tel:${telephone}`}
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                                case 'telephone':
+                                    return (
+                                        <Button key={_key} as="a" href={`tel:${telephone}`}>
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'external':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="a"
-                                                href={externalLink.url}
-                                                target={externalLink.newWindow ? '_blank' : null}
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                                case 'external':
+                                    return (
+                                        <Button
+                                            key={_key}
+                                            as="a"
+                                            href={externalLink.url}
+                                            target={externalLink.newWindow ? '_blank' : null}
+                                        >
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'internal':
-                                        return (
-                                            <Button
-                                                key={_key}
-                                                variant={variant}
-                                                as="link"
-                                                to={slug}
-                                            >
-                                                {label}
-                                            </Button>
-                                        );
+                                case 'internal':
+                                    return (
+                                        <Button key={_key} as="link" to={slug}>
+                                            {label}
+                                        </Button>
+                                    );
 
-                                    case 'copy to clipboard':
-                                        return (
-                                            <CopyButton
-                                                key={_key}
-                                                variant={variant}
-                                                textToCopy={textToCopy}
-                                            >
-                                                {label}
-                                            </CopyButton>
-                                        );
+                                case 'copy to clipboard':
+                                    return (
+                                        <CopyButton key={_key} textToCopy={textToCopy}>
+                                            {label}
+                                        </CopyButton>
+                                    );
 
-                                    default:
-                                        return (
-                                            <Button key={_key} variant={variant}>
-                                                {label}
-                                            </Button>
-                                        );
-                                }
-                            })}
-                        </ButtonGroup>
-                    ) : null}
-                </div>
+                                default:
+                                    return <Button key={_key}>{label}</Button>;
+                            }
+                        })}
+                    </ButtonGroup>
+                ) : null}
             </div>
-        </article>
+        </div>
     );
 };

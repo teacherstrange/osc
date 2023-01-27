@@ -24,6 +24,10 @@ a {
     }
 }
 
+strong {
+    font-weight: $weight-bold;
+}
+
 small {
     @include font-size(var(--font-scale-micro));
 }
@@ -34,7 +38,7 @@ input,
 select,
 textarea {
     &:focus {
-        box-shadow: 0 0 0 0.5rem var(--colour-tertiary), 0 0 0 0.75rem var(--color-primary); /* outline color here */
+        box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary); /* outline color here */
 
         &:not(:focus-visible) {
             box-shadow: none;
@@ -45,5 +49,5 @@ textarea {
 input,
 select,
 textarea {
-    @include font-size(var(--scale-zeta));
+    @include font-size(var(--font-scale-base), 1.5);
 }

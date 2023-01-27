@@ -119,6 +119,7 @@ $osc-config: (
         prefix: "text",
         values: (
             "bold": $weight-bold,
+            "med": $weight-med,
             "reg": $weight-reg
         )
     ),
@@ -218,10 +219,16 @@ $osc-config: (
 // generate classes for each custom property in settings/_colors.scss
 // we're assuming the default map will include the same keys as the other themes
 @each $name, $value in color-token("default") {
-    // Skip over the gradients for text colour
-    @if (string.index($name, 'gradient') == null) {
-        [data-t-color="#{$name}"],
-        .u-color-#{$name} {
+    [data-t-color="#{$name}"],
+    .u-color-#{$name} {
+        @if (string.index($name, "gradient")) {
+            color: transparent;
+            background-image: var(--color-#{$name});
+            background-size: 100%;
+            background-repeat: repeat;
+            background-clip: text;
+            -webkit-background-clip: text;
+        } @else {
             color: var(--color-#{$name});
         }
     }
@@ -231,7 +238,7 @@ $osc-config: (
 @each $name, $value in color-token("default") {
     [data-bg-color="#{$name}"],
     .u-bg-color-#{$name} {
-        @if (string.index($name, 'gradient')) {
+        @if (string.index($name, "gradient")) {
             background-image: var(--color-#{$name});
         } @else {
             background-color: var(--color-#{$name});

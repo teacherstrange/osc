@@ -20,9 +20,8 @@ html {
 
 body {
     overflow-x: hidden;
-
-    @include font-size(var(--font-scale-zeta));
-
     font-family: $font-primary;
     -webkit-font-smoothing: antialiased;
+
+    @include font-size(var(--font-scale-base), 1.5);
 }

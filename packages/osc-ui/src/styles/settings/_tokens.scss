@@ -528,7 +528,7 @@ $colors: (
                 hsl(165deg 99% 78%) 69%,
                 hsl(172deg 96% 77%) 79%,
                 hsl(179deg 92% 77%) 100%
-            ),
+            )
     ),
     dark: (
         primary: hsl(335deg 85% 49%),
@@ -549,7 +549,7 @@ $containers: (
     container-size-xsml: 1020,
     container-size-sml: 1140,
     container-size-med: 1280,
-    container-size-lrg: 1680,
+    container-size-lrg: 1680
 );
 $fluid-scale: (
     base-font-size: 16,
@@ -565,18 +565,18 @@ $fluid-scale: (
         alpha,
         omega,
         kilo,
-        mega,
+        mega
     ),
     min-viewport: (
         width: 375,
         font-size: 16,
-        scale: 1.2,
+        scale: 1.2
     ),
     max-viewport: (
         width: 1440,
         font-size: 20,
-        scale: 1.33,
-    ),
+        scale: 1.3
+    )
 );
 $media-queries: (
     mob: 360,
@@ -587,23 +587,24 @@ $media-queries: (
     tab-lrg: 960,
     desk: 1024,
     desk-med: 1280,
-    desk-lrg: 1440,
+    desk-lrg: 1440
 );
 $typography: (
     font-primary: (
         "Outfit",
         helvetica,
         arial,
-        sans-serif,
+        sans-serif
     ),
     font-secondary: (
         "F37 Judge",
         helvetica,
         arial,
-        sans-serif,
+        sans-serif
     ),
     weight-light: 300,
     weight-reg: 400,
+    weight-med: 500,
     weight-bold: 700,
     letter-spacing-xxsml: 0.0625em,
     letter-spacing-xsml: 0.1em,

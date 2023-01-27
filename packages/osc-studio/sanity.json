@@ -12,10 +12,8 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
-    "@sanity/color-input",
     "iframe-pane",
     "seo-pane",
-    "color-list",
     "cloudinary"
   ],
   "env": {

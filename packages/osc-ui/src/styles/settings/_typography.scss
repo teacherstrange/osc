@@ -4,6 +4,7 @@
 @use "../tools/fluid-scale" as *;
 @use "../tools/functions/get-tokens" as *;
 @use "../settings/tokens" as *;
+@use "../tools/functions/rem" as *;
 
 ///*----------------------------------*\
 //  #TYPOGRAPHY SETTINGS
@@ -72,16 +73,13 @@
     font-display: swap;
 }
 
-:root {
-    @include fluid-scale("font");
-}
-
 $font-primary: typography-token("font-primary");
 $font-secondary: typography-token("font-secondary");
 
 // Font Weights
 $weight-light: typography-token("weight-light");
 $weight-reg: typography-token("weight-reg");
+$weight-med: typography-token("weight-med");
 $weight-bold: typography-token("weight-bold");
 
 // Letter Spacing
@@ -92,3 +90,12 @@ $letter-spacing-sml: typography-token("letter-spacing-sml");
 // Base Sizes
 $base-font-size: scale-token("base-font-size");
 $base-line-height: scale-token("max-viewport.scale");
+
+:root {
+    // Manually set a base font size we can use across the site,
+    // this will be set on the body so all text inherits it.
+    --font-scale-base: #{rem($base-font-size)};
+
+    // Add fluid scale custom properties to the root element
+    @include fluid-scale("font");
+}

@@ -5,12 +5,11 @@ import { LINK_INTERNAL } from '../linkInternal';
 
 export const MODULE_CONTENT = groq`
     _key,
-    "backgroundColor": backgroundColor.value ,
+    backgroundColor,
     horizontalAlignment,
     marginBottom,
     paddingBottom,
     paddingTop,
-    "textColor": textColor.value,
     body[] {
         ...,
         ${IMAGE},

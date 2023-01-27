@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from '@portabletext/types';
+import type { Spacing, Themes } from 'osc-ui/src/types';
 import type { ImgHTMLAttributes } from 'react';
 
 export interface SanityLinkItem {
@@ -66,12 +67,11 @@ interface buttonModule extends module {
 }
 
 export interface contentModule extends module {
-    backgroundColor?: 'primary' | 'secondary' | 'tertiary';
+    backgroundColor?: Themes;
     horizontalAlignment?: 'left' | 'centre' | 'right';
-    marginBottom?: 10 | 50 | 110 | 210;
-    paddingBottom?: 10 | 50 | 110 | 210;
-    paddingTop?: 10 | 50 | 110 | 210;
-    textColor?: 'primary' | 'secondary' | 'tertiary';
+    marginBottom?: Spacing;
+    paddingBottom?: Spacing;
+    paddingTop?: Spacing;
     body?: PortableTextBlock[];
     buttons?: buttonModule[];
 }

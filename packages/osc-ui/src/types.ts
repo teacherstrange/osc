@@ -15,7 +15,19 @@ export type Themes =
 
 export type Variants = 'outline' | 'subtle';
 
-export type Spacing = 10 | 50 | 110 | 210;
+export type Spacing =
+    | 'micro'
+    | 'milli'
+    | 'centi'
+    | 'zeta'
+    | 'epsilon'
+    | 'delta'
+    | 'gamma'
+    | 'beta'
+    | 'alpha'
+    | 'omega'
+    | 'kilo'
+    | 'mega';
 
 export type Direction = 'top' | 'right' | 'bottom' | 'left';
 

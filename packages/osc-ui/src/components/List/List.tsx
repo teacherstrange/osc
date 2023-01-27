@@ -35,7 +35,7 @@ export const List: FC<ListProps<ListTypes>> = ({
     children,
     ...attr
 }: ListProps<ListTypes>) => {
-    const classes = classNames(className);
+    const classes = classNames('o-list', className);
 
     switch (variant) {
         case 'ul':
