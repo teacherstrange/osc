@@ -43,7 +43,7 @@ const Template: Story<CardProps> = ({ ...args }) => (
                 <p>{truncate(postCardData.body)}</p>
             </CardBody>
 
-            <CardFooter hasBorderTop hasBorderBottom>
+            <CardFooter>
                 <time dateTime="2022-10-08" className="u-text-reg">
                     Wednesday 8th October
                 </time>

@@ -4,8 +4,6 @@
 @use "../../styles/tools" as *;
 
 // TODO: consolidate some of these blog styles
-$card-footer-border: solid 1px var(--color-neutral-400);
-
 @mixin before-subttl {
     &::before {
         content: "/";
@@ -98,25 +96,21 @@ $card-footer-border: solid 1px var(--color-neutral-400);
         > * {
             margin-bottom: 0;
         }
-
-        &.has-border-top {
-            border-top: $card-footer-border;
-        }
-
-        &.has-border-bottom {
-            border-bottom: $card-footer-border;
-        }
     }
 
     // *----------------------------------*/
     //  Variant - Blog
     // *----------------------------------*/
     &--blog {
+        --card-border: solid 1px var(--color-neutral-400);
+
+        border-bottom: var(--card-border);
         box-shadow: none;
         color: var(--color-secondary);
 
         #{$self}__inner {
             padding-inline: 0;
+            padding-block-end: 0;
         }
 
         #{$self}__subttl {
@@ -126,6 +120,7 @@ $card-footer-border: solid 1px var(--color-neutral-400);
         }
 
         #{$self}__footer {
+            border-top: var(--card-border);
             margin-block-start: var(--space-scale-epsilon);
             padding-block: var(--space-scale-epsilon);
         }
@@ -137,7 +132,6 @@ $card-footer-border: solid 1px var(--color-neutral-400);
             grid-template-rows: 1fr;
             grid-template-columns: minmax(0, var(--card-image-size)) minmax(0, 1fr);
             gap: var(--space-scale-micro);
-            border-bottom: $card-footer-border;
 
             @include mq(mq-token("tab")) {
                 --card-image-size: 160px;
@@ -172,14 +166,17 @@ $card-footer-border: solid 1px var(--color-neutral-400);
 
             #{$self}__footer {
                 justify-content: flex-end;
+                border-top: none;
                 margin-block-start: 0;
                 padding-block: 0 var(--space-scale-delta);
             }
         }
 
         &.is-featured {
-            grid-template-rows: 1fr;
+            --card-border: none;
+
             color: var(--color-septenary);
+            grid-template-rows: 1fr;
 
             #{$self}__img {
                 grid-row: 1;

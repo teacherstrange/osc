@@ -63,7 +63,7 @@ const SmallTemplate: Story<CardProps> = ({ ...args }) => (
                 <p>{truncate(collectionCardDataSml.body)}</p>
             </CardBody>
 
-            <CardFooter hasBorderTop>
+            <CardFooter>
                 <span className="u-text-bold">23 courses</span>
                 <Button>Find our more</Button>
             </CardFooter>
