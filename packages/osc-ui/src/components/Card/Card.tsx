@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactElement, ReactNode } from 'react';
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import useElementSize from '../../hooks/useElementSize';
 import { useModifier } from '../../hooks/useModifier';
@@ -247,6 +247,46 @@ export const CardFooter = (props: CardFooterProps) => {
         <footer className={classes} {...attr}>
             {children}
         </footer>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Card Callout
+ * -----------------------------------------------------------------------------------------------*/
+export interface CardCalloutProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {}
+
+export const CardCallout = (props: CardCalloutProps) => {
+    const { children, className, ...attr } = props;
+    const classes = classNames('c-card__callout', className);
+
+    return (
+        <div className={classes} {...attr}>
+            {children}
+        </div>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Card Price Tag
+ * -----------------------------------------------------------------------------------------------*/
+export interface CardPriceTagProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * The content of the component,
+     * this component accepts up to two children & they must be an element.
+     */
+    children:
+        | ReactElement<HTMLParagraphElement>
+        | [ReactElement<HTMLParagraphElement>, ReactElement<HTMLParagraphElement>];
+}
+
+export const CardPriceTag = (props: CardPriceTagProps) => {
+    const { children, className, ...attr } = props;
+    const classes = classNames('c-card__price-tag', className);
+
+    return (
+        <div className={classes} {...attr}>
+            {children}
+        </div>
     );
 };
 
