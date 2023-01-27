@@ -11,6 +11,13 @@
     }
 }
 
+/*
+ * Some elements/modifiers of the card are themeable. This is handled by the --card-theme-color custom property
+ *
+ * [1] Set the color to the --card-theme-color and fallback to the primary color if it doesn't exist
+ * [2] Set the gradient to the --card-theme-gradient and fallback to the primary gradient if it doesn't exist
+ */
+
 .c-card {
     --card-border: solid 1px var(--color-neutral-400);
 
@@ -68,7 +75,7 @@
 
         &.is-small {
             font-size: var(--font-scale-zeta);
-            font-weight: $weight-light;
+            font-weight: $weight-reg;
         }
     }
 
@@ -78,7 +85,7 @@
         grid-row: 1;
 
         &.is-small {
-            font-weight: $weight-light;
+            font-weight: $weight-reg;
         }
     }
 
@@ -96,6 +103,37 @@
 
         > * {
             margin-bottom: 0;
+        }
+    }
+
+    /*
+     * Border image doesn't work with border-radius
+     * probably fine in this instance but worth being aware of
+     */
+    &__callout {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-scale-centi) var(--space-scale-zeta);
+        margin-block-start: var(--space-scale-zeta);
+        border: 6px solid;
+        border-image-slice: 1;
+        border-image-source: var(--card-theme-gradient, var(--color-gradient-primary-270)); /* [2] */
+        font-weight: $weight-bold;
+    }
+
+    &__price-tag {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-block-start: var(--space-scale-zeta);
+        font-size: var(--font-scale-zeta);
+
+        > * {
+            margin-block-end: 0;
+        }
+
+        > :first-child {
+            color: var(--card-theme-color, var(--color-primary)); /* [1] */
         }
     }
 
@@ -402,6 +440,48 @@
                         max-width: 32ch;
                     }
                 }
+            }
+        }
+    }
+
+    // *----------------------------------*/
+    //  Variant - Course
+    // *----------------------------------*/
+    &#{$self}--course {
+
+        #{$self}__inner {
+            padding: var(--space-scale-epsilon);
+        }
+
+        #{$self}__header {
+            button { // TODO: Should this be a class?
+                justify-self: end;
+            }
+        }
+
+        #{$self}__ttl {
+            border-bottom: 1px solid var(--color-secondary);
+            padding-block-end: 0.2em;
+            margin-block-end: 0.2em;
+        }
+
+        #{$self}__subttl {
+            grid-row: auto;
+            color: var(--card-theme-color, var(--color-primary)); /* [1] */
+        }
+
+        #{$self}__body {
+            h3,
+            h4,
+            h5,
+            h6,
+            li {
+                font-size: var(--font-scale-base);
+                margin-block-end: 0.2em;
+            }
+
+            .c-btn {
+                margin-block-start: var(--space-scale-milli);
             }
         }
     }
