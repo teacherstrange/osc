@@ -1,3 +1,43 @@
+## [0.29.0](https://github.com/Open-Study-College/osc/compare/v0.28.0...v0.29.0) (2023-01-27)
+
+
+### 📦 General Housekeeping / Package Updates
+
+* removes colour picker plugin ([1bba79a](https://github.com/Open-Study-College/osc/commit/1bba79a0b202b8261911027e66974ff85ad266ef))
+
+
+### 🐛 Bugs
+
+* **accordion:** add font weight to accordion header ([7254f3d](https://github.com/Open-Study-College/osc/commit/7254f3da47e0fd326460da4213fdb506b4d764c7))
+* add missing component import ([beafe9c](https://github.com/Open-Study-College/osc/commit/beafe9ca798f7957037160a4b596a5ad8cb56aa7))
+* **build:** adds commonjs plugin to bundle our tokens correctly ([84938a2](https://github.com/Open-Study-College/osc/commit/84938a2f269e3f94296388f982a97e1cdc6a2db7))
+* remove rule setting trailing comma on scss files ([1dbef14](https://github.com/Open-Study-College/osc/commit/1dbef14eb98ac9692977fdc91e4fde4fdf6ad0fc))
+* **styles:** fixes typo in color ([bdd82a9](https://github.com/Open-Study-College/osc/commit/bdd82a9bab8df84780859776e56d2eadc49a135f))
+
+
+### ✨ Features
+
+* **content component:** adds custom input for setting content background color ([1f8874e](https://github.com/Open-Study-College/osc/commit/1f8874e4d75555dfbe784a64726686f6c1418029))
+* **content component:** adds markup for decorators ([01bcb7a](https://github.com/Open-Study-College/osc/commit/01bcb7a7ed4f22abd7c3d886e3e9aa16bb0c4b9f))
+* **content module:** adds decorators for users to style text ([e94d5dc](https://github.com/Open-Study-College/osc/commit/e94d5dcd2bf8e5ca43798295cfae5e57d33da42c))
+* **list:** adds numeric list style ([009208d](https://github.com/Open-Study-College/osc/commit/009208d3e2be999830b02596fede9c8748c1cccb))
+* **styles:** adds content component styles ([d439b87](https://github.com/Open-Study-College/osc/commit/d439b87b51627358ecfe88ca94ba3f9a5c95efbd))
+* **styles:** adds gradient text-color ([2dd64f3](https://github.com/Open-Study-College/osc/commit/2dd64f32a268bb7e1ea18c8e92bcd937d4334eda))
+* **styles:** adds semi-bold typography token ([6e73418](https://github.com/Open-Study-College/osc/commit/6e73418dbddc35505f39e1368b5f715b0b51db3e))
+* **styles:** updates list styling ([b352e8f](https://github.com/Open-Study-College/osc/commit/b352e8f765bda5a4792d4a5f879bce2e2521722c))
+* **styles:** updates the line height for font sizes ([d257b9e](https://github.com/Open-Study-College/osc/commit/d257b9e07cdd658ad72db515118dcbb7aa968c68))
+* **styles:** updates update global body font size ([04e324b](https://github.com/Open-Study-College/osc/commit/04e324b12144ca2a9af21abc586a4b99aa773216))
+
+
+### ♻️ Refactors
+
+* **accordion:** explicitly set font-weight so we don't inherit ([e90b613](https://github.com/Open-Study-College/osc/commit/e90b613c89872308c529f64ece8eda51c4410783))
+* **tokens:** updates fluid scale maxScale value ([89a2a70](https://github.com/Open-Study-College/osc/commit/89a2a705a42a51d2a1d8332e63ce6618e2c0e256))
+* replace variant picker with color picker ([97ba747](https://github.com/Open-Study-College/osc/commit/97ba74779faf4e41c353cd5e4172f02443a8e2dd))
+* updates query to account for new shape ([10c231c](https://github.com/Open-Study-College/osc/commit/10c231cb68a6e1b9527a8e3ce8d9cb1190e25dda))
+* updates spacing values to match tokens ([dd9e516](https://github.com/Open-Study-College/osc/commit/dd9e5160b2b374c321766de904825a1c88cc7a6f))
+* **styles:** updates font sizes per heading ([aade89f](https://github.com/Open-Study-College/osc/commit/aade89f9fb9b82346808c8bde743719fbe348106))
+
 ## [0.28.0](https://github.com/Open-Study-College/osc/compare/v0.27.0...v0.28.0) (2023-01-27)
 
 
@@ -96,56 +136,4 @@
 ### 📦 General Housekeeping / Package Updates
 
 * update lock file ([b6be3e0](https://github.com/Open-Study-College/osc/commit/b6be3e046af821641b5a66f7e010f5f29155ee19))
-
-## [0.25.0](https://github.com/Open-Study-College/osc/compare/v0.24.1...v0.25.0) (2023-01-05)
-
-
-### 📝 Documentation
-
-* **accordion:** update storybook docs ([7ef9ff0](https://github.com/Open-Study-College/osc/commit/7ef9ff0b3977fca6dcdfbd32102a1db3e27c91f1))
-
-
-### 🐛 Bugs
-
-* **studio:** add logic to bail out of validation if there are no heading levels set ([5728a18](https://github.com/Open-Study-College/osc/commit/5728a18eb4fe3751a0c206db037047b17621724e))
-* **studio:** remove duplicate schema ([8c58fc3](https://github.com/Open-Study-College/osc/commit/8c58fc3df33a65881805c4ebb202ddb9c94dfd55))
-
-
-### 🧪 Tests
-
-* **accordion:** add content test to accordion ([42a409d](https://github.com/Open-Study-College/osc/commit/42a409d6c23e85d9dd6a8fb43b5a488679e56172))
-* **accordion:** adds accordion tests ([a2311b7](https://github.com/Open-Study-College/osc/commit/a2311b7cfb9a984dab31d1e7689b96502c865866))
-* **accordion:** adds resize observer mock ([a8441db](https://github.com/Open-Study-College/osc/commit/a8441dbbcffec01daa0496c4d182e10b703750af))
-* **accordion:** updates tests to check for variant class ([1ff180a](https://github.com/Open-Study-College/osc/commit/1ff180ab9b857a1db34eef7342850115bd7c6251))
-
-
-### ✨ Features
-
-* **accordion:** add fixed fontsize for tertiary accordion ([0979c91](https://github.com/Open-Study-College/osc/commit/0979c91c8e932a5f6d6b52cbee88fa9bed4156f4))
-* **accordion:** add focus styles ([201c835](https://github.com/Open-Study-College/osc/commit/201c8351749401c827068c2d922f9fad477b3254))
-* **accordion:** adds accordion component to osc-ui ([79b83be](https://github.com/Open-Study-College/osc/commit/79b83be2d1261643a9e5e52f5c382bc6d0e83a82))
-* **accordion:** adds accordion styles and variants ([c696620](https://github.com/Open-Study-College/osc/commit/c6966200c317fe425d9dc6f78e75c66a6a5047d7))
-* **accordion:** allow user to switch icon between plusminus or chevron ([49dbcda](https://github.com/Open-Study-College/osc/commit/49dbcda098bbc146984977de5c3e8d365e5c4b58))
-* **accordion:** update accordion to forceMount the content ([fa07058](https://github.com/Open-Study-College/osc/commit/fa07058494c48f0cf574bb54f0f0b4b58535816c))
-* **ecommerce:** adds accordion module ([b6637c2](https://github.com/Open-Study-College/osc/commit/b6637c2c40b27aeda31e5ea4e4a3cd3b5eedcc1e))
-* **ecommerce:** adds content to accordion module in ecommerce ([ee322ba](https://github.com/Open-Study-College/osc/commit/ee322ba3accd85195a6add88fb0876785fea59b7))
-* **studio:** adds accordion schema ([3ce9bec](https://github.com/Open-Study-College/osc/commit/3ce9bec80e149cff97638cf99abb97772eb3b030))
-* **tokens:** adds light font-weight token ([e08db6b](https://github.com/Open-Study-College/osc/commit/e08db6b203e2397242a59d6b20f82027aa0e52f5))
-* **tokens:** adds small letter spacing token ([ec3b580](https://github.com/Open-Study-College/osc/commit/ec3b58018695d4b9075876558617920231c8857c))
-
-
-### ♻️ Refactors
-
-* **accordion:** remove forwardRefs to simplify markup ([66a00b0](https://github.com/Open-Study-College/osc/commit/66a00b078652a57df663e5d97986f38a423a4497))
-* **accordion:** update font size vars to use base-font-size calculation ([48d1a82](https://github.com/Open-Study-College/osc/commit/48d1a82821d0eb79c534dc973a9e595466a7cb52))
-* **accordion:** update nesting of icon styles ([2a3ab2f](https://github.com/Open-Study-College/osc/commit/2a3ab2f46f3b054601562baf1f1a818ec6007915))
-* **content component:** remove article tag to make more generic ([4b82672](https://github.com/Open-Study-College/osc/commit/4b82672f081dac26af668747dd189ec209c32774))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* adds todo ([ec662c6](https://github.com/Open-Study-College/osc/commit/ec662c686e6131e87e707a3add86f28b9c9e81d7))
-* update lock file ([ae0be86](https://github.com/Open-Study-College/osc/commit/ae0be86ac146347d56e8018b655a19a6ed1bc925))
-* update package-lock ([7f59ab2](https://github.com/Open-Study-College/osc/commit/7f59ab241cb508a9c1d0de1b9d5150a6cf4d0ee0))
-* **studio:** updates ts target so we can use newer js features ([40eb9e7](https://github.com/Open-Study-College/osc/commit/40eb9e7cbafced2d85011e52676a18782d6a0d19))
 
