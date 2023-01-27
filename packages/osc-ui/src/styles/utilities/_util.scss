@@ -137,7 +137,12 @@ $osc-config: (
         values: (
             uppercase,
             lowercase,
-            underline
+        )
+    ),
+    text-decoration: (
+        prefix: "text",
+        values: (
+            underline,
         )
     ),
     text-align: (
