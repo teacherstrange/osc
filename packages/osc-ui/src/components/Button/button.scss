@@ -1,75 +1,503 @@
 /* stylelint-disable plugin/selector-bem-pattern */
+@use "sass:map";
+@use "sass:string";
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
 
-.c-button {
-    --button-background-color: var(--colour-pink);
-    --button-foreground-color: var(--colour-white);
+$btn-primary-border: solid 3px var(--color-secondary);
+$btn-primary-offset: 6px;
+$btn-properties: (
+    primary: (
+        bg-color: var(--color-secondary),
+        bg-hover-color: var(--color-primary),
+        fg-color: var(--color-tertiary),
+        font-weight: $weight-bold,
+        letter-spacing: $letter-spacing-xsml,
+        text-transform: uppercase,
+        border: $btn-primary-border,
+        offset: $btn-primary-offset,
+        inverse-bg-color: var(--color-tertiary),
+        inverse-bg-hover-color: var(--color-tertiary),
+        inverse-fg-color: var(--color-secondary),
+        after: (
+            position: absolute,
+            bottom: calc($btn-primary-offset * -1),
+            left: $btn-primary-offset,
+            width: 100%,
+            height: 100%,
+            background-color: transparent,
+            border-right: $btn-primary-border,
+            border-bottom: $btn-primary-border,
+            content: "",
+        ),
+        sizes: (
+            sm: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
+            md: (
+                padding: var(--space-scale-centi) var(--space-scale-delta),
+                font-size: var(--font-scale-centi)
+            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-omega),
+                font-size: var(--font-scale-zeta),
+            ),
+        )
+    ),
+    secondary: (
+        bg-color: transparent,
+        bg-hover-color: var(--color-secondary),
+        fg-color: var(--color-secondary),
+        fg-hover-color: var(--color-tertiary),
+        font-weight: $weight-bold,
+        letter-spacing: $letter-spacing-xsml,
+        text-transform: uppercase,
+        border: solid 1px var(--color-secondary),
+        inverse-bg-hover-color: var(--color-tertiary),
+        inverse-fg-color: var(--color-tertiary),
+        inverse-fg-hover-color: var(--color-secondary),
+        sizes: (
+            sm: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
+            md: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-centi)
+            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-delta),
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
+    ),
+    tertiary: (
+        bg-color: transparent,
+        bg-hover-color: var(--color-secondary),
+        fg-color: var(--color-neutral-600),
+        fg-hover-color: var(--color-tertiary),
+        font-weight: $weight-bold,
+        letter-spacing: $letter-spacing-xsml,
+        text-transform: uppercase,
+        border: 1px solid var(--color-neutral-400),
+        inverse-bg-hover-color: var(--color-neutral-100),
+        inverse-fg-color: var(--color-neutral-100),
+        inverse-fg-hover-color: var(--color-secondary),
+        sizes: (
+            sm: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
+            md: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-centi)
+            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-delta),
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
+    ),
+    quaternary: (
+        bg-color: transparent,
+        bg-hover-color: transparent,
+        fg-color: var(--color-secondary),
+        fg-hover-color: var(--color-primary),
+        font-weight: $weight-reg,
+        gap: 0.8em,
+        inverse-fg-color: var(--color-tertiary),
+        sizes: (
+            sm: (
+                font-size: var(--font-scale-milli)
+            ),
+            md: (
+                font-size: var(--font-scale-centi)
+            ),
+            lg: (
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
+    ),
+    quinary: (
+        bg-color: var(--color-septenary),
+        bg-hover-color: var(--color-primary),
+        fg-color: var(--color-secondary),
+        fg-hover-color: var(--color-tertiary),
+        font-weight: $weight-bold,
+        letter-spacing: $letter-spacing-xsml,
+        text-transform: uppercase,
+        sizes: (
+            sm: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
+            md: (
+                padding: var(--space-scale-milli) var(--space-scale-zeta),
+                font-size: var(--font-scale-centi)
+            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-delta),
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
+    ),
+    primary-gradient: (
+        bg-image: var(--color-gradient-quaternary-90),
+        bg-hover-color: var(--color-nonary),
+        fg-color: var(--color-tertiary),
+        font-weight: $weight-bold,
+        letter-spacing: $letter-spacing-xsml,
+        text-transform: uppercase,
+        inverse-bg-color: var(--color-tertiary),
+        inverse-bg-hover-color: transparent,
+        inverse-fg-color: var(--color-secondary),
+        inverse-fg-hover-color: var(--color-tertiary),
+        sizes: (
+            sm: (
+                padding: var(--space-scale-micro) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
+            md: (
+                padding: var(--space-scale-milli) var(--space-scale-gamma),
+                font-size: var(--font-scale-centi),
+            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-beta),
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
+    ),
+    secondary-gradient: (
+        bg-image: var(--color-gradient-septenary-90),
+        bg-hover-color: var(--color-quaternary),
+        fg-color: var(--color-tertiary),
+        font-weight: $weight-bold,
+        font-size: var(--font-scale-centi),
+        letter-spacing: $letter-spacing-xsml,
+        text-transform: uppercase,
+        inverse-bg-color: var(--color-tertiary),
+        inverse-bg-hover-color: transparent,
+        inverse-fg-color: var(--color-secondary),
+        inverse-fg-hover-color: var(--color-tertiary),
+        sizes: (
+            sm: (
+                padding: var(--space-scale-micro) var(--space-scale-zeta),
+                font-size: var(--font-scale-milli)
+            ),
+            md: (
+                padding: var(--space-scale-milli) var(--space-scale-gamma),
+            ),
+            lg: (
+                padding: var(--space-scale-zeta) var(--space-scale-beta),
+                font-size: var(--font-scale-zeta),
+            ),
+        ),
+    ),
+);
 
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    background-color: var(--button-background-color);
-    border: none;
-    border-radius: 0;
-    color: var(--button-foreground-color);
+.c-btn {
+    $self: &;
+
+    color: inherit;
     font: inherit;
     text-align: center;
     text-decoration: none;
     white-space: nowrap;
-    letter-spacing: 0;
+    letter-spacing: normal;
+    transition: all $timing-s $ease-in;
     cursor: pointer;
     pointer-events: auto;
 
-    > span {
+    &,
+    &__inner {
         position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: inherit;
-        gap: 0.25em; // good enough support to use now?
-        pointer-events: none;
+        box-sizing: border-box;
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary);
+    }
+
+    &__inner {
+        width: 100%;
+        gap: 0.6em;
+        pointer-events: none; // We will want to prevent bubbling/capturing of events on the inner span
     }
 
     svg {
         flex-shrink: 0;
-        height: 1em;
+        width: 1em; // Make sure svg scales with the font-size
+        height: 1em; // Make sure svg scales with the font-size
+        font-size: 1.4em;
     }
 
-    &[disabled] {
-        --button-background-color: var(--colour-light-pink);
-
+    // *----------------------------------*/
+    //  Disabled
+    // *----------------------------------*/
+    &[data-disabled] {
         cursor: not-allowed;
     }
 
-    // Variant modifiers
-    &--outline {
-        --button-background-color: transparent;
-        --button-foreground-color: var(--colour-pink);
-
-        border: 2px solid currentcolor;
+    // *----------------------------------*/
+    //  Loading
+    // *----------------------------------*/
+    &.is-loading {
+        cursor: auto;
+        pointer-events: none;
     }
 
-    // Size modifiers
-    // &--sm {}
+    // *----------------------------------*/
+    // Rounded borders
+    // *----------------------------------*/
+    &.is-pill {
+        $btn-radius: 40px;
 
-    // &--md {}
+        &,
+        #{$self}__inner,
+        &::before {
+            border-radius: $btn-radius;
+        }
 
-    // &--lg {}
+        &::after,
+        > span::after {
+            display: none;
+        }
 
-    &--full {
+        &:hover > span {
+            transform: none;
+        }
+    }
+
+    // *----------------------------------*/
+    // Full width
+    // *----------------------------------*/
+    &.is-full {
         width: 100%;
+    }
+
+    // *----------------------------------*/
+    //  Variants
+    // *----------------------------------*/
+    @each $class, $property in $btn-properties {
+        &--#{$class} {
+            color: map.get($property, fg-color);
+            font-size: map.get($property, font-size);
+            font-weight: map.get($property, font-weight);
+            text-transform: map.get($property, text-transform);
+            letter-spacing: map.get($property, letter-spacing);
+
+            @if $class != "primary" {
+                background-color: map.get($property, bg-color);
+                border: map.get($property, border);
+            }
+
+            // If we're on a gradient modifier then set the background image
+            @if string.index($class, "-gradient") {
+                background-color: map.get($property, bg-color);
+                background-image: map.get($property, bg-image);
+
+                // Use a pseudo element to imitate changing the background-color as we
+                // can't transition a background-image into a color
+                &::before {
+                    position: absolute;
+                    content: "";
+                    inset: 0;
+                    transition: all $timing-m $ease-in-out;
+                }
+            }
+
+            @if map.has-key($property, after) {
+                &::after {
+                    @each $key, $value in map.get($property, after) {
+                        #{$key}: $value;
+                    }
+                }
+            }
+
+            #{$self}__inner {
+                gap: map.get($property, gap);
+
+                @if $class == "primary" {
+                    background-color: map.get($property, bg-color);
+                    transition: all $timing-s $ease-in;
+                }
+
+                @include z-index(button);
+            }
+
+            &:hover,
+            &:active {
+                @if $class != "primary" {
+                    background-color: map.get($property, bg-hover-color);
+                }
+
+                color: map.get($property, fg-hover-color);
+
+                @if map.get($property, offset) {
+                    > #{$self}__inner {
+                        background-color: map.get($property, bg-hover-color);
+                        transform: translate($btn-primary-offset, $btn-primary-offset);
+                    }
+                }
+
+                @if string.index($class, "-gradient") {
+                    &::before {
+                        background-color: map.get($property, bg-hover-color);
+                    }
+                }
+            }
+
+            &[data-disabled] {
+                opacity: 0.75;
+                &:hover > #{$self}__inner {
+                    background-color: map.get($property, bg-color);
+                    color: map.get($property, fg-color);
+                    transform: none;
+                }
+            }
+
+            // *----------------------------------*/
+            //  Sizes
+            // *----------------------------------*/
+            @each $size, $properties in map.get($property, sizes) {
+                @if $class == "primary" {
+                    &#{$self}--#{$size} #{$self}__inner {
+                        @each $property, $value in $properties {
+                            #{$property}: $value;
+                        }
+                    }
+                } @else {
+                    &#{$self}--#{$size} {
+                        @each $property, $value in $properties {
+                            #{$property}: $value;
+                        }
+                    }
+                }
+            }
+        }
+
+        // *----------------------------------*/
+        //  Dark mode / inverse overrides
+        // *----------------------------------*/
+        &.is-inversed {
+            @each $class, $property in $btn-properties {
+                &#{$self}--#{$class} {
+                    @if $class != "primary" {
+                        background-color: map.get($property, inverse-bg-color);
+                    }
+
+                    @if string.index($class, "-gradient") {
+                        background-color: map.get($property, inverse-bg-color);
+                        background-image: none;
+
+                        &::before {
+                            display: none;
+                        }
+                    }
+
+                    border-color: map.get($property, inverse-fg-color);
+                    color: map.get($property, inverse-fg-color);
+
+                    @if map.has-key($property, after) {
+                        &::after {
+                            border-color: map.get($property, inverse-bg-color);
+                        }
+                    }
+
+                    &:hover,
+                    &:active {
+                        @if $class != "primary" {
+                            background-color: map.get($property, inverse-bg-hover-color);
+                        }
+
+                        color: map.get($property, inverse-fg-hover-color);
+                    }
+
+                    #{$self}__inner {
+                        @if $class == "primary" {
+                            background-color: map.get($property, inverse-bg-color);
+                        }
+                    }
+                }
+            }
+        }
+
+        @if string.index($class, "-gradient") {
+            .theme--dark &--#{$class} {
+                background-color: var(--color-secondary);
+                background-image: none;
+
+                &::before {
+                    display: none;
+                }
+
+                &:hover,
+                &:active {
+                    background-color: transparent;
+                    color: var(--color-secondary);
+                }
+            }
+        }
     }
 }
 
-.c-button-group {
+// *----------------------------------*/
+//  Button Group
+// *----------------------------------*/
+.c-btn-group {
     display: flex;
-    gap: 0.5em;
+    gap: var(--space-scale-zeta);
     flex-wrap: wrap;
+    align-items: center;
 
     &--column {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+// *----------------------------------*/
+//  Button Loader
+// *----------------------------------*/
+.c-btn-loader {
+    display: flex;
+    gap: 0.25em;
+
+    &__dot {
+        width: 2px;
+        height: 2px;
+        background-color: currentcolor;
+        border-radius: 50%;
+
+        // Start here so we have a smoother transition when switching the loading state on
+        transform: translateY(0.2em);
+        animation: bounce 1s ease-in-out infinite;
+
+        &:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        &:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        &:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+    }
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0.2em);
+    }
+
+    50% {
+        transform: translateY(-0.2em);
     }
 }

@@ -51,6 +51,14 @@ interface buttonModule extends module {
     label: string;
     reference?: object;
     type: string;
+    variant?:
+        | 'primary'
+        | 'secondary'
+        | 'tertiary'
+        | 'quaternary'
+        | 'quinary'
+        | 'primary-gradient'
+        | 'secondary-gradient';
     email?: string;
     slug?: string;
     telephone?: string;

@@ -23,9 +23,9 @@ export const parameters = {
     controls: {
         matchers: {
             color: /(background|color)$/i,
-            date: /Date$/
-        }
-    }
+            date: /Date$/,
+        },
+    },
 };
 
 export const globalTypes = {
@@ -37,7 +37,7 @@ export const globalTypes = {
             icon: 'mirror',
             items: ['light', 'dark'],
             showName: true,
-            dynamicTitle: true
-        }
-    }
+            dynamicTitle: true,
+        },
+    },
 };

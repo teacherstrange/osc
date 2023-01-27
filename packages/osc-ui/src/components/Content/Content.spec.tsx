@@ -114,7 +114,7 @@ test('renders the correct buttons', () => {
         </MemoryRouter>
     );
 
-    const buttons = document.querySelectorAll('.c-button');
+    const buttons = document.querySelectorAll('.c-btn');
     expect(buttons).toHaveLength(6);
 
     const fileDownloadButton = screen.getByRole('link', { name: /file download/i });

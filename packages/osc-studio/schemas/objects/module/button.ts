@@ -11,7 +11,26 @@ export default {
             name: 'label',
             title: 'Label',
             type: 'string',
-            validation: (Rule) => Rule.required()
+            validation: (Rule) => Rule.required(),
+        },
+        {
+            name: 'variant',
+            title: 'Variant',
+            type: 'string',
+            options: {
+                list: [
+                    'primary',
+                    'secondary',
+                    'tertiary',
+                    'quaternary',
+                    'quinary',
+                    'primary-gradient',
+                    'secondary-gradient',
+                ],
+                layout: 'radio',
+                direction: 'horizontal',
+            },
+            initialValue: 'primary',
         },
         {
             name: 'type',
@@ -20,20 +39,20 @@ export default {
             options: {
                 list: ['file', 'email', 'external', 'internal', 'telephone', 'copy to clipboard'],
                 layout: 'radio',
-                direction: 'horizontal'
-            }
+                direction: 'horizontal',
+            },
         },
         {
             name: 'file',
             title: 'File',
             type: 'file',
-            hidden: ({ parent }) => parent?.type !== 'file'
+            hidden: ({ parent }) => parent?.type !== 'file',
         },
         {
             name: 'email',
             title: 'Email address',
             type: 'email',
-            hidden: ({ parent }) => parent?.type !== 'email'
+            hidden: ({ parent }) => parent?.type !== 'email',
         },
         {
             name: 'externalLink',
@@ -44,49 +63,49 @@ export default {
                     name: 'url',
                     title: 'URL',
                     type: 'url',
-                    validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] })
+                    validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
                 },
                 {
                     title: 'Open in a new window?',
                     name: 'newWindow',
                     type: 'boolean',
-                    initialValue: true
-                }
+                    initialValue: true,
+                },
             ],
-            hidden: ({ parent }) => parent?.type !== 'external'
+            hidden: ({ parent }) => parent?.type !== 'external',
         },
         {
             name: 'telephone',
             title: 'Telephone number',
             type: 'string',
-            hidden: ({ parent }) => parent?.type !== 'telephone'
+            hidden: ({ parent }) => parent?.type !== 'telephone',
         },
         {
             name: 'reference',
             type: 'reference',
             weak: true,
             to: PAGE_REFERENCES,
-            hidden: ({ parent }) => parent?.type !== 'internal'
+            hidden: ({ parent }) => parent?.type !== 'internal',
         },
         {
             name: 'textToCopy',
             title: 'Text to copy',
             type: 'string',
             description: 'If left blank this will default to the button label',
-            hidden: ({ parent }) => parent?.type !== 'copy to clipboard'
-        }
+            hidden: ({ parent }) => parent?.type !== 'copy to clipboard',
+        },
     ],
     preview: {
         select: {
             title: 'label',
-            subtitle: 'type'
+            subtitle: 'type',
         },
         prepare(selection) {
             const { title, subtitle } = selection;
             return {
                 title,
-                subtitle: subtitle.charAt(0).toUpperCase() + subtitle.slice(1)
+                subtitle: subtitle.charAt(0).toUpperCase() + subtitle.slice(1),
             };
-        }
-    }
+        },
+    },
 };

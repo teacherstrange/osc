@@ -27,6 +27,7 @@ export interface ButtonProps {
     slug?: string;
     telephone?: string;
     textToCopy?: string;
+    variant?: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary'; // TODO: This and the button component should share this
 }
 
 export interface Props {
@@ -149,26 +150,43 @@ export const Content: FC<Props> = (props: Props) => {
                                     telephone,
                                     type,
                                     textToCopy,
+                                    variant,
                                 } = button;
 
                                 switch (type) {
                                     case 'file':
                                         return (
-                                            <Button key={_key} as="a" href={file} download>
+                                            <Button
+                                                key={_key}
+                                                variant={variant}
+                                                as="a"
+                                                href={file}
+                                                download
+                                            >
                                                 {label}
                                             </Button>
                                         );
 
                                     case 'email':
                                         return (
-                                            <Button key={_key} as="a" href={`mailto:${email}`}>
+                                            <Button
+                                                key={_key}
+                                                variant={variant}
+                                                as="a"
+                                                href={`mailto:${email}`}
+                                            >
                                                 {label}
                                             </Button>
                                         );
 
                                     case 'telephone':
                                         return (
-                                            <Button key={_key} as="a" href={`tel:${telephone}`}>
+                                            <Button
+                                                key={_key}
+                                                variant={variant}
+                                                as="a"
+                                                href={`tel:${telephone}`}
+                                            >
                                                 {label}
                                             </Button>
                                         );
@@ -177,6 +195,7 @@ export const Content: FC<Props> = (props: Props) => {
                                         return (
                                             <Button
                                                 key={_key}
+                                                variant={variant}
                                                 as="a"
                                                 href={externalLink.url}
                                                 target={externalLink.newWindow ? '_blank' : null}
@@ -187,20 +206,33 @@ export const Content: FC<Props> = (props: Props) => {
 
                                     case 'internal':
                                         return (
-                                            <Button key={_key} as="link" to={slug}>
+                                            <Button
+                                                key={_key}
+                                                variant={variant}
+                                                as="link"
+                                                to={slug}
+                                            >
                                                 {label}
                                             </Button>
                                         );
 
                                     case 'copy to clipboard':
                                         return (
-                                            <CopyButton key={_key} textToCopy={textToCopy}>
+                                            <CopyButton
+                                                key={_key}
+                                                variant={variant}
+                                                textToCopy={textToCopy}
+                                            >
                                                 {label}
                                             </CopyButton>
                                         );
 
                                     default:
-                                        return <Button key={_key}>{label}</Button>;
+                                        return (
+                                            <Button key={_key} variant={variant}>
+                                                {label}
+                                            </Button>
+                                        );
                                 }
                             })}
                         </ButtonGroup>
