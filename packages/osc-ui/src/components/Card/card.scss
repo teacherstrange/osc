@@ -19,9 +19,9 @@
     width: 100%;
     background-color: var(--color-tertiary);
     box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
-    font-size: 16px; // TODO: Update this to variable
+    font-size: var(--font-scale-base);
     font-weight: $weight-light;
-    line-height: 1.4; // TODO: Update this to variable
+    line-height: 1.4;
 
     &,
     &__inner,
@@ -74,7 +74,7 @@
 
     &__subttl {
         color: var(--color-neutral-600);
-        font-size: 16px; // TODO: Update this to variable
+        font-size: var(--font-scale-base);
         grid-row: 1;
 
         &.is-small {
@@ -350,7 +350,7 @@
 
                 @include mq(mq-token("mob-lrg")) {
                     max-width: 26ch;
-                    font-size: 16px; // TODO: Update this to variable
+                    font-size: var(--font-scale-base);
                 }
             }
         }
