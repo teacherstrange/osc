@@ -57,8 +57,8 @@ interface buttonModule extends module {
         | 'tertiary'
         | 'quaternary'
         | 'quinary'
-        | 'septenary'
-        | 'octonary';
+        | 'primary-gradient'
+        | 'secondary-gradient';
     email?: string;
     slug?: string;
     telephone?: string;
