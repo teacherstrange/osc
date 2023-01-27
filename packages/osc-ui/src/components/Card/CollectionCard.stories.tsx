@@ -38,7 +38,7 @@ const LargeTemplate: Story<CardProps> = ({ ...args }) => (
 
             <CardBody>
                 <p>{truncate(collectionCardData.body)}</p>
-                <Button>23 Courses</Button>
+                <Button isFull>23 Courses</Button>
             </CardBody>
         </CardInner>
     </Card>
@@ -65,13 +65,27 @@ const SmallTemplate: Story<CardProps> = ({ ...args }) => (
 
             <CardFooter>
                 <span className="u-text-bold">23 courses</span>
-                <Button>Find our more</Button>
+                <Button variant="quaternary">
+                    Find our more {/* // TODO: update this with Icon component */}
+                    <svg
+                        width="13"
+                        height="18"
+                        viewBox="0 0 13 18"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M6.64277 8.64467L0.973619 14.3314L3.77309 17.1221L12.1978 8.671L3.75554 0.176041L0.964843 2.96674L6.64277 8.64467Z"
+                            fill="#062134"
+                        />
+                    </svg>
+                </Button>
             </CardFooter>
         </CardInner>
     </Card>
 );
 const MediumTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <Card {...args} style={{ maxWidth: '610px' }}>
         <CardImage>
             <Image
                 src={collectionCardDataHzntl.image.secure_url}
@@ -87,7 +101,7 @@ const MediumTemplate: Story<CardProps> = ({ ...args }) => (
 
             <CardBody>
                 <p>{truncate(collectionCardDataHzntl.body)}</p>
-                <Button>23 Courses</Button>
+                <Button isFull>23 Courses</Button>
             </CardBody>
         </CardInner>
     </Card>
