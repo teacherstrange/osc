@@ -53,12 +53,12 @@ export const Card = (props: CardProps) => {
     const [cardInnerHeight, setCardInnerHeight] = useState<number>(null);
     const variantModifier = useModifier('c-card', variant);
     const sizeModifier = useModifier('c-card', size);
-    const subVariantClass = `is-${subVariant}`;
+
     const classes = classNames(
         'c-card',
         variantModifier,
         sizeModifier,
-        subVariantClass,
+        subVariant && `is-${subVariant}`,
         isFull && 'is-full',
         className
     );
