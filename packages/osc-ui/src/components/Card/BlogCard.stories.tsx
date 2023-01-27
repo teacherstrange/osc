@@ -140,4 +140,5 @@ FeaturedFullWidth.args = {
     subVariant: 'featured',
     isFull: true,
     className: 'u-bg-color-nonary',
+    style: { maxWidth: '100%' },
 };
