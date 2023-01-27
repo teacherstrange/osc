@@ -130,6 +130,7 @@ Featured.args = {
     variant: 'blog',
     subVariant: 'featured',
     className: 'u-bg-color-nonary',
+    blockLink: true,
     style: { maxWidth: '400px' },
 };
 
@@ -140,5 +141,6 @@ FeaturedFullWidth.args = {
     subVariant: 'featured',
     isFull: true,
     className: 'u-bg-color-nonary',
+    blockLink: true,
     style: { maxWidth: '100%' },
 };

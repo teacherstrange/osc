@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import useElementSize from '../../hooks/useElementSize';
 import { useModifier } from '../../hooks/useModifier';
 import type { Headings } from '../../types';
@@ -20,7 +20,15 @@ export interface SharedCardProps {
     className?: string;
 }
 
+/* -------------------------------------------------------------------------------------------------
+ * Card
+ * -----------------------------------------------------------------------------------------------*/
 export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Makes the whole card the click target for the button.
+     * @default false
+     */
+    blockLink?: boolean;
     /**
      * Card variation
      */
@@ -42,15 +50,21 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
      */
     isFull?: boolean;
 }
-
-/* -------------------------------------------------------------------------------------------------
- * Card
- * -----------------------------------------------------------------------------------------------*/
 const CardContext = createContext(null);
 
 export const Card = (props: CardProps) => {
-    const { children, className, isFull, size = 'md', variant, subVariant, ...attr } = props;
+    const {
+        blockLink,
+        children,
+        className,
+        isFull,
+        size = 'md',
+        variant,
+        subVariant,
+        ...attr
+    } = props;
     const [cardInnerHeight, setCardInnerHeight] = useState<number>(null);
+    const cardRef = useRef<HTMLDivElement>(null);
     const variantModifier = useModifier('c-card', variant);
     const sizeModifier = useModifier('c-card', size);
 
@@ -60,6 +74,7 @@ export const Card = (props: CardProps) => {
         sizeModifier,
         subVariant && `is-${subVariant}`,
         isFull && 'is-full',
+        blockLink && 'is-block-link',
         className
     );
 
@@ -67,6 +82,28 @@ export const Card = (props: CardProps) => {
         cardInnerHeight,
         setCardInnerHeight,
     };
+
+    useEffect(() => {
+        if (blockLink) {
+            const card = cardRef.current;
+            // We can expect the only button to be a Button component which is identified by the `c-btn` class
+            // By using querySelector we're only selecting the first button
+            const button = card.querySelector('.c-btn') as HTMLButtonElement;
+
+            const handleClick = (e: MouseEvent) => {
+                // Prevent event bubbling when clicking directly on the button element.
+                // Without this clicking directly on the button will fire two events
+                // which could cause some uninteded bugs.
+                if (e.target !== button) button.click();
+            };
+
+            card.addEventListener('click', handleClick);
+
+            return () => {
+                card.removeEventListener('click', handleClick);
+            };
+        }
+    }, [blockLink]);
 
     return (
         <CardContext.Provider value={context}>
@@ -77,6 +114,7 @@ export const Card = (props: CardProps) => {
                     ...attr.style,
                     ['--c-card-inner-height' as string]: cardInnerHeight && `${cardInnerHeight}px`,
                 }}
+                ref={cardRef}
             >
                 {children}
             </div>

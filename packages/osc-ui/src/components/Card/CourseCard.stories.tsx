@@ -21,19 +21,20 @@ const Template: Story<CardProps> = ({ ...args }) => (
     <Card {...args}>
         <CardInner>
             <CardHeader>
-                <CardTitle>Title</CardTitle>
-                <CardTitle as="h3" is="subtitle">
-                    Subtitle
+                <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
+                <CardTitle as="h3" subtitle isSmall className="u-color-primary">
+                    Single course
                 </CardTitle>
             </CardHeader>
 
             <CardBody>
-                <p>
-                    Study three or more A levels or GCSEs to save and start working towards a
-                    brighter future.
-                </p>
+                <h4>Course options available</h4>
+                <ul>
+                    <li>Course Material</li>
+                    <li>Course Material + Exams</li>
+                </ul>
 
-                <Button>Click me</Button>
+                <Button isFull>Click me</Button>
             </CardBody>
 
             <CardFooter>
