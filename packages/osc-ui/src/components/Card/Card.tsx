@@ -72,11 +72,11 @@ export const Card = (props: CardProps) => {
         <CardContext.Provider value={context}>
             <div
                 className={classes}
+                {...attr}
                 style={{
                     ...attr.style,
                     ['--c-card-inner-height' as string]: cardInnerHeight && `${cardInnerHeight}px`,
                 }}
-                {...attr}
             >
                 {children}
             </div>
