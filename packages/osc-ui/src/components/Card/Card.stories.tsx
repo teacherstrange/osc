@@ -22,7 +22,7 @@ export default {
 } as Meta;
 
 const Template: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <Card {...args} style={{ maxWidth: '400px' }}>
         <CardImage>
             <Image
                 src={imageData.src}
@@ -116,7 +116,9 @@ const HasCustomHeadingTextTemplate: Story<CardProps> = ({ ...args }) => (
 );
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+    style: { maxWidth: '400px' },
+};
 
 export const HasRoundImage = HasRoundImageTemplate.bind({});
 HasRoundImage.args = {

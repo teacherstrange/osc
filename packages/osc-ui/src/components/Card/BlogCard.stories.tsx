@@ -22,7 +22,7 @@ export default {
 } as Meta;
 
 const Template: Story<CardProps> = ({ ...args }) => (
-    <Card {...args} style={{ maxWidth: '610px' }}>
+    <Card {...args}>
         <CardImage>
             <Image
                 src={postCardData.image.secure_url}
@@ -114,12 +114,14 @@ const FeaturedTemplate: Story<CardProps> = ({ ...args }) => (
 export const Primary = Template.bind({});
 Primary.args = {
     variant: 'blog',
+    style: { maxWidth: '610px' },
 };
 
 export const MediaObject = MediaObjectTemplate.bind({});
 MediaObject.args = {
     ...Primary.args,
     subVariant: 'media-object',
+    style: { maxWidth: '566px' },
 };
 
 export const Featured = FeaturedTemplate.bind({});
@@ -128,6 +130,7 @@ Featured.args = {
     variant: 'blog',
     subVariant: 'featured',
     className: 'u-bg-color-nonary',
+    style: { maxWidth: '400px' },
 };
 
 export const FeaturedFullWidth = FeaturedTemplate.bind({});

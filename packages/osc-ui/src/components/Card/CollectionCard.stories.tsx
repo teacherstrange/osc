@@ -21,31 +21,8 @@ export default {
     },
 } as Meta;
 
-const LargeTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
-        <CardImage>
-            <Image
-                src={collectionCardData.image.secure_url}
-                alt={collectionCardData.image.alt}
-                width={collectionCardData.image.width}
-                height={collectionCardData.image.height}
-            />
-        </CardImage>
-        <CardInner>
-            <CardHeader>
-                <CardTitle>{collectionCardData.title}</CardTitle>
-            </CardHeader>
-
-            <CardBody>
-                <p>{truncate(collectionCardData.body)}</p>
-                <Button isFull>23 Courses</Button>
-            </CardBody>
-        </CardInner>
-    </Card>
-);
-
 const SmallTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args} style={{ maxWidth: '452px' }}>
+    <Card {...args}>
         <CardImage>
             <Image
                 src={collectionCardDataSml.image.secure_url}
@@ -85,7 +62,7 @@ const SmallTemplate: Story<CardProps> = ({ ...args }) => (
     </Card>
 );
 const MediumTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args} style={{ maxWidth: '610px' }}>
+    <Card {...args}>
         <CardImage>
             <Image
                 src={collectionCardDataHzntl.image.secure_url}
@@ -107,18 +84,44 @@ const MediumTemplate: Story<CardProps> = ({ ...args }) => (
     </Card>
 );
 
+const LargeTemplate: Story<CardProps> = ({ ...args }) => (
+    <Card {...args}>
+        <CardImage>
+            <Image
+                src={collectionCardData.image.secure_url}
+                alt={collectionCardData.image.alt}
+                width={collectionCardData.image.width}
+                height={collectionCardData.image.height}
+            />
+        </CardImage>
+        <CardInner>
+            <CardHeader>
+                <CardTitle>{collectionCardData.title}</CardTitle>
+            </CardHeader>
+
+            <CardBody>
+                <p>{truncate(collectionCardData.body)}</p>
+                <Button isFull>23 Courses</Button>
+            </CardBody>
+        </CardInner>
+    </Card>
+);
+
 export const Small = SmallTemplate.bind({});
 Small.args = {
     variant: 'collection',
     size: 'sm',
+    style: { maxWidth: '452px' },
 };
 export const Medium = MediumTemplate.bind({});
 Medium.args = {
     variant: 'collection',
     size: 'md',
+    style: { maxWidth: '610px' },
 };
 export const Large = LargeTemplate.bind({});
 Large.args = {
     variant: 'collection',
     size: 'lg',
+    style: { maxWidth: '610px' },
 };
