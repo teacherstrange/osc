@@ -162,9 +162,9 @@ $osc-config: (
     @each $key, $value in $values {
         .u-#{$prefix}-#{strip-unit($key)} {
             @if ($value) {
-                #{$property}: $value;
+                #{$property}: $value !important;
             } @else {
-                #{$property}: $key;
+                #{$property}: $key !important;
             }
         }
     }
