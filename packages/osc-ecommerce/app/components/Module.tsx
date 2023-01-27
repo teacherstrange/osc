@@ -102,6 +102,7 @@ export default function Module(props: Props) {
                         paddingTop={moduleContent.paddingTop}
                         textColor={moduleContent.textColor}
                         value={moduleContent?.body}
+                        buttons={moduleContent.buttons}
                     />
                 </article>
             ) : null;
