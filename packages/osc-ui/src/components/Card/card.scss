@@ -83,11 +83,15 @@ $card-footer-border: solid 1px var(--color-neutral-400);
         }
     }
 
+    &__body {
+        margin-block-start: auto;
+    }
+
     &__footer {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        padding-block-start: var(--space-scale-micro);
+        padding-block-start: var(--space-scale-centi);
         font-size: var(--font-scale-centi);
         font-weight: $weight-light;
 
@@ -122,8 +126,8 @@ $card-footer-border: solid 1px var(--color-neutral-400);
         }
 
         #{$self}__footer {
-            margin-block-start: var(--space-scale-delta);
-            padding-block: var(--space-scale-delta);
+            margin-block-start: var(--space-scale-epsilon);
+            padding-block: var(--space-scale-epsilon);
         }
 
         &.is-media-object {
@@ -133,6 +137,7 @@ $card-footer-border: solid 1px var(--color-neutral-400);
             grid-template-rows: 1fr;
             grid-template-columns: minmax(0, var(--card-image-size)) minmax(0, 1fr);
             gap: var(--space-scale-micro);
+            border-bottom: $card-footer-border;
 
             @include mq(mq-token("tab")) {
                 --card-image-size: 160px;
@@ -167,6 +172,7 @@ $card-footer-border: solid 1px var(--color-neutral-400);
 
             #{$self}__footer {
                 justify-content: flex-end;
+                margin-block-start: 0;
                 padding-block: 0 var(--space-scale-delta);
             }
         }
@@ -223,6 +229,7 @@ $card-footer-border: solid 1px var(--color-neutral-400);
             }
 
             #{$self}__footer {
+                margin-block-start: 0;
                 padding-block: var(--space-scale-gamma) 0;
                 justify-content: flex-end;
 

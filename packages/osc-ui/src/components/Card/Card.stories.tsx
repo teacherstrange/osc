@@ -45,7 +45,7 @@ const Template: Story<CardProps> = ({ ...args }) => (
                     justo, sagittis quam nam nisi.
                 </p>
 
-                <Button>Button</Button>
+                <Button isFull>Button</Button>
             </CardBody>
 
             <CardFooter>
@@ -103,7 +103,9 @@ const HasCustomHeadingTextTemplate: Story<CardProps> = ({ ...args }) => (
                     brighter future.
                 </p>
 
-                <CopyButton textToCopy="ALEVELGCSE">Copy code</CopyButton>
+                <CopyButton isFull textToCopy="ALEVELGCSE">
+                    Copy code
+                </CopyButton>
             </CardBody>
 
             <CardFooter>

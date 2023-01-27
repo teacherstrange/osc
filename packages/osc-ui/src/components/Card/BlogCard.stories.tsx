@@ -47,7 +47,7 @@ const Template: Story<CardProps> = ({ ...args }) => (
                 <time dateTime="2022-10-08" className="u-text-reg">
                     Wednesday 8th October
                 </time>
-                <Button>Read more</Button>
+                <Button variant="secondary">Read more</Button>
             </CardFooter>
         </CardInner>
     </Card>
@@ -71,8 +71,8 @@ const MediaObjectTemplate: Story<CardProps> = ({ ...args }) => (
                 </CardTitle>
             </CardHeader>
 
-            <CardFooter hasBorderBottom>
-                <Button>Read more</Button>
+            <CardFooter>
+                <Button variant="secondary">Read more</Button>
             </CardFooter>
         </CardInner>
     </Card>
@@ -104,7 +104,7 @@ const FeaturedTemplate: Story<CardProps> = ({ ...args }) => (
                 </CardBody>
 
                 <CardFooter>
-                    <Button>Read more</Button>
+                    <Button variant="quinary">Read more</Button>
                 </CardFooter>
             </CardInner>
         </Card>
