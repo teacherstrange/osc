@@ -45,10 +45,9 @@ export default {
     },
 } as Meta;
 
-// TODO: Tests
-// TODO: Typescript
 // TODO: Tooltip on wishlist button
-// TODO: Badge?
+// TODO: Badge needs styling
+// TODO: Popover need styling
 const Template: Story<CardProps> = ({ ...args }) => {
     const [isActive, setIsActive] = useState(false);
 

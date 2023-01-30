@@ -3,10 +3,6 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
-// TODO: consolidate some of these blog styles?
-// TODO: Active state for wishlist button
-// TODO: Test block link across other card types
-// TODO: consolidate some of these blog styles
 @mixin before-subttl {
     &::before {
         content: "/";
