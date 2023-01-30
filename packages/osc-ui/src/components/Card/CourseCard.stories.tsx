@@ -9,6 +9,7 @@ import type { CardProps } from './Card';
 import {
     Card,
     CardBody,
+    CardBodyInner,
     CardCallout,
     CardFooter,
     CardHeader,
@@ -28,6 +29,7 @@ export default {
         CardHeader,
         CardTitle,
         CardBody,
+        CardBodyInner,
         CardCallout,
         CardPriceTag,
         CardFooter,
@@ -98,14 +100,16 @@ const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => (
             </CardHeader>
 
             <CardBody>
-                <h4>Course options available</h4>
-                <ul>
-                    <li>Course Material</li>
-                    <li>Course Material + Exams</li>
-                </ul>
+                <CardBodyInner>
+                    <h4>Course options available</h4>
+                    <ul>
+                        <li>Course Material</li>
+                        <li>Course Material + Exams</li>
+                    </ul>
+                </CardBodyInner>
 
                 <CardCallout>
-                    Save up to £200
+                    <strong>Save up to £200</strong>
                     <Popover>
                         <PopoverTrigger className={args.className}>
                             {/* // TODO: replace with with `Icon` component */}
@@ -174,13 +178,13 @@ const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => (
             </CardHeader>
 
             <CardBody>
-                <div className="c-card__body-inner">
+                <CardBodyInner>
                     <h4>Course options available</h4>
                     <ul>
                         <li>Course Material</li>
                         <li>Course Material + Exams</li>
                     </ul>
-                </div>
+                </CardBodyInner>
 
                 <CardCallout>
                     <strong>Save up to £200</strong>

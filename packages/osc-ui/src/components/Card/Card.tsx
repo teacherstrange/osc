@@ -238,6 +238,22 @@ export const CardBody = (props: CardBodyProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * Card Body Inner
+ * -----------------------------------------------------------------------------------------------*/
+export interface CardBodyInnerProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {}
+
+export const CardBodyInner = (props: CardBodyInnerProps) => {
+    const { children, className, ...attr } = props;
+    const classes = classNames('c-card__body-inner', className);
+
+    return (
+        <div className={classes} {...attr}>
+            {children}
+        </div>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Card Footer
  * -----------------------------------------------------------------------------------------------*/
 export interface CardFooterProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {}
