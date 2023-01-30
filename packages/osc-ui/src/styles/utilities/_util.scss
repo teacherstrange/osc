@@ -4,7 +4,6 @@
 @use "../tools" as *;
 @use "../tools/functions" as *;
 
-
 ///*----------------------------------*\
 //  #UTILITIES
 //\*----------------------------------*/
@@ -136,13 +135,13 @@ $osc-config: (
         prefix: "text",
         values: (
             uppercase,
-            lowercase,
+            lowercase
         )
     ),
     text-decoration: (
         prefix: "text",
         values: (
-            underline,
+            underline
         )
     ),
     text-align: (
@@ -252,10 +251,14 @@ $osc-config: (
 @each $name, $value in color-token("default") {
     [data-bg-color="#{$name}"],
     .u-bg-color-#{$name} {
-        @if (string.index($name, 'gradient')) {
-            background-image: var(--color-#{$name}) !important; // Make sure we override our component styles
+        @if (string.index($name, "gradient")) {
+            background-image: var(
+                --color-#{$name}
+            ) !important; // Make sure we override our component styles
         } @else {
-            background-color: var(--color-#{$name}) !important; // Make sure we override our component styles
+            background-color: var(
+                --color-#{$name}
+            ) !important; // Make sure we override our component styles
         }
     }
 }
