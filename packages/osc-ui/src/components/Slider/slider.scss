@@ -1,0 +1,117 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+
+    &[data-orientation="horizontal"] {
+        height: 20px;
+    }
+
+    &[data-disabled] {
+        .c-slider__range {
+            background-color: var(--color-neutral-600);
+        }
+
+        .c-slider__thumb {
+            border: solid 2px var(--color-neutral-400);
+        }
+    }
+
+    &__track {
+        position: relative;
+        flex-grow: 1;
+        background-color: var(--color-neutral-400);
+        border-radius: 9999px;
+
+        &[data-orientation="horizontal"] {
+            height: 6px;
+        }
+    }
+
+    &__range {
+        position: absolute;
+        height: 100%;
+        background-color: var(--color-primary);
+        border-radius: 9999px;
+    }
+
+    &__thumb {
+        display: block;
+        width: 1em;
+        height: 1em;
+        background-color: var(--color-tertiary);
+        border: solid 2px var(--color-primary);
+        border-radius: 10px;
+        box-shadow: 0 1px 3px hsl(0deg 0% 0% / 10%), 0 1px 2px hsl(0deg 0% 0% / 6%);
+
+        &:hover {
+            background-color: var(--color-neutral-200);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--color-secondary);
+
+            .c-slider__value {
+                transform: scale(1);
+                transition: 100ms ease-in-out;
+            }
+        }
+    }
+
+    &__value {
+        position: relative;
+        top: -42px;
+        display: flex;
+        justify-content: center;
+        width: max-content;
+        padding: 0.25em 0.375em;
+        background-color: var(--color-secondary);
+        color: var(--color-tertiary);
+        font-size: var(--font-scale-centi);
+        transform: scale(0);
+        transition: 100ms ease-in-out;
+
+        &--arrow {
+            position: absolute;
+            bottom: -8px;
+            width: 0;
+            height: 0;
+            border-top: 8px solid var(--color-secondary);
+            border-right: 8px solid transparent;
+            border-left: 8px solid transparent;
+        }
+    }
+
+    &:hover {
+        .c-slider__value {
+            transform: scale(1);
+            transition: 100ms ease-in-out;
+        }
+    }
+
+    .c-slider__value-container {
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    &--arrow {
+        position: absolute;
+        bottom: -8px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid var(--color-secondary);
+        border-right: 8px solid transparent;
+        border-left: 8px solid transparent;
+    }
+}

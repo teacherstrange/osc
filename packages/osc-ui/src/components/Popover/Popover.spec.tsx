@@ -7,7 +7,13 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from './Popover';
 
-global.ResizeObserver = require('resize-observer-polyfill');
+beforeEach(() => {
+    window.ResizeObserver = vi.fn().mockImplementation(() => ({
+        observe: vi.fn(),
+        unobserve: vi.fn(),
+        disconnect: vi.fn(),
+    }));
+});
 
 test('should render popover content when trigger is clicked and close when trigger is clicked again', async () => {
     const user = userEvent.setup();
