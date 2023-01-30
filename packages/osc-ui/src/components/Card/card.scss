@@ -142,6 +142,21 @@
         }
     }
 
+    &__wishlist-btn {
+        svg {
+            stroke: currentcolor;
+            fill: transparent;
+            stroke-width: 2px;
+        }
+
+        &.is-active {
+            svg {
+                fill: var(--color-primary);
+                stroke: var(--color-primary);
+            }
+        }
+    }
+
     &.is-block-link {
         cursor: pointer;
     }

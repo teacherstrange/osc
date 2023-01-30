@@ -1,7 +1,7 @@
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Popover } from '@radix-ui/react-popover';
 import type { Meta, Story } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, ButtonGroup } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '../Popover/Popover';
@@ -53,195 +53,220 @@ export default {
 // TODO: Badge?
 // TODO: Refactor variants into their own components
 
-const Template: Story<CardProps> = ({ ...args }) => (
-    <CourseCard {...args}>
-        <CardInner>
-            <CardHeader>
-                <CardWishListButton label="Save for later" className="is-active" />
+const Template: Story<CardProps> = ({ ...args }) => {
+    const [isActive, setIsActive] = useState(false);
 
-                <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
-                <CardTitle as="h3" subtitle isSmall>
-                    Single course
-                </CardTitle>
-            </CardHeader>
+    return (
+        <CourseCard {...args}>
+            <CardInner>
+                <CardHeader>
+                    <CardWishListButton
+                        label="Save for later"
+                        className={isActive && 'is-active'}
+                        onClick={() => setIsActive(!isActive)}
+                    />
 
-            <CardBody>
-                <h4>Course options available</h4>
-                <ul>
-                    <li>Course Material</li>
-                    <li>Course Material + Exams</li>
-                </ul>
+                    <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
+                    <CardTitle as="h3" subtitle isSmall>
+                        Single course
+                    </CardTitle>
+                </CardHeader>
 
-                <CardPriceTag>
-                    <p>
-                        <span className="u-text-bold">From £23</span>/month
-                    </p>
-                    <p>
-                        or from <span className="u-text-bold">£849 in full</span>
-                    </p>
-                </CardPriceTag>
-
-                <Button as="link" to="/courses/aat-level-3-diploma-in-accounting" isFull>
-                    View course
-                </Button>
-            </CardBody>
-        </CardInner>
-    </CourseCard>
-);
-
-const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => (
-    <CourseCard {...args}>
-        <CardInner>
-            <CardHeader>
-                <CardWishListButton label="Save for later" />
-
-                <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
-                <CardTitle as="h3" subtitle isSmall>
-                    Single course
-                </CardTitle>
-            </CardHeader>
-
-            <CardBody>
-                <CardBodyInner>
+                <CardBody>
                     <h4>Course options available</h4>
                     <ul>
                         <li>Course Material</li>
                         <li>Course Material + Exams</li>
                     </ul>
-                </CardBodyInner>
 
-                <CardCallout>
-                    <strong>Save up to £200</strong>
-                    <Popover>
-                        <PopoverTrigger className={args.className}>
-                            {/* // TODO: replace with with `Icon` component */}
-                            <Icon label="More information">
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 20 20"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM9 9V15H11V9H9ZM9 5V7H11V5H9Z"
-                                        fill="currentColor"
-                                    />
-                                </svg>
-                            </Icon>
-                        </PopoverTrigger>
-                        <PopoverContent side="top">
-                            <PopoverArrow />
+                    <CardPriceTag>
+                        <p>
+                            <span className="u-text-bold">From £23</span>/month
+                        </p>
+                        <p>
+                            or from <span className="u-text-bold">£849 in full</span>
+                        </p>
+                    </CardPriceTag>
 
-                            <PopoverClose className="c-popover__close" aria-label="Close">
-                                {/* // TODO: Update with out Icon component */}
-                                <Cross2Icon />
-                            </PopoverClose>
-
-                            <p>Save up to £200 when you purchase</p>
-                            <p>Interior Design and Heritage Interior Design QLS Level 3 </p>
-                        </PopoverContent>
-                    </Popover>
-                </CardCallout>
-
-                <CardPriceTag>
-                    <p>
-                        <span className="u-text-bold">From £23</span>/month
-                    </p>
-                    <p>
-                        or from <span className="u-text-bold">£849 in full</span>
-                    </p>
-                </CardPriceTag>
-
-                <Button as="link" to="/courses/aat-level-3-diploma-in-accounting" isFull>
-                    View course
-                </Button>
-            </CardBody>
-        </CardInner>
-    </CourseCard>
-);
-
-const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => (
-    <CourseCard {...args}>
-        <CardInner>
-            <CardHeader>
-                <CardPriceTag className="u-hidden-until@tab">
-                    <p>
-                        <span className="u-text-bold">From £23</span>/month
-                    </p>
-                    <p>
-                        or from <span className="u-text-bold">£849 in full</span>
-                    </p>
-                </CardPriceTag>
-                <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
-                <CardTitle as="h3" subtitle isSmall>
-                    Single course
-                </CardTitle>
-            </CardHeader>
-
-            <CardBody>
-                <CardBodyInner>
-                    <h4>Course options available</h4>
-                    <ul>
-                        <li>Course Material</li>
-                        <li>Course Material + Exams</li>
-                    </ul>
-                </CardBodyInner>
-
-                <CardCallout>
-                    <strong>Save up to £200</strong>
-                    <Popover>
-                        <PopoverTrigger className={args.className}>
-                            {/* // TODO: replace with with `Icon` component */}
-                            <Icon label="More information">
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 20 20"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM9 9V15H11V9H9ZM9 5V7H11V5H9Z"
-                                        fill="currentColor"
-                                    />
-                                </svg>
-                            </Icon>
-                        </PopoverTrigger>
-                        <PopoverContent side="top">
-                            <PopoverArrow />
-
-                            <PopoverClose className="c-popover__close" aria-label="Close">
-                                {/* // TODO: Update with out Icon component */}
-                                <Cross2Icon />
-                            </PopoverClose>
-
-                            <p>Save up to £200 when you purchase</p>
-                            <p>Interior Design and Heritage Interior Design QLS Level 3 </p>
-                        </PopoverContent>
-                    </Popover>
-                </CardCallout>
-
-                <CardPriceTag className="u-hidden-from@tab">
-                    <p>
-                        <span className="u-text-bold">From £23</span>/month
-                    </p>
-                    <p>
-                        or from <span className="u-text-bold">£849 in full</span>
-                    </p>
-                </CardPriceTag>
-
-                <ButtonGroup>
-                    <CardWishListButton label="Save for later" size="lg" />
-
-                    <Button as="link" to="/courses/aat-level-3-diploma-in-accounting">
+                    <Button as="link" to="/courses/aat-level-3-diploma-in-accounting" isFull>
                         View course
                     </Button>
-                </ButtonGroup>
-            </CardBody>
-        </CardInner>
-    </CourseCard>
-);
+                </CardBody>
+            </CardInner>
+        </CourseCard>
+    );
+};
+
+const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => {
+    const [isActive, setIsActive] = useState(false);
+
+    return (
+        <CourseCard {...args}>
+            <CardInner>
+                <CardHeader>
+                    <CardWishListButton
+                        label="Save for later"
+                        className={isActive && 'is-active'}
+                        onClick={() => setIsActive(!isActive)}
+                    />
+
+                    <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
+                    <CardTitle as="h3" subtitle isSmall>
+                        Single course
+                    </CardTitle>
+                </CardHeader>
+
+                <CardBody>
+                    <CardBodyInner>
+                        <h4>Course options available</h4>
+                        <ul>
+                            <li>Course Material</li>
+                            <li>Course Material + Exams</li>
+                        </ul>
+                    </CardBodyInner>
+
+                    <CardCallout>
+                        <strong>Save up to £200</strong>
+                        <Popover>
+                            <PopoverTrigger className={args.className}>
+                                {/* // TODO: replace with with `Icon` component */}
+                                <Icon label="More information">
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM9 9V15H11V9H9ZM9 5V7H11V5H9Z"
+                                            fill="currentColor"
+                                        />
+                                    </svg>
+                                </Icon>
+                            </PopoverTrigger>
+                            <PopoverContent side="top">
+                                <PopoverArrow />
+
+                                <PopoverClose className="c-popover__close" aria-label="Close">
+                                    {/* // TODO: Update with out Icon component */}
+                                    <Cross2Icon />
+                                </PopoverClose>
+
+                                <p>Save up to £200 when you purchase</p>
+                                <p>Interior Design and Heritage Interior Design QLS Level 3 </p>
+                            </PopoverContent>
+                        </Popover>
+                    </CardCallout>
+
+                    <CardPriceTag>
+                        <p>
+                            <span className="u-text-bold">From £23</span>/month
+                        </p>
+                        <p>
+                            or from <span className="u-text-bold">£849 in full</span>
+                        </p>
+                    </CardPriceTag>
+
+                    <Button as="link" to="/courses/aat-level-3-diploma-in-accounting" isFull>
+                        View course
+                    </Button>
+                </CardBody>
+            </CardInner>
+        </CourseCard>
+    );
+};
+
+const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => {
+    const [isActive, setIsActive] = useState(false);
+
+    return (
+        <CourseCard {...args}>
+            <CardInner>
+                <CardHeader>
+                    <CardPriceTag className="u-hidden-until@tab">
+                        <p>
+                            <span className="u-text-bold">From £23</span>/month
+                        </p>
+                        <p>
+                            or from <span className="u-text-bold">£849 in full</span>
+                        </p>
+                    </CardPriceTag>
+                    <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
+                    <CardTitle as="h3" subtitle isSmall>
+                        Single course
+                    </CardTitle>
+                </CardHeader>
+
+                <CardBody>
+                    <CardBodyInner>
+                        <h4>Course options available</h4>
+                        <ul>
+                            <li>Course Material</li>
+                            <li>Course Material + Exams</li>
+                        </ul>
+                    </CardBodyInner>
+
+                    <CardCallout>
+                        <strong>Save up to £200</strong>
+                        <Popover>
+                            <PopoverTrigger className={args.className}>
+                                {/* // TODO: replace with with `Icon` component */}
+                                <Icon label="More information">
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM9 9V15H11V9H9ZM9 5V7H11V5H9Z"
+                                            fill="currentColor"
+                                        />
+                                    </svg>
+                                </Icon>
+                            </PopoverTrigger>
+                            <PopoverContent side="top">
+                                <PopoverArrow />
+
+                                <PopoverClose className="c-popover__close" aria-label="Close">
+                                    {/* // TODO: Update with out Icon component */}
+                                    <Cross2Icon />
+                                </PopoverClose>
+
+                                <p>Save up to £200 when you purchase</p>
+                                <p>Interior Design and Heritage Interior Design QLS Level 3 </p>
+                            </PopoverContent>
+                        </Popover>
+                    </CardCallout>
+
+                    <CardPriceTag className="u-hidden-from@tab">
+                        <p>
+                            <span className="u-text-bold">From £23</span>/month
+                        </p>
+                        <p>
+                            or from <span className="u-text-bold">£849 in full</span>
+                        </p>
+                    </CardPriceTag>
+
+                    <ButtonGroup>
+                        <CardWishListButton
+                            label="Save for later"
+                            size="lg"
+                            className={isActive && 'is-active'}
+                            onClick={() => setIsActive(!isActive)}
+                        />
+
+                        <Button as="link" to="/courses/aat-level-3-diploma-in-accounting">
+                            View course
+                        </Button>
+                    </ButtonGroup>
+                </CardBody>
+            </CardInner>
+        </CourseCard>
+    );
+};
 
 const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
     <CourseCard {...args}>

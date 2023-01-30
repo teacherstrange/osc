@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactElement, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactElement, ReactNode } from 'react';
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import useElementSize from '../../hooks/useElementSize';
 import { useModifier } from '../../hooks/useModifier';
@@ -281,7 +281,8 @@ export const CardPriceTag = (props: CardPriceTagProps) => {
  * CardWishListButton
  * -----------------------------------------------------------------------------------------------*/
 export interface CardWishListButtonProps
-    extends Pick<SharedButtonProps, 'className' | 'isDisabled' | 'size'> {
+    extends Pick<SharedButtonProps, 'className' | 'isDisabled' | 'size'>,
+        ButtonHTMLAttributes<HTMLButtonElement> {
     /**
      * Accessible label for the icon
      */
@@ -297,15 +298,7 @@ export const CardWishListButton = (props: CardWishListButtonProps) => {
             {/* // TODO: replace with with `Icon` component */}
             {/* // TODO: This also needs a tooltip see 'collection-design' in Figma */}
             <Icon label={label}>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    style={{
-                        stroke: 'currentColor',
-                        fill: 'transparent',
-                        strokeWidth: '2px',
-                    }}
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 26">
                     <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />
                 </svg>
             </Icon>
