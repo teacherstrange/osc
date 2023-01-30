@@ -9,7 +9,7 @@
     cursor: pointer;
 
     &__required {
-        padding-left: 0.063em;
+        padding-inline-start: #{math.div(1, $base-font-size)}em;
     }
 
     &--bold {
