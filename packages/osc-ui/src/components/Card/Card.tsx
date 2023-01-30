@@ -38,27 +38,16 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
      * @default md
      */
     size?: 'sm' | 'md' | 'lg';
-    /**
-     * Makes the card fill the width of its container
-     * @default false
-     */
-    isFull?: boolean;
 }
 const CardContext = createContext(null);
 
 export const Card = (props: CardProps) => {
-    const { blockLink, children, className, isFull, size = 'md', ...attr } = props;
+    const { blockLink, children, className, size = 'md', ...attr } = props;
     const [cardInnerHeight, setCardInnerHeight] = useState<number>(null);
     const cardRef = useRef<HTMLDivElement>(null);
     const sizeModifier = useModifier('c-card', size);
 
-    const classes = classNames(
-        'c-card',
-        sizeModifier,
-        isFull && 'is-full',
-        blockLink && 'is-block-link',
-        className
-    );
+    const classes = classNames('c-card', sizeModifier, blockLink && 'is-block-link', className);
 
     const context = {
         cardInnerHeight,
@@ -314,7 +303,7 @@ export const CardWishListButton = (props: CardWishListButtonProps) => {
                     style={{
                         stroke: 'currentColor',
                         fill: 'transparent',
-                        // strokeWidth: '2px',
+                        strokeWidth: '2px',
                     }}
                 >
                     <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />
@@ -355,6 +344,28 @@ export interface CollectionCardProps extends CardProps, HTMLAttributes<HTMLDivEl
 export const CollectionCard = (props: CollectionCardProps) => {
     const { children, className, ...attr } = props;
     const classes = classNames('c-card--collection', className);
+
+    return (
+        <Card className={classes} {...attr}>
+            {children}
+        </Card>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Course Card
+ * -----------------------------------------------------------------------------------------------*/
+export interface CourseCardProps extends CardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Makes the card fill the width of its container
+     * @default false
+     */
+    isFull?: boolean;
+}
+
+export const CourseCard = (props: CourseCardProps) => {
+    const { children, className, isFull, ...attr } = props;
+    const classes = classNames('c-card--course', isFull && 'is-full', className);
 
     return (
         <Card className={classes} {...attr}>

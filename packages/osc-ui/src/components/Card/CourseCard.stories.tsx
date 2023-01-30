@@ -7,7 +7,6 @@ import { Icon } from '../Icon/Icon';
 import { PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '../Popover/Popover';
 import type { CardProps } from './Card';
 import {
-    Card,
     CardBody,
     CardBodyInner,
     CardCallout,
@@ -18,11 +17,12 @@ import {
     CardPriceTag,
     CardTitle,
     CardWishListButton,
+    CourseCard,
 } from './Card';
 
 export default {
     title: 'osc-ui/Cards/Course Card',
-    component: Card,
+    component: CourseCard,
     subcomponents: {
         CardInner,
         CardImage,
@@ -32,6 +32,7 @@ export default {
         CardBodyInner,
         CardCallout,
         CardPriceTag,
+        CardWishListButton,
         CardFooter,
     },
     parameters: {
@@ -50,12 +51,13 @@ export default {
 // TODO: Typescript
 // TODO: Tooltip on wishlist button
 // TODO: Badge?
+// TODO: Refactor variants into their own components
 
 const Template: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <CourseCard {...args}>
         <CardInner>
             <CardHeader>
-                <CardWishListButton label="Save for later" />
+                <CardWishListButton label="Save for later" className="is-active" />
 
                 <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
                 <CardTitle as="h3" subtitle isSmall>
@@ -84,11 +86,11 @@ const Template: Story<CardProps> = ({ ...args }) => (
                 </Button>
             </CardBody>
         </CardInner>
-    </Card>
+    </CourseCard>
 );
 
 const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <CourseCard {...args}>
         <CardInner>
             <CardHeader>
                 <CardWishListButton label="Save for later" />
@@ -156,11 +158,11 @@ const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => (
                 </Button>
             </CardBody>
         </CardInner>
-    </Card>
+    </CourseCard>
 );
 
 const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <CourseCard {...args}>
         <CardInner>
             <CardHeader>
                 <CardPriceTag className="u-hidden-until@tab">
@@ -238,11 +240,11 @@ const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => (
                 </ButtonGroup>
             </CardBody>
         </CardInner>
-    </Card>
+    </CourseCard>
 );
 
 const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <CourseCard {...args}>
         <CardInner>
             <CardHeader>
                 <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
@@ -280,12 +282,11 @@ const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
                 </Button>
             </CardFooter>
         </CardInner>
-    </Card>
+    </CourseCard>
 );
 
 export const Primary = Template.bind({});
 Primary.args = {
-    variant: 'course',
     style: { maxWidth: '400px' },
 };
 export const HasCallout = HasCalloutTemplate.bind({});
