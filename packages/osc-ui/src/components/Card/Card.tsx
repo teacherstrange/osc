@@ -336,9 +336,25 @@ export interface BlogCardProps extends CardProps, HTMLAttributes<HTMLDivElement>
 
 export const BlogCard = (props: BlogCardProps) => {
     const { children, className, variant, ...attr } = props;
-    const variantModifier = useModifier('c-blog-card', variant);
+    const variantModifier = useModifier('c-card', variant);
 
-    const classes = classNames('c-card', 'c-card--blog', variantModifier, className);
+    const classes = classNames('c-card--blog', variantModifier, className);
+
+    return (
+        <Card className={classes} {...attr}>
+            {children}
+        </Card>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Collection Card
+ * -----------------------------------------------------------------------------------------------*/
+export interface CollectionCardProps extends CardProps, HTMLAttributes<HTMLDivElement> {}
+
+export const CollectionCard = (props: CollectionCardProps) => {
+    const { children, className, ...attr } = props;
+    const classes = classNames('c-card--collection', className);
 
     return (
         <Card className={classes} {...attr}>

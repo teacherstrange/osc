@@ -4,12 +4,20 @@ import { truncate } from '../../utils/truncate';
 import { Button } from '../Button/Button';
 import { Image } from '../Image/Image';
 import type { CardProps } from './Card';
-import { Card, CardBody, CardFooter, CardHeader, CardImage, CardInner, CardTitle } from './Card';
+import {
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardImage,
+    CardInner,
+    CardTitle,
+    CollectionCard,
+} from './Card';
 import { collectionCardData, collectionCardDataHzntl, collectionCardDataSml } from './cardData';
 
 export default {
     title: 'osc-ui/Cards/Collection Card',
-    component: Card,
+    component: CollectionCard,
     subcomponents: { CardInner, CardImage, CardHeader, CardTitle, CardBody, CardFooter },
     parameters: {
         docs: {
@@ -22,7 +30,7 @@ export default {
 } as Meta;
 
 const SmallTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <CollectionCard {...args}>
         <CardImage>
             <Image
                 src={collectionCardDataSml.image.secure_url}
@@ -59,10 +67,10 @@ const SmallTemplate: Story<CardProps> = ({ ...args }) => (
                 </Button>
             </CardFooter>
         </CardInner>
-    </Card>
+    </CollectionCard>
 );
 const MediumTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <CollectionCard {...args}>
         <CardImage>
             <Image
                 src={collectionCardDataHzntl.image.secure_url}
@@ -81,11 +89,11 @@ const MediumTemplate: Story<CardProps> = ({ ...args }) => (
                 <Button isFull>23 Courses</Button>
             </CardBody>
         </CardInner>
-    </Card>
+    </CollectionCard>
 );
 
 const LargeTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <CollectionCard {...args}>
         <CardImage>
             <Image
                 src={collectionCardData.image.secure_url}
@@ -104,24 +112,21 @@ const LargeTemplate: Story<CardProps> = ({ ...args }) => (
                 <Button isFull>23 Courses</Button>
             </CardBody>
         </CardInner>
-    </Card>
+    </CollectionCard>
 );
 
 export const Small = SmallTemplate.bind({});
 Small.args = {
-    variant: 'collection',
     size: 'sm',
     style: { maxWidth: '452px' },
 };
 export const Medium = MediumTemplate.bind({});
 Medium.args = {
-    variant: 'collection',
     size: 'md',
     style: { maxWidth: '610px' },
 };
 export const Large = LargeTemplate.bind({});
 Large.args = {
-    variant: 'collection',
     size: 'lg',
     style: { maxWidth: '610px' },
 };
