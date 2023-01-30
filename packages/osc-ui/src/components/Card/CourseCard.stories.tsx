@@ -143,15 +143,15 @@ const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => (
                                 >
                                     <path
                                         d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM9 9V15H11V9H9ZM9 5V7H11V5H9Z"
-                                        fill="#062134"
+                                        fill="currentColor"
                                     />
                                 </svg>
                             </Icon>
                         </PopoverTrigger>
-                        <PopoverContent>
-                            <PopoverArrow key={1} />
+                        <PopoverContent side="top">
+                            <PopoverArrow />
 
-                            <PopoverClose className="c-popover__close" aria-label="Close" key={1}>
+                            <PopoverClose className="c-popover__close" aria-label="Close">
                                 {/* // TODO: Update with out Icon component */}
                                 <Cross2Icon />
                             </PopoverClose>
