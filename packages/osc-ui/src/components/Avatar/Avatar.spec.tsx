@@ -50,4 +50,12 @@ describe('Avatar component', () => {
         const result = screen.queryByText(initial);
         expect(result).toBeInTheDocument();
     });
+    test('should render a count of when passed in as a prop', () => {
+        render(<Avatar name={NAME} src={IMAGE_URL} notification={{ show: true, count: '10' }} />);
+        expect(screen.getByText('10')).toBeInTheDocument();
+    });
+    test('should render a count of "99+" if count is >99', () => {
+        render(<Avatar name={NAME} src={IMAGE_URL} notification={{ show: true, count: '200' }} />);
+        expect(screen.getByText('99+')).toBeInTheDocument();
+    });
 });
