@@ -1,3 +1,11 @@
+## [0.31.0](https://github.com/Open-Study-College/osc/compare/v0.30.0...v0.31.0) (2023-01-30)
+
+
+### ✨ Features
+
+* add "isDisabled" story and descriptions ([68a750a](https://github.com/Open-Study-College/osc/commit/68a750a1226cc9c69bc892708bfe84c5ecd333cc))
+* add error handling/styling for "Has Validation" ([2e6d128](https://github.com/Open-Study-College/osc/commit/2e6d128e05f4e5d46191af9f3a199fa3fb56f879))
+
 ## [0.30.0](https://github.com/Open-Study-College/osc/compare/v0.29.1...v0.30.0) (2023-01-30)
 
 
@@ -120,20 +128,4 @@
 * **storybook:** remove background color ([905ec2b](https://github.com/Open-Study-College/osc/commit/905ec2b0a89c0668554434861a59e7fb7c813372))
 * **tokens:** update colour variables ([5af88c3](https://github.com/Open-Study-College/osc/commit/5af88c3d2188a85ce22f8ded9025614714f93e49))
 * **tokens:** updates dark theme neutral color tokens ([4388a18](https://github.com/Open-Study-College/osc/commit/4388a188c08fc0933c367e2ae2d3594385b3c818))
-
-## [0.27.0](https://github.com/Open-Study-College/osc/compare/v0.26.1...v0.27.0) (2023-01-25)
-
-
-### ♻️ Refactors
-
-* **osc-api:** added util for getting user by id/email ([03b8f26](https://github.com/Open-Study-College/osc/commit/03b8f26018b99cd3adf5d03e7c3534f3e334fbfd))
-* **osc-api:** restructured third party system links ([f75b46c](https://github.com/Open-Study-College/osc/commit/f75b46c659b0beca6c7bc5f381e30c0c193e501b))
-* **osc-api:** third party platforms prisma update ([8515a9d](https://github.com/Open-Study-College/osc/commit/8515a9df24db4620bb3a7075e9946be29a13d513))
-
-
-### ✨ Features
-
-* **api-crm:** adding query for getting student from CRM ([28dae88](https://github.com/Open-Study-College/osc/commit/28dae885dce29d916c738f2fbc09f90b56da1bff))
-* **crm-api:** added query to get students CRM record ([c0557f7](https://github.com/Open-Study-College/osc/commit/c0557f7832ca31dcf617d79e3658ac263d16d0c8))
-* **crm-api:** initial setup ([a71878e](https://github.com/Open-Study-College/osc/commit/a71878e5de71d7ae6ebc3a4a2043a76eea2dee66))
 
