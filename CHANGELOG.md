@@ -1,3 +1,24 @@
+## [0.32.0](https://github.com/Open-Study-College/osc/compare/v0.31.0...v0.32.0) (2023-01-30)
+
+
+### ✨ Features
+
+* **ecommerce:** preloads spritesheet ([1ecf6af](https://github.com/Open-Study-College/osc/commit/1ecf6af565ce6479d0d9901ca1b1eb7655e2b00f))
+* **ecommerce:** rule to server deps bundle to prevent unhandled syntax error with svgs ([eb56c69](https://github.com/Open-Study-College/osc/commit/eb56c693c9ad111c3d453abb30189f72e3bbb7bf))
+* **studio:** adds custom icon picker and spritesheet ([09e0d96](https://github.com/Open-Study-College/osc/commit/09e0d966e8a7a601a1e3d3dc94e0959897d19297))
+* add dist folder to staticDirs so we can reference the spritesheet ([88ec773](https://github.com/Open-Study-College/osc/commit/88ec77339ffd98a1234594e6e3ef74dd00168146))
+* adds an icon component ([7cad44b](https://github.com/Open-Study-College/osc/commit/7cad44b706b67d7471d9e887383be698b16f7a46))
+* adds custom icons ([57576ab](https://github.com/Open-Study-College/osc/commit/57576ab8e7839716f139bfe2df233a044dbb63a8))
+* adds custom rollup plugin to generate a spritesheet ([330722e](https://github.com/Open-Study-College/osc/commit/330722e39924e4491ce40f602561776597eac836))
+
+
+### ♻️ Refactors
+
+* remove menu icon ([5bb8059](https://github.com/Open-Study-College/osc/commit/5bb805900ffdba29d36391a9be2e1aae60943232))
+* renames icons with more generic name ([b066ac7](https://github.com/Open-Study-College/osc/commit/b066ac7af867104cb51ffba1f1063285d7bbba47))
+* **tag:** updates accessible icon within the tag ([f2e3edc](https://github.com/Open-Study-College/osc/commit/f2e3edc7531870efde3be1a7a9d0dee28e6e7b5d))
+* update regex to match all instances ([b163bec](https://github.com/Open-Study-College/osc/commit/b163bec45d4d3718c96494a05888450a6f5384ab))
+
 ## [0.31.0](https://github.com/Open-Study-College/osc/compare/v0.30.0...v0.31.0) (2023-01-30)
 
 
@@ -80,52 +101,4 @@
 * updates query to account for new shape ([10c231c](https://github.com/Open-Study-College/osc/commit/10c231cb68a6e1b9527a8e3ce8d9cb1190e25dda))
 * updates spacing values to match tokens ([dd9e516](https://github.com/Open-Study-College/osc/commit/dd9e5160b2b374c321766de904825a1c88cc7a6f))
 * **styles:** updates font sizes per heading ([aade89f](https://github.com/Open-Study-College/osc/commit/aade89f9fb9b82346808c8bde743719fbe348106))
-
-## [0.28.0](https://github.com/Open-Study-College/osc/compare/v0.27.0...v0.28.0) (2023-01-27)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **button:** update variant defaults ([22529d7](https://github.com/Open-Study-College/osc/commit/22529d70ebc686fcb87341fb8fc881d90ca669b4))
-* **storybook:** set a background for our stories ([52076b0](https://github.com/Open-Study-College/osc/commit/52076b07c7345a9d7c8a521fa3bf2006ecd51234))
-* remove redundant comment ([3555dc4](https://github.com/Open-Study-College/osc/commit/3555dc4840e5507b0b56a01c7470d08f523eb254))
-* update typescript target ([74e1198](https://github.com/Open-Study-College/osc/commit/74e11980a6973d36a3c98ff21b1cf53bb6116ec4))
-
-
-### 🐛 Bugs
-
-* update variant type ([f934a8d](https://github.com/Open-Study-College/osc/commit/f934a8ddfebb4ed09a1d77384bd0e5c6b462de34))
-
-
-### ✨ Features
-
-* **button:** add button variants to Sanity ([d0059dc](https://github.com/Open-Study-College/osc/commit/d0059dc12f515091316df40735502abb1ace134e))
-* **button:** add gradient variations ([1c888ce](https://github.com/Open-Study-College/osc/commit/1c888ce68642af6b8e0d6881422276e98c290ee1))
-* **button:** add is-full class ([8dc0abd](https://github.com/Open-Study-College/osc/commit/8dc0abd5840f2a6deeef9e946b8ce83d24f676c8))
-* **button:** adds button styles ([53d3c8e](https://github.com/Open-Study-College/osc/commit/53d3c8e7d6e3921960e047a6890209b16f87f77c))
-* **button:** adds full width prop ([016a419](https://github.com/Open-Study-College/osc/commit/016a419cae9f1f1d95959202859aedadc82a8f1d))
-* **button:** adds inverse colour styles ([2cb2bc3](https://github.com/Open-Study-College/osc/commit/2cb2bc3f400b4b66fa77c19401daa72236b0571f))
-* **button:** adds lg variant ([22ec31a](https://github.com/Open-Study-College/osc/commit/22ec31a610aa3fdda8a47567ab60acba91a059e6))
-* **button:** adds new stories ([c881782](https://github.com/Open-Study-College/osc/commit/c88178268f77d255d9f240e8a3bab0ba33426901))
-* **button:** adds shape prop ([dfe52ec](https://github.com/Open-Study-College/osc/commit/dfe52ec18ac945a1456d64766e4972183ed9a091))
-* **button:** adds small variant styles ([e847c3b](https://github.com/Open-Study-College/osc/commit/e847c3b13e56e56424b94347bff69d5a001b2fcc))
-* **ecommerce:** add buttons array to content ([c328245](https://github.com/Open-Study-College/osc/commit/c32824519f653487a8ab2cc97d9bc5ade42b9e5a))
-* **styles:** adds xsml and xxsml letter spacing ([784fa29](https://github.com/Open-Study-College/osc/commit/784fa29b51b1199e926772165b7499519a14ad17))
-* **tokens:** adds letter spacing options to tokens ([f45baf9](https://github.com/Open-Study-College/osc/commit/f45baf949d687f4f1fa0e925fa30082c7eaae31b))
-
-
-### ♻️ Refactors
-
-* **button:** adds forwardRef to button ([20b5eb2](https://github.com/Open-Study-College/osc/commit/20b5eb2d4c9d18cd5f05b7e0c5aabadb18522cb7))
-* **button:** moves styles out of mixin ([71777be](https://github.com/Open-Study-College/osc/commit/71777be4b7994cac0cbb5bf3d112ab4fb0abaefc))
-* **button:** moves type descriptions from storybook to jsdoc ([fe3447f](https://github.com/Open-Study-College/osc/commit/fe3447f9cba6e3759108af90e67653751625a416))
-* **button:** rebuilds the stylesheet as a sass map ([4a278c5](https://github.com/Open-Study-College/osc/commit/4a278c5e72fa36adb77f77939f02dd7701efd56a))
-* **button:** replace shape prop with isPill boolean ([5632315](https://github.com/Open-Study-College/osc/commit/563231529417a8963f49be9ff348bfa41719fd48))
-* **button:** update jsdoc typescript comments ([86d762e](https://github.com/Open-Study-College/osc/commit/86d762ebfb94c7aa78baee936ed410efca640e9c))
-* **button:** update stories ([26d2915](https://github.com/Open-Study-College/osc/commit/26d29159a8e79c61e9551c7b245a175c7c23b34f))
-* **button:** update tests to match new selectors ([0912788](https://github.com/Open-Study-College/osc/commit/09127880d5064b98194c64364f2f5fe824d68464))
-* **button:** update variant names ([b68a8eb](https://github.com/Open-Study-College/osc/commit/b68a8eb4c1c1052cdced30c599ed799f2f372168))
-* **storybook:** remove background color ([905ec2b](https://github.com/Open-Study-College/osc/commit/905ec2b0a89c0668554434861a59e7fb7c813372))
-* **tokens:** update colour variables ([5af88c3](https://github.com/Open-Study-College/osc/commit/5af88c3d2188a85ce22f8ded9025614714f93e49))
-* **tokens:** updates dark theme neutral color tokens ([4388a18](https://github.com/Open-Study-College/osc/commit/4388a188c08fc0933c367e2ae2d3594385b3c818))
 
