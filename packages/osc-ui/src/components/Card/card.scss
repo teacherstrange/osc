@@ -91,6 +91,8 @@
 
     &__body {
         margin-block-start: auto;
+        display: flex;
+        flex-direction: column;
     }
 
     &__footer {
@@ -113,12 +115,12 @@
     &__callout {
         display: flex;
         justify-content: space-between;
-        padding: var(--space-scale-centi) var(--space-scale-zeta);
+        gap: var(--space-scale-centi);
+        padding: var(--space-scale-milli) var(--space-scale-centi);
         margin-block-start: var(--space-scale-zeta);
         border: 6px solid;
         border-image-slice: 1;
         border-image-source: var(--card-theme-gradient, var(--color-gradient-primary-270)); /* [2] */
-        font-weight: $weight-bold;
     }
 
     &__price-tag {
@@ -471,7 +473,6 @@
         }
 
         #{$self}__body {
-            h3,
             h4,
             h5,
             h6,
@@ -482,6 +483,84 @@
 
             .c-btn {
                 margin-block-start: var(--space-scale-milli);
+            }
+        }
+
+        &.is-full {
+            border: 1px solid var(--color-neutral-400);
+            box-shadow: none;
+
+            #{$self}__header {
+                #{$self}__ttl,
+                #{$self}__price-tag {
+                    grid-column: 1;
+                    grid-row: 1;
+                    align-self: end;
+                }
+
+                #{$self}__price-tag {
+                    margin-block-end: 0.5em;
+                    line-height: 1.2;
+                }
+            }
+
+            #{$self}__subttl {
+                font-size: var(--font-scale-epsilon);;
+            }
+
+            #{$self}__price-tag {
+                margin-block-start: 0;
+                margin-inline-start: auto;
+            }
+
+            #{$self}__body {
+                flex-flow: row wrap;
+                align-items: center;
+                gap: var(--space-scale-milli);
+                justify-content: space-between;
+
+                @include mq(mq-token("tab")) {
+                    gap: var(--space-scale-zeta);
+                }
+
+                #{$self}__body-inner {
+                    flex: 100%;
+
+                    // margin-block-end: var(--space-scale-zeta);
+                }
+
+                .c-btn-group {
+                    gap: var(--space-scale-milli);
+                }
+
+                .c-btn,
+                #{$self}__callout {
+                    margin: 0;
+                }
+
+                .c-btn {
+                    flex-grow: 1;
+                }
+
+                #{$self}__wishlist-btn {
+                    flex-grow: 0;
+                    flex-shrink: 0; // Prevent the icon getting too small
+                }
+
+                .c-btn-group,
+                #{$self}__callout {
+                    flex: 100%;
+
+                    @include mq(mq-token("tab")) {
+                        flex: 0 1 auto;
+                    }
+                }
+
+                #{$self}__callout {
+                    @include mq(mq-token("tab")) {
+                        min-width: 480px;
+                    }
+                }
             }
         }
     }
