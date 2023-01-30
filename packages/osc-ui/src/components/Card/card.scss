@@ -150,6 +150,8 @@
         }
 
         &.is-active {
+            @include animate(heartbeat, 0.3s, $ease-in-out-quint);
+
             svg {
                 fill: var(--color-primary);
                 stroke: var(--color-primary);
