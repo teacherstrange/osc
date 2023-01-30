@@ -2,9 +2,10 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import type { SwitchProps } from '@radix-ui/react-switch';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import type { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, ReactNode } from 'react';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
+import { getFieldError } from '../../utils/getFieldError';
 import './switch.scss';
 
 export interface Props extends SwitchProps {
@@ -27,19 +28,46 @@ export interface Props extends SwitchProps {
      * @default 'primary'
      */
     variant?: 'primary' | 'secondary';
+    /**
+     * A boolean that alerts when form is submitted for error handling
+     * @default false
+     */
+    wasSubmitted?: boolean;
 }
 
 export const Switch = forwardRef<
     ElementRef<typeof SwitchPrimitive.Root>,
     ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>
 >((props: Props, forwardedRef) => {
-    const { className, id, size = 'large', variant = 'primary' } = props;
+    const [value, setValue] = useState(false);
+
+    const {
+        className,
+        id,
+        required,
+        size = 'large',
+        variant = 'primary',
+        wasSubmitted = 'false',
+    } = props;
     const sizeModifier = useModifier('c-switch', size);
     const variantModifier = useModifier('c-switch', variant);
     const classes = classNames('c-switch', sizeModifier, variantModifier, className);
 
+    const errorMessage = getFieldError(value, required);
+    const displayError = wasSubmitted && errorMessage;
+
+    const setChecked = () => {
+        setValue(!value);
+    };
+
     return (
-        <SwitchPrimitive.Root id={id} className={classes} {...props} ref={forwardedRef}>
+        <SwitchPrimitive.Root
+            id={id}
+            className={!displayError ? classes : `${classes} c-switch--error`}
+            onCheckedChange={setChecked}
+            {...props}
+            ref={forwardedRef}
+        >
             <SwitchPrimitive.Thumb className="c-switch__thumb" asChild>
                 <span>
                     {variant === 'secondary' ? (

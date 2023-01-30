@@ -150,3 +150,31 @@ HasIcons.parameters = {
         },
     },
 };
+
+export const HasValidation = Template.bind({});
+HasValidation.args = {
+    ...Primary.args,
+    required: true,
+};
+
+HasValidation.parameters = {
+    docs: {
+        description: {
+            story: 'Switches can accept validation requirements and display error colouring to indicate when an error is present.',
+        },
+    },
+};
+
+export const isDisabled = Template.bind({});
+isDisabled.args = {
+    ...Primary.args,
+    disabled: true,
+};
+
+isDisabled.parameters = {
+    docs: {
+        description: {
+            story: 'Switches can be set to disabled which will grey them out and provide a "not allowed" cursor on hover.',
+        },
+    },
+};

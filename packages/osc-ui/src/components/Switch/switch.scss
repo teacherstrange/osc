@@ -101,6 +101,15 @@ button {
         }
     }
 
+    &--error {
+        background-color: var(--color-error-20);
+        border-color: var(--color-error);
+        /* stylelint-disable-next-line selector-class-pattern */
+        .c-switch__thumb {
+            background-color: var(--color-error);
+        }
+    }
+
     // *----------------------------------*/
     //  Sizes
     // --large is the default
