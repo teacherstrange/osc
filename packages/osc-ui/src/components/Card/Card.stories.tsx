@@ -9,7 +9,7 @@ import { Card, CardBody, CardFooter, CardHeader, CardImage, CardInner, CardTitle
 import { bioCardData } from './cardData';
 
 export default {
-    title: 'osc-ui/Cards/Default Card',
+    title: 'osc-ui/Cards/Card',
     component: Card,
     subcomponents: { CardInner, CardImage, CardHeader, CardTitle, CardBody, CardFooter },
     parameters: {
@@ -152,7 +152,7 @@ BlockLink.args = {
 BlockLink.parameters = {
     docs: {
         description: {
-            story: 'A `Card` can be enhanced into a clickable card by setting the `blockLink` prop to `true`. <br>Do not wrap the contents of a card inside a singular <a> element. This can result in the entire contents of the card being read out to screen reader users.',
+            story: 'A `Card` can be enhanced into a clickable card by setting the `blockLink` prop to `true`. <br>Do not wrap the contents of a card inside a singular `<a>` element. This can result in the entire contents of the card being read out to screen reader users.',
         },
     },
 };

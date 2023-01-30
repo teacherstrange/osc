@@ -23,7 +23,7 @@ export default {
         docs: {
             description: {
                 component:
-                    'The aspect card variation is mostly controlled by the images aspect ratio. You can further refine the positioning of the card contents by using the `direction="horizontal"` or `direction="vertical"` properties.',
+                    'The collection variant of the card is mainly used for displaying collection content from the cms.<br>This variant is mostly controlled by the size of the image, but you can add a `size` prop to apply more specific styles.',
             },
         },
     },
@@ -115,18 +115,18 @@ const LargeTemplate: Story<CardProps> = ({ ...args }) => (
     </CollectionCard>
 );
 
-export const Small = SmallTemplate.bind({});
-Small.args = {
-    size: 'sm',
-    style: { maxWidth: '452px' },
+export const Large = LargeTemplate.bind({});
+Large.args = {
+    size: 'lg',
+    style: { maxWidth: '610px' },
 };
 export const Medium = MediumTemplate.bind({});
 Medium.args = {
     size: 'md',
     style: { maxWidth: '610px' },
 };
-export const Large = LargeTemplate.bind({});
-Large.args = {
-    size: 'lg',
-    style: { maxWidth: '610px' },
+export const Small = SmallTemplate.bind({});
+Small.args = {
+    size: 'sm',
+    style: { maxWidth: '452px' },
 };

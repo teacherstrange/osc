@@ -23,7 +23,14 @@ export default {
         docs: {
             description: {
                 component:
-                    'The blog variant of the card is mainly used for displaying blog post content from the cms.<br> Add the `variant="blog"` to the `<Card>` to apply the modifier.',
+                    'The blog variant of the card is mainly used for displaying blog post content from the cms.',
+            },
+        },
+    },
+    argTypes: {
+        variant: {
+            control: {
+                type: 'select',
             },
         },
     },
@@ -130,6 +137,13 @@ MediaObject.args = {
     variant: 'media-object',
     style: { maxWidth: '566px' },
 };
+MediaObject.parameters = {
+    docs: {
+        description: {
+            story: 'Add the `variant="media-object"` prop to apply the media object styles. Works best with the `isRounded` prop on the `CardImage` component and no `CardBody`.',
+        },
+    },
+};
 
 export const Featured = FeaturedTemplate.bind({});
 Featured.args = {
@@ -138,6 +152,13 @@ Featured.args = {
     className: 'u-bg-color-nonary',
     blockLink: true,
     style: { maxWidth: '400px' },
+};
+Featured.parameters = {
+    docs: {
+        description: {
+            story: 'Add the `variant="featured"` prop to apply the featured styles. This works well with the `blockLink` prop.',
+        },
+    },
 };
 
 export const FeaturedFullWidth = FeaturedTemplate.bind({});
@@ -148,4 +169,11 @@ FeaturedFullWidth.args = {
     className: 'u-bg-color-nonary',
     blockLink: true,
     style: { maxWidth: '100%' },
+};
+FeaturedFullWidth.parameters = {
+    docs: {
+        description: {
+            story: 'Make the card fill the width by adding the `isFull` prop.',
+        },
+    },
 };

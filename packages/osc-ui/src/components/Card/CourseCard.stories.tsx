@@ -39,20 +39,16 @@ export default {
         docs: {
             description: {
                 component:
-                    'The course variant of the card is mainly used for displaying course content from the cms.<br>Add the variant="course" to the <Card> to apply the modifier.',
+                    'The course variant of the card is mainly used for displaying course content from the cms.',
             },
         },
     },
 } as Meta;
 
-// TODO: CourseCardWide (list view)
-// TODO: Move popover into CardCallout?
 // TODO: Tests
 // TODO: Typescript
 // TODO: Tooltip on wishlist button
 // TODO: Badge?
-// TODO: Refactor variants into their own components
-
 const Template: Story<CardProps> = ({ ...args }) => {
     const [isActive, setIsActive] = useState(false);
 
@@ -321,7 +317,7 @@ HasCallout.args = {
 HasCallout.parameters = {
     docs: {
         description: {
-            story: 'Add the `<CardCallout>` component to the `<CardBody>` to add a callout with a popover to the card.',
+            story: 'Add the `<CardCallout>` component to the `<CardBody>` to add a callout box to the card. You can enhance this by adding our `<Popover>` component.',
         },
     },
 };
@@ -336,7 +332,7 @@ IsFullWidth.args = {
 IsFullWidth.parameters = {
     docs: {
         description: {
-            story: '...',
+            story: 'Add the `isFull` prop to apply the `is-full` class to the card. This allows you have have a bit more space within the card so you can change the markup if needed.',
         },
     },
 };

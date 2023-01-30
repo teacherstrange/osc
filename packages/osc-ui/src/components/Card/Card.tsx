@@ -32,22 +32,15 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
      * @default false
      */
     blockLink?: boolean;
-    /**
-     * Sets the size of the card
-     *
-     * @default md
-     */
-    size?: 'sm' | 'md' | 'lg';
 }
 const CardContext = createContext(null);
 
 export const Card = (props: CardProps) => {
-    const { blockLink, children, className, size = 'md', ...attr } = props;
+    const { blockLink, children, className, ...attr } = props;
     const [cardInnerHeight, setCardInnerHeight] = useState<number>(null);
     const cardRef = useRef<HTMLDivElement>(null);
-    const sizeModifier = useModifier('c-card', size);
 
-    const classes = classNames('c-card', sizeModifier, blockLink && 'is-block-link', className);
+    const classes = classNames('c-card', blockLink && 'is-block-link', className);
 
     const context = {
         cardInnerHeight,
@@ -314,13 +307,18 @@ export interface BlogCardProps extends CardProps, HTMLAttributes<HTMLDivElement>
      * Card variation
      */
     variant?: 'featured' | 'media-object';
+    /**
+     * Makes the card fill the width of its container
+     * @default false
+     */
+    isFull?: boolean;
 }
 
 export const BlogCard = (props: BlogCardProps) => {
-    const { children, className, variant, ...attr } = props;
+    const { children, className, isFull, variant, ...attr } = props;
     const variantModifier = useModifier('c-card', variant);
 
-    const classes = classNames('c-card--blog', variantModifier, className);
+    const classes = classNames('c-card--blog', variantModifier, isFull && 'is-full', className);
 
     return (
         <Card className={classes} {...attr}>
@@ -332,11 +330,19 @@ export const BlogCard = (props: BlogCardProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Collection Card
  * -----------------------------------------------------------------------------------------------*/
-export interface CollectionCardProps extends CardProps, HTMLAttributes<HTMLDivElement> {}
+export interface CollectionCardProps extends CardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Sets the size of the card
+     *
+     * @default md
+     */
+    size?: 'sm' | 'md' | 'lg';
+}
 
 export const CollectionCard = (props: CollectionCardProps) => {
-    const { children, className, ...attr } = props;
-    const classes = classNames('c-card--collection', className);
+    const { children, className, size = 'md', ...attr } = props;
+    const sizeModifier = useModifier('c-card', size);
+    const classes = classNames('c-card--collection', sizeModifier, className);
 
     return (
         <Card className={classes} {...attr}>
