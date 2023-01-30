@@ -194,8 +194,8 @@ $osc-config: (
 
 .u-hidden {
     &-from\@tab {
-        @include mq($mq-tab-l) {
-            display: none;
+        @include mq(mq-token("tab")) {
+            display: none !important;
         }
     }
 
@@ -212,8 +212,8 @@ $osc-config: (
     }
 
     &-until\@tab {
-        @include mq($mq-tab, max) {
-            display: none;
+        @include mq(mq-token("tab"), max) {
+            display: none !important;
         }
     }
 
