@@ -291,8 +291,8 @@ export const CardWishListButton = (props: CardWishListButtonProps) => {
             {/* // TODO: replace with with `Icon` component */}
             {/* // TODO: This also needs a tooltip see 'collection-design' in Figma */}
             <Icon label={label}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 26">
-                    <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />
+                <svg viewBox="0 0 23 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.6225 18.4743L19.7893 10.1104C21.7106 8.1426 21.7106 4.94453 19.7893 2.97677C17.8607 1.0016 14.7162 1.0016 12.7876 2.97677L11.6225 4.17003L10.4393 2.95824C8.51789 0.990482 5.39519 0.990482 3.47381 2.95824C1.54519 4.93712 1.54519 8.15372 3.47381 10.1289L11.6225 18.4743Z" />
                 </svg>
             </Icon>
         </Button>
