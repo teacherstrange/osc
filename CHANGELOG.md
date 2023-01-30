@@ -1,3 +1,26 @@
+## [0.30.0](https://github.com/Open-Study-College/osc/compare/v0.29.1...v0.30.0) (2023-01-30)
+
+
+### ✨ Features
+
+* add Slider component, styling and tests ([008f622](https://github.com/Open-Study-College/osc/commit/008f62250e9c8dcd5a1b1b170771cd93110f0e1b))
+
+
+### ♻️ Refactors
+
+* mock out ResizeObserver, make same change in Popover component and remove package ([a897e77](https://github.com/Open-Study-College/osc/commit/a897e776b3e1234a11f6538b89392cfc1e19df40))
+* remove React fragment ([977a2d4](https://github.com/Open-Study-College/osc/commit/977a2d4347b8d427ba21dea4f97c2910eaa6b40a))
+* remove useEffect and set value directly in useState ([191d1b1](https://github.com/Open-Study-College/osc/commit/191d1b1c4c459a3dcc109f66cc1ee84288b8d38c))
+* remove useEffect import ([7d35023](https://github.com/Open-Study-College/osc/commit/7d3502391a8c87af2c53d5d724e74ebac1f27e0e))
+* removes react FC type from components ([1e4ab18](https://github.com/Open-Study-College/osc/commit/1e4ab18475520761d836eddcd9b2c01a1a731b41))
+* simplify and move into two separate stories ([72326fa](https://github.com/Open-Study-College/osc/commit/72326fa16f9f6af1305730b5f4c939e75f73535d))
+
+
+### 🐛 Bugs
+
+* adds missing children type ([e250054](https://github.com/Open-Study-College/osc/commit/e25005467abdbf6429239b81a586e52a03a3bd36))
+* updates props to correct type ([4b9639e](https://github.com/Open-Study-College/osc/commit/4b9639efbdfc9d369bd113d04feb4aa3c591d239))
+
 ## [0.29.1](https://github.com/Open-Study-College/osc/compare/v0.29.0...v0.29.1) (2023-01-30)
 
 
@@ -113,14 +136,4 @@
 * **api-crm:** adding query for getting student from CRM ([28dae88](https://github.com/Open-Study-College/osc/commit/28dae885dce29d916c738f2fbc09f90b56da1bff))
 * **crm-api:** added query to get students CRM record ([c0557f7](https://github.com/Open-Study-College/osc/commit/c0557f7832ca31dcf617d79e3658ac263d16d0c8))
 * **crm-api:** initial setup ([a71878e](https://github.com/Open-Study-College/osc/commit/a71878e5de71d7ae6ebc3a4a2043a76eea2dee66))
-
-## [0.26.1](https://github.com/Open-Study-College/osc/compare/v0.26.0...v0.26.1) (2023-01-12)
-
-
-### ♻️ Refactors
-
-* update colour tokens ([e6827df](https://github.com/Open-Study-College/osc/commit/e6827df39b265c8814ef93ed708d37e7df10333b))
-* update error20 to match error ([d0d0fad](https://github.com/Open-Study-College/osc/commit/d0d0fad05cae6c818c2990f9c8681d6eb97613fc))
-* **tokens:** adds gradient direction options ([0d2a89f](https://github.com/Open-Study-College/osc/commit/0d2a89fb447f79aeeeb2c5330e39bfc4e99c0e79))
-* **tokens:** updates colour tokens ([a1eae17](https://github.com/Open-Study-College/osc/commit/a1eae17a51871d14dc12c05fd677ba1942c8333c))
 
