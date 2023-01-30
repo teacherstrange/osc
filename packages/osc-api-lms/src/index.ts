@@ -11,7 +11,11 @@ async function startServer() {
             const lms = axios.create({
                 baseURL: env.LMS_URL,
                 timeout: 10000,
-                headers: { apikey: env.LMS_API_KEY },
+                headers: {
+                    APIKey: env.LMS_API_KEY,
+                    DataServiceVersion: '2.0',
+                    Accept: 'application/json',
+                },
             });
 
             // @ts-ignore - Type 'string[]' is not assignable to type 'string'. user will never be an array (comes from gateway)
