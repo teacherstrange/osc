@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import React from 'react';
 import { useFontSize } from '../../hooks/useFontSize';
 import { useModifier } from '../../hooks/useModifier';
@@ -16,7 +15,7 @@ export interface Props {
     variant?: Variants;
 }
 
-export const Badge: FC<Props> = (props: Props) => {
+export const Badge = (props: Props) => {
     const { badgeName, className, fontSize, theme = 'primary', variant } = props;
     const fontSizeClass = useFontSize(fontSize);
     const variantClass = useModifier('c-badge', variant);

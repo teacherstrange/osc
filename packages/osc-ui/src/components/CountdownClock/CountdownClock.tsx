@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { CountdownClockInner } from './CountdownClockInner';
 
@@ -22,13 +21,13 @@ interface Timer {
     seconds: string;
 }
 
-export const CountdownClock: FC<Props> = ({ endDate, icon, name, onComplete }: Props) => {
+export const CountdownClock = ({ endDate, icon, name, onComplete }: Props) => {
     const [timer, setTimer] = useState<Timer>({
         status: 'inactive',
         days: '0',
         hours: '0',
         minutes: '0',
-        seconds: '0'
+        seconds: '0',
     });
 
     const now = () => new Date().getTime();
@@ -46,7 +45,7 @@ export const CountdownClock: FC<Props> = ({ endDate, icon, name, onComplete }: P
             days: days() < 10 ? `0${days()}` : `${days()}`,
             hours: hours() < 10 ? `0${hours()}` : `${hours()}`,
             minutes: minutes() < 10 ? `0${minutes()}` : `${minutes()}`,
-            seconds: seconds() < 10 ? `0${seconds()}` : `${seconds()}`
+            seconds: seconds() < 10 ? `0${seconds()}` : `${seconds()}`,
         }));
     };
 
@@ -57,7 +56,7 @@ export const CountdownClock: FC<Props> = ({ endDate, icon, name, onComplete }: P
             days: '0',
             hours: '0',
             minutes: '0',
-            seconds: '0'
+            seconds: '0',
         }));
     };
 

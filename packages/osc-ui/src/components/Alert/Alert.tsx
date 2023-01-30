@@ -1,10 +1,10 @@
 import {
     CheckCircledIcon as SuccessIcon,
+    CrossCircledIcon as ErrorIcon,
     ExclamationTriangleIcon as WarningIcon,
     InfoCircledIcon as InfoIcon,
-    CrossCircledIcon as ErrorIcon
 } from '@radix-ui/react-icons';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import React from 'react';
 
 import { classNames } from '../../utils/classNames';
@@ -18,7 +18,7 @@ export interface Props {
     status: 'info' | 'warning' | 'success' | 'error';
 }
 
-export const Alert: FC<Props> = (props: Props) => {
+export const Alert = (props: Props) => {
     const { className, children, displayIcon = true, iconSize = 20, status } = props;
 
     let Icon;
@@ -70,7 +70,7 @@ export interface AlertDescriptionProps {
     children: ReactNode;
 }
 
-export const AlertDescription: FC<AlertDescriptionProps> = (props: AlertDescriptionProps) => {
+export const AlertDescription = (props: AlertDescriptionProps) => {
     const { className, children } = props;
     const classes = classNames('c-alert__description', className);
 
@@ -82,7 +82,7 @@ export interface AlertTitleProps {
     children: ReactNode;
 }
 
-export const AlertTitle: FC<AlertTitleProps> = (props: AlertTitleProps) => {
+export const AlertTitle = (props: AlertTitleProps) => {
     const { className, children } = props;
     const classes = classNames('c-alert__title', className);
 

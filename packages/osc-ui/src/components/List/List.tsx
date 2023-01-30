@@ -1,4 +1,4 @@
-import type { FC, LiHTMLAttributes, OlHTMLAttributes, ReactChildren, ReactNode } from 'react';
+import type { LiHTMLAttributes, OlHTMLAttributes, ReactChildren, ReactNode } from 'react';
 import React from 'react';
 import { classNames } from '../../utils/classNames';
 
@@ -7,11 +7,7 @@ export interface ListItemProps<T> extends LiHTMLAttributes<T> {
     className?: string;
 }
 
-export const ListItem: FC<ListItemProps<HTMLLIElement>> = ({
-    children,
-    className,
-    ...attr
-}: ListItemProps<HTMLLIElement>) => {
+export const ListItem = ({ children, className, ...attr }: ListItemProps<HTMLLIElement>) => {
     const classes = classNames(className);
 
     return (
@@ -29,12 +25,7 @@ export interface ListProps<T> extends OlHTMLAttributes<T> {
     className?: string;
 }
 
-export const List: FC<ListProps<ListTypes>> = ({
-    variant,
-    className,
-    children,
-    ...attr
-}: ListProps<ListTypes>) => {
+export const List = ({ variant, className, children, ...attr }: ListProps<ListTypes>) => {
     const classes = classNames('o-list', className);
 
     switch (variant) {

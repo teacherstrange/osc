@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import React from 'react';
 import { classNames } from '../../utils/classNames';
 
@@ -9,7 +9,7 @@ export interface Props {
     className?: string;
 }
 
-export const VisuallyHidden: FC<Props> = (props: Props) => {
+export const VisuallyHidden = (props: Props) => {
     const { asChild, children, className } = props;
     const classes = classNames('sr-only', className);
 

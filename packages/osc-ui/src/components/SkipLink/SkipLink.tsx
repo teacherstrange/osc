@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import React from 'react';
 import { classNames } from '../../utils/classNames';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
@@ -11,7 +11,7 @@ export interface Props {
     className?: string;
 }
 
-export const SkipLink: FC<Props> = (props: Props) => {
+export const SkipLink = (props: Props) => {
     const { anchor, className, children } = props;
     const classes = classNames('c-skip-link', className);
 

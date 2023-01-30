@@ -1,5 +1,4 @@
 import { Link } from '@remix-run/react';
-import type { FC } from 'react';
 import React from 'react';
 import { classNames } from '../../utils/classNames';
 import './breadcrumb.scss';
@@ -15,7 +14,7 @@ export interface Props {
     separator: any;
 }
 
-export const Breadcrumb: FC<Props> = (props: Props) => {
+export const Breadcrumb = (props: Props) => {
     const { className, matches, separator } = props;
     const classes = classNames('c-breadcrumb', className);
 

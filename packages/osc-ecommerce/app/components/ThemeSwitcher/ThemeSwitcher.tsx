@@ -1,6 +1,5 @@
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { Switch } from 'osc-ui';
-import type { FC } from 'react';
 
 export interface Props {
     label: string;
@@ -8,7 +7,7 @@ export interface Props {
     isChecked: boolean;
 }
 
-export const ThemeSwitcher: FC<Props> = (props: Props) => {
+export const ThemeSwitcher = (props: Props) => {
     const { label, onToggle, isChecked } = props;
 
     return (

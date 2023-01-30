@@ -1,6 +1,6 @@
 import type { KeenSliderPlugin } from 'keen-slider/react';
 import { useKeenSlider } from 'keen-slider/react';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import React, { Children, useState } from 'react';
 import mq from '../../../../../tokens/media-queries';
 import { classNames } from '../../utils/classNames';
@@ -105,7 +105,7 @@ export interface Props {
     slideOrigin?: SlideOrigin;
 }
 
-export const Carousel: FC<Props> = (props: Props) => {
+export const Carousel = (props: Props) => {
     const {
         carouselName,
         adaptiveHeight = false,
@@ -410,7 +410,6 @@ export const Carousel: FC<Props> = (props: Props) => {
                     );
                 })}
             </div>
-
             {/* IF we have arrows enabled AND the slider has loaded AND the current object is available on the instance */}
             {arrows && sliderHasLoaded && instanceRef.current && (
                 <>
@@ -430,7 +429,6 @@ export const Carousel: FC<Props> = (props: Props) => {
                     />
                 </>
             )}
-
             {/* IF we have dots enabled AND the slider has loaded AND the current object is available on the instance */}
             {dotNav && sliderHasLoaded && instanceRef.current && (
                 <CarouselDots
