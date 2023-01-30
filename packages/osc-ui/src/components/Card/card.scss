@@ -3,6 +3,9 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
+// TODO: consolidate some of these blog styles?
+// TODO: Active state for wishlist button
+// TODO: Test block link across other card types
 // TODO: consolidate some of these blog styles
 @mixin before-subttl {
     &::before {
@@ -168,7 +171,7 @@
             padding-block: var(--space-scale-epsilon);
         }
 
-        &.is-media-object {
+        &#{$self}--media-object {
             --card-image-size: 105px;
 
             grid-template-rows: 1fr;
@@ -214,7 +217,7 @@
             }
         }
 
-        &.is-featured {
+        &#{$self}--featured {
             --card-border: none;
 
             color: var(--color-septenary);
@@ -278,7 +281,7 @@
             }
         }
 
-        &.is-featured.is-full {
+        &#{$self}--featured.is-full {
             align-items: center;
             max-width: 100%;
 

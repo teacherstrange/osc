@@ -33,15 +33,6 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
      */
     blockLink?: boolean;
     /**
-     * Card variation
-     */
-    variant?: 'blog' | 'collection' | 'course';
-    /**
-     * Set the sub variant of the card -- only available for certain variants
-     * TODO: Type this 👆
-     */
-    subVariant?: 'featured' | 'media-object';
-    /**
      * Sets the size of the card
      *
      * @default md
@@ -56,26 +47,14 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
 const CardContext = createContext(null);
 
 export const Card = (props: CardProps) => {
-    const {
-        blockLink,
-        children,
-        className,
-        isFull,
-        size = 'md',
-        variant,
-        subVariant,
-        ...attr
-    } = props;
+    const { blockLink, children, className, isFull, size = 'md', ...attr } = props;
     const [cardInnerHeight, setCardInnerHeight] = useState<number>(null);
     const cardRef = useRef<HTMLDivElement>(null);
-    const variantModifier = useModifier('c-card', variant);
     const sizeModifier = useModifier('c-card', size);
 
     const classes = classNames(
         'c-card',
-        variantModifier,
         sizeModifier,
-        subVariant && `is-${subVariant}`,
         isFull && 'is-full',
         blockLink && 'is-block-link',
         className
@@ -330,19 +309,41 @@ export const CardWishListButton = (props: CardWishListButtonProps) => {
             {/* // TODO: This also needs a tooltip see 'collection-design' in Figma */}
             <Icon label={label}>
                 <svg
-                    width="20"
-                    height="18"
-                    viewBox="0 0 20 18"
-                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    style={{
+                        stroke: 'currentColor',
+                        fill: 'transparent',
+                        // strokeWidth: '2px',
+                    }}
                 >
-                    <path
-                        d="M18.2093 9.11036L10.0425 17.4743L1.89385 9.12889C-0.0347669 7.15372 -0.0347669 3.93712 1.89385 1.95824C3.81523 -0.00951818 6.93793 -0.00951818 8.85931 1.95824L10.0425 3.17003L11.2077 1.97677C13.1363 0.00159907 16.2807 0.00159907 18.2093 1.97677C20.1307 3.94453 20.1307 7.1426 18.2093 9.11036ZM10.0425 15.1174L17.0587 7.93193C18.3432 6.61639 18.3432 4.47445 17.0587 3.1552C15.7633 1.82854 13.6537 1.82854 12.3583 3.1552L10.0425 5.52689L7.70865 3.13667C6.42411 1.82113 4.33267 1.82113 3.04451 3.13667C1.74911 4.46334 1.74911 6.6238 3.04451 7.95046L10.0425 15.1174Z"
-                        fill="currentColor"
-                    />
+                    <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z" />
                 </svg>
             </Icon>
         </Button>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Blog Card
+ * -----------------------------------------------------------------------------------------------*/
+export interface BlogCardProps extends CardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Card variation
+     */
+    variant?: 'featured' | 'media-object';
+}
+
+export const BlogCard = (props: BlogCardProps) => {
+    const { children, className, variant, ...attr } = props;
+    const variantModifier = useModifier('c-blog-card', variant);
+
+    const classes = classNames('c-card', 'c-card--blog', variantModifier, className);
+
+    return (
+        <Card className={classes} {...attr}>
+            {children}
+        </Card>
     );
 };
 

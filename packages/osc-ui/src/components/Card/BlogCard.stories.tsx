@@ -4,12 +4,20 @@ import { truncate } from '../../utils/truncate';
 import { Button } from '../Button/Button';
 import { Image } from '../Image/Image';
 import type { CardProps } from './Card';
-import { Card, CardBody, CardFooter, CardHeader, CardImage, CardInner, CardTitle } from './Card';
+import {
+    BlogCard,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardImage,
+    CardInner,
+    CardTitle,
+} from './Card';
 import { postCardData } from './cardData';
 
 export default {
     title: 'osc-ui/Cards/Blog Card',
-    component: Card,
+    component: BlogCard,
     subcomponents: { CardInner, CardImage, CardHeader, CardTitle, CardBody, CardFooter },
     parameters: {
         docs: {
@@ -22,7 +30,7 @@ export default {
 } as Meta;
 
 const Template: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <BlogCard {...args}>
         <CardImage>
             <Image
                 src={postCardData.image.secure_url}
@@ -50,11 +58,11 @@ const Template: Story<CardProps> = ({ ...args }) => (
                 <Button variant="secondary">Read more</Button>
             </CardFooter>
         </CardInner>
-    </Card>
+    </BlogCard>
 );
 
 const MediaObjectTemplate: Story<CardProps> = ({ ...args }) => (
-    <Card {...args}>
+    <BlogCard {...args}>
         <CardImage isRounded>
             <Image
                 src={postCardData.image.secure_url}
@@ -75,12 +83,12 @@ const MediaObjectTemplate: Story<CardProps> = ({ ...args }) => (
                 <Button variant="secondary">Read more</Button>
             </CardFooter>
         </CardInner>
-    </Card>
+    </BlogCard>
 );
 
 const FeaturedTemplate: Story<CardProps> = ({ ...args }) => (
     <div className="o-container">
-        <Card {...args}>
+        <BlogCard {...args}>
             <CardImage>
                 <Image
                     src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1674744069/db8cdf9db0ec39f88706516410a64ed7_kxoiou.png"
@@ -107,28 +115,26 @@ const FeaturedTemplate: Story<CardProps> = ({ ...args }) => (
                     <Button variant="quinary">Read more</Button>
                 </CardFooter>
             </CardInner>
-        </Card>
+        </BlogCard>
     </div>
 );
 
 export const Primary = Template.bind({});
 Primary.args = {
-    variant: 'blog',
     style: { maxWidth: '610px' },
 };
 
 export const MediaObject = MediaObjectTemplate.bind({});
 MediaObject.args = {
     ...Primary.args,
-    subVariant: 'media-object',
+    variant: 'media-object',
     style: { maxWidth: '566px' },
 };
 
 export const Featured = FeaturedTemplate.bind({});
 Featured.args = {
     ...Primary.args,
-    variant: 'blog',
-    subVariant: 'featured',
+    variant: 'featured',
     className: 'u-bg-color-nonary',
     blockLink: true,
     style: { maxWidth: '400px' },
@@ -137,8 +143,7 @@ Featured.args = {
 export const FeaturedFullWidth = FeaturedTemplate.bind({});
 FeaturedFullWidth.args = {
     ...Primary.args,
-    variant: 'blog',
-    subVariant: 'featured',
+    variant: 'featured',
     isFull: true,
     className: 'u-bg-color-nonary',
     blockLink: true,
