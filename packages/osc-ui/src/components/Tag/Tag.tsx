@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from '../../hooks/useTheme';
 import type { Themes } from '../../types';
 import { classNames } from '../../utils/classNames';
-import { Icon } from '../Icon/Icon';
+import { AccessibleIcon } from '../Icon/Icon';
 import './tag.scss';
 
 export interface Props {
@@ -40,8 +40,10 @@ export const Tag = (props: Props) => {
         rightIcon = null;
 
     if (icon) {
-        if (iconPosition === 'left') leftIcon = <Icon label={iconLabel}>{icon}</Icon>;
-        if (iconPosition === 'right') rightIcon = <Icon label={iconLabel}>{icon}</Icon>;
+        if (iconPosition === 'left')
+            leftIcon = <AccessibleIcon label={iconLabel}>{icon}</AccessibleIcon>;
+        if (iconPosition === 'right')
+            rightIcon = <AccessibleIcon label={iconLabel}>{icon}</AccessibleIcon>;
     } else if (customElement) {
         if (iconPosition === 'left') leftIcon = customElement;
         if (iconPosition === 'right') rightIcon = customElement;

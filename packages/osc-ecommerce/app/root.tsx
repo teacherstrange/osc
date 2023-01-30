@@ -12,6 +12,7 @@ import {
     useMatches,
 } from '@remix-run/react';
 import { SkipLink } from 'osc-ui';
+import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import oscUiSkipLinkStyle from 'osc-ui/dist/src-components-SkipLink-skip-link.css';
 import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
@@ -27,6 +28,12 @@ import { getColorScheme } from './utils/colorScheme';
 let isMount = true;
 export const links: LinksFunction = () => {
     return [
+        // Preload the spritesheet to avoid a flash of unstyled content
+        {
+            rel: 'preload',
+            href: spritesheet,
+            as: 'image',
+        },
         { rel: 'stylesheet', href: oscUiCarouselStyles },
         { rel: 'stylesheet', href: oscUiSwitchStyles },
         { rel: 'stylesheet', href: oscUiSkipLinkStyle },

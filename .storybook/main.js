@@ -7,12 +7,12 @@ const stories = [
     '../packages/osc-academic-hub/app/components/**/*.stories.mdx',
     '../packages/osc-academic-hub/app/components/**/*.stories.@(js|jsx|ts|tsx)',
     '../packages/osc-ecommerce/app/components/**/*.stories.mdx',
-    '../packages/osc-ecommerce/app/components/**/*.stories.@(js|jsx|ts|tsx)'
+    '../packages/osc-ecommerce/app/components/**/*.stories.@(js|jsx|ts|tsx)',
 ];
 
 module.exports = {
     features: {
-        emotionAlias: false
+        emotionAlias: false,
     },
     stories,
     addons: [
@@ -21,15 +21,16 @@ module.exports = {
         {
             name: '@storybook/addon-essentials',
             options: {
-                backgrounds: false
-            }
+                backgrounds: false,
+            },
         },
         '@storybook/addon-interactions',
-        '@storybook/addon-a11y'
+        '@storybook/addon-a11y',
     ],
+    staticDirs: ['../packages/osc-ui/dist'], // Point static directory to osc-ui dist folder, where the spritesheet is living
     framework: '@storybook/react',
     core: {
-        builder: 'webpack5'
+        builder: 'webpack5',
     },
     webpackFinal: async (config, { configType }) => {
         config.resolve = {
@@ -39,15 +40,15 @@ module.exports = {
                 fs: false,
                 stream: false,
                 os: false,
-                emotionAlias: false
+                emotionAlias: false,
             },
             // Alias the font path in osc-ui so storybook can find it
             alias: {
-                './fonts': path.resolve(__dirname, '../packages/osc-ui/src/fonts')
-            }
+                './fonts': path.resolve(__dirname, '../packages/osc-ui/src/fonts'),
+            },
         };
 
         // Return the altered config
         return config;
-    }
+    },
 };
