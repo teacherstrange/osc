@@ -59,7 +59,7 @@ interface LinkProps extends RemixLinkProps {
     to: RemixLinkProps['to'];
 }
 
-export interface SharedProps {
+export interface SharedButtonProps {
     /**
      * 'The content of the button.'
      */
@@ -116,7 +116,8 @@ export interface SharedProps {
         | 'secondary-gradient';
 }
 
-export type ButtonProps = SharedProps & StrictUnion<DefaultButtonProps | AnchorProps | LinkProps>;
+export type ButtonProps = SharedButtonProps &
+    StrictUnion<DefaultButtonProps | AnchorProps | LinkProps>;
 
 export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
     (props: ButtonProps, forwardedRef) => {
@@ -198,7 +199,9 @@ Button.displayName = 'Button';
 /* -------------------------------------------------------------------------------------------------
  * CopyButton
  * -----------------------------------------------------------------------------------------------*/
-export interface CopyButtonProps extends SharedProps, ButtonHTMLAttributes<HTMLButtonElement> {
+export interface CopyButtonProps
+    extends SharedButtonProps,
+        ButtonHTMLAttributes<HTMLButtonElement> {
     /**
      * Text to add to the clipboard when pressed
      */
