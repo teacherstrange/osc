@@ -1,3 +1,15 @@
+## [0.29.1](https://github.com/Open-Study-College/osc/compare/v0.29.0...v0.29.1) (2023-01-30)
+
+
+### ♻️ Refactors
+
+* add countLimiter util ([ba852d2](https://github.com/Open-Study-College/osc/commit/ba852d2c345ad026a61194426f8596918c7ee636))
+* add Fallback gradient component, add logic for max count and update css/tests ([e940042](https://github.com/Open-Study-College/osc/commit/e940042eaf811da3639a915ceccb1561e22a0640))
+* add notification dot ([9bd34d9](https://github.com/Open-Study-College/osc/commit/9bd34d9b62943f261b0b3f9ed6c4b1e52b124b76))
+* move "overflow:hidden" to "fallback" class ([dcb1291](https://github.com/Open-Study-College/osc/commit/dcb129183bacbdb44345784655fee76667192340))
+* move fallback class conditionally to Root and tidy up scss ([454f1c2](https://github.com/Open-Study-College/osc/commit/454f1c2812987ee0984b40235f6618ec1acffb3f))
+* move notification and count into one property ([b411061](https://github.com/Open-Study-College/osc/commit/b4110611b356d4b1a97721327c974e59ad364844))
+
 ## [0.29.0](https://github.com/Open-Study-College/osc/compare/v0.28.0...v0.29.0) (2023-01-27)
 
 
@@ -111,29 +123,4 @@
 * update error20 to match error ([d0d0fad](https://github.com/Open-Study-College/osc/commit/d0d0fad05cae6c818c2990f9c8681d6eb97613fc))
 * **tokens:** adds gradient direction options ([0d2a89f](https://github.com/Open-Study-College/osc/commit/0d2a89fb447f79aeeeb2c5330e39bfc4e99c0e79))
 * **tokens:** updates colour tokens ([a1eae17](https://github.com/Open-Study-College/osc/commit/a1eae17a51871d14dc12c05fd677ba1942c8333c))
-
-## [0.26.0](https://github.com/Open-Study-College/osc/compare/v0.25.0...v0.26.0) (2023-01-05)
-
-
-### 🧪 Tests
-
-* **switch:** adds tests ([748bbeb](https://github.com/Open-Study-College/osc/commit/748bbebaccd993ea9c9754fa02b5b604d45eef23))
-
-
-### ♻️ Refactors
-
-* **switch:** update colour values ([2981b1f](https://github.com/Open-Study-College/osc/commit/2981b1fa9a20b9d2abef69785c8119ef3c9e4c72))
-
-
-### ✨ Features
-
-* **switch:** adds a group wrapper for the switch so we can style sibling icons ([48e299f](https://github.com/Open-Study-College/osc/commit/48e299f4008a3d9101de7db614da61fea9d3df9c))
-* **switch:** adds a secondary variant to the switch ([09168e6](https://github.com/Open-Study-College/osc/commit/09168e64a97e3e1dd483d81e35074cb19fb0dec1))
-* **switch:** adds sizes to switch ([a468605](https://github.com/Open-Study-College/osc/commit/a46860597b79a15eedc58ebd053d6137939b9b79))
-* **switch:** adds styles to switch ([19c6f20](https://github.com/Open-Study-College/osc/commit/19c6f201eba5d50a0e4ccfb172cf1cf1c709d812))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* update lock file ([b6be3e0](https://github.com/Open-Study-College/osc/commit/b6be3e046af821641b5a66f7e010f5f29155ee19))
 
