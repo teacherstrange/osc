@@ -27,6 +27,7 @@
     $self: &;
 
     width: 100%;
+    overflow: hidden;
     background-color: var(--color-tertiary);
     box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
     font-size: var(--font-scale-base);
@@ -61,6 +62,7 @@
     }
 
     &__inner {
+        z-index: 1;
         padding: var(--space-scale-zeta) var(--space-scale-delta) var(--space-scale-delta);
     }
 
@@ -161,6 +163,16 @@
 
     &.is-block-link {
         cursor: pointer;
+
+        #{$self}__img {
+            transition: transform 0.3s ease-out;
+        }
+
+        &:hover {
+            #{$self}__img {
+                transform: scale(1.1) rotate(1deg);
+            }
+        }
     }
 
     // *----------------------------------*/
