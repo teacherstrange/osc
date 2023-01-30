@@ -1,15 +1,15 @@
 /* stylelint-disable selector-class-pattern */
+@use "sass:math";
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-label {
-    font-size: var(--font-scale-centi);
+    font-size: var(--font-scale-base);
     font-weight: $weight-reg;
     cursor: pointer;
 
     &__required {
         padding-left: 0.063em;
-        font-size: var(--font-scale-centi);
     }
 
     &--bold {
