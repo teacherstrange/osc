@@ -32,6 +32,10 @@ export interface imageModule<T> extends SanityImage<T> {
     className?: string;
     loading?: 'eager' | 'lazy';
     responsiveWidths?: number[];
+    derived?: {
+        secure_url?: string;
+    }[];
+    secure_url?: string;
     sizes?: string | undefined;
 }
 
@@ -40,7 +44,7 @@ export interface module {
     _key?: Maybe<string>;
 }
 
-interface buttonModule extends module {
+export interface buttonModule extends module {
     _key: string;
     _type: string;
     externalLink?: {
@@ -98,6 +102,57 @@ export interface videoModule extends module {
     };
     videoImage?: imageModule<HTMLImageElement>;
     content?: contentModule;
+}
+
+export interface bioCardModule extends module {
+    reference: {
+        bio: contentModule;
+        image?: {
+            alt: string;
+            image?: imageModule<HTMLImageElement>;
+        };
+        name: string;
+        role: string;
+    };
+}
+
+interface courseCardModule extends module {
+    reference: {
+        store: shopifyProduct;
+    };
+}
+
+interface collectionCardModule extends module {
+    reference: {
+        store: shopifyCollection;
+    };
+}
+
+interface postCardModule extends module {
+    reference: {
+        slug: {
+            current: string;
+        };
+        title: string;
+    };
+}
+
+export interface staticCardModule extends module {
+    button?: buttonModule;
+    content?: PortableTextBlock[];
+    footer?: PortableTextBlock[];
+    heading?: string;
+    image?: {
+        alt: string;
+        image?: imageModule<HTMLImageElement>;
+    };
+    showFooter: boolean;
+    showSubHeading: boolean;
+    subHeading?: string;
+}
+
+export interface cardModule extends module {
+    card: [bioCardModule, courseCardModule, collectionCardModule, postCardModule, staticCardModule];
 }
 
 export interface mediaTextModule extends module {
@@ -221,6 +276,18 @@ export interface shopifyProduct {
         values: string[];
         name: string;
     }[];
+}
+
+export interface shopifyCollection {
+    id: string;
+    title: string;
+    handle: string;
+    featuredImage?: {
+        altText?: string | null;
+        height: number;
+        width: number;
+        url: string;
+    } | null;
 }
 
 export interface SanitySiteSetting {
