@@ -1,9 +1,8 @@
-import { Cross2Icon } from '@radix-ui/react-icons';
 import { Popover } from '@radix-ui/react-popover';
 import type { Meta, Story } from '@storybook/react';
 import React, { useState } from 'react';
 import { Button, ButtonGroup } from '../Button/Button';
-import { Icon } from '../Icon/Icon';
+import { AccessibleIcon, Icon } from '../Icon/Icon';
 import { PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '../Popover/Popover';
 import type { CardProps } from './Card';
 import {
@@ -124,28 +123,15 @@ const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => {
                         <strong>Save up to £200</strong>
                         <Popover>
                             <PopoverTrigger className={args.className}>
-                                {/* // TODO: replace with with `Icon` component */}
-                                <Icon label="More information">
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM9 9V15H11V9H9ZM9 5V7H11V5H9Z"
-                                            fill="currentColor"
-                                        />
-                                    </svg>
-                                </Icon>
+                                <AccessibleIcon label="More information">
+                                    <Icon id="warning" />
+                                </AccessibleIcon>
                             </PopoverTrigger>
                             <PopoverContent side="top">
                                 <PopoverArrow />
 
                                 <PopoverClose className="c-popover__close" aria-label="Close">
-                                    {/* // TODO: Update with out Icon component */}
-                                    <Cross2Icon />
+                                    <Icon id="close" />
                                 </PopoverClose>
 
                                 <p>Save up to £200 when you purchase</p>
@@ -206,28 +192,15 @@ const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => {
                         <strong>Save up to £200</strong>
                         <Popover>
                             <PopoverTrigger className={args.className}>
-                                {/* // TODO: replace with with `Icon` component */}
-                                <Icon label="More information">
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM9 9V15H11V9H9ZM9 5V7H11V5H9Z"
-                                            fill="currentColor"
-                                        />
-                                    </svg>
-                                </Icon>
+                                <AccessibleIcon label="More information">
+                                    <Icon id="warning" />
+                                </AccessibleIcon>
                             </PopoverTrigger>
                             <PopoverContent side="top">
                                 <PopoverArrow />
 
                                 <PopoverClose className="c-popover__close" aria-label="Close">
-                                    {/* // TODO: Update with out Icon component */}
-                                    <Cross2Icon />
+                                    <Icon id="close" />
                                 </PopoverClose>
 
                                 <p>Save up to £200 when you purchase</p>

@@ -1,5 +1,6 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 @use "sass:map";
+@use "sass:math";
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
@@ -122,6 +123,10 @@
         border: 6px solid;
         border-image-slice: 1;
         border-image-source: var(--card-theme-gradient, var(--color-gradient-primary-270)); /* [2] */
+
+        .o-icon {
+            --icon-size: #{math.div(20, $base-font-size)}em;
+        }
     }
 
     &__price-tag {

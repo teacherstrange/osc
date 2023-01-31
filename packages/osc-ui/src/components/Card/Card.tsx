@@ -6,7 +6,7 @@ import type { Headings } from '../../types';
 import { classNames } from '../../utils/classNames';
 import type { SharedButtonProps } from '../Button/Button';
 import { Button } from '../Button/Button';
-import { Icon } from '../Icon/Icon';
+import { AccessibleIcon, Icon } from '../Icon/Icon';
 
 import './card.scss';
 
@@ -288,13 +288,10 @@ export const CardWishListButton = (props: CardWishListButtonProps) => {
 
     return (
         <Button className={classes} variant="quaternary" {...attr}>
-            {/* // TODO: replace with with `Icon` component */}
             {/* // TODO: This also needs a tooltip see 'collection-design' in Figma */}
-            <Icon label={label}>
-                <svg viewBox="0 0 23 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.6225 18.4743L19.7893 10.1104C21.7106 8.1426 21.7106 4.94453 19.7893 2.97677C17.8607 1.0016 14.7162 1.0016 12.7876 2.97677L11.6225 4.17003L10.4393 2.95824C8.51789 0.990482 5.39519 0.990482 3.47381 2.95824C1.54519 4.93712 1.54519 8.15372 3.47381 10.1289L11.6225 18.4743Z" />
-                </svg>
-            </Icon>
+            <AccessibleIcon label={label}>
+                <Icon id="heart" />
+            </AccessibleIcon>
         </Button>
     );
 };
