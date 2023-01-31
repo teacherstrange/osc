@@ -2,6 +2,7 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { truncate } from '../../utils/truncate';
 import { Button } from '../Button/Button';
+import { Icon } from '../Icon/Icon';
 import { Image } from '../Image/Image';
 import type { CardProps } from './Card';
 import {
@@ -51,19 +52,8 @@ const SmallTemplate: Story<CardProps> = ({ ...args }) => (
             <CardFooter>
                 <span className="u-text-bold">23 courses</span>
                 <Button variant="quaternary">
-                    Find our more {/* // TODO: update this with Icon component */}
-                    <svg
-                        width="13"
-                        height="18"
-                        viewBox="0 0 13 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M6.64277 8.64467L0.973619 14.3314L3.77309 17.1221L12.1978 8.671L3.75554 0.176041L0.964843 2.96674L6.64277 8.64467Z"
-                            fill="#062134"
-                        />
-                    </svg>
+                    Find our more
+                    <Icon id="chevron-right" />
                 </Button>
             </CardFooter>
         </CardInner>
