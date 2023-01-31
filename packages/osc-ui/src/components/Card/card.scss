@@ -399,6 +399,10 @@
                 padding-block-start: 0;
             }
 
+            #{$self}__img {
+                max-height: 180px;
+            }
+
             #{$self}__header,
             #{$self}__body,
             #{$self}__footer {
@@ -415,6 +419,12 @@
             #{$self}__inner {
                 align-self: center;
                 padding: var(--space-scale-beta) var(--space-scale-epsilon);
+            }
+
+            #{$self}__img {
+                img {
+                    aspect-ratio: 2 / 1;
+                }
             }
 
             #{$self}__ttl {
@@ -440,6 +450,10 @@
 
                 @include mq(mq-token("mob-lrg")) {
                     padding-block-end: var(--space-scale-omega);
+                }
+
+                img {
+                    aspect-ratio: 1 / 0.9;
                 }
             }
 
