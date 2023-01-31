@@ -48,10 +48,9 @@ export default {
             group: 'content',
         },
         {
-            name: 'buttons',
-            title: 'Buttons',
-            type: 'array',
-            of: [{ type: 'module.button' }],
+            name: 'button',
+            title: 'Button',
+            type: 'module.button',
             group: 'content',
         },
         {
