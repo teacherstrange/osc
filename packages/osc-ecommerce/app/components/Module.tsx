@@ -2,12 +2,14 @@ import type { LinkDescriptor } from '@remix-run/node';
 import { Carousel, Content, Image, Trustpilot } from 'osc-ui';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
+import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
 import { getTypes } from '~/models/sanity.server';
 import type {
     accordionModule,
+    cardModule,
     carouselModule,
     contentModule,
     heroModule,
@@ -18,6 +20,7 @@ import type {
     videoModule,
 } from '~/types/sanity';
 import { AccordionModule } from './Accordion/Accordion';
+import { Cards } from './Cards/Cards';
 import { Hero } from './Hero/Hero';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
 
@@ -44,6 +47,10 @@ export const getComponentStyles = (data: SanityPage) => {
                 styles.push({ rel: 'stylesheet', href: buttonStyles });
                 break;
 
+            case 'module.cards':
+                styles.push({ rel: 'stylesheet', href: cardStyles });
+                break;
+
             case 'module.content':
                 styles.push({ rel: 'stylesheet', href: contentStyles });
                 break;
@@ -67,6 +74,7 @@ interface Props {
 
 export default function Module(props: Props) {
     const { module } = props;
+    console.log(module);
 
     switch (module._type) {
         case 'module.accordion':
@@ -85,6 +93,11 @@ export default function Module(props: Props) {
                     height={moduleTrustpilot.height}
                 />
             );
+
+        case 'module.cards':
+            const moduleCard = module as cardModule;
+
+            return <Cards module={moduleCard} />;
 
         case 'module.carousel':
             const moduleCarousel = module as carouselModule;
