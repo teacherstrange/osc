@@ -1,5 +1,6 @@
 import { ThLargeIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
+import { ColorPicker } from '../../../components/inputs/ColorPicker';
 
 const CARDS = [
     { type: 'card.bio' },
@@ -26,6 +27,12 @@ export default {
                 layout: 'dropdown',
             },
             validation: (Rule) => Rule.required(),
+        },
+        {
+            name: 'backgroundColor',
+            title: 'Background Colour',
+            type: 'string',
+            inputComponent: ColorPicker,
         },
         {
             name: 'card',
