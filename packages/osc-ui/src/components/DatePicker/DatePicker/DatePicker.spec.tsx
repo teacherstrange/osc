@@ -23,7 +23,7 @@ test('should open the calendar when the calendar button is clicked', async () =>
     expect(screen.getByRole('group', { name: 'February 2023' })).toBeInTheDocument();
     expect(screen.getByRole('grid', { name: 'February 2023' })).toBeInTheDocument();
 });
-test('should disabled out of range dates when min/max values are passed in', async () => {
+test('should disable out of range dates when min/max values are passed in', async () => {
     const user = userEvent.setup();
     const minDate = 13;
     const maxDate = 20;
@@ -55,7 +55,7 @@ test('should disabled out of range dates when min/max values are passed in', asy
         i++;
     }
 
-    // // Test all dates above max until end of month
+    // Test all dates above max until end of month
     i = maxDate + 1;
     while (i <= 31) {
         expect(screen.getByRole('gridcell', { name: i.toString() })).toHaveAttribute(
