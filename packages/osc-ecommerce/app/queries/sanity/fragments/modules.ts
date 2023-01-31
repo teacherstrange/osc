@@ -1,5 +1,6 @@
 import groq from 'groq';
 import { MODULE_ACCORDION } from './modules/accordion';
+import { MODULE_CARDS } from './modules/card';
 import { MODULE_CAROUSEL } from './modules/carousel';
 import { MODULE_CONTENT } from './modules/content';
 import { MODULE_HERO } from './modules/hero';
@@ -16,6 +17,9 @@ modules[] {
     (_type == "module.trustpilot") => {
         ${MODULE_TRUSTPILOT}
     },
+    (_type == "module.cards") => {
+        ${MODULE_CARDS}
+    }
     (_type == "module.carousel") => {
         ${MODULE_CAROUSEL}
     },
