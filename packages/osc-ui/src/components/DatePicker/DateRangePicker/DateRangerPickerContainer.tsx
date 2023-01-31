@@ -36,8 +36,8 @@ export const DateRangePickerContainer = ({
 };
 
 const TimePresets = ({ presets, setValue }) => (
-    <div className="c-calendar__range--time-presets">
-        <div> Time Presets </div>
+    <div className="c-calendar__range--time-presets" aria-label="Time Presets" role="group">
+        <div>Time Presets</div>
 
         {createTimePresets(presets).map(({ endDate, name, startDate }, index) => (
             <button
