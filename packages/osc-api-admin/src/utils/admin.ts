@@ -1,19 +1,46 @@
 import { PrismaClient } from '@prisma/client';
-import type { GetUnassignedStudents } from '~/types/functions';
 
 const prisma = new PrismaClient();
 
-export const unassignedStudents: GetUnassignedStudents = async (limit) => {
-    return await prisma.courseStudent.findMany({
+export const unassignedStudents = async (limit: number) => {
+    const students = await prisma.courseStudent.findMany({
+        distinct: ['studentId'],
         where: {
             tutorId: null,
         },
-        include: {
+        select: {
+            studentId: true,
             profile: {
-                include: {
-                    studying: true,
+                select: {
+                    firstName: true,
+                    lastName: true,
+                    studying: {
+                        select: {
+                            courseId: true,
+                            course: {
+                                select: {
+                                    title: true,
+                                },
+                            },
+                            tutorId: true,
+                            tutor: {
+                                select: {
+                                    profile: {
+                                        select: {
+                                            firstName: true,
+                                            lastName: true,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
                 },
             },
         },
+        take: limit,
+        orderBy: [{ createdAt: 'asc' }],
     });
+
+    return students;
 };
