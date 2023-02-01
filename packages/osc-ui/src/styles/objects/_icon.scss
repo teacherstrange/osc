@@ -1,4 +1,4 @@
-.o-icon {
+.o-icon:not(.o-logo) {
     // Set the icon size to 1em by default
     // This allows us to scale the icon size by changing the font-size
     --icon-size: 1em;
