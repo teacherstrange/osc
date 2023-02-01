@@ -45,7 +45,6 @@ interface PopoverProps extends AriaPopoverProps {
 export const ReactAriaPopover = ({ children, state, ...props }: PopoverProps) => {
     let popoverRef = useRef();
 
-    // TODO - temporarily assigned to any to shut TS up.
     let { popoverProps, underlayProps } = usePopover(
         {
             ...props,
