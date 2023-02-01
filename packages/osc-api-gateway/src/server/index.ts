@@ -10,8 +10,10 @@ const gateway =
               supergraphSdl: new IntrospectAndCompose({
                   subgraphs: [
                       { name: 'OSC-Auth', url: env.AUTH_API_URL },
-                      { name: 'OSC-Ecommerce', url: env.ECOMMERCE_API_URL }
-                  ]
+                      { name: 'OSC-Ecommerce', url: env.ECOMMERCE_API_URL },
+                      { name: 'OSC-CRM', url: env.CRM_API_URL },
+                      { name: 'OSC-Admin', url: env.ADMIN_API_URL },
+                  ],
               }),
               buildService({ name, url }) {
                   return new RemoteGraphQLDataSource({
@@ -21,9 +23,9 @@ const gateway =
                               'user',
                               context.user ? JSON.stringify(context.user) : ''
                           );
-                      }
+                      },
                   });
-              }
+              },
           })
         : new ApolloGateway({
               buildService({ name, url }) {
@@ -34,9 +36,9 @@ const gateway =
                               'user',
                               context.user ? JSON.stringify(context.user) : ''
                           );
-                      }
+                      },
                   });
-              }
+              },
           });
 
 export const server = new ApolloServer({
@@ -45,5 +47,5 @@ export const server = new ApolloServer({
         // @ts-ignore
         const user = req.auth?.user || null;
         return { user };
-    }
+    },
 });
