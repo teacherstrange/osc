@@ -7,7 +7,6 @@
 
     font-size: rem($base-font-size);
     font-weight: $weight-bold;
-    line-height: 1.5; // TODO: Check this against PR: 643 once merged
 
     @include z-index("navigation");
 
