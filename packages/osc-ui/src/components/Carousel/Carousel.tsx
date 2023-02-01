@@ -58,6 +58,11 @@ export interface Props {
     carouselName: string;
 
     /**
+     * Custom class
+     */
+    className?: string;
+
+    /**
      * The slides to render in the carousel
      */
     children: ReactNode | ReactNode[];
@@ -112,6 +117,7 @@ export const Carousel = (props: Props) => {
         autoPlaySpeed = 10_000, // ms
         loop = true,
         children,
+        className,
         slidesPerView = 1,
         arrows = false,
         dotNav = true,
@@ -127,7 +133,8 @@ export const Carousel = (props: Props) => {
     const classes = classNames(
         'c-carousel',
         arrows && 'has-arrows',
-        adaptiveHeight && 'has-adaptive-height'
+        adaptiveHeight && 'has-adaptive-height',
+        className
     );
 
     // Keep track of which slides are in view by assigning their index to an array
