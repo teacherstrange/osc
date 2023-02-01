@@ -3,8 +3,7 @@ import { LINK_EXTERNAL } from '../linkExternal';
 import { LINK_INTERNAL } from '../linkInternal';
 
 export const MODULE_CARDS = groq`
-    _key,
-    _type,
+    ...,
     card[] {
         _type == 'card.bio' => {
           _key,
