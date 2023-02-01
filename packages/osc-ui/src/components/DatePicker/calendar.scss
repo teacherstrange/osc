@@ -3,7 +3,11 @@
 // /* stylelint-disable plugin/selector-bem-pattern */
 
 // .c-calendar {
-//     width: 100%;
+//     --selected-color: #00baa9;
+//     --highlighted-color: rgba(0, 186, 169, 0.2);
+//     --hover-color: #f5f5f5;
+
+//     width: max-content;
 
 //     &__header {
 //         display: flex;
@@ -44,10 +48,18 @@
 //         color: #062134;
 //         text-align: center;
 //         cursor: pointer;
+//         font-size: var(--font-scale-zeta);
+//         border-radius: 0;
 
 //         &:focus {
 //             border: 3px solid var(--color-primary);
-//             border-radius: 4px;
+//             background: var(--hover-color);
+//             border-radius: 50%;
+//         }
+
+//         &:hover {
+//             background: var(--hover-color);
+//             border-radius: 50%;
 //         }
 
 //         &--selected {
@@ -56,10 +68,15 @@
 //             justify-content: center;
 //             width: 40px;
 //             height: 40px;
-//             background: var(--color-quaternary);
-//             border: solid 2px var(--color-primary);
+//             background: var(--selected-color);
 //             border-radius: 4px;
-//             color: white;
+//             color: var(--color-tertiary);
+//             font-weight: $weight-bold;
+//             &:focus {
+//                 border: 3px solid var(--color-primary);
+//                 background: var(--selected-color);
+//                 border-radius: 4px;
+//             }
 //         }
 
 //         &--disabled {
@@ -86,7 +103,7 @@
 //     &__buttons {
 //         display: flex;
 //         justify-content: center;
-//         .c-react-aria-button {
+//         .c-react-aria__button {
 //             cursor: pointer;
 
 //             &:focus {
@@ -109,7 +126,6 @@
 //         }
 //         &--inner-container-1 {
 //             display: flex;
-
 //             flex: 1 100%;
 //             .c-calendar__range--time-presets {
 //                 :first-child {
@@ -126,7 +142,7 @@
 //                     }
 //                 }
 //             }
-//             .c-calendar__range--calendar {
+//             .c-calendar__range--calendar-container {
 //                 flex: 6;
 //             }
 //         }
@@ -148,6 +164,35 @@
 //                         border-radius: 4px;
 //                     }
 //                 }
+//             }
+//         }
+
+//         .c-calendar__cell {
+//             &--selected {
+//                 border-radius: 0;
+//                 background: var(--highlighted-color) !important;
+//                 color: var(--color-secondary) !important;
+//                 font-weight: $weight-reg !important;
+//             }
+
+//             &--selection-start,
+//             &--selection-end {
+//                 background: var(--selected-color) !important;
+//                 font-weight: $weight-bold !important;
+//                 color: var(--color-tertiary) !important;
+//             }
+
+//             &--rounded-left,
+//             &--rounded-right {
+//                 background: var(--selected-color);
+//                 font-weight: $weight-bold;
+//                 color: var(--color-tertiary);
+//             }
+//             &--rounded-left {
+//                 border-radius: 4px 0 0 4px;
+//             }
+//             &--rounded-right {
+//                 border-radius: 0 4px 4px 0;
 //             }
 //         }
 

@@ -2,13 +2,13 @@ import { endOfMonth, getWeeksInMonth } from '@internationalized/date';
 import type { AriaCalendarGridProps } from '@react-aria/calendar';
 import { useCalendarGrid } from '@react-aria/calendar';
 import { useLocale } from '@react-aria/i18n';
-import type { CalendarState, RangeCalendarState } from '@react-stately/calendar';
+import type { RangeCalendarState } from '@react-stately/calendar';
 import React from 'react';
 import { CalendarCell } from './CalendarCell';
 
 interface GridProps extends AriaCalendarGridProps {
     offset?: {};
-    state: CalendarState | RangeCalendarState;
+    state: RangeCalendarState;
 }
 
 export const CalendarGrid = ({ state, offset = {} }: GridProps) => {
@@ -33,7 +33,7 @@ export const CalendarGrid = ({ state, offset = {} }: GridProps) => {
     let weeksInMonth = getWeeksInMonth(startDate, locale);
 
     return (
-        <table {...gridProps}>
+        <table {...gridProps} className="c-calendar__grid">
             <thead className="c-calendar__table-head" {...headerProps}>
                 <tr>
                     {weekDays.map((day, index) => (
