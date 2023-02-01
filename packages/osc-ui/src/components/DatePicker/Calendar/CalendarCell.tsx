@@ -25,18 +25,16 @@ export const CalendarCell = ({ currentMonth, date, state }: CellProps) => {
         isOutsideMonth = !isSameMonth(currentMonth, date);
     }
 
-    let isSelectionStart = state.highlightedRange
+    const isSelectionStart = state.highlightedRange
         ? isSameDay(date, state.highlightedRange.start)
         : isSelected;
-    let isSelectionEnd = state.highlightedRange
+    const isSelectionEnd = state.highlightedRange
         ? isSameDay(date, state.highlightedRange.end)
         : isSelected;
-
-    let isRoundedLeft = isSelected && (isSelectionStart || date.day === 1);
-    let isRoundedRight =
+    const isRoundedLeft = isSelected && (isSelectionStart || date.day === 1);
+    const isRoundedRight =
         isSelected && (isSelectionEnd || date.day === date.calendar.getDaysInMonth(date));
-
-    let { focusProps } = useFocusRing();
+    const { focusProps } = useFocusRing();
 
     return (
         <td {...cellProps} data-selected={isSelected}>
