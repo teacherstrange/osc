@@ -118,6 +118,8 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     {...rest}
                 />
                 <Label
+                    // If Quaternary variation then wrap in VisuallyHidden to hide the label
+                    hidden={variants?.some((variant) => variant === 'quaternary')}
                     htmlFor={id}
                     name={name}
                     required={required}
