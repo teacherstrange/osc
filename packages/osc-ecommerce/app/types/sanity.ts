@@ -116,19 +116,19 @@ export interface bioCardModule extends module {
     };
 }
 
-interface courseCardModule extends module {
+export interface courseCardModule extends module {
     reference: {
         store: shopifyProduct;
     };
 }
 
-interface collectionCardModule extends module {
+export interface collectionCardModule extends module {
     reference: {
         store: shopifyCollection;
     };
 }
 
-interface postCardModule extends module {
+export interface postCardModule extends module {
     reference: {
         slug: {
             current: string;
@@ -253,7 +253,10 @@ export interface SanityPage {
 export interface shopifyProduct {
     id: string;
     title: string;
-    handle: string;
+    descriptionHtml: string;
+    slug: {
+        current: string;
+    };
     featuredImage?: {
         altText?: string | null;
         height: number;
@@ -273,6 +276,7 @@ export interface shopifyProduct {
         };
     };
     options: {
+        _key: string;
         values: string[];
         name: string;
     }[];
@@ -281,7 +285,10 @@ export interface shopifyProduct {
 export interface shopifyCollection {
     id: string;
     title: string;
-    handle: string;
+    descriptionHtml: string;
+    slug: {
+        current: string;
+    };
     featuredImage?: {
         altText?: string | null;
         height: number;
