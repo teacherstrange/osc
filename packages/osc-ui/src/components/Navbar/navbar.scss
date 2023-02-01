@@ -2,6 +2,9 @@
 @use "../../styles/tools" as *;
 
 /* stylelint-disable plugin/selector-bem-pattern */
+
+$simple-nav-width: 250px;
+
 .c-nav {
     $self: &;
 
@@ -18,6 +21,46 @@
     a {
         &:focus-visible {
             box-shadow: 0 0 0 0.2rem var(--color-primary);
+        }
+    }
+
+    &--simple {
+        #{$self}__content {
+            @include mq(mq-token("desk")) {
+                max-width: $simple-nav-width;
+            }
+
+            &[data-level="0"] #{$self}__list {
+                @include mq(mq-token("desk")) {
+                    padding-inline: 0;
+                }
+            }
+
+            &[data-state="closed"] {
+                @include mq(mq-token("desk")) {
+                    grid-template-rows: 1fr;
+                }
+            }
+
+            #{$self}__trigger--close {
+                @include mq(mq-token("desk")) {
+                    display: none;
+                }
+            }
+        }
+
+        #{$self}__submenu #{$self}__list {
+            @include mq(mq-token("desk")) {
+                flex-flow: column nowrap;
+            }
+
+            #{$self}__item {
+                > a {
+                    @include mq(mq-token("desk")) {
+                        padding-block-start: var(--space-scale-centi);
+                    }
+                }
+            }
         }
     }
 

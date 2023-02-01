@@ -52,20 +52,28 @@ export interface NavProps extends SharedNavProps, HTMLAttributes<HTMLDivElement>
      */
     label?: string;
 }
-type NavRef = ForwardRefExoticComponent<NavProps & RefAttributes<HTMLDivElement>>;
+// type NavRef = ForwardRefExoticComponent<NavProps & RefAttributes<HTMLDivElement>>;
 
-export const Navbar = forwardRef<ElementRef<NavRef>, ComponentPropsWithoutRef<NavRef>>(
-    (props: NavProps, forwardedRef) => {
-        const { children, className, label = 'main', ...attr } = props;
-        const classes = classNames('c-nav', className);
+export const Navbar = (props: NavProps) => {
+    const navRef = useRef<HTMLDivElement>(null);
 
-        return (
-            <nav aria-label={label} className={classes} {...attr} ref={forwardedRef}>
-                {children}
-            </nav>
-        );
-    }
-);
+    useEffect(() => {
+        const columns = document.querySelectorAll('.c-nav__item--column');
+
+        if (columns.length === 0) {
+            navRef.current.classList.add('c-nav--simple');
+        }
+    }, []);
+
+    const { children, className, label = 'main', ...attr } = props;
+    const classes = classNames('c-nav', className);
+
+    return (
+        <nav aria-label={label} className={classes} {...attr} ref={navRef}>
+            {children}
+        </nav>
+    );
+};
 Navbar.displayName = NAV_NAME;
 
 /* -------------------------------------------------------------------------------------------------
