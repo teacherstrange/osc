@@ -107,6 +107,7 @@ model UserRole {
 
   @@index([userId])
   @@index([roleId])
+  @@index([createdBy])
   @@map("users.roles")
 }
 
@@ -283,12 +284,14 @@ model LmsToken {
 }
 
 model Course {
-  id          Int           @id @default(autoincrement())
-  title       String        @db.VarChar(64)
-  externalRef String        @db.VarChar(255)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime?     @updatedAt
-  tutors      CourseTutor[] @relation("courseTutor")
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(64)
+  externalRef String    @db.VarChar(255)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  tutors   CourseTutor[]   @relation("courseTutorCourse")
+  students CourseStudent[] @relation("courseStudentCourse")
 
   @@map("courses")
 }
@@ -302,10 +305,10 @@ model CourseTutor {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
-  course   Course          @relation("courseTutor", fields: [courseId], references: [id])
+  course   Course          @relation("courseTutorCourse", fields: [courseId], references: [id])
   profile  User            @relation("courseTutorProfile", fields: [tutorId], references: [id])
   creator  User            @relation("courseTutorCreator", fields: [createdBy], references: [id])
-  students CourseStudent[] @relation("studentCourseTutor")
+  students CourseStudent[] @relation("courseStudentTutor")
 
   @@index([courseId])
   @@index([tutorId])
@@ -314,20 +317,24 @@ model CourseTutor {
 }
 
 model CourseStudent {
-  id            Int       @id @default(autoincrement())
-  courseTutorId Int
-  studentId     Int
-  active        Boolean   @default(true)
-  createdBy     Int
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime? @updatedAt
+  id        Int       @id @default(autoincrement())
+  courseId  Int
+  studentId Int
+  tutorId   Int?
+  active    Boolean   @default(true)
+  createdBy Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
-  tutor   CourseTutor @relation("studentCourseTutor", fields: [courseTutorId], references: [id])
-  profile User        @relation("courseStudentProfile", fields: [studentId], references: [id])
-  creator User        @relation("courseStudentCreator", fields: [createdBy], references: [id])
+  course  Course       @relation("courseStudentCourse", fields: [courseId], references: [id])
+  tutor   CourseTutor? @relation("courseStudentTutor", fields: [tutorId], references: [id])
+  profile User         @relation("courseStudentProfile", fields: [studentId], references: [id])
+  creator User         @relation("courseStudentCreator", fields: [createdBy], references: [id])
 
-  @@index([courseTutorId])
+  @@index([courseId])
   @@index([studentId])
+  @@index([tutorId])
+  @@index([createdBy])
   @@map("courses.students")
 }
 
