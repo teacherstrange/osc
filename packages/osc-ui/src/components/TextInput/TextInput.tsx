@@ -73,6 +73,29 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
     const iconModifier = useModifier('c-input__icon', variants);
     const iconClasses = classNames('c-input__icon', iconModifier);
 
+    const InputError = () => (
+        <>
+            <div className="c-input__icon c-input__icon--error">
+                <Icon label={icon?.label}>{icon?.content}</Icon>
+            </div>
+            <span className="c-input__error-message" role="alert" id={`${id}-error`}>
+                {errorMessage}
+            </span>
+        </>
+    );
+
+    const InputIcon = () => (
+        <div className={iconClasses}>
+            <Icon label={icon.label}>{icon.content}</Icon>
+        </div>
+    );
+
+    const InputButton = () => (
+        <Button className="c-input__button">
+            <Icon label={action?.icon?.label}>{action?.icon?.content}</Icon>
+        </Button>
+    );
+
     return (
         <div className="c-input__outer-container">
             <div
@@ -100,27 +123,10 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     required={required}
                     variants={value ? ['filled'] : null}
                 />
-                {icon && icon.type !== 'error' ? (
-                    <div className={iconClasses}>
-                        <Icon label={icon.label}>{icon.content}</Icon>
-                    </div>
-                ) : null}
-                {displayError ? (
-                    <>
-                        <div className="c-input__icon c-input__icon--error">
-                            <Icon label={icon?.label}>{icon?.content}</Icon>
-                        </div>
-                        <span className="c-input__error-message" role="alert" id={`${id}-error`}>
-                            {errorMessage}
-                        </span>
-                    </>
-                ) : null}
+                {icon && icon.type !== 'error' ? <InputIcon /> : null}
+                {displayError ? <InputError /> : null}
             </div>
-            {action?.type === 'submit' ? (
-                <Button className="c-input__button">
-                    <Icon label={action?.icon?.label}>{action?.icon?.content}</Icon>
-                </Button>
-            ) : null}
+            {action?.type === 'submit' ? <InputButton /> : null}
         </div>
     );
 });
