@@ -3,6 +3,6 @@ import { isAuthenticated } from './rules';
 
 export const shieldPermissions = shield({
     Query: {
-        product: isAuthenticated,
+        unassignedStudents: isAuthenticated,
     },
 });
