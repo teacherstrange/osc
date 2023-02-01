@@ -7,7 +7,7 @@ import { getFieldError } from '../../utils/getFieldError';
 import { Label } from '../Label/Label';
 import './text-input.scss';
 import { Button } from '../Button/Button';
-import { Icon } from '../Icon/Icon';
+import { AccessibleIcon } from '../Icon/Icon';
 
 type IconType = {
     content: ReactNode;
@@ -56,9 +56,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         ...rest
     } = props;
 
-    const [value, setValue] = useState<string | number | readonly string[]>(
-        defaultValue ? defaultValue : ''
-    );
+    const [value, setValue] = useState(defaultValue ? defaultValue : '');
 
     const errorMessage = getFieldError(value, required);
     const displayError = wasSubmitted && errorMessage;
@@ -75,9 +73,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
 
     const InputError = () => (
         <>
-            <div className="c-input__icon c-input__icon--error">
-                <Icon label={icon?.label}>{icon?.content}</Icon>
-            </div>
+            <div className="c-input__icon c-input__icon--error">{icon?.content}</div>
             <span className="c-input__error-message" role="alert" id={`${id}-error`}>
                 {errorMessage}
             </span>
@@ -86,13 +82,13 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
 
     const InputIcon = () => (
         <div className={iconClasses}>
-            <Icon label={icon.label}>{icon.content}</Icon>
+            <AccessibleIcon label={icon.label}>{icon.content}</AccessibleIcon>
         </div>
     );
 
     const InputButton = () => (
         <Button className="c-input__button">
-            <Icon label={action?.icon?.label}>{action?.icon?.content}</Icon>
+            <AccessibleIcon label={action?.icon?.label}>{action?.icon?.content}</AccessibleIcon>
         </Button>
     );
 

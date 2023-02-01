@@ -2,7 +2,8 @@ import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef } from 'react';
 
 import { TextInput } from './TextInput';
-import { ExclamationTriangleIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { Icon } from '../Icon/Icon';
 
 export default {
     title: 'osc-ui/TextInput',
@@ -109,7 +110,7 @@ Primary.args = {
             name: 'Full Name',
             editor: 'input',
             icon: {
-                content: <ExclamationTriangleIcon />,
+                content: <Icon id="exclamation-mark" />,
                 label: 'Exclamation Triangle Icon',
                 type: 'error',
             },
@@ -163,7 +164,7 @@ Secondary.args = {
             name: 'Full Name',
             editor: 'input',
             icon: {
-                content: <ExclamationTriangleIcon />,
+                content: <Icon id="exclamation-mark" />,
                 label: 'Exclamation Triangle Icon',
                 type: 'error',
             },
@@ -218,7 +219,7 @@ Tertiary.args = {
             name: 'Full Name',
             editor: 'input',
             icon: {
-                content: <ExclamationTriangleIcon />,
+                content: <Icon id="exclamation-mark" />,
                 label: 'Exclamation Triangle Icon',
                 type: 'error',
             },
