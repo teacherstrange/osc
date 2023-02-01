@@ -117,10 +117,10 @@
             display: block;
             cursor: pointer;
 
-            svg {
+            .o-icon {
+                --icon-size: 20px;
+
                 flex-shrink: 0;
-                width: 20px;
-                height: 20px;
             }
         }
 
