@@ -16,8 +16,11 @@ interface CellProps extends AriaCalendarCellProps {
 
 export const CalendarCell = ({ currentMonth, date, state }: CellProps) => {
     let ref = useRef();
-    let { buttonProps, cellProps, formattedDate, isDisabled, isSelected, isUnavailable } =
-        useCalendarCell({ date }, state, ref);
+    let { buttonProps, cellProps, formattedDate, isDisabled, isSelected } = useCalendarCell(
+        { date },
+        state,
+        ref
+    );
 
     let isOutsideMonth;
 
@@ -44,7 +47,7 @@ export const CalendarCell = ({ currentMonth, date, state }: CellProps) => {
                 hidden={isOutsideMonth}
                 className={`c-calendar__cell ${isSelected ? 'c-calendar__cell--selected' : ''} ${
                     isDisabled ? 'c-calendar__cell--disabled' : ''
-                } ${isUnavailable ? 'c-calendar__cell--unavailable' : ''}
+                } 
                 ${isRoundedLeft ? 'c-calendar__cell--rounded-left' : ''}
                 ${isRoundedRight ? 'c-calendar__cell--rounded-right' : ''}
                 ${isSelectionStart ? 'c-calendar__cell--selection-start' : ''}
