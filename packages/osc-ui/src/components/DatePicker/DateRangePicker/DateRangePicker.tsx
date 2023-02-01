@@ -1,10 +1,11 @@
 import { ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
-import { useDateRangePicker } from '@react-aria/datepicker';
 import type { AriaDateRangePickerProps } from '@react-aria/datepicker';
+import { useDateRangePicker } from '@react-aria/datepicker';
 
 import { useDateRangePickerState } from '@react-stately/datepicker';
-import React, { useRef } from 'react';
+import type { DateValue } from '@react-types/calendar';
 import type { ReactNode } from 'react';
+import React, { useRef } from 'react';
 import { Icon } from '../../Icon/Icon';
 import { DateField } from '../DateField/DateField';
 import { RangeCalendarContainer } from '../RangeCalendar/RangeCalendarContainer';
@@ -13,7 +14,6 @@ import {
     ReactAriaDialog,
     ReactAriaPopover,
 } from '../ReactAriaComponents/ReactAriaComponents';
-import type { DateValue } from '@react-types/calendar';
 
 interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
     timePresets: ReactNode;
@@ -77,6 +77,9 @@ export const DateRangePicker = ({
                             {...calendarProps}
                             clearSelection={clearSelection}
                             timePresets={timePresets}
+                            selectEndDate={state.value}
+                            setHighlighted={props.setHighlighted}
+                            highlighted={props.highlighted}
                         />
                     </ReactAriaDialog>
                 </ReactAriaPopover>

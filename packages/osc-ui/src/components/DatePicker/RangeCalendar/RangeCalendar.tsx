@@ -1,37 +1,25 @@
-import { GregorianCalendar } from '@internationalized/date';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { useRangeCalendar } from '@react-aria/calendar';
 import type { AriaRangeCalendarProps } from '@react-aria/calendar';
-import { useDateFormatter, useLocale } from '@react-aria/i18n';
+import { useRangeCalendar } from '@react-aria/calendar';
+import { useDateFormatter } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
-import { useRangeCalendarState } from '@react-stately/calendar';
+import type { RangeCalendarState } from '@react-stately/calendar';
+import type { DateValue } from '@react-types/calendar';
 import React, { useRef } from 'react';
 import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
 import { CalendarGrid } from '../Calendar/CalendarGrid';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
 import { formatDate } from '../utils';
-import type { DateValue } from '@react-types/calendar';
 
-const createCalendar = (identifier) => {
-    switch (identifier) {
-        case 'gregory':
-            return new GregorianCalendar();
-        default:
-            throw new Error(`Unsupported calendar ${identifier}`);
-    }
-};
+interface RangeCalendarProps extends AriaRangeCalendarProps<DateValue> {
+    state: RangeCalendarState;
+}
 
-export const RangeCalendar = (props: AriaRangeCalendarProps<DateValue>) => {
+export const RangeCalendar = (props: RangeCalendarProps) => {
+    const { state } = props;
     const RANGES = ['start', 'end'];
-    let { locale } = useLocale();
-    // Set up the state for the calendar using 2 visible months
-    let state = useRangeCalendarState({
-        ...props,
-        visibleDuration: { months: 2 },
-        locale,
-        createCalendar,
-    });
+
     let ref = useRef();
     let { calendarProps, prevButtonProps, nextButtonProps } = useRangeCalendar(props, state, ref);
 
