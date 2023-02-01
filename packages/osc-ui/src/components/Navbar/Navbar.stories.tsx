@@ -1,5 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
+import { Icon } from '../Icon/Icon';
 import type { NavProps } from './Navbar';
 import { Navbar, NavContent, NavItem, NavLink, NavList, NavSubMenu, NavTrigger } from './Navbar';
 import { nestedSubMenuNav, simpleNav, subMenuNav } from './navContent';
@@ -121,24 +122,13 @@ const NestedSubMenuTemplate: Story<NavProps> = ({ ...args }) => {
                     <NavSubMenu level={level} label={item.label}>
                         <NavTrigger>
                             {item.label}
-                            {/* // TODO: Update this icon to use our Icons */}
-                            <svg
-                                width="15"
-                                height="10"
-                                viewBox="0 0 15 10"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                // Only show the icon if the level is > 0 or were not on a desktop
+                            <Icon
+                                id="chevron-down"
                                 className={`c-nav__trigger-icon ${
                                     level === 0 && 'u-hidden-from@desk'
-                                }`}
+                                }`} // Only show the icon if the level is > 0 or were not on a desktop
                                 aria-hidden
-                            >
-                                <path
-                                    d="M7.72284 5.42052L3.17348 0.885194L0.940918 3.12477L7.70178 9.86457L14.4977 3.11073L12.2652 0.878174L7.72284 5.42052Z"
-                                    fill="#062134"
-                                />
-                            </svg>
+                            />
                         </NavTrigger>
                         <NavContent level={level}>
                             <NavList>
