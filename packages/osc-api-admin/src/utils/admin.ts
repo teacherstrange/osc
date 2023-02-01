@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const unassignedStudents = async (limit: number) => {
-    const students = await prisma.courseStudent.findMany({
+    return await prisma.courseStudent.findMany({
         distinct: ['studentId'],
         where: {
             tutorId: null,
@@ -41,6 +41,4 @@ export const unassignedStudents = async (limit: number) => {
         take: limit,
         orderBy: [{ createdAt: 'asc' }],
     });
-
-    return students;
 };
