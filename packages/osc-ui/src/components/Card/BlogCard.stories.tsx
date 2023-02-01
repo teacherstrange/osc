@@ -1,5 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
+import { formatDate } from '../../utils/formatDate';
 import { truncate } from '../../utils/truncate';
 import { Button } from '../Button/Button';
 import { Image } from '../Image/Image';
@@ -60,8 +61,13 @@ const Template: Story<CardProps> = ({ ...args }) => (
             </CardBody>
 
             <CardFooter>
-                <time dateTime="2022-10-08" className="u-text-reg">
-                    Wednesday 8th October
+                <time dateTime="2022-09-28T15:36:12Z" className="u-text-reg">
+                    {formatDate('2022-09-28T15:36:12Z', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                    })}
                 </time>
                 <Button variant="secondary">
                     Read more
