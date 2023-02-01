@@ -3,15 +3,29 @@
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
+$input-py: calc(var(--space-scale-micro) - 3px);
+$input-pr: var(--space-scale-delta);
+$input-pl: var(--space-scale-epsilon);
+
 .c-input {
     display: flex;
     order: 1;
     min-width: 20ch;
     max-width: 30ch;
-    padding: 0.375em 2.563em 0.375em 1.25em;
+    padding: $input-py $input-pr $input-py $input-pl;
     border: solid 1px var(--color-quinary);
     font-size: var(--font-scale-base);
     cursor: text;
+    grid-column: 1;
+    grid-row: 2;
+
+    &__icon {
+        justify-self: end;
+        align-self: center;
+        grid-row: 2;
+        grid-column: 1;
+        padding-right: 5%;
+    }
 
     &:focus {
         outline: 3px solid transparent;
@@ -24,25 +38,18 @@
         pointer-events: none;
     }
 
-    &__number {
-        padding: 0.375em 0.375em 0.375em 1.25em;
-    }
-
-    &__icon {
-        position: absolute;
-        top: 50%;
-        right: 5%;
-        transform: translateY(-50%);
-    }
-
     &__outer-container {
         display: flex;
     }
 
     &__container {
-        position: relative;
-        display: flex;
+        display: grid;
         flex-direction: column;
+
+        .c-label {
+            grid-row: 1;
+            grid-column: 1;
+        }
 
         &--secondary {
             .c-input {
@@ -55,22 +62,17 @@
             position: relative;
 
             .c-label {
-                position: absolute;
                 display: flex;
                 align-items: center;
-                transform: scale(1);
+                grid-row: 2;
                 transform-origin: top left;
                 transition: 100ms ease-in-out;
                 pointer-events: none;
 
                 &.c-label--filled {
+                    top: 10px;
                     transform: translate(0, -1.25em) scale(0.8);
                 }
-            }
-
-            .c-label,
-            .c-input {
-                height: 1.875em;
             }
 
             .c-input {
@@ -99,15 +101,9 @@
             }
         }
 
-        &--tertiary {
-            .c-input__icon {
-                top: 35%;
-            }
-        }
-
         &--quaternary {
             .c-input {
-                padding: 0.375em 2.563em 0.375em 0;
+                padding: $input-py $input-pr $input-py 0;
                 color: var(--color-neutral-600);
             }
 
@@ -136,6 +132,8 @@
                     order: 2;
                     color: var(--color-error);
                     font-size: var(--font-scale-base);
+                    grid-row: 3;
+                    grid-column: 1;
                 }
 
                 &__icon {
