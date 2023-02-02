@@ -6,6 +6,7 @@ import type {
     courseCardModule,
     postCardModule,
     staticCardModule,
+    TypesOfCard,
 } from '~/types/sanity';
 import breakpoints from '../../../../../tokens/media-queries';
 import { BioCard } from './BioCard';
@@ -13,13 +14,6 @@ import { BlogCard } from './BlogCard';
 import { CollectionCard } from './CollectionCard';
 import { CourseCard } from './CourseCard';
 import { SimpleCard } from './SimpleCard';
-
-type TypesOfCard =
-    | bioCardModule
-    | courseCardModule
-    | collectionCardModule
-    | postCardModule
-    | staticCardModule;
 
 const Card = (props: { card: TypesOfCard }) => {
     const { card } = props;
