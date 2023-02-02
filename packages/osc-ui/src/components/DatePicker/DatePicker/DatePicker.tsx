@@ -3,7 +3,6 @@ import { useDatePicker } from '@react-aria/datepicker';
 import { useDatePickerState } from '@react-stately/datepicker';
 import React, { useRef } from 'react';
 
-import { CalendarIcon } from '@radix-ui/react-icons';
 import type { DateValue } from '@react-types/calendar';
 import { Icon } from '../../Icon/Icon';
 import { Calendar } from '../Calendar/Calendar';
@@ -30,9 +29,7 @@ export const DatePicker = (props: AriaDatePickerProps<DateValue>) => {
             <div className="c-datepicker__date-field-container" {...groupProps} ref={ref}>
                 <DateField {...fieldProps} />
                 <ReactAriaButton {...buttonProps}>
-                    <Icon label="calendar">
-                        <CalendarIcon width={20} height={20} />
-                    </Icon>
+                    <Icon id="calendar" />
                 </ReactAriaButton>
             </div>
             {state.isOpen && (

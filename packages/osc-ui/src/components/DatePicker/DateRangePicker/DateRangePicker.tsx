@@ -1,4 +1,3 @@
-import { ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
 import type { AriaDateRangePickerProps } from '@react-aria/datepicker';
 import { useDateRangePicker } from '@react-aria/datepicker';
 
@@ -47,20 +46,14 @@ export const DateRangePicker = ({
                     <div className="c-datepicker__date-field-inner-container">
                         <DateField {...startFieldProps} />
                         <ReactAriaButton {...buttonProps}>
-                            <Icon label="calendar">
-                                <CalendarIcon width={20} height={20} />
-                            </Icon>
+                            <Icon id="calendar" />
                         </ReactAriaButton>
                     </div>
-                    <Icon label="arrow">
-                        <ArrowRightIcon width={20} height={20} />
-                    </Icon>
+                    <Icon className="arrow" id="arrow" />
                     <div className="c-datepicker__date-field-inner-container">
                         <DateField {...endFieldProps} />
                         <ReactAriaButton {...buttonProps}>
-                            <Icon label="calendar">
-                                <CalendarIcon width={20} height={20} />
-                            </Icon>
+                            <Icon id="calendar" />
                         </ReactAriaButton>
                     </div>
                 </div>

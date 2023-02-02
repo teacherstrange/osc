@@ -1,5 +1,4 @@
 import { GregorianCalendar } from '@internationalized/date';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import type { AriaCalendarProps } from '@react-aria/calendar';
 import { useCalendar } from '@react-aria/calendar';
 import { useDateFormatter, useLocale } from '@react-aria/i18n';
@@ -48,14 +47,10 @@ export const Calendar = (props: AriaCalendarProps<DateValue>) => {
                 </h3>
                 <div className="c-calendar__buttons">
                     <ReactAriaButton {...prevButtonProps}>
-                        <Icon label="chevron-left">
-                            <ChevronLeftIcon />
-                        </Icon>
+                        <Icon className="chevron" id="chevron-left" />
                     </ReactAriaButton>
                     <ReactAriaButton {...nextButtonProps}>
-                        <Icon label="chevron-right">
-                            <ChevronRightIcon />
-                        </Icon>
+                        <Icon className="chevron" id="chevron-right" />
                     </ReactAriaButton>
                 </div>
             </div>

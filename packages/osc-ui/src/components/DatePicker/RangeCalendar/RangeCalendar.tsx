@@ -1,4 +1,3 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import type { AriaRangeCalendarProps } from '@react-aria/calendar';
 import { useRangeCalendar } from '@react-aria/calendar';
 import { useDateFormatter } from '@react-aria/i18n';
@@ -59,9 +58,7 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                             <h2>{calendarProps['aria-label']}</h2>
                         </VisuallyHidden>
                         <ReactAriaButton {...prevButtonProps}>
-                            <Icon label="chevron-left">
-                                <ChevronLeftIcon />
-                            </Icon>
+                            <Icon className="chevron" id="chevron-left" />
                         </ReactAriaButton>
                     </div>
                     {startAndEndDate[0]}
@@ -70,9 +67,7 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                     {startAndEndDate[1]}
                     <div className="c-calendar__buttons">
                         <ReactAriaButton {...nextButtonProps}>
-                            <Icon label="chevron-right">
-                                <ChevronRightIcon />
-                            </Icon>
+                            <Icon className="chevron" id="chevron-right" />
                         </ReactAriaButton>
                     </div>
                 </div>
