@@ -64,7 +64,7 @@ export const RangeCalendarContainer = ({
             // the prompt in these cases
             if (selectedRange.timePreset) {
                 setSelectedRange((prev) => {
-                    return { ...prev, setTimePreset: false };
+                    return { ...prev, timePreset: false };
                 });
                 return setShowPrompt(false);
             }
