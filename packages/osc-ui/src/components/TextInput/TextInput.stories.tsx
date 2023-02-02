@@ -64,7 +64,7 @@ const Template: Story = ({ items }) => {
     return (
         <div>
             {items.map((item, i) => (
-                <div key={i} style={{ margin: '1em' }}>
+                <div key={i} style={{ margin: '1em', width: '300px' }}>
                     <p style={{ fontWeight: '700', padding: '.5em 0' }}>{states[item.state]}</p>
                     <TextInput {...item} ref={item.ref ? selectRef : null} />
                 </div>
@@ -247,7 +247,11 @@ Quaternary.args = {
         {
             action: {
                 type: 'submit',
-                icon: { content: <MagnifyingGlassIcon />, label: 'Magnifying Glass' },
+                icon: {
+                    content: <MagnifyingGlassIcon />,
+                    label: 'Magnifying Glass',
+                },
+                variant: 'quaternary',
             },
             editor: 'input',
             id: 'search',
@@ -259,7 +263,11 @@ Quaternary.args = {
         {
             action: {
                 type: 'submit',
-                icon: { content: <MagnifyingGlassIcon />, label: 'Magnifying Glass' },
+                icon: {
+                    content: <MagnifyingGlassIcon />,
+                    label: 'Magnifying Glass',
+                },
+                variant: 'quaternary',
             },
             defaultValue: 'GCSE English',
             editor: 'input',

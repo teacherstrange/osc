@@ -10,8 +10,6 @@ $input-pl: var(--space-scale-epsilon);
 .c-input {
     display: flex;
     order: 1;
-    min-width: 20ch;
-    max-width: 30ch;
     padding: $input-py $input-pr $input-py $input-pl;
     border: solid 1px var(--color-quinary);
     font-size: var(--font-scale-base);
@@ -44,7 +42,7 @@ $input-pl: var(--space-scale-epsilon);
 
     &__container {
         display: grid;
-        flex-direction: column;
+        width: 100%;
 
         .c-label {
             grid-row: 1;
@@ -115,9 +113,11 @@ $input-pl: var(--space-scale-epsilon);
         }
 
         &--quaternary + .c-input__button {
+            cursor: pointer;
+
             svg {
-                width: 1em;
-                height: 1em;
+                width: 2em;
+                height: 2em;
             }
         }
 

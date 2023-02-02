@@ -86,11 +86,13 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         </div>
     );
 
-    const InputButton = () => (
-        <Button className="c-input__button">
-            <AccessibleIcon label={action?.icon?.label}>{action?.icon?.content}</AccessibleIcon>
-        </Button>
-    );
+    const InputButton = ({ action: { icon, size, variant } }) => {
+        return (
+            <Button className="c-input__button" variant={variant} size={size}>
+                {icon ? <AccessibleIcon label={icon.label}>{icon.content}</AccessibleIcon> : null}
+            </Button>
+        );
+    };
 
     return (
         <div className="c-input__outer-container">
@@ -124,7 +126,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                 {icon && icon.type !== 'error' ? <InputIcon /> : null}
                 {displayError ? <InputError /> : null}
             </div>
-            {action?.type === 'submit' ? <InputButton /> : null}
+            {action?.type === 'submit' ? <InputButton action={action} /> : null}
         </div>
     );
 });
