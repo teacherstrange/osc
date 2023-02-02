@@ -30,6 +30,11 @@ export const DateRangePickerContainer = ({
     return (
         <>
             <DateRangePicker
+                clearSelection={<ClearSelection />}
+                label="Date range"
+                onChange={setValue}
+                selectedRange={selectedRange}
+                setSelectedRange={setSelectedRange}
                 timePresets={
                     presets ? (
                         <TimePresets
@@ -39,12 +44,7 @@ export const DateRangePickerContainer = ({
                         />
                     ) : null
                 }
-                clearSelection={<ClearSelection />}
-                selectedRange={selectedRange}
-                label="Date range"
-                setSelectedRange={setSelectedRange}
                 value={value}
-                onChange={setValue}
                 {...props}
             />
         </>

@@ -33,8 +33,8 @@ const createCalendar = (identifier) => {
 export const RangeCalendarContainer = ({
     clearSelection,
     selectedRange,
-    timePresets,
     setSelectedRange,
+    timePresets,
     ...props
 }: RangeCalendarContainerProps) => {
     const [showPrompt, setShowPrompt] = useState(false);

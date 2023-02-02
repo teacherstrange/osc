@@ -28,8 +28,10 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
 }
 
 export const DateRangePicker = ({
-    timePresets,
     clearSelection,
+    selectedRange,
+    setSelectedRange,
+    timePresets,
     ...props
 }: DateRangePickerProps) => {
     let state = useDateRangePickerState({ ...props, shouldCloseOnSelect: false });
@@ -78,8 +80,8 @@ export const DateRangePicker = ({
                             {...calendarProps}
                             clearSelection={clearSelection}
                             timePresets={timePresets}
-                            setSelectedRange={props.setSelectedRange}
-                            selectedRange={props.selectedRange}
+                            setSelectedRange={setSelectedRange}
+                            selectedRange={selectedRange}
                         />
                     </ReactAriaDialog>
                 </ReactAriaPopover>
