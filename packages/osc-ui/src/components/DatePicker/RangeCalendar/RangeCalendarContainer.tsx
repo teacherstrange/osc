@@ -88,7 +88,9 @@ export const RangeCalendarContainer = ({
                 </div>
             </div>
             <div className="c-calendar__range--inner-container-2">
-                <div>{showPrompt && <span>Now Select an End Date</span>}</div>
+                <div className={showPrompt ? 'c-calendar__prompt' : 'c-calendar__prompt--hidden'}>
+                    Now Select an End Date
+                </div>
                 <div className="c-calendar__range--inner-container-2-options">
                     {clearSelection}
                     <button
