@@ -56,14 +56,7 @@ export interface buttonModule extends module {
     label: string;
     reference?: object;
     type: string;
-    variant?:
-        | 'primary'
-        | 'secondary'
-        | 'tertiary'
-        | 'quaternary'
-        | 'quinary'
-        | 'primary-gradient'
-        | 'secondary-gradient';
+    variant?: string;
     email?: string;
     slug?: string;
     telephone?: string;
@@ -105,35 +98,40 @@ export interface videoModule extends module {
 }
 
 export interface bioCardModule extends module {
-    reference: {
-        bio: contentModule;
+    reference?: {
+        bio?: PortableTextBlock[];
         image?: {
             alt: string;
-            image?: imageModule<HTMLImageElement>;
+            image?: Omit<imageModule<HTMLImageElement>, 'alt' | 'src'>;
         };
-        name: string;
-        role: string;
+        name?: string;
+        role?: string;
     };
 }
 
 export interface courseCardModule extends module {
-    reference: {
-        store: shopifyProduct;
+    reference?: {
+        _createdAt: string;
+        _id: string;
+        _rev: string;
+        _type: string;
+        _updatedAt: string;
+        store?: shopifyProduct;
     };
 }
 
 export interface collectionCardModule extends module {
-    reference: {
-        store: shopifyCollection;
+    reference?: {
+        store?: shopifyCollection;
     };
 }
 
 export interface postCardModule extends module {
-    reference: {
-        slug: {
+    reference?: {
+        slug?: {
             current: string;
         };
-        title: string;
+        title?: string;
     };
 }
 
@@ -144,21 +142,28 @@ export interface staticCardModule extends module {
     heading?: string;
     image?: {
         alt: string;
-        image?: imageModule<HTMLImageElement>;
+        image?: Omit<imageModule<HTMLImageElement>, 'alt' | 'src'>;
     };
-    showFooter: boolean;
-    showSubHeading: boolean;
+    showFooter?: boolean;
+    showSubHeading?: boolean;
     subHeading?: string;
 }
 
+export type TypesOfCard =
+    | bioCardModule
+    | courseCardModule
+    | collectionCardModule
+    | postCardModule
+    | staticCardModule;
+
 export interface cardModule extends module {
-    backgroundColor?: Themes;
-    marginBottom?: Spacing;
-    paddingBottom?: Spacing;
-    paddingTop?: Spacing;
-    layout: 'grid' | 'carousel';
+    backgroundColor?: Themes | string;
+    marginBottom?: Spacing | string;
+    paddingBottom?: Spacing | string;
+    paddingTop?: Spacing | string;
+    layout: string;
     carouselName?: string;
-    card: [bioCardModule, courseCardModule, collectionCardModule, postCardModule, staticCardModule];
+    card: TypesOfCard[];
 }
 
 export interface mediaTextModule extends module {
@@ -257,39 +262,41 @@ export interface SanityPage {
 }
 
 export interface shopifyProduct {
-    id: string;
-    title: string;
-    descriptionHtml: string;
-    slug: {
-        current: string;
+    id?: string | number;
+    title?: string;
+    descriptionHtml?: string;
+    slug?: {
+        current?: string;
     };
     featuredImage?: {
         altText?: string | null;
-        height: number;
-        width: number;
-        url: string;
+        height?: number;
+        width?: number;
+        url?: string;
     } | null;
-    compareAtPriceRange: {
-        minVariantPrice: {
-            amount: string;
-            currencyCode: string;
+    compareAtPriceRange?: {
+        minVariantPrice?: {
+            amount?: string;
+            currencyCode?: string;
         };
     };
-    priceRange: {
-        minVariantPrice: {
-            amount: string;
-            currencyCode: string;
-        };
+    priceRange?: {
+        minVariantPrice?:
+            | number
+            | {
+                  amount?: string;
+                  currencyCode?: string;
+              };
     };
-    options: {
-        _key: string;
-        values: string[];
-        name: string;
+    options?: {
+        _key?: string;
+        values?: string[];
+        name?: string;
     }[];
 }
 
 export interface shopifyCollection {
-    id: string;
+    id: string | number;
     title: string;
     descriptionHtml: string;
     slug: {
