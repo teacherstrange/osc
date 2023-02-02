@@ -1,4 +1,4 @@
-import { Carousel, classNames, rem, useMediaQuery, useSpacing } from 'osc-ui';
+import { Carousel, classNames, rem, useMediaQuery } from 'osc-ui';
 import type {
     bioCardModule,
     cardModule,
@@ -14,11 +14,14 @@ import { CollectionCard } from './CollectionCard';
 import { CourseCard } from './CourseCard';
 import { SimpleCard } from './SimpleCard';
 
-interface Props {
-    module: cardModule;
-}
+type TypesOfCard =
+    | bioCardModule
+    | courseCardModule
+    | collectionCardModule
+    | postCardModule
+    | staticCardModule;
 
-const Card = (props) => {
+const Card = (props: { card: TypesOfCard }) => {
     const { card } = props;
 
     switch (card._type) {
@@ -42,19 +45,15 @@ const Card = (props) => {
     }
 };
 
-export const Cards = (props: Props) => {
+export const Cards = (props: { module: cardModule }) => {
     const { module } = props;
     const isSmallerThanTab = useMediaQuery(`(max-width: ${rem(breakpoints.tab)}rem)`);
 
-    const marginBottomClass = useSpacing('margin', 'bottom', module?.marginBottom);
-    const paddingTopClass = useSpacing('padding', 'top', module?.paddingTop);
-    const paddingBottomClass = useSpacing('padding', 'bottom', module?.paddingBottom);
-
     const classes = classNames(
-        module?.backgroundColor && `u-bg-color-${module?.backgroundColor}`,
-        module?.marginBottom && marginBottomClass,
-        module?.paddingTop && paddingTopClass,
-        module?.paddingBottom && paddingBottomClass
+        module?.backgroundColor ? `u-bg-color-${module?.backgroundColor}` : '',
+        module?.marginBottom ? `u-mb-${module?.marginBottom}` : '',
+        module?.paddingTop ? `u-pt-${module?.paddingTop}` : '',
+        module?.paddingBottom ? `u-pb-${module?.paddingBottom}` : ''
     );
 
     if (module?.layout === 'carousel') {

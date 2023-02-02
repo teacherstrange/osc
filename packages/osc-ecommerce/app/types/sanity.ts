@@ -152,6 +152,11 @@ export interface staticCardModule extends module {
 }
 
 export interface cardModule extends module {
+    backgroundColor?: Themes;
+    marginBottom?: Spacing;
+    paddingBottom?: Spacing;
+    paddingTop?: Spacing;
+    layout: 'grid' | 'carousel';
     card: [bioCardModule, courseCardModule, collectionCardModule, postCardModule, staticCardModule];
 }
 
