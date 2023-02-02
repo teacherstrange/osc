@@ -28,7 +28,7 @@ interface Props {
 // TODO: Update this to use Shopify storekit helpers
 export const CourseCard = (props: Props) => {
     const { data } = props;
-    const { store } = data?.reference;
+    const store = data?.reference?.store;
     const [isActive, setIsActive] = useState(false);
 
     return (
@@ -41,7 +41,7 @@ export const CourseCard = (props: Props) => {
                         onClick={() => setIsActive(!isActive)}
                     />
 
-                    <CardTitle>{store.title}</CardTitle>
+                    <CardTitle>{store?.title}</CardTitle>
                     <CardTitle as="h3" subtitle isSmall>
                         {/* // TODO: This data should come from the CMS */}
                         Single course
@@ -51,13 +51,19 @@ export const CourseCard = (props: Props) => {
                 <CardBody>
                     <CardBodyInner>
                         <h4>Course options available</h4>
-                        <ul>
-                            {store?.options
-                                .filter((option) => option?._key === 'Format')
-                                .map((option) =>
-                                    option.values.map((value) => <li key={value}>{value}</li>)
-                                )}
-                        </ul>
+                        {store?.options ? (
+                            <ul>
+                                {store?.options
+                                    .filter((option) => option?._key === 'Format')
+                                    .map(
+                                        (option) =>
+                                            option?.values &&
+                                            option?.values.map((value) => (
+                                                <li key={value}>{value}</li>
+                                            ))
+                                    )}
+                            </ul>
+                        ) : null}
                     </CardBodyInner>
 
                     <CardCallout>

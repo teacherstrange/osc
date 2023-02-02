@@ -9,7 +9,6 @@ import {
     CollectionCard as OSCCollectionCard,
     Icon,
     Image,
-    truncate,
 } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import type { collectionCardModule } from '~/types/sanity';
@@ -21,7 +20,7 @@ interface Props {
 // TODO: Update this to use Shopify storekit helpers
 export const CollectionCard = (props: Props) => {
     const { data } = props;
-    const { store } = data?.reference;
+    const store = data?.reference?.store;
 
     return (
         <OSCCollectionCard size="sm">
@@ -36,12 +35,10 @@ export const CollectionCard = (props: Props) => {
             </CardImage>
             <CardInner>
                 <CardHeader>
-                    <CardTitle>{store.title}</CardTitle>
+                    <CardTitle>{store?.title}</CardTitle>
                 </CardHeader>
 
-                <CardBody>
-                    <p>{truncate(store.descriptionHtml)}</p>
-                </CardBody>
+                <CardBody>{store?.descriptionHtml}</CardBody>
 
                 <CardFooter>
                     <span className="u-text-bold">23 courses</span>

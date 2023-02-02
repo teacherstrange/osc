@@ -23,7 +23,7 @@ export const BioCard = (props: Props) => {
 
     return (
         <Card>
-            {data.image ? (
+            {data?.image ? (
                 <CardImage isRounded>
                     {src && data?.image?.image ? (
                         <Image
