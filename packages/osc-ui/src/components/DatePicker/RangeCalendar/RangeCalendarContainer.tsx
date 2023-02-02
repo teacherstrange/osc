@@ -6,10 +6,19 @@ import type { DateValue } from '@react-types/calendar';
 import type { ReactNode } from 'react';
 import React, { useEffect, useState } from 'react';
 import { RangeCalendar } from './RangeCalendar';
+import type { Dispatch, SetStateAction } from 'react';
+import type { RangeValue } from '@react-types/shared';
+import type { CalendarDate } from '@internationalized/date';
 
+type SelectedRange = {
+    timePreset: boolean;
+    range: RangeValue<CalendarDate>;
+};
 interface RangeCalendarContainerProps extends AriaRangeCalendarProps<DateValue> {
-    timePresets: ReactNode;
     clearSelection: ReactNode;
+    selectedRange: SelectedRange;
+    setSelectedRange: Dispatch<SetStateAction<SelectedRange>>;
+    timePresets: ReactNode;
 }
 
 const createCalendar = (identifier) => {
@@ -23,14 +32,12 @@ const createCalendar = (identifier) => {
 
 export const RangeCalendarContainer = ({
     clearSelection,
-    highlighted,
+    selectedRange,
     timePresets,
-    setHighlighted,
-    selectEndDate,
+    setSelectedRange,
     ...props
 }: RangeCalendarContainerProps) => {
-    // let [highlighted, setHighlighted] = useState({ bool: true, value: null });
-    const [value, setValue] = useState(false);
+    const [showPrompt, setShowPrompt] = useState(false);
 
     let { locale } = useLocale();
     let state = useRangeCalendarState({
@@ -40,30 +47,37 @@ export const RangeCalendarContainer = ({
         createCalendar,
     });
 
-    const { setFocusedDate, highlightedRange } = state;
+    const { setFocusedDate } = state;
 
-    // This is designed to enable a pop up in the Range Picker to tell the
-    // user to select an end date once they've selected a start date
+    // This is designed to enable a prompt that tells the user to
+    // select an end date once they've selected a start date
     useEffect(() => {
-        if (!highlightedRange) return;
+        if (!state.highlightedRange) return;
+        // Check whether the day the user has selected (and is passed down as state)
+        // is different - If it is then show the prompt
         if (
-            highlightedRange.start.day &&
-            highlightedRange.start.day !== highlighted.value?.start.day
+            state.highlightedRange.start.day &&
+            state.highlightedRange.start.day !== selectedRange.range?.start.day
         ) {
-            if (highlighted.setTimePreset) {
-                setHighlighted((prev) => {
+            // This is an additional check on the time presets (e.g. yesterday, 7 days ago...)
+            // This automatically sets the whole range in one click so we don't want to show users
+            // the prompt in these cases
+            if (selectedRange.timePreset) {
+                setSelectedRange((prev) => {
                     return { ...prev, setTimePreset: false };
                 });
-                return setValue(false);
+                return setShowPrompt(false);
             }
-            setHighlighted((prev) => {
-                setValue(true);
-                return { ...prev, bool: false, value: highlightedRange };
+            setSelectedRange((prev) => {
+                setShowPrompt(true);
+                return { ...prev, range: state.highlightedRange };
             });
-        } else if (selectEndDate) {
-            setValue(false);
+        } else {
+            setShowPrompt(false);
         }
-    }, [highlightedRange?.start.day, selectEndDate]);
+        // Update when the start day changes, and when the entire value changes (ie - when)
+        // both the start and end date are updated
+    }, [state.highlightedRange?.start.day, state.value]);
 
     return (
         <div className="c-calendar__range--container">
@@ -74,7 +88,7 @@ export const RangeCalendarContainer = ({
                 </div>
             </div>
             <div className="c-calendar__range--inner-container-2">
-                {value && <div>Now Select an End Date</div>}
+                <div>{showPrompt && <span>Now Select an End Date</span>}</div>
                 <div className="c-calendar__range--inner-container-2-options">
                     {clearSelection}
                     <button

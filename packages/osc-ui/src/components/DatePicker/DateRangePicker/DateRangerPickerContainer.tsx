@@ -16,10 +16,9 @@ export const DateRangePickerContainer = ({
     // Used to set the value of the range calender to a preset or to clear it
     const [value, setValue] = useState(defaultValue ? defaultValue : null);
 
-    const [highlighted, setHighlighted] = useState({
-        bool: true,
-        setTimePreset: false,
-        value: null,
+    const [selectedRange, setSelectedRange] = useState({
+        timePreset: false,
+        range: null,
     });
 
     const ClearSelection = () => (
@@ -36,14 +35,14 @@ export const DateRangePickerContainer = ({
                         <TimePresets
                             presets={presets}
                             setValue={setValue}
-                            setHighlighted={setHighlighted}
+                            setSelectedRange={setSelectedRange}
                         />
                     ) : null
                 }
                 clearSelection={<ClearSelection />}
-                highlighted={highlighted}
+                selectedRange={selectedRange}
                 label="Date range"
-                setHighlighted={setHighlighted}
+                setSelectedRange={setSelectedRange}
                 value={value}
                 onChange={setValue}
                 {...props}
@@ -52,7 +51,7 @@ export const DateRangePickerContainer = ({
     );
 };
 
-const TimePresets = ({ presets, setHighlighted, setValue }) => (
+const TimePresets = ({ presets, setSelectedRange, setValue }) => (
     <div className="c-calendar__range--time-presets" aria-label="Time Presets" role="group">
         <div>Time Presets</div>
 
@@ -60,7 +59,7 @@ const TimePresets = ({ presets, setHighlighted, setValue }) => (
             <button
                 key={index}
                 onClick={() => {
-                    setHighlighted((prev) => ({ ...prev, setTimePreset: true }));
+                    setSelectedRange((prevRange) => ({ ...prevRange, timePreset: true }));
                     setValue({
                         start: startDate,
                         end: endDate,

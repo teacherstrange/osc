@@ -3,7 +3,7 @@ import { useDateRangePicker } from '@react-aria/datepicker';
 
 import { useDateRangePickerState } from '@react-stately/datepicker';
 import type { DateValue } from '@react-types/calendar';
-import type { ReactNode } from 'react';
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import React, { useRef } from 'react';
 import { Icon } from '../../Icon/Icon';
 import { DateField } from '../DateField/DateField';
@@ -13,10 +13,18 @@ import {
     ReactAriaDialog,
     ReactAriaPopover,
 } from '../ReactAriaComponents/ReactAriaComponents';
+import type { RangeValue } from '@react-types/shared';
+import type { CalendarDate } from '@internationalized/date';
 
+type SelectedRange = {
+    timePreset: boolean;
+    range: RangeValue<CalendarDate>;
+};
 interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
-    timePresets: ReactNode;
     clearSelection: ReactNode;
+    selectedRange: SelectedRange;
+    setSelectedRange: Dispatch<SetStateAction<SelectedRange>>;
+    timePresets: ReactNode;
 }
 
 export const DateRangePicker = ({
@@ -70,9 +78,8 @@ export const DateRangePicker = ({
                             {...calendarProps}
                             clearSelection={clearSelection}
                             timePresets={timePresets}
-                            selectEndDate={state.value}
-                            setHighlighted={props.setHighlighted}
-                            highlighted={props.highlighted}
+                            setSelectedRange={props.setSelectedRange}
+                            selectedRange={props.selectedRange}
                         />
                     </ReactAriaDialog>
                 </ReactAriaPopover>
