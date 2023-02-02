@@ -1,4 +1,4 @@
-import { Carousel, classNames, useSpacing } from 'osc-ui';
+import { Carousel, classNames, rem, useMediaQuery, useSpacing } from 'osc-ui';
 import type {
     bioCardModule,
     cardModule,
@@ -7,6 +7,7 @@ import type {
     postCardModule,
     staticCardModule,
 } from '~/types/sanity';
+import breakpoints from '../../../../../tokens/media-queries';
 import { BioCard } from './BioCard';
 import { BlogCard } from './BlogCard';
 import { CollectionCard } from './CollectionCard';
@@ -43,6 +44,8 @@ const Card = (props) => {
 
 export const Cards = (props: Props) => {
     const { module } = props;
+    const isSmallerThanTab = useMediaQuery(`(max-width: ${rem(breakpoints.tab)}rem)`);
+
     const marginBottomClass = useSpacing('margin', 'bottom', module?.marginBottom);
     const paddingTopClass = useSpacing('padding', 'top', module?.paddingTop);
     const paddingBottomClass = useSpacing('padding', 'bottom', module?.paddingBottom);
@@ -67,19 +70,27 @@ export const Cards = (props: Props) => {
     }
 
     // Return grid layout by default
-    // TODO: Responsive grid >>> carousel
     return (
         <div className={classes}>
-            <ul className="o-grid o-container">
-                {module.card.map((card) => (
-                    <li
-                        className="o-grid__col--12 o-grid__col--6@tab o-grid__col--4@desk"
-                        key={card?._key}
-                    >
-                        <Card card={card} />
-                    </li>
-                ))}
-            </ul>
+            {/* Only become a carousel on mobile and small tablets AND when the number of cards is greater than three */}
+            {isSmallerThanTab && module?.card.length > 3 ? (
+                <Carousel className="o-container" adaptiveHeight>
+                    {module.card.map((card) => (
+                        <Card card={card} key={card?._key} />
+                    ))}
+                </Carousel>
+            ) : (
+                <ul className="o-grid o-container">
+                    {module.card.map((card) => (
+                        <li
+                            className="o-grid__col--12 o-grid__col--6@tab o-grid__col--4@desk"
+                            key={card?._key}
+                        >
+                            <Card card={card} />
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };

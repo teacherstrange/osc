@@ -384,6 +384,7 @@ export const Carousel = (props: Props) => {
         ]
     );
 
+    // TODO: Need to make this a polymorphic component so support ul / li for example
     return (
         <section
             className={classes}
