@@ -5,38 +5,32 @@
 // .c-calendar {
 //     --selected-color: #00baa9;
 //     --highlighted-color: rgba(0, 186, 169, 0.2);
-//     --hover-color: #f5f5f5;
+//     --hover-color: var(--color-neutral-300);
 
 //     width: max-content;
 
 //     &__header {
 //         display: flex;
 //         align-items: center;
+//         justify-content: space-between;
 //         gap: 1em;
-//         margin: 0 8px;
-
-//         h2 {
-//             flex: 1;
-//             margin: 0;
+//         h3 {
+//             display: flex;
+//             margin-bottom: 0;
 //         }
-//     }
-
-//     table {
-//         width: 100%;
 //     }
 
 //     &__month,
 //     &__year {
-//         margin: 0 0.188em;
 //         font-size: var(--font-scale-zeta);
 //     }
 
-//     &__year {
-//         color: #00a698;
+//     &__month {
+//         margin: 0 0.188em;
 //     }
 
-//     td {
-//         height: 40px;
+//     &__year {
+//         color: var(--selected-color);
 //     }
 
 //     &__cell {
@@ -45,7 +39,7 @@
 //         justify-content: center;
 //         width: 40px;
 //         height: 40px;
-//         color: #062134;
+//         color: var(--color-secondary);
 //         text-align: center;
 //         cursor: pointer;
 //         font-size: var(--font-scale-zeta);
@@ -80,16 +74,13 @@
 //         }
 
 //         &--disabled {
-//             color: gray;
-//         }
-
-//         &--unavailable {
-//             color: red;
+//             color: var(--color-neutral-400);
+//             cursor: not-allowed;
 //         }
 //     }
 
 //     &__table-head {
-//         background: #f5f5f5;
+//         background: var(--color-neutral-300);
 
 //         th {
 //             display: table-cell;
@@ -97,6 +88,8 @@
 //             width: 40px;
 //             height: 40px;
 //             text-align: center;
+//             font-weight: $weight-bold;
+//             color: var(--color-neutral-600);
 //         }
 //     }
 
@@ -111,9 +104,10 @@
 //                 border-radius: 4px;
 //             }
 
-//             svg {
-//                 width: 30px;
-//                 height: 30px;
+//             .chevron {
+//                 width: 20px;
+//                 height: 20px;
+//                 color: var(--color-neutral-600);
 //             }
 //         }
 //     }
@@ -125,6 +119,7 @@
 //             gap: 2em;
 //         }
 //         &--inner-container-1 {
+//             width: 300px;
 //             display: flex;
 //             flex: 1 100%;
 //             .c-calendar__range--time-presets {
@@ -133,7 +128,7 @@
 //                 }
 //                 flex: 1;
 //                 border-right: solid 1px var(--color-neutral-300);
-//                 margin: 0 1em;
+//                 padding: 0 1em;
 
 //                 button {
 //                     &:focus {
@@ -144,6 +139,8 @@
 //             }
 //             .c-calendar__range--calendar-container {
 //                 flex: 6;
+//                 display: flex;
+//                 justify-content: center;
 //             }
 //         }
 
@@ -152,6 +149,7 @@
 //             justify-content: space-between;
 //             align-items: center;
 //             flex: 1 100%;
+
 //             &-options {
 //                 display: flex;
 //                 align-items: center;
@@ -201,6 +199,7 @@
 //             flex-direction: column;
 //             justify-content: space-evenly;
 //             gap: 1em;
+//             cursor: pointer;
 //         }
 
 //         &--clear-selection {
@@ -221,15 +220,19 @@
 //         }
 
 //         .c-calendar__header--inner {
+//             margin-bottom: 0.5em;
 //             display: flex;
 //             justify-content: space-between;
 //             align-items: center;
 //             flex: 1;
 //         }
 //     }
-// }
 
-// table {
-//     border-collapse: separate;
-//     text-indent: initial;
+//     &__prompt {
+//         scale: 1;
+//         transition: 100ms ease-in-out;
+//         &--hidden {
+//             scale: 0;
+//         }
+//     }
 // }
