@@ -157,6 +157,7 @@ export interface cardModule extends module {
     paddingBottom?: Spacing;
     paddingTop?: Spacing;
     layout: 'grid' | 'carousel';
+    carouselName?: string;
     card: [bioCardModule, courseCardModule, collectionCardModule, postCardModule, staticCardModule];
 }
 

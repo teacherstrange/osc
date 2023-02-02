@@ -59,7 +59,11 @@ export const Cards = (props: { module: cardModule }) => {
     if (module?.layout === 'carousel') {
         return (
             <div className={classes}>
-                <Carousel className="o-container" adaptiveHeight>
+                <Carousel
+                    carouselName={module?.carouselName ? module?.carouselName : ''}
+                    className="o-container"
+                    adaptiveHeight
+                >
                     {module.card.map((card) => (
                         <Card card={card} key={card?._key} />
                     ))}
@@ -73,7 +77,11 @@ export const Cards = (props: { module: cardModule }) => {
         <div className={classes}>
             {/* Only become a carousel on mobile and small tablets AND when the number of cards is greater than three */}
             {isSmallerThanTab && module?.card.length > 3 ? (
-                <Carousel className="o-container" adaptiveHeight>
+                <Carousel
+                    carouselName={module?.carouselName ? module?.carouselName : ''}
+                    className="o-container"
+                    adaptiveHeight
+                >
                     {module.card.map((card) => (
                         <Card card={card} key={card?._key} />
                     ))}

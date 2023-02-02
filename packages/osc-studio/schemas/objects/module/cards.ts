@@ -11,6 +11,10 @@ const CARDS = [
     { type: 'card.static' },
 ];
 
+const shouldShow = (parent) => {
+    return parent.layout === 'carousel';
+};
+
 export default {
     name: 'module.cards',
     title: 'Cards',
@@ -73,6 +77,24 @@ export default {
             },
             validation: (Rule) => Rule.required(),
             group: 'cards',
+        },
+        {
+            name: 'carouselName',
+            title: 'Carousel Name',
+            type: 'string',
+            description: 'The accessible name of the carousel.',
+            group: 'cards',
+            hidden: ({ parent }) => !shouldShow(parent),
+            validation: (Rule) =>
+                Rule.custom((currentValue, { parent }) => {
+                    // in a custom validation rule, check if the field should be shown, and if yes, show an error if the value is not set
+                    if (shouldShow(parent) && currentValue === undefined) {
+                        return 'An accessible name is needed to describe the carousel for screen readers.';
+                    }
+
+                    // if we are not showing the field, or if the field has a value then the validation passes
+                    return true;
+                }),
         },
         {
             name: 'backgroundColor',
