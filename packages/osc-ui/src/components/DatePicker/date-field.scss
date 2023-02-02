@@ -2,12 +2,16 @@
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
+$input-py: calc(var(--space-scale-micro) - 3px);
+$input-pr: var(--space-scale-delta);
+$input-pl: var(--space-scale-micro);
+
 .c-date-field {
     position: relative;
     display: inline-flex;
     min-width: 20ch;
     max-width: 30ch;
-    padding: 0.375em 2.563em 0.375em 0.625em;
+    padding: $input-py $input-pr $input-py $input-pl;
     border: solid 1px var(--color-quinary);
     border-radius: 4px;
 
