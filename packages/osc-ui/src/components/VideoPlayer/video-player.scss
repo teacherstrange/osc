@@ -1,0 +1,8 @@
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+.c-video-player {
+    &__wrapper {
+        @include ratio(16 9);
+    }
+}
