@@ -23,6 +23,8 @@ export const MODULE_CARDS = groq`
         _type == 'card.post' => {
           _key,
           _type,
+          backgroundColor,
+          fullWidth,
           reference->
         },
         _type == 'card.static' => {

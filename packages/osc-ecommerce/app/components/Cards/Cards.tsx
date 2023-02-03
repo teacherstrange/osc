@@ -82,14 +82,22 @@ export const Cards = (props: { module: cardModule }) => {
                 </Carousel>
             ) : (
                 <ul className="o-grid o-container">
-                    {module.card.map((card) => (
-                        <li
-                            className="o-grid__col--12 o-grid__col--6@tab o-grid__col--4@desk"
-                            key={card?._key}
-                        >
-                            <Card card={card} />
-                        </li>
-                    ))}
+                    {module.card.map((card) => {
+                        const postCard = card as postCardModule;
+                        const isFullWidth = postCard?.fullWidth;
+
+                        const classes = classNames(
+                            'o-grid__col--12',
+                            isFullWidth ? '' : 'o-grid__col--6@tab',
+                            isFullWidth ? '' : 'o-grid__col--4@desk'
+                        );
+
+                        return (
+                            <li className={classes} key={card?._key}>
+                                <Card card={card} />
+                            </li>
+                        );
+                    })}
                 </ul>
             )}
         </div>

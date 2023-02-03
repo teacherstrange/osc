@@ -127,6 +127,8 @@ export interface collectionCardModule extends module {
 }
 
 export interface postCardModule extends module {
+    fullWidth?: boolean;
+    backgroundColor?: string;
     reference?: {
         slug?: {
             current: string;

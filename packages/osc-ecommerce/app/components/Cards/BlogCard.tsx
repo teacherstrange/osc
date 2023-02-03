@@ -19,9 +19,15 @@ export const BlogCard = (props: Props) => {
     const data = props?.data?.reference;
 
     return (
-        <OSCBlogCard variant="featured" blockLink>
+        <OSCBlogCard
+            variant="featured"
+            blockLink
+            isFull={props?.data?.fullWidth}
+            className={
+                props?.data?.backgroundColor ? `u-bg-color-${props?.data?.backgroundColor}` : ''
+            }
+        >
             {/* // TODO: This data should come from the CMS */}
-
             <CardImage>
                 <Image
                     src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1674744069/db8cdf9db0ec39f88706516410a64ed7_kxoiou.png"

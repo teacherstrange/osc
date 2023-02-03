@@ -1,3 +1,5 @@
+import { ColorPicker } from '../../../components/inputs/ColorPicker';
+
 export default {
     name: 'card.post',
     title: 'Post Card',
@@ -11,6 +13,19 @@ export default {
             options: {
                 disableNew: true,
             },
+        },
+        {
+            name: 'backgroundColor',
+            title: 'Background Colour',
+            type: 'string',
+            inputComponent: ColorPicker,
+            validation: (Rule) => Rule.required(),
+        },
+        {
+            name: 'fullWidth',
+            title: 'Full Width',
+            type: 'boolean',
+            intialValue: false,
         },
     ],
     preview: {
