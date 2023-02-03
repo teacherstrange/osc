@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
-import type { ReactPlayerProps } from 'react-player/lazy';
+import type { ReactPlayerProps } from 'react-player';
 import ReactPlayer from 'react-player/lazy';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { classNames } from '../../utils/classNames';
@@ -11,7 +11,6 @@ import './video-player.scss';
 
 /*
 TODO: To support ONLY Vimeo and Youtube (No video upload i.e. MP4) -> Sanity thing
-TODO: Tests
 */
 
 /* -------------------------------------------------------------------------------------------------
