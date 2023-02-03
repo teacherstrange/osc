@@ -1,7 +1,8 @@
 import type { ReactElement, ReactNode } from 'react';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { ReactPlayerProps } from 'react-player/lazy';
 import ReactPlayer from 'react-player/lazy';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { classNames } from '../../utils/classNames';
 import type { IconProps } from '../Icon/Icon';
 import { Icon } from '../Icon/Icon';
@@ -10,8 +11,6 @@ import './video-player.scss';
 
 /*
 TODO: To support ONLY Vimeo and Youtube (No video upload i.e. MP4) -> Sanity thing
-TODO: Pause on scroll out of view (iframe api)
-TODO: custom play icon
 TODO: overlay?
 TODO: Tests
 */
@@ -42,11 +41,25 @@ export interface VideoPlayerProps extends ReactPlayerProps {
 
 export const VideoPlayer = (props: VideoPlayerProps) => {
     const { className, url, previewImage, playIcon, ...rest } = props;
-    const [isPlaying, setIsPlaying] = useState(false);
     const classes = classNames('c-video-player', className);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const intersectionRef = useRef<HTMLDivElement>(null);
+    const intersectionThreshold = 0.5; // intersect when 50% of the element is in view
+    const intersection = useIntersectionObserver(intersectionRef, {
+        root: null,
+        rootMargin: '0px',
+        threshold: intersectionThreshold,
+    });
+
+    useEffect(() => {
+        intersection && intersection.intersectionRatio < intersectionThreshold
+            ? setIsPlaying(false)
+            : setIsPlaying(true);
+    }, [intersection]);
 
     return (
-        <div className={classes}>
+        <div className={classes} ref={intersectionRef}>
             <ReactPlayer
                 url={url}
                 playing={isPlaying}
