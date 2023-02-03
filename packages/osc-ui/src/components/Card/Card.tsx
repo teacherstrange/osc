@@ -10,8 +10,6 @@ import { AccessibleIcon, Icon } from '../Icon/Icon';
 
 import './card.scss';
 
-// TODO: Make polymorphic to support li for example
-
 export interface SharedCardProps {
     /**
      * The content of the component
