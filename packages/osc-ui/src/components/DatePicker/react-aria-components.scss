@@ -2,14 +2,6 @@
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
-// *********** REACT ARIA BUTTON ************
-
-.c-react-aria__button {
-    &:focus {
-        outline: 2px solid var(--color-primary);
-    }
-}
-
 // *********** REACT ARIA DIALOG ************
 
 .c-react-aria__dialog {

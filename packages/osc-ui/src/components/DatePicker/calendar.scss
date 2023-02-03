@@ -5,7 +5,7 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-calendar {
-    --selected-color: #00baa9;
+    --selected-color: #00a698;
     --highlighted-color: rgb(0 186 169 / 20%);
     --hover-color: var(--color-neutral-300);
 
@@ -99,7 +99,6 @@
             cursor: pointer;
 
             &:focus {
-                border: 2px solid var(--color-primary);
                 border-radius: 4px;
             }
 
@@ -134,7 +133,6 @@
 
                 button {
                     &:focus {
-                        border: solid 2px var(--color-primary);
                         border-radius: 4px;
                     }
                 }
@@ -163,7 +161,6 @@
                     cursor: pointer;
 
                     &:focus {
-                        border: solid 2px var(--color-primary);
                         border-radius: 4px;
                     }
                 }
@@ -231,6 +228,67 @@
             flex: 1;
             align-items: center;
             justify-content: space-between;
+        }
+    }
+
+    &__year-view,
+    &__decade-view {
+        padding: 0 var(--space-scale-delta);
+
+        &--month-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        &--month-button,
+        &--year-button {
+            padding: var(--space-scale-micro) var(--space-scale-delta);
+            cursor: pointer;
+            font-variant-numeric: tabular-nums;
+
+            &:hover {
+                background: var(--color-neutral-300);
+                border-radius: 4px;
+            }
+
+            &:focus {
+                background: var(--color-neutral-300);
+                border-radius: 4px;
+                box-shadow: 0 0 0 2px var(--color-primary);
+            }
+        }
+
+        &--selected {
+            background: #00a698 !important;
+            border-radius: 4px;
+            color: var(--color-tertiary);
+            font-weight: $weight-bold;
+        }
+
+        .c-calendar__header {
+            border-bottom: solid 2px var(--color-neutral-400);
+
+            .c-calendar__year {
+                font-weight: $weight-bold;
+
+                &--container {
+                    display: flex;
+                    gap: 0.2em;
+                }
+            }
+
+            .chevron {
+                width: 20px;
+                height: 20px;
+                color: var(--color-neutral-600);
+            }
+        }
+    }
+
+    &__decade-view {
+        &--month-button,
+        &--year-button {
+            padding: 0.5em 1em;
         }
     }
 

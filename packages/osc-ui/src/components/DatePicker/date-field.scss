@@ -40,10 +40,6 @@ $input-pl: var(--space-scale-micro);
         }
     }
 
-    &:focus-within {
-        border: 2px solid var(--color-primary);
-    }
-
     &__label {
         --label-font-size: var(--font-scale-centi);
 
