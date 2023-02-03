@@ -45,6 +45,9 @@ export const MODULE_CARDS = groq`
             content,
             footer,
             heading,
+            headingStyles {
+                ...
+            },
             image,
             showFooter,
             showSubHeading,

@@ -142,6 +142,10 @@ export interface staticCardModule extends module {
     content?: PortableTextBlock[];
     footer?: PortableTextBlock[];
     heading?: string;
+    headingStyles?: {
+        headingColor?: string;
+        smallHeading?: boolean;
+    };
     image?: {
         alt: string;
         image?: Omit<imageModule<HTMLImageElement>, 'alt' | 'src'>;

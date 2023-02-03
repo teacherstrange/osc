@@ -40,7 +40,16 @@ export const SimpleCard = (props: Props) => {
 
             <CardInner>
                 <CardHeader>
-                    <CardTitle>{data?.heading}</CardTitle>
+                    <CardTitle
+                        isSmall={data?.headingStyles?.smallHeading}
+                        className={
+                            data?.headingStyles?.headingColor
+                                ? `u-color-${data?.headingStyles?.headingColor}`
+                                : ''
+                        }
+                    >
+                        {data?.heading}
+                    </CardTitle>
 
                     {data?.showSubHeading && data?.subHeading ? (
                         <CardTitle as="h3" subtitle>
