@@ -178,7 +178,7 @@ describe('Card types', () => {
         expect(content).toBeInTheDocument();
     });
 
-    test('renders teh content of the course card', async () => {
+    test('renders the content of the course card', async () => {
         // TODO: Will need to update test to reflect Shopify storekit helpers when in place
         const courseCard = getCardType('card.course');
         const user = userEvent.setup();
@@ -208,7 +208,7 @@ describe('Card types', () => {
         expect(wishlistButton).toHaveClass('is-active');
     });
 
-    test('renders teh content of the course card', () => {
+    test('renders the content of the collection card', () => {
         // TODO: Will need to update test to reflect Shopify storekit helpers when in place
         const collectionCard = getCardType('card.collection');
 
