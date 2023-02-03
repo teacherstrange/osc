@@ -6,6 +6,8 @@ import React, { useRef } from 'react';
 import type { DateValue } from '@react-types/calendar';
 import { Icon } from '../../Icon/Icon';
 import { Calendar } from '../Calendar/Calendar';
+import { YearCalendar } from '../Calendar/YearCalendar';
+import { DecadeCalendar } from '../Calendar/DecadeCalendar';
 import '../date-picker.scss';
 import { DateField } from '../DateField/DateField';
 
@@ -15,11 +17,30 @@ import {
     ReactAriaPopover,
 } from '../ReactAriaComponents/ReactAriaComponents';
 
-export const DatePicker = (props: AriaDatePickerProps<DateValue>) => {
+interface DatePickerProps extends AriaDatePickerProps<DateValue> {
+    type: 'month' | 'year' | 'decade';
+}
+
+export const DatePicker = (props: DatePickerProps) => {
     let state = useDatePickerState({ ...props, shouldCloseOnSelect: false });
     let ref = useRef();
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
         useDatePicker(props, state, ref);
+    let calendar;
+
+    switch (props.type) {
+        case 'month':
+            calendar = <Calendar {...calendarProps} />;
+            break;
+        case 'year':
+            calendar = <YearCalendar {...calendarProps} />;
+            break;
+        case 'decade':
+            calendar = <DecadeCalendar {...calendarProps} />;
+            break;
+        default:
+            console.error('No calendar selected');
+    }
 
     return (
         <div className="c-datepicker">
@@ -27,7 +48,7 @@ export const DatePicker = (props: AriaDatePickerProps<DateValue>) => {
                 {props.label}
             </div>
             <div className="c-datepicker__date-field-container" {...groupProps} ref={ref}>
-                <DateField {...fieldProps} />
+                <DateField {...fieldProps} granularity={props.granularity} />
                 <ReactAriaButton {...buttonProps}>
                     <Icon id="calendar" />
                 </ReactAriaButton>
@@ -39,9 +60,7 @@ export const DatePicker = (props: AriaDatePickerProps<DateValue>) => {
                     triggerRef={ref}
                     placement="bottom start"
                 >
-                    <ReactAriaDialog {...dialogProps}>
-                        <Calendar {...calendarProps} />
-                    </ReactAriaDialog>
+                    <ReactAriaDialog {...dialogProps}>{calendar}</ReactAriaDialog>
                 </ReactAriaPopover>
             )}
         </div>

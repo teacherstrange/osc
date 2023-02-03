@@ -20,10 +20,12 @@ const Template: Story = ({ minValue, maxValue, ...args }) => {
         // required to change the date order to dd-mm-YYYY rather than US mm-dd-YYYY
         <I18nProvider locale="en-GB">
             <DatePicker
-                value={date}
+                granularity={args.granularity}
                 minValue={minValue && parseDate('2023-02-03')}
                 maxValue={maxValue && parseDate('2023-02-20')}
                 onChange={setDate}
+                type={args.type}
+                value={date}
                 {...args}
             />
         </I18nProvider>
@@ -33,16 +35,31 @@ const Template: Story = ({ minValue, maxValue, ...args }) => {
 export const Primary = Template.bind({});
 export const DefaultDate = Template.bind({});
 export const MinAndMaxDates = Template.bind({});
+export const YearCalendar = Template.bind({});
+export const DecadeCalendar = Template.bind({});
 
 Primary.args = {
     label: 'Date',
+    type: 'month',
 };
 DefaultDate.args = {
     defaultValue: '2022-02-03',
     label: 'Date',
+    type: 'month',
 };
 MinAndMaxDates.args = {
     label: 'Date',
     minValue: true,
     maxValue: true,
+    type: 'month',
+};
+YearCalendar.args = {
+    granularity: 'month',
+    label: 'Date',
+    type: 'year',
+};
+DecadeCalendar.args = {
+    granularity: 'year',
+    label: 'Date',
+    type: 'decade',
 };
