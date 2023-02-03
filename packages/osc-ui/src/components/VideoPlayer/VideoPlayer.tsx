@@ -1,7 +1,8 @@
 import type { ReactElement, ReactNode } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import type { ReactPlayerProps } from 'react-player';
-import ReactPlayer from 'react-player/lazy';
+import VimeoPlayer from 'react-player/vimeo';
+import YouTubePlayer from 'react-player/youtube';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { classNames } from '../../utils/classNames';
 import type { IconProps } from '../Icon/Icon';
@@ -16,9 +17,12 @@ TODO: To support ONLY Vimeo and Youtube (No video upload i.e. MP4) -> Sanity thi
 /* -------------------------------------------------------------------------------------------------
  * VideoPlayer
  *
+ * We're importing two separate packages, rather than the entire react-player/lazy package
+ * as we're only using two players this keeps the bundle size much smaller
+ *
  * https://www.npmjs.com/package/react-player
  * -----------------------------------------------------------------------------------------------*/
-export interface VideoPlayerProps extends ReactPlayerProps {
+export interface VideoPlayerProps extends Omit<ReactPlayerProps, 'config'> {
     /**
      * The url of a video to play
      */
@@ -35,10 +39,15 @@ export interface VideoPlayerProps extends ReactPlayerProps {
      * Custom class
      */
     className?: string;
+    /**
+     * Set the video player component to render
+     * @default youtube
+     */
+    variant?: 'youtube' | 'vimeo';
 }
 
 export const VideoPlayer = (props: VideoPlayerProps) => {
-    const { className, url, previewImage, playIcon, ...rest } = props;
+    const { className, url, previewImage, playIcon, variant = 'youtube', ...rest } = props;
     const classes = classNames('c-video-player', className);
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -58,18 +67,33 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
 
     return (
         <div className={classes} ref={intersectionRef}>
-            <ReactPlayer
-                url={url}
-                playing={isPlaying}
-                wrapper={Wrapper}
-                controls={true}
-                light={previewImage ?? true}
-                playIcon={playIcon}
-                width="100%"
-                height="100%"
-                onClickPreview={() => setIsPlaying(true)}
-                {...rest}
-            />
+            {variant === 'youtube' ? (
+                <YouTubePlayer
+                    url={url}
+                    playing={isPlaying}
+                    wrapper={Wrapper}
+                    controls={true}
+                    light={previewImage ?? true}
+                    playIcon={playIcon}
+                    width="100%"
+                    height="100%"
+                    onClickPreview={() => setIsPlaying(true)}
+                    {...rest}
+                />
+            ) : (
+                <VimeoPlayer
+                    url={url}
+                    playing={isPlaying}
+                    wrapper={Wrapper}
+                    controls={true}
+                    light={previewImage ?? true}
+                    playIcon={playIcon}
+                    width="100%"
+                    height="100%"
+                    onClickPreview={() => setIsPlaying(true)}
+                    {...rest}
+                />
+            )}
         </div>
     );
 };

@@ -3,13 +3,6 @@ import React from 'react';
 import { Image } from '../Image/Image';
 import { PlayIcon, VideoPlayer } from './VideoPlayer';
 
-// react-player/lazy causes an error when running tests
-// To get around this we're replacing the  package here
-// See: https://github.com/cookpete/react-player/issues/1391
-vi.mock('react-player/lazy', () => {
-    return vi.importActual('react-player');
-});
-
 beforeEach(() => {
     // Window.fetch isn't available in the test environment
     window.fetch = vi.fn().mockImplementation(() =>
