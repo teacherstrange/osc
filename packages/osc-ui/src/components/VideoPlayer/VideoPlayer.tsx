@@ -21,7 +21,7 @@ TODO: Tests
  * -----------------------------------------------------------------------------------------------*/
 export interface VideoPlayerProps extends ReactPlayerProps {
     /**
-     * The url of a video or song to play
+     * The url of a video to play
      */
     url: ReactPlayerProps['url'];
     /**

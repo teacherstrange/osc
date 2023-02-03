@@ -11,7 +11,15 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: '',
+                component:
+                    'Video player that can be used to play a video, either from YouTube or Vimeo. <br>The player will pause when scrolled out of view',
+            },
+        },
+    },
+    argTypes: {
+        url: {
+            control: {
+                type: 'text',
             },
         },
     },
@@ -40,7 +48,7 @@ HasCustomPreviewImage.args = {
 HasCustomPreviewImage.parameters = {
     docs: {
         description: {
-            story: 'The video player will automatically generate a preview image, which is the default video thumbnail. <br>Add a custom image to add a higher quality or more appopriate image.',
+            story: 'The video player will automatically generate a preview image, which is the default video thumbnail. <br>Add a custom image to add a higher quality or more appropriate image.',
         },
     },
 };
