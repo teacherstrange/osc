@@ -7,8 +7,29 @@ $play-btn-color: var(--color-tertiary);
 $play-btn-radius: $radius-l;
 $play-btn-icon-size: rem($base-font-size * 2);
 
+/* ============================
+ * React player generated classes
+============================ */
+.react-player {
+    &__preview {
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: hsl(0deg 0 0 / 50%);
+        }
+    }
+}
+
+/* ============================
+ * End React player generated classes
+============================ */
+
 .c-video-player {
     &__wrapper {
+        position: relative;
+
         @include ratio(16 9);
     }
 

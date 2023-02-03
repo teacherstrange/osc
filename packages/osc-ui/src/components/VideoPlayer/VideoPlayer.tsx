@@ -11,7 +11,6 @@ import './video-player.scss';
 
 /*
 TODO: To support ONLY Vimeo and Youtube (No video upload i.e. MP4) -> Sanity thing
-TODO: overlay?
 TODO: Tests
 */
 
