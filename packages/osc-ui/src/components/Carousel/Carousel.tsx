@@ -358,7 +358,7 @@ export const Carousel = (props: Props) => {
     };
 
     // Handle keen-slider settings and call plugins
-    const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
+    const [sliderRef, instanceRef] = useKeenSlider<HTMLUListElement>(
         {
             initial: startIndex,
             created() {
@@ -384,7 +384,6 @@ export const Carousel = (props: Props) => {
         ]
     );
 
-    // TODO: Need to make this a polymorphic component so support ul / li for example
     return (
         <section
             className={classes}
@@ -395,13 +394,13 @@ export const Carousel = (props: Props) => {
             aria-live={autoplay ? 'off' : 'polite'}
             aria-atomic="true"
         >
-            <div ref={sliderRef} className="c-carousel__inner keen-slider">
+            <ul ref={sliderRef} className="c-carousel__inner keen-slider">
                 {Children.map(children, (child, index) => {
                     const numberOfChildren = Children.count(children);
 
                     return (
                         // We need the keen-slider__slide class to be able to use the keen-slider
-                        <div
+                        <li
                             role="group"
                             aria-label={`${index + 1} of ${numberOfChildren}`}
                             aria-roledescription="slide"
@@ -410,10 +409,10 @@ export const Carousel = (props: Props) => {
                             data-slide-index={index}
                         >
                             {child}
-                        </div>
+                        </li>
                     );
                 })}
-            </div>
+            </ul>
             {/* IF we have arrows enabled AND the slider has loaded AND the current object is available on the instance */}
             {arrows && sliderHasLoaded && instanceRef.current && (
                 <>
