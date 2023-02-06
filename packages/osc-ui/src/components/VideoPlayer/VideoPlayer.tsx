@@ -10,6 +10,8 @@ import { Icon } from '../Icon/Icon';
 
 import './video-player.scss';
 
+// TODO: FIX focus styles -_-
+
 /* -------------------------------------------------------------------------------------------------
  * VideoPlayer
  *
@@ -60,6 +62,10 @@ export interface VideoPlayerProps extends Omit<ReactPlayerProps, 'config'> {
      * @default false
      */
     loop?: boolean;
+    /**
+     * Custom path for the icon spritesheet
+     */
+    iconPath?: string;
 }
 
 export const VideoPlayer = (props: VideoPlayerProps) => {
@@ -73,6 +79,7 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         preserveContent = false,
         loop = false,
         children,
+        iconPath,
         ...rest
     } = props;
     const classes = classNames('c-video-player', className);
@@ -153,7 +160,7 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
                 </VideoPlayerContent>
             ) : null}
 
-            <PlayIcon className={!isPlaying ? '' : 'is-hidden'} />
+            <PlayIcon path={iconPath} className={!isPlaying ? '' : 'is-hidden'} />
 
             <VideoPlayerOverlay
                 color={overlayColor}
@@ -172,6 +179,9 @@ interface PlayIconProps extends Omit<IconProps, 'id'> {
      * @default play
      */
     id?: string;
+    /**
+     * Custom class
+     */
     className?: string;
 }
 
