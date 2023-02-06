@@ -10,7 +10,9 @@
 
 // *********** REACT ARIA POPUP ************
 
-.c-react-aria__popup {
-    position: fixed;
-    inset: 0;
+.c-react-aria__popover {
+    background: var(--color-tertiary);
+    box-shadow:
+        hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
+        hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
 }

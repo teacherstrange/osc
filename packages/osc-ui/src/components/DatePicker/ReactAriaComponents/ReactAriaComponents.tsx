@@ -55,15 +55,13 @@ export const ReactAriaPopover = ({ children, state, ...props }: PopoverProps) =>
 
     return (
         <Overlay>
-            <div className="c-react-aria__popover" {...underlayProps} />
+            <div {...underlayProps} />
             <div
+                className="c-react-aria__popover"
                 {...popoverProps}
                 ref={popoverRef}
                 style={{
                     ...popoverProps.style,
-                    background: 'var(--page-background)',
-                    boxShadow:
-                        'hsl(206deg 22% 7% / 35%) 0 10px 38px -10px, hsl(206deg 22% 7% / 20%) 0 10px 20px -15px',
                 }}
             >
                 <DismissButton onDismiss={state.close} />
