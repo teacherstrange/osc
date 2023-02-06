@@ -75,8 +75,9 @@ export const RangeCalendarContainer = ({
         } else {
             setShowPrompt(false);
         }
-        // Update when the start day changes, and when the entire value changes (ie - when)
-        // both the start and end date are updated
+        // Should only update when the start day changes, and when the entire value
+        // changes (ie - when both the start and end date are updated)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.highlightedRange?.start.day, state.value]);
 
     return (
