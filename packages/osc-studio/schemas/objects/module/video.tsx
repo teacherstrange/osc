@@ -58,11 +58,10 @@ export default {
                     initialValue: false,
                 },
                 {
-                    name: 'preserveOverlay',
-                    title: 'Preserve Overlay',
+                    name: 'preserveContent',
+                    title: 'Preserve Content',
                     type: 'boolean',
-                    description:
-                        'Preserve the overlay when the video is playing to make content more readable.',
+                    description: 'Preserve the content when the video is playing.',
                     initialValue: false,
                 },
             ],
