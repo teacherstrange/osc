@@ -171,7 +171,7 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
 
     const startAndEndDate = RANGES.map((range: 'start' | 'end', index: number) => {
         return (
-            <h3 key={index}>
+            <span className="c-calendar__date-container" key={index}>
                 {formatDate(range, formattedDate, state).map((date, idx) => {
                     const dateSegment = ['month', 'year'];
                     return (
@@ -180,7 +180,7 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                         </span>
                     );
                 })}
-            </h3>
+            </span>
         );
     });
 

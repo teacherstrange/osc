@@ -24,13 +24,19 @@
         }
     }
 
+    &__date-container {
+        display: flex;
+        font-size: var(--font-scale-delta);
+        font-weight: $weight-bold;
+    }
+
     &__month,
     &__year {
         font-size: var(--font-scale-zeta);
     }
 
     &__month {
-        margin: 0 var(--space-scale-micro);
+        margin: 0 var(--space-scale-micro) 0 0;
     }
 
     &__year {
