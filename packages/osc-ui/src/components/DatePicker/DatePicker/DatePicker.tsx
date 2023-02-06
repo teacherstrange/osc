@@ -17,18 +17,18 @@ import {
     ReactAriaPopover,
 } from '../ReactAriaComponents/ReactAriaComponents';
 
-interface DatePickerProps extends AriaDatePickerProps<DateValue> {
-    type: 'month' | 'year' | 'decade';
+export interface DatePickerProps extends AriaDatePickerProps<DateValue> {
+    type?: 'month' | 'year' | 'decade';
 }
 
-export const DatePicker = (props: DatePickerProps) => {
+export const DatePicker = ({ type = 'month', ...props }: DatePickerProps) => {
     let state = useDatePickerState({ ...props, shouldCloseOnSelect: false });
     let ref = useRef();
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
         useDatePicker(props, state, ref);
     let calendar;
 
-    switch (props.type) {
+    switch (type) {
         case 'month':
             calendar = <Calendar {...calendarProps} />;
             break;
