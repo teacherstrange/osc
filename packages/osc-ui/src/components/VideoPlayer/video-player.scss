@@ -7,6 +7,17 @@ $play-btn-color: var(--color-tertiary);
 $play-btn-radius: $radius-l;
 $play-btn-icon-size: rem($base-font-size * 2);
 
+/* stylelint-disable-next-line selector-class-pattern */
+.react-player__preview {
+    &:focus {
+        box-shadow: $shadow-focus;
+
+        &:not(:focus-visible) {
+            box-shadow: none;
+        }
+    }
+}
+
 .c-video-player {
     position: relative;
 
