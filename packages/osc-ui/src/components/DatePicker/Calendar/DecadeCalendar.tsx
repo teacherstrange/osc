@@ -32,7 +32,8 @@ const getYears = (state: CalendarState, formatter: DateFormatter): Year[] => {
     return years;
 };
 
-const YearRange = ({ classes, years }: { classes: string; years: Year[] }): ReactElement => {
+const YearRange = (props): ReactElement => {
+    const { classes, years }: { classes: string; years: Year[] } = props;
     const startYear = years[0].formatted;
     const endYear = years[years.length - 1].formatted;
 
@@ -45,7 +46,8 @@ const YearRange = ({ classes, years }: { classes: string; years: Year[] }): Reac
     );
 };
 
-const Years = ({ state, years }: { state: CalendarState; years: Year[] }) => {
+const Years = (props) => {
+    const { state, years }: { state: CalendarState; years: Year[] } = props;
     const yearsArray = years.map((year, i) => {
         let date = state.value;
         const isSelected = date?.year === +year.formatted;

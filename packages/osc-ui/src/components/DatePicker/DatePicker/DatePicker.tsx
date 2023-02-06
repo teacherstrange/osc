@@ -21,8 +21,10 @@ export interface DatePickerProps extends AriaDatePickerProps<DateValue> {
     type?: 'month' | 'year' | 'decade';
 }
 
-export const DatePicker = ({ type = 'month', ...props }: DatePickerProps) => {
-    let state = useDatePickerState({ ...props, shouldCloseOnSelect: false });
+export const DatePicker = (props: DatePickerProps) => {
+    const { type = 'month', ...rest } = props;
+
+    let state = useDatePickerState({ ...rest, shouldCloseOnSelect: false });
     let ref = useRef();
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
         useDatePicker(props, state, ref);

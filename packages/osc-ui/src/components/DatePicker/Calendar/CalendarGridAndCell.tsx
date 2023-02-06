@@ -23,9 +23,9 @@ interface GridProps extends AriaCalendarGridProps {
     state: CalendarState | RangeCalendarState;
 }
 
-export const CalendarGrid = ({ offset = {}, state }: GridProps) => {
+export const CalendarGrid = (props: GridProps) => {
+    const { offset = {}, state } = props;
     let { locale } = useLocale();
-
     // If there is an offset (used for the range calender then apply to the start date)
     let startDate = state.visibleRange.start.add(offset);
 
@@ -90,7 +90,8 @@ interface CellProps extends AriaCalendarCellProps {
     state: CalendarState | RangeCalendarState;
 }
 
-export const CalendarCell = ({ currentMonth, date, state }: CellProps) => {
+export const CalendarCell = (props: CellProps) => {
+    const { currentMonth, date, state } = props;
     let ref = useRef();
     let { buttonProps, cellProps, formattedDate, isDisabled, isSelected } = useCalendarCell(
         { date },

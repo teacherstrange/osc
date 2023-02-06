@@ -24,11 +24,8 @@ interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateVal
     presets?: { name: string; length: number }[];
 }
 
-export const DateRangePickerContainer = ({
-    defaultValue,
-    presets,
-    ...props
-}: DateRangePickerContainerProps) => {
+export const DateRangePickerContainer = (props: DateRangePickerContainerProps) => {
+    const { defaultValue, presets, ...rest } = props;
     // Used to set the value of the range calender to a preset or to clear it
     const [value, setValue] = useState(defaultValue ? defaultValue : null);
     // Additional piece of state to ensure prompt to 'select end date' doesn't show if default has been set
@@ -65,7 +62,7 @@ export const DateRangePickerContainer = ({
                     ) : null
                 }
                 value={value}
-                {...props}
+                {...rest}
             />
         </>
     );
@@ -127,15 +124,7 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
     timePresets: ReactNode;
 }
 
-export const DateRangePicker = ({
-    clearSelection,
-    initialDefault,
-    selectedRange,
-    setInitialDefault,
-    setSelectedRange,
-    timePresets,
-    ...props
-}: DateRangePickerProps) => {
+export const DateRangePicker = (props: DateRangePickerProps) => {
     let state = useDateRangePickerState({ ...props, shouldCloseOnSelect: false });
     let ref = useRef();
     let {
@@ -147,6 +136,14 @@ export const DateRangePicker = ({
         dialogProps,
         calendarProps,
     } = useDateRangePicker(props, state, ref);
+    const {
+        clearSelection,
+        initialDefault,
+        selectedRange,
+        setInitialDefault,
+        setSelectedRange,
+        timePresets,
+    } = props;
 
     return (
         <div className="c-datepicker c-datepicker__range">

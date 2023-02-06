@@ -60,20 +60,21 @@ const createCalendar = (identifier) => {
     }
 };
 
-export const RangeCalendarContainer = ({
-    clearSelection,
-    initialDefault,
-    selectedRange,
-    setInitialDefault,
-    setSelectedRange,
-    timePresets,
-    ...props
-}: RangeCalendarContainerProps) => {
+export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
+    const {
+        clearSelection,
+        initialDefault,
+        selectedRange,
+        setInitialDefault,
+        setSelectedRange,
+        timePresets,
+        ...rest
+    } = props;
     const [showPrompt, setShowPrompt] = useState(false);
 
     let { locale } = useLocale();
     let state = useRangeCalendarState({
-        ...props,
+        ...rest,
         visibleDuration: { months: 2 },
         locale,
         createCalendar,
@@ -123,7 +124,7 @@ export const RangeCalendarContainer = ({
             <div className="c-calendar__range--inner-container-1">
                 {timePresets}
                 <div className="c-calendar__range--calendar-container">
-                    <RangeCalendar aria-label="Date range" state={state} {...props} />
+                    <RangeCalendar aria-label="Date range" state={state} {...rest} />
                 </div>
             </div>
             <div className="c-calendar__range--inner-container-2">

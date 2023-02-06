@@ -12,7 +12,8 @@ import '../calendar.scss';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
 import { selectDateHandler } from '../utils';
 
-const Year = ({ className, state }: { className: string; state: CalendarState }): ReactElement => {
+const Year = (props): ReactElement => {
+    const { className, state }: { className: string; state: CalendarState } = props;
     let formatter = useDateFormatter({
         year: 'numeric',
         timeZone: state.timeZone,
@@ -25,13 +26,15 @@ const Year = ({ className, state }: { className: string; state: CalendarState })
     );
 };
 
-const Months = ({ state }: { state: CalendarState }) => {
+const Months = (props) => {
+    const { state }: { state: CalendarState } = props;
     let formatter = useDateFormatter({
         month: 'short',
         timeZone: state.timeZone,
     });
 
-    const Month = ({ index }: { index: number }): ReactElement => {
+    const Month = (props): ReactElement => {
+        const { index }: { index: number } = props;
         let date = state.focusedDate.set({ month: index + 1 });
         const fomattedMonth = formatter.format(date.toDate(state.timeZone));
         const isSelected = state.isSelected(date);

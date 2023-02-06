@@ -26,7 +26,8 @@ interface DialogProps extends AriaDialogProps {
     children: ReactNode;
 }
 
-export const ReactAriaDialog = ({ children, ...props }: DialogProps) => {
+export const ReactAriaDialog = (props: DialogProps) => {
+    const { children } = props;
     let ref = useRef();
     let { dialogProps } = useDialog(props, ref);
 
@@ -42,12 +43,13 @@ interface PopoverProps extends AriaPopoverProps {
     state: DatePickerState | DateRangePickerState;
 }
 
-export const ReactAriaPopover = ({ children, state, ...props }: PopoverProps) => {
+export const ReactAriaPopover = (props: PopoverProps) => {
+    const { children, state, ...rest } = props;
     let popoverRef = useRef();
 
     let { popoverProps, underlayProps } = usePopover(
         {
-            ...props,
+            ...rest,
             popoverRef,
         },
         state
