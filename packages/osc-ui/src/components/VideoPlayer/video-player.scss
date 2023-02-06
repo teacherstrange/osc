@@ -22,31 +22,53 @@ $play-btn-icon-size: rem($base-font-size * 2);
     $self: &;
 
     position: relative;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
 
-    &:hover {
-        #{$self}__btn {
-            opacity: 1;
+    &__wrapper,
+    &__btn,
+    &__content {
+        grid-column: 1;
+    }
+
+    &__btn,
+    &__content,
+    &__overlay {
+        transition: opacity $timing-s $ease-in;
+        opacity: 1;
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        &,
+        & * {
+            // make sure we can click through overlaying content and still control the video
+            pointer-events: none;
+        }
+
+        &.is-hidden {
+            opacity: 0;
         }
     }
 
     &__wrapper {
         position: relative;
+        overflow: hidden;
+        grid-row: 1 / -1;
 
         @include ratio(16 9);
     }
 
     &__btn {
-        position: absolute;
         display: grid;
+        grid-row: 2;
+        place-self: center;
         width: $play-btn-size;
         height: $play-btn-size;
         border: 2px solid $play-btn-color;
         border-radius: $play-btn-radius;
         color: $play-btn-color;
         font-size: $play-btn-icon-size;
-        transition: opacity $timing-s $ease-in;
-        opacity: 0.5;
         place-items: center;
+        cursor: pointer;
 
         @include z-index("button");
 
@@ -57,14 +79,15 @@ $play-btn-icon-size: rem($base-font-size * 2);
         }
     }
 
+    &__content {
+        color: var(--color-tertiary);
+        grid-row: 1;
+
+        @include z-index("button");
+    }
+
     &__overlay {
         position: absolute;
         inset: 0;
-        pointer-events: none;
-        transition: opacity $timing-s $ease-in;
-
-        &.is-hidden {
-            opacity: 0;
-        }
     }
 }

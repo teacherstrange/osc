@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Image } from '../Image/Image';
-import { PlayIcon, VideoPlayer } from './VideoPlayer';
+import { VideoPlayer } from './VideoPlayer';
 
 beforeEach(() => {
     // Window.fetch isn't available in the test environment
@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 
 test('renders the default video player preview', async () => {
-    render(<VideoPlayer url="https://youtu.be/w36Yhxxuk_c" playIcon={<PlayIcon />} />);
+    render(<VideoPlayer url="https://youtu.be/w36Yhxxuk_c" />);
 
     await waitFor(() => {
         expect(document.querySelector('.react-player__preview')).toBeInTheDocument();
@@ -36,7 +36,6 @@ test('renders the custom video player preview', async () => {
                     alt="A cartoon man sitting on an armchair with his laptop on his knees. He's looking at his laptop and there are some shelves and lights in the background."
                 />
             }
-            playIcon={<PlayIcon />}
         />
     );
 
@@ -57,47 +56,71 @@ test("doesn't render the video player preview if autoplay is true", async () => 
     });
 });
 
-test('clears the icon and overlay when the video is played', async () => {
+test('clears the icon, content and overlay when the video is played', async () => {
     const user = userEvent.setup();
-    render(<VideoPlayer url="https://youtu.be/w36Yhxxuk_c" playIcon={<PlayIcon />} />);
+    render(
+        <VideoPlayer url="https://youtu.be/w36Yhxxuk_c">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sit dicta voluptatum
+                aspernatur neque possimus animi, nihil ex deleniti, sapiente illo ab, velit in hic!
+                Nam quasi ea velit error?
+            </p>
+        </VideoPlayer>
+    );
 
     const preview = document.querySelector('.react-player__preview');
     await waitFor(() => {
         expect(preview).toBeInTheDocument();
     });
 
-    const playBtn = document.querySelector('.o-icon');
+    const playBtn = document.querySelector('.c-video-player__btn');
     const overlay = document.querySelector('.c-video-player__overlay');
+    const content = document.querySelector('.c-video-player__content');
 
     expect(playBtn).toBeInTheDocument();
     expect(overlay).toBeInTheDocument();
+    expect(content).toBeInTheDocument();
     user.click(preview);
 
     await waitFor(() => {
         expect(preview).not.toBeInTheDocument();
     });
 
-    expect(playBtn).not.toBeInTheDocument();
+    expect(playBtn).toHaveClass('is-hidden');
     expect(overlay).toHaveClass('is-hidden');
+    expect(content).toHaveClass('is-hidden');
 });
 
-test("doesn't clear the overlay if preserveOverlay is true", async () => {
+test("doesn't clear the content or overlay if preserveContent is true", async () => {
     const user = userEvent.setup();
-    render(<VideoPlayer url="https://youtu.be/w36Yhxxuk_c" preserveOverlay={true} />);
+    render(
+        <VideoPlayer url="https://youtu.be/w36Yhxxuk_c" preserveContent={true}>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sit dicta voluptatum
+                aspernatur neque possimus animi, nihil ex deleniti, sapiente illo ab, velit in hic!
+                Nam quasi ea velit error?
+            </p>
+        </VideoPlayer>
+    );
 
     const preview = document.querySelector('.react-player__preview');
     await waitFor(() => {
         expect(preview).toBeInTheDocument();
     });
 
+    const playBtn = document.querySelector('.c-video-player__btn');
     const overlay = document.querySelector('.c-video-player__overlay');
+    const content = document.querySelector('.c-video-player__content');
 
     expect(overlay).toBeInTheDocument();
+    expect(content).toBeInTheDocument();
     user.click(preview);
 
     await waitFor(() => {
         expect(preview).not.toBeInTheDocument();
     });
 
-    expect(overlay).toBeInTheDocument();
+    expect(playBtn).toHaveClass('is-hidden');
+    expect(overlay).not.toHaveClass('is-hidden');
+    expect(content).not.toHaveClass('is-hidden');
 });

@@ -2,12 +2,12 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { Image } from '../Image/Image';
 import type { VideoPlayerProps } from './VideoPlayer';
-import { PlayIcon, VideoPlayer, VideoPlayerOverlay } from './VideoPlayer';
+import { PlayIcon, VideoPlayer, VideoPlayerContent, VideoPlayerOverlay } from './VideoPlayer';
 
 export default {
     title: 'osc-ui/VideoPlayer',
     component: VideoPlayer,
-    subcomponents: { PlayIcon, VideoPlayerOverlay },
+    subcomponents: { PlayIcon, VideoPlayerContent, VideoPlayerOverlay },
     parameters: {
         docs: {
             description: {
@@ -30,8 +30,8 @@ export default {
     },
 } as Meta;
 
-const Template: Story<VideoPlayerProps> = ({ ...args }) => {
-    return <VideoPlayer playIcon={<PlayIcon />} {...args} />;
+const Template: Story<VideoPlayerProps> = ({ children, ...args }) => {
+    return <VideoPlayer {...args}>{children}</VideoPlayer>;
 };
 
 export const Primary = Template.bind({});
@@ -72,15 +72,41 @@ Autoplay.parameters = {
     },
 };
 
-export const PreservesOverlay = Template.bind({});
-PreservesOverlay.args = {
+export const HasOverlayedContent = Template.bind({});
+HasOverlayedContent.args = {
     ...Primary.args,
-    preserveOverlay: true,
+    children: (
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus numquam officia sequi ab
+            reprehenderit nulla distinctio assumenda sit. Voluptates nisi explicabo non esse
+            distinctio cumque minima provident minus odit officiis!
+        </p>
+    ),
 };
-PreservesOverlay.parameters = {
+HasOverlayedContent.parameters = {
     docs: {
         description: {
-            story: 'You can prevent the overlay from disappearing when the video is playing by setting `preserveOverlay` to `true`. This might be useful for when you want to overlay some text on top of the video.',
+            story: '',
+        },
+    },
+};
+
+export const PreservesContent = Template.bind({});
+PreservesContent.args = {
+    ...Primary.args,
+    preserveContent: true,
+    children: (
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus numquam officia sequi ab
+            reprehenderit nulla distinctio assumenda sit. Voluptates nisi explicabo non esse
+            distinctio cumque minima provident minus odit officiis!
+        </p>
+    ),
+};
+PreservesContent.parameters = {
+    docs: {
+        description: {
+            story: 'You can prevent the content and overlay from disappearing when the video is playing by setting `preserveContent` to `true`.',
         },
     },
 };

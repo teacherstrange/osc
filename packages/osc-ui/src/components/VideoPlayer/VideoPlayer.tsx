@@ -28,13 +28,13 @@ export interface VideoPlayerProps extends Omit<ReactPlayerProps, 'config'> {
      */
     previewImage?: string | ReactElement;
     /**
-     * Element or component to use as the play icon
-     */
-    playIcon?: ReactElement;
-    /**
      * Custom class
      */
     className?: string;
+    /**
+     * The content of the component
+     */
+    children?: ReactNode;
     /**
      * Set the video player component to render
      * @default youtube
@@ -51,10 +51,10 @@ export interface VideoPlayerProps extends Omit<ReactPlayerProps, 'config'> {
      */
     overlayColor?: string;
     /**
-     * Set whether the overlay should be present when playing
+     * Set whether the content should remain present when video is playing
      * @default false
      */
-    preserveOverlay?: boolean;
+    preserveContent?: boolean;
     /**
      * Set the video to loop
      * @default false
@@ -68,11 +68,11 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         className,
         url,
         previewImage,
-        playIcon,
         variant = 'youtube',
         overlayColor,
-        preserveOverlay = false,
+        preserveContent = false,
         loop = false,
+        children,
         ...rest
     } = props;
     const classes = classNames('c-video-player', className);
@@ -115,7 +115,7 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         wrapper: Wrapper, // Wrapper component
         controls: true,
         light: showPreview,
-        playIcon: playIcon,
+        playIcon: <></>, // Fragment so we can remove the default
         volume: 1, // Manually set the volume so that the muted prop works
         muted: autoplay, // make sure video is muted when autoplay is true
         loop: loop,
@@ -124,6 +124,14 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         onClickPreview: () => {
             setHasBeenInteracted(true);
             setIsPlaying(true);
+        },
+        onPlay: () => {
+            setHasBeenInteracted(true);
+            setIsPlaying(true);
+        },
+        onPause: () => {
+            setHasBeenInteracted(true);
+            setIsPlaying(false);
         },
     };
 
@@ -134,9 +142,22 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
             ) : (
                 <VimeoPlayer {...propsObj} {...rest} />
             )}
+
+            {children ? (
+                <VideoPlayerContent
+                    className={`c-video-player__content u-p-delta ${
+                        !isPlaying || preserveContent ? '' : 'is-hidden'
+                    }`}
+                >
+                    {children}
+                </VideoPlayerContent>
+            ) : null}
+
+            <PlayIcon className={!isPlaying ? '' : 'is-hidden'} />
+
             <VideoPlayerOverlay
                 color={overlayColor}
-                className={!isPlaying || preserveOverlay ? '' : 'is-hidden'}
+                className={!isPlaying || preserveContent ? '' : 'is-hidden'}
             />
         </div>
     );
@@ -151,12 +172,13 @@ interface PlayIconProps extends Omit<IconProps, 'id'> {
      * @default play
      */
     id?: string;
+    className?: string;
 }
 
 export const PlayIcon = (props: PlayIconProps) => {
-    const { id = 'play', ...rest } = props;
+    const { id = 'play', className, ...rest } = props;
     return (
-        <div className="c-video-player__btn">
+        <div className={`c-video-player__btn ${className}`}>
             <Icon id={id} {...rest} />
         </div>
     );
@@ -188,6 +210,27 @@ export const VideoPlayerOverlay = (props: VideoPlayerOverlayProps) => {
             }}
         ></div>
     );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * VideoPlayer Content
+ * -----------------------------------------------------------------------------------------------*/
+interface VideoPlayerContentProps {
+    /**
+     * The content of the component
+     */
+    children?: ReactNode;
+    /**
+     * Custom class
+     */
+    className?: string;
+}
+
+export const VideoPlayerContent = (props: VideoPlayerContentProps) => {
+    const { children, className } = props;
+    const classes = classNames('c-video-player__content', className);
+
+    return <div className={classes}>{children}</div>;
 };
 
 /* -------------------------------------------------------------------------------------------------
