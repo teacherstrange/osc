@@ -59,6 +59,11 @@ export interface VideoPlayerProps extends Omit<ReactPlayerProps, 'config'> {
      * @default false
      */
     preserveOverlay?: boolean;
+    /**
+     * Set the video to loop
+     * @default false
+     */
+    loop?: boolean;
 }
 
 export const VideoPlayer = (props: VideoPlayerProps) => {
@@ -71,6 +76,7 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         variant = 'youtube',
         overlayColor,
         preserveOverlay = false,
+        loop = false,
         ...rest
     } = props;
     const classes = classNames('c-video-player', className);
@@ -119,6 +125,7 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
                     playIcon={playIcon}
                     volume={1}
                     muted={autoplay} // make sure video is muted when autoplay is true
+                    loop={loop}
                     width="100%"
                     height="100%"
                     onClickPreview={() => {
