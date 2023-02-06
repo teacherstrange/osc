@@ -116,14 +116,13 @@
     &__range {
         &--container {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 2em;
         }
 
         &--inner-container-1 {
             display: flex;
             flex: 1 100%;
-            width: 300px;
 
             .c-calendar__range--time-presets {
                 :first-child {
@@ -131,7 +130,7 @@
                 }
 
                 flex: 1;
-                padding: 0 var(--space-scale-centi);
+                padding: 0 var(--space-scale-zeta);
                 border-right: solid 1px var(--color-neutral-300);
 
                 button {
@@ -145,6 +144,7 @@
                 display: flex;
                 flex: 6;
                 justify-content: center;
+                padding: 0 var(--space-scale-zeta);
             }
         }
 
