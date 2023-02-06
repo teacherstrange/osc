@@ -56,9 +56,9 @@ const Months = ({ state }: { state: CalendarState }) => {
 
     const monthsResult = (): ReactElement[] => {
         let i = 0;
-        return [...new Array(4).keys()].map((_, idx) => (
+        return [...Array(4).keys()].map((_, idx) => (
             <div className="c-calendar__year-view--month-container" key={idx}>
-                {[...new Array(3).keys()].map((_) => {
+                {[...Array(3).keys()].map((_) => {
                     const year = <Month key={i} index={i} />;
                     i++;
                     return year;

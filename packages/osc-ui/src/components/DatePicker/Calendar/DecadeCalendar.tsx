@@ -70,9 +70,9 @@ const Years = ({ state, years }: { state: CalendarState; years: Year[] }) => {
 
     const yearsResult = (): ReactElement[] => {
         let i = 0;
-        return [...new Array(3).keys()].map((_, idx) => (
+        return [...Array(3).keys()].map((_, idx) => (
             <div key={idx}>
-                {[...new Array(4).keys()].map((_) => {
+                {[...Array(4).keys()].map((_) => {
                     const year = yearsArray[i];
                     i++;
                     return year;
