@@ -18,9 +18,12 @@
         gap: 1em;
         padding: var(--space-scale-milli) 0;
 
-        h3 {
+        .c-calendar__chevron {
             display: flex;
-            margin-bottom: 0;
+            width: 20px;
+            height: 20px;
+            color: var(--color-neutral-600);
+            cursor: pointer;
         }
     }
 
@@ -106,12 +109,6 @@
 
             &:focus {
                 border-radius: 4px;
-            }
-
-            .chevron {
-                width: 20px;
-                height: 20px;
-                color: var(--color-neutral-600);
             }
         }
     }
@@ -281,12 +278,6 @@
                     display: flex;
                     gap: 0.2em;
                 }
-            }
-
-            .chevron {
-                width: 20px;
-                height: 20px;
-                color: var(--color-neutral-600);
             }
         }
     }

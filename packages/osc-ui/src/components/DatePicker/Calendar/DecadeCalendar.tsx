@@ -116,7 +116,7 @@ export const DecadeCalendar = (props: AriaCalendarProps<DateValue>) => {
                         setYearStepper(true);
                     }}
                 >
-                    <Icon className="chevron" id="chevron-left" />
+                    <Icon className="c-calendar__chevron" id="chevron-left" />
                 </ReactAriaButton>
                 {years ? <YearRange classes="c-calendar__year" years={years} /> : null}
                 <ReactAriaButton
@@ -125,7 +125,7 @@ export const DecadeCalendar = (props: AriaCalendarProps<DateValue>) => {
                         setYearStepper(true);
                     }}
                 >
-                    <Icon className="chevron" id="chevron-right" />
+                    <Icon className="c-calendar__chevron" id="chevron-right" />
                 </ReactAriaButton>
             </div>
             <div className="year-calendar__dropdowns">

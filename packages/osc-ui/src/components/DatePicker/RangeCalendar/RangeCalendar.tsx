@@ -198,7 +198,7 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                             <h2>{calendarProps['aria-label']}</h2>
                         </VisuallyHidden>
                         <ReactAriaButton {...prevButtonProps}>
-                            <Icon className="chevron" id="chevron-left" />
+                            <Icon className="c-calendar__chevron" id="chevron-left" />
                         </ReactAriaButton>
                     </div>
                     {startAndEndDate[0]}
@@ -207,7 +207,7 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                     {startAndEndDate[1]}
                     <div className="c-calendar__buttons">
                         <ReactAriaButton {...nextButtonProps}>
-                            <Icon className="chevron" id="chevron-right" />
+                            <Icon className="c-calendar__chevron" id="chevron-right" />
                         </ReactAriaButton>
                     </div>
                 </div>

@@ -47,10 +47,10 @@ export const Calendar = (props: AriaCalendarProps<DateValue>) => {
                 </span>
                 <div className="c-calendar__buttons">
                     <ReactAriaButton {...prevButtonProps}>
-                        <Icon className="chevron" id="chevron-left" />
+                        <Icon className="c-calendar__chevron" id="chevron-left" />
                     </ReactAriaButton>
                     <ReactAriaButton {...nextButtonProps}>
-                        <Icon className="chevron" id="chevron-right" />
+                        <Icon className="c-calendar__chevron" id="chevron-right" />
                     </ReactAriaButton>
                 </div>
             </div>

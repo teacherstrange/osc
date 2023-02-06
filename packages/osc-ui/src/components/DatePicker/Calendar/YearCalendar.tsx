@@ -87,7 +87,7 @@ export const YearCalendar = (props: AriaCalendarProps<DateValue>) => {
                         state.setFocusedDate(state.focusedDate.subtract({ years: 1 }));
                     }}
                 >
-                    <Icon className="chevron" id="chevron-left" />
+                    <Icon className="c-calendar__chevron" id="chevron-left" />
                 </ReactAriaButton>
                 <Year className="c-calendar__year" state={state} />
                 <ReactAriaButton
@@ -95,7 +95,7 @@ export const YearCalendar = (props: AriaCalendarProps<DateValue>) => {
                         state.setFocusedDate(state.focusedDate.add({ years: 1 }));
                     }}
                 >
-                    <Icon className="chevron" id="chevron-right" />
+                    <Icon className="c-calendar__chevron" id="chevron-right" />
                 </ReactAriaButton>
             </div>
             <div className="year-calendar__dropdowns">
