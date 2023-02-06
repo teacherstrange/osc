@@ -5,7 +5,7 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-calendar {
-    --selected-color: #00a698;
+    --selected-color: rgb(0 166 152);
     --highlighted-color: rgb(0 186 169 / 20%);
     --hover-color: var(--color-neutral-300);
     --cell-height: 40px;
@@ -173,22 +173,22 @@
         }
 
         .c-calendar__cell {
+            &--rounded-left,
+            &--rounded-right {
+                background: var(--selected-color);
+                color: var(--color-tertiary);
+                font-weight: $weight-bold;
+            }
+
             &--selected {
-                background: var(--highlighted-color) !important;
+                background: var(--highlighted-color);
                 border-radius: 0;
-                color: var(--color-secondary) !important;
-                font-weight: $weight-reg !important;
+                color: var(--color-secondary);
+                font-weight: $weight-reg;
             }
 
             &--selection-start,
             &--selection-end {
-                background: var(--selected-color) !important;
-                color: var(--color-tertiary) !important;
-                font-weight: $weight-bold !important;
-            }
-
-            &--rounded-left,
-            &--rounded-right {
                 background: var(--selected-color);
                 color: var(--color-tertiary);
                 font-weight: $weight-bold;
@@ -263,8 +263,9 @@
             }
         }
 
-        &--selected {
-            background: #00a698 !important;
+        button.c-calendar__year-view--selected,
+        button.c-calendar__decade-view--selected {
+            background: var(--selected-color);
             border-radius: $radius-xs;
             color: var(--color-tertiary);
             font-weight: $weight-bold;
