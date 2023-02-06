@@ -78,7 +78,7 @@ test('clears the icon and overlay when the video is played', async () => {
     });
 
     expect(playBtn).not.toBeInTheDocument();
-    expect(overlay).not.toBeInTheDocument();
+    expect(overlay).toHaveClass('is-hidden');
 });
 
 test("doesn't clear the overlay if preserveOverlay is true", async () => {

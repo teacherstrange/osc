@@ -134,7 +134,10 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
             ) : (
                 <VimeoPlayer {...propsObj} {...rest} />
             )}
-            {!isPlaying || preserveOverlay ? <VideoPlayerOverlay color={overlayColor} /> : null}
+            <VideoPlayerOverlay
+                color={overlayColor}
+                className={!isPlaying || preserveOverlay ? '' : 'is-hidden'}
+            />
         </div>
     );
 };
@@ -177,7 +180,7 @@ export const VideoPlayerOverlay = (props: VideoPlayerOverlayProps) => {
 
     return (
         <div
-            className="c-video-player__overlay"
+            className={`c-video-player__overlay ${className}`}
             {...rest}
             style={{
                 ...rest.style,
