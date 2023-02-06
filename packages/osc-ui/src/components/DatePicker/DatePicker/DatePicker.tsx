@@ -46,9 +46,9 @@ export const DatePicker = (props: DatePickerProps) => {
 
     return (
         <div className="c-datepicker">
-            <div {...labelProps} className="c-datepicker__label">
+            <label {...labelProps} className="c-datepicker__label">
                 {props.label}
-            </div>
+            </label>
             <div className="c-datepicker__date-field-container" {...groupProps} ref={ref}>
                 <DateField {...fieldProps} granularity={props.granularity} />
                 <ReactAriaButton {...buttonProps}>
