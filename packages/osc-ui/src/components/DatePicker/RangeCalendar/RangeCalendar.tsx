@@ -64,7 +64,7 @@ export const RangeCalendarContainer = ({
     let { locale } = useLocale();
     let state = useRangeCalendarState({
         ...props,
-        visibleDuration: { months: 1 },
+        visibleDuration: { months: 2 },
         locale,
         createCalendar,
     });
