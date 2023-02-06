@@ -27,6 +27,8 @@ $play-btn-icon-size: rem($base-font-size * 2);
         color: $play-btn-color;
         font-size: $play-btn-icon-size;
 
+        @include z-index("button");
+
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
         > .o-icon {
             position: relative;
