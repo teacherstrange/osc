@@ -88,6 +88,18 @@ export interface accordionModule extends module {
     content?: contentModule;
 }
 
+export interface videoModule extends module {
+    videoUrl?: string;
+    videoType?: 'youtube' | 'vimeo';
+    videoSettings?: {
+        autoplay?: boolean;
+        loop?: boolean;
+        preserveContent?: boolean;
+    };
+    videoImage?: imageModule<HTMLImageElement>;
+    content?: contentModule;
+}
+
 export interface mediaTextModule extends module {
     layout: 'media-left' | 'media-right';
     body?: PortableTextBlock;
