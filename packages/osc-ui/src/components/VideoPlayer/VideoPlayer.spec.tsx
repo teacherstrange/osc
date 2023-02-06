@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Image } from '../Image/Image';
 import { PlayIcon, VideoPlayer } from './VideoPlayer';
@@ -20,6 +21,7 @@ test('renders the default video player preview', async () => {
     });
 
     expect(document.querySelector('.o-icon')).toBeInTheDocument();
+    expect(document.querySelector('.c-video-player__overlay')).toBeInTheDocument();
 });
 
 test('renders the custom video player preview', async () => {
@@ -43,5 +45,59 @@ test('renders the custom video player preview', async () => {
     });
 
     expect(document.querySelector('.o-icon')).toBeInTheDocument();
+    expect(document.querySelector('.c-video-player__overlay')).toBeInTheDocument();
     expect(screen.getByRole('img')).toBeInTheDocument();
+});
+
+test("doesn't render the video player preview if autoplay is true", async () => {
+    render(<VideoPlayer autoplay={true} url="https://youtu.be/w36Yhxxuk_c" />);
+
+    await waitFor(() => {
+        expect(document.querySelector('.react-player__preview')).not.toBeInTheDocument();
+    });
+});
+
+test('clears the icon and overlay when the video is played', async () => {
+    const user = userEvent.setup();
+    render(<VideoPlayer url="https://youtu.be/w36Yhxxuk_c" playIcon={<PlayIcon />} />);
+
+    const preview = document.querySelector('.react-player__preview');
+    await waitFor(() => {
+        expect(preview).toBeInTheDocument();
+    });
+
+    const playBtn = document.querySelector('.o-icon');
+    const overlay = document.querySelector('.c-video-player__overlay');
+
+    expect(playBtn).toBeInTheDocument();
+    expect(overlay).toBeInTheDocument();
+    user.click(preview);
+
+    await waitFor(() => {
+        expect(preview).not.toBeInTheDocument();
+    });
+
+    expect(playBtn).not.toBeInTheDocument();
+    expect(overlay).not.toBeInTheDocument();
+});
+
+test("doesn't clear the overlay if preserveOverlay is true", async () => {
+    const user = userEvent.setup();
+    render(<VideoPlayer url="https://youtu.be/w36Yhxxuk_c" preserveOverlay={true} />);
+
+    const preview = document.querySelector('.react-player__preview');
+    await waitFor(() => {
+        expect(preview).toBeInTheDocument();
+    });
+
+    const overlay = document.querySelector('.c-video-player__overlay');
+
+    expect(overlay).toBeInTheDocument();
+    user.click(preview);
+
+    await waitFor(() => {
+        expect(preview).not.toBeInTheDocument();
+    });
+
+    expect(overlay).toBeInTheDocument();
 });
