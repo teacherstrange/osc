@@ -8,7 +8,7 @@ import React from 'react';
 import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
-import { CalendarGrid } from './CalendarGrid';
+import { CalendarGrid } from './CalendarGridAndCell';
 
 const createCalendar = (identifier) => {
     switch (identifier) {

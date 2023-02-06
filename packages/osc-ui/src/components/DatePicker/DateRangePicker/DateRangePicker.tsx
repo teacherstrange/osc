@@ -1,29 +1,117 @@
+import type { CalendarDate } from '@internationalized/date';
 import type { AriaDateRangePickerProps } from '@react-aria/datepicker';
 import { useDateRangePicker } from '@react-aria/datepicker';
-
 import { useDateRangePickerState } from '@react-stately/datepicker';
 import type { DateValue } from '@react-types/calendar';
+import type { RangeValue } from '@react-types/shared';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Icon } from '../../Icon/Icon';
 import { DateField } from '../DateField/DateField';
-import { RangeCalendarContainer } from '../RangeCalendar/RangeCalendarContainer';
+import { RangeCalendarContainer } from '../RangeCalendar/RangeCalendar';
 import {
     ReactAriaButton,
     ReactAriaDialog,
     ReactAriaPopover,
 } from '../ReactAriaComponents/ReactAriaComponents';
-import type { RangeValue } from '@react-types/shared';
-import type { CalendarDate } from '@internationalized/date';
+import { createTimePresets } from '../utils';
+
+/* -------------------------------------------------------------------------------------------------
+ * DateRangePickerContainer
+ * -----------------------------------------------------------------------------------------------*/
+
+interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateValue> {
+    presets?: { name: string; length: number }[];
+}
+
+export const DateRangePickerContainer = ({
+    defaultValue,
+    presets,
+    ...props
+}: DateRangePickerContainerProps) => {
+    // Used to set the value of the range calender to a preset or to clear it
+    const [value, setValue] = useState(defaultValue ? defaultValue : null);
+
+    const [selectedRange, setSelectedRange] = useState({
+        timePreset: false,
+        range: null,
+    });
+
+    const ClearSelection = () => (
+        <button className="c-calendar__range--clear-selection" onClick={() => setValue(null)}>
+            Clear Selection
+        </button>
+    );
+
+    return (
+        <>
+            <DateRangePicker
+                clearSelection={<ClearSelection />}
+                label="Date range"
+                onChange={setValue}
+                selectedRange={selectedRange}
+                setSelectedRange={setSelectedRange}
+                timePresets={
+                    presets ? (
+                        <TimePresets
+                            presets={presets}
+                            setValue={setValue}
+                            setSelectedRange={setSelectedRange}
+                        />
+                    ) : null
+                }
+                value={value}
+                {...props}
+            />
+        </>
+    );
+};
+
+const TimePresets = ({ presets, setSelectedRange, setValue }) => (
+    <div className="c-calendar__range--time-presets" aria-label="Time Presets" role="group">
+        <div>Time Presets</div>
+
+        {createTimePresets(presets).map(({ endDate, name, startDate }, index) => (
+            <button
+                key={index}
+                onClick={() => {
+                    setSelectedRange((prevRange) => ({ ...prevRange, timePreset: true }));
+                    setValue({
+                        start: startDate,
+                        end: endDate,
+                    });
+                }}
+            >
+                {name}
+            </button>
+        ))}
+    </div>
+);
+
+/* -------------------------------------------------------------------------------------------------
+ * DateRangePicker
+ * -----------------------------------------------------------------------------------------------*/
 
 type SelectedRange = {
     timePreset: boolean;
     range: RangeValue<CalendarDate>;
 };
 interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
+    /**
+     * A button component that allows the selected range to be cleared
+     */
     clearSelection: ReactNode;
+    /**
+     * The selected range state that is passed down to the Range Calendar
+     */
     selectedRange: SelectedRange;
+    /**
+     * A Dispatch that allows selectedRange state to be updated in the Range Calendar
+     */
     setSelectedRange: Dispatch<SetStateAction<SelectedRange>>;
+    /**
+     * Preset time periods a user can select
+     */
     timePresets: ReactNode;
 }
 
