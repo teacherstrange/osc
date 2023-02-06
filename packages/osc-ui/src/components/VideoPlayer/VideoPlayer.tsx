@@ -172,7 +172,7 @@ interface VideoPlayerOverlayProps extends HTMLAttributes<HTMLDivElement> {
      */
     color?: string;
 }
-const VideoPlayerOverlay = (props: VideoPlayerOverlayProps) => {
+export const VideoPlayerOverlay = (props: VideoPlayerOverlayProps) => {
     const { className, color, ...rest } = props;
 
     return (

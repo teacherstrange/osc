@@ -2,12 +2,12 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { Image } from '../Image/Image';
 import type { VideoPlayerProps } from './VideoPlayer';
-import { PlayIcon, VideoPlayer } from './VideoPlayer';
+import { PlayIcon, VideoPlayer, VideoPlayerOverlay } from './VideoPlayer';
 
 export default {
     title: 'osc-ui/VideoPlayer',
     component: VideoPlayer,
-    subcomponents: { PlayIcon },
+    subcomponents: { PlayIcon, VideoPlayerOverlay },
     parameters: {
         docs: {
             description: {
