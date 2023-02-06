@@ -7,11 +7,11 @@ import React, { useRef } from 'react';
 
 import type { CalendarDate } from '@internationalized/date';
 import { isSameDay, isSameMonth } from '@internationalized/date';
-import type { RangeCalendarState } from '@react-stately/calendar';
+import type { CalendarState, RangeCalendarState } from '@react-stately/calendar';
 
 interface CellProps extends AriaCalendarCellProps {
     currentMonth: CalendarDate;
-    state: RangeCalendarState;
+    state: CalendarState | RangeCalendarState;
 }
 
 export const CalendarCell = ({ currentMonth, date, state }: CellProps) => {
@@ -28,11 +28,12 @@ export const CalendarCell = ({ currentMonth, date, state }: CellProps) => {
         isOutsideMonth = !isSameMonth(currentMonth, date);
     }
 
-    const isSelectionStart = state.highlightedRange
-        ? isSameDay(date, state.highlightedRange.start)
+    const rangeState = state as RangeCalendarState;
+    const isSelectionStart = rangeState.highlightedRange
+        ? isSameDay(date, rangeState.highlightedRange.start)
         : isSelected;
-    const isSelectionEnd = state.highlightedRange
-        ? isSameDay(date, state.highlightedRange.end)
+    const isSelectionEnd = rangeState.highlightedRange
+        ? isSameDay(date, rangeState.highlightedRange.end)
         : isSelected;
     const isRoundedLeft = isSelected && (isSelectionStart || date.day === 1);
     const isRoundedRight =
