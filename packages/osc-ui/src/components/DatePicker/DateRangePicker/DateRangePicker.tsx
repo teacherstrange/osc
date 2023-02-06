@@ -31,6 +31,8 @@ export const DateRangePickerContainer = ({
 }: DateRangePickerContainerProps) => {
     // Used to set the value of the range calender to a preset or to clear it
     const [value, setValue] = useState(defaultValue ? defaultValue : null);
+    // Additional piece of state to ensure prompt to 'select end date' doesn't show if default has been set
+    const [initialDefault, setInitialDefault] = useState(defaultValue ? true : false);
 
     const [selectedRange, setSelectedRange] = useState({
         timePreset: false,
@@ -47,9 +49,11 @@ export const DateRangePickerContainer = ({
         <>
             <DateRangePicker
                 clearSelection={<ClearSelection />}
+                initialDefault={initialDefault}
                 label="Date range"
                 onChange={setValue}
                 selectedRange={selectedRange}
+                setInitialDefault={setInitialDefault}
                 setSelectedRange={setSelectedRange}
                 timePresets={
                     presets ? (
@@ -102,9 +106,17 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
      */
     clearSelection: ReactNode;
     /**
+     * Indicates where a defaultValue has been set
+     */
+    initialDefault: boolean;
+    /**
      * The selected range state that is passed down to the Range Calendar
      */
     selectedRange: SelectedRange;
+    /**
+     * A Dispatch that allows initialDefault value to be reset
+     */
+    setInitialDefault: Dispatch<SetStateAction<boolean>>;
     /**
      * A Dispatch that allows selectedRange state to be updated in the Range Calendar
      */
@@ -117,7 +129,9 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
 
 export const DateRangePicker = ({
     clearSelection,
+    initialDefault,
     selectedRange,
+    setInitialDefault,
     setSelectedRange,
     timePresets,
     ...props
@@ -166,8 +180,10 @@ export const DateRangePicker = ({
                     <ReactAriaDialog {...dialogProps}>
                         <RangeCalendarContainer
                             {...calendarProps}
+                            initialDefault={initialDefault}
                             clearSelection={clearSelection}
                             timePresets={timePresets}
+                            setInitialDefault={setInitialDefault}
                             setSelectedRange={setSelectedRange}
                             selectedRange={selectedRange}
                         />

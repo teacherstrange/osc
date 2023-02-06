@@ -30,9 +30,17 @@ interface RangeCalendarContainerProps extends AriaRangeCalendarProps<DateValue> 
      */
     clearSelection: ReactNode;
     /**
+     * Indicates where a defaultValue has been set
+     */
+    initialDefault: boolean;
+    /**
      * The selected range state that is passed down to the Range Calendar
      */
     selectedRange: SelectedRange;
+    /**
+     * A Dispatch that allows initialDefault value to be reset
+     */
+    setInitialDefault: Dispatch<SetStateAction<boolean>>;
     /**
      * A Dispatch that allows selectedRange state to be updated in the Range Calendar
      */
@@ -54,7 +62,9 @@ const createCalendar = (identifier) => {
 
 export const RangeCalendarContainer = ({
     clearSelection,
+    initialDefault,
     selectedRange,
+    setInitialDefault,
     setSelectedRange,
     timePresets,
     ...props
@@ -75,6 +85,12 @@ export const RangeCalendarContainer = ({
     // select an end date once they've selected a start date
     useEffect(() => {
         if (!state.highlightedRange) return;
+        // If a default Value has been set - do not show prompt, reset the state
+        // so prompt can be shown on any further date changes
+        if (initialDefault) {
+            setInitialDefault(false);
+            return;
+        }
         // Check whether the day the user has selected (and is passed down as state)
         // is different - If it is then show the prompt
         if (
