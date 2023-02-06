@@ -1,13 +1,34 @@
+import { parseDate } from '@internationalized/date';
+import { I18nProvider } from '@react-aria/i18n';
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { I18nProvider } from '@react-aria/i18n';
-import { DateRangePicker } from './DateRangePicker';
-import { DateRangePickerContainer } from './DateRangerPickerContainer';
-import { parseDate } from '@internationalized/date';
+import { CalendarCell, CalendarGrid } from '../Calendar/CalendarGridAndCell';
+import { RangeCalendar, RangeCalendarContainer } from '../RangeCalendar/RangeCalendar';
+import { DateRangePicker, DateRangePickerContainer } from './DateRangePicker';
 
 export default {
     title: 'osc-ui/DateRangePicker',
-    component: DateRangePicker,
+    component: DateRangePickerContainer,
+    parameters: {
+        docs: {
+            description: {
+                component:
+                    'Provides the behavior and accessibility implementation for a date picker component. A date range picker combines two DateFields and a RangeCalendar popover to allow users to enter or select a date and time range.',
+            },
+        },
+    },
+    argTypes: {
+        presets: {
+            description: 'Preset time periods a user can select',
+        },
+    },
+    subcomponents: {
+        DateRangePicker,
+        RangeCalendarContainer,
+        RangeCalendar,
+        CalendarGrid,
+        CalendarCell,
+    },
 } as Meta;
 
 const todaysDate = new Date().toISOString().split('T')[0];
@@ -70,17 +91,46 @@ WithTimePresets.args = {
         },
     ],
 };
+WithTimePresets.parameters = {
+    docs: {
+        description: {
+            story: 'Allows users the option to select from a range of time presets',
+        },
+    },
+};
 
 DefaultValue.args = {
     defaultValue: true,
 };
+DefaultValue.parameters = {
+    docs: {
+        description: {
+            story: 'A default date range that can be passed into the calendar.',
+        },
+    },
+};
+
 MinAndMax.args = {
     defaultValue: true,
     minValue: 'lastWeek',
     maxValue: 'nextWeek',
 };
+MinAndMax.parameters = {
+    docs: {
+        description: {
+            story: 'Min and max dates can be set which will limit what the user can select. Dates outside of this will trigger validation requirement.',
+        },
+    },
+};
 Validation.args = {
     defaultValue: true,
     minValue: 'threeWeeksAgo',
     maxValue: 'lastWeek',
+};
+Validation.parameters = {
+    docs: {
+        description: {
+            story: 'Validation styling when selected date range is invalid',
+        },
+    },
 };
