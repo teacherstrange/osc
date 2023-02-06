@@ -29,6 +29,7 @@ export const MODULES = [
     { type: 'module.images' },
     { type: 'module.trustpilot' },
     { type: 'module.carousel' },
+    { type: 'module.video' },
 ];
 
 // Space values to use in the 'spacing' field type
