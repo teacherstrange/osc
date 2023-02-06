@@ -1,13 +1,24 @@
+import type { CalendarDate, DateFormatter } from '@internationalized/date';
 import { createCalendar } from '@internationalized/date';
+import type { AriaCalendarProps } from '@react-aria/calendar';
 import { useCalendar } from '@react-aria/calendar';
 import { useDateFormatter, useLocale } from '@react-aria/i18n';
+
+import type { CalendarState } from '@react-stately/calendar';
 import { useCalendarState } from '@react-stately/calendar';
-import React, { useEffect, useRef, useState } from 'react';
+import type { DateValue } from '@react-types/calendar';
+import type { ReactElement } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from '../../Icon/Icon';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
 import { selectDateHandler } from '../utils';
 
-const getYears = (state, formatter) => {
+type Year = {
+    value: CalendarDate;
+    formatted: string;
+};
+
+const getYears = (state: CalendarState, formatter: DateFormatter): Year[] => {
     let years = [];
 
     for (let i = -5; i <= 6; i++) {
@@ -17,12 +28,14 @@ const getYears = (state, formatter) => {
             formatted: formatter.format(date.toDate(state.timeZone)),
         });
     }
+
     return years;
 };
 
-const Years = ({ classes, years }) => {
+const YearRange = ({ classes, years }: { classes: string; years: Year[] }): ReactElement => {
     const startYear = years[0].formatted;
     const endYear = years[years.length - 1].formatted;
+
     return (
         <div className="c-calendar__year--container">
             <div className={classes}>{startYear}</div>
@@ -32,12 +45,11 @@ const Years = ({ classes, years }) => {
     );
 };
 
-const YearSelector = ({ state, years }) => {
+const Years = ({ state, years }: { state: CalendarState; years: Year[] }) => {
     const yearsArray = years.map((year, i) => {
         let date = state.value;
-
         const isSelected = date?.year === +year.formatted;
-
+        console.log('year.formatted', year.formatted);
         return (
             <button
                 className={
@@ -56,7 +68,7 @@ const YearSelector = ({ state, years }) => {
         );
     });
 
-    const yearsResult = () => {
+    const yearsResult = (): ReactElement[] => {
         let i = 0;
         return [...new Array(3).keys()].map((_, idx) => (
             <div key={idx}>
@@ -72,18 +84,17 @@ const YearSelector = ({ state, years }) => {
     return <div>{yearsResult()}</div>;
 };
 
-export const DecadeCalendar = (props) => {
+export const DecadeCalendar = (props: AriaCalendarProps<DateValue>) => {
     const [years, setYears] = useState(null);
     const [yearStepper, setYearStepper] = useState(false);
 
     let { locale } = useLocale();
-    let ref = useRef();
     let state = useCalendarState({
         ...props,
         locale,
         createCalendar,
     });
-    let { calendarProps } = useCalendar(props, state, ref);
+    let { calendarProps } = useCalendar(props, state);
     let formatter = useDateFormatter({
         year: 'numeric',
         timeZone: state.timeZone,
@@ -93,10 +104,11 @@ export const DecadeCalendar = (props) => {
     useEffect(() => {
         setYears(getYears(state, formatter));
         setYearStepper(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- Only update when yearStepper is clicked
     }, [yearStepper]);
 
     return (
-        <div {...calendarProps} ref={ref} className="c-calendar c-calendar__decade-view">
+        <div {...calendarProps} className="c-calendar c-calendar__decade-view">
             <div className="c-calendar__header">
                 <ReactAriaButton
                     onPress={() => {
@@ -106,7 +118,7 @@ export const DecadeCalendar = (props) => {
                 >
                     <Icon className="chevron" id="chevron-left" />
                 </ReactAriaButton>
-                {years ? <Years classes="c-calendar__year" years={years} /> : null}
+                {years ? <YearRange classes="c-calendar__year" years={years} /> : null}
                 <ReactAriaButton
                     onPress={() => {
                         state.setFocusedDate(state.focusedDate.add({ years: 10 }));
@@ -117,7 +129,7 @@ export const DecadeCalendar = (props) => {
                 </ReactAriaButton>
             </div>
             <div className="year-calendar__dropdowns">
-                {years ? <YearSelector state={state} years={years} /> : null}
+                {years ? <Years state={state} years={years} /> : null}
             </div>
         </div>
     );
