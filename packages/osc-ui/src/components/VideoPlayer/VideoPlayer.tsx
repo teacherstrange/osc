@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react';
+import type { HTMLAttributes, ReactElement, ReactNode } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import type { ReactPlayerProps } from 'react-player';
 import VimeoPlayer from 'react-player/vimeo';
@@ -44,12 +44,38 @@ export interface VideoPlayerProps extends Omit<ReactPlayerProps, 'config'> {
      * @default youtube
      */
     variant?: 'youtube' | 'vimeo';
+    /**
+     * Autoplay the video
+     * @default false
+     */
+    autoplay?: boolean;
+    /**
+     * Set the colour of the overlay
+     * @default hsla(0deg 0% 0% / 50%)
+     */
+    overlayColor?: string;
+    /**
+     * Set whether the overlay should be present when playing
+     * @default false
+     */
+    preserveOverlay?: boolean;
 }
 
 export const VideoPlayer = (props: VideoPlayerProps) => {
-    const { className, url, previewImage, playIcon, variant = 'youtube', ...rest } = props;
+    const {
+        autoplay = false,
+        className,
+        url,
+        previewImage,
+        playIcon,
+        variant = 'youtube',
+        overlayColor,
+        preserveOverlay = false,
+        ...rest
+    } = props;
     const classes = classNames('c-video-player', className);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(autoplay);
+    const [hasBeenInteracted, setHasBeenInteracted] = useState(false);
 
     const intersectionRef = useRef<HTMLDivElement>(null);
     const intersectionThreshold = 0.5; // intersect when 50% of the element is in view
@@ -60,10 +86,26 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
     });
 
     useEffect(() => {
-        intersection && intersection.intersectionRatio < intersectionThreshold
-            ? setIsPlaying(false)
-            : setIsPlaying(true);
-    }, [intersection]);
+        // IF the player is set to autoplay OR has been interacted with then
+        // set the play state based on the intersection observer
+        if (autoplay || hasBeenInteracted) {
+            intersection && intersection.intersectionRatio < intersectionThreshold
+                ? setIsPlaying(false)
+                : setIsPlaying(true);
+        }
+    }, [autoplay, hasBeenInteracted, intersection]);
+
+    let showPreview: boolean | VideoPlayerProps['previewImage'];
+    // IF autoplay is true disable the preview image
+    // ELSE if previewImage is truthy, set the preview image
+    // ELSE show the default preview
+    if (autoplay === true) {
+        showPreview = false;
+    } else if (previewImage) {
+        showPreview = previewImage;
+    } else {
+        showPreview = true;
+    }
 
     return (
         <div className={classes} ref={intersectionRef}>
@@ -73,11 +115,16 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
                     playing={isPlaying}
                     wrapper={Wrapper}
                     controls={true}
-                    light={previewImage ?? true}
+                    light={showPreview}
                     playIcon={playIcon}
+                    volume={1}
+                    muted={autoplay} // make sure video is muted when autoplay is true
                     width="100%"
                     height="100%"
-                    onClickPreview={() => setIsPlaying(true)}
+                    onClickPreview={() => {
+                        setHasBeenInteracted(true);
+                        setIsPlaying(true);
+                    }}
                     {...rest}
                 />
             ) : (
@@ -86,14 +133,17 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
                     playing={isPlaying}
                     wrapper={Wrapper}
                     controls={true}
-                    light={previewImage ?? true}
+                    light={showPreview}
                     playIcon={playIcon}
+                    volume={1}
+                    muted={autoplay} // make sure video is muted when autoplay is true
                     width="100%"
                     height="100%"
                     onClickPreview={() => setIsPlaying(true)}
                     {...rest}
                 />
             )}
+            {!isPlaying || preserveOverlay ? <VideoPlayerOverlay color={overlayColor} /> : null}
         </div>
     );
 };
@@ -115,6 +165,34 @@ export const PlayIcon = (props: PlayIconProps) => {
         <div className="c-video-player__btn">
             <Icon id={id} {...rest} />
         </div>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * VideoPlayerOverlay
+ * -----------------------------------------------------------------------------------------------*/
+interface VideoPlayerOverlayProps extends HTMLAttributes<HTMLDivElement> {
+    /**
+     * Custom class
+     */
+    className?: string;
+    /**
+     * Set the colour of the overlay
+     */
+    color?: string;
+}
+const VideoPlayerOverlay = (props: VideoPlayerOverlayProps) => {
+    const { className, color, ...rest } = props;
+
+    return (
+        <div
+            className="c-video-player__overlay"
+            {...rest}
+            style={{
+                ...rest.style,
+                backgroundColor: color ? color : 'hsla(0deg 0% 0% / 50%)',
+            }}
+        ></div>
     );
 };
 
