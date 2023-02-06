@@ -9,8 +9,7 @@ $input-pl: var(--space-scale-micro);
 .c-date-field {
     position: relative;
     display: inline-flex;
-    min-width: 20ch;
-    max-width: 30ch;
+    width: 100%;
     padding: $input-py $input-pr $input-py $input-pl;
     border: solid 1px var(--color-quinary);
     border-radius: 4px;
@@ -28,8 +27,8 @@ $input-pl: var(--space-scale-micro);
         font-variant-numeric: tabular-nums;
         text-align: end;
 
-        .c-date-field__segment {
-            color: var(--color-secondary);
+        &:last-of-type {
+            padding: 0 var(--space-scale-zeta) 0 0;
         }
 
         &:focus {
