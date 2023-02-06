@@ -30,14 +30,15 @@ export default {
     },
 } as Meta;
 
-const Template: Story<VideoPlayerProps> = ({ ...args }) => (
-    <VideoPlayer playIcon={<PlayIcon />} {...args} />
-);
+const Template: Story<VideoPlayerProps> = ({ ...args }) => {
+    return <VideoPlayer playIcon={<PlayIcon />} {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {
     url: 'https://youtu.be/w36Yhxxuk_c',
 };
+
 export const HasCustomPreviewImage = Template.bind({});
 HasCustomPreviewImage.args = {
     ...Primary.args,
@@ -54,6 +55,32 @@ HasCustomPreviewImage.parameters = {
     docs: {
         description: {
             story: 'The video player will automatically generate a preview image, which is the default video thumbnail. <br>Add a custom image to add a higher quality or more appropriate image.',
+        },
+    },
+};
+
+export const Autoplay = Template.bind({});
+Autoplay.args = {
+    ...Primary.args,
+    autoplay: true,
+};
+Autoplay.parameters = {
+    docs: {
+        description: {
+            story: 'The video player will automatically start playing when scrolled into view, it will be muted by default.',
+        },
+    },
+};
+
+export const PreservesOverlay = Template.bind({});
+PreservesOverlay.args = {
+    ...Primary.args,
+    preserveOverlay: true,
+};
+PreservesOverlay.parameters = {
+    docs: {
+        description: {
+            story: 'You can prevent the overlay from disappearing when the video is playing by setting `preserveOverlay` to `true`. This might be useful for when you want to overlay some text on top of the video.',
         },
     },
 };
