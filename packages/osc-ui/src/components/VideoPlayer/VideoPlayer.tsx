@@ -10,10 +10,6 @@ import { Icon } from '../Icon/Icon';
 
 import './video-player.scss';
 
-/*
-TODO: To support ONLY Vimeo and Youtube (No video upload i.e. MP4) -> Sanity thing
-*/
-
 /* -------------------------------------------------------------------------------------------------
  * VideoPlayer
  *
@@ -113,42 +109,30 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         showPreview = true;
     }
 
+    const propsObj = {
+        url: url,
+        playing: isPlaying,
+        wrapper: Wrapper, // Wrapper component
+        controls: true,
+        light: showPreview,
+        playIcon: playIcon,
+        volume: 1, // Manually set the volume so that the muted prop works
+        muted: autoplay, // make sure video is muted when autoplay is true
+        loop: loop,
+        width: '100%',
+        height: '100%',
+        onClickPreview: () => {
+            setHasBeenInteracted(true);
+            setIsPlaying(true);
+        },
+    };
+
     return (
         <div className={classes} ref={intersectionRef}>
             {variant === 'youtube' ? (
-                <YouTubePlayer
-                    url={url}
-                    playing={isPlaying}
-                    wrapper={Wrapper}
-                    controls={true}
-                    light={showPreview}
-                    playIcon={playIcon}
-                    volume={1}
-                    muted={autoplay} // make sure video is muted when autoplay is true
-                    loop={loop}
-                    width="100%"
-                    height="100%"
-                    onClickPreview={() => {
-                        setHasBeenInteracted(true);
-                        setIsPlaying(true);
-                    }}
-                    {...rest}
-                />
+                <YouTubePlayer {...propsObj} {...rest} />
             ) : (
-                <VimeoPlayer
-                    url={url}
-                    playing={isPlaying}
-                    wrapper={Wrapper}
-                    controls={true}
-                    light={showPreview}
-                    playIcon={playIcon}
-                    volume={1}
-                    muted={autoplay} // make sure video is muted when autoplay is true
-                    width="100%"
-                    height="100%"
-                    onClickPreview={() => setIsPlaying(true)}
-                    {...rest}
-                />
+                <VimeoPlayer {...propsObj} {...rest} />
             )}
             {!isPlaying || preserveOverlay ? <VideoPlayerOverlay color={overlayColor} /> : null}
         </div>
