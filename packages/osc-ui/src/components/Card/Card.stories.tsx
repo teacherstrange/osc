@@ -4,8 +4,18 @@ import { Button, CopyButton } from '../Button/Button';
 import { Content } from '../Content/Content';
 import { Image } from '../Image/Image';
 import { imageData } from '../Image/imageData';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import type { CardProps } from './Card';
-import { Card, CardBody, CardFooter, CardHeader, CardImage, CardInner, CardTitle } from './Card';
+import {
+    BlogCard,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardImage,
+    CardInner,
+    CardTitle,
+} from './Card';
 import { bioCardData } from './cardData';
 
 export default {
@@ -115,6 +125,40 @@ const HasCustomHeadingTextTemplate: Story<CardProps> = ({ ...args }) => (
     </Card>
 );
 
+const HasBlockLinkTemplate: Story<CardProps> = ({ ...args }) => (
+    <BlogCard {...args} variant="featured" className="u-bg-color-nonary">
+        <CardImage>
+            <Image
+                src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1674744069/db8cdf9db0ec39f88706516410a64ed7_kxoiou.png"
+                alt=""
+                width={400}
+                height={460}
+            />
+        </CardImage>
+        <CardInner>
+            <CardHeader>
+                <CardTitle>A third of women change their career after having children</CardTitle>
+                <CardTitle as="h3" subtitle>
+                    Study tips
+                </CardTitle>
+            </CardHeader>
+
+            <CardBody>
+                <p>December 29th, 2021</p>
+            </CardBody>
+
+            <CardFooter>
+                <Button variant="quinary">
+                    Read more{' '}
+                    <VisuallyHidden>
+                        about A third of women change their career after having children
+                    </VisuallyHidden>
+                </Button>
+            </CardFooter>
+        </CardInner>
+    </BlogCard>
+);
+
 export const Primary = Template.bind({});
 Primary.args = {
     style: { maxWidth: '400px' },
@@ -144,7 +188,7 @@ HasCustomHeadingText.parameters = {
     },
 };
 
-export const BlockLink = Template.bind({});
+export const BlockLink = HasBlockLinkTemplate.bind({});
 BlockLink.args = {
     ...Primary.args,
     blockLink: true,
