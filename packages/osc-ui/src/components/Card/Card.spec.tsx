@@ -162,9 +162,9 @@ describe('Card Title', () => {
 });
 
 describe('Blog card', () => {
-    test('adds the featured class to the blog card', () => {
+    const setup = (variant, isFull) => {
         render(
-            <BlogCard variant="featured">
+            <BlogCard variant={variant} isFull={isFull}>
                 <CardInner>
                     <CardHeader>
                         <CardTitle>{postCardData.title}</CardTitle>
@@ -186,71 +186,30 @@ describe('Blog card', () => {
                 </CardInner>
             </BlogCard>
         );
+    };
+    test('adds the featured class to the blog card', () => {
+        setup('featured', false);
 
         expect(document.querySelector('.c-card--blog')).toHaveClass('c-card--featured');
     });
 
     test('adds the is-full class to the blog card', () => {
-        render(
-            <BlogCard variant="featured" isFull>
-                <CardInner>
-                    <CardHeader>
-                        <CardTitle>{postCardData.title}</CardTitle>
-                        <CardTitle as="h3" subtitle>
-                            {postCardData.subtitle}
-                        </CardTitle>
-                    </CardHeader>
-
-                    <CardBody>
-                        <p>{truncate(postCardData.body)}</p>
-                    </CardBody>
-
-                    <CardFooter>
-                        <time dateTime="2022-10-08" className="u-text-reg">
-                            Wednesday 8th October
-                        </time>
-                        <Button variant="secondary">Read more</Button>
-                    </CardFooter>
-                </CardInner>
-            </BlogCard>
-        );
+        setup('featured', true);
 
         expect(document.querySelector('.c-card--blog')).toHaveClass('is-full');
     });
 
     test('adds the media-object class to the blog card', () => {
-        render(
-            <BlogCard variant="media-object">
-                <CardInner>
-                    <CardHeader>
-                        <CardTitle>{postCardData.title}</CardTitle>
-                        <CardTitle as="h3" subtitle>
-                            {postCardData.subtitle}
-                        </CardTitle>
-                    </CardHeader>
-
-                    <CardBody>
-                        <p>{truncate(postCardData.body)}</p>
-                    </CardBody>
-
-                    <CardFooter>
-                        <time dateTime="2022-10-08" className="u-text-reg">
-                            Wednesday 8th October
-                        </time>
-                        <Button variant="secondary">Read more</Button>
-                    </CardFooter>
-                </CardInner>
-            </BlogCard>
-        );
+        setup('media-object', false);
 
         expect(document.querySelector('.c-card--blog')).toHaveClass('c-card--media-object');
     });
 });
 
 describe('Collection Card', () => {
-    test('adds the sm class to the blog card', () => {
+    const setup = (size) => {
         render(
-            <CollectionCard size="sm">
+            <CollectionCard size={size}>
                 <CardImage>
                     <Image
                         src={collectionCardDataSml.image.secure_url}
@@ -275,66 +234,21 @@ describe('Collection Card', () => {
                 </CardInner>
             </CollectionCard>
         );
+    };
+
+    test('adds the sm class to the blog card', () => {
+        setup('sm');
 
         expect(document.querySelector('.c-card--collection')).toHaveClass('c-card--sm');
     });
+
     test('adds the md class to the blog card', () => {
-        render(
-            <CollectionCard size="md">
-                <CardImage>
-                    <Image
-                        src={collectionCardDataSml.image.secure_url}
-                        alt={collectionCardDataSml.image.alt}
-                        width={collectionCardDataSml.image.width}
-                        height={collectionCardDataSml.image.height}
-                    />
-                </CardImage>
-                <CardInner>
-                    <CardHeader>
-                        <CardTitle>{collectionCardDataSml.title}</CardTitle>
-                    </CardHeader>
-
-                    <CardBody>
-                        <p>{truncate(collectionCardDataSml.body)}</p>
-                    </CardBody>
-
-                    <CardFooter>
-                        <span className="u-text-bold">23 courses</span>
-                        <Button variant="quaternary">Find our more</Button>
-                    </CardFooter>
-                </CardInner>
-            </CollectionCard>
-        );
+        setup('md');
 
         expect(document.querySelector('.c-card--collection')).toHaveClass('c-card--md');
     });
     test('adds the lg class to the blog card', () => {
-        render(
-            <CollectionCard size="lg">
-                <CardImage>
-                    <Image
-                        src={collectionCardDataSml.image.secure_url}
-                        alt={collectionCardDataSml.image.alt}
-                        width={collectionCardDataSml.image.width}
-                        height={collectionCardDataSml.image.height}
-                    />
-                </CardImage>
-                <CardInner>
-                    <CardHeader>
-                        <CardTitle>{collectionCardDataSml.title}</CardTitle>
-                    </CardHeader>
-
-                    <CardBody>
-                        <p>{truncate(collectionCardDataSml.body)}</p>
-                    </CardBody>
-
-                    <CardFooter>
-                        <span className="u-text-bold">23 courses</span>
-                        <Button variant="quaternary">Find our more</Button>
-                    </CardFooter>
-                </CardInner>
-            </CollectionCard>
-        );
+        setup('lg');
 
         expect(document.querySelector('.c-card--collection')).toHaveClass('c-card--lg');
     });
