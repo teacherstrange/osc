@@ -23,7 +23,8 @@ $play-btn-icon-size: rem($base-font-size * 2);
 
     position: relative;
     display: grid;
-    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    max-width: 100%;
 
     &__wrapper,
     &__btn,
@@ -43,7 +44,10 @@ $play-btn-icon-size: rem($base-font-size * 2);
             // make sure we can click through overlaying content and still control the video
             pointer-events: none;
         }
+    }
 
+    &__btn,
+    &__overlay {
         &.is-hidden {
             opacity: 0;
         }
@@ -51,10 +55,13 @@ $play-btn-icon-size: rem($base-font-size * 2);
 
     &__wrapper {
         position: relative;
-        overflow: hidden;
+        min-height: 200px;
+        max-height: 600px;
         grid-row: 1 / -1;
 
-        @include ratio(16 9);
+        @include mq(mq-token("tab")) {
+            @include ratio(16 9);
+        }
     }
 
     &__btn {
@@ -80,14 +87,40 @@ $play-btn-icon-size: rem($base-font-size * 2);
     }
 
     &__content {
-        color: var(--color-tertiary);
-        grid-row: 1;
+        background-color: var(--color-quinary);
+        color: var(--color-secondary);
 
         @include z-index("button");
+
+        @include mq(mq-token("tab")) {
+            align-self: end;
+            background-color: transparent;
+            color: var(--color-tertiary);
+            grid-row: 3;
+        }
+
+        // Only hide content on larger screens
+        &.is-hidden {
+            @include mq(mq-token("tab")) {
+                opacity: 0;
+            }
+        }
     }
 
     &__overlay {
-        position: absolute;
-        inset: 0;
+        grid-row: 1 / -1;
+        grid-column: 1 / -1;
+        z-index: 1;
+
+        &.has-content {
+            @include mq(mq-token("tab")) {
+                opacity: 1;
+            }
+        }
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    .o-img {
+        object-fit: cover;
     }
 }
