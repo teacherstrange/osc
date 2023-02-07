@@ -164,7 +164,9 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
 
             <VideoPlayerOverlay
                 color={overlayColor}
-                className={!isPlaying || preserveContent ? '' : 'is-hidden'}
+                className={`${!isPlaying ? '' : 'is-hidden'} ${
+                    preserveContent ? 'has-content' : ''
+                }`}
             />
         </div>
     );
