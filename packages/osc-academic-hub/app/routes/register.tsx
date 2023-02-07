@@ -1,17 +1,17 @@
 import type { ActionFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
-import { json, redirect } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import { Form, Link, useActionData, useSearchParams } from '@remix-run/react';
 import * as React from 'react';
 
-import { getUserId, createUserSession } from '~/session.server';
+import { createUserSession } from '~/session.server';
 
 import { createUser, getUserByEmail } from '~/models/user.server';
-import { validateEmail } from '~/utils/_tmp_/validateEmail';
 import { safeRedirect } from '~/utils/_tmp_/safeRedirect';
+import { validateEmail } from '~/utils/_tmp_/validateEmail';
 
 export const loader: LoaderFunction = async ({ request }) => {
-    const userId = await getUserId(request);
-    if (userId) return redirect('/admin');
+    // const userId = await getUserId(request);
+    // if (userId) return redirect('/admin');
     return json({});
 };
 
@@ -54,13 +54,13 @@ export const action: ActionFunction = async ({ request }) => {
         request,
         userId: user.id,
         remember: false,
-        redirectTo
+        redirectTo,
     });
 };
 
 export const meta: MetaFunction = () => {
     return {
-        title: 'Sign Up'
+        title: 'Sign Up',
     };
 };
 
@@ -148,7 +148,7 @@ export default function Join() {
                                 className="text-blue-500 underline"
                                 to={{
                                     pathname: '/login',
-                                    search: searchParams.toString()
+                                    search: searchParams.toString(),
                                 }}
                             >
                                 Log in
