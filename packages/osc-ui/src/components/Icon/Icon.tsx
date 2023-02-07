@@ -1,6 +1,6 @@
 import * as AccessibleIconPrimitive from '@radix-ui/react-accessible-icon';
 import type { ReactNode } from 'react';
-import React, { forwardRef } from 'react';
+import React, { createContext, forwardRef, useContext } from 'react';
 import { classNames } from '../../utils/classNames';
 
 export interface IconProps {
@@ -19,6 +19,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>((props, forwardedRef) =
     const { className, id, ...attr } = props;
     const classes = classNames('o-icon', className);
     const size = 30; // an arbitrary size that constrains the width and height of the icon if css isn't loaded for whatever reason
+    const { spriteSheetPath } = useSpritesheetContext();
 
     return (
         <svg
@@ -31,7 +32,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>((props, forwardedRef) =
             {...attr}
             ref={forwardedRef}
         >
-            <use href={`./spritesheet.svg#${id}`} />
+            <use href={`${spriteSheetPath}#${id}`} />
         </svg>
     );
 });
@@ -53,4 +54,48 @@ export const AccessibleIcon = (props: AccessibleIconProps) => {
     const { children, label } = props;
 
     return <AccessibleIconPrimitive.Root label={label}>{children}</AccessibleIconPrimitive.Root>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Spritesheet provider
+ * -----------------------------------------------------------------------------------------------*/
+const SpritesheetContext = createContext(null);
+
+export interface SpritesheetProviderProps {
+    /**
+     * The content of the button.
+     */
+    children?: ReactNode;
+
+    /**
+     * Spritesheet path context value for the spritesheet provider.
+     * @default ./spritesheet.svg
+     */
+    value?: {
+        spriteSheetPath: string;
+    };
+}
+export const SpritesheetProvider = (props: SpritesheetProviderProps) => {
+    const {
+        children,
+        value = {
+            spriteSheetPath: './spritesheet.svg',
+        },
+    } = props;
+
+    return <SpritesheetContext.Provider value={value}>{children}</SpritesheetContext.Provider>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * useSpritesheetContext
+ * -----------------------------------------------------------------------------------------------*/
+const useSpritesheetContext = () => {
+    const context = useContext(SpritesheetContext);
+
+    // if `undefined`, throw an error
+    if (context === undefined) {
+        throw new Error('useSpritesheetContext was used outside of its Provider');
+    }
+
+    return context;
 };

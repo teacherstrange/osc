@@ -1,7 +1,7 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import type { IconProps } from './Icon';
-import { AccessibleIcon, Icon } from './Icon';
+import { AccessibleIcon, Icon, SpritesheetProvider } from './Icon';
 
 // Can't use fs in a browser, so we have to manually list the icons 😭
 const icons: string[] = [
@@ -46,11 +46,12 @@ const icons: string[] = [
 export default {
     title: 'osc-ui/Icons',
     component: Icon,
+    subcomponents: { AccessibleIcon, SpritesheetProvider },
     parameters: {
         docs: {
             description: {
                 component:
-                    'Icons are used to represent actions, objects, and concepts. They are used to communicate information and help users navigate the interface.<br>Icons can appear small in navy or white or as a featured icon in a gradient that matches with the page colours.',
+                    'Icons are used to represent actions, objects, and concepts. They are used to communicate information and help users navigate the interface.<br>Icons can appear small in navy or white or as a featured icon in a gradient that matches with the page colours.<br>Must be wrapped in the `<SpritesheetProvider>` to work.',
             },
         },
     },
