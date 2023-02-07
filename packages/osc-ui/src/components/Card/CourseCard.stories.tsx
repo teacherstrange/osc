@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Button, ButtonGroup } from '../Button/Button';
 import { AccessibleIcon, Icon } from '../Icon/Icon';
 import { PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '../Popover/Popover';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import type { CardProps } from './Card';
 import {
     CardBody,
@@ -84,6 +85,7 @@ const Template: Story<CardProps> = ({ ...args }) => {
 
                     <Button as="link" to="/courses/aat-level-3-diploma-in-accounting" isFull>
                         View course
+                        <VisuallyHidden>AAT Level 3 Diploma in Accounting</VisuallyHidden>
                     </Button>
                 </CardBody>
             </CardInner>
@@ -151,6 +153,7 @@ const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => {
 
                     <Button as="link" to="/courses/aat-level-3-diploma-in-accounting" isFull>
                         View course
+                        <VisuallyHidden>AAT Level 3 Diploma in Accounting</VisuallyHidden>
                     </Button>
                 </CardBody>
             </CardInner>
@@ -228,6 +231,7 @@ const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => {
 
                         <Button as="link" to="/courses/aat-level-3-diploma-in-accounting">
                             View course
+                            <VisuallyHidden>AAT Level 3 Diploma in Accounting</VisuallyHidden>
                         </Button>
                     </ButtonGroup>
                 </CardBody>
@@ -272,6 +276,7 @@ const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
                 </Button>
                 <Button variant="secondary" size="sm">
                     View course
+                    <VisuallyHidden>AAT Level 3 Diploma in Accounting</VisuallyHidden>
                 </Button>
             </CardFooter>
         </CardInner>

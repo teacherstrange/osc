@@ -3,6 +3,7 @@ import React from 'react';
 import { truncate } from '../../utils/truncate';
 import { Button } from '../Button/Button';
 import { Image } from '../Image/Image';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import type { CardProps } from './Card';
 import {
     BlogCard,
@@ -62,7 +63,10 @@ const Template: Story<CardProps> = ({ ...args }) => (
                 <time dateTime="2022-10-08" className="u-text-reg">
                     Wednesday 8th October
                 </time>
-                <Button variant="secondary">Read more</Button>
+                <Button variant="secondary">
+                    Read more
+                    <VisuallyHidden>about {postCardData.title}</VisuallyHidden>
+                </Button>
             </CardFooter>
         </CardInner>
     </BlogCard>
@@ -87,7 +91,9 @@ const MediaObjectTemplate: Story<CardProps> = ({ ...args }) => (
             </CardHeader>
 
             <CardFooter>
-                <Button variant="secondary">Read more</Button>
+                <Button variant="secondary">
+                    Read more <VisuallyHidden>about {postCardData.title}</VisuallyHidden>
+                </Button>
             </CardFooter>
         </CardInner>
     </BlogCard>
@@ -119,7 +125,12 @@ const FeaturedTemplate: Story<CardProps> = ({ ...args }) => (
                 </CardBody>
 
                 <CardFooter>
-                    <Button variant="quinary">Read more</Button>
+                    <Button variant="quinary">
+                        Read more{' '}
+                        <VisuallyHidden>
+                            about A third of women change their career after having children
+                        </VisuallyHidden>
+                    </Button>
                 </CardFooter>
             </CardInner>
         </BlogCard>
