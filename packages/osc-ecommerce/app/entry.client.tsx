@@ -1,8 +1,19 @@
 // entry.client.tsx
 import { RemixBrowser } from '@remix-run/react';
+import { SpritesheetProvider } from 'osc-ui';
+import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import { hydrate } from 'react-dom';
 
-hydrate(<RemixBrowser />, document);
+hydrate(
+    <SpritesheetProvider
+        value={{
+            spriteSheetPath: spritesheet,
+        }}
+    >
+        <RemixBrowser />
+    </SpritesheetProvider>,
+    document
+);
 
 if ('serviceWorker' in navigator) {
     // Use the window load event to keep the page load performant
@@ -14,13 +25,13 @@ if ('serviceWorker' in navigator) {
                 if (navigator.serviceWorker.controller) {
                     navigator.serviceWorker.controller.postMessage({
                         type: 'SYNC_REMIX_MANIFEST',
-                        manifest: window.__remixManifest
+                        manifest: window.__remixManifest,
                     });
                 } else {
                     navigator.serviceWorker.addEventListener('controllerchange', () => {
                         navigator.serviceWorker.controller?.postMessage({
                             type: 'SYNC_REMIX_MANIFEST',
-                            manifest: window.__remixManifest
+                            manifest: window.__remixManifest,
                         });
                     });
                 }
@@ -60,7 +71,7 @@ navigator.serviceWorker.ready
         const convertedVapidKey = urlBase64ToUint8Array(returnedSubscription);
         return sub.registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: convertedVapidKey
+            applicationServerKey: convertedVapidKey,
         });
     })
     .then(async (subscription) => {
@@ -68,7 +79,7 @@ navigator.serviceWorker.ready
             method: 'POST',
             body: JSON.stringify({
                 subscription: subscription,
-                type: 'POST_SUBSCRIPTION'
-            })
+                type: 'POST_SUBSCRIPTION',
+            }),
         });
     });
