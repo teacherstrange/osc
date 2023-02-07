@@ -8,9 +8,10 @@ import {
     Scripts,
     ScrollRestoration,
     useLocation,
-    useMatches
+    useMatches,
 } from '@remix-run/react';
 import { SkipLink } from 'osc-ui';
+import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import oscUiSkipLinkStyle from 'osc-ui/dist/src-components-SkipLink-skip-link.css';
 import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
 import styles from 'osc-ui/dist/src-styles-main.css';
@@ -22,6 +23,12 @@ import { getColorScheme } from './utils/colorScheme';
 let isMount = true;
 export const links: LinksFunction = () => {
     return [
+        // Preload the spritesheet to avoid a flash of unstyled content
+        {
+            rel: 'preload',
+            href: spritesheet,
+            as: 'image',
+        },
         { rel: 'stylesheet', href: oscUiSwitchStyles },
         { rel: 'stylesheet', href: oscUiSkipLinkStyle },
         { rel: 'stylesheet', href: styles },
@@ -39,18 +46,18 @@ export const links: LinksFunction = () => {
             rel: 'icon',
             type: 'image/png',
             sizes: '192x192',
-            href: '/icons/android-icon-192x192.png'
+            href: '/icons/android-icon-192x192.png',
         },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icons/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/icons/favicon-96x96.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icons/favicon-16x16.png' }
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icons/favicon-16x16.png' },
     ];
 };
 
 export const meta: MetaFunction = () => ({
     charset: 'utf-8',
     title: 'OSC Academic Hub',
-    viewport: 'width=device-width,initial-scale=1'
+    viewport: 'width=device-width,initial-scale=1',
 });
 
 type LoaderData = {
@@ -59,13 +66,13 @@ type LoaderData = {
 };
 
 export const headers: HeadersFunction = () => ({
-    'Accept-CH': 'Sec-CH-Prefers-Color-Scheme'
+    'Accept-CH': 'Sec-CH-Prefers-Color-Scheme',
 });
 
 export const loader: LoaderFunction = async ({ request }) => {
     return json<LoaderData>({
         user: await getUser(request),
-        colorScheme: await getColorScheme(request)
+        colorScheme: await getColorScheme(request),
     });
 };
 
@@ -117,7 +124,7 @@ export default function App() {
                     isMount: mounted,
                     location,
                     matches,
-                    manifest: window.__remixManifest
+                    manifest: window.__remixManifest,
                 });
             } else {
                 let listener = async () => {
@@ -127,7 +134,7 @@ export default function App() {
                         isMount: mounted,
                         location,
                         matches,
-                        manifest: window.__remixManifest
+                        manifest: window.__remixManifest,
                     });
                 };
                 navigator.serviceWorker.addEventListener('controllerchange', listener);
