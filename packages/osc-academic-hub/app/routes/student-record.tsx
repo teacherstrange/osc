@@ -1,4 +1,4 @@
-import { Form, useLoaderData } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import type { LoaderFunction } from '@remix-run/server-runtime';
 import { json, redirect } from '@remix-run/server-runtime';
 import { getUserToken } from '~/session.server';
@@ -12,17 +12,13 @@ export const loader: LoaderFunction = async ({ request }) => {
     });
 };
 
-export default function Index() {
+export default function StudentRecord() {
     const { userAccessToken } = useLoaderData();
     console.log(userAccessToken);
 
     return (
         <div>
-            <h1>This is the admin index page</h1>
-
-            <Form action="/logout" method="post">
-                <button type="submit">Logout</button>
-            </Form>
+            <h1>This is the student record page</h1>
         </div>
     );
 }
