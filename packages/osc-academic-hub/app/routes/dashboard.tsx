@@ -12,13 +12,13 @@ export const loader: LoaderFunction = async ({ request }) => {
     });
 };
 
-export default function Index() {
+export default function Dashboard() {
     const { userAccessToken } = useLoaderData();
     console.log(userAccessToken);
 
     return (
         <div>
-            <h1>This is the admin index page</h1>
+            <h1>This is the dashboard page</h1>
 
             <Form action="/logout" method="post">
                 <button type="submit">Logout</button>
