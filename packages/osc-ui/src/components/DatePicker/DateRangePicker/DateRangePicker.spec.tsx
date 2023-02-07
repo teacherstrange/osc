@@ -2,7 +2,7 @@ import { parseDate } from '@internationalized/date';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { DateRangePickerContainer } from './DateRangerPickerContainer';
+import { DateRangePickerContainer } from './DateRangePicker';
 
 const TODAY = 'Today';
 const YEST = 'Yesterday';
@@ -116,4 +116,40 @@ test('should select the correct range when a time present is selected', async ()
         i++;
         length--;
     }
+});
+
+test('should remove hidden class from "Now select end date" prompt when first date is selected', async () => {
+    const user = userEvent.setup();
+
+    render(<DateRangePickerContainer label="Date Range" />);
+    const button = screen.getAllByRole('button')[0];
+    await user.click(button);
+
+    const gridCellStartBtn = await screen.getAllByText('5')[0];
+    expect(screen.getByText('Now Select an End Date')).toHaveClass('c-calendar__prompt--hidden');
+    await user.click(gridCellStartBtn);
+    expect(screen.getByText('Now Select an End Date')).toHaveClass('c-calendar__prompt');
+});
+
+test('should clear selection if the Clear Selection button is selected', async () => {
+    const user = userEvent.setup();
+
+    render(<DateRangePickerContainer label="Date Range" />);
+    const button = screen.getAllByRole('button')[0];
+    await user.click(button);
+
+    const gridCellStartBtn = await screen.getAllByText('10')[0];
+    const gridCellEndBtn = await screen.getAllByText('11')[0];
+
+    await user.click(gridCellStartBtn);
+    await user.click(gridCellEndBtn);
+
+    expect(screen.getAllByText('10')[1]).toHaveClass('c-calendar__cell--selected');
+    expect(screen.getAllByText('11')[1]).toHaveClass('c-calendar__cell--selected');
+
+    const clearSelectionBtn = screen.getByRole('button', { name: 'Clear Selection' });
+
+    await user.click(clearSelectionBtn);
+    expect(screen.getAllByText('10')[1]).not.toHaveClass('c-calendar__cell--selected');
+    expect(screen.getAllByText('11')[1]).not.toHaveClass('c-calendar__cell--selected');
 });
