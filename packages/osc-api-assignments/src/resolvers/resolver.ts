@@ -1,7 +1,8 @@
+import type { getStudentsAssignments } from '~/types/arguments';
+
 export const resolvers = {
     Query: {
-        crmStudent: async (_: undefined, __: undefined) => {
-            return null;
+        studentsAssignments: async (_: undefined, { id }: getStudentsAssignments) => {
         },
     },
 };

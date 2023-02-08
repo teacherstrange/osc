@@ -1,3 +1,3 @@
-export type crmStudentArguments = {
+export type getStudentsAssignments = {
     id: number;
 };
