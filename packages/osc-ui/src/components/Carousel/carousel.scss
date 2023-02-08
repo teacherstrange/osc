@@ -1,8 +1,8 @@
 @import "../../styles/settings";
 
 $carousel-control-color: var(--color-neutral-400);
-$carousel-dot-dimensions: 12px;
-$carousel-arrow-dimensions: 30px;
+$carousel-dot-dimensions: ($base-fs * 0.75);
+$carousel-arrow-dimensions: ($base-fs * 1.875);
 
 /* stylelint-disable selector-class-pattern */
 .c-carousel {

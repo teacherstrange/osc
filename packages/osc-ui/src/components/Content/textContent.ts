@@ -414,7 +414,7 @@ export const textContentWithTextColor: TextContent = {
                     _key: 'c0acf5edaaff0',
                     _type: 'span',
                     marks: [
-                        'span t-font-gamma',
+                        'span t-font-2xl',
                         'span u-color-gradient-quaternary',
                         'strong u-text-med',
                     ],
