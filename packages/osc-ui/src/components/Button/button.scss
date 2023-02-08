@@ -1,18 +1,19 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 @use "sass:map";
 @use "sass:string";
-@use "../../styles/settings" as *;
-@use "../../styles/tools" as *;
+@import "../../styles/settings";
+@import "../../styles/tools";
 
 $btn-primary-border: solid 3px var(--color-secondary);
 $btn-primary-offset: 6px;
+$btn-radius: 40px;
 $btn-properties: (
     primary: (
         bg-color: var(--color-secondary),
         bg-hover-color: var(--color-primary),
         fg-color: var(--color-tertiary),
-        font-weight: $weight-bold,
-        letter-spacing: $letter-spacing-xsml,
+        font-weight: $fw-bold,
+        letter-spacing: $ls-xs,
         text-transform: uppercase,
         border: $btn-primary-border,
         offset: $btn-primary-offset,
@@ -28,21 +29,21 @@ $btn-properties: (
             background-color: transparent,
             border-right: $btn-primary-border,
             border-bottom: $btn-primary-border,
-            content: "",
+            content: ""
         ),
         sizes: (
             sm: (
-                padding: var(--space-scale-milli) var(--space-scale-zeta),
-                font-size: var(--font-scale-milli)
+                padding: $space-xs $space-m,
+                font-size: $fs-xs
             ),
             md: (
-                padding: var(--space-scale-centi) var(--space-scale-delta),
-                font-size: var(--font-scale-centi)
+                padding: $space-s $space-xl,
+                font-size: $fs-s
             ),
             lg: (
-                padding: var(--space-scale-zeta) var(--space-scale-omega),
-                font-size: var(--font-scale-zeta),
-            ),
+                padding: $space-m $space-5xl,
+                font-size: $fs-m
+            )
         )
     ),
     secondary: (
@@ -50,8 +51,8 @@ $btn-properties: (
         bg-hover-color: var(--color-secondary),
         fg-color: var(--color-secondary),
         fg-hover-color: var(--color-tertiary),
-        font-weight: $weight-bold,
-        letter-spacing: $letter-spacing-xsml,
+        font-weight: $fw-bold,
+        letter-spacing: $ls-xs,
         text-transform: uppercase,
         border: solid 1px var(--color-secondary),
         inverse-bg-hover-color: var(--color-tertiary),
@@ -59,26 +60,26 @@ $btn-properties: (
         inverse-fg-hover-color: var(--color-secondary),
         sizes: (
             sm: (
-                padding: var(--space-scale-milli) var(--space-scale-zeta),
-                font-size: var(--font-scale-milli)
+                padding: $space-xs $space-m,
+                font-size: $fs-xs
             ),
             md: (
-                padding: var(--space-scale-milli) var(--space-scale-zeta),
-                font-size: var(--font-scale-centi)
+                padding: $space-xs $space-m,
+                font-size: $fs-s
             ),
             lg: (
-                padding: var(--space-scale-zeta) var(--space-scale-delta),
-                font-size: var(--font-scale-zeta),
-            ),
-        ),
+                padding: $space-m $space-xl,
+                font-size: $fs-m
+            )
+        )
     ),
     tertiary: (
         bg-color: transparent,
         bg-hover-color: var(--color-secondary),
         fg-color: var(--color-neutral-600),
         fg-hover-color: var(--color-tertiary),
-        font-weight: $weight-bold,
-        letter-spacing: $letter-spacing-xsml,
+        font-weight: $fw-bold,
+        letter-spacing: $ls-xs,
         text-transform: uppercase,
         border: 1px solid var(--color-neutral-400),
         inverse-bg-hover-color: var(--color-neutral-100),
@@ -86,68 +87,68 @@ $btn-properties: (
         inverse-fg-hover-color: var(--color-secondary),
         sizes: (
             sm: (
-                padding: var(--space-scale-milli) var(--space-scale-zeta),
-                font-size: var(--font-scale-milli)
+                padding: $space-xs $space-m,
+                font-size: $fs-xs
             ),
             md: (
-                padding: var(--space-scale-milli) var(--space-scale-zeta),
-                font-size: var(--font-scale-centi)
+                padding: $space-xs $space-m,
+                font-size: $fs-s
             ),
             lg: (
-                padding: var(--space-scale-zeta) var(--space-scale-delta),
-                font-size: var(--font-scale-zeta),
-            ),
-        ),
+                padding: $space-m $space-xl,
+                font-size: $fs-m
+            )
+        )
     ),
     quaternary: (
         bg-color: transparent,
         bg-hover-color: transparent,
         fg-color: var(--color-secondary),
         fg-hover-color: var(--color-primary),
-        font-weight: $weight-reg,
+        font-weight: $fw-reg,
         gap: 0.8em,
         inverse-fg-color: var(--color-tertiary),
         sizes: (
             sm: (
-                font-size: var(--font-scale-milli)
+                font-size: $fs-xs
             ),
             md: (
-                font-size: var(--font-scale-centi)
+                font-size: $fs-s
             ),
             lg: (
-                font-size: var(--font-scale-zeta),
-            ),
-        ),
+                font-size: $fs-m
+            )
+        )
     ),
     quinary: (
         bg-color: var(--color-septenary),
         bg-hover-color: var(--color-primary),
         fg-color: var(--color-secondary),
         fg-hover-color: var(--color-tertiary),
-        font-weight: $weight-bold,
-        letter-spacing: $letter-spacing-xsml,
+        font-weight: $fw-bold,
+        letter-spacing: $ls-xs,
         text-transform: uppercase,
         sizes: (
             sm: (
-                padding: var(--space-scale-milli) var(--space-scale-zeta),
-                font-size: var(--font-scale-milli)
+                padding: $space-xs $space-m,
+                font-size: $fs-xs
             ),
             md: (
-                padding: var(--space-scale-milli) var(--space-scale-zeta),
-                font-size: var(--font-scale-centi)
+                padding: $space-xs $space-m,
+                font-size: $fs-s
             ),
             lg: (
-                padding: var(--space-scale-zeta) var(--space-scale-delta),
-                font-size: var(--font-scale-zeta),
-            ),
-        ),
+                padding: $space-m $space-xl,
+                font-size: $fs-m
+            )
+        )
     ),
     primary-gradient: (
         bg-image: var(--color-gradient-quaternary-90),
         bg-hover-color: var(--color-nonary),
         fg-color: var(--color-tertiary),
-        font-weight: $weight-bold,
-        letter-spacing: $letter-spacing-xsml,
+        font-weight: $fw-bold,
+        letter-spacing: $ls-xs,
         text-transform: uppercase,
         inverse-bg-color: var(--color-tertiary),
         inverse-bg-hover-color: transparent,
@@ -155,26 +156,26 @@ $btn-properties: (
         inverse-fg-hover-color: var(--color-tertiary),
         sizes: (
             sm: (
-                padding: var(--space-scale-micro) var(--space-scale-zeta),
-                font-size: var(--font-scale-milli)
+                padding: $space-2xs $space-m,
+                font-size: $fs-xs
             ),
             md: (
-                padding: var(--space-scale-milli) var(--space-scale-gamma),
-                font-size: var(--font-scale-centi),
+                padding: $space-xs $space-2xl,
+                font-size: $fs-s
             ),
             lg: (
-                padding: var(--space-scale-zeta) var(--space-scale-beta),
-                font-size: var(--font-scale-zeta),
-            ),
-        ),
+                padding: $space-m $space-3xl,
+                font-size: $fs-m
+            )
+        )
     ),
     secondary-gradient: (
         bg-image: var(--color-gradient-septenary-90),
         bg-hover-color: var(--color-quaternary),
         fg-color: var(--color-tertiary),
-        font-weight: $weight-bold,
-        font-size: var(--font-scale-centi),
-        letter-spacing: $letter-spacing-xsml,
+        font-weight: $fw-bold,
+        font-size: $fs-s,
+        letter-spacing: $ls-xs,
         text-transform: uppercase,
         inverse-bg-color: var(--color-tertiary),
         inverse-bg-hover-color: transparent,
@@ -182,18 +183,18 @@ $btn-properties: (
         inverse-fg-hover-color: var(--color-tertiary),
         sizes: (
             sm: (
-                padding: var(--space-scale-micro) var(--space-scale-zeta),
-                font-size: var(--font-scale-milli)
+                padding: $space-2xs $space-m,
+                font-size: $fs-xs
             ),
             md: (
-                padding: var(--space-scale-milli) var(--space-scale-gamma),
+                padding: $space-xs $space-2xl
             ),
             lg: (
-                padding: var(--space-scale-zeta) var(--space-scale-beta),
-                font-size: var(--font-scale-zeta),
-            ),
-        ),
-    ),
+                padding: $space-m $space-3xl,
+                font-size: $fs-m
+            )
+        )
+    )
 );
 
 .c-btn {
@@ -254,8 +255,6 @@ $btn-properties: (
     // Rounded borders
     // *----------------------------------*/
     &.is-pill {
-        $btn-radius: 40px;
-
         &,
         #{$self}__inner,
         &::before {
@@ -450,7 +449,7 @@ $btn-properties: (
 // *----------------------------------*/
 .c-btn-group {
     display: flex;
-    gap: var(--space-scale-zeta);
+    gap: $space-m;
     flex-wrap: wrap;
     align-items: center;
 
@@ -471,7 +470,7 @@ $btn-properties: (
         width: 2px;
         height: 2px;
         background-color: currentcolor;
-        border-radius: 50%;
+        border-radius: $rad;
 
         // Start here so we have a smoother transition when switching the loading state on
         transform: translateY(0.2em);

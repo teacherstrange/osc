@@ -1,4 +1,4 @@
-@use "../settings" as s;
+@use "../settings" as *;
 
 ///*----------------------------------*\
 //  #LISTS
@@ -19,7 +19,7 @@ li {
     list-style: inherit;
 
     &:not([class]) {
-        margin: 0 0 s.$global-spacing-s;
+        margin: 0 0 $space-s;
     }
 
     /*

@@ -9,18 +9,18 @@ export const imageData = {
             _type: 'image.mobile',
             height: 1250,
             src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/a_hflip.vflip,e_bgremoval,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-            width: 1870
+            width: 1870,
         },
         {
             _key: '2a0753c07577',
             _type: 'image.tablet',
             height: 1250,
             src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/v1665669942/cld-sample-4.jpg',
-            width: 1870
-        }
+            width: 1870,
+        },
     ],
     src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto/v1665669942/cld-sample-5.jpg',
-    width: 1870
+    width: 1870,
 };
 
 export const largeImageData = {
@@ -29,7 +29,7 @@ export const largeImageData = {
     alt: 'A cartoony shoe',
     height: 250,
     src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1870/v1665669942/cld-sample-5.jpg',
-    width: 870
+    width: 870,
 };
 
 export const noImageWidthData = {
@@ -38,7 +38,7 @@ export const noImageWidthData = {
     alt: 'A cartoony shoe',
     height: 250,
     src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify/v1665669942/cld-sample-5.jpg',
-    width: 870
+    width: 870,
 };
 
 export const imageDataNoTransforms = {
@@ -47,5 +47,5 @@ export const imageDataNoTransforms = {
     alt: 'Some food',
     height: 1250,
     src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/v1665669942/cld-sample-4.jpg',
-    width: 1870
+    width: 1870,
 };

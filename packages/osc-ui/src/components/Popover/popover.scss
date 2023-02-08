@@ -1,13 +1,16 @@
+@import "../../styles/settings";
+
 .c-popover {
     &__content {
         width: 260px;
-        padding: 20px;
-        background-color: rgb(255 255 255);
-        border-radius: 4px;
+        padding: $space-m;
+        background-color: var(--color-tertiary);
+        border-radius: 4px; // todo: create border radius variable;
         box-shadow:
             hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
-            hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
-        animation-duration: 400ms;
+            hsl(206deg 22% 7% / 20%) 0 10px 20px -15px; // todo: create box-shadow variable;
+
+        animation-duration: $timing;
         animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         will-change: transform, opacity;
 
@@ -15,7 +18,9 @@
             box-shadow:
                 hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
                 hsl(206deg 22% 7% / 20%) 0 10px 20px -15px,
-                0 0 0 2px rgb(237 237 237);
+                0 0 0 2px var(--color-neutral-200);
+
+            // todo: create box-shadow variable;
         }
     }
 
@@ -28,15 +33,15 @@
         justify-content: center;
         width: 25px;
         height: 25px;
-        border-radius: 100%;
+        border-radius: $rad-l;
         font-family: inherit;
 
         &:hover {
-            background-color: rgb(237 237 237);
+            background-color: var(--color-neutral-200);
         }
 
         &:focus {
-            box-shadow: 0 0 0 2px rgb(237 237 237);
+            box-shadow: 0 0 0 2px var(--color-neutral-200); // todo: create box-shadow variable;
         }
     }
 
@@ -46,17 +51,17 @@
         justify-content: center;
         width: 35px;
         height: 35px;
-        background-color: rgb(255 255 255);
-        border-radius: 100%;
-        color: rgb(0 0 0);
+        background-color: var(--color-tertiary);
+        border-radius: $rad-l;
+        color: var(--color-secondary);
         font-family: inherit;
 
         &:hover {
-            background-color: rgb(237 237 237);
+            background-color: var(--color-neutral-200);
         }
 
         &:focus {
-            box-shadow: 0 0 0 2px rgb(0 0 0);
+            box-shadow: 0 0 0 2px var(--color-neutral-0); // todo: create box-shadow variable;
         }
     }
 }

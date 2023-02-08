@@ -4,8 +4,8 @@
 .o-media {
     $mobile-padding: 1.5rem;
     $desktop-padding: 0;
-    $media-spacing: $global-spacing-s;
-    $media-spacing-l: $global-spacing-m;
+    $media-spacing: $space-xs;
+    $media-spacing-l: $space-l;
 
     display: flex;
     flex-wrap: wrap;
@@ -38,8 +38,8 @@
         }
 
         &--offset {
-            @include mq(mq-token("desk-med")) {
-                padding-left: $global-spacing-l;
+            @include mq($mq-desk-m) {
+                padding-left: $space-xl;
 
                 /* stylelint-disable-next-line plugin/selector-bem-pattern */
                 [class*="--default"] & {
@@ -57,7 +57,7 @@
             padding: 0;
         }
 
-        @include mq(mq-token("tab-lrg"), min) {
+        @include mq($mq-tab-l, min) {
             &--1-4 {
                 max-width: 25%;
             }
@@ -81,7 +81,7 @@
     }
 
     &__content {
-        @include mq(mq-token("tab-lrg")) {
+        @include mq($mq-tab-l) {
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
             [class*="--alternate"] & {
                 padding-right: 0;
@@ -90,7 +90,7 @@
     }
 
     &__img {
-        @include mq(mq-token("tab-lrg")) {
+        @include mq($mq-tab-l) {
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
             [class*="--alternate"] & {
                 padding-right: 0;

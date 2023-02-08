@@ -1,5 +1,5 @@
-@use "../settings" as s;
-@use "../tools" as t;
+@use "../settings" as *;
+@use "../tools" as *;
 
 /* ============================
 // $GENERIC LIST OBJECT
@@ -12,14 +12,14 @@
 [class*="free-text"] ul {
     &:not(.is-bare) {
         width: 100%;
-        margin: 0 0 s.$global-spacing-s;
+        margin: 0 0 $space-s;
         padding: 0;
     }
 
     li {
         position: relative;
         display: list-item;
-        margin-bottom: s.$global-spacing-s;
+        margin-bottom: $space-xs;
 
         &:last-of-type {
             margin-bottom: 0;
@@ -27,14 +27,14 @@
     }
 
     ul {
-        padding-left: s.$global-spacing;
+        padding-left: $space-m;
 
         &.is-child {
             margin: 0;
         }
 
         ul {
-            margin-top: s.$global-spacing-s;
+            margin-top: $space-xs;
         }
     }
 
@@ -46,7 +46,7 @@
             list-style: none outside none;
 
             li {
-                padding-left: s.$global-spacing-s;
+                padding-left: $space-xs;
 
                 &.has-children {
                     padding-left: 0;
@@ -56,7 +56,7 @@
                 &:not(.has-children) {
                     &::before {
                         content: "";
-                        @include t.position(absolute, 0.75em, null, null, 0);
+                        @include position(absolute, 0.75em, null, null, 0);
                         width: $bullet;
                         height: $bullet;
                         margin: auto 0;
@@ -69,10 +69,10 @@
     }
 
     &:where(ol) {
-         &:not(.is-bare) {
-            padding-left: s.$global-spacing-s;
+        &:not(.is-bare) {
+            padding-left: $space-xs;
             list-style: numeric outside none;
-         }
+        }
     }
 
     &--square {

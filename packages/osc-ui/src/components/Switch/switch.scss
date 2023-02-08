@@ -1,30 +1,26 @@
 /* stylelint-disable max-line-length */
-@use "../../styles/tools" as *;
+@import "../../styles/tools";
+@import "../../styles/settings";
 
-/* stylelint-disable-next-line plugin/selector-bem-pattern */
-button {
-    all: unset; // Reset all button styles
-    box-sizing: border-box;
-}
+$switch-radius: 9999px;
+$switch-thumb-offset: 1px;
+$switch-border-width: 1px;
+$switch-transition-duration: 0.2s;
 
 .c-switch {
-    --switch-radius: 9999px;
-    --switch-width: #{rem(50)};
-    --switch-height: #{rem(28)};
-    --switch-thumb-offset: 1px;
-    --switch-border-width: 1px;
-    --switch-thumb-size: #{rem(24)};
     --switch-background-color: transparent;
     --switch-thumb-color: var(--color-secondary);
-    --switch-transition-duration: 0.2s;
+    --switch-width: #{rem($base-fs * 3.125)};
+    --switch-height: #{rem($base-fs * 1.75)};
+    --switch-thumb-size: #{rem($base-fs * 1.5)};
 
     position: relative;
     width: var(--switch-width);
     height: var(--switch-height);
     background-color: var(--switch-background-color);
-    border: var(--switch-border-width) solid var(--switch-thumb-color);
-    border-radius: var(--switch-radius);
-    transition: filter var(--switch-transition-duration);
+    border: $switch-border-width solid var(--switch-thumb-color);
+    border-radius: $switch-radius;
+    transition: filter $switch-transition-duration;
     cursor: pointer;
 
     &:focus {
@@ -53,18 +49,18 @@ button {
         width: var(--switch-thumb-size);
         height: var(--switch-thumb-size);
         background-color: var(--switch-thumb-color);
-        border-radius: var(--switch-radius);
-        transform: translateX(var(--switch-thumb-offset));
-        transition: transform var(--switch-transition-duration);
+        border-radius: $switch-radius;
+        transform: translateX($switch-thumb-offset);
+        transition: transform $switch-transition-duration;
         will-change: transform;
 
         &[data-state="checked"] {
             transform:
                 // width of the switch minus the width of the thumb size minus the border plus the offset
                 // we multiply the border by 2 because we have a border on the left and right
-            translateX(
+                translateX(
                     calc(
-                        var(--switch-width) - var(--switch-thumb-size) - ((var(--switch-border-width) * 2) + var(--switch-thumb-offset))
+                        var(--switch-width) - var(--switch-thumb-size) - (($switch-border-width * 2) + $switch-thumb-offset)
                     )
                 );
         }
@@ -86,8 +82,8 @@ button {
         .c-switch__thumb-icon {
             width: 1em;
             height: 1em;
-            font-size: 1.25rem;
-            transition: opacity var(--switch-transition-duration), visibility var(--switch-transition-duration);
+            font-size: $fs-m;
+            transition: opacity $switch-transition-duration, visibility $switch-transition-duration;
             opacity: 0;
             visibility: hidden;
         }
@@ -115,15 +111,15 @@ button {
     // --large is the default
     // *----------------------------------*/
     &--small {
-        --switch-width: #{rem(26)};
-        --switch-height: #{rem(16)};
-        --switch-thumb-size: #{rem(12)};
+        --switch-width: #{rem($base-fs * 2.125)};
+        --switch-height: #{rem($base-fs)};
+        --switch-thumb-size: #{rem($base-fs * 0.75)};
     }
 
     &--medium {
-        --switch-width: #{rem(34)};
-        --switch-height: #{rem(20)};
-        --switch-thumb-size: #{rem(16)};
+        --switch-width: #{rem($base-fs * 2.125)};
+        --switch-height: #{rem($base-fs * 1.25)};
+        --switch-thumb-size: #{rem($base-fs)};
     }
 }
 
@@ -133,14 +129,14 @@ button {
 .c-switch-group {
     display: flex;
     align-items: center;
-    gap: var(--space-scale-micro);
+    gap: $space-2xs;
 
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
     > svg {
         width: 1em;
         height: 1em;
-        font-size: var(--font-scale-zeta);
-        transition: color var(--switch-transition-duration);
+        font-size: $fs-m;
+        transition: color $switch-transition-duration;
     }
 
     /* stylelint-disable-next-line no-descending-specificity */

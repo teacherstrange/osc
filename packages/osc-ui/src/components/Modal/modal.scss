@@ -1,3 +1,6 @@
+@import "../../styles/tools";
+@import "../../styles/settings";
+
 // TODO: sb - we should probably set these as variables
 
 .c-modal {
@@ -34,7 +37,7 @@
     }
 
     &--sm {
-        max-width: 480px;
+        max-width: #{calc($container-3xs / 2)}px;
     }
 
     &--md {
@@ -42,11 +45,11 @@
     }
 
     &--lg {
-        max-width: 1024px;
+        max-width: #{$container-2xs}px;
     }
 
     &--xl {
-        max-width: 1400px;
+        max-width: #{$container-m}px;
     }
 
     &--full {

@@ -9,11 +9,10 @@
 //
 //\*----------------------------------*/
 
-$container-size: container-token("container-size"); // 1440
-
-$container-size-xxxsml: container-token("container-size-xxxsml");
-$container-size-xxsml: container-token("container-size-xxsml");
-$container-size-xsml: container-token("container-size-xsml");
-$container-size-sml: container-token("container-size-sml");
-$container-size-med: container-token("container-size-med");
-$container-size-lrg: container-token("container-size-lrg");
+$container-4xs: container-token("container-size-4xs"); // 610
+$container-3xs: container-token("container-size-3xs"); // 960
+$container-2xs: container-token("container-size-2xs"); // 1020
+$container-xs: container-token("container-size-xs"); // 1140
+$container-s: container-token("container-size-s"); //1280
+$container-m: container-token("container-size-m"); // 1440
+$container-l: container-token("container-size-l"); // 1680

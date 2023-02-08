@@ -1,3 +1,9 @@
+@import "../../styles/settings";
+
+$carousel-control-color: var(--color-neutral-400);
+$carousel-dot-dimensions: 12px;
+$carousel-arrow-dimensions: 30px;
+
 /* stylelint-disable selector-class-pattern */
 .c-carousel {
     display: grid;
@@ -44,9 +50,9 @@
     }
 
     &__arrow {
-        width: 30px;
-        height: 30px;
-        color: hsl(0deg 0% 73%); // TODO: Use a variable
+        width: $carousel-arrow-dimensions;
+        height: $carousel-arrow-dimensions;
+        color: $carousel-control-color;
         cursor: pointer;
 
         &--left {
@@ -59,7 +65,7 @@
 
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
         &[disabled] {
-            color: hsl(0deg 0% 73% / 50%);
+            opacity: 0.5;
             cursor: auto;
         }
     }
@@ -67,7 +73,7 @@
     // DotNav
     &__dots {
         display: flex;
-        padding: 10px 0;
+        padding: $space-xs 0;
 
         &--start {
             justify-content: flex-start;
@@ -83,12 +89,12 @@
     }
 
     &__dot {
-        width: 12px;
-        height: 12px;
+        width: $carousel-dot-dimensions;
+        height: $carousel-dot-dimensions;
         margin: 0 2px;
-        background: hsl(0deg 0% 100% / 0%); // TODO: Use a variable
-        border: 1px solid hsl(0deg 0% 73%); // TODO: Use a variable
-        border-radius: 50%;
+        background: var(--color-tertiary);
+        border: 1px solid $carousel-control-color;
+        border-radius: $rad;
         cursor: pointer;
 
         &:focus {
@@ -96,7 +102,7 @@
         }
 
         &.is-active {
-            background: hsl(0deg 0% 73%); // TODO: Use a variable
+            background: $carousel-control-color;
         }
     }
 

@@ -1,4 +1,4 @@
-@use "../../styles/settings" as *;
+@import "../../styles/settings";
 
 .c-content {
     --content-decoration-color: var(--color-quaternary);
@@ -12,19 +12,13 @@
     // Ensure the links are underlined unless they are buttons or has been specifically reset
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
     a[href]:not(.c-btn):not(.u-text-reset) {
-        text-decoration:
-            underline
-            solid
-            currentcolor
-            var(--content-decoration-size);
+        text-decoration: underline solid currentcolor var(--content-decoration-size);
         transition: text-decoration $timing-s $ease-out;
 
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
         &:hover {
             text-decoration:
-                underline
-                solid
-                var(--content-decoration-color)
+                underline solid var(--content-decoration-color)
                 var(--content-decoration-size);
         }
     }
@@ -34,7 +28,7 @@
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        max-width: 1140px;
+        max-width: #{$container-xs}px;
         margin: auto;
 
         // Horizontal Alignments
