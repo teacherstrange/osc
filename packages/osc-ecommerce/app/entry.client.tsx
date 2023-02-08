@@ -5,11 +5,7 @@ import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import { hydrate } from 'react-dom';
 
 hydrate(
-    <SpritesheetProvider
-        value={{
-            spriteSheetPath: spritesheet,
-        }}
-    >
+    <SpritesheetProvider spriteSheetPath={spritesheet}>
         <RemixBrowser />
     </SpritesheetProvider>,
     document

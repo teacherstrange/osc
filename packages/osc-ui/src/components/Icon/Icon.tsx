@@ -68,22 +68,24 @@ export interface SpritesheetProviderProps {
     children?: ReactNode;
 
     /**
-     * Spritesheet path context value for the spritesheet provider.
+     * Spritesheet path.
+     *
      * @default ./spritesheet.svg
      */
-    value?: {
-        spriteSheetPath: string;
-    };
+    spriteSheetPath?: string;
 }
 export const SpritesheetProvider = (props: SpritesheetProviderProps) => {
-    const {
-        children,
-        value = {
-            spriteSheetPath: './spritesheet.svg',
-        },
-    } = props;
+    const { children, spriteSheetPath = './spritesheet.svg' } = props;
 
-    return <SpritesheetContext.Provider value={value}>{children}</SpritesheetContext.Provider>;
+    return (
+        <SpritesheetContext.Provider
+            value={{
+                spriteSheetPath: spriteSheetPath,
+            }}
+        >
+            {children}
+        </SpritesheetContext.Provider>
+    );
 };
 
 /* -------------------------------------------------------------------------------------------------

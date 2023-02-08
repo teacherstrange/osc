@@ -13,11 +13,7 @@ export default function handleRequest(
     remixContext: EntryContext
 ) {
     const markup = renderToString(
-        <SpritesheetProvider
-            value={{
-                spriteSheetPath: spritesheet,
-            }}
-        >
+        <SpritesheetProvider spriteSheetPath={spritesheet}>
             <RemixServer context={remixContext} url={request.url} />
         </SpritesheetProvider>
     );

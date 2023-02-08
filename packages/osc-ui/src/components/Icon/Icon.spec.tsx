@@ -26,11 +26,7 @@ test('passes correct classNames', () => {
 
 test('provider provides a custom spritesheet path', () => {
     render(
-        <SpritesheetProvider
-            value={{
-                spriteSheetPath: './custom-spritesheet.svg',
-            }}
-        >
+        <SpritesheetProvider spriteSheetPath="./custom-spritesheet.svg">
             <Icon id="arrow" />
         </SpritesheetProvider>
     );
