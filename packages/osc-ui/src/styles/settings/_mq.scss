@@ -1,0 +1,26 @@
+@use "../tools/functions/get-tokens" as *;
+
+///*----------------------------------*\
+//  #MEDIA QUERY SETTINGS
+//\*----------------------------------*/
+//
+//  Sets baseline Media Queries which correlate with some of the popular viewports.
+//  Adjust where necessary and add/remove if needed.
+//  Apply mixin from tools/mq
+//
+//\*----------------------------------*/
+//
+// Usage:git
+// @include mq($mq-mob) { ... };
+
+$mq-mob: mq-token("mob");
+$mq-mob-m: mq-token("mob-med");
+$mq-mob-l: mq-token("mob-lrg");
+
+$mq-tab: mq-token("tab");
+$mq-tab-m: mq-token("tab-med");
+$mq-tab-l: mq-token("tab-lrg");
+
+$mq-desk: mq-token("desk");
+$mq-desk-m: mq-token("desk-med");
+$mq-desk-l: mq-token("desk-lrg");
