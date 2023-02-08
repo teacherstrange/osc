@@ -26,6 +26,7 @@ const colorGrey = 'hsl(0deg 0% 87%)';
 const colorMidGrey = 'hsl(0deg 0% 79%)';
 const colorDarkGrey = 'hsl(0deg 0% 73%)';
 const colorDarkestGrey = 'hsl(0deg 0% 60%)';
+const colorBlack = 'hsl(0deg 0% 18%)';
 
 // Semantic colours
 const colorError = 'hsl(0deg 93% 48%)';
@@ -120,6 +121,7 @@ module.exports = {
         nonary: colorBlue,
         denary: colorOrange,
         duodenary: colorLemon,
+        'neutral-0': colorBlack,
         'neutral-100': colorLightestGrey,
         'neutral-200': colorSoftGrey,
         'neutral-300': colorPaleGrey,
@@ -140,6 +142,7 @@ module.exports = {
         primary: colorPink,
         secondary: colorWhite,
         tertiary: colorNavy,
+        'neutral-0': colorWhite,
         'neutral-100': colorDarkestGrey,
         'neutral-200': colorDarkGrey,
         'neutral-300': colorMidGrey,
