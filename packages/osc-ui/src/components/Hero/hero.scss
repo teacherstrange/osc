@@ -1,0 +1,103 @@
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+$hero-padding-x: $global-spacing-m;
+$hero-padding-y: calc($hero-padding-x * 2);
+$hero-padding-y-lg: var(--space-scale-omega);
+$hero-ttl-border: 3px solid var(--color-secondary);
+$hero-content-border: 3px solid var(--color-tertiary);
+$hero-grid-outer: clamp(16px, 2.5vw, 40px);
+
+.c-hero {
+    $self: &;
+
+    display: grid;
+    grid-template-rows: $hero-grid-outer 1fr 1fr;
+    row-gap: 0;
+
+    @include mq(mq-token("mob-lrg")) {
+        grid-template-rows: $hero-grid-outer 1fr $hero-grid-outer;
+    }
+
+    &__background {
+        grid-row: 2 / span 2;
+        grid-column: 1 / -1;
+
+        @include mq(mq-token("mob-lrg")) {
+            grid-row: 2 / span 1;
+        }
+    }
+
+    &__inner {
+        grid-row: 1 / -1;
+        grid-column: 1 / -1;
+        padding-block-end: $hero-padding-y;
+        row-gap: 0;
+
+        @include mq(mq-token("mob-lrg")) {
+            grid-template-rows: $hero-grid-outer auto auto $hero-grid-outer;
+            align-items: center;
+            padding-block-end: 0;
+        }
+    }
+
+    &__img {
+        grid-row: 1 / span 2;
+        padding-inline-start: #{$base-font-size}px;
+        max-width: 400px;
+        justify-self: end;
+
+        @include mq(mq-token("mob"), max) {
+            grid-column: 1 / -1;
+        }
+
+        @include mq(mq-token("mob-lrg")) {
+            grid-row: 1 / span 4;
+        }
+    }
+
+    &__ttl {
+        z-index: 2;
+    }
+
+    &__content {
+        z-index: 2;
+    }
+
+    &--primary {
+        #{$self}__ttl {
+            max-width: 10ch;
+            grid-row: 2;
+            border-block-end: $hero-ttl-border;
+            margin-block-end: var(--space-scale-beta);
+
+            @include mq(mq-token("mob-lrg")) {
+                align-self: end;
+                max-width: 533px;
+                margin-block-end: 0;
+                padding-block-end: var(--space-scale-milli);
+            }
+
+            @include mq(mq-token("tab")) {
+                padding-block-start: 10px;
+            }
+        }
+
+        #{$self}__content {
+            grid-row: 3;
+            border-block-start: $hero-content-border;
+            padding-block-start: var(--space-scale-milli);
+            z-index: 2;
+
+            @include mq(mq-token("mob-lrg")) {
+                align-self: start;
+                max-width: 32ch;
+                border: none;
+            }
+
+            @include mq(mq-token("tab")) {
+                padding-block-end: 10px;
+            }
+        }
+    }
+}
