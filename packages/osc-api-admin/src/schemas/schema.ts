@@ -15,8 +15,8 @@ export const typeDefs = gql`
     }
 
     type CourseAllocation {
-        courseId: Int
-        course: Course
+        courseId: Int!
+        course: Course!
         tutorId: Int
         tutor: Tutor
     }
