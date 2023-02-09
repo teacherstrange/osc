@@ -1,3 +1,30 @@
+## [0.33.0](https://github.com/Open-Study-College/osc/compare/v0.32.0...v0.33.0) (2023-02-09)
+
+
+### ♻️ Refactors
+
+* **prisma:** readding supposedly deprecated feature - fails to generate without ([99e0514](https://github.com/Open-Study-College/osc/commit/99e0514e0e063d3a1195483c9e010edf560eaec5))
+* **prisma:** removed deprecated settings ([8431623](https://github.com/Open-Study-College/osc/commit/8431623aecb17d3cf503387492e8511007343031))
+
+
+### ✨ Features
+
+* **api-admin:** added schema types fro unassigned students ([aa343e5](https://github.com/Open-Study-College/osc/commit/aa343e5ec6cfbdef7aa0c75ec78924cda85e0007))
+* **api-admin:** added shield perms ([c4a59f6](https://github.com/Open-Study-College/osc/commit/c4a59f6acf449973bb55cd3db93827cba750e72b))
+* **api-admin:** adding dev scripts ([dcd73d1](https://github.com/Open-Study-College/osc/commit/dcd73d18825f6a1ad477d499bc24e53fabc80d4c))
+* **api-admin:** expanded prisma query for unassigned students ([20fe348](https://github.com/Open-Study-College/osc/commit/20fe3489fd00e53efba9e2ba7e38df5616535ee7))
+* **api-admin:** initial admin API skeleton with basic query ([ea197b6](https://github.com/Open-Study-College/osc/commit/ea197b6d7e457d9a32fa1d01933c3aa9464dc5df))
+* **api-gateway:** adding admin API to gateway ([8275ec5](https://github.com/Open-Study-College/osc/commit/8275ec57b58f810eced1aef2a9d26ab977449b2b))
+* **prisma:** redefined student/course/tutor relationships ([64c8800](https://github.com/Open-Study-College/osc/commit/64c88002f1924beb8ec71c290d93df1e1e8ba83b))
+
+
+### 🐛 Bugs
+
+* **api-admin:** removed unused context ([62d147b](https://github.com/Open-Study-College/osc/commit/62d147b95356fdbed7619f0ce5d991b2044ff149))
+* **api-admin:** setting fields to non-nullable ([3fe6fe5](https://github.com/Open-Study-College/osc/commit/3fe6fe5a3172a8c7d562a208b04215736b1ab93a))
+* **api-admin:** setting ID to non-nullable ([b19dc03](https://github.com/Open-Study-College/osc/commit/b19dc03e72590e1cee27a880077bbcf751e991dd))
+* **api-admin:** type casting user context from gateway ([052f597](https://github.com/Open-Study-College/osc/commit/052f59735532b9ac8e521bc8094858514fc222ed))
+
 ## [0.32.0](https://github.com/Open-Study-College/osc/compare/v0.31.0...v0.32.0) (2023-01-30)
 
 
@@ -61,44 +88,4 @@
 * move "overflow:hidden" to "fallback" class ([dcb1291](https://github.com/Open-Study-College/osc/commit/dcb129183bacbdb44345784655fee76667192340))
 * move fallback class conditionally to Root and tidy up scss ([454f1c2](https://github.com/Open-Study-College/osc/commit/454f1c2812987ee0984b40235f6618ec1acffb3f))
 * move notification and count into one property ([b411061](https://github.com/Open-Study-College/osc/commit/b4110611b356d4b1a97721327c974e59ad364844))
-
-## [0.29.0](https://github.com/Open-Study-College/osc/compare/v0.28.0...v0.29.0) (2023-01-27)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* removes colour picker plugin ([1bba79a](https://github.com/Open-Study-College/osc/commit/1bba79a0b202b8261911027e66974ff85ad266ef))
-
-
-### 🐛 Bugs
-
-* **accordion:** add font weight to accordion header ([7254f3d](https://github.com/Open-Study-College/osc/commit/7254f3da47e0fd326460da4213fdb506b4d764c7))
-* add missing component import ([beafe9c](https://github.com/Open-Study-College/osc/commit/beafe9ca798f7957037160a4b596a5ad8cb56aa7))
-* **build:** adds commonjs plugin to bundle our tokens correctly ([84938a2](https://github.com/Open-Study-College/osc/commit/84938a2f269e3f94296388f982a97e1cdc6a2db7))
-* remove rule setting trailing comma on scss files ([1dbef14](https://github.com/Open-Study-College/osc/commit/1dbef14eb98ac9692977fdc91e4fde4fdf6ad0fc))
-* **styles:** fixes typo in color ([bdd82a9](https://github.com/Open-Study-College/osc/commit/bdd82a9bab8df84780859776e56d2eadc49a135f))
-
-
-### ✨ Features
-
-* **content component:** adds custom input for setting content background color ([1f8874e](https://github.com/Open-Study-College/osc/commit/1f8874e4d75555dfbe784a64726686f6c1418029))
-* **content component:** adds markup for decorators ([01bcb7a](https://github.com/Open-Study-College/osc/commit/01bcb7a7ed4f22abd7c3d886e3e9aa16bb0c4b9f))
-* **content module:** adds decorators for users to style text ([e94d5dc](https://github.com/Open-Study-College/osc/commit/e94d5dcd2bf8e5ca43798295cfae5e57d33da42c))
-* **list:** adds numeric list style ([009208d](https://github.com/Open-Study-College/osc/commit/009208d3e2be999830b02596fede9c8748c1cccb))
-* **styles:** adds content component styles ([d439b87](https://github.com/Open-Study-College/osc/commit/d439b87b51627358ecfe88ca94ba3f9a5c95efbd))
-* **styles:** adds gradient text-color ([2dd64f3](https://github.com/Open-Study-College/osc/commit/2dd64f32a268bb7e1ea18c8e92bcd937d4334eda))
-* **styles:** adds semi-bold typography token ([6e73418](https://github.com/Open-Study-College/osc/commit/6e73418dbddc35505f39e1368b5f715b0b51db3e))
-* **styles:** updates list styling ([b352e8f](https://github.com/Open-Study-College/osc/commit/b352e8f765bda5a4792d4a5f879bce2e2521722c))
-* **styles:** updates the line height for font sizes ([d257b9e](https://github.com/Open-Study-College/osc/commit/d257b9e07cdd658ad72db515118dcbb7aa968c68))
-* **styles:** updates update global body font size ([04e324b](https://github.com/Open-Study-College/osc/commit/04e324b12144ca2a9af21abc586a4b99aa773216))
-
-
-### ♻️ Refactors
-
-* **accordion:** explicitly set font-weight so we don't inherit ([e90b613](https://github.com/Open-Study-College/osc/commit/e90b613c89872308c529f64ece8eda51c4410783))
-* **tokens:** updates fluid scale maxScale value ([89a2a70](https://github.com/Open-Study-College/osc/commit/89a2a705a42a51d2a1d8332e63ce6618e2c0e256))
-* replace variant picker with color picker ([97ba747](https://github.com/Open-Study-College/osc/commit/97ba74779faf4e41c353cd5e4172f02443a8e2dd))
-* updates query to account for new shape ([10c231c](https://github.com/Open-Study-College/osc/commit/10c231cb68a6e1b9527a8e3ce8d9cb1190e25dda))
-* updates spacing values to match tokens ([dd9e516](https://github.com/Open-Study-College/osc/commit/dd9e5160b2b374c321766de904825a1c88cc7a6f))
-* **styles:** updates font sizes per heading ([aade89f](https://github.com/Open-Study-College/osc/commit/aade89f9fb9b82346808c8bde743719fbe348106))
 
