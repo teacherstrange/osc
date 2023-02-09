@@ -53,19 +53,12 @@ const SecondaryTemplate: Story<HeroProps> = ({ ...args }) => (
         <HeroInner>
             <HeroTitle>Prospectus</HeroTitle>
 
-            {/* <HeroImage>
-                <Image
-                    src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1675932183/c029363030ddd0a2ec5cb7d0541f4bba_yhznnx_p6av0z.png"
-                    width={444}
-                    height={480}
-                    alt="A smiling man, dancing with his left hand raised in the air"
-                />
-            </HeroImage> */}
-
             <HeroContent>
                 <div className="c-content">
                     <div className="c-content__inner c-content__inner--centre">
-                        <p>Download our new 2023 prospectus today</p>
+                        <p className="t-font-epsilon">
+                            Download our <strong>new 2023 prospectus</strong> today
+                        </p>
 
                         <div className="c-btn-group">
                             <Button>Download</Button>

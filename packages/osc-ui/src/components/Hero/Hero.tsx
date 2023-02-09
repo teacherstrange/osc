@@ -8,12 +8,8 @@ import './hero.scss';
 
 /*
 TODO: Should be able to Carousel
-TODO: Content / CTA
-TODO: Image / Video
-
-TODO: Layout -- Text left / image right
-TODO: Layout -- Text center / Large title over small cta
-TODO: Blend mode image (blog article)
+TODO: Video
+TODO: Add animated flourishes
 */
 
 export interface SharedHeroProps {
@@ -93,10 +89,20 @@ export const HeroTitle = <C extends ElementType = 'h2'>(
     const elementClass = subtitle ? 'c-hero__subttl' : 'c-hero__ttl';
     const { variant } = useHeroContext();
 
+    let fontSize = '';
+
+    if (variant === 'secondary') {
+        fontSize = 't-font-mega';
+    } else if (variant === 'tertiary') {
+        fontSize = 't-font-beta';
+    } else {
+        fontSize = 't-font-kilo';
+    }
+
     const classes = classNames(
         elementClass,
         variant === 'tertiary' ? 't-font-primary' : 't-font-secondary',
-        variant === 'tertiary' ? 't-font-beta' : 't-font-kilo',
+        fontSize,
         className
     );
 

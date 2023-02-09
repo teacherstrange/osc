@@ -130,10 +130,35 @@ $inner-grid-rows: 2;
             text-align: center;
         }
 
+        #{$self}__ttl {
+            // TODO: These values might need revising once the OSC font is used
+            font-size: clamp(rem(50), calc(-1.34rem + 22.32vw), rem(300));
+            line-height: 0.8;
+            letter-spacing: clamp(rem(10), calc(0.18rem + 1.88vw), rem(30));
+            margin-block-start: var(--space-scale-delta);
+        }
+
         #{$self}__content {
+            @include mq(mq-token("tab-med"), max) {
+                border-block-start: $hero-ttl-border;
+                border-image-slice: 1;
+                border-image-source: var(--color-gradient-quaternary-90);
+                margin-block-start: var(--space-scale-alpha);
+                padding-block-start: var(--space-scale-milli);
+            }
+
             .c-content__inner {
-                flex-direction: row;
+                align-items: center;
                 justify-content: center;
+                gap: var(--space-scale-milli);
+
+                @include mq(mq-token("tab-med")) {
+                    flex-direction: row;
+                }
+
+                > * {
+                    margin-block-end: 0;
+                }
             }
         }
     }
