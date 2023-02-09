@@ -1,5 +1,5 @@
 import type { ElementType, ReactNode } from 'react';
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import type { PolymorphicComponentProps } from '../../types';
 import { classNames } from '../../utils/classNames';
@@ -49,14 +49,16 @@ export const Hero = (props: HeroProps) => {
     const classes = classNames('c-hero', variantModifier, className);
 
     return (
-        <div className={classes}>
-            <div
-                className={`c-hero__background ${
-                    backgroundColor ? `u-bg-color-${backgroundColor}` : ''
-                }`}
-            />
-            {children}
-        </div>
+        <HeroProvider variant={variant}>
+            <div className={classes}>
+                <div
+                    className={`c-hero__background ${
+                        backgroundColor ? `u-bg-color-${backgroundColor}` : ''
+                    }`}
+                />
+                {children}
+            </div>
+        </HeroProvider>
     );
 };
 
@@ -67,7 +69,7 @@ interface HeroInnerProps extends SharedHeroProps {}
 
 export const HeroInner = (props: HeroInnerProps) => {
     const { children, className } = props;
-    const classes = classNames('c-hero__inner', 'o-container', 'o-grid', className);
+    const classes = classNames('c-hero__inner', 'o-container', className);
 
     return <div className={classes}>{children}</div>;
 };
@@ -75,19 +77,26 @@ export const HeroInner = (props: HeroInnerProps) => {
 /* -------------------------------------------------------------------------------------------------
  * HeroTitle
  * -----------------------------------------------------------------------------------------------*/
-interface HeroTitleProps extends SharedHeroProps {}
+interface HeroTitleProps extends SharedHeroProps {
+    /**
+     * Set the style of the heading element
+     * @default false
+     */
+    subtitle?: boolean;
+}
 
 export const HeroTitle = <C extends ElementType = 'h2'>(
     props: PolymorphicComponentProps<C, HeroTitleProps>
 ) => {
-    const { as, children, className, ...rest } = props;
+    const { as, children, className, subtitle, ...rest } = props;
     const Component = as || 'h2';
+    const elementClass = subtitle ? 'c-hero__subttl' : 'c-hero__ttl';
+    const { variant } = useHeroContext();
 
     const classes = classNames(
-        'c-hero__ttl',
-        'o-grid__col--start-1 o-grid__col--7',
-        't-font-secondary',
-        't-font-kilo',
+        elementClass,
+        variant === 'tertiary' ? 't-font-primary' : 't-font-secondary',
+        variant === 'tertiary' ? 't-font-beta' : 't-font-kilo',
         className
     );
 
@@ -106,12 +115,7 @@ export interface HeroContentProps extends SharedHeroProps {}
 export const HeroContent = (props: HeroContentProps) => {
     const { children, className } = props;
 
-    const classes = classNames(
-        'c-hero__content',
-        'o-grid__col--start-1 o-grid__col--12 o-grid__col--7@tab',
-        't-font-epsilon',
-        className
-    );
+    const classes = classNames('c-hero__content', className);
 
     return <div className={classes}>{children}</div>;
 };
@@ -124,11 +128,51 @@ export interface HeroImageProps extends SharedHeroProps {}
 export const HeroImage = (props: HeroImageProps) => {
     const { children, className } = props;
 
-    const classes = classNames(
-        'c-hero__img',
-        'o-grid__col--start-5 o-grid__col--start-8@tab o-grid__col--8 o-grid__col--5@tab',
-        className
-    );
+    const classes = classNames('c-hero__img', className);
 
     return <div className={classes}>{children}</div>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Hero Provider
+ * -----------------------------------------------------------------------------------------------*/
+const HeroContext = createContext(null);
+
+export interface HeroProviderProps {
+    /**
+     * The content of the button.
+     */
+    children: ReactNode;
+    /**
+     * 'Sets the style of the hero, primary, secondary etc.'
+     * @default primary
+     */
+    variant?: 'primary' | 'secondary' | 'tertiary';
+}
+export const HeroProvider = (props: HeroProviderProps) => {
+    const { children, variant } = props;
+
+    return (
+        <HeroContext.Provider
+            value={{
+                variant,
+            }}
+        >
+            {children}
+        </HeroContext.Provider>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * useHeroContext
+ * -----------------------------------------------------------------------------------------------*/
+const useHeroContext = () => {
+    const context = useContext(HeroContext);
+
+    // if `undefined`, throw an error
+    if (context === undefined) {
+        throw new Error('useHeroContext was used outside of its Provider');
+    }
+
+    return context;
 };

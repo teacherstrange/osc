@@ -1,12 +1,16 @@
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable plugin/selector-bem-pattern */
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
-$hero-padding-x: $global-spacing-m;
-$hero-padding-y: calc($hero-padding-x * 2);
-$hero-padding-y-lg: var(--space-scale-omega);
+$hero-padding-y: calc($global-spacing-m * 2);
+$hero-padding-s: var(--space-scale-milli);
+$hero-padding-l: var(--space-scale-kilo);
+$hero-inner-grid-cols: repeat(12, 1fr);
 $hero-ttl-border: 3px solid var(--color-secondary);
 $hero-content-border: 3px solid var(--color-tertiary);
 $hero-grid-outer: clamp(16px, 2.5vw, 40px);
+$inner-grid-rows: 2;
 
 .c-hero {
     $self: &;
@@ -29,13 +33,16 @@ $hero-grid-outer: clamp(16px, 2.5vw, 40px);
     }
 
     &__inner {
+        display: grid;
+        grid-template-columns: $hero-inner-grid-cols;
+        gap: $global-spacing;
         grid-row: 1 / -1;
         grid-column: 1 / -1;
         padding-block-end: $hero-padding-y;
         row-gap: 0;
 
         @include mq(mq-token("mob-lrg")) {
-            grid-template-rows: $hero-grid-outer auto auto $hero-grid-outer;
+            grid-template-rows: $hero-grid-outer repeat($inner-grid-rows, auto) $hero-grid-outer;
             align-items: center;
             padding-block-end: 0;
         }
@@ -43,7 +50,8 @@ $hero-grid-outer: clamp(16px, 2.5vw, 40px);
 
     &__img {
         grid-row: 1 / span 2;
-        padding-inline-start: #{$base-font-size}px;
+        grid-column: 5 / span 8;
+        padding-inline-start: $global-spacing;
         max-width: 400px;
         justify-self: end;
 
@@ -54,20 +62,33 @@ $hero-grid-outer: clamp(16px, 2.5vw, 40px);
         @include mq(mq-token("mob-lrg")) {
             grid-row: 1 / span 4;
         }
+
+        @include mq(mq-token("tab")) {
+            grid-column: 8 / span 5;
+        }
+    }
+
+    &-ttl__group {
+        grid-row: 2;
+        display: flex;
+        flex-direction: column-reverse;
+        align-self: end;
     }
 
     &__ttl {
         z-index: 2;
+        grid-row: 2;
     }
 
     &__content {
         z-index: 2;
+        grid-row: 3;
     }
 
     &--primary {
         #{$self}__ttl {
             max-width: 10ch;
-            grid-row: 2;
+            grid-column: 1 / span 7;
             border-block-end: $hero-ttl-border;
             margin-block-end: var(--space-scale-beta);
 
@@ -79,24 +100,116 @@ $hero-grid-outer: clamp(16px, 2.5vw, 40px);
             }
 
             @include mq(mq-token("tab")) {
-                padding-block-start: 10px;
+                padding-block-start: $hero-padding-s;
             }
         }
 
         #{$self}__content {
-            grid-row: 3;
+            grid-column: 1 / span 12;
             border-block-start: $hero-content-border;
             padding-block-start: var(--space-scale-milli);
             z-index: 2;
 
             @include mq(mq-token("mob-lrg")) {
                 align-self: start;
-                max-width: 32ch;
+                max-width: 50ch;
                 border: none;
             }
 
             @include mq(mq-token("tab")) {
-                padding-block-end: 10px;
+                padding-block-end: $hero-padding-s;
+                grid-column: 1 / span 7;
+            }
+        }
+    }
+
+    &--secondary {
+        #{$self}__ttl,
+        #{$self}__content {
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+
+        #{$self}__content {
+            .c-content__inner {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    }
+
+    &--tertiary {
+        #{$self}__background {
+            @include mq(mq-token("tab"), max) {
+                grid-row: 1 / -1;
+            }
+        }
+
+        #{$self}__inner {
+            padding-block-start: $hero-padding-l;
+            padding-block-end: 0;
+
+            @include mq(mq-token("tab"), max) {
+                grid-template-rows: repeat(4, auto);
+            }
+
+            @include mq(mq-token("tab")) {
+                padding-block-start: 0;
+            }
+        }
+
+        #{$self}__content,
+        #{$self}-ttl__group,
+        #{$self}__img {
+            grid-column: 1 / -1;
+        }
+
+        #{$self}__content,
+        #{$self}-ttl__group {
+            @include mq(mq-token("tab")) {
+                grid-column: 1 / span 6;
+            }
+        }
+
+        #{$self}__ttl,
+        #{$self}__subttl {
+            font-weight: $weight-bold;
+        }
+
+        #{$self}__ttl {
+            @include mq(mq-token("tab")) {
+                margin-block-end: 0;
+            }
+        }
+
+        #{$self}__subttl {
+            margin-block-end: 0;
+            font-size: var(--font-scale-base);
+
+            &::before {
+                content: "/";
+                margin-inline-end: 0.15em;
+            }
+        }
+
+        #{$self}__content {
+            grid-row: 3;
+            margin-block-end: calc($global-spacing * 1.25);
+            align-self: start;
+        }
+
+        #{$self}__img {
+            grid-row: 4;
+            mix-blend-mode: multiply;
+            padding-inline-start: 0;
+
+            @include mq(mq-token("tab"), max) {
+                margin-inline: calc($global-spacing-m * -1); // Break out of the container padding
+            }
+
+            @include mq(mq-token("tab")) {
+                grid-row: 1 / -1;
+                grid-column: 6 / -1;
             }
         }
     }
