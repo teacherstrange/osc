@@ -6,6 +6,7 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
+$hero-height: 480px;
 $hero-space: $global-spacing-s;
 $hero-space-m: calc($global-spacing-m * 2);
 $hero-space-l: $global-spacing-5xl;
@@ -19,6 +20,7 @@ $hero-grid-full: list.slash(1, -1);
 .c-hero {
     $self: &;
 
+    position: relative;
     display: grid;
     grid-template-rows: $hero-grid-outer 1fr 1fr;
     row-gap: 0;
@@ -61,6 +63,10 @@ $hero-grid-full: list.slash(1, -1);
             align-items: center;
             padding-block-end: 0;
         }
+
+        @include mq(mq-token("desk-lrg")) {
+            min-height: $hero-height;
+        }
     }
 
     &__img {
@@ -79,6 +85,25 @@ $hero-grid-full: list.slash(1, -1);
 
         @include mq(mq-token("tab")) {
             grid-column: 8 / span 5;
+        }
+
+        &.is-flush {
+            margin-inline-end: calc($global-spacing-m * -1); // Break out of the container padding
+
+            @include mq(mq-token("desk")) {
+                margin-inline-end: calc(($global-spacing-4xl + 4px) * -1); // Break out of the container padding
+            }
+
+            @include mq(mq-token("desk-lrg")) {
+                margin-inline-end: 0;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+
+        .o-img {
+            max-height: $hero-height;
         }
     }
 

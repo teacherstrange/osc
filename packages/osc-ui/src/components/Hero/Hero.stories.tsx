@@ -93,9 +93,9 @@ const TertiaryTemplate: Story<HeroProps> = ({ ...args }) => (
 
             <HeroImage>
                 <Image
-                    src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1675932183/c029363030ddd0a2ec5cb7d0541f4bba_yhznnx_p6av0z.png"
-                    width={444}
-                    height={480}
+                    src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1675940147/dog1_thmujg.png"
+                    width={573}
+                    height={435}
                     alt="A smiling man, dancing with his left hand raised in the air"
                 />
             </HeroImage>
@@ -191,6 +191,30 @@ const CarouselTemplate: Story<HeroProps> = () => (
     </Carousel>
 );
 
+const FlushImgTemplate: Story<HeroProps> = ({ ...args }) => (
+    <Hero {...args}>
+        <HeroInner>
+            <HeroTitle>Property & Home</HeroTitle>
+            <HeroContent>
+                <div className="c-content">
+                    <div className="c-content__inner c-content__inner--left">
+                        <p className="t-font-epsilon">35 Courses Available</p>
+                    </div>
+                </div>
+            </HeroContent>
+
+            <HeroImage isFlush>
+                <Image
+                    src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1674577946/cat-img_rwumo5.png"
+                    width={610}
+                    height={557}
+                    alt=""
+                />
+            </HeroImage>
+        </HeroInner>
+    </Hero>
+);
+
 export const Primary = Template.bind({});
 Primary.args = {
     backgroundColor: 'gradient-nonary-270',
@@ -213,3 +237,9 @@ Tertiary.args = {
 
 export const IsCarousel = CarouselTemplate.bind({});
 IsCarousel.args = {};
+
+export const ImageIsFlush = FlushImgTemplate.bind({});
+ImageIsFlush.args = {
+    ...Primary.args,
+    backgroundColor: 'neutral-300',
+};

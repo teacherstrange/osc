@@ -138,12 +138,18 @@ export const HeroContent = (props: HeroContentProps) => {
 /* -------------------------------------------------------------------------------------------------
  * HeroImage
  * -----------------------------------------------------------------------------------------------*/
-export interface HeroImageProps extends SharedHeroProps {}
+export interface HeroImageProps extends SharedHeroProps {
+    /**
+     * Pushes the image up to the right hand side of the viewport
+     * @default false
+     */
+    isFlush?: boolean;
+}
 
 export const HeroImage = (props: HeroImageProps) => {
-    const { children, className } = props;
+    const { children, className, isFlush } = props;
 
-    const classes = classNames('c-hero__img', className);
+    const classes = classNames('c-hero__img', isFlush ? 'is-flush' : '', className);
 
     return <div className={classes}>{children}</div>;
 };
