@@ -5,14 +5,15 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
-$hero-padding-y: calc($global-spacing-m * 2);
-$hero-padding-s: var(--space-scale-milli);
-$hero-padding-l: var(--space-scale-kilo);
-$hero-inner-grid-cols: repeat(12, 1fr);
-$hero-ttl-border: 3px solid var(--color-secondary);
+$hero-space: $global-spacing-s;
+$hero-space-m: calc($global-spacing-m * 2);
+$hero-space-l: $global-spacing-5xl;
+$hero-ttl-border: 3px solid currentcolor;
 $hero-content-border: 3px solid;
 $hero-grid-outer: clamp(16px, 2.5vw, 40px);
-$inner-grid-rows: 2;
+$hero-inner-grid-cols: repeat(12, 1fr);
+$hero-inner-grid-rows: 2;
+$hero-grid-full: 1 / -1;
 
 .c-hero {
     $self: &;
@@ -38,7 +39,7 @@ $inner-grid-rows: 2;
 
     &__background {
         grid-row: 2 / span 2;
-        grid-column: 1 / -1;
+        grid-column: $hero-grid-full;
 
         @include mq(mq-token("mob-lrg")) {
             grid-row: 2 / span 1;
@@ -49,13 +50,13 @@ $inner-grid-rows: 2;
         display: grid;
         grid-template-columns: $hero-inner-grid-cols;
         gap: $global-spacing;
-        grid-row: 1 / -1;
-        grid-column: 1 / -1;
-        padding-block-end: $hero-padding-y;
+        grid-row: $hero-grid-full;
+        grid-column: $hero-grid-full;
+        padding-block-end: $hero-space-m;
         row-gap: 0;
 
         @include mq(mq-token("mob-lrg")) {
-            grid-template-rows: $hero-grid-outer repeat($inner-grid-rows, auto) $hero-grid-outer;
+            grid-template-rows: $hero-grid-outer repeat($hero-inner-grid-rows, auto) $hero-grid-outer;
             align-items: center;
             padding-block-end: 0;
         }
@@ -69,7 +70,7 @@ $inner-grid-rows: 2;
         justify-self: end;
 
         @include mq(mq-token("mob"), max) {
-            grid-column: 1 / -1;
+            grid-column: $hero-grid-full;
         }
 
         @include mq(mq-token("mob-lrg")) {
@@ -113,7 +114,7 @@ $inner-grid-rows: 2;
             }
 
             @include mq(mq-token("tab")) {
-                padding-block-start: $hero-padding-s;
+                padding-block-start: $hero-space;
             }
         }
 
@@ -130,7 +131,7 @@ $inner-grid-rows: 2;
             }
 
             @include mq(mq-token("tab")) {
-                padding-block-end: $hero-padding-s;
+                padding-block-end: $hero-space;
                 grid-column: 1 / span 7;
             }
         }
@@ -139,7 +140,7 @@ $inner-grid-rows: 2;
     &--secondary {
         #{$self}__ttl,
         #{$self}__content {
-            grid-column: 1 / -1;
+            grid-column: $hero-grid-full;
             text-align: center;
         }
 
@@ -147,7 +148,7 @@ $inner-grid-rows: 2;
             // TODO: These values might need revising once the OSC font is used
             font-size: clamp(rem(50), calc(-1.34rem + 22.32vw), rem(300));
             letter-spacing: clamp(rem(10), calc(0.18rem + 1.88vw), rem(30));
-            margin-block-start: var(--space-scale-kilo);
+            margin-block-start: $hero-space-l;
 
             @include mq(mq-token("tab-med")) {
                 margin-block-start: var(--space-scale-alpha);
@@ -183,12 +184,12 @@ $inner-grid-rows: 2;
     &--tertiary {
         #{$self}__background {
             @include mq(mq-token("tab"), max) {
-                grid-row: 1 / -1;
+                grid-row: $hero-grid-full;
             }
         }
 
         #{$self}__inner {
-            padding-block-start: $hero-padding-l;
+            padding-block-start: $hero-space-l;
             padding-block-end: 0;
 
             @include mq(mq-token("tab"), max) {
@@ -203,7 +204,7 @@ $inner-grid-rows: 2;
         #{$self}__content,
         #{$self}-ttl__group,
         #{$self}__img {
-            grid-column: 1 / -1;
+            grid-column: $hero-grid-full;
         }
 
         #{$self}__content,
@@ -250,7 +251,7 @@ $inner-grid-rows: 2;
             }
 
             @include mq(mq-token("tab")) {
-                grid-row: 1 / -1;
+                grid-row: $hero-grid-full;
                 grid-column: 6 / -1;
             }
         }
