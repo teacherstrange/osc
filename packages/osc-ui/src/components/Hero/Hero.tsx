@@ -7,8 +7,6 @@ import { classNames } from '../../utils/classNames';
 import './hero.scss';
 
 /*
-TODO: Should be able to Carousel
-TODO: Video
 TODO: Add animated flourishes
 */
 
