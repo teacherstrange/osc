@@ -15,8 +15,7 @@ export const resolvers = {
                         source: 'OSC API',
                     },
                 });
-                console.log(courses);
-                return courses;
+                return courses.data;
             }
             return null;
         },

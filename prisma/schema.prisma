@@ -257,7 +257,7 @@ model LmsUserLink {
   id         Int       @id @default(autoincrement())
   lmsId      Int
   userId     Int
-  externalId Int
+  externalId String    @db.VarChar(128)
   createdAt  DateTime  @default(now())
   updatedAt  DateTime? @updatedAt
 

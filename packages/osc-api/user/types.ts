@@ -12,7 +12,7 @@ type UserObject = User & {
         externalId: number;
     }[];
     lmsLink: {
-        externalId: number;
+        externalId: string;
     }[];
 };
 export type GetUserByIdFn = (id: number) => Promise<UserObject | null>;
