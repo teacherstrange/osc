@@ -1,5 +1,7 @@
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable plugin/selector-bem-pattern */
+@use "sass:map";
+@use "sass:string";
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
@@ -8,7 +10,7 @@ $hero-padding-s: var(--space-scale-milli);
 $hero-padding-l: var(--space-scale-kilo);
 $hero-inner-grid-cols: repeat(12, 1fr);
 $hero-ttl-border: 3px solid var(--color-secondary);
-$hero-content-border: 3px solid var(--color-tertiary);
+$hero-content-border: 3px solid;
 $hero-grid-outer: clamp(16px, 2.5vw, 40px);
 $inner-grid-rows: 2;
 
@@ -21,6 +23,17 @@ $inner-grid-rows: 2;
 
     @include mq(mq-token("mob-lrg")) {
         grid-template-rows: $hero-grid-outer 1fr $hero-grid-outer;
+    }
+
+    @each $name, $value in color-token("default") {
+        &#{$self}__flourish--#{$name} &__content {
+            @if string.index($name, "gradient") {
+                border-image-slice: 1;
+                border-image-source: var(--color-#{$name});
+            } @else {
+                border-color: var(--color-#{$name});
+            }
+        }
     }
 
     &__background {
@@ -133,16 +146,20 @@ $inner-grid-rows: 2;
         #{$self}__ttl {
             // TODO: These values might need revising once the OSC font is used
             font-size: clamp(rem(50), calc(-1.34rem + 22.32vw), rem(300));
-            line-height: 0.8;
             letter-spacing: clamp(rem(10), calc(0.18rem + 1.88vw), rem(30));
-            margin-block-start: var(--space-scale-delta);
+            margin-block-start: var(--space-scale-kilo);
+
+            @include mq(mq-token("tab-med")) {
+                margin-block-start: var(--space-scale-alpha);
+                line-height: 0.8;
+            }
         }
 
         #{$self}__content {
+            margin-block-end: var(--space-scale-delta);
+
             @include mq(mq-token("tab-med"), max) {
-                border-block-start: $hero-ttl-border;
-                border-image-slice: 1;
-                border-image-source: var(--color-gradient-quaternary-90);
+                border-block-start: $hero-content-border;
                 margin-block-start: var(--space-scale-alpha);
                 padding-block-start: var(--space-scale-milli);
             }

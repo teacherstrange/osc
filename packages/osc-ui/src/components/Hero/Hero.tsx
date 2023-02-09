@@ -36,13 +36,25 @@ export interface HeroProps extends SharedHeroProps {
      * @default primary
      */
     variant?: 'primary' | 'secondary' | 'tertiary';
+    /**
+     * Sets the colour of the flourishes and the border details on mobile
+     * @default tertiary
+     */
+    flourishColor?: string; // TODO: These will need to include all colours? -- maybe just set as a string?
 }
 
 export const Hero = (props: HeroProps) => {
-    const { backgroundColor, children, className, variant = 'primary' } = props;
+    const {
+        backgroundColor,
+        children,
+        className,
+        variant = 'primary',
+        flourishColor = 'tertiary',
+    } = props;
     const variantModifier = useModifier('c-hero', variant);
+    const flourishModifier = useModifier('c-hero__flourish', flourishColor);
 
-    const classes = classNames('c-hero', variantModifier, className);
+    const classes = classNames('c-hero', variantModifier, flourishModifier, className);
 
     return (
         <HeroProvider variant={variant}>
@@ -120,7 +132,6 @@ export interface HeroContentProps extends SharedHeroProps {}
 
 export const HeroContent = (props: HeroContentProps) => {
     const { children, className } = props;
-
     const classes = classNames('c-hero__content', className);
 
     return <div className={classes}>{children}</div>;
