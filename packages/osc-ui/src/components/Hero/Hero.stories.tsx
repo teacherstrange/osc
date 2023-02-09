@@ -12,7 +12,8 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: '',
+                component:
+                    'A large banner, usually appearing as one of the first items on a page; it often contains large text and / or an image.',
             },
         },
     },
@@ -52,17 +53,17 @@ const Template: Story<HeroProps> = ({ ...args }) => (
 const SecondaryTemplate: Story<HeroProps> = ({ ...args }) => (
     <Hero {...args}>
         <HeroInner>
-            <HeroTitle>Prospectus</HeroTitle>
+            <HeroTitle className="u-color-tertiary">Black Friday</HeroTitle>
 
             <HeroContent>
                 <div className="c-content">
                     <div className="c-content__inner c-content__inner--centre">
-                        <p className="t-font-epsilon">
-                            Download our <strong>new 2023 prospectus</strong> today
+                        <p className="t-font-epsilon u-color-tertiary">
+                            Get £75 off when you spend over £400 on your enrolment
                         </p>
 
                         <div className="c-btn-group">
-                            <Button>Download</Button>
+                            <Button isInversed>Special Offers</Button>
                         </div>
                     </div>
                 </div>
@@ -224,7 +225,7 @@ Primary.args = {
 export const Secondary = SecondaryTemplate.bind({});
 Secondary.args = {
     ...Primary.args,
-    backgroundColor: 'tertiary',
+    backgroundColor: 'neutral-0',
     variant: 'secondary',
 };
 
@@ -237,9 +238,23 @@ Tertiary.args = {
 
 export const IsCarousel = CarouselTemplate.bind({});
 IsCarousel.args = {};
+IsCarousel.parameters = {
+    docs: {
+        description: {
+            story: "Make the hero a carousel by wrapping each `<Hero>` component inside the carousel. You'll then be able to set the carousel settings through the `<carousel>` props.",
+        },
+    },
+};
 
 export const ImageIsFlush = FlushImgTemplate.bind({});
 ImageIsFlush.args = {
     ...Primary.args,
     backgroundColor: 'neutral-300',
+};
+ImageIsFlush.parameters = {
+    docs: {
+        description: {
+            story: 'Push the image up to the right hand side of the screen by passing the `isFlush` prop to the `<HeroImage>`.',
+        },
+    },
 };
