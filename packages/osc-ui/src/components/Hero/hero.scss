@@ -2,6 +2,7 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 @use "sass:map";
 @use "sass:string";
+@use "sass:list";
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
@@ -13,7 +14,7 @@ $hero-content-border: 3px solid;
 $hero-grid-outer: clamp(16px, 2.5vw, 40px);
 $hero-inner-grid-cols: repeat(12, 1fr);
 $hero-inner-grid-rows: 2;
-$hero-grid-full: 1 / -1;
+$hero-grid-full: list.slash(1, -1);
 
 .c-hero {
     $self: &;
