@@ -28,7 +28,7 @@ export interface HeroProps extends SharedHeroProps {
     /**
      * Sets the background colour class on the hero
      */
-    backgroundColor: string; // TODO: These will need to include all colours? -- maybe just set as a string?
+    backgroundColor: string;
     /**
      * 'Sets the style of the hero, primary, secondary etc.'
      * @default primary
@@ -38,7 +38,7 @@ export interface HeroProps extends SharedHeroProps {
      * Sets the colour of the flourishes and the border details on mobile
      * @default tertiary
      */
-    flourishColor?: string; // TODO: These will need to include all colours? -- maybe just set as a string?
+    flourishColor?: string;
 }
 
 export const Hero = (props: HeroProps) => {
