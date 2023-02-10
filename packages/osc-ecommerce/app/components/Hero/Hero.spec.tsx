@@ -1,4 +1,3 @@
-// TODO: Write tests innit
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import type { heroModule } from '~/types/sanity';
