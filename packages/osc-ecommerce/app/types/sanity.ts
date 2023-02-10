@@ -125,10 +125,32 @@ export interface carouselModule extends module {
     startIndex: number;
 }
 
-export interface SanityHero {
-    image?: SanityImage<HTMLImageElement>;
-    body: PortableTextBlock;
-    links?: InternalSanityLinkItem[] | ExternalSanityLinkItem[] | null;
+export interface carouselModuleSettings extends module {
+    carouselName: string;
+    arrows?: boolean;
+    dotNav?: boolean;
+    loop?: boolean;
+    autoplay?: false | 'smooth' | 'switch';
+    startIndex?: number;
+    slidesPerView?: {
+        mobile?: number;
+        tablet?: number;
+        desktop?: number;
+    };
+}
+
+export interface heroSlide extends module {
+    title?: string;
+    content: contentModule;
+    image?: imageModule<HTMLImageElement>;
+    backgroundColor?: string;
+    titleColor?: string;
+    variant: 'primary' | 'secondary' | 'tertiary';
+}
+
+export interface heroModule extends module {
+    carouselSettings: carouselModuleSettings;
+    slides: heroSlide[];
 }
 
 export interface SanitySEO {
@@ -163,7 +185,6 @@ export interface SanityPage {
           }
         | undefined;
     seo: SanitySEO;
-    hero?: SanityHero;
     showHero?: boolean;
     modules: module[] | contentModule[];
     store?: {
