@@ -5,7 +5,7 @@
         width: 260px;
         padding: $space-m;
         background-color: var(--color-tertiary);
-        border-radius: 4px; // todo: create border radius variable;
+        border-radius: $rad-xs;
         box-shadow:
             hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
             hsl(206deg 22% 7% / 20%) 0 10px 20px -15px; // todo: create box-shadow variable;
@@ -33,7 +33,7 @@
         justify-content: center;
         width: 25px;
         height: 25px;
-        border-radius: $rad-l;
+        border-radius: $rad;
         font-family: inherit;
 
         &:hover {
@@ -52,7 +52,7 @@
         width: 35px;
         height: 35px;
         background-color: var(--color-tertiary);
-        border-radius: $rad-l;
+        border-radius: $rad;
         color: var(--color-secondary);
         font-family: inherit;
 

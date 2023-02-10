@@ -6,7 +6,7 @@
 
 $btn-primary-border: solid 3px var(--color-secondary);
 $btn-primary-offset: 6px;
-$btn-radius: 40px;
+$btn-radius: $rad-l;
 $btn-properties: (
     primary: (
         bg-color: var(--color-secondary),

@@ -1,3 +1,5 @@
+@use "sass:math";
+@use "sass:list";
 @use "spacing" as *;
 
 ///*----------------------------------*\
@@ -9,7 +11,7 @@
 //\*----------------------------------*/
 
 $rad: 50%;
-$rad-l: 100%;
-$rad-m: $space-m;
-$rad-s: $space-xs;
-$rad-xs: $space-2xs;
+$rad-l: 999em;
+$rad-m: $space-m; // 20px
+$rad-s: $space-xs; // 11px
+$rad-xs: calc($space-2xs / 2); // 4.5px

@@ -6,7 +6,7 @@
         min-width: 220px;
         padding: calc($space-2xs / 2);
         background-color: var(--color-tertiary);
-        border-radius: 6px;
+        border-radius: $rad-xs;
         box-shadow:
             hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
             hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
@@ -24,7 +24,7 @@
         align-items: center;
         height: 25px;
         padding: 0 calc($space-2xs / 2) 0 $space-l;
-        border-radius: 3px;
+        border-radius: $rad-xs;
         outline: none;
         font-size: $fs-xs;
         user-select: none;
@@ -81,7 +81,7 @@
         width: 35px;
         height: 35px;
         background-color: var(--color-tertiary);
-        border-radius: $rad-l;
+        border-radius: $rad;
         box-shadow: 0 2px 10px hsl(0deg 0% 0% / 14.1%); // todo: create box-shadow variables;
         font-family: inherit;
 

@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     padding: $space-xs;
-    border-radius: calc($rad-xs / 2);
+    border-radius: $rad-xs;
     gap: 0.5em;
 
     &--error {

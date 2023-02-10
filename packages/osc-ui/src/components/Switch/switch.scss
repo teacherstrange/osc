@@ -2,7 +2,7 @@
 @import "../../styles/tools";
 @import "../../styles/settings";
 
-$switch-radius: 9999px;
+$switch-radius: $rad-l;
 $switch-thumb-offset: 1px;
 $switch-border-width: 1px;
 $switch-transition-duration: 0.2s;
