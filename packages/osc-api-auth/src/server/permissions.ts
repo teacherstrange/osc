@@ -5,15 +5,15 @@ import {
     canReadOwnAccount,
     canViewOther,
     isAuthenticated,
-    isReadingOwnAccount
+    isReadingOwnAccount,
 } from '~/server/rules';
 
 export const shieldPermissions = shield({
     Query: {
         users: and(isAuthenticated, canListOthers),
-        user: and(isAuthenticated, or(and(canReadOwnAccount, isReadingOwnAccount), canViewOther))
+        user: and(isAuthenticated, or(and(canReadOwnAccount, isReadingOwnAccount), canViewOther)),
     },
     Mutation: {
-        createUser: and(isAuthenticated, canCreateUser)
-    }
+        createUser: and(isAuthenticated, canCreateUser),
+    },
 });
