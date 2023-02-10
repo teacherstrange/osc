@@ -4,11 +4,18 @@ import { Button } from '../Button/Button';
 import { Carousel } from '../Carousel/Carousel';
 import { Image } from '../Image/Image';
 import type { HeroProps } from './Hero';
-import { Hero, HeroContent, HeroImage, HeroInner, HeroTitle } from './Hero';
+import { Hero, HeroContent, HeroImage, HeroInner, HeroTitle, HeroTitleGroup } from './Hero';
 
 export default {
     title: 'osc-ui/Hero',
     component: Hero,
+    subcomponents: {
+        HeroContent,
+        HeroImage,
+        HeroInner,
+        HeroTitle,
+        HeroTitleGroup,
+    },
     parameters: {
         docs: {
             description: {
@@ -75,14 +82,14 @@ const SecondaryTemplate: Story<HeroProps> = ({ ...args }) => (
 const TertiaryTemplate: Story<HeroProps> = ({ ...args }) => (
     <Hero {...args}>
         <HeroInner>
-            <div className="c-hero-ttl__group">
+            <HeroTitleGroup>
                 <HeroTitle className="u-color-septenary">
                     Turning your passion into a career
                 </HeroTitle>
                 <HeroTitle className="u-color-septenary" as="h3" subtitle>
                     Study tips
                 </HeroTitle>
-            </div>
+            </HeroTitleGroup>
 
             <HeroContent>
                 <div className="c-content">

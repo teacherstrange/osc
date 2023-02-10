@@ -6,6 +6,7 @@ import {
     HeroImage,
     HeroInner,
     HeroTitle,
+    HeroTitleGroup,
     Image,
     rem,
 } from 'osc-ui';
@@ -78,20 +79,30 @@ interface SlideProps extends heroSlide {
 const Slide = (props: SlideProps) => {
     const { title, titleColor, backgroundColor, content, variant, image, initialSlide } = props;
 
+    const Title = () => {
+        return title ? (
+            <HeroTitle
+                as={initialSlide ? 'h1' : 'h2'}
+                className={titleColor ? `u-color-${titleColor}` : ''}
+            >
+                {title}
+            </HeroTitle>
+        ) : null;
+    };
+
     return (
         <OSCHero
             backgroundColor={backgroundColor ? backgroundColor : 'tertiary'}
             variant={variant ? variant : 'primary'}
         >
             <HeroInner>
-                {title ? (
-                    <HeroTitle
-                        as={initialSlide ? 'h1' : 'h2'}
-                        className={titleColor ? `u-color-${titleColor}` : ''}
-                    >
-                        {title}
-                    </HeroTitle>
-                ) : null}
+                {variant === 'tertiary' ? (
+                    <HeroTitleGroup>
+                        <Title />
+                    </HeroTitleGroup>
+                ) : (
+                    <Title />
+                )}
 
                 {content?.body ? (
                     <HeroContent>

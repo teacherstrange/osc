@@ -124,6 +124,18 @@ export const HeroTitle = <C extends ElementType = 'h2'>(
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * HeroTitleGroup
+ * -----------------------------------------------------------------------------------------------*/
+export interface HeroTitleGroupProps extends SharedHeroProps {}
+
+export const HeroTitleGroup = (props: HeroContentProps) => {
+    const { children, className } = props;
+    const classes = classNames('c-hero-ttl__group', className);
+
+    return <div className={classes}>{children}</div>;
+};
+
+/* -------------------------------------------------------------------------------------------------
  * HeroContent
  * -----------------------------------------------------------------------------------------------*/
 export interface HeroContentProps extends SharedHeroProps {}
