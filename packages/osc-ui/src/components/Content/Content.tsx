@@ -30,7 +30,15 @@ export interface ButtonProps {
     slug?: string;
     telephone?: string;
     textToCopy?: string;
-    variant?: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'quinary'; // TODO: This and the button component should share this
+    variant?:
+        | 'primary'
+        | 'secondary'
+        | 'tertiary'
+        | 'quaternary'
+        | 'quinary'
+        | 'primary-gradient'
+        | 'secondary-gradient'; // TODO: This and the button component should share this
+    isInversed?: boolean;
 }
 
 export interface Props {
@@ -176,26 +184,47 @@ export const Content = (props: Props) => {
                                 telephone,
                                 type,
                                 textToCopy,
+                                isInversed,
+                                variant,
                             } = button;
 
                             switch (type) {
                                 case 'file':
                                     return (
-                                        <Button key={_key} as="a" href={file} download>
+                                        <Button
+                                            key={_key}
+                                            as="a"
+                                            href={file}
+                                            download
+                                            isInversed={isInversed}
+                                            variant={variant}
+                                        >
                                             {label}
                                         </Button>
                                     );
 
                                 case 'email':
                                     return (
-                                        <Button key={_key} as="a" href={`mailto:${email}`}>
+                                        <Button
+                                            key={_key}
+                                            as="a"
+                                            href={`mailto:${email}`}
+                                            isInversed={isInversed}
+                                            variant={variant}
+                                        >
                                             {label}
                                         </Button>
                                     );
 
                                 case 'telephone':
                                     return (
-                                        <Button key={_key} as="a" href={`tel:${telephone}`}>
+                                        <Button
+                                            key={_key}
+                                            as="a"
+                                            href={`tel:${telephone}`}
+                                            isInversed={isInversed}
+                                            variant={variant}
+                                        >
                                             {label}
                                         </Button>
                                     );
@@ -207,6 +236,8 @@ export const Content = (props: Props) => {
                                             as="a"
                                             href={externalLink.url}
                                             target={externalLink.newWindow ? '_blank' : null}
+                                            isInversed={isInversed}
+                                            variant={variant}
                                         >
                                             {label}
                                         </Button>
@@ -214,20 +245,39 @@ export const Content = (props: Props) => {
 
                                 case 'internal':
                                     return (
-                                        <Button key={_key} as="link" to={slug}>
+                                        <Button
+                                            key={_key}
+                                            as="link"
+                                            to={slug}
+                                            isInversed={isInversed}
+                                            variant={variant}
+                                        >
                                             {label}
                                         </Button>
                                     );
 
                                 case 'copy to clipboard':
                                     return (
-                                        <CopyButton key={_key} textToCopy={textToCopy}>
+                                        <CopyButton
+                                            key={_key}
+                                            textToCopy={textToCopy}
+                                            isInversed={isInversed}
+                                            variant={variant}
+                                        >
                                             {label}
                                         </CopyButton>
                                     );
 
                                 default:
-                                    return <Button key={_key}>{label}</Button>;
+                                    return (
+                                        <Button
+                                            key={_key}
+                                            isInversed={isInversed}
+                                            variant={variant}
+                                        >
+                                            {label}
+                                        </Button>
+                                    );
                             }
                         })}
                     </ButtonGroup>
