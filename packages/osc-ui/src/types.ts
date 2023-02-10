@@ -31,6 +31,8 @@ export type Spacing =
 
 export type Direction = 'top' | 'right' | 'bottom' | 'left';
 
+export type Maybe<T> = T | null | undefined;
+
 // StrictUnion type allows us to set up props that are mutually exclusive
 // For example if you have a prop called isSuccess and isError, you can't have both
 // Using this helper you can set up the type to only allow one of the two at a time

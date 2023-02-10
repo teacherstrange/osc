@@ -1,5 +1,5 @@
 import type { PortableTextBlock } from '@portabletext/types';
-import type { Spacing, Themes } from 'osc-ui/src/types';
+import type { Maybe, Spacing, Themes } from 'osc-ui/src/types';
 import type { ImgHTMLAttributes } from 'react';
 
 export interface SanityLinkItem {
@@ -28,7 +28,7 @@ interface SanityImage<T> extends ImgHTMLAttributes<T> {
 
 export interface imageModule<T> extends SanityImage<T> {
     alt: string;
-    responsiveImages?: SanityImage<T>[] | undefined;
+    responsiveImages: Maybe<SanityImage<T>[]>;
     className?: string;
     loading?: 'eager' | 'lazy';
     responsiveWidths?: number[];
@@ -36,8 +36,8 @@ export interface imageModule<T> extends SanityImage<T> {
 }
 
 export interface module {
-    _type?: string;
-    _key?: string;
+    _type?: Maybe<string>;
+    _key?: Maybe<string>;
 }
 
 interface buttonModule extends module {
@@ -67,11 +67,11 @@ interface buttonModule extends module {
 }
 
 export interface contentModule extends module {
-    backgroundColor?: Themes;
+    backgroundColor?: Maybe<Themes>;
     horizontalAlignment?: 'left' | 'centre' | 'right';
-    marginBottom?: Spacing;
-    paddingBottom?: Spacing;
-    paddingTop?: Spacing;
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
     body?: PortableTextBlock[];
     buttons?: buttonModule[];
 }
