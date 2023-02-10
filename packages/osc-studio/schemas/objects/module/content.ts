@@ -10,13 +10,13 @@ export default {
     icon: EditIcon,
     groups: [
         {
-            default: true,
             name: 'spacing',
             title: 'Spacing',
         },
         {
             name: 'content',
             title: 'Content',
+            default: true,
         },
     ],
     fields: [
@@ -64,13 +64,13 @@ export default {
                 layout: 'radio',
                 direction: 'horizontal',
             },
+            initialValue: 'left',
             group: 'content',
         },
         {
             name: 'backgroundColor',
             title: 'Background Colour',
             type: 'string',
-            initialValue: 'tertiary',
             inputComponent: ColorPicker,
             group: 'content',
         },
