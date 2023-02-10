@@ -189,6 +189,20 @@ Images.parameters = {
     },
 };
 
+export const SlidesPerView = Template.bind({});
+SlidesPerView.args = {
+    ...Primary.args,
+    carouselName: 'Slides Per View',
+    slidesPerView: 3,
+};
+SlidesPerView.parameters = {
+    docs: {
+        description: {
+            story: 'Change the number of slides visible per page.',
+        },
+    },
+};
+
 export const Breakpoints = Template.bind({});
 Breakpoints.args = {
     ...Primary.args,

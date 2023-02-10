@@ -2,9 +2,7 @@ import type { KeenSliderPlugin } from 'keen-slider/react';
 import { useKeenSlider } from 'keen-slider/react';
 import type { ReactNode } from 'react';
 import React, { Children, useState } from 'react';
-import mq from '../../../../../tokens/media-queries';
 import { classNames } from '../../utils/classNames';
-import { rem } from '../../utils/rem';
 
 import './carousel.scss';
 import { Arrow } from './CarouselArrows';
@@ -120,22 +118,7 @@ export const Carousel = (props: Props) => {
         slideOrigin = 'auto',
         startIndex = 0,
         gap = 16, //px
-        breakpoints = {
-            [`(min-width: ${rem(mq['tab'])}rem)`]: {
-                slides: {
-                    origin: slideOrigin,
-                    perView: 2,
-                    spacing: gap,
-                },
-            },
-            [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
-                slides: {
-                    origin: slideOrigin,
-                    perView: 3,
-                    spacing: gap,
-                },
-            },
-        },
+        breakpoints,
     } = props;
 
     const [currentSlide, setCurrentSlide] = useState<number>(startIndex);

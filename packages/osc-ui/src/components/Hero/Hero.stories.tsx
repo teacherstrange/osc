@@ -111,15 +111,6 @@ const CarouselTemplate: Story<HeroProps> = () => (
         loop={true}
         autoplay="switch"
         autoPlaySpeed={3000}
-        breakpoints={{
-            '(min-width: 48rem)': {
-                slides: {
-                    origin: 'auto',
-                    perView: 1,
-                    spacing: 16,
-                },
-            },
-        }}
     >
         <Hero backgroundColor="gradient-nonary-270" variant="primary">
             <HeroInner>
