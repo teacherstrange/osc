@@ -3,12 +3,14 @@ import { Carousel, Content, Image, Trustpilot } from 'osc-ui';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
+import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
 import { getTypes } from '~/models/sanity.server';
 import type {
     accordionModule,
     carouselModule,
     contentModule,
+    heroModule,
     imageModule,
     module,
     SanityPage,
@@ -16,6 +18,7 @@ import type {
     videoModule,
 } from '~/types/sanity';
 import { AccordionModule } from './Accordion/Accordion';
+import { Hero } from './Hero/Hero';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
 
 // So we can dynamically add the styles of each component into remix we need to create an array of stylesheet objects.
@@ -43,6 +46,10 @@ export const getComponentStyles = (data: SanityPage) => {
 
             case 'module.content':
                 styles.push({ rel: 'stylesheet', href: contentStyles });
+                break;
+
+            case 'module.hero':
+                styles.push({ rel: 'stylesheet', href: heroStyles });
                 break;
 
             case 'module.video':
@@ -116,6 +123,11 @@ export default function Module(props: Props) {
                     />
                 </article>
             ) : null;
+
+        case 'module.hero':
+            const moduleHero = module as heroModule;
+
+            return <Hero data={moduleHero} key={moduleHero._key} />;
 
         case 'module.images':
             const moduleImage = module as imageModule<HTMLImageElement>;
