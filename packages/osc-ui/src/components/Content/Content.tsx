@@ -142,7 +142,6 @@ export const Content = (props: Props) => {
         paddingBottom,
         value,
         buttons,
-        ...other
     } = props;
 
     // ? Perhaps better to simply apply the class and pass them as a value from Sanity?
@@ -161,7 +160,7 @@ export const Content = (props: Props) => {
     );
 
     return (
-        <div className={classes ? classes : null} {...other}>
+        <div className={classes ? classes : null}>
             <div className={`c-content__inner ${alignClass}`}>
                 <ReactPortableText value={value} components={portableTextComponents} />
 
