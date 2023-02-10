@@ -7,11 +7,11 @@ dotenv.config();
 async function startServer() {
     const { url } = await startStandaloneServer(server(), {
         context: async ({ req }) => {
-            const client = new S3Client({ region: 'eu-west-1' });
+            const s3Client = new S3Client({ region: 'eu-west-1' });
 
             // @ts-ignore - Type 'string[]' is not assignable to type 'string'. user will never be an array (comes from gateway)
             const user = req.headers.user ? JSON.parse(req.headers.user) : null;
-            return { client, user };
+            return { s3Client, user };
         },
         listen: { port: 4006 },
     });
