@@ -117,6 +117,11 @@ $hero-grid-full: list.slash(1, -1);
     &__ttl {
         z-index: 2;
         grid-row: 2;
+
+        /* Check if the inline-size value is supported */
+        @supports (contain: inline-size) {
+            contain: inline-size;
+        }
     }
 
     &__content {
@@ -169,10 +174,24 @@ $hero-grid-full: list.slash(1, -1);
             text-align: center;
         }
 
+        /*
+         * [1] Using dynamic container unit to scale the text with it's container
+         * [2] For non supporting browsers, fallback to viewport width
+        */
         #{$self}__ttl {
             // TODO: These values might need revising once the OSC font is used
-            font-size: clamp(rem(50), calc(-1.34rem + 22.32vw), rem(300));
-            letter-spacing: clamp(rem(10), calc(0.18rem + 1.88vw), rem(30));
+            @supports (font-size: 1cqw) {
+                /* stylelint-disable-next-line unit-no-unknown */
+                font-size: clamp(rem(50), calc(-1.34rem + 22.32cqw), rem(300)); /* [1] */
+                /* stylelint-disable-next-line unit-no-unknown */
+                letter-spacing: clamp(rem(10), calc(0.18rem + 1.88cqw), rem(30)); /* [1] */
+            }
+
+            @supports not (font-size: 1cqw) {
+                font-size: clamp(rem(50), calc(-1.34rem + 22.32vw), rem(300)); /* [2] */
+                letter-spacing: clamp(rem(10), calc(0.18rem + 1.88vw), rem(30)); /* [2] */
+            }
+
             margin-block-start: $hero-space-l;
 
             @include mq(mq-token("tab-med")) {
