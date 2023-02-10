@@ -36,11 +36,6 @@ export default {
             description: 'The minimum allowed date that a user may select',
             type: Object,
         },
-        type: {
-            description: 'The type of calendar, e.g. month, yearly, decade',
-            control: 'select',
-            options: ['month', 'year', 'decade'],
-        },
     },
     subcomponents: {
         Calendar,
@@ -63,7 +58,6 @@ const Template: Story = ({ minValue, maxValue, ...args }) => {
                 minValue={minValue && parseDate('2023-02-03')}
                 maxValue={maxValue && parseDate('2023-02-20')}
                 onChange={setDate}
-                type={args.type}
                 value={date}
                 {...args}
             />
@@ -74,17 +68,13 @@ const Template: Story = ({ minValue, maxValue, ...args }) => {
 export const Primary = Template.bind({});
 export const DefaultDate = Template.bind({});
 export const MinAndMaxDates = Template.bind({});
-export const YearCalendar = Template.bind({});
-export const DecadeCalendar = Template.bind({});
 
 Primary.args = {
     label: 'Date',
-    type: 'month',
 };
 DefaultDate.args = {
     defaultValue: '2022-02-03',
     label: 'Date',
-    type: 'month',
 };
 DefaultDate.parameters = {
     docs: {
@@ -97,36 +87,11 @@ MinAndMaxDates.args = {
     label: 'Date',
     minValue: true,
     maxValue: true,
-    type: 'month',
 };
 MinAndMaxDates.parameters = {
     docs: {
         description: {
             story: 'Min and max dates can be set which will limit what the user can select. Dates outside of this will trigger validation requirement.',
-        },
-    },
-};
-YearCalendar.args = {
-    granularity: 'month',
-    label: 'Date',
-    type: 'year',
-};
-YearCalendar.parameters = {
-    docs: {
-        description: {
-            story: 'The Year Calendar enables users to select a specific month.',
-        },
-    },
-};
-DecadeCalendar.args = {
-    granularity: 'year',
-    label: 'Date',
-    type: 'decade',
-};
-DecadeCalendar.parameters = {
-    docs: {
-        description: {
-            story: 'The Decade Calendar enables users to select a specific year.',
         },
     },
 };

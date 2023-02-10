@@ -73,9 +73,9 @@ const TimePresets = ({ presets, setSelectedRange, setValue }) => (
         <div>Time Presets</div>
 
         {createTimePresets(presets).map(({ endDate, name, startDate }, index) => (
-            <button
+            <ReactAriaButton
                 key={index}
-                onClick={() => {
+                onPress={() => {
                     setSelectedRange((prevRange) => ({ ...prevRange, timePreset: true }));
                     setValue({
                         start: startDate,
@@ -84,7 +84,7 @@ const TimePresets = ({ presets, setSelectedRange, setValue }) => (
                 }}
             >
                 {name}
-            </button>
+            </ReactAriaButton>
         ))}
     </div>
 );
@@ -158,7 +158,7 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
                             <Icon id="calendar" />
                         </ReactAriaButton>
                     </div>
-                    <Icon className="arrow" id="arrow" />
+                    <Icon className="c-datepicker__date-field-container--arrow" id="arrow" />
                     <div className="c-datepicker__date-field-inner-container">
                         <DateField {...endFieldProps} />
                         <ReactAriaButton {...buttonProps}>

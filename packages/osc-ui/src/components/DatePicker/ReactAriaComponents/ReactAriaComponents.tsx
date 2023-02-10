@@ -10,13 +10,20 @@ import type { DatePickerState, DateRangePickerState } from '@react-stately/datep
 
 import '../date-picker.scss';
 import '../react-aria-components.scss';
+import { classNames } from '../../../utils/classNames';
 
-export const ReactAriaButton = (props: AriaButtonProps) => {
+interface ButtonProps extends AriaButtonProps {
+    className?: string;
+}
+
+export const ReactAriaButton = (props: ButtonProps) => {
+    const { className } = props;
     let ref = useRef();
     let { buttonProps } = useButton(props, ref);
+    const classes = classNames('c-react-aria__button', className);
 
     return (
-        <button className="c-react-aria__button" {...buttonProps} ref={ref}>
+        <button className={classes} {...buttonProps} ref={ref}>
             {props.children}
         </button>
     );

@@ -28,9 +28,10 @@
             display: flex;
             align-items: center;
 
-            .arrow {
-                width: 20px;
-                height: 12px;
+            &--arrow {
+                width: 1.25em;
+                height: 0.75em;
+                margin: 0 1.5px;
             }
         }
 

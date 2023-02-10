@@ -158,7 +158,6 @@ interface RangeCalendarProps extends AriaRangeCalendarProps<DateValue> {
 
 export const RangeCalendar = (props: RangeCalendarProps) => {
     const { state } = props;
-    const RANGES = ['start', 'end'];
 
     let ref = useRef();
     let { calendarProps, prevButtonProps, nextButtonProps } = useRangeCalendar(props, state, ref);
@@ -170,9 +169,9 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
         timeZone: state.timeZone,
     });
 
-    const startAndEndDate = RANGES.map((range: 'start' | 'end', index: number) => {
+    const Date = ({ range }: { range: 'start' | 'end' }) => {
         return (
-            <span className="c-calendar__date-container" key={index}>
+            <div className="c-calendar__date-container">
                 {formatDate(range, formattedDate, state).map((date, idx) => {
                     const dateSegment = ['month', 'year'];
                     return (
@@ -181,9 +180,9 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                         </span>
                     );
                 })}
-            </span>
+            </div>
         );
-    });
+    };
 
     return (
         <div {...calendarProps} ref={ref} className="c-calendar c-calendar__range">
@@ -202,10 +201,10 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                             <Icon className="c-calendar__chevron" id="chevron-left" />
                         </ReactAriaButton>
                     </div>
-                    {startAndEndDate[0]}
+                    <Date range={'start'} />
                 </div>
                 <div className="c-calendar__header--inner">
-                    {startAndEndDate[1]}
+                    <Date range={'end'} />
                     <div className="c-calendar__buttons">
                         <ReactAriaButton {...nextButtonProps}>
                             <Icon className="c-calendar__chevron" id="chevron-right" />

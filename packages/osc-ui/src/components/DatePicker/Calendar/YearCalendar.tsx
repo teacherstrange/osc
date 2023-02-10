@@ -1,33 +1,47 @@
-import { createCalendar } from '@internationalized/date';
 import type { AriaCalendarProps } from '@react-aria/calendar';
 import { useCalendar } from '@react-aria/calendar';
 import { useDateFormatter, useLocale } from '@react-aria/i18n';
 import type { CalendarState } from '@react-stately/calendar';
 import { useCalendarState } from '@react-stately/calendar';
 import type { DateValue } from '@react-types/calendar';
-import type { ReactElement } from 'react';
+import type { Dispatch, ReactElement, SetStateAction } from 'react';
 import React from 'react';
 import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
 import { selectDateHandler } from '../utils';
+import { createCalendar } from './Calendar';
 
 const Year = (props): ReactElement => {
-    const { className, state }: { className: string; state: CalendarState } = props;
+    const {
+        className,
+        setCalendarView,
+        state,
+    }: {
+        className: string;
+        setCalendarView: Dispatch<SetStateAction<'month' | 'year' | 'decade'>>;
+        state: CalendarState;
+    } = props;
     let formatter = useDateFormatter({
         year: 'numeric',
         timeZone: state.timeZone,
     });
 
     return (
-        <div className={className}>
+        <ReactAriaButton className={className} onPress={() => setCalendarView('decade')}>
             {formatter.format(state.focusedDate.toDate(state.timeZone))}
-        </div>
+        </ReactAriaButton>
     );
 };
 
 const Months = (props) => {
-    const { state }: { state: CalendarState } = props;
+    const {
+        state,
+        setCalendarView,
+    }: {
+        state: CalendarState;
+        setCalendarView: Dispatch<SetStateAction<'month' | 'year' | 'decade'>>;
+    } = props;
     let formatter = useDateFormatter({
         month: 'short',
         timeZone: state.timeZone,
@@ -48,6 +62,7 @@ const Months = (props) => {
                 }
                 key={index}
                 onClick={(e) => {
+                    setCalendarView('month');
                     selectDateHandler(e, state, 'month');
                 }}
                 value={index + 1}
@@ -73,14 +88,19 @@ const Months = (props) => {
     return <div>{monthsResult()}</div>;
 };
 
-export const YearCalendar = (props: AriaCalendarProps<DateValue>) => {
+interface YearCalendarProps extends AriaCalendarProps<DateValue> {
+    setCalendarView: Dispatch<SetStateAction<'month' | 'year' | 'decade'>>;
+}
+
+export const YearCalendar = (props: YearCalendarProps) => {
+    const { setCalendarView, ...rest } = props;
     let { locale } = useLocale();
     let state = useCalendarState({
-        ...props,
+        ...rest,
         locale,
         createCalendar,
     });
-    let { calendarProps } = useCalendar(props, state);
+    let { calendarProps } = useCalendar(rest, state);
 
     return (
         <div {...calendarProps} className="c-calendar c-calendar__year-view">
@@ -92,7 +112,11 @@ export const YearCalendar = (props: AriaCalendarProps<DateValue>) => {
                 >
                     <Icon className="c-calendar__chevron" id="chevron-left" />
                 </ReactAriaButton>
-                <Year className="c-calendar__year" state={state} />
+                <Year
+                    className="c-calendar__year"
+                    setCalendarView={setCalendarView}
+                    state={state}
+                />
                 <ReactAriaButton
                     onPress={() => {
                         state.setFocusedDate(state.focusedDate.add({ years: 1 }));
@@ -102,7 +126,7 @@ export const YearCalendar = (props: AriaCalendarProps<DateValue>) => {
                 </ReactAriaButton>
             </div>
             <div className="year-calendar__dropdowns">
-                <Months state={state} />
+                <Months state={state} setCalendarView={setCalendarView} />
             </div>
         </div>
     );

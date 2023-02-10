@@ -18,12 +18,13 @@
         align-items: center;
         justify-content: space-between;
         gap: 1em;
-        padding: var(--space-scale-milli) 0;
+        padding: 0 0 var(--space-scale-milli) 0;
 
         .c-calendar__chevron {
             display: flex;
-            width: 20px;
-            height: 20px;
+            width: 1.25em;
+            height: 1.25em;
+            padding: 0 0.1em;
             color: var(--color-neutral-600);
             cursor: pointer;
         }
@@ -38,10 +39,11 @@
     &__month,
     &__year {
         font-size: var(--font-scale-zeta);
+        cursor: pointer;
     }
 
     &__month {
-        margin: 0 var(--space-scale-micro) 0 0;
+        margin: 0 calc(var(--space-scale-micro) - 3px) 0 0;
     }
 
     &__year {
@@ -56,17 +58,20 @@
         height: var(--cell-height);
         color: var(--color-secondary);
         font-size: var(--font-scale-zeta);
+        font-weight: $weight-light;
         cursor: pointer;
 
         &:focus {
             background: var(--hover-color);
             border: 3px solid var(--color-primary);
             border-radius: $radius;
+            font-weight: $weight-bold;
         }
 
         &:hover {
             background: var(--hover-color);
             border-radius: $radius;
+            font-weight: $weight-bold;
         }
 
         &--selected {
@@ -125,28 +130,33 @@
         &--inner-container-1 {
             display: flex;
             flex: 1 100%;
+        }
 
-            .c-calendar__range--time-presets {
-                :first-child {
-                    font-weight: $weight-bold;
-                }
+        &--calendar-container {
+            padding: 0 var(--space-scale-zeta);
+        }
 
-                flex: 1;
-                padding: 0 var(--space-scale-zeta);
-                border-right: solid 1px var(--color-neutral-300);
+        &--time-presets {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 0 var(--space-scale-zeta);
+            border-right: solid 1px var(--color-neutral-300);
+            cursor: pointer;
+            gap: 1em;
 
-                button {
-                    &:focus {
-                        border-radius: $radius-xs;
-                    }
-                }
+            :first-child {
+                font-weight: $weight-bold;
+                cursor: initial;
             }
 
-            .c-calendar__range--calendar-container {
-                display: flex;
-                flex: 6;
-                justify-content: center;
-                padding: 0 var(--space-scale-zeta);
+            button {
+                padding: 0.2em;
+
+                &:focus {
+                    border-radius: $radius-xs;
+                    box-shadow: 0 0 0 3px var(--color-primary);
+                }
             }
         }
 
@@ -203,14 +213,6 @@
             }
         }
 
-        &--time-presets {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            gap: 1em;
-            cursor: pointer;
-        }
-
         &--clear-selection {
             border-bottom: 1px solid var(--color-neutral-600);
             color: var(--color-neutral-600);
@@ -233,6 +235,11 @@
             flex: 1;
             align-items: center;
             justify-content: space-between;
+        }
+
+        .c-calendar__month,
+        .c-calendar__year {
+            cursor: initial;
         }
     }
 
