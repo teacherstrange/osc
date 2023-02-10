@@ -114,7 +114,7 @@ const Slide = (props: SlideProps) => {
                     </HeroContent>
                 ) : null}
 
-                {image?.src ? (
+                {variant !== 'secondary' && image?.src ? (
                     <HeroImage>
                         <Image
                             src={image?.src}
