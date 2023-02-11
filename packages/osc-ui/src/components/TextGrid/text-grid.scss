@@ -24,9 +24,12 @@ $text-grid-heading-offset: calc(var(--space-scale-beta) * -1);
 
     &__items {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 30ch), 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 32ch), 1fr));
         row-gap: $text-grid-gap;
-        margin-inline: calc($text-grid-gap / 2 * -1); /* [2] */
+
+        @include mq(mq-token("tab-lrg")) {
+            margin-inline: calc($text-grid-gap / 2 * -1); /* [2] */
+        }
 
         > #{$self}__item {
             margin-block-end: 0;
