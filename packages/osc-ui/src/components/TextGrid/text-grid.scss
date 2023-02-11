@@ -13,10 +13,20 @@ $text-grid-heading-offset: calc(var(--space-scale-beta) * -1);
 
     font-weight: $weight-light;
 
+    /*
+     * Rather than using gap here we're using margin-inline to set the space between column content.
+     * This is because, when we have an inline heading, we want the first column to not have the gap
+     * so the content doesn't get too narrow.
+     *
+     * [1] Apply half the width of the gap to each side of the cell
+     * [2] Create a negative margin that's the same size as the gap in [1] to pull the content flush with the container
+    */
+
     &__items {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 30ch), 1fr));
         row-gap: $text-grid-gap;
+        margin-inline: calc($text-grid-gap / 2 * -1); /* [2] */
 
         > #{$self}__item {
             margin-block-end: 0;
@@ -24,7 +34,7 @@ $text-grid-heading-offset: calc(var(--space-scale-beta) * -1);
             border-bottom: $text-grid-item-border;
 
             @include mq(mq-token("tab")) {
-                margin-inline: calc($text-grid-gap / 2);
+                margin-inline: calc($text-grid-gap / 2); /* [1] */
                 border-width: ($base-font-size * 0.375px);
             }
         }
