@@ -31,6 +31,7 @@ export const MODULES = [
     { type: 'module.hero' },
     { type: 'module.images' },
     { type: 'module.trustpilot' },
+    { type: 'module.textGrid' },
     { type: 'module.video' },
 ];
 

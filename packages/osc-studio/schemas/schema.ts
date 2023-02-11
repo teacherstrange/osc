@@ -51,6 +51,7 @@ import moduleImage from './objects/module/image';
 import moduleImageMobile from './objects/module/imageMobile';
 import moduleImages from './objects/module/images';
 import moduleImageTablet from './objects/module/imageTablet';
+import moduleTextGrid from './objects/module/textGrid';
 import moduleTrustpilot from './objects/module/trustpilot';
 import moduleVideo from './objects/module/video';
 import navigationItem from './objects/navigationItem';
@@ -66,6 +67,7 @@ import shopifyCollection from './objects/shopifyCollection';
 import shopifyProduct from './objects/shopifyProduct';
 import shopifyProductVariant from './objects/shopifyProductVariant';
 import social from './objects/social';
+import textGridItem from './objects/textGridItem';
 
 // Build the schemas and export to the Sanity Studio app
 export default createSchema({
@@ -100,6 +102,7 @@ export default createSchema({
         heroCarouselSettings,
         heroSlide,
         collectionRule,
+        textGridItem,
         linkExternal,
         linkInternal,
         navigationItem,
@@ -132,6 +135,7 @@ export default createSchema({
         moduleContent,
         moduleTrustpilot,
         moduleCarousel,
+        moduleTextGrid,
         moduleVideo,
     ]),
 });
