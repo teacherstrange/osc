@@ -7,6 +7,7 @@ import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
+import textGridStyles from 'osc-ui/dist/src-components-TextGrid-text-grid.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
 import { getTypes } from '~/models/sanity.server';
 import type {
@@ -18,12 +19,14 @@ import type {
     imageModule,
     module,
     SanityPage,
+    textGridModule,
     trustpilotModule,
     videoModule,
 } from '~/types/sanity';
 import { AccordionModule } from './Accordion/Accordion';
 import { Cards } from './Cards/Cards';
 import { Hero } from './Hero/Hero';
+import { TextGrid } from './TextGrid/TextGrid';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
 
 // So we can dynamically add the styles of each component into remix we need to create an array of stylesheet objects.
@@ -61,6 +64,10 @@ export const getComponentStyles = (data: SanityPage) => {
 
             case 'module.hero':
                 styles.push({ rel: 'stylesheet', href: heroStyles });
+                break;
+
+            case 'module.textGrid':
+                styles.push({ rel: 'stylesheet', href: textGridStyles });
                 break;
 
             case 'module.video':
@@ -160,6 +167,11 @@ export default function Module(props: Props) {
                     height={moduleImage.height}
                 />
             );
+
+        case 'module.textGrid':
+            const moduleTextGrid = module as textGridModule;
+
+            return <TextGrid data={moduleTextGrid} key={moduleTextGrid._key} />;
 
         case 'module.video':
             const moduleVideo = module as videoModule;
