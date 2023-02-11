@@ -5,6 +5,7 @@ import { MODULE_CAROUSEL } from './modules/carousel';
 import { MODULE_CONTENT } from './modules/content';
 import { MODULE_HERO } from './modules/hero';
 import { MODULE_IMAGES } from './modules/images';
+import { MODULE_TEXT_GRID } from './modules/textGrid';
 import { MODULE_TRUSTPILOT } from './modules/trustpilot';
 import { MODULE_VIDEO } from './modules/video';
 
@@ -31,6 +32,9 @@ modules[] {
     },
     (_type == "module.hero") => {
         ${MODULE_HERO}
+    },
+    (_type == "module.textGrid") => {
+        ${MODULE_TEXT_GRID}
     },
     (_type == "module.video") => {
       ${MODULE_VIDEO}
