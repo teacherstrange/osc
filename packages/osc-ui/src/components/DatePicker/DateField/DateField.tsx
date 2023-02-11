@@ -29,7 +29,7 @@ export const DateField = (props: AriaDateFieldProps<DateValue>) => {
     });
 
     let ref = useRef();
-    let { labelProps, fieldProps } = useDateField(props, state, ref);
+    let { fieldProps } = useDateField(props, state, ref);
 
     return (
         <div
@@ -39,12 +39,9 @@ export const DateField = (props: AriaDateFieldProps<DateValue>) => {
                     : `c-date-field__wrapper`
             }
         >
-            <span {...labelProps} className="c-date-field__label">
-                {props.label}
-            </span>
             <div {...fieldProps} ref={ref} className="c-date-field">
                 {state.segments.map((segment, i) => (
-                    <DateSegment key={i} segment={segment} state={state} name="datepicker" />
+                    <DateSegment key={i} segment={segment} state={state} />
                 ))}
             </div>
             {state.validationState === 'invalid' ? (
@@ -54,7 +51,7 @@ export const DateField = (props: AriaDateFieldProps<DateValue>) => {
     );
 };
 
-const DateSegment = ({ segment, state, name }) => {
+const DateSegment = ({ segment, state }) => {
     let ref = useRef();
     let { segmentProps } = useDateSegment(segment, state, ref);
 
