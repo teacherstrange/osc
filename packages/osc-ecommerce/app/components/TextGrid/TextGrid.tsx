@@ -4,7 +4,6 @@ import type { textGridModule } from '~/types/sanity';
 
 export const TextGrid = (props: { data: textGridModule }) => {
     const { data } = props;
-    console.log(data);
 
     return (
         <OSCTextGrid heading={data?.heading} hasInlineHeading={data?.hasInlineHeading}>
