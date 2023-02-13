@@ -32,20 +32,7 @@ export const MODULES = [
 ];
 
 // Space values to use in the 'spacing' field type
-export const SPACING = [
-    'micro',
-    'milli',
-    'centi',
-    'zeta',
-    'epsilon',
-    'delta',
-    'gamma',
-    'beta',
-    'alpha',
-    'omega',
-    'kilo',
-    'mega',
-];
+export const SPACING = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'];
 
 // API version to use when using the Sanity client within the studio
 // https://www.sanity.io/help/studio-client-specify-api-version
