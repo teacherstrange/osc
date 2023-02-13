@@ -4,6 +4,7 @@ import { Button } from '../Button/Button';
 import { Carousel } from '../Carousel/Carousel';
 import { Image } from '../Image/Image';
 import { List, ListItem } from '../List/List';
+import { Trustpilot } from '../Trustpilot/Trustpilot';
 import type { ContentMediaProps } from './ContentMedia';
 import { ContentMedia, ContentMediaBlock } from './ContentMedia';
 
@@ -387,6 +388,30 @@ const CarouselMediaTemplate: Story<ContentMediaProps> = ({ ...args }) => (
     </div>
 );
 
+const TrustpilotTemplate: Story<ContentMediaProps> = ({ ...args }) => (
+    <div className="o-container">
+        <ContentMedia {...args}>
+            <ContentMediaBlock variant="media" align="center">
+                <Trustpilot height="24px" stars="4,5" template="microstar" theme="light" />
+            </ContentMediaBlock>
+
+            <ContentMediaBlock variant="content">
+                <div className="c-content">
+                    <div className="c-content__inner c-content__inner--left">
+                        <h2 className="t-font-delta u-text-bold">Lorem ipsum dolor sit amet</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione id
+                            minima voluptate debitis officia accusantium maxime molestiae, maiores
+                            porro, nulla harum totam aut nisi, quas ipsum temporibus perspiciatis
+                            iusto voluptates.
+                        </p>
+                    </div>
+                </div>
+            </ContentMediaBlock>
+        </ContentMedia>
+    </div>
+);
+
 export const Primary = Template.bind({});
 Primary.args = {};
 
@@ -449,4 +474,9 @@ CarouselMedia.parameters = {
             story: 'To carousel just the content of a `ContentMediaBlock` wrap a `Carousel` around the contents inside.',
         },
     },
+};
+
+export const TrustpilotMedia = TrustpilotTemplate.bind({});
+TrustpilotMedia.args = {
+    ...Primary.args,
 };
