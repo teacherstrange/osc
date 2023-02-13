@@ -7,9 +7,7 @@
         padding: calc($space-2xs / 2);
         background-color: var(--color-tertiary);
         border-radius: $rad-xs;
-        box-shadow:
-            hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
-            hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
+        box-shadow: $shadow-l;
         animation-duration: 400ms;
         animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         will-change: transform, opacity;
@@ -82,7 +80,7 @@
         height: 35px;
         background-color: var(--color-tertiary);
         border-radius: $rad;
-        box-shadow: 0 2px 10px hsl(0deg 0% 0% / 14.1%); // todo: create box-shadow variables;
+        box-shadow: $shadow-m;
         font-family: inherit;
 
         &:hover {

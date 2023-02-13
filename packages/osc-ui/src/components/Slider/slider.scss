@@ -51,7 +51,7 @@
         background-color: var(--color-tertiary);
         border: solid 2px var(--color-primary);
         border-radius: $rad;
-        box-shadow: 0 1px 3px hsl(0deg 0% 0% / 10%), 0 1px 2px hsl(0deg 0% 0% / 6%); // todo: assign variable;
+        box-shadow: $shadow-xs;
 
         &:hover {
             background-color: var(--color-neutral-200);
@@ -59,7 +59,7 @@
 
         &:focus {
             outline: none;
-            box-shadow: 0 0 0 2px var(--color-secondary);
+            box-shadow: $shadow-focus-s;
 
             .c-slider__value {
                 transform: scale(1);

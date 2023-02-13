@@ -23,10 +23,6 @@ $switch-transition-duration: 0.2s;
     transition: filter $switch-transition-duration;
     cursor: pointer;
 
-    &:focus {
-        box-shadow: 0 0 0 0 var(--color-tertiary), 0 0 0 0.188rem var(--color-primary);
-    }
-
     &:not([data-disabled]):hover {
         filter: brightness(0.95);
     }

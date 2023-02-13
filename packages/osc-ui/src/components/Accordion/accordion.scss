@@ -75,10 +75,6 @@ $accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
             color: var(--color-quaternary);
         }
 
-        &:focus-visible .c-accordion__icon {
-            box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary);
-        }
-
         &[data-state="open"] {
             .c-accordion__icon {
                 &--plusminus > :first-child {

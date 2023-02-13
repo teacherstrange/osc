@@ -219,10 +219,6 @@ $btn-properties: (
         box-sizing: border-box;
     }
 
-    &:focus-visible {
-        box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary);
-    }
-
     &__inner {
         width: 100%;
         gap: 0.6em;

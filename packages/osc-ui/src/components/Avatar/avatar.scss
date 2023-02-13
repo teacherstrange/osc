@@ -49,7 +49,7 @@
         height: 15px;
         background: var(--color-primary);
         border-radius: $rad;
-        box-shadow: 0 0 0 2px var(--color-tertiary);
+        outline: 2px solid var(--color-tertiary);
 
         &--count {
             padding: $space-2xs;

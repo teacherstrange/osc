@@ -1,0 +1,37 @@
+@use "../settings/tokens" as *;
+@use "../settings/typography" as *;
+@use "../tools/functions/rem" as *;
+
+///*----------------------------------*\
+//  #BOX SHADOW SETTINGS
+//\*----------------------------------*/
+//
+//  Defines variations of box-shadow
+//
+//\*----------------------------------*/
+
+:root {
+  --shadow-ring: inset 0 2px 4px 0 hsla(0, 0%, 0%, 0.05);
+  --shadow-focus: 0 0 0 #{rem(calc($base-fs / 3))} var(--color-tertiary), 0 0 0 #{rem(calc($base-fs / 2))} var(--color-primary);
+  --shadow-focus-s: 0 0 0 #{rem(calc($base-fs / 5))} var(--color-tertiary), 0 0 0 #{rem(calc($base-fs / 3.25))} var(--color-primary);
+  --shadow-inner: 0 0 0 1px hsla(0, 0%, 0%, 0.05);
+
+  --shadow-xs:  0 0.1px 0.3px hsla(0, 0%, 0%, 0.06), 0 1px 2px hsla(0, 0%, 0%, 0.12);
+  --shadow-s:  0 0.3px 0.4px hsla(0, 0%, 0%, 0.025), 0 0.9px 1.5px hsla(0, 0%, 0%, 0.05), 0 3.5px 6px hsla(0, 0%, 0%, 0.1);
+  --shadow-m:  0 0.9px 1.5px hsla(0, 0%, 0%, 0.03), 0 3.1px 5.5px hsla(0, 0%, 0%, 0.08), 0 14px 25px hsla(0, 0%, 0%, 0.12);
+  --shadow-l:  0 10px 38px -10px hsl(206deg 22% 7% / 35%), 0 10px 20px -15px hsl(206deg 22% 7% / 20%);
+  --shadow-xl:  0 1.2px 1.9px -1px hsla(0, 0%, 0%, 0.014), 0 3.3px 5.3px -1px hsla(0, 0%, 0%, 0.038), 0 8.5px 12.7px -1px hsla(0, 0%, 0%, 0.085), 0 30px 42px -1px hsla(0, 0%, 0%, 0.15);
+  --shadow-2xl:  0 1.5px 2.1px -6px hsla(0, 0%, 0%, 0.012), 0 3.6px 5.2px -6px hsla(0, 0%, 0%, 0.035), 0 7.3px 10.6px -6px hsla(0, 0%, 0%, 0.07), 0 16.2px 21.9px -6px hsla(0, 0%, 0%, 0.117), 0 46px 60px -6px hsla(0, 0%, 0%, 0.2);
+}
+
+
+$shadow-xs: var(--shadow-s);
+$shadow-s: var(--shadow-s);
+$shadow-m: var(--shadow-m);
+$shadow-l: var(--shadow-l);
+$shadow-xl: var(--shadow-xl);
+$shadow-2xl: var(--shadow-2xl);
+$shadow-inner: var(--shadow-inner);
+$shadow-ring: var(--shadow-ring);
+$shadow-focus: var(--shadow-focus);
+$shadow-focus-s: var(--shadow-focus-s);
