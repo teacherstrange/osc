@@ -6,6 +6,7 @@ import type { DateValue } from '@react-types/calendar';
 import type { RangeValue } from '@react-types/shared';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import React, { useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { Icon } from '../../Icon/Icon';
 import { DateField } from '../DateField/DateField';
 import { RangeCalendarContainer } from '../RangeCalendar/RangeCalendar';
@@ -161,7 +162,7 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
                     <Icon className="c-datepicker__date-field-container--arrow" id="arrow" />
                     <div className="c-datepicker__date-field-inner-container">
                         <DateField {...endFieldProps} />
-                        <ReactAriaButton {...buttonProps}>
+                        <ReactAriaButton {...buttonProps} id={uuidv4()}>
                             <Icon id="calendar" />
                         </ReactAriaButton>
                     </div>
