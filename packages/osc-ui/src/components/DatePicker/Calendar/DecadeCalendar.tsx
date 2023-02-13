@@ -8,8 +8,8 @@ import type { CalendarState } from '@react-stately/calendar';
 import { useCalendarState } from '@react-stately/calendar';
 import type { DateValue } from '@react-types/calendar';
 import React, { useEffect, useState } from 'react';
+import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
-import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
 import { selectDateHandler } from '../utils';
 import { createCalendar } from './Calendar';
 
@@ -43,33 +43,34 @@ const YearRange = (props): ReactElement => {
     const { classes, setCalendarView, state, years }: YearRangeProps = props;
     const startYear = years[0].formatted;
     const endYear = years[years.length - 1].formatted;
-    console.log('startYear', startYear);
-    console.log('endYear', endYear);
+
     return (
         <div className="c-calendar__year--container">
-            <ReactAriaButton
+            <Button
                 className={classes}
-                onPress={() => {
+                onClick={() => {
                     const date = state.focusedDate.set({ year: +startYear });
                     state.setFocusedDate(date);
                     state.setValue(date);
                     setCalendarView('month');
                 }}
+                variant="quaternary"
             >
                 {startYear}
-            </ReactAriaButton>
+            </Button>
             <span className={classes}>-</span>
-            <ReactAriaButton
+            <Button
                 className={classes}
-                onPress={() => {
+                onClick={() => {
                     const date = state.focusedDate.set({ year: +endYear });
                     state.setFocusedDate(state.focusedDate.set(date));
                     state.setValue(state.focusedDate.set(date));
                     setCalendarView('month');
                 }}
+                variant="quaternary"
             >
                 {endYear}
-            </ReactAriaButton>
+            </Button>
         </div>
     );
 };
@@ -154,14 +155,15 @@ export const DecadeCalendar = (props: DecadeCalendarProps) => {
     return (
         <div {...calendarProps} className="c-calendar c-calendar__decade-view">
             <div className="c-calendar__header">
-                <ReactAriaButton
-                    onPress={() => {
+                <Button
+                    onClick={() => {
                         state.setFocusedDate(state.focusedDate.subtract({ years: 10 }));
                         setYearStepper(true);
                     }}
+                    variant="quaternary"
                 >
                     <Icon className="c-calendar__chevron" id="chevron-left" />
-                </ReactAriaButton>
+                </Button>
                 {years ? (
                     <YearRange
                         classes="c-calendar__year"
@@ -170,14 +172,15 @@ export const DecadeCalendar = (props: DecadeCalendarProps) => {
                         setCalendarView={setCalendarView}
                     />
                 ) : null}
-                <ReactAriaButton
-                    onPress={() => {
+                <Button
+                    onClick={() => {
                         state.setFocusedDate(state.focusedDate.add({ years: 10 }));
                         setYearStepper(true);
                     }}
+                    variant="quaternary"
                 >
                     <Icon className="c-calendar__chevron" id="chevron-right" />
-                </ReactAriaButton>
+                </Button>
             </div>
             <div className="year-calendar__dropdowns">
                 {years ? (
