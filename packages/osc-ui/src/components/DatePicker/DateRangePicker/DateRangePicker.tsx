@@ -6,9 +6,9 @@ import type { DateValue } from '@react-types/calendar';
 import type { RangeValue } from '@react-types/shared';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import React, { useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import breakpoints from '../../../../../../tokens/media-queries';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { useUniqueId } from '../../../hooks/useUniqueId';
 import { classNames } from '../../../utils/classNames';
 import { rem } from '../../../utils/rem';
 import { Button } from '../../Button/Button';
@@ -188,6 +188,8 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
 export const DateRangePicker = (props: DateRangePickerProps) => {
     let state = useDateRangePickerState({ ...props, shouldCloseOnSelect: false });
 
+    const buttonId = useUniqueId('buttonId:');
+
     let ref = useRef();
     let {
         labelProps,
@@ -224,7 +226,7 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
                     <Icon className="c-datepicker__date-field-container--arrow" id="arrow" />
                     <div className="c-datepicker__date-field-inner-container">
                         <DateField {...endFieldProps} />
-                        <ReactAriaButton {...buttonProps} id={uuidv4()}>
+                        <ReactAriaButton {...buttonProps} id={buttonId}>
                             <Icon id="calendar" />
                         </ReactAriaButton>
                     </div>

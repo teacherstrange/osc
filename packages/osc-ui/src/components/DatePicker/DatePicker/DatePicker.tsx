@@ -3,7 +3,7 @@ import { useDatePicker } from '@react-aria/datepicker';
 import { useDatePickerState } from '@react-stately/datepicker';
 import type { DateValue } from '@react-types/calendar';
 import React, { useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useUniqueId } from '../../../hooks/useUniqueId';
 import { Icon } from '../../Icon/Icon';
 import { CalendarContainer } from '../Calendar/CalendarContainer';
 import '../date-picker.scss';
@@ -24,6 +24,8 @@ export const DatePicker = (props: DatePickerProps) => {
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
         useDatePicker(props, state, ref);
 
+    const dateFieldId = useUniqueId('dateField:');
+
     return (
         <div className="c-datepicker">
             <label {...labelProps} className="c-datepicker__label">
@@ -35,7 +37,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 ref={ref}
                 // Manually setting random ID due to bug on duplicate Ids:
                 // https://github.com/adobe/react-spectrum/issues/3969
-                id={uuidv4()}
+                id={dateFieldId}
             >
                 <DateField {...fieldProps} granularity={props.granularity} />
                 <ReactAriaButton {...buttonProps}>
