@@ -70,9 +70,10 @@ interface ContentMediaBlockProps extends SharedProps {
      */
     align?: Alignments;
     /**
-     * Sets the width of the block on large screens
+     * Sets the number of columns the item should span on large screens
+     * @default 6
      */
-    width?: '40%' | '50%' | '60%';
+    cols?: Columns;
     /**
      * The content or media variant
      */
@@ -80,20 +81,8 @@ interface ContentMediaBlockProps extends SharedProps {
 }
 
 export const ContentMediaBlock = (props: ContentMediaBlockProps) => {
-    const { align = 'center', children, className, width = '50%', variant } = props;
+    const { align = 'center', children, className, cols = 6, variant } = props;
     const breakpoint = '@tab';
-
-    let widthClass: string;
-
-    if (width === '40%') {
-        widthClass = `o-grid__col--5${breakpoint}`;
-    }
-    if (width === '50%') {
-        widthClass = `o-grid__col--6${breakpoint}`;
-    }
-    if (width === '60%') {
-        widthClass = `o-grid__col--7${breakpoint}`;
-    }
 
     const alignmentClass = align ? `u-self-${align}` : '';
 
@@ -101,7 +90,7 @@ export const ContentMediaBlock = (props: ContentMediaBlockProps) => {
         'c-content-media__block',
         `c-content-media__${variant}`,
         'o-grid__col--12',
-        widthClass,
+        `o-grid__col--${cols}${breakpoint}`,
         alignmentClass,
         className
     );

@@ -123,6 +123,57 @@ const AlignMediaTemplate: Story<ContentMediaProps> = ({ ...args }) => (
     </div>
 );
 
+const AdjustWidthsTemplate: Story<ContentMediaProps> = ({ ...args }) => (
+    <div className="o-container">
+        <ContentMedia {...args}>
+            <ContentMediaBlock variant="media" cols={7}>
+                <Image
+                    src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1676288291/9b17bb1298dcfbed19cac005af4453d8_gwpd23.png"
+                    width={610}
+                    height={451}
+                    alt="A woman smiling while looking forward"
+                    className="o-img--contain"
+                />
+            </ContentMediaBlock>
+
+            <ContentMediaBlock variant="content" cols={5}>
+                <div className="c-content">
+                    <div className="c-content__inner c-content__inner--left">
+                        <h2>Working with children</h2>
+                        <p>
+                            If you're passionate about working with children, whether that's babies
+                            and toddlers, young children, teens, or children with special
+                            educational needs, there is a wide variety of careers you could look
+                            into. Working with children gives you the opportunity to inspire and
+                            help raise the next generation. Potential careers include:
+                        </p>
+
+                        <List>
+                            <ListItem>Teaching assistant</ListItem>
+                            <ListItem>Early years educator/nursery nurse </ListItem>
+                            <ListItem>Childminder </ListItem>
+                            <ListItem>Nanny</ListItem>
+                            <ListItem>Child psychologist </ListItem>
+                            <ListItem>SEN coordinator </ListItem>
+                            <ListItem>Pediatric nurse </ListItem>
+                            <ListItem>Play specialist</ListItem>
+                        </List>
+
+                        <p>
+                            To work with children, you'll need to look into obtaining the relevant
+                            qualifications as well as a Disclosure and Barring Service (DBS) check
+                            to demonstrate that you are fit to work with children aged under 18.
+                        </p>
+                        <div className="c-btn-group c-btn-group--row">
+                            <Button variant="secondary">View Courses</Button>
+                        </div>
+                    </div>
+                </div>
+            </ContentMediaBlock>
+        </ContentMedia>
+    </div>
+);
+
 const ReverseLayoutTemplate: Story<ContentMediaProps> = ({ ...args }) => (
     <div className="o-container">
         <ContentMedia {...args}>
@@ -347,6 +398,18 @@ AlignMedia.parameters = {
     docs: {
         description: {
             story: 'You can vertically align the content or the media by adding the `align` prop to the `ContentMediaBlock` subcomponent',
+        },
+    },
+};
+
+export const AdjustWidths = AdjustWidthsTemplate.bind({});
+AdjustWidths.args = {
+    ...Primary.args,
+};
+AdjustWidths.parameters = {
+    docs: {
+        description: {
+            story: 'You can adjust the width of each content block by changing the `cols` prop. The `ContentMedia` uses our `o-grid` class so the `cols` will be a range of 1 - 12 and influence how many columns each block should span.',
         },
     },
 };

@@ -42,6 +42,8 @@ export type Headings = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export type Alignments = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
 
+export type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+
 export type Maybe<T> = T | null | undefined;
 
 // StrictUnion type allows us to set up props that are mutually exclusive
