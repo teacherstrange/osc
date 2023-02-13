@@ -1,8 +1,19 @@
+/* stylelint-disable plugin/selector-bem-pattern */
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
 .c-content-media {
     $self: &;
+
+    &__content {
+        .c-content {
+            max-width: 57ch;
+
+            .c-btn-group {
+                margin-block-start: var(--space-scale-zeta);
+            }
+        }
+    }
 
     &--media-pos-above {
         #{$self}__media {
