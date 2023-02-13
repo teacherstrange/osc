@@ -61,6 +61,7 @@ runs:
         echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
         echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
         echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
+        echo "SHORT_SHA=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
 
     # from here
     - name: 🐳 Set up Docker Buildx
@@ -122,7 +123,7 @@ runs:
         file: ./Dockerfiles/Dockerfile
         context: .
         push: true
-        tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
+        tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ env.SHORT_SHA }}
         build-args: |
           "VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY }}"
           "VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY }}"
@@ -142,7 +143,7 @@ runs:
       with:
         context: .
         push: true
-        tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
+        tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ env.SHORT_SHA }}
         build-args: |
           VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
           VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}
