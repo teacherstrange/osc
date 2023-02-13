@@ -110,10 +110,9 @@ runs:
       if: ${{ env.PR_CLOSED != 'true' }}
       uses: superfly/fly-pr-review-apps@1.0.0
       with:
-        image: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
         org: "open-study-college"
         name: pr-${{ github.event.number }}-${{ inputs.APP_NAME }}
-        args: "deploy --build-arg SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --app registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}"
+        args: "deploy --build-arg SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --image registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}"
       env:
         FLY_API_TOKEN: ${{ inputs.FLY_API_TOKEN }}
 
