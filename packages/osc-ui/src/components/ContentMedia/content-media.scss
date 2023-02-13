@@ -1,0 +1,22 @@
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+.c-content-media {
+    $self: &;
+
+    &--media-pos-above {
+        #{$self}__media {
+            @include mq(mq-token("tab"), max) {
+                grid-row: 1;
+            }
+        }
+    }
+
+    &--media-pos-below {
+        #{$self}__media {
+            @include mq(mq-token("tab"), max) {
+                grid-row: 2;
+            }
+        }
+    }
+}

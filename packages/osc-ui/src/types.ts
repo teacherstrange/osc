@@ -40,6 +40,8 @@ export type Direction = 'top' | 'right' | 'bottom' | 'left';
 
 export type Headings = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
+export type Alignments = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
+
 export type Maybe<T> = T | null | undefined;
 
 // StrictUnion type allows us to set up props that are mutually exclusive
