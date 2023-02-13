@@ -121,6 +121,10 @@ test('should select the correct range when a time present is selected', async ()
 test('should remove hidden class from "Now select end date" prompt when first date is selected', async () => {
     const user = userEvent.setup();
 
+    vi.mock('./../../../hooks/useMediaQuery', () => ({
+        useMediaQuery: vi.fn(() => true),
+    }));
+
     render(<DateRangePickerContainer label="Date Range" />);
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
