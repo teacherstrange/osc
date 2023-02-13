@@ -55,10 +55,8 @@ $switch-transition-duration: 0.2s;
                 // width of the switch minus the width of the thumb size minus the border plus the offset
                 // we multiply the border by 2 because we have a border on the left and right
                 translateX(
-                calc(
-                    var(--switch-width) - var(--switch-thumb-size) - (($switch-border-width * 2) + $switch-thumb-offset)
-                )
-            );
+                    calc(var(--switch-width) - var(--switch-thumb-size) - (($switch-border-width * 2) + $switch-thumb-offset))
+                );
         }
     }
 
