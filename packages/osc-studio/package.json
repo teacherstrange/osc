@@ -12,6 +12,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@radix-ui/react-icons": "^1.1.1",
     "@sanity/base": "^2.34.0",
     "@sanity/core": "^2.34.0",
     "@sanity/default-layout": "^2.34.0",
