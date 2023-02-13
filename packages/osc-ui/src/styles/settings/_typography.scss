@@ -9,22 +9,7 @@
 //  #TYPOGRAPHY SETTINGS
 //\*----------------------------------*/
 //
-// @TODO: rewrite this to reflect new typography scale
-
-//  Set the Typography scales for your site inc. Font Sizes/Weights/Styles
-//  Uses Modular Scale as defined in settings/global
-//  The defined Modular Scale calculates your font sizes based on your $base-fs and $global-scale-ratio
-//  e.g.
-//  $global-scale-ratio: 1.33;
-//  $size-alpha: round(50 * 1.33) = 66.5 | 65px | 6.5rem
-//
-//  The Sizes are calculated on the previous size defined in the hierarchy
-//  e.g. $size-beta will be passed in to determine the outcome of $size-alpha
-//  These values can of course be overridden;
-//  e.g.
-//  $size-alpha: _fs($size-beta) ...... could also be: $size-alpha: 50;
-//
-//  Ref: https://medium.com/codyhouse/create-your-design-system-part-1-typography-7c630d9092bd
+// @TODO: create a brief write-up on the new typography scale
 //
 //\*----------------------------------*/
 
