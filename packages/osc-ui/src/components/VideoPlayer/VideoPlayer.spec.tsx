@@ -121,7 +121,7 @@ test("doesn't clear the content or overlay if preserveContent is true", async ()
         expect(preview).not.toBeInTheDocument();
     });
 
+    expect(overlay).toHaveClass('has-content');
     expect(playBtn).toHaveClass('is-hidden');
-    expect(overlay).not.toHaveClass('is-hidden');
     expect(content).not.toHaveClass('is-hidden');
 });
