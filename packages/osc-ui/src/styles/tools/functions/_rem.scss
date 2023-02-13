@@ -15,7 +15,6 @@
 // ---------------------------------------------------------
 
 @function rem($size) {
-
     $base-size: scale-token("base-font-size");
     $rem: calc($size / $base-size) * 1rem;
 
