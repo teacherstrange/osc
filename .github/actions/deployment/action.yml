@@ -112,7 +112,7 @@ runs:
       with:
         org: "open-study-college"
         name: pr-${{ github.event.number }}-${{ inputs.APP_NAME }}
-        args: "deploy --build-arg SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --app registry.fly.io/pr-${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}"
+        args: "deploy --build-arg SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --app registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}"
       env:
         FLY_API_TOKEN: ${{ inputs.FLY_API_TOKEN }}
 

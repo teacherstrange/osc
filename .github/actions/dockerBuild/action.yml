@@ -142,7 +142,7 @@ runs:
       with:
         context: .
         push: true
-        tags: registry.fly.io/pr-${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
+        tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
         build-args: |
           VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
           VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}
