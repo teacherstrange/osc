@@ -185,11 +185,7 @@ $accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
 
         .c-accordion__trigger {
             padding: $space-2xs $space-l;
-            background-color:
-                hsl(
-                    0deg 0% 96% / 100%
-                ); // TODO: Update this to use neutral colour token
-
+            background-color: var(--color-neutral-200);
             color: var(--color-quaternary);
             text-align: left;
             text-transform: none;
