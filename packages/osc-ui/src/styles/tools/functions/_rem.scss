@@ -1,4 +1,3 @@
-@use "sass:math";
 @use "../../settings/tokens" as *;
 @use "./get-tokens" as *;
 
@@ -18,7 +17,7 @@
 @function rem($size) {
 
     $base-size: scale-token("base-font-size");
-    $rem: math.div($size, $base-size) * 1rem;
+    $rem: calc($size / $base-size) * 1rem;
 
     @return $rem;
 }
