@@ -1,32 +1,15 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 import { useModifier } from '../../hooks/useModifier';
-import type { Alignments } from '../../types';
+import type { Alignments, Columns } from '../../types';
 import { classNames } from '../../utils/classNames';
 
 import './content-media.scss';
 
 /*
-
-    TODO: Carousel?
-
-    TODO: Media
-        TODO: cover/contain option -- should be applied directly to image with o-img-- modifiers
-
-    TODO: Layout
-        TODO: Can be flipped so the text is left, the image is right and vice-versa
-        TODO: Define Grid (50/50 or 60/40 etc)
-
-    TODO: Content Alignment
-        TODO: top, centre, bottom
-
     TODO: Select Media / Content Type
-        TODO: Slides
-        TODO: Form
-        TODO: Content
-        TODO: Trustpilot
+        TODO: Form still in PR (#647 etc.)
         TODO: Video still in PR (#687)
-
 */
 interface SharedProps {
     /**

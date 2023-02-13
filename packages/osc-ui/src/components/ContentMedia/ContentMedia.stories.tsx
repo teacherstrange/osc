@@ -20,6 +20,11 @@ export default {
             },
         },
     },
+    argTypes: {
+        mobileMediaPosition: {
+            control: 'select',
+        },
+    },
 } as Meta;
 
 const Template: Story<ContentMediaProps> = ({ ...args }) => (
