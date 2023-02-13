@@ -10,44 +10,44 @@
     <body>
         <style>
             section {
-                padding: var(--space-scale-epsilon) 0;
+                padding: var(--space-scale-l) 0;
                 border-bottom: 1px solid hsl(0, 0%, 80%);
             }
-            .micro {
-                font-size: var(--font-scale-micro);
+            .t-2xs {
+                font-size: var(--font-scale-2xs);
             }
-            .milli {
-                font-size: var(--font-scale-milli);
+            .t-xs {
+                font-size: var(--font-scale-xs);
             }
-            .centi {
-                font-size: var(--font-scale-centi);
+            .t-s {
+                font-size: var(--font-scale-s);
             }
-            .zeta {
-                font-size: var(--font-scale-zeta);
+            .t-m {
+                font-size: var(--font-scale-m);
             }
-            .epsilon {
-                font-size: var(--font-scale-epsilon);
+            .t-l {
+                font-size: var(--font-scale-l);
             }
-            .delta {
-                font-size: var(--font-scale-delta);
+            .t-xl {
+                font-size: var(--font-scale-xl);
             }
-            .gamma {
-                font-size: var(--font-scale-gamma);
+            .t-2xl {
+                font-size: var(--font-scale-2xl);
             }
-            .beta {
-                font-size: var(--font-scale-beta);
+            .t-3xl {
+                font-size: var(--font-scale-3xl);
             }
-            .alpha {
-                font-size: var(--font-scale-alpha);
+            .t-4xl {
+                font-size: var(--font-scale-4xl);
             }
-            .omega {
-                font-size: var(--font-scale-omega);
+            .t-5xl {
+                font-size: var(--font-scale-5xl);
             }
-            .kilo {
-                font-size: var(--font-scale-kilo);
+            .t-6xl {
+                font-size: var(--font-scale-6xl);
             }
-            .mega {
-                font-size: var(--font-scale-mega);
+            .t-7xl {
+                font-size: var(--font-scale-7xl);
             }
             .text-wrapper {
                 display: flex;
@@ -62,7 +62,7 @@
             .boxes {
                 display: flex;
                 flex-wrap: wrap;
-                gap: var(--space-scale-epsilon);
+                gap: var(--space-scale-l);
             }
             .boxes > div {
                 display: flex;
@@ -75,17 +75,17 @@
                 text-orientation: mixed;
             }
             .box {
-                --box-size: var(--font-scale-zeta);
+                --box-size: var(--font-scale-m);
                 width: var(--box-size);
                 height: var(--box-size);
             }
             [class*="o-grid__col"] {
-                height: var(--font-scale-zeta);
+                height: var(--font-scale-m);
                 color: var(--color-tertiary);
             }
         </style>
-        <div class="o-container o-container--large u-pb-delta">
-            <h1 class="alpha">Style test</h1>
+        <div class="o-container o-container--l u-pb-xl">
+            <h1 class="t-4xl">Style test</h1>
 
             <section>
                 <h2>Font scale</h2>
@@ -94,40 +94,40 @@
                     lower bound.
                 </p>
                 <div class="text-wrapper">
-                    <p class="t-font mega">Mega</p>
+                    <p class="t-font t-7xl">7xl</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font kilo">Kilo</p>
+                    <p class="t-font t-6xl">6xl</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font omega">Omega</p>
+                    <p class="t-font t-5xl">5xl</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font alpha">Alpha</p>
+                    <p class="t-font t-4xl">4xl</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font beta">Beta</p>
+                    <p class="t-font t-3xl">3xl</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font gamma">Gamma</p>
+                    <p class="t-font t-2xl">2xl</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font delta">Delta</p>
+                    <p class="t-font t-xl">xl</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font epsilon">Epsilon</p>
+                    <p class="t-font t-l">l</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font zeta">Zeta</p>
+                    <p class="t-font t-m">m</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font centi">Centi</p>
+                    <p class="t-font t-s">s</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font milli">Milli</p>
+                    <p class="t-font t-xs">xs</p>
                 </div>
                 <div class="text-wrapper">
-                    <p class="t-font micro">Micro</p>
+                    <p class="t-font t-2xs">2xs</p>
                 </div>
             </section>
 
@@ -135,99 +135,99 @@
                 <h2>Space scale</h2>
                 <p>Follows the same size scale as our font.</p>
                 <p>Only difference is it uses px instead of rems by default.</p>
-                <div class="boxes t-font-milli">
+                <div class="boxes t-font-xs">
                     <div>
-                        <p>Micro</p>
+                        <p>2XS</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-micro)"
+                            style="--box-size: var(--space-scale-2xs)"
                         ></div>
                     </div>
                     <div>
-                        <p>Milli</p>
+                        <p>XS</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-milli)"
-                        ></div>
-                    </div>
-
-                    <div>
-                        <p>Centi</p>
-                        <div
-                            class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-centi)"
+                            style="--box-size: var(--space-scale-xs)"
                         ></div>
                     </div>
 
                     <div>
-                        <p>Zeta</p>
+                        <p>S</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-zeta)"
+                            style="--box-size: var(--space-scale-s)"
                         ></div>
                     </div>
 
                     <div>
-                        <p>Epsilon</p>
+                        <p>M</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-epsilon)"
+                            style="--box-size: var(--space-scale-m)"
                         ></div>
                     </div>
 
                     <div>
-                        <p>Delta</p>
+                        <p>L</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-delta)"
+                            style="--box-size: var(--space-scale-l)"
                         ></div>
                     </div>
 
                     <div>
-                        <p>Gamma</p>
+                        <p>XL</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-gamma)"
+                            style="--box-size: var(--space-scale-xl)"
                         ></div>
                     </div>
 
                     <div>
-                        <p>Beta</p>
+                        <p>2XL</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-beta)"
+                            style="--box-size: var(--space-scale-2xl)"
                         ></div>
                     </div>
 
                     <div>
-                        <p>Alpha</p>
+                        <p>3XL</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-alpha)"
+                            style="--box-size: var(--space-scale-3xl)"
                         ></div>
                     </div>
 
                     <div>
-                        <p>Omega</p>
+                        <p>4XL</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-omega)"
+                            style="--box-size: var(--space-scale-4xl)"
                         ></div>
                     </div>
 
                     <div>
-                        <p>Kilo</p>
+                        <p>5XL</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-kilo)"
+                            style="--box-size: var(--space-scale-5xl)"
                         ></div>
                     </div>
 
                     <div>
-                        <p>Mega</p>
+                        <p>6XL</p>
                         <div
                             class="box u-bg-color-gradient-primary"
-                            style="--box-size: var(--space-scale-mega)"
+                            style="--box-size: var(--space-scale-6xl)"
+                        ></div>
+                    </div>
+
+                    <div>
+                        <p>7XL</p>
+                        <div
+                            class="box u-bg-color-gradient-primary"
+                            style="--box-size: var(--space-scale-7xl)"
                         ></div>
                     </div>
                 </div>
@@ -235,7 +235,7 @@
 
             <section>
                 <h2>Grid</h2>
-                <div class="o-grid u-mb-zeta">
+                <div class="o-grid u-mb-m">
                     <div
                         class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--6@mob o-grid__col--4@tab o-grid__col--3@desk"
                     ></div>
@@ -274,7 +274,7 @@
                     ></div>
                 </div>
                 <h3>Offsets</h3>
-                <div class="o-grid u-mb-zeta">
+                <div class="o-grid u-mb-m">
                     <div
                         class="u-bg-color-gradient-septenary o-grid__col--12 o-grid__col--4@mob o-grid__col--start-2@mob"
                     ></div>
