@@ -5,8 +5,11 @@ import { SearchIcon } from '@sanity/icons';
 import { Autocomplete, Box, Card, Flex, Text } from '@sanity/ui';
 import { uuid } from '@sanity/uuid';
 import React from 'react';
-import colors from '../../../../tokens/colors';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
+const colors =
+    process.env.NODE_ENV !== 'production'
+        ? require('../../../../tokens/colors')
+        : require('../../tokens/colors');
 
 interface Props {
     /**
