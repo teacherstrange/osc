@@ -39,7 +39,6 @@ runs:
         echo "HEAD_REF=${{ steps.findandreplace.outputs.result }}" >> $GITHUB_ENV
         echo "BASE_REF=${{ github.base_ref  }}" >> $GITHUB_ENV
         echo "PR_CLOSED=${{ github.event.pull_request.merged == true }}" >> $GITHUB_ENV
-        echo "SHORT_SHA=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
 
     - uses: superfly/flyctl-actions/setup-flyctl@master
       env:
@@ -101,7 +100,7 @@ runs:
       if: ${{ env.BASE_REF == 'main' && env.PR_CLOSED == 'true' }}
       uses: superfly/flyctl-actions@1.3
       with:
-        args: "deploy --image registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ env.SHORT_SHA }}"
+        args: "deploy --image registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}"
       env:
         FLY_API_TOKEN: ${{ inputs.FLY_API_TOKEN }}
 
@@ -111,7 +110,7 @@ runs:
       if: ${{ env.PR_CLOSED != 'true' }}
       uses: superfly/fly-pr-review-apps@1.0.0
       with:
-        image: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ env.SHORT_SHA }}
+        image: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
         org: "open-study-college"
         name: pr-${{ github.event.number }}-${{ inputs.APP_NAME }}
         args: "deploy --build-arg SESSION_SECRET=${{ inputs.FLY_PR_BRANCH_SESSION_SECRET }} --app pr-${{ github.event.number }}-${{ inputs.APP_NAME }}"
