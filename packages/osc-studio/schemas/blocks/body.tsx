@@ -1,10 +1,10 @@
 import React from 'react';
 const sizes =
-    process.env.NODE_ENV !== 'production'
+    process.env.SANITY_STUDIO_CI !== 'true'
         ? require('../../../../tokens/fluid-scale')
         : require('../../tokens/colors');
 const colors =
-    process.env.NODE_ENV !== 'production'
+    process.env.SANITY_STUDIO_CI !== 'true'
         ? require('../../../../tokens/colors')
         : require('../../tokens/colors');
 

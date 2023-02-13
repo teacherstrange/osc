@@ -7,7 +7,7 @@ import { uuid } from '@sanity/uuid';
 import React from 'react';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 const colors =
-    process.env.NODE_ENV !== 'production'
+    process.env.SANITY_STUDIO_CI !== 'true'
         ? require('../../../../tokens/colors')
         : require('../../tokens/colors');
 

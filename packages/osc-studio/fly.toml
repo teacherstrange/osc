@@ -5,6 +5,7 @@ processes = []
 
 [env]
   PORT = "8080"
+  SANITY_STUDIO_CI = true
 
 [experimental]
   allowed_public_ports = []
