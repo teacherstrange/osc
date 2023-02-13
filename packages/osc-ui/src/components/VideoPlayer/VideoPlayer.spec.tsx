@@ -5,7 +5,8 @@ import { Image } from '../Image/Image';
 import { VideoPlayer } from './VideoPlayer';
 
 beforeEach(() => {
-    // Window.fetch isn't available in the test environment
+    // Fetch is used by react-player in the background so we need to
+    // mock it out here as window.fetch isn't available in the test environment
     window.fetch = vi.fn().mockImplementation(() =>
         Promise.resolve({
             json: () => Promise.resolve('accepted'),
