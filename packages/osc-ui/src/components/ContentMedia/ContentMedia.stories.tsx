@@ -8,13 +8,14 @@ import type { ContentMediaProps } from './ContentMedia';
 import { ContentMedia, ContentMediaBlock } from './ContentMedia';
 
 export default {
-    title: 'osc-ui/ContentMedia',
+    title: 'osc-ui/Content Media',
     component: ContentMedia,
     subcomponents: { ContentMediaBlock },
     parameters: {
         docs: {
             description: {
-                component: '',
+                component:
+                    'A component for displaying content alongside a piece of media, which could be an image, a video or a form.',
             },
         },
     },
@@ -342,19 +343,47 @@ export const AlignMedia = AlignMediaTemplate.bind({});
 AlignMedia.args = {
     ...Primary.args,
 };
+AlignMedia.parameters = {
+    docs: {
+        description: {
+            story: 'You can vertically align the content or the media by adding the `align` prop to the `ContentMediaBlock` subcomponent',
+        },
+    },
+};
 
 export const ReverseLayout = ReverseLayoutTemplate.bind({});
 ReverseLayout.args = {
     ...Primary.args,
     mobileMediaPosition: 'above',
 };
+ReverseLayout.parameters = {
+    docs: {
+        description: {
+            story: 'You can change whether the media is on the left or right by changing the order in the markup. If you want to ensure the media is always on top on mobile devices, you can set the `mobileMediaPosition` prop to `above`.',
+        },
+    },
+};
 
 export const CarouselMediaContent = CarouselMediaContentTemplate.bind({});
 CarouselMediaContent.args = {
     ...Primary.args,
 };
+CarouselMediaContent.parameters = {
+    docs: {
+        description: {
+            story: 'Wrap your `ContentMedia` components in a `Carousel` to be able to carousel through them.',
+        },
+    },
+};
 
 export const CarouselMedia = CarouselMediaTemplate.bind({});
 CarouselMedia.args = {
     ...Primary.args,
+};
+CarouselMedia.parameters = {
+    docs: {
+        description: {
+            story: 'To carousel just the content of a `ContentMediaBlock` wrap a `Carousel` around the contents inside.',
+        },
+    },
 };
