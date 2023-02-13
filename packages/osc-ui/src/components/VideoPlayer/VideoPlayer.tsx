@@ -10,8 +10,6 @@ import { Icon } from '../Icon/Icon';
 
 import './video-player.scss';
 
-// TODO: FIX focus styles -_-
-
 /* -------------------------------------------------------------------------------------------------
  * VideoPlayer
  *
