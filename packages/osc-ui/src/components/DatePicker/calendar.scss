@@ -2,10 +2,11 @@
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable selector-class-pattern */
 @use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-calendar {
-    --selected-color: rgb(0 166 152);
+    --selected-color: var(--color-quaternary);
     --highlighted-color: rgb(0 186 169 / 20%);
     --hover-color: var(--color-neutral-300);
     --cell-height: 40px;
@@ -124,7 +125,7 @@
         &--container {
             display: flex;
             flex-direction: column;
-            gap: 2em;
+            gap: 1em;
         }
 
         &--inner-container-1 {
@@ -133,43 +134,64 @@
         }
 
         &--calendar-container {
-            padding: 0 var(--space-scale-zeta);
+            padding: 0;
+
+            @include mq(mq-token("desk")) {
+                padding: 0 var(--space-scale-zeta);
+            }
         }
 
         &--time-presets {
             display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            padding: 0 var(--space-scale-zeta);
-            border-right: solid 1px var(--color-neutral-300);
+            max-width: 280px;
+            padding: 0.5em 0;
+            border-top: 1px solid var(--color-neutral-300);
+            border-bottom: 1px solid var(--color-neutral-300);
             cursor: pointer;
-            gap: 1em;
+            overflow-x: scroll;
+            gap: 0.2em;
 
-            :first-child {
-                font-weight: $weight-bold;
-                cursor: initial;
-            }
-
-            button {
+            .c-btn {
                 padding: 0.2em;
+                border-radius: $radius-xs;
 
                 &:focus {
                     border-radius: $radius-xs;
                     box-shadow: 0 0 0 3px var(--color-primary);
                 }
+
+                &.is-selected {
+                    background-color: var(--color-secondary);
+                    color: var(--color-tertiary);
+                }
+
+                &.is-mobile {
+                    padding: 0.5em;
+                    font-size: var(--font-scale-milli);
+                }
+            }
+
+            @include mq(mq-token("desk")) {
+                flex-direction: column;
+                justify-content: space-evenly;
+                padding: 0 var(--space-scale-zeta);
+                border-top: none;
+                border-right: solid 1px var(--color-neutral-300);
+                border-bottom: none;
+
+                &:first-child {
+                    font-weight: $weight-bold;
+                    cursor: initial;
+                }
             }
         }
 
         &--inner-container-2 {
-            display: flex;
-            flex: 1 100%;
-            align-items: center;
-            justify-content: space-between;
-
             &-options {
+                gap: 1em;
                 display: flex;
                 align-items: center;
-                gap: 1em;
+                justify-content: space-between;
 
                 .c-calendar__range--today,
                 .c-calendar__range--clear-selection {
@@ -179,6 +201,13 @@
                         border-radius: $radius-xs;
                     }
                 }
+            }
+
+            @include mq(mq-token("desk")) {
+                display: flex;
+                flex: 1 100%;
+                align-items: center;
+                justify-content: space-between;
             }
         }
 
@@ -245,7 +274,7 @@
 
     &__year-view,
     &__decade-view {
-        padding: 0 var(--space-scale-delta);
+        padding: var(--space-scale-micro) 0;
 
         &--month-container {
             display: grid;
@@ -270,6 +299,12 @@
             }
         }
 
+        .c-btn {
+            &.c-calendar__year {
+                font-size: var(--font-scale-zeta);
+            }
+        }
+
         button.c-calendar__year-view--selected,
         button.c-calendar__decade-view--selected {
             background: var(--selected-color);
@@ -289,6 +324,10 @@
                     gap: 0.2em;
                 }
             }
+        }
+
+        @include mq(mq-token("mob")) {
+            padding: 0 var(--space-scale-delta);
         }
     }
 

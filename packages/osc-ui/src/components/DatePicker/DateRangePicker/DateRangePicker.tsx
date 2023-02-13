@@ -1,4 +1,4 @@
-import type { CalendarDate } from '@internationalized/date';
+import type { AnyCalendarDate, CalendarDate } from '@internationalized/date';
 import type { AriaDateRangePickerProps } from '@react-aria/datepicker';
 import { useDateRangePicker } from '@react-aria/datepicker';
 import { useDateRangePickerState } from '@react-stately/datepicker';
@@ -7,6 +7,11 @@ import type { RangeValue } from '@react-types/shared';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import React, { useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import breakpoints from '../../../../../../tokens/media-queries';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { classNames } from '../../../utils/classNames';
+import { rem } from '../../../utils/rem';
+import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
 import { DateField } from '../DateField/DateField';
 import { RangeCalendarContainer } from '../RangeCalendar/RangeCalendar';
@@ -27,20 +32,32 @@ interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateVal
 
 export const DateRangePickerContainer = (props: DateRangePickerContainerProps) => {
     const { defaultValue, presets, ...rest } = props;
+
     // Used to set the value of the range calender to a preset or to clear it
-    const [value, setValue] = useState(defaultValue ? defaultValue : null);
+    const [value, setValue] = useState<RangeValue<DateValue>>(defaultValue ? defaultValue : null);
+
     // Additional piece of state to ensure prompt to 'select end date' doesn't show if default has been set
     const [initialDefault, setInitialDefault] = useState(defaultValue ? true : false);
 
     const [selectedRange, setSelectedRange] = useState({
         timePreset: false,
         range: null,
+        timePresetLength: 0,
     });
 
+    const isDesktop = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
+
     const ClearSelection = () => (
-        <button className="c-calendar__range--clear-selection" onClick={() => setValue(null)}>
+        <Button
+            variant="quaternary"
+            className="c-calendar__range--clear-selection"
+            onClick={() => {
+                setValue(null);
+                setSelectedRange({ timePreset: false, range: null, timePresetLength: 0 });
+            }}
+        >
             Clear Selection
-        </button>
+        </Button>
     );
 
     return (
@@ -48,15 +65,23 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
             <DateRangePicker
                 clearSelection={<ClearSelection />}
                 initialDefault={initialDefault}
+                isDesktop={isDesktop}
                 label="Date range"
-                onChange={setValue}
+                // Runs only when start AND end date are both selected
+                onChange={(e: { start: DateValue; end: DateValue }) => {
+                    setValue(e);
+                    // Reset length
+                    setSelectedRange((prev) => ({ ...prev, timePresetLength: 0 }));
+                }}
                 selectedRange={selectedRange}
                 setInitialDefault={setInitialDefault}
                 setSelectedRange={setSelectedRange}
                 timePresets={
                     presets ? (
                         <TimePresets
+                            isDesktop={isDesktop}
                             presets={presets}
+                            selectedRange={selectedRange}
                             setValue={setValue}
                             setSelectedRange={setSelectedRange}
                         />
@@ -69,26 +94,55 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
     );
 };
 
-const TimePresets = ({ presets, setSelectedRange, setValue }) => (
-    <div className="c-calendar__range--time-presets" aria-label="Time Presets" role="group">
-        <div>Time Presets</div>
+interface TimePresetProps {
+    isDesktop: boolean;
+    presets: { name: string; length: number }[];
+    selectedRange: SelectedRange;
+    setSelectedRange: Dispatch<SetStateAction<SelectedRange>>;
+    setValue: Dispatch<SetStateAction<{ start: AnyCalendarDate; end: AnyCalendarDate }>>;
+}
 
-        {createTimePresets(presets).map(({ endDate, name, startDate }, index) => (
-            <ReactAriaButton
-                key={index}
-                onPress={() => {
-                    setSelectedRange((prevRange) => ({ ...prevRange, timePreset: true }));
-                    setValue({
-                        start: startDate,
-                        end: endDate,
-                    });
-                }}
-            >
-                {name}
-            </ReactAriaButton>
-        ))}
-    </div>
-);
+const TimePresets = (props: TimePresetProps) => {
+    const { isDesktop, presets, selectedRange, setSelectedRange, setValue } = props;
+
+    return (
+        <div className="c-calendar__range--time-presets" aria-label="Time Presets" role="group">
+            {isDesktop ? <div>Time Presets</div> : null}
+            {createTimePresets(presets).map(({ endDate, length, name, startDate }, index) => {
+                const selectedClass =
+                    selectedRange.timePresetLength === length ? 'is-selected' : null;
+                const mobileClasses = !isDesktop ? 'is-mobile' : null;
+
+                const classes = classNames(
+                    selectedClass && selectedClass,
+                    mobileClasses && mobileClasses
+                );
+
+                return (
+                    <Button
+                        key={index}
+                        variant={isDesktop ? 'quaternary' : 'tertiary'}
+                        isPill={isDesktop ? false : true}
+                        onClick={() => {
+                            setSelectedRange((prevRange) => ({
+                                ...prevRange,
+                                timePresetLength: length,
+                                timePreset: true,
+                            }));
+                            setValue({
+                                start: startDate,
+                                end: endDate,
+                            });
+                        }}
+                        className={classes}
+                    >
+                        {name}
+                    </Button>
+                );
+            })}
+        </div>
+    );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * DateRangePicker
@@ -97,6 +151,7 @@ const TimePresets = ({ presets, setSelectedRange, setValue }) => (
 type SelectedRange = {
     timePreset: boolean;
     range: RangeValue<CalendarDate>;
+    timePresetLength: number;
 };
 interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
     /**
@@ -108,7 +163,12 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
      */
     initialDefault: boolean;
     /**
-     * The selected range state that is passed down to the Range Calendar
+     * Indicates whether screen size is desktop or mobile
+     */
+    isDesktop: boolean;
+    /**
+     * The selected date range as well as whether a time preset is being used and
+     * what length it is (ie, how many days)
      */
     selectedRange: SelectedRange;
     /**
@@ -127,6 +187,7 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
 
 export const DateRangePicker = (props: DateRangePickerProps) => {
     let state = useDateRangePickerState({ ...props, shouldCloseOnSelect: false });
+
     let ref = useRef();
     let {
         labelProps,
@@ -140,6 +201,7 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
     const {
         clearSelection,
         initialDefault,
+        isDesktop,
         selectedRange,
         setInitialDefault,
         setSelectedRange,
@@ -179,6 +241,7 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
                         <RangeCalendarContainer
                             {...calendarProps}
                             initialDefault={initialDefault}
+                            isDesktop={isDesktop}
                             clearSelection={clearSelection}
                             timePresets={timePresets}
                             setInitialDefault={setInitialDefault}

@@ -1,11 +1,21 @@
 /* stylelint-disable selector-class-pattern */
 @use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
 // *********** REACT ARIA DIALOG ************
 
 .c-react-aria__dialog {
-    padding: 2.5em;
+    width: 100%;
+    padding: var(--space-scale-centi) var(--space-scale-micro);
+
+    @include mq(mq-token("mob")) {
+        padding: var(--space-scale-epsilon);
+    }
+
+    @include mq(mq-token("desk")) {
+        padding: calc(var(--space-scale-delta));
+    }
 }
 
 // *********** REACT ARIA POPUP ************

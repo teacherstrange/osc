@@ -10,6 +10,7 @@ import type { DateValue } from '@react-types/calendar';
 import type { RangeValue } from '@react-types/shared';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
+import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
 import { CalendarGrid } from '../Calendar/CalendarGridAndCell';
@@ -23,6 +24,7 @@ import { formatDate } from '../utils';
 type SelectedRange = {
     timePreset: boolean;
     range: RangeValue<CalendarDate>;
+    timePresetLength: number;
 };
 interface RangeCalendarContainerProps extends AriaRangeCalendarProps<DateValue> {
     /**
@@ -34,7 +36,12 @@ interface RangeCalendarContainerProps extends AriaRangeCalendarProps<DateValue> 
      */
     initialDefault: boolean;
     /**
-     * The selected range state that is passed down to the Range Calendar
+     * Indicates whether screen size is desktop or mobile
+     */
+    isDesktop: boolean;
+    /**
+     * The selected date range as well as whether a time preset is being used and
+     * what length it is (ie, how many days)
      */
     selectedRange: SelectedRange;
     /**
@@ -64,6 +71,7 @@ export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
     const {
         clearSelection,
         initialDefault,
+        isDesktop,
         selectedRange,
         setInitialDefault,
         setSelectedRange,
@@ -71,11 +79,12 @@ export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
         ...rest
     } = props;
     const [showPrompt, setShowPrompt] = useState(false);
-
+    // If desktop view show a 2 month view to users
+    const duration = isDesktop ? { months: 2 } : { months: 1 };
     let { locale } = useLocale();
     let state = useRangeCalendarState({
         ...rest,
-        visibleDuration: { months: 2 },
+        visibleDuration: duration,
         locale,
         createCalendar,
     });
@@ -103,12 +112,13 @@ export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
             // the prompt in these cases
             if (selectedRange.timePreset) {
                 setSelectedRange((prev) => {
-                    return { ...prev, timePreset: false };
+                    return { ...prev, range: state.highlightedRange, timePreset: false };
                 });
                 return setShowPrompt(false);
             }
             setSelectedRange((prev) => {
                 setShowPrompt(true);
+
                 return { ...prev, range: state.highlightedRange };
             });
         } else {
@@ -122,23 +132,34 @@ export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
     return (
         <div className="c-calendar__range--container">
             <div className="c-calendar__range--inner-container-1">
-                {timePresets}
+                {isDesktop ? timePresets : null}
                 <div className="c-calendar__range--calendar-container">
-                    <RangeCalendar aria-label="Date range" state={state} {...rest} />
+                    <RangeCalendar
+                        aria-label="Date range"
+                        isDesktop={isDesktop}
+                        state={state}
+                        {...rest}
+                    />
                 </div>
             </div>
+            {!isDesktop ? timePresets : null}
             <div className="c-calendar__range--inner-container-2">
-                <div className={showPrompt ? 'c-calendar__prompt' : 'c-calendar__prompt--hidden'}>
-                    Now Select an End Date
-                </div>
+                {isDesktop ? (
+                    <div
+                        className={showPrompt ? 'c-calendar__prompt' : 'c-calendar__prompt--hidden'}
+                    >
+                        Now Select an End Date
+                    </div>
+                ) : null}
                 <div className="c-calendar__range--inner-container-2-options">
                     {clearSelection}
-                    <button
+                    <Button
+                        variant="quaternary"
                         className="c-calendar__range--today"
                         onClick={() => setFocusedDate(today(getLocalTimeZone()))}
                     >
                         Jump to Today
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
@@ -151,13 +172,17 @@ export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
 
 interface RangeCalendarProps extends AriaRangeCalendarProps<DateValue> {
     /**
+     * Indicates whether screen size is desktop or mobile
+     */
+    isDesktop: boolean;
+    /**
      * UseRangeCalendarState
      */
     state: RangeCalendarState;
 }
 
 export const RangeCalendar = (props: RangeCalendarProps) => {
-    const { state } = props;
+    const { isDesktop, state } = props;
 
     let ref = useRef();
     let { calendarProps, prevButtonProps, nextButtonProps } = useRangeCalendar(props, state, ref);
@@ -202,19 +227,28 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                         </ReactAriaButton>
                     </div>
                     <Date range={'start'} />
+                    {!isDesktop ? (
+                        <div className="c-calendar__buttons">
+                            <ReactAriaButton {...nextButtonProps}>
+                                <Icon className="c-calendar__chevron" id="chevron-right" />
+                            </ReactAriaButton>
+                        </div>
+                    ) : null}
                 </div>
-                <div className="c-calendar__header--inner">
-                    <Date range={'end'} />
-                    <div className="c-calendar__buttons">
-                        <ReactAriaButton {...nextButtonProps}>
-                            <Icon className="c-calendar__chevron" id="chevron-right" />
-                        </ReactAriaButton>
+                {isDesktop ? (
+                    <div className="c-calendar__header--inner">
+                        <Date range={'end'} />
+                        <div className="c-calendar__buttons">
+                            <ReactAriaButton {...nextButtonProps}>
+                                <Icon className="c-calendar__chevron" id="chevron-right" />
+                            </ReactAriaButton>
+                        </div>
                     </div>
-                </div>
+                ) : null}
             </div>
             <div className="c-calendar__grid-container">
                 <CalendarGrid state={state} />
-                <CalendarGrid state={state} offset={{ months: 1 }} />
+                {isDesktop ? <CalendarGrid state={state} offset={{ months: 1 }} /> : null}
             </div>
         </div>
     );
