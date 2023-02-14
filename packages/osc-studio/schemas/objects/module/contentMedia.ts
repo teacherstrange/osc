@@ -2,7 +2,7 @@ import { MasterDetailIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
 
 const shouldShow = (parent) => {
-    return parent.layout === 'carousel';
+    return parent.slides.length > 1;
 };
 
 export default {
@@ -28,18 +28,6 @@ export default {
             type: 'array',
             of: [{ type: 'contentMediaSlide' }],
             group: 'slides',
-        },
-        {
-            name: 'layout',
-            title: 'Layout',
-            type: 'string',
-            initialValue: 'static',
-            options: {
-                list: ['static', 'carousel'],
-                layout: 'radio',
-                direction: 'horizontal',
-            },
-            group: 'settings',
         },
         {
             // To make the name validation only apply when the field is visible we need to move it out of the settings object

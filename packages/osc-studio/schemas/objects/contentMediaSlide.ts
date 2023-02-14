@@ -46,7 +46,11 @@ export default {
             type: 'string',
             initialValue: 'center',
             options: {
-                list: ['top', 'center', 'bottom'],
+                list: [
+                    { title: 'Top', value: 'start' },
+                    { title: 'Center', value: 'center' },
+                    { title: 'Bottom', value: 'end' },
+                ],
                 layout: 'radio',
                 direction: 'horizontal',
             },
@@ -80,7 +84,7 @@ export default {
                     name: 'mediaType',
                     title: 'Media Type',
                     type: 'array',
-                    of: [{ type: 'image.desktop' }],
+                    of: [{ type: 'contentMediaImage' }],
                 },
                 {
                     // To make the name validation only apply when the field is visible we need to move it out of the settings object
