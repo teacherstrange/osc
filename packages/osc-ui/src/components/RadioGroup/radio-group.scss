@@ -1,11 +1,15 @@
 /* stylelint-disable selector-class-pattern */
+@use "../../styles/tools" as *;
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
+
+$radio-size: rem(($base-fs * 1.25)); // 20px
+$radio-indicator-diff: 0.7;
 
 .c-radio-group {
     display: flex;
     flex-direction: column;
-    gap: 0.625em;
+    gap: $space-xs;
 
     &__item-container {
         display: flex;
@@ -13,14 +17,11 @@
     }
 
     &__item {
-        --radio-item-size: 1.25em;
-        --radio-indicator-diff: 0.7;
-
-        width: var(--radio-item-size);
-        height: var(--radio-item-size);
+        width: $radio-size;
+        height: $radio-size;
         background-color: var(--color-tertiary);
         border: solid 1px var(--color-quinary);
-        border-radius: 100%;
+        border-radius: $rad;
         cursor: pointer;
 
         &:hover {
@@ -28,7 +29,7 @@
         }
 
         &:focus {
-            box-shadow: 0 0 0 2px var(--color-primary);
+            box-shadow: $shadow-focus-s;
         }
     }
 
@@ -42,16 +43,12 @@
 
         &::after {
             display: block;
-            width: calc(var(--radio-item-size) * var(--radio-indicator-diff));
-            height: calc(var(--radio-item-size) * var(--radio-indicator-diff));
+            width: calc($radio-size * $radio-indicator-diff);
+            height: calc($radio-size * $radio-indicator-diff);
             background-color: var(--color-quaternary);
-            border-radius: 50%;
+            border-radius: $rad;
             content: "";
         }
-    }
-
-    &__description {
-        font-size: var(--font-scale-centi);
     }
 
     &--error {
@@ -62,7 +59,6 @@
 
         .c-radio-group__error-message {
             color: var(--color-error);
-            font-size: var(--font-scale-centi);
         }
     }
 
@@ -89,7 +85,7 @@
     }
 
     .c-label {
-        padding-left: 0.625em;
+        padding-left: $space-xs;
     }
 
     &[data-disabled] {
