@@ -83,6 +83,25 @@ export interface contentModule extends module {
     buttons?: buttonModule[];
 }
 
+export interface contentMediaSlide extends module {
+    content: contentModule;
+    contentAlignment?: 'start' | 'center' | 'end';
+    layoutDirection?: 'content-media' | 'media-content';
+    layoutGrid?: string;
+    media: {
+        mediaType: {
+            image?: imageModule<HTMLImageElement>;
+            imageFit?: 'cover' | 'contain';
+        }[];
+    };
+}
+
+export interface contentMediaModule extends module {
+    carouselName?: string;
+    carouselSettings: carouselModuleSettings;
+    slides: contentMediaSlide[];
+}
+
 export interface accordionModule extends module {
     accordionHeadingLevels: 'string';
     accordionItem?: {
