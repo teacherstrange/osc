@@ -3,6 +3,7 @@ FROM node:16-bullseye-slim as base
 
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
+ENV SANITY_STUDIO_CI="true"
 ARG SANITY_STUDIO_API_DATASET
 ARG SANITY_STUDIO_API_PROJECT_ID
 ARG SANITY_STUDIO_API_TOKEN

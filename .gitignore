@@ -5,6 +5,7 @@ packages/lib
 .idea
 .env
 .env.development
+.env.production
 .DS_Store
 packages/osc-academic-hub/.DS_Store
 packages/osc-academic-hub/public/**/*

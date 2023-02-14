@@ -1,6 +1,12 @@
 import React from 'react';
-import colors from '../../../../tokens/colors';
-import sizes from '../../../../tokens/fluid-scale';
+const sizes =
+    process.env.SANITY_STUDIO_CI !== 'true'
+        ? require('../../../../tokens/fluid-scale')
+        : require('../../tokens/fluid-scale');
+const colors =
+    process.env.SANITY_STUDIO_CI !== 'true'
+        ? require('../../../../tokens/colors')
+        : require('../../tokens/colors');
 
 const excludeColors = (key) =>
     !key.includes('shadow') &&
