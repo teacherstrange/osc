@@ -21,12 +21,11 @@ $input-pl: $space-l;
         align-self: center;
         grid-row: 2;
         grid-column: 1;
-        padding-right: 5%;
+        padding-right: $space-xs;
     }
 
     &:focus {
-        outline: 3px solid transparent;
-        box-shadow: 0 0 0 2px var(--color-primary);
+        box-shadow: $shadow-focus-s;
     }
 
     &[disabled] {
@@ -63,7 +62,7 @@ $input-pl: $space-l;
                 align-items: center;
                 grid-row: 2;
                 transform-origin: top left;
-                transition: 100ms ease-in-out;
+                transition: $timing-s ease-in-out;
                 pointer-events: none;
 
                 &.c-label--filled {
@@ -102,12 +101,6 @@ $input-pl: $space-l;
             .c-input {
                 padding: $input-py $input-pr $input-py 0;
                 color: var(--color-neutral-600);
-            }
-
-            .c-label {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
             }
         }
 
