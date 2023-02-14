@@ -118,7 +118,7 @@ $label-transform-up: translate(0, -1.25em) scale(0.8);
             .c-input {
                 background-color: var(--color-error-20);
                 border: 1px solid var(--color-error);
-                box-shadow: 0 1px 2px var(--color-neutral-500), 0 0 5px 3px var(--color-septenary);
+                box-shadow: $shadow-error;
 
                 &__error-message {
                     display: flex;

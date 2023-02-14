@@ -12,6 +12,7 @@
 
 :root {
     --shadow-ring: inset 0 2px 4px 0 hsla(0, 0%, 0%, 0.05);
+    --shadow-error: 0 1px 2px var(--color-neutral-500), 0 0 5px 3px var(--color-error-20);
     --shadow-focus: 0 0 0 #{rem(calc($base-fs / 3))} var(--color-tertiary),
         0 0 0 #{rem(calc($base-fs / 2))} var(--color-primary);
     --shadow-focus-s: 0 0 0 #{rem(calc($base-fs / 5))} var(--color-tertiary),
@@ -43,3 +44,4 @@ $shadow-inner: var(--shadow-inner);
 $shadow-ring: var(--shadow-ring);
 $shadow-focus: var(--shadow-focus);
 $shadow-focus-s: var(--shadow-focus-s);
+$shadow-error: var(--shadow-error);
