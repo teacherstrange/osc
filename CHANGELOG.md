@@ -1,3 +1,10 @@
+## [0.33.1](https://github.com/Open-Study-College/osc/compare/v0.33.0...v0.33.1) (2023-02-14)
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **prisma:** upgraded to latest prisma version ([fcb5a3b](https://github.com/Open-Study-College/osc/commit/fcb5a3bca9e82801fa362b8190a1e66e0d7c594e))
+
 ## [0.33.0](https://github.com/Open-Study-College/osc/compare/v0.32.0...v0.33.0) (2023-02-09)
 
 
@@ -76,16 +83,4 @@
 
 * adds missing children type ([e250054](https://github.com/Open-Study-College/osc/commit/e25005467abdbf6429239b81a586e52a03a3bd36))
 * updates props to correct type ([4b9639e](https://github.com/Open-Study-College/osc/commit/4b9639efbdfc9d369bd113d04feb4aa3c591d239))
-
-## [0.29.1](https://github.com/Open-Study-College/osc/compare/v0.29.0...v0.29.1) (2023-01-30)
-
-
-### ♻️ Refactors
-
-* add countLimiter util ([ba852d2](https://github.com/Open-Study-College/osc/commit/ba852d2c345ad026a61194426f8596918c7ee636))
-* add Fallback gradient component, add logic for max count and update css/tests ([e940042](https://github.com/Open-Study-College/osc/commit/e940042eaf811da3639a915ceccb1561e22a0640))
-* add notification dot ([9bd34d9](https://github.com/Open-Study-College/osc/commit/9bd34d9b62943f261b0b3f9ed6c4b1e52b124b76))
-* move "overflow:hidden" to "fallback" class ([dcb1291](https://github.com/Open-Study-College/osc/commit/dcb129183bacbdb44345784655fee76667192340))
-* move fallback class conditionally to Root and tidy up scss ([454f1c2](https://github.com/Open-Study-College/osc/commit/454f1c2812987ee0984b40235f6618ec1acffb3f))
-* move notification and count into one property ([b411061](https://github.com/Open-Study-College/osc/commit/b4110611b356d4b1a97721327c974e59ad364844))
 
