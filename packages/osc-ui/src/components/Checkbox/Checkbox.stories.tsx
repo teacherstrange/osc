@@ -1,7 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef } from 'react';
 
-import { CheckIcon } from '@radix-ui/react-icons';
 import { Checkbox } from './Checkbox';
 
 export default {
