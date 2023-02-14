@@ -3,10 +3,13 @@ import { Carousel, Content, ContentMedia, ContentMediaBlock, Image, rem } from '
 import type { contentMediaModule, contentMediaSlide } from '~/types/sanity';
 import mq from '../../../../../tokens/media-queries';
 
+// TODO: tidy up sanity -- content media previews
+// TODO: tests for this component
+
+const perView = (perView: number | undefined) => (perView ? perView : 1);
+
 export const ContentMediaModule = (props: { module: contentMediaModule }) => {
     const { carouselName, carouselSettings, slides } = props.module;
-
-    const perView = (perView: number | undefined) => (perView ? perView : 1);
 
     if (slides.length > 1) {
         return (
