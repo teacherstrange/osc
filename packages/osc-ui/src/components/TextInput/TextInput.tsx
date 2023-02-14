@@ -18,6 +18,8 @@ type IconType = {
 type Action = {
     icon?: IconType;
     type: string;
+    variant?: Variants;
+    size?: 'sm' | 'md' | 'lg';
 };
 
 type Variants = 'secondary' | 'tertiary' | 'quaternary';
@@ -86,7 +88,11 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         </div>
     );
 
-    const InputButton = ({ action: { icon, size, variant } }) => {
+    const InputButton = (props: { action: Action }) => {
+        const {
+            action: { icon, size, variant },
+        } = props;
+
         return (
             <Button className="c-input__button" variant={variant} size={size}>
                 {icon ? <AccessibleIcon label={icon.label}>{icon.content}</AccessibleIcon> : null}
