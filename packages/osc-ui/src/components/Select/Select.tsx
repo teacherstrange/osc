@@ -1,6 +1,6 @@
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
+import { CheckIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import type { ComponentPropsWithRef, ElementRef, ReactNode } from 'react';
+import type { ComponentPropsWithRef, ElementRef } from 'react';
 import React, { forwardRef, useState } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -11,7 +11,7 @@ import './select.scss';
 
 type Description = {
     label?: string;
-    icon?: ReactNode;
+    icon?: string;
 };
 
 type GroupVariants = 'secondary' | 'tertiary' | 'inline' | 'bold';
@@ -68,7 +68,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                         required={required}
                     />
                 );
-            if (desc?.icon) return <Icon label={name}>{desc.icon}</Icon>;
+            if (desc?.icon) return <Icon id={desc.icon} />;
         };
         return (
             <div className={displayError ? `${selectClasses} c-select--error` : selectClasses}>
@@ -89,19 +89,17 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                         aria-label={name}
                     >
                         <SelectPrimitive.Value placeholder={placeholder} />
-                        <SelectPrimitive.Icon className="c-select__icon">
-                            <ChevronDownIcon />
-                        </SelectPrimitive.Icon>
+                        <Icon className="c-select__icon" id="chevron-down" />
                     </SelectPrimitive.Trigger>
                     <SelectPrimitive.Content className="c-select__content">
                         <SelectPrimitive.ScrollUpButton className="c-select__scroll-button">
-                            <ChevronUpIcon />
+                            <Icon id="chevron-up" />
                         </SelectPrimitive.ScrollUpButton>
                         <SelectPrimitive.Viewport className="c-select__viewport">
                             {children}
                         </SelectPrimitive.Viewport>
                         <SelectPrimitive.ScrollDownButton className="c-select__scroll-button">
-                            <ChevronDownIcon />
+                            <Icon id="chevron-down" />
                         </SelectPrimitive.ScrollDownButton>
                     </SelectPrimitive.Content>
                 </SelectPrimitive.Root>

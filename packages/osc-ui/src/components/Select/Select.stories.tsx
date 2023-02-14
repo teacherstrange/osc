@@ -1,7 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef } from 'react';
 
-import { ListBulletIcon } from '@radix-ui/react-icons';
 import { Select, SelectItem } from './Select';
 
 export default {
@@ -63,8 +62,9 @@ const Template: Story = ({ selects }) => {
                 const { items } = select;
 
                 return (
-                    <div key={i} style={{ margin: '1.5em 1em' }}>
+                    <div key={i} style={{ margin: '1.5em 1em', width: '300px' }}>
                         <p style={{ fontWeight: '700' }}>{states[select.state]}</p>
+
                         <Select
                             defaultValue={select.defaultValue}
                             description={select.description}
@@ -310,7 +310,7 @@ Tertiary.args = {
             state: 'inline',
         },
         {
-            description: { icon: <ListBulletIcon /> },
+            description: { icon: 'list' },
             editor: 'select',
             groupVariants: ['inline', 'tertiary', 'bold'],
             items: viewItems,
