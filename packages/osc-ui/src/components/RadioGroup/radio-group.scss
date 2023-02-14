@@ -1,0 +1,95 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/tools" as *;
+@use "../../styles/settings" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+$radio-size: rem(($base-fs * 1.25)); // 20px
+$radio-indicator-diff: 0.7;
+
+.c-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+
+    &__item-container {
+        display: flex;
+        align-items: center;
+    }
+
+    &__item {
+        width: $radio-size;
+        height: $radio-size;
+        background-color: var(--color-tertiary);
+        border: solid 1px var(--color-quinary);
+        border-radius: $rad;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--color-neutral-300);
+        }
+
+        &:focus {
+            box-shadow: $shadow-focus-s;
+        }
+    }
+
+    &__indicator {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+        &::after {
+            display: block;
+            width: calc($radio-size * $radio-indicator-diff);
+            height: calc($radio-size * $radio-indicator-diff);
+            background-color: var(--color-quaternary);
+            border-radius: $rad;
+            content: "";
+        }
+    }
+
+    &--error {
+        .c-radio-group__item {
+            background-color: var(--color-error-20);
+            border: solid 1px var(--color-error);
+        }
+
+        .c-radio-group__error-message {
+            color: var(--color-error);
+        }
+    }
+
+    &--secondary {
+        .c-radio-group__item {
+            border: solid 1px var(--color-secondary);
+        }
+
+        .c-radio-group__indicator {
+            &::after {
+                background-color: var(--color-secondary);
+            }
+        }
+
+        .c-label {
+            font-weight: $fw-bold;
+        }
+
+        &[data-disabled] {
+            .c-radio-group__item {
+                border: solid 1px var(--color-quinary);
+            }
+        }
+    }
+
+    .c-label {
+        padding-left: $space-xs;
+    }
+
+    &[data-disabled] {
+        color: var(--color-neutral-500);
+        pointer-events: none;
+    }
+}
