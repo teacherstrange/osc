@@ -67,7 +67,7 @@
         position: relative;
         display: flex;
         align-items: center;
-        height: $space-xl;
+        min-height: $space-xl;
         padding: 0 $space-xl 0 $space-xl;
         user-select: none;
 
