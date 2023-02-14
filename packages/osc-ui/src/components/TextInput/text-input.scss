@@ -6,6 +6,7 @@
 $input-py: calc($space-2xs - 3px);
 $input-pr: $space-xl;
 $input-pl: $space-l;
+$label-transform-up: translate(0, -1.25em) scale(0.8);
 
 .c-input {
     display: flex;
@@ -67,7 +68,7 @@ $input-pl: $space-l;
 
                 &.c-label--filled {
                     top: 10px;
-                    transform: translate(0, -1.25em) scale(0.8);
+                    transform: $label-transform-up;
                 }
             }
 
@@ -93,7 +94,7 @@ $input-pl: $space-l;
             }
 
             .c-input:focus + .c-label {
-                transform: translate(0, -1.25em) scale(0.8);
+                transform: $label-transform-up;
             }
         }
 
