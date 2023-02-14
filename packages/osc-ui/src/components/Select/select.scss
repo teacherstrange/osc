@@ -4,8 +4,9 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-select {
-    --select-font-size: var(--font-scale-centi);
     --secondary-background-color: var(--color-quinary);
+
+    width: inherit;
 
     .c-label {
         cursor: pointer;
@@ -15,15 +16,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        min-width: 30ch;
-        max-width: 60ch;
-        height: 2.2em;
-        padding: 0 var(--space-scale-centi);
+        width: inherit;
+        height: $space-2xl;
+        padding: 0 $space-s;
         background-color: var(--color-tertiary);
         border: 1px solid var(--color-quinary);
-        font-size: var(--select-font-size);
-        line-height: 1;
-        gap: 0.313em;
         cursor: pointer;
 
         &:hover {
@@ -31,7 +28,7 @@
         }
 
         &:focus {
-            box-shadow: 0 0 0 0.125em var(--color-primary);
+            box-shadow: $shadow-focus-s;
         }
 
         &[data-placeholder] {
@@ -43,19 +40,12 @@
             color: var(--color-neutral-500);
             pointer-events: none;
         }
-
-        .c-select__icon {
-            svg {
-                width: 1.25em;
-                height: 1.25em;
-            }
-        }
     }
 
     &__content {
         overflow: hidden;
         background-color: var(--color-tertiary);
-        box-shadow: 0 10px 38px -10px var(--color-neutral-400), 0 10px 20px -15px var(--color-neutral-400);
+        box-shadow: $shadow-l, $shadow-s;
 
         @include z-index(select);
 
@@ -63,18 +53,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 1.563em;
+            height: $space-l;
             background-color: var(--color-tertiary);
             cursor: default;
-
-            svg {
-                width: 1em;
-                height: 1em;
-            }
         }
 
         .c-select__viewport {
-            padding: var(--space-scale-micro);
+            padding: $space-2xs;
         }
     }
 
@@ -82,15 +67,12 @@
         position: relative;
         display: flex;
         align-items: center;
-        height: 1.8em;
-        padding: 0 2.2em 0 1.8em;
-        font-size: var(--select-font-size);
-        line-height: 1;
+        height: $space-xl;
+        padding: 0 $space-xl 0 $space-xl;
         user-select: none;
 
         &[data-highlighted] {
             background-color: var(--color-neutral-300);
-            outline: none;
         }
 
         &[data-disabled] {
@@ -103,24 +85,19 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 2em;
-
-            svg {
-                width: 1em;
-                height: 1em;
-            }
+            width: 2rem;
         }
     }
 
     &--inline {
         display: flex;
         align-items: center;
-        gap: 0.625em;
+        gap: $space-s;
     }
 
     &--bold {
         .c-label {
-            font-weight: $weight-bold;
+            font-weight: $fw-bold;
         }
     }
 
@@ -142,13 +119,13 @@
         }
 
         .c-label {
-            font-weight: $weight-bold;
+            font-weight: $fw-bold;
         }
     }
 
     &--tertiary {
         .c-select__trigger {
-            min-width: 5ch;
+            flex: 1;
             padding: 0;
             background: none;
             border: none;
