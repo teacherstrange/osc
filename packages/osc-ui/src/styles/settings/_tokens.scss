@@ -11,12 +11,14 @@ $colors: (
         nonary: hsl(237deg 41% 44%),
         denary: hsl(11deg 81% 55%),
         duodenary: hsl(56deg 100% 73%),
+        neutral-0: hsl(0deg 0% 18%),
         neutral-100: hsl(0deg 0% 98%),
         neutral-200: hsl(0deg 0% 96%),
         neutral-300: hsl(0deg 0% 93%),
         neutral-400: hsl(0deg 0% 79%),
         neutral-500: hsl(0deg 0% 73%),
         neutral-600: hsl(0deg 0% 60%),
+        neutral-700: hsl(0deg 0% 45%),
         error: hsl(0deg 93% 48%),
         error-20: hsl(0deg 93% 48% / 20%),
         success: hsl(144deg 66% 55%),
@@ -534,38 +536,40 @@ $colors: (
         primary: hsl(335deg 85% 49%),
         secondary: hsl(0deg 0% 100%),
         tertiary: hsl(205deg 79% 11%),
-        neutral-100: hsl(0deg 0% 60%),
+        neutral-0: hsl(0deg 0% 100%),
+        neutral-100: hsl(0deg 0% 45%),
         neutral-200: hsl(0deg 0% 73%),
         neutral-300: hsl(0deg 0% 79%),
         neutral-400: hsl(0deg 0% 93%),
         neutral-500: hsl(0deg 0% 96%),
         neutral-600: hsl(0deg 0% 98%),
-    ),
+        neutral-700: hsl(0deg 0% 100%)
+    )
 );
 $containers: (
-    container-size: 1440,
-    container-size-xxxsml: 610,
-    container-size-xxsml: 960,
-    container-size-xsml: 1020,
-    container-size-sml: 1140,
-    container-size-med: 1280,
-    container-size-lrg: 1680
+    container-size-4xs: 610,
+    container-size-3xs: 960,
+    container-size-2xs: 1020,
+    container-size-xs: 1140,
+    container-size-s: 1280,
+    container-size-m: 1440,
+    container-size-l: 1680
 );
 $fluid-scale: (
     base-font-size: 16,
     steps: (
-        micro,
-        milli,
-        centi,
-        zeta,
-        epsilon,
-        delta,
-        gamma,
-        beta,
-        alpha,
-        omega,
-        kilo,
-        mega
+        2xs,
+        xs,
+        s,
+        m,
+        l,
+        xl,
+        2xl,
+        3xl,
+        4xl,
+        5xl,
+        6xl,
+        7xl
     ),
     min-viewport: (
         width: 375,
@@ -606,7 +610,7 @@ $typography: (
     weight-reg: 400,
     weight-med: 500,
     weight-bold: 700,
-    letter-spacing-xxsml: 0.0625em,
-    letter-spacing-xsml: 0.1em,
-    letter-spacing-sml: 0.188em,
+    ls-2xs: 0.0625em,
+    ls-xs: 0.1em,
+    ls-s: 0.188em
 );

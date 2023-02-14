@@ -1,6 +1,5 @@
 @use "sass:math";
 @use "sass:meta";
-@use "global";
 @use "../tools/fluid-scale" as *;
 @use "../tools/functions/get-tokens" as *;
 @use "../settings/tokens" as *;
@@ -10,22 +9,7 @@
 //  #TYPOGRAPHY SETTINGS
 //\*----------------------------------*/
 //
-// @TODO: rewrite this to reflect new typography scale
-
-//  Set the Typography scales for your site inc. Font Sizes/Weights/Styles
-//  Uses Modular Scale as defined in settings/global
-//  The defined Modular Scale calculates your font sizes based on your $base-font-size and $global-scale-ratio
-//  e.g.
-//  $global-scale-ratio: 1.33;
-//  $size-alpha: round(50 * 1.33) = 66.5 | 65px | 6.5rem
-//
-//  The Sizes are calculated on the previous size defined in the hierarchy
-//  e.g. $size-beta will be passed in to determine the outcome of $size-alpha
-//  These values can of course be overridden;
-//  e.g.
-//  $size-alpha: _fs($size-beta) ...... could also be: $size-alpha: 50;
-//
-//  Ref: https://medium.com/codyhouse/create-your-design-system-part-1-typography-7c630d9092bd
+// @TODO: create a brief write-up on the new typography scale
 //
 //\*----------------------------------*/
 
@@ -73,28 +57,43 @@
     font-display: swap;
 }
 
+// Base Sizes
+$base-fs: scale-token("base-font-size");
+$base-lh: scale-token("max-viewport.scale");
+
+// Font Families
 $font-primary: typography-token("font-primary");
 $font-secondary: typography-token("font-secondary");
 
+// Font Sizes
+$fs-2xs: var(--font-scale-2xs);
+$fs-xs: var(--font-scale-xs);
+$fs-s: var(--font-scale-s);
+$fs-m: var(--font-scale-m);
+$fs-l: var(--font-scale-l);
+$fs-xl: var(--font-scale-xl);
+$fs-2xl: var(--font-scale-2xl);
+$fs-3xl: var(--font-scale-3xl);
+$fs-4xl: var(--font-scale-4xl);
+$fs-5xl: var(--font-scale-5xl);
+$fs-6xl: var(--font-scale-6xl);
+$fs-7xl: var(--font-scale-7xl);
+
 // Font Weights
-$weight-light: typography-token("weight-light");
-$weight-reg: typography-token("weight-reg");
-$weight-med: typography-token("weight-med");
-$weight-bold: typography-token("weight-bold");
+$fw-light: typography-token("weight-light");
+$fw-reg: typography-token("weight-reg");
+$fw-med: typography-token("weight-med");
+$fw-bold: typography-token("weight-bold");
 
 // Letter Spacing
-$letter-spacing-xxsml: typography-token("letter-spacing-xxsml");
-$letter-spacing-xsml: typography-token("letter-spacing-xsml");
-$letter-spacing-sml: typography-token("letter-spacing-sml");
-
-// Base Sizes
-$base-font-size: scale-token("base-font-size");
-$base-line-height: scale-token("max-viewport.scale");
+$ls-2xs: typography-token("ls-2xs");
+$ls-xs: typography-token("ls-xs");
+$ls-s: typography-token("ls-s");
 
 :root {
     // Manually set a base font size we can use across the site,
     // this will be set on the body so all text inherits it.
-    --font-scale-base: #{rem($base-font-size)};
+    --font-scale-base: #{rem($base-fs)};
 
     // Add fluid scale custom properties to the root element
     @include fluid-scale("font");

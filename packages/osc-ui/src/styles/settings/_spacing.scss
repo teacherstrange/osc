@@ -24,16 +24,30 @@
 // Spacing values are determined based on your project’s fluid scale.
 // It is not recommended that you modify these following variables
 // (it can break your vertical rhythm), but if you need to, you can.
-$global-spacing-s: var(--space-scale-milli);
-$global-spacing: var(--space-scale-zeta);
-$global-spacing-m: var(--space-scale-epsilon);
-$global-spacing-l: var(--space-scale-delta);
-$global-spacing-xl: var(--space-scale-gamma);
+$space-2xs: var(--space-scale-2xs);
+$space-xs: var(--space-scale-xs);
+$space-s: var(--space-scale-s);
+$space-m: var(--space-scale-m);
+$space-l: var(--space-scale-l);
+$space-xl: var(--space-scale-xl);
+$space-2xl: var(--space-scale-2xl);
+$space-3xl: var(--space-scale-3xl);
+$space-4xl: var(--space-scale-4xl);
+$space-5xl: var(--space-scale-5xl);
+$space-6xl: var(--space-scale-6xl);
+$space-7xl: var(--space-scale-7xl);
 
 // For instances when we want the spacing to scale with the user's font size
 // i.e. adding a margin bottom to a paragraph, we would expect that to increase with the font size
-$global-spacing-relative-s: var(--font-scale-milli);
-$global-spacing-relative: var(--space-font-zeta);
-$global-spacing-relative-m: var(--font-scale-epsilon);
-$global-spacing-relative-l: var(--font-scale-delta);
-$global-spacing-relative-xl: var(--font-scale-gamma);
+$space-rel-2xs: var(--font-scale-2xs);
+$space-rel-xs: var(--font-scale-xs);
+$space-rel-s: var(--font-scale-s);
+$space-rel-m: var(--font-scale-m);
+$space-rel-l: var(--font-scale-l);
+$space-rel-xl: var(--font-scale-xl);
+$space-rel-2xl: var(--font-scale-2xl);
+$space-rel-3xl: var(--font-scale-3xl);
+$space-rel-4xl: var(--font-scale-4xl);
+$space-rel-5xl: var(--font-scale-5xl);
+$space-rel-6xl: var(--font-scale-6xl);
+$space-rel-7xl: var(--font-scale-7xl);

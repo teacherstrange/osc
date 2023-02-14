@@ -3,7 +3,7 @@ import type {
     AccordionHeaderProps,
     AccordionItemProps,
     AccordionMultipleProps,
-    AccordionSingleProps,
+    AccordionSingleProps
 } from '@radix-ui/react-accordion';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import type { ComponentPropsWithoutRef, ElementRef, FC, RefAttributes } from 'react';
@@ -92,7 +92,7 @@ export const AccordionHeader: FC<AccordionHeadingProps> = forwardRef<
     ComponentPropsWithoutRef<typeof AccordionPrimitive.Header>
 >((props: AccordionHeadingProps, forwardedRef) => {
     const { as: Component, asChild, children, className, icon } = props;
-    const fontSize = useFontSize('delta');
+    const fontSize = useFontSize('xl');
     const classes = classNames('c-accordion__header', fontSize, className);
 
     if (asChild && Component) {

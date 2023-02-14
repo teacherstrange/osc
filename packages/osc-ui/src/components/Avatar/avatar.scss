@@ -1,4 +1,4 @@
-@use "../../styles/settings" as *;
+@import "../../styles/settings";
 
 .c-avatar {
     position: relative;
@@ -8,7 +8,7 @@
     vertical-align: middle;
     width: 45px;
     height: 45px;
-    border-radius: 100%;
+    border-radius: $rad;
     user-select: none;
 
     &__image {
@@ -26,8 +26,8 @@
         overflow: hidden;
         background-color: var(--color-nonary);
         color: var(--color-tertiary);
-        font-size: var(--font-scale-zeta);
-        font-weight: $weight-reg;
+        font-size: $fs-m;
+        font-weight: $fw-reg;
         line-height: 1;
 
         &--initials {
@@ -48,11 +48,11 @@
         width: 15px;
         height: 15px;
         background: var(--color-primary);
-        border-radius: 50%;
-        box-shadow: 0 0 0 2px var(--color-tertiary);
+        border-radius: $rad;
+        outline: 2px solid var(--color-tertiary);
 
         &--count {
-            padding: 10px;
+            padding: $space-2xs;
             color: var(--color-tertiary);
             font-size: 0.5em;
             font-variant-numeric: tabular-nums;

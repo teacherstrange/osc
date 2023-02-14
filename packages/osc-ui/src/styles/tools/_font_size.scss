@@ -12,11 +12,11 @@
 
 // Usage:
 //
-// @include font-size($size-alpha);
-// @include font-size($size-alpha, $line-height); // overrides line-height
-// @include font-size($size-alpha, null); // overrides line-height
+// @include font-size($fs-xl);
+// @include font-size($fs-xl, $lh-l); // overrides line-height
+// @include font-size($fs-xl, null); // overrides line-height
 
-@mixin font-size($font-size, $line-height: $base-line-height) {
+@mixin font-size($font-size, $line-height: $base-lh) {
     font-size: $font-size;
 
     @if $line-height != null {

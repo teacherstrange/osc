@@ -18,7 +18,7 @@
 // </div>
 */
 $grid-columns: 12 !default;
-$grid-gutter-width: $global-spacing !default;
+$grid-gutter-width: $space-m !default;
 
 // Add a 0 value to our media queries so we can generate class names without an infix
 $breakpoints: map.merge(

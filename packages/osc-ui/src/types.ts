@@ -1,4 +1,4 @@
-export type Sizes = 'alpha' | 'beta' | 'gamma' | 'delta' | 'epsilon' | 'zeta';
+export type Sizes = '4xl' | '3xl' | '2xl' | 'xl' | 'l' | 'm';
 
 export type Themes =
     | 'primary'
@@ -16,18 +16,18 @@ export type Themes =
 export type Variants = 'outline' | 'subtle';
 
 export type Spacing =
-    | 'micro'
-    | 'milli'
-    | 'centi'
-    | 'zeta'
-    | 'epsilon'
-    | 'delta'
-    | 'gamma'
-    | 'beta'
-    | 'alpha'
-    | 'omega'
-    | 'kilo'
-    | 'mega';
+    | '2xs'
+    | 'xs'
+    | 's'
+    | 'm'
+    | 'l'
+    | 'xl'
+    | '2xl'
+    | '3xl'
+    | '4xl'
+    | '5xl'
+    | '6xl'
+    | '7xl';
 
 export type Direction = 'top' | 'right' | 'bottom' | 'left';
 

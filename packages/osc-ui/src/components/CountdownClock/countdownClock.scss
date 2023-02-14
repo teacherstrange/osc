@@ -1,3 +1,5 @@
+@import "../../styles/settings";
+
 .c-countdown-clock {
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
     &__container {
@@ -8,7 +10,7 @@
 
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
     &__section {
-        padding: 0 0.2em;
+        padding: 0 calc($space-2xs / 2);
     }
 
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
@@ -20,7 +22,7 @@
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
     &__icon {
         display: flex;
-        padding: 0 0.5em;
+        padding: 0 $space-2xs;
     }
 
     /* stylelint-disable-next-line plugin/selector-bem-pattern */

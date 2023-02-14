@@ -10,7 +10,7 @@
 //\*----------------------------------*/
 
 p {
-    margin: 0 0 $global-spacing-relative-s;
+    margin: 0 0 $space-rel-xs;
 }
 
 a {
@@ -25,11 +25,11 @@ a {
 }
 
 strong {
-    font-weight: $weight-bold;
+    font-weight: $fw-bold;
 }
 
 small {
-    @include font-size(var(--font-scale-micro));
+    @include font-size($fs-2xs);
 }
 
 a[href],
@@ -38,7 +38,7 @@ input,
 select,
 textarea {
     &:focus {
-        box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary); /* outline color here */
+        box-shadow: $shadow-focus;
 
         &:not(:focus-visible) {
             box-shadow: none;

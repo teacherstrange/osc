@@ -414,7 +414,7 @@ export const textContentWithTextColor: TextContent = {
                     _key: 'c0acf5edaaff0',
                     _type: 'span',
                     marks: [
-                        'span t-font-gamma',
+                        'span t-font-2xl',
                         'span u-color-gradient-quaternary',
                         'strong u-text-med',
                     ],
@@ -436,8 +436,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: 'df1597a476c10',
                     _type: 'span',
-                    marks: ['span t-font-micro'],
-                    text: 'micro',
+                    marks: ['span t-font-2xs'],
+                    text: '2xs',
                 },
                 {
                     _key: '73012266f0f1',
@@ -448,8 +448,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: '48f7519b50d4',
                     _type: 'span',
-                    marks: ['span t-font-milli'],
-                    text: 'milli',
+                    marks: ['span t-font-xs'],
+                    text: 'xs',
                 },
                 {
                     _key: 'f78211c80404',
@@ -460,8 +460,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: '70fe2d690d1a',
                     _type: 'span',
-                    marks: ['span t-font-centi'],
-                    text: 'centi',
+                    marks: ['span t-font-s'],
+                    text: 's',
                 },
                 {
                     _key: 'd4c1a45e913d',
@@ -472,8 +472,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: '61e4bbd4db60',
                     _type: 'span',
-                    marks: ['span t-font-zeta'],
-                    text: 'zeta',
+                    marks: ['span t-font-m'],
+                    text: 'm',
                 },
                 {
                     _key: 'd551b5cf0476',
@@ -484,8 +484,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: '699dc21e9654',
                     _type: 'span',
-                    marks: ['span t-font-epsilon'],
-                    text: 'epsilon',
+                    marks: ['span t-font-l'],
+                    text: 'l',
                 },
                 {
                     _key: '4c126e64eef5',
@@ -496,8 +496,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: '03909b3afe21',
                     _type: 'span',
-                    marks: ['span t-font-delta'],
-                    text: 'delta',
+                    marks: ['span t-font-xl'],
+                    text: 'xl',
                 },
                 {
                     _key: '3babf2ee030b',
@@ -508,8 +508,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: 'ceaad69b0e00',
                     _type: 'span',
-                    marks: ['span t-font-gamma'],
-                    text: 'gamma',
+                    marks: ['span t-font-2xl'],
+                    text: '2xl',
                 },
                 {
                     _key: '16844938fc62',
@@ -520,8 +520,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: '125ab9f022bc',
                     _type: 'span',
-                    marks: ['span t-font-beta'],
-                    text: 'beta',
+                    marks: ['span t-font-3xl'],
+                    text: '3xl',
                 },
                 {
                     _key: '10de04979d94',
@@ -532,8 +532,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: '0fe32c2a1a96',
                     _type: 'span',
-                    marks: ['span t-font-alpha'],
-                    text: 'alpha',
+                    marks: ['span t-font-4xl'],
+                    text: '4xl',
                 },
                 {
                     _key: 'bc0f65767fac',
@@ -544,8 +544,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: '81d443e81e60',
                     _type: 'span',
-                    marks: ['span t-font-omega'],
-                    text: 'omega',
+                    marks: ['span t-font-5xl'],
+                    text: '5xl',
                 },
                 {
                     _key: '3048bdff37bf',
@@ -556,8 +556,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: '01168998a671',
                     _type: 'span',
-                    marks: ['span t-font-kilo'],
-                    text: 'kilo',
+                    marks: ['span t-font-6xl'],
+                    text: '6xl',
                 },
                 {
                     _key: '40528d7ac28f',
@@ -568,8 +568,8 @@ export const textContentSizes: TextContent = {
                 {
                     _key: 'fc6724e0193d',
                     _type: 'span',
-                    marks: ['span t-font-mega'],
-                    text: 'mega',
+                    marks: ['span t-font-7xl'],
+                    text: '7xl',
                 },
             ],
             markDefs: [],
@@ -587,7 +587,7 @@ export const textContentFonts: TextContent = {
                 {
                     _key: '6f41298ed3e9',
                     _type: 'span',
-                    marks: ['span t-font-secondary', 'span t-font-kilo'],
+                    marks: ['span t-font-secondary', 'span t-font-6xl'],
                     text: 'Judge',
                 },
             ],
@@ -601,7 +601,7 @@ export const textContentFonts: TextContent = {
                 {
                     _key: '605995e34058',
                     _type: 'span',
-                    marks: ['span t-font-primary', 'span t-font-alpha'],
+                    marks: ['span t-font-primary', 'span t-font-4xl'],
                     text: 'Outfit',
                 },
             ],
@@ -622,7 +622,7 @@ export const textContentWithBackgroundColor: TextContent = {
                     _key: 'c0acf5edaaff0',
                     _type: 'span',
                     marks: [
-                        'span t-font-gamma',
+                        'span t-font-2xl',
                         'span u-color-gradient-quaternary',
                         'strong u-text-med',
                     ],
@@ -633,6 +633,6 @@ export const textContentWithBackgroundColor: TextContent = {
             style: 'normal',
         },
     ],
-    paddingBottom: 'centi',
-    paddingTop: 'centi',
+    paddingBottom: 's',
+    paddingTop: 's',
 };

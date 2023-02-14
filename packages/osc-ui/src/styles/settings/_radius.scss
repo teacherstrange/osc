@@ -1,4 +1,5 @@
-@use "spacing";
+@use "sass:math";
+@use "spacing" as *;
 
 ///*----------------------------------*\
 //  #RADIUS SETTINGS
@@ -8,8 +9,8 @@
 //
 //\*----------------------------------*/
 
-$radius: 50%;
-$radius-l: 100%;
-$radius-m: spacing.$global-spacing;
-$radius-s: spacing.$global-spacing-s;
-$radius-xs: calc(spacing.$global-spacing-s / 2);
+$rad: 50%;
+$rad-l: 999em;
+$rad-m: $space-m; // 20px
+$rad-s: $space-xs; // 11px
+$rad-xs: calc($space-2xs / 2); // 4.5px

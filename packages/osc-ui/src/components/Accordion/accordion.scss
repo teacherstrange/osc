@@ -1,57 +1,55 @@
+@import "../../styles/tools";
+@import "../../styles/settings";
+
 /* stylelint-disable selector-class-pattern */
-@use "../../styles/tools/" as *;
-@use "../../styles/settings/" as *;
+
+// Colors
+$accordion-icon-color: var(--color-quaternary);
+
+// Sizes
+$accordion-icon-base-size: 1em; // make sure the icon matches the height of the text
+$accordion-content-font-size: #{rem($base-fs)}; // design has this fixed across breakpoints
+
+// Layout
+$accordion-trigger-padding: $space-l; // design has this fixed across breakpoints
+$accordion-item-border: 1px solid var(--color-quinary);
+
+// Transitions
+$accordion-transition-duration: 0.3s;
+$accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
 
 .c-accordion {
-    // Colors
-    --accordion-icon-color: var(--color-quaternary);
-
-    // Sizes
-    --accordion-icon-base-size: 1em; // make sure the icon matches the height of the text
     --accordion-icon-size: 1.1rem;
-    --accordion-trigger-font-size: #{rem($base-font-size * 1.25)}; // design has this fixed across breakpoints
-    --accordion-content-font-size: #{rem($base-font-size)}; // design has this fixed across breakpoints
-
-    // Layout
+    --accordion-trigger-font-size: #{rem($base-fs * 1.25)}; // design has this fixed across breakpoints
     --accordion-trigger-grid-columns: 1fr auto;
-    --accordion-trigger-padding: #{rem(26)}; // design has this fixed across breakpoints
-    --accordion-item-border: 1px solid var(--color-quinary);
-
-    // Transitions
-    --accordion-transition-duration: 0.3s;
-    --accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
 
     &__item {
         &:not(:last-child) {
-            padding-bottom: var(--accordion-trigger-padding);
-            border-bottom: var(--accordion-item-border);
+            padding-bottom: $accordion-trigger-padding;
+            border-bottom: $accordion-item-border;
         }
     }
 
     &__header {
         margin-bottom: 0;
-        font-weight: $weight-bold;
+        font-weight: $fw-bold;
     }
 
     &__icon {
-        width: var(--accordion-icon-base-size);
-        height: var(--accordion-icon-base-size);
+        width: $accordion-icon-base-size;
+        height: $accordion-icon-base-size;
         margin-top: 0.125em; // align the icon with the middle of the text
-        color: var(--accordion-icon-color);
+        color: $accordion-icon-color;
         font-size: var(--accordion-icon-size);
 
         &--plusminus > :first-child {
             transition:
-                opacity var(--accordion-transition-duration)
-                var(--accordion-transition-timing-func),
-                visibility var(--accordion-transition-duration)
-                var(--accordion-transition-timing-func);
+                opacity $accordion-transition-duration $accordion-transition-timing-func,
+                visibility $accordion-transition-duration $accordion-transition-timing-func;
         }
 
         &--chevron {
-            transition:
-                transform var(--accordion-transition-duration)
-                var(--accordion-transition-timing-func);
+            transition: transform $accordion-transition-duration $accordion-transition-timing-func;
         }
     }
 
@@ -61,26 +59,20 @@
         align-items: center;
         box-sizing: border-box;
         width: 100%;
-        padding: var(--accordion-trigger-padding) 0 0;
+        padding: $accordion-trigger-padding 0 0;
         font-size: var(--accordion-trigger-font-size);
-        font-weight: $weight-bold;
+        font-weight: $fw-bold;
         text-align: left;
-        transition:
-            color var(--accordion-transition-duration)
-            var(--accordion-transition-timing-func);
+        transition: color $accordion-transition-duration $accordion-transition-timing-func;
         cursor: pointer;
         grid-template-columns: var(--accordion-trigger-grid-columns);
 
-        @include mq(mq-token("mob")) {
-            gap: var(--space-scale-gamma);
+        @include mq($mq-mob) {
+            gap: $space-2xl;
         }
 
         &:hover {
             color: var(--color-quaternary);
-        }
-
-        &:focus-visible .c-accordion__icon {
-            box-shadow: 0 0 0 0.5rem var(--color-tertiary), 0 0 0 0.75rem var(--color-primary);
         }
 
         &[data-state="open"] {
@@ -105,25 +97,21 @@
     &__content {
         max-width: 64ch;
         overflow: hidden;
-        font-size: var(--accordion-content-font-size);
-        font-weight: $weight-light;
+        font-size: $accordion-content-font-size;
+        font-weight: $fw-light;
 
         &[data-state="open"] {
-            animation:
-                slide-down var(--accordion-transition-duration)
-                var(--accordion-transition-timing-func);
+            animation: slide-down $accordion-transition-duration $accordion-transition-timing-func;
         }
 
         &[data-state="closed"] {
             height: 0;
-            animation:
-                slide-up var(--accordion-transition-duration)
-                var(--accordion-transition-timing-func);
+            animation: slide-up $accordion-transition-duration $accordion-transition-timing-func;
         }
     }
 
     &__text {
-        padding: var(--font-scale-milli) 0;
+        padding: $space-xs 0;
     }
 
     // *----------------------------------*/
@@ -132,13 +120,13 @@
     // *----------------------------------*/
     &--secondary {
         --accordion-icon-size: 1.6em;
-        --accordion-trigger-font-size: var(--font-scale-centi);
+        --accordion-trigger-font-size: #{$fs-s};
 
         // Add new column to the grid so we can centre the text accurately
         --accordion-trigger-grid-columns: minmax(0, var(--accordion-icon-size)) 1fr auto;
 
         .c-accordion__item {
-            border: var(--accordion-item-border);
+            border: $accordion-item-border;
 
             &:not(:last-child) {
                 padding-bottom: 0;
@@ -147,18 +135,18 @@
         }
 
         .c-accordion__trigger {
-            padding: var(--space-scale-epsilon) var(--space-scale-delta);
+            padding: $space-l $space-xl;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: $letter-spacing-sml;
+            letter-spacing: $ls-s;
 
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
             > span {
                 grid-column: 2 / 3;
             }
 
-            @include mq(mq-token("mob")) {
-                gap: var(--space-scale-zeta);
+            @include mq($mq-mob) {
+                gap: $space-m;
             }
 
             &[data-state="open"] {
@@ -177,34 +165,34 @@
         }
 
         .c-accordion__text {
-            padding: 0 var(--space-scale-delta) var(--space-scale-delta);
+            padding: 0 $space-xl $space-xl;
         }
     }
 
     &--tertiary {
-        --accordion-trigger-font-size: #{rem($base-font-size * 1.5)}; // design has this fixed across breakpoints
+        --accordion-trigger-font-size: #{rem($base-fs * 1.5)}; // design has this fixed across breakpoints
         --accordion-trigger-grid-columns: 1fr auto;
 
         /* stylelint-disable-next-line no-descending-specificity */
         .c-accordion__item {
             padding-bottom: 0;
-            border: var(--accordion-item-border);
+            border: $accordion-item-border;
         }
 
         .c-accordion__item + .c-accordion__item {
-            margin-top: var(--space-scale-gamma);
+            margin-top: $space-2xl;
         }
 
         .c-accordion__trigger {
-            padding: var(--space-scale-micro) var(--space-scale-epsilon);
-            background-color: hsl(0deg 0% 96% / 100%); // TODO: Update this to use neutral colour token
+            padding: $space-2xs $space-l;
+            background-color: var(--color-neutral-200);
             color: var(--color-quaternary);
             text-align: left;
             text-transform: none;
             letter-spacing: normal;
             transition:
-                background-color var(--accordion-transition-duration)
-                var(--accordion-transition-timing-func);
+                background-color $accordion-transition-duration
+                $accordion-transition-timing-func;
 
             &:hover {
                 background-color: var(--color-quinary);
@@ -218,7 +206,7 @@
 
         /* stylelint-disable-next-line no-descending-specificity */
         .c-accordion__icon {
-            @include mq(mq-token("mob"), max) {
+            @include mq($mq-mob, max) {
                 display: none;
             }
         }
@@ -228,7 +216,7 @@
         }
 
         .c-accordion__text {
-            padding: var(--space-scale-gamma) var(--space-scale-gamma);
+            padding: $space-2xl;
         }
     }
 }

@@ -25,7 +25,9 @@ const colorPaleGrey = 'hsl(0deg 0% 93%)';
 const colorGrey = 'hsl(0deg 0% 87%)';
 const colorMidGrey = 'hsl(0deg 0% 79%)';
 const colorDarkGrey = 'hsl(0deg 0% 73%)';
-const colorDarkestGrey = 'hsl(0deg 0% 60%)';
+const colorDarkerGrey = 'hsl(0deg 0% 60%)';
+const colorDarkestGrey = 'hsl(0deg 0% 45%)';
+const colorBlack = 'hsl(0deg 0% 18%)';
 
 // Semantic colours
 const colorError = 'hsl(0deg 93% 48%)';
@@ -120,12 +122,14 @@ module.exports = {
         nonary: colorBlue,
         denary: colorOrange,
         duodenary: colorLemon,
+        'neutral-0': colorBlack,
         'neutral-100': colorLightestGrey,
         'neutral-200': colorSoftGrey,
         'neutral-300': colorPaleGrey,
         'neutral-400': colorMidGrey,
         'neutral-500': colorDarkGrey,
-        'neutral-600': colorDarkestGrey,
+        'neutral-600': colorDarkerGrey,
+        'neutral-700': colorDarkestGrey,
         error: colorError,
         'error-20': colorError20,
         success: colorSuccess,
@@ -140,11 +144,13 @@ module.exports = {
         primary: colorPink,
         secondary: colorWhite,
         tertiary: colorNavy,
+        'neutral-0': colorWhite,
         'neutral-100': colorDarkestGrey,
         'neutral-200': colorDarkGrey,
         'neutral-300': colorMidGrey,
         'neutral-400': colorPaleGrey,
         'neutral-500': colorSoftGrey,
         'neutral-600': colorLightestGrey,
+        'neutral-700': colorWhite,
     },
 };

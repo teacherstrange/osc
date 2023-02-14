@@ -14,7 +14,7 @@
 //\*----------------------------------*/
 //
 // Usage:
-// <div class="u-mt-micro"></div>
+// <div class="u-mt-xl"></div>
 
 @function scales-map($scale: "fixed") {
     $map: ();
@@ -118,9 +118,9 @@ $osc-config: (
     font-weight: (
         prefix: "text",
         values: (
-            "bold": $weight-bold,
-            "med": $weight-med,
-            "reg": $weight-reg
+            "bold": $fw-bold,
+            "med": $fw-med,
+            "reg": $fw-reg
         )
     ),
     font-style: (
@@ -162,7 +162,7 @@ $osc-config: (
     }
 }
 
-@include mq(mq-token("tab"), max) {
+@include mq($mq-tab, max) {
     .u-plr-0\@tab {
         padding-right: 0;
         padding-left: 0;
@@ -186,31 +186,31 @@ $osc-config: (
 
 .u-hidden {
     &-from\@tab {
-        @include mq(mq-token("tab-lrg")) {
+        @include mq($mq-tab-l) {
             display: none;
         }
     }
 
     &-from\@desk-med {
-        @include mq(mq-token("desk-med")) {
+        @include mq($mq-desk-m) {
             display: none;
         }
     }
 
     &-until\@tab {
-        @include mq(mq-token("tab"), max) {
+        @include mq($mq-tab, max) {
             display: none;
         }
     }
 
     &-until\@desk {
-        @include mq(mq-token("desk"), max) {
+        @include mq($mq-desk, max) {
             display: none;
         }
     }
 
     &-until\@desk-med {
-        @include mq(mq-token("desk-med"), max) {
+        @include mq($mq-desk-m, max) {
             display: none;
         }
     }
@@ -263,7 +263,7 @@ $osc-config: (
 
 [data-line-clamp] {
     display: box;
-    margin-bottom: $global-spacing-s;
+    margin-bottom: $space-xs;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
@@ -274,7 +274,7 @@ $osc-config: (
         -webkit-line-clamp: #{$clamp-i};
 
         // max-height: calc(
-        //     (math.div(typography.$base-font-size, 10) * 4)
+        //     (math.div(typography.$base-fs, 10) * 4)
         //     * #{global.$global-scale-ratio}
         // );
     }

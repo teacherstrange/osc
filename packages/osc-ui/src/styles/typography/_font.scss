@@ -17,116 +17,99 @@
 // @param {*} font-size - expects a base font-size with option to add different sizes at different media queries
 
 // Usage:
-// <h1 class="t-font-beta"></h1>
+// <h1 class="t-font-xl"></h1>
 */
 
 $font-sizes: (
     (
         elements: (
-            h1,
+            h1
         ),
         classes: (
-            "beta",
-        ),
+            "3xl"
+        )
     ),
     (
         elements: (
-            h2,
+            h2
         ),
         classes: (
-            "gamma",
-        ),
+            "2xl"
+        )
     ),
     (
         elements: (
-            h3,
+            h3
         ),
         classes: (
-            "delta",
-        ),
+            "xl"
+        )
     ),
     (
         elements: (
-            h4,
+            h4
         ),
         classes: (
-            "epsilon",
-        ),
+            "l"
+        )
     ),
     (
         elements: (
-            h5,
+            h5
         ),
         classes: (
-            "zeta",
-        ),
+            "m"
+        )
     ),
     (
         elements: (
-            h6,
+            h6
         ),
         classes: (
-            "centi",
-        ),
+            "s"
+        )
     ),
     (
         elements: (),
         classes: (
-            "milli",
-        ),
+            "xs"
+        )
     ),
     (
         elements: (),
         classes: (
-            "micro",
-        ),
+            "2xs"
+        )
     ),
     (
         elements: (),
         classes: (
-            "alpha",
-        ),
+            "4xl"
+        )
     ),
     (
         elements: (),
         classes: (
-            "omega",
-        ),
+            "5xl"
+        )
     ),
     (
         elements: (),
         classes: (
-            "kilo",
-        ),
+            "6xl"
+        )
     ),
     (
         elements: (),
         classes: (
-            "mega",
-        ),
+            "7xl"
+        )
     )
 );
 $font-families: (
     "primary": $font-primary,
-    "secondary": $font-secondary,
+    "secondary": $font-secondary
 );
-
-@mixin font-styles($rules, $mq: null, $fs: null) {
-    $size: map.get($rules, font-size);
-    $font-size: map.get($size, base);
-
-    @if $mq != "base" {
-        @include mq($mq, min) {
-            @include font-size($fs);
-        }
-    } @else {
-        @if map.has-key($rules, line-height) {
-            @include font-size($font-size, map.get($rules, line-height));
-        } @else {
-            @include font-size($font-size);
-        }
-    }
-}
 
 /* postcss-bem-linter: ignore */
 h1,
@@ -136,15 +119,15 @@ h4,
 h5,
 h6,
 [class*="t-font"] {
-    margin: 0 0 $global-spacing-relative-s;
+    margin: 0 0 $space-rel-xs;
     font-style: normal;
-    font-weight: $weight-bold;
+    font-weight: $fw-bold;
     text-transform: none;
 }
 
 /* stylelint-disable-next-line plugin/selector-bem-pattern */
 [class*="t-font"] {
-    font-weight: $weight-reg;
+    font-weight: $fw-reg;
 }
 
 // Font Family
@@ -168,19 +151,19 @@ h6,
     @each $element in $elements {
         @each $class in $classes {
             #{$element} {
-                @include font-size(var(--font-scale-#{$class}), $base-line-height);
+                @include font-size(var(--font-scale-#{$class}), $base-lh);
             }
         }
     }
 
     @each $class in $classes {
         .t-font-#{$class} {
-            @if $class == "gamma" or $class == "beta" or $class == "alpha" or $class == "omega" {
+            @if $class == "2xl" or $class == "3xl" or $class == "4xl" or $class == "7xl" {
                 @include font-size(var(--font-scale-#{$class}), 1.2);
-            } @else if $class == "kilo" or $class == "mega" {
+            } @else if $class == "6xl" or $class == "5xl" {
                 @include font-size(var(--font-scale-#{$class}), 1);
             } @else {
-                @include font-size(var(--font-scale-#{$class}), $base-line-height);
+                @include font-size(var(--font-scale-#{$class}), $base-lh);
             }
         }
     }

@@ -23,17 +23,17 @@
 }
 
 * {
-  margin: 0;
+    margin: 0;
 }
 
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* For images/media to not be able to exceed their container */
@@ -42,15 +42,15 @@ picture,
 video,
 canvas,
 svg {
-  display: block;
-  max-width: 100%;
+    display: block;
+    max-width: 100%;
 }
 
 input,
 button,
 textarea,
 select {
-  font: inherit;
+    font: inherit;
 }
 
 /* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
@@ -82,7 +82,7 @@ h3,
 h4,
 h5,
 h6 {
-  overflow-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Reapply the pointer cursor for anchor tags */
@@ -98,13 +98,10 @@ menu {
     list-style: none;
 }
 
-
 /* removes spacing between cells in tables */
 table {
     border-collapse: collapse;
 }
-
-
 
 /* fix the feature of 'hidden' attribute.
    display:revert; revert to element instead of attribute */

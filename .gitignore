@@ -17,6 +17,7 @@ packages/osc-ecommerce/coverage/*
 
 packages/osc-ui/coverage/*
 packages/osc-ui/dist/**
+packages/osc-ui/**/styles/dist/**
 packages/osc-studio/dist
 
 packages/**/.node-persist

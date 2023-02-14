@@ -23,7 +23,7 @@
     $steps: scale-token("steps");
     // Get the position of the value we want to use as the base for the scale
     // This will be used to set the correct exponent for each step of the scale
-    $base-index: list.index($steps, "zeta");
+    $base-index: list.index($steps, "m");
 
     // Get our size values from the tokens
     $min-viewport: scale-token("min-viewport.width");

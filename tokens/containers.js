@@ -6,11 +6,11 @@
 //
 // *----------------------------------*/
 module.exports = {
-    'container-size': 1440,
-    'container-size-xxxsml': 610,
-    'container-size-xxsml': 960,
-    'container-size-xsml': 1020,
-    'container-size-sml': 1140,
-    'container-size-med': 1280,
-    'container-size-lrg': 1680
+    'container-size-4xs': 610,
+    'container-size-3xs': 960,
+    'container-size-2xs': 1020,
+    'container-size-xs': 1140,
+    'container-size-s': 1280,
+    'container-size-m': 1440,
+    'container-size-l': 1680,
 };

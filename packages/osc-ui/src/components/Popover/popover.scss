@@ -1,21 +1,18 @@
+@import "../../styles/settings";
+
 .c-popover {
     &__content {
         width: 260px;
-        padding: 20px;
-        background-color: rgb(255 255 255);
-        border-radius: 4px;
-        box-shadow:
-            hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
-            hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
-        animation-duration: 400ms;
+        padding: $space-m;
+        background-color: var(--color-tertiary);
+        border-radius: $rad-xs;
+        box-shadow: $shadow-l;
+        animation-duration: $timing;
         animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         will-change: transform, opacity;
 
         &:focus {
-            box-shadow:
-                hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
-                hsl(206deg 22% 7% / 20%) 0 10px 20px -15px,
-                0 0 0 2px rgb(237 237 237);
+            box-shadow: $shadow-focus-s;
         }
     }
 
@@ -28,15 +25,11 @@
         justify-content: center;
         width: 25px;
         height: 25px;
-        border-radius: 100%;
+        border-radius: $rad;
         font-family: inherit;
 
         &:hover {
-            background-color: rgb(237 237 237);
-        }
-
-        &:focus {
-            box-shadow: 0 0 0 2px rgb(237 237 237);
+            background-color: var(--color-neutral-200);
         }
     }
 
@@ -46,17 +39,13 @@
         justify-content: center;
         width: 35px;
         height: 35px;
-        background-color: rgb(255 255 255);
-        border-radius: 100%;
-        color: rgb(0 0 0);
+        background-color: var(--color-tertiary);
+        border-radius: $rad;
+        color: var(--color-secondary);
         font-family: inherit;
 
         &:hover {
-            background-color: rgb(237 237 237);
-        }
-
-        &:focus {
-            box-shadow: 0 0 0 2px rgb(0 0 0);
+            background-color: var(--color-neutral-200);
         }
     }
 }

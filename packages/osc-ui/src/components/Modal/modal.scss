@@ -1,3 +1,6 @@
+@import "../../styles/tools";
+@import "../../styles/settings";
+
 // TODO: sb - we should probably set these as variables
 
 .c-modal {
@@ -6,10 +9,8 @@
     left: 50%;
     width: 100%;
     padding: 25px;
-    background-color: var(--colour-white);
-    box-shadow:
-        hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
-        hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
+    background-color: var(--color-tertiary);
+    box-shadow: $shadow-l;
     transform: translate(-50%, -50%);
     animation: content-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -24,7 +25,7 @@
 
     &__overlay {
         position: fixed;
-        background-color: var(--colour-shadow);
+        background-color: var(--color-neutral-200);
         animation: overlay-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
         inset: 0;
     }
@@ -34,7 +35,7 @@
     }
 
     &--sm {
-        max-width: 480px;
+        max-width: #{calc($container-3xs / 2)}px;
     }
 
     &--md {
@@ -42,11 +43,11 @@
     }
 
     &--lg {
-        max-width: 1024px;
+        max-width: #{$container-2xs}px;
     }
 
     &--xl {
-        max-width: 1400px;
+        max-width: #{$container-m}px;
     }
 
     &--full {

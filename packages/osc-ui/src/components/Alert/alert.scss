@@ -1,9 +1,11 @@
+@import "../../styles/settings";
+
 .c-alert {
     position: relative;
     display: flex;
     align-items: center;
-    padding: 1em;
-    border-radius: 5px;
+    padding: $space-xs;
+    border-radius: $rad-xs;
     gap: 0.5em;
 
     &--error {
@@ -54,7 +56,7 @@
 
     &__title {
         &--bold {
-            font-weight: bold;
+            font-weight: $fw-bold;
         }
     }
 }

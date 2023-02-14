@@ -1,4 +1,4 @@
-@use "../settings" as s;
+@use "../settings" as *;
 
 /* ============================
 // $ROW WRAPPER
@@ -17,40 +17,54 @@
     display: flex;
     flex-flow: row wrap;
     width: 100%;
-    margin: 0 auto s.$global-spacing;
+    margin: 0 auto $space-m;
     background-size: cover;
 
     // content-visibility: auto;
     // contain: layout;
 
-    &--n {
-        margin-bottom: 0;
+    &--xs {
+        margin-bottom: $space-xs;
     }
 
     &--s {
-        margin-bottom: s.$global-spacing-s;
+        margin-bottom: $space-s;
     }
 
     &--m {
-        margin-bottom: s.$global-spacing-m;
+        margin-bottom: $space-m;
     }
 
     &--l {
-        margin-bottom: s.$global-spacing-l;
+        margin-bottom: $space-l;
     }
 
     &--xl {
-        margin-bottom: s.$global-spacing-xl;
+        margin-bottom: $space-xl;
     }
 
-    &--padded {
-        padding-top: s.$global-spacing-m;
-        padding-bottom: s.$global-spacing;
+    &--2xl {
+        margin-bottom: $space-2xl;
+    }
 
-        &-sml {
-            padding-top: s.$global-spacing;
-            padding-bottom: s.$global-spacing;
-        }
+    &--3xl {
+        margin-bottom: $space-3xl;
+    }
+
+    &--4xl {
+        margin-bottom: $space-4xl;
+    }
+
+    &--5xl {
+        margin-bottom: $space-5xl;
+    }
+
+    &--6xl {
+        margin-bottom: $space-6xl;
+    }
+
+    &--7xl {
+        margin-bottom: $space-7xl;
     }
 
     &--centre {
