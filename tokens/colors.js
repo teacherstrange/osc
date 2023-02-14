@@ -25,7 +25,8 @@ const colorPaleGrey = 'hsl(0deg 0% 93%)';
 const colorGrey = 'hsl(0deg 0% 87%)';
 const colorMidGrey = 'hsl(0deg 0% 79%)';
 const colorDarkGrey = 'hsl(0deg 0% 73%)';
-const colorDarkestGrey = 'hsl(0deg 0% 60%)';
+const colorDarkerGrey = 'hsl(0deg 0% 60%)';
+const colorDarkestGrey = 'hsl(0deg 0% 45%)';
 const colorBlack = 'hsl(0deg 0% 18%)';
 
 // Semantic colours
@@ -127,7 +128,8 @@ module.exports = {
         'neutral-300': colorPaleGrey,
         'neutral-400': colorMidGrey,
         'neutral-500': colorDarkGrey,
-        'neutral-600': colorDarkestGrey,
+        'neutral-600': colorDarkerGrey,
+        'neutral-700': colorDarkestGrey,
         error: colorError,
         'error-20': colorError20,
         success: colorSuccess,
@@ -149,5 +151,6 @@ module.exports = {
         'neutral-400': colorPaleGrey,
         'neutral-500': colorSoftGrey,
         'neutral-600': colorLightestGrey,
+        'neutral-700': colorWhite,
     },
 };
