@@ -1,5 +1,5 @@
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import type { ComponentPropsWithRef, ElementRef, ReactNode } from 'react';
+import type { ComponentPropsWithRef, ElementRef } from 'react';
 import React, { forwardRef, useState } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -18,7 +18,7 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
     /**
      * Optional icon that can be placed inside the checkbox
      */
-    icon?: ReactNode;
+    icon?: { id: string; className: string };
     /**
      * Id used to reference the label to the checkbox
      */
@@ -90,7 +90,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     value={value}
                 >
                     <CheckboxPrimitive.Indicator className="c-checkbox__indicator">
-                        {icon ? <Icon label={id}>{icon}</Icon> : null}
+                        {icon ? <Icon id={icon.id} className={icon.className} /> : null}
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
                 <Label name={value} htmlFor={id} required={required} />
