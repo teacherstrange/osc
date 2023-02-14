@@ -1,3 +1,24 @@
+## [0.36.0](https://github.com/Open-Study-College/osc/compare/v0.35.0...v0.36.0) (2023-02-14)
+
+
+### ✨ Features
+
+* add Checkbox  component, styles and tests ([1bd7ddd](https://github.com/Open-Study-College/osc/commit/1bd7ddd0200b29d086d6063b0675c08732d285d3))
+
+
+### ♻️ Refactors
+
+* add fieldset and optional legend ([b434684](https://github.com/Open-Study-College/osc/commit/b43468447f61f3ee2783a3abaaf83b15b1050501))
+* add sizes variable, change value to rem and use math.div to create ratio ([8baac31](https://github.com/Open-Study-College/osc/commit/8baac31af9d132a38a32316aa0620d28c012d44d))
+* nest selectors inside of "c-checkbox" ([d3e4ff6](https://github.com/Open-Study-College/osc/commit/d3e4ff6d737356ea8d79c2f6825c7b743725589c))
+* remove aria-labelledby and update aria-label to use value ([45b6c76](https://github.com/Open-Study-College/osc/commit/45b6c76262f7d33dceb057c501d24ccf919d9b37))
+* remove redundant import ([36f9367](https://github.com/Open-Study-College/osc/commit/36f936743cb5fb2ab5351f9e760a5d76f4bc200d))
+* update class name and use --icon-size variable ([441f98c](https://github.com/Open-Study-College/osc/commit/441f98cd81bb87cbe700b85ae6b9a01fdf988100))
+* update colours with tokens, set cursor to pointer and add padding-top for error message ([3d5f05f](https://github.com/Open-Study-College/osc/commit/3d5f05fdfc0049d6ef1efa45193be04602f93a31))
+* update Icon ([d1e34a4](https://github.com/Open-Study-College/osc/commit/d1e34a4ba4060b7e6d76e7984a0973f5dde251b3))
+* update Label and styles ([6ce065a](https://github.com/Open-Study-College/osc/commit/6ce065adf6e4c48c2e964a7cda1c599b146d5c06))
+* update with correct tokens ([6ca3ed9](https://github.com/Open-Study-College/osc/commit/6ca3ed9b4f81ae2548d41e93e5e595061172d64e))
+
 ## [0.35.0](https://github.com/Open-Study-College/osc/compare/v0.34.1...v0.35.0) (2023-02-14)
 
 
@@ -98,31 +119,4 @@
 ### 📦 General Housekeeping / Package Updates
 
 * **prisma:** upgraded to latest prisma version ([fcb5a3b](https://github.com/Open-Study-College/osc/commit/fcb5a3bca9e82801fa362b8190a1e66e0d7c594e))
-
-## [0.33.0](https://github.com/Open-Study-College/osc/compare/v0.32.0...v0.33.0) (2023-02-09)
-
-
-### ♻️ Refactors
-
-* **prisma:** readding supposedly deprecated feature - fails to generate without ([99e0514](https://github.com/Open-Study-College/osc/commit/99e0514e0e063d3a1195483c9e010edf560eaec5))
-* **prisma:** removed deprecated settings ([8431623](https://github.com/Open-Study-College/osc/commit/8431623aecb17d3cf503387492e8511007343031))
-
-
-### ✨ Features
-
-* **api-admin:** added schema types fro unassigned students ([aa343e5](https://github.com/Open-Study-College/osc/commit/aa343e5ec6cfbdef7aa0c75ec78924cda85e0007))
-* **api-admin:** added shield perms ([c4a59f6](https://github.com/Open-Study-College/osc/commit/c4a59f6acf449973bb55cd3db93827cba750e72b))
-* **api-admin:** adding dev scripts ([dcd73d1](https://github.com/Open-Study-College/osc/commit/dcd73d18825f6a1ad477d499bc24e53fabc80d4c))
-* **api-admin:** expanded prisma query for unassigned students ([20fe348](https://github.com/Open-Study-College/osc/commit/20fe3489fd00e53efba9e2ba7e38df5616535ee7))
-* **api-admin:** initial admin API skeleton with basic query ([ea197b6](https://github.com/Open-Study-College/osc/commit/ea197b6d7e457d9a32fa1d01933c3aa9464dc5df))
-* **api-gateway:** adding admin API to gateway ([8275ec5](https://github.com/Open-Study-College/osc/commit/8275ec57b58f810eced1aef2a9d26ab977449b2b))
-* **prisma:** redefined student/course/tutor relationships ([64c8800](https://github.com/Open-Study-College/osc/commit/64c88002f1924beb8ec71c290d93df1e1e8ba83b))
-
-
-### 🐛 Bugs
-
-* **api-admin:** removed unused context ([62d147b](https://github.com/Open-Study-College/osc/commit/62d147b95356fdbed7619f0ce5d991b2044ff149))
-* **api-admin:** setting fields to non-nullable ([3fe6fe5](https://github.com/Open-Study-College/osc/commit/3fe6fe5a3172a8c7d562a208b04215736b1ab93a))
-* **api-admin:** setting ID to non-nullable ([b19dc03](https://github.com/Open-Study-College/osc/commit/b19dc03e72590e1cee27a880077bbcf751e991dd))
-* **api-admin:** type casting user context from gateway ([052f597](https://github.com/Open-Study-College/osc/commit/052f59735532b9ac8e521bc8094858514fc222ed))
 
