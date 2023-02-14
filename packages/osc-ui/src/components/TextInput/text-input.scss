@@ -1,0 +1,152 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+$input-py: calc($space-2xs - 3px);
+$input-pr: $space-xl;
+$input-pl: $space-l;
+$label-transform-up: translate(0, -1.25em) scale(0.8);
+
+.c-input {
+    display: flex;
+    order: 1;
+    padding: $input-py $input-pr $input-py $input-pl;
+    border: solid 1px var(--color-quinary);
+    cursor: text;
+    grid-column: 1;
+    grid-row: 2;
+
+    &__icon {
+        justify-self: end;
+        align-self: center;
+        grid-row: 2;
+        grid-column: 1;
+        padding-right: $space-xs;
+    }
+
+    &:focus {
+        box-shadow: $shadow-focus-s;
+    }
+
+    &[disabled] {
+        background-color: var(--color-neutral-100);
+        color: var(--color-neutral-500);
+        pointer-events: none;
+    }
+
+    &__outer-container {
+        display: flex;
+    }
+
+    &__container {
+        display: grid;
+        width: 100%;
+
+        .c-label {
+            grid-row: 1;
+            grid-column: 1;
+        }
+
+        &--secondary {
+            .c-input {
+                border-radius: $rad-xs;
+            }
+        }
+
+        &--tertiary,
+        &--quaternary {
+            position: relative;
+
+            .c-label {
+                display: flex;
+                align-items: center;
+                grid-row: 2;
+                transform-origin: top left;
+                transition: $timing-s ease-in-out;
+                pointer-events: none;
+
+                &.c-label--filled {
+                    top: 10px;
+                    transform: $label-transform-up;
+                }
+            }
+
+            .c-input {
+                &__text {
+                    border: none;
+                    border-bottom: solid 2px var(--color-secondary);
+                }
+
+                &[disabled] {
+                    background: none;
+                    pointer-events: cursor;
+                    border-bottom: solid 2px var(--color-neutral-500);
+
+                    + .c-label {
+                        color: var(--color-neutral-500);
+                    }
+                }
+            }
+
+            .c-input:focus {
+                box-shadow: none;
+            }
+
+            .c-input:focus + .c-label {
+                transform: $label-transform-up;
+            }
+        }
+
+        &--quaternary {
+            .c-input {
+                padding: $input-py $input-pr $input-py 0;
+                color: var(--color-neutral-600);
+            }
+        }
+
+        &--quaternary + .c-input__button {
+            cursor: pointer;
+
+            svg {
+                width: 2em;
+                height: 2em;
+            }
+        }
+
+        &--error {
+            .c-input {
+                background-color: var(--color-error-20);
+                border: 1px solid var(--color-error);
+                box-shadow: $shadow-error;
+
+                &__error-message {
+                    display: flex;
+                    order: 2;
+                    color: var(--color-error);
+                    grid-row: 3;
+                    grid-column: 1;
+                }
+
+                &__icon {
+                    &--error {
+                        color: var(--color-error);
+                    }
+                }
+            }
+
+            &.c-input__container--tertiary {
+                .c-input {
+                    background: none;
+                    border: none;
+                    border-bottom: solid 0.125em var(--color-error);
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+    .c-label {
+        cursor: text;
+    }
+}

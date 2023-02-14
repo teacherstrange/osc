@@ -1,0 +1,17 @@
+/* stylelint-disable selector-class-pattern */
+@use "sass:math";
+@use "../../styles/settings" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-label {
+    font-weight: $fw-reg;
+    cursor: pointer;
+
+    &__required {
+        padding-inline-start: #{math.div(1, $base-fs)}em;
+    }
+
+    &--bold {
+        font-weight: $fw-bold;
+    }
+}
