@@ -3,16 +3,15 @@
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
-$input-py: calc(var(--space-scale-2xs) - 3px);
-$input-pr: var(--space-scale-xl);
-$input-pl: var(--space-scale-l);
+$input-py: calc($space-2xs - 3px);
+$input-pr: $space-xl;
+$input-pl: $space-l;
 
 .c-input {
     display: flex;
     order: 1;
     padding: $input-py $input-pr $input-py $input-pl;
     border: solid 1px var(--color-quinary);
-    font-size: var(--font-scale-base);
     cursor: text;
     grid-column: 1;
     grid-row: 2;
@@ -131,7 +130,6 @@ $input-pl: var(--space-scale-l);
                     display: flex;
                     order: 2;
                     color: var(--color-error);
-                    font-size: var(--font-scale-base);
                     grid-row: 3;
                     grid-column: 1;
                 }
