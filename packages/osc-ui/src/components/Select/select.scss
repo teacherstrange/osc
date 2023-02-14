@@ -1,0 +1,166 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-select {
+    --secondary-background-color: var(--color-quinary);
+
+    width: inherit;
+
+    .c-label {
+        cursor: pointer;
+    }
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: inherit;
+        height: $space-2xl;
+        padding: 0 $space-s;
+        background-color: var(--color-tertiary);
+        border: 1px solid var(--color-quinary);
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--color-neutral-300);
+        }
+
+        &:focus {
+            box-shadow: $shadow-focus-s;
+        }
+
+        &[data-placeholder] {
+            color: var(--color-secondary);
+        }
+
+        &[data-disabled] {
+            background-color: var(--color-neutral-200);
+            color: var(--color-neutral-500);
+            pointer-events: none;
+        }
+    }
+
+    &__content {
+        overflow: hidden;
+        background-color: var(--color-tertiary);
+        box-shadow: $shadow-l, $shadow-s;
+
+        @include z-index(select);
+
+        .c-select__scroll-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: $space-l;
+            background-color: var(--color-tertiary);
+            cursor: default;
+        }
+
+        .c-select__viewport {
+            padding: $space-2xs;
+        }
+    }
+
+    &__item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: $space-xl;
+        padding: 0 $space-xl 0 $space-xl;
+        user-select: none;
+
+        &[data-highlighted] {
+            background-color: var(--color-neutral-300);
+        }
+
+        &[data-disabled] {
+            color: var(--color-neutral-500);
+        }
+
+        .c-select__item-indicator {
+            position: absolute;
+            left: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+        }
+    }
+
+    &--inline {
+        display: flex;
+        align-items: center;
+        gap: $space-s;
+    }
+
+    &--bold {
+        .c-label {
+            font-weight: $fw-bold;
+        }
+    }
+
+    &--secondary {
+        .c-select__trigger {
+            background-color: var(--secondary-background-color);
+        }
+
+        .c-select__content {
+            background-color: var(--secondary-background-color);
+
+            .c-select__scroll-button {
+                background-color: var(--secondary-background-color);
+            }
+        }
+
+        .c-select__item[data-highlighted] {
+            background-color: var(--color-neutral-200);
+        }
+
+        .c-label {
+            font-weight: $fw-bold;
+        }
+    }
+
+    &--tertiary {
+        .c-select__trigger {
+            flex: 1;
+            padding: 0;
+            background: none;
+            border: none;
+
+            &[data-highlighted] {
+                background: none;
+            }
+        }
+    }
+
+    &--error {
+        .c-select__trigger {
+            background-color: var(--color-error-20);
+            border: 1px solid var(--color-error);
+        }
+
+        .c-select__icon {
+            color: var(--color-error);
+        }
+
+        .c-select__error-message {
+            color: var(--color-error);
+            font-size: var(--select-font-size);
+        }
+
+        &.c-select--tertiary {
+            .c-select__trigger {
+                background: none;
+                border: none;
+                color: var(--color-error);
+            }
+
+            .c-select--error {
+                display: none;
+            }
+        }
+    }
+}
