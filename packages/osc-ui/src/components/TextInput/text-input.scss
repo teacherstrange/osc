@@ -3,9 +3,9 @@
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
-$input-py: calc(var(--space-scale-micro) - 3px);
-$input-pr: var(--space-scale-delta);
-$input-pl: var(--space-scale-epsilon);
+$input-py: calc(var(--space-scale-2xs) - 3px);
+$input-pr: var(--space-scale-xl);
+$input-pl: var(--space-scale-l);
 
 .c-input {
     display: flex;
@@ -51,7 +51,7 @@ $input-pl: var(--space-scale-epsilon);
 
         &--secondary {
             .c-input {
-                border-radius: 6px;
+                border-radius: $rad-xs;
             }
         }
 

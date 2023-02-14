@@ -5,14 +5,14 @@
 
 .c-label {
     font-size: var(--font-scale-base);
-    font-weight: $weight-reg;
+    font-weight: $fw-reg;
     cursor: pointer;
 
     &__required {
-        padding-inline-start: #{math.div(1, $base-font-size)}em;
+        padding-inline-start: #{math.div(1, $base-fs)}em;
     }
 
     &--bold {
-        font-weight: $weight-bold;
+        font-weight: $fw-bold;
     }
 }
