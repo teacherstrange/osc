@@ -1,3 +1,45 @@
+## [0.38.0](https://github.com/Open-Study-College/osc/compare/v0.37.0...v0.38.0) (2023-02-14)
+
+
+### ✨ Features
+
+* add Select and Label components ([d88e17d](https://github.com/Open-Study-College/osc/commit/d88e17d9ecaed5a3f6d01706606f390737951929))
+
+
+### ♻️ Refactors
+
+* add argTypes ([59dcae5](https://github.com/Open-Study-College/osc/commit/59dcae57b6e4dd02011c9347769c705dd36bd559))
+* add aria-label and add Radix Label component ([1d33560](https://github.com/Open-Study-College/osc/commit/1d3356026de05fac444a81204bf5f2ea90e99cc8))
+* add GroupVariants type ([612822b](https://github.com/Open-Study-College/osc/commit/612822b63364556ca473af0e081abeb7fe4c2a26))
+* add Radix Select package ([c093a7a](https://github.com/Open-Study-College/osc/commit/c093a7a68dfc04e50b22d79adde4516494b9a334))
+* add secondary background color variable ([ff27bb9](https://github.com/Open-Study-College/osc/commit/ff27bb9c6e848b2afcc55f63581e5504aa4018c0))
+* create a font-size variable ([027f31e](https://github.com/Open-Study-College/osc/commit/027f31e3239ebe7e37a027e9d111daaccbee9f8c))
+* enable Select to be opened on Label click ([1218919](https://github.com/Open-Study-College/osc/commit/121891973822d92f17ce99ca63bbbfe56dfbeff9))
+* pass all props through to SelectItem ([fca6b6e](https://github.com/Open-Study-College/osc/commit/fca6b6e69c48cf78a7d53dacab8362f7c02928bb))
+* pass value prop rather than spreading props ([942973b](https://github.com/Open-Study-College/osc/commit/942973ba0065def5bdf20d0d924bb2646d489630))
+* remove async from tests ([47fd16b](https://github.com/Open-Study-College/osc/commit/47fd16b8e407492bc649020d71fc1735d2a36139))
+* remove console log ([fa80b8a](https://github.com/Open-Study-College/osc/commit/fa80b8a19190fc352040d71ab7cccf966ec27f13))
+* remove FC type ([1cf6495](https://github.com/Open-Study-College/osc/commit/1cf649541675409a2859c405ab024c99ceb7a204))
+* remove pointer cursor for Select labels ([eade38f](https://github.com/Open-Study-College/osc/commit/eade38f72b36bae1c95962c8d670cdada99e7e53))
+* set directly to Description type ([3bf937f](https://github.com/Open-Study-College/osc/commit/3bf937f16344cac79041dc638a1dd4c546831231))
+* simplify props, add jsdoc descriptions and add disabled styling for SelectItem ([7b0f617](https://github.com/Open-Study-College/osc/commit/7b0f61749908143844339003f2c9b0cbae601487))
+* update box-shadow to use "shadow" color token ([d0cf65a](https://github.com/Open-Study-College/osc/commit/d0cf65ae1be79d1f9a59ffc5a575ff3c17630773))
+* update colors to use hsl values ([1b32334](https://github.com/Open-Study-College/osc/commit/1b32334131bd38c0392ddf5dd9bca9e22e0971c9))
+* update error handling ([372dbc9](https://github.com/Open-Study-College/osc/commit/372dbc90ba33126d65f60819e0e0516937d068e5))
+* update icons ([4326b88](https://github.com/Open-Study-College/osc/commit/4326b883ef399351ff07b908bf00b5273c2de18c))
+* update padding to use em unit ([6f6011d](https://github.com/Open-Study-College/osc/commit/6f6011d37be1497d294beecd14cbc33217664021))
+* update tests and make "wasSubmitted" optional ([559a6c7](https://github.com/Open-Study-College/osc/commit/559a6c7ca7d4dae723dc60895c0bdf9974d63d0d))
+* update to use em rather than px ([cab87ed](https://github.com/Open-Study-College/osc/commit/cab87ed0bd9378f99c8c0a46aa8240e4bbbb7f13))
+* update with correct tokens ([2a9834f](https://github.com/Open-Study-College/osc/commit/2a9834fc2a7736ae8e593fe4a38f49c8f3a74c8b))
+* update z-index for Select and remove from Button ([effd135](https://github.com/Open-Study-College/osc/commit/effd1357e1bd322b17dc3c1b16e3ca8e7de53775))
+* use correct color tokens and update sizings to use "em" units where necessary ([12aab68](https://github.com/Open-Study-College/osc/commit/12aab68be7141fa5b53444de09657e5bf82fe1b7))
+* use named imports at top of file ([57cdeb0](https://github.com/Open-Study-College/osc/commit/57cdeb0b9c671ce06e8b7d7364df62616bf342d3))
+
+
+### 🐛 Bugs
+
+* **tokens:** replaces height with min-height ([ca488b0](https://github.com/Open-Study-College/osc/commit/ca488b020f0558213af882e8eee939b1cd67edb1))
+
 ## [0.37.0](https://github.com/Open-Study-College/osc/compare/v0.36.0...v0.37.0) (2023-02-14)
 
 
@@ -101,36 +143,4 @@
 * update sample env.file in studio ([5ede79b](https://github.com/Open-Study-College/osc/commit/5ede79bb89a2ba3803f1cb1536dddb6c6da4ec76))
 * use short sha when searching for image ([c902995](https://github.com/Open-Study-College/osc/commit/c902995ace022020d15cc6ff800a5ac4b6b70be0))
 * used buildx action v2 ([b6f21e1](https://github.com/Open-Study-College/osc/commit/b6f21e1d3b6438eb02509c77d10aef8b2c28a714))
-
-## [0.34.0](https://github.com/Open-Study-College/osc/compare/v0.33.1...v0.34.0) (2023-02-14)
-
-
-### ⚙️ CI/CD Updates
-
-* **tools:** prettier fixes ([3496b57](https://github.com/Open-Study-College/osc/commit/3496b5775fdde62d23774ea8bc670aa6cae6f56a))
-
-
-### ♻️ Refactors
-
-* **tokens:** adds colour variable to accordion ([3fdd019](https://github.com/Open-Study-College/osc/commit/3fdd019156a83661d5bd616a4acc1b24ff40b7d1))
-* **tokens:** amend to colour token ([7570a07](https://github.com/Open-Study-College/osc/commit/7570a07fbc10756a69eeadddaa6595645ff094ba))
-* **tokens:** creates and updates box shadow variables ([9bab3ee](https://github.com/Open-Study-College/osc/commit/9bab3ee16a9dcfca36c7787e04452bac54ef97b8))
-* **tokens:** fixes prettier line issue ([6608807](https://github.com/Open-Study-College/osc/commit/6608807c046f113fa6c10065a282716f536e84da))
-* **tokens:** pr feedback ([900e249](https://github.com/Open-Study-College/osc/commit/900e249ad5b703d1f6064a8a4b3e21271319fd31))
-* **tokens:** redefine radius tokens and update across scss ([05ded1c](https://github.com/Open-Study-College/osc/commit/05ded1c881a3f9ee1580ee7dc7b69dc0a0158386))
-* **tokens:** rem function switched to using calc instead of sass:math ([8e586b4](https://github.com/Open-Study-College/osc/commit/8e586b4e5ab5d23eaf237a91593f79c05be57e2a))
-* **tokens:** updates all scss files with amended tokens and associated variables ([f49ced3](https://github.com/Open-Study-College/osc/commit/f49ced305c027e9d98f6a1cf081cd3f250a6f82c))
-* **tokens:** updates all scss files with amended tokens and associated variables ([73b70bc](https://github.com/Open-Study-College/osc/commit/73b70bcd594bc23f158487bd1bfe2bd03e1860a2))
-* **tokens:** updates new and existing js tokens with new conventions ([8c11e7c](https://github.com/Open-Study-College/osc/commit/8c11e7c8c50dc39f3e44c8ecd242f15a1091bf37))
-* **tokens:** updates new class keywords inline with new variable naming ([87a2cb6](https://github.com/Open-Study-College/osc/commit/87a2cb6db137bb99305d8bb309c85b6ab2929614))
-* **tokens:** updates outdated doc ([d5b651f](https://github.com/Open-Study-College/osc/commit/d5b651f3f4e41134656029ff5d1a45e59b33fa71))
-* **tokens:** updates package.json script for watching sass ([78fde7e](https://github.com/Open-Study-College/osc/commit/78fde7ed9e07e2d6b24d4ae5cc890b9bd9a69084))
-* **tokens:** updates test.html file with new variable naming ([ad7cb4c](https://github.com/Open-Study-College/osc/commit/ad7cb4cf481793c7cbc1afe72ca30f95e33e577a))
-* **tokens:** updates tokens README ([8bdb440](https://github.com/Open-Study-College/osc/commit/8bdb440eb3fdd1192afb8a7f0918db493064f481))
-* **tokens:** updates types to match token names ([c5d370d](https://github.com/Open-Study-College/osc/commit/c5d370d3585997298708efee06111409e4235807))
-
-
-### ✨ Features
-
-* **tokens:** adds new darkestGrey colour ([b2e3e66](https://github.com/Open-Study-College/osc/commit/b2e3e66fdeff8a53eb5574abb7a3e81ce7d427f7))
 
