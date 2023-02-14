@@ -1,3 +1,35 @@
+## [0.34.0](https://github.com/Open-Study-College/osc/compare/v0.33.1...v0.34.0) (2023-02-14)
+
+
+### ⚙️ CI/CD Updates
+
+* **tools:** prettier fixes ([3496b57](https://github.com/Open-Study-College/osc/commit/3496b5775fdde62d23774ea8bc670aa6cae6f56a))
+
+
+### ♻️ Refactors
+
+* **tokens:** adds colour variable to accordion ([3fdd019](https://github.com/Open-Study-College/osc/commit/3fdd019156a83661d5bd616a4acc1b24ff40b7d1))
+* **tokens:** amend to colour token ([7570a07](https://github.com/Open-Study-College/osc/commit/7570a07fbc10756a69eeadddaa6595645ff094ba))
+* **tokens:** creates and updates box shadow variables ([9bab3ee](https://github.com/Open-Study-College/osc/commit/9bab3ee16a9dcfca36c7787e04452bac54ef97b8))
+* **tokens:** fixes prettier line issue ([6608807](https://github.com/Open-Study-College/osc/commit/6608807c046f113fa6c10065a282716f536e84da))
+* **tokens:** pr feedback ([900e249](https://github.com/Open-Study-College/osc/commit/900e249ad5b703d1f6064a8a4b3e21271319fd31))
+* **tokens:** redefine radius tokens and update across scss ([05ded1c](https://github.com/Open-Study-College/osc/commit/05ded1c881a3f9ee1580ee7dc7b69dc0a0158386))
+* **tokens:** rem function switched to using calc instead of sass:math ([8e586b4](https://github.com/Open-Study-College/osc/commit/8e586b4e5ab5d23eaf237a91593f79c05be57e2a))
+* **tokens:** updates all scss files with amended tokens and associated variables ([f49ced3](https://github.com/Open-Study-College/osc/commit/f49ced305c027e9d98f6a1cf081cd3f250a6f82c))
+* **tokens:** updates all scss files with amended tokens and associated variables ([73b70bc](https://github.com/Open-Study-College/osc/commit/73b70bcd594bc23f158487bd1bfe2bd03e1860a2))
+* **tokens:** updates new and existing js tokens with new conventions ([8c11e7c](https://github.com/Open-Study-College/osc/commit/8c11e7c8c50dc39f3e44c8ecd242f15a1091bf37))
+* **tokens:** updates new class keywords inline with new variable naming ([87a2cb6](https://github.com/Open-Study-College/osc/commit/87a2cb6db137bb99305d8bb309c85b6ab2929614))
+* **tokens:** updates outdated doc ([d5b651f](https://github.com/Open-Study-College/osc/commit/d5b651f3f4e41134656029ff5d1a45e59b33fa71))
+* **tokens:** updates package.json script for watching sass ([78fde7e](https://github.com/Open-Study-College/osc/commit/78fde7ed9e07e2d6b24d4ae5cc890b9bd9a69084))
+* **tokens:** updates test.html file with new variable naming ([ad7cb4c](https://github.com/Open-Study-College/osc/commit/ad7cb4cf481793c7cbc1afe72ca30f95e33e577a))
+* **tokens:** updates tokens README ([8bdb440](https://github.com/Open-Study-College/osc/commit/8bdb440eb3fdd1192afb8a7f0918db493064f481))
+* **tokens:** updates types to match token names ([c5d370d](https://github.com/Open-Study-College/osc/commit/c5d370d3585997298708efee06111409e4235807))
+
+
+### ✨ Features
+
+* **tokens:** adds new darkestGrey colour ([b2e3e66](https://github.com/Open-Study-College/osc/commit/b2e3e66fdeff8a53eb5574abb7a3e81ce7d427f7))
+
 ## [0.33.1](https://github.com/Open-Study-College/osc/compare/v0.33.0...v0.33.1) (2023-02-14)
 
 
@@ -60,27 +92,4 @@
 
 * add "isDisabled" story and descriptions ([68a750a](https://github.com/Open-Study-College/osc/commit/68a750a1226cc9c69bc892708bfe84c5ecd333cc))
 * add error handling/styling for "Has Validation" ([2e6d128](https://github.com/Open-Study-College/osc/commit/2e6d128e05f4e5d46191af9f3a199fa3fb56f879))
-
-## [0.30.0](https://github.com/Open-Study-College/osc/compare/v0.29.1...v0.30.0) (2023-01-30)
-
-
-### ✨ Features
-
-* add Slider component, styling and tests ([008f622](https://github.com/Open-Study-College/osc/commit/008f62250e9c8dcd5a1b1b170771cd93110f0e1b))
-
-
-### ♻️ Refactors
-
-* mock out ResizeObserver, make same change in Popover component and remove package ([a897e77](https://github.com/Open-Study-College/osc/commit/a897e776b3e1234a11f6538b89392cfc1e19df40))
-* remove React fragment ([977a2d4](https://github.com/Open-Study-College/osc/commit/977a2d4347b8d427ba21dea4f97c2910eaa6b40a))
-* remove useEffect and set value directly in useState ([191d1b1](https://github.com/Open-Study-College/osc/commit/191d1b1c4c459a3dcc109f66cc1ee84288b8d38c))
-* remove useEffect import ([7d35023](https://github.com/Open-Study-College/osc/commit/7d3502391a8c87af2c53d5d724e74ebac1f27e0e))
-* removes react FC type from components ([1e4ab18](https://github.com/Open-Study-College/osc/commit/1e4ab18475520761d836eddcd9b2c01a1a731b41))
-* simplify and move into two separate stories ([72326fa](https://github.com/Open-Study-College/osc/commit/72326fa16f9f6af1305730b5f4c939e75f73535d))
-
-
-### 🐛 Bugs
-
-* adds missing children type ([e250054](https://github.com/Open-Study-College/osc/commit/e25005467abdbf6429239b81a586e52a03a3bd36))
-* updates props to correct type ([4b9639e](https://github.com/Open-Study-College/osc/commit/4b9639efbdfc9d369bd113d04feb4aa3c591d239))
 
