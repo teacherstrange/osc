@@ -14,7 +14,7 @@
 
     &__description {
         flex: 1 100%;
-        font-size: var(--font-scale-centi);
+        font-size: $fs-s;
     }
 
     &__indicator {
@@ -31,7 +31,6 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        margin: 0.5em;
 
         &--secondary {
             .c-checkbox {
@@ -39,7 +38,7 @@
                     border: none;
 
                     &:focus {
-                        box-shadow: 0 0 0 2px var(--color-secondary);
+                        box-shadow: $shadow-focus-s;
                     }
                 }
 
@@ -58,14 +57,14 @@
 
             .c-checkbox__error-message {
                 flex: 1 100%;
-                padding-top: 0.875em;
+                padding-top: $space-xs;
                 color: var(--color-error);
-                font-size: var(--font-scale-centi);
+                font-size: $fs-s;
             }
         }
 
         .c-label {
-            padding-left: 0.625em;
+            padding-left: $space-xs;
         }
     }
 
@@ -74,7 +73,7 @@
     }
 
     &:focus {
-        box-shadow: 0 0 0 2px var(--color-primary);
+        box-shadow: $shadow-focus-s;
     }
 
     &[data-disabled] {
@@ -84,6 +83,13 @@
         + .c-label {
             color: var(--color-neutral-500);
             pointer-events: none;
+        }
+    }
+
+    .o-icon {
+        &.check {
+            width: 0.625em;
+            height: 0.625em;
         }
     }
 }
