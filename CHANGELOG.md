@@ -1,3 +1,24 @@
+## [0.37.0](https://github.com/Open-Study-College/osc/compare/v0.36.0...v0.37.0) (2023-02-14)
+
+
+### ✨ Features
+
+* add RadioGroup component, styles and tests ([38b9ecb](https://github.com/Open-Study-College/osc/commit/38b9ecbf85d5f3529b0a4746469352a167c2d976))
+
+
+### ♻️ Refactors
+
+* **tokens:** updates radios with new variables ([a3d367a](https://github.com/Open-Study-College/osc/commit/a3d367aba162538f57a6bfcba670b3fa18b79b7e))
+* add conditional for showing the description ([a9c917d](https://github.com/Open-Study-College/osc/commit/a9c917de0ac0e5f588936084e932db0084d54064))
+* add cursor:pointer to the radio items ([b14f523](https://github.com/Open-Study-College/osc/commit/b14f52340927739e0d57de4007267c29f94c299e))
+* add font-weight token ([00162ab](https://github.com/Open-Study-College/osc/commit/00162aba9e4687bbbafc84618678453e41126ec5))
+* ensure indicator size is always relative to the item size ([e7b1e0c](https://github.com/Open-Study-College/osc/commit/e7b1e0ca8f9fd3f8541a6404f4f2ea2de1bce2bb))
+* re-order selectors and remove no-descending-specificity ([7a1e496](https://github.com/Open-Study-College/osc/commit/7a1e4969dbd1ed2c797858986b10c9f56b960883))
+* remove 'aria-labelledby' - not required with fieldset/legend ([2c6b388](https://github.com/Open-Study-College/osc/commit/2c6b388de433d3c73df8b6a2f4e6ee5cda836163))
+* update Label usage to receive "name" as a prop ([e0027c1](https://github.com/Open-Study-College/osc/commit/e0027c19c728d79b477e19c3601da1961f51403c))
+* update scss to use correct colour tokens ([1782a74](https://github.com/Open-Study-College/osc/commit/1782a74866f7ae4d16bc93a158b052213e0f39fc))
+* use fieldset and legend for description and make it required ([dc7320a](https://github.com/Open-Study-College/osc/commit/dc7320a0f6ce1abb71d31e94a5242863f6e5fd8a))
+
 ## [0.36.0](https://github.com/Open-Study-College/osc/compare/v0.35.0...v0.36.0) (2023-02-14)
 
 
@@ -112,11 +133,4 @@
 ### ✨ Features
 
 * **tokens:** adds new darkestGrey colour ([b2e3e66](https://github.com/Open-Study-College/osc/commit/b2e3e66fdeff8a53eb5574abb7a3e81ce7d427f7))
-
-## [0.33.1](https://github.com/Open-Study-College/osc/compare/v0.33.0...v0.33.1) (2023-02-14)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **prisma:** upgraded to latest prisma version ([fcb5a3b](https://github.com/Open-Study-College/osc/commit/fcb5a3bca9e82801fa362b8190a1e66e0d7c594e))
 
