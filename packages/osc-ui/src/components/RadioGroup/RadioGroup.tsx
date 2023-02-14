@@ -110,7 +110,7 @@ export const RadioItem = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>,
                 >
                     <RadioGroupPrimitive.Indicator className="c-radio-group__indicator" />
                 </RadioGroupPrimitive.Item>
-                <Label htmlFor={id}>{name}</Label>
+                <Label htmlFor={id} name={name} />
             </div>
         );
     }
