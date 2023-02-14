@@ -89,6 +89,8 @@ export interface contentMediaSlide extends module {
     layoutDirection?: 'content-media' | 'media-content';
     layoutGrid?: string;
     media: {
+        carouselName?: string;
+        carouselSettings: carouselModuleSettings;
         mediaType: {
             image?: imageModule<HTMLImageElement>;
             imageFit?: 'cover' | 'contain';

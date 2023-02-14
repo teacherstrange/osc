@@ -70,7 +70,6 @@ const Slide = (props: SlideProps) => {
 
     return (
         <ContentMedia>
-            {/* TODO: Probably need to make this a component so we can handle forms etc. */}
             {layoutDirection === 'media-content' ? (
                 <ContentMediaBlockModule media={media} cols={gridCols[0]} />
             ) : null}
@@ -109,13 +108,64 @@ interface ContentMediaBlockProps extends Pick<contentMediaSlide, 'media'> {
 
 const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
     const { media, cols } = props;
+
+    const itemHasCover = media?.mediaType.some((media) => media.imageFit === 'cover')
+        ? 'cover'
+        : 'contain';
+
     return (
         <ContentMediaBlock
-            align={media?.mediaType[0]?.imageFit === 'cover' ? 'stretch' : 'center'}
+            // IF any item is set to cover then we want to make sure we're stretching the container
+            align={itemHasCover ? 'stretch' : 'center'}
             variant="media"
             cols={cols}
         >
-            {media?.mediaType[0]?.image ? (
+            {media?.mediaType.length > 1 ? (
+                <Carousel
+                    carouselName={
+                        media?.carouselName ? media?.carouselName : 'content media carousel'
+                    }
+                    arrows={media?.carouselSettings?.arrows}
+                    dotNav={media?.carouselSettings?.dotNav}
+                    loop={media?.carouselSettings?.loop}
+                    autoplay={media?.carouselSettings?.autoplay}
+                    slidesPerView={perView(media?.carouselSettings?.slidesPerView?.mobile)}
+                    startIndex={
+                        media?.carouselSettings?.startIndex
+                            ? media?.carouselSettings?.startIndex - 1
+                            : 0
+                    } // minus 1 so cms users can start at 1
+                    breakpoints={{
+                        [`(min-width: ${rem(mq['tab'])}rem)`]: {
+                            slides: {
+                                origin: 'auto',
+                                perView: perView(media?.carouselSettings?.slidesPerView?.tablet),
+                                spacing: 16,
+                            },
+                        },
+                        [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
+                            slides: {
+                                origin: 'auto',
+                                perView: perView(media?.carouselSettings?.slidesPerView?.desktop),
+                                spacing: 16,
+                            },
+                        },
+                    }}
+                >
+                    {media?.mediaType.map((media) =>
+                        media?.image ? (
+                            <Image
+                                src={media?.image?.src}
+                                width={media?.image?.width}
+                                height={media?.image?.height}
+                                alt={media?.image?.alt}
+                                className={`o-img--${media?.imageFit}`}
+                                key={media?.image?._key}
+                            />
+                        ) : null
+                    )}
+                </Carousel>
+            ) : media?.mediaType[0]?.image ? (
                 <Image
                     src={media?.mediaType[0]?.image?.src}
                     width={media?.mediaType[0]?.image?.width}
