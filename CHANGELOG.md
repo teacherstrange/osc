@@ -1,3 +1,24 @@
+## [0.34.1](https://github.com/Open-Study-College/osc/compare/v0.34.0...v0.34.1) (2023-02-14)
+
+
+### 🐛 Bugs
+
+* add image back into build process ([86af618](https://github.com/Open-Study-College/osc/commit/86af6189208abdd4fd4b77ead77be360b8808701))
+* add radix package to studio and update nvmrc ([535c7ba](https://github.com/Open-Study-College/osc/commit/535c7ba51fc553541333e87574c6cd21aa815990))
+* condtional token path ([059f156](https://github.com/Open-Study-College/osc/commit/059f1561905060268465109da9ae358ca203a1ab))
+* declare image as a build arg ([ecd5319](https://github.com/Open-Study-College/osc/commit/ecd531955492506d17cfbdcb68f6e2617599d9eb))
+* image id and studio conditionals ([fb386f3](https://github.com/Open-Study-College/osc/commit/fb386f3ad2bd6c910b80301654375984447a60e0))
+* image tags ([3213c68](https://github.com/Open-Study-College/osc/commit/3213c687a62822f75d2a7255e111b6d26b9b2aed))
+* revert short_sha to github sha ([a02e909](https://github.com/Open-Study-College/osc/commit/a02e9098f3bb18f063f3195bbf234b3692b8e05d))
+* sanity_studio_ci is defined ([d537742](https://github.com/Open-Study-College/osc/commit/d537742db8b60c7e7b3e8b313d2dda113fadc0a9))
+* sanity_studio_ci is now readonly ([5fd3e82](https://github.com/Open-Study-College/osc/commit/5fd3e820305370a7b741fc53a92359997adae3b4))
+* short sha ([6aec899](https://github.com/Open-Study-College/osc/commit/6aec8996fba4fa0e992a7e31bf7deac2a88e20cc))
+* typo in body.tsx osc-studio ([5d27a68](https://github.com/Open-Study-College/osc/commit/5d27a686ce6049b2d129f011984452aaeb3499e2))
+* update dockerfiles with ENV SANITY_STUDIO_CI="true" ([88f7256](https://github.com/Open-Study-College/osc/commit/88f7256ea83561571fec2c3baedc512d457a4406))
+* update sample env.file in studio ([5ede79b](https://github.com/Open-Study-College/osc/commit/5ede79bb89a2ba3803f1cb1536dddb6c6da4ec76))
+* use short sha when searching for image ([c902995](https://github.com/Open-Study-College/osc/commit/c902995ace022020d15cc6ff800a5ac4b6b70be0))
+* used buildx action v2 ([b6f21e1](https://github.com/Open-Study-College/osc/commit/b6f21e1d3b6438eb02509c77d10aef8b2c28a714))
+
 ## [0.34.0](https://github.com/Open-Study-College/osc/compare/v0.33.1...v0.34.0) (2023-02-14)
 
 
@@ -84,12 +105,4 @@
 * renames icons with more generic name ([b066ac7](https://github.com/Open-Study-College/osc/commit/b066ac7af867104cb51ffba1f1063285d7bbba47))
 * **tag:** updates accessible icon within the tag ([f2e3edc](https://github.com/Open-Study-College/osc/commit/f2e3edc7531870efde3be1a7a9d0dee28e6e7b5d))
 * update regex to match all instances ([b163bec](https://github.com/Open-Study-College/osc/commit/b163bec45d4d3718c96494a05888450a6f5384ab))
-
-## [0.31.0](https://github.com/Open-Study-College/osc/compare/v0.30.0...v0.31.0) (2023-01-30)
-
-
-### ✨ Features
-
-* add "isDisabled" story and descriptions ([68a750a](https://github.com/Open-Study-College/osc/commit/68a750a1226cc9c69bc892708bfe84c5ecd333cc))
-* add error handling/styling for "Has Validation" ([2e6d128](https://github.com/Open-Study-College/osc/commit/2e6d128e05f4e5d46191af9f3a199fa3fb56f879))
 
