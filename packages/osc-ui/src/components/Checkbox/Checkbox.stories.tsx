@@ -96,7 +96,7 @@ Primary.args = {
 Secondary.args = {
     variations: [
         {
-            icon: { id: 'check', className: 'check' },
+            icon: { id: 'check', className: 'c-checkbox__is-checked' },
             id: 'course-replacement-1',
             name: 'course-replacement',
             state: 'default',
@@ -105,7 +105,7 @@ Secondary.args = {
         },
         {
             defaultChecked: true,
-            icon: { id: 'check', className: 'check' },
+            icon: { id: 'check', className: 'c-checkbox__is-checked' },
             id: 'course-replacement-2',
             name: 'course-replacement',
             state: 'selectedOption',
@@ -113,7 +113,7 @@ Secondary.args = {
             variants: ['secondary'],
         },
         {
-            icon: { id: 'check', className: 'check' },
+            icon: { id: 'check', className: 'is-checked' },
             id: 'course-replacement-3',
             name: 'course-replacement',
             ref: true,
@@ -122,7 +122,7 @@ Secondary.args = {
             variants: ['secondary'],
         },
         {
-            icon: { id: 'check', className: 'check' },
+            icon: { id: 'check', className: 'is-checked' },
             id: 'course-replacement-4',
             name: 'course-replacement',
             required: true,

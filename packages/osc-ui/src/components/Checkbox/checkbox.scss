@@ -91,10 +91,7 @@ $checkbox-height: 1.25;
         }
     }
 
-    .o-icon {
-        &.check {
-            width: 0.625em;
-            height: 0.625em;
-        }
+    &__is-checked {
+        --icon-size: 0.625em;
     }
 }
