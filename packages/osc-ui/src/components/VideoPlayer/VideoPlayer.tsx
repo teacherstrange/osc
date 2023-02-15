@@ -150,7 +150,7 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
 
             {children ? (
                 <VideoPlayerContent
-                    className={`c-video-player__content u-p-delta ${
+                    className={`c-video-player__content u-p-l ${
                         !isPlaying || preserveContent ? '' : 'is-hidden'
                     }`}
                 >

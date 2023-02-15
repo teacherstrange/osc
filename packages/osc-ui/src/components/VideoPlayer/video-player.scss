@@ -1,11 +1,12 @@
+/* stylelint-disable plugin/selector-bem-pattern */
 @use "sass:math";
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
-$play-btn-size: $base-font-size * 5px;
+$play-btn-size: $base-fs * 5px;
 $play-btn-color: var(--color-tertiary);
-$play-btn-radius: $radius-l;
-$play-btn-icon-size: rem($base-font-size * 2);
+$play-btn-radius: $rad-l;
+$play-btn-icon-size: rem($base-fs * 2);
 
 /* stylelint-disable-next-line selector-class-pattern */
 .react-player__preview {
@@ -38,7 +39,6 @@ $play-btn-icon-size: rem($base-font-size * 2);
         transition: opacity $timing-s $ease-in;
         opacity: 1;
 
-        /* stylelint-disable-next-line plugin/selector-bem-pattern */
         &,
         & * {
             // make sure we can click through overlaying content and still control the video
@@ -80,7 +80,6 @@ $play-btn-icon-size: rem($base-font-size * 2);
 
         @include z-index("button");
 
-        /* stylelint-disable-next-line plugin/selector-bem-pattern */
         > .o-icon {
             position: relative;
             left: 3px; // offset the position to make it more visually aligned
@@ -120,7 +119,6 @@ $play-btn-icon-size: rem($base-font-size * 2);
         }
     }
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
     .o-img {
         object-fit: cover;
     }
