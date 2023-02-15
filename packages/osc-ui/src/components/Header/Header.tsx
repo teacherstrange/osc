@@ -1,11 +1,9 @@
-import { NavLink as RemixNavLink } from '@remix-run/react';
 import type { HTMLAttributes, ReactNode, RefObject } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import breakpoints from '../../../../../tokens/media-queries';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { classNames } from '../../utils/classNames';
 import { rem } from '../../utils/rem';
-import { AccessibleIcon, Icon } from '../Icon/Icon';
 
 import './header.scss';
 
@@ -19,17 +17,6 @@ export interface SharedNavProps {
      */
     className?: string;
 }
-
-/* -------------------------------------------------------------------------------------------------
- * Logo
- * -----------------------------------------------------------------------------------------------*/
-export const Logo = () => (
-    <RemixNavLink to="/" className="c-header__logo">
-        <AccessibleIcon label="Open Study College">
-            <Icon id="logo" size={[278, 33]} className="o-logo" />
-        </AccessibleIcon>
-    </RemixNavLink>
-);
 
 /* -------------------------------------------------------------------------------------------------
  * Header

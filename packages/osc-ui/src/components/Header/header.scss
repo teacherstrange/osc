@@ -2,6 +2,9 @@
 @use "../../styles/tools/" as *;
 @use "../../styles/settings/" as *;
 
+$logo-size-s: 192px;
+$logo-size-l: 277px;
+
 .c-header {
     $self: &;
 
@@ -16,7 +19,7 @@
     @include mq(mq-token("desk")) {
         grid-template-columns: repeat(2, auto);
         grid-template-rows: repeat(2, 1fr);
-        gap: $space-2xl;
+        gap: $space-2xs;
     }
 
     a,
@@ -27,7 +30,6 @@
     }
 
     &__logo {
-        display: block;
         margin-inline: auto;
         grid-column: 2 / 3;
 
@@ -38,7 +40,11 @@
         }
 
         > svg {
-            max-width: 192px;
+            max-width: $logo-size-s;
+
+            @include mq(mq-token("tab")) {
+                max-width: $logo-size-l;
+            }
         }
     }
 
@@ -106,7 +112,7 @@
         font-weight: $fw-light;
 
         @include mq(mq-token("desk")) {
-            padding-inline-end: $space-2xl;
+            padding-inline-end: $space-2xs;
             grid-column: 2 / -1;
             grid-row: 1;
         }

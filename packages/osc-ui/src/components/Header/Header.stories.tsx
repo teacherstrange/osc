@@ -2,6 +2,7 @@ import type { Meta, Story } from '@storybook/react';
 import React, { useState } from 'react';
 import { Burger } from '../Burger/Burger';
 import { AccessibleIcon, Icon } from '../Icon/Icon';
+import { Logo } from '../Logo/Logo';
 import {
     Navbar,
     NavContent,
@@ -13,7 +14,7 @@ import {
 } from '../Navbar/Navbar';
 import { nestedSubMenuNav } from '../Navbar/navContent';
 import type { HeaderProps } from './Header';
-import { Header, HeaderActionBar, HeaderNav, Logo } from './Header';
+import { Header, HeaderActionBar, HeaderNav } from './Header';
 
 export default {
     title: 'osc-ui/Header',
@@ -116,7 +117,7 @@ const RecursiveNavItemWrapper = (props: { item: Item; level: number; value: stri
 
 const Template: Story<HeaderProps> = (args) => (
     <Header {...args}>
-        <Logo />
+        <Logo className="c-header__logo" />
     </Header>
 );
 
@@ -135,7 +136,7 @@ const HasNavTemplate: Story<HeaderProps> = (args) => {
                 onClick={() => setIsOpen(!isOpen)}
             />
 
-            <Logo />
+            <Logo className="c-header__logo" />
 
             <HeaderNav
                 id="header-nav"
@@ -175,7 +176,7 @@ const HasActionBarTemplate: Story<HeaderProps> = (args) => {
                 onClick={() => setIsOpen(!isOpen)}
             />
 
-            <Logo />
+            <Logo className="c-header__logo" />
 
             <HeaderActionBar>
                 <button className="u-hidden-until@desk">
@@ -263,7 +264,7 @@ HasNavigation.parameters = {
         onClick={() => setIsOpen(!isOpen)}
     />
 
-    <Logo />
+    <Logo className="c-header__logo" />
 
     <HeaderNav
         id="header-nav"
@@ -314,7 +315,7 @@ HasActionBar.parameters = {
         onClick={() => setIsOpen(!isOpen)}
     />
 
-    <Logo />
+    <Logo className="c-header__logo" />
 
     <HeaderActionBar>
         <button className="u-hidden-until@desk">
