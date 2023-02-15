@@ -78,24 +78,24 @@ export const Calendar = (props: CalendarProps) => {
             <div className="c-calendar__header">
                 <span className="c-calendar__date-container">
                     <ReactAriaButton
-                        className="c-calendar__month"
+                        className="c-calendar__current-month"
                         onPress={() => setCalendarView('year')}
                     >
                         {month}
                     </ReactAriaButton>
                     <ReactAriaButton
-                        className="c-calendar__year"
+                        className="c-calendar__current-year"
                         onPress={() => setCalendarView('decade')}
                     >
                         {year}
                     </ReactAriaButton>
                 </span>
-                <div className="c-calendar__buttons">
+                <div className="c-calendar__buttons-container">
                     <ReactAriaButton {...prevButtonProps}>
-                        <Icon className="c-calendar__chevron" id="chevron-left" />
+                        <Icon className="c-calendar__button--chevron" id="chevron-left" />
                     </ReactAriaButton>
                     <ReactAriaButton {...nextButtonProps}>
-                        <Icon className="c-calendar__chevron" id="chevron-right" />
+                        <Icon className="c-calendar__button--chevron" id="chevron-right" />
                     </ReactAriaButton>
                 </div>
             </div>

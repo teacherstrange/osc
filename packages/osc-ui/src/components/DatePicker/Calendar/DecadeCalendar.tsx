@@ -45,7 +45,7 @@ const YearRange = (props): ReactElement => {
     const endYear = years[years.length - 1].formatted;
 
     return (
-        <div className="c-calendar__year--container">
+        <div className="c-calendar__date-container">
             <Button
                 className={classes}
                 onClick={() => {
@@ -93,8 +93,8 @@ const Years = (props) => {
             <button
                 className={
                     isSelected
-                        ? `c-calendar__decade-view--year-button c-calendar__decade-view--selected`
-                        : `c-calendar__decade-view--year-button `
+                        ? `c-calendar__button--year c-calendar__button--selected`
+                        : `c-calendar__button--year `
                 }
                 key={i}
                 onClick={(e) => {
@@ -153,20 +153,21 @@ export const DecadeCalendar = (props: DecadeCalendarProps) => {
     }, [yearStepper]);
 
     return (
-        <div {...calendarProps} className="c-calendar c-calendar__decade-view">
+        <div {...calendarProps} className="c-calendar c-calendar__decade">
             <div className="c-calendar__header">
                 <Button
                     onClick={() => {
                         state.setFocusedDate(state.focusedDate.subtract({ years: 10 }));
                         setYearStepper(true);
                     }}
+                    className="c-calendar__button--chevron"
                     variant="quaternary"
                 >
-                    <Icon className="c-calendar__chevron" id="chevron-left" />
+                    <Icon id="chevron-left" />
                 </Button>
                 {years ? (
                     <YearRange
-                        classes="c-calendar__year"
+                        classes="c-calendar__current-year"
                         state={state}
                         years={years}
                         setCalendarView={setCalendarView}
@@ -177,9 +178,10 @@ export const DecadeCalendar = (props: DecadeCalendarProps) => {
                         state.setFocusedDate(state.focusedDate.add({ years: 10 }));
                         setYearStepper(true);
                     }}
+                    className="c-calendar__button--chevron"
                     variant="quaternary"
                 >
-                    <Icon className="c-calendar__chevron" id="chevron-right" />
+                    <Icon id="chevron-right" />
                 </Button>
             </div>
             <div className="year-calendar__dropdowns">

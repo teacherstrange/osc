@@ -61,8 +61,8 @@ const Months = (props) => {
             <Button
                 className={
                     isSelected
-                        ? `c-calendar__year-view--month-button c-calendar__year-view--selected`
-                        : `c-calendar__year-view--month-button`
+                        ? `c-calendar__button--month c-calendar__button--selected`
+                        : `c-calendar__button--month`
                 }
                 key={index}
                 onClick={(e) => {
@@ -80,7 +80,7 @@ const Months = (props) => {
     const monthsResult = (): ReactElement[] => {
         let i = 0;
         return [...Array(4).keys()].map((_, idx) => (
-            <div className="c-calendar__year-view--month-container" key={idx}>
+            <div className="c-calendar__date-container" key={idx}>
                 {[...Array(3).keys()].map((_) => {
                     const year = <Month key={i} index={i} />;
                     i++;
@@ -108,18 +108,19 @@ export const YearCalendar = (props: YearCalendarProps) => {
     let { calendarProps } = useCalendar(rest, state);
 
     return (
-        <div {...calendarProps} className="c-calendar c-calendar__year-view">
+        <div {...calendarProps} className="c-calendar c-calendar__year">
             <div className="c-calendar__header">
                 <Button
                     onClick={() => {
                         state.setFocusedDate(state.focusedDate.subtract({ years: 1 }));
                     }}
+                    className="c-calendar__button--chevron"
                     variant="quaternary"
                 >
-                    <Icon className="c-calendar__chevron" id="chevron-left" />
+                    <Icon id="chevron-left" />
                 </Button>
                 <Year
-                    className="c-calendar__year"
+                    className="c-calendar__current-year"
                     setCalendarView={setCalendarView}
                     state={state}
                 />
@@ -127,9 +128,10 @@ export const YearCalendar = (props: YearCalendarProps) => {
                     onClick={() => {
                         state.setFocusedDate(state.focusedDate.add({ years: 1 }));
                     }}
+                    className="c-calendar__button--chevron"
                     variant="quaternary"
                 >
-                    <Icon className="c-calendar__chevron" id="chevron-right" />
+                    <Icon id="chevron-right" />
                 </Button>
             </div>
             <div className="year-calendar__dropdowns">

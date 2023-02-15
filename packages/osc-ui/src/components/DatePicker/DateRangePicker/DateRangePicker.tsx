@@ -50,7 +50,7 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
     const ClearSelection = () => (
         <Button
             variant="quaternary"
-            className="c-calendar__range--clear-selection"
+            className="c-calendar__button--clear-selection"
             onClick={() => {
                 setValue(null);
                 setSelectedRange({ timePreset: false, range: null, timePresetLength: 0 });
@@ -106,7 +106,7 @@ const TimePresets = (props: TimePresetProps) => {
     const { isDesktop, presets, selectedRange, setSelectedRange, setValue } = props;
 
     return (
-        <div className="c-calendar__range--time-presets" aria-label="Time Presets" role="group">
+        <div className="c-calendar__range-time-presets" aria-label="Time Presets" role="group">
             {isDesktop ? <div>Time Presets</div> : null}
             {createTimePresets(presets).map(({ endDate, length, name, startDate }, index) => {
                 const selectedClass =
@@ -114,6 +114,7 @@ const TimePresets = (props: TimePresetProps) => {
                 const mobileClasses = !isDesktop ? 'is-mobile' : null;
 
                 const classes = classNames(
+                    'c-calendar__button--time-preset',
                     selectedClass && selectedClass,
                     mobileClasses && mobileClasses
                 );

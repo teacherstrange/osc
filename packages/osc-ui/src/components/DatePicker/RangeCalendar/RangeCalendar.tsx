@@ -130,10 +130,10 @@ export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
     }, [state.highlightedRange?.start.day, state.value]);
 
     return (
-        <div className="c-calendar__range--container">
-            <div className="c-calendar__range--inner-container-1">
+        <div className="c-calendar__range-container">
+            <div className="c-calendar__range-container-inner-1">
                 {isDesktop ? timePresets : null}
-                <div className="c-calendar__range--calendar-container">
+                <div className="c-calendar__range-container-calendar">
                     <RangeCalendar
                         aria-label="Date range"
                         isDesktop={isDesktop}
@@ -143,7 +143,7 @@ export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
                 </div>
             </div>
             {!isDesktop ? timePresets : null}
-            <div className="c-calendar__range--inner-container-2">
+            <div className="c-calendar__range-container-inner-2">
                 {isDesktop ? (
                     <div
                         className={showPrompt ? 'c-calendar__prompt' : 'c-calendar__prompt--hidden'}
@@ -151,11 +151,11 @@ export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
                         Now Select an End Date
                     </div>
                 ) : null}
-                <div className="c-calendar__range--inner-container-2-options">
+                <div className="c-calendar__range-container-inner-2-options">
                     {clearSelection}
                     <Button
                         variant="quaternary"
-                        className="c-calendar__range--today"
+                        className="c-calendar__button--today"
                         onClick={() => setFocusedDate(today(getLocalTimeZone()))}
                     >
                         Jump to Today
@@ -200,7 +200,7 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                 {formatDate(range, formattedDate, state).map((date, idx) => {
                     const dateSegment = ['month', 'year'];
                     return (
-                        <span key={idx} className={`c-calendar__${dateSegment[idx]}`}>
+                        <span key={idx} className={`c-calendar__current-${dateSegment[idx]}`}>
                             {date}
                         </span>
                     );
@@ -213,7 +213,7 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
         <div {...calendarProps} ref={ref} className="c-calendar c-calendar__range">
             <div className="c-calendar__header">
                 <div className="c-calendar__header--inner">
-                    <div className="c-calendar__buttons">
+                    <div className="c-calendar__buttons-container">
                         {/* Add a screen reader only description of the entire visible range rather than
                          * a separate heading above each month grid. This is placed first in the DOM order
                          * so that it is the first thing a touch screen reader user encounters.
@@ -222,15 +222,21 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                         <VisuallyHidden>
                             <h2>{calendarProps['aria-label']}</h2>
                         </VisuallyHidden>
-                        <ReactAriaButton {...prevButtonProps}>
-                            <Icon className="c-calendar__chevron" id="chevron-left" />
+                        <ReactAriaButton
+                            className="c-calendar__button--chevron"
+                            {...prevButtonProps}
+                        >
+                            <Icon id="chevron-left" />
                         </ReactAriaButton>
                     </div>
                     <Date range={'start'} />
                     {!isDesktop ? (
-                        <div className="c-calendar__buttons">
-                            <ReactAriaButton {...nextButtonProps}>
-                                <Icon className="c-calendar__chevron" id="chevron-right" />
+                        <div className="c-calendar__buttons-container">
+                            <ReactAriaButton
+                                className="c-calendar__button--chevron"
+                                {...nextButtonProps}
+                            >
+                                <Icon id="chevron-right" />
                             </ReactAriaButton>
                         </div>
                     ) : null}
@@ -238,9 +244,12 @@ export const RangeCalendar = (props: RangeCalendarProps) => {
                 {isDesktop ? (
                     <div className="c-calendar__header--inner">
                         <Date range={'end'} />
-                        <div className="c-calendar__buttons">
-                            <ReactAriaButton {...nextButtonProps}>
-                                <Icon className="c-calendar__chevron" id="chevron-right" />
+                        <div className="c-calendar__buttons-container">
+                            <ReactAriaButton
+                                className="c-calendar__button--chevron"
+                                {...nextButtonProps}
+                            >
+                                <Icon id="chevron-right" />
                             </ReactAriaButton>
                         </div>
                     </div>
