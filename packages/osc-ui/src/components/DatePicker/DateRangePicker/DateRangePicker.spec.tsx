@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { DateRangePickerContainer } from './DateRangePicker';
+import { SpritesheetProvider } from '../../Icon/Icon';
 
 const TODAY = 'Today';
 const YEST = 'Yesterday';
@@ -23,7 +24,11 @@ const presets = [
 ];
 
 test('should render the DateField with SpinButtons for a DatePicker, a button for the Calendar and a Label', () => {
-    render(<DateRangePickerContainer label="Date Range" />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" />
+        </SpritesheetProvider>
+    );
     const dateRange = ['Start', 'End'];
 
     expect(screen.getByRole('group', { name: 'Date Range' })).toBeInTheDocument();
@@ -39,15 +44,19 @@ test('should render the DateField with SpinButtons for a DatePicker, a button fo
             screen.getByRole('spinbutton', { name: `Date Range ${res} Date year` })
         ).toBeInTheDocument();
     });
-    expect(screen.getAllByRole('button', { name: 'Date Range Calendar' }).length).toBe(2);
+    expect(screen.getAllByRole('button', { name: 'Date Range' }).length).toBe(2);
 });
 test('should open the calendar when the calendar button is clicked', async () => {
     const dates = { start: parseDate('2023-01-01'), end: parseDate('2023-02-28') };
     const user = userEvent.setup();
-    render(<DateRangePickerContainer label="Date Range" defaultValue={dates} />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" defaultValue={dates} />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
-    expect(screen.getByRole('dialog', { name: 'Date Range Calendar' })).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: 'Date Range' })).toBeInTheDocument();
     expect(
         screen.getByRole('group', { name: 'Date range, January to February 2023' })
     ).toBeInTheDocument();
@@ -60,11 +69,13 @@ test('should disable out of range dates when min/max values are passed in', asyn
     const maxDate = 26;
 
     render(
-        <DateRangePickerContainer
-            label="Date Range"
-            minValue={parseDate(`2023-01-${minDate}`)}
-            maxValue={parseDate(`2023-02-${maxDate}`)}
-        />
+        <SpritesheetProvider>
+            <DateRangePickerContainer
+                label="Date Range"
+                minValue={parseDate(`2023-01-${minDate}`)}
+                maxValue={parseDate(`2023-02-${maxDate}`)}
+            />
+        </SpritesheetProvider>
     );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
@@ -85,7 +96,11 @@ test('should disable out of range dates when min/max values are passed in', asyn
 test('should render time presets when pass in as a prop', async () => {
     const user = userEvent.setup();
 
-    render(<DateRangePickerContainer label="Date Range" presets={presets} />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" presets={presets} />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
     expect(screen.getByRole('group', { name: 'Time Presets' })).toBeInTheDocument();
@@ -97,7 +112,11 @@ test('should select the correct range when a time present is selected', async ()
     const user = userEvent.setup();
     const today = new Date().toISOString().split('T')[0];
 
-    render(<DateRangePickerContainer label="Date Range" presets={presets} />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" presets={presets} />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
     const timePresetButton = screen.getByRole('button', { name: THREE_DAYS });
@@ -125,7 +144,11 @@ test('should remove hidden class from "Now select end date" prompt when first da
         useMediaQuery: vi.fn(() => true),
     }));
 
-    render(<DateRangePickerContainer label="Date Range" />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
 
@@ -138,7 +161,11 @@ test('should remove hidden class from "Now select end date" prompt when first da
 test('should clear selection if the Clear Selection button is selected', async () => {
     const user = userEvent.setup();
 
-    render(<DateRangePickerContainer label="Date Range" />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
 
