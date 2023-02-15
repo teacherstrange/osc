@@ -17,13 +17,6 @@ $simple-nav-width: 250px;
         font-weight: $fw-reg;
     }
 
-    button,
-    a {
-        &:focus-visible {
-            box-shadow: 0 0 0 0.2rem var(--color-primary);
-        }
-    }
-
     &--simple {
         #{$self}__content {
             @include mq(mq-token("desk")) {

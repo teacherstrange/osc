@@ -22,13 +22,6 @@ $logo-size-l: 277px;
         gap: $space-2xs;
     }
 
-    a,
-    button {
-        &:focus-visible {
-            box-shadow: 0 0 0 0.25rem var(--color-primary);
-        }
-    }
-
     &__logo {
         margin-inline: auto;
         grid-column: 2 / 3;
