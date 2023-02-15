@@ -9,14 +9,14 @@
     display: grid;
     align-items: center;
     grid-template-columns: repeat(3, auto);
-    padding-block: var(--space-scale-delta);
+    padding-block: $space-xl;
 
     @include z-index("header");
 
     @include mq(mq-token("desk")) {
         grid-template-columns: repeat(2, auto);
         grid-template-rows: repeat(2, 1fr);
-        gap: var(--space-scale-micro);
+        gap: $space-2xl;
     }
 
     a,
@@ -102,11 +102,11 @@
     &__action-bar {
         display: flex;
         justify-content: flex-end;
-        gap: var(--space-scale-delta);
-        font-weight: $weight-light;
+        gap: $space-xl;
+        font-weight: $fw-light;
 
         @include mq(mq-token("desk")) {
-            padding-inline-end: var(--space-scale-micro);
+            padding-inline-end: $space-2xl;
             grid-column: 2 / -1;
             grid-row: 1;
         }
@@ -135,8 +135,8 @@
                 flex: 0 1 50%;
                 align-items: center;
                 justify-content: center;
-                padding: var(--space-scale-centi) var(--space-scale-zeta);
-                gap: var(--space-scale-milli);
+                padding: $space-s $space-m;
+                gap: $space-xs;
 
                 &:not(:last-child) {
                     border-right: 1px solid var(--color-tertiary);
