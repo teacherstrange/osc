@@ -35,7 +35,7 @@ export const heroCarousel = {
                             {
                                 _key: '5933b05259cb0',
                                 _type: 'span',
-                                marks: ['span t-font-epsilon'],
+                                marks: ['span t-font-l'],
                                 text: "With flexible payment plans and a range of special offers it's never been simpler to study.",
                             },
                         ],
@@ -90,7 +90,7 @@ export const heroCarousel = {
                             {
                                 _key: '9caf437895110',
                                 _type: 'span',
-                                marks: ['span t-font-epsilon', 'span u-color-tertiary'],
+                                marks: ['span t-font-l', 'span u-color-tertiary'],
                                 text: 'Get £75 off when you spend over £400 on your enrolment',
                             },
                         ],
@@ -168,7 +168,7 @@ export const heroSingle = {
                             {
                                 _key: '5933b05259cb0',
                                 _type: 'span',
-                                marks: ['span t-font-epsilon'],
+                                marks: ['span t-font-l'],
                                 text: "With flexible payment plans and a range of special offers it's never been simpler to study.",
                             },
                         ],

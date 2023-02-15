@@ -12,7 +12,7 @@ test('renders the Hero', () => {
                 <HeroContent>
                     <div className="c-content">
                         <div className="c-content__inner c-content__inner--left">
-                            <p className="t-font-epsilon">
+                            <p className="t-font-l">
                                 With flexible payment plans and a range of special offers it's never
                                 been simpler to study.
                             </p>

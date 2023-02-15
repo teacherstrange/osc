@@ -7,9 +7,9 @@
 @use "../../styles/tools" as *;
 
 $hero-height: 480px;
-$hero-space: $global-spacing-s;
-$hero-space-m: calc($global-spacing-m * 2);
-$hero-space-l: $global-spacing-5xl;
+$hero-space: $space-s;
+$hero-space-m: calc($space-m * 2);
+$hero-space-l: $space-5xl;
 $hero-ttl-border: 3px solid currentcolor;
 $hero-content-border: 3px solid;
 $hero-grid-outer: clamp(16px, 2.5vw, 40px);
@@ -52,7 +52,7 @@ $hero-grid-full: list.slash(1, -1);
     &__inner {
         display: grid;
         grid-template-columns: $hero-inner-grid-cols;
-        gap: $global-spacing;
+        gap: $space-m;
         grid-row: $hero-grid-full;
         grid-column: $hero-grid-full;
         padding-block-end: $hero-space-m;
@@ -72,7 +72,7 @@ $hero-grid-full: list.slash(1, -1);
     &__img {
         grid-row: 1 / span 2;
         grid-column: 5 / span 8;
-        padding-inline-start: $global-spacing;
+        padding-inline-start: $space-m;
         justify-self: end;
 
         @include mq(mq-token("mob"), max) {
@@ -88,10 +88,10 @@ $hero-grid-full: list.slash(1, -1);
         }
 
         &.is-flush {
-            margin-inline-end: calc($global-spacing-m * -1); // Break out of the container padding
+            margin-inline-end: calc($space-m * -1); // Break out of the container padding
 
             @include mq(mq-token("desk")) {
-                margin-inline-end: calc(($global-spacing-4xl + 4px) * -1); // Break out of the container padding
+                margin-inline-end: calc(($space-4xl + 4px) * -1); // Break out of the container padding
             }
 
             @include mq(mq-token("desk-lrg")) {
@@ -134,13 +134,13 @@ $hero-grid-full: list.slash(1, -1);
             max-width: 10ch;
             grid-column: 1 / span 7;
             border-block-end: $hero-ttl-border;
-            margin-block-end: var(--space-scale-beta);
+            margin-block-end: $space-2xl;
 
             @include mq(mq-token("mob-lrg")) {
                 align-self: end;
                 max-width: 533px;
                 margin-block-end: 0;
-                padding-block-end: var(--space-scale-milli);
+                padding-block-end: $space-xs;
             }
 
             @include mq(mq-token("tab")) {
@@ -151,7 +151,7 @@ $hero-grid-full: list.slash(1, -1);
         #{$self}__content {
             grid-column: 1 / span 12;
             border-block-start: $hero-content-border;
-            padding-block-start: var(--space-scale-milli);
+            padding-block-start: $space-xs;
             z-index: 2;
 
             @include mq(mq-token("mob-lrg")) {
@@ -195,24 +195,24 @@ $hero-grid-full: list.slash(1, -1);
             margin-block-start: $hero-space-l;
 
             @include mq(mq-token("tab-med")) {
-                margin-block-start: var(--space-scale-alpha);
+                margin-block-start: $space-4xl;
                 line-height: 0.8;
             }
         }
 
         #{$self}__content {
-            margin-block-end: var(--space-scale-delta);
+            margin-block-end: $space-xl;
 
             @include mq(mq-token("tab-med"), max) {
                 border-block-start: $hero-content-border;
-                margin-block-start: var(--space-scale-alpha);
-                padding-block-start: var(--space-scale-milli);
+                margin-block-start: $space-4xl;
+                padding-block-start: $space-2xs;
             }
 
             .c-content__inner {
                 align-items: center;
                 justify-content: center;
-                gap: var(--space-scale-milli);
+                gap: $space-2xs;
 
                 @include mq(mq-token("tab-med")) {
                     flex-direction: row;
@@ -260,7 +260,7 @@ $hero-grid-full: list.slash(1, -1);
 
         #{$self}__ttl,
         #{$self}__subttl {
-            font-weight: $weight-bold;
+            font-weight: $fw-bold;
         }
 
         #{$self}__ttl {
@@ -281,7 +281,7 @@ $hero-grid-full: list.slash(1, -1);
 
         #{$self}__content {
             grid-row: 3;
-            margin-block-end: calc($global-spacing * 1.25);
+            margin-block-end: calc($space-m * 1.25);
             align-self: start;
         }
 
@@ -291,7 +291,7 @@ $hero-grid-full: list.slash(1, -1);
             padding-inline-start: 0;
 
             @include mq(mq-token("tab"), max) {
-                margin-inline: calc($global-spacing-m * -1); // Break out of the container padding
+                margin-inline: calc($space-m * -1); // Break out of the container padding
             }
 
             @include mq(mq-token("tab")) {

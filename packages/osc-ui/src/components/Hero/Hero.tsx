@@ -102,11 +102,11 @@ export const HeroTitle = <C extends ElementType = 'h2'>(
     let fontSize = '';
 
     if (variant === 'secondary') {
-        fontSize = 't-font-mega';
+        fontSize = 't-font-7xl';
     } else if (variant === 'tertiary') {
-        fontSize = 't-font-beta';
+        fontSize = 't-font-3xl';
     } else {
-        fontSize = 't-font-kilo';
+        fontSize = 't-font-6xl';
     }
 
     const classes = classNames(

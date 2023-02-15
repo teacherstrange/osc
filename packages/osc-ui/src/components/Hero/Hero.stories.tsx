@@ -33,7 +33,7 @@ const Template: Story<HeroProps> = ({ ...args }) => (
             <HeroContent>
                 <div className="c-content">
                     <div className="c-content__inner c-content__inner--left">
-                        <p className="t-font-epsilon">
+                        <p className="t-font-l">
                             With flexible payment plans and a range of special offers it's never
                             been simpler to study.
                         </p>
@@ -65,7 +65,7 @@ const SecondaryTemplate: Story<HeroProps> = ({ ...args }) => (
             <HeroContent>
                 <div className="c-content">
                     <div className="c-content__inner c-content__inner--centre">
-                        <p className="t-font-epsilon u-color-tertiary">
+                        <p className="t-font-l u-color-tertiary">
                             Get £75 off when you spend over £400 on your enrolment
                         </p>
 
@@ -125,7 +125,7 @@ const CarouselTemplate: Story<HeroProps> = () => (
                 <HeroContent>
                     <div className="c-content">
                         <div className="c-content__inner c-content__inner--left">
-                            <p className="t-font-epsilon">
+                            <p className="t-font-l">
                                 With flexible payment plans and a range of special offers it's never
                                 been simpler to study.
                             </p>
@@ -155,7 +155,7 @@ const CarouselTemplate: Story<HeroProps> = () => (
                 <HeroContent>
                     <div className="c-content">
                         <div className="c-content__inner c-content__inner--centre">
-                            <p className="t-font-epsilon">
+                            <p className="t-font-l">
                                 Download our <strong>new 2023 prospectus</strong> today
                             </p>
 
@@ -175,7 +175,7 @@ const CarouselTemplate: Story<HeroProps> = () => (
                 <HeroContent>
                     <div className="c-content">
                         <div className="c-content__inner c-content__inner--centre">
-                            <p className="t-font-epsilon u-color-tertiary">
+                            <p className="t-font-l u-color-tertiary">
                                 Get £75 off when you spend over £400 on your enrolment
                             </p>
 
@@ -197,7 +197,7 @@ const FlushImgTemplate: Story<HeroProps> = ({ ...args }) => (
             <HeroContent>
                 <div className="c-content">
                     <div className="c-content__inner c-content__inner--left">
-                        <p className="t-font-epsilon">35 Courses Available</p>
+                        <p className="t-font-l">35 Courses Available</p>
                     </div>
                 </div>
             </HeroContent>
