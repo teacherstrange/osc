@@ -6,7 +6,11 @@ export const TextGrid = (props: { data: textGridModule }) => {
     const { data } = props;
 
     return (
-        <OSCTextGrid heading={data?.heading} hasInlineHeading={data?.hasInlineHeading}>
+        <OSCTextGrid
+            heading={data?.heading}
+            hasInlineHeading={data?.hasInlineHeading}
+            className="o-container"
+        >
             {data?.items?.map((item) => (
                 <Fragment key={item?._key}>
                     {item?.icon ? <Icon id={item?.icon} /> : null}
