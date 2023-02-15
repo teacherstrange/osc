@@ -162,6 +162,12 @@ $simple-nav-width: 250px;
         }
     }
 
+    > #{$self}__list {
+        @include mq(mq-token("desk")) {
+            align-items: center;
+        }
+    }
+
     &__list {
         --navbar-list-gap: #{$space-xl};
 
