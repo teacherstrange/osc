@@ -1,12 +1,12 @@
-import { Content, Icon, TextGrid as OSCTextGrid } from 'osc-ui';
+import { Content, Icon, TextGrid } from 'osc-ui';
 import { Fragment } from 'react';
 import type { textGridModule } from '~/types/sanity';
 
-export const TextGrid = (props: { data: textGridModule }) => {
+export const TextGridModule = (props: { data: textGridModule }) => {
     const { data } = props;
 
     return (
-        <OSCTextGrid
+        <TextGrid
             heading={data?.heading}
             hasInlineHeading={data?.hasInlineHeading}
             className="o-container"
@@ -29,6 +29,6 @@ export const TextGrid = (props: { data: textGridModule }) => {
                     ) : null}
                 </Fragment>
             ))}
-        </OSCTextGrid>
+        </TextGrid>
     );
 };

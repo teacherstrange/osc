@@ -26,7 +26,7 @@ import type {
 import { AccordionModule } from './Accordion/Accordion';
 import { Cards } from './Cards/Cards';
 import { Hero } from './Hero/Hero';
-import { TextGrid } from './TextGrid/TextGrid';
+import { TextGridModule } from './TextGrid/TextGrid';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
 
 // So we can dynamically add the styles of each component into remix we need to create an array of stylesheet objects.
@@ -171,7 +171,7 @@ export default function Module(props: Props) {
         case 'module.textGrid':
             const moduleTextGrid = module as textGridModule;
 
-            return <TextGrid data={moduleTextGrid} key={moduleTextGrid._key} />;
+            return <TextGridModule data={moduleTextGrid} key={moduleTextGrid._key} />;
 
         case 'module.video':
             const moduleVideo = module as videoModule;
