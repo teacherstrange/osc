@@ -65,3 +65,31 @@ test('should disable out of range dates when min/max values are passed in', asyn
         i++;
     }
 });
+test('should open the year and decade calendars and set the correct date', async () => {
+    const finalSelectedDate = 'Selected Date: December 5, 2024';
+    const user = userEvent.setup();
+    render(
+        <SpritesheetProvider>
+            <DatePicker type="month" label="Date" defaultValue={parseDate('2023-02-01')} />
+        </SpritesheetProvider>
+    );
+
+    const button = screen.getByRole('button');
+    await user.click(button);
+
+    const monthButton = screen.getByRole('button', { name: 'Feb' });
+    await user.click(monthButton);
+
+    const decButton = screen.getByRole('button', { name: 'Dec' });
+    await user.click(decButton);
+
+    const yearButton = screen.getByRole('button', { name: '2023' });
+    await user.click(yearButton);
+
+    const year2024Button = screen.getByRole('button', { name: '2024' });
+    await user.click(year2024Button);
+    const dayButton = screen.getByRole('button', { name: 'Thursday, December 5, 2024' });
+    await user.click(dayButton);
+
+    expect(screen.getByText(finalSelectedDate)).toBeInTheDocument();
+});
