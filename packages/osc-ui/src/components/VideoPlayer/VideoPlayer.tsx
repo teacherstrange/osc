@@ -62,6 +62,7 @@ export interface VideoPlayerProps extends Omit<ReactPlayerProps, 'config'> {
     loop?: boolean;
     /**
      * Custom path for the icon spritesheet
+     * TODO: Temporary fix Remove this once #685 is merged
      */
     iconPath?: string;
 }
