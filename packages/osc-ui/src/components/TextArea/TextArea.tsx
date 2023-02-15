@@ -2,10 +2,7 @@ import type { TextareaHTMLAttributes, ReactNode } from 'react';
 import React, { forwardRef, useState } from 'react';
 import { Label } from '../Label/Label';
 
-import { useModifier } from '../../hooks/useModifier';
-import { classNames } from '../../utils/classNames';
 import { getFieldError } from '../../utils/getFieldError';
-import { Icon } from '../Icon/Icon';
 import './text-area.scss';
 
 type IconType = {
@@ -46,26 +43,26 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         const errorMessage = getFieldError(value, required);
         const displayError = wasSubmitted && errorMessage;
 
-        const modifiers = useModifier('c-textarea__container', variants);
-        const textareaClasses = classNames('c-textarea__container', modifiers);
+        const InputError = () => (
+            <>
+                <div className="c-input__icon c-input__icon--error">{icon?.content}</div>
+                <span className="c-input__error-message" role="alert" id={`${id}-error`}>
+                    {errorMessage}
+                </span>
+            </>
+        );
 
         return (
-            <div className="c-textarea__outer-container">
+            <div className="c-input__outer-container">
                 <div
                     className={
                         displayError
-                            ? `${textareaClasses} c-textarea__container--error`
-                            : textareaClasses
+                            ? `c-input__container c-input__container--error`
+                            : `c-input__container`
                     }
                 >
-                    <Label
-                        htmlFor={id}
-                        name={name}
-                        variants={disabled ? ['disabled'] : null}
-                        required={required}
-                    />
                     <textarea
-                        className="c-textarea"
+                        className="c-input c-input__textarea"
                         disabled={disabled}
                         id={id}
                         name={name}
@@ -74,22 +71,13 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                         required={required}
                         {...rest}
                     />
-                    {displayError ? (
-                        <>
-                            {icon && icon.content ? (
-                                <div className="c-textarea__icon c-textarea__icon--error">
-                                    <Icon label={icon.label}>{icon.content}</Icon>
-                                </div>
-                            ) : null}
-                            <span
-                                className="c-textarea__error-message"
-                                role="alert"
-                                id={`${id}-error`}
-                            >
-                                {errorMessage}
-                            </span>
-                        </>
-                    ) : null}
+                    <Label
+                        htmlFor={id}
+                        name={name}
+                        variants={disabled ? ['disabled'] : null}
+                        required={required}
+                    />
+                    {displayError ? <InputError /> : null}
                 </div>
             </div>
         );

@@ -1,8 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef } from 'react';
+import { Icon } from '../Icon/Icon';
 
 import { TextArea } from './TextArea';
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 
 export default {
     title: 'osc-ui/TextArea',
@@ -35,7 +35,7 @@ const Template: Story = ({ variations }) => {
         <div>
             {variations.map((variant, i) => {
                 return (
-                    <div key={i} style={{ margin: '1em' }}>
+                    <div key={i} style={{ margin: '1em', width: '500px' }}>
                         <p style={{ fontWeight: '700', padding: '.5em 0' }}>
                             {states[variant.state]}
                         </p>
@@ -89,7 +89,7 @@ Primary.args = {
             editor: 'input',
             id: 'enquiry-4',
             icon: {
-                content: <ExclamationTriangleIcon />,
+                content: <Icon id="exclamation-mark" />,
                 label: 'Exclamation Triangle Icon',
                 type: 'error',
             },
