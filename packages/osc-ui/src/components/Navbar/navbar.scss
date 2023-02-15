@@ -126,6 +126,8 @@ $simple-nav-width: 250px;
     }
 
     &__trigger-icon {
+        transition: transform $timing $ease-in-out;
+
         @include mq(mq-token("desk"), max) {
             transform: rotate(-90deg);
         }
