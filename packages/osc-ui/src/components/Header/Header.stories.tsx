@@ -185,13 +185,13 @@ const HasActionBarTemplate: Story<HeaderProps> = (args) => {
                     </AccessibleIcon>
                 </button>
 
-                <a href="#" className="u-hidden-until@desk">
+                <a href="/" className="u-hidden-until@desk">
                     <AccessibleIcon label="My account">
                         <Icon id="user" />
                     </AccessibleIcon>
                 </a>
 
-                <a href="#" className="u-hidden-until@desk">
+                <a href="/" className="u-hidden-until@desk">
                     <AccessibleIcon label="Wishlist">
                         <Icon id="heart" />
                     </AccessibleIcon>
@@ -211,12 +211,12 @@ const HasActionBarTemplate: Story<HeaderProps> = (args) => {
                 isOpen={isOpen}
             >
                 <HeaderActionBar className="u-hidden-from@desk">
-                    <a href="#">
+                    <a href="/">
                         <Icon id="phone" />
                         Get in touch
                     </a>
 
-                    <a href="#">
+                    <a href="/">
                         <Icon id="user" />
                         My account
                     </a>
