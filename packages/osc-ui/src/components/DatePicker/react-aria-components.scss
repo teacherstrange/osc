@@ -7,14 +7,14 @@
 
 .c-react-aria__dialog {
     width: 100%;
-    padding: var(--space-scale-centi) var(--space-scale-micro);
+    padding: $space-s $space-2xs;
 
     @include mq(mq-token("mob")) {
-        padding: var(--space-scale-epsilon);
+        padding: $space-l;
     }
 
     @include mq(mq-token("desk")) {
-        padding: calc(var(--space-scale-delta));
+        padding: $space-xl;
     }
 }
 
@@ -22,7 +22,6 @@
 
 .c-react-aria__popover {
     background: var(--color-tertiary);
-    box-shadow:
-        hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
-        hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
+    border-radius: $rad-xs;
+    box-shadow: $shadow-l, $shadow-s;
 }

@@ -1,20 +1,22 @@
 /* stylelint-disable selector-class-pattern */
 @use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
-$input-py: calc(var(--space-scale-micro) - 3px);
-$input-pr: var(--space-scale-delta);
-$input-pl: var(--space-scale-micro);
+$input-py: calc($space-rel-2xs - 3px);
+$input-pr: $space-rel-xl;
+$input-pl: $space-rel-2xs;
 
 .c-date-field {
-    position: relative;
     display: inline-flex;
     width: 100%;
     padding: $input-py $input-pr $input-py $input-pl;
     border: solid 1px var(--color-quinary);
-    border-radius: 4px;
+    border-radius: $rad-xs;
 
     &__wrapper {
+        position: relative;
+
         &--error {
             .c-date-field {
                 border: solid 1px var(--color-error);
@@ -23,38 +25,29 @@ $input-pl: var(--space-scale-micro);
     }
 
     &__segment {
-        padding: 0 0.063em;
         font-variant-numeric: tabular-nums;
         text-align: end;
 
         &:last-of-type {
-            padding: 0 var(--space-scale-zeta) 0 0;
+            margin: 0 $space-m 0 0;
         }
 
         &:focus {
             background: var(--color-primary);
-            border-radius: 2px;
+            border-radius: $rad-xs;
             outline: none;
             color: var(--color-tertiary);
         }
-    }
 
-    &__label {
-        --label-font-size: var(--font-scale-centi);
-
-        color: var(--color-neutral-600);
-        font-size: var(--label-font-size);
-        font-weight: $weight-reg;
-        cursor: pointer;
+        @include mq(mq-token("mob")) {
+            padding: 0 0.063rem;
+        }
     }
 
     &__error {
         &--text {
-            position: absolute;
-            top: 100%;
-            left: 0;
             color: var(--color-error);
-            font-size: var(--font-scale-centi);
+            font-size: $fs-s;
         }
     }
 }

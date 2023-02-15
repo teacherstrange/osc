@@ -7,7 +7,7 @@
 
 .c-calendar {
     --selected-color: var(--color-quaternary);
-    --highlighted-color: rgb(0 186 169 / 20%);
+    --highlighted-color: hsl(175deg 100% 36% / 20%);
     --hover-color: var(--color-neutral-300);
     --cell-height: 40px;
     --cell-width: 40px;
@@ -18,24 +18,22 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1em;
-        padding: 0 0 var(--space-scale-milli) 0;
+        gap: $space-s;
+        padding: 0 0 $space-xs 0;
     }
 
     &__date-container {
         display: flex;
-        font-size: var(--font-scale-delta);
-        font-weight: $weight-bold;
+        font-weight: $fw-bold;
     }
 
     &__current-month,
     &__current-year {
-        font-size: var(--font-scale-zeta);
         cursor: pointer;
     }
 
     &__current-month {
-        margin: 0 calc(var(--space-scale-micro) - 3px) 0 0;
+        margin: 0 calc($space-2xs - 3px) 0 0;
     }
 
     &__current-year {
@@ -48,9 +46,9 @@
     }
 
     &__button--chevron {
-        width: 1.25em;
-        height: 1.25em;
-        padding: 0 0.1em;
+        width: 1.25rem;
+        height: 1.25rem;
+        padding: 0 0.1rem;
         color: var(--color-neutral-600);
         cursor: pointer;
     }
@@ -62,7 +60,7 @@
             vertical-align: middle;
             height: var(--cell-height);
             color: var(--color-neutral-600);
-            font-weight: $weight-bold;
+            font-weight: $fw-bold;
             text-align: center;
         }
     }
@@ -73,33 +71,33 @@
         justify-content: center;
         width: var(--cell-width);
         height: var(--cell-height);
-        font-size: var(--font-scale-zeta);
-        font-weight: $weight-light;
+        font-size: $fs-m;
+        font-weight: $fw-light;
         cursor: pointer;
 
         &:focus {
             background: var(--hover-color);
             border: 3px solid var(--color-primary);
-            border-radius: $radius;
-            font-weight: $weight-bold;
+            border-radius: $rad;
+            font-weight: $fw-bold;
         }
 
         &:hover {
             background: var(--hover-color);
-            border-radius: $radius;
-            font-weight: $weight-bold;
+            border-radius: $rad;
+            font-weight: $fw-bold;
         }
 
         &--selected {
             background: var(--selected-color);
-            border-radius: $radius-xs;
+            border-radius: $rad-xs;
             color: var(--color-tertiary);
-            font-weight: $weight-bold;
+            font-weight: $fw-bold;
 
             &:focus {
                 background: var(--selected-color);
                 border: 3px solid var(--color-primary);
-                border-radius: $radius-xs;
+                border-radius: $rad-xs;
             }
         }
 
@@ -113,36 +111,34 @@
     &__decade {
         .c-calendar__button--month,
         .c-calendar__button--year {
-            padding: var(--space-scale-micro) var(--space-scale-delta);
+            padding: $space-2xs $space-xl;
             cursor: pointer;
             font-variant-numeric: tabular-nums;
 
             &:hover {
                 background: var(--color-neutral-300);
-                border-radius: $radius-xs;
+                border-radius: $rad-xs;
             }
 
             &:focus {
                 background: var(--color-neutral-300);
-                border-radius: $radius-xs;
-                box-shadow: 0 0 0 2px var(--color-primary);
+                border-radius: $rad-xs;
             }
         }
 
         .c-calendar__button--selected {
             background: var(--selected-color);
-            border-radius: $radius-xs;
+            border-radius: $rad-xs;
             color: var(--color-tertiary);
-            font-weight: $weight-bold;
+            font-weight: $fw-bold;
         }
 
         .c-calendar__header {
-            margin-bottom: 0.5rem;
+            margin-bottom: $space-xs;
             border-bottom: solid 2px var(--color-neutral-400);
 
             .c-calendar__current-year {
-                font-size: var(--font-scale-zeta);
-                font-weight: $weight-bold;
+                font-weight: $fw-bold;
             }
         }
     }
@@ -157,14 +153,14 @@
     &__decade {
         .c-calendar__button--month,
         .c-calendar__button--year {
-            padding: 0.5em 1em;
+            padding: $space-2xs $space-m;
         }
     }
 
     &__range-container {
         display: flex;
         flex-direction: column;
-        gap: 1em;
+        gap: $space-m;
 
         &-inner-1 {
             display: flex;
@@ -173,7 +169,7 @@
 
         &-inner-2 {
             &-options {
-                gap: 1em;
+                gap: $space-s;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -189,13 +185,13 @@
             .c-calendar__button--clear-selection {
                 border-bottom: 1px solid var(--color-neutral-600);
                 color: var(--color-neutral-600);
-                font-weight: $weight-bold;
+                font-weight: $fw-bold;
             }
 
             .c-calendar__button--today {
-                padding: calc(var(--space-scale-micro) - 3px) var(--space-scale-zeta);
+                padding: calc($space-xs - 3px) $space-m;
                 border: solid 1px var(--color-neutral-400);
-                border-radius: $radius-xs;
+                border-radius: $rad-xs;
             }
         }
 
@@ -203,7 +199,7 @@
             padding: 0;
 
             @include mq(mq-token("desk")) {
-                padding: 0 var(--space-scale-zeta);
+                padding: 0 $space-m;
             }
         }
     }
@@ -212,20 +208,20 @@
         &-time-presets {
             display: flex;
             max-width: 280px;
-            padding: 0.5em 0;
+            padding: $space-2xs 0;
             border-top: 1px solid var(--color-neutral-300);
             border-bottom: 1px solid var(--color-neutral-300);
             cursor: pointer;
             overflow-x: scroll;
-            gap: 0.2em;
+            gap: 0.2rem;
 
             .c-calendar__button--time-preset {
-                padding: 0.2em;
-                border-radius: $radius-xs;
+                padding: $space-2xs;
+                border-radius: $rad-xs;
 
                 &:focus {
-                    border-radius: $radius-xs;
-                    box-shadow: 0 0 0 3px var(--color-primary);
+                    border-radius: $rad-xs;
+                    box-shadow: $shadow-focus-s;
                 }
 
                 &.is-selected {
@@ -234,21 +230,21 @@
                 }
 
                 &.is-mobile {
-                    padding: 0.5em;
-                    font-size: var(--font-scale-milli);
+                    padding: calc($space-2xs - 4px);
+                    font-size: $fs-xs;
                 }
             }
 
             @include mq(mq-token("desk")) {
                 flex-direction: column;
                 justify-content: space-evenly;
-                padding: 0 var(--space-scale-zeta);
+                padding: 0 $space-m;
                 border-top: none;
                 border-right: solid 1px var(--color-neutral-300);
                 border-bottom: none;
 
                 &:first-child {
-                    font-weight: $weight-bold;
+                    font-weight: $fw-bold;
                     cursor: initial;
                 }
             }
@@ -259,35 +255,35 @@
             &--rounded-right {
                 background: var(--selected-color);
                 color: var(--color-tertiary);
-                font-weight: $weight-bold;
+                font-weight: $fw-bold;
             }
 
             &--selected {
                 background: var(--highlighted-color);
                 border-radius: 0;
                 color: var(--color-secondary);
-                font-weight: $weight-reg;
+                font-weight: $fw-reg;
             }
 
             &--selection-start,
             &--selection-end {
                 background: var(--selected-color);
                 color: var(--color-tertiary);
-                font-weight: $weight-bold;
+                font-weight: $fw-bold;
             }
 
             &--rounded-left {
-                border-radius: $radius-xs 0 0 $radius-xs;
+                border-radius: $rad-xs 0 0 $rad-xs;
             }
 
             &--rounded-right {
-                border-radius: 0 $radius-xs $radius-xs 0;
+                border-radius: 0 $rad-xs $rad-xs 0;
             }
         }
 
         .c-calendar__grid-container {
             display: flex;
-            gap: 1em;
+            gap: $space-s;
         }
 
         .c-calendar__header--inner {
