@@ -8,13 +8,13 @@ $simple-nav-width: 250px;
 .c-nav {
     $self: &;
 
-    font-size: rem($base-font-size);
-    font-weight: $weight-bold;
+    font-size: rem($base-fs);
+    font-weight: $fw-bold;
 
     @include z-index("navigation");
 
     @include mq(mq-token("desk")) {
-        font-weight: $weight-reg;
+        font-weight: $fw-reg;
     }
 
     button,
@@ -57,7 +57,7 @@ $simple-nav-width: 250px;
             #{$self}__item {
                 > a {
                     @include mq(mq-token("desk")) {
-                        padding-block-start: var(--space-scale-centi);
+                        padding-block-start: $space-s;
                     }
                 }
             }
@@ -66,7 +66,7 @@ $simple-nav-width: 250px;
 
     &__trigger,
     &__link {
-        padding: var(--space-scale-gamma) var(--space-scale-zeta);
+        padding: $space-2xl $space-m;
         border-block-end: solid 1px var(--color-quinary);
 
         @include mq(mq-token("desk")) {
@@ -76,7 +76,7 @@ $simple-nav-width: 250px;
 
         // Style triggers and links within the content block
         #{$self}__content & {
-            padding-block: var(--space-scale-epsilon);
+            padding-block: $space-l;
 
             @include mq(mq-token("desk")) {
                 padding-block: 0;
@@ -87,9 +87,9 @@ $simple-nav-width: 250px;
         #{$self}__content:where([data-level="0"]) & {
             @include mq(mq-token("desk")) {
                 display: flex;
-                padding-block: var(--space-scale-delta) var(--space-scale-micro);
+                padding-block: $space-xl $space-2xs;
                 border-block-end: solid 1px var(--color-quinary);
-                font-weight: $weight-bold;
+                font-weight: $fw-bold;
                 transition: border-block-end-color $timing $ease-in-out;
 
                 &:hover {
@@ -163,9 +163,7 @@ $simple-nav-width: 250px;
     }
 
     &__list {
-        --navbar-list-gap: var(--space-scale-delta);
-
-        // z-index: -1;
+        --navbar-list-gap: #{$space-xl};
 
         @include mq(mq-token("desk")) {
             column-gap: var(--navbar-list-gap);
@@ -198,8 +196,8 @@ $simple-nav-width: 250px;
 
         &--feature {
             border-block-end: solid 1px var(--color-quinary);
-            font-size: var(--font-scale-delta);
-            padding-block: var(--space-scale-zeta);
+            font-size: $fs-xl;
+            padding-block: $space-m;
 
             @include mq(mq-token("desk"), max) {
                 order: 0;
@@ -274,7 +272,7 @@ $simple-nav-width: 250px;
         }
 
         #{$self}__item--feature #{$self}__link {
-            font-weight: $weight-bold;
+            font-weight: $fw-bold;
         }
 
         // If menu has no further children
@@ -283,7 +281,7 @@ $simple-nav-width: 250px;
             #{$self}__link,
             #{$self}__trigger:not(#{$self}__trigger--close) {
                 border-block-end: none;
-                font-weight: $weight-light;
+                font-weight: $fw-light;
 
                 @include mq(mq-token("desk")) {
                     padding-block: 6px;
@@ -305,13 +303,13 @@ $simple-nav-width: 250px;
 
         &[data-level="0"] {
             @include mq(mq-token("desk")) {
-                padding-block: var(--space-scale-epsilon) var(--space-scale-gamma);
-                padding-inline: var(--space-scale-epsilon);
+                padding-block: $space-l $space-2xl;
+                padding-inline: $space-l;
             }
 
             > #{$self}__list {
                 @include mq(mq-token("desk")) {
-                    padding-inline: var(--space-scale-beta) var(--space-scale-delta);
+                    padding-inline: $space-3xl $space-xl;
                     flex-wrap: wrap;
                 }
             }
