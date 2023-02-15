@@ -88,6 +88,7 @@ const NestedSubMenuTemplate: Story<NavProps> = ({ ...args }) => {
                                 <NavItem key={index}>
                                     <NavLink href={item.href} isExternal={item.isExternal}>
                                         {item.label}
+                                        <Icon id="chevron-right" />
                                     </NavLink>
                                 </NavItem>
                             );

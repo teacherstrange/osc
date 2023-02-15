@@ -51,6 +51,7 @@ const RecursiveNavItemWrapper = (props: { item: Item; level: number; value: stri
                             <NavItem key={index}>
                                 <NavLink href={item.href} isExternal={item.isExternal}>
                                     {item.label}
+                                    <Icon id="chevron-right" />
                                 </NavLink>
                             </NavItem>
                         );
