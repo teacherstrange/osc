@@ -1,3 +1,23 @@
+## [0.39.0](https://github.com/Open-Study-College/osc/compare/v0.38.0...v0.39.0) (2023-02-15)
+
+
+### ✨ Features
+
+* add TextArea component, styles and tests ([aeb3d99](https://github.com/Open-Study-College/osc/commit/aeb3d9909d3cab1bd2fc6845164851a1e5fcf1b4))
+
+
+### ♻️ Refactors
+
+* **textarea:** update class on textarea ([4db8dbb](https://github.com/Open-Study-College/osc/commit/4db8dbbdfd2aa04215ca6baf1edfaa23b5dcc0f4))
+* add disabled variant to label and textarea elements ([e7e464d](https://github.com/Open-Study-College/osc/commit/e7e464d43c81dffedbabb2a83e19c3d28609d617))
+* add Meta type casting in ([746c6b5](https://github.com/Open-Study-College/osc/commit/746c6b517eb81623fa7b4efd502d68039c4709db))
+* add resize:vertical so users can manually resize the textarea vertically ([ab83ca6](https://github.com/Open-Study-College/osc/commit/ab83ca611eb3457380c68e560292834c40ba88ab))
+* add scrollbar gutter ([974e2bf](https://github.com/Open-Study-College/osc/commit/974e2bf7eb71599238b4695436dba9e488945f23))
+* correct css selector ([cd3d1f0](https://github.com/Open-Study-College/osc/commit/cd3d1f0b5376950180e94c79ba854a72fd22aed7))
+* nest selectors inside of "c-textarea" ([ad4ae97](https://github.com/Open-Study-College/osc/commit/ad4ae97d4c29319fd8f868a7fab95dfbdfa7d500))
+* update colours with tokens and remove pointer events when disabled ([839ac7c](https://github.com/Open-Study-College/osc/commit/839ac7c75f03492c1202733b23477c5e74b39172))
+* update to match/use TextInput classes ([a83597d](https://github.com/Open-Study-College/osc/commit/a83597d6af8a04b07e78104f18601a31d21c75e3))
+
 ## [0.38.0](https://github.com/Open-Study-College/osc/compare/v0.37.0...v0.38.0) (2023-02-14)
 
 
@@ -122,25 +142,4 @@
 * update to use sass variables and remove usage of font-base-scale ([8c4694b](https://github.com/Open-Study-College/osc/commit/8c4694ba0d46d6d9a795f227f62296e94c696d2a))
 * update tokens ([dbbfdbe](https://github.com/Open-Study-College/osc/commit/dbbfdbec89ff568b8655fcd8c2c32136f78e3100))
 * update with spacing/shadow/timing variables and remove c-label positioning ([db5983b](https://github.com/Open-Study-College/osc/commit/db5983b032533ec07e50d02d7b2e7955fc427652))
-
-## [0.34.1](https://github.com/Open-Study-College/osc/compare/v0.34.0...v0.34.1) (2023-02-14)
-
-
-### 🐛 Bugs
-
-* add image back into build process ([86af618](https://github.com/Open-Study-College/osc/commit/86af6189208abdd4fd4b77ead77be360b8808701))
-* add radix package to studio and update nvmrc ([535c7ba](https://github.com/Open-Study-College/osc/commit/535c7ba51fc553541333e87574c6cd21aa815990))
-* condtional token path ([059f156](https://github.com/Open-Study-College/osc/commit/059f1561905060268465109da9ae358ca203a1ab))
-* declare image as a build arg ([ecd5319](https://github.com/Open-Study-College/osc/commit/ecd531955492506d17cfbdcb68f6e2617599d9eb))
-* image id and studio conditionals ([fb386f3](https://github.com/Open-Study-College/osc/commit/fb386f3ad2bd6c910b80301654375984447a60e0))
-* image tags ([3213c68](https://github.com/Open-Study-College/osc/commit/3213c687a62822f75d2a7255e111b6d26b9b2aed))
-* revert short_sha to github sha ([a02e909](https://github.com/Open-Study-College/osc/commit/a02e9098f3bb18f063f3195bbf234b3692b8e05d))
-* sanity_studio_ci is defined ([d537742](https://github.com/Open-Study-College/osc/commit/d537742db8b60c7e7b3e8b313d2dda113fadc0a9))
-* sanity_studio_ci is now readonly ([5fd3e82](https://github.com/Open-Study-College/osc/commit/5fd3e820305370a7b741fc53a92359997adae3b4))
-* short sha ([6aec899](https://github.com/Open-Study-College/osc/commit/6aec8996fba4fa0e992a7e31bf7deac2a88e20cc))
-* typo in body.tsx osc-studio ([5d27a68](https://github.com/Open-Study-College/osc/commit/5d27a686ce6049b2d129f011984452aaeb3499e2))
-* update dockerfiles with ENV SANITY_STUDIO_CI="true" ([88f7256](https://github.com/Open-Study-College/osc/commit/88f7256ea83561571fec2c3baedc512d457a4406))
-* update sample env.file in studio ([5ede79b](https://github.com/Open-Study-College/osc/commit/5ede79bb89a2ba3803f1cb1536dddb6c6da4ec76))
-* use short sha when searching for image ([c902995](https://github.com/Open-Study-College/osc/commit/c902995ace022020d15cc6ff800a5ac4b6b70be0))
-* used buildx action v2 ([b6f21e1](https://github.com/Open-Study-College/osc/commit/b6f21e1d3b6438eb02509c77d10aef8b2c28a714))
 
