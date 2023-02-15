@@ -1,8 +1,8 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
-$burger-size: $base-font-size * 1.25px; // 20px
-$burger-bar-height: $base-font-size * 0.25px; // 4px
+$burger-size: $base-fs * 1.25px; // 20px
+$burger-bar-height: $base-fs * 0.25px; // 4px
 $burger-gap: $burger-bar-height;
 
 .c-burger {
