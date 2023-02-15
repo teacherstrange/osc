@@ -55,10 +55,11 @@ $play-btn-icon-size: rem($base-fs * 2);
 
     &__wrapper {
         position: relative;
+        width: 100%;
         min-height: 200px;
         max-height: 600px;
-        grid-row: 1 / -1;
         background-color: var(--color-secondary);
+        grid-row: 1 / -1;
 
         @include mq(mq-token("tab")) {
             @include ratio(16 9);

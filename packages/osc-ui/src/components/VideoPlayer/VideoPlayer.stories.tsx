@@ -31,11 +31,7 @@ export default {
 } as Meta;
 
 const Template: Story<VideoPlayerProps> = ({ children, ...args }) => {
-    return (
-        <div style={{ maxWidth: '960px' }}>
-            <VideoPlayer {...args}>{children}</VideoPlayer>
-        </div>
-    );
+    return <VideoPlayer {...args}>{children}</VideoPlayer>;
 };
 
 export const Primary = Template.bind({});
