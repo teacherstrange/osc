@@ -4,15 +4,11 @@ import { useDatePickerState } from '@react-stately/datepicker';
 import type { DateValue } from '@react-types/calendar';
 import React, { useRef } from 'react';
 import { useUniqueId } from '../../../hooks/useUniqueId';
-import { Icon } from '../../Icon/Icon';
+
 import { CalendarContainer } from '../Calendar/CalendarContainer';
 import '../date-picker.scss';
 import { DateField } from '../DateField/DateField';
-import {
-    ReactAriaButton,
-    ReactAriaDialog,
-    ReactAriaPopover,
-} from '../ReactAriaComponents/ReactAriaComponents';
+import { ReactAriaDialog, ReactAriaPopover } from '../ReactAriaComponents/ReactAriaComponents';
 
 export interface DatePickerProps extends AriaDatePickerProps<DateValue> {
     type?: 'month' | 'year' | 'decade';
@@ -39,10 +35,11 @@ export const DatePicker = (props: DatePickerProps) => {
                 // https://github.com/adobe/react-spectrum/issues/3969
                 id={dateFieldId}
             >
-                <DateField {...fieldProps} granularity={props.granularity} />
-                <ReactAriaButton {...buttonProps}>
-                    <Icon id="calendar" />
-                </ReactAriaButton>
+                <DateField
+                    {...fieldProps}
+                    buttonProps={buttonProps}
+                    granularity={props.granularity}
+                />
             </div>
             {state.isOpen && (
                 <ReactAriaPopover

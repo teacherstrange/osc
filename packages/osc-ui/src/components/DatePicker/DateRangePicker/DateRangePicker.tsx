@@ -8,18 +8,13 @@ import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import React, { useRef, useState } from 'react';
 import breakpoints from '../../../../../../tokens/media-queries';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import { useUniqueId } from '../../../hooks/useUniqueId';
 import { classNames } from '../../../utils/classNames';
 import { rem } from '../../../utils/rem';
 import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
 import { DateField } from '../DateField/DateField';
 import { RangeCalendarContainer } from '../RangeCalendar/RangeCalendar';
-import {
-    ReactAriaButton,
-    ReactAriaDialog,
-    ReactAriaPopover,
-} from '../ReactAriaComponents/ReactAriaComponents';
+import { ReactAriaDialog, ReactAriaPopover } from '../ReactAriaComponents/ReactAriaComponents';
 import { createTimePresets } from '../utils';
 
 /* -------------------------------------------------------------------------------------------------
@@ -189,8 +184,6 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
 export const DateRangePicker = (props: DateRangePickerProps) => {
     let state = useDateRangePickerState({ ...props, shouldCloseOnSelect: false });
 
-    const buttonId = useUniqueId('buttonId:');
-
     let ref = useRef();
     let {
         labelProps,
@@ -219,17 +212,13 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
             <div {...groupProps} ref={ref}>
                 <div className="c-datepicker__date-field-container">
                     <div className="c-datepicker__date-field-inner-container">
-                        <DateField {...startFieldProps} />
-                        <ReactAriaButton {...buttonProps}>
-                            <Icon id="calendar" />
-                        </ReactAriaButton>
+                        <DateField buttonProps={buttonProps} {...startFieldProps} />
                     </div>
-                    <Icon className="c-datepicker__date-field-container--arrow" id="arrow" />
+                    {isDesktop ? (
+                        <Icon className="c-datepicker__date-field-container--arrow" id="arrow" />
+                    ) : null}
                     <div className="c-datepicker__date-field-inner-container">
-                        <DateField {...endFieldProps} />
-                        <ReactAriaButton {...buttonProps} id={buttonId}>
-                            <Icon id="calendar" />
-                        </ReactAriaButton>
+                        <DateField buttonProps={buttonProps} {...endFieldProps} />
                     </div>
                 </div>
             </div>
