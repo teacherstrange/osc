@@ -62,7 +62,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                     }
                 >
                     <textarea
-                        className="c-input c-input__textarea"
+                        className="c-input  c-textarea"
                         disabled={disabled}
                         id={id}
                         name={name}

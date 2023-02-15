@@ -1,7 +1,5 @@
 /* stylelint-disable plugin/selector-bem-pattern */
-.c-input {
-    &__textarea {
-        resize: vertical;
-        scrollbar-gutter: stable;
-    }
+.c-textarea {
+    resize: vertical;
+    scrollbar-gutter: stable;
 }
