@@ -15,7 +15,7 @@ export { Content } from './components/Content/Content';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export { Footer } from './components/Footer/Footer';
 export { Header } from './components/Header/Header';
-export { Icon } from './components/Icon/Icon';
+export { Icon, SpritesheetProvider } from './components/Icon/Icon';
 export { Image } from './components/Image/Image';
 export { ImageGallery } from './components/ImageGallery/ImageGallery';
 export { List } from './components/List/List';

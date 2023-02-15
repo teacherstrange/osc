@@ -1,4 +1,5 @@
 // OSC-UI
+import { SpritesheetProvider } from '../packages/osc-ui/src/components/Icon/Icon';
 import '../packages/osc-ui/src/styles/main.scss';
 
 import React from 'react';
@@ -13,7 +14,11 @@ const withTheme = (story, context) => {
         document.documentElement.classList.remove('theme--dark');
     }
 
-    return <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>;
+    return (
+        <MemoryRouter initialEntries={['/']}>
+            <SpritesheetProvider>{story()}</SpritesheetProvider>
+        </MemoryRouter>
+    );
 };
 
 export const decorators = [withTheme];
