@@ -32,7 +32,10 @@ $label-transform-up: translate(0, -1.25em) scale(0.8);
     &[disabled] {
         background-color: var(--color-neutral-100);
         color: var(--color-neutral-500);
-        pointer-events: none;
+
+        & + .c-label {
+            pointer-events: none;
+        }
     }
 
     &__outer-container {
