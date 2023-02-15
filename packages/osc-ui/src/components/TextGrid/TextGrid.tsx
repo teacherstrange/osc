@@ -61,7 +61,7 @@ export interface TextGridHeadingProps extends SharedProps {}
 const TextGridHeading = (props: TextGridHeadingProps) => {
     const { children, className } = props;
 
-    const classes = classNames('c-text-grid__heading', 't-font-secondary', 'u-mb-zeta', className);
+    const classes = classNames('c-text-grid__heading', 't-font-secondary', 'u-mb-m', className);
 
     return <h2 className={classes}>{children}</h2>;
 };

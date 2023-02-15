@@ -31,7 +31,7 @@ const Template: Story<TextGridProps> = ({ ...args }) => (
                     <Icon id="star" />
                     <div className="c-content">
                         <div className="c-content__inner c-content__inner--left">
-                            <h3 className="t-font-epsilon u-text-bold">{item.title}</h3>
+                            <h3 className="t-font-m u-text-bold">{item.title}</h3>
                             <p>{item.content}</p>
                         </div>
                     </div>

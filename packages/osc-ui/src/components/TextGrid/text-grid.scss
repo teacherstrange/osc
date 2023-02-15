@@ -1,17 +1,17 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
-$text-grid-gap: var(--space-scale-beta);
+$text-grid-gap: $fs-2xl;
 /* stylelint-disable-next-line function-no-unknown */
-$text-grid-icon-size: decimal-round(($base-font-size * 2.188px));
-$text-grid-item-space: var(--space-scale-delta);
+$text-grid-icon-size: decimal-round(($base-fs * 2.188px));
+$text-grid-item-space: $fs-l;
 $text-grid-item-border: 1px solid var(--color-secondary);
-$text-grid-heading-offset: calc(var(--space-scale-beta) * -1);
+$text-grid-heading-offset: calc($fs-2xl * -1);
 
 .c-text-grid {
     $self: &;
 
-    font-weight: $weight-light;
+    font-weight: $fw-light;
 
     /*
      * Rather than using gap here we're using margin-inline to set the space between column content.
@@ -38,17 +38,17 @@ $text-grid-heading-offset: calc(var(--space-scale-beta) * -1);
 
             @include mq(mq-token("tab")) {
                 margin-inline: calc($text-grid-gap / 2); /* [1] */
-                border-width: ($base-font-size * 0.375px);
+                border-width: ($base-fs * 0.375px);
             }
         }
     }
 
     &__heading {
-        font-size: var(--font-scale-mega);
+        font-size: $fs-6xl;
         line-height: 1;
 
         @include mq(mq-token("tab")) {
-            font-size: var(--font-scale-kilo);
+            font-size: $fs-5xl;
         }
 
         .has-inline-heading & {
@@ -63,6 +63,6 @@ $text-grid-heading-offset: calc(var(--space-scale-beta) * -1);
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
         --icon-size: #{$text-grid-icon-size};
 
-        margin-block-end: var(--space-scale-micro);
+        margin-block-end: $fs-2xs;
     }
 }

@@ -8,7 +8,7 @@ test('renders TextGrid items', () => {
         <TextGrid>
             {data.map((item, index) => (
                 <Fragment key={index}>
-                    <h3 className="t-font-epsilon u-text-bold">{item.title}</h3>
+                    <h3 className="t-font-m u-text-bold">{item.title}</h3>
                     <p>{item.content}</p>
                 </Fragment>
             ))}
@@ -24,7 +24,7 @@ test('renders the heading outside of the grid', () => {
         <TextGrid heading="How an online college works">
             {data.map((item, index) => (
                 <Fragment key={index}>
-                    <h3 className="t-font-epsilon u-text-bold">{item.title}</h3>
+                    <h3 className="t-font-m u-text-bold">{item.title}</h3>
                     <p>{item.content}</p>
                 </Fragment>
             ))}
@@ -43,7 +43,7 @@ test('renders the heading inline with the grid', () => {
         <TextGrid heading="How an online college works" hasInlineHeading>
             {data.map((item, index) => (
                 <Fragment key={index}>
-                    <h3 className="t-font-epsilon u-text-bold">{item.title}</h3>
+                    <h3 className="t-font-m u-text-bold">{item.title}</h3>
                     <p>{item.content}</p>
                 </Fragment>
             ))}
