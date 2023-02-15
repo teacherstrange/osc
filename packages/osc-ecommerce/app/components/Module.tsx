@@ -16,7 +16,7 @@ import type {
     videoModule,
 } from '~/types/sanity';
 import { AccordionModule } from './Accordion/Accordion';
-import { VideoPlayer } from './VideoPlayer/VideoPlayer';
+import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
 
 // So we can dynamically add the styles of each component into remix we need to create an array of stylesheet objects.
 // We will then call this function in each of the `route` files where we have a dynamicLinks.
@@ -136,7 +136,7 @@ export default function Module(props: Props) {
         case 'module.video':
             const moduleVideo = module as videoModule;
 
-            return <VideoPlayer data={moduleVideo} key={moduleVideo._key} />;
+            return <VideoPlayerModule module={moduleVideo} key={moduleVideo._key} />;
 
         default:
             return null;

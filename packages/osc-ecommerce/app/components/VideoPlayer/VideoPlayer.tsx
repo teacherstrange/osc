@@ -1,45 +1,45 @@
-import { Content, Image, VideoPlayer as OSCVideoPlayer } from 'osc-ui';
+import { Content, Image, VideoPlayer } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import type { videoModule } from '~/types/sanity';
 
 interface Props {
-    data: videoModule;
+    module: videoModule;
 }
 
-export const VideoPlayer = (props: Props) => {
-    const { data } = props;
+export const VideoPlayerModule = (props: Props) => {
+    const { module } = props;
 
     return (
-        <OSCVideoPlayer
-            key={data._key}
-            url={data?.videoUrl}
-            variant={data?.videoType}
-            autoplay={data?.videoSettings?.autoplay}
-            loop={data?.videoSettings?.loop}
-            preserveContent={data?.videoSettings?.preserveContent}
+        <VideoPlayer
+            key={module._key}
+            url={module?.videoUrl}
+            variant={module?.videoType}
+            autoplay={module?.videoSettings?.autoplay}
+            loop={module?.videoSettings?.loop}
+            preserveContent={module?.videoSettings?.preserveContent}
             previewImage={
-                data?.videoImage?.src ? (
+                module?.videoImage?.src ? (
                     <Image
-                        src={data?.videoImage?.src}
-                        artDirectedImages={data?.videoImage?.responsiveImages}
-                        alt={data?.videoImage?.alt}
-                        width={data?.videoImage?.width}
-                        height={data?.videoImage?.height}
+                        src={module?.videoImage?.src}
+                        artDirectedImages={module?.videoImage?.responsiveImages}
+                        alt={module?.videoImage?.alt}
+                        width={module?.videoImage?.width}
+                        height={module?.videoImage?.height}
                     />
                 ) : undefined
             }
             iconPath={spritesheet}
         >
-            {data?.content?.body ? (
+            {module?.content?.body ? (
                 <Content
-                    align={data?.content?.horizontalAlignment}
-                    backgroundColor={data?.content?.backgroundColor}
-                    marginBottom={data?.content?.marginBottom}
-                    paddingBottom={data?.content?.paddingBottom}
-                    paddingTop={data?.content?.paddingTop}
-                    value={data?.content?.body}
+                    align={module?.content?.horizontalAlignment}
+                    backgroundColor={module?.content?.backgroundColor}
+                    marginBottom={module?.content?.marginBottom}
+                    paddingBottom={module?.content?.paddingBottom}
+                    paddingTop={module?.content?.paddingTop}
+                    value={module?.content?.body}
                 />
             ) : null}
-        </OSCVideoPlayer>
+        </VideoPlayer>
     );
 };
