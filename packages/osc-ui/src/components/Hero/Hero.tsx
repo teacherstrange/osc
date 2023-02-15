@@ -71,11 +71,22 @@ export const Hero = (props: HeroProps) => {
 /* -------------------------------------------------------------------------------------------------
  * HeroInner
  * -----------------------------------------------------------------------------------------------*/
-interface HeroInnerProps extends SharedHeroProps {}
+interface HeroInnerProps extends SharedHeroProps {
+    /**
+     * Removes the padding on the right of the container
+     * @default false
+     */
+    pullRight?: boolean;
+}
 
 export const HeroInner = (props: HeroInnerProps) => {
     const { children, className } = props;
-    const classes = classNames('c-hero__inner', 'o-container', className);
+    const classes = classNames(
+        'c-hero__inner',
+        'o-container',
+        props.pullRight ? 'o-container--flush-r' : '',
+        className
+    );
 
     return <div className={classes}>{children}</div>;
 };
@@ -150,18 +161,12 @@ export const HeroContent = (props: HeroContentProps) => {
 /* -------------------------------------------------------------------------------------------------
  * HeroImage
  * -----------------------------------------------------------------------------------------------*/
-export interface HeroImageProps extends SharedHeroProps {
-    /**
-     * Pushes the image up to the right hand side of the viewport
-     * @default false
-     */
-    isFlush?: boolean;
-}
+export interface HeroImageProps extends SharedHeroProps {}
 
 export const HeroImage = (props: HeroImageProps) => {
-    const { children, className, isFlush } = props;
+    const { children, className } = props;
 
-    const classes = classNames('c-hero__img', isFlush ? 'is-flush' : '', className);
+    const classes = classNames('c-hero__img', className);
 
     return <div className={classes}>{children}</div>;
 };

@@ -192,7 +192,7 @@ const CarouselTemplate: Story<HeroProps> = () => (
 
 const FlushImgTemplate: Story<HeroProps> = ({ ...args }) => (
     <Hero {...args}>
-        <HeroInner>
+        <HeroInner pullRight>
             <HeroTitle>Property & Home</HeroTitle>
             <HeroContent>
                 <div className="c-content">
@@ -202,7 +202,7 @@ const FlushImgTemplate: Story<HeroProps> = ({ ...args }) => (
                 </div>
             </HeroContent>
 
-            <HeroImage isFlush>
+            <HeroImage>
                 <Image
                     src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1674577946/cat-img_rwumo5.png"
                     width={610}
@@ -252,7 +252,7 @@ ImageIsFlush.args = {
 ImageIsFlush.parameters = {
     docs: {
         description: {
-            story: 'Push the image up to the right hand side of the screen by passing the `isFlush` prop to the `<HeroImage>`.',
+            story: 'Push the image up to the right hand side of the screen by passing the `pullRight` prop to the `<HeroInner>`.',
         },
     },
 };
