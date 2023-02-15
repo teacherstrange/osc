@@ -1,3 +1,23 @@
+## [0.40.0](https://github.com/Open-Study-College/osc/compare/v0.39.0...v0.40.0) (2023-02-15)
+
+
+### ✨ Features
+
+* **academic-hub:** adds spritesheet provider to osc-academic-hub ([36e08a3](https://github.com/Open-Study-College/osc/commit/36e08a30a70667dac0c9239f2f7bc3240086cbdd))
+* **ecommerce:** adds spritesheet provider to osc-ecommerce ([6f17b1f](https://github.com/Open-Study-College/osc/commit/6f17b1f6091619604ebc16d26b7f8eef04ef6512))
+* **icon:** adds react context to create a provider for our spritesheet ([e346aa6](https://github.com/Open-Study-College/osc/commit/e346aa616eef08a9230be5104bc298c6b444f585))
+* **storybook:** wraps storybook preview in spritesheet provider ([081840c](https://github.com/Open-Study-College/osc/commit/081840cadb1b79bd4b95f8759d488361e914256a))
+
+
+### ♻️ Refactors
+
+* **icon:** update provider props ([d3639d1](https://github.com/Open-Study-College/osc/commit/d3639d1420f426bdbf80f1e18bc544f50f054e58))
+
+
+### 🧪 Tests
+
+* **select:** wraps tests in the SpritesheetProvider ([c5c1ff5](https://github.com/Open-Study-College/osc/commit/c5c1ff55b8095dbbe9e62c3a616dcbdbaf578e4e))
+
 ## [0.39.0](https://github.com/Open-Study-College/osc/compare/v0.38.0...v0.39.0) (2023-02-15)
 
 
@@ -101,45 +121,4 @@
 * update Icon ([d1e34a4](https://github.com/Open-Study-College/osc/commit/d1e34a4ba4060b7e6d76e7984a0973f5dde251b3))
 * update Label and styles ([6ce065a](https://github.com/Open-Study-College/osc/commit/6ce065adf6e4c48c2e964a7cda1c599b146d5c06))
 * update with correct tokens ([6ca3ed9](https://github.com/Open-Study-College/osc/commit/6ca3ed9b4f81ae2548d41e93e5e595061172d64e))
-
-## [0.35.0](https://github.com/Open-Study-College/osc/compare/v0.34.1...v0.35.0) (2023-02-14)
-
-
-### ✨ Features
-
-* add TextInput component, styles and tests ([bb60e71](https://github.com/Open-Study-College/osc/commit/bb60e715e2da14cee0e2050e132c458ccd492140))
-
-
-### ♻️ Refactors
-
-* **tokens:** adds a error box shadow ([56a5892](https://github.com/Open-Study-College/osc/commit/56a5892a358aa7d9f3c6423c3f89311b7c9e1e95))
-* add "display:flex" ([039007d](https://github.com/Open-Study-College/osc/commit/039007d3d0b7df530f634489d7ab584f30fb79b3))
-* add argTypes ([07ac81d](https://github.com/Open-Study-College/osc/commit/07ac81ddd01722e660c10e9bec1fd7eb9189dae9))
-* add boolean as a type ([6e3d77f](https://github.com/Open-Study-College/osc/commit/6e3d77f7bc08f71a4bd0fac22cec4555c44918da))
-* add eslint disable-next-line for useEffect ([a0f953f](https://github.com/Open-Study-College/osc/commit/a0f953fc6bf2a79a21132d19748001a7953e4790))
-* add jsdoc descriptions, remove native "type" prop and consolidate "Icon" into its own type ([33edb41](https://github.com/Open-Study-College/osc/commit/33edb41cf573f1576100fc26a20b0e1d850d3ef7))
-* add placeholder colour styling ([62aaed7](https://github.com/Open-Study-College/osc/commit/62aaed7c8166d23248396f94744d4f59180b5b98))
-* add Variants type ([fa2820c](https://github.com/Open-Study-College/osc/commit/fa2820cd4fc4765225e2d7e51431b426a0ef65a9))
-* add VisuallyHidden component as an option in the Label component ([91ad177](https://github.com/Open-Study-College/osc/commit/91ad177edf67b0a56b0e9d73f5b498c1bd547588))
-* move label transform into a variable ([aa7be8b](https://github.com/Open-Study-College/osc/commit/aa7be8bb48e40f886a48698420ff2c63c2570650))
-* move placeholder styling into separate partials file ([8b67ea4](https://github.com/Open-Study-College/osc/commit/8b67ea430a37554fe072b81aad9266347e6fb079))
-* nest "required" selector and change padding to "em" unit ([a7b035c](https://github.com/Open-Study-College/osc/commit/a7b035ccab6d4c6978aeb93449adc5b85a5b6bfc))
-* nest selectors inside of "c-input" ([bbaed35](https://github.com/Open-Study-College/osc/commit/bbaed35dde8c47cafeaf253577b75602d2caa290))
-* reduce svg size ([ffc6206](https://github.com/Open-Study-College/osc/commit/ffc6206bdd3df832a9cd86df39f541042fcfa42c))
-* remove explicit passing in of "placeholder" prop ([a0ce3bc](https://github.com/Open-Study-College/osc/commit/a0ce3bceee29a200a9a71f8d7eb1c16d4d138549))
-* remove useEffect and set defaultValue directly in useState ([4c92fb9](https://github.com/Open-Study-College/osc/commit/4c92fb994e79ff9cc68a2e6e71345683e672fcce))
-* remove useEffect import ([1005d5f](https://github.com/Open-Study-College/osc/commit/1005d5fe973dbc8e55667cf6b81313495a630ba1))
-* replace font size centi with font size base variable ([1e6ab18](https://github.com/Open-Study-College/osc/commit/1e6ab1880b9a542048b4b48b86b9d6cf1244b91b))
-* tidy up conditional components ([40264fb](https://github.com/Open-Study-College/osc/commit/40264fbe06c342dab4a9510753a54841cdee2517))
-* update "Action" type ([22063ce](https://github.com/Open-Study-College/osc/commit/22063cefa4ce9236e5d960bb814bc4368ce85ade))
-* update argument types ([2fab9db](https://github.com/Open-Study-College/osc/commit/2fab9db4512e95811c3021458d7d7ad6b6b9465f))
-* update error handling ([f9ee15b](https://github.com/Open-Study-College/osc/commit/f9ee15b7978c1400e39b27a1a6e838149f125782))
-* update iconography ([add1ba5](https://github.com/Open-Study-College/osc/commit/add1ba5c28396ca143e29ee6bdff48ff72613771))
-* update padding to use calculation based on base font size ([e6505d4](https://github.com/Open-Study-College/osc/commit/e6505d4fcc55cf32216f235e2f4752a277b5c008))
-* update styling ([4be6750](https://github.com/Open-Study-College/osc/commit/4be6750303c6335a1fb1c268acf2120454e51230))
-* update styling for input width & input button ([0c4cdf7](https://github.com/Open-Study-College/osc/commit/0c4cdf75a085c7e9af4e6a85ecd561e2a28f3931))
-* update styling with correct tokens and "em" unit usage ([65bb9aa](https://github.com/Open-Study-College/osc/commit/65bb9aa78efe64e22c38dac4b0de088422422a37))
-* update to use sass variables and remove usage of font-base-scale ([8c4694b](https://github.com/Open-Study-College/osc/commit/8c4694ba0d46d6d9a795f227f62296e94c696d2a))
-* update tokens ([dbbfdbe](https://github.com/Open-Study-College/osc/commit/dbbfdbec89ff568b8655fcd8c2c32136f78e3100))
-* update with spacing/shadow/timing variables and remove c-label positioning ([db5983b](https://github.com/Open-Study-College/osc/commit/db5983b032533ec07e50d02d7b2e7955fc427652))
 
