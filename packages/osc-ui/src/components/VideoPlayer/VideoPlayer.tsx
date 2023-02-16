@@ -60,11 +60,6 @@ export interface VideoPlayerProps extends Omit<ReactPlayerProps, 'config'> {
      * @default false
      */
     loop?: boolean;
-    /**
-     * Custom path for the icon spritesheet
-     * TODO: Temporary fix Remove this once #685 is merged
-     */
-    iconPath?: string;
 }
 
 export const VideoPlayer = (props: VideoPlayerProps) => {
@@ -78,7 +73,6 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         preserveContent = false,
         loop = false,
         children,
-        iconPath,
         ...rest
     } = props;
     const classes = classNames('c-video-player', className);
@@ -159,7 +153,7 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
                 </VideoPlayerContent>
             ) : null}
 
-            <PlayIcon path={iconPath} className={!isPlaying ? '' : 'is-hidden'} />
+            <PlayIcon className={!isPlaying ? '' : 'is-hidden'} />
 
             <VideoPlayerOverlay
                 color={overlayColor}
