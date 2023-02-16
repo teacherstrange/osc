@@ -271,6 +271,7 @@
                 border-top: none;
                 border-right: solid 1px var(--color-neutral-300);
                 border-bottom: none;
+                overflow-x: unset;
 
                 &:first-child {
                     font-weight: $fw-bold;
