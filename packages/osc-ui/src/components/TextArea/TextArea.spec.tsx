@@ -34,7 +34,10 @@ test('should render an icon when passed as a prop', () => {
     );
 
     expect(document.querySelector('use')).toBeInTheDocument();
-    expect(document.querySelector('use')).toHaveAttribute('href');
+    expect(document.querySelector('use')).toHaveAttribute(
+        'href',
+        './spritesheet.svg#exclamation-mark'
+    );
 });
 
 test('should disable the input when disabled prop is true', () => {
