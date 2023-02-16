@@ -61,7 +61,7 @@ $play-btn-icon-size: rem($base-fs * 2);
         background-color: var(--color-secondary);
         grid-row: 1 / -1;
 
-        @include mq(mq-token("tab")) {
+        @include mq($mq-tab) {
             @include ratio(16 9);
         }
     }
@@ -93,7 +93,7 @@ $play-btn-icon-size: rem($base-fs * 2);
 
         @include z-index("button");
 
-        @include mq(mq-token("tab")) {
+        @include mq($mq-tab) {
             align-self: end;
             background-color: transparent;
             color: var(--color-tertiary);
@@ -102,7 +102,7 @@ $play-btn-icon-size: rem($base-fs * 2);
 
         // Only hide content on larger screens
         &.is-hidden {
-            @include mq(mq-token("tab")) {
+            @include mq($mq-tab) {
                 opacity: 0;
             }
         }
@@ -114,7 +114,7 @@ $play-btn-icon-size: rem($base-fs * 2);
         z-index: 1;
 
         &.has-content {
-            @include mq(mq-token("tab")) {
+            @include mq($mq-tab) {
                 opacity: 1;
             }
         }
