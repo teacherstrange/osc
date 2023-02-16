@@ -30,7 +30,7 @@ interface DateFieldProps extends AriaDateFieldProps<DateValue> {
 export const DateField = (props: DateFieldProps) => {
     let { locale } = useLocale();
 
-    const buttonId = useUniqueId('buttonId:');
+    const buttonId = useUniqueId('calendarBtn:');
 
     let state = useDateFieldState({
         ...props,
