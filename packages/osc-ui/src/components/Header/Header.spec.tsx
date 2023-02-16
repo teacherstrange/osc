@@ -1,17 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { SpritesheetProvider } from '../Icon/Icon';
+import { Logo } from '../Logo/Logo';
 import { Navbar, NavItem, NavLink, NavList } from '../Navbar/Navbar';
 import { simpleNav } from '../Navbar/navContent';
-import { Header, HeaderActionBar, HeaderNav, Logo } from './Header';
+import { Header, HeaderActionBar, HeaderNav } from './Header';
 
 describe('header', () => {
     test('renders header component with logo', () => {
         render(
             <MemoryRouter>
-                <Header>
-                    <Logo />
-                </Header>
+                <SpritesheetProvider>
+                    <Header>
+                        <Logo />
+                    </Header>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -26,7 +30,9 @@ describe('header', () => {
     test('successfully adds custom class to header', () => {
         render(
             <MemoryRouter>
-                <Header className="test-class" />
+                <SpritesheetProvider>
+                    <Header className="test-class" />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -38,9 +44,11 @@ describe('header', () => {
     test('adds a --header-height custom property to the style attribute', () => {
         render(
             <MemoryRouter>
-                <Header>
-                    <Logo />
-                </Header>
+                <SpritesheetProvider>
+                    <Header>
+                        <Logo />
+                    </Header>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -54,19 +62,21 @@ describe('headerNav', () => {
     test('renders headerNav component with a simple nav', () => {
         render(
             <MemoryRouter>
-                <Header>
-                    <HeaderNav isOpen={false}>
-                        <Navbar>
-                            <NavList>
-                                {simpleNav.map((item, index) => (
-                                    <NavItem key={index}>
-                                        <NavLink href={item.href}>{item.label}</NavLink>
-                                    </NavItem>
-                                ))}
-                            </NavList>
-                        </Navbar>
-                    </HeaderNav>
-                </Header>
+                <SpritesheetProvider>
+                    <Header>
+                        <HeaderNav isOpen={false}>
+                            <Navbar>
+                                <NavList>
+                                    {simpleNav.map((item, index) => (
+                                        <NavItem key={index}>
+                                            <NavLink href={item.href}>{item.label}</NavLink>
+                                        </NavItem>
+                                    ))}
+                                </NavList>
+                            </Navbar>
+                        </HeaderNav>
+                    </Header>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -78,19 +88,21 @@ describe('headerNav', () => {
     test('locks the body when headerNav is open', () => {
         const { rerender } = render(
             <MemoryRouter>
-                <Header>
-                    <HeaderNav isOpen={true}>
-                        <Navbar>
-                            <NavList>
-                                {simpleNav.map((item, index) => (
-                                    <NavItem key={index}>
-                                        <NavLink href={item.href}>{item.label}</NavLink>
-                                    </NavItem>
-                                ))}
-                            </NavList>
-                        </Navbar>
-                    </HeaderNav>
-                </Header>
+                <SpritesheetProvider>
+                    <Header>
+                        <HeaderNav isOpen={true}>
+                            <Navbar>
+                                <NavList>
+                                    {simpleNav.map((item, index) => (
+                                        <NavItem key={index}>
+                                            <NavLink href={item.href}>{item.label}</NavLink>
+                                        </NavItem>
+                                    ))}
+                                </NavList>
+                            </Navbar>
+                        </HeaderNav>
+                    </Header>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -101,19 +113,21 @@ describe('headerNav', () => {
 
         rerender(
             <MemoryRouter>
-                <Header>
-                    <HeaderNav isOpen={false}>
-                        <Navbar>
-                            <NavList>
-                                {simpleNav.map((item, index) => (
-                                    <NavItem key={index}>
-                                        <NavLink href={item.href}>{item.label}</NavLink>
-                                    </NavItem>
-                                ))}
-                            </NavList>
-                        </Navbar>
-                    </HeaderNav>
-                </Header>
+                <SpritesheetProvider>
+                    <Header>
+                        <HeaderNav isOpen={false}>
+                            <Navbar>
+                                <NavList>
+                                    {simpleNav.map((item, index) => (
+                                        <NavItem key={index}>
+                                            <NavLink href={item.href}>{item.label}</NavLink>
+                                        </NavItem>
+                                    ))}
+                                </NavList>
+                            </Navbar>
+                        </HeaderNav>
+                    </Header>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -126,11 +140,13 @@ describe('headerActionBar', () => {
     test('renders the headerAction Bar', () => {
         render(
             <MemoryRouter>
-                <Header>
-                    <HeaderActionBar>
-                        <a href="/">Test link</a>
-                    </HeaderActionBar>
-                </Header>
+                <SpritesheetProvider>
+                    <Header>
+                        <HeaderActionBar>
+                            <a href="/">Test link</a>
+                        </HeaderActionBar>
+                    </Header>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 

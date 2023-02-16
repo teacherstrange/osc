@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { SpritesheetProvider } from '../Icon/Icon';
 import { Navbar, NavContent, NavItem, NavLink, NavList, NavSubMenu, NavTrigger } from './Navbar';
 import { nestedSubMenuNav, simpleNav, subMenuNav, testNestedSubMenuNav } from './navContent';
 
@@ -18,15 +19,17 @@ beforeEach(() => {
 test('renders a single level Nav', () => {
     render(
         <MemoryRouter>
-            <Navbar>
-                <NavList>
-                    {simpleNav.map((item, index) => (
-                        <NavItem key={index}>
-                            <NavLink href={item.href}>{item.label}</NavLink>
-                        </NavItem>
-                    ))}
-                </NavList>
-            </Navbar>
+            <SpritesheetProvider>
+                <Navbar>
+                    <NavList>
+                        {simpleNav.map((item, index) => (
+                            <NavItem key={index}>
+                                <NavLink href={item.href}>{item.label}</NavLink>
+                            </NavItem>
+                        ))}
+                    </NavList>
+                </Navbar>
+            </SpritesheetProvider>
         </MemoryRouter>
     );
 
@@ -42,34 +45,36 @@ test('renders a single level Nav', () => {
 test('renders a nav with a submenu', async () => {
     render(
         <MemoryRouter>
-            <Navbar>
-                <NavList>
-                    {subMenuNav.map((item, index) => (
-                        <NavItem key={index}>
-                            {item.subMenu ? (
-                                <NavSubMenu level={0} label={item.label}>
-                                    <NavTrigger>{item.label}</NavTrigger>
-                                    <NavContent level={0}>
-                                        <NavList>
-                                            {item.subMenu.map((subItem, subIndex) => (
-                                                <NavItem key={subIndex}>
-                                                    <NavLink href={subItem.href}>
-                                                        {subItem.label}
-                                                    </NavLink>
-                                                </NavItem>
-                                            ))}
-                                        </NavList>
-                                    </NavContent>
-                                </NavSubMenu>
-                            ) : (
-                                <NavLink href={item?.href} isExternal={item?.isExternal}>
-                                    {item.label}
-                                </NavLink>
-                            )}
-                        </NavItem>
-                    ))}
-                </NavList>
-            </Navbar>
+            <SpritesheetProvider>
+                <Navbar>
+                    <NavList>
+                        {subMenuNav.map((item, index) => (
+                            <NavItem key={index}>
+                                {item.subMenu ? (
+                                    <NavSubMenu level={0} label={item.label}>
+                                        <NavTrigger>{item.label}</NavTrigger>
+                                        <NavContent level={0}>
+                                            <NavList>
+                                                {item.subMenu.map((subItem, subIndex) => (
+                                                    <NavItem key={subIndex}>
+                                                        <NavLink href={subItem.href}>
+                                                            {subItem.label}
+                                                        </NavLink>
+                                                    </NavItem>
+                                                ))}
+                                            </NavList>
+                                        </NavContent>
+                                    </NavSubMenu>
+                                ) : (
+                                    <NavLink href={item?.href} isExternal={item?.isExternal}>
+                                        {item.label}
+                                    </NavLink>
+                                )}
+                            </NavItem>
+                        ))}
+                    </NavList>
+                </Navbar>
+            </SpritesheetProvider>
         </MemoryRouter>
     );
 
@@ -171,18 +176,20 @@ describe('Nested sub menus', () => {
     test('renders a nav with a nested submenu', async () => {
         render(
             <MemoryRouter>
-                <Navbar>
-                    <NavList>
-                        {testNestedSubMenuNav.map((item, index) => (
-                            <RecursiveNavItemWrapper
-                                key={index}
-                                item={item}
-                                level={0}
-                                value={item.label}
-                            />
-                        ))}
-                    </NavList>
-                </Navbar>
+                <SpritesheetProvider>
+                    <Navbar>
+                        <NavList>
+                            {testNestedSubMenuNav.map((item, index) => (
+                                <RecursiveNavItemWrapper
+                                    key={index}
+                                    item={item}
+                                    level={0}
+                                    value={item.label}
+                                />
+                            ))}
+                        </NavList>
+                    </Navbar>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -214,18 +221,20 @@ describe('Nested sub menus', () => {
     test("Sets the correct level to the subnav and it's children", async () => {
         render(
             <MemoryRouter>
-                <Navbar>
-                    <NavList>
-                        {nestedSubMenuNav.map((item, index) => (
-                            <RecursiveNavItemWrapper
-                                key={index}
-                                item={item}
-                                level={0}
-                                value={item.label}
-                            />
-                        ))}
-                    </NavList>
-                </Navbar>
+                <SpritesheetProvider>
+                    <Navbar>
+                        <NavList>
+                            {nestedSubMenuNav.map((item, index) => (
+                                <RecursiveNavItemWrapper
+                                    key={index}
+                                    item={item}
+                                    level={0}
+                                    value={item.label}
+                                />
+                            ))}
+                        </NavList>
+                    </Navbar>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -238,18 +247,20 @@ describe('Nested sub menus', () => {
     test('clicking outside the nav closes the submenus', async () => {
         render(
             <MemoryRouter>
-                <Navbar>
-                    <NavList>
-                        {nestedSubMenuNav.map((item, index) => (
-                            <RecursiveNavItemWrapper
-                                key={index}
-                                item={item}
-                                level={0}
-                                value={item.label}
-                            />
-                        ))}
-                    </NavList>
-                </Navbar>
+                <SpritesheetProvider>
+                    <Navbar>
+                        <NavList>
+                            {nestedSubMenuNav.map((item, index) => (
+                                <RecursiveNavItemWrapper
+                                    key={index}
+                                    item={item}
+                                    level={0}
+                                    value={item.label}
+                                />
+                            ))}
+                        </NavList>
+                    </Navbar>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -274,18 +285,20 @@ describe('Nested sub menus', () => {
     test('clicking escape with the keyboard closes the submenus', async () => {
         render(
             <MemoryRouter>
-                <Navbar>
-                    <NavList>
-                        {nestedSubMenuNav.map((item, index) => (
-                            <RecursiveNavItemWrapper
-                                key={index}
-                                item={item}
-                                level={0}
-                                value={item.label}
-                            />
-                        ))}
-                    </NavList>
-                </Navbar>
+                <SpritesheetProvider>
+                    <Navbar>
+                        <NavList>
+                            {nestedSubMenuNav.map((item, index) => (
+                                <RecursiveNavItemWrapper
+                                    key={index}
+                                    item={item}
+                                    level={0}
+                                    value={item.label}
+                                />
+                            ))}
+                        </NavList>
+                    </Navbar>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -311,18 +324,20 @@ describe('Nested sub menus', () => {
     test('opening a submenu sets the correct tabindex', async () => {
         render(
             <MemoryRouter>
-                <Navbar>
-                    <NavList>
-                        {testNestedSubMenuNav.map((item, index) => (
-                            <RecursiveNavItemWrapper
-                                key={index}
-                                item={item}
-                                level={0}
-                                value={item.label}
-                            />
-                        ))}
-                    </NavList>
-                </Navbar>
+                <SpritesheetProvider>
+                    <Navbar>
+                        <NavList>
+                            {testNestedSubMenuNav.map((item, index) => (
+                                <RecursiveNavItemWrapper
+                                    key={index}
+                                    item={item}
+                                    level={0}
+                                    value={item.label}
+                                />
+                            ))}
+                        </NavList>
+                    </Navbar>
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
