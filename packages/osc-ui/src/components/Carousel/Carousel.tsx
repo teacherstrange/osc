@@ -3,6 +3,7 @@ import { useKeenSlider } from 'keen-slider/react';
 import type { ReactNode } from 'react';
 import React, { Children, useState } from 'react';
 import { classNames } from '../../utils/classNames';
+import { getFocusableElements } from '../../utils/getFocusableElements';
 
 import './carousel.scss';
 import { Arrow } from './CarouselArrows';
@@ -162,10 +163,22 @@ export const Carousel = (props: Props) => {
                     saveSlidesInView(entries, slidesInView);
 
                     for (const slide of slider.slides) {
+                        const focusableElements = getFocusableElements(slide);
+
                         if (slidesInView.includes(slide.dataset.slideIndex)) {
                             slide.setAttribute('aria-hidden', 'false');
+
+                            // Restore focus to on screen elements
+                            for (const element of focusableElements) {
+                                element.setAttribute('tabindex', '0');
+                            }
                         } else {
                             slide.setAttribute('aria-hidden', 'true');
+
+                            // Prevent off screen elements from being focused
+                            for (const element of focusableElements) {
+                                element.setAttribute('tabindex', '-1');
+                            }
                         }
                     }
                 },
