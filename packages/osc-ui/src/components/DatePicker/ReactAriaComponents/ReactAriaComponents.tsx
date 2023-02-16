@@ -2,15 +2,15 @@ import type { AriaButtonProps } from '@react-aria/button';
 import { useButton } from '@react-aria/button';
 import type { AriaDialogProps } from '@react-aria/dialog';
 import { useDialog } from '@react-aria/dialog';
-import { DismissButton, Overlay, usePopover } from '@react-aria/overlays';
 import type { AriaPopoverProps } from '@react-aria/overlays';
+import { DismissButton, Overlay, usePopover } from '@react-aria/overlays';
+import type { DatePickerState, DateRangePickerState } from '@react-stately/datepicker';
 import type { ReactNode } from 'react';
 import React, { useRef } from 'react';
-import type { DatePickerState, DateRangePickerState } from '@react-stately/datepicker';
 
+import { classNames } from '../../../utils/classNames';
 import '../date-picker.scss';
 import '../react-aria-components.scss';
-import { classNames } from '../../../utils/classNames';
 
 interface ButtonProps extends AriaButtonProps {
     className?: string;
@@ -21,9 +21,10 @@ export const ReactAriaButton = (props: ButtonProps) => {
     let ref = useRef();
     let { buttonProps } = useButton(props, ref);
     const classes = classNames('c-react-aria__button', className);
+    const disabledClasses = buttonProps.disabled ? 'c-calendar__button--disabled' : '';
 
     return (
-        <button className={classes} {...buttonProps} ref={ref}>
+        <button className={`${classes} ${disabledClasses}`} {...buttonProps} ref={ref}>
             {props.children}
         </button>
     );

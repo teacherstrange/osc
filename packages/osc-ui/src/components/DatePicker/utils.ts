@@ -60,3 +60,21 @@ export const selectDateHandler = (
     state.setFocusedDate(date);
     state.setValue(date);
 };
+
+export const checkDateRange = (minDate: number, maxDate: number, date: number): boolean => {
+    let isOutOfRange = false;
+    if (minDate) {
+        if (date < minDate) {
+            isOutOfRange = true;
+        } else if (maxDate) {
+            if (date > maxDate) {
+                isOutOfRange = true;
+            }
+        }
+    } else if (maxDate) {
+        if (date > maxDate) {
+            isOutOfRange = true;
+        }
+    }
+    return isOutOfRange;
+};

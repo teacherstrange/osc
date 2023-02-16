@@ -10,12 +10,13 @@ import type { DateValue } from '@react-types/calendar';
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
-import { selectDateHandler } from '../utils';
+import { checkDateRange, selectDateHandler } from '../utils';
 import { createCalendar } from './Calendar';
 
 type Year = {
-    value: CalendarDate;
+    isDisabled: boolean;
     formatted: string;
+    value: CalendarDate;
 };
 
 const getYears = (state: CalendarState, formatter: DateFormatter): Year[] => {
@@ -23,12 +24,17 @@ const getYears = (state: CalendarState, formatter: DateFormatter): Year[] => {
 
     for (let i = -5; i <= 6; i++) {
         let date = state.focusedDate.add({ years: i });
+        const minYear = state.minValue?.year;
+        const maxYear = state.maxValue?.year;
+        const year = date.year;
+        const isDisabled = checkDateRange(minYear, maxYear, year);
+
         years.push({
+            isDisabled: isDisabled,
             value: date,
             formatted: formatter.format(date.toDate(state.timeZone)),
         });
     }
-
     return years;
 };
 
@@ -43,11 +49,17 @@ const YearRange = (props): ReactElement => {
     const { classes, setCalendarView, state, years }: YearRangeProps = props;
     const startYear = years[0].formatted;
     const endYear = years[years.length - 1].formatted;
+    const minYear = state.minValue?.year;
+    const maxYear = state.maxValue?.year;
+
+    const startYearDisabled = checkDateRange(minYear, maxYear, +startYear);
+    const endYearDisabled = checkDateRange(minYear, maxYear, +endYear);
 
     return (
         <div className="c-calendar__date-container">
             <Button
-                className={classes}
+                className={`${classes} ${startYearDisabled ? `c-calendar__button--disabled` : ``}`}
+                isDisabled={startYearDisabled}
                 onClick={() => {
                     const date = state.focusedDate.set({ year: +startYear });
                     state.setFocusedDate(date);
@@ -58,9 +70,12 @@ const YearRange = (props): ReactElement => {
             >
                 {startYear}
             </Button>
-            <span className={classes}>-</span>
+            <span className={`${classes} ${endYearDisabled ? `c-calendar__button--disabled` : ``}`}>
+                -
+            </span>
             <Button
-                className={classes}
+                className={`${classes} ${endYearDisabled ? `c-calendar__button--disabled` : ``}`}
+                isDisabled={endYearDisabled}
                 onClick={() => {
                     const date = state.focusedDate.set({ year: +endYear });
                     state.setFocusedDate(state.focusedDate.set(date));
@@ -89,22 +104,26 @@ const Years = (props) => {
         let date = state.value;
         const isSelected = date?.year === +year.formatted;
 
+        const selectedClasses = isSelected
+            ? `c-calendar__button--year c-calendar__button--selected`
+            : `c-calendar__button--year `;
+
+        const disabledClasses = year.isDisabled ? 'c-calendar__button--disabled' : '';
+
         return (
-            <button
-                className={
-                    isSelected
-                        ? `c-calendar__button--year c-calendar__button--selected`
-                        : `c-calendar__button--year `
-                }
+            <Button
+                className={`${selectedClasses}${disabledClasses}`}
+                disabled={year.isDisabled}
                 key={i}
                 onClick={(e) => {
                     setCalendarView('month');
                     selectDateHandler(e, state, 'year');
                 }}
                 value={year.formatted}
+                variant="quaternary"
             >
                 {year.formatted}
-            </button>
+            </Button>
         );
     });
 
@@ -152,6 +171,11 @@ export const DecadeCalendar = (props: DecadeCalendarProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps -- Only update when yearStepper is clicked
     }, [yearStepper]);
 
+    const startDate = state.focusedDate.subtract({ years: 5 });
+    const endDate = state.focusedDate.add({ years: 5 });
+    const startDisabled = checkDateRange(state.minValue?.year, null, startDate.year);
+    const endDisabled = checkDateRange(null, state.minValue?.year, endDate.year);
+
     return (
         <div {...calendarProps} className="c-calendar c-calendar__decade">
             <div className="c-calendar__header">
@@ -161,6 +185,7 @@ export const DecadeCalendar = (props: DecadeCalendarProps) => {
                         setYearStepper(true);
                     }}
                     className="c-calendar__button--chevron"
+                    isDisabled={startDisabled}
                     variant="quaternary"
                 >
                     <Icon id="chevron-left" />
@@ -179,12 +204,13 @@ export const DecadeCalendar = (props: DecadeCalendarProps) => {
                         setYearStepper(true);
                     }}
                     className="c-calendar__button--chevron"
+                    isDisabled={endDisabled}
                     variant="quaternary"
                 >
                     <Icon id="chevron-right" />
                 </Button>
             </div>
-            <div className="year-calendar__dropdowns">
+            <div className="c-calendar__decade-dropdown">
                 {years ? (
                     <Years state={state} years={years} setCalendarView={setCalendarView} />
                 ) : null}

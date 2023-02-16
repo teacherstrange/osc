@@ -56,7 +56,7 @@ const Template: Story = ({ minValue, maxValue, ...args }) => {
             <DatePicker
                 granularity={args.granularity}
                 minValue={minValue && parseDate('2023-02-03')}
-                maxValue={maxValue && parseDate('2023-02-20')}
+                maxValue={maxValue && parseDate('2023-03-20')}
                 onChange={setDate}
                 value={date}
                 {...args}

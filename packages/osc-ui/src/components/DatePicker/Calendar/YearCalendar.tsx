@@ -9,7 +9,7 @@ import React from 'react';
 import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
-import { selectDateHandler } from '../utils';
+import { checkDateRange, selectDateHandler } from '../utils';
 import { createCalendar } from './Calendar';
 
 const Year = (props): ReactElement => {
@@ -54,16 +54,25 @@ const Months = (props) => {
     const Month = (props): ReactElement => {
         const { index }: { index: number } = props;
         let date = state.focusedDate.set({ month: index + 1 });
+
+        const minMonth = state.minValue?.month;
+        const maxMonth = state.maxValue?.month;
+        const month = date.month;
+
+        const isDisabled = checkDateRange(minMonth, maxMonth, month);
+
         const fomattedMonth = formatter.format(date.toDate(state.timeZone));
         const isSelected = state.isSelected(date);
 
+        const selectedClasses = isSelected
+            ? `c-calendar__button--year c-calendar__button--selected`
+            : `c-calendar__button--year `;
+
+        const disabledClasses = isDisabled ? 'c-calendar__button--disabled' : '';
         return (
             <Button
-                className={
-                    isSelected
-                        ? `c-calendar__button--month c-calendar__button--selected`
-                        : `c-calendar__button--month`
-                }
+                className={`${selectedClasses}${disabledClasses}`}
+                disabled={isDisabled}
                 key={index}
                 onClick={(e) => {
                     setCalendarView('month');
@@ -107,6 +116,11 @@ export const YearCalendar = (props: YearCalendarProps) => {
     });
     let { calendarProps } = useCalendar(rest, state);
 
+    const startDate = state.focusedDate.subtract({ years: 1 });
+    const endDate = state.focusedDate.add({ years: 1 });
+    const startDisabled = checkDateRange(state.minValue?.year, null, startDate.year);
+    const endDisabled = checkDateRange(null, state.minValue?.year, endDate.year);
+
     return (
         <div {...calendarProps} className="c-calendar c-calendar__year">
             <div className="c-calendar__header">
@@ -115,6 +129,7 @@ export const YearCalendar = (props: YearCalendarProps) => {
                         state.setFocusedDate(state.focusedDate.subtract({ years: 1 }));
                     }}
                     className="c-calendar__button--chevron"
+                    isDisabled={startDisabled}
                     variant="quaternary"
                 >
                     <Icon id="chevron-left" />
@@ -129,12 +144,13 @@ export const YearCalendar = (props: YearCalendarProps) => {
                         state.setFocusedDate(state.focusedDate.add({ years: 1 }));
                     }}
                     className="c-calendar__button--chevron"
+                    isDisabled={endDisabled}
                     variant="quaternary"
                 >
                     <Icon id="chevron-right" />
                 </Button>
             </div>
-            <div className="year-calendar__dropdowns">
+            <div className="c-calendar__year-dropdown">
                 <Months state={state} setCalendarView={setCalendarView} />
             </div>
         </div>

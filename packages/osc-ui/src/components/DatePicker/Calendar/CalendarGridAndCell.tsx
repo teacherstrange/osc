@@ -1,6 +1,10 @@
 import type { CalendarDate } from '@internationalized/date';
 import { endOfMonth, getWeeksInMonth, isSameDay, isSameMonth } from '@internationalized/date';
-import type { AriaCalendarCellProps, AriaCalendarGridProps } from '@react-aria/calendar';
+import type {
+    AriaCalendarCellProps,
+    AriaCalendarGridProps,
+    CalendarGridAria,
+} from '@react-aria/calendar';
 import { useCalendarCell, useCalendarGrid } from '@react-aria/calendar';
 import { useFocusRing } from '@react-aria/focus';
 import { useLocale } from '@react-aria/i18n';
@@ -32,7 +36,7 @@ export const CalendarGrid = (props: GridProps) => {
 
     let endDate = endOfMonth(startDate);
 
-    let { gridProps, headerProps, weekDays } = useCalendarGrid(
+    let { gridProps, headerProps, weekDays }: CalendarGridAria = useCalendarGrid(
         {
             startDate,
             endDate,

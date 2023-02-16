@@ -111,6 +111,11 @@
         &--disabled {
             color: var(--color-neutral-400);
             cursor: not-allowed;
+
+            &:hover {
+                background: var(--color-tertiary);
+                font-weight: $fw-reg;
+            }
         }
     }
 
@@ -123,12 +128,13 @@
             font-variant-numeric: tabular-nums;
 
             &:hover {
-                background: var(--color-neutral-300);
+                background: var(--hover-color);
                 border-radius: $rad-xs;
+                color: var(--color-secondary);
+                font-weight: $fw-bold;
             }
 
             &:focus {
-                background: var(--color-neutral-300);
                 border-radius: $rad-xs;
             }
         }
@@ -138,6 +144,11 @@
             border-radius: $rad-xs;
             color: var(--color-tertiary);
             font-weight: $fw-bold;
+
+            &:hover {
+                background: var(--selected-color);
+                color: var(--color-tertiary);
+            }
         }
 
         .c-calendar__header {
@@ -146,6 +157,15 @@
 
             .c-calendar__current-year {
                 font-weight: $fw-bold;
+
+                &.c-calendar__button--disabled {
+                    color: var(--color-neutral-600);
+
+                    &:hover {
+                        background-color: var(--color-tertiary);
+                        cursor: not-allowed;
+                    }
+                }
             }
         }
     }
@@ -303,6 +323,21 @@
         .c-calendar__current-month,
         .c-calendar__current-year {
             cursor: initial;
+        }
+    }
+
+    .c-calendar__button--disabled {
+        color: var(--color-neutral-400);
+
+        &:hover {
+            background-color: var(--color-tertiary);
+            color: var(--color-neutral-400);
+            font-weight: $fw-bold;
+            cursor: not-allowed;
+
+            svg {
+                cursor: not-allowed;
+            }
         }
     }
 
