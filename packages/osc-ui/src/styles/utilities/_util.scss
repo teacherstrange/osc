@@ -198,7 +198,7 @@ $osc-config: (
     }
 
     &-from\@desk {
-        @include mq(mq-token("desk")) {
+        @include mq($mq-desk) {
             display: none !important;
         }
     }
@@ -210,7 +210,7 @@ $osc-config: (
     }
 
     &-until\@desk {
-        @include mq(mq-token("desk"), max) {
+        @include mq($mq-desk, max) {
             display: none !important;
         }
     }

@@ -26,7 +26,7 @@
     padding-right: $padding-alt;
     padding-left: $padding-alt;
 
-    @include mq(mq-token("desk")) {
+    @include mq($mq-desk) {
         padding-right: $padding;
         padding-left: $padding;
     }
