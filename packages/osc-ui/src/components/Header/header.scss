@@ -111,8 +111,7 @@ $logo-size-l: 277px;
         }
 
         /* stylelint-disable-next-line no-descending-specificity */
-        > a,
-        > button {
+        #{$self}__action-item {
             display: block;
             cursor: pointer;
 
@@ -128,8 +127,7 @@ $logo-size-l: 277px;
             color: var(--color-tertiary);
             gap: 0;
 
-            a,
-            button {
+            #{$self}__action-item {
                 display: flex;
                 flex: 0 1 50%;
                 align-items: center;

@@ -1,5 +1,6 @@
+import { Slot } from '@radix-ui/react-slot';
 import type { HTMLAttributes, ReactNode, RefObject } from 'react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Children, useEffect, useRef, useState } from 'react';
 import breakpoints from '../../../../../tokens/media-queries';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { classNames } from '../../utils/classNames';
@@ -97,7 +98,13 @@ export const HeaderActionBar = (props: HeaderActionBarProps) => {
 
     return (
         <div className={classes} {...attr}>
-            {children}
+            {Children.map(children, (child, index) => {
+                return (
+                    <Slot className="c-header__action-item" key={index}>
+                        {child}
+                    </Slot>
+                );
+            })}
         </div>
     );
 };
