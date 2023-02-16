@@ -4,7 +4,7 @@
 /* stylelint-disable plugin/selector-bem-pattern */
 
 .c-label {
-    font-weight: $fw-reg;
+    color: var(--color-neutral-700);
     cursor: pointer;
 
     &__required {
