@@ -178,13 +178,14 @@ $simple-nav-width: 250px;
             > #{$self}__submenu > #{$self}__trigger,
             > #{$self}__link {
                 @include mq(mq-token("desk")) {
-                    $bg-height: 2px;
+                    $bg-height: 4px;
 
+                    padding-block-end: $bg-height;
                     background:
                         linear-gradient(
                             0deg,
-                            var(--color-primary),
-                            var(--color-primary)
+                            var(--color-secondary),
+                            var(--color-secondary)
                         ) no-repeat right bottom / 0 $bg-height;
                     line-height: $base-lh;
                     transition: background-size $timing $ease-in-out;
