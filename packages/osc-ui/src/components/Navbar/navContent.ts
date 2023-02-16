@@ -1,34 +1,34 @@
 const subMenu = [
     {
         label: 'Sub category',
-        href: '/',
+        href: '/sub-category',
     },
     {
         label: 'Sub category',
-        href: '/',
+        href: '/sub-category',
     },
     {
         label: 'Sub category',
-        href: '/',
+        href: '/sub-category',
     },
     {
         label: 'View all',
-        href: '/',
+        href: '/view-all',
     },
 ];
 
 export const simpleNav = [
     {
         label: 'Courses',
-        href: '/',
+        href: '/courses',
     },
     {
         label: 'How it works',
-        href: '/',
+        href: '/how-it-works',
     },
     {
         label: 'Special offers',
-        href: '/baz',
+        href: '/special-offers',
     },
 ];
 
@@ -39,29 +39,29 @@ export const subMenuNav = [
         subMenu: [
             {
                 label: 'Childcare & education',
-                href: '/',
+                href: '/childcare-and-education',
             },
             {
                 label: 'Health & social care',
-                href: '/',
+                href: '/health-social-care',
             },
             {
                 label: 'Access to HE',
-                href: '/',
+                href: '/access-to-he',
             },
             {
                 label: 'Hair, beauty & nails',
-                href: '/',
+                href: '/hair-beauty-nails',
             },
         ],
     },
     {
         label: 'How it works',
-        href: '/',
+        href: '/how-it-works',
     },
     {
         label: 'Special offers',
-        href: '/baz',
+        href: '/special-offers',
     },
 ];
 
@@ -75,22 +75,22 @@ export const nestedSubMenuNav = [
                 column: [
                     {
                         label: 'Childcare & education',
-                        href: '/',
+                        href: '/childcare-and-education',
                         subMenu,
                     },
                     {
                         label: 'Health & social care',
-                        href: '/',
+                        href: '/health-social-care',
                         subMenu,
                     },
                     {
                         label: 'Access to HE',
-                        href: '/',
+                        href: '/access-to-he',
                         subMenu,
                     },
                     {
                         label: 'Hair, beauty & nails',
-                        href: '/',
+                        href: '/hair-beauty-nails',
                         subMenu,
                     },
                 ],
@@ -100,22 +100,22 @@ export const nestedSubMenuNav = [
                 column: [
                     {
                         label: 'Counselling & psychology',
-                        href: '/',
+                        href: '/counselling-and-psychology',
                         subMenu,
                     },
                     {
                         label: 'Accounting & bookkeeping',
-                        href: '/',
+                        href: '/accounting-and-bookkeeping',
                         subMenu,
                     },
                     {
                         label: 'Business',
-                        href: '/',
+                        href: '/business',
                         subMenu,
                     },
                     {
                         label: 'Computers & IT',
-                        href: '/',
+                        href: '/computers-and-it',
                         subMenu,
                     },
                 ],
@@ -125,27 +125,27 @@ export const nestedSubMenuNav = [
                 column: [
                     {
                         label: 'Health & safety',
-                        href: '/',
+                        href: '/health-safety',
                         subMenu,
                     },
                     {
                         label: 'Health, fitness & nutrition',
-                        href: '/',
+                        href: '/health-fitness-and-nutrition',
                         subMenu,
                     },
                     {
                         label: 'Animal care',
-                        href: '/',
+                        href: '/animal-care',
                         subMenu,
                     },
                     {
                         label: 'Higher education',
-                        href: '/',
+                        href: '/higher-education',
                         subMenu,
                     },
                     {
                         label: 'Languages',
-                        href: '/',
+                        href: '/languages',
                         subMenu,
                     },
                 ],
@@ -155,27 +155,27 @@ export const nestedSubMenuNav = [
                 column: [
                     {
                         label: 'Creative',
-                        href: '/',
+                        href: '/creative',
                         subMenu,
                     },
                     {
                         label: 'Property & home',
-                        href: '/',
+                        href: '/property-and-home',
                         subMenu,
                     },
                     {
                         label: 'History',
-                        href: '/',
+                        href: '/history',
                         subMenu,
                     },
                     {
                         label: 'Law & politics',
-                        href: '/',
+                        href: '/law-and-politics',
                         subMenu,
                     },
                     {
                         label: 'Maths & science',
-                        href: '/',
+                        href: '/maths-and-science',
                         subMenu,
                     },
                 ],
@@ -185,15 +185,15 @@ export const nestedSubMenuNav = [
                 featured: [
                     {
                         label: 'A levels',
-                        href: '/',
+                        href: '/a-levels',
                     },
                     {
                         label: 'GCSEs',
-                        href: '/',
+                        href: '/gcses',
                     },
                     {
                         label: 'Discover all courses',
-                        href: '/',
+                        href: '/discovered-all-courses',
                     },
                 ],
             },
@@ -201,7 +201,7 @@ export const nestedSubMenuNav = [
     },
     {
         label: 'How it works',
-        href: '/',
+        href: '/how-it-works',
     },
     {
         label: 'Special offers',
@@ -236,20 +236,20 @@ export const testNestedSubMenuNav = [
                 column: [
                     {
                         label: 'Childcare & education',
-                        href: '/',
+                        href: '/chilcare-and-education',
                         subMenu,
                     },
                     {
                         label: 'Health & social care',
-                        href: '/',
+                        href: '/healt-and-social-care',
                     },
                     {
                         label: 'Access to HE',
-                        href: '/',
+                        href: '/access-to-he',
                     },
                     {
                         label: 'Hair, beauty & nails',
-                        href: '/',
+                        href: '/hair-beauty-nails',
                     },
                 ],
             },
@@ -258,15 +258,15 @@ export const testNestedSubMenuNav = [
                 featured: [
                     {
                         label: 'A levels',
-                        href: '/',
+                        href: '/a-levels',
                     },
                     {
                         label: 'GCSEs',
-                        href: '/',
+                        href: '/gcse',
                     },
                     {
                         label: 'Discover all courses',
-                        href: '/',
+                        href: '/discovered-all-courses',
                     },
                 ],
             },
@@ -274,7 +274,7 @@ export const testNestedSubMenuNav = [
     },
     {
         label: 'How it works',
-        href: '/',
+        href: '/how-it-works',
     },
     {
         label: 'Special offers',
