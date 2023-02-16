@@ -79,20 +79,31 @@ $simple-nav-width: 250px;
         // Style triggers and links within the content block where they are not the top level
         #{$self}__content:where([data-level="0"]) & {
             @include mq(mq-token("desk")) {
-                display: flex;
-                padding-block: $space-xl $space-2xs;
-                border-block-end: solid 1px var(--color-quinary);
-                font-weight: $fw-bold;
-                transition: border-block-end-color $timing $ease-in-out;
+                $bg-height: 1px;
 
+                display: flex;
+                background:
+                    linear-gradient(
+                        0deg,
+                        var(--color-secondary),
+                        var(--color-secondary)
+                    ) no-repeat right bottom / 0 $bg-height;
+                font-weight: $fw-bold;
+                transition: background-size $timing $ease-in-out;
+                padding-block: $space-xl $space-2xs;
+                border-block-end: solid $bg-height var(--color-quinary);
+
+                &[data-state="open"],
                 &:hover {
-                    border-block-end-color: var(--color-secondary);
+                    background-size: 100% $bg-height;
+                    background-position-x: left;
                 }
             }
 
             &--close {
                 @include mq(mq-token("desk")) {
                     padding-block: 0;
+                    background: none;
                 }
 
                 border-block-end: none;
@@ -161,6 +172,32 @@ $simple-nav-width: 250px;
         @include mq(mq-token("desk")) {
             align-items: center;
         }
+
+        // Select only the top level of items without cascading the styles down
+        > #{$self}__item {
+            > #{$self}__submenu > #{$self}__trigger,
+            > #{$self}__link {
+                @include mq(mq-token("desk")) {
+                    $bg-height: 2px;
+
+                    background:
+                        linear-gradient(
+                            0deg,
+                            var(--color-primary),
+                            var(--color-primary)
+                        ) no-repeat right bottom / 0 $bg-height;
+                    line-height: $base-lh;
+                    transition: background-size $timing $ease-in-out;
+
+                    &:hover,
+                    &.active, // active is auto applied by the Remix NavLink component
+                    &[data-state="open"] {
+                        background-size: 100% $bg-height;
+                        background-position-x: left;
+                    }
+                }
+            }
+        }
     }
 
     &__list {
@@ -218,6 +255,7 @@ $simple-nav-width: 250px;
             #{$self}__link {
                 padding-block: 0;
                 border-block-end: none;
+                background: none;
             }
         }
 
