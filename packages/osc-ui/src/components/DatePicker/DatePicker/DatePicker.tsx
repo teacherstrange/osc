@@ -24,7 +24,7 @@ export const DatePicker = (props: DatePickerProps) => {
 
     return (
         <div className="c-datepicker">
-            <label {...labelProps} className="c-datepicker__label">
+            <label {...labelProps} className="c-label">
                 {props.label}
             </label>
             <div

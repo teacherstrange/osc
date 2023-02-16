@@ -213,7 +213,7 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
 
     return (
         <div className="c-datepicker c-datepicker__range">
-            <label className="c-datepicker__label" {...labelProps}>
+            <label className="c-label" {...labelProps}>
                 {props.label}
             </label>
             <div {...groupProps} ref={ref}>
