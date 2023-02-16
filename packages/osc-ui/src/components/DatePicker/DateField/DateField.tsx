@@ -10,6 +10,7 @@ import { useUniqueId } from '../../../hooks/useUniqueId';
 import { Icon } from '../../Icon/Icon';
 import '../date-field.scss';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
+import type { DateFieldState, DateSegment } from '@react-stately/datepicker';
 
 // Ensure that we just use the Gregorian Calendar to limit package size.
 // If needed more can be added in at a later point. See below link for example:
@@ -52,7 +53,7 @@ export const DateField = (props: DateFieldProps) => {
             >
                 <div {...fieldProps} ref={ref} className="c-date-field">
                     {state.segments.map((segment, i) => (
-                        <DateSegment key={i} segment={segment} state={state} />
+                        <DateSegmentComponent key={i} segment={segment} state={state} />
                     ))}
                 </div>
                 <ReactAriaButton {...props.buttonProps} id={buttonId}>
@@ -66,7 +67,14 @@ export const DateField = (props: DateFieldProps) => {
     );
 };
 
-const DateSegment = ({ segment, state }) => {
+interface DateSegmentProps {
+    segment: DateSegment;
+    state: DateFieldState;
+}
+
+const DateSegmentComponent = (props: DateSegmentProps) => {
+    const { segment, state } = props;
+
     let ref = useRef();
     let { segmentProps } = useDateSegment(segment, state, ref);
 
