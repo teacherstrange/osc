@@ -77,7 +77,6 @@
 
         &:focus {
             background: var(--hover-color);
-            border: 3px solid var(--color-primary);
             border-radius: $rad;
             font-weight: $fw-bold;
         }
@@ -94,10 +93,18 @@
             color: var(--color-tertiary);
             font-weight: $fw-bold;
 
+            &:hover {
+                background: var(--selected-color);
+                border-radius: $rad-xs;
+            }
+
             &:focus {
                 background: var(--selected-color);
-                border: 3px solid var(--color-primary);
                 border-radius: $rad-xs;
+            }
+
+            &:focus-visible {
+                border: 3px solid var(--color-primary);
             }
         }
 
