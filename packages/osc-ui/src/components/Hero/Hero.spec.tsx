@@ -77,19 +77,19 @@ test('renders different font sizes for each variant', () => {
             <HeroTitle>Title</HeroTitle>
         </Hero>
     );
-    expect(screen.getByRole('heading', { name: 'Title' })).toHaveClass('t-font-kilo');
+    expect(screen.getByRole('heading', { name: 'Title' })).toHaveClass('t-font-6xl');
 
     rerender(
         <Hero variant="secondary" backgroundColor="gradient-nonary-270">
             <HeroTitle>Title</HeroTitle>
         </Hero>
     );
-    expect(screen.getByRole('heading', { name: 'Title' })).toHaveClass('t-font-mega');
+    expect(screen.getByRole('heading', { name: 'Title' })).toHaveClass('t-font-7xl');
 
     rerender(
         <Hero variant="tertiary" backgroundColor="gradient-nonary-270">
             <HeroTitle>Title</HeroTitle>
         </Hero>
     );
-    expect(screen.getByRole('heading', { name: 'Title' })).toHaveClass('t-font-beta');
+    expect(screen.getByRole('heading', { name: 'Title' })).toHaveClass('t-font-3xl');
 });
