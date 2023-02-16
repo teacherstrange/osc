@@ -13,43 +13,43 @@ $simple-nav-width: 250px;
 
     @include z-index("navigation");
 
-    @include mq(mq-token("desk")) {
+    @include mq($mq-desk) {
         font-weight: $fw-reg;
     }
 
     &--simple {
         #{$self}__content {
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 max-width: $simple-nav-width;
             }
 
             &[data-level="0"] #{$self}__list {
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     padding-inline: 0;
                 }
             }
 
             &[data-state="closed"] {
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     grid-template-rows: 1fr;
                 }
             }
 
             #{$self}__trigger--close {
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     display: none;
                 }
             }
         }
 
         #{$self}__submenu #{$self}__list {
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 flex-flow: column nowrap;
             }
 
             #{$self}__item {
                 > a {
-                    @include mq(mq-token("desk")) {
+                    @include mq($mq-desk) {
                         padding-block-start: $space-s;
                     }
                 }
@@ -62,7 +62,7 @@ $simple-nav-width: 250px;
         padding: $space-2xl $space-m;
         border-block-end: solid 1px var(--color-quinary);
 
-        @include mq(mq-token("desk")) {
+        @include mq($mq-desk) {
             padding: 0;
             border-block-end: none;
         }
@@ -71,14 +71,14 @@ $simple-nav-width: 250px;
         #{$self}__content & {
             padding-block: $space-l;
 
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 padding-block: 0;
             }
         }
 
         // Style triggers and links within the content block where they are not the top level
         #{$self}__content:where([data-level="0"]) & {
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 $bg-height: 1px;
 
                 display: flex;
@@ -101,7 +101,7 @@ $simple-nav-width: 250px;
             }
 
             &--close {
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     padding-block: 0;
                     background: none;
                 }
@@ -121,7 +121,7 @@ $simple-nav-width: 250px;
         &--close {
             background-color: var(--color-neutral-200);
 
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 width: auto;
                 justify-self: flex-end;
             }
@@ -139,12 +139,12 @@ $simple-nav-width: 250px;
     &__trigger-icon {
         transition: transform $timing $ease-in-out;
 
-        @include mq(mq-token("desk"), max) {
+        @include mq($mq-desk, max) {
             transform: rotate(-90deg);
         }
 
         #{$self}__trigger[data-state="open"] & {
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 transform: rotate(180deg);
             }
         }
@@ -153,7 +153,7 @@ $simple-nav-width: 250px;
     &__link {
         display: flex;
 
-        @include mq(mq-token("desk")) {
+        @include mq($mq-desk) {
             display: inline-block;
         }
     }
@@ -163,13 +163,13 @@ $simple-nav-width: 250px;
         display: flex;
         flex-direction: column;
 
-        @include mq(mq-token("desk")) {
+        @include mq($mq-desk) {
             flex-direction: row;
         }
     }
 
     > #{$self}__list {
-        @include mq(mq-token("desk")) {
+        @include mq($mq-desk) {
             align-items: center;
         }
 
@@ -177,7 +177,7 @@ $simple-nav-width: 250px;
         > #{$self}__item {
             > #{$self}__submenu > #{$self}__trigger,
             > #{$self}__link {
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     $bg-height: 4px;
 
                     padding-block-end: $bg-height;
@@ -204,13 +204,13 @@ $simple-nav-width: 250px;
     &__list {
         --navbar-list-gap: #{$space-xl};
 
-        @include mq(mq-token("desk")) {
+        @include mq($mq-desk) {
             column-gap: var(--navbar-list-gap);
         }
 
         // Style the list when the content block isn't the top level
         #{$self}__content:not([data-level="0"]) & {
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 flex-direction: column;
                 column-gap: var(--navbar-list-gap);
             }
@@ -224,7 +224,7 @@ $simple-nav-width: 250px;
     }
 
     &__item {
-        @include mq(mq-token("desk")) {
+        @include mq($mq-desk) {
             flex: 0 1 calc(25% - var(--navbar-list-gap));
         }
 
@@ -238,17 +238,17 @@ $simple-nav-width: 250px;
             font-size: $fs-xl;
             padding-block: $space-m;
 
-            @include mq(mq-token("desk"), max) {
+            @include mq($mq-desk, max) {
                 order: 0;
             }
 
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 flex: 1 1 100%;
                 border-block-end: none;
             }
 
             #{$self}__list {
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     flex-direction: column;
                 }
             }
@@ -261,13 +261,13 @@ $simple-nav-width: 250px;
         }
 
         &--column {
-            @include mq(mq-token("desk"), max) {
+            @include mq($mq-desk, max) {
                 order: 1;
             }
         }
 
         [data-level="0"] & {
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 padding-left: 0;
             }
         }
@@ -300,13 +300,13 @@ $simple-nav-width: 250px;
 
         @include z-index("sub-navigation");
 
-        @include mq(mq-token("desk")) {
+        @include mq($mq-desk) {
             position: absolute;
             display: grid; /* [1]  */
         }
 
         #{$self}__list {
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 min-height: 0; /* [3] */
             }
         }
@@ -347,7 +347,7 @@ $simple-nav-width: 250px;
                 border-block-end: none;
                 transition: font-weight $timing $ease-in-out;
 
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     background: none;
                     padding-block: 6px;
                 }
@@ -359,7 +359,7 @@ $simple-nav-width: 250px;
             }
         }
 
-        @include mq(mq-token("desk")) {
+        @include mq($mq-desk) {
             inset-block-start: 0;
             min-height: unset;
             background-color: var(--color-neutral-200);
@@ -372,27 +372,27 @@ $simple-nav-width: 250px;
         }
 
         &[data-level="0"] {
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 padding-block: $space-l $space-2xl;
                 padding-inline: $space-l;
             }
 
             > #{$self}__list {
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     padding-inline: $space-3xl $space-xl;
                     flex-wrap: wrap;
                 }
             }
 
             &[data-state="closed"] {
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     opacity: 0;
                     visibility: hidden;
                 }
             }
 
             &[data-state="open"] {
-                @include mq(mq-token("desk")) {
+                @include mq($mq-desk) {
                     opacity: 1;
                     visibility: visible;
                 }
@@ -402,7 +402,7 @@ $simple-nav-width: 250px;
         &[data-state="closed"] {
             transform: translateX(100vw);
 
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 transform: translateX(0);
                 grid-template-rows: 0fr; /* [2] */
             }
@@ -411,7 +411,7 @@ $simple-nav-width: 250px;
         &[data-state="open"] {
             transform: translateX(0);
 
-            @include mq(mq-token("desk")) {
+            @include mq($mq-desk) {
                 grid-template-rows: 1fr; /* [5] */
             }
         }
