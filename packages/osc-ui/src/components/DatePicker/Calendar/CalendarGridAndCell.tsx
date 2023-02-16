@@ -138,7 +138,7 @@ export const CalendarCell = (props: CellProps) => {
     const finalClasses = classNames('c-calendar__cell', classesList);
 
     return (
-        <td {...cellProps} data-selected={isSelected}>
+        <td {...cellProps} data-selected={isSelected} className="c-calendar__grid-cell">
             <div
                 {...mergeProps(buttonProps, focusProps)}
                 ref={ref}
