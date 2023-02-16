@@ -49,6 +49,7 @@ const Template: Story = (args) => {
                         ? { start: parseDate(todaysDate), end: dates['nextWeek'] }
                         : null
                 }
+                label={args.label}
                 presets={args.presets}
                 minValue={dates[args.minValue]}
                 maxValue={dates[args.maxValue]}
@@ -63,7 +64,12 @@ export const DefaultValue = Template.bind({});
 export const MinAndMax = Template.bind({});
 export const Validation = Template.bind({});
 
+Primary.args = {
+    label: 'Date Range',
+};
+
 WithTimePresets.args = {
+    label: 'Date Range',
     presets: [
         {
             name: 'Today',
@@ -101,6 +107,7 @@ WithTimePresets.parameters = {
 
 DefaultValue.args = {
     defaultValue: true,
+    label: 'Date Range',
 };
 DefaultValue.parameters = {
     docs: {
@@ -112,6 +119,7 @@ DefaultValue.parameters = {
 
 MinAndMax.args = {
     defaultValue: true,
+    label: 'Date Range',
     minValue: 'lastWeek',
     maxValue: 'nextWeek',
 };
@@ -124,6 +132,7 @@ MinAndMax.parameters = {
 };
 Validation.args = {
     defaultValue: true,
+    label: 'Date Range',
     minValue: 'threeWeeksAgo',
     maxValue: 'lastWeek',
 };

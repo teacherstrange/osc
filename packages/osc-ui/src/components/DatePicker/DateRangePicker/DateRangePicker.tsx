@@ -22,11 +22,18 @@ import { createTimePresets } from '../utils';
  * -----------------------------------------------------------------------------------------------*/
 
 interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateValue> {
+    /**
+     * A label for the DateRangePicker
+     */
+    label: string;
+    /**
+     * Preset time periods a user can select
+     */
     presets?: { name: string; length: number }[];
 }
 
 export const DateRangePickerContainer = (props: DateRangePickerContainerProps) => {
-    const { defaultValue, presets, ...rest } = props;
+    const { defaultValue, label, presets, ...rest } = props;
 
     // Used to set the value of the range calender to a preset or to clear it
     const [value, setValue] = useState<RangeValue<DateValue>>(defaultValue ? defaultValue : null);
@@ -61,7 +68,7 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
                 clearSelection={<ClearSelection />}
                 initialDefault={initialDefault}
                 isDesktop={isDesktop}
-                label="Date range"
+                label={label}
                 // Runs only when start AND end date are both selected
                 onChange={(e: { start: DateValue; end: DateValue }) => {
                     setValue(e);
