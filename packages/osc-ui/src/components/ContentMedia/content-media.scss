@@ -1,6 +1,6 @@
 /* stylelint-disable plugin/selector-bem-pattern */
-@use "../../styles/settings" as *;
-@use "../../styles/tools" as *;
+@import "../../styles/settings";
+@import "../../styles/tools";
 
 .c-content-media {
     $self: &;
