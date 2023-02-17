@@ -1,6 +1,12 @@
-import type { AnyCalendarDate, DateFormatter } from '@internationalized/date';
+import type { AnyCalendarDate, CalendarDate, DateFormatter } from '@internationalized/date';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import type { CalendarState, RangeCalendarState } from '@react-stately/calendar';
+
+type Year = {
+    isDisabled: boolean;
+    formatted: string;
+    value: CalendarDate;
+};
 
 export const formatDate = (
     visibleRange: 'start' | 'end',
@@ -61,6 +67,10 @@ export const selectDateHandler = (
     state.setValue(date);
 };
 
+/**
+ * Check whether a date is outside of the min or max range - Used
+ * with year and decade calendar to set the disabled ranges
+ */
 export const checkDateRange = (minDate: number, maxDate: number, date: number): boolean => {
     let isOutOfRange = false;
     if (minDate) {
@@ -77,4 +87,30 @@ export const checkDateRange = (minDate: number, maxDate: number, date: number): 
         }
     }
     return isOutOfRange;
+};
+
+/**
+ * set the start and end disabled range - Used with year and decade calendar
+ */
+export const setDisabledRange = (
+    state: CalendarState,
+    type: string,
+    time: number | Year[]
+): [boolean, boolean] => {
+    let startDisabled, endDisabled;
+    if (type === 'toggleDates') {
+        const years = time as number;
+        const startDate = state.focusedDate.subtract({ years: years });
+        const endDate = state.focusedDate.add({ years: years });
+        startDisabled = checkDateRange(state.minValue?.year, null, startDate.year);
+        endDisabled = checkDateRange(null, state.minValue?.year, endDate.year);
+    }
+    if (type === 'yearSelector') {
+        const year = time as Year[];
+        const startYear = year[0].formatted;
+        const endYear = year[year.length - 1].formatted;
+        startDisabled = checkDateRange(state.minValue?.year, state.maxValue?.year, +startYear);
+        endDisabled = checkDateRange(state.minValue?.year, state.maxValue?.year, +endYear);
+    }
+    return [startDisabled, endDisabled];
 };
