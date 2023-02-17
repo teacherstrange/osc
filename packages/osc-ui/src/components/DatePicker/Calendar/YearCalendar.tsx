@@ -12,16 +12,14 @@ import '../calendar.scss';
 import { checkDateRange, selectDateHandler } from '../utils';
 import { createCalendar } from './Calendar';
 
-const Year = (props): ReactElement => {
-    const {
-        className,
-        setCalendarView,
-        state,
-    }: {
-        className: string;
-        setCalendarView: Dispatch<SetStateAction<'month' | 'year' | 'decade'>>;
-        state: CalendarState;
-    } = props;
+interface YearProps {
+    className: string;
+    setCalendarView: Dispatch<SetStateAction<'month' | 'year' | 'decade'>>;
+    state: CalendarState;
+}
+
+const Year = (props: YearProps): ReactElement => {
+    const { className, setCalendarView, state } = props;
     let formatter = useDateFormatter({
         year: 'numeric',
         timeZone: state.timeZone,
@@ -38,14 +36,13 @@ const Year = (props): ReactElement => {
     );
 };
 
-const Months = (props) => {
-    const {
-        state,
-        setCalendarView,
-    }: {
-        state: CalendarState;
-        setCalendarView: Dispatch<SetStateAction<'month' | 'year' | 'decade'>>;
-    } = props;
+interface MonthProps {
+    state: CalendarState;
+    setCalendarView: Dispatch<SetStateAction<'month' | 'year' | 'decade'>>;
+}
+
+const Months = (props: MonthProps) => {
+    const { state, setCalendarView } = props;
     let formatter = useDateFormatter({
         month: 'short',
         timeZone: state.timeZone,
