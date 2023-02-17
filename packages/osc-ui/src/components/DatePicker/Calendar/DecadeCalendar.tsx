@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 import { classNames } from '../../../utils/classNames';
 import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
-import { checkDateRange, selectDateHandler, setDisabledRange } from '../utils';
+import { checkYearRange, selectDateHandler, setDisabledRange } from '../utils';
 import { createCalendar } from './Calendar';
 
 type Year = {
@@ -28,7 +28,7 @@ const getYears = (state: CalendarState, formatter: DateFormatter): Year[] => {
         const minYear = state.minValue?.year;
         const maxYear = state.maxValue?.year;
         const year = date.year;
-        const isDisabled = checkDateRange(minYear, maxYear, year);
+        const isDisabled = checkYearRange(minYear, maxYear, year);
 
         years.push({
             isDisabled: isDisabled,

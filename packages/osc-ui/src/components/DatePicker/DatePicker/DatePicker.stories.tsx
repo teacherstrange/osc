@@ -1,11 +1,11 @@
+import { parseDate } from '@internationalized/date';
+import { I18nProvider } from '@react-aria/i18n';
+import type { DateValue } from '@react-types/calendar';
 import type { Meta, Story } from '@storybook/react';
 import React, { useState } from 'react';
-import { I18nProvider } from '@react-aria/i18n';
-import { DatePicker } from './DatePicker';
-import { parseDate } from '@internationalized/date';
-import type { DateValue } from '@react-types/calendar';
 import { Calendar } from '../Calendar/Calendar';
-import { CalendarGrid, CalendarCell } from '../Calendar/CalendarGridAndCell';
+import { CalendarCell, CalendarGrid } from '../Calendar/CalendarGridAndCell';
+import { DatePicker } from './DatePicker';
 
 export default {
     title: 'osc-ui/DatePicker',
@@ -56,7 +56,7 @@ const Template: Story = ({ minValue, maxValue, ...args }) => {
             <DatePicker
                 granularity={args.granularity}
                 minValue={minValue && parseDate('2023-02-03')}
-                maxValue={maxValue && parseDate('2023-03-20')}
+                maxValue={maxValue && parseDate('2024-04-03')}
                 onChange={setDate}
                 value={date}
                 {...args}

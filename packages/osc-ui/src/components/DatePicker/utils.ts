@@ -1,4 +1,4 @@
-import type { AnyCalendarDate, CalendarDate, DateFormatter } from '@internationalized/date';
+import type { CalendarDate, DateFormatter, DateValue } from '@internationalized/date';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import type { CalendarState, RangeCalendarState } from '@react-stately/calendar';
 
@@ -27,7 +27,7 @@ export const formatDate = (
 
 export const createTimePresets = (
     presets: { name: string; length: number }[]
-): { endDate: AnyCalendarDate; length: number; name: string; startDate: AnyCalendarDate }[] =>
+): { endDate: CalendarDate; length: number; name: string; startDate: CalendarDate }[] =>
     presets.map((preset) => {
         let startDate, endDate;
         if (preset.length > 0) {
@@ -68,10 +68,38 @@ export const selectDateHandler = (
 };
 
 /**
- * Check whether a date is outside of the min or max range - Used
+ * Check whether a month is outside of the min or max range -
+ * This must also check the year so that it doesn't disable months
+ * indiscriminately for every year
+ */
+export const checkMonthRange = (
+    minDate: DateValue,
+    maxDate: DateValue,
+    date: CalendarDate
+): boolean => {
+    let isOutOfRange = false;
+
+    if (minDate) {
+        if (date.month < minDate.month && date.year <= minDate.year) {
+            isOutOfRange = true;
+        } else if (maxDate) {
+            if (date.month > maxDate.month && date.year >= maxDate.year) {
+                isOutOfRange = true;
+            }
+        }
+    } else if (maxDate) {
+        if (date.month > maxDate.month && date.year >= maxDate.year) {
+            isOutOfRange = true;
+        }
+    }
+    return isOutOfRange;
+};
+
+/**
+ * Check whether a year is outside of the min or max range - Used
  * with year and decade calendar to set the disabled ranges
  */
-export const checkDateRange = (minDate: number, maxDate: number, date: number): boolean => {
+export const checkYearRange = (minDate: number, maxDate: number, date: number): boolean => {
     let isOutOfRange = false;
     if (minDate) {
         if (date < minDate) {
@@ -102,15 +130,15 @@ export const setDisabledRange = (
         const years = time as number;
         const startDate = state.focusedDate.subtract({ years: years });
         const endDate = state.focusedDate.add({ years: years });
-        startDisabled = checkDateRange(state.minValue?.year, null, startDate.year);
-        endDisabled = checkDateRange(null, state.minValue?.year, endDate.year);
+        startDisabled = checkYearRange(state.minValue?.year, null, startDate.year);
+        endDisabled = checkYearRange(null, state.maxValue?.year, endDate.year);
     }
     if (type === 'yearSelector') {
         const year = time as Year[];
         const startYear = year[0].formatted;
         const endYear = year[year.length - 1].formatted;
-        startDisabled = checkDateRange(state.minValue?.year, state.maxValue?.year, +startYear);
-        endDisabled = checkDateRange(state.minValue?.year, state.maxValue?.year, +endYear);
+        startDisabled = checkYearRange(state.minValue?.year, state.maxValue?.year, +startYear);
+        endDisabled = checkYearRange(state.minValue?.year, state.maxValue?.year, +endYear);
     }
     return [startDisabled, endDisabled];
 };

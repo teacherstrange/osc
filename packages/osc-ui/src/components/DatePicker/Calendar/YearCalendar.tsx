@@ -10,7 +10,7 @@ import { classNames } from '../../../utils/classNames';
 import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
-import { checkDateRange, selectDateHandler, setDisabledRange } from '../utils';
+import { checkMonthRange, selectDateHandler, setDisabledRange } from '../utils';
 import { createCalendar } from './Calendar';
 
 interface YearProps {
@@ -53,11 +53,7 @@ const Months = (props: MonthProps) => {
         const { index }: { index: number } = props;
         let date = state.focusedDate.set({ month: index + 1 });
 
-        const minMonth = state.minValue?.month;
-        const maxMonth = state.maxValue?.month;
-        const month = date.month;
-
-        const isDisabled = checkDateRange(minMonth, maxMonth, month);
+        const isDisabled = checkMonthRange(state.minValue, state.maxValue, date);
 
         const fomattedMonth = formatter.format(date.toDate(state.timeZone));
         const isSelected = state.isSelected(date);
