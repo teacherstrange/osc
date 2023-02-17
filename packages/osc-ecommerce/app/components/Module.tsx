@@ -96,7 +96,11 @@ export default function Module(props: Props) {
                 <article>
                     <Content
                         align={moduleContent.horizontalAlignment}
-                        backgroundColor={moduleContent.backgroundColor}
+                        backgroundColor={
+                            moduleContent.backgroundColor
+                                ? moduleContent.backgroundColor
+                                : undefined
+                        }
                         marginBottom={moduleContent.marginBottom}
                         paddingBottom={moduleContent.paddingBottom}
                         paddingTop={moduleContent.paddingTop}
@@ -113,7 +117,9 @@ export default function Module(props: Props) {
                 <Image
                     key={moduleImage._key}
                     src={moduleImage.src}
-                    artDirectedImages={moduleImage.responsiveImages}
+                    artDirectedImages={
+                        moduleImage.responsiveImages ? moduleImage.responsiveImages : undefined
+                    }
                     alt={moduleImage.alt}
                     width={moduleImage.width}
                     height={moduleImage.height}

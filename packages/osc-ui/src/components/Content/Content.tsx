@@ -7,7 +7,7 @@ import colors from '../../../../../tokens/colors';
 import sizes from '../../../../../tokens/fluid-scale';
 import typography from '../../../../../tokens/typography';
 import { useSpacing } from '../../hooks/useSpacing';
-import type { Spacing } from '../../types';
+import type { Maybe, Spacing } from '../../types';
 import { classNames } from '../../utils/classNames';
 import { Button, ButtonGroup, CopyButton } from '../Button/Button';
 import { Image } from '../Image/Image';
@@ -35,11 +35,11 @@ export interface ButtonProps {
 
 export interface Props {
     align?: 'left' | 'centre' | 'right';
-    backgroundColor?: string;
+    backgroundColor?: Maybe<string>;
     className?: string;
-    marginBottom?: Spacing;
-    paddingBottom?: Spacing;
-    paddingTop?: Spacing;
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
     value: PortableTextBlock[];
     buttons?: ButtonProps[];
 }
