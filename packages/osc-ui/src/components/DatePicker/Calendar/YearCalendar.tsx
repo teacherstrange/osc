@@ -88,8 +88,10 @@ const Months = (props) => {
 
     const monthsResult = (): ReactElement[] => {
         let i = 0;
+        // Set number of rows for the months
         return [...Array(4).keys()].map((_, idx) => (
             <div className="c-calendar__date-container" key={idx}>
+                {/* Set number of columns for the months */}
                 {[...Array(3).keys()].map((_) => {
                     const year = <Month key={i} index={i} />;
                     i++;

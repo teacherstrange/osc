@@ -129,8 +129,10 @@ const Years = (props) => {
 
     const yearsResult = (): ReactElement[] => {
         let i = 0;
+        // Set number of rows for the years
         return [...Array(3).keys()].map((_, idx) => (
             <div key={idx}>
+                {/* Set number of columns for the years */}
                 {[...Array(4).keys()].map((_) => {
                     const year = yearsArray[i];
                     i++;
