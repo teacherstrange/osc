@@ -31,6 +31,7 @@ import bodyNoHeadings from './blocks/bodyNoHeadings';
 import accordionItem from './objects/accordionItem';
 import carouselSettings from './objects/carouselSettings';
 import collectionRule from './objects/collectionRule';
+import heroCarouselSettings from './objects/heroCarouselSettings';
 import heroSlide from './objects/heroSlide';
 import linkExternal from './objects/linkExternal';
 import linkInternal from './objects/linkInternal';
@@ -95,6 +96,7 @@ export default createSchema({
         // Objects
         accordionItem,
         carouselSettings,
+        heroCarouselSettings,
         heroSlide,
         collectionRule,
         linkExternal,
