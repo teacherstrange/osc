@@ -5,6 +5,7 @@ import { Carousel } from '../Carousel/Carousel';
 import { Image } from '../Image/Image';
 import { List, ListItem } from '../List/List';
 import { Trustpilot } from '../Trustpilot/Trustpilot';
+import { VideoPlayer } from '../VideoPlayer/VideoPlayer';
 import type { ContentMediaProps } from './ContentMedia';
 import { ContentMedia, ContentMediaBlock } from './ContentMedia';
 
@@ -403,7 +404,41 @@ const TrustpilotTemplate: Story<ContentMediaProps> = ({ ...args }) => (
             <ContentMediaBlock variant="content">
                 <div className="c-content">
                     <div className="c-content__inner c-content__inner--left">
-                        <h2 className="t-font-delta u-text-bold">Lorem ipsum dolor sit amet</h2>
+                        <h2 className="t-font-xl u-text-bold">Lorem ipsum dolor sit amet</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione id
+                            minima voluptate debitis officia accusantium maxime molestiae, maiores
+                            porro, nulla harum totam aut nisi, quas ipsum temporibus perspiciatis
+                            iusto voluptates.
+                        </p>
+                    </div>
+                </div>
+            </ContentMediaBlock>
+        </ContentMedia>
+    </div>
+);
+
+const VideoTemplate: Story<ContentMediaProps> = ({ ...args }) => (
+    <div className="o-container">
+        <ContentMedia {...args}>
+            <ContentMediaBlock variant="media" align="center">
+                <VideoPlayer
+                    url="https://youtu.be/w36Yhxxuk_c"
+                    previewImage={
+                        <Image
+                            src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1675425684/maxresdefault_si26jj.jpg"
+                            width={968}
+                            height={544}
+                            alt="A cartoon man sitting on an armchair with his laptop on his knees. He's looking at his laptop and there are some shelves and lights in the background."
+                        />
+                    }
+                />
+            </ContentMediaBlock>
+
+            <ContentMediaBlock variant="content">
+                <div className="c-content">
+                    <div className="c-content__inner c-content__inner--left">
+                        <h2>Lorem ipsum dolor sit amet</h2>
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione id
                             minima voluptate debitis officia accusantium maxime molestiae, maiores
@@ -483,5 +518,9 @@ CarouselMedia.parameters = {
 
 export const TrustpilotMedia = TrustpilotTemplate.bind({});
 TrustpilotMedia.args = {
+    ...Primary.args,
+};
+export const VideoMedia = VideoTemplate.bind({});
+VideoMedia.args = {
     ...Primary.args,
 };

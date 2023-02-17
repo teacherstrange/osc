@@ -30,4 +30,12 @@
             }
         }
     }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .c-video-player__wrapper {
+        @include mq($mq-tab) {
+            // Reset the aspect ratio so we don't overflow the grid
+            aspect-ratio: auto;
+        }
+    }
 }

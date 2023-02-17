@@ -8,8 +8,7 @@ import './content-media.scss';
 
 /*
     TODO: Select Media / Content Type
-        TODO: Form still in PR (#647 etc.)
-        TODO: Video still in PR (#687)
+        TODO: Form
 */
 interface SharedProps {
     /**
