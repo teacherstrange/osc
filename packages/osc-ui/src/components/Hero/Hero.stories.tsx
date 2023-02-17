@@ -24,6 +24,11 @@ export default {
             },
         },
     },
+    argTypes: {
+        variant: {
+            control: false,
+        },
+    },
 } as Meta;
 
 const Template: Story<HeroProps> = ({ ...args }) => (
