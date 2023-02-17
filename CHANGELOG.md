@@ -1,3 +1,16 @@
+## [0.41.2](https://github.com/Open-Study-College/osc/compare/v0.41.1...v0.41.2) (2023-02-17)
+
+
+### 🐛 Bugs
+
+* add SpriteSheetProvider and re-write test ([f3af8e5](https://github.com/Open-Study-College/osc/commit/f3af8e5a1a6f5fd46243451a99f97d7677ced3fe))
+
+
+### ♻️ Refactors
+
+* **types:** adds a Maybe generic type ([14e5597](https://github.com/Open-Study-College/osc/commit/14e5597df222f37ee9851c820f4748e76276f114))
+* update assertion ([7307c78](https://github.com/Open-Study-College/osc/commit/7307c78a066ce0a26639e15688b4bab44e551cf2))
+
 ## [0.41.1](https://github.com/Open-Study-College/osc/compare/v0.41.0...v0.41.1) (2023-02-17)
 
 
@@ -132,46 +145,4 @@
 * nest selectors inside of "c-textarea" ([ad4ae97](https://github.com/Open-Study-College/osc/commit/ad4ae97d4c29319fd8f868a7fab95dfbdfa7d500))
 * update colours with tokens and remove pointer events when disabled ([839ac7c](https://github.com/Open-Study-College/osc/commit/839ac7c75f03492c1202733b23477c5e74b39172))
 * update to match/use TextInput classes ([a83597d](https://github.com/Open-Study-College/osc/commit/a83597d6af8a04b07e78104f18601a31d21c75e3))
-
-## [0.38.0](https://github.com/Open-Study-College/osc/compare/v0.37.0...v0.38.0) (2023-02-14)
-
-
-### ✨ Features
-
-* add Select and Label components ([d88e17d](https://github.com/Open-Study-College/osc/commit/d88e17d9ecaed5a3f6d01706606f390737951929))
-
-
-### ♻️ Refactors
-
-* add argTypes ([59dcae5](https://github.com/Open-Study-College/osc/commit/59dcae57b6e4dd02011c9347769c705dd36bd559))
-* add aria-label and add Radix Label component ([1d33560](https://github.com/Open-Study-College/osc/commit/1d3356026de05fac444a81204bf5f2ea90e99cc8))
-* add GroupVariants type ([612822b](https://github.com/Open-Study-College/osc/commit/612822b63364556ca473af0e081abeb7fe4c2a26))
-* add Radix Select package ([c093a7a](https://github.com/Open-Study-College/osc/commit/c093a7a68dfc04e50b22d79adde4516494b9a334))
-* add secondary background color variable ([ff27bb9](https://github.com/Open-Study-College/osc/commit/ff27bb9c6e848b2afcc55f63581e5504aa4018c0))
-* create a font-size variable ([027f31e](https://github.com/Open-Study-College/osc/commit/027f31e3239ebe7e37a027e9d111daaccbee9f8c))
-* enable Select to be opened on Label click ([1218919](https://github.com/Open-Study-College/osc/commit/121891973822d92f17ce99ca63bbbfe56dfbeff9))
-* pass all props through to SelectItem ([fca6b6e](https://github.com/Open-Study-College/osc/commit/fca6b6e69c48cf78a7d53dacab8362f7c02928bb))
-* pass value prop rather than spreading props ([942973b](https://github.com/Open-Study-College/osc/commit/942973ba0065def5bdf20d0d924bb2646d489630))
-* remove async from tests ([47fd16b](https://github.com/Open-Study-College/osc/commit/47fd16b8e407492bc649020d71fc1735d2a36139))
-* remove console log ([fa80b8a](https://github.com/Open-Study-College/osc/commit/fa80b8a19190fc352040d71ab7cccf966ec27f13))
-* remove FC type ([1cf6495](https://github.com/Open-Study-College/osc/commit/1cf649541675409a2859c405ab024c99ceb7a204))
-* remove pointer cursor for Select labels ([eade38f](https://github.com/Open-Study-College/osc/commit/eade38f72b36bae1c95962c8d670cdada99e7e53))
-* set directly to Description type ([3bf937f](https://github.com/Open-Study-College/osc/commit/3bf937f16344cac79041dc638a1dd4c546831231))
-* simplify props, add jsdoc descriptions and add disabled styling for SelectItem ([7b0f617](https://github.com/Open-Study-College/osc/commit/7b0f61749908143844339003f2c9b0cbae601487))
-* update box-shadow to use "shadow" color token ([d0cf65a](https://github.com/Open-Study-College/osc/commit/d0cf65ae1be79d1f9a59ffc5a575ff3c17630773))
-* update colors to use hsl values ([1b32334](https://github.com/Open-Study-College/osc/commit/1b32334131bd38c0392ddf5dd9bca9e22e0971c9))
-* update error handling ([372dbc9](https://github.com/Open-Study-College/osc/commit/372dbc90ba33126d65f60819e0e0516937d068e5))
-* update icons ([4326b88](https://github.com/Open-Study-College/osc/commit/4326b883ef399351ff07b908bf00b5273c2de18c))
-* update padding to use em unit ([6f6011d](https://github.com/Open-Study-College/osc/commit/6f6011d37be1497d294beecd14cbc33217664021))
-* update tests and make "wasSubmitted" optional ([559a6c7](https://github.com/Open-Study-College/osc/commit/559a6c7ca7d4dae723dc60895c0bdf9974d63d0d))
-* update to use em rather than px ([cab87ed](https://github.com/Open-Study-College/osc/commit/cab87ed0bd9378f99c8c0a46aa8240e4bbbb7f13))
-* update with correct tokens ([2a9834f](https://github.com/Open-Study-College/osc/commit/2a9834fc2a7736ae8e593fe4a38f49c8f3a74c8b))
-* update z-index for Select and remove from Button ([effd135](https://github.com/Open-Study-College/osc/commit/effd1357e1bd322b17dc3c1b16e3ca8e7de53775))
-* use correct color tokens and update sizings to use "em" units where necessary ([12aab68](https://github.com/Open-Study-College/osc/commit/12aab68be7141fa5b53444de09657e5bf82fe1b7))
-* use named imports at top of file ([57cdeb0](https://github.com/Open-Study-College/osc/commit/57cdeb0b9c671ce06e8b7d7364df62616bf342d3))
-
-
-### 🐛 Bugs
-
-* **tokens:** replaces height with min-height ([ca488b0](https://github.com/Open-Study-College/osc/commit/ca488b020f0558213af882e8eee939b1cd67edb1))
 
