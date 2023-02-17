@@ -122,20 +122,15 @@ export const CalendarCell = (props: CellProps) => {
         isSelected && (isSelectionEnd || date.day === date.calendar.getDaysInMonth(date));
     const { focusProps } = useFocusRing();
 
-    const classes = {
-        selected: isSelected ? 'c-calendar__cell--selected' : null,
-        disabled: isDisabled ? 'c-calendar__cell--disabled' : null,
-        roundedLeft: isRoundedLeft ? 'c-calendar__cell--rounded-left' : null,
-        roundedRight: isRoundedRight ? 'c-calendar__cell--rounded-right' : null,
-        selectionStart: isSelectionStart ? 'c-calendar__cell--selection-start' : null,
-        selectionEnd: isSelectionEnd ? 'c-calendar__cell--selection-end' : null,
-    };
-
-    const classesList = Object.keys(classes)
-        .map((res) => classes[res])
-        .join(' ');
-
-    const finalClasses = classNames('c-calendar__cell', classesList);
+    const finalClasses = classNames(
+        'c-calendar__cell',
+        isSelected ? 'c-calendar__cell--selected' : '',
+        isDisabled ? 'c-calendar__cell--disabled' : '',
+        isRoundedLeft ? 'c-calendar__cell--rounded-left' : '',
+        isRoundedRight ? 'c-calendar__cell--rounded-right' : '',
+        isSelectionStart ? 'c-calendar__cell--selection-start' : '',
+        isSelectionEnd ? 'c-calendar__cell--selection-end' : ''
+    );
 
     return (
         <td {...cellProps} data-selected={isSelected} className="c-calendar__grid-cell">
