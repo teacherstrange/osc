@@ -1,19 +1,137 @@
-import type { HTMLAttributes } from 'react';
-import React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import type { HTMLAttributes, ReactNode, RefObject } from 'react';
+import React, { Children, useEffect, useRef, useState } from 'react';
+import breakpoints from '../../../../../tokens/media-queries';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { classNames } from '../../utils/classNames';
+import { rem } from '../../utils/rem';
+
 import './header.scss';
 
-export interface Props<T> extends HTMLAttributes<T> {
+export interface SharedNavProps {
+    /**
+     * The content of the component
+     */
+    children?: ReactNode;
+    /**
+     * Custom class
+     */
     className?: string;
 }
 
-export const Header = (props: Props<HTMLDivElement>) => {
-    const { className, ...attr } = props;
-    const classes = classNames(className);
+/* -------------------------------------------------------------------------------------------------
+ * Header
+ * -----------------------------------------------------------------------------------------------*/
+export interface HeaderProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {}
+
+export const Header = (props: HeaderProps) => {
+    const { className, children, ...attr } = props;
+    const ref = useRef<HTMLDivElement>(null);
+    const headerHeight = useHeight(ref);
+    const classes = classNames('c-header', 'o-container', className);
 
     return (
-        <header className={classes} {...attr}>
-            Header
+        <header
+            className={classes}
+            {...attr}
+            ref={ref}
+            style={{
+                ...attr.style,
+                // Set the header height as state so we can use it to help position things such as the nav
+                ['--header-height' as string]: `${headerHeight}px`,
+            }}
+        >
+            {children}
         </header>
     );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Header nav
+ * -----------------------------------------------------------------------------------------------*/
+export interface HeaderNavProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Sets the data-state attribute of the button.
+     *
+     * @default false
+     */
+    isOpen: boolean;
+}
+
+export const HeaderNav = (props: HeaderNavProps) => {
+    const { className, children, isOpen = false, ...attr } = props;
+    const classes = classNames('c-header__nav', className);
+    const isDesktop = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
+
+    useEffect(() => {
+        // Lock document body when the nav is open
+        if (isOpen && !isDesktop) {
+            document.body.style.overflowY = 'hidden';
+        } else {
+            document.body.style.overflowY = 'auto';
+        }
+    }, [isDesktop, isOpen]);
+
+    return (
+        <div
+            className={classes}
+            {...attr}
+            style={{
+                ...attr.style,
+                // Ensure we can always scroll
+                overflowY: isOpen ? 'auto' : null,
+            }}
+        >
+            {children}
+        </div>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Header action bar
+ * -----------------------------------------------------------------------------------------------*/
+export interface HeaderActionBarProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {}
+
+export const HeaderActionBar = (props: HeaderActionBarProps) => {
+    const { className, children, ...attr } = props;
+    const classes = classNames('c-header__action-bar', className);
+
+    return (
+        <div className={classes} {...attr}>
+            {Children.map(children, (child, index) => {
+                return (
+                    <Slot className="c-header__action-item" key={index}>
+                        {child}
+                    </Slot>
+                );
+            })}
+        </div>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * useHeight
+ * -----------------------------------------------------------------------------------------------*/
+const useHeight = (ref: RefObject<HTMLElement | null>) => {
+    const [headerHeight, setHeaderHeight] = useState<number>(0);
+
+    useEffect(() => {
+        // Get the bottom position of the current ref
+        // This will allow us to take into account thing like padding on the body
+        const handleResize = () => {
+            setHeaderHeight(ref.current.offsetHeight);
+        };
+
+        // Triggered at the first client-side load and if query changes
+        handleResize();
+
+        // Listen for window resize
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [ref]);
+
+    return headerHeight;
 };

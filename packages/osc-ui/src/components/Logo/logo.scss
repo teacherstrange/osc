@@ -1,0 +1,8 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+.c-logo {
+    display: block;
+
+    .o-icon {
+        --icon-size: auto;
+    }
+}

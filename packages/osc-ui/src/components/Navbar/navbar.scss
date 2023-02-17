@@ -1,0 +1,419 @@
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+/* stylelint-disable plugin/selector-bem-pattern */
+
+$simple-nav-width: 250px;
+
+.c-nav {
+    $self: &;
+
+    font-size: rem($base-fs);
+    font-weight: $fw-bold;
+
+    @include z-index("navigation");
+
+    @include mq($mq-desk) {
+        font-weight: $fw-reg;
+    }
+
+    &--simple {
+        #{$self}__content {
+            @include mq($mq-desk) {
+                max-width: $simple-nav-width;
+            }
+
+            &[data-level="0"] #{$self}__list {
+                @include mq($mq-desk) {
+                    padding-inline: 0;
+                }
+            }
+
+            &[data-state="closed"] {
+                @include mq($mq-desk) {
+                    grid-template-rows: 1fr;
+                }
+            }
+
+            #{$self}__trigger--close {
+                @include mq($mq-desk) {
+                    display: none;
+                }
+            }
+        }
+
+        #{$self}__submenu #{$self}__list {
+            @include mq($mq-desk) {
+                flex-flow: column nowrap;
+            }
+
+            #{$self}__item {
+                > a {
+                    @include mq($mq-desk) {
+                        padding-block-start: $space-s;
+                    }
+                }
+            }
+        }
+    }
+
+    &__trigger,
+    &__link {
+        padding: $space-2xl $space-m;
+        border-block-end: solid 1px var(--color-quinary);
+
+        @include mq($mq-desk) {
+            padding: 0;
+            border-block-end: none;
+        }
+
+        // Style triggers and links within the content block
+        #{$self}__content & {
+            padding-block: $space-l;
+
+            @include mq($mq-desk) {
+                padding-block: 0;
+            }
+        }
+
+        // Style triggers and links within the content block where they are not the top level
+        #{$self}__content:where([data-level="0"]) & {
+            @include mq($mq-desk) {
+                $bg-height: 1px;
+
+                display: flex;
+                background:
+                    linear-gradient(
+                        0deg,
+                        var(--color-secondary),
+                        var(--color-secondary)
+                    ) no-repeat right bottom / 0 $bg-height;
+                font-weight: $fw-bold;
+                transition: background-size $timing $ease-in-out;
+                padding-block: $space-xl $space-2xs;
+                border-block-end: solid $bg-height var(--color-quinary);
+
+                &[data-state="open"],
+                &:hover {
+                    background-size: 100% $bg-height;
+                    background-position-x: left;
+                }
+            }
+
+            &--close {
+                @include mq($mq-desk) {
+                    padding-block: 0;
+                    background: none;
+                }
+
+                border-block-end: none;
+            }
+        }
+    }
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        cursor: pointer;
+
+        &--close {
+            background-color: var(--color-neutral-200);
+
+            @include mq($mq-desk) {
+                width: auto;
+                justify-self: flex-end;
+            }
+
+            > span {
+                margin-inline: auto;
+            }
+
+            #{$self}__trigger-icon {
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    &__trigger-icon {
+        transition: transform $timing $ease-in-out;
+
+        @include mq($mq-desk, max) {
+            transform: rotate(-90deg);
+        }
+
+        #{$self}__trigger[data-state="open"] & {
+            @include mq($mq-desk) {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &__link {
+        display: flex;
+
+        @include mq($mq-desk) {
+            display: inline-block;
+        }
+    }
+
+    &,
+    &__list {
+        display: flex;
+        flex-direction: column;
+
+        @include mq($mq-desk) {
+            flex-direction: row;
+        }
+    }
+
+    > #{$self}__list {
+        @include mq($mq-desk) {
+            align-items: center;
+        }
+
+        // Select only the top level of items without cascading the styles down
+        > #{$self}__item {
+            > #{$self}__submenu > #{$self}__trigger,
+            > #{$self}__link {
+                @include mq($mq-desk) {
+                    $bg-height: 4px;
+
+                    padding-block-end: $bg-height;
+                    background:
+                        linear-gradient(
+                            0deg,
+                            var(--color-secondary),
+                            var(--color-secondary)
+                        ) no-repeat right bottom / 0 $bg-height;
+                    line-height: $base-lh;
+                    transition: background-size $timing $ease-in-out;
+
+                    &:hover,
+                    &.active, // active is auto applied by the Remix NavLink component
+                    &[data-state="open"] {
+                        background-size: 100% $bg-height;
+                        background-position-x: left;
+                    }
+                }
+            }
+        }
+    }
+
+    &__list {
+        --navbar-list-gap: #{$space-xl};
+
+        @include mq($mq-desk) {
+            column-gap: var(--navbar-list-gap);
+        }
+
+        // Style the list when the content block isn't the top level
+        #{$self}__content:not([data-level="0"]) & {
+            @include mq($mq-desk) {
+                flex-direction: column;
+                column-gap: var(--navbar-list-gap);
+            }
+        }
+
+        // Lists within the columns
+        #{$self}__item--column & {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &__item {
+        @include mq($mq-desk) {
+            flex: 0 1 calc(25% - var(--navbar-list-gap));
+        }
+
+        // Reset the flex value on the very top level list items
+        #{$self} > #{$self}__list > & {
+            flex: auto;
+        }
+
+        &--feature {
+            border-block-end: solid 1px var(--color-quinary);
+            font-size: $fs-xl;
+            padding-block: $space-m;
+
+            @include mq($mq-desk, max) {
+                order: 0;
+            }
+
+            @include mq($mq-desk) {
+                flex: 1 1 100%;
+                border-block-end: none;
+            }
+
+            #{$self}__list {
+                @include mq($mq-desk) {
+                    flex-direction: column;
+                }
+            }
+
+            #{$self}__link {
+                padding-block: 0;
+                border-block-end: none;
+                background: none;
+            }
+        }
+
+        &--column {
+            @include mq($mq-desk, max) {
+                order: 1;
+            }
+        }
+
+        [data-level="0"] & {
+            @include mq($mq-desk) {
+                padding-left: 0;
+            }
+        }
+    }
+
+    /*
+     * CSS trick to animate the height to "auto"
+     * https://chriscoyier.net/2022/12/21/things-css-could-still-use-heading-into-2023/#animate-to-auto
+     *
+     * [1] Set the display of the container to a grid
+     * [2] Set the template rows to 0fr -- this will make them take up a 0 height space
+     * [3] Set the inner element to have a min-height of 0, this is required to make the above step work
+     * [4] Set the overflow to hidden for obvious reasons
+     * [5] When the state is open set the template rows to 1fr
+     *
+     */
+    &__content {
+        position: fixed;
+        top: var(--nav-trigger-distance, 0);
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-tertiary);
+        transition:
+            transform $timing $ease-out-sine,
+            grid-template-rows $timing $ease-out-sine,
+            opacity $timing-s $ease-out,
+            visibility $timing-s $ease-out;
+        overflow-x: hidden;
+
+        @include z-index("sub-navigation");
+
+        @include mq($mq-desk) {
+            position: absolute;
+            display: grid; /* [1]  */
+        }
+
+        #{$self}__list {
+            @include mq($mq-desk) {
+                min-height: 0; /* [3] */
+            }
+        }
+
+        #{$self}__item--feature #{$self}__link {
+            align-items: center;
+            font-weight: $fw-bold;
+
+            .o-icon {
+                transform: translateX(-5px);
+                transition: transform $timing $ease-in-out, opacity $timing $ease-in-out;
+                opacity: 0;
+            }
+
+            &:hover {
+                .o-icon {
+                    transform: translateX(5px);
+                    opacity: 1;
+                }
+            }
+        }
+
+        // If menu has no further children
+        &:where(#{$self}__content #{$self}__content:last-of-type) {
+            min-height: 100vh;
+
+            #{$self}__item:last-child {
+
+                #{$self}__link,
+                #{$self}__trigger {
+                    font-weight: $fw-med;
+                }
+            }
+
+            #{$self}__link,
+            #{$self}__trigger:not(#{$self}__trigger--close) {
+                font-weight: $fw-light;
+                border-block-end: none;
+                transition: font-weight $timing $ease-in-out;
+
+                @include mq($mq-desk) {
+                    background: none;
+                    padding-block: 6px;
+                }
+
+                &:hover,
+                .active { // active is auto applied by the Remix NavLink component
+                    font-weight: $fw-reg;
+                }
+            }
+        }
+
+        @include mq($mq-desk) {
+            inset-block-start: 0;
+            min-height: unset;
+            background-color: var(--color-neutral-200);
+            inset: unset;
+
+            #{$self}__content {
+                position: relative;
+                overflow: hidden; /* [4] */
+            }
+        }
+
+        &[data-level="0"] {
+            @include mq($mq-desk) {
+                padding-block: $space-l $space-2xl;
+                padding-inline: $space-l;
+            }
+
+            > #{$self}__list {
+                @include mq($mq-desk) {
+                    padding-inline: $space-3xl $space-xl;
+                    flex-wrap: wrap;
+                }
+            }
+
+            &[data-state="closed"] {
+                @include mq($mq-desk) {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+
+            &[data-state="open"] {
+                @include mq($mq-desk) {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+
+        &[data-state="closed"] {
+            transform: translateX(100vw);
+
+            @include mq($mq-desk) {
+                transform: translateX(0);
+                grid-template-rows: 0fr; /* [2] */
+            }
+        }
+
+        &[data-state="open"] {
+            transform: translateX(0);
+
+            @include mq($mq-desk) {
+                grid-template-rows: 1fr; /* [5] */
+            }
+        }
+    }
+}

@@ -197,6 +197,12 @@ $osc-config: (
         }
     }
 
+    &-from\@desk {
+        @include mq($mq-desk) {
+            display: none !important;
+        }
+    }
+
     &-until\@tab {
         @include mq($mq-tab, max) {
             display: none;
@@ -205,7 +211,7 @@ $osc-config: (
 
     &-until\@desk {
         @include mq($mq-desk, max) {
-            display: none;
+            display: none !important;
         }
     }
 

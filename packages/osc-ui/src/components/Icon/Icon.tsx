@@ -13,20 +13,29 @@ export interface IconProps {
      * The id of the icon to reference from the spritesheet
      */
     id: string;
+
+    /**
+     * The size of the icon, can either be a singular value or an array (x,y)
+     * will default to 30 if not specified
+     * @default 30
+     */
+    size?: number | [number, number];
 }
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>((props, forwardedRef) => {
-    const { className, id, ...attr } = props;
+    const { className, id, size = 30, ...attr } = props;
     const classes = classNames('o-icon', className);
-    const size = 30; // an arbitrary size that constrains the width and height of the icon if css isn't loaded for whatever reason
     const { spriteSheetPath } = useSpritesheetContext();
+
+    const width = Array.isArray(size) ? size[0] : size;
+    const height = Array.isArray(size) ? size[1] : size;
 
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={size}
-            height={size}
-            viewBox={`0 0 ${size} ${size}`}
+            width={width}
+            height={height}
+            viewBox={`0 0 ${width} ${height}`}
             fill="none"
             className={classes}
             {...attr}
