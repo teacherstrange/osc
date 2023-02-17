@@ -131,7 +131,6 @@ const portableTextComponents: PortableTextComponents = {
     },
 };
 
-// TODO: sb - images
 export const Content = (props: Props) => {
     const {
         align = 'left',
