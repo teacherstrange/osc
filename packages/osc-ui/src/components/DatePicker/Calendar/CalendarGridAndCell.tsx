@@ -122,7 +122,7 @@ export const CalendarCell = (props: CellProps) => {
         isSelected && (isSelectionEnd || date.day === date.calendar.getDaysInMonth(date));
     const { focusProps } = useFocusRing();
 
-    const finalClasses = classNames(
+    const cellClasses = classNames(
         'c-calendar__cell',
         isSelected ? 'c-calendar__cell--selected' : '',
         isDisabled ? 'c-calendar__cell--disabled' : '',
@@ -132,13 +132,19 @@ export const CalendarCell = (props: CellProps) => {
         isSelectionEnd ? 'c-calendar__cell--selection-end' : ''
     );
 
+    const gridCellClasses = classNames(
+        'c-calendar__grid-cell',
+        isDisabled ? 'c-calendar__grid-cell--disabled' : '',
+        isOutsideMonth ? 'c-calendar__grid-cell--outside-month' : ''
+    );
+
     return (
-        <td {...cellProps} data-selected={isSelected} className="c-calendar__grid-cell">
+        <td {...cellProps} data-selected={isSelected} className={gridCellClasses}>
             <div
                 {...mergeProps(buttonProps, focusProps)}
                 ref={ref}
                 hidden={isOutsideMonth}
-                className={finalClasses}
+                className={cellClasses}
             >
                 {formattedDate}
             </div>
