@@ -4,6 +4,7 @@ import { MODULE_CAROUSEL } from './modules/carousel';
 import { MODULE_CONTENT } from './modules/content';
 import { MODULE_IMAGES } from './modules/images';
 import { MODULE_TRUSTPILOT } from './modules/trustpilot';
+import { MODULE_VIDEO } from './modules/video';
 
 export const MODULES = groq`
 modules[] {
@@ -23,5 +24,8 @@ modules[] {
     (_type == "module.images") => {
         ${MODULE_IMAGES}
     },
+    (_type == "module.video") => {
+      ${MODULE_VIDEO}
+    }
 }
 `;

@@ -3,6 +3,7 @@ import { Carousel, Content, Image, Trustpilot } from 'osc-ui';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
+import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
 import { getTypes } from '~/models/sanity.server';
 import type {
     accordionModule,
@@ -12,8 +13,10 @@ import type {
     module,
     SanityPage,
     trustpilotModule,
+    videoModule,
 } from '~/types/sanity';
 import { AccordionModule } from './Accordion/Accordion';
+import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
 
 // So we can dynamically add the styles of each component into remix we need to create an array of stylesheet objects.
 // We will then call this function in each of the `route` files where we have a dynamicLinks.
@@ -40,6 +43,10 @@ export const getComponentStyles = (data: SanityPage) => {
 
             case 'module.content':
                 styles.push({ rel: 'stylesheet', href: contentStyles });
+                break;
+
+            case 'module.video':
+                styles.push({ rel: 'stylesheet', href: videoStyles });
                 break;
         }
     }
@@ -125,6 +132,11 @@ export default function Module(props: Props) {
                     height={moduleImage.height}
                 />
             );
+
+        case 'module.video':
+            const moduleVideo = module as videoModule;
+
+            return <VideoPlayerModule module={moduleVideo} key={moduleVideo._key} />;
 
         default:
             return null;

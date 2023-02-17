@@ -1,0 +1,126 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+@use "sass:math";
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+$play-btn-size: $base-fs * 5px;
+$play-btn-color: var(--color-tertiary);
+$play-btn-radius: $rad-l;
+$play-btn-icon-size: rem($base-fs * 2);
+
+/* stylelint-disable-next-line selector-class-pattern */
+.react-player__preview {
+    &:focus {
+        box-shadow: $shadow-focus;
+
+        &:not(:focus-visible) {
+            box-shadow: none;
+        }
+    }
+}
+
+.c-video-player {
+    $self: &;
+
+    position: relative;
+    display: grid;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    max-width: 100%;
+
+    &__wrapper,
+    &__btn,
+    &__content {
+        grid-column: 1;
+    }
+
+    &__btn,
+    &__content,
+    &__overlay {
+        transition: opacity $timing-s $ease-in;
+        opacity: 1;
+
+        &,
+        & * {
+            // make sure we can click through overlaying content and still control the video
+            pointer-events: none;
+        }
+    }
+
+    &__btn,
+    &__overlay {
+        &.is-hidden {
+            opacity: 0;
+        }
+    }
+
+    &__wrapper {
+        position: relative;
+        width: 100%;
+        min-height: 200px;
+        max-height: 600px;
+        background-color: var(--color-secondary);
+        grid-row: 1 / -1;
+
+        @include mq($mq-tab) {
+            @include ratio(16 9);
+        }
+    }
+
+    &__btn {
+        display: grid;
+        grid-row: 2;
+        place-self: center;
+        width: $play-btn-size;
+        height: $play-btn-size;
+        border: 2px solid $play-btn-color;
+        border-radius: $play-btn-radius;
+        color: $play-btn-color;
+        font-size: $play-btn-icon-size;
+        place-items: center;
+        cursor: pointer;
+
+        @include z-index("button");
+
+        > .o-icon {
+            position: relative;
+            left: 3px; // offset the position to make it more visually aligned
+        }
+    }
+
+    &__content {
+        background-color: var(--color-quinary);
+        color: var(--color-secondary);
+
+        @include z-index("button");
+
+        @include mq($mq-tab) {
+            align-self: end;
+            background-color: transparent;
+            color: var(--color-tertiary);
+            grid-row: 3;
+        }
+
+        // Only hide content on larger screens
+        &.is-hidden {
+            @include mq($mq-tab) {
+                opacity: 0;
+            }
+        }
+    }
+
+    &__overlay {
+        grid-row: 1 / -1;
+        grid-column: 1 / -1;
+        z-index: 1;
+
+        &.has-content {
+            @include mq($mq-tab) {
+                opacity: 1;
+            }
+        }
+    }
+
+    .o-img {
+        object-fit: cover;
+    }
+}

@@ -39,6 +39,7 @@ import moduleImageMobile from './objects/module/imageMobile';
 import moduleImages from './objects/module/images';
 import moduleImageTablet from './objects/module/imageTablet';
 import moduleTrustpilot from './objects/module/trustpilot';
+import moduleVideo from './objects/module/video';
 import placeholderString from './objects/placeholderString';
 import productOption from './objects/productOption';
 import productWithVariant from './objects/productWithVariant';
@@ -99,5 +100,6 @@ export default createSchema({
         moduleContent,
         moduleTrustpilot,
         moduleCarousel,
+        moduleVideo,
     ]),
 });
