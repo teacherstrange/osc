@@ -1,4 +1,3 @@
-import { GregorianCalendar } from '@internationalized/date';
 import type { AriaCalendarProps } from '@react-aria/calendar';
 import { useCalendar } from '@react-aria/calendar';
 import { useDateFormatter, useLocale } from '@react-aria/i18n';
@@ -9,18 +8,10 @@ import React, { useState } from 'react';
 import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
+import { createCalendar } from '../utils';
 import { CalendarGrid } from './CalendarGridAndCell';
 import { DecadeCalendar } from './DecadeCalendar';
 import { YearCalendar } from './YearCalendar';
-
-export const createCalendar = (identifier) => {
-    switch (identifier) {
-        case 'gregory':
-            return new GregorianCalendar();
-        default:
-            throw new Error(`Unsupported calendar ${identifier}`);
-    }
-};
 
 /* -------------------------------------------------------------------------------------------------
  * Calendar Container

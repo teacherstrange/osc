@@ -1,5 +1,5 @@
 import type { CalendarDate, DateFormatter, DateValue } from '@internationalized/date';
-import { getLocalTimeZone, today } from '@internationalized/date';
+import { getLocalTimeZone, GregorianCalendar, today } from '@internationalized/date';
 import type { CalendarState, RangeCalendarState } from '@react-stately/calendar';
 
 type Year = {
@@ -141,4 +141,16 @@ export const setDisabledRange = (
         endDisabled = checkYearRange(state.minValue?.year, state.maxValue?.year, +endYear);
     }
     return [startDisabled, endDisabled];
+};
+
+// Ensure that we just use the Gregorian Calendar to limit package size.
+// If needed more can be added in at a later point. See below link for example:
+// https://react-spectrum.adobe.com/react-aria/useDateField.html#reducing-bundle-size
+export const createCalendar = (identifier) => {
+    switch (identifier) {
+        case 'gregory':
+            return new GregorianCalendar();
+        default:
+            throw new Error(`Unsupported calendar ${identifier}`);
+    }
 };

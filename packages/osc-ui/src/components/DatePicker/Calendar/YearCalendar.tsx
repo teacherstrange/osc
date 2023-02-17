@@ -10,8 +10,7 @@ import { classNames } from '../../../utils/classNames';
 import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
-import { checkMonthRange, selectDateHandler, setDisabledRange } from '../utils';
-import { createCalendar } from './Calendar';
+import { checkMonthRange, createCalendar, selectDateHandler, setDisabledRange } from '../utils';
 
 interface YearProps {
     className: string;

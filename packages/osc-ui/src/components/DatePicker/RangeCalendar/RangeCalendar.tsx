@@ -1,5 +1,5 @@
 import type { CalendarDate } from '@internationalized/date';
-import { getLocalTimeZone, GregorianCalendar, today } from '@internationalized/date';
+import { getLocalTimeZone, today } from '@internationalized/date';
 import type { AriaRangeCalendarProps } from '@react-aria/calendar';
 import { useRangeCalendar } from '@react-aria/calendar';
 import { useDateFormatter, useLocale } from '@react-aria/i18n';
@@ -15,7 +15,7 @@ import { Icon } from '../../Icon/Icon';
 import '../calendar.scss';
 import { CalendarGrid } from '../Calendar/CalendarGridAndCell';
 import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
-import { formatDate } from '../utils';
+import { createCalendar, formatDate } from '../utils';
 
 /* -------------------------------------------------------------------------------------------------
  * RangeCalendarContainer
@@ -57,15 +57,6 @@ interface RangeCalendarContainerProps extends AriaRangeCalendarProps<DateValue> 
      */
     timePresets: ReactNode;
 }
-
-const createCalendar = (identifier) => {
-    switch (identifier) {
-        case 'gregory':
-            return new GregorianCalendar();
-        default:
-            throw new Error(`Unsupported calendar ${identifier}`);
-    }
-};
 
 export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
     const {
