@@ -2,8 +2,8 @@ import { parseDate } from '@internationalized/date';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { DateRangePickerContainer } from './DateRangePicker';
 import { SpritesheetProvider } from '../../Icon/Icon';
+import { DateRangePickerContainer } from './DateRangePicker';
 
 const TODAY = 'Today';
 const YEST = 'Yesterday';
@@ -22,6 +22,11 @@ const presets = [
         length: -3,
     },
 ];
+
+// afterEach(() => {
+//     vi.clearAllMocks();
+//     vi.resetAllMocks();
+// });
 
 test('should render the DateField with SpinButtons for a DatePicker, a button for the Calendar and a Label', () => {
     render(
@@ -47,49 +52,56 @@ test('should render the DateField with SpinButtons for a DatePicker, a button fo
     expect(screen.getAllByRole('button', { name: 'Date Range' }).length).toBe(2);
 });
 test('should open the calendar when the calendar button is clicked', async () => {
-    const dates = { start: parseDate('2023-01-01'), end: parseDate('2023-02-28') };
+    const dates = { start: parseDate('2023-02-04'), end: parseDate('2023-02-20') };
     const user = userEvent.setup();
     render(
         <SpritesheetProvider>
-            <DateRangePickerContainer label="Date Range" defaultValue={dates} />
+            <DateRangePickerContainer defaultValue={dates} label="Date Range" />
         </SpritesheetProvider>
     );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
+
     expect(screen.getByRole('dialog', { name: 'Date Range' })).toBeInTheDocument();
-    expect(
-        screen.getByRole('group', { name: 'Date range, January to February 2023' })
-    ).toBeInTheDocument();
-    expect(screen.getByRole('grid', { name: 'Date range, January 2023' })).toBeInTheDocument();
-    expect(screen.getByRole('grid', { name: 'Date range, February 2023' })).toBeInTheDocument();
+    expect(screen.getByText('Click to start selecting date range')).toBeInTheDocument();
+    expect(screen.getByRole('grid', { name: 'February 2023' })).toBeInTheDocument();
+    expect(screen.getByRole('grid', { name: 'March 2023' })).toBeInTheDocument();
 });
 test('should disable out of range dates when min/max values are passed in', async () => {
+    const dates = { start: parseDate('2023-01-04'), end: parseDate('2023-01-20') };
     const user = userEvent.setup();
     const minDate = '03';
-    const maxDate = 26;
+    const maxDate = 29;
 
     render(
         <SpritesheetProvider>
             <DateRangePickerContainer
+                defaultValue={dates}
                 label="Date Range"
                 minValue={parseDate(`2023-01-${minDate}`)}
-                maxValue={parseDate(`2023-02-${maxDate}`)}
+                maxValue={parseDate(`2023-01-${maxDate}`)}
             />
         </SpritesheetProvider>
     );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
 
+    expect(
+        screen.getByRole('button', { name: 'Tuesday, January 3, 2023, First available date' })
+    ).toBeInTheDocument();
+    expect(
+        screen.getByRole('button', { name: 'Sunday, January 29, 2023, Last available date' })
+    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Sunday, January 1, 2023' })).toHaveAttribute(
         'aria-disabled'
     );
     expect(screen.getByRole('button', { name: 'Monday, January 2, 2023' })).toHaveAttribute(
         'aria-disabled'
     );
-    expect(screen.getByRole('button', { name: 'Monday, February 27, 2023' })).toHaveAttribute(
+    expect(screen.getByRole('button', { name: 'Monday, January 30, 2023' })).toHaveAttribute(
         'aria-disabled'
     );
-    expect(screen.getByRole('button', { name: 'Tuesday, February 28, 2023' })).toHaveAttribute(
+    expect(screen.getByRole('button', { name: 'Tuesday, January 31, 2023' })).toHaveAttribute(
         'aria-disabled'
     );
 });
@@ -138,11 +150,10 @@ test('should select the correct range when a time present is selected', async ()
 });
 
 test('should remove hidden class from "Now select end date" prompt when first date is selected', async () => {
-    const user = userEvent.setup();
-
     vi.mock('./../../../hooks/useMediaQuery', () => ({
         useMediaQuery: vi.fn(() => true),
     }));
+    const user = userEvent.setup();
 
     render(
         <SpritesheetProvider>
