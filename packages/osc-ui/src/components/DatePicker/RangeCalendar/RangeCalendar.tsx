@@ -134,12 +134,7 @@ export const RangeCalendarContainer = (props: RangeCalendarContainerProps) => {
             <div className="c-calendar__range-container-inner-1">
                 {isDesktop ? timePresets : null}
                 <div className="c-calendar__range-container-calendar">
-                    <RangeCalendar
-                        aria-label="Date range"
-                        isDesktop={isDesktop}
-                        state={state}
-                        {...rest}
-                    />
+                    <RangeCalendar isDesktop={isDesktop} state={state} {...rest} />
                 </div>
             </div>
             {!isDesktop ? timePresets : null}
