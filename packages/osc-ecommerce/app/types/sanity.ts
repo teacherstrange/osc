@@ -225,6 +225,12 @@ export interface SanityRedirect {
     };
 }
 
+export interface SanityNavSettings {
+    _type: string;
+    navigationId: string;
+    navigationItem: SanityNavItem[];
+}
+
 export interface SanityNavItem extends module {
     _type?: 'column' | 'feature';
     navigationLabel: string;
