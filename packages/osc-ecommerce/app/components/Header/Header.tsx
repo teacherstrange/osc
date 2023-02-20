@@ -1,15 +1,16 @@
 import { Link } from '@remix-run/react';
 import { AccessibleIcon, Burger, Header, HeaderActionBar, HeaderNav, Icon, Logo } from 'osc-ui';
 import { useEffect, useState } from 'react';
-import type { SanityNavSettings } from '~/types/sanity';
+import type { SanityActionNavSettings, SanityNavSettings } from '~/types/sanity';
 import { Nav } from '../Nav';
 
 interface SiteHeaderProps {
     navSettings: SanityNavSettings;
+    actionNav?: SanityActionNavSettings;
 }
 
 export const SiteHeader = (props: SiteHeaderProps) => {
-    const { navSettings } = props;
+    const { navSettings, actionNav } = props;
     const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
 
     useEffect(() => {
@@ -44,29 +45,37 @@ export const SiteHeader = (props: SiteHeaderProps) => {
             <Logo className="c-header__logo" />
 
             <HeaderActionBar>
-                <button className="u-hidden-until@desk">
-                    <AccessibleIcon label="Search">
-                        <Icon id="search" />
-                    </AccessibleIcon>
-                </button>
+                {actionNav?.search?.icon ? (
+                    <button className="u-hidden-until@desk">
+                        <AccessibleIcon label={actionNav?.search?.label}>
+                            <Icon id={actionNav?.search?.icon} />
+                        </AccessibleIcon>
+                    </button>
+                ) : null}
 
-                <Link to="/" className="u-hidden-until@desk">
-                    <AccessibleIcon label="My account">
-                        <Icon id="user" />
-                    </AccessibleIcon>
-                </Link>
+                {actionNav?.account?.icon && actionNav?.account?.link?.slug ? (
+                    <Link to={actionNav?.account?.link?.slug} className="u-hidden-until@desk">
+                        <AccessibleIcon label={actionNav?.account?.label}>
+                            <Icon id={actionNav?.account?.icon} />
+                        </AccessibleIcon>
+                    </Link>
+                ) : null}
 
-                <Link to="/" className="u-hidden-until@desk">
-                    <AccessibleIcon label="Wishlist">
-                        <Icon id="heart" />
-                    </AccessibleIcon>
-                </Link>
+                {actionNav?.wishlist?.icon && actionNav?.account?.link?.slug ? (
+                    <Link to={actionNav?.wishlist?.link?.slug} className="u-hidden-until@desk">
+                        <AccessibleIcon label={actionNav?.wishlist?.label}>
+                            <Icon id={actionNav?.wishlist?.icon} />
+                        </AccessibleIcon>
+                    </Link>
+                ) : null}
 
-                <button>
-                    <AccessibleIcon label="Bag">
-                        <Icon id="bag" />
-                    </AccessibleIcon>
-                </button>
+                {actionNav?.cart?.icon ? (
+                    <button>
+                        <AccessibleIcon label={actionNav?.cart?.label}>
+                            <Icon id={actionNav?.cart?.icon} />
+                        </AccessibleIcon>
+                    </button>
+                ) : null}
             </HeaderActionBar>
 
             {navSettings ? (

@@ -169,7 +169,7 @@ const Document = ({ children }: DocumentProps) => {
 };
 
 export default function App() {
-    const { SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET, navSettings } =
+    const { SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET, navSettings, siteSettings } =
         useLoaderData();
     let location = useLocation();
     let matches = useMatches();
@@ -228,7 +228,7 @@ export default function App() {
 
             <SkipLink anchor="main-content">Skip to main content</SkipLink>
 
-            <SiteHeader navSettings={navSettings} />
+            <SiteHeader navSettings={navSettings} actionNav={siteSettings?.actionNav} />
 
             <main id="main-content" tabIndex={-1}>
                 <Outlet />
