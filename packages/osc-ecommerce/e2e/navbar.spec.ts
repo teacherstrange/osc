@@ -7,7 +7,7 @@ test('menu columns are visible', async ({ page, isMobile }) => {
         await page.getByRole('button', { name: 'Open mobile menu' }).click();
     }
 
-    await page.getByRole('button', { name: 'Courses' }).click();
+    await page.getByRole('button', { name: 'Courses', exact: true }).click();
 
     // locate all elements with class
     const items = page.locator('.c-nav__item--column');
@@ -28,7 +28,7 @@ test('featured items are visible', async ({ page, isMobile }) => {
         await page.getByRole('button', { name: 'Open mobile menu' }).click();
     }
 
-    await page.getByRole('button', { name: 'Courses' }).click();
+    await page.getByRole('button', { name: 'Courses', exact: true }).click();
 
     // locate all elements with class
     const items = page.locator('.c-nav__item--feature');
@@ -67,8 +67,8 @@ test('can navigate to a page nested within the nav', async ({ page, isMobile }) 
         await page.getByRole('button', { name: 'Open mobile menu' }).click();
     }
 
-    await page.getByRole('button', { name: 'Courses' }).click();
-    await page.getByRole('button', { name: 'Childcare & education' }).click();
+    await page.getByRole('button', { name: 'Courses', exact: true }).click();
+    await page.getByRole('button', { name: 'Childcare & education', exact: true }).click();
     await page
         .getByRole('link', {
             name: 'NCFE CACHE Level 3 Award in Home Based Childcare - Childminder Route',
