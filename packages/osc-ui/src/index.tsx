@@ -21,6 +21,7 @@ export { Icon, SpritesheetProvider } from './components/Icon/Icon';
 export { Image } from './components/Image/Image';
 export { ImageGallery } from './components/ImageGallery/ImageGallery';
 export { List } from './components/List/List';
+export { Logo } from './components/Logo/Logo';
 export { Modal } from './components/Modal/Modal';
 export {
     Navbar,
