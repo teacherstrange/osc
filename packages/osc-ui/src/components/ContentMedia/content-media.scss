@@ -31,6 +31,39 @@
         }
     }
 
+    &__form-cntnr {
+        display: flex;
+        flex-direction: column;
+        gap: $space-l;
+        padding: $space-4xl $space-2xl $space-5xl;
+        box-shadow: $shadow-m;
+        font-weight: $fw-light;
+
+        /*
+         * Full bleed utility, breaks the content out of it's container
+         * @see https://piccalil.li/tutorial/creating-a-full-bleed-css-utility
+         *
+         * [1] Set the width of the element to the size of the viewport width
+         * [2] Pull the content back to the left by subtracting half the parent elements width
+         *     by half the width of the viewport.
+         */
+        @include mq($mq-mob-m, max) {
+            width: 100vw; /* [1] */
+            margin-inline-start: calc(50% - 50vw); /* [2] */
+        }
+
+        // Strip any trailing margins
+        > * {
+            margin-block-end: 0;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: $space-l;
+    }
+
     /* stylelint-disable-next-line selector-class-pattern */
     .c-video-player__wrapper {
         @include mq($mq-tab) {

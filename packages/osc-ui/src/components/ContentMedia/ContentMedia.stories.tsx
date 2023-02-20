@@ -4,15 +4,16 @@ import { Button } from '../Button/Button';
 import { Carousel } from '../Carousel/Carousel';
 import { Image } from '../Image/Image';
 import { List, ListItem } from '../List/List';
+import { TextInput } from '../TextInput/TextInput';
 import { Trustpilot } from '../Trustpilot/Trustpilot';
 import { VideoPlayer } from '../VideoPlayer/VideoPlayer';
 import type { ContentMediaProps } from './ContentMedia';
-import { ContentMedia, ContentMediaBlock } from './ContentMedia';
+import { ContentMedia, ContentMediaBlock, ContentMediaFormContainer } from './ContentMedia';
 
 export default {
     title: 'osc-ui/Content Media',
     component: ContentMedia,
-    subcomponents: { ContentMediaBlock },
+    subcomponents: { ContentMediaBlock, ContentMediaFormContainer },
     parameters: {
         docs: {
             description: {
@@ -452,6 +453,49 @@ const VideoTemplate: Story<ContentMediaProps> = ({ ...args }) => (
     </div>
 );
 
+const FormTemplate: Story<ContentMediaProps> = ({ ...args }) => (
+    <div className="o-container">
+        <ContentMedia {...args}>
+            {/* Note: u-pt-4xl doesn't currently work. See: https://github.com/Open-Study-College/osc/pull/714 */}
+            <ContentMediaBlock variant="content" align="start" className="u-pt-4xl">
+                <div className="c-content">
+                    <div className="c-content__inner c-content__inner--left">
+                        <h2>Lorem ipsum dolor sit amet</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione id
+                            minima voluptate debitis officia accusantium maxime molestiae, maiores
+                            porro, nulla harum totam aut nisi, quas ipsum temporibus perspiciatis
+                            iusto voluptates.
+                        </p>
+                    </div>
+                </div>
+            </ContentMediaBlock>
+
+            <ContentMediaBlock variant="media" align="center">
+                <ContentMediaFormContainer>
+                    <h2>Book a call back</h2>
+                    <p>
+                        Our education specialists can help you find the right course for your
+                        requirements. Fill in the form below and one of them will give you a call
+                        back at the time requested.
+                    </p>
+                    <form className="c-content-media__form">
+                        <TextInput id="full-name" name="Full Name" required type="text" />
+                        <TextInput id="email" name="Email" required type="email" />
+                        <Button isFull>Enrol Now</Button>
+                    </form>
+                    <p>
+                        By completing this form you are expressing interest in Open Study College.
+                        We will send you information about our courses and any special offers we
+                        think will be useful to you. You will be able to unsubscribe at anytime. See
+                        our Privacy Policy.
+                    </p>
+                </ContentMediaFormContainer>
+            </ContentMediaBlock>
+        </ContentMedia>
+    </div>
+);
+
 export const Primary = Template.bind({});
 Primary.args = {};
 
@@ -522,5 +566,9 @@ TrustpilotMedia.args = {
 };
 export const VideoMedia = VideoTemplate.bind({});
 VideoMedia.args = {
+    ...Primary.args,
+};
+export const FormMedia = FormTemplate.bind({});
+FormMedia.args = {
     ...Primary.args,
 };
