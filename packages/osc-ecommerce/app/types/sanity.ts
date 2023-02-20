@@ -243,3 +243,28 @@ export interface SanityNavItem extends module {
     featured?: SanityNavItem[];
     items?: SanityNavItem[];
 }
+
+export interface SanityActionNavSettings {
+    account: {
+        icon: string;
+        label: string;
+        link: {
+            slug: string;
+        };
+    };
+    cart: {
+        icon: string;
+        label: string;
+    };
+    search: {
+        icon: string;
+        label: string;
+    };
+    wishlist: {
+        icon: string;
+        label: string;
+        link: {
+            slug: string;
+        };
+    };
+}
