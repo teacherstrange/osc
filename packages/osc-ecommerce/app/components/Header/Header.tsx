@@ -85,6 +85,20 @@ export const SiteHeader = (props: SiteHeaderProps) => {
                     data-state={menuIsOpen ? 'open' : 'closed'}
                     isOpen={menuIsOpen}
                 >
+                    <HeaderActionBar className="u-hidden-from@desk">
+                        <a href="tel:+443308222729">
+                            <Icon id="phone" />
+                            Get in touch
+                        </a>
+
+                        {actionNav?.account?.icon && actionNav?.account?.link?.slug ? (
+                            <Link to={actionNav?.account?.link?.slug}>
+                                <Icon id={actionNav?.account?.icon} />
+                                {actionNav?.account?.label}
+                            </Link>
+                        ) : null}
+                    </HeaderActionBar>
+
                     <Nav navItems={navSettings?.navigationItem} />
                 </HeaderNav>
             ) : null}
