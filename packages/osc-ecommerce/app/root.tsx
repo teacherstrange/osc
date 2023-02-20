@@ -17,6 +17,7 @@ import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import oscUiBurgerStyles from 'osc-ui/dist/src-components-Burger-burger.css';
 import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import oscHeaderStyles from 'osc-ui/dist/src-components-Header-header.css';
+import oscLogoStyles from 'osc-ui/dist/src-components-Logo-logo.css';
 import oscNavStyles from 'osc-ui/dist/src-components-Navbar-navbar.css';
 import oscUiSkipLinkStyle from 'osc-ui/dist/src-components-SkipLink-skip-link.css';
 import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
@@ -46,6 +47,7 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscUiSkipLinkStyle },
         { rel: 'stylesheet', href: oscHeaderStyles },
         { rel: 'stylesheet', href: oscNavStyles },
+        { rel: 'stylesheet', href: oscLogoStyles },
         { rel: 'stylesheet', href: oscUiBurgerStyles },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
@@ -254,7 +256,7 @@ export default function App() {
                     onClick={() => setMenuIsOpen(!menuIsOpen)}
                 />
 
-                <Logo />
+                <Logo className="c-header__logo" />
 
                 <HeaderActionBar>
                     <button className="u-hidden-until@desk">
