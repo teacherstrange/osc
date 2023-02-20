@@ -55,7 +55,7 @@ interface ContentMediaBlockProps extends SharedProps {
     /**
      * The content or media variant
      */
-    variant: 'content' | 'media';
+    variant: 'content' | 'media' | 'form-container';
 }
 
 export const ContentMediaBlock = (props: ContentMediaBlockProps) => {
@@ -72,18 +72,6 @@ export const ContentMediaBlock = (props: ContentMediaBlockProps) => {
         alignmentClass,
         className
     );
-
-    return <div className={classes}>{children}</div>;
-};
-
-/* -------------------------------------------------------------------------------------------------
- * Content Media FormContainer
- * -----------------------------------------------------------------------------------------------*/
-interface ContentMediaFormProps extends SharedProps {}
-
-export const ContentMediaFormContainer = (props: ContentMediaFormProps) => {
-    const { children, className } = props;
-    const classes = classNames('c-content-media__form-cntnr', className);
 
     return <div className={classes}>{children}</div>;
 };

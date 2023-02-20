@@ -8,13 +8,13 @@ import { TextInput } from '../TextInput/TextInput';
 import { Trustpilot } from '../Trustpilot/Trustpilot';
 import { VideoPlayer } from '../VideoPlayer/VideoPlayer';
 import type { ContentMediaProps } from './ContentMedia';
-import { ContentMedia, ContentMediaBlock, ContentMediaFormContainer } from './ContentMedia';
+import { ContentMedia, ContentMediaBlock } from './ContentMedia';
 import { lorem, workingWithAnimals, workingWithChildren } from './contentMediaContent';
 
 export default {
     title: 'osc-ui/Content Media',
     component: ContentMedia,
-    subcomponents: { ContentMediaBlock, ContentMediaFormContainer },
+    subcomponents: { ContentMediaBlock },
     parameters: {
         docs: {
             description: {
@@ -246,30 +246,32 @@ const FormTemplate: Story<ContentMediaProps> = ({ ...args }) => (
     <div className="o-container">
         <ContentMedia {...args}>
             {/* Note: u-pt-4xl doesn't currently work. See: https://github.com/Open-Study-College/osc/pull/714 */}
-            <ContentMediaBlock variant="content" align="start" className="u-pt-4xl">
+            <ContentMediaBlock variant="content" align="start" cols={5} className="u-pt-4xl">
                 <Content value={lorem.body} />
             </ContentMediaBlock>
 
-            <ContentMediaBlock variant="media" align="center">
-                <ContentMediaFormContainer>
-                    <h2>Book a call back</h2>
-                    <p>
-                        Our education specialists can help you find the right course for your
-                        requirements. Fill in the form below and one of them will give you a call
-                        back at the time requested.
-                    </p>
-                    <form className="c-content-media__form">
-                        <TextInput id="full-name" name="Full Name" required type="text" />
-                        <TextInput id="email" name="Email" required type="email" />
-                        <Button isFull>Enrol Now</Button>
-                    </form>
-                    <p>
-                        By completing this form you are expressing interest in Open Study College.
-                        We will send you information about our courses and any special offers we
-                        think will be useful to you. You will be able to unsubscribe at anytime. See
-                        our Privacy Policy.
-                    </p>
-                </ContentMediaFormContainer>
+            <ContentMediaBlock
+                variant="form-container"
+                align="center"
+                className="o-grid__col--start-7@tab"
+            >
+                <h2>Book a call back</h2>
+                <p>
+                    Our education specialists can help you find the right course for your
+                    requirements. Fill in the form below and one of them will give you a call back
+                    at the time requested.
+                </p>
+                <form className="c-content-media__form">
+                    <TextInput id="full-name" name="Full Name" required type="text" />
+                    <TextInput id="email" name="Email" required type="email" />
+                    <Button isFull>Enrol Now</Button>
+                </form>
+                <p>
+                    By completing this form you are expressing interest in Open Study College. We
+                    will send you information about our courses and any special offers we think will
+                    be useful to you. You will be able to unsubscribe at anytime. See our Privacy
+                    Policy.
+                </p>
             </ContentMediaBlock>
         </ContentMedia>
     </div>
