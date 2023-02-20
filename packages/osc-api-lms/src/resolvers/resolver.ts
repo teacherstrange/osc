@@ -8,8 +8,6 @@ export const resolvers = {
             const user = await getUserById(args.id);
 
             if (user) {
-                console.log(`/users/${user.lmsLink[0].externalId}/courses`);
-
                 let courses = await lms.get(`/users/${user.lmsLink[0].externalId}/courses`, {
                     params: {
                         source: 'OSC API',
