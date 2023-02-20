@@ -1,4 +1,6 @@
 import { CogIcon } from '@sanity/icons';
+import { IconPicker } from '../../components/inputs/IconPicker';
+import { PAGE_REFERENCES } from '../../constants.js';
 
 const TITLE = 'Settings';
 
@@ -35,6 +37,120 @@ export default {
             type: 'reference',
             to: { type: 'navigation' },
             group: 'navigation',
+        },
+        {
+            name: 'actionNav',
+            title: 'Action bar',
+            type: 'object',
+            group: 'navigation',
+            options: {
+                collapsed: false,
+                collapsible: true,
+            },
+            fields: [
+                {
+                    name: 'search',
+                    title: 'Search',
+                    type: 'object',
+                    options: {
+                        collapsible: true,
+                    },
+                    fields: [
+                        {
+                            name: 'icon',
+                            title: 'Icon',
+                            type: 'string',
+                            inputComponent: IconPicker,
+                            placeholder: 'Select an icon...',
+                        },
+                        {
+                            name: 'label',
+                            title: 'Label',
+                            type: 'string',
+                        },
+                    ],
+                },
+                {
+                    name: 'account',
+                    title: 'Account',
+                    type: 'object',
+                    options: {
+                        collapsible: true,
+                    },
+                    fields: [
+                        {
+                            name: 'icon',
+                            title: 'Icon',
+                            type: 'string',
+                            inputComponent: IconPicker,
+                            placeholder: 'Select an icon...',
+                        },
+                        {
+                            name: 'label',
+                            title: 'Label',
+                            type: 'string',
+                        },
+                        {
+                            name: 'link',
+                            title: 'Link',
+                            type: 'reference',
+                            weak: true,
+                            to: PAGE_REFERENCES,
+                        },
+                    ],
+                },
+                {
+                    name: 'wishlist',
+                    title: 'Wishlist',
+                    type: 'object',
+                    options: {
+                        collapsible: true,
+                    },
+                    fields: [
+                        {
+                            name: 'icon',
+                            title: 'Icon',
+                            type: 'string',
+                            inputComponent: IconPicker,
+                            placeholder: 'Select an icon...',
+                        },
+                        {
+                            name: 'label',
+                            title: 'Label',
+                            type: 'string',
+                        },
+                        {
+                            name: 'link',
+                            title: 'Link',
+                            type: 'reference',
+                            weak: true,
+                            to: PAGE_REFERENCES,
+                        },
+                    ],
+                },
+                {
+                    name: 'cart',
+                    title: 'Cart',
+                    type: 'object',
+                    options: {
+                        collapsible: true,
+                    },
+                    fields: [
+                        {
+                            name: 'icon',
+                            title: 'Icon',
+                            type: 'string',
+                            inputComponent: IconPicker,
+                            placeholder: 'Select an icon...',
+                        },
+                        {
+                            name: 'label',
+                            title: 'Label',
+                            type: 'string',
+                        },
+                    ],
+                },
+            ],
         },
         // Footer
         {
