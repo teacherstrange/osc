@@ -1,7 +1,6 @@
 import type { HeadersFunction, LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import {
-    Link,
     Links,
     LiveReload,
     Meta,
@@ -12,16 +11,7 @@ import {
     useLocation,
     useMatches,
 } from '@remix-run/react';
-import {
-    AccessibleIcon,
-    Burger,
-    Header,
-    HeaderActionBar,
-    HeaderNav,
-    Icon,
-    Logo,
-    SkipLink,
-} from 'osc-ui';
+import { SkipLink } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import oscUiBurgerStyles from 'osc-ui/dist/src-components-Burger-burger.css';
 import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
@@ -31,10 +21,10 @@ import oscNavStyles from 'osc-ui/dist/src-components-Navbar-navbar.css';
 import oscUiSkipLinkStyle from 'osc-ui/dist/src-components-SkipLink-skip-link.css';
 import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
 import styles from 'osc-ui/dist/src-styles-main.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { DynamicLinks } from 'remix-utils';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
-import { Nav } from './components/Nav';
+import { SiteHeader } from './components/Header/Header';
 import { getSettingsData } from './models/sanity.server';
 import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
@@ -183,7 +173,6 @@ export default function App() {
         useLoaderData();
     let location = useLocation();
     let matches = useMatches();
-    const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
 
     const online = () => {
         //..Do something for online state
@@ -196,22 +185,7 @@ export default function App() {
     useEffect(() => {
         // The `console.log` method returns an object with a status of "success" if online and a pass message or a status of "bad" and a fail message if offline
         checkConnectivity(online, offline).then((data) => console.log(data));
-
-        // Make sure the mobile menu get's closed when we click on a link
-        const navLinks = document.querySelectorAll('.c-nav__link');
-
-        const handleClick = () => setMenuIsOpen(false);
-
-        navLinks.forEach((link) => {
-            link.addEventListener('click', handleClick);
-        });
-
-        return () => {
-            navLinks.forEach((link) => {
-                link.removeEventListener('click', handleClick);
-            });
-        };
-    }, [menuIsOpen]);
+    }, []);
 
     React.useEffect(() => {
         let mounted = isMount;
@@ -254,56 +228,7 @@ export default function App() {
 
             <SkipLink anchor="main-content">Skip to main content</SkipLink>
 
-            <Header>
-                <Burger
-                    id="mob-menu-trigger"
-                    label="Open mobile menu"
-                    isOpen={menuIsOpen}
-                    aria-expanded={menuIsOpen}
-                    aria-controls="header-nav"
-                    className="u-hidden-from@desk"
-                    onClick={() => setMenuIsOpen(!menuIsOpen)}
-                />
-
-                <Logo className="c-header__logo" />
-
-                <HeaderActionBar>
-                    <button className="u-hidden-until@desk">
-                        <AccessibleIcon label="Search">
-                            <Icon id="search" />
-                        </AccessibleIcon>
-                    </button>
-
-                    <Link to="/" className="u-hidden-until@desk">
-                        <AccessibleIcon label="My account">
-                            <Icon id="user" />
-                        </AccessibleIcon>
-                    </Link>
-
-                    <Link to="/" className="u-hidden-until@desk">
-                        <AccessibleIcon label="Wishlist">
-                            <Icon id="heart" />
-                        </AccessibleIcon>
-                    </Link>
-
-                    <button>
-                        <AccessibleIcon label="Bag">
-                            <Icon id="bag" />
-                        </AccessibleIcon>
-                    </button>
-                </HeaderActionBar>
-
-                {navSettings ? (
-                    <HeaderNav
-                        id="header-nav"
-                        aria-labelledby="mob-menu-trigger"
-                        data-state={menuIsOpen ? 'open' : 'closed'}
-                        isOpen={menuIsOpen}
-                    >
-                        <Nav navItems={navSettings?.navigationItem} />
-                    </HeaderNav>
-                ) : null}
-            </Header>
+            <SiteHeader navSettings={navSettings} />
 
             <main id="main-content" tabIndex={-1}>
                 <Outlet />
