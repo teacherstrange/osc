@@ -7,15 +7,16 @@ export const resolvers = {
         usersCourses: async (_: undefined, args: getUserCourses, { lms }: LmsContext) => {
             const user = await getUserById(args.id);
 
-            if (user) {
-                const courses = await lms.get(`/users/${user.lmsLink[0].externalId}/courses`, {
-                    params: {
-                        source: 'OSC API',
-                    },
-                });
-                return courses.data;
+            if (!user) {
+                return new Error('User not found.');
             }
-            return null;
+
+            const courses = await lms.get(`/users/${user.lmsLink[0].externalId}/courses`, {
+                params: {
+                    source: 'OSC API',
+                },
+            });
+            return courses.data;
         },
     },
     Mutation: {},
