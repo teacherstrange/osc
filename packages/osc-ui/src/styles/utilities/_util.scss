@@ -21,9 +21,11 @@
 
     @each $step in scale-token("steps") {
         @if ($scale == "relative") {
-            $map: map.set($map, $step, var(--font-scale-#{$step}));
+            // Interpolate the $step to convert it into a string
+            // This prevents it getting stripped apart if we use the strip-unit function
+            $map: map.set($map, #{$step}, var(--font-scale-#{$step}));
         } @else {
-            $map: map.set($map, $step, var(--space-scale-#{$step}));
+            $map: map.set($map, #{$step}, var(--space-scale-#{$step}));
         }
     }
 
