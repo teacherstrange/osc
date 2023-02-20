@@ -1,4 +1,13 @@
-import { Navbar, NavContent, NavItem, NavLink, NavList, NavSubMenu, NavTrigger } from 'osc-ui';
+import {
+    Icon,
+    Navbar,
+    NavContent,
+    NavItem,
+    NavLink,
+    NavList,
+    NavSubMenu,
+    NavTrigger,
+} from 'osc-ui';
 import type { SanityNavItem } from '~/types/sanity';
 
 interface Props {
@@ -41,6 +50,7 @@ const RecursiveNavItemWrapper = (props: Props) => {
                                     isExternal={item?.target === 'External'}
                                 >
                                     {item?.navigationLabel ?? item?.internalLink?.title}
+                                    <Icon id="chevron-right" />
                                 </NavLink>
                             </NavItem>
                         );
@@ -57,22 +67,11 @@ const RecursiveNavItemWrapper = (props: Props) => {
                     <NavTrigger>
                         {item?.navigationLabel}
 
-                        {/* // TODO: Update this icon to use our Icons */}
-                        <svg
-                            width="15"
-                            height="10"
-                            viewBox="0 0 15 10"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            // Only show the icon if the level is > 0 or were not on a desktop
-                            className={`c-nav__trigger-icon ${level === 0 && 'u-hidden-from@desk'}`}
+                        <Icon
+                            id="chevron-down"
+                            className={`c-nav__trigger-icon ${level === 0 && 'u-hidden-from@desk'}`} // Only show the icon if the level is > 0 or were not on a desktop
                             aria-hidden
-                        >
-                            <path
-                                d="M7.72284 5.42052L3.17348 0.885194L0.940918 3.12477L7.70178 9.86457L14.4977 3.11073L12.2652 0.878174L7.72284 5.42052Z"
-                                fill="#062134"
-                            />
-                        </svg>
+                        />
                     </NavTrigger>
                     <NavContent level={level}>
                         <NavList>
