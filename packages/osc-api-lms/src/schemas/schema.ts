@@ -7,7 +7,7 @@ export const typeDefs = gql`
     List of user's courses 
     """
     type UserCourse {
-        Id: Int
+        Id: Int!
         Code: String
         Name: String
         Complete: Boolean
