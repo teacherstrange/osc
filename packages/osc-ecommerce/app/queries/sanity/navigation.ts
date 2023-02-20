@@ -1,25 +1,5 @@
 import groq from 'groq';
-
-const buildUrls = groq`
-    (_type == "collection") => {
-        "slug": "/collections/" + store.slug.current,
-        },
-    (_type == "home") => {
-        "slug": "/",
-    },
-    (_type == "blog") => {
-        "slug": '/' + slug.current,
-    },
-    (_type == "page") => {
-        "slug": '/' + slug.current,
-    },
-    (_type == "post") => {
-        "slug": "/blog/" + slug.current,
-    },
-    (_type == "product") => {
-        "slug": "/products/" + store.slug.current,
-    }
-`;
+import { buildUrls } from './fragments/buildUrls';
 
 export const NAV_QUERY = groq`
     *[ _type == "navigation" && navigationId.current == $id && !(_id in path("drafts.**")) ] {
