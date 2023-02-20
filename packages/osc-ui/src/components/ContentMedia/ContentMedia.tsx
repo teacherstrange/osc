@@ -6,10 +6,6 @@ import { classNames } from '../../utils/classNames';
 
 import './content-media.scss';
 
-/*
-    TODO: Select Media / Content Type
-        TODO: Form
-*/
 interface SharedProps {
     /**
      * The content of the ContentMedia
