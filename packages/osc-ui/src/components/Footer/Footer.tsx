@@ -1,7 +1,12 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { AccordionContentProps, AccordionItemProps } from '@radix-ui/react-accordion';
+import type { Attributes, HTMLAttributes, ReactNode } from 'react';
 import React from 'react';
 import { useModifier } from '../../hooks/useModifier';
+import type { StrictUnion } from '../../types';
 import { classNames } from '../../utils/classNames';
+import type { AccordionHeadingProps, AccordionProps } from '../Accordion/Accordion';
+import { Accordion, AccordionHeader, AccordionItem, AccordionPanel } from '../Accordion/Accordion';
+
 import './footer.scss';
 
 export interface SharedFooterProps {
@@ -52,6 +57,148 @@ export const FooterGroup = (props: FooterGroupProps) => {
         <div className={classes} {...attr}>
             {children}
         </div>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * FooterMenu
+ * -----------------------------------------------------------------------------------------------*/
+interface DefaultFooterMenuProps extends HTMLAttributes<HTMLDivElement> {
+    /**
+     * Whether the menu should display as an accordion
+     * @default false
+     */
+    isAccordion?: false;
+}
+
+type FooterAccordionProps = AccordionProps & {
+    /**
+     * Whether the menu should display as an accordion
+     */
+    isAccordion: true;
+    type: 'single';
+};
+
+export type FooterMenuProps = SharedFooterProps &
+    StrictUnion<DefaultFooterMenuProps | FooterAccordionProps>;
+
+export const FooterMenu = (props: FooterMenuProps) => {
+    const { isAccordion = false, children, className, defaultValue, type, ...rest } = props;
+    const classes = classNames('c-footer__menu', className);
+
+    return isAccordion ? (
+        <Accordion
+            asChild
+            defaultValue={typeof defaultValue === 'string' && defaultValue}
+            type={type}
+            {...rest}
+        >
+            <div className={classes}>{children}</div>
+        </Accordion>
+    ) : (
+        <div className={classes}>{children}</div>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * FooterMenuItem
+ * -----------------------------------------------------------------------------------------------*/
+interface DefaultFooterMenuItemProps extends HTMLAttributes<HTMLDivElement>, Attributes {
+    /**
+     * Whether the menu should display as an accordion
+     * @default false
+     */
+    isAccordion?: false;
+}
+
+interface FooterAccordionItemProps extends AccordionItemProps {
+    /**
+     * Whether the menu should display as an accordion
+     */
+    isAccordion: true;
+}
+
+export type FooterMenuItemProps = SharedFooterProps &
+    StrictUnion<DefaultFooterMenuItemProps | FooterAccordionItemProps>;
+
+export const FooterMenuItem = (props: FooterMenuItemProps) => {
+    const { isAccordion = false, children, className, value, ...rest } = props;
+    const classes = classNames('c-footer__menu-item', className);
+
+    return isAccordion ? (
+        <AccordionItem asChild value={value} {...rest}>
+            <div className={classes}>{children}</div>
+        </AccordionItem>
+    ) : (
+        <div className={classes}>{children}</div>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * FooterMenuHeader
+ * -----------------------------------------------------------------------------------------------*/
+interface DefaultFooterMenuHeaderProps extends HTMLAttributes<HTMLDivElement> {
+    /**
+     * Whether the menu should display as an accordion
+     * @default false
+     */
+    isAccordion?: false;
+}
+
+interface FooterAccordionHeaderProps extends AccordionHeadingProps {
+    /**
+     * Whether the menu should display as an accordion
+     */
+    isAccordion: true;
+}
+
+export type FooterMenuHeaderProps = SharedFooterProps &
+    StrictUnion<DefaultFooterMenuHeaderProps | FooterAccordionHeaderProps>;
+
+export const FooterMenuHeader = (props: FooterMenuHeaderProps) => {
+    const { isAccordion = false, children, className, ...rest } = props;
+    const classes = classNames('c-footer__menu-header', className);
+
+    return isAccordion ? (
+        <AccordionHeader asChild {...rest}>
+            <div className={classes}>{children}</div>
+        </AccordionHeader>
+    ) : (
+        <h2 className={classes}>{children}</h2>
+    );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * FooterMenuContent
+ * -----------------------------------------------------------------------------------------------*/
+interface DefaultFooterMenuContentProps extends HTMLAttributes<HTMLDivElement> {
+    /**
+     * Whether the menu should display as an accordion
+     * @default false
+     */
+    isAccordion?: false;
+}
+
+interface FooterAccordionContentProps extends AccordionContentProps {
+    /**
+     * Whether the menu should display as an accordion
+     */
+    isAccordion: true;
+}
+
+export type FooterMenuContentProps = SharedFooterProps &
+    StrictUnion<DefaultFooterMenuContentProps | FooterAccordionContentProps>;
+
+export const FooterMenuContent = (props: FooterMenuContentProps) => {
+    const { isAccordion = false, children, className, ...rest } = props;
+    const classes = classNames('c-footer__menu-content', className);
+
+    return isAccordion ? (
+        <AccordionPanel {...rest}>
+            <div className={classes}>{children}</div>
+        </AccordionPanel>
+    ) : (
+        <div className={classes}>{children}</div>
     );
 };
 
