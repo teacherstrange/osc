@@ -6,6 +6,9 @@ export const MODULE_TEXT_GRID = groq`
     _type,
     heading,
     hasInlineHeading,
+    marginBottom,
+    paddingBottom,
+    paddingTop,
     items[] {
         _key,
         content {

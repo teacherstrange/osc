@@ -250,6 +250,9 @@ export interface textGridModule extends module {
     }[];
     heading?: string;
     hasInlineHeading?: boolean;
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
 }
 
 export interface SanitySEO {
