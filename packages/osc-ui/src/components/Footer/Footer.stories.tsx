@@ -21,7 +21,21 @@ import { footerMenuItems } from './footerContent';
 export default {
     title: 'osc-ui/Footer',
     component: Footer,
-    subcomponents: { FooterGroup },
+    subcomponents: {
+        FooterBottom,
+        FooterGroup,
+        FooterMenu,
+        FooterMenuContent,
+        FooterMenuHeader,
+        FooterMenuItem,
+    },
+    parameters: {
+        docs: {
+            description: {
+                component: 'Global footer component for displaying at the bottom of the website.',
+            },
+        },
+    },
 } as Meta;
 
 const Template: Story<FooterProps> = (args) => {
@@ -112,5 +126,4 @@ const Template: Story<FooterProps> = (args) => {
 };
 
 export const Primary = Template.bind({});
-
 Primary.args = {};
