@@ -1,3 +1,10 @@
+## [0.42.1](https://github.com/Open-Study-College/osc/compare/v0.42.0...v0.42.1) (2023-02-21)
+
+
+### 🐛 Bugs
+
+* **styles:** interpolate step in scales-map to convert type to string ([f543cf7](https://github.com/Open-Study-College/osc/commit/f543cf7aad17546ae9df69976b72b746a45719cd))
+
 ## [0.42.0](https://github.com/Open-Study-College/osc/compare/v0.41.2...v0.42.0) (2023-02-17)
 
 
@@ -165,24 +172,4 @@
 * **navbar:** updates colour value with token ([afc3646](https://github.com/Open-Study-College/osc/commit/afc36467029d111f0e9d43dcbcd2dbb94e97a94f))
 * **styles:** adds important to utility so it overrules component styles ([3f6b715](https://github.com/Open-Study-College/osc/commit/3f6b71598bea6dae456205d7a5653a361c3c88e5))
 * **styles:** update media queries to use variables ([c3c7acb](https://github.com/Open-Study-College/osc/commit/c3c7acb466402f32f1a14617a4ad6f337a9ff4b8))
-
-## [0.40.0](https://github.com/Open-Study-College/osc/compare/v0.39.0...v0.40.0) (2023-02-15)
-
-
-### ✨ Features
-
-* **academic-hub:** adds spritesheet provider to osc-academic-hub ([36e08a3](https://github.com/Open-Study-College/osc/commit/36e08a30a70667dac0c9239f2f7bc3240086cbdd))
-* **ecommerce:** adds spritesheet provider to osc-ecommerce ([6f17b1f](https://github.com/Open-Study-College/osc/commit/6f17b1f6091619604ebc16d26b7f8eef04ef6512))
-* **icon:** adds react context to create a provider for our spritesheet ([e346aa6](https://github.com/Open-Study-College/osc/commit/e346aa616eef08a9230be5104bc298c6b444f585))
-* **storybook:** wraps storybook preview in spritesheet provider ([081840c](https://github.com/Open-Study-College/osc/commit/081840cadb1b79bd4b95f8759d488361e914256a))
-
-
-### ♻️ Refactors
-
-* **icon:** update provider props ([d3639d1](https://github.com/Open-Study-College/osc/commit/d3639d1420f426bdbf80f1e18bc544f50f054e58))
-
-
-### 🧪 Tests
-
-* **select:** wraps tests in the SpritesheetProvider ([c5c1ff5](https://github.com/Open-Study-College/osc/commit/c5c1ff55b8095dbbe9e62c3a616dcbdbaf578e4e))
 
