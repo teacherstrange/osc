@@ -27,11 +27,11 @@ export interface FooterProps extends SharedFooterProps, HTMLAttributes<HTMLDivEl
 
 export const Footer = (props: FooterProps) => {
     const { children, className, ...attr } = props;
-    const classes = classNames('c-footer', 'o-container', className);
+    const classes = classNames('c-footer', className);
 
     return (
         <footer className={classes} {...attr}>
-            {children}
+            <div className="c-footer__inner o-container">{children}</div>
         </footer>
     );
 };

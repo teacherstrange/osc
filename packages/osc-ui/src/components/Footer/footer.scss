@@ -14,15 +14,10 @@
     $footer-gap-l: $base-fs * 5.5px;
 
     .c-footer {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: start;
-        justify-content: space-between;
         background-color: $footer-bg-color;
         color: $footer-fg-color;
         font-size: $footer-fs;
         font-weight: $fw-light;
-        gap: $footer-gap;
         padding-block: $footer-block-padding;
 
         @include mq($mq-tab) {
@@ -35,113 +30,175 @@
             margin-block-end: 0;
         }
 
-        &__group {
+        &__inner {
             display: flex;
             flex-wrap: wrap;
+            align-items: start;
+            justify-content: space-between;
             gap: $footer-gap;
-            background-color: $footer-bg-color;
-            color: $footer-fg-color;
-            padding-block: $footer-block-padding;
-            font-size: $footer-fs;
-            font-weight: $fw-light;
+        }
+
+        &__group {
+            display: flex;
+            justify-content: space-between;
+            gap: $space-l;
+
+            @include mq($mq-mob) {
+                gap: $space-3xl;
+            }
 
             @include mq($mq-tab) {
                 gap: $space-2xl $space-xl;
                 width: auto;
             }
 
-            /* stylelint-disable-next-line plugin/selector-bem-pattern -- remove any trailing margins */
-            p {
+            &--column {
+                flex-direction: column;
+            }
+
+            &--row {
+                flex-flow: row wrap;
+            }
+        }
+
+        &__logo {
+            max-width: 260px;
+        }
+
+        &__icon {
+            font-size: $footer-fs-l;
+        }
+
+        &__menu {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: start;
+            justify-content: space-between;
+            background-color: $footer-bg-color;
+            color: $footer-fg-color;
+            font-size: $footer-fs;
+            font-weight: $fw-light;
+            gap: $footer-gap;
+            padding-block: $footer-block-padding;
+
+            @include mq($mq-tab) {
+                gap: $footer-gap-l $space-m;
+            }
+
+            // remove any trailing margins
+            p,
+            li {
                 margin-block-end: 0;
             }
 
             &__group {
                 display: flex;
-                justify-content: space-between;
-                gap: $space-l;
-
-                @include mq($mq-mob) {
-                    gap: $space-3xl;
-                }
+                flex-wrap: wrap;
+                gap: $footer-gap;
+                background-color: $footer-bg-color;
+                color: $footer-fg-color;
+                padding-block: $footer-block-padding;
+                font-size: $footer-fs;
+                font-weight: $fw-light;
 
                 @include mq($mq-tab) {
                     gap: $space-2xl $space-xl;
-                }
-
-                &--column {
-                    flex-direction: column;
-                }
-
-                &--row {
-                    flex-flow: row wrap;
-                }
-            }
-
-            &__logo {
-                max-width: 260px;
-            }
-
-            &__icon {
-                font-size: $footer-fs-l;
-            }
-
-            &__menu {
-                display: flex;
-                flex-wrap: wrap;
-                font-size: rem($base-fs);
-
-                @include mq($mq-tab) {
-                    gap: $space-xl;
-                }
-            }
-
-            &__menu-header {
-                font-size: $footer-fs;
-
-                @include mq($mq-tab) {
-                    border-block-end: $footer-border;
-                    padding-inline-end: $space-l;
-                    padding-block-end: $space-2xs;
-                }
-            }
-
-            &__menu-item {
-                width: 100%;
-
-                @include mq($mq-tab) {
                     width: auto;
                 }
 
-                li {
-                    margin-block-end: $space-2xs;
+                /* stylelint-disable-next-line plugin/selector-bem-pattern -- remove any trailing margins */
+                p {
+                    margin-block-end: 0;
                 }
 
-                .c-accordion__trigger {
-                    &:hover {
+                &__group {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: $space-l;
+
+                    @include mq($mq-mob) {
+                        gap: $space-3xl;
+                    }
+
+                    @include mq($mq-tab) {
+                        gap: $space-2xl $space-xl;
+                    }
+
+                    &--column {
+                        flex-direction: column;
+                    }
+
+                    &--row {
+                        flex-flow: row wrap;
+                    }
+                }
+
+                &__logo {
+                    max-width: 260px;
+                }
+
+                &__icon {
+                    font-size: $footer-fs-l;
+                }
+
+                &__menu {
+                    display: flex;
+                    flex-wrap: wrap;
+                    font-size: rem($base-fs);
+
+                    @include mq($mq-tab) {
+                        gap: $space-xl;
+                    }
+                }
+
+                &__menu-header {
+                    font-size: $footer-fs;
+
+                    @include mq($mq-tab) {
+                        border-block-end: $footer-border;
+                        padding-inline-end: $space-l;
+                        padding-block-end: $space-2xs;
+                    }
+                }
+
+                &__menu-item {
+                    width: 100%;
+
+                    @include mq($mq-tab) {
+                        width: auto;
+                    }
+
+                    li {
+                        margin-block-end: $space-2xs;
+                    }
+
+                    .c-accordion__trigger {
+                        &:hover {
+                            color: currentcolor;
+                        }
+                    }
+
+                    .c-accordion__icon {
                         color: currentcolor;
                     }
                 }
 
-                .c-accordion__icon {
-                    color: currentcolor;
+                &__btm {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    gap: $space-2xs;
+                    border-block-start: $footer-border;
+                    padding-block-start: $fs-2xs;
+                    width: 100%;
+                    font-size: rem($base-fs);
                 }
-            }
 
-            &__btm {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                gap: $space-2xs;
-                border-block-start: $footer-border;
-                padding-block-start: $fs-2xs;
-                width: 100%;
-                font-size: rem($base-fs);
-            }
-
-            &__btm-item {
-                display: flex;
-                flex-wrap: wrap;
-                gap: #{$base-fs}px;
+                &__btm-item {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: #{$base-fs}px;
+                }
             }
         }
     }
