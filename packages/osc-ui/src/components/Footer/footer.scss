@@ -1,11 +1,80 @@
-@layer components {
-    .c-footer {
-        width: 50%;
-        background-color: rgb(23 222 219);
+@import "../../styles/tools/";
+@import "../../styles/settings/";
 
-        &--full {
-            width: 40%;
-            background-color: rgb(117 2 2);
+@layer components {
+    $footer-bg-color: var(--color-secondary);
+    $footer-fg-color: var(--color-tertiary);
+    $footer-block-padding: $space-7xl;
+    $footer-border: 1px solid currentcolor;
+    $footer-fs: rem($base-fs * 1.25); // 20px
+    $footer-fs-l: rem($base-fs * 1.5); // 24px
+    $footer-gap: $base-fs * 5px;
+    $footer-gap-l: $base-fs * 5.5px;
+
+    .c-footer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $footer-gap;
+        background-color: $footer-bg-color;
+        color: $footer-fg-color;
+        padding-block: $footer-block-padding;
+        font-size: $footer-fs;
+        font-weight: $fw-light;
+
+        @include mq($mq-tab) {
+            gap: $footer-gap-l;
+        }
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern -- remove any trailing margins */
+        p {
+            margin-block-end: 0;
+        }
+
+        &__group {
+            display: flex;
+            justify-content: space-between;
+            gap: $space-l;
+
+            @include mq($mq-mob) {
+                gap: $space-3xl;
+            }
+
+            @include mq($mq-tab) {
+                gap: $space-2xl $space-xl;
+            }
+
+            &--column {
+                flex-direction: column;
+            }
+
+            &--row {
+                flex-flow: row wrap;
+            }
+        }
+
+        &__logo {
+            max-width: 260px;
+        }
+
+        &__icon {
+            font-size: $footer-fs-l;
+        }
+
+        &__btm {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: $space-2xs;
+            border-block-start: $footer-border;
+            padding-block-start: $fs-2xs;
+            width: 100%;
+            font-size: $fs-m;
+        }
+
+        &__btm-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: #{$base-fs}px;
         }
     }
 }
