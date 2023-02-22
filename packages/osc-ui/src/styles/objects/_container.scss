@@ -15,86 +15,53 @@
 //  <div class="o-container"> ... </div>
 */
 
-.o-container {
-    $padding: calc($space-5xl + 4px); /* [1] */
-    $padding-alt: $space-l;
+$padding: calc($space-5xl + 4px); /* [1] */
+$padding-s: $space-l;
+$container-width-2xs: #{$container-2xs}px;
+$container-width-xs: #{$container-xs}px;
+$container-width-s: #{$container-s}px;
+$container-width-m: #{$container-m}px;
+$container-width-l: #{$container-l}px;
 
-    width: 100%;
-    max-width: #{$container-m}px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: $padding-alt;
-    padding-left: $padding-alt;
+.o-container {
+    // Use min function to set min & max width of the container
+    width: min(100%, $container-width-m);
+    margin-inline: auto;
+    padding-inline: $padding-s;
 
     @include mq($mq-desk) {
-        padding-right: $padding;
-        padding-left: $padding;
+        padding-inline: $padding;
     }
 
     &--flush {
-        padding-right: 0;
-        padding-left: 0;
-
-        &-alt-r {
-            @include mq($mq-mob, max) {
-                padding-right: 0;
-            }
-        }
-
-        &-alt-l {
-            @include mq($mq-mob, max) {
-                padding-left: 0;
-            }
-        }
+        padding-inline: 0;
     }
 
-    &--pad-r {
-        padding-right: 0;
-
-        @include mq($mq-mob) {
-            padding-right: $space-m;
-        }
+    &--pull-r {
+        padding-inline-end: 0;
     }
 
-    &--pad-l {
-        padding-left: 0;
-
-        @include mq($mq-mob) {
-            padding-left: $space-m;
-        }
-    }
-
-    // Container Sizes
-
-    &--4xs {
-        max-width: calc(#{$container-4xs * 1px} + #{$padding});
-    }
-
-    &--3xs {
-        max-width: calc(#{$container-3xs * 1px} + #{$padding});
+    &--pull-l {
+        padding-inline-start: 0;
     }
 
     &--2xs {
-        max-width: calc(#{$container-2xs * 1px} + #{$padding});
+        width: min(100%, $container-width-2xs);
     }
 
     &--xs {
-        max-width: calc(#{$container-xs * 1px} + #{$padding});
+        width: min(100%, $container-width-xs);
     }
 
     &--s {
-        max-width: calc(#{$container-s * 1px} + #{$padding});
+        width: min(100%, $container-width-s);
     }
 
     &--l {
-        max-width: calc(#{$container-l * 1px} + #{$padding});
+        width: min(100%, $container-width-l);
     }
 
     &--full {
-        max-width: 100%;
-    }
-
-    &-fluid {
-        padding: $padding;
+        width: 100%;
     }
 }
