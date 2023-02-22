@@ -72,6 +72,16 @@ $banner-content-max-w: 40ch;
         }
     }
 
+    &__footer {
+        margin-block-start: $space-xs;
+        flex: 100%;
+        font-size: $fs-s;
+
+        @include mq($mq-tab-l) {
+            text-align: right;
+        }
+    }
+
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
     .o-img {
         max-width: 330px;

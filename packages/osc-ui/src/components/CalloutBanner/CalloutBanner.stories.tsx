@@ -1,18 +1,20 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { Button } from '../Button/Button';
+import { Image } from '../Image/Image';
 import type { CalloutBannerProps } from './CalloutBanner';
 import {
     CalloutBanner,
     CalloutBannerTitle,
     CalloutButtonGroup,
     CalloutContentGroup,
+    CalloutFooter,
 } from './CalloutBanner';
 
 export default {
     title: 'osc-ui/Callout Banner',
     component: CalloutBanner,
-    subcomponents: { CalloutBannerTitle, CalloutContentGroup, CalloutButtonGroup },
+    subcomponents: { CalloutBannerTitle, CalloutContentGroup, CalloutButtonGroup, CalloutFooter },
     parameters: {
         docs: {
             description: {
@@ -52,7 +54,7 @@ const HasImageTemplate: Story<CalloutBannerProps> = ({ ...args }) => (
                 height={74}
                 alt="Black Friday"
             />
-            <CalloutContentGroup asChild>
+            <CalloutContentGroup>
                 <div className="c-content">
                     <div className="c-content__inner c-content__inner--left">
                         <p className="u-color-tertiary u-text-bold t-font-m">
@@ -65,10 +67,10 @@ const HasImageTemplate: Story<CalloutBannerProps> = ({ ...args }) => (
                         </p>
                     </div>
                 </div>
+                <CalloutFooter asChild>
+                    <p className="u-color-tertiary">Offer ends 24.11.22!</p>
+                </CalloutFooter>
             </CalloutContentGroup>
-            <CalloutFooter asChild>
-                <p className="u-color-tertiary">Offer ends 24.11.22!</p>
-            </CalloutFooter>
         </CalloutBanner>
     </div>
 );

@@ -70,3 +70,21 @@ export const CalloutButtonGroup = (props: CalloutButtonGroupProps) => {
 
     return <div className={classes}>{children}</div>;
 };
+
+/* -------------------------------------------------------------------------------------------------
+ * CalloutFooter
+ * -----------------------------------------------------------------------------------------------*/
+export interface CalloutFooterProps extends SharedProps, ComponentPropsWithoutRef<'div'> {
+    /**
+     * Merges its props onto its immediate child
+     */
+    asChild?: boolean;
+}
+
+export const CalloutFooter = (props: CalloutFooterProps) => {
+    const { asChild, children, className } = props;
+    const classes = classNames('c-callout-banner__footer', className);
+    const Component = asChild ? Slot : 'div';
+
+    return <Component className={classes}>{children}</Component>;
+};
