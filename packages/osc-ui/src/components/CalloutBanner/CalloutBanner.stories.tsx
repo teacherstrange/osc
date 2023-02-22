@@ -2,11 +2,17 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { Button } from '../Button/Button';
 import type { CalloutBannerProps } from './CalloutBanner';
-import { CalloutBanner } from './CalloutBanner';
+import {
+    CalloutBanner,
+    CalloutBannerTitle,
+    CalloutButtonGroup,
+    CalloutContentGroup,
+} from './CalloutBanner';
 
 export default {
     title: 'osc-ui/Callout Banner',
     component: CalloutBanner,
+    subcomponents: { CalloutBannerTitle, CalloutContentGroup, CalloutButtonGroup },
     parameters: {
         docs: {
             description: {
@@ -19,18 +25,20 @@ export default {
 const Template: Story<CalloutBannerProps> = ({ ...args }) => (
     <div className="o-container">
         <CalloutBanner {...args}>
-            <h2 className="c-callout-banner__ttl u-color-gradient-quaternary-90 t-font-secondary u-lh-1">
+            <CalloutBannerTitle className="u-color-gradient-quaternary-90">
                 OSC STUDENT DISCOUNT
-            </h2>
-            <div className="c-content">
-                <div className="c-content__inner c-content__inner--left">
-                    <p>
-                        We're offering a special price of £29.99 for OSC learners. To purchase the
-                        Career Kickstarter package at the discounted price please contact our
-                        learner services team via studentsupport@openstudycollege.com
-                    </p>
+            </CalloutBannerTitle>
+            <CalloutContentGroup>
+                <div className="c-content">
+                    <div className="c-content__inner c-content__inner--left">
+                        <p>
+                            We're offering a special price of £29.99 for OSC learners. To purchase
+                            the Career Kickstarter package at the discounted price please contact
+                            our learner services team via studentsupport@openstudycollege.com
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </CalloutContentGroup>
         </CalloutBanner>
     </div>
 );
@@ -38,21 +46,23 @@ const Template: Story<CalloutBannerProps> = ({ ...args }) => (
 const TemplateHasButton: Story<CalloutBannerProps> = ({ ...args }) => (
     <div className="o-container">
         <CalloutBanner {...args}>
-            <h2 className="c-callout-banner__ttl u-color-gradient-quaternary-90 t-font-secondary u-lh-1">
+            <CalloutBannerTitle className="u-color-gradient-quaternary-90">
                 OSC STUDENT DISCOUNT
-            </h2>
-            <div className="c-content">
-                <div className="c-content__inner c-content__inner--left">
-                    <p>
-                        We're offering a special price of £29.99 for OSC learners. To purchase the
-                        Career Kickstarter package at the discounted price please contact our
-                        learner services team via studentsupport@openstudycollege.com
-                    </p>
+            </CalloutBannerTitle>
+            <CalloutContentGroup>
+                <div className="c-content">
+                    <div className="c-content__inner c-content__inner--left">
+                        <p>
+                            We're offering a special price of £29.99 for OSC learners. To purchase
+                            the Career Kickstarter package at the discounted price please contact
+                            our learner services team via studentsupport@openstudycollege.com
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div className="c-callout-banner__btn-group">
+            </CalloutContentGroup>
+            <CalloutButtonGroup>
                 <Button>Buy now</Button>
-            </div>
+            </CalloutButtonGroup>
         </CalloutBanner>
     </div>
 );
