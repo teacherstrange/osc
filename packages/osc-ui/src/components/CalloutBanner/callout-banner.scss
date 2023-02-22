@@ -7,6 +7,7 @@ $banner-py: $space-xl;
 $banner-py-s: $space-s;
 $banner-px: $space-m;
 $banner-px-l: $space-xl;
+$banner-content-max-w: 40ch;
 
 .c-callout-banner {
     display: flex;
@@ -16,7 +17,7 @@ $banner-px-l: $space-xl;
     background-color: $banner-bg;
     color: $banner-fg;
     margin-inline: auto;
-    gap: 0 $space-m;
+    gap: $space-m;
 
     @include mq($mq-tab-l) {
         flex-flow: row wrap;
@@ -25,8 +26,16 @@ $banner-px-l: $space-xl;
         padding: $banner-py-s $banner-px-l;
     }
 
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    p,
+    li {
+        margin-block-end: 0;
+    }
+
     &__ttl {
         font-size: $fs-7xl;
+        padding-inline-end: $space-m;
+        margin-block-end: 0;
 
         @include mq($mq-mob-l) {
             font-size: $fs-6xl;
@@ -36,7 +45,7 @@ $banner-px-l: $space-xl;
             font-size: $fs-5xl;
         }
 
-        @include mq(($mq-desk, 1108)) {
+        @include mq(($mq-desk, 1137)) {
             // One off breakpoint to stretch the title across the width of the flex-container
             // Without this the button wraps onto it's own line and looks odd
             flex: 100%;
@@ -55,5 +64,16 @@ $banner-px-l: $space-xl;
         @include mq($mq-mob, max) {
             width: 100%;
         }
+
+        .c-btn {
+            @include mq($mq-mob, max) {
+                width: 100%;
+            }
+        }
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    .o-img {
+        max-width: 330px;
     }
 }
