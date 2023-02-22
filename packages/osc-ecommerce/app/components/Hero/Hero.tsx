@@ -127,7 +127,9 @@ const Slide = (props: SlideProps) => {
                             width={image?.width}
                             height={image?.height}
                             alt={image?.alt}
-                            artDirectedImages={image?.responsiveImages}
+                            artDirectedImages={
+                                image?.responsiveImages ? image?.responsiveImages : undefined
+                            }
                         />
                     </HeroImage>
                 ) : null}
