@@ -100,12 +100,13 @@ const TemplateHasButton: Story<CalloutBannerProps> = ({ ...args }) => (
 export const Primary = Template.bind({});
 Primary.args = {};
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-    ...Primary.args,
-};
-
 export const HasButton = TemplateHasButton.bind({});
 HasButton.args = {
     ...Primary.args,
+};
+
+export const HasImage = HasImageTemplate.bind({});
+HasImage.args = {
+    ...Primary.args,
+    className: 'u-bg-color-neutral-0',
 };
