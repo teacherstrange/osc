@@ -7,11 +7,10 @@ $banner-py: $space-xl;
 $banner-py-s: $space-s;
 $banner-px: $space-m;
 $banner-px-l: $space-xl;
-$banner-content-max-w: 40ch;
 
 .c-callout-banner {
-    display: grid;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
     max-width: 100%;
     padding: $banner-py $banner-px;
     background-color: $banner-bg;
@@ -20,8 +19,9 @@ $banner-content-max-w: 40ch;
     gap: 0 $space-m;
 
     @include mq($mq-tab-l) {
+        flex-flow: row wrap;
+        align-items: center;
         width: fit-content; // make sure banner is constrained to the width of it's children
-        grid-template-columns: minmax(21ch, 1fr) minmax(auto, $banner-content-max-w) auto;
         padding: $banner-py-s $banner-px-l;
     }
 
@@ -34,6 +34,20 @@ $banner-content-max-w: 40ch;
 
         @include mq($mq-tab-l) {
             font-size: $fs-5xl;
+        }
+
+        @include mq(($mq-desk, 1108)) {
+            // One off breakpoint to stretch the title across the width of the flex-container
+            // Without this the button wraps onto it's own line and looks odd
+            flex: 100%;
+        }
+    }
+
+    &__content-group {
+        flex: 1;
+
+        @include mq($mq-desk-m) {
+            max-width: $banner-content-max-w;
         }
     }
 
