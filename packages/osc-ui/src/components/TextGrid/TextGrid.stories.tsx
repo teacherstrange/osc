@@ -19,10 +19,9 @@ export default {
 
 const Template: Story<TextGridProps> = ({ ...args }) => (
     <div
+        className="o-container"
         style={{
             paddingTop: '50px',
-            maxWidth: '1200px',
-            margin: '0 auto',
         }}
     >
         <TextGrid {...args}>
