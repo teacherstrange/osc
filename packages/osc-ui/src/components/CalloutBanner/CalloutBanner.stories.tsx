@@ -18,7 +18,7 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: '',
+                component: 'A callout banner to highlight some content or an offer on the page.',
             },
         },
     },
@@ -106,9 +106,23 @@ export const HasButton = TemplateHasButton.bind({});
 HasButton.args = {
     ...Primary.args,
 };
+HasButton.parameters = {
+    docs: {
+        description: {
+            story: 'Pass a button using the `<CalloutButtonGroup>` subcomponent with a `<Button>` as a child.',
+        },
+    },
+};
 
 export const HasImage = HasImageTemplate.bind({});
 HasImage.args = {
     ...Primary.args,
     className: 'u-bg-color-neutral-0',
+};
+HasImage.parameters = {
+    docs: {
+        description: {
+            story: 'Instead of text, you can pass an image as the first child by omitting the `<CalloutBannerTitle>` and placing an `<Image>` there instead.',
+        },
+    },
 };
