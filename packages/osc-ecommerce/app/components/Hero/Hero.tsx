@@ -11,7 +11,13 @@ import {
     rem,
 } from 'osc-ui';
 import type { heroModule, heroSlide } from '~/types/sanity';
-import mq from '../../../../../tokens/media-queries';
+
+// ! TEMPORARY fix for tokens path not matching dev and prod environments
+// ! Once solution in place we can update this to use design token files instead
+const mq = {
+    tab: 768,
+    'desk-lrg': 1440,
+};
 
 export const Hero = (props: { data: heroModule }) => {
     const { carouselSettings, slides } = props?.data;
