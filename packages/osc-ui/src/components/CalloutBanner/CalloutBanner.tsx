@@ -44,13 +44,19 @@ export const CalloutBannerTitle = (props: CalloutBannerProps) => {
 /* -------------------------------------------------------------------------------------------------
  * CalloutContentGroup
  * -----------------------------------------------------------------------------------------------*/
-export interface CalloutContentGroupProps extends SharedProps, ComponentPropsWithoutRef<'div'> {}
+export interface CalloutContentGroupProps extends SharedProps, ComponentPropsWithoutRef<'div'> {
+    /**
+     * Merges its props onto its immediate child
+     */
+    asChild?: boolean;
+}
 
 export const CalloutContentGroup = (props: CalloutContentGroupProps) => {
-    const { children, className } = props;
+    const { asChild, children, className } = props;
     const classes = classNames('c-callout-banner__content-group', className);
+    const Component = asChild ? Slot : 'div';
 
-    return <Slot className={classes}>{children}</Slot>;
+    return <Component className={classes}>{children}</Component>;
 };
 
 /* -------------------------------------------------------------------------------------------------
