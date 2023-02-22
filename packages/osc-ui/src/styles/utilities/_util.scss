@@ -4,6 +4,7 @@
 @use "../tools" as *;
 @use "../tools/functions" as *;
 
+
 ///*----------------------------------*\
 //  #UTILITIES
 //\*----------------------------------*/
@@ -183,7 +184,7 @@ $osc-config: (
 
 [hidden] {
     // stylelint-disable-next-line declaration-no-important
-    display: none !important;
+    display: none;
 }
 
 .u-hidden {

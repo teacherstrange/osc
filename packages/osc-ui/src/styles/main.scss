@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@use "sass:meta";
 
 /* =============================================================================
    Primary styles
@@ -16,32 +17,50 @@
 	6 	$UTILITIES
 */
 
+@layer
+    generics,
+    theme,
+    elements,
+    objects,
+    typography,
+    components,
+    utilities;
+
 /* ============================
 // $GENERIC
 // High Level Styles i.e. Normalize//CSS Resets
 // --- Can be employed across multiple sites without the need to edit or adjust
 */
-@use "generic/reset";
-@use "generic/normalize";
+
+@layer generics {
+    @include meta.load-css("generic/reset");
+    @include meta.load-css("generic/normalize");
+}
 
 /* ============================
 // $THEME
 // Define your colour themes
 */
-@use "theme/theme";
+
+@layer theme {
+    @include meta.load-css("theme/theme");
+}
 
 /* ============================
 // $ELEMENTS
 // Single HTML element selectors without classes
 */
-@use "elements/address";
-@use "elements/iframe";
-@use "elements/image";
-@use "elements/input";
-@use "elements/list";
-@use "elements/page";
-@use "elements/table";
-@use "elements/type";
+
+@layer elements {
+    @include meta.load-css("elements/address");
+    @include meta.load-css("elements/iframe");
+    @include meta.load-css("elements/image");
+    @include meta.load-css("elements/input");
+    @include meta.load-css("elements/list");
+    @include meta.load-css("elements/page");
+    @include meta.load-css("elements/table");
+    @include meta.load-css("elements/type");
+}
 
 /* ============================
 // $OBJECTS
@@ -49,31 +68,37 @@
 // The first layer in which we find class-level specificity
 */
 
-@use "objects/ar";
-@use "objects/container";
-@use "objects/flex";
-@use "objects/img";
-@use "objects/media";
-@use "objects/row";
-@use "objects/grid";
-@use "objects/bg";
-@use "objects/list" as objects-list;
-@use "objects/main";
-@use "objects/icon";
+@layer objects {
+    @include meta.load-css("objects/ar");
+    @include meta.load-css("objects/container");
+    @include meta.load-css("objects/flex");
+    @include meta.load-css("objects/img");
+    @include meta.load-css("objects/media");
+    @include meta.load-css("objects/row");
+    @include meta.load-css("objects/grid");
+    @include meta.load-css("objects/bg");
+    @include meta.load-css("objects/list");
+    @include meta.load-css("objects/main");
+    @include meta.load-css("objects/icon");
+}
 
 /* ============================
 // $TYPOGRAPHY
 // Classes for the display and control of your typography.
 // These elements sit loosely between objects and components and in turn can be overridden on a piece of UI
 */
-@use "typography/font";
+
+@layer typography {
+    @include meta.load-css("typography/font");
+}
 
 /* ============================
 //	$COMPONENTS
 //  Classes for styling any & all UI elements (often combined with the structure of object classes)
 //  Keep to DRY principles  ( [D]ont [R]epeat [Y]ourself )
 */
-@use "components/spinner";
+
+// OUR SCSS COMPONENT STYLES ARE LOADED VIA OUR UI LIBRARY, @OSC-UI //
 
 /* ============================
 // $UTILITIES
@@ -81,5 +106,8 @@
 // Eliminates the need to create specific classes to perform simple tasks
 // NOTE: Use sparingly
 */
-@use "utilities/util";
-@use "utilities/anim";
+
+@layer utilities {
+    @include meta.load-css("utilities/util");
+    @include meta.load-css("utilities/anim");
+}
