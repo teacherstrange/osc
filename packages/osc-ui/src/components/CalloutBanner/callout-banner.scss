@@ -1,3 +1,45 @@
+@import "../../styles/settings";
+@import "../../styles/tools";
+
+$banner-bg: var(--color-neutral-300);
+$banner-fg: var(--color-nonary);
+$banner-py: $space-xl;
+$banner-py-s: $space-s;
+$banner-px: $space-m;
+$banner-px-l: $space-xl;
+$banner-content-max-w: 40ch;
+
 .c-callout-banner {
-    // Styles go here
+    display: grid;
+    align-items: center;
+    max-width: 100%;
+    padding: $banner-py $banner-px;
+    background-color: $banner-bg;
+    color: $banner-fg;
+    margin-inline: auto;
+    gap: 0 $space-m;
+
+    @include mq($mq-tab-l) {
+        width: fit-content; // make sure banner is constrained to the width of it's children
+        grid-template-columns: minmax(21ch, 1fr) minmax(auto, $banner-content-max-w) auto;
+        padding: $banner-py-s $banner-px-l;
+    }
+
+    &__ttl {
+        font-size: $fs-7xl;
+
+        @include mq($mq-mob-l) {
+            font-size: $fs-6xl;
+        }
+
+        @include mq($mq-tab-l) {
+            font-size: $fs-5xl;
+        }
+    }
+
+    &__btn-group {
+        @include mq($mq-mob, max) {
+            width: 100%;
+        }
+    }
 }
