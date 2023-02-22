@@ -1,3 +1,4 @@
+import { Slot } from '@radix-ui/react-slot';
 import type { ComponentPropsWithoutRef } from 'react';
 import React from 'react';
 import { classNames } from '../../utils/classNames';
@@ -49,7 +50,7 @@ export const CalloutContentGroup = (props: CalloutContentGroupProps) => {
     const { children, className } = props;
     const classes = classNames('c-callout-banner__content-group', className);
 
-    return <div className={classes}>{children}</div>;
+    return <Slot className={classes}>{children}</Slot>;
 };
 
 /* -------------------------------------------------------------------------------------------------
