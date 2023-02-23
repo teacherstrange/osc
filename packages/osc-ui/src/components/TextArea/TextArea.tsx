@@ -1,9 +1,10 @@
-import type { TextareaHTMLAttributes, ReactNode } from 'react';
-import React, { forwardRef, useState } from 'react';
+import type { Dispatch, ReactNode, SetStateAction, TextareaHTMLAttributes } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
+import type { ZodSchema } from 'zod';
+import { clientSideValidation } from '../../utils/clientSideValidation';
 import { Label } from '../Label/Label';
-
-import { getFieldError } from '../../utils/getFieldError';
 import './text-area.scss';
+import { InputError } from '../TextInput/TextInput';
 
 type IconType = {
     content: ReactNode;
@@ -12,6 +13,10 @@ type IconType = {
 };
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+    /**
+     * Any error messages - initially set through server validation, but can be updated through client validation
+     */
+    errors?: string[] | undefined;
     /**
      * An object that contains an Icon and a label for accessibility
      */
@@ -25,38 +30,36 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
      */
     name: string;
     /**
+     * The Zod Schema used for creating client side validation
+     */
+    schema?: ZodSchema;
+    /**
+     * Allows for client side validation once a server side error has been received
+     */
+    setErrors?: Dispatch<SetStateAction<any>>;
+    /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
     variants?: string[];
-    /**
-     * A boolean that alerts when form is submitted for error handling
-     * @default false
-     */
-    wasSubmitted?: boolean;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     (props: TextAreaProps, forwardedRef) => {
-        const { disabled, icon, id, name, required, variants, wasSubmitted, ...rest } = props;
+        const { disabled, errors, icon, id, name, required, schema, setErrors, variants, ...rest } =
+            props;
         const [value, setValue] = useState('');
 
-        const errorMessage = getFieldError(value, required);
-        const displayError = wasSubmitted && errorMessage;
-
-        const InputError = () => (
-            <>
-                <div className="c-input__icon c-input__icon--error">{icon?.content}</div>
-                <span className="c-input__error-message" role="alert" id={`${id}-error`}>
-                    {errorMessage}
-                </span>
-            </>
-        );
+        useEffect(() => {
+            if (errors) {
+                clientSideValidation(id, schema, setErrors, value);
+            }
+        }, [value]);
 
         return (
             <div className="c-input__outer-container">
                 <div
                     className={
-                        displayError
+                        errors
                             ? `c-input__container c-input__container--error`
                             : `c-input__container`
                     }
@@ -65,7 +68,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                         className="c-input  c-textarea"
                         disabled={disabled}
                         id={id}
-                        name={name}
+                        name={id}
                         onChange={(event) => setValue(event.currentTarget.value)}
                         ref={forwardedRef}
                         required={required}
@@ -77,7 +80,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                         variants={disabled ? ['disabled'] : null}
                         required={required}
                     />
-                    {displayError ? <InputError /> : null}
+                    {errors ? <InputError errors={errors} id={id} /> : null}
                 </div>
             </div>
         );

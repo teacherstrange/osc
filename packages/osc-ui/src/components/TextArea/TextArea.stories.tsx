@@ -1,8 +1,11 @@
 import type { Meta, Story } from '@storybook/react';
-import React, { useEffect, useRef } from 'react';
-import { Icon } from '../Icon/Icon';
-
+import React, { useEffect, useRef, useState } from 'react';
+import { z } from 'zod';
 import { TextArea } from './TextArea';
+
+const schema = z.object({
+    enquiry: z.string().trim().min(1, { message: 'Field is required' }),
+});
 
 export default {
     title: 'osc-ui/TextArea',
@@ -46,71 +49,72 @@ const Template: Story = ({ variations }) => {
         </div>
     );
 };
+const ValidationTemplate: Story = () => {
+    const [errors, setErrors] = useState({ enquiry: ['Field is required'] });
+    return (
+        <div style={{ margin: '1em', width: '500px' }}>
+            <TextArea
+                errors={errors.enquiry}
+                id="enquiry"
+                name="Enquiry"
+                required={true}
+                schema={schema}
+                setErrors={setErrors}
+            />
+        </div>
+    );
+};
 
 export const Primary = Template.bind({});
 
 Primary.args = {
     variations: [
         {
-            cols: 65,
             editor: 'input',
             id: 'enquiry-1',
             name: 'Enquiry',
             required: 'required',
-            rows: 2,
             type: 'text',
             state: 'default',
         },
         {
-            cols: 65,
             defaultValue:
                 'Donec volutpat quis libero eu fringilla. Aenean ultrices, elit ut varius condimentum, libero ligula aliquam lorem, eu volutpat quam purus ut leo. Etiam consectetur viverra augue.',
             editor: 'input',
             id: 'enquiry-2',
             name: 'Enquiry',
-            rows: 2,
             type: 'text',
             state: 'hasValue',
         },
         {
-            cols: 65,
             defaultValue:
                 'Donec volutpat quis libero eu fringilla. Aenean ultrices, elit ut varius condimentum, libero ligula aliquam lorem, eu volutpat quam purus ut leo. Etiam consectetur viverra augue.',
             editor: 'input',
             id: 'enquiry-3',
             name: 'Enquiry',
             ref: true,
-            rows: 2,
             type: 'text',
             state: 'hasFocus',
         },
         {
-            cols: 65,
-            editor: 'input',
-            id: 'enquiry-4',
-            icon: {
-                content: <Icon id="exclamation-mark" />,
-                label: 'Exclamation Triangle Icon',
-                type: 'error',
-            },
-            name: 'Enquiry',
-            required: true,
-            rows: 2,
-            type: 'text',
-            state: 'hasValidation',
-            wasSubmitted: true,
-        },
-        {
-            cols: 65,
             defaultValue:
                 'Donec volutpat quis libero eu fringilla. Aenean ultrices, elit ut varius condimentum, libero ligula aliquam lorem, eu volutpat.',
             disabled: true,
             editor: 'input',
             id: 'enquiry-5',
             name: 'Enquiry',
-            rows: 2,
             type: 'text',
             state: 'isDisabled',
         },
     ],
+};
+
+export const Validation = ValidationTemplate.bind({});
+
+Validation.parameters = {
+    docs: {
+        description: {
+            story: 'Validation styling for the Text Area',
+        },
+    },
 };
