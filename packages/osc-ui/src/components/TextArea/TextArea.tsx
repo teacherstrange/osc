@@ -1,4 +1,4 @@
-import type { Dispatch, ReactNode, SetStateAction, TextareaHTMLAttributes } from 'react';
+import type { Dispatch, SetStateAction, TextareaHTMLAttributes } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
 import type { ZodSchema } from 'zod';
 import { clientSideValidation } from '../../utils/clientSideValidation';
@@ -6,21 +6,11 @@ import { Label } from '../Label/Label';
 import './text-area.scss';
 import { InputError } from '../TextInput/TextInput';
 
-type IconType = {
-    content: ReactNode;
-    label: string;
-    type?: string;
-};
-
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     /**
      * Any error messages - initially set through server validation, but can be updated through client validation
      */
     errors?: string[] | undefined;
-    /**
-     * An object that contains an Icon and a label for accessibility
-     */
-    icon?: IconType;
     /**
      * Id used to connect the textarea to the corresponding label
      */
@@ -45,7 +35,7 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     (props: TextAreaProps, forwardedRef) => {
-        const { disabled, errors, icon, id, name, required, schema, setErrors, variants, ...rest } =
+        const { disabled, errors, id, name, required, schema, setErrors, variants, ...rest } =
             props;
         const [value, setValue] = useState('');
 
