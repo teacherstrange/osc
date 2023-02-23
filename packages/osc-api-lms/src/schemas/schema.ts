@@ -15,6 +15,7 @@ export const typeDefs = gql`
     }
     
     type Query {
+        "Get the user's assigned courses"
         usersCourses(id: Int): [UserCourse]
     }
 `;
