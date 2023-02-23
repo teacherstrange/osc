@@ -1,61 +1,63 @@
 @import "../../styles/settings";
 
-.c-avatar {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    width: 45px;
-    height: 45px;
-    border-radius: $rad;
-    user-select: none;
-
-    &__image {
+@layer components {
+    .c-avatar {
         position: relative;
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
-        object-fit: cover;
-    }
-
-    &__fallback {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
-        background-color: var(--color-nonary);
-        color: var(--color-tertiary);
-        font-size: $fs-m;
-        font-weight: $fw-reg;
-        line-height: 1;
-
-        &--initials {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    }
-
-    &__badge {
-        position: absolute;
-        right: 0;
-        bottom: -4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 15px;
-        height: 15px;
-        background: var(--color-primary);
+        vertical-align: middle;
+        width: 45px;
+        height: 45px;
         border-radius: $rad;
-        outline: 2px solid var(--color-tertiary);
+        user-select: none;
 
-        &--count {
-            padding: $space-2xs;
+        &__image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+        }
+
+        &__fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: var(--color-nonary);
             color: var(--color-tertiary);
-            font-size: 0.5em;
-            font-variant-numeric: tabular-nums;
+            font-size: $fs-m;
+            font-weight: $fw-reg;
+            line-height: 1;
+
+            &--initials {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        &__badge {
+            position: absolute;
+            right: 0;
+            bottom: -4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 15px;
+            height: 15px;
+            background: var(--color-primary);
+            border-radius: $rad;
+            outline: 2px solid var(--color-tertiary);
+
+            &--count {
+                padding: $space-2xs;
+                color: var(--color-tertiary);
+                font-size: 0.5em;
+                font-variant-numeric: tabular-nums;
+            }
         }
     }
 }

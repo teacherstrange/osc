@@ -1,21 +1,23 @@
 @import "../../styles/settings";
 @import "../../styles/tools";
 
-.c-skip-link {
-    position: absolute;
-    top: -100%;
-    left: -100%;
+@layer components {
+    .c-skip-link {
+        position: absolute;
+        top: -100%;
+        left: -100%;
 
-    @include z-index("skip-link");
+        @include z-index("skip-link");
 
-    padding: $space-s $space-m;
-    background-color: var(--color-duodenary);
-    border: 5px solid currentcolor;
-    color: var(--color-secondary);
+        padding: $space-s $space-m;
+        background-color: var(--color-duodenary);
+        border: 5px solid currentcolor;
+        color: var(--color-secondary);
 
-    &:focus {
-        position: static;
-        display: block;
-        text-decoration: underline;
+        &:focus {
+            position: static;
+            display: block;
+            text-decoration: underline;
+        }
     }
 }

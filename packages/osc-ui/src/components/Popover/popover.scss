@@ -1,51 +1,53 @@
 @import "../../styles/settings";
 
-.c-popover {
-    &__content {
-        width: 260px;
-        padding: $space-m;
-        background-color: var(--color-tertiary);
-        border-radius: $rad-xs;
-        box-shadow: $shadow-l;
-        animation-duration: $timing;
-        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform, opacity;
+@layer components {
+    .c-popover {
+        &__content {
+            width: 260px;
+            padding: $space-m;
+            background-color: var(--color-tertiary);
+            border-radius: $rad-xs;
+            box-shadow: $shadow-l;
+            animation-duration: $timing;
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
 
-        &:focus {
-            box-shadow: $shadow-focus-s;
+            &:focus {
+                box-shadow: $shadow-focus-s;
+            }
         }
-    }
 
-    &__close {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 25px;
-        height: 25px;
-        border-radius: $rad;
-        font-family: inherit;
+        &__close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+            border-radius: $rad;
+            font-family: inherit;
 
-        &:hover {
-            background-color: var(--color-neutral-200);
+            &:hover {
+                background-color: var(--color-neutral-200);
+            }
         }
-    }
 
-    &__icon-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 35px;
-        height: 35px;
-        background-color: var(--color-tertiary);
-        border-radius: $rad;
-        color: var(--color-secondary);
-        font-family: inherit;
+        &__icon-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: var(--color-tertiary);
+            border-radius: $rad;
+            color: var(--color-secondary);
+            font-family: inherit;
 
-        &:hover {
-            background-color: var(--color-neutral-200);
+            &:hover {
+                background-color: var(--color-neutral-200);
+            }
         }
     }
 }

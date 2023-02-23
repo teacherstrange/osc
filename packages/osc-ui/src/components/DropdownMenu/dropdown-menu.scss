@@ -1,110 +1,112 @@
 @import "../../styles/settings";
 
-.c-dropdown-menu {
-    &__content,
-    &__sub-content {
-        min-width: 220px;
-        padding: calc($space-2xs / 2);
-        background-color: var(--color-tertiary);
-        border-radius: $rad-xs;
-        box-shadow: $shadow-l;
-        animation-duration: 400ms;
-        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform, opacity;
-    }
+@layer components {
+    .c-dropdown-menu {
+        &__content,
+        &__sub-content {
+            min-width: 220px;
+            padding: calc($space-2xs / 2);
+            background-color: var(--color-tertiary);
+            border-radius: $rad-xs;
+            box-shadow: $shadow-l;
+            animation-duration: 400ms;
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
 
-    &__item,
-    &__checkbox-item,
-    &__radio-item,
-    &__sub-trigger {
-        position: relative;
-        display: flex;
-        align-items: center;
-        height: 25px;
-        padding: 0 calc($space-2xs / 2) 0 $space-l;
-        border-radius: $rad-xs;
-        outline: none;
-        font-size: $fs-xs;
-        user-select: none;
+        &__item,
+        &__checkbox-item,
+        &__radio-item,
+        &__sub-trigger {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 25px;
+            padding: 0 calc($space-2xs / 2) 0 $space-l;
+            border-radius: $rad-xs;
+            outline: none;
+            font-size: $fs-xs;
+            user-select: none;
 
-        /* stylelint-disable-next-line plugin/selector-bem-pattern */
-        &[data-disabled] {
-            color: var(--color-neutral-300);
-            pointer-events: none;
+            /* stylelint-disable-next-line plugin/selector-bem-pattern */
+            &[data-disabled] {
+                color: var(--color-neutral-300);
+                pointer-events: none;
+            }
+
+            /* stylelint-disable-next-line plugin/selector-bem-pattern */
+            &[data-highlighted] {
+                background-color: var(--color-neutral-400);
+                color: var(--color-neutral-100);
+            }
         }
 
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
-        &[data-highlighted] {
+        &__sub-trigger[data-state="open"] {
             background-color: var(--color-neutral-400);
             color: var(--color-neutral-100);
         }
-    }
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    &__sub-trigger[data-state="open"] {
-        background-color: var(--color-neutral-400);
-        color: var(--color-neutral-100);
-    }
-
-    &__label {
-        padding-left: $space-l;
-        color: var(--color-neutral-600);
-        font-size: $fs-xs;
-        text-transform: uppercase;
-    }
-
-    &__separator {
-        height: 1px;
-        margin: 5px;
-        background-color: var(--color-neutral-500);
-    }
-
-    &__indicator {
-        position: absolute;
-        left: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 25px;
-    }
-
-    &__arrow {
-        fill: var(--color-tertiary);
-    }
-
-    &__icon-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 35px;
-        height: 35px;
-        background-color: var(--color-tertiary);
-        border-radius: $rad;
-        box-shadow: $shadow-m;
-        font-family: inherit;
-
-        &:hover {
-            background-color: var(--color-neutral-300);
+        &__label {
+            padding-left: $space-l;
+            color: var(--color-neutral-600);
+            font-size: $fs-xs;
+            text-transform: uppercase;
         }
 
-        &:focus {
-            box-shadow: 0 0 0 2px var(--color-primary);
+        &__separator {
+            height: 1px;
+            margin: 5px;
+            background-color: var(--color-neutral-500);
         }
-    }
 
-    &__icon--right-slot {
-        margin-left: auto;
-        padding-left: $space-m;
-        color: var(--color-neutral-500);
-    }
+        &__indicator {
+            position: absolute;
+            left: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+        }
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    [data-highlighted] > &__icon--right-slot {
-        color: var(--color-tertiary);
-    }
+        &__arrow {
+            fill: var(--color-tertiary);
+        }
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    [data-disabled] &__icon--right-slot {
-        color: var(--color-neutral-400);
+        &__icon-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: var(--color-tertiary);
+            border-radius: $rad;
+            box-shadow: $shadow-m;
+            font-family: inherit;
+
+            &:hover {
+                background-color: var(--color-neutral-300);
+            }
+
+            &:focus {
+                box-shadow: 0 0 0 2px var(--color-primary);
+            }
+        }
+
+        &__icon--right-slot {
+            margin-left: auto;
+            padding-left: $space-m;
+            color: var(--color-neutral-500);
+        }
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        [data-highlighted] > &__icon--right-slot {
+            color: var(--color-tertiary);
+        }
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        [data-disabled] &__icon--right-slot {
+            color: var(--color-neutral-400);
+        }
     }
 }

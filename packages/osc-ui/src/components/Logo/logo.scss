@@ -1,8 +1,10 @@
 /* stylelint-disable plugin/selector-bem-pattern */
-.c-logo {
-    display: block;
+@layer components {
+    .c-logo {
+        display: block;
 
-    .o-icon {
-        --icon-size: auto;
+        .o-icon {
+            --icon-size: auto;
+        }
     }
 }

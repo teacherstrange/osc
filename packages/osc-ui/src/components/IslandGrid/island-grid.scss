@@ -2,23 +2,26 @@
 @import "../../styles/settings";
 @import "../../styles/tools";
 
-$island-cols: 2;
-$max-islands: 4;
+@layer components {
+    $island-cols: 2;
+    $max-islands: 4;
 
-.c-island-grid {
-    @include mq($mq-tab) {
-        grid-template-rows: repeat($island-cols, minmax(0, 1fr));
-    }
-
-    &__island {
+    .c-island-grid {
         @include mq($mq-tab) {
-            &:nth-child(1) {
-                grid-row: list.slash(1, $max-islands);
-            }
+            grid-template-rows: repeat($island-cols, minmax(0, 1fr));
+        }
 
-            @for $i from 2 through $max-islands {
-                &:nth-child(#{$i}) {
-                    grid-row: #{$i - 1}; // Position the island in the row minus 1 place from it's index
+        &__island {
+            @include mq($mq-tab) {
+                &:nth-child(1) {
+                    grid-row: list.slash(1, $max-islands);
+                }
+
+                @for $i from 2 through $max-islands {
+                    &:nth-child(#{$i}) {
+                        // Position the island in the row minus 1 place from it's index
+                        grid-row: #{$i - 1};
+                    }
                 }
             }
         }
