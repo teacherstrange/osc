@@ -61,12 +61,8 @@ $banner-content-max-w: 40ch;
     }
 
     &__btn-group {
-        @include mq($mq-mob, max) {
-            width: 100%;
-        }
-
         .c-btn {
-            @include mq($mq-mob, max) {
+            @include mq($mq-tab, max) {
                 width: 100%;
             }
         }
