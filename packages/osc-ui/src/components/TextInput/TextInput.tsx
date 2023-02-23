@@ -20,11 +20,11 @@ type Action = {
     /**
      * Variant for the button
      */
-    variant: Variants;
+    variant?: Variants;
     /**
      * The Size of the button
      */
-    size: 'sm' | 'md' | 'lg';
+    size?: 'sm' | 'md' | 'lg';
 };
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
