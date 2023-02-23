@@ -13,7 +13,7 @@ export const clientSideValidation = (
     id: string,
     schema: ZodSchema,
     setErrors: Dispatch<SetStateAction<any>>,
-    value: string | number | readonly string[]
+    value: string | number | readonly string[] | boolean
 ) => {
     const result = schema.safeParse({ [id]: value });
     if (!result.success) {
@@ -39,6 +39,7 @@ export const clientSideValidation = (
  * @returns string
  */
 export const getFieldError = (error: any, id: any) => {
+    debugger;
     const errors = error.flatten();
     return errors.fieldErrors[id];
 };
