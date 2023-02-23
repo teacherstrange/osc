@@ -8,6 +8,7 @@ $banner-py-s: $space-s;
 $banner-px: $space-m;
 $banner-px-l: $space-xl;
 $banner-content-max-w: 40ch;
+$banner-breakpoint: 1137;
 
 .c-callout-banner {
     display: flex;
@@ -45,7 +46,7 @@ $banner-content-max-w: 40ch;
             font-size: $fs-5xl;
         }
 
-        @include mq(($mq-desk, 1137)) {
+        @include mq(($mq-desk, $banner-breakpoint)) {
             // One off breakpoint to stretch the title across the width of the flex-container
             // Without this the button wraps onto it's own line and looks odd
             flex: 100%;
