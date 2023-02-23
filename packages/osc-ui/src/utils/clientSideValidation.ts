@@ -39,7 +39,6 @@ export const clientSideValidation = (
  * @returns string
  */
 export const getFieldError = (error: any, id: any) => {
-    debugger;
     const errors = error.flatten();
     return errors.fieldErrors[id];
 };

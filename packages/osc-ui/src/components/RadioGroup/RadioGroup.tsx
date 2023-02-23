@@ -1,11 +1,18 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import type { ComponentPropsWithoutRef, ComponentPropsWithRef, ElementRef, ReactNode } from 'react';
-import React, { forwardRef, useState } from 'react';
-import { Label } from '../Label/Label';
-
+import type {
+    ComponentPropsWithoutRef,
+    ComponentPropsWithRef,
+    Dispatch,
+    ElementRef,
+    ReactNode,
+    SetStateAction,
+} from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
+import type { ZodSchema } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
-import { getFieldError } from '../../utils/getFieldError';
+import { clientSideValidation } from '../../utils/clientSideValidation';
+import { Label } from '../Label/Label';
 import './radio-group.scss';
 
 type Variants = 'secondary' | 'tertiary';
@@ -20,18 +27,25 @@ export interface RadioGroupProps extends ComponentPropsWithoutRef<typeof RadioGr
      */
     description: { id: string; value: string };
     /**
+     * Any error messages - initially set through server validation, but can be updated through client validation
+     */
+    errors?: string[] | undefined;
+    /**
      * The name of the group. Submitted with its owning form as part of a name/value pair.
      */
     name: string;
     /**
+     * The Zod Schema used for validation
+     */
+    schema?: ZodSchema;
+    /**
+     * Allows for client side validation once a server side error has been received
+     */
+    setErrors?: Dispatch<SetStateAction<any>>;
+    /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
     variants?: Variants[];
-    /**
-     * A boolean that alerts when form is submitted for error handling
-     * @default false
-     */
-    wasSubmitted?: boolean;
 }
 
 export const RadioGroup = (props: RadioGroupProps) => {
@@ -40,19 +54,26 @@ export const RadioGroup = (props: RadioGroupProps) => {
         defaultValue,
         description,
         disabled,
+        errors,
         name,
         required,
+        schema,
+        setErrors,
         variants,
-        wasSubmitted = false,
     } = props;
 
     const [value, setValue] = useState('');
 
+    useEffect(() => {
+        // Client side error handling - Sets any errors on an input in
+        // accordance with the schema validation
+        if (errors) {
+            clientSideValidation(name, schema, setErrors, value);
+        }
+    }, [value]);
+
     const modifiers = useModifier('c-radio-group', variants);
     const radioGroupClasses = classNames('c-radio-group', modifiers);
-
-    const errorMessage = getFieldError(value, required);
-    const displayError = wasSubmitted && errorMessage;
 
     return (
         <fieldset>
@@ -60,9 +81,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
                 {description.value}
             </legend>
             <RadioGroupPrimitive.Root
-                className={
-                    displayError ? `${radioGroupClasses} c-radio-group--error` : radioGroupClasses
-                }
+                className={errors ? `${radioGroupClasses} c-radio-group--error` : radioGroupClasses}
                 disabled={disabled}
                 defaultValue={defaultValue}
                 name={name}
@@ -70,9 +89,9 @@ export const RadioGroup = (props: RadioGroupProps) => {
                 required={required}
             >
                 {children}
-                {displayError ? (
+                {errors ? (
                     <div className="c-radio-group__error-message" role="alert">
-                        {errorMessage}
+                        {errors}
                     </div>
                 ) : null}
             </RadioGroupPrimitive.Root>

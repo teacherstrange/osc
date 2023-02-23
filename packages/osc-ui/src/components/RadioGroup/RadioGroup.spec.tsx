@@ -2,6 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { RadioGroup, RadioItem } from './RadioGroup';
+import { radioSchema } from './RadioGroup.stories';
 
 const radioItems = [
     { id: 'r-yes', name: 'Yes', value: 'yes' },
@@ -29,13 +30,16 @@ test('should render a RadioGroup with three RadioItems', () => {
         .forEach((radio, index) => expect(radio).toHaveValue(radioItems[index].value));
 });
 
-test('should render an error message when form is submitted and no value is selected', () => {
+test('should render an error message when errors are present', () => {
+    const setErrorsMock = vi.fn();
     render(
         <RadioGroup
             description={{ id: 'receive-newsletter-1', value: 'Receive Newsletter' }}
+            errors={['Please choose an option']}
             name="newsletter"
             required={true}
-            wasSubmitted={true}
+            schema={radioSchema.newsletter}
+            setErrors={setErrorsMock}
         >
             {radioItems.map(({ id, name, value }, index) => (
                 <RadioItem key={index} id={id} name={name} value={value} />
@@ -43,7 +47,7 @@ test('should render an error message when form is submitted and no value is sele
         </RadioGroup>
     );
     expect(screen.getByRole('alert')).toBeInTheDocument();
-    expect(screen.getByRole('alert')).toHaveTextContent('Field is required');
+    expect(screen.getByRole('alert')).toHaveTextContent('Please choose an option');
 });
 
 test('should render a description for the RadioGroup', () => {
@@ -66,7 +70,6 @@ test('should change focus to second input when using an arrow key', async () => 
             description={{ id: 'receive-newsletter-1', value: 'Receive Newsletter' }}
             name="newsletter"
             required={true}
-            wasSubmitted={true}
         >
             {radioItems.map(({ id, name, value }, index) => (
                 <RadioItem key={index} id={id} name={name} value={value} />
