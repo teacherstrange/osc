@@ -1,0 +1,357 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-calendar {
+    --selected-color: var(--color-quaternary);
+    --highlighted-color: hsl(175deg 100% 36% / 20%);
+    --hover-color: var(--color-neutral-300);
+    --cell-height: 40px;
+    --cell-width: 40px;
+
+    width: max-content;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: $space-s;
+        padding: 0 0 $space-xs 0;
+    }
+
+    &__date-container {
+        display: flex;
+        font-weight: $fw-bold;
+    }
+
+    &__current-month,
+    &__current-year {
+        cursor: pointer;
+    }
+
+    &__current-month {
+        margin: 0 calc($space-2xs - 3px) 0 0;
+    }
+
+    &__current-year {
+        color: var(--color-quaternary);
+    }
+
+    &__buttons-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__button--chevron {
+        width: 1.25rem;
+        height: 1.25rem;
+        padding: 0 0.1rem;
+        color: var(--color-neutral-600);
+        cursor: pointer;
+    }
+
+    &__table-head {
+        background: var(--color-neutral-300);
+
+        th {
+            vertical-align: middle;
+            height: var(--cell-height);
+            color: var(--color-neutral-600);
+            font-weight: $fw-bold;
+            text-align: center;
+        }
+    }
+
+    &__grid-cell:not(.c-calendar__grid-cell--disabled, .c-calendar__grid-cell--outside-month) {
+        &:hover {
+            background: var(--hover-color);
+            border-radius: $rad;
+            font-weight: $fw-bold;
+        }
+    }
+
+    &__cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--cell-width);
+        height: var(--cell-height);
+        font-size: $fs-m;
+        font-weight: $fw-light;
+        cursor: pointer;
+
+        &:focus {
+            background: var(--hover-color);
+            border-radius: $rad;
+            font-weight: $fw-bold;
+        }
+
+        &--selected {
+            background: var(--selected-color);
+            border-radius: $rad-xs;
+            color: var(--color-tertiary);
+            font-weight: $fw-bold;
+
+            &:hover {
+                background: var(--selected-color);
+                border-radius: $rad-xs;
+            }
+
+            &:focus {
+                background: var(--selected-color);
+                border-radius: $rad-xs;
+            }
+
+            &:focus-visible {
+                border: 3px solid var(--color-primary);
+            }
+        }
+
+        &--disabled {
+            color: var(--color-neutral-400);
+            cursor: not-allowed;
+
+            &:hover {
+                background: var(--color-tertiary);
+                font-weight: $fw-reg;
+            }
+        }
+    }
+
+    &__year,
+    &__decade {
+        .c-calendar__button--month,
+        .c-calendar__button--year {
+            padding: $space-2xs $space-xl;
+            cursor: pointer;
+            font-variant-numeric: tabular-nums;
+
+            &:hover {
+                background: var(--hover-color);
+                border-radius: $rad-xs;
+                color: var(--color-secondary);
+                font-weight: $fw-bold;
+            }
+
+            &:focus {
+                border-radius: $rad-xs;
+            }
+        }
+
+        .c-calendar__button--selected {
+            background: var(--selected-color);
+            border-radius: $rad-xs;
+            color: var(--color-tertiary);
+            font-weight: $fw-bold;
+
+            &:hover {
+                background: var(--selected-color);
+                color: var(--color-tertiary);
+            }
+        }
+
+        .c-calendar__header {
+            margin-bottom: $space-xs;
+            border-bottom: solid 2px var(--color-neutral-400);
+
+            .c-calendar__current-year {
+                font-weight: $fw-bold;
+
+                &.c-calendar__button--disabled {
+                    color: var(--color-neutral-600);
+
+                    &:hover {
+                        background-color: var(--color-tertiary);
+                        cursor: not-allowed;
+                    }
+                }
+            }
+        }
+    }
+
+    &__year {
+        .c-calendar__date-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
+    &__decade {
+        .c-calendar__button--month,
+        .c-calendar__button--year {
+            padding: $space-2xs $space-m;
+        }
+    }
+
+    &__range-container {
+        display: flex;
+        flex-direction: column;
+        gap: $space-m;
+
+        &-inner-1 {
+            display: flex;
+            flex: 1 100%;
+        }
+
+        &-inner-2 {
+            position: relative;
+
+            &-options {
+                gap: $space-s;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            @include mq(mq-token("desk")) {
+                display: flex;
+                flex: 1 100%;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .c-calendar__button--clear-selection {
+                border-bottom: 1px solid var(--color-neutral-600);
+                color: var(--color-neutral-600);
+                font-weight: $fw-bold;
+            }
+
+            .c-calendar__button--today {
+                padding: calc($space-xs - 3px) $space-m;
+                border: solid 1px var(--color-neutral-400);
+                border-radius: $rad-xs;
+            }
+        }
+
+        &-calendar {
+            padding: 0;
+
+            @include mq(mq-token("desk")) {
+                padding: 0 $space-m;
+            }
+        }
+    }
+
+    &__range {
+        &-time-presets {
+            display: flex;
+            max-width: 280px;
+            padding: $space-2xs 0;
+            border-top: 1px solid var(--color-neutral-300);
+            border-bottom: 1px solid var(--color-neutral-300);
+            cursor: pointer;
+            overflow-x: scroll;
+            gap: 0.2rem;
+
+            .c-calendar__button--time-preset {
+                padding: $space-2xs;
+                border-radius: $rad-xs;
+
+                &:focus {
+                    border-radius: $rad-xs;
+                    box-shadow: $shadow-focus-s;
+                }
+
+                &.is-selected {
+                    background-color: var(--color-secondary);
+                    color: var(--color-tertiary);
+                }
+
+                &.is-mobile {
+                    padding: calc($space-2xs - 4px);
+                    font-size: $fs-xs;
+                }
+            }
+
+            @include mq(mq-token("desk")) {
+                flex-direction: column;
+                justify-content: space-evenly;
+                padding: 0 $space-m;
+                border-top: none;
+                border-right: solid 1px var(--color-neutral-300);
+                border-bottom: none;
+                overflow-x: unset;
+
+                &:first-child {
+                    font-weight: $fw-bold;
+                    cursor: initial;
+                }
+            }
+        }
+
+        .c-calendar__cell {
+            &--rounded-left,
+            &--rounded-right {
+                background: var(--selected-color);
+                color: var(--color-tertiary);
+                font-weight: $fw-bold;
+            }
+
+            &--selected {
+                background: var(--highlighted-color);
+                border-radius: 0;
+                color: var(--color-secondary);
+                font-weight: $fw-reg;
+            }
+
+            &--selection-start,
+            &--selection-end {
+                background: var(--selected-color);
+                color: var(--color-tertiary);
+                font-weight: $fw-bold;
+            }
+
+            &--rounded-left {
+                border-radius: $rad-xs 0 0 $rad-xs;
+            }
+
+            &--rounded-right {
+                border-radius: 0 $rad-xs $rad-xs 0;
+            }
+        }
+
+        .c-calendar__grid-container {
+            display: flex;
+            gap: $space-s;
+        }
+
+        .c-calendar__header--inner {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .c-calendar__current-month,
+        .c-calendar__current-year {
+            cursor: initial;
+        }
+    }
+
+    .c-calendar__button--disabled {
+        color: var(--color-neutral-400);
+
+        &:hover {
+            background-color: var(--color-tertiary);
+            color: var(--color-neutral-400);
+            font-weight: $fw-bold;
+            cursor: not-allowed;
+
+            svg {
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    &__prompt {
+        scale: 1;
+        transition: 100ms ease-in-out;
+
+        &--hidden {
+            scale: 0;
+        }
+    }
+}

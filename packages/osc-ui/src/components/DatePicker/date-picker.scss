@@ -1,0 +1,53 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+.c-datepicker {
+    display: inline-flex;
+    flex-direction: column;
+
+    &__date-field-container {
+        position: relative;
+
+        .c-react-aria__button {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            color: var(--color-neutral-600);
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+
+            svg {
+                height: unset;
+            }
+        }
+    }
+
+    &__range {
+        .c-datepicker__date-field-container {
+            display: flex;
+            align-items: center;
+
+            &--arrow {
+                width: 1.25rem;
+                height: 0.75rem;
+                margin: calc($space-2xs - 6px);
+            }
+        }
+
+        .c-datepicker__date-field-inner-container {
+            position: relative;
+
+            &:first-child {
+                padding-right: $space-2xs;
+            }
+
+            @include mq(mq-token("desk")) {
+                &:first-child {
+                    padding-right: 0;
+                }
+            }
+        }
+    }
+}

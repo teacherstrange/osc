@@ -1,0 +1,27 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+/* stylelint-disable plugin/selector-bem-pattern */
+
+// *********** REACT ARIA DIALOG ************
+
+.c-react-aria__dialog {
+    width: 100%;
+    padding: $space-s $space-2xs;
+
+    @include mq(mq-token("mob")) {
+        padding: $space-l;
+    }
+
+    @include mq(mq-token("desk")) {
+        padding: $space-xl;
+    }
+}
+
+// *********** REACT ARIA POPUP ************
+
+.c-react-aria__popover {
+    background: var(--color-tertiary);
+    border-radius: $rad-xs;
+    box-shadow: $shadow-l, $shadow-s;
+}
