@@ -1,3 +1,10 @@
+## [0.46.1](https://github.com/Open-Study-College/osc/compare/v0.46.0...v0.46.1) (2023-02-24)
+
+
+### ⚙️ CI/CD Updates
+
+* **actions:** adds codeball AI PR review workflow ([ca96ffc](https://github.com/Open-Study-College/osc/commit/ca96ffc3bec968e4aca1ce5f1d5be8fed3d3eac1))
+
 ## [0.46.0](https://github.com/Open-Study-College/osc/compare/v0.45.0...v0.46.0) (2023-02-24)
 
 
@@ -174,11 +181,4 @@
 ### 🧪 Tests
 
 * **island-grid:** adds island grid tests ([fae5873](https://github.com/Open-Study-College/osc/commit/fae5873a0fcff5b0795ee113a9b3ca526bf70e4d))
-
-## [0.42.1](https://github.com/Open-Study-College/osc/compare/v0.42.0...v0.42.1) (2023-02-21)
-
-
-### 🐛 Bugs
-
-* **styles:** interpolate step in scales-map to convert type to string ([f543cf7](https://github.com/Open-Study-College/osc/commit/f543cf7aad17546ae9df69976b72b746a45719cd))
 
