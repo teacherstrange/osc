@@ -3,14 +3,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { SpritesheetProvider } from '../Icon/Icon';
 import { TextInput } from './TextInput';
-
-import { z } from 'zod';
-
-const schema = {
-    firstname: z.object({
-        firstname: z.string().trim().min(1, { message: 'Field is required' }),
-    }),
-};
+import { textInputSchema } from './mockSchema';
 
 test('should render a text input component and a label', () => {
     render(<TextInput type="text" id="test-input" name="Test Input" />);
@@ -69,7 +62,7 @@ test('should render error message if an error is passed in', () => {
                 id="firstname"
                 name="First Name"
                 errors={['Field is required']}
-                schema={schema.firstname}
+                schema={textInputSchema.firstname}
                 required={true}
                 setErrors={setErrorsMock}
             />

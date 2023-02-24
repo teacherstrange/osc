@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Switch } from './Switch';
-import { switchSchema } from './testSchema';
+import { switchSchema } from './mockSchema';
 
 test('it renders the switch', () => {
     render(<Switch />);

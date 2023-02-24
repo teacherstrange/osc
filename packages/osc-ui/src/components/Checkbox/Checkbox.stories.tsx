@@ -1,18 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { z } from 'zod';
 import { Checkbox } from './Checkbox';
-
-const schema = {
-    termsAndConditions: z.object({
-        // Using 'errorMap' to set a message because 'invalid_type_error' will not work.
-        // See: https://github.com/react-hook-form/react-hook-form/discussions/9063?sort=new
-        termsAndConditions: z.literal<boolean>(true, {
-            errorMap: () => ({ message: 'Please accept the terms and conditions' }),
-        }),
-    }),
-};
+import { checkboxSchema } from './mockSchema';
 
 export default {
     title: 'osc-ui/Checkbox',
@@ -79,7 +69,7 @@ const ValidationTemplate: Story = () => {
                 name="termsandconditions"
                 required={true}
                 setErrors={setErrors}
-                schema={schema.termsAndConditions}
+                schema={checkboxSchema.termsAndConditions}
                 value="Accept the terms and conditions"
             />
         </div>

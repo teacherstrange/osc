@@ -3,13 +3,7 @@ import React from 'react';
 import { render } from 'test-utils';
 import { SpritesheetProvider } from '../Icon/Icon';
 import { TextArea } from './TextArea';
-import { z } from 'zod';
-
-const schema = {
-    enquiry: z.object({
-        enquiry: z.string().trim().min(1),
-    }),
-};
+import { textAreaSchema } from './mockSchema';
 
 test('should render a textarea component with a label', () => {
     render(<TextArea id="enquiry" name="Enquiry" />);
@@ -38,7 +32,7 @@ test('should render an error message if an error is passed in', () => {
                 name="Enquiry"
                 required={true}
                 errors={['Field is required']}
-                schema={schema.enquiry}
+                schema={textAreaSchema}
                 setErrors={setErrorsMock}
             />
         </SpritesheetProvider>

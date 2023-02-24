@@ -2,24 +2,7 @@ import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Select, SelectItem } from './Select';
-
-import { z } from 'zod';
-
-export const selectSchema = {
-    courses: z.object({
-        courses: z.string().refine(
-            (val) =>
-                courseItems
-                    .map((value) => {
-                        return value.value;
-                    })
-                    .includes(val),
-            {
-                message: 'Please select a course',
-            }
-        ),
-    }),
-};
+import { courseItems, selectSchema } from './mockData';
 
 export default {
     title: 'osc-ui/Select',
@@ -137,42 +120,6 @@ export const Primary = Template.bind({});
 export const Secondary = Template.bind({});
 export const Tertiary = Template.bind({});
 export const Validation = ValidationTemplate.bind({});
-
-const courseItems = [
-    {
-        name: 'A Level Psychology',
-        value: 'a-level-psychology',
-        disabled: true,
-    },
-    {
-        name: 'A Level Computer Science',
-        value: 'a-level-computer-science',
-    },
-    { name: 'A Level History', value: 'a-level-history' },
-    {
-        name: 'A Level Sociology',
-        value: 'a-level-sociology',
-        disabled: true,
-    },
-    {
-        name: 'A Level Geography',
-        value: 'a-level-geography',
-    },
-    { name: 'A Level French', value: 'a-level-french' },
-    {
-        name: 'A Level German',
-        value: 'a-level-german',
-    },
-    {
-        name: 'A Level Maths',
-        value: 'a-level-maths',
-    },
-    { name: 'A Level Physics', value: 'a-level-physics' },
-    {
-        name: 'A Level Biology',
-        value: 'a-level-biology',
-    },
-];
 
 Primary.args = {
     selects: [

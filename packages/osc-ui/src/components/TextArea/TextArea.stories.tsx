@@ -1,11 +1,7 @@
 import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
-import { z } from 'zod';
 import { TextArea } from './TextArea';
-
-const schema = z.object({
-    enquiry: z.string().trim().min(1, { message: 'Field is required' }),
-});
+import { textAreaSchema } from './mockSchema';
 
 export default {
     title: 'osc-ui/TextArea',
@@ -58,7 +54,7 @@ const ValidationTemplate: Story = () => {
                 id="enquiry"
                 name="Enquiry"
                 required={true}
-                schema={schema}
+                schema={textAreaSchema}
                 setErrors={setErrors}
             />
         </div>

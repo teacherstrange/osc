@@ -2,19 +2,7 @@ import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { TextInput } from './TextInput';
-import { z } from 'zod';
-
-const schema = {
-    email: z.object({
-        email: z.string().email({ message: 'Invalid Email' }),
-    }),
-    firstname: z.object({
-        firstname: z.string().trim().min(1, { message: 'Field is required' }),
-    }),
-    lastname: z.object({
-        lastname: z.string().trim().min(1, { message: 'Field is required' }),
-    }),
-};
+import { textInputSchema } from './mockSchema';
 
 export default {
     title: 'osc-ui/TextInput',
@@ -101,7 +89,7 @@ const ValidationTemplate: Story = () => {
                     id="firstname"
                     name="First Name"
                     setErrors={setFirstnameErrors}
-                    schema={schema.firstname}
+                    schema={textInputSchema.firstname}
                     type="text"
                 />
                 <TextInput
@@ -109,7 +97,7 @@ const ValidationTemplate: Story = () => {
                     id="lastname"
                     name="Last Name"
                     setErrors={setLastnameErrors}
-                    schema={schema.lastname}
+                    schema={textInputSchema.lastname}
                     type="text"
                     variants={['secondary']}
                 />
@@ -118,7 +106,7 @@ const ValidationTemplate: Story = () => {
                     id="email"
                     name="Email"
                     setErrors={setEmailErrors}
-                    schema={schema.email}
+                    schema={textInputSchema.email}
                     type="email"
                     variants={['tertiary']}
                 />

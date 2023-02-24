@@ -3,7 +3,7 @@ import type { Meta, Story } from '@storybook/react';
 import React, { useState } from 'react';
 import type { SwitchProps } from './Switch';
 import { Switch, SwitchGroup } from './Switch';
-import { switchSchema } from './testSchema';
+import { switchSchema } from './mockSchema';
 
 export default {
     title: 'osc-ui/Switch',

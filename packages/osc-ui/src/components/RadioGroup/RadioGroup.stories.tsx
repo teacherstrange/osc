@@ -2,17 +2,7 @@ import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { RadioGroup, RadioItem } from './RadioGroup';
-import { z } from 'zod';
-
-export const radioSchema = {
-    newsletter: z.object({
-        newsletter: z
-            .string()
-            .refine((val) => radioVariants.map((value) => value.value).includes(val), {
-                message: 'Please select an option',
-            }),
-    }),
-};
+import { radioSchema, radioVariants } from './mockData';
 
 export default {
     title: 'osc-ui/RadioGroup',
@@ -210,11 +200,6 @@ Secondary.args = {
 };
 
 export const Validation = ValidationTemplate.bind({});
-
-const radioVariants = [
-    { id: 'r1-yes', name: 'Yes', value: 'yes' },
-    { id: 'r1-no', name: 'No', value: 'no' },
-];
 
 Validation.args = {
     variants: radioVariants,

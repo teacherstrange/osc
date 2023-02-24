@@ -2,7 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { RadioGroup, RadioItem } from './RadioGroup';
-import { radioSchema } from './RadioGroup.stories';
+import { radioSchema } from './mockData';
 
 const radioItems = [
     { id: 'r-yes', name: 'Yes', value: 'yes' },

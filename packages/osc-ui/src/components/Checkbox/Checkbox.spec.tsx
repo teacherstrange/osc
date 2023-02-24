@@ -1,15 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { z } from 'zod';
 import { Checkbox } from './Checkbox';
-
-const schema = {
-    termsAndConditions: z.object({
-        termsAndConditions: z.literal<boolean>(true, {
-            errorMap: () => ({ message: 'Please accept the terms and conditions' }),
-        }),
-    }),
-};
+import { checkboxSchema } from './mockSchema';
 
 test('should render a Checkbox item with a label', () => {
     render(<Checkbox id="call" name="contact" value="Call me as soon as possible" />);
@@ -33,7 +25,7 @@ test('should render an error message when form is submitted and no value is sele
             id="call"
             name="contact"
             required={true}
-            schema={schema.termsAndConditions}
+            schema={checkboxSchema.termsAndConditions}
             setErrors={setErrorsMock}
             value="Please accept the terms and conditions"
         />

@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import React from 'react';
 import { render } from 'test-utils';
 import { Select, SelectItem } from './Select';
-import { selectSchema } from './Select.stories';
+import { selectSchema } from './mockData';
 
 test('should render a select component', () => {
     render(
