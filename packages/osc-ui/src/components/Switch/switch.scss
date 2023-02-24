@@ -2,147 +2,154 @@
 @import "../../styles/tools";
 @import "../../styles/settings";
 
-@layer components {
-    $switch-radius: $rad-l;
-    $switch-thumb-offset: 1px;
-    $switch-border-width: 1px;
-    $switch-transition-duration: 0.2s;
+$switch-radius: $rad-l;
+$switch-thumb-offset: 1px;
+$switch-border-width: 1px;
+$switch-transition-duration: 0.2s;
 
-    .c-switch {
-        --switch-background-color: transparent;
-        --switch-thumb-color: var(--color-secondary);
-        --switch-width: #{rem($base-fs * 3.125)};
-        --switch-height: #{rem($base-fs * 1.75)};
-        --switch-thumb-size: #{rem($base-fs * 1.5)};
+.c-switch {
+    --switch-background-color: transparent;
+    --switch-thumb-color: var(--color-secondary);
+    --switch-width: #{rem($base-fs * 3.125)};
+    --switch-height: #{rem($base-fs * 1.75)};
+    --switch-thumb-size: #{rem($base-fs * 1.5)};
 
-        position: relative;
-        width: var(--switch-width);
-        height: var(--switch-height);
-        background-color: var(--switch-background-color);
-        border: $switch-border-width solid var(--switch-thumb-color);
+    position: relative;
+    width: var(--switch-width);
+    height: var(--switch-height);
+    background-color: var(--switch-background-color);
+    border: $switch-border-width solid var(--switch-thumb-color);
+    border-radius: $switch-radius;
+    transition: filter $switch-transition-duration;
+    cursor: pointer;
+
+    &:not([data-disabled]):hover {
+        filter: brightness(0.95);
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &[data-disabled] {
+        --switch-thumb-color: var(--color-tertiary);
+        --switch-background-color: var(--color-quinary);
+
+        border-color: var(--switch-background-color);
+        cursor: not-allowed;
+    }
+
+    &[data-state="checked"] {
+        --switch-thumb-color: var(--color-primary);
+    }
+
+    &__container {
+        display: flex;
+        gap: var(--space-scale-2xs);
+    }
+
+    &__thumb {
+        display: block;
+        width: var(--switch-thumb-size);
+        height: var(--switch-thumb-size);
+        background-color: var(--switch-thumb-color);
         border-radius: $switch-radius;
-        transition: filter $switch-transition-duration;
-        cursor: pointer;
-
-        &:not([data-disabled]):hover {
-            filter: brightness(0.95);
-        }
-
-        /* stylelint-disable-next-line plugin/selector-bem-pattern */
-        &[data-disabled] {
-            --switch-thumb-color: var(--color-tertiary);
-            --switch-background-color: var(--color-quinary);
-
-            border-color: var(--switch-background-color);
-            cursor: not-allowed;
-        }
+        transform: translateX($switch-thumb-offset);
+        transition: transform $switch-transition-duration;
+        will-change: transform;
 
         &[data-state="checked"] {
-            --switch-thumb-color: var(--color-primary);
-        }
-
-        &__thumb {
-            display: block;
-            width: var(--switch-thumb-size);
-            height: var(--switch-thumb-size);
-            background-color: var(--switch-thumb-color);
-            border-radius: $switch-radius;
-            transform: translateX($switch-thumb-offset);
-            transition: transform $switch-transition-duration;
-            will-change: transform;
-
-            &[data-state="checked"] {
-                // prettier-ignore
-                transform:
-                    // width of the switch minus the width of the thumb size minus the border plus the offset
-                    // we multiply the border by 2 because we have a border on the left and right
-                    translateX(
-                        calc(var(--switch-width) - var(--switch-thumb-size) - (($switch-border-width * 2) + $switch-thumb-offset))
-                    );
-            }
-        }
-
-        // *----------------------------------*/
-        //  Variants
-        // --primary is the default
-        // *----------------------------------*/
-        &--secondary {
-            /* stylelint-disable-next-line selector-class-pattern */
-            .c-switch__thumb {
-                display: grid;
-                place-items: center;
-                color: var(--color-tertiary);
-            }
-
-            /* stylelint-disable-next-line selector-class-pattern */
-            .c-switch__thumb-icon {
-                width: 1em;
-                height: 1em;
-                font-size: $fs-m;
-                transition:
-                    opacity $switch-transition-duration,
-                    visibility $switch-transition-duration;
-                opacity: 0;
-                visibility: hidden;
-            }
-
-            &[data-state="checked"] {
-                /* stylelint-disable-next-line selector-class-pattern */
-                .c-switch__thumb-icon {
-                    opacity: 1;
-                    visibility: visible;
-                }
-            }
-        }
-
-        &--error {
-            background-color: var(--color-error-20);
-            border-color: var(--color-error);
-            /* stylelint-disable-next-line selector-class-pattern */
-            .c-switch__thumb {
-                background-color: var(--color-error);
-            }
-        }
-
-        // *----------------------------------*/
-        //  Sizes
-        // --large is the default
-        // *----------------------------------*/
-        &--small {
-            --switch-width: #{rem($base-fs * 2.125)};
-            --switch-height: #{rem($base-fs)};
-            --switch-thumb-size: #{rem($base-fs * 0.75)};
-        }
-
-        &--medium {
-            --switch-width: #{rem($base-fs * 2.125)};
-            --switch-height: #{rem($base-fs * 1.25)};
-            --switch-thumb-size: #{rem($base-fs)};
+            transform:
+                // width of the switch minus the width of the thumb size minus the border plus the offset
+                // we multiply the border by 2 because we have a border on the left and right
+                translateX(
+                calc(
+                    var(--switch-width) - var(--switch-thumb-size) -
+                        (($switch-border-width * 2) + $switch-thumb-offset)
+                )
+            );
         }
     }
 
     // *----------------------------------*/
-    //  Switch group
+    //  Variants
+    // --primary is the default
     // *----------------------------------*/
-    .c-switch-group {
-        display: flex;
-        align-items: center;
-        gap: $space-2xs;
+    &--secondary {
+        /* stylelint-disable-next-line selector-class-pattern */
+        .c-switch__thumb {
+            display: grid;
+            place-items: center;
+            color: var(--color-tertiary);
+        }
 
-        /* stylelint-disable-next-line plugin/selector-bem-pattern */
-        > svg {
+        /* stylelint-disable-next-line selector-class-pattern */
+        .c-switch__thumb-icon {
             width: 1em;
             height: 1em;
             font-size: $fs-m;
-            transition: color $switch-transition-duration;
+            transition: opacity $switch-transition-duration, visibility $switch-transition-duration;
+            opacity: 0;
+            visibility: hidden;
         }
 
-        /* stylelint-disable-next-line no-descending-specificity */
-        .c-switch {
-            /* stylelint-disable-next-line plugin/selector-bem-pattern */
-            &[data-state="checked"] + svg {
-                color: var(--color-primary);
+        &[data-state="checked"] {
+            /* stylelint-disable-next-line selector-class-pattern */
+            .c-switch__thumb-icon {
+                opacity: 1;
+                visibility: visible;
             }
+        }
+    }
+
+    &--error {
+        background-color: var(--color-error-20);
+        border-color: var(--color-error);
+        /* stylelint-disable-next-line selector-class-pattern */
+        .c-switch__thumb {
+            background-color: var(--color-error);
+        }
+    }
+
+    &--error-message {
+        color: var(--color-error);
+    }
+
+    // *----------------------------------*/
+    //  Sizes
+    // --large is the default
+    // *----------------------------------*/
+    &--small {
+        --switch-width: #{rem($base-fs * 2.125)};
+        --switch-height: #{rem($base-fs)};
+        --switch-thumb-size: #{rem($base-fs * 0.75)};
+    }
+
+    &--medium {
+        --switch-width: #{rem($base-fs * 2.125)};
+        --switch-height: #{rem($base-fs * 1.25)};
+        --switch-thumb-size: #{rem($base-fs)};
+    }
+}
+
+// *----------------------------------*/
+//  Switch group
+// *----------------------------------*/
+.c-switch-group {
+    display: flex;
+    align-items: center;
+    gap: $space-2xs;
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    > svg {
+        width: 1em;
+        height: 1em;
+        font-size: $fs-m;
+        transition: color $switch-transition-duration;
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    .c-switch {
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        &[data-state="checked"] + svg {
+            color: var(--color-primary);
         }
     }
 }

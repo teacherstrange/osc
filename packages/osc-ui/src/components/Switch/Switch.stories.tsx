@@ -1,8 +1,9 @@
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import type { Meta, Story } from '@storybook/react';
-import React from 'react';
-import type { Props } from './Switch';
+import React, { useState } from 'react';
+import type { SwitchProps } from './Switch';
 import { Switch, SwitchGroup } from './Switch';
+import { switchSchema } from './testSchema';
 
 export default {
     title: 'osc-ui/Switch',
@@ -86,9 +87,9 @@ export default {
     },
 } as Meta;
 
-const Template: Story<Props> = (args) => <Switch {...args} />;
+const Template: Story<SwitchProps> = (args) => <Switch {...args} />;
 
-const sizesTemplate: Story<Props> = (args) => (
+const sizesTemplate: Story<SwitchProps> = (args) => (
     <div
         style={{
             display: 'flex',
@@ -102,7 +103,7 @@ const sizesTemplate: Story<Props> = (args) => (
     </div>
 );
 
-const hasIconsTemplate: Story<Props> = (args) => (
+const hasIconsTemplate: Story<SwitchProps> = (args) => (
     <SwitchGroup>
         <MoonIcon />
         <Switch {...args} />
@@ -110,8 +111,26 @@ const hasIconsTemplate: Story<Props> = (args) => (
     </SwitchGroup>
 );
 
+const ValidationTemplate: Story<SwitchProps> = () => {
+    const [errors, setErrors] = useState({
+        isActive: ['Something went wrong, please try again'],
+    });
+    return (
+        <Switch
+            description="Unsubscribe from all emails"
+            errors={errors.isActive}
+            id="isActive"
+            name="Unsubscribe from all emails"
+            schema={switchSchema.isActive}
+            setErrors={setErrors}
+        />
+    );
+};
+
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+    description: 'Toggle button',
+};
 
 export const Secondary = Template.bind({});
 Secondary.args = {
@@ -151,11 +170,7 @@ HasIcons.parameters = {
     },
 };
 
-export const HasValidation = Template.bind({});
-HasValidation.args = {
-    ...Primary.args,
-    required: true,
-};
+export const HasValidation = ValidationTemplate.bind({});
 
 HasValidation.parameters = {
     docs: {

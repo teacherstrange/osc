@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Switch } from './Switch';
+import { switchSchema } from './testSchema';
 
 test('it renders the switch', () => {
     render(<Switch />);
@@ -24,4 +25,17 @@ test('it renders the switch with a custom size', () => {
     render(<Switch size="small" />);
 
     expect(screen.getByRole('switch')).toHaveClass('c-switch--small');
+});
+
+test('it renders an error message when one is present', () => {
+    const setErrorsMock = vi.fn();
+
+    render(
+        <Switch
+            errors={['Something went wrong, please try again']}
+            schema={switchSchema.isActive}
+            setErrors={setErrorsMock}
+        />
+    );
+    expect(screen.getByText('Something went wrong, please try again')).toBeInTheDocument();
 });
