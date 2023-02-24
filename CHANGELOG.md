@@ -1,3 +1,32 @@
+## [0.45.0](https://github.com/Open-Study-College/osc/compare/v0.44.0...v0.45.0) (2023-02-24)
+
+
+### ✨ Features
+
+* **api-gateway:** added LMS API to gateway ([ff87df9](https://github.com/Open-Study-College/osc/commit/ff87df9b7294748fa77fc7896a53f7f5f946a70b))
+* **api-lms:** authenticating Litmos (WIP) ([f87dd51](https://github.com/Open-Study-College/osc/commit/f87dd5167f7d1ff2ea3053fcb3fc11070aaa3d02))
+* **api-lms:** setup skeleton LMS API ([38fe653](https://github.com/Open-Study-College/osc/commit/38fe653bb82a9d3b7ead615d48532748a328b21d))
+* **api-lms:** working API example ([f21cb5e](https://github.com/Open-Study-College/osc/commit/f21cb5e1441a76ab9f52346dc0a399885a74fc75))
+
+
+### ♻️ Refactors
+
+* **api:** updating .env.example files with all variables ([9727f02](https://github.com/Open-Study-College/osc/commit/9727f025e41b7f060ab4169c624b36b1885be652))
+* **api-lms:** change from `let` to `const` ([567f7ce](https://github.com/Open-Study-College/osc/commit/567f7cefb213ffbfe3f382d37b6944d8b02d95a0))
+
+
+### 🐛 Bugs
+
+* **api-lms:** returning an error if no user found ([e140b43](https://github.com/Open-Study-College/osc/commit/e140b43cefa2bf8910b979b28c90a7d28f11a67e))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **api-lms:** added docs to schema ([93a9edc](https://github.com/Open-Study-College/osc/commit/93a9edcbad7c18114a59ec8ab2cebe9f43547998))
+* **api-lms:** remove `console.log` ([fb16abb](https://github.com/Open-Study-College/osc/commit/fb16abbc9baff7de73480c68cda40e935c5e7135))
+* **api-lms:** removed empty function types file ([b91e5f7](https://github.com/Open-Study-College/osc/commit/b91e5f762dc88c0399df3c9e9bb8f68d24404769))
+* **api-lms:** set ID to non-nullable in GQL schema ([888d86d](https://github.com/Open-Study-College/osc/commit/888d86d5287dceb5423334564ef213371bc4e6ef))
+
 ## [0.44.0](https://github.com/Open-Study-College/osc/compare/v0.43.0...v0.44.0) (2023-02-24)
 
 
@@ -194,17 +223,4 @@
 * **video:** update to use new token names ([2cab76b](https://github.com/Open-Study-College/osc/commit/2cab76bd2b9651c15f13968d2886fe2175dad8c8))
 * **video:** update video to take overlayed content ([fec9b02](https://github.com/Open-Study-College/osc/commit/fec9b02820431d3dbea7d9663c31186a7161c4ae))
 * **video:** updates grid layout so aspect-ratio is maintained better ([15d9323](https://github.com/Open-Study-College/osc/commit/15d9323084a98940fa7f864e1dad94f614b11dc1))
-
-## [0.41.2](https://github.com/Open-Study-College/osc/compare/v0.41.1...v0.41.2) (2023-02-17)
-
-
-### 🐛 Bugs
-
-* add SpriteSheetProvider and re-write test ([f3af8e5](https://github.com/Open-Study-College/osc/commit/f3af8e5a1a6f5fd46243451a99f97d7677ced3fe))
-
-
-### ♻️ Refactors
-
-* **types:** adds a Maybe generic type ([14e5597](https://github.com/Open-Study-College/osc/commit/14e5597df222f37ee9851c820f4748e76276f114))
-* update assertion ([7307c78](https://github.com/Open-Study-College/osc/commit/7307c78a066ce0a26639e15688b4bab44e551cf2))
 
