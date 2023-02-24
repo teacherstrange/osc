@@ -9,6 +9,7 @@ import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { Label } from '../Label/Label';
 import './text-input.scss';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 
 type Variants = 'secondary' | 'tertiary' | 'quaternary';
 
@@ -147,6 +148,7 @@ const InputButton = (props: InputButtonProps) => {
 
     return (
         <Button className="c-input__button" variant={variant} size={size}>
+            <VisuallyHidden>{id}</VisuallyHidden>
             <Icon id={id} />
         </Button>
     );
