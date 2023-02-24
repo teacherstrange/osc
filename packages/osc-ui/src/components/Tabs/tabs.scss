@@ -1,5 +1,7 @@
 @import "../../styles/settings";
 
-.c-tabs {
-    background-color: var(--color-tertiary);
+@layer components {
+    .c-tabs {
+        background-color: var(--color-tertiary);
+    }
 }

@@ -1,14 +1,16 @@
 @import "../../styles/settings";
 
-.c-tag {
-    display: flex;
-    align-items: center;
-    background-color: var(--colour-primary);
-    color: var(--colour-tertiary);
+@layer components {
+    .c-tag {
+        display: flex;
+        align-items: center;
+        background-color: var(--colour-primary);
+        color: var(--colour-tertiary);
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    * + &__content,
-    &__content + * {
-        margin-inline-start: 0.5em;
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        * + &__content,
+        &__content + * {
+            margin-inline-start: 0.5em;
+        }
     }
 }

@@ -1,123 +1,125 @@
 @import "../../styles/settings";
 
-$carousel-control-color: var(--color-neutral-400);
-$carousel-dot-dimensions: ($base-fs * 0.75);
-$carousel-arrow-dimensions: ($base-fs * 1.875);
+@layer components {
+    $carousel-control-color: var(--color-neutral-400);
+    $carousel-dot-dimensions: ($base-fs * 0.75);
+    $carousel-arrow-dimensions: ($base-fs * 1.875);
 
-/* stylelint-disable selector-class-pattern */
-.c-carousel {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    /* stylelint-disable selector-class-pattern */
+    .c-carousel {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
 
-    &__inner {
-        grid-column: 1 / -1;
+        &__inner {
+            grid-column: 1 / -1;
 
-        // Required Keen styles
-        &:not([data-keen-slider-disabled]) {
-            position: relative;
-            display: flex;
-            align-content: flex-start;
-            width: 100%;
-            overflow: hidden;
-            -webkit-touch-callout: none;
-            touch-action: pan-y;
-            -webkit-tap-highlight-color: transparent;
+            // Required Keen styles
+            &:not([data-keen-slider-disabled]) {
+                position: relative;
+                display: flex;
+                align-content: flex-start;
+                width: 100%;
+                overflow: hidden;
+                -webkit-touch-callout: none;
+                touch-action: pan-y;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            &:not([data-keen-slider-disabled]) .keen-slider__slide {
+                position: relative;
+                width: 100%;
+                min-height: 100%;
+                overflow: hidden;
+            }
+
+            &:not([data-keen-slider-disabled])[data-keen-slider-reverse] {
+                flex-direction: row-reverse;
+            }
+
+            &:not([data-keen-slider-disabled])[data-keen-slider-v] {
+                flex-wrap: wrap;
+            }
+
+            // End required Keen styles
         }
 
-        &:not([data-keen-slider-disabled]) .keen-slider__slide {
-            position: relative;
-            width: 100%;
-            min-height: 100%;
-            overflow: hidden;
-        }
-
-        &:not([data-keen-slider-disabled])[data-keen-slider-reverse] {
-            flex-direction: row-reverse;
-        }
-
-        &:not([data-keen-slider-disabled])[data-keen-slider-v] {
-            flex-wrap: wrap;
-        }
-
-        // End required Keen styles
-    }
-
-    // Arrows
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    &.has-adaptive-height .c-carousel__slide {
-        min-height: auto;
-    }
-
-    &__arrow {
-        width: $carousel-arrow-dimensions;
-        height: $carousel-arrow-dimensions;
-        color: $carousel-control-color;
-        cursor: pointer;
-
-        &--left {
-            grid-column: 1 / 2;
-        }
-
-        &--right {
-            grid-column: 3 / 4;
-        }
-
+        // Arrows
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
-        &[disabled] {
-            opacity: 0.5;
-            cursor: auto;
-        }
-    }
-
-    // DotNav
-    &__dots {
-        display: flex;
-        padding: $space-xs 0;
-
-        &--start {
-            justify-content: flex-start;
+        &.has-adaptive-height .c-carousel__slide {
+            min-height: auto;
         }
 
-        &--end {
-            justify-content: flex-end;
+        &__arrow {
+            width: $carousel-arrow-dimensions;
+            height: $carousel-arrow-dimensions;
+            color: $carousel-control-color;
+            cursor: pointer;
+
+            &--left {
+                grid-column: 1 / 2;
+            }
+
+            &--right {
+                grid-column: 3 / 4;
+            }
+
+            /* stylelint-disable-next-line plugin/selector-bem-pattern */
+            &[disabled] {
+                opacity: 0.5;
+                cursor: auto;
+            }
         }
 
-        &--center {
-            justify-content: center;
-        }
-    }
+        // DotNav
+        &__dots {
+            display: flex;
+            padding: $space-xs 0;
 
-    &__dot {
-        width: $carousel-dot-dimensions;
-        height: $carousel-dot-dimensions;
-        margin: 0 2px;
-        background: var(--color-tertiary);
-        border: 1px solid $carousel-control-color;
-        border-radius: $rad;
-        cursor: pointer;
+            &--start {
+                justify-content: flex-start;
+            }
 
-        &:focus {
-            outline: none;
-        }
+            &--end {
+                justify-content: flex-end;
+            }
 
-        &.is-active {
-            background: $carousel-control-color;
-        }
-    }
-
-    &.has-arrows {
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-
-        .c-carousel__inner,
-        .c-carousel__dots {
-            grid-column: 2 / 3;
+            &--center {
+                justify-content: center;
+            }
         }
 
-        .c-carousel__inner,
-        .c-carousel__arrow {
-            grid-row: 1;
+        &__dot {
+            width: $carousel-dot-dimensions;
+            height: $carousel-dot-dimensions;
+            margin: 0 2px;
+            background: var(--color-tertiary);
+            border: 1px solid $carousel-control-color;
+            border-radius: $rad;
+            cursor: pointer;
+
+            &:focus {
+                outline: none;
+            }
+
+            &.is-active {
+                background: $carousel-control-color;
+            }
+        }
+
+        &.has-arrows {
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+
+            .c-carousel__inner,
+            .c-carousel__dots {
+                grid-column: 2 / 3;
+            }
+
+            .c-carousel__inner,
+            .c-carousel__arrow {
+                grid-row: 1;
+            }
         }
     }
 }

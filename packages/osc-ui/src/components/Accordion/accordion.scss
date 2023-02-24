@@ -3,199 +3,90 @@
 
 /* stylelint-disable selector-class-pattern */
 
-// Colors
-$accordion-icon-color: var(--color-quaternary);
+@layer components {
+    // Colors
+    $accordion-icon-color: var(--color-quaternary);
 
-// Sizes
-$accordion-icon-base-size: 1em; // make sure the icon matches the height of the text
-$accordion-content-font-size: #{rem($base-fs)}; // design has this fixed across breakpoints
+    // Sizes
+    $accordion-icon-base-size: 1em; // make sure the icon matches the height of the text
+    $accordion-content-font-size: #{rem($base-fs)}; // design has this fixed across breakpoints
 
-// Layout
-$accordion-trigger-padding: $space-l; // design has this fixed across breakpoints
-$accordion-item-border: 1px solid var(--color-quinary);
+    // Layout
+    $accordion-trigger-padding: $space-l; // design has this fixed across breakpoints
+    $accordion-item-border: 1px solid var(--color-quinary);
 
-// Transitions
-$accordion-transition-duration: 0.3s;
-$accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
+    // Transitions
+    $accordion-transition-duration: 0.3s;
+    $accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
 
-.c-accordion {
-    --accordion-icon-size: 1.1rem;
-    --accordion-trigger-font-size: #{rem($base-fs * 1.25)}; // design has this fixed across breakpoints
-    --accordion-trigger-grid-columns: 1fr auto;
+    .c-accordion {
+        --accordion-icon-size: 1.1rem;
+        --accordion-trigger-font-size: #{rem($base-fs * 1.25)}; // design has this fixed across breakpoints
+        --accordion-trigger-grid-columns: 1fr auto;
 
-    &__item {
-        &:not(:last-child) {
-            padding-bottom: $accordion-trigger-padding;
-            border-bottom: $accordion-item-border;
-        }
-    }
-
-    &__header {
-        margin-bottom: 0;
-        font-weight: $fw-bold;
-    }
-
-    &__icon {
-        width: $accordion-icon-base-size;
-        height: $accordion-icon-base-size;
-        margin-top: 0.125em; // align the icon with the middle of the text
-        color: $accordion-icon-color;
-        font-size: var(--accordion-icon-size);
-
-        &--plusminus > :first-child {
-            transition:
-                opacity $accordion-transition-duration $accordion-transition-timing-func,
-                visibility $accordion-transition-duration $accordion-transition-timing-func;
-        }
-
-        &--chevron {
-            transition: transform $accordion-transition-duration $accordion-transition-timing-func;
-        }
-    }
-
-    &__trigger {
-        position: relative;
-        display: grid;
-        align-items: center;
-        box-sizing: border-box;
-        width: 100%;
-        padding: $accordion-trigger-padding 0 0;
-        font-size: var(--accordion-trigger-font-size);
-        font-weight: $fw-bold;
-        text-align: left;
-        transition: color $accordion-transition-duration $accordion-transition-timing-func;
-        cursor: pointer;
-        grid-template-columns: var(--accordion-trigger-grid-columns);
-
-        @include mq($mq-mob) {
-            gap: $space-2xl;
-        }
-
-        &:hover {
-            color: var(--color-quaternary);
-        }
-
-        &[data-state="open"] {
-            .c-accordion__icon {
-                &--plusminus > :first-child {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-
-                &--chevron {
-                    transform: rotate(180deg);
-                }
-            }
-        }
-
-        /* stylelint-disable-next-line plugin/selector-bem-pattern */
-        > span {
-            grid-column: 1 / 2;
-        }
-    }
-
-    &__content {
-        max-width: 64ch;
-        overflow: hidden;
-        font-size: $accordion-content-font-size;
-        font-weight: $fw-light;
-
-        &[data-state="open"] {
-            animation: slide-down $accordion-transition-duration $accordion-transition-timing-func;
-        }
-
-        &[data-state="closed"] {
-            height: 0;
-            animation: slide-up $accordion-transition-duration $accordion-transition-timing-func;
-        }
-    }
-
-    &__text {
-        padding: $space-xs 0;
-    }
-
-    // *----------------------------------*/
-    //  Variants
-    // --primary not included as it would be the default
-    // *----------------------------------*/
-    &--secondary {
-        --accordion-icon-size: 1.6em;
-        --accordion-trigger-font-size: #{$fs-s};
-
-        // Add new column to the grid so we can centre the text accurately
-        --accordion-trigger-grid-columns: minmax(0, var(--accordion-icon-size)) 1fr auto;
-
-        .c-accordion__item {
-            border: $accordion-item-border;
-
+        &__item {
             &:not(:last-child) {
-                padding-bottom: 0;
-                border-bottom: none;
+                padding-bottom: $accordion-trigger-padding;
+                border-bottom: $accordion-item-border;
             }
         }
 
-        .c-accordion__trigger {
-            padding: $space-l $space-xl;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: $ls-s;
+        &__header {
+            margin-bottom: 0;
+            font-weight: $fw-bold;
+        }
 
-            /* stylelint-disable-next-line plugin/selector-bem-pattern */
-            > span {
-                grid-column: 2 / 3;
+        &__icon {
+            width: $accordion-icon-base-size;
+            height: $accordion-icon-base-size;
+            margin-top: 0.125em; // align the icon with the middle of the text
+            color: $accordion-icon-color;
+            font-size: var(--accordion-icon-size);
+
+            &--plusminus > :first-child {
+                transition:
+                    opacity $accordion-transition-duration $accordion-transition-timing-func,
+                    visibility $accordion-transition-duration $accordion-transition-timing-func;
             }
+
+            &--chevron {
+                transition: transform $accordion-transition-duration $accordion-transition-timing-func;
+            }
+        }
+
+        &__trigger {
+            position: relative;
+            display: grid;
+            align-items: center;
+            box-sizing: border-box;
+            width: 100%;
+            padding: $accordion-trigger-padding 0 0;
+            font-size: var(--accordion-trigger-font-size);
+            font-weight: $fw-bold;
+            text-align: left;
+            transition: color $accordion-transition-duration $accordion-transition-timing-func;
+            cursor: pointer;
+            grid-template-columns: var(--accordion-trigger-grid-columns);
 
             @include mq($mq-mob) {
-                gap: $space-m;
+                gap: $space-2xl;
+            }
+
+            &:hover {
+                color: var(--color-quaternary);
             }
 
             &[data-state="open"] {
-                color: var(--color-quaternary);
-            }
-        }
+                .c-accordion__icon {
+                    &--plusminus > :first-child {
+                        opacity: 0;
+                        visibility: hidden;
+                    }
 
-        /* stylelint-disable-next-line no-descending-specificity */
-        .c-accordion__icon {
-            grid-column: 3 / -1;
-            color: currentcolor;
-        }
-
-        .c-accordion__content {
-            max-width: 100%;
-        }
-
-        .c-accordion__text {
-            padding: 0 $space-xl $space-xl;
-        }
-    }
-
-    &--tertiary {
-        --accordion-trigger-font-size: #{rem($base-fs * 1.5)}; // design has this fixed across breakpoints
-        --accordion-trigger-grid-columns: 1fr auto;
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        .c-accordion__item {
-            padding-bottom: 0;
-            border: $accordion-item-border;
-        }
-
-        .c-accordion__item + .c-accordion__item {
-            margin-top: $space-2xl;
-        }
-
-        .c-accordion__trigger {
-            padding: $space-2xs $space-l;
-            background-color: var(--color-neutral-200);
-            color: var(--color-quaternary);
-            text-align: left;
-            text-transform: none;
-            letter-spacing: normal;
-            transition:
-                background-color $accordion-transition-duration
-                $accordion-transition-timing-func;
-
-            &:hover {
-                background-color: var(--color-quinary);
+                    &--chevron {
+                        transform: rotate(180deg);
+                    }
+                }
             }
 
             /* stylelint-disable-next-line plugin/selector-bem-pattern */
@@ -204,41 +95,152 @@ $accordion-transition-timing-func: cubic-bezier(0.87, 0, 0.13, 1);
             }
         }
 
-        /* stylelint-disable-next-line no-descending-specificity */
-        .c-accordion__icon {
-            @include mq($mq-mob, max) {
-                display: none;
+        &__content {
+            max-width: 64ch;
+            overflow: hidden;
+            font-size: $accordion-content-font-size;
+            font-weight: $fw-light;
+
+            &[data-state="open"] {
+                animation: slide-down $accordion-transition-duration $accordion-transition-timing-func;
+            }
+
+            &[data-state="closed"] {
+                height: 0;
+                animation: slide-up $accordion-transition-duration $accordion-transition-timing-func;
             }
         }
 
-        .c-accordion__content {
-            max-width: 100%;
+        &__text {
+            padding: $space-xs 0;
         }
 
-        .c-accordion__text {
-            padding: $space-2xl;
+        // *----------------------------------*/
+        //  Variants
+        // --primary not included as it would be the default
+        // *----------------------------------*/
+        &--secondary {
+            --accordion-icon-size: 1.6em;
+            --accordion-trigger-font-size: #{$fs-s};
+
+            // Add new column to the grid so we can centre the text accurately
+            --accordion-trigger-grid-columns: minmax(0, var(--accordion-icon-size)) 1fr auto;
+
+            .c-accordion__item {
+                border: $accordion-item-border;
+
+                &:not(:last-child) {
+                    padding-bottom: 0;
+                    border-bottom: none;
+                }
+            }
+
+            .c-accordion__trigger {
+                padding: $space-l $space-xl;
+                text-align: center;
+                text-transform: uppercase;
+                letter-spacing: $ls-s;
+
+                /* stylelint-disable-next-line plugin/selector-bem-pattern */
+                > span {
+                    grid-column: 2 / 3;
+                }
+
+                @include mq($mq-mob) {
+                    gap: $space-m;
+                }
+
+                &[data-state="open"] {
+                    color: var(--color-quaternary);
+                }
+            }
+
+            /* stylelint-disable-next-line no-descending-specificity */
+            .c-accordion__icon {
+                grid-column: 3 / -1;
+                color: currentcolor;
+            }
+
+            .c-accordion__content {
+                max-width: 100%;
+            }
+
+            .c-accordion__text {
+                padding: 0 $space-xl $space-xl;
+            }
+        }
+
+        &--tertiary {
+            --accordion-trigger-font-size: #{rem($base-fs * 1.5)}; // design has this fixed across breakpoints
+            --accordion-trigger-grid-columns: 1fr auto;
+
+            /* stylelint-disable-next-line no-descending-specificity */
+            .c-accordion__item {
+                padding-bottom: 0;
+                border: $accordion-item-border;
+            }
+
+            .c-accordion__item + .c-accordion__item {
+                margin-top: $space-2xl;
+            }
+
+            .c-accordion__trigger {
+                padding: $space-2xs $space-l;
+                background-color: var(--color-neutral-200);
+                color: var(--color-quaternary);
+                text-align: left;
+                text-transform: none;
+                letter-spacing: normal;
+                transition:
+                    background-color $accordion-transition-duration
+                    $accordion-transition-timing-func;
+
+                &:hover {
+                    background-color: var(--color-quinary);
+                }
+
+                /* stylelint-disable-next-line plugin/selector-bem-pattern */
+                > span {
+                    grid-column: 1 / 2;
+                }
+            }
+
+            /* stylelint-disable-next-line no-descending-specificity */
+            .c-accordion__icon {
+                @include mq($mq-mob, max) {
+                    display: none;
+                }
+            }
+
+            .c-accordion__content {
+                max-width: 100%;
+            }
+
+            .c-accordion__text {
+                padding: $space-2xl;
+            }
         }
     }
-}
 
-@keyframes slide-down {
-    from {
-        height: 0;
+    @keyframes slide-down {
+        from {
+            height: 0;
+        }
+
+        to {
+            // Radix specific custom property
+            height: var(--radix-accordion-content-height);
+        }
     }
 
-    to {
-        // Radix specific custom property
-        height: var(--radix-accordion-content-height);
-    }
-}
+    @keyframes slide-up {
+        from {
+            // Radix specific custom property
+            height: var(--radix-accordion-content-height);
+        }
 
-@keyframes slide-up {
-    from {
-        // Radix specific custom property
-        height: var(--radix-accordion-content-height);
-    }
-
-    to {
-        height: 0;
+        to {
+            height: 0;
+        }
     }
 }

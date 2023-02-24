@@ -1,9 +1,11 @@
-.o-footer {
-    width: 50%;
-    background-color: rgb(23 222 219);
+@layer components {
+    .c-footer {
+        width: 50%;
+        background-color: rgb(23 222 219);
 
-    &--full {
-        width: 40%;
-        background-color: rgb(117 2 2);
+        &--full {
+            width: 40%;
+            background-color: rgb(117 2 2);
+        }
     }
 }

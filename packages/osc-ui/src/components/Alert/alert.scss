@@ -1,62 +1,64 @@
 @import "../../styles/settings";
 
-.c-alert {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: $space-xs;
-    border-radius: $rad-xs;
-    gap: 0.5em;
-
-    &--error {
-        background-color: #fed7d7;
-    }
-
-    &--info {
-        background-color: #bee3f8;
-    }
-
-    &--success {
-        background-color: #c6f6d5;
-    }
-
-    &--warning {
-        background-color: #feebc8;
-    }
-
-    &__button--right {
-        position: absolute;
-        top: 4px;
-        right: 4px;
-    }
-
-    &__icon {
+@layer components {
+    .c-alert {
+        position: relative;
         display: flex;
+        align-items: center;
+        padding: $space-xs;
+        border-radius: $rad-xs;
+        gap: 0.5em;
 
         &--error {
-            color: #e53e3e;
+            background-color: #fed7d7;
         }
 
         &--info {
-            color: #3182ce;
+            background-color: #bee3f8;
         }
 
         &--success {
-            color: #38a169;
+            background-color: #c6f6d5;
         }
 
         &--warning {
-            color: #dd6b20;
+            background-color: #feebc8;
         }
-    }
 
-    &__description {
-        font-style: italic;
-    }
+        &__button--right {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+        }
 
-    &__title {
-        &--bold {
-            font-weight: $fw-bold;
+        &__icon {
+            display: flex;
+
+            &--error {
+                color: #e53e3e;
+            }
+
+            &--info {
+                color: #3182ce;
+            }
+
+            &--success {
+                color: #38a169;
+            }
+
+            &--warning {
+                color: #dd6b20;
+            }
+        }
+
+        &__description {
+            font-style: italic;
+        }
+
+        &__title {
+            &--bold {
+                font-weight: $fw-bold;
+            }
         }
     }
 }

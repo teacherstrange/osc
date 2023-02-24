@@ -3,15 +3,18 @@
 @use "../../styles/settings" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
-.c-label {
-    color: var(--color-neutral-700);
-    cursor: pointer;
+@layer components {
+    .c-label {
+        color: var(--color-neutral-700);
+        font-weight: $fw-reg;
+        cursor: pointer;
 
-    &__required {
-        padding-inline-start: #{math.div(1, $base-fs)}em;
-    }
+        &__required {
+            padding-inline-start: #{math.div(1, $base-fs)}em;
+        }
 
-    &--bold {
-        font-weight: $fw-bold;
+        &--bold {
+            font-weight: $fw-bold;
+        }
     }
 }

@@ -2,46 +2,47 @@
 @use "../../styles/tools/" as *;
 @use "../../styles/settings/" as *;
 
-$logo-size-s: 192px;
-$logo-size-l: 277px;
+@layer components {
+    $logo-size-s: 192px;
+    $logo-size-l: 277px;
 
-.c-header {
-    $self: &;
+    .c-header {
+        $self: &;
 
-    position: relative;
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(3, auto);
-    padding-block: $space-xl;
+        position: relative;
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(3, auto);
+        padding-block: $space-xl;
 
-    @include z-index("header");
-
-    @include mq($mq-desk) {
-        grid-template-columns: repeat(2, auto);
-        grid-template-rows: repeat(2, 1fr);
-        gap: $space-2xs;
-    }
-
-    &__logo {
-        margin-inline: auto;
-        grid-column: 2 / 3;
+        @include z-index("header");
 
         @include mq($mq-desk) {
-            margin-inline: 0;
-            grid-column: 1 / 2;
-            grid-row: 2;
+            grid-template-columns: repeat(2, auto);
+            grid-template-rows: repeat(2, 1fr);
+            gap: $space-2xs;
         }
 
-        > svg {
-            max-width: $logo-size-s;
+        &__logo {
+            margin-inline: auto;
+            grid-column: 2 / 3;
 
-            @include mq($mq-tab) {
-                max-width: $logo-size-l;
+            @include mq($mq-desk) {
+                margin-inline: 0;
+                grid-column: 1 / 2;
+                grid-row: 2;
+            }
+
+            > svg {
+                max-width: $logo-size-s;
+
+                @include mq($mq-tab) {
+                    max-width: $logo-size-l;
+                }
             }
         }
-    }
 
-    /*
+        /*
      * Fix overflow issue on IOS devices
      *
      * On IOS there is an issue where if you set the body and html elements to have overflow hidden
@@ -52,97 +53,98 @@ $logo-size-l: 277px;
      * [1] Set the initial position of the __nav to fixed
      * [2] Set the overflow-x to hidden to hide any children
      */
-    &__nav {
-        position: fixed; /* [1] */
-        top: var(--header-height, 0);
-        right: 0;
-        bottom: 0;
-        left: 0;
-        transition: transform $timing $ease-out-sine;
-        overflow-x: hidden; /* [2] */
-
-        @include mq($mq-desk) {
-            position: static;
-            display: flex;
-            justify-content: flex-end;
-            grid-column: 2 / -1;
-            grid-row: 2;
-            overflow-x: initial;
-        }
-
-        &[data-state="closed"] {
-            @include mq($mq-desk, max) {
-                transform: translateX(100vw);
-            }
-        }
-
-        &[data-state="open"] {
-            @include mq($mq-desk, max) {
-                transform: translateX(0);
-            }
-        }
-
-        .c-nav {
-            @include mq($mq-desk, max) {
-                border-top: 1px solid var(--color-secondary);
-            }
-        }
-
-        /* stylelint-disable-next-line selector-class-pattern */
-        .c-nav__content[data-level="0"] {
+        &__nav {
+            position: fixed; /* [1] */
+            top: var(--header-height, 0);
+            right: 0;
+            bottom: 0;
             left: 0;
+            transition: transform $timing $ease-out-sine;
+            overflow-x: hidden; /* [2] */
 
             @include mq($mq-desk) {
-                top: var(--header-height, 0);
-            }
-        }
-    }
-
-    &__action-bar {
-        display: flex;
-        justify-content: flex-end;
-        gap: $space-xl;
-        font-weight: $fw-light;
-
-        @include mq($mq-desk) {
-            padding-inline-end: $space-2xs;
-            grid-column: 2 / -1;
-            grid-row: 1;
-        }
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        #{$self}__action-item {
-            display: block;
-            cursor: pointer;
-
-            .o-icon {
-                --icon-size: 20px;
-
-                flex-shrink: 0;
-            }
-        }
-
-        #{$self}__nav & {
-            background-color: var(--color-secondary);
-            color: var(--color-tertiary);
-            gap: 0;
-
-            #{$self}__action-item {
+                position: static;
                 display: flex;
-                flex: 0 1 50%;
-                align-items: center;
-                justify-content: center;
-                padding: $space-s $space-m;
-                gap: $space-xs;
+                justify-content: flex-end;
+                grid-column: 2 / -1;
+                grid-row: 2;
+                overflow-x: initial;
+            }
 
-                &:not(:last-child) {
-                    border-right: 1px solid var(--color-tertiary);
+            &[data-state="closed"] {
+                @include mq($mq-desk, max) {
+                    transform: translateX(100vw);
+                }
+            }
+
+            &[data-state="open"] {
+                @include mq($mq-desk, max) {
+                    transform: translateX(0);
+                }
+            }
+
+            .c-nav {
+                @include mq($mq-desk, max) {
+                    border-top: 1px solid var(--color-secondary);
+                }
+            }
+
+            /* stylelint-disable-next-line selector-class-pattern */
+            .c-nav__content[data-level="0"] {
+                left: 0;
+
+                @include mq($mq-desk) {
+                    top: var(--header-height, 0);
                 }
             }
         }
-    }
 
-    > .c-burger {
-        grid-column: 1 / 2;
+        &__action-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: $space-xl;
+            font-weight: $fw-light;
+
+            @include mq($mq-desk) {
+                padding-inline-end: $space-2xs;
+                grid-column: 2 / -1;
+                grid-row: 1;
+            }
+
+            /* stylelint-disable-next-line no-descending-specificity */
+            #{$self}__action-item {
+                display: block;
+                cursor: pointer;
+
+                .o-icon {
+                    --icon-size: 20px;
+
+                    flex-shrink: 0;
+                }
+            }
+
+            #{$self}__nav & {
+                background-color: var(--color-secondary);
+                color: var(--color-tertiary);
+                gap: 0;
+
+                #{$self}__action-item {
+                    display: flex;
+                    flex: 0 1 50%;
+                    align-items: center;
+                    justify-content: center;
+                    padding: $space-s $space-m;
+                    gap: $space-xs;
+
+                    &:not(:last-child) {
+                        border-right: 1px solid var(--color-tertiary);
+                    }
+                }
+            }
+        }
+
+        > .c-burger {
+            grid-column: 1 / 2;
+        }
     }
 }
