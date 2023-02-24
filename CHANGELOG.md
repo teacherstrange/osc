@@ -1,3 +1,16 @@
+## [0.46.2](https://github.com/Open-Study-College/osc/compare/v0.46.1...v0.46.2) (2023-02-24)
+
+
+### 🐛 Bugs
+
+* **config:** removed the scss formatter override in the vscode json ([9c8dab0](https://github.com/Open-Study-College/osc/commit/9c8dab0fd1d1d0efb68a403f48a359cdfa6f4390))
+
+
+### ♻️ Refactors
+
+* **scss:** setting up css layers to control the cascade when loading components scss via osc-ui ([d2e70d9](https://github.com/Open-Study-College/osc/commit/d2e70d9dffd120eff7ee1266f12dcfc27d8d8a11))
+* **scss:** wraps all component scss with an [@layer](https://github.com/layer) to allow us better control of css cascade ([857f649](https://github.com/Open-Study-College/osc/commit/857f6497e135f3ee32ce48de4574ab1505f0f050))
+
 ## [0.46.1](https://github.com/Open-Study-College/osc/compare/v0.46.0...v0.46.1) (2023-02-24)
 
 
@@ -168,17 +181,4 @@
 * use BEM styling for the Chevron, and remove h3 styling ([3eff9dc](https://github.com/Open-Study-College/osc/commit/3eff9dc4aa171e9b5885b834ef08dd7cbb5b759a))
 * use existing "c-label" class for the labels ([791e9f0](https://github.com/Open-Study-College/osc/commit/791e9f0433bcab4a418713c5c6bf48177f235412))
 * use span instead of h3 and updates styles ([8f656d0](https://github.com/Open-Study-College/osc/commit/8f656d04894a40b3b902bc9991007c267d7a949a))
-
-## [0.43.0](https://github.com/Open-Study-College/osc/compare/v0.42.1...v0.43.0) (2023-02-22)
-
-
-### ✨ Features
-
-* **island-grid:** adds island grid component ([9d88a15](https://github.com/Open-Study-College/osc/commit/9d88a15cbcc517a43e3eb45ec469efd3b462bce6))
-* **island-grid:** adds island grid component stories ([86e9574](https://github.com/Open-Study-College/osc/commit/86e9574acd0653926acee8d3413598d1ad1e4998))
-
-
-### 🧪 Tests
-
-* **island-grid:** adds island grid tests ([fae5873](https://github.com/Open-Study-College/osc/commit/fae5873a0fcff5b0795ee113a9b3ca526bf70e4d))
 
