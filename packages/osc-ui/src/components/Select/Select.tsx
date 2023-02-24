@@ -1,13 +1,14 @@
 import { CheckIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import type { ComponentPropsWithRef, ElementRef } from 'react';
-import React, { forwardRef, useState } from 'react';
+import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
+import type { ZodSchema } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
-import { getFieldError } from '../../utils/getFieldError';
 import { Icon } from '../Icon/Icon';
 import { Label } from '../Label/Label';
 import './select.scss';
+import { clientSideValidation } from '../../utils/clientSideValidation';
 
 type Description = {
     label?: string;
@@ -23,6 +24,10 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
      */
     description?: Description;
     /**
+     * Any error messages - initially set through server validation, but can be updated through client validation
+     */
+    errors?: string[] | undefined;
+    /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
     groupVariants?: GroupVariants[];
@@ -31,10 +36,13 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
      */
     placeholder?: string;
     /**
-     * A boolean that alerts when form is submitted for error handling
-     * @default false
+     * The Zod Schema used for validation
      */
-    wasSubmitted?: boolean;
+    schema?: ZodSchema;
+    /**
+     * Allows for client side validation once a server side error has been received
+     */
+    setErrors?: Dispatch<SetStateAction<any>>;
 }
 
 export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(
@@ -43,17 +51,24 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             children,
             description,
             disabled,
+            errors,
             groupVariants,
             placeholder,
             required,
             name,
-            wasSubmitted = false,
+            schema,
+            setErrors,
         } = props;
         const [value, setValue] = useState('');
         const [isOpen, setIsOpen] = useState(false);
 
-        const errorMessage = getFieldError(value, required);
-        const displayError = wasSubmitted && errorMessage;
+        useEffect(() => {
+            // Client side error handling - Sets any errors on an input in
+            // accordance with the schema validation
+            if (errors) {
+                clientSideValidation(name, schema, setErrors, value);
+            }
+        }, [value]);
 
         const modifiers = useModifier('c-select', groupVariants);
         const selectClasses = classNames('c-select', modifiers);
@@ -71,7 +86,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             if (desc?.icon) return <Icon id={desc.icon} />;
         };
         return (
-            <div className={displayError ? `${selectClasses} c-select--error` : selectClasses}>
+            <div className={errors ? `${selectClasses} c-select--error` : selectClasses}>
                 {setDescription(description)}
                 <SelectPrimitive.Root
                     {...props}
@@ -103,9 +118,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                         </SelectPrimitive.ScrollDownButton>
                     </SelectPrimitive.Content>
                 </SelectPrimitive.Root>
-                {displayError ? (
-                    <div className="c-select__error-message">{errorMessage}</div>
-                ) : null}
+                {errors ? <div className="c-select__error-message">{errors}</div> : null}
             </div>
         );
     }

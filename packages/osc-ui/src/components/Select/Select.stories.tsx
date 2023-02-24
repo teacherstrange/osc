@@ -1,7 +1,25 @@
 import type { Meta, Story } from '@storybook/react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Select, SelectItem } from './Select';
+
+import { z } from 'zod';
+
+export const selectSchema = {
+    courses: z.object({
+        courses: z.string().refine(
+            (val) =>
+                courseItems
+                    .map((value) => {
+                        return value.value;
+                    })
+                    .includes(val),
+            {
+                message: 'Please select a course',
+            }
+        ),
+    }),
+};
 
 export default {
     title: 'osc-ui/Select',
@@ -74,7 +92,6 @@ const Template: Story = ({ selects }) => {
                             ref={select.ref ? selectRef : null}
                             required={select.required}
                             name={select.name}
-                            wasSubmitted={select.wasSubmitted}
                         >
                             {items.map((item, index) => {
                                 return (
@@ -91,9 +108,35 @@ const Template: Story = ({ selects }) => {
     );
 };
 
+const ValidationTemplate: Story = () => {
+    const [errors, setErrors] = useState({
+        courses: ['Please choose a course'],
+    });
+    return (
+        <div style={{ margin: '1.5em 1em', width: '300px' }}>
+            <Select
+                errors={errors.courses}
+                required={true}
+                name="courses"
+                schema={selectSchema.courses}
+                setErrors={setErrors}
+            >
+                {courseItems.map((item, index) => {
+                    return (
+                        <SelectItem key={index} {...item}>
+                            {item.name}
+                        </SelectItem>
+                    );
+                })}
+            </Select>
+        </div>
+    );
+};
+
 export const Primary = Template.bind({});
 export const Secondary = Template.bind({});
 export const Tertiary = Template.bind({});
+export const Validation = ValidationTemplate.bind({});
 
 const courseItems = [
     {
@@ -319,4 +362,10 @@ Tertiary.args = {
             state: 'inlineIcon',
         },
     ],
+};
+
+Validation.args = {
+    editor: 'select',
+    items: courseItems,
+    name: 'courses',
 };
