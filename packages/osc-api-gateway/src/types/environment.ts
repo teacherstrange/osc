@@ -9,5 +9,6 @@ export const env = z
         CRM_API_URL: z.string(),
         ECOMMERCE_API_URL: z.string(),
         ADMIN_API_URL: z.string(),
+        LMS_API_URL: z.string(),
     })
     .parse(process.env);
