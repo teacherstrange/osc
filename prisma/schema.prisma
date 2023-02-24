@@ -37,6 +37,7 @@ model User {
   courseStudentsAssigned CourseStudent[]         @relation("courseStudentCreator")
   organisations          UserOrganisation[]      @relation("userOrganisation")
   userRefreshToken       UserRefreshToken[]      @relation("userRefreshTokens")
+  assignments            AssignmentSubmission[]  @relation("studentDetails")
 
   @@map("users")
 }
@@ -290,10 +291,45 @@ model Course {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
 
-  tutors   CourseTutor[]   @relation("courseTutorCourse")
-  students CourseStudent[] @relation("courseStudentCourse")
+  tutors      CourseTutor[]   @relation("courseTutorCourse")
+  students    CourseStudent[] @relation("courseStudentCourse")
+  assignments Assignment[]    @relation("courseAssignmentCourse")
 
   @@map("courses")
+}
+
+model Assignment {
+  id          Int       @id @default(autoincrement())
+  courseId    Int
+  title       String    @db.VarChar(64)
+  description String    @db.VarChar(255)
+  createdAt   DateTime  @default(now())
+  createdBy   Int
+  updatedAt   DateTime? @updatedAt
+
+  course               Course                 @relation("courseAssignmentCourse", fields: [courseId], references: [id])
+  AssignmentSubmission AssignmentSubmission[] @relation("assignmentSubmissionDetails")
+
+  @@index([courseId])
+  @@map("courses.assignments")
+}
+
+model AssignmentSubmission {
+  id           Int       @id @default(autoincrement())
+  assignmentId Int
+  studentId    Int
+  createdAt    DateTime  @default(now())
+  createdBy    Int
+  updatedAt    DateTime? @updatedAt
+  result       Int
+  markedBy     Int
+
+  assignment Assignment @relation("assignmentSubmissionDetails", fields: [assignmentId], references: [id])
+  student    User       @relation("studentDetails", fields: [studentId], references: [id])
+
+  @@index([assignmentId])
+  @@index([studentId])
+  @@map("courses.assignmentSubmissions")
 }
 
 model CourseTutor {

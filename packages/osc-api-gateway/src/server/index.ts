@@ -14,6 +14,7 @@ const gateway =
                       { name: 'OSC-CRM', url: env.CRM_API_URL },
                       { name: 'OSC-Admin', url: env.ADMIN_API_URL },
                       { name: 'OSC-LMS', url: env.LMS_API_URL },
+                      { name: 'OSC-Assignments', url: env.ASSIGNMENTS_API_URL },
                   ],
               }),
               buildService({ name, url }) {
