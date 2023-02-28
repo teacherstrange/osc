@@ -1,86 +1,88 @@
 @import "../../styles/settings";
 @import "../../styles/tools";
 
-$banner-bg: var(--color-neutral-300);
-$banner-fg: var(--color-nonary);
-$banner-py: $space-xl;
-$banner-py-s: $space-s;
-$banner-px: $space-m;
-$banner-px-l: $space-xl;
-$banner-content-max-w: 40ch;
-$banner-breakpoint: 1137;
+@layer components {
+    $banner-bg: var(--color-neutral-300);
+    $banner-fg: var(--color-nonary);
+    $banner-py: $space-xl;
+    $banner-py-s: $space-s;
+    $banner-px: $space-m;
+    $banner-px-l: $space-xl;
+    $banner-content-max-w: 40ch;
+    $banner-breakpoint: 1137;
 
-.c-callout-banner {
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    padding: $banner-py $banner-px;
-    background-color: $banner-bg;
-    color: $banner-fg;
-    margin-inline: auto;
-    gap: $space-m;
-
-    @include mq($mq-tab-l) {
-        flex-flow: row wrap;
-        align-items: center;
-        width: fit-content; // make sure banner is constrained to the width of it's children
-        padding: $banner-py-s $banner-px-l;
-    }
-
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    p,
-    li {
-        margin-block-end: 0;
-    }
-
-    &__ttl {
-        font-size: $fs-7xl;
-        padding-inline-end: $space-m;
-        margin-block-end: 0;
-
-        @include mq($mq-mob-l) {
-            font-size: $fs-6xl;
-        }
+    .c-callout-banner {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        padding: $banner-py $banner-px;
+        background-color: $banner-bg;
+        color: $banner-fg;
+        margin-inline: auto;
+        gap: $space-m;
 
         @include mq($mq-tab-l) {
-            font-size: $fs-5xl;
+            flex-flow: row wrap;
+            align-items: center;
+            width: fit-content; // make sure banner is constrained to the width of it's children
+            padding: $banner-py-s $banner-px-l;
         }
 
-        @include mq(($mq-desk, $banner-breakpoint)) {
-            // One off breakpoint to stretch the title across the width of the flex-container
-            // Without this the button wraps onto it's own line and looks odd
-            flex: 100%;
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        p,
+        li {
+            margin-block-end: 0;
         }
-    }
 
-    &__content-group {
-        flex: 1;
+        &__ttl {
+            font-size: $fs-7xl;
+            padding-inline-end: $space-m;
+            margin-block-end: 0;
 
-        @include mq($mq-desk-m) {
-            max-width: $banner-content-max-w;
-        }
-    }
+            @include mq($mq-mob-l) {
+                font-size: $fs-6xl;
+            }
 
-    &__btn-group {
-        .c-btn {
-            @include mq($mq-tab, max) {
-                width: 100%;
+            @include mq($mq-tab-l) {
+                font-size: $fs-5xl;
+            }
+
+            @include mq(($mq-desk, $banner-breakpoint)) {
+                // One off breakpoint to stretch the title across the width of the flex-container
+                // Without this the button wraps onto it's own line and looks odd
+                flex: 100%;
             }
         }
-    }
 
-    &__footer {
-        margin-block-start: $space-xs;
-        flex: 100%;
-        font-size: $fs-s;
+        &__content-group {
+            flex: 1;
 
-        @include mq($mq-tab-l) {
-            text-align: right;
+            @include mq($mq-desk-m) {
+                max-width: $banner-content-max-w;
+            }
         }
-    }
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    .o-img {
-        max-width: 330px;
+        &__btn-group {
+            .c-btn {
+                @include mq($mq-tab, max) {
+                    width: 100%;
+                }
+            }
+        }
+
+        &__footer {
+            margin-block-start: $space-xs;
+            flex: 100%;
+            font-size: $fs-s;
+
+            @include mq($mq-tab-l) {
+                text-align: right;
+            }
+        }
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        .o-img {
+            max-width: 330px;
+        }
     }
 }
