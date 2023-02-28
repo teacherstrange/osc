@@ -227,7 +227,7 @@ $card-fs-3xl: $fs-3xl;
                 grid-template-columns: minmax(0, var(--card-image-size)) minmax(0, 1fr);
                 gap: $card-space-2xl;
 
-                @include mq(mq-token("tab")) {
+                @include mq($mq-tab) {
                     --card-image-size: 160px;
 
                     gap: $card-space-xl;
@@ -248,7 +248,7 @@ $card-fs-3xl: $fs-3xl;
                 #{$self}__ttl {
                     font-size: $card-fs-2xl;
 
-                    @include mq(mq-token("mob-lrg")) {
+                    @include mq($mq-mob-l) {
                         max-width: 24ch;
                         font-size: $card-fs-l;
                     }
@@ -309,7 +309,7 @@ $card-fs-3xl: $fs-3xl;
                     font-size: $card-fs-3xl;
                     line-height: $base-lh;
 
-                    @include mq(mq-token("tab-med")) {
+                    @include mq($mq-tab-m) {
                         max-width: unset;
                         font-size: $card-fs-xl;
                     }
@@ -324,7 +324,7 @@ $card-fs-3xl: $fs-3xl;
                     padding-block: $card-space-2xl 0;
                     justify-content: flex-end;
 
-                    @include mq(mq-token("tab-med")) {
+                    @include mq($mq-tab-m) {
                         padding-block-start: $card-space-l;
                     }
                 }
@@ -335,21 +335,21 @@ $card-fs-3xl: $fs-3xl;
                 align-items: center;
                 max-width: 100%;
 
-                @include mq(mq-token("mob-lrg"), max) {
+                @include mq($mq-mob-l, max) {
                     grid-template-rows: minmax(0, 1fr) minmax(0, auto);
                 }
 
-                @include mq(mq-token("mob-lrg")) {
+                @include mq($mq-mob-l) {
                     grid-template-columns: minmax(0, 1fr) minmax(0, 45.5%);
                 }
 
                 #{$self}__img {
-                    @include mq(mq-token("mob-lrg"), max) {
+                    @include mq($mq-mob-l, max) {
                         max-height: 230px;
                         grid-row: 2;
                     }
 
-                    @include mq(mq-token("mob-lrg")) {
+                    @include mq($mq-mob-l) {
                         grid-column: 2;
                         width: 100%;
                         height: var(--c-card-inner-height);
@@ -359,7 +359,7 @@ $card-fs-3xl: $fs-3xl;
                 #{$self}__inner {
                     align-self: center;
 
-                    @include mq(mq-token("mob-lrg")) {
+                    @include mq($mq-mob-l) {
                         padding-block: $card-space-2xl;
                     }
                 }
@@ -368,7 +368,7 @@ $card-fs-3xl: $fs-3xl;
                 #{$self}__body {
                     padding-inline: $card-space-xl;
 
-                    @include mq(mq-token("tab")) {
+                    @include mq($mq-tab) {
                         padding-inline: $space-3xl $card-space-2xl;
                     }
                 }
@@ -376,17 +376,17 @@ $card-fs-3xl: $fs-3xl;
                 #{$self}__ttl {
                     line-height: 1;
 
-                    @include mq(mq-token("tab-med")) {
+                    @include mq($mq-tab-m) {
                         font-size: $card-fs-3xl;
                     }
 
-                    @include mq(mq-token("tab")) {
+                    @include mq($mq-tab) {
                         line-height: 1.1;
                     }
                 }
 
                 #{$self}__footer {
-                    @include mq(mq-token("mob-lrg")) {
+                    @include mq($mq-mob-l) {
                         position: absolute;
                         right: 0;
                         bottom: 0;
@@ -467,7 +467,7 @@ $card-fs-3xl: $fs-3xl;
                     max-width: 24ch;
                     font-size: $card-fs-s;
 
-                    @include mq(mq-token("mob-lrg")) {
+                    @include mq($mq-mob-l) {
                         max-width: 26ch;
                         font-size: var(--font-scale-base);
                     }
@@ -476,11 +476,11 @@ $card-fs-3xl: $fs-3xl;
 
             &#{$self}--lg {
                 #{$self}__img {
-                    @include mq(mq-token("mob-med")) {
+                    @include mq($mq-mob-m) {
                         padding-block-end: $card-space-5xl;
                     }
 
-                    @include mq(mq-token("mob-lrg")) {
+                    @include mq($mq-mob-l) {
                         padding-block-end: $card-space-5xl;
                     }
 
@@ -493,7 +493,7 @@ $card-fs-3xl: $fs-3xl;
                     grid-row: 2;
                     padding-block-start: 0;
 
-                    @include mq(mq-token("mob-med")) {
+                    @include mq($mq-mob-m) {
                         grid-row: 1;
                     }
                 }
@@ -508,7 +508,7 @@ $card-fs-3xl: $fs-3xl;
                     max-width: 28ch;
                     padding-block-end: $card-space-l;
 
-                    @include mq(mq-token("mob-med")) {
+                    @include mq($mq-mob-m) {
                         max-width: 42ch;
                         padding-block-end: $card-space-xl;
                     }
@@ -517,7 +517,7 @@ $card-fs-3xl: $fs-3xl;
                         margin-block-start: $card-space-m;
                         max-width: 16ch;
 
-                        @include mq(mq-token("mob-med")) {
+                        @include mq($mq-mob-m) {
                             max-width: 32ch;
                         }
                     }
@@ -535,7 +535,6 @@ $card-fs-3xl: $fs-3xl;
 
             #{$self}__header {
                 button {
-                    // TODO: Should this be a class?
                     justify-self: end;
                 }
             }
@@ -598,7 +597,7 @@ $card-fs-3xl: $fs-3xl;
                     gap: $card-space-xs;
                     justify-content: space-between;
 
-                    @include mq(mq-token("tab")) {
+                    @include mq($mq-tab) {
                         gap: $card-space-m;
                     }
 
@@ -628,13 +627,13 @@ $card-fs-3xl: $fs-3xl;
                     #{$self}__callout {
                         flex: 100%;
 
-                        @include mq(mq-token("tab")) {
+                        @include mq($mq-tab) {
                             flex: 0 1 auto;
                         }
                     }
 
                     #{$self}__callout {
-                        @include mq(mq-token("tab")) {
+                        @include mq($mq-tab) {
                             min-width: 480px;
                         }
                     }
