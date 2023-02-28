@@ -331,6 +331,7 @@ $card-fs-3xl: $fs-3xl;
             }
 
             &#{$self}--featured.is-full {
+                position: relative;
                 align-items: center;
                 max-width: 100%;
 
@@ -357,6 +358,10 @@ $card-fs-3xl: $fs-3xl;
 
                 #{$self}__inner {
                     align-self: center;
+
+                    @include mq(mq-token("mob-lrg")) {
+                        padding-block: $card-space-2xl;
+                    }
                 }
 
                 #{$self}__header,
@@ -377,6 +382,14 @@ $card-fs-3xl: $fs-3xl;
 
                     @include mq(mq-token("tab")) {
                         line-height: 1.1;
+                    }
+                }
+
+                #{$self}__footer {
+                    @include mq(mq-token("mob-lrg")) {
+                        position: absolute;
+                        right: 0;
+                        bottom: 0;
                     }
                 }
             }
