@@ -13,14 +13,20 @@ import {
 } from '@remix-run/react';
 import { SkipLink } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
+import oscUiBurgerStyles from 'osc-ui/dist/src-components-Burger-burger.css';
 import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
+import oscHeaderStyles from 'osc-ui/dist/src-components-Header-header.css';
+import oscLogoStyles from 'osc-ui/dist/src-components-Logo-logo.css';
+import oscNavStyles from 'osc-ui/dist/src-components-Navbar-navbar.css';
 import oscUiSkipLinkStyle from 'osc-ui/dist/src-components-SkipLink-skip-link.css';
 import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
 import styles from 'osc-ui/dist/src-styles-main.css';
 import React, { useEffect } from 'react';
 import { DynamicLinks } from 'remix-utils';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
+import { SiteHeader } from './components/Header/Header';
 import { getSettingsData } from './models/sanity.server';
+import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
 import { getUser } from './session.server';
 import { getColorScheme } from './utils/colorScheme';
@@ -38,6 +44,10 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscUiCarouselStyles },
         { rel: 'stylesheet', href: oscUiSwitchStyles },
         { rel: 'stylesheet', href: oscUiSkipLinkStyle },
+        { rel: 'stylesheet', href: oscHeaderStyles },
+        { rel: 'stylesheet', href: oscNavStyles },
+        { rel: 'stylesheet', href: oscLogoStyles },
+        { rel: 'stylesheet', href: oscUiBurgerStyles },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
         { rel: 'apple-touch-icon', sizes: '60x60', href: '/icons/apple-icon-60x60.png' },
@@ -64,6 +74,7 @@ type LoaderData = {
     user: Awaited<ReturnType<typeof getUser>>;
     colorScheme: string;
     siteSettings: object;
+    navSettings: object;
     SANITY_STUDIO_API_PROJECT_ID: string | undefined;
     SANITY_STUDIO_API_DATASET: string | undefined;
 };
@@ -77,10 +88,21 @@ export const loader: LoaderFunction = async ({ request }) => {
         query: SETTINGS_QUERY,
     });
 
+    // If the mainNavigationId is returned from the settings then run the navigation query
+    const navSettings =
+        siteSettings?.mainNavigationId &&
+        (await getSettingsData({
+            query: NAV_QUERY,
+            params: {
+                id: siteSettings?.mainNavigationId,
+            },
+        }));
+
     return json<LoaderData>({
         user: await getUser(request),
         colorScheme: await getColorScheme(request),
         siteSettings,
+        navSettings,
         SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
         SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET,
     });
@@ -147,7 +169,8 @@ const Document = ({ children }: DocumentProps) => {
 };
 
 export default function App() {
-    const { SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET } = useLoaderData();
+    const { SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET, navSettings, siteSettings } =
+        useLoaderData();
     let location = useLocation();
     let matches = useMatches();
 
@@ -202,7 +225,11 @@ export default function App() {
                     })}`,
                 }}
             />
+
             <SkipLink anchor="main-content">Skip to main content</SkipLink>
+
+            <SiteHeader navSettings={navSettings} actionNav={siteSettings?.actionNav} />
+
             <main id="main-content" tabIndex={-1}>
                 <Outlet />
             </main>

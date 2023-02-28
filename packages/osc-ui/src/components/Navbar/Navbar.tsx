@@ -1,5 +1,4 @@
 import { NavLink as RemixNavLink } from '@remix-run/react';
-import uniqueId from 'lodash.uniqueid';
 import type {
     AnchorHTMLAttributes,
     ButtonHTMLAttributes,
@@ -11,18 +10,11 @@ import type {
     ReactNode,
     RefAttributes,
 } from 'react';
-import React, {
-    createContext,
-    forwardRef,
-    useContext,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import React, { createContext, forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import breakpoints from '../../../../../tokens/media-queries';
 import { useInteractOutside } from '../../hooks/useInteractOutside';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useUniqueId } from '../../hooks/useUniqueId';
 import { classNames } from '../../utils/classNames';
 import { rem } from '../../utils/rem';
 import { Icon } from '../Icon/Icon';
@@ -101,8 +93,8 @@ export const NavSubMenu = (props: NavSubMenuProps) => {
     const ref = useRef<HTMLDivElement>(null);
 
     // IDs get regenerated on every render so we're memoizing them here to preserve them
-    const contentId = useMemo(() => uniqueId('content:'), []);
-    const triggerId = useMemo(() => uniqueId('trigger:'), []);
+    const contentId = useUniqueId('content:');
+    const triggerId = useUniqueId('trigger:');
 
     const context = {
         name: SUBMENU_NAME,
@@ -122,17 +114,29 @@ export const NavSubMenu = (props: NavSubMenuProps) => {
     useInteractOutside(ref, () => setIsOpen(false), ['mouseup', 'touchstart', 'keyup']);
 
     useEffect(() => {
+        const navLinks = document.querySelectorAll('.c-nav__link');
+
         // close menu when user presses escape
         const handleEscape = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
                 setIsOpen(false);
             }
         };
-
         document.addEventListener('keyup', handleEscape);
+
+        // As we're using the Remix Link component we need to make sure the menu is closed as expected when a link is clicked
+        // otherwise we end up with the menu remaining open.
+        const handleClick = () => setIsOpen(false);
+        navLinks.forEach((link) => {
+            link.addEventListener('click', handleClick);
+        });
 
         return () => {
             document.removeEventListener('keyup', handleEscape);
+
+            navLinks.forEach((link) => {
+                link.removeEventListener('click', handleClick);
+            });
         };
     }, []);
 
@@ -276,7 +280,7 @@ export const NavContent = (props: NavContentProps) => {
             className={classes}
             style={{
                 ...attr.style,
-                ['--nav-trigger-distance' as string]: !isDesktop && `${scrollPosition}px`,
+                ['--nav-trigger-distance' as string]: `${scrollPosition}px`,
             }}
             {...attr}
             ref={ref}

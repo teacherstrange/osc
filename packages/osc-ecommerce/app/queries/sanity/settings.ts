@@ -1,4 +1,5 @@
 import groq from 'groq';
+import { buildUrls } from './fragments/buildUrls';
 import { LINK_EXTERNAL } from './fragments/linkExternal';
 import { LINK_INTERNAL } from './fragments/linkInternal';
 
@@ -7,16 +8,21 @@ export const SETTINGS_QUERY = groq`
         _id,
         _rev,
         _type,
-        menu {
-            links[] {
-                (_type == 'linkInternal') => {
-                    title,
-                    ${LINK_INTERNAL}
-                },
-                (_type == 'linkExternal') => {
-                    ${LINK_EXTERNAL}
+        "mainNavigationId": mainNavigation->navigationId.current,
+        actionNav {
+            ...,
+            account {
+                ...,
+                link->{
+                    ${buildUrls}
                 }
             },
+            wishlist {
+                ...,
+                link->{
+                    ${buildUrls}
+                }
+            }
         },
         footer {
             _type,

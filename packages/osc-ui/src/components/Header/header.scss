@@ -59,6 +59,7 @@
             right: 0;
             bottom: 0;
             left: 0;
+            background-color: var(--color-tertiary);
             transition: transform $timing $ease-out-sine;
             overflow-x: hidden; /* [2] */
 

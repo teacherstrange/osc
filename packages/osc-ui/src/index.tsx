@@ -1,5 +1,6 @@
 import './styles/main.scss';
 
+// Components
 export {
     Accordion,
     AccordionHeader,
@@ -16,10 +17,11 @@ export { Content } from './components/Content/Content';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export { Footer } from './components/Footer/Footer';
 export { Header, HeaderActionBar, HeaderNav } from './components/Header/Header';
-export { Icon, SpritesheetProvider } from './components/Icon/Icon';
+export { AccessibleIcon, Icon, SpritesheetProvider } from './components/Icon/Icon';
 export { Image } from './components/Image/Image';
 export { ImageGallery } from './components/ImageGallery/ImageGallery';
 export { List } from './components/List/List';
+export { Logo } from './components/Logo/Logo';
 export { Modal } from './components/Modal/Modal';
 export {
     Navbar,
@@ -38,3 +40,5 @@ export { Tag } from './components/Tag/Tag';
 export { Trustpilot } from './components/Trustpilot/Trustpilot';
 export { VideoPlayer } from './components/VideoPlayer/VideoPlayer';
 export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
+// Utils
+export { rem } from './utils/rem';

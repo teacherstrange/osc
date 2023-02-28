@@ -211,9 +211,7 @@ export interface SanitySiteSetting {
         links: InternalSanityLinkItem[] | ExternalSanityLinkItem[];
         text: PortableTextBlock;
     };
-    menu: {
-        links: InternalSanityLinkItem[] | ExternalSanityLinkItem[];
-    };
+    mainNavigationId: string;
     seo: SanitySEO;
 }
 
@@ -224,5 +222,49 @@ export interface SanityRedirect {
     destination: {
         _type: string;
         slug: string;
+    };
+}
+
+export interface SanityNavSettings {
+    _type: string;
+    navigationId: string;
+    navigationItem: SanityNavItem[];
+}
+
+export interface SanityNavItem extends module {
+    _type?: 'column' | 'feature';
+    navigationLabel: string;
+    internalLink?: {
+        title: string;
+        slug: string;
+    };
+    externalLink?: string;
+    target?: 'Internal' | 'External' | 'Trigger';
+    featured?: SanityNavItem[];
+    items?: SanityNavItem[];
+}
+
+export interface SanityActionNavSettings {
+    account: {
+        icon: string;
+        label: string;
+        link: {
+            slug: string;
+        };
+    };
+    cart: {
+        icon: string;
+        label: string;
+    };
+    search: {
+        icon: string;
+        label: string;
+    };
+    wishlist: {
+        icon: string;
+        label: string;
+        link: {
+            slug: string;
+        };
     };
 }

@@ -22,15 +22,16 @@
 import S from '@sanity/desk-tool/structure-builder';
 import Iframe from 'sanity-plugin-iframe-pane';
 import SeoPane from 'sanity-plugin-seo-pane';
-import { resolveProductionUrl } from './utils/resolveProductionUrl';
+import { blog } from './desk/blog';
 import { collections } from './desk/collections';
 import { home } from './desk/home';
+import { navigation } from './desk/navigation';
 import { pages } from './desk/pages';
-import { products } from './desk/products';
-import { settings } from './desk/settings';
-import { blog } from './desk/blog';
 import { posts } from './desk/posts';
+import { products } from './desk/products';
 import { redirects } from './desk/redirects';
+import { settings } from './desk/settings';
+import { resolveProductionUrl } from './utils/resolveProductionUrl';
 
 // If you add document types to desk structure manually, you can add them to this array to prevent duplicates in the root pane
 const DOCUMENT_TYPES_IN_STRUCTURE = [
@@ -43,7 +44,8 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
     'settings',
     'blog',
     'post',
-    'redirect'
+    'redirect',
+    'navigation',
 ];
 
 /**
@@ -55,7 +57,7 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
  */
 export const getDefaultDocumentNode = ({ schemaType }) => {
     // Don't add the preview or seo pane to the redirect
-    if (schemaType === 'redirect') {
+    if (schemaType === 'redirect' || schemaType === 'navigation') {
         return;
     }
 
@@ -68,8 +70,8 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
                 url: (doc) => resolveProductionUrl(doc),
                 reload: {
                     button: true,
-                    revision: true
-                }
+                    revision: true,
+                },
             })
             .title('Preview'),
         S.view
@@ -78,9 +80,9 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
                 // Retrieve the keywords and synonyms at the given dot-notated strings
                 keywords: `seo.keywords`,
                 synonyms: `seo.synonyms`,
-                url: (doc) => resolveProductionUrl(doc)
+                url: (doc) => resolveProductionUrl(doc),
             })
-            .title('SEO')
+            .title('SEO'),
     ]);
 };
 
@@ -100,6 +102,7 @@ export default () => {
             products,
             S.divider(),
             settings,
+            navigation,
             redirects,
             S.divider(),
             // Automatically add new document types to the root pane
