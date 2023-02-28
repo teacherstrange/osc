@@ -67,7 +67,7 @@
     "last 2 versions, not dead"
   ],
   "name": "osc",
-  "version": "0.46.3",
+  "version": "0.46.4",
   "workspaces": [
     "packages/osc-ui",
     "packages/osc-ecommerce",

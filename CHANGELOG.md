@@ -1,3 +1,11 @@
+## [0.46.4](https://github.com/Open-Study-College/osc/compare/v0.46.3...v0.46.4) (2023-02-28)
+
+
+### 🐛 Bugs
+
+* **academic-hub:** move styles link before component styles ([66014e4](https://github.com/Open-Study-College/osc/commit/66014e42959c874a94db44780d386149007c81c7))
+* **ecommerce:** move dynamic styles after static assets ([23991ad](https://github.com/Open-Study-College/osc/commit/23991ad9bb8c4cace345d2d49293b523a8c85c41))
+
 ## [0.46.3](https://github.com/Open-Study-College/osc/compare/v0.46.2...v0.46.3) (2023-02-24)
 
 
@@ -52,33 +60,4 @@
 ### 📦 General Housekeeping / Package Updates
 
 * **api-assignments:** remove `debug: true` ([b9b9c19](https://github.com/Open-Study-College/osc/commit/b9b9c197d45fc961ec98ad995c1a33a59195f87b))
-
-## [0.45.0](https://github.com/Open-Study-College/osc/compare/v0.44.0...v0.45.0) (2023-02-24)
-
-
-### ✨ Features
-
-* **api-gateway:** added LMS API to gateway ([ff87df9](https://github.com/Open-Study-College/osc/commit/ff87df9b7294748fa77fc7896a53f7f5f946a70b))
-* **api-lms:** authenticating Litmos (WIP) ([f87dd51](https://github.com/Open-Study-College/osc/commit/f87dd5167f7d1ff2ea3053fcb3fc11070aaa3d02))
-* **api-lms:** setup skeleton LMS API ([38fe653](https://github.com/Open-Study-College/osc/commit/38fe653bb82a9d3b7ead615d48532748a328b21d))
-* **api-lms:** working API example ([f21cb5e](https://github.com/Open-Study-College/osc/commit/f21cb5e1441a76ab9f52346dc0a399885a74fc75))
-
-
-### ♻️ Refactors
-
-* **api:** updating .env.example files with all variables ([9727f02](https://github.com/Open-Study-College/osc/commit/9727f025e41b7f060ab4169c624b36b1885be652))
-* **api-lms:** change from `let` to `const` ([567f7ce](https://github.com/Open-Study-College/osc/commit/567f7cefb213ffbfe3f382d37b6944d8b02d95a0))
-
-
-### 🐛 Bugs
-
-* **api-lms:** returning an error if no user found ([e140b43](https://github.com/Open-Study-College/osc/commit/e140b43cefa2bf8910b979b28c90a7d28f11a67e))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **api-lms:** added docs to schema ([93a9edc](https://github.com/Open-Study-College/osc/commit/93a9edcbad7c18114a59ec8ab2cebe9f43547998))
-* **api-lms:** remove `console.log` ([fb16abb](https://github.com/Open-Study-College/osc/commit/fb16abbc9baff7de73480c68cda40e935c5e7135))
-* **api-lms:** removed empty function types file ([b91e5f7](https://github.com/Open-Study-College/osc/commit/b91e5f762dc88c0399df3c9e9bb8f68d24404769))
-* **api-lms:** set ID to non-nullable in GQL schema ([888d86d](https://github.com/Open-Study-College/osc/commit/888d86d5287dceb5423334564ef213371bc4e6ef))
 
