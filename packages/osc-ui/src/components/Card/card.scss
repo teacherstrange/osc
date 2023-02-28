@@ -36,241 +36,356 @@ $card-fs-xl: $fs-xl;
 $card-fs-2xl: $fs-2xl;
 $card-fs-3xl: $fs-3xl;
 
-.c-card {
-    --card-border: #{$card-border};
+@layer components {
+    .c-card {
+        --card-border: #{$card-border};
 
-    $self: &;
+        $self: &;
 
-    width: 100%;
-    overflow: hidden;
-    background-color: var(--color-tertiary);
-    box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
-    font-size: var(--font-scale-base);
-    font-weight: $fw-light;
-    line-height: 1.4;
+        width: 100%;
+        overflow: hidden;
+        background-color: var(--color-tertiary);
+        box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+        font-size: var(--font-scale-base);
+        font-weight: $fw-light;
+        line-height: 1.4;
 
-    &,
-    &__inner,
-    &__header {
-        display: grid;
-    }
-
-    &__img {
-        height: 100%;
-
-        img {
-            width: 100%;
-            max-height: 250px;
-            object-fit: cover;
+        &,
+        &__inner,
+        &__header {
+            display: grid;
         }
 
-        &.is-rounded {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto;
-            margin-block-start: $card-space-xl;
+        &__img {
+            height: 100%;
 
-            > img {
-                border-radius: 100%;
+            img {
+                width: 100%;
+                max-height: 250px;
+                object-fit: cover;
+            }
+
+            &.is-rounded {
+                width: 160px;
+                height: 160px;
+                margin: 0 auto;
+                margin-block-start: $card-space-xl;
+
+                > img {
+                    border-radius: 100%;
+                }
             }
         }
-    }
 
-    &__inner {
-        z-index: 1;
-        padding: $card-space-m $card-space-xl $card-space-xl;
-    }
-
-    &__header {
-        margin-block-end: $card-space-m;
-    }
-
-    &__ttl,
-    &__subttl {
-        margin-block-end: 0;
-    }
-
-    &__ttl {
-        font-size: $card-fs-l;
-
-        &.is-small {
-            font-size: $card-fs-m;
-            font-weight: $fw-reg;
+        &__inner {
+            z-index: 1;
+            padding: $card-space-m $card-space-xl $card-space-xl;
         }
-    }
 
-    &__subttl {
-        color: var(--color-neutral-700);
-        font-size: var(--font-scale-base);
-        grid-row: 1;
-
-        &.is-small {
-            font-weight: $fw-reg;
+        &__header {
+            margin-block-end: $card-space-m;
         }
-    }
 
-    &__body {
-        margin-block-start: auto;
-        display: flex;
-        flex-direction: column;
-    }
-
-    &__footer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding-block-start: $card-space-s;
-        font-size: $card-fs-s;
-        font-weight: $fw-light;
-
-        > * {
-            margin-bottom: 0;
-        }
-    }
-
-    /*
-     * Border image doesn't work with border-radius
-     * probably fine in this instance but worth being aware of
-     */
-    &__callout {
-        display: flex;
-        justify-content: space-between;
-        gap: $card-space-s;
-        padding: $card-space-xs $card-space-s;
-        margin-block-start: $card-space-m;
-        border: 6px solid;
-        border-image-slice: 1;
-        border-image-source: $card-gradient;
-
-        .o-icon {
-            --icon-size: #{math.div(20, $base-fs)}em;
-        }
-    }
-
-    &__price-tag {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        margin-block-start: $card-space-m;
-        font-size: $card-fs-m;
-
-        > * {
+        &__ttl,
+        &__subttl {
             margin-block-end: 0;
         }
 
-        > :first-child {
-            color: $card-color;
-        }
-    }
+        &__ttl {
+            font-size: $card-fs-l;
 
-    &__wishlist-btn {
-        svg {
-            stroke: currentcolor;
-            fill: transparent;
-            stroke-width: 2px;
+            &.is-small {
+                font-size: $card-fs-m;
+                font-weight: $fw-reg;
+            }
         }
 
-        &.is-active {
-            @include animate(heartbeat, 0.3s, $ease-in-out-quint);
+        &__subttl {
+            color: var(--color-neutral-700);
+            font-size: var(--font-scale-base);
+            grid-row: 1;
 
+            &.is-small {
+                font-weight: $fw-reg;
+            }
+        }
+
+        &__body {
+            margin-block-start: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding-block-start: $card-space-s;
+            font-size: $card-fs-s;
+            font-weight: $fw-light;
+
+            > * {
+                margin-bottom: 0;
+            }
+        }
+
+        /*
+         * Border image doesn't work with border-radius
+         * probably fine in this instance but worth being aware of
+         */
+        &__callout {
+            display: flex;
+            justify-content: space-between;
+            gap: $card-space-s;
+            padding: $card-space-xs $card-space-s;
+            margin-block-start: $card-space-m;
+            border: 6px solid;
+            border-image-slice: 1;
+            border-image-source: $card-gradient;
+
+            .o-icon {
+                --icon-size: #{math.div(20, $base-fs)}em;
+            }
+        }
+
+        &__price-tag {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-block-start: $card-space-m;
+            font-size: $card-fs-m;
+
+            > * {
+                margin-block-end: 0;
+            }
+
+            > :first-child {
+                color: $card-color;
+            }
+        }
+
+        &__wishlist-btn {
             svg {
-                fill: var(--color-primary);
-                stroke: var(--color-primary);
-            }
-        }
-    }
-
-    &.is-block-link {
-        cursor: pointer;
-
-        #{$self}__img {
-            transition: transform 0.3s ease-out;
-        }
-
-        &:hover {
-            #{$self}__img {
-                transform: scale(1.1) rotate(1deg);
-            }
-        }
-    }
-
-    // *----------------------------------*/
-    //  Variant - Blog
-    // *----------------------------------*/
-    &--blog {
-        border-bottom: var(--card-border);
-        box-shadow: none;
-        color: var(--color-secondary);
-
-        #{$self}__inner {
-            padding-inline: 0;
-            padding-block-end: 0;
-        }
-
-        #{$self}__subttl {
-            color: var(--color-secondary);
-
-            @include before-subttl;
-        }
-
-        #{$self}__footer {
-            border-top: var(--card-border);
-            margin-block-start: $card-space-l;
-            padding-block: $card-space-l;
-        }
-
-        &#{$self}--media-object {
-            --card-image-size: 105px;
-
-            grid-template-rows: 1fr;
-            grid-template-columns: minmax(0, var(--card-image-size)) minmax(0, 1fr);
-            gap: $card-space-2xl;
-
-            @include mq(mq-token("tab")) {
-                --card-image-size: 160px;
-
-                gap: $card-space-xl;
+                stroke: currentcolor;
+                fill: transparent;
+                stroke-width: 2px;
             }
 
-            #{$self}__img {
-                grid-row: 1;
-                grid-column: 1;
-                width: var(--card-image-size);
-                height: var(--card-image-size);
-                margin-top: 0;
-            }
+            &.is-active {
+                @include animate(heartbeat, 0.3s, $ease-in-out-quint);
 
-            #{$self}__header {
-                margin-block-end: $card-space-2xs;
-            }
-
-            #{$self}__ttl {
-                font-size: $card-fs-2xl;
-
-                @include mq(mq-token("mob-lrg")) {
-                    max-width: 24ch;
-                    font-size: $card-fs-l;
+                svg {
+                    fill: var(--color-primary);
+                    stroke: var(--color-primary);
                 }
             }
+        }
+
+        &.is-block-link {
+            cursor: pointer;
+
+            #{$self}__img {
+                transition: transform 0.3s ease-out;
+            }
+
+            &:hover {
+                #{$self}__img {
+                    transform: scale(1.1) rotate(1deg);
+                }
+            }
+        }
+
+        // *----------------------------------*/
+        //  Variant - Blog
+        // *----------------------------------*/
+        &--blog {
+            border-bottom: var(--card-border);
+            box-shadow: none;
+            color: var(--color-secondary);
 
             #{$self}__inner {
-                padding: 0;
+                padding-inline: 0;
+                padding-block-end: 0;
+            }
+
+            #{$self}__subttl {
+                color: var(--color-secondary);
+
+                @include before-subttl;
             }
 
             #{$self}__footer {
-                justify-content: flex-end;
-                border-top: none;
-                margin-block-start: 0;
-                padding-block: 0 $card-space-xl;
+                border-top: var(--card-border);
+                margin-block-start: $card-space-l;
+                padding-block: $card-space-l;
+            }
+
+            &#{$self}--media-object {
+                --card-image-size: 105px;
+
+                grid-template-rows: 1fr;
+                grid-template-columns: minmax(0, var(--card-image-size)) minmax(0, 1fr);
+                gap: $card-space-2xl;
+
+                @include mq(mq-token("tab")) {
+                    --card-image-size: 160px;
+
+                    gap: $card-space-xl;
+                }
+
+                #{$self}__img {
+                    grid-row: 1;
+                    grid-column: 1;
+                    width: var(--card-image-size);
+                    height: var(--card-image-size);
+                    margin-top: 0;
+                }
+
+                #{$self}__header {
+                    margin-block-end: $card-space-2xs;
+                }
+
+                #{$self}__ttl {
+                    font-size: $card-fs-2xl;
+
+                    @include mq(mq-token("mob-lrg")) {
+                        max-width: 24ch;
+                        font-size: $card-fs-l;
+                    }
+                }
+
+                #{$self}__inner {
+                    padding: 0;
+                }
+
+                #{$self}__footer {
+                    justify-content: flex-end;
+                    border-top: none;
+                    margin-block-start: 0;
+                    padding-block: 0 $card-space-xl;
+                }
+            }
+
+            &#{$self}--featured {
+                --card-border: none;
+
+                color: var(--color-septenary);
+                grid-template-rows: 1fr;
+
+                #{$self}__img {
+                    grid-row: 1;
+                    grid-column: 1;
+                    align-self: stretch;
+
+                    &,
+                    img {
+                        max-height: 100%;
+                    }
+                }
+
+                #{$self}__inner {
+                    grid-row: 1;
+                    grid-column: 1;
+                    align-self: end;
+                    padding: $card-space-2xl 0 0;
+                }
+
+                #{$self}__header {
+                    margin-block-end: 6px;
+                }
+
+                #{$self}__header,
+                #{$self}__body {
+                    padding-inline: 12px;
+                    font-weight: $fw-bold;
+
+                    > * {
+                        margin-block-end: 0;
+                    }
+                }
+
+                #{$self}__ttl {
+                    max-width: 11ch;
+                    font-size: $card-fs-3xl;
+                    line-height: $base-lh;
+
+                    @include mq(mq-token("tab-med")) {
+                        max-width: unset;
+                        font-size: $card-fs-xl;
+                    }
+                }
+
+                #{$self}__subttl {
+                    color: var(--color-septenary);
+                }
+
+                #{$self}__footer {
+                    margin-block-start: 0;
+                    padding-block: $card-space-2xl 0;
+                    justify-content: flex-end;
+
+                    @include mq(mq-token("tab-med")) {
+                        padding-block-start: $card-space-l;
+                    }
+                }
+            }
+
+            &#{$self}--featured.is-full {
+                align-items: center;
+                max-width: 100%;
+
+                @include mq(mq-token("mob-lrg"), max) {
+                    grid-template-rows: minmax(0, 1fr) minmax(0, auto);
+                }
+
+                @include mq(mq-token("mob-lrg")) {
+                    grid-template-columns: minmax(0, 1fr) minmax(0, 45.5%);
+                }
+
+                #{$self}__img {
+                    @include mq(mq-token("mob-lrg"), max) {
+                        max-height: 230px;
+                        grid-row: 2;
+                    }
+
+                    @include mq(mq-token("mob-lrg")) {
+                        grid-column: 2;
+                        width: 100%;
+                        height: var(--c-card-inner-height);
+                    }
+                }
+
+                #{$self}__inner {
+                    align-self: center;
+                }
+
+                #{$self}__header,
+                #{$self}__body {
+                    padding-inline: $card-space-xl;
+
+                    @include mq(mq-token("tab")) {
+                        padding-inline: $space-3xl $card-space-2xl;
+                    }
+                }
+
+                #{$self}__ttl {
+                    line-height: 1;
+
+                    @include mq(mq-token("tab-med")) {
+                        font-size: $card-fs-3xl;
+                    }
+
+                    @include mq(mq-token("tab")) {
+                        line-height: 1.1;
+                    }
+                }
             }
         }
 
-        &#{$self}--featured {
-            --card-border: none;
-
-            color: var(--color-septenary);
-            grid-template-rows: 1fr;
-
+        // *----------------------------------*/
+        //  Variant - Collection
+        // *----------------------------------*/
+        &--collection {
             #{$self}__img {
                 grid-row: 1;
                 grid-column: 1;
@@ -290,338 +405,225 @@ $card-fs-3xl: $fs-3xl;
             }
 
             #{$self}__header {
-                margin-block-end: 6px;
-            }
-
-            #{$self}__header,
-            #{$self}__body {
-                padding-inline: 12px;
-                font-weight: $fw-bold;
-
-                > * {
-                    margin-block-end: 0;
-                }
+                margin-block-end: 0;
             }
 
             #{$self}__ttl {
-                max-width: 11ch;
-                font-size: $card-fs-3xl;
-                line-height: $base-lh;
-
-                @include mq(mq-token("tab-med")) {
-                    max-width: unset;
-                    font-size: $card-fs-xl;
-                }
+                font-size: $card-fs-xl;
             }
 
-            #{$self}__subttl {
-                color: var(--color-septenary);
-            }
-
-            #{$self}__footer {
-                margin-block-start: 0;
-                padding-block: $card-space-2xl 0;
-                justify-content: flex-end;
-
-                @include mq(mq-token("tab-med")) {
-                    padding-block-start: $card-space-l;
-                }
-            }
-        }
-
-        &#{$self}--featured.is-full {
-            align-items: center;
-            max-width: 100%;
-
-            @include mq(mq-token("mob-lrg"), max) {
-                grid-template-rows: minmax(0, 1fr) minmax(0, auto);
-            }
-
-            @include mq(mq-token("mob-lrg")) {
-                grid-template-columns: minmax(0, 1fr) minmax(0, 45.5%);
-            }
-
-            #{$self}__img {
-                @include mq(mq-token("mob-lrg"), max) {
-                    max-height: 230px;
+            &#{$self}--sm {
+                #{$self}__inner {
                     grid-row: 2;
+                    padding-block-start: 0;
                 }
 
-                @include mq(mq-token("mob-lrg")) {
-                    grid-column: 2;
-                    width: 100%;
-                    height: var(--c-card-inner-height);
+                #{$self}__img {
+                    max-height: 180px;
                 }
-            }
 
-            #{$self}__inner {
-                align-self: center;
-            }
+                #{$self}__header,
+                #{$self}__body,
+                #{$self}__footer {
+                    padding-inline: $card-space-l;
+                }
 
-            #{$self}__header,
-            #{$self}__body {
-                padding-inline: $card-space-xl;
-
-                @include mq(mq-token("tab")) {
-                    padding-inline: $space-3xl $card-space-2xl;
+                #{$self}__footer {
+                    border-top: var(--card-border);
+                    padding-block-end: $card-space-s;
                 }
             }
 
-            #{$self}__ttl {
-                line-height: 1;
-
-                @include mq(mq-token("tab-med")) {
-                    font-size: $card-fs-3xl;
+            &#{$self}--md {
+                #{$self}__inner {
+                    align-self: center;
+                    padding: $space-3xl $card-space-l;
                 }
 
-                @include mq(mq-token("tab")) {
-                    line-height: 1.1;
+                #{$self}__img {
+                    img {
+                        aspect-ratio: 2 / 1;
+                    }
                 }
-            }
-        }
-    }
 
-    // *----------------------------------*/
-    //  Variant - Collection
-    // *----------------------------------*/
-    &--collection {
-        #{$self}__img {
-            grid-row: 1;
-            grid-column: 1;
-            align-self: stretch;
+                #{$self}__ttl {
+                    font-size: $card-space-xl;
+                }
 
-            &,
-            img {
-                max-height: 100%;
-            }
-        }
+                #{$self}__body {
+                    max-width: 24ch;
+                    font-size: $card-fs-s;
 
-        #{$self}__inner {
-            grid-row: 1;
-            grid-column: 1;
-            align-self: end;
-            padding: $card-space-2xl 0 0;
-        }
-
-        #{$self}__header {
-            margin-block-end: 0;
-        }
-
-        #{$self}__ttl {
-            font-size: $card-fs-xl;
-        }
-
-        &#{$self}--sm {
-            #{$self}__inner {
-                grid-row: 2;
-                padding-block-start: 0;
-            }
-
-            #{$self}__img {
-                max-height: 180px;
-            }
-
-            #{$self}__header,
-            #{$self}__body,
-            #{$self}__footer {
-                padding-inline: $card-space-l;
-            }
-
-            #{$self}__footer {
-                border-top: var(--card-border);
-                padding-block-end: $card-space-s;
-            }
-        }
-
-        &#{$self}--md {
-            #{$self}__inner {
-                align-self: center;
-                padding: $space-3xl $card-space-l;
-            }
-
-            #{$self}__img {
-                img {
-                    aspect-ratio: 2 / 1;
+                    @include mq(mq-token("mob-lrg")) {
+                        max-width: 26ch;
+                        font-size: var(--font-scale-base);
+                    }
                 }
             }
 
-            #{$self}__ttl {
-                font-size: $card-space-xl;
-            }
+            &#{$self}--lg {
+                #{$self}__img {
+                    @include mq(mq-token("mob-med")) {
+                        padding-block-end: $card-space-5xl;
+                    }
 
-            #{$self}__body {
-                max-width: 24ch;
-                font-size: $card-fs-s;
+                    @include mq(mq-token("mob-lrg")) {
+                        padding-block-end: $card-space-5xl;
+                    }
 
-                @include mq(mq-token("mob-lrg")) {
-                    max-width: 26ch;
-                    font-size: var(--font-scale-base);
-                }
-            }
-        }
-
-        &#{$self}--lg {
-            #{$self}__img {
-                @include mq(mq-token("mob-med")) {
-                    padding-block-end: $card-space-5xl;
+                    img {
+                        aspect-ratio: 1 / 0.9;
+                    }
                 }
 
-                @include mq(mq-token("mob-lrg")) {
-                    padding-block-end: $card-space-5xl;
-                }
-
-                img {
-                    aspect-ratio: 1 / 0.9;
-                }
-            }
-
-            #{$self}__inner {
-                grid-row: 2;
-                padding-block-start: 0;
-
-                @include mq(mq-token("mob-med")) {
-                    grid-row: 1;
-                }
-            }
-
-            #{$self}__header,
-            #{$self}__body,
-            #{$self}__footer {
-                padding-inline: $card-space-l;
-            }
-
-            #{$self}__body {
-                max-width: 28ch;
-                padding-block-end: $card-space-l;
-
-                @include mq(mq-token("mob-med")) {
-                    max-width: 42ch;
-                    padding-block-end: $card-space-xl;
-                }
-
-                > button {
-                    margin-block-start: $card-space-m;
-                    max-width: 16ch;
+                #{$self}__inner {
+                    grid-row: 2;
+                    padding-block-start: 0;
 
                     @include mq(mq-token("mob-med")) {
-                        max-width: 32ch;
+                        grid-row: 1;
+                    }
+                }
+
+                #{$self}__header,
+                #{$self}__body,
+                #{$self}__footer {
+                    padding-inline: $card-space-l;
+                }
+
+                #{$self}__body {
+                    max-width: 28ch;
+                    padding-block-end: $card-space-l;
+
+                    @include mq(mq-token("mob-med")) {
+                        max-width: 42ch;
+                        padding-block-end: $card-space-xl;
+                    }
+
+                    > button {
+                        margin-block-start: $card-space-m;
+                        max-width: 16ch;
+
+                        @include mq(mq-token("mob-med")) {
+                            max-width: 32ch;
+                        }
                     }
                 }
             }
         }
-    }
 
-    // *----------------------------------*/
-    //  Variant - Course
-    // *----------------------------------*/
-    &#{$self}--course {
-
-        #{$self}__inner {
-            padding: $card-space-l;
-        }
-
-        #{$self}__header {
-            button { // TODO: Should this be a class?
-                justify-self: end;
+        // *----------------------------------*/
+        //  Variant - Course
+        // *----------------------------------*/
+        &#{$self}--course {
+            #{$self}__inner {
+                padding: $card-space-l;
             }
-        }
 
-        #{$self}__ttl {
-            border-bottom: 1px solid var(--color-secondary);
-            padding-block-end: 0.2em;
-            margin-block-end: 0.2em;
-        }
+            #{$self}__header {
+                button {
+                    // TODO: Should this be a class?
+                    justify-self: end;
+                }
+            }
 
-        #{$self}__subttl {
-            grid-row: auto;
-            color: $card-color;
-        }
-
-        #{$self}__body {
-            h4,
-            h5,
-            h6,
-            li {
-                font-size: var(--font-scale-base);
+            #{$self}__ttl {
+                border-bottom: 1px solid var(--color-secondary);
+                padding-block-end: 0.2em;
                 margin-block-end: 0.2em;
             }
 
-            .c-btn {
-                margin-block-start: $card-space-xs;
-            }
-        }
-
-        &.is-full {
-            border: 1px solid var(--color-neutral-400);
-            box-shadow: none;
-
-            #{$self}__header {
-                #{$self}__ttl,
-                #{$self}__price-tag {
-                    grid-column: 1;
-                    grid-row: 1;
-                    align-self: end;
-                }
-
-                #{$self}__price-tag {
-                    margin-block-end: 0.5em;
-                    line-height: 1.2;
-                }
-            }
-
             #{$self}__subttl {
-                font-size: $card-fs-l;
-            }
-
-            #{$self}__price-tag {
-                margin-block-start: 0;
-                margin-inline-start: auto;
+                grid-row: auto;
+                color: $card-color;
             }
 
             #{$self}__body {
-                flex-flow: row wrap;
-                align-items: center;
-                gap: $card-space-xs;
-                justify-content: space-between;
-
-                @include mq(mq-token("tab")) {
-                    gap: $card-space-m;
-                }
-
-                #{$self}__body-inner {
-                    flex: 100%;
-                }
-
-                .c-btn-group {
-                    gap: $card-space-xs;
-                }
-
-                .c-btn,
-                #{$self}__callout {
-                    margin: 0;
+                h4,
+                h5,
+                h6,
+                li {
+                    font-size: var(--font-scale-base);
+                    margin-block-end: 0.2em;
                 }
 
                 .c-btn {
-                    flex-grow: 1;
+                    margin-block-start: $card-space-xs;
                 }
+            }
 
-                #{$self}__wishlist-btn {
-                    flex-grow: 0;
-                    flex-shrink: 0; // Prevent the icon getting too small
-                }
+            &.is-full {
+                border: 1px solid var(--color-neutral-400);
+                box-shadow: none;
 
-                .c-btn-group,
-                #{$self}__callout {
-                    flex: 100%;
+                #{$self}__header {
+                    #{$self}__ttl,
+                    #{$self}__price-tag {
+                        grid-column: 1;
+                        grid-row: 1;
+                        align-self: end;
+                    }
 
-                    @include mq(mq-token("tab")) {
-                        flex: 0 1 auto;
+                    #{$self}__price-tag {
+                        margin-block-end: 0.5em;
+                        line-height: 1.2;
                     }
                 }
 
-                #{$self}__callout {
+                #{$self}__subttl {
+                    font-size: $card-fs-l;
+                }
+
+                #{$self}__price-tag {
+                    margin-block-start: 0;
+                    margin-inline-start: auto;
+                }
+
+                #{$self}__body {
+                    flex-flow: row wrap;
+                    align-items: center;
+                    gap: $card-space-xs;
+                    justify-content: space-between;
+
                     @include mq(mq-token("tab")) {
-                        min-width: 480px;
+                        gap: $card-space-m;
+                    }
+
+                    #{$self}__body-inner {
+                        flex: 100%;
+                    }
+
+                    .c-btn-group {
+                        gap: $card-space-xs;
+                    }
+
+                    .c-btn,
+                    #{$self}__callout {
+                        margin: 0;
+                    }
+
+                    .c-btn {
+                        flex-grow: 1;
+                    }
+
+                    #{$self}__wishlist-btn {
+                        flex-grow: 0;
+                        flex-shrink: 0; // Prevent the icon getting too small
+                    }
+
+                    .c-btn-group,
+                    #{$self}__callout {
+                        flex: 100%;
+
+                        @include mq(mq-token("tab")) {
+                            flex: 0 1 auto;
+                        }
+                    }
+
+                    #{$self}__callout {
+                        @include mq(mq-token("tab")) {
+                            min-width: 480px;
+                        }
                     }
                 }
             }
