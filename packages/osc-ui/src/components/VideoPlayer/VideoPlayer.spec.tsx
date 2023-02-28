@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { SpritesheetProvider } from '../Icon/Icon';
+import { render } from 'test-utils';
 import { Image } from '../Image/Image';
 import { VideoPlayer } from './VideoPlayer';
 
@@ -16,11 +16,7 @@ beforeEach(() => {
 });
 
 test('renders the default video player preview', async () => {
-    render(
-        <SpritesheetProvider>
-            <VideoPlayer url="https://youtu.be/w36Yhxxuk_c" />
-        </SpritesheetProvider>
-    );
+    render(<VideoPlayer url="https://youtu.be/w36Yhxxuk_c" />);
 
     await waitFor(() => {
         expect(document.querySelector('.react-player__preview')).toBeInTheDocument();
@@ -32,19 +28,17 @@ test('renders the default video player preview', async () => {
 
 test('renders the custom video player preview', async () => {
     render(
-        <SpritesheetProvider>
-            <VideoPlayer
-                url="https://youtu.be/w36Yhxxuk_c"
-                previewImage={
-                    <Image
-                        src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1675425684/maxresdefault_si26jj.jpg"
-                        width={968}
-                        height={544}
-                        alt="A cartoon man sitting on an armchair with his laptop on his knees. He's looking at his laptop and there are some shelves and lights in the background."
-                    />
-                }
-            />
-        </SpritesheetProvider>
+        <VideoPlayer
+            url="https://youtu.be/w36Yhxxuk_c"
+            previewImage={
+                <Image
+                    src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1675425684/maxresdefault_si26jj.jpg"
+                    width={968}
+                    height={544}
+                    alt="A cartoon man sitting on an armchair with his laptop on his knees. He's looking at his laptop and there are some shelves and lights in the background."
+                />
+            }
+        />
     );
 
     await waitFor(() => {
@@ -57,11 +51,7 @@ test('renders the custom video player preview', async () => {
 });
 
 test("doesn't render the video player preview if autoplay is true", async () => {
-    render(
-        <SpritesheetProvider>
-            <VideoPlayer autoplay={true} url="https://youtu.be/w36Yhxxuk_c" />
-        </SpritesheetProvider>
-    );
+    render(<VideoPlayer autoplay={true} url="https://youtu.be/w36Yhxxuk_c" />);
 
     await waitFor(() => {
         expect(document.querySelector('.react-player__preview')).not.toBeInTheDocument();
@@ -71,15 +61,13 @@ test("doesn't render the video player preview if autoplay is true", async () => 
 test('clears the icon, content and overlay when the video is played', async () => {
     const user = userEvent.setup();
     render(
-        <SpritesheetProvider>
-            <VideoPlayer url="https://youtu.be/w36Yhxxuk_c">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sit dicta
-                    voluptatum aspernatur neque possimus animi, nihil ex deleniti, sapiente illo ab,
-                    velit in hic! Nam quasi ea velit error?
-                </p>
-            </VideoPlayer>
-        </SpritesheetProvider>
+        <VideoPlayer url="https://youtu.be/w36Yhxxuk_c">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sit dicta voluptatum
+                aspernatur neque possimus animi, nihil ex deleniti, sapiente illo ab, velit in hic!
+                Nam quasi ea velit error?
+            </p>
+        </VideoPlayer>
     );
 
     const preview = document.querySelector('.react-player__preview');
@@ -108,15 +96,13 @@ test('clears the icon, content and overlay when the video is played', async () =
 test("doesn't clear the content or overlay if preserveContent is true", async () => {
     const user = userEvent.setup();
     render(
-        <SpritesheetProvider>
-            <VideoPlayer url="https://youtu.be/w36Yhxxuk_c" preserveContent={true}>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sit dicta
-                    voluptatum aspernatur neque possimus animi, nihil ex deleniti, sapiente illo ab,
-                    velit in hic! Nam quasi ea velit error?
-                </p>
-            </VideoPlayer>
-        </SpritesheetProvider>
+        <VideoPlayer url="https://youtu.be/w36Yhxxuk_c" preserveContent={true}>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sit dicta voluptatum
+                aspernatur neque possimus animi, nihil ex deleniti, sapiente illo ab, velit in hic!
+                Nam quasi ea velit error?
+            </p>
+        </VideoPlayer>
     );
 
     const preview = document.querySelector('.react-player__preview');
