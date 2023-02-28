@@ -1,11 +1,8 @@
-/**
- * @vitest-environment jsdom
- */
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { MouseEvent } from 'react';
 import React, { useState } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { render } from 'test-utils';
 import { Button, ButtonGroup, CopyButton } from './Button';
 
 describe('default button', () => {
@@ -110,11 +107,9 @@ describe('anchor button', () => {
 describe('link button', () => {
     test('has a href attribute', () => {
         render(
-            <MemoryRouter>
-                <Button as="link" to="/blog">
-                    Test Button
-                </Button>
-            </MemoryRouter>
+            <Button as="link" to="/blog">
+                Test Button
+            </Button>
         );
 
         expect(screen.getByRole('link')).toHaveAttribute('href', '/blog');
@@ -122,10 +117,10 @@ describe('link button', () => {
 
     test('href falls back to homepage url if `to` prop is missing', () => {
         render(
-            <MemoryRouter>
+            <>
                 {/* @ts-ignore -- we want to test that the to prop is missing, even though ts will shout */}
                 <Button as="link">Test Button</Button>
-            </MemoryRouter>
+            </>
         );
 
         expect(screen.getByRole('link')).toHaveAttribute('href', '/');

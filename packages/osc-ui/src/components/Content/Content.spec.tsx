@@ -1,15 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { render } from 'test-utils';
 import { Content } from './Content';
 import { textContent, textContentHasButtons } from './textContent';
 // TODO: sb - test background color -- think we need theme setup in storybook?
 test('renders the correct elements', () => {
-    render(
-        <MemoryRouter>
-            <Content value={textContent.body} />
-        </MemoryRouter>
-    );
+    render(<Content value={textContent.body} />);
 
     const h1 = screen.getByRole('heading', { level: 1 });
     const h2 = screen.getByRole('heading', { level: 2 });
@@ -46,73 +42,43 @@ test('renders the correct elements', () => {
 });
 
 test('renders the correct alignment class', () => {
-    const { rerender } = render(
-        <MemoryRouter>
-            <Content value={textContent.body} align="left" />
-        </MemoryRouter>
-    );
+    const { rerender } = render(<Content value={textContent.body} align="left" />);
     const contentInner = document.querySelector('.c-content__inner');
     expect(contentInner).toHaveClass('c-content__inner--left');
 
-    rerender(
-        <MemoryRouter>
-            <Content value={textContent.body} align="centre" />
-        </MemoryRouter>
-    );
+    rerender(<Content value={textContent.body} align="centre" />);
     expect(contentInner).toHaveClass('c-content__inner--centre');
 
-    rerender(
-        <MemoryRouter>
-            <Content value={textContent.body} align="right" />
-        </MemoryRouter>
-    );
+    rerender(<Content value={textContent.body} align="right" />);
     expect(contentInner).toHaveClass('c-content__inner--right');
 });
 
 test('renders a custom classname', () => {
-    render(
-        <MemoryRouter>
-            <Content value={textContent.body} className="test-class" />
-        </MemoryRouter>
-    );
+    render(<Content value={textContent.body} className="test-class" />);
     const content = document.querySelector('.c-content');
     expect(content).toHaveClass('test-class');
 });
 
 test('renders the correct padding class', () => {
     const { rerender } = render(
-        <MemoryRouter>
-            <Content value={textContent.body} paddingTop={10} paddingBottom={10} />
-        </MemoryRouter>
+        <Content value={textContent.body} paddingTop={10} paddingBottom={10} />
     );
     const content = document.querySelector('.c-content');
     expect(content).toHaveClass('u-pt-10 u-pb-10');
 
-    rerender(
-        <MemoryRouter>
-            <Content value={textContent.body} paddingTop={50} paddingBottom={110} />
-        </MemoryRouter>
-    );
+    rerender(<Content value={textContent.body} paddingTop={50} paddingBottom={110} />);
 
     expect(content).toHaveClass('u-pt-50 u-pb-110');
 });
 
 test('renders the correct margin class', () => {
-    render(
-        <MemoryRouter>
-            <Content value={textContent.body} marginBottom={10} />
-        </MemoryRouter>
-    );
+    render(<Content value={textContent.body} marginBottom={10} />);
     const content = document.querySelector('.c-content');
     expect(content).toHaveClass('u-mb-10');
 });
 
 test('renders the correct buttons', () => {
-    render(
-        <MemoryRouter>
-            <Content value={textContentHasButtons.body} buttons={textContentHasButtons.buttons} />
-        </MemoryRouter>
-    );
+    render(<Content value={textContentHasButtons.body} buttons={textContentHasButtons.buttons} />);
 
     const buttons = document.querySelectorAll('.c-btn');
     expect(buttons).toHaveLength(6);
