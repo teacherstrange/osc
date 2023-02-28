@@ -34,10 +34,10 @@ export const links: LinksFunction = () => {
             href: spritesheet,
             as: 'image',
         },
+        { rel: 'stylesheet', href: styles },
         { rel: 'stylesheet', href: oscUiCarouselStyles },
         { rel: 'stylesheet', href: oscUiSwitchStyles },
         { rel: 'stylesheet', href: oscUiSkipLinkStyle },
-        { rel: 'stylesheet', href: styles },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
         { rel: 'apple-touch-icon', sizes: '60x60', href: '/icons/apple-icon-60x60.png' },
@@ -133,8 +133,8 @@ const Document = ({ children }: DocumentProps) => {
                 {typeof document === 'undefined' && canonical && (
                     <link rel="canonical" href={canonical} />
                 )}
-                {typeof document === 'undefined' && <DynamicLinks />}
                 {typeof document === 'undefined' && <Links />}
+                {typeof document === 'undefined' && <DynamicLinks />}
             </head>
             <body>
                 {children}
