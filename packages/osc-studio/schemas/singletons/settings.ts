@@ -27,6 +27,10 @@ export default {
             name: 'seo',
             title: 'SEO',
         },
+        {
+            name: 'social',
+            title: 'Social',
+        },
     ],
     fields: [
         // Menu
@@ -301,25 +305,6 @@ export default {
             ],
         },
         {
-            name: 'social',
-            title: "Organization's social profiles",
-            type: 'object',
-            group: 'seo',
-            description: 'Input any profiles on the web that belong to your organization.',
-            options: {
-                collapsed: false,
-                collapsible: true,
-            },
-            fields: [
-                {
-                    name: 'socialProfile',
-                    title: 'Social Profile',
-                    type: 'array',
-                    of: [{ type: 'string' }],
-                },
-            ],
-        },
-        {
             name: 'robots',
             title: 'Search engine visibility',
             type: 'object',
@@ -334,6 +319,25 @@ export default {
                     name: 'noIndex',
                     title: 'Discourage search engines from indexing this site',
                     type: 'boolean',
+                },
+            ],
+        },
+        {
+            name: 'social',
+            title: "Organization's social profiles",
+            type: 'object',
+            group: 'social',
+            description: 'Input any profiles on the web that belong to your organization.',
+            options: {
+                collapsed: false,
+                collapsible: true,
+            },
+            fields: [
+                {
+                    name: 'socialProfile',
+                    title: 'Social Profile',
+                    type: 'array',
+                    of: [{ type: 'social' }],
                 },
             ],
         },
