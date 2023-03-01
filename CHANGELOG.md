@@ -1,3 +1,11 @@
+## [0.48.0](https://github.com/Open-Study-College/osc/compare/v0.47.0...v0.48.0) (2023-03-01)
+
+
+### ✨ Features
+
+* **ecommerce:** wrap root components in o-page div ([9b0f022](https://github.com/Open-Study-College/osc/commit/9b0f0221e1c2c49dff39d4cdea0e63f7743208e3))
+* **styles:** adds o-page object class ([3586390](https://github.com/Open-Study-College/osc/commit/35863908141b0969e419a3f0a3d49462fddfa6be))
+
 ## [0.47.0](https://github.com/Open-Study-College/osc/compare/v0.46.4...v0.47.0) (2023-02-28)
 
 
@@ -88,11 +96,4 @@
 
 * **scss:** setting up css layers to control the cascade when loading components scss via osc-ui ([d2e70d9](https://github.com/Open-Study-College/osc/commit/d2e70d9dffd120eff7ee1266f12dcfc27d8d8a11))
 * **scss:** wraps all component scss with an [@layer](https://github.com/layer) to allow us better control of css cascade ([857f649](https://github.com/Open-Study-College/osc/commit/857f6497e135f3ee32ce48de4574ab1505f0f050))
-
-## [0.46.1](https://github.com/Open-Study-College/osc/compare/v0.46.0...v0.46.1) (2023-02-24)
-
-
-### ⚙️ CI/CD Updates
-
-* **actions:** adds codeball AI PR review workflow ([ca96ffc](https://github.com/Open-Study-College/osc/commit/ca96ffc3bec968e4aca1ce5f1d5be8fed3d3eac1))
 
