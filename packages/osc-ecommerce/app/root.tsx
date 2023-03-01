@@ -228,11 +228,13 @@ export default function App() {
 
             <SkipLink anchor="main-content">Skip to main content</SkipLink>
 
-            <SiteHeader navSettings={navSettings} actionNav={siteSettings?.actionNav} />
+            <div className="o-page">
+                <SiteHeader navSettings={navSettings} actionNav={siteSettings?.actionNav} />
 
-            <main id="main-content" tabIndex={-1}>
-                <Outlet />
-            </main>
+                <main id="main-content" tabIndex={-1}>
+                    <Outlet />
+                </main>
+            </div>
         </Document>
     );
 }
