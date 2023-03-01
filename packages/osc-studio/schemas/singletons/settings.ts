@@ -256,23 +256,12 @@ export default {
         },
         // Social
         {
-            name: 'social',
+            name: 'socialProfile',
             title: "Organization's social profiles",
-            type: 'object',
-            group: 'social',
             description: 'Input any profiles on the web that belong to your organization.',
-            options: {
-                collapsed: false,
-                collapsible: true,
-            },
-            fields: [
-                {
-                    name: 'socialProfile',
-                    title: 'Social Profile',
-                    type: 'array',
-                    of: [{ type: 'social' }],
-                },
-            ],
+            group: 'social',
+            type: 'array',
+            of: [{ type: 'social' }],
         },
         // Not found page
         {
