@@ -80,6 +80,7 @@
     @include meta.load-css("objects/list");
     @include meta.load-css("objects/main");
     @include meta.load-css("objects/icon");
+    @include meta.load-css("objects/page");
 }
 
 /* ============================

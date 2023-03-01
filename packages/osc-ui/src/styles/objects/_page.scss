@@ -1,0 +1,6 @@
+.o-page {
+    display: grid;
+    min-height: 100vh; // fallback if dvh is not supported
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+}
