@@ -16,8 +16,8 @@ export default {
             title: 'Navigation',
         },
         {
-            name: 'productOptions',
-            title: 'Product options',
+            name: 'footer',
+            title: 'Footer',
         },
         {
             name: 'notFoundPage',
@@ -158,60 +158,26 @@ export default {
         },
         // Footer
         {
-            name: 'footer',
-            title: 'Footer',
-            type: 'object',
-            group: 'navigation',
-            options: {
-                collapsed: false,
-                collapsible: true,
-            },
-            fields: [
-                // Links
+            name: 'footerNavigation',
+            title: 'Footer Navigation',
+            type: 'array',
+            of: [
                 {
-                    name: 'links',
-                    title: 'Links',
-                    type: 'array',
-                    of: [{ type: 'linkInternal' }, { type: 'linkExternal' }],
-                },
-                // Text
-                {
-                    name: 'text',
-                    title: 'Text',
-                    type: 'array',
-                    of: [
-                        {
-                            lists: [],
-                            marks: {
-                                annotations: [
-                                    // Email
-                                    {
-                                        title: 'Email',
-                                        name: 'annotationLinkEmail',
-                                        type: 'annotationLinkEmail',
-                                    },
-                                    // Internal link
-                                    {
-                                        title: 'Internal page',
-                                        name: 'annotationLinkInternal',
-                                        type: 'annotationLinkInternal',
-                                    },
-                                    // URL
-                                    {
-                                        title: 'URL',
-                                        name: 'annotationLinkExternal',
-                                        type: 'annotationLinkExternal',
-                                    },
-                                ],
-                                decorators: [],
-                            },
-                            // Block styles
-                            styles: [{ title: 'Normal', value: 'normal' }],
-                            type: 'block',
-                        },
-                    ],
+                    name: 'navigation',
+                    title: 'Navigation',
+                    type: 'reference',
+                    to: { type: 'navigation' },
                 },
             ],
+            validation: (Rule) => Rule.max(4),
+            group: 'footer',
+        },
+        {
+            name: 'footerBottomNav',
+            title: 'Footer Bottom Navigation',
+            type: 'reference',
+            to: { type: 'navigation' },
+            group: 'footer',
         },
         // Not found page
         {
