@@ -1,3 +1,17 @@
+## [0.49.0](https://github.com/Open-Study-College/osc/compare/v0.48.0...v0.49.0) (2023-03-01)
+
+
+### ✨ Features
+
+* **ui:** adds render wrapper utility ([c38b217](https://github.com/Open-Study-College/osc/commit/c38b217bc20b87dadc2d91e7bfc14093c2b4dcde))
+* **ui:** configure vitest and typescript paths to utils file ([a8b3807](https://github.com/Open-Study-College/osc/commit/a8b38074d9c568dadf9fd4f44da3c69e3de3e3b7))
+
+
+### ♻️ Refactors
+
+* **ui:** replace memoryrouters with render utility ([4bce5b4](https://github.com/Open-Study-College/osc/commit/4bce5b4d74fb6748a16103560b149df0cf6be5ea))
+* **ui:** replace spritesheet with custom render utility ([995d8f1](https://github.com/Open-Study-College/osc/commit/995d8f1990ed2dfdbbffb0423293349beff1b825))
+
 ## [0.48.0](https://github.com/Open-Study-College/osc/compare/v0.47.0...v0.48.0) (2023-03-01)
 
 
@@ -83,17 +97,4 @@
 ### ⚙️ CI/CD Updates
 
 * **actions:** adds codeball update ([b37f00f](https://github.com/Open-Study-College/osc/commit/b37f00f2eede05c42765deb8cac2c15539ae0436))
-
-## [0.46.2](https://github.com/Open-Study-College/osc/compare/v0.46.1...v0.46.2) (2023-02-24)
-
-
-### 🐛 Bugs
-
-* **config:** removed the scss formatter override in the vscode json ([9c8dab0](https://github.com/Open-Study-College/osc/commit/9c8dab0fd1d1d0efb68a403f48a359cdfa6f4390))
-
-
-### ♻️ Refactors
-
-* **scss:** setting up css layers to control the cascade when loading components scss via osc-ui ([d2e70d9](https://github.com/Open-Study-College/osc/commit/d2e70d9dffd120eff7ee1266f12dcfc27d8d8a11))
-* **scss:** wraps all component scss with an [@layer](https://github.com/layer) to allow us better control of css cascade ([857f649](https://github.com/Open-Study-College/osc/commit/857f6497e135f3ee32ce48de4574ab1505f0f050))
 
