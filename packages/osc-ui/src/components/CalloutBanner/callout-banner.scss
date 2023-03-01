@@ -10,6 +10,7 @@
     $banner-px-l: $space-xl;
     $banner-content-max-w: 40ch;
     $banner-breakpoint: 1137;
+    $banner-img-width: 330px; // Set a fixed width so the image doesn't cause the banner to resize when loading
 
     .c-callout-banner {
         display: flex;
@@ -82,7 +83,8 @@
 
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
         .o-img {
-            max-width: 330px;
+            width: $banner-img-width;
+            object-fit: contain;
         }
     }
 }
