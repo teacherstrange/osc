@@ -288,6 +288,7 @@ export default {
                 },
             ],
         },
+        // Social
         {
             name: 'social',
             title: "Organization's social profiles",

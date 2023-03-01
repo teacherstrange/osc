@@ -14,7 +14,19 @@ export default {
         {
             name: 'socialProfile',
             title: 'Social Profile',
-            type: 'string',
+            type: 'url',
         },
     ],
+    preview: {
+        select: {
+            url: 'socialProfile',
+        },
+        prepare(selection: Record<string, any>) {
+            const { url } = selection;
+
+            return {
+                title: url,
+            };
+        },
+    },
 };
