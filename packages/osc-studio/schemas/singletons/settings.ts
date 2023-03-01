@@ -28,6 +28,10 @@ export default {
             title: 'Social',
         },
         {
+            name: 'contact',
+            title: 'Contact details',
+        },
+        {
             name: 'notFoundPage',
             title: '404 page',
         },
@@ -262,6 +266,29 @@ export default {
             group: 'social',
             type: 'array',
             of: [{ type: 'social' }],
+        },
+        // Contact
+        {
+            name: 'phoneNumber',
+            title: 'Phone number',
+            type: 'string',
+            group: 'contact',
+            validation: (Rule) =>
+                // regex to match phone number pattern: https://ihateregex.io/expr/phone/
+                Rule.regex(/^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/, {
+                    name: 'phone number',
+                }),
+        },
+        {
+            name: 'email',
+            title: 'Email',
+            type: 'string',
+            group: 'contact',
+            validation: (Rule) =>
+                // regex to match email address: https://ihateregex.io/expr/email/
+                Rule.regex(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, {
+                    name: 'email',
+                }),
         },
         // Not found page
         {
