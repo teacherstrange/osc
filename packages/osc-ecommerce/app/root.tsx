@@ -29,6 +29,7 @@ import { getSettingsData } from './models/sanity.server';
 import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
 import { getUser } from './session.server';
+import type { SanityGlobalSEO } from './types/sanity';
 import { getColorScheme } from './utils/colorScheme';
 
 let isMount = true;
@@ -113,9 +114,12 @@ export const meta: MetaFunction = ({ data }) => {
 
     const noindex = seoSettings.robots.noIndex && 'noindex';
     const { asset: organizationAsset } = seoSettings.schema.organizationLogo;
-    const facebook = seoSettings.socials.find((social: string) => social.includes('facebook'));
-    const twitter = seoSettings.socials.find((social: string) => social.includes('twitter'));
-    const twitterHandle = twitter && twitter.substring(twitter.lastIndexOf('/') + 1);
+
+    const socials = seoSettings.socials as SanityGlobalSEO['socials'];
+    const facebook = socials.find((social) => social.socialProfile.includes('facebook'));
+    const twitter = socials.find((social) => social.socialProfile.includes('twitter'));
+    const twitterHandle =
+        twitter && twitter?.socialProfile.substring(twitter?.socialProfile.lastIndexOf('/') + 1);
 
     return {
         charset: 'utf-8',
@@ -128,7 +132,7 @@ export const meta: MetaFunction = ({ data }) => {
         'og:title': seoSettings?.siteTitle,
         'og:url': '',
         'og:site_name': seoSettings.schema?.organizationName,
-        'article:publisher': facebook,
+        'article:publisher': facebook?.socialProfile,
         'og:image': organizationAsset?.url,
         'og:image:width': organizationAsset?.dimensions?.width,
         'og:image:height': organizationAsset?.dimensions?.height,

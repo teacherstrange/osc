@@ -261,6 +261,12 @@ export interface SanitySEO {
 export interface SanityGlobalSEO extends SanitySEO {
     siteTile: string;
     titleSeparator: string;
+    socials: {
+        _key: string;
+        _type: string;
+        socialProfile: string;
+        icon: string;
+    }[];
 }
 
 export interface SanityPage {

@@ -50,7 +50,7 @@ export const SETTINGS_QUERY = groq`
                     }
                 }
             },
-            'socials': social.socialProfile
+            'socials': socialProfile
         }
     }
 `;
