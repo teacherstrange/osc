@@ -20,16 +20,16 @@ export default {
             title: 'Footer',
         },
         {
-            name: 'notFoundPage',
-            title: '404 page',
-        },
-        {
             name: 'seo',
             title: 'SEO',
         },
         {
             name: 'social',
             title: 'Social',
+        },
+        {
+            name: 'notFoundPage',
+            title: '404 page',
         },
     ],
     fields: [
@@ -179,40 +179,6 @@ export default {
             to: { type: 'navigation' },
             group: 'footer',
         },
-        // Not found page
-        {
-            name: 'notFoundPage',
-            title: '404 page',
-            type: 'object',
-            group: 'notFoundPage',
-            fields: [
-                {
-                    name: 'title',
-                    title: 'Title',
-                    type: 'string',
-                    validation: (Rule) => Rule.required(),
-                },
-                {
-                    name: 'body',
-                    title: 'Body',
-                    type: 'text',
-                    rows: 2,
-                },
-                {
-                    name: 'collection',
-                    title: 'Collection',
-                    type: 'reference',
-                    description: 'Collection products displayed on this page',
-                    weak: true,
-                    to: [
-                        {
-                            name: 'collection',
-                            type: 'collection',
-                        },
-                    ],
-                },
-            ],
-        },
         // SEO
         {
             name: 'seo',
@@ -305,6 +271,40 @@ export default {
                     title: 'Social Profile',
                     type: 'array',
                     of: [{ type: 'social' }],
+                },
+            ],
+        },
+        // Not found page
+        {
+            name: 'notFoundPage',
+            title: '404 page',
+            type: 'object',
+            group: 'notFoundPage',
+            fields: [
+                {
+                    name: 'title',
+                    title: 'Title',
+                    type: 'string',
+                    validation: (Rule) => Rule.required(),
+                },
+                {
+                    name: 'body',
+                    title: 'Body',
+                    type: 'text',
+                    rows: 2,
+                },
+                {
+                    name: 'collection',
+                    title: 'Collection',
+                    type: 'reference',
+                    description: 'Collection products displayed on this page',
+                    weak: true,
+                    to: [
+                        {
+                            name: 'collection',
+                            type: 'collection',
+                        },
+                    ],
                 },
             ],
         },
