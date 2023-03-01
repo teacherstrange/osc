@@ -1,12 +1,12 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import fs from 'fs';
 import { resolve } from 'path';
-import type { ResolvedConfig, PluginOption } from 'vite';
+import type { PluginOption, ResolvedConfig } from 'vite';
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const fileRegex = /\.(css)$/;
 
@@ -31,7 +31,7 @@ function libInjectCss(): PluginOption {
             if (fileRegex.test(id)) {
                 css.push(code);
                 return {
-                    code: ''
+                    code: '',
                 };
             }
             if (
@@ -40,7 +40,7 @@ function libInjectCss(): PluginOption {
             ) {
                 return {
                     code: `${code}
-          ${template}`
+          ${template}`,
                 };
             }
             return null;
@@ -55,7 +55,7 @@ function libInjectCss(): PluginOption {
 
                 try {
                     let data: string = fs.readFileSync(filePath, {
-                        encoding: 'utf8'
+                        encoding: 'utf8',
                     });
 
                     if (data.includes(template)) {
@@ -67,7 +67,7 @@ function libInjectCss(): PluginOption {
                     console.error(e);
                 }
             }
-        }
+        },
     };
 }
 export default defineConfig({
@@ -78,6 +78,11 @@ export default defineConfig({
         globals: true,
         environment: 'jsdom',
         setupFiles: ['./__test__/setup-test-env.ts'],
-        include: ['./src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,css}']
-    }
+        include: ['./src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,css}'],
+    },
+    resolve: {
+        alias: {
+            'test-utils': resolve(__dirname, './__test__/test-utils'),
+        },
+    },
 });

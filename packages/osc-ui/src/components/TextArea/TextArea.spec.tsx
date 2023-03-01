@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import React from 'react';
-import { Icon, SpritesheetProvider } from '../Icon/Icon';
+import { render } from 'test-utils';
+import { Icon } from '../Icon/Icon';
 import { TextArea } from './TextArea';
 
 test('should render a textarea component with a label', () => {
@@ -18,19 +19,17 @@ test('should render an asterisk when input field is required', () => {
 
 test('should render an icon when passed as a prop', () => {
     render(
-        <SpritesheetProvider>
-            <TextArea
-                icon={{
-                    content: <Icon id="exclamation-mark" />,
-                    label: 'Exclamation Triangle Icon',
-                    type: 'error',
-                }}
-                id="enquiry"
-                name="Enquiry"
-                required={true}
-                wasSubmitted={true}
-            />
-        </SpritesheetProvider>
+        <TextArea
+            icon={{
+                content: <Icon id="exclamation-mark" />,
+                label: 'Exclamation Triangle Icon',
+                type: 'error',
+            }}
+            id="enquiry"
+            name="Enquiry"
+            required={true}
+            wasSubmitted={true}
+        />
     );
 
     expect(document.querySelector('use')).toBeInTheDocument();
@@ -41,19 +40,11 @@ test('should render an icon when passed as a prop', () => {
 });
 
 test('should disable the input when disabled prop is true', () => {
-    render(
-        <SpritesheetProvider>
-            <TextArea id="enquiry" name="Enquiry" disabled={true} />
-        </SpritesheetProvider>
-    );
+    render(<TextArea id="enquiry" name="Enquiry" disabled={true} />);
     expect(screen.getByRole('textbox')).toBeDisabled();
 });
 
 test('should render an error message if "wasSubmitted" is true, the field is required, and no value is present', () => {
-    render(
-        <SpritesheetProvider>
-            <TextArea id="enquiry" name="Enquiry" required={true} wasSubmitted={true} />
-        </SpritesheetProvider>
-    );
+    render(<TextArea id="enquiry" name="Enquiry" required={true} wasSubmitted={true} />);
     expect(screen.getByRole('alert')).toBeInTheDocument();
 });
