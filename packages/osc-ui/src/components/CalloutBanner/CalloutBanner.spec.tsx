@@ -5,7 +5,7 @@ import {
     CalloutBannerTitle,
     CalloutContentGroup,
     CalloutFooter,
-} from './calloutBanner';
+} from './CalloutBanner';
 
 test('renders CalloutBanner with content', () => {
     render(
