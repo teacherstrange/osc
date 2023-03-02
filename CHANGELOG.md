@@ -1,3 +1,99 @@
+## [0.50.0](https://github.com/Open-Study-College/osc/compare/v0.49.0...v0.50.0) (2023-03-02)
+
+
+### ✨ Features
+
+* **card:** add active animation to wishlist heart ([68eca22](https://github.com/Open-Study-College/osc/commit/68eca22a99eb06646e9f907a77c365f0a6b01e2d))
+* **card:** add aspect-ratio to collection card images ([7efca0f](https://github.com/Open-Study-College/osc/commit/7efca0fc3bfe14793ee667a23fbcde7482636d85))
+* **card:** add hover styles for block link ([12cf4a9](https://github.com/Open-Study-College/osc/commit/12cf4a9f33aaa0819ab75c6640e2de9990a73f41))
+* **card:** adds active state styles to wishlist button ([2c2b2c3](https://github.com/Open-Study-College/osc/commit/2c2b2c32dffb222ca8905e26a0aa9c24548f6369))
+* **card:** adds base card component ([49e3d6f](https://github.com/Open-Study-College/osc/commit/49e3d6f61f5adb5202b3cb03204b1e65b0fb601d))
+* **card:** adds blockLink prop ([e440cc6](https://github.com/Open-Study-College/osc/commit/e440cc6f5e5330e6278e86ff7298dc09816927b2))
+* **card:** adds BodyInner component ([9c86de7](https://github.com/Open-Study-College/osc/commit/9c86de7daf1aceaea664a3e11dccfebfe3a43e3d))
+* **card:** adds collection modifier styles ([ea24417](https://github.com/Open-Study-College/osc/commit/ea244175de372617d1abc693e8fff2c4af74ebbd))
+* **card:** adds context to card ([ef65447](https://github.com/Open-Study-College/osc/commit/ef6544786410c040e2ae5555a0e014aac529c594))
+* **card:** adds course card variants ([64aadda](https://github.com/Open-Study-College/osc/commit/64aadda322bed3aeb7342fbac9675203bd4ad8ac))
+* **card:** adds featured card variant ([8f8ca96](https://github.com/Open-Study-College/osc/commit/8f8ca960a36ef02b498c9c2fe3b09a0e5368ab53))
+* **card:** adds hasBorder props to footer ([53d7e3f](https://github.com/Open-Study-College/osc/commit/53d7e3ff2227bd8f0daf455211f7bb47472b484e))
+* **card:** adds hook to watch the size of an element ([b79c8f9](https://github.com/Open-Study-College/osc/commit/b79c8f904ad732670ad728392c19790006e02fce))
+* **card:** adds horizontal styles for aspect-card ([8f7138e](https://github.com/Open-Study-College/osc/commit/8f7138ed459f5052c8ae72ba1a3a409fbfaccd2a))
+* **card:** adds initial aspectCard styles ([c515707](https://github.com/Open-Study-College/osc/commit/c5157073b252d6587413d31dbbb7b5127d33ca70))
+* **card:** adds isRounded prop to CardImage ([e2689ce](https://github.com/Open-Study-College/osc/commit/e2689cebe69d537d45faadc0675e4cd7fa9da25a))
+* **card:** adds media object variant ([c1c78d7](https://github.com/Open-Study-College/osc/commit/c1c78d7a63f7b283ec7900754ec4afb503aef9cb))
+* **card:** adds new card subcomponents ([c2df89e](https://github.com/Open-Study-College/osc/commit/c2df89eeb18a75be8846caa5a02f094d4c2b4319))
+* **card:** adds styles for full width course card ([b6ee03c](https://github.com/Open-Study-College/osc/commit/b6ee03c97d5cf6f6c4aee16a0d35b525726a870c))
+* **card:** adds wishlist button component ([6f12ccb](https://github.com/Open-Study-College/osc/commit/6f12ccb667bd7d13162185c375cd1b54f5acccd1))
+* **card:** export cards from osc-ui ([b8feec4](https://github.com/Open-Study-College/osc/commit/b8feec4aaf2b92484ebdbb6f77dea54120b729af))
+* **icon:** add warning icon ([3e45bc7](https://github.com/Open-Study-College/osc/commit/3e45bc718cea2ce738111054c41136dca5b5d91f))
+* **studio:** adds team content type ([31048f8](https://github.com/Open-Study-College/osc/commit/31048f8b1bf29b7566427b574ad0374149a26685))
+* **studio:** adds the card modules ([3ce6558](https://github.com/Open-Study-College/osc/commit/3ce655889aeb475e66a90eccda5e19cc563e9ce7))
+* **styles:** add text-decoration utility ([c5f46d6](https://github.com/Open-Study-College/osc/commit/c5f46d6779b8be18dc7e4bf3999a8a0e21f30dbd))
+* **types:** adds t-shirt sizes to types ([3d8ab72](https://github.com/Open-Study-College/osc/commit/3d8ab720dc4bc31b2e88111781827643577e4724))
+* **ui:** adds a truncate utility function ([7383673](https://github.com/Open-Study-College/osc/commit/73836732ba8aec7de2e8130da6caed902af0c4f1))
+
+
+### 🧪 Tests
+
+* **card:** adds test cases ([57ebca2](https://github.com/Open-Study-College/osc/commit/57ebca2bff541431d25a32dd425b8fa15abaa55c))
+* **card:** updates test to use setup function ([d37194c](https://github.com/Open-Study-College/osc/commit/d37194c76060226553402e6825a2b9417b4b7581))
+
+
+### 🐛 Bugs
+
+* **card:** moves style tag after ...attr ([82351bf](https://github.com/Open-Study-College/osc/commit/82351bf909f7a050697a77f8aed7131c7b326c3f))
+* **card:** removes is-undefined classname ([880a6ca](https://github.com/Open-Study-College/osc/commit/880a6ca9e42da7523775bc401ceed0411fe54577))
+* **card:** restore maxWidth on full width story ([96af292](https://github.com/Open-Study-College/osc/commit/96af2926727de30f03ce34b02286492acdaed01d))
+* **card:** update subtitle colour for better contrast ([35cf719](https://github.com/Open-Study-College/osc/commit/35cf7197a81f066bfd383d9031147decd9f0dc5b))
+* **popover:** apply z-index to popover ([5de3f20](https://github.com/Open-Study-College/osc/commit/5de3f207b458a0d67ce89ec6d39cf8e661c4d32e))
+* **studio:** remove duplicate carousel module ([22e4e01](https://github.com/Open-Study-College/osc/commit/22e4e01a5ac62e7477d0d17610a1d975e04cc7c3))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* remove commented out code ([d4593e9](https://github.com/Open-Study-College/osc/commit/d4593e98a171a372b49873d1b933b7f874332e82))
+* **card:** remove todos ([03bf401](https://github.com/Open-Study-College/osc/commit/03bf40109d97e491444be401271236759b47c15b))
+* **card:** update card image ([983f5c0](https://github.com/Open-Study-College/osc/commit/983f5c05e007a01aca971887a040e805b5a7deff))
+* **card:** update card story data ([fcd3cdc](https://github.com/Open-Study-College/osc/commit/fcd3cdcfd9ad7f9418372477e423570b2de1b6b4))
+
+
+### ♻️ Refactors
+
+* **button:** update interface name so we can use it elsewhere clearly ([1aab70d](https://github.com/Open-Study-College/osc/commit/1aab70df228e46f32b84b8e9fc3c358ae3bbe2b8))
+* **card:** add maxWidth style props ([a58e818](https://github.com/Open-Study-College/osc/commit/a58e81810f9d32da4e4fbca4af9765ba57fbdeab))
+* **card:** group variants into subvariant styles ([db22adb](https://github.com/Open-Study-College/osc/commit/db22adb74ce07cfdbe7ac1ca6c0a2dc8c1bab1b4))
+* **card:** move blog variant into it's own component ([8de96f0](https://github.com/Open-Study-College/osc/commit/8de96f0068abade8235ad90c8b8153b90651f11c))
+* **card:** move collection variant into it's own component ([49d8724](https://github.com/Open-Study-College/osc/commit/49d87242b9911c4c0c16e0e5d8fb2516a0f1c1dc))
+* **card:** move course variant into it's own component ([b7aa074](https://github.com/Open-Study-College/osc/commit/b7aa0748e50a03c2bdc5d2c82970c8dbb41557cc))
+* **card:** move variables into card specifics ([cbc7c49](https://github.com/Open-Study-College/osc/commit/cbc7c49e25554ea8d503da74bafbf2d471e7a066))
+* **card:** position button to the right in featured card ([a8565fd](https://github.com/Open-Study-College/osc/commit/a8565fd2f071ec323ad7fd951c0063e23f111a1c))
+* **card:** remove border props from footer ([e3e31b0](https://github.com/Open-Study-College/osc/commit/e3e31b0cabeeeef823923cd7b83fa2fdcdb743f5))
+* **card:** remove directional prop ([0741951](https://github.com/Open-Study-College/osc/commit/0741951b8645b8833580847073c557fbd2709389))
+* **card:** replace forgotten svg with Icon ([324a66c](https://github.com/Open-Study-College/osc/commit/324a66cc40378a9d7ae6a58849314148702f26c6))
+* **card:** replace inline svgs with Icon component ([7fe6a80](https://github.com/Open-Study-College/osc/commit/7fe6a80193adefede9efdd8cd7e71ac5ddaf9e2a))
+* **card:** replace mq functions with variables ([32345df](https://github.com/Open-Study-College/osc/commit/32345df93c360060ac872e46ee779ef0a24537ce))
+* **card:** replace spacing values with variable ([6f9fbf4](https://github.com/Open-Study-College/osc/commit/6f9fbf4492735d1095747eb7644938b3063da1cc))
+* **card:** replace timing value with variable ([76b4d0a](https://github.com/Open-Study-College/osc/commit/76b4d0af74448b9e60842d06b516533a305cb577))
+* **card:** split card stories into separate files ([cdf1f85](https://github.com/Open-Study-College/osc/commit/cdf1f85d53ec3404043db2765c801f4e5f229b1a))
+* **card:** tidies up default card component/styles ([2ffc043](https://github.com/Open-Study-College/osc/commit/2ffc0437cca2a7bc0ef39eec8a9bfa071475af58))
+* **card:** update button props in storybook ([a6a4dfd](https://github.com/Open-Study-College/osc/commit/a6a4dfdb280c1b0b5673dd700171363c48ae3901))
+* **card:** update card shadow value with variable ([2e74799](https://github.com/Open-Study-College/osc/commit/2e74799dcf794d12742fc6d56e51b6d8cc2065ed))
+* **card:** update fixed values with tokens ([6151807](https://github.com/Open-Study-College/osc/commit/6151807d5fdb17b062b0ba55527a1207be3db993))
+* **card:** update heart icon ([fe112e2](https://github.com/Open-Study-College/osc/commit/fe112e2baabfb2c99c43b3d23f3422cbf9d64dac))
+* **card:** update math.sass function with calc ([02658c0](https://github.com/Open-Study-College/osc/commit/02658c061b7b30b0ef815098d858c79cdd9eacf7))
+* **card:** update now we have button styles ([19a8476](https://github.com/Open-Study-College/osc/commit/19a8476a564af16468fc9cb77131c0dd3870974c))
+* **card:** update radius value to use variable ([966d153](https://github.com/Open-Study-College/osc/commit/966d153147f8fa43c0f2e6c5626182b658aed21c))
+* **card:** update stories ([71ab091](https://github.com/Open-Study-College/osc/commit/71ab09111f7d96dd15f4522e272e2bf7478b29f7))
+* **card:** update subvariants ([e934f79](https://github.com/Open-Study-College/osc/commit/e934f79a8f664478d80727c3e5ab024de5241461))
+* **card:** updates block link card to use featured blogcard in example ([c346f78](https://github.com/Open-Study-College/osc/commit/c346f78ea551bad41c6f576982e2555534761e9f))
+* **card:** updates story to include visually hidden button text ([339da63](https://github.com/Open-Study-College/osc/commit/339da634897c1bd1334596a3736da9cf5507ec4a))
+* **card:** updates variables to new naming tokens ([8d7dc56](https://github.com/Open-Study-College/osc/commit/8d7dc56ea922444c1c94a25e4ce3127cfd72f49b))
+* **card:** wrap styles in [@layer](https://github.com/layer) rule ([170653c](https://github.com/Open-Study-College/osc/commit/170653cd34a6e639523ecb38c711074d0348e9e0))
+* **icon:** update heart icon ([b5ec705](https://github.com/Open-Study-College/osc/commit/b5ec705588600516a9e56ce61fe1123f582c6496))
+* **popover:** remove FC type so props pass through as expected ([6002ea8](https://github.com/Open-Study-College/osc/commit/6002ea8a22f76c38a47ebb0735c03843fe25d437))
+* **styles:** adds important to utility so it overrules component styles ([dfb36f7](https://github.com/Open-Study-College/osc/commit/dfb36f7616fe6373c9f66c6a7426f57e6b8ecf67))
+* **styles:** adds important to utility so it overrules component styles ([21a37c1](https://github.com/Open-Study-College/osc/commit/21a37c1c502bca4acca8732cbb8be0dcc2251262))
+* **styles:** adds important to utility so it overrules component styles ([4d8a91c](https://github.com/Open-Study-College/osc/commit/4d8a91c8c10bfb583768634eb6fc8bad718e65af))
+
 ## [0.49.0](https://github.com/Open-Study-College/osc/compare/v0.48.0...v0.49.0) (2023-03-01)
 
 
@@ -80,21 +176,4 @@
 
 * **academic-hub:** move styles link before component styles ([66014e4](https://github.com/Open-Study-College/osc/commit/66014e42959c874a94db44780d386149007c81c7))
 * **ecommerce:** move dynamic styles after static assets ([23991ad](https://github.com/Open-Study-College/osc/commit/23991ad9bb8c4cace345d2d49293b523a8c85c41))
-
-## [0.46.3](https://github.com/Open-Study-College/osc/compare/v0.46.2...v0.46.3) (2023-02-24)
-
-
-### ♻️ Refactors
-
-* **styles:** updates container class and modifiers ([0b6fa06](https://github.com/Open-Study-College/osc/commit/0b6fa06995572d88ac5fcd4ab80dca898a6d854a))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **style:** update comment ([05cb2ef](https://github.com/Open-Study-College/osc/commit/05cb2ef1960b548b312713ccd58abfdde82ac649))
-
-
-### ⚙️ CI/CD Updates
-
-* **actions:** adds codeball update ([b37f00f](https://github.com/Open-Study-College/osc/commit/b37f00f2eede05c42765deb8cac2c15539ae0436))
 
