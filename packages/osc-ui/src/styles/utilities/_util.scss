@@ -137,7 +137,12 @@ $osc-config: (
         values: (
             uppercase,
             lowercase,
-            underline
+        )
+    ),
+    text-decoration: (
+        prefix: "text",
+        values: (
+            underline,
         )
     ),
     text-align: (
@@ -157,9 +162,9 @@ $osc-config: (
     @each $key, $value in $values {
         .u-#{$prefix}-#{strip-unit($key)} {
             @if ($value) {
-                #{$property}: $value;
+                #{$property}: $value !important;
             } @else {
-                #{$property}: $key;
+                #{$property}: $key !important;
             }
         }
     }
@@ -189,8 +194,8 @@ $osc-config: (
 
 .u-hidden {
     &-from\@tab {
-        @include mq($mq-tab-l) {
-            display: none;
+        @include mq(mq-token("tab")) {
+            display: none !important;
         }
     }
 
@@ -207,8 +212,8 @@ $osc-config: (
     }
 
     &-until\@tab {
-        @include mq($mq-tab, max) {
-            display: none;
+        @include mq(mq-token("tab"), max) {
+            display: none !important;
         }
     }
 
@@ -247,10 +252,10 @@ $osc-config: (
 @each $name, $value in color-token("default") {
     [data-bg-color="#{$name}"],
     .u-bg-color-#{$name} {
-        @if (string.index($name, "gradient")) {
-            background-image: var(--color-#{$name});
+        @if (string.index($name, 'gradient')) {
+            background-image: var(--color-#{$name}) !important; // Make sure we override our component styles
         } @else {
-            background-color: var(--color-#{$name});
+            background-color: var(--color-#{$name}) !important; // Make sure we override our component styles
         }
     }
 }

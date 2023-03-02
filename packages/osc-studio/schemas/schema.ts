@@ -16,6 +16,7 @@ import post from './documents/post';
 import product from './documents/product';
 import productVariant from './documents/productVariant';
 import redirects from './documents/redirects';
+import team from './documents/team';
 
 // Singleton document types
 import blog from './singletons/blog';
@@ -26,6 +27,7 @@ import settings from './singletons/settings';
 import body from './blocks/body';
 
 // Object types
+import bodyNoHeadings from './blocks/bodyNoHeadings';
 import accordionItem from './objects/accordionItem';
 import collectionRule from './objects/collectionRule';
 import linkExternal from './objects/linkExternal';
@@ -33,6 +35,12 @@ import linkInternal from './objects/linkInternal';
 import moduleAccordion from './objects/module/accordion';
 import moduleButton from './objects/module/button';
 import moduleButtons from './objects/module/buttons';
+import moduleCardBio from './objects/module/cardBio';
+import moduleCardCollection from './objects/module/cardCollection';
+import moduleCardCourse from './objects/module/cardCourse';
+import moduleCardPost from './objects/module/cardPost';
+import moduleCards from './objects/module/cards';
+import moduleCardStatic from './objects/module/cardStatic';
 import moduleCarousel from './objects/module/carousel';
 import moduleContent from './objects/module/content';
 import moduleImage from './objects/module/image';
@@ -73,12 +81,14 @@ export default createSchema({
         product,
         productVariant,
         redirects,
+        team,
         // Singleton document types
         home,
         blog,
         settings,
         // Block content
         body,
+        bodyNoHeadings,
         // Objects
         accordionItem,
         collectionRule,
@@ -99,6 +109,12 @@ export default createSchema({
         moduleButton,
         moduleButtons,
         moduleAccordion,
+        moduleCardBio,
+        moduleCardCourse,
+        moduleCardCollection,
+        moduleCardPost,
+        moduleCardStatic,
+        moduleCards,
         moduleImage,
         moduleImages,
         moduleImageMobile,

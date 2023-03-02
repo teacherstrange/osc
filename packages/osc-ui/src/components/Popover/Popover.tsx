@@ -26,7 +26,19 @@ export const PopoverContent = forwardRef<
 
     return (
         <PopoverPrimitive.Portal>
-            <PopoverPrimitive.Content className={contentClasses} {...props} ref={forwardedRef}>
+            <PopoverPrimitive.Content
+                className={contentClasses}
+                {...props}
+                ref={forwardedRef}
+                style={{
+                    // Make sure the popover has a stacking index.
+                    // Setting it inline as the only way to target the required element
+                    // is to use a data attribute and !important.
+                    // As the data attribute might be applied to other components this
+                    // is the safest way to avoid any unintended stacking issues.
+                    zIndex: 10,
+                }}
+            >
                 {children}
             </PopoverPrimitive.Content>
         </PopoverPrimitive.Portal>

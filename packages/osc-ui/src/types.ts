@@ -1,4 +1,4 @@
-export type Sizes = '4xl' | '3xl' | '2xl' | 'xl' | 'l' | 'm';
+export type Sizes = '4xl' | '3xl' | '2xl' | 'xl' | 'l' | 'm' | 's';
 
 export type Themes =
     | 'primary'
@@ -30,6 +30,8 @@ export type Spacing =
     | '7xl';
 
 export type Direction = 'top' | 'right' | 'bottom' | 'left';
+
+export type Headings = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export type Maybe<T> = T | null | undefined;
 
