@@ -291,12 +291,12 @@ $card-fs-3xl: $fs-3xl;
                 }
 
                 #{$self}__header {
-                    margin-block-end: 6px;
+                    margin-block-end: calc(#{$card-space-xs} / 2);
                 }
 
                 #{$self}__header,
                 #{$self}__body {
-                    padding-inline: 12px;
+                    padding-inline: $card-space-xs;
                     font-weight: $fw-bold;
 
                     > * {
