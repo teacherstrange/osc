@@ -30,7 +30,6 @@ export const MODULES = [
     { type: 'module.carousel' },
     { type: 'module.images' },
     { type: 'module.trustpilot' },
-    { type: 'module.carousel' },
     { type: 'module.video' },
 ];
 
