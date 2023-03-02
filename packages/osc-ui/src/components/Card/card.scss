@@ -172,7 +172,7 @@ $card-fs-3xl: $fs-3xl;
             }
 
             &.is-active {
-                @include animate(heartbeat, 0.3s, $ease-in-out-quint);
+                @include animate(heartbeat, $timing, $ease-in-out-quint);
 
                 svg {
                     fill: var(--color-primary);
@@ -185,7 +185,7 @@ $card-fs-3xl: $fs-3xl;
             cursor: pointer;
 
             #{$self}__img {
-                transition: transform 0.3s ease-out;
+                transition: transform $timing ease-out;
             }
 
             &:hover {
