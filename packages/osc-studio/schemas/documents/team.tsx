@@ -6,17 +6,6 @@ export default {
     title: 'Team',
     type: 'document',
     icon: UsersIcon,
-    // groups: [
-    //     {
-    //         default: true,
-    //         name: 'editorial',
-    //         title: 'Editorial',
-    //     },
-    //     {
-    //         name: 'seo',
-    //         title: 'SEO',
-    //     },
-    // ],
     fields: [
         {
             name: 'name',
