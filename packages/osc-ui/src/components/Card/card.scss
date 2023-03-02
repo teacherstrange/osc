@@ -21,6 +21,7 @@
 $card-border: solid 1px var(--color-neutral-400);
 $card-color: var(--card-theme-color, var(--color-primary)); /* [1] */
 $card-gradient: var(--card-theme-gradient, var(--color-gradient-primary-270)); /* [2] */
+$card-shadow: $shadow-m;
 $card-space-2xs: $space-2xs;
 $card-space-xs: $space-xs;
 $card-space-s: $space-s;
@@ -45,7 +46,7 @@ $card-fs-3xl: $fs-3xl;
         width: 100%;
         overflow: hidden;
         background-color: var(--color-tertiary);
-        box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+        box-shadow: $card-shadow;
         font-size: var(--font-scale-base);
         font-weight: $fw-light;
         line-height: 1.4;
