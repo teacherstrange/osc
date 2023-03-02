@@ -144,7 +144,7 @@ $card-fs-3xl: $fs-3xl;
             border-image-source: $card-gradient;
 
             .o-icon {
-                --icon-size: #{math.div(20, $base-fs)}em;
+                --icon-size: calc(20 / #{$base-fs} * 1em);
             }
         }
 
