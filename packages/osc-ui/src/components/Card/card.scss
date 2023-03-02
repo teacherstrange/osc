@@ -72,7 +72,7 @@ $card-fs-3xl: $fs-3xl;
                 margin-block-start: $card-space-xl;
 
                 > img {
-                    border-radius: 100%;
+                    border-radius: $rad-l;
                 }
             }
         }
