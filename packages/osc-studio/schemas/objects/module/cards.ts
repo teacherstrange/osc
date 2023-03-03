@@ -72,7 +72,7 @@ export default {
             description: 'Select the layout for the cards.',
             initialValue: 'grid',
             options: {
-                list: ['grid', 'carousel'],
+                list: ['grid', 'island grid', 'carousel'],
                 layout: 'dropdown',
             },
             validation: (Rule) => Rule.required(),
@@ -109,6 +109,19 @@ export default {
             type: 'array',
             of: CARDS,
             group: 'cards',
+            validation: (Rule) =>
+                Rule.custom((currentValue, { parent }) => {
+                    // in a custom validation rule, check if the field should be shown, and if yes, show an error if the value is not set
+                    if (!currentValue || currentValue.length === 0) {
+                        return 'You must add at least one card.';
+                    }
+
+                    if (parent.layout === 'island grid' && currentValue.length > 3) {
+                        return 'You can only add up to 3 cards when Island grid layout is set.';
+                    }
+
+                    return true;
+                }),
         },
     ],
     preview: {

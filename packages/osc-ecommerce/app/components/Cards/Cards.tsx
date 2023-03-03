@@ -1,4 +1,4 @@
-import { Carousel, classNames, rem, useMediaQuery } from 'osc-ui';
+import { Carousel, classNames, IslandGrid, rem, useMediaQuery } from 'osc-ui';
 import type {
     bioCardModule,
     cardModule,
@@ -62,6 +62,18 @@ export const Cards = (props: { module: cardModule }) => {
                         <Card card={card} key={card?._key} />
                     ))}
                 </Carousel>
+            </div>
+        );
+    }
+
+    if (module.layout === 'island grid') {
+        return (
+            <div className={classes}>
+                <IslandGrid className="o-container">
+                    {module.card.map((card) => (
+                        <Card card={card} key={card?._key} />
+                    ))}
+                </IslandGrid>
             </div>
         );
     }

@@ -5,6 +5,7 @@ import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
+import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
 import { getTypes } from '~/models/sanity.server';
@@ -51,6 +52,7 @@ export const getComponentStyles = (data: SanityPage) => {
             case 'module.cards':
                 styles.push({ rel: 'stylesheet', href: cardStyles });
                 styles.push({ rel: 'stylesheet', href: popoverStyles });
+                styles.push({ rel: 'stylesheet', href: islandGrid });
                 break;
 
             case 'module.content':
