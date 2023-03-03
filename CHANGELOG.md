@@ -1,3 +1,25 @@
+## [0.51.0](https://github.com/Open-Study-College/osc/compare/v0.50.0...v0.51.0) (2023-03-03)
+
+
+### ♻️ Refactors
+
+* **footer:** add inner block for the container class ([f8cf9ca](https://github.com/Open-Study-College/osc/commit/f8cf9cac5add0e5b0c75aa579d0c2d338323fde8))
+* **footer:** adjust breakpoint so icons stay on one line on xs screens ([77b9552](https://github.com/Open-Study-College/osc/commit/77b955291c96076c6571ffe5b25854c051ae413a))
+
+
+### ✨ Features
+
+* **footer:** add mock data ([8c78112](https://github.com/Open-Study-College/osc/commit/8c78112f78484e6f08a6b16e73e7ac00c4f07457))
+* **footer:** add optional accordion style columns ([87fa64d](https://github.com/Open-Study-College/osc/commit/87fa64da8bc88e4ebc08caa2656c2e4098637ecf))
+* **footer:** adds initial footer components ([a30859d](https://github.com/Open-Study-College/osc/commit/a30859d05e17a653d2c7bed21d88fc8f3d41dc62))
+* **footer:** update storybook docs ([0fe1596](https://github.com/Open-Study-College/osc/commit/0fe1596bc94a8b212f20d485e9098fc26bb23498))
+* **icons:** adds social icons to spritesheet ([acc9a3b](https://github.com/Open-Study-College/osc/commit/acc9a3b544367e1f061e24a30d2ca3c97e7dc919))
+
+
+### 🧪 Tests
+
+* **footer:** add footer tests ([b3b8569](https://github.com/Open-Study-College/osc/commit/b3b856974632b5cab1d54f112c892b62ad2d88f3))
+
 ## [0.50.0](https://github.com/Open-Study-College/osc/compare/v0.49.0...v0.50.0) (2023-03-02)
 
 
@@ -168,12 +190,4 @@
 * **studio:** adds nav selector to settings ([4d097ff](https://github.com/Open-Study-College/osc/commit/4d097ff5612493da8cfc49b6540daf8fc77d7972))
 * **studio:** adds navigation schema ([289b1de](https://github.com/Open-Study-College/osc/commit/289b1dead140d7c2b1c55676620818692306e53d))
 * **studio:** adds navigation to the desk structure ([7fe7c4a](https://github.com/Open-Study-College/osc/commit/7fe7c4ad746684e3ae34e6d800dfc479e351e2ae))
-
-## [0.46.4](https://github.com/Open-Study-College/osc/compare/v0.46.3...v0.46.4) (2023-02-28)
-
-
-### 🐛 Bugs
-
-* **academic-hub:** move styles link before component styles ([66014e4](https://github.com/Open-Study-College/osc/commit/66014e42959c874a94db44780d386149007c81c7))
-* **ecommerce:** move dynamic styles after static assets ([23991ad](https://github.com/Open-Study-College/osc/commit/23991ad9bb8c4cace345d2d49293b523a8c85c41))
 
