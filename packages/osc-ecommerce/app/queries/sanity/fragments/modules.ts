@@ -19,7 +19,7 @@ modules[] {
     },
     (_type == "module.cards") => {
         ${MODULE_CARDS}
-    }
+    },
     (_type == "module.carousel") => {
         ${MODULE_CAROUSEL}
     },
