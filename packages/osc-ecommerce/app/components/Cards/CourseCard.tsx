@@ -17,7 +17,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from 'osc-ui';
-import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import { useState } from 'react';
 import type { courseCardModule } from '~/types/sanity';
 
@@ -73,14 +72,14 @@ export const CourseCard = (props: Props) => {
                         <Popover>
                             <PopoverTrigger>
                                 <AccessibleIcon label="More information">
-                                    <Icon path={spritesheet} id="warning" />
+                                    <Icon id="warning" />
                                 </AccessibleIcon>
                             </PopoverTrigger>
                             <PopoverContent side="top">
                                 <PopoverArrow />
 
                                 <PopoverClose className="c-popover__close" aria-label="Close">
-                                    <Icon path={spritesheet} id="close" />
+                                    <Icon id="close" />
                                 </PopoverClose>
 
                                 <p>Save up to £200 when you purchase</p>

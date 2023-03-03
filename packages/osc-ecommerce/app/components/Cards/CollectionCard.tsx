@@ -10,7 +10,6 @@ import {
     Icon,
     Image,
 } from 'osc-ui';
-import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import type { collectionCardModule } from '~/types/sanity';
 
 interface Props {
@@ -48,7 +47,7 @@ export const CollectionCard = (props: Props) => {
                         to={`/collections/${store?.slug?.current}`}
                     >
                         Find out more
-                        <Icon path={spritesheet} id="chevron-right" />
+                        <Icon id="chevron-right" />
                     </Button>
                 </CardFooter>
             </CardInner>
