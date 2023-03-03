@@ -169,6 +169,7 @@ export interface cardModule extends module {
     paddingTop?: Spacing | string;
     layout: string;
     carouselName?: string;
+    carouselSettings?: carouselModuleSettings;
     content?: contentModule;
     card: TypesOfCard[];
 }
@@ -184,6 +185,20 @@ export interface trustpilotModule extends module {
     height: string;
     stars: string;
     type: 'slider' | 'grid' | 'minicarousel' | 'microstar';
+}
+
+export interface carouselModuleSettings extends module {
+    carouselName: string;
+    arrows?: boolean;
+    dotNav?: boolean;
+    loop?: boolean;
+    autoplay?: false | 'smooth' | 'switch';
+    startIndex?: number;
+    slidesPerView?: {
+        mobile?: number;
+        tablet?: number;
+        desktop?: number;
+    };
 }
 
 export interface carouselModule extends module {

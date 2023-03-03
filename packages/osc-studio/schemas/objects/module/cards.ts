@@ -107,6 +107,13 @@ export default {
                 }),
         },
         {
+            name: 'carouselSettings',
+            title: 'Carousel Settings',
+            type: 'carouselSettings',
+            group: 'cards',
+            hidden: ({ parent }) => !shouldShow(parent),
+        },
+        {
             name: 'backgroundColor',
             title: 'Background Colour',
             type: 'string',

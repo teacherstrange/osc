@@ -41,6 +41,13 @@ const Card = (props: { card: TypesOfCard }) => {
 
 export const Cards = (props: { module: cardModule }) => {
     const { module } = props;
+    // ! TEMPORARY fix for tokens path not matching dev and prod environments
+    // ! Once solution in place we can update this to use design token files instead
+    const mq = {
+        tab: 768,
+        'desk-lrg': 1440,
+    };
+
     const isSmallerThanTab = useMediaQuery(`(max-width: ${rem(breakpoints.tab)}rem)`);
 
     const classes = classNames(
@@ -50,13 +57,13 @@ export const Cards = (props: { module: cardModule }) => {
         module?.paddingBottom ? `u-pb-${module?.paddingBottom}` : ''
     );
 
-    console.log(module.content);
+    const perView = (perView: number | undefined) => (perView ? perView : 1);
 
     if (module?.layout === 'carousel') {
         return (
             <article className={classes}>
                 <div className="o-container">
-                    {module.content ? (
+                    {module.content?.body ? (
                         <Content
                             align={module.content.horizontalAlignment}
                             backgroundColor={
@@ -74,6 +81,36 @@ export const Cards = (props: { module: cardModule }) => {
 
                     <Carousel
                         carouselName={module?.carouselName ? module?.carouselName : ''}
+                        arrows={module?.carouselSettings?.arrows}
+                        dotNav={module?.carouselSettings?.dotNav}
+                        loop={module?.carouselSettings?.loop}
+                        autoplay={module?.carouselSettings?.autoplay}
+                        slidesPerView={perView(module?.carouselSettings?.slidesPerView?.mobile)}
+                        startIndex={
+                            module?.carouselSettings?.startIndex
+                                ? module?.carouselSettings?.startIndex - 1
+                                : 0
+                        } // minus 1 so cms users can start at 1
+                        breakpoints={{
+                            [`(min-width: ${rem(mq['tab'])}rem)`]: {
+                                slides: {
+                                    origin: 'auto',
+                                    perView: perView(
+                                        module?.carouselSettings?.slidesPerView?.tablet
+                                    ),
+                                    spacing: 16,
+                                },
+                            },
+                            [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
+                                slides: {
+                                    origin: 'auto',
+                                    perView: perView(
+                                        module?.carouselSettings?.slidesPerView?.desktop
+                                    ),
+                                    spacing: 16,
+                                },
+                            },
+                        }}
                         adaptiveHeight
                     >
                         {module.card.map((card) => (
@@ -89,7 +126,7 @@ export const Cards = (props: { module: cardModule }) => {
         return (
             <article className={classes}>
                 <div className="o-container">
-                    {module.content ? (
+                    {module.content?.body ? (
                         <Content
                             align={module.content.horizontalAlignment}
                             backgroundColor={
@@ -119,7 +156,7 @@ export const Cards = (props: { module: cardModule }) => {
     return (
         <article className={classes}>
             <div className="o-container">
-                {module.content ? (
+                {module.content?.body ? (
                     <Content
                         align={module.content.horizontalAlignment}
                         backgroundColor={
