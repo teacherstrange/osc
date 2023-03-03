@@ -3,6 +3,13 @@ import userEvent from '@testing-library/user-event';
 import { SpritesheetProvider } from 'osc-ui';
 import { MemoryRouter } from 'react-router-dom';
 import { mockCardData } from '~/components/Cards/mockCardData';
+import type {
+    bioCardModule,
+    collectionCardModule,
+    courseCardModule,
+    postCardModule,
+    staticCardModule,
+} from '~/types/sanity';
 import breakpoints from '../../../../../tokens/media-queries';
 import { BioCard } from './BioCard';
 import { BlogCard } from './BlogCard';
@@ -185,7 +192,7 @@ describe('Card types', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <BioCard data={bioCard} />
+                    <BioCard data={bioCard as bioCardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -216,7 +223,7 @@ describe('Card types', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <CourseCard data={courseCard} />
+                    <CourseCard data={courseCard as courseCardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -247,7 +254,7 @@ describe('Card types', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <CollectionCard data={collectionCard} />
+                    <CollectionCard data={collectionCard as collectionCardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -266,7 +273,7 @@ describe('Card types', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <BlogCard data={blogCard} />
+                    <BlogCard data={blogCard as postCardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -285,7 +292,7 @@ describe('Card types', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <SimpleCard data={staticCard} />
+                    <SimpleCard data={staticCard as staticCardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
