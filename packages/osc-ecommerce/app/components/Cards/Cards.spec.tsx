@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { SpritesheetProvider } from 'osc-ui';
 import { MemoryRouter } from 'react-router-dom';
 import { mockCardData } from '~/components/Cards/mockCardData';
 import breakpoints from '../../../../../tokens/media-queries';
@@ -39,7 +40,9 @@ describe('Responsive layout', () => {
 
         render(
             <MemoryRouter>
-                <Cards module={mockCardData} />
+                <SpritesheetProvider>
+                    <Cards module={mockCardData} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -62,7 +65,9 @@ describe('Responsive layout', () => {
 
         render(
             <MemoryRouter>
-                <Cards module={mockCardData} />
+                <SpritesheetProvider>
+                    <Cards module={mockCardData} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -89,7 +94,9 @@ describe('Responsive layout', () => {
 
         render(
             <MemoryRouter>
-                <Cards module={clonedData} />
+                <SpritesheetProvider>
+                    <Cards module={clonedData} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -120,7 +127,9 @@ describe('Controlled layout', () => {
 
         render(
             <MemoryRouter>
-                <Cards module={clonedData} />
+                <SpritesheetProvider>
+                    <Cards module={clonedData} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -138,7 +147,9 @@ describe('Controlled layout', () => {
 
         render(
             <MemoryRouter>
-                <Cards module={clonedData} />
+                <SpritesheetProvider>
+                    <Cards module={clonedData} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -156,7 +167,9 @@ describe('Card types', () => {
 
         render(
             <MemoryRouter>
-                <BioCard data={bioCard} />
+                <SpritesheetProvider>
+                    <BioCard data={bioCard} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -185,7 +198,9 @@ describe('Card types', () => {
 
         render(
             <MemoryRouter>
-                <CourseCard data={courseCard} />
+                <SpritesheetProvider>
+                    <CourseCard data={courseCard} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -214,7 +229,9 @@ describe('Card types', () => {
 
         render(
             <MemoryRouter>
-                <CollectionCard data={collectionCard} />
+                <SpritesheetProvider>
+                    <CollectionCard data={collectionCard} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -231,7 +248,9 @@ describe('Card types', () => {
 
         render(
             <MemoryRouter>
-                <BlogCard data={blogCard} />
+                <SpritesheetProvider>
+                    <BlogCard data={blogCard} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
@@ -248,7 +267,9 @@ describe('Card types', () => {
 
         render(
             <MemoryRouter>
-                <SimpleCard data={staticCard} />
+                <SpritesheetProvider>
+                    <SimpleCard data={staticCard} />
+                </SpritesheetProvider>
             </MemoryRouter>
         );
 
