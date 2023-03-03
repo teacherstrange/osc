@@ -22,6 +22,10 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
     /**
      * Description for the Select, can be a Label or an Icon
      */
+    children: ReactNode;
+    /**
+     * Description for the Select, can be a Label or an Icon
+     */
     description?: Description;
     /**
      * Any error messages - initially set through server validation, but can be updated through client validation
@@ -31,6 +35,10 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
     groupVariants?: GroupVariants[];
+    /**
+     * Name of the select, submitted with its owning form as part of a name/pair value
+     */
+    name: string;
     /**
      * A placeholder value for the Select, e.g. "Please Select"
      */
@@ -139,7 +147,12 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
     }
 );
 
-export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.Item> {}
+export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.Item> {
+    /**
+     * The value given as data when submitted with a name.
+     */
+    value: string;
+}
 
 export const SelectItem = forwardRef<ElementRef<typeof SelectPrimitive.Item>, ItemProps>(
     ({ children, ...props }, forwardedRef) => {
