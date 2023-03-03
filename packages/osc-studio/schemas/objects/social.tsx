@@ -1,3 +1,4 @@
+import React from 'react';
 import { IconPicker } from '../../components/inputs/IconPicker';
 
 export default {
@@ -20,12 +21,24 @@ export default {
     preview: {
         select: {
             url: 'socialProfile',
+            icon: 'icon',
         },
         prepare(selection: Record<string, any>) {
-            const { url } = selection;
+            const { url, icon } = selection;
 
             return {
                 title: url,
+                media: (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                    >
+                        <use href={`/static/spritesheet.svg#${icon}`} />
+                    </svg>
+                ),
             };
         },
     },
