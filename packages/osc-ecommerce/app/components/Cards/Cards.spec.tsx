@@ -159,6 +159,23 @@ describe('Controlled layout', () => {
         expect(carousel).toBeInTheDocument();
         expect(carouselSlide).toHaveLength(5);
     });
+
+    test('renders cards in grid island layout', () => {
+        // TODO: We can update to use structuredClone() when we update to Node 17
+        const clonedData = JSON.parse(JSON.stringify(mockCardData)) as typeof mockCardData;
+        clonedData.layout = 'island grid';
+
+        render(
+            <MemoryRouter>
+                <SpritesheetProvider>
+                    <Cards module={clonedData} />
+                </SpritesheetProvider>
+            </MemoryRouter>
+        );
+
+        const islandGrid = document.querySelector('.c-island-grid');
+        expect(islandGrid).toBeInTheDocument();
+    });
 });
 
 describe('Card types', () => {
