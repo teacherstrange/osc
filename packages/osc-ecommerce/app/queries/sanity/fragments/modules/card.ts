@@ -18,6 +18,7 @@ export const MODULE_CARDS = groq`
         _type == 'card.collection' => {
           _key,
           _type,
+          variant,
           reference->
         },
         _type == 'card.post' => {

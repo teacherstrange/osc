@@ -124,6 +124,7 @@ export interface collectionCardModule extends module {
     reference?: {
         store?: shopifyCollection;
     };
+    variant?: 'sm' | 'md' | 'lg';
 }
 
 export interface postCardModule extends module {
