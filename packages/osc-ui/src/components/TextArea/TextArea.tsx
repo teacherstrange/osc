@@ -56,6 +56,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                     }
                 >
                     <textarea
+                        aria-invalid={errors ? true : false}
+                        aria-describedby={errors ? `${id}-error` : undefined}
                         className="c-input  c-textarea"
                         disabled={disabled}
                         id={id}

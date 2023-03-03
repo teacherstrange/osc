@@ -103,6 +103,8 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                     required={required}
                 >
                     <SelectPrimitive.Trigger
+                        aria-invalid={errors ? true : false}
+                        aria-describedby={errors ? `${name}-error` : undefined}
                         className="c-select__trigger"
                         id={name}
                         ref={forwardedRef}
