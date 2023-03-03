@@ -1,4 +1,4 @@
-import { Carousel, classNames, IslandGrid, rem, useMediaQuery } from 'osc-ui';
+import { Carousel, classNames, Content, IslandGrid, rem, useMediaQuery } from 'osc-ui';
 import type {
     bioCardModule,
     cardModule,
@@ -50,68 +50,122 @@ export const Cards = (props: { module: cardModule }) => {
         module?.paddingBottom ? `u-pb-${module?.paddingBottom}` : ''
     );
 
+    console.log(module.content);
+
     if (module?.layout === 'carousel') {
         return (
-            <div className={classes}>
-                <Carousel
-                    carouselName={module?.carouselName ? module?.carouselName : ''}
-                    className="o-container"
-                    adaptiveHeight
-                >
-                    {module.card.map((card) => (
-                        <Card card={card} key={card?._key} />
-                    ))}
-                </Carousel>
-            </div>
+            <article className={classes}>
+                <div className="o-container">
+                    {module.content ? (
+                        <Content
+                            align={module.content.horizontalAlignment}
+                            backgroundColor={
+                                module.content.backgroundColor
+                                    ? module.content.backgroundColor
+                                    : undefined
+                            }
+                            marginBottom={module.content.marginBottom}
+                            paddingBottom={module.content.paddingBottom}
+                            paddingTop={module.content.paddingTop}
+                            value={module.content.body}
+                            buttons={module.content.buttons}
+                        />
+                    ) : null}
+
+                    <Carousel
+                        carouselName={module?.carouselName ? module?.carouselName : ''}
+                        adaptiveHeight
+                    >
+                        {module.card.map((card) => (
+                            <Card card={card} key={card?._key} />
+                        ))}
+                    </Carousel>
+                </div>
+            </article>
         );
     }
 
     if (module.layout === 'island grid') {
         return (
-            <div className={classes}>
-                <IslandGrid className="o-container">
-                    {module.card.map((card) => (
-                        <Card card={card} key={card?._key} />
-                    ))}
-                </IslandGrid>
-            </div>
+            <article className={classes}>
+                <div className="o-container">
+                    {module.content ? (
+                        <Content
+                            align={module.content.horizontalAlignment}
+                            backgroundColor={
+                                module.content.backgroundColor
+                                    ? module.content.backgroundColor
+                                    : undefined
+                            }
+                            marginBottom={module.content.marginBottom}
+                            paddingBottom={module.content.paddingBottom}
+                            paddingTop={module.content.paddingTop}
+                            value={module.content.body}
+                            buttons={module.content.buttons}
+                        />
+                    ) : null}
+
+                    <IslandGrid>
+                        {module.card.map((card) => (
+                            <Card card={card} key={card?._key} />
+                        ))}
+                    </IslandGrid>
+                </div>
+            </article>
         );
     }
 
     // Return grid layout by default
     return (
-        <div className={classes}>
-            {/* Only become a carousel on mobile and small tablets AND when the number of cards is greater than three */}
-            {isSmallerThanTab && module?.card.length > 3 ? (
-                <Carousel
-                    carouselName={module?.carouselName ? module?.carouselName : ''}
-                    className="o-container"
-                    adaptiveHeight
-                >
-                    {module.card.map((card) => (
-                        <Card card={card} key={card?._key} />
-                    ))}
-                </Carousel>
-            ) : (
-                <ul className="o-grid o-container">
-                    {module.card.map((card) => {
-                        const postCard = card as postCardModule;
-                        const isFullWidth = postCard?.fullWidth;
+        <article className={classes}>
+            <div className="o-container">
+                {module.content ? (
+                    <Content
+                        align={module.content.horizontalAlignment}
+                        backgroundColor={
+                            module.content.backgroundColor
+                                ? module.content.backgroundColor
+                                : undefined
+                        }
+                        marginBottom={module.content.marginBottom}
+                        paddingBottom={module.content.paddingBottom}
+                        paddingTop={module.content.paddingTop}
+                        value={module.content.body}
+                        buttons={module.content.buttons}
+                    />
+                ) : null}
 
-                        const classes = classNames(
-                            'o-grid__col--12',
-                            isFullWidth ? '' : 'o-grid__col--6@tab',
-                            isFullWidth ? '' : 'o-grid__col--4@desk'
-                        );
+                {/* Only become a carousel on mobile and small tablets AND when the number of cards is greater than three */}
+                {isSmallerThanTab && module?.card.length > 3 ? (
+                    <Carousel
+                        carouselName={module?.carouselName ? module?.carouselName : ''}
+                        adaptiveHeight
+                    >
+                        {module.card.map((card) => (
+                            <Card card={card} key={card?._key} />
+                        ))}
+                    </Carousel>
+                ) : (
+                    <ul className="o-grid">
+                        {module.card.map((card) => {
+                            const postCard = card as postCardModule;
+                            const isFullWidth = postCard?.fullWidth;
 
-                        return (
-                            <li className={classes} key={card?._key}>
-                                <Card card={card} />
-                            </li>
-                        );
-                    })}
-                </ul>
-            )}
-        </div>
+                            const classes = classNames(
+                                'o-grid__col--12',
+                                isFullWidth ? '' : 'o-grid__col--6@tab',
+                                isFullWidth ? '' : 'o-grid__col--4@desk'
+                            );
+
+                            return (
+                                <li className={classes} key={card?._key}>
+                                    <Card card={card} />
+                                </li>
+                            );
+                        })}
+                    </ul>
+                )}
+            </div>
+        </article>
     );
 };

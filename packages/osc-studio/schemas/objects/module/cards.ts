@@ -27,11 +27,21 @@ export default {
             title: 'Spacing',
         },
         {
+            name: 'content',
+            title: 'Content',
+        },
+        {
             name: 'cards',
             title: 'Cards',
         },
     ],
     fields: [
+        {
+            name: 'content',
+            title: 'Content',
+            type: 'module.content',
+            group: 'content',
+        },
         {
             name: 'marginBottom',
             title: 'Push Region',

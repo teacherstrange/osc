@@ -169,6 +169,7 @@ export interface cardModule extends module {
     paddingTop?: Spacing | string;
     layout: string;
     carouselName?: string;
+    content?: contentModule;
     card: TypesOfCard[];
 }
 
