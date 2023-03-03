@@ -74,7 +74,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         required,
         schema,
         setErrors,
-        type,
+        type = 'text',
         variants,
         ...rest
     } = props;
