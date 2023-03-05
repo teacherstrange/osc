@@ -1,13 +1,41 @@
-node_modules/
-lerna-debug.log
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+dist
+tmp
+/out-tsc
+
+# dependencies
+node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
 npm-debug.log
-packages/lib
-.idea
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Env files
 .env
 .env.development
 .env.production
-.DS_Store
-packages/osc-academic-hub/.DS_Store
+
 packages/osc-academic-hub/public/**/*
 packages/osc-academic-hub/public/entry.worker.js
 packages/osc-academic-hub/coverage/**/*
