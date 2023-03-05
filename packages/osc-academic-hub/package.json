@@ -20,7 +20,10 @@
     "test:e2e": "cross-env PORT=8812 start-server-and-test start:mocks http://localhost:8812 \"PORT=8811 npx playwright test\"",
     "typecheck": "tsc -b",
     "build:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --minify --bundle --format=esm --define:process.env.NODE_ENV='\"production\"'",
-    "dev:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --bundle --format=esm --define:process.env.NODE_ENV='\"development\"' --watch"
+    "dev:worker": "esbuild ./app/entry.worker.ts --outfile=./public/entry.worker.js --bundle --format=esm --define:process.env.NODE_ENV='\"development\"' --watch",
+    "copy-fonts:from-ui": "cp -R ../osc-ui/src/fonts public",
+    "copy-fonts:from-remix": "cp -R public/fonts public/build/_assets",
+    "copy-fonts": "run-s copy-fonts:*"
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
