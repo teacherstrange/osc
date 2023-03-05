@@ -15,7 +15,8 @@
     "build": "rm -rf dist && NODE_ENV=production LOAD_PATH=src rollup --config",
     "dev": "run-p dev:*",
     "dev:rollup": "LOAD_PATH=src rollup -c -w",
-    "sass": "sass --watch src/styles/main.scss src/styles/dist/main.css"
+    "sass": "sass --watch src/styles/main.scss src/styles/dist/main.css",
+    "typecheck": "tsc -b"
   },
   "dependencies": {
     "@portabletext/react": "^2.0.2",
