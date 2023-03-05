@@ -1,29 +1,41 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "npmScope": "osc",
+  "affected": {
+    "defaultBase": "main"
+  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "test"],
+        "cacheableOperations": ["build", "test", "test:e2e"],
+        "parallel": 20,
         "accessToken": "NGY1YTkxMDItN2ViNS00MjgxLWIxOGEtMTdjZjc0Mzk1OGZmfHJlYWQtd3JpdGU="
       }
     }
   },
   "targetDefaults": {
-    "targetDefaults": {
-      "build": {
-        "dependsOn": ["^build", "prebuild"]
-      },
-      "test": {
-        "dependsOn": ["build"]
-      }
-    },
-    "dev": {
+    "build": {
+      "inputs": ["production", "^production"],
       "dependsOn": ["^build"]
+    },
+    "test": {
+      "inputs": ["default", "^production", "{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)"],
+      "dependsOn": ["build"]
+    },
+    "test:e2e": {
+      "inputs": ["default", "^production", "{projectRoot}/**/e2e/?(*.)+(spec|test).[jt]s?(x)"],
+      "dependsOn": ["build"]
     }
   },
-  "pluginsConfig": {
-    "@nrwl/js": {
-      "analyzeSourceFiles": false
-    }
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*"],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/.eslintrc.js",
+      "{projectRoot}/.stylelint.json"
+    ]
   }
 }
