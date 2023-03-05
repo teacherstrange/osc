@@ -19,6 +19,7 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "@internationalized/date": "^3.1.0",
     "@portabletext/react": "^2.0.2",
     "@radix-ui/react-accessible-icon": "^1.0.1",
     "@radix-ui/react-accordion": "^1.1.0",
