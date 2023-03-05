@@ -1,81 +1,10 @@
-# OSC Monorepo
+# OSC monorepo
 
-## Getting started
-
-Make a copy of the `.env.sample` and rename it to `.env`. Next add the values to the following constants.
-
-```.env
-PLANETSCALE_PRISMA_DATABASE_URL=''
-SESSION_SECRET="super-duper-s3cret"
-LOAD_PATH="app/styles"
-PATH_TO_MAIN_SCSS="/app/styles/main.scss"
-PATH_TO_DEST_MAIN_CSS="/app/styles/dest"
-PATH_TO_COMPONENTS="/app/components"
-GA_TRACKING_ID=""
-GTM_TRACKING_ID=""
-VAPID_PUBLIC_KEY=""
-VAPID_PRIVATE_KEY=""
-DATABASE_URL=""
-ALGOLIA_ID=""
-ALGOLIA_ID_SEARCH_ONLY=""
-SANITY_STUDIO_API_PROJECT_ID=""
-SANITY_STUDIO_API_DATASET="staging"
-SANITY_STUDIO_API_TOKEN=""
-```
-
-The first time you clone the repo run `npm install` to get the Lerna dependencies etc and then `npm run setup` to install the dependencies for each package:
-
-```sh
-npm install
-npm run setup
-```
-
-`npm run setup` will run:
-
--   `npm install`
--   `prisma generate` - generates prisma client
--   `lerna link convert` - takes all dev deps and moves them to the root of the project
-
-Run `npm run dev` to start the development server.
-
-## Setting up Sanity Studio
-
-There's an extra step to get Sanity working.
-
-Navigate into the `osc-studio` package and make a copy of the `.env.sample.development`, rename it `.env.development` and add the following variables to it
-
-```.env
-SANITY_STUDIO_API_PROJECT_ID=""
-SANITY_STUDIO_API_DATASET="staging"
-```
-
-## Development commands
-
-Run `osc-ecommerce`, `osc-academic-hub` and `osc-ui`.
-
-Because `osc-studio` isn't part of the packages array in `lerna.json` then it has to be run as a separate command.
-
-```sh
-npm run dev
-```
-
-Run `osc-ecommerce` & `osc-ui` or `osc-academic-hub` & `osc-ui`
-
-```sh
-npm run dev:osc-ecommerce
-npm run dev:osc-academic-hub
-```
-
-Run Sanity Studio
-
-```sh
-npm run dev:osc-studio
-```
-
-This will run osc-ecommerce on [http://localhost:2000](http://localhost:2000) and osc-academic-hub on [http://localhost:3000](http://localhost:3000).
+Welcome to the OSC monorepo! 👋
 
 ## Our tech
 
+-   Monorepo management with [NPM workspaces](https://docs.npmjs.com/cli/v9/using-npm/workspaces) and [NX](https://nx.dev/getting-started/intro).
 -   [Fly app deployment](https://fly.io) with [Docker](https://www.docker.com/)
 -   Healthcheck endpoint for [Fly backups region fallbacks](https://fly.io/docs/reference/configuration/#services-http_checks)
 -   [GitHub Actions](https://github.com/features/actions) for deploy on merge to production and staging environments
@@ -89,95 +18,215 @@ This will run osc-ecommerce on [http://localhost:2000](http://localhost:2000) an
 -   Linting with [ESLint](https://eslint.org)
 -   Static Types with [TypeScript](https://typescriptlang.org)
 
+## Getting started
+
+Make a copy of the `.env.sample` in each workspace, rename it to `.env` and update any missing values. (You will be able to get any of the these from one of the team).
+
 <details>
-    <summary>Setting up a new monorepo</summary>
-This Remix Stack comes with two GitHub Actions that handle automatically deploying your app to production and staging environments.
+  <summary><h3>Environment Variable list<h3></summary>
 
-Prior to your first deployment, you'll need to do a few things:
+-   `root`
 
--   [Install Fly](https://fly.io/docs/getting-started/installing-flyctl/)
-
--   Sign up and log in to Fly
-
-    ```sh
-    fly auth signup
+    ```
+    PLANETSCALE_PRISMA_DATABASE_URL=''
+    SESSION_SECRET="super-duper-s3cret"
+    LOAD_PATH="app/styles"
+    PATH_TO_MAIN_SCSS="/app/styles/main.scss"
+    PATH_TO_DEST_MAIN_CSS="/app/styles/dest"
+    PATH_TO_COMPONENTS="/app/components"
+    GA_TRACKING_ID=""
+    GTM_TRACKING_ID=""
+    VAPID_PUBLIC_KEY=""
+    VAPID_PRIVATE_KEY=""
+    DATABASE_URL=""
+    ALGOLIA_ID=""
+    ALGOLIA_ID_SEARCH_ONLY=""
+    SANITY_STUDIO_API_PROJECT_ID=""
+    SANITY_STUDIO_API_DATASET="staging"
+    SANITY_STUDIO_API_TOKEN=""
     ```
 
-    > **Note:** If you have more than one Fly account, ensure that you are signed into the same account in the Fly CLI as you are in the browser. In your terminal, run `fly auth whoami` and ensure the email matches the Fly account signed into the browser.
+-   `osc-api-admin`
+    ```
+    NODE_ENV=development
+    ```
+-   `osc-api-assignments`
 
--   Create two apps on Fly, one for staging and one for production:
-
-    ```sh
-    fly create osc-ecommerce
-    fly create osc-ecommerce-staging
+    ```
+    NODE_ENV=development
+    S3_BUCKET=
+    S3_KEY_ID=
+    S3_KEY_SECRET=
     ```
 
-    -   Initialize Git.
+-   `osc-api-auth`
 
-    ```sh
-    git init
+    ```
+    NODE_ENV=development
+    SALT_ROUNDS=12
+    JWT_SECRET=changeme
+    JWT_AUDIENCE="http://localhost:4000/graphql"
+    JWT_DURATION=3600
+    JWT_REFRESH_DURATION=86400
     ```
 
--   Create a new [GitHub Repository](https://repo.new), and then add it as the remote for your project. **Do not push your app yet!**
+-   `osc-api-crm`
 
-    ```sh
-    git remote add origin <ORIGIN_URL>
+    ```
+    NODE_ENV=development
+    HUBSPOT_ACCESS_TOKEN=
     ```
 
--   Add a `FLY_API_TOKEN` to your GitHub repo. To do this, go to your user settings on Fly and create a new [token](https://web.fly.io/user/personal_access_tokens/new), then add it to [your repo secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) with the name `FLY_API_TOKEN`.
+-   `osc-api-ecommerce`
+    ```
+    NODE_ENV=development
+    ALGOLIA_APP_ID=
+    ALGOLIA_SEARCH_KEY=
+    SHOPIFY_API_KEY=
+    SHOPIFY_SECRET=
+    ```
+-   `osc-api-gateway`
 
--   Add a `SESSION_SECRET` to your fly app secrets, to do this you can run the following commands:
-
-    ```sh
-    fly secrets set SESSION_SECRET=$(openssl rand -hex 32) --app osc-ecommerce
-    fly secrets set SESSION_SECRET=$(openssl rand -hex 32) --app osc-ecommerce-staging
+    ```
+    NODE_ENV=development
+    APOLLO_KEY=
+    APOLLO_GRAPH_REF=
+    AUTH_API_URL=http://localhost:4001
+    ADMIN_API_URL=http://localhost:4005
     ```
 
-    If you don't have openssl installed, you can also use [1password](https://1password.com/password-generator/) to generate a random secret, just replace `$(openssl rand -hex 32)` with the generated secret.
+-   `osc-api-lms`
 
--   Create a persistent volume for the sqlite database for both your staging and production environments. Run the following:
-
-    ```sh
-    fly volumes create data --size 1 --app osc-ecommerce
-    fly volumes create data --size 1 --app osc-ecommerce-staging
     ```
-
-Now that everything is set up you can commit and push your changes to your repo. Every commit to your `main` branch will trigger a deployment to your production environment, and every commit to your `dev` branch will trigger a deployment to your staging environment.
-
-### Connecting to your database
-
-The sqlite database lives at `/data/sqlite.db` in your deployed application. You can connect to the live database by running `fly ssh console -C database-cli`.
-
-### Getting Help with Deployment
-
-If you run into any issues deploying to Fly, make sure you've followed all of the steps above and if you have, then post as many details about your deployment (including your app name) to [the Fly support community](https://community.fly.io). They're normally pretty responsive over there and hopefully can help resolve any of your deployment issues and questions.
+    NODE_ENV=development
+    LMS_URL=
+    LMS_API_KEY=
+    ```
 
 </details>
 
-## GitHub Actions
+-   Install all dependencies and setup prisma
 
-We use GitHub Actions for continuous integration and deployment. Anything that gets into the `production` branch will be deployed to production after running tests/build/etc. Anything in the `staging` branch will be deployed to staging.
+    ```sh
+    npm run setup
+    ```
+
+-   Run the build command
+
+    ```sh
+    npm run build
+    ```
+
+    Builds workspaces and sets up the cache
+
+-   Start development
+
+    ```sh
+    npm run dev
+    ```
+
+    This will run all workspaces in development mode.
+
+## Installing new packages
+
+If you need to install a new package to one or multiple workspaces then it is best to install them using the `--workspace` flag on the end of the install command. For example:
+
+```sh
+npm i react --workspace=osc-ui
+```
+
+If you need the dependency installed in multiple workspaces then you can chain this flag like so:
+
+```sh
+npm i react --workspace=osc-ui --workspace=osc-ecommerce --workspace=osc-academic-hub
+```
+
+## Development
+
+-   `npm run dev`
+
+    Runs development server for all workspaces
+
+-   `npm run dev:fe`
+
+    Runs development server for frontend only workspaces
+
+-   `npm run dev:api`
+
+    Runs development server for api services
+
+-   `npm run dev:<workspace-name>`
+
+    Runs development server for osc-{ui|ecommerce|academic-hub|studio}
+
+-   `npm run api:dev:<workspace-name>`
+
+    Runs development server for osc-api-{\*}
+
+-   `npm run storybook`
+
+    Runs storybook for components in osc-{ui|ecommerce|academic-hub}
+
+-   `npm run tokens:generate`
+
+    Generate scss `_tokens.scss` file from the osc-design-tokens workspace
 
 ## Testing
-
-### Playwright
-
-We use Playwright for our End-to-End tests in this project. You'll find those in the `e2e` directory.
-
-To run these tests in development, run `npm run test:e2e:dev` which will start the dev server for the app as well as the Playwright test runner. Make sure the database is running in docker as described above.
 
 ### Vitest
 
 For lower level tests of utilities and individual components, we use `vitest`. We have DOM-specific assertion helpers via [`@testing-library/jest-dom`](https://testing-library.com/jest-dom).
 
-### Type Checking
+-   `npm run test`
 
-This project uses TypeScript. It's recommended to get TypeScript set up for your editor to get a really great in-editor experience with type checking and auto-complete. To run type checking across the whole project, run `npm run typecheck`.
+    Run tests for all workspaces
 
-### Linting
+-   `npm run test:<workspace-name>`
 
-This project uses ESLint for linting. That is configured in `.eslintrc.js`.
+    Runs tests for osc-{ui|ecommerce|academic-hub|api-\*}
 
-### Formatting
+-   `npm run test:watch`
 
-We use [Prettier](https://prettier.io/) for auto-formatting in this project. It's recommended to install an editor plugin (like the [VSCode Prettier plugin](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)) to get auto-formatting on save. There's also a `npm run format` script you can run to format all files in the project.
+    Runs tests in watch mode for all workspaces
+
+-   `npm run test:watch:<workspace-name>`
+
+    Runs tests in watch mode for osc-{ui|ecommerce|academic-hub}
+
+### Playwright
+
+We use `Playwright` for our End-to-End tests in this project. You'll find those in the `e2e` directory inside of our Remix apps.
+
+-   `npm run test:e2e`
+
+    Run tests for all workspaces
+
+-   `npm run test:e2e:<workspace-name>`
+
+    Runs tests for osc-{ecommerce|academic-hub}
+
+## Linting & Typechecking
+
+This project uses TypeScript. It's recommended to get TypeScript set up for your editor to get a really great in-editor experience with type checking and auto-complete.
+
+We use [Prettier](https://prettier.io/) for auto-formatting in this project. It's recommended to install an editor plugin (like the [VSCode Prettier plugin](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)) to get auto-formatting on save.
+
+-   `npm run lint`
+
+    Lints the monorepo based on the `.eslint.js` config.
+
+-   `npm run lint-and-fix`
+
+    Lints and attempts to fix the monorepo based on the `.eslintrc` file.
+
+-   `npm run prettier-format`
+
+    Format all files against the `.prettierrc` file.
+
+-   `npm run typecheck`
+
+    Typecheck files against the `tsconfig` files
+
+## Deployment
+
+We use GitHub Actions for continuous integration and deployment. Anything that gets into the `main` branch will be deployed to production after running tests/build/etc.
