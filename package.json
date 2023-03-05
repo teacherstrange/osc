@@ -2,6 +2,9 @@
   "name": "osc",
   "version": "0.51.0",
   "private": true,
+  "workspaces": [
+    "packages/**"
+  ],
   "dependencies": {
     "conventional-changelog-conventionalcommits": "^5.0.0",
     "osc-academic-hub": "file:packages/osc-academic-hub",
@@ -109,5 +112,10 @@
     "stylelint-prettier": "^2.0.0",
     "stylelint-selector-bem-pattern": "^2.1.1",
     "typescript": "~4.8.2"
+  },
+  "overrides": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "node-sass": "^8"
   }
 }
