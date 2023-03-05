@@ -5,20 +5,6 @@
   "workspaces": [
     "packages/**"
   ],
-  "dependencies": {
-    "conventional-changelog-conventionalcommits": "^5.0.0",
-    "osc-academic-hub": "file:packages/osc-academic-hub",
-    "osc-api": "file:packages/osc-api",
-    "osc-api-admin": "file:packages/osc-api-admin",
-    "osc-api-assignments": "file:packages/osc-api-assignments",
-    "osc-api-auth": "file:packages/osc-api-auth",
-    "osc-api-crm": "file:packages/osc-api-crm",
-    "osc-api-ecommerce": "file:packages/osc-api-ecommerce",
-    "osc-api-gateway": "file:packages/osc-api-gateway",
-    "osc-api-lms": "file:packages/osc-api-lms",
-    "osc-ecommerce": "file:packages/osc-ecommerce",
-    "osc-ui": "file:packages/osc-ui"
-  },
   "scripts": {
     "prepare": "husky install",
     "stylelint": "npx stylelint \"**/*.scss\" --allow-empty-input --formatter verbose",
