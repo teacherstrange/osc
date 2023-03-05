@@ -28,6 +28,7 @@
     "express": "^4.18.2",
     "express-history-api-fallback": "^2.2.1",
     "lodash.get": "^4.4.2",
+    "osc-design-tokens": "*",
     "pluralize": "^8.0.0",
     "prop-types": "^15.7",
     "react": "^18.2.0",

@@ -87,6 +87,7 @@ export const FooterMenu = (props: FooterMenuProps) => {
     const classes = classNames('c-footer__menu', className);
 
     return isAccordion ? (
+        // @ts-ignore
         <Accordion
             asChild
             defaultValue={typeof defaultValue === 'string' && defaultValue}

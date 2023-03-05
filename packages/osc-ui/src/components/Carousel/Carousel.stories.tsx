@@ -1,6 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
+import { mediaQueries as mq } from 'osc-design-tokens';
 import React from 'react';
-import mq from '../../../../../tokens/media-queries';
 import { rem } from '../../utils/rem';
 import { Image } from '../Image/Image';
 import type { Props } from './Carousel';

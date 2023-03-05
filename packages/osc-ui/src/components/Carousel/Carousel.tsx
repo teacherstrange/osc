@@ -1,5 +1,6 @@
 import type { KeenSliderPlugin } from 'keen-slider/react';
 import { useKeenSlider } from 'keen-slider/react';
+import { mediaQueries as mq } from 'osc-design-tokens';
 import type { ReactNode } from 'react';
 import React, { Children, useState } from 'react';
 import { classNames } from '../../utils/classNames';

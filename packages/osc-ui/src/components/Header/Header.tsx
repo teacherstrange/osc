@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
+import { mediaQueries as breakpoints } from 'osc-design-tokens';
 import type { HTMLAttributes, ReactNode, RefObject } from 'react';
 import React, { Children, useEffect, useRef, useState } from 'react';
-import breakpoints from '../../../../../tokens/media-queries';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { classNames } from '../../utils/classNames';
 import { rem } from '../../utils/rem';
