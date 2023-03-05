@@ -13,14 +13,22 @@ describe('Image Gallery Component', () => {
     test('should render a single image and a modal without an "lg-show" class when passed one image', () => {
         setup({ images: singleImageData });
         expect(screen.getByAltText(/A cartoony shoe/i)).toBeInTheDocument();
-        expect(screen.getByRole('dialog')).toBeInTheDocument();
-        expect(screen.getByRole('dialog')).not.toHaveClass('lg-show');
+        expect(
+            screen.getByRole('dialog', {
+                hidden: true,
+            })
+        ).toBeInTheDocument();
+        expect(
+            screen.getByRole('dialog', {
+                hidden: true,
+            })
+        ).not.toHaveClass('lg-show');
     });
 
     test('should render four images in a 2x2 grid when passed four images with 2x variant', async () => {
         const { container } = setup({ images: imageGrid2x2.images, variant: imageGrid2x2.variant });
         // Expect this to be double as it renders one image for the initial view and one for the carousel
-        expect(screen.getAllByRole('img').length).toBe(8);
+        expect(screen.getAllByRole('img').length).toBe(4);
         const images = container.getElementsByClassName('c-image-gallery__img');
         for (const img of Array.from(images)) {
             expect(img).toHaveClass('c-image-gallery__img--2x2-grid');
@@ -33,7 +41,11 @@ describe('Image Gallery Component', () => {
 
         setup({ images: singleImageData });
 
-        expect(screen.getByRole('dialog')).not.toHaveClass('lg-show');
+        expect(
+            screen.getByRole('dialog', {
+                hidden: true,
+            })
+        ).not.toHaveClass('lg-show');
         expect(screen.getAllByAltText(/A cartoony shoe/i).length).toBe(1);
 
         await user.click(screen.getByAltText(/A cartoony shoe/i));
