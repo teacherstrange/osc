@@ -1,8 +1,15 @@
 // tests/setup.ts
 import matchers from '@testing-library/jest-dom/matchers';
-import { expect, vi } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import { afterEach, expect, vi } from 'vitest';
 
+// extends Vitest's expect method with methods from react-testing-library
 expect.extend(matchers);
+
+// runs a cleanup after each test case (e.g. clearing jsdom)
+afterEach(() => {
+    cleanup();
+});
 
 Object.defineProperty(window, 'matchMedia', {
     writable: true,
@@ -14,6 +21,6 @@ Object.defineProperty(window, 'matchMedia', {
         removeListener: vi.fn(), // deprecated
         addEventListener: vi.fn(),
         removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn()
-    }))
+        dispatchEvent: vi.fn(),
+    })),
 });
