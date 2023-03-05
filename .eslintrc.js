@@ -6,23 +6,34 @@ module.exports = {
         '@remix-run/eslint-config',
         '@remix-run/eslint-config/node',
         '@remix-run/eslint-config/jest-testing-library',
-        'prettier'
+        'prettier',
     ],
     // we're using vitest which has a very similar API to jest
     // (so the linting plugins work nicely), but it means we have to explicitly
     // set the jest version.
     settings: {
         jest: {
-            version: 27
-        }
+            version: 27,
+        },
+    },
+    plugins: ['import'],
+    rules: {
+        'import/no-extraneous-dependencies': [
+            'error',
+            {
+                devDependencies: true,
+                optionalDependencies: false,
+                peerDependencies: false,
+            },
+        ],
     },
     overrides: [
         {
             // playwright uses the same "getBy" method as testing library so we need to ignore this rule
             files: ['./*/**/e2e/**/*'],
             rules: {
-                'testing-library/prefer-screen-queries': 'off'
-            }
-        }
-    ]
+                'testing-library/prefer-screen-queries': 'off',
+            },
+        },
+    ],
 };
