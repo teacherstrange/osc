@@ -10,11 +10,11 @@
     "dist/*.css"
   ],
   "scripts": {
-    "test": "vitest --coverage --config ./vite.config.ts",
-    "test:dev": "vitest run --config ./vite.config.ts",
+    "test": "vitest run --coverage --config ./vite.config.ts",
+    "test:watch": "vitest --coverage --config ./vite.config.ts",
     "build": "rm -rf dist && NODE_ENV=production LOAD_PATH=src rollup --config",
     "dev": "run-p dev:*",
-    "dev:rollup": " LOAD_PATH=src rollup -c -w",
+    "dev:rollup": "LOAD_PATH=src rollup -c -w",
     "sass": "sass --watch src/styles/main.scss src/styles/dist/main.css"
   },
   "dependencies": {
