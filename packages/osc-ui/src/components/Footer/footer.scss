@@ -7,6 +7,7 @@
     $footer-bg-color: var(--color-secondary);
     $footer-fg-color: var(--color-tertiary);
     $footer-block-padding: $space-7xl;
+    $footer-block-padding-s: $space-5xl;
     $footer-border: 1px solid currentcolor;
     $footer-fs: rem($base-fs * 1.25); // 20px
     $footer-fs-l: rem($base-fs * 1.5); // 24px
@@ -22,6 +23,7 @@
 
         @include mq($mq-tab) {
             gap: $footer-gap-l $space-m;
+            padding-block: $footer-block-padding-s;
         }
 
         // remove any trailing margins
