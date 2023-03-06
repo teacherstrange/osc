@@ -129,5 +129,10 @@
             flex-wrap: wrap;
             gap: #{$base-fs}px;
         }
+
+        .c-nav__link {
+            all: inherit; // Remove nav styling when used in the footer
+            cursor: pointer;
+        }
     }
 }
