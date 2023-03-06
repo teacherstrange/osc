@@ -385,8 +385,8 @@ export interface SanityNavItem extends module {
     };
     externalLink?: string;
     target?: 'Internal' | 'External' | 'Trigger';
-    featured?: SanityNavItem[];
-    items?: SanityNavItem[];
+    featured?: Maybe<SanityNavItem[]>;
+    items?: Maybe<SanityNavItem[]>;
 }
 
 export interface SanityActionNavSettings {
