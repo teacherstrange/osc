@@ -111,18 +111,20 @@ const hasIconsTemplate: Story<SwitchProps> = (args) => (
     </SwitchGroup>
 );
 
-const ValidationTemplate: Story<SwitchProps> = () => {
+const ValidationTemplate: Story<SwitchProps> = (args) => {
     const [errors, setErrors] = useState({
         isActive: ['Something went wrong, please try again'],
     });
     return (
         <Switch
+            {...args}
             description="Unsubscribe from all emails"
             errors={errors.isActive}
             id="isActive"
             name="Unsubscribe from all emails"
             schema={switchSchema.isActive}
             setErrors={setErrors}
+            size="large"
         />
     );
 };
@@ -171,6 +173,10 @@ HasIcons.parameters = {
 };
 
 export const HasValidation = ValidationTemplate.bind({});
+
+HasValidation.args = {
+    ...Primary.args,
+};
 
 HasValidation.parameters = {
     docs: {

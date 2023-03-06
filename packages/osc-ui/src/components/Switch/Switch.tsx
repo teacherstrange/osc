@@ -66,7 +66,7 @@ export interface SwitchProps extends ComponentPropsWithRef<typeof SwitchPrimitiv
 
 export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, SwitchProps>(
     (props: SwitchProps, forwardedRef) => {
-        const { description, errors, name, schema, setErrors } = props;
+        const { description, errors, name, schema, setErrors, ...rest } = props;
         const [value, setValue] = useState(false);
 
         const { className, id, size = 'large', variant = 'primary' } = props;
@@ -103,7 +103,7 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
                         id={id}
                         className={!errors ? classes : `${classes} c-switch--error`}
                         onCheckedChange={setChecked}
-                        {...props}
+                        {...rest}
                         ref={forwardedRef}
                     >
                         <VisuallyHidden>{description}</VisuallyHidden>
