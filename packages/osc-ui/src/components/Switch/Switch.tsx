@@ -81,7 +81,7 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
         useEffect(() => {
             // Client side error handling - Sets any errors on an input in
             // accordance with the schema validation
-            if (errors) {
+            if (errors && schema && setErrors) {
                 clientSideValidation(id, schema, setErrors, value);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
@@ -91,9 +91,9 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
             <>
                 <div
                     className={
-                        !errors
-                            ? 'c-switch__container'
-                            : 'c-switch__container c-switch__container--error'
+                        errors && errors.length > 0
+                            ? 'c-switch__container c-switch__container--error'
+                            : 'c-switch__container '
                     }
                 >
                     <Label htmlFor={id} name={name} />
@@ -120,7 +120,7 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
                         </SwitchPrimitive.Thumb>
                     </SwitchPrimitive.Root>
                 </div>
-                {errors ? (
+                {errors && errors.length > 0 ? (
                     <div className="c-switch--error-message" id={`${id}-error`} role="alert">
                         {errors}
                     </div>

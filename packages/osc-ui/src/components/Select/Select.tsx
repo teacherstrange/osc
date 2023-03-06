@@ -66,7 +66,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
         useEffect(() => {
             // Client side error handling - Sets any errors on an input in
             // accordance with the schema validation
-            if (errors) {
+            if (errors && schema && setErrors) {
                 clientSideValidation(name, schema, setErrors, value);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
@@ -88,7 +88,11 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             if (desc?.icon) return <Icon id={desc.icon} />;
         };
         return (
-            <div className={errors ? `${selectClasses} c-select--error` : selectClasses}>
+            <div
+                className={
+                    errors && errors.length > 0 ? `${selectClasses} c-select--error` : selectClasses
+                }
+            >
                 {setDescription(description)}
                 <SelectPrimitive.Root
                     {...props}
@@ -120,7 +124,9 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                         </SelectPrimitive.ScrollDownButton>
                     </SelectPrimitive.Content>
                 </SelectPrimitive.Root>
-                {errors ? <div className="c-select__error-message">{errors}</div> : null}
+                {errors && errors.length > 0 ? (
+                    <div className="c-select__error-message">{errors}</div>
+                ) : null}
             </div>
         );
     }

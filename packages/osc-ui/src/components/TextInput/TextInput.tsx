@@ -83,7 +83,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
     useEffect(() => {
         // Client side error handling - Sets any errors on an input in
         // accordance with the schema validation
-        if (errors) {
+        if (errors && schema && setErrors) {
             clientSideValidation(id, schema, setErrors, value);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
@@ -103,7 +103,9 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         <div className="c-input__outer-container">
             <div
                 className={
-                    errors ? `${containerClasses} c-input__container--error` : `${containerClasses}`
+                    errors && errors.length > 0
+                        ? `${containerClasses} c-input__container--error`
+                        : `${containerClasses}`
                 }
             >
                 <input
@@ -127,7 +129,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     variants={value ? ['filled'] : null}
                 />
                 {icon ? <Icon className={iconClasses} id={icon.id} /> : null}
-                {errors ? <InputError errors={errors} id={id} /> : null}
+                {errors && errors.length > 0 ? <InputError errors={errors} id={id} /> : null}
             </div>
             {action ? <InputButton action={action} id={action.iconId} /> : null}
         </div>

@@ -73,7 +73,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
         useEffect(() => {
             // Client side error handling - Sets any errors on an input in
             // accordance with the schema validation
-            if (errors) {
+            if (errors && schema && setErrors) {
                 clientSideValidation(id, schema, setErrors, checked);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
@@ -85,7 +85,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
         return (
             <fieldset
                 className={
-                    errors
+                    errors && errors.length > 0
                         ? `${checkboxClasses} c-checkbox__container--error`
                         : `${checkboxClasses}`
                 }
@@ -110,7 +110,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
                 <Label name={value} htmlFor={id} required={required} />
-                {errors ? (
+                {errors && errors.length > 0 ? (
                     <div className="c-checkbox__error-message" role="alert">
                         {errors}
                     </div>

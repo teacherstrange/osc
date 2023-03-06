@@ -40,7 +40,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         const [value, setValue] = useState('');
 
         useEffect(() => {
-            if (errors) {
+            if (errors && schema && setErrors) {
                 clientSideValidation(id, schema, setErrors, value);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
@@ -50,7 +50,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             <div className="c-input__outer-container">
                 <div
                     className={
-                        errors
+                        errors && errors.length > 0
                             ? `c-input__container c-input__container--error`
                             : `c-input__container`
                     }
@@ -71,7 +71,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                         variants={disabled ? ['disabled'] : null}
                         required={required}
                     />
-                    {errors ? <InputError errors={errors} id={id} /> : null}
+                    {errors && errors.length > 0 ? <InputError errors={errors} id={id} /> : null}
                 </div>
             </div>
         );
