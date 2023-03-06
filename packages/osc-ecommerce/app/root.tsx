@@ -13,8 +13,10 @@ import {
 } from '@remix-run/react';
 import { SkipLink } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
+import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import oscUiBurgerStyles from 'osc-ui/dist/src-components-Burger-burger.css';
 import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
+import oscFooterStyles from 'osc-ui/dist/src-components-Footer-footer.css';
 import oscHeaderStyles from 'osc-ui/dist/src-components-Header-header.css';
 import oscLogoStyles from 'osc-ui/dist/src-components-Logo-logo.css';
 import oscNavStyles from 'osc-ui/dist/src-components-Navbar-navbar.css';
@@ -49,6 +51,8 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscNavStyles },
         { rel: 'stylesheet', href: oscLogoStyles },
         { rel: 'stylesheet', href: oscUiBurgerStyles },
+        { rel: 'stylesheet', href: oscUiAccordionStyles },
+        { rel: 'stylesheet', href: oscFooterStyles },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
         { rel: 'apple-touch-icon', sizes: '60x60', href: '/icons/apple-icon-60x60.png' },
