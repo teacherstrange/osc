@@ -6,9 +6,12 @@ import type { DateValue } from '@react-types/calendar';
 import type { RangeValue } from '@react-types/shared';
 import { mediaQueries as breakpoints } from 'osc-design-tokens';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { useUniqueId } from '../../../hooks/useUniqueId';
 import { classNames } from '../../../utils/classNames';
+import { validateDatepicker } from '../../../utils/clientSideValidation';
 import { rem } from '../../../utils/rem';
 import { Button } from '../../Button/Button';
 import { Icon } from '../../Icon/Icon';
@@ -23,6 +26,10 @@ import { createTimePresets } from '../utils';
 
 interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateValue> {
     /**
+     * Any error messages - initially set through server validation, but can be updated through client validation
+     */
+    errors?: string[] | undefined;
+    /**
      * A label for the DateRangePicker
      */
     label: string;
@@ -30,10 +37,18 @@ interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateVal
      * Preset time periods a user can select
      */
     presets?: { name: string; length: number }[];
+    /**
+     * Allows for client side validation once a server side error has been received
+     */
+    setErrors?: Dispatch<SetStateAction<any>>;
+    /**
+     * The Zod Schema used for validation
+     */
+    schema?: ZodObject<ZodRawShape>;
 }
 
 export const DateRangePickerContainer = (props: DateRangePickerContainerProps) => {
-    const { defaultValue, label, presets, ...rest } = props;
+    const { defaultValue, errors, label, presets, schema, setErrors, ...rest } = props;
 
     // Used to set the value of the range calender to a preset or to clear it
     const [value, setValue] = useState<RangeValue<DateValue>>(defaultValue ? defaultValue : null);
@@ -46,6 +61,22 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
         range: null,
         timePresetLength: 0,
     });
+
+    const dateFieldId = useUniqueId('dateField:');
+
+    useEffect(() => {
+        // Client side error handling - Sets any errors on an input in
+        // accordance with the schema validation
+        if (errors && schema) {
+            validateDatepicker(
+                'dateRangePicker',
+                schema,
+                setErrors,
+                value as RangeValue<CalendarDate>
+            );
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
+    }, [value]);
 
     const isDesktop = useMediaQuery(`(min-width: ${rem(breakpoints.desk)}rem)`);
 
@@ -66,6 +97,8 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
         <>
             <DateRangePicker
                 clearSelection={<ClearSelection />}
+                dateFieldId={dateFieldId}
+                errors={errors}
                 initialDefault={initialDefault}
                 isDesktop={isDesktop}
                 label={label}
@@ -162,6 +195,14 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
      */
     clearSelection: ReactNode;
     /**
+     * A unique Id
+     */
+    dateFieldId: string;
+    /**
+     * Any error messages - initially set through server validation, but can be updated through client validation
+     */
+    errors?: string[] | undefined;
+    /**
      * Indicates where a defaultValue has been set
      */
     initialDefault: boolean;
@@ -203,6 +244,8 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
     } = useDateRangePicker(props, state, ref);
     const {
         clearSelection,
+        dateFieldId,
+        errors,
         initialDefault,
         isDesktop,
         selectedRange,
@@ -210,22 +253,36 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
         setSelectedRange,
         timePresets,
     } = props;
-
     return (
         <div className="c-datepicker c-datepicker__range">
             <label className="c-label" {...labelProps}>
                 {props.label}
             </label>
             <div {...groupProps} ref={ref}>
-                <div className="c-datepicker__date-field-container">
+                <div
+                    className="c-datepicker__date-field-container"
+                    id={dateFieldId}
+                    aria-invalid={errors ? true : false}
+                >
                     <div className="c-datepicker__date-field-inner-container">
-                        <DateField buttonProps={buttonProps} {...startFieldProps} />
+                        <DateField
+                            aria-describedby={errors ? `${dateFieldId}-error` : undefined}
+                            buttonProps={buttonProps}
+                            dateFieldId={dateFieldId}
+                            errors={errors}
+                            {...startFieldProps}
+                        />
                     </div>
                     {isDesktop ? (
                         <Icon className="c-datepicker__date-field-container--arrow" id="arrow" />
                     ) : null}
                     <div className="c-datepicker__date-field-inner-container">
-                        <DateField buttonProps={buttonProps} {...endFieldProps} />
+                        <DateField
+                            buttonProps={buttonProps}
+                            dateFieldId={dateFieldId}
+                            errors={errors}
+                            {...endFieldProps}
+                        />
                     </div>
                 </div>
             </div>
@@ -250,6 +307,11 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
                     </ReactAriaDialog>
                 </ReactAriaPopover>
             )}
+            {errors ? (
+                <div className="c-date-field__error--text" id={`${dateFieldId}-error`}>
+                    {errors}
+                </div>
+            ) : null}
         </div>
     );
 };

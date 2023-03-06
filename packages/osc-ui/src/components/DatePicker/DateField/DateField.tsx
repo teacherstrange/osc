@@ -13,9 +13,12 @@ import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
 import { createCalendar } from '../utils';
 interface DateFieldProps extends AriaDateFieldProps<DateValue> {
     buttonProps: AriaButtonProps;
+    dateFieldId: string;
+    errors?: string[] | undefined;
 }
 
 export const DateField = (props: DateFieldProps) => {
+    const { dateFieldId, errors } = props;
     let { locale } = useLocale();
 
     const buttonId = useUniqueId('calendarBtn:');
@@ -33,7 +36,7 @@ export const DateField = (props: DateFieldProps) => {
         <>
             <div
                 className={
-                    state.validationState === 'invalid'
+                    state.validationState === 'invalid' || errors
                         ? `c-date-field__wrapper c-date-field__wrapper--error`
                         : `c-date-field__wrapper`
                 }
@@ -43,7 +46,11 @@ export const DateField = (props: DateFieldProps) => {
                         <DateSegmentComponent key={i} segment={segment} state={state} />
                     ))}
                 </div>
-                <ReactAriaButton {...props.buttonProps} id={buttonId}>
+                <ReactAriaButton
+                    {...props.buttonProps}
+                    aria-describedby={errors ? `${dateFieldId}-error` : undefined}
+                    id={buttonId}
+                >
                     <Icon id="calendar" />
                 </ReactAriaButton>
             </div>
