@@ -1,4 +1,5 @@
 import { Carousel, classNames, Content, IslandGrid, rem, useMediaQuery } from 'osc-ui';
+import { useEffect, useState } from 'react';
 import type {
     bioCardModule,
     cardModule,
@@ -49,6 +50,13 @@ export const Cards = (props: { module: cardModule }) => {
     };
 
     const isSmallerThanTab = useMediaQuery(`(max-width: ${rem(breakpoints.tab)}rem)`);
+    const [showOnSmallerThanTab, setShowOnSmallerThanTab] = useState(false);
+
+    // We need this useEffect to set the showOnTab state only when the window object exists
+    // Otherwise we will receive an SSR warning telling us the markup differs from the server
+    useEffect(() => {
+        setShowOnSmallerThanTab(isSmallerThanTab);
+    }, [isSmallerThanTab]);
 
     const classes = classNames(
         module?.backgroundColor ? `u-bg-color-${module?.backgroundColor}` : '',
@@ -173,7 +181,7 @@ export const Cards = (props: { module: cardModule }) => {
                 ) : null}
 
                 {/* Only become a carousel on mobile and small tablets AND when the number of cards is greater than three */}
-                {isSmallerThanTab && module?.card.length > 3 ? (
+                {showOnSmallerThanTab && module?.card.length > 3 ? (
                     <Carousel
                         carouselName={module?.carouselName ? module?.carouselName : ''}
                         slidesPerView={1.2} // Set to 1.2 to peek the next card in the carousel
