@@ -26,12 +26,13 @@ import styles from 'osc-ui/dist/src-styles-main.css';
 import React, { useEffect } from 'react';
 import { DynamicLinks } from 'remix-utils';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
+import { SiteFooter } from './components/Footer/Footer';
 import { SiteHeader } from './components/Header/Header';
 import { getSettingsData } from './models/sanity.server';
 import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
 import { getUser } from './session.server';
-import type { SanitySocial } from './types/sanity';
+import type { SanityNavSettings, SanitySocial } from './types/sanity';
 import { getColorScheme } from './utils/colorScheme';
 
 let isMount = true;
@@ -79,7 +80,9 @@ type LoaderData = {
     user: Awaited<ReturnType<typeof getUser>>;
     colorScheme: string;
     siteSettings: object;
-    navSettings: object;
+    navSettings: SanityNavSettings;
+    footerNavSettings: SanityNavSettings[];
+    footerBottomNav: SanityNavSettings;
     SANITY_STUDIO_API_PROJECT_ID: string | undefined;
     SANITY_STUDIO_API_DATASET: string | undefined;
 };
@@ -103,11 +106,35 @@ export const loader: LoaderFunction = async ({ request }) => {
             },
         }));
 
+    // Loop through the footer nav items and query each id
+    const footerNavSettings = [];
+    if (siteSettings?.footer?.footerNavigation.length > 0) {
+        for await (const navId of siteSettings?.footer?.footerNavigation) {
+            footerNavSettings.push(
+                await getSettingsData({
+                    query: NAV_QUERY,
+                    params: {
+                        id: navId,
+                    },
+                })
+            );
+        }
+    }
+
+    const footerBottomNav =
+        siteSettings?.footer?.footerBottomNav &&
+        (await getSettingsData({
+            query: NAV_QUERY,
+            params: { id: siteSettings?.footer?.footerBottomNav },
+        }));
+
     return json<LoaderData>({
         user: await getUser(request),
         colorScheme: await getColorScheme(request),
         siteSettings,
         navSettings,
+        footerNavSettings,
+        footerBottomNav,
         SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
         SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET,
     });
@@ -177,8 +204,14 @@ const Document = ({ children }: DocumentProps) => {
 };
 
 export default function App() {
-    const { SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET, navSettings, siteSettings } =
-        useLoaderData();
+    const {
+        SANITY_STUDIO_API_PROJECT_ID,
+        SANITY_STUDIO_API_DATASET,
+        navSettings,
+        siteSettings,
+        footerNavSettings,
+        footerBottomNav,
+    } = useLoaderData();
     let location = useLocation();
     let matches = useMatches();
 
@@ -242,6 +275,14 @@ export default function App() {
                 <main id="main-content" tabIndex={-1}>
                     <Outlet />
                 </main>
+
+                <SiteFooter
+                    navigationGroups={footerNavSettings}
+                    bottomNavigation={footerBottomNav}
+                    contactDetails={siteSettings?.contactDetails}
+                    socials={siteSettings?.seo?.socials}
+                    siteName={siteSettings?.seo?.siteTile}
+                />
             </div>
         </Document>
     );
