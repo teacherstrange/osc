@@ -1,4 +1,5 @@
 import {
+    AccessibleIcon,
     Footer,
     FooterBottom,
     FooterGroup,
@@ -70,7 +71,11 @@ export const SiteFooter = (props: SiteFooterProps) => {
                 {socials.length > 0 ? (
                     <FooterGroup>
                         {socials.map((social) => (
-                            <Icon id={social?.icon} className="c-footer__icon" key={social._key} />
+                            <a href={social?.socialProfile} key={social._key}>
+                                <AccessibleIcon label={social?.icon}>
+                                    <Icon id={social?.icon} className="c-footer__icon" />
+                                </AccessibleIcon>
+                            </a>
                         ))}
                     </FooterGroup>
                 ) : null}
