@@ -32,7 +32,15 @@ export {
 export { Carousel } from './components/Carousel/Carousel';
 export { Content } from './components/Content/Content';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
-export { Footer } from './components/Footer/Footer';
+export {
+    Footer,
+    FooterBottom,
+    FooterGroup,
+    FooterMenu,
+    FooterMenuContent,
+    FooterMenuHeader,
+    FooterMenuItem,
+} from './components/Footer/Footer';
 export { Header, HeaderActionBar, HeaderNav } from './components/Header/Header';
 export {
     Hero,
@@ -46,7 +54,7 @@ export { AccessibleIcon, Icon, SpritesheetProvider } from './components/Icon/Ico
 export { Image } from './components/Image/Image';
 export { ImageGallery } from './components/ImageGallery/ImageGallery';
 export { IslandGrid } from './components/IslandGrid/IslandGrid';
-export { List } from './components/List/List';
+export { List, ListItem } from './components/List/List';
 export { Logo } from './components/Logo/Logo';
 export { Modal } from './components/Modal/Modal';
 export {
