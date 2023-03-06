@@ -122,7 +122,11 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
                 </div>
                 {errors && errors.length > 0 ? (
                     <div className="c-switch--error-message" id={`${id}-error`} role="alert">
-                        {errors}
+                        {errors.map((error, index) => (
+                            <span key={index} className="u-pr-2xs">
+                                {error}
+                            </span>
+                        ))}
                     </div>
                 ) : null}
             </>

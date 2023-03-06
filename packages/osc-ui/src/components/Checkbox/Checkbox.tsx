@@ -112,7 +112,11 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                 <Label name={value} htmlFor={id} required={required} />
                 {errors && errors.length > 0 ? (
                     <div className="c-checkbox__error-message" role="alert">
-                        {errors}
+                        {errors.map((error, index) => (
+                            <span key={index} className="u-pr-2xs">
+                                {error}
+                            </span>
+                        ))}
                     </div>
                 ) : null}
             </fieldset>

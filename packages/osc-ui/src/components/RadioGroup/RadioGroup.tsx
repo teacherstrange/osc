@@ -92,7 +92,11 @@ export const RadioGroup = (props: RadioGroupProps) => {
                 {children}
                 {errors && errors.length > 0 ? (
                     <div className="c-radio-group__error-message" role="alert">
-                        {errors}
+                        {errors.map((error, index) => (
+                            <span key={index} className="u-pr-2xs">
+                                {error}
+                            </span>
+                        ))}
                     </div>
                 ) : null}
             </RadioGroupPrimitive.Root>

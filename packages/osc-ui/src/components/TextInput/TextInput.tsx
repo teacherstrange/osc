@@ -169,9 +169,13 @@ export const InputError = (props: InputErrorProps) => {
             <div className="c-input__icon c-input__icon--error">
                 <Icon id="exclamation-mark" />
             </div>
-            <span className="c-input__error-message" role="alert" id={`${id}-error`}>
-                {errors}
-            </span>
+            <div className="c-input__error-message" role="alert" id={`${id}-error`}>
+                {errors.map((error, index) => (
+                    <span key={index} className="u-pr-2xs">
+                        {error}
+                    </span>
+                ))}
+            </div>
         </>
     );
 };

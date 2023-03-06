@@ -69,7 +69,9 @@ const Template: Story = ({ items }) => {
     );
 };
 const ValidationTemplate: Story = () => {
-    const [primaryStyleErrors, setFirstnameErrors] = useState({ firstname: ['Field is required'] });
+    const [primaryStyleErrors, setFirstnameErrors] = useState({
+        firstname: ['Field is required', 'test'],
+    });
     const [secondaryStyleErrors, setLastnameErrors] = useState({ lastname: ['Field is required'] });
     const [tertiaryStyleErrors, setEmailErrors] = useState({ email: ['Invalid Email'] });
 
