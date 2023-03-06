@@ -176,7 +176,7 @@ export const Cards = (props: { module: cardModule }) => {
                 {isSmallerThanTab && module?.card.length > 3 ? (
                     <Carousel
                         carouselName={module?.carouselName ? module?.carouselName : ''}
-                        adaptiveHeight
+                        slidesPerView={1.2} // Set to 1.2 to peek the next card in the carousel
                     >
                         {module.card.map((card) => (
                             <Card card={card} key={card?._key} />
