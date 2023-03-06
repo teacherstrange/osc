@@ -29,7 +29,7 @@ import { getSettingsData } from './models/sanity.server';
 import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
 import { getUser } from './session.server';
-import type { SanityGlobalSEO } from './types/sanity';
+import type { SanitySocial } from './types/sanity';
 import { getColorScheme } from './utils/colorScheme';
 
 let isMount = true;
@@ -115,7 +115,7 @@ export const meta: MetaFunction = ({ data }) => {
     const noindex = seoSettings.robots.noIndex && 'noindex';
     const { asset: organizationAsset } = seoSettings.schema.organizationLogo;
 
-    const socials = seoSettings.socials as SanityGlobalSEO['socials'];
+    const socials = seoSettings.socials as SanitySocial[];
     const facebook = socials.find((social) => social.socialProfile.includes('facebook'));
     const twitter = socials.find((social) => social.socialProfile.includes('twitter'));
     const twitterHandle =
