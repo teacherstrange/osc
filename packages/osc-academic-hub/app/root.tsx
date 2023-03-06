@@ -83,8 +83,8 @@ const Document = ({ children }: DocumentProps) => {
     return (
         <html lang="en">
             <head>
-                {typeof document === 'undefined' && <Meta />}
-                {typeof document === 'undefined' && <Links />}
+                <Meta />
+                <Links />
             </head>
             <body>
                 {children}
