@@ -2,7 +2,8 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import type { ZodSchema } from 'zod';
+import type { ReactNode } from 'react';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 import { Icon } from '../Icon/Icon';
@@ -38,7 +39,7 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
     /**
      * The Zod Schema used for validation
      */
-    schema?: ZodSchema;
+    schema?: ZodObject<ZodRawShape>;
     /**
      * Allows for client side validation once a server side error has been received
      */
@@ -68,6 +69,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             if (errors) {
                 clientSideValidation(name, schema, setErrors, value);
             }
+            // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
         }, [value]);
 
         const modifiers = useModifier('c-select', groupVariants);

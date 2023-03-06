@@ -1,7 +1,7 @@
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import type { ZodSchema } from 'zod';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 import { clientSideValidation } from '../../utils/clientSideValidation';
@@ -34,9 +34,9 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
      */
     name: string;
     /**
-     * The Zod Schema used for validation
+     * The Zod Schema object used for validation
      */
-    schema?: ZodSchema;
+    schema?: ZodObject<ZodRawShape>;
     /**
      * Allows for client side validation once a server side error has been received
      */
@@ -76,6 +76,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
             if (errors) {
                 clientSideValidation(id, schema, setErrors, checked);
             }
+            // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
         }, [checked]);
 
         const modifiers = useModifier('c-checkbox__container', variants);

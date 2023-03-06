@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction, TextareaHTMLAttributes } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import type { ZodSchema } from 'zod';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { clientSideValidation } from '../../utils/clientSideValidation';
 import { Label } from '../Label/Label';
 import './text-area.scss';
@@ -22,7 +22,7 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
     /**
      * The Zod Schema used for creating client side validation
      */
-    schema?: ZodSchema;
+    schema?: ZodObject<ZodRawShape>;
     /**
      * Allows for client side validation once a server side error has been received
      */
@@ -43,6 +43,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             if (errors) {
                 clientSideValidation(id, schema, setErrors, value);
             }
+            // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
         }, [value]);
 
         return (

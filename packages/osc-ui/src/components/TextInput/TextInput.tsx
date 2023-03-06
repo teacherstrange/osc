@@ -1,6 +1,6 @@
 import type { Dispatch, InputHTMLAttributes, SetStateAction } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import type { ZodSchema } from 'zod';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { useElement } from '../../hooks/useElement';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -52,7 +52,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
     /**
      * The Zod Schema used for validation
      */
-    schema?: ZodSchema;
+    schema?: ZodObject<ZodRawShape>;
     /**
      * Allows for client side validation once a server side error has been received
      */
@@ -86,6 +86,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         if (errors) {
             clientSideValidation(id, schema, setErrors, value);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
     }, [value]);
 
     const element = useElement('c-input', type);

@@ -8,7 +8,7 @@ import type {
     SetStateAction,
 } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import type { ZodSchema } from 'zod';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 import { clientSideValidation } from '../../utils/clientSideValidation';
@@ -37,7 +37,7 @@ export interface RadioGroupProps extends ComponentPropsWithoutRef<typeof RadioGr
     /**
      * The Zod Schema used for validation
      */
-    schema?: ZodSchema;
+    schema?: ZodObject<ZodRawShape>;
     /**
      * Allows for client side validation once a server side error has been received
      */
@@ -70,6 +70,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
         if (errors) {
             clientSideValidation(name, schema, setErrors, value);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
     }, [value]);
 
     const modifiers = useModifier('c-radio-group', variants);

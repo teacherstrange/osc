@@ -9,7 +9,7 @@ import type {
     SetStateAction,
 } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import type { ZodSchema } from 'zod';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 import { clientSideValidation } from '../../utils/clientSideValidation';
@@ -42,7 +42,7 @@ export interface SwitchProps extends ComponentPropsWithRef<typeof SwitchPrimitiv
     /**
      * The Zod Schema used for validation
      */
-    schema?: ZodSchema;
+    schema?: ZodObject<ZodRawShape>;
     /**
      * Allows for client side validation once a server side error has been received
      */
