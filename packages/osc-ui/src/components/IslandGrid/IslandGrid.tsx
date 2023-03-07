@@ -19,7 +19,12 @@ export interface IslandGridProps {
 export const IslandGrid = (props: IslandGridProps) => {
     const { children, className } = props;
 
-    const classes = classNames('c-island-grid', 'o-grid', className);
+    const classes = classNames(
+        'c-island-grid',
+        'o-grid',
+        `has-${children.length}-islands`,
+        className
+    );
 
     return (
         <div className={classes}>
