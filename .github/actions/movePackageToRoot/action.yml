@@ -13,5 +13,5 @@ runs:
     - run: mv -v -f packages/${{ inputs.name }}/* .
       shell: bash
 
-    - run: find ./packages -mindepth 1 ! -regex '^./packages/osc-ui\(/.*\)?' -delete
+    - run: find ./packages -mindepth 1 ! -regex '^./packages/\(osc-ui|osc-design-tokens\)\(/.*\)?' -delete
       shell: bash
