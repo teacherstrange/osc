@@ -25,7 +25,7 @@ $hero-grid-full: list.slash(1, -1);
     grid-template-rows: $hero-grid-outer 1fr 1fr;
     row-gap: 0;
 
-    @include mq(mq-token("mob-lrg")) {
+    @include mq($mq-mob-l) {
         grid-template-rows: $hero-grid-outer 1fr $hero-grid-outer;
     }
 
@@ -44,7 +44,7 @@ $hero-grid-full: list.slash(1, -1);
         grid-row: 2 / span 2;
         grid-column: $hero-grid-full;
 
-        @include mq(mq-token("mob-lrg")) {
+        @include mq($mq-mob-l) {
             grid-row: 2 / span 1;
         }
     }
@@ -58,13 +58,13 @@ $hero-grid-full: list.slash(1, -1);
         padding-block-end: $hero-space-m;
         row-gap: 0;
 
-        @include mq(mq-token("mob-lrg")) {
+        @include mq($mq-mob-l) {
             grid-template-rows: $hero-grid-outer repeat($hero-inner-grid-rows, auto) $hero-grid-outer;
             align-items: center;
             padding-block-end: 0;
         }
 
-        @include mq(mq-token("desk-lrg")) {
+        @include mq($mq-desk-l) {
             min-height: $hero-height;
         }
     }
@@ -75,15 +75,15 @@ $hero-grid-full: list.slash(1, -1);
         padding-inline-start: $space-m;
         justify-self: end;
 
-        @include mq(mq-token("mob"), max) {
+        @include mq($mq-mob, max) {
             grid-column: $hero-grid-full;
         }
 
-        @include mq(mq-token("mob-lrg")) {
+        @include mq($mq-mob-l) {
             grid-row: 1 / span 4;
         }
 
-        @include mq(mq-token("tab")) {
+        @include mq($mq-tab) {
             grid-column: 8 / span 5;
         }
 
@@ -121,14 +121,14 @@ $hero-grid-full: list.slash(1, -1);
             border-block-end: $hero-ttl-border;
             margin-block-end: $space-2xl;
 
-            @include mq(mq-token("mob-lrg")) {
+            @include mq($mq-mob-l) {
                 align-self: end;
                 max-width: 533px;
                 margin-block-end: 0;
                 padding-block-end: $space-xs;
             }
 
-            @include mq(mq-token("tab")) {
+            @include mq($mq-tab) {
                 padding-block-start: $hero-space;
             }
         }
@@ -139,13 +139,13 @@ $hero-grid-full: list.slash(1, -1);
             padding-block-start: $space-xs;
             z-index: 2;
 
-            @include mq(mq-token("mob-lrg")) {
+            @include mq($mq-mob-l) {
                 align-self: start;
                 max-width: 50ch;
                 border: none;
             }
 
-            @include mq(mq-token("tab")) {
+            @include mq($mq-tab) {
                 padding-block-end: $hero-space;
                 grid-column: 1 / span 7;
             }
@@ -179,7 +179,7 @@ $hero-grid-full: list.slash(1, -1);
 
             margin-block-start: $hero-space-l;
 
-            @include mq(mq-token("tab-med")) {
+            @include mq($mq-tab-m) {
                 margin-block-start: $space-4xl;
                 line-height: 0.8;
             }
@@ -188,7 +188,7 @@ $hero-grid-full: list.slash(1, -1);
         #{$self}__content {
             margin-block-end: $space-xl;
 
-            @include mq(mq-token("tab-med"), max) {
+            @include mq($mq-tab-m, max) {
                 border-block-start: $hero-content-border;
                 margin-block-start: $space-4xl;
                 padding-block-start: $space-2xs;
@@ -199,7 +199,7 @@ $hero-grid-full: list.slash(1, -1);
                 justify-content: center;
                 gap: $space-2xs;
 
-                @include mq(mq-token("tab-med")) {
+                @include mq($mq-tab-m) {
                     flex-direction: row;
                 }
 
@@ -212,7 +212,7 @@ $hero-grid-full: list.slash(1, -1);
 
     &--tertiary {
         #{$self}__background {
-            @include mq(mq-token("tab"), max) {
+            @include mq($mq-tab, max) {
                 grid-row: $hero-grid-full;
             }
         }
@@ -221,11 +221,11 @@ $hero-grid-full: list.slash(1, -1);
             padding-block-start: $hero-space-l;
             padding-block-end: 0;
 
-            @include mq(mq-token("tab"), max) {
+            @include mq($mq-tab, max) {
                 grid-template-rows: repeat(4, auto);
             }
 
-            @include mq(mq-token("tab")) {
+            @include mq($mq-tab) {
                 padding-block-start: 0;
             }
         }
@@ -238,7 +238,7 @@ $hero-grid-full: list.slash(1, -1);
 
         #{$self}__content,
         #{$self}-ttl__group {
-            @include mq(mq-token("tab")) {
+            @include mq($mq-tab) {
                 grid-column: 1 / span 6;
             }
         }
@@ -249,7 +249,7 @@ $hero-grid-full: list.slash(1, -1);
         }
 
         #{$self}__ttl {
-            @include mq(mq-token("tab")) {
+            @include mq($mq-tab) {
                 margin-block-end: 0;
             }
         }
@@ -275,11 +275,11 @@ $hero-grid-full: list.slash(1, -1);
             mix-blend-mode: multiply;
             padding-inline-start: 0;
 
-            @include mq(mq-token("tab"), max) {
+            @include mq($mq-tab, max) {
                 margin-inline: calc($space-m * -1); // Break out of the container padding
             }
 
-            @include mq(mq-token("tab")) {
+            @include mq($mq-tab) {
                 grid-row: $hero-grid-full;
                 grid-column: 6 / -1;
             }
