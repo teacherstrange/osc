@@ -6,282 +6,284 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
-$hero-height: 480px;
-$hero-space: $space-s;
-$hero-space-m: calc($space-m * 2);
-$hero-space-l: $space-5xl;
-$hero-ttl-border: 3px solid currentcolor;
-$hero-content-border: 3px solid;
-$hero-grid-outer: clamp(16px, 2.5vw, 40px);
-$hero-inner-grid-cols: repeat(12, 1fr);
-$hero-inner-grid-rows: 2;
-$hero-grid-full: list.slash(1, -1);
+@layer components {
+    $hero-height: 480px;
+    $hero-space: $space-s;
+    $hero-space-m: calc($space-m * 2);
+    $hero-space-l: $space-5xl;
+    $hero-ttl-border: 3px solid currentcolor;
+    $hero-content-border: 3px solid;
+    $hero-grid-outer: clamp(16px, 2.5vw, 40px);
+    $hero-inner-grid-cols: repeat(12, 1fr);
+    $hero-inner-grid-rows: 2;
+    $hero-grid-full: list.slash(1, -1);
 
-.c-hero {
-    $self: &;
+    .c-hero {
+        $self: &;
 
-    position: relative;
-    display: grid;
-    grid-template-rows: $hero-grid-outer 1fr 1fr;
-    row-gap: 0;
-
-    @include mq($mq-mob-l) {
-        grid-template-rows: $hero-grid-outer 1fr $hero-grid-outer;
-    }
-
-    @each $name, $value in color-token("default") {
-        &#{$self}__flourish--#{$name} &__content {
-            @if string.index($name, "gradient") {
-                border-image-slice: 1;
-                border-image-source: var(--color-#{$name});
-            } @else {
-                border-color: var(--color-#{$name});
-            }
-        }
-    }
-
-    &__background {
-        grid-row: 2 / span 2;
-        grid-column: $hero-grid-full;
-
-        @include mq($mq-mob-l) {
-            grid-row: 2 / span 1;
-        }
-    }
-
-    &__inner {
+        position: relative;
         display: grid;
-        grid-template-columns: $hero-inner-grid-cols;
-        gap: $space-m;
-        grid-row: $hero-grid-full;
-        grid-column: $hero-grid-full;
-        padding-block-end: $hero-space-m;
+        grid-template-rows: $hero-grid-outer 1fr 1fr;
         row-gap: 0;
 
         @include mq($mq-mob-l) {
-            grid-template-rows: $hero-grid-outer repeat($hero-inner-grid-rows, auto) $hero-grid-outer;
-            align-items: center;
-            padding-block-end: 0;
+            grid-template-rows: $hero-grid-outer 1fr $hero-grid-outer;
         }
 
-        @include mq($mq-desk-l) {
-            min-height: $hero-height;
+        @each $name, $value in color-token("default") {
+            &#{$self}__flourish--#{$name} &__content {
+                @if string.index($name, "gradient") {
+                    border-image-slice: 1;
+                    border-image-source: var(--color-#{$name});
+                } @else {
+                    border-color: var(--color-#{$name});
+                }
+            }
         }
-    }
 
-    &__img {
-        grid-row: 1 / span 2;
-        grid-column: 5 / span 8;
-        padding-inline-start: $space-m;
-        justify-self: end;
-
-        @include mq($mq-mob, max) {
+        &__background {
+            grid-row: 2 / span 2;
             grid-column: $hero-grid-full;
-        }
-
-        @include mq($mq-mob-l) {
-            grid-row: 1 / span 4;
-        }
-
-        @include mq($mq-tab) {
-            grid-column: 8 / span 5;
-        }
-
-        .o-img {
-            max-height: $hero-height;
-        }
-    }
-
-    &-ttl__group {
-        grid-row: 2;
-        display: flex;
-        flex-direction: column-reverse;
-        align-self: end;
-    }
-
-    &__ttl {
-        z-index: 2;
-        grid-row: 2;
-
-        /* Check if the inline-size value is supported */
-        @supports (contain: inline-size) {
-            contain: inline-size;
-        }
-    }
-
-    &__content {
-        z-index: 2;
-        grid-row: 3;
-    }
-
-    &--primary {
-        #{$self}__ttl {
-            max-width: 10ch;
-            grid-column: 1 / span 7;
-            border-block-end: $hero-ttl-border;
-            margin-block-end: $space-2xl;
 
             @include mq($mq-mob-l) {
-                align-self: end;
-                max-width: 533px;
-                margin-block-end: 0;
-                padding-block-end: $space-xs;
-            }
-
-            @include mq($mq-tab) {
-                padding-block-start: $hero-space;
+                grid-row: 2 / span 1;
             }
         }
 
-        #{$self}__content {
-            grid-column: 1 / span 12;
-            border-block-start: $hero-content-border;
-            padding-block-start: $space-xs;
-            z-index: 2;
+        &__inner {
+            display: grid;
+            grid-template-columns: $hero-inner-grid-cols;
+            gap: $space-m;
+            grid-row: $hero-grid-full;
+            grid-column: $hero-grid-full;
+            padding-block-end: $hero-space-m;
+            row-gap: 0;
 
             @include mq($mq-mob-l) {
-                align-self: start;
-                max-width: 50ch;
-                border: none;
-            }
-
-            @include mq($mq-tab) {
-                padding-block-end: $hero-space;
-                grid-column: 1 / span 7;
-            }
-        }
-    }
-
-    &--secondary {
-        #{$self}__ttl,
-        #{$self}__content {
-            grid-column: $hero-grid-full;
-            text-align: center;
-        }
-
-        /*
-         * [1] Using dynamic container unit to scale the text with it's container
-         * [2] For non supporting browsers, fallback to viewport width
-        */
-        #{$self}__ttl {
-            // TODO: These values might need revising once the OSC font is used
-            @supports (font-size: 1cqw) {
-                /* stylelint-disable-next-line unit-no-unknown */
-                font-size: clamp(rem(50), calc(-1.34rem + 22.32cqw), rem(300)); /* [1] */
-                /* stylelint-disable-next-line unit-no-unknown */
-                letter-spacing: clamp(rem(10), calc(0.18rem + 1.88cqw), rem(30)); /* [1] */
-            }
-
-            @supports not (font-size: 1cqw) {
-                font-size: clamp(rem(50), calc(-1.34rem + 22.32vw), rem(300)); /* [2] */
-                letter-spacing: clamp(rem(10), calc(0.18rem + 1.88vw), rem(30)); /* [2] */
-            }
-
-            margin-block-start: $hero-space-l;
-
-            @include mq($mq-tab-m) {
-                margin-block-start: $space-4xl;
-                line-height: 0.8;
-            }
-        }
-
-        #{$self}__content {
-            margin-block-end: $space-xl;
-
-            @include mq($mq-tab-m, max) {
-                border-block-start: $hero-content-border;
-                margin-block-start: $space-4xl;
-                padding-block-start: $space-2xs;
-            }
-
-            .c-content__inner {
+                grid-template-rows: $hero-grid-outer repeat($hero-inner-grid-rows, auto) $hero-grid-outer;
                 align-items: center;
-                justify-content: center;
-                gap: $space-2xs;
+                padding-block-end: 0;
+            }
 
-                @include mq($mq-tab-m) {
-                    flex-direction: row;
+            @include mq($mq-desk-l) {
+                min-height: $hero-height;
+            }
+        }
+
+        &__img {
+            grid-row: 1 / span 2;
+            grid-column: 5 / span 8;
+            padding-inline-start: $space-m;
+            justify-self: end;
+
+            @include mq($mq-mob, max) {
+                grid-column: $hero-grid-full;
+            }
+
+            @include mq($mq-mob-l) {
+                grid-row: 1 / span 4;
+            }
+
+            @include mq($mq-tab) {
+                grid-column: 8 / span 5;
+            }
+
+            .o-img {
+                max-height: $hero-height;
+            }
+        }
+
+        &-ttl__group {
+            grid-row: 2;
+            display: flex;
+            flex-direction: column-reverse;
+            align-self: end;
+        }
+
+        &__ttl {
+            z-index: 2;
+            grid-row: 2;
+
+            /* Check if the inline-size value is supported */
+            @supports (contain: inline-size) {
+                contain: inline-size;
+            }
+        }
+
+        &__content {
+            z-index: 2;
+            grid-row: 3;
+        }
+
+        &--primary {
+            #{$self}__ttl {
+                max-width: 10ch;
+                grid-column: 1 / span 7;
+                border-block-end: $hero-ttl-border;
+                margin-block-end: $space-2xl;
+
+                @include mq($mq-mob-l) {
+                    align-self: end;
+                    max-width: 533px;
+                    margin-block-end: 0;
+                    padding-block-end: $space-xs;
                 }
 
-                > * {
+                @include mq($mq-tab) {
+                    padding-block-start: $hero-space;
+                }
+            }
+
+            #{$self}__content {
+                grid-column: 1 / span 12;
+                border-block-start: $hero-content-border;
+                padding-block-start: $space-xs;
+                z-index: 2;
+
+                @include mq($mq-mob-l) {
+                    align-self: start;
+                    max-width: 50ch;
+                    border: none;
+                }
+
+                @include mq($mq-tab) {
+                    padding-block-end: $hero-space;
+                    grid-column: 1 / span 7;
+                }
+            }
+        }
+
+        &--secondary {
+            #{$self}__ttl,
+            #{$self}__content {
+                grid-column: $hero-grid-full;
+                text-align: center;
+            }
+
+            /*
+             * [1] Using dynamic container unit to scale the text with it's container
+             * [2] For non supporting browsers, fallback to viewport width
+            */
+            #{$self}__ttl {
+                // TODO: These values might need revising once the OSC font is used
+                @supports (font-size: 1cqw) {
+                    /* stylelint-disable-next-line unit-no-unknown */
+                    font-size: clamp(rem(50), calc(-1.34rem + 22.32cqw), rem(300)); /* [1] */
+                    /* stylelint-disable-next-line unit-no-unknown */
+                    letter-spacing: clamp(rem(10), calc(0.18rem + 1.88cqw), rem(30)); /* [1] */
+                }
+
+                @supports not (font-size: 1cqw) {
+                    font-size: clamp(rem(50), calc(-1.34rem + 22.32vw), rem(300)); /* [2] */
+                    letter-spacing: clamp(rem(10), calc(0.18rem + 1.88vw), rem(30)); /* [2] */
+                }
+
+                margin-block-start: $hero-space-l;
+
+                @include mq($mq-tab-m) {
+                    margin-block-start: $space-4xl;
+                    line-height: 0.8;
+                }
+            }
+
+            #{$self}__content {
+                margin-block-end: $space-xl;
+
+                @include mq($mq-tab-m, max) {
+                    border-block-start: $hero-content-border;
+                    margin-block-start: $space-4xl;
+                    padding-block-start: $space-2xs;
+                }
+
+                .c-content__inner {
+                    align-items: center;
+                    justify-content: center;
+                    gap: $space-2xs;
+
+                    @include mq($mq-tab-m) {
+                        flex-direction: row;
+                    }
+
+                    > * {
+                        margin-block-end: 0;
+                    }
+                }
+            }
+        }
+
+        &--tertiary {
+            #{$self}__background {
+                @include mq($mq-tab, max) {
+                    grid-row: $hero-grid-full;
+                }
+            }
+
+            #{$self}__inner {
+                padding-block-start: $hero-space-l;
+                padding-block-end: 0;
+
+                @include mq($mq-tab, max) {
+                    grid-template-rows: repeat(4, auto);
+                }
+
+                @include mq($mq-tab) {
+                    padding-block-start: 0;
+                }
+            }
+
+            #{$self}__content,
+            #{$self}-ttl__group,
+            #{$self}__img {
+                grid-column: $hero-grid-full;
+            }
+
+            #{$self}__content,
+            #{$self}-ttl__group {
+                @include mq($mq-tab) {
+                    grid-column: 1 / span 6;
+                }
+            }
+
+            #{$self}__ttl,
+            #{$self}__subttl {
+                font-weight: $fw-bold;
+            }
+
+            #{$self}__ttl {
+                @include mq($mq-tab) {
                     margin-block-end: 0;
                 }
             }
-        }
-    }
 
-    &--tertiary {
-        #{$self}__background {
-            @include mq($mq-tab, max) {
-                grid-row: $hero-grid-full;
-            }
-        }
-
-        #{$self}__inner {
-            padding-block-start: $hero-space-l;
-            padding-block-end: 0;
-
-            @include mq($mq-tab, max) {
-                grid-template-rows: repeat(4, auto);
-            }
-
-            @include mq($mq-tab) {
-                padding-block-start: 0;
-            }
-        }
-
-        #{$self}__content,
-        #{$self}-ttl__group,
-        #{$self}__img {
-            grid-column: $hero-grid-full;
-        }
-
-        #{$self}__content,
-        #{$self}-ttl__group {
-            @include mq($mq-tab) {
-                grid-column: 1 / span 6;
-            }
-        }
-
-        #{$self}__ttl,
-        #{$self}__subttl {
-            font-weight: $fw-bold;
-        }
-
-        #{$self}__ttl {
-            @include mq($mq-tab) {
+            #{$self}__subttl {
                 margin-block-end: 0;
-            }
-        }
+                font-size: var(--font-scale-base);
 
-        #{$self}__subttl {
-            margin-block-end: 0;
-            font-size: var(--font-scale-base);
-
-            &::before {
-                content: "/";
-                margin-inline-end: 0.15em;
-            }
-        }
-
-        #{$self}__content {
-            grid-row: 3;
-            margin-block-end: calc($space-m * 1.25);
-            align-self: start;
-        }
-
-        #{$self}__img {
-            grid-row: 4;
-            mix-blend-mode: multiply;
-            padding-inline-start: 0;
-
-            @include mq($mq-tab, max) {
-                margin-inline: calc($space-m * -1); // Break out of the container padding
+                &::before {
+                    content: "/";
+                    margin-inline-end: 0.15em;
+                }
             }
 
-            @include mq($mq-tab) {
-                grid-row: $hero-grid-full;
-                grid-column: 6 / -1;
+            #{$self}__content {
+                grid-row: 3;
+                margin-block-end: calc($space-m * 1.25);
+                align-self: start;
+            }
+
+            #{$self}__img {
+                grid-row: 4;
+                mix-blend-mode: multiply;
+                padding-inline-start: 0;
+
+                @include mq($mq-tab, max) {
+                    margin-inline: calc($space-m * -1); // Break out of the container padding
+                }
+
+                @include mq($mq-tab) {
+                    grid-row: $hero-grid-full;
+                    grid-column: 6 / -1;
+                }
             }
         }
     }
