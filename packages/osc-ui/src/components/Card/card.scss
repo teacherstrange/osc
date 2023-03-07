@@ -82,6 +82,7 @@ $card-fs-3xl: $fs-3xl;
         &__inner {
             z-index: 1;
             padding: $card-space-m $card-space-xl $card-space-xl;
+            grid-template-rows: auto 1fr;
         }
 
         &__header {
