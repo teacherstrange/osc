@@ -33,6 +33,13 @@ export default {
             initialValue: 'primary',
         },
         {
+            name: 'isInversed',
+            title: 'Inverse',
+            type: 'boolean',
+            initialValue: false,
+            description: 'Inverse the color of the button',
+        },
+        {
             name: 'type',
             title: 'Type',
             type: 'string',

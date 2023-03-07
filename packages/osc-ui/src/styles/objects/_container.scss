@@ -33,6 +33,14 @@ $container-width-l: #{$container-l}px;
         padding-inline: $padding;
     }
 
+    &--flush-r {
+        padding-inline-end: 0;
+    }
+
+    &--flush-l {
+        padding-inline-start: 0;
+    }
+
     &--flush {
         padding-inline: 0;
     }

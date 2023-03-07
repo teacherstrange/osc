@@ -1,3 +1,10 @@
+import type {
+    ComponentPropsWithoutRef,
+    ComponentPropsWithRef,
+    ElementType,
+    PropsWithChildren,
+} from 'react';
+
 export type Sizes = '4xl' | '3xl' | '2xl' | 'xl' | 'l' | 'm' | 's';
 
 export type Themes =
@@ -45,3 +52,30 @@ type StrictUnionHelper<T, TAll> = T extends any
     ? T & Partial<Record<Exclude<UnionKeys<TAll>, keyof T>, never>>
     : never;
 export type StrictUnion<T> = StrictUnionHelper<T, T>;
+
+/* -------------------------------------------------------------------------------------------------
+ * Polymorphic Component Generic
+ * -----------------------------------------------------------------------------------------------*/
+/**
+ * Generic to set the as prop
+ */
+type AsProp<C extends ElementType> = {
+    as?: C;
+};
+/**
+ * Omit any props that don't match the given type
+ */
+type PropsToOmit<C extends ElementType, P> = keyof (AsProp<C> & P);
+
+/**
+ * Sets the appropriate props for a polymorphic component
+ */
+export type PolymorphicComponentProps<C extends ElementType, Props = {}> = PropsWithChildren<
+    Props & AsProp<C>
+> &
+    Omit<ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
+
+/**
+ * Adds ref support when needed
+ */
+export type PolymorphicRef<C extends ElementType> = ComponentPropsWithRef<C>['ref'];

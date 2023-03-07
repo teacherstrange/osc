@@ -34,6 +34,14 @@ export { Content } from './components/Content/Content';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export { Footer } from './components/Footer/Footer';
 export { Header, HeaderActionBar, HeaderNav } from './components/Header/Header';
+export {
+    Hero,
+    HeroContent,
+    HeroImage,
+    HeroInner,
+    HeroTitle,
+    HeroTitleGroup,
+} from './components/Hero/Hero';
 export { AccessibleIcon, Icon, SpritesheetProvider } from './components/Icon/Icon';
 export { Image } from './components/Image/Image';
 export { ImageGallery } from './components/ImageGallery/ImageGallery';

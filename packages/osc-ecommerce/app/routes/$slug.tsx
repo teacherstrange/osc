@@ -23,7 +23,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const data = await getPageData({
         request,
         params,
-        query: PAGE_QUERY
+        query: PAGE_QUERY,
     });
 
     if (!data?.page) {
@@ -39,14 +39,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const { page, isPreview }: PageData = data;
     const canonicalUrl = buildCanonicalUrl({
         canonical: page?.seo?.canonicalUrl,
-        request
+        request,
     });
 
     return json({
         page,
         canonicalUrl,
         isPreview,
-        query: isPreview ? PAGE_QUERY : null
+        query: isPreview ? PAGE_QUERY : null,
     });
 };
 
@@ -63,7 +63,7 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
     const meta = buildHtmlMetaTags({
         pageData: data.page,
         globalData: globalSeoSettings,
-        canonicalUrl: data.canonicalUrl
+        canonicalUrl: data.canonicalUrl,
     });
 
     return meta;
@@ -87,8 +87,6 @@ export default function Index() {
             {isPreview ? (
                 <Preview data={data} setData={setData} query={query} queryParams={params} />
             ) : null}
-
-            <h1>{data?.title}</h1>
 
             {data?.modules && data?.modules.length > 0 ? (
                 <>

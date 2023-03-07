@@ -29,7 +29,10 @@ import body from './blocks/body';
 // Object types
 import bodyNoHeadings from './blocks/bodyNoHeadings';
 import accordionItem from './objects/accordionItem';
+import carouselSettings from './objects/carouselSettings';
 import collectionRule from './objects/collectionRule';
+import heroCarouselSettings from './objects/heroCarouselSettings';
+import heroSlide from './objects/heroSlide';
 import linkExternal from './objects/linkExternal';
 import linkInternal from './objects/linkInternal';
 import moduleAccordion from './objects/module/accordion';
@@ -43,6 +46,7 @@ import moduleCards from './objects/module/cards';
 import moduleCardStatic from './objects/module/cardStatic';
 import moduleCarousel from './objects/module/carousel';
 import moduleContent from './objects/module/content';
+import moduleHero from './objects/module/hero';
 import moduleImage from './objects/module/image';
 import moduleImageMobile from './objects/module/imageMobile';
 import moduleImages from './objects/module/images';
@@ -91,6 +95,9 @@ export default createSchema({
         bodyNoHeadings,
         // Objects
         accordionItem,
+        carouselSettings,
+        heroCarouselSettings,
+        heroSlide,
         collectionRule,
         linkExternal,
         linkInternal,
@@ -115,6 +122,7 @@ export default createSchema({
         moduleCardPost,
         moduleCardStatic,
         moduleCards,
+        moduleHero,
         moduleImage,
         moduleImages,
         moduleImageMobile,

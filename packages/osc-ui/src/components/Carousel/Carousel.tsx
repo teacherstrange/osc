@@ -2,9 +2,8 @@ import type { KeenSliderPlugin } from 'keen-slider/react';
 import { useKeenSlider } from 'keen-slider/react';
 import type { ReactNode } from 'react';
 import React, { Children, useState } from 'react';
-import mq from '../../../../../tokens/media-queries';
 import { classNames } from '../../utils/classNames';
-import { rem } from '../../utils/rem';
+import { getFocusableElements } from '../../utils/getFocusableElements';
 
 import './carousel.scss';
 import { Arrow } from './CarouselArrows';
@@ -120,22 +119,7 @@ export const Carousel = (props: Props) => {
         slideOrigin = 'auto',
         startIndex = 0,
         gap = 16, //px
-        breakpoints = {
-            [`(min-width: ${rem(mq['tab'])}rem)`]: {
-                slides: {
-                    origin: slideOrigin,
-                    perView: 2,
-                    spacing: gap,
-                },
-            },
-            [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
-                slides: {
-                    origin: slideOrigin,
-                    perView: 3,
-                    spacing: gap,
-                },
-            },
-        },
+        breakpoints,
     } = props;
 
     const [currentSlide, setCurrentSlide] = useState<number>(startIndex);
@@ -179,10 +163,22 @@ export const Carousel = (props: Props) => {
                     saveSlidesInView(entries, slidesInView);
 
                     for (const slide of slider.slides) {
+                        const focusableElements = getFocusableElements(slide);
+
                         if (slidesInView.includes(slide.dataset.slideIndex)) {
                             slide.setAttribute('aria-hidden', 'false');
+
+                            // Restore focus to on screen elements
+                            for (const element of focusableElements) {
+                                element.setAttribute('tabindex', '0');
+                            }
                         } else {
                             slide.setAttribute('aria-hidden', 'true');
+
+                            // Prevent off screen elements from being focused
+                            for (const element of focusableElements) {
+                                element.setAttribute('tabindex', '-1');
+                            }
                         }
                     }
                 },

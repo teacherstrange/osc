@@ -118,6 +118,35 @@ describe('a11y', () => {
         expect(slides[2]).toHaveAttribute('aria-hidden', 'true');
     });
 
+    test('sets tabIndex to -1 on focusable elements when slides are not intersecting with the viewport', () => {
+        const mockEntry = { isIntersecting: false };
+        const mockIntersectionObserver = vi.fn();
+
+        mockIntersectionObserver.mockReturnValue({
+            observe: () => {},
+            disconnect: () => vi.fn(),
+        });
+        window.IntersectionObserver = mockIntersectionObserver;
+
+        render(
+            <Carousel carouselName="Test" loop={true}>
+                <div>1</div>
+                <div>2</div>
+                <div>
+                    3 <button>Button</button>
+                </div>
+            </Carousel>
+        );
+
+        const observerCallback = mockIntersectionObserver.mock.calls[0][0];
+        observerCallback([mockEntry]);
+
+        expect(screen.getByRole('button', { name: 'Button', hidden: true })).toHaveAttribute(
+            'tabindex',
+            '-1'
+        );
+    });
+
     test('carousel inner is in the focus tree', () => {
         render(
             <Carousel carouselName="Test" loop={true}>
