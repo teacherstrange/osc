@@ -1,3 +1,10 @@
+import type {
+    ComponentPropsWithoutRef,
+    ComponentPropsWithRef,
+    ElementType,
+    PropsWithChildren,
+} from 'react';
+
 export type Sizes = '4xl' | '3xl' | '2xl' | 'xl' | 'l' | 'm' | 's';
 
 export type Themes =
