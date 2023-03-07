@@ -1,3 +1,104 @@
+## [0.52.0](https://github.com/Open-Study-College/osc/compare/v0.51.0...v0.52.0) (2023-03-07)
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **card:** fixes eslint error ([2afe965](https://github.com/Open-Study-College/osc/commit/2afe965c11b7f4e15aeb14a1d395dfcd4202a8d0))
+* **card:** tidy up todos ([fe200af](https://github.com/Open-Study-College/osc/commit/fe200af3b31358c9f375b897c6d9f0b6f38bd099))
+* **hero:** remove todos ([82edec5](https://github.com/Open-Study-College/osc/commit/82edec557360fe0fab6bfbea265491e641eed47c))
+* **hero:** remove todos ([1c0b5ab](https://github.com/Open-Study-College/osc/commit/1c0b5abdf715587950aaf6d35f7b5b4ba20f5469))
+* **hero:** tidy up todos ([9f38d0a](https://github.com/Open-Study-College/osc/commit/9f38d0a8e4f41cd80de22851404fd87aa9d59c36))
+
+
+### 🧪 Tests
+
+* **ecommerce:** add island grid test ([3c51dfc](https://github.com/Open-Study-College/osc/commit/3c51dfce3917e694520c1142d78edb29c901131f))
+* **ecommerce:** adds tests for cards ([41ab771](https://github.com/Open-Study-College/osc/commit/41ab771d20ba8b18f94c2cf1713b482ca093cc2b))
+* **ecommerce:** adds tests for hero ([14ebab6](https://github.com/Open-Study-College/osc/commit/14ebab65dcecd9d945451668e8bb485ff4f08a97))
+* **hero:** adds tests ([584ac3f](https://github.com/Open-Study-College/osc/commit/584ac3ff0e90d81e0cadde83c6bb29cafc1d4ba8))
+* **hero:** update test to check for correct classnames ([4c00f5f](https://github.com/Open-Study-College/osc/commit/4c00f5f600bf95960b6c35ab7e4f8d3389372d91))
+
+
+### ✨ Features
+
+* **card:** add content module to card studio options ([58eda75](https://github.com/Open-Study-College/osc/commit/58eda75ba87be8d41b3ec76873175803a06e6c3b))
+* **card:** add island grid layout ([494a882](https://github.com/Open-Study-College/osc/commit/494a882b3463a3aa6780d14872f2c8b67870e69e))
+* **ecommerce:** add card queries ([91d35b7](https://github.com/Open-Study-College/osc/commit/91d35b7270d9e96c2ddbd545c90d5bdfc443c71e))
+* **ecommerce:** add card types ([5e95638](https://github.com/Open-Study-College/osc/commit/5e956382b126836881d6798d341176743a7b67e6))
+* **ecommerce:** add conditional to swap grid/carousel layout ([121dae5](https://github.com/Open-Study-College/osc/commit/121dae5cfaa315a5cca6d9526a086b4da497c7c9))
+* **ecommerce:** add inital cards layouts from studio ([adbbbdd](https://github.com/Open-Study-College/osc/commit/adbbbdd628beea9e386f544443ab4f603fd1331a))
+* **ecommerce:** add initial card component wrappers ([e6ea8fe](https://github.com/Open-Study-College/osc/commit/e6ea8fe6c13f8e78dbfe2c65fae75901c0e08fc2))
+* **ecommerce:** adds basic card wrappers ([264f814](https://github.com/Open-Study-College/osc/commit/264f814a9e15ac50af2b0771c7365d4521d6c438))
+* **ecommerce:** adds fields to post card option ([839a943](https://github.com/Open-Study-College/osc/commit/839a94331bec1c8689ec632cee5db0f437829ca1))
+* **ecommerce:** adds header style fields to static card ([06b826b](https://github.com/Open-Study-College/osc/commit/06b826b86cbfc221906cbf9cb4e8a78bf643d689))
+* **ecommerce:** adds hero component ([d2c3fe2](https://github.com/Open-Study-College/osc/commit/d2c3fe25d7aee2ec3efd59a62aed749fc798f08b))
+* **ecommerce:** adds hero module query ([476d5c8](https://github.com/Open-Study-College/osc/commit/476d5c8c2b1a03649f01e7d74baceab01cba0a45))
+* **ecommerce:** adds hero module types ([728a3c9](https://github.com/Open-Study-College/osc/commit/728a3c9d30667aabfc814ed7e7a750b5b6fe392a))
+* **ecommerce:** setup carousel to peek the next item in view ([50d5b7e](https://github.com/Open-Study-College/osc/commit/50d5b7e1608203ccf030f41c70cceed3c922b996))
+* **hero:** add descriptions to Storybook ([62240ef](https://github.com/Open-Study-College/osc/commit/62240eff1419df2c1d43d254198097d09420ce23))
+* **hero:** add option to make image flush against the viewport ([24449b9](https://github.com/Open-Study-College/osc/commit/24449b9168c50351b95722479647f21074311b09))
+* **hero:** adds carousel story ([87ed3ec](https://github.com/Open-Study-College/osc/commit/87ed3ecccf3ae7887681ecd5352ece1172043950))
+* **hero:** adds container unit to font size ([f9476d8](https://github.com/Open-Study-College/osc/commit/f9476d867d5edf443144e3c19ff55e3f72fc2d94))
+* **hero:** adds initial hero component ([268387e](https://github.com/Open-Study-College/osc/commit/268387edab4fe5ec2e50bcbb4c2da5d9f76a8432))
+* **hero:** adds initial secondary variant ([e9d2486](https://github.com/Open-Study-College/osc/commit/e9d2486184a190c9b269ae1a0300bf13bce32b38))
+* **hero:** adds initial tertiary variant ([4c66269](https://github.com/Open-Study-College/osc/commit/4c662697f9e6d0a73ab606887aebddfbd89894c5))
+* **hero:** adds prop to handle theming flourishes ([100cbcc](https://github.com/Open-Study-College/osc/commit/100cbcc29fd4f8992a0e6d8eca11361ded41697d))
+* **hero:** adds title group container ([f2c0d67](https://github.com/Open-Study-College/osc/commit/f2c0d675b15342c127b040bfda0f82874c3f3182))
+* **hero:** export hero from osc-ui ([ac54ce2](https://github.com/Open-Study-College/osc/commit/ac54ce22056cc08a98c72787c19202546e2874d2))
+* **studio:** add carousel settings to cards ([8173840](https://github.com/Open-Study-College/osc/commit/81738403d71df8010c06f6c45af472946ca8e2b9))
+* **studio:** adds accessible carousel name field ([b98933b](https://github.com/Open-Study-College/osc/commit/b98933b621b4b6f35a1fc8c8490b924bc8ce3d7b))
+* **studio:** adds background color to module ([098b3c8](https://github.com/Open-Study-College/osc/commit/098b3c826391742097608e8d98a551fa1b3aaeb6))
+* **studio:** adds hero schema ([8e962cf](https://github.com/Open-Study-College/osc/commit/8e962cfeef9d876da4e6fb57250f5fef226b6bd6))
+* **types:** adds polymorphic component generic type ([2ccf812](https://github.com/Open-Study-College/osc/commit/2ccf812bb8181e4a36a32bccf7c3209f2e6283d8))
+* **ui:** adds useMediaQuery hook to watch for screen size changes ([a235520](https://github.com/Open-Study-College/osc/commit/a235520cb376e973746829808bb19f472c4f7e79))
+* **ui:** export missing components, hooks and utils ([4227846](https://github.com/Open-Study-College/osc/commit/422784639c693b48d539ef41968cab2aeb77efe2))
+* **util:** adds function to format dates ([5cdf21d](https://github.com/Open-Study-College/osc/commit/5cdf21db33157881b11990e44915d293892c8b0b))
+
+
+### 🐛 Bugs
+
+* **carousel:** add function to set focusable elements tabindex to -1 when outside the viewport ([c912324](https://github.com/Open-Study-College/osc/commit/c9123249544df3f242c7f8e3247b1098da34e22f))
+* **ecommerce:** add missing comma ([9854574](https://github.com/Open-Study-College/osc/commit/98545743ad601ac5b3bcc0170674789e367a3798))
+* **ecommerce:** add useEffect to fix ssr mismatch error ([f3a1bfd](https://github.com/Open-Study-College/osc/commit/f3a1bfd734a5e505fb5f6cd0bbf212b037999994))
+* **ecommerce:** cast card data as correct type ([5b78c4d](https://github.com/Open-Study-College/osc/commit/5b78c4d5eacc0d4d146e033847bde6f88a99372d))
+* **ecommerce:** remove unused path prop ([294d320](https://github.com/Open-Study-College/osc/commit/294d3203a8e238c16583d117c99c8ad199da888e))
+* **ecommerce:** replace breakpoints import with temp objects ([26670e2](https://github.com/Open-Study-College/osc/commit/26670e2178b6136a18a48ba7e3efc82266816c4c))
+* **hero:** add list.slash to avoid sass trying to divide grid cols ([d2fbc91](https://github.com/Open-Study-College/osc/commit/d2fbc919d37e9199af0be27dab79a7bb9b6a7616))
+* **hero:** add ternary to fix type error ([4626c39](https://github.com/Open-Study-College/osc/commit/4626c39c2338e6152e5446f64606021b5eeb7d78))
+* **hero:** hard code in media query values ([032787b](https://github.com/Open-Study-College/osc/commit/032787bd46220b52b9926761ce75a69703fa4610))
+* **types:** adds missing type imports ([8232242](https://github.com/Open-Study-College/osc/commit/8232242345092d0b9a992b6212fba2a8ab555c31))
+
+
+### ♻️ Refactors
+
+* **card:** add height 100% ([ee9e562](https://github.com/Open-Study-College/osc/commit/ee9e56286a091bd1eb5d30edc563d1980d9e6392))
+* **carousel:** add className prop ([7e7f6db](https://github.com/Open-Study-College/osc/commit/7e7f6db26deca25dd692557e62703bfbc87d2077))
+* **carousel:** update default carousel settings to only be one slide per view across viewports ([599df50](https://github.com/Open-Study-College/osc/commit/599df50d13312554f157c0c9ed133185491b7ddb))
+* **carousel:** update markup to use list items ([d204bff](https://github.com/Open-Study-College/osc/commit/d204bffec93dbb5f9fd970ba74e721e46ae698b6))
+* **ecommerce:** add condition to remove image from secondary variant ([e55470e](https://github.com/Open-Study-College/osc/commit/e55470e7ba93da4036aca9f7ed42d06578800b57))
+* **ecommerce:** add type guards ([ee28ab2](https://github.com/Open-Study-College/osc/commit/ee28ab282bdf186d6155f52f68954d0196c77391))
+* **ecommerce:** import type ([5c101af](https://github.com/Open-Study-College/osc/commit/5c101af4ab95c13bb2b396393b9c2d9a39cd819b))
+* **ecommerce:** remove h1 ([aa2d28d](https://github.com/Open-Study-College/osc/commit/aa2d28d9ead67bab0c157bb750a9db721121bbc6))
+* **ecommerce:** update collection card to take size variant ([04e5087](https://github.com/Open-Study-College/osc/commit/04e5087e4d03a86bb8e7732829fcf00df1fcea06))
+* **ecommerce:** update sanity types ([ab27327](https://github.com/Open-Study-College/osc/commit/ab27327e367e3a3859269c8d7f9ddf5635902762))
+* **ecommerce:** update tests with spritesheet provider ([2ce975a](https://github.com/Open-Study-College/osc/commit/2ce975aa2611bec30092a3348dd22a51ab261589))
+* **ecommerce:** update types ([5b1e351](https://github.com/Open-Study-College/osc/commit/5b1e351198cc67183c9e593fecd5e9d0c0ddf414))
+* **hero:** change is-flush on image to container modifier class ([00f7638](https://github.com/Open-Study-College/osc/commit/00f76387fc22b69f99f484d31173ff8ccc0f716c))
+* **hero:** remove max width from image ([adf895e](https://github.com/Open-Study-College/osc/commit/adf895e1d510cd8412524fc5562e1252d988e971))
+* **hero:** remove variant controls from storybook ([14244f4](https://github.com/Open-Study-College/osc/commit/14244f42d63225cc8d7bc90363b8c781d2c05f57))
+* **hero:** tidy up variables ([855ef45](https://github.com/Open-Study-College/osc/commit/855ef4518eb332c8098c7675548fbad8e4a18f61))
+* **hero:** update mq-tokens with variables ([34fc77d](https://github.com/Open-Study-College/osc/commit/34fc77d32c874398d9fa371f4f1e7a1c27718568))
+* **hero:** updated to use new token names ([5b506fb](https://github.com/Open-Study-College/osc/commit/5b506fbb2d2f72acbdcd565af8894f8e90d81318))
+* **hero:** wrap styles in layer ([d4aede6](https://github.com/Open-Study-College/osc/commit/d4aede6ba49b992dc7f0eea1a5299f46378488d5))
+* **island grid:** allow type to accept array as child ([3ca0449](https://github.com/Open-Study-College/osc/commit/3ca04493bc90c509d068ea67402c5907b1ab884a))
+* **studio:** adds initial value to alignment ([135e883](https://github.com/Open-Study-College/osc/commit/135e883d370f0a931c25f2700df9e8905bc769c9))
+* **studio:** adds inverse setting to button ([c3ef0f4](https://github.com/Open-Study-College/osc/commit/c3ef0f48ca6e73ebcdaefe3e08ebd8ba530d0e88))
+* **studio:** adds specific settings for hero carousel ([59766b1](https://github.com/Open-Study-College/osc/commit/59766b15a9f01c94e5f3a16c02471ff4fb08ac2b))
+* **studio:** change button from array to singular ([caa9142](https://github.com/Open-Study-College/osc/commit/caa91421dbf5c45581e32578ac205f05fc669f1b))
+* **studio:** move carousel settings into their own schema ([7777a1f](https://github.com/Open-Study-College/osc/commit/7777a1f68f9d1d933864405fd8b8b807940bd65f))
+* **styles:** adds important to utility so it overrules component styles ([241ad62](https://github.com/Open-Study-College/osc/commit/241ad624f9598b0e81a61434befc6bbcbcd111fa))
+* **styles:** remove important tags now we have cascade layers ([2aab420](https://github.com/Open-Study-College/osc/commit/2aab42090ad7f3bf82d4b364d7c082fa2485ce41))
+
 ## [0.51.0](https://github.com/Open-Study-College/osc/compare/v0.50.0...v0.51.0) (2023-03-03)
 
 
@@ -137,57 +238,4 @@
 
 * **ecommerce:** wrap root components in o-page div ([9b0f022](https://github.com/Open-Study-College/osc/commit/9b0f0221e1c2c49dff39d4cdea0e63f7743208e3))
 * **styles:** adds o-page object class ([3586390](https://github.com/Open-Study-College/osc/commit/35863908141b0969e419a3f0a3d49462fddfa6be))
-
-## [0.47.0](https://github.com/Open-Study-College/osc/compare/v0.46.4...v0.47.0) (2023-02-28)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* make storybook quiet for my sanity ([c21648a](https://github.com/Open-Study-College/osc/commit/c21648aa99860f9bafcbf6dfa93367a224f36e60))
-
-
-### 🐛 Bugs
-
-* **ecommerce:** fixes lint error ([5d964ad](https://github.com/Open-Study-College/osc/commit/5d964ad68f647d2a150d321f68543c574ac388c6))
-* **navbar:** removes isDekstop check on inline style ([d2c3805](https://github.com/Open-Study-College/osc/commit/d2c380570f0d3519f872febf2c2e7b4e9ef4ee92))
-
-
-### 🧪 Tests
-
-* **e2e:** add e2e tests for the navbar ([36b1d00](https://github.com/Open-Study-College/osc/commit/36b1d000f69a70089a098bf895c6bef3ca4ec529))
-* **e2e:** enable mobile tests ([89830d5](https://github.com/Open-Study-College/osc/commit/89830d5eb8099774a2e8650c306581606acf87d3))
-* **ecommerce:** add exact: true to button locators ([fdc5f5c](https://github.com/Open-Study-College/osc/commit/fdc5f5c7dc67f1c8e2a92a4f7481a2d4347a9d84))
-
-
-### ♻️ Refactors
-
-* **ecommerce:** abstract header into it's own component ([366ab4b](https://github.com/Open-Study-College/osc/commit/366ab4b7c294a3b3918302394a48b911a36ef74c))
-* **ecommerce:** move buildUrl query into it's own file ([8d032ff](https://github.com/Open-Study-College/osc/commit/8d032ff3a9b8afa67ebf5b83c277dcd3419e4467))
-* **ecommerce:** update svgs to use Icon component ([2729f19](https://github.com/Open-Study-College/osc/commit/2729f196361777a6324950fb6c6c8e5a619911a6))
-* **ecommerce:** updates getSettingsData to accept params ([09a7a3c](https://github.com/Open-Study-College/osc/commit/09a7a3ca432c471d052df6237cbfb95a0a9102c1))
-* **navbar:** removes prefetch prop ([dc072ad](https://github.com/Open-Study-College/osc/commit/dc072ad5f9fb1c09a4a9ac7dc52aecccdb13fca4))
-
-
-### ✨ Features
-
-* **ecommerce:** add action nav to settings query ([283a4ac](https://github.com/Open-Study-College/osc/commit/283a4ac56997cb616b164b9241c2dadb9ae64916))
-* **ecommerce:** add types for nav settings ([68e469e](https://github.com/Open-Study-College/osc/commit/68e469e9ec223266c57514c4112a017cf514fa90))
-* **ecommerce:** adds action bar to header ([e7e4038](https://github.com/Open-Study-College/osc/commit/e7e4038caeec95277d40b663a30818194057b94c))
-* **ecommerce:** adds action nav settings types ([c8b1093](https://github.com/Open-Study-College/osc/commit/c8b1093efa7637e1ce46e51242ee24e6044be41f))
-* **ecommerce:** adds action nav to header ([234e4c5](https://github.com/Open-Study-College/osc/commit/234e4c5be8d6868183f29688e3e3a165e8e7bdd8))
-* **ecommerce:** adds action nav to mobile menu ([15e095f](https://github.com/Open-Study-College/osc/commit/15e095f6cebdcec9d3833165fa26a53769dd131e))
-* **ecommerce:** adds header and nav ([35d07f1](https://github.com/Open-Study-College/osc/commit/35d07f17b24ba8b8d846e38356859bbf62e7488d))
-* **ecommerce:** adds nav component wrapper ([a6a386e](https://github.com/Open-Study-College/osc/commit/a6a386eba15213e0c8db7c981cd2af100c8cb661))
-* **ecommerce:** adds navigation query ([246bae7](https://github.com/Open-Study-College/osc/commit/246bae7580f77ef304e752af91dd83185c79136a))
-* **ecommerce:** import logo from osc-ui ([68f47c4](https://github.com/Open-Study-College/osc/commit/68f47c41ed0f76e5a05ae9a7b86e17041759f908))
-* **header:** adds background color ([f1a4427](https://github.com/Open-Study-College/osc/commit/f1a4427f2efff88d89cf2f174c0c7fabdf24e1c6))
-* **header:** update exports ([b499e6d](https://github.com/Open-Study-College/osc/commit/b499e6de34b53c1716fff6080e4b1389cb576c65))
-* **icon:** export accessible icon component ([8558f4e](https://github.com/Open-Study-College/osc/commit/8558f4e36f3ccc1f5e393f6e33ee8e2996761b13))
-* **logo:** export logo from osc-ui ([f5b35f1](https://github.com/Open-Study-College/osc/commit/f5b35f1da012c1eb27b6458315024b4848a19a68))
-* **navbar:** adds an event listener to close menu when links are clicked ([90ca7bc](https://github.com/Open-Study-College/osc/commit/90ca7bc1a8e9b9cd009e59adcc119e7c340edd61))
-* **navbar:** adds useUniqueId hook ([bd5675d](https://github.com/Open-Study-College/osc/commit/bd5675d41e582640e5bb763ade59ee47d29ed794))
-* **studio:** adds action nav settings ([661c15f](https://github.com/Open-Study-College/osc/commit/661c15fc61bd2d37e4e44d4cab5ec8de0a6e6421))
-* **studio:** adds nav selector to settings ([4d097ff](https://github.com/Open-Study-College/osc/commit/4d097ff5612493da8cfc49b6540daf8fc77d7972))
-* **studio:** adds navigation schema ([289b1de](https://github.com/Open-Study-College/osc/commit/289b1dead140d7c2b1c55676620818692306e53d))
-* **studio:** adds navigation to the desk structure ([7fe7c4a](https://github.com/Open-Study-College/osc/commit/7fe7c4ad746684e3ae34e6d800dfc479e351e2ae))
 
