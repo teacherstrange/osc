@@ -1,3 +1,5 @@
+import { ColorPicker } from '../../../components/inputs/ColorPicker';
+
 export default {
     name: 'card.static',
     title: 'Static Card',
@@ -28,6 +30,29 @@ export default {
             validation: (Rule) => Rule.required(),
         },
         {
+            name: 'headingStyles',
+            title: 'Heading Styles',
+            type: 'object',
+            group: 'content',
+            fields: [
+                {
+                    name: 'smallHeading',
+                    title: 'Small Heading',
+                    type: 'boolean',
+                    initialValue: false,
+                },
+                {
+                    name: 'headingColor',
+                    title: 'Heading Colour',
+                    type: 'string',
+                    inputComponent: ColorPicker,
+                },
+            ],
+            options: {
+                columns: 2,
+            },
+        },
+        {
             name: 'showSubHeading',
             title: 'Show Sub Heading',
             type: 'boolean',
@@ -48,10 +73,9 @@ export default {
             group: 'content',
         },
         {
-            name: 'buttons',
-            title: 'Buttons',
-            type: 'array',
-            of: [{ type: 'module.button' }],
+            name: 'button',
+            title: 'Button',
+            type: 'module.button',
             group: 'content',
         },
         {

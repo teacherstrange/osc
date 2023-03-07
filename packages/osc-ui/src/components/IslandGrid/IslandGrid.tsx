@@ -9,7 +9,7 @@ export interface IslandGridProps {
      * The content of the IslandGrid
      * Must take a minimum of 3 children, or a maximum of 4
      */
-    children: [ReactNode, ReactNode, ReactNode, ReactNode?];
+    children: [ReactNode, ReactNode, ReactNode, ReactNode?] | ReactNode[];
     /**
      * Custom class
      */

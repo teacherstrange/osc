@@ -4,14 +4,6 @@ export default {
     type: 'object',
     fields: [
         {
-            name: 'carouselName',
-            title: 'Carousel Name',
-            type: 'string',
-            description:
-                'The accessible name of the Carousel, this will not be visible on the page but is required for accessibility.',
-            validation: (Rule) => Rule.required(),
-        },
-        {
             name: 'arrows',
             title: 'Show Arrows',
             type: 'boolean',

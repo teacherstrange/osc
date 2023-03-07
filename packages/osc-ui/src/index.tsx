@@ -45,6 +45,7 @@ export {
 export { AccessibleIcon, Icon, SpritesheetProvider } from './components/Icon/Icon';
 export { Image } from './components/Image/Image';
 export { ImageGallery } from './components/ImageGallery/ImageGallery';
+export { IslandGrid } from './components/IslandGrid/IslandGrid';
 export { List } from './components/List/List';
 export { Logo } from './components/Logo/Logo';
 export { Modal } from './components/Modal/Modal';
@@ -57,7 +58,13 @@ export {
     NavSubMenu,
     NavTrigger,
 } from './components/Navbar/Navbar';
-export { Popover } from './components/Popover/Popover';
+export {
+    Popover,
+    PopoverArrow,
+    PopoverClose,
+    PopoverContent,
+    PopoverTrigger,
+} from './components/Popover/Popover';
 export { SkipLink } from './components/SkipLink/SkipLink';
 export { Switch } from './components/Switch/Switch';
 export { Tabs } from './components/Tabs/Tabs';
@@ -65,5 +72,10 @@ export { Tag } from './components/Tag/Tag';
 export { Trustpilot } from './components/Trustpilot/Trustpilot';
 export { VideoPlayer } from './components/VideoPlayer/VideoPlayer';
 export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
+// Hooks
+export { useMediaQuery } from './hooks/useMediaQuery';
 // Utils
+export { classNames } from './utils/classNames';
+export { formatDate as transformDate } from './utils/formatDate';
 export { rem } from './utils/rem';
+export { truncate } from './utils/truncate';

@@ -58,6 +58,11 @@ export interface Props {
     carouselName: string;
 
     /**
+     * Custom class
+     */
+    className?: string;
+
+    /**
      * The slides to render in the carousel
      */
     children: ReactNode | ReactNode[];
@@ -112,6 +117,7 @@ export const Carousel = (props: Props) => {
         autoPlaySpeed = 10_000, // ms
         loop = true,
         children,
+        className,
         slidesPerView = 1,
         arrows = false,
         dotNav = true,
@@ -127,7 +133,8 @@ export const Carousel = (props: Props) => {
     const classes = classNames(
         'c-carousel',
         arrows && 'has-arrows',
-        adaptiveHeight && 'has-adaptive-height'
+        adaptiveHeight && 'has-adaptive-height',
+        className
     );
 
     // Keep track of which slides are in view by assigning their index to an array
@@ -351,7 +358,7 @@ export const Carousel = (props: Props) => {
     };
 
     // Handle keen-slider settings and call plugins
-    const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
+    const [sliderRef, instanceRef] = useKeenSlider<HTMLUListElement>(
         {
             initial: startIndex,
             created() {
@@ -387,13 +394,13 @@ export const Carousel = (props: Props) => {
             aria-live={autoplay ? 'off' : 'polite'}
             aria-atomic="true"
         >
-            <div ref={sliderRef} className="c-carousel__inner keen-slider">
+            <ul ref={sliderRef} className="c-carousel__inner keen-slider">
                 {Children.map(children, (child, index) => {
                     const numberOfChildren = Children.count(children);
 
                     return (
                         // We need the keen-slider__slide class to be able to use the keen-slider
-                        <div
+                        <li
                             role="group"
                             aria-label={`${index + 1} of ${numberOfChildren}`}
                             aria-roledescription="slide"
@@ -402,10 +409,10 @@ export const Carousel = (props: Props) => {
                             data-slide-index={index}
                         >
                             {child}
-                        </div>
+                        </li>
                     );
                 })}
-            </div>
+            </ul>
             {/* IF we have arrows enabled AND the slider has loaded AND the current object is available on the instance */}
             {arrows && sliderHasLoaded && instanceRef.current && (
                 <>

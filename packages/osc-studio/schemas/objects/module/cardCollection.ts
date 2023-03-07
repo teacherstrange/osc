@@ -12,6 +12,15 @@ export default {
                 disableNew: true,
             },
         },
+        {
+            name: 'variant',
+            title: 'Variant',
+            type: 'string',
+            initialValue: 'lg',
+            options: {
+                list: ['lg', 'md', 'sm'],
+            },
+        },
     ],
     preview: {
         select: {

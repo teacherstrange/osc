@@ -10,8 +10,6 @@ import { AccessibleIcon, Icon } from '../Icon/Icon';
 
 import './card.scss';
 
-// TODO: Layout (grid/carousel)
-
 export interface SharedCardProps {
     /**
      * The content of the component

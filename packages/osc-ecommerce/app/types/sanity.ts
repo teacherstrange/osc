@@ -32,6 +32,10 @@ export interface imageModule<T> extends SanityImage<T> {
     className?: string;
     loading?: 'eager' | 'lazy';
     responsiveWidths?: number[];
+    derived?: {
+        secure_url?: string;
+    }[];
+    secure_url?: string;
     sizes?: string | undefined;
 }
 
@@ -40,7 +44,7 @@ export interface module {
     _key?: Maybe<string>;
 }
 
-interface buttonModule extends module {
+export interface buttonModule extends module {
     _key: string;
     _type: string;
     externalLink?: {
@@ -52,14 +56,7 @@ interface buttonModule extends module {
     label: string;
     reference?: object;
     type: string;
-    variant?:
-        | 'primary'
-        | 'secondary'
-        | 'tertiary'
-        | 'quaternary'
-        | 'quinary'
-        | 'primary-gradient'
-        | 'secondary-gradient';
+    variant?: string;
     email?: string;
     slug?: string;
     telephone?: string;
@@ -100,6 +97,84 @@ export interface videoModule extends module {
     content?: contentModule;
 }
 
+export interface bioCardModule extends module {
+    reference?: {
+        bio?: PortableTextBlock[];
+        image?: {
+            alt: string;
+            image?: Omit<imageModule<HTMLImageElement>, 'alt' | 'src'>;
+        };
+        name?: string;
+        role?: string;
+    };
+}
+
+export interface courseCardModule extends module {
+    reference?: {
+        _createdAt: string;
+        _id: string;
+        _rev: string;
+        _type: string;
+        _updatedAt: string;
+        store?: shopifyProduct;
+    };
+}
+
+export interface collectionCardModule extends module {
+    reference?: {
+        store?: shopifyCollection;
+    };
+    variant?: 'sm' | 'md' | 'lg';
+}
+
+export interface postCardModule extends module {
+    fullWidth?: boolean;
+    backgroundColor?: string;
+    reference?: {
+        slug?: {
+            current: string;
+        };
+        title?: string;
+    };
+}
+
+export interface staticCardModule extends module {
+    button?: buttonModule;
+    content?: PortableTextBlock[];
+    footer?: PortableTextBlock[];
+    heading?: string;
+    headingStyles?: {
+        headingColor?: string;
+        smallHeading?: boolean;
+    };
+    image?: {
+        alt: string;
+        image?: Omit<imageModule<HTMLImageElement>, 'alt' | 'src'>;
+    };
+    showFooter?: boolean;
+    showSubHeading?: boolean;
+    subHeading?: string;
+}
+
+export type TypesOfCard =
+    | bioCardModule
+    | courseCardModule
+    | collectionCardModule
+    | postCardModule
+    | staticCardModule;
+
+export interface cardModule extends module {
+    backgroundColor?: Themes | string;
+    marginBottom?: Spacing | string;
+    paddingBottom?: Spacing | string;
+    paddingTop?: Spacing | string;
+    layout: string;
+    carouselName?: string;
+    carouselSettings?: carouselModuleSettings;
+    content?: contentModule;
+    card: TypesOfCard[];
+}
+
 export interface mediaTextModule extends module {
     layout: 'media-left' | 'media-right';
     body?: PortableTextBlock;
@@ -111,6 +186,20 @@ export interface trustpilotModule extends module {
     height: string;
     stars: string;
     type: 'slider' | 'grid' | 'minicarousel' | 'microstar';
+}
+
+export interface carouselModuleSettings extends module {
+    carouselName: string;
+    arrows?: boolean;
+    dotNav?: boolean;
+    loop?: boolean;
+    autoplay?: false | 'smooth' | 'switch';
+    startIndex?: number;
+    slidesPerView?: {
+        mobile?: number;
+        tablet?: number;
+        desktop?: number;
+    };
 }
 
 export interface carouselModule extends module {
@@ -196,31 +285,52 @@ export interface SanityPage {
 }
 
 export interface shopifyProduct {
-    id: string;
+    id?: string | number;
+    title?: string;
+    descriptionHtml?: string;
+    slug?: {
+        current?: string;
+    };
+    featuredImage?: {
+        altText?: string | null;
+        height?: number;
+        width?: number;
+        url?: string;
+    } | null;
+    compareAtPriceRange?: {
+        minVariantPrice?: {
+            amount?: string;
+            currencyCode?: string;
+        };
+    };
+    priceRange?: {
+        minVariantPrice?:
+            | number
+            | {
+                  amount?: string;
+                  currencyCode?: string;
+              };
+    };
+    options?: {
+        _key?: string;
+        values?: string[];
+        name?: string;
+    }[];
+}
+
+export interface shopifyCollection {
+    id: string | number;
     title: string;
-    handle: string;
+    descriptionHtml: string;
+    slug: {
+        current: string;
+    };
     featuredImage?: {
         altText?: string | null;
         height: number;
         width: number;
         url: string;
     } | null;
-    compareAtPriceRange: {
-        minVariantPrice: {
-            amount: string;
-            currencyCode: string;
-        };
-    };
-    priceRange: {
-        minVariantPrice: {
-            amount: string;
-            currencyCode: string;
-        };
-    };
-    options: {
-        values: string[];
-        name: string;
-    }[];
 }
 
 export interface SanitySiteSetting {
