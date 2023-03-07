@@ -223,6 +223,7 @@ $card-fs-3xl: $fs-3xl;
             }
 
             #{$self}__footer {
+                align-items: center;
                 border-top: var(--card-border);
                 margin-block-start: $card-space-l;
                 padding-block: $card-space-l;
