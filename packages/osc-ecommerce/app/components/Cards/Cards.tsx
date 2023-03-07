@@ -9,7 +9,6 @@ import type {
     staticCardModule,
     TypesOfCard,
 } from '~/types/sanity';
-import breakpoints from '../../../../../tokens/media-queries';
 import { BioCard } from './BioCard';
 import { BlogCard } from './BlogCard';
 import { CollectionCard } from './CollectionCard';
@@ -49,7 +48,7 @@ export const Cards = (props: { module: cardModule }) => {
         'desk-lrg': 1440,
     };
 
-    const isSmallerThanTab = useMediaQuery(`(max-width: ${rem(breakpoints.tab)}rem)`);
+    const isSmallerThanTab = useMediaQuery(`(max-width: ${rem(mq.tab)}rem)`);
     const [showOnSmallerThanTab, setShowOnSmallerThanTab] = useState(false);
 
     // We need this useEffect to set the showOnTab state only when the window object exists

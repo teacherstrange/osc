@@ -10,13 +10,18 @@ import type {
     postCardModule,
     staticCardModule,
 } from '~/types/sanity';
-import breakpoints from '../../../../../tokens/media-queries';
 import { BioCard } from './BioCard';
 import { BlogCard } from './BlogCard';
 import { Cards } from './Cards';
 import { CollectionCard } from './CollectionCard';
 import { CourseCard } from './CourseCard';
 import { SimpleCard } from './SimpleCard';
+
+// ! TEMPORARY fix for tokens path not matching dev and prod environments
+// ! Once solution in place we can update this to use design token files instead
+const mq = {
+    tab: 768,
+};
 
 const getCardType = (cardType: string) => {
     return mockCardData.card.filter((card) => card._type === cardType)[0];
@@ -35,9 +40,9 @@ beforeEach(() => {
 });
 
 describe('Responsive layout', () => {
-    test(`renders cards in a grid layout when screen is greater than ${breakpoints.tab}px`, () => {
+    test(`renders cards in a grid layout when screen is greater than ${mq.tab}px`, () => {
         window.matchMedia = vi.fn().mockImplementation((query: string) => ({
-            matches: query === `(min-width: ${breakpoints.tab}px)`,
+            matches: query === `(min-width: ${mq.tab}px)`,
             media: '',
             onchange: vi.fn(),
             addEventListener: vi.fn(),
@@ -60,9 +65,9 @@ describe('Responsive layout', () => {
         expect(gridItems).toHaveLength(5);
     });
 
-    test(`renders cards in a carousel layout when screen is less than ${breakpoints.tab}px`, () => {
+    test(`renders cards in a carousel layout when screen is less than ${mq.tab}px`, () => {
         window.matchMedia = vi.fn().mockImplementation((query: string) => ({
-            matches: query !== `(min-width: ${breakpoints.tab}px)`,
+            matches: query !== `(min-width: ${mq.tab}px)`,
             media: '',
             onchange: vi.fn(),
             addEventListener: vi.fn(),
@@ -85,9 +90,9 @@ describe('Responsive layout', () => {
         expect(carouselSlide).toHaveLength(5);
     });
 
-    test(`renders cards in a grid layout when screen is less than ${breakpoints.tab}px and number of cards is less than three`, () => {
+    test(`renders cards in a grid layout when screen is less than ${mq.tab}px and number of cards is less than three`, () => {
         window.matchMedia = vi.fn().mockImplementation((query: string) => ({
-            matches: query !== `(min-width: ${breakpoints.tab}px)`,
+            matches: query !== `(min-width: ${mq.tab}px)`,
             media: '',
             onchange: vi.fn(),
             addEventListener: vi.fn(),
