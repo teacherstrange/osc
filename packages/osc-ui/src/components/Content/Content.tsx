@@ -48,6 +48,7 @@ export interface Props {
     paddingTop?: Maybe<Spacing>;
     value: PortableTextBlock[];
     buttons?: ButtonProps[];
+    fullWidth?: boolean;
 }
 
 // Create the decorator markup
@@ -140,6 +141,7 @@ const portableTextComponents: PortableTextComponents = {
 export const Content = (props: Props) => {
     const {
         align = 'left',
+        fullWidth = false,
         backgroundColor,
         className,
         marginBottom,
@@ -151,6 +153,7 @@ export const Content = (props: Props) => {
 
     // ? Perhaps better to simply apply the class and pass them as a value from Sanity?
     const alignClass = align ? `c-content__inner--${align}` : '';
+    const fullWidthClass = fullWidth ? 'c-content__inner--full' : '';
     const marginBottomClass = useSpacing('margin', 'bottom', marginBottom);
     const paddingTopClass = useSpacing('padding', 'top', paddingTop);
     const paddingBottomClass = useSpacing('padding', 'bottom', paddingBottom);
@@ -166,7 +169,7 @@ export const Content = (props: Props) => {
 
     return (
         <div className={classes ? classes : null}>
-            <div className={`c-content__inner ${alignClass}`}>
+            <div className={`c-content__inner ${alignClass} ${fullWidthClass}`}>
                 <ReactPortableText value={value} components={portableTextComponents} />
 
                 {buttons && buttons.length > 0 ? (
