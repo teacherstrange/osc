@@ -1,9 +1,8 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { render } from 'test-utils';
-import { SpritesheetProvider } from '../Icon/Icon';
-import { TextArea } from './TextArea';
 import { textAreaSchema } from './mockSchema';
+import { TextArea } from './TextArea';
 
 test('should render a textarea component with a label', () => {
     render(<TextArea id="enquiry" name="Enquiry" />);
@@ -26,16 +25,14 @@ test('should disable the input when disabled prop is true', () => {
 test('should render an error message if an error is passed in', () => {
     const setErrorsMock = vi.fn();
     render(
-        <SpritesheetProvider>
-            <TextArea
-                id="enquiry"
-                name="Enquiry"
-                required={true}
-                errors={['Field is required']}
-                schema={textAreaSchema}
-                setErrors={setErrorsMock}
-            />
-        </SpritesheetProvider>
+        <TextArea
+            id="enquiry"
+            name="Enquiry"
+            required={true}
+            errors={['Field is required']}
+            schema={textAreaSchema}
+            setErrors={setErrorsMock}
+        />
     );
     expect(screen.getByRole('alert')).toBeInTheDocument();
 });
