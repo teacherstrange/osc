@@ -1,4 +1,5 @@
 /* stylelint-disable max-line-length */
+/* stylelint-disable scss/operator-no-newline-after */
 @import "../../styles/tools";
 @import "../../styles/settings";
 
@@ -60,11 +61,11 @@ $switch-transition-duration: 0.2s;
                 // width of the switch minus the width of the thumb size minus the border plus the offset
                 // we multiply the border by 2 because we have a border on the left and right
                 translateX(
-                calc(
-                    var(--switch-width) - var(--switch-thumb-size) -
+                    calc(
+                        var(--switch-width) - var(--switch-thumb-size) -
                         (($switch-border-width * 2) + $switch-thumb-offset)
-                )
-            );
+                    )
+                );
         }
     }
 
@@ -146,9 +147,10 @@ $switch-transition-duration: 0.2s;
     }
 
     /* stylelint-disable-next-line no-descending-specificity */
-    .c-switch {
+    /* stylelint-disable-next-line selector-class-pattern */
+    .c-switch__container {
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
-        &[data-state="checked"] + svg {
+        &[data-state="true"] + svg {
             color: var(--color-primary);
         }
     }

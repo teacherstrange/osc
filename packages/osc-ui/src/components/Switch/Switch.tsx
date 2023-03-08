@@ -93,8 +93,9 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
                     className={
                         errors && errors.length > 0
                             ? 'c-switch__container c-switch__container--error'
-                            : 'c-switch__container '
+                            : 'c-switch__container'
                     }
+                    data-state={value}
                 >
                     <Label htmlFor={id} name={name} />
                     <SwitchPrimitive.Root
