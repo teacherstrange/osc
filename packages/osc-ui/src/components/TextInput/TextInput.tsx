@@ -83,7 +83,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
     useEffect(() => {
         // Client side error handling - Sets any errors on an input in
         // accordance with the schema validation
-        if (errors && schema && setErrors) {
+        if (errors && errors.length > 0 && schema && setErrors) {
             clientSideValidation(id, schema, setErrors, value);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
@@ -109,8 +109,8 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                 }
             >
                 <input
-                    aria-invalid={errors ? true : false}
-                    aria-describedby={errors ? `${id}-error` : undefined}
+                    aria-invalid={errors && errors.length > 0 ? true : false}
+                    aria-describedby={errors && errors.length > 0 ? `${id}-error` : undefined}
                     className={inputClasses}
                     defaultValue={defaultValue}
                     id={id}

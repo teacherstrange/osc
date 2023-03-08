@@ -36,7 +36,7 @@ export const DateField = (props: DateFieldProps) => {
         <>
             <div
                 className={
-                    state.validationState === 'invalid' || errors
+                    state.validationState === 'invalid' || (errors && errors.length > 0)
                         ? `c-date-field__wrapper c-date-field__wrapper--error`
                         : `c-date-field__wrapper`
                 }
@@ -48,7 +48,9 @@ export const DateField = (props: DateFieldProps) => {
                 </div>
                 <ReactAriaButton
                     {...props.buttonProps}
-                    aria-describedby={errors ? `${dateFieldId}-error` : undefined}
+                    aria-describedby={
+                        errors && errors.length > 0 ? `${dateFieldId}-error` : undefined
+                    }
                     id={buttonId}
                 >
                     <Icon id="calendar" />

@@ -67,7 +67,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
     useEffect(() => {
         // Client side error handling - Sets any errors on an input in
         // accordance with the schema validation
-        if (errors && schema && setErrors) {
+        if (errors && errors.length > 0 && schema && setErrors) {
             clientSideValidation(name, schema, setErrors, value);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
@@ -82,7 +82,11 @@ export const RadioGroup = (props: RadioGroupProps) => {
                 {description.value}
             </legend>
             <RadioGroupPrimitive.Root
-                className={errors ? `${radioGroupClasses} c-radio-group--error` : radioGroupClasses}
+                className={
+                    errors && errors.length > 0
+                        ? `${radioGroupClasses} c-radio-group--error`
+                        : radioGroupClasses
+                }
                 disabled={disabled}
                 defaultValue={defaultValue}
                 name={name}

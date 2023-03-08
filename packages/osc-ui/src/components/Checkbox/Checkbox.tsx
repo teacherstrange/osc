@@ -73,7 +73,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
         useEffect(() => {
             // Client side error handling - Sets any errors on an input in
             // accordance with the schema validation
-            if (errors && schema && setErrors) {
+            if (errors && errors.length > 0 && schema && setErrors) {
                 clientSideValidation(id, schema, setErrors, checked);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes

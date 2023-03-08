@@ -38,7 +38,7 @@ export interface DatePickerProps extends AriaDatePickerProps<DateValue> {
 }
 
 export const DatePicker = (props: DatePickerProps) => {
-    const { closeOnSelect = true, errors, schema, setErrors } = props;
+    const { closeOnSelect = true, errors, granularity, label, schema, setErrors } = props;
     let state = useDatePickerState({ ...props, shouldCloseOnSelect: closeOnSelect });
     let ref = useRef();
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
@@ -48,7 +48,7 @@ export const DatePicker = (props: DatePickerProps) => {
     useEffect(() => {
         // Client side error handling - Sets any errors on an input in
         // accordance with the schema validation
-        if (errors && schema) {
+        if (errors && errors.length > 0 && schema && setErrors) {
             validateDatepicker('datePicker', schema, setErrors, state.value as CalendarDate);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
@@ -57,7 +57,7 @@ export const DatePicker = (props: DatePickerProps) => {
     return (
         <div className="c-datepicker">
             <label {...labelProps} className="c-label">
-                {props.label}
+                {label}
             </label>
             <div
                 className="c-datepicker__date-field-container"
@@ -66,15 +66,17 @@ export const DatePicker = (props: DatePickerProps) => {
                 // Manually setting random ID due to bug on duplicate Ids:
                 // https://github.com/adobe/react-spectrum/issues/3969
                 id={dateFieldId}
-                aria-invalid={props.errors ? true : false}
+                aria-invalid={errors && errors.length > 0 ? true : false}
             >
                 <DateField
                     {...fieldProps}
                     dateFieldId={dateFieldId}
                     buttonProps={buttonProps}
                     errors={errors}
-                    aria-describedby={props.errors ? `${dateFieldId}-error` : undefined}
-                    granularity={props.granularity}
+                    aria-describedby={
+                        errors && errors.length > 0 ? `${dateFieldId}-error` : undefined
+                    }
+                    granularity={granularity}
                 />
             </div>
             {state.isOpen && (
@@ -89,9 +91,13 @@ export const DatePicker = (props: DatePickerProps) => {
                     </ReactAriaDialog>
                 </ReactAriaPopover>
             )}
-            {errors ? (
+            {errors && errors.length > 0 ? (
                 <div className="c-date-field__error--text" role="alert" id={`${dateFieldId}-error`}>
-                    {errors}
+                    {errors.map((error, index) => (
+                        <span key={index} className="u-pr-2xs">
+                            {error}
+                        </span>
+                    ))}
                 </div>
             ) : null}
         </div>

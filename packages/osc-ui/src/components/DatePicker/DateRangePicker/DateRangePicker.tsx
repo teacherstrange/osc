@@ -81,7 +81,7 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
     useEffect(() => {
         // Client side error handling - Sets any errors on an input in
         // accordance with the schema validation
-        if (errors && schema) {
+        if (errors && errors.length > 0 && schema && setErrors) {
             validateDatepicker(
                 'dateRangePicker',
                 schema,
@@ -282,11 +282,13 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
                 <div
                     className="c-datepicker__date-field-container"
                     id={dateFieldId}
-                    aria-invalid={errors ? true : false}
+                    aria-invalid={errors && errors.length > 0 ? true : false}
                 >
                     <div className="c-datepicker__date-field-inner-container">
                         <DateField
-                            aria-describedby={errors ? `${dateFieldId}-error` : undefined}
+                            aria-describedby={
+                                errors && errors.length > 0 ? `${dateFieldId}-error` : undefined
+                            }
                             buttonProps={buttonProps}
                             dateFieldId={dateFieldId}
                             errors={errors}
@@ -327,9 +329,13 @@ export const DateRangePicker = (props: DateRangePickerProps) => {
                     </ReactAriaDialog>
                 </ReactAriaPopover>
             )}
-            {errors ? (
+            {errors && errors.length > 0 ? (
                 <div className="c-date-field__error--text" id={`${dateFieldId}-error`}>
-                    {errors}
+                    {errors.map((error, index) => (
+                        <span key={index} className="u-pr-2xs">
+                            {error}
+                        </span>
+                    ))}
                 </div>
             ) : null}
         </div>

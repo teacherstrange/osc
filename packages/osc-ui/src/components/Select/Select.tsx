@@ -2,7 +2,6 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import type { ReactNode } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -66,7 +65,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
         useEffect(() => {
             // Client side error handling - Sets any errors on an input in
             // accordance with the schema validation
-            if (errors && schema && setErrors) {
+            if (errors && errors.length > 0 && schema && setErrors) {
                 clientSideValidation(name, schema, setErrors, value);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
