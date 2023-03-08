@@ -2,18 +2,12 @@ import type { AutocompleteOptions, AutocompleteState } from '@algolia/autocomple
 import { createAutocomplete } from '@algolia/autocomplete-core';
 import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
 import algoliasearch from 'algoliasearch/lite';
-import React, {
-    BaseSyntheticEvent,
-    KeyboardEvent,
-    MouseEvent,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { TextInput } from '../TextInput/TextInput';
 import './autocomplete.scss';
 import { ProductItemCustom } from './components/Templates';
-import { AutocompleteItem } from './types/autoComplete';
+import type { AutocompleteItem } from './types/autoComplete';
 
 const searchClient = algoliasearch('CMEG2XKNP8', '45b007891e2e306b97a88d7da87afac8');
 
