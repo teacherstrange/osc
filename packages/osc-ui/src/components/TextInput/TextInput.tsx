@@ -8,8 +8,8 @@ import { clientSideValidation } from '../../utils/clientSideValidation';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { Label } from '../Label/Label';
-import './text-input.scss';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
+import './text-input.scss';
 
 type Variants = 'secondary' | 'tertiary' | 'quaternary';
 
@@ -74,7 +74,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         required,
         schema,
         setErrors,
-        type = 'text',
+        type,
         variants,
         ...rest
     } = props;
