@@ -66,6 +66,8 @@ export type AutocompleteProps = Partial<AutocompleteOptions<BaseItem>> & {
 
 // TODO - What's this for
 export type SetAutocompleteUiStateOptions = {
+    collections?: any;
+    isOpen?: any;
     query: string;
     category?: string;
 };
