@@ -1,5 +1,6 @@
 import type { BaseItem } from '@algolia/autocomplete-core';
 import type { AutocompleteOptions } from '@algolia/autocomplete-js';
+import type { Hit } from '@algolia/client-search';
 import type { SearchClient } from 'algoliasearch/lite';
 import type { Dispatch, MutableRefObject, SetStateAction } from 'react';
 
@@ -66,19 +67,17 @@ export type AutocompleteProps = Partial<AutocompleteOptions<BaseItem>> & {
 
 // TODO - What's this for
 export type SetAutocompleteUiStateOptions = {
-    collections?: any;
-    isOpen?: any;
+    collections?: [];
+    isOpen?: boolean;
     query: string;
     category?: string;
 };
 
-// TODO - The consts at the bottom are not assigned types, e.g. INSTANT_SEARCH_HIERARCHICAL_ATTRIBUTES
-export interface OscAutocompleteProps {
-    onParentStateChange?: (item: Data) => void;
-    containerRef?: MutableRefObject<HTMLDivElement>;
-    searchClient: SearchClient; // used to connect
-    data?: Data[] | (() => Data[]);
-    INSTANT_SEARCH_HIERARCHICAL_ATTRIBUTES;
-    INSTANT_SEARCH_INDEX_NAME;
-    INSTANT_SEARCH_QUERY_SUGGESTIONS;
-}
+export type AutocompleteItem = Hit<{
+    brand: string;
+    categories: string[];
+    image: string;
+    name: string;
+    objectID: string;
+    url: string;
+}>;

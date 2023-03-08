@@ -1,38 +1,27 @@
+import type { AutocompleteOptions } from '@algolia/autocomplete-core';
 import type { Meta, Story } from '@storybook/react';
-import algoliasearch from 'algoliasearch';
-import React, { useRef, useState } from 'react';
+import React from 'react';
 
-import { OscAutocomplete } from './AutocompleteContainer';
-import type { OscAutocompleteProps } from './types/autoComplete';
+import { Autocomplete } from './Autocomplete';
+import { AutocompleteItem } from './types/autoComplete';
 
 export default {
     title: 'osc-ui/Autocomplete',
-    component: OscAutocomplete,
+    component: Autocomplete,
     parameters: {
         docs: {
             description: {
-                component: 'A control that allows the user to calculator the expenses.',
+                component:
+                    'Autocomplete is an open source, production-ready JavaScript library for building autocomplete experiences.',
             },
         },
     },
 } as Meta;
 
-const Template: Story<OscAutocompleteProps> = (args) => {
-    const [data, setData] = useState(null);
-    const containerRef = useRef(null);
-    const [setVariants] = useState(null);
-    const [title, setTitle] = useState(null);
-    const searchClient = algoliasearch('CMEG2XKNP8', '45b007891e2e306b97a88d7da87afac8');
-
+const Template: Story<Partial<AutocompleteOptions<AutocompleteItem>>> = (args) => {
     return (
         <>
-            <OscAutocomplete
-                {...args}
-                data={data}
-                searchClient={searchClient}
-                containerRef={containerRef}
-            />
-            <h1>{title}</h1>
+            <Autocomplete {...args} />
         </>
     );
 };
@@ -40,7 +29,5 @@ const Template: Story<OscAutocompleteProps> = (args) => {
 export const Primary = Template.bind({});
 
 Primary.args = {
-    INSTANT_SEARCH_HIERARCHICAL_ATTRIBUTES: ['tags'],
-    INSTANT_SEARCH_INDEX_NAME: 'shopify_products_grouped_by_id',
-    INSTANT_SEARCH_QUERY_SUGGESTIONS: 'shopify_products_grouped_by_id_query_suggestions',
+    placeholder: 'Search...',
 };
