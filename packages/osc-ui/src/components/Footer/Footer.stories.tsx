@@ -117,7 +117,7 @@ const Template: Story<FooterProps> = (args) => {
                 )}
             </FooterGroup>
 
-            <FooterBottom>
+            <FooterBottom siteName="Open Study College">
                 <a href="/">Terms</a>
                 <a href="/">Privacy Policy</a>
             </FooterBottom>

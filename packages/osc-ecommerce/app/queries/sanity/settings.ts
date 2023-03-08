@@ -1,7 +1,5 @@
 import groq from 'groq';
 import { buildUrls } from './fragments/buildUrls';
-import { LINK_EXTERNAL } from './fragments/linkExternal';
-import { LINK_INTERNAL } from './fragments/linkInternal';
 
 export const SETTINGS_QUERY = groq`
     *[ _type == "settings" ] {
@@ -24,18 +22,13 @@ export const SETTINGS_QUERY = groq`
                 }
             }
         },
-        footer {
-            _type,
-            links[] {
-                (_type == 'linkInternal') => {
-                    title,
-                    ${LINK_INTERNAL}
-                },
-                (_type == 'linkExternal') => {
-                    ${LINK_EXTERNAL}
-                }
-            },
-            text[]
+        "contactDetails": {
+            email,
+            phoneNumber
+        },
+        "footer": {
+            "footerNavigation": footerNavigation[]->navigationId.current,
+            "footerBottomNav": footerBottomNav->navigationId.current
         },
         'seo': {
             robots,
@@ -50,7 +43,7 @@ export const SETTINGS_QUERY = groq`
                     }
                 }
             },
-            'socials': social.socialProfile
+            'socials': socialProfile
         }
     }
 `;

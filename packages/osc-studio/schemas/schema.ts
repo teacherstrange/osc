@@ -65,6 +65,7 @@ import seoShopify from './objects/seo/shopify';
 import shopifyCollection from './objects/shopifyCollection';
 import shopifyProduct from './objects/shopifyProduct';
 import shopifyProductVariant from './objects/shopifyProductVariant';
+import social from './objects/social';
 
 // Build the schemas and export to the Sanity Studio app
 export default createSchema({
@@ -110,6 +111,7 @@ export default createSchema({
         seoHome,
         seoPage,
         seoShopify,
+        social,
         shopifyCollection,
         shopifyProduct,
         shopifyProductVariant,

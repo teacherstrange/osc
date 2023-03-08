@@ -205,17 +205,24 @@ export const FooterMenuContent = (props: FooterMenuContentProps) => {
 /* -------------------------------------------------------------------------------------------------
  * FooterBottom
  * -----------------------------------------------------------------------------------------------*/
-export interface FooterBottomProps extends SharedFooterProps, HTMLAttributes<HTMLDivElement> {}
+export interface FooterBottomProps extends SharedFooterProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * String to be displayed on the bottom of the footer
+     */
+    siteName: string;
+}
 
 export const FooterBottom = (props: FooterBottomProps) => {
-    const { children, className, ...attr } = props;
+    const { children, className, siteName, ...attr } = props;
 
     const classes = classNames('c-footer__btm', className);
     const year = new Date().getFullYear();
 
     return (
         <div className={classes} {...attr}>
-            <div className="c-footer__btm-item">&copy; Open Study College {year}</div>
+            <div className="c-footer__btm-item">
+                &copy; {siteName} {year}
+            </div>
             <div className="c-footer__btm-item">{children}</div>
         </div>
     );

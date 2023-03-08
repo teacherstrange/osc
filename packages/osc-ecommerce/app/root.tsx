@@ -13,8 +13,10 @@ import {
 } from '@remix-run/react';
 import { SkipLink } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
+import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import oscUiBurgerStyles from 'osc-ui/dist/src-components-Burger-burger.css';
 import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
+import oscFooterStyles from 'osc-ui/dist/src-components-Footer-footer.css';
 import oscHeaderStyles from 'osc-ui/dist/src-components-Header-header.css';
 import oscLogoStyles from 'osc-ui/dist/src-components-Logo-logo.css';
 import oscNavStyles from 'osc-ui/dist/src-components-Navbar-navbar.css';
@@ -24,11 +26,13 @@ import styles from 'osc-ui/dist/src-styles-main.css';
 import React, { useEffect } from 'react';
 import { DynamicLinks } from 'remix-utils';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
+import { SiteFooter } from './components/Footer/Footer';
 import { SiteHeader } from './components/Header/Header';
 import { getSettingsData } from './models/sanity.server';
 import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
 import { getUser } from './session.server';
+import type { SanityNavSettings, SanitySocial } from './types/sanity';
 import { getColorScheme } from './utils/colorScheme';
 
 let isMount = true;
@@ -48,6 +52,8 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscNavStyles },
         { rel: 'stylesheet', href: oscLogoStyles },
         { rel: 'stylesheet', href: oscUiBurgerStyles },
+        { rel: 'stylesheet', href: oscUiAccordionStyles },
+        { rel: 'stylesheet', href: oscFooterStyles },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
         { rel: 'apple-touch-icon', sizes: '60x60', href: '/icons/apple-icon-60x60.png' },
@@ -74,7 +80,9 @@ type LoaderData = {
     user: Awaited<ReturnType<typeof getUser>>;
     colorScheme: string;
     siteSettings: object;
-    navSettings: object;
+    navSettings: SanityNavSettings;
+    footerNavSettings: SanityNavSettings[];
+    footerBottomNav: SanityNavSettings;
     SANITY_STUDIO_API_PROJECT_ID: string | undefined;
     SANITY_STUDIO_API_DATASET: string | undefined;
 };
@@ -98,11 +106,35 @@ export const loader: LoaderFunction = async ({ request }) => {
             },
         }));
 
+    // Loop through the footer nav items and query each id
+    const footerNavSettings = [];
+    if (siteSettings?.footer?.footerNavigation.length > 0) {
+        for await (const navId of siteSettings?.footer?.footerNavigation) {
+            footerNavSettings.push(
+                await getSettingsData({
+                    query: NAV_QUERY,
+                    params: {
+                        id: navId,
+                    },
+                })
+            );
+        }
+    }
+
+    const footerBottomNav =
+        siteSettings?.footer?.footerBottomNav &&
+        (await getSettingsData({
+            query: NAV_QUERY,
+            params: { id: siteSettings?.footer?.footerBottomNav },
+        }));
+
     return json<LoaderData>({
         user: await getUser(request),
         colorScheme: await getColorScheme(request),
         siteSettings,
         navSettings,
+        footerNavSettings,
+        footerBottomNav,
         SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
         SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET,
     });
@@ -113,9 +145,12 @@ export const meta: MetaFunction = ({ data }) => {
 
     const noindex = seoSettings.robots.noIndex && 'noindex';
     const { asset: organizationAsset } = seoSettings.schema.organizationLogo;
-    const facebook = seoSettings.socials.find((social: string) => social.includes('facebook'));
-    const twitter = seoSettings.socials.find((social: string) => social.includes('twitter'));
-    const twitterHandle = twitter && twitter.substring(twitter.lastIndexOf('/') + 1);
+
+    const socials = seoSettings.socials as SanitySocial[];
+    const facebook = socials.find((social) => social.socialProfile.includes('facebook'));
+    const twitter = socials.find((social) => social.socialProfile.includes('twitter'));
+    const twitterHandle =
+        twitter && twitter?.socialProfile.substring(twitter?.socialProfile.lastIndexOf('/') + 1);
 
     return {
         charset: 'utf-8',
@@ -128,7 +163,7 @@ export const meta: MetaFunction = ({ data }) => {
         'og:title': seoSettings?.siteTitle,
         'og:url': '',
         'og:site_name': seoSettings.schema?.organizationName,
-        'article:publisher': facebook,
+        'article:publisher': facebook?.socialProfile,
         'og:image': organizationAsset?.url,
         'og:image:width': organizationAsset?.dimensions?.width,
         'og:image:height': organizationAsset?.dimensions?.height,
@@ -169,8 +204,14 @@ const Document = ({ children }: DocumentProps) => {
 };
 
 export default function App() {
-    const { SANITY_STUDIO_API_PROJECT_ID, SANITY_STUDIO_API_DATASET, navSettings, siteSettings } =
-        useLoaderData();
+    const {
+        SANITY_STUDIO_API_PROJECT_ID,
+        SANITY_STUDIO_API_DATASET,
+        navSettings,
+        siteSettings,
+        footerNavSettings,
+        footerBottomNav,
+    } = useLoaderData();
     let location = useLocation();
     let matches = useMatches();
 
@@ -234,6 +275,14 @@ export default function App() {
                 <main id="main-content" tabIndex={-1}>
                     <Outlet />
                 </main>
+
+                <SiteFooter
+                    navigationGroups={footerNavSettings}
+                    bottomNavigation={footerBottomNav}
+                    contactDetails={siteSettings?.contactDetails}
+                    socials={siteSettings?.seo?.socials}
+                    siteName={siteSettings?.seo?.siteTile}
+                />
             </div>
         </Document>
     );

@@ -261,6 +261,14 @@ export interface SanitySEO {
 export interface SanityGlobalSEO extends SanitySEO {
     siteTile: string;
     titleSeparator: string;
+    socials: SanitySocial[];
+}
+
+export interface SanitySocial {
+    _key: string;
+    _type: string;
+    socialProfile: string;
+    icon: string;
 }
 
 export interface SanityPage {
@@ -338,12 +346,16 @@ export interface SanitySiteSetting {
     _rev: string;
     _type: 'settings';
     footer: {
-        _type: 'settings.footer';
-        links: InternalSanityLinkItem[] | ExternalSanityLinkItem[];
-        text: PortableTextBlock;
+        footerBottomNav: string;
+        footerNavigation: string;
     };
     mainNavigationId: string;
     seo: SanitySEO;
+}
+
+export interface SanityContactDetails {
+    email?: string;
+    phoneNumber?: string;
 }
 
 export interface SanityRedirect {
@@ -357,9 +369,11 @@ export interface SanityRedirect {
 }
 
 export interface SanityNavSettings {
+    _id: string;
     _type: string;
     navigationId: string;
     navigationItem: SanityNavItem[];
+    title?: string;
 }
 
 export interface SanityNavItem extends module {
@@ -371,8 +385,8 @@ export interface SanityNavItem extends module {
     };
     externalLink?: string;
     target?: 'Internal' | 'External' | 'Trigger';
-    featured?: SanityNavItem[];
-    items?: SanityNavItem[];
+    featured?: Maybe<SanityNavItem[]>;
+    items?: Maybe<SanityNavItem[]>;
 }
 
 export interface SanityActionNavSettings {

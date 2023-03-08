@@ -16,16 +16,24 @@ export default {
             title: 'Navigation',
         },
         {
-            name: 'productOptions',
-            title: 'Product options',
-        },
-        {
-            name: 'notFoundPage',
-            title: '404 page',
+            name: 'footer',
+            title: 'Footer',
         },
         {
             name: 'seo',
             title: 'SEO',
+        },
+        {
+            name: 'social',
+            title: 'Social',
+        },
+        {
+            name: 'contact',
+            title: 'Contact details',
+        },
+        {
+            name: 'notFoundPage',
+            title: '404 page',
         },
     ],
     fields: [
@@ -154,94 +162,26 @@ export default {
         },
         // Footer
         {
-            name: 'footer',
-            title: 'Footer',
-            type: 'object',
-            group: 'navigation',
-            options: {
-                collapsed: false,
-                collapsible: true,
-            },
-            fields: [
-                // Links
+            name: 'footerNavigation',
+            title: 'Footer Navigation',
+            type: 'array',
+            of: [
                 {
-                    name: 'links',
-                    title: 'Links',
-                    type: 'array',
-                    of: [{ type: 'linkInternal' }, { type: 'linkExternal' }],
-                },
-                // Text
-                {
-                    name: 'text',
-                    title: 'Text',
-                    type: 'array',
-                    of: [
-                        {
-                            lists: [],
-                            marks: {
-                                annotations: [
-                                    // Email
-                                    {
-                                        title: 'Email',
-                                        name: 'annotationLinkEmail',
-                                        type: 'annotationLinkEmail',
-                                    },
-                                    // Internal link
-                                    {
-                                        title: 'Internal page',
-                                        name: 'annotationLinkInternal',
-                                        type: 'annotationLinkInternal',
-                                    },
-                                    // URL
-                                    {
-                                        title: 'URL',
-                                        name: 'annotationLinkExternal',
-                                        type: 'annotationLinkExternal',
-                                    },
-                                ],
-                                decorators: [],
-                            },
-                            // Block styles
-                            styles: [{ title: 'Normal', value: 'normal' }],
-                            type: 'block',
-                        },
-                    ],
-                },
-            ],
-        },
-        // Not found page
-        {
-            name: 'notFoundPage',
-            title: '404 page',
-            type: 'object',
-            group: 'notFoundPage',
-            fields: [
-                {
-                    name: 'title',
-                    title: 'Title',
-                    type: 'string',
-                    validation: (Rule) => Rule.required(),
-                },
-                {
-                    name: 'body',
-                    title: 'Body',
-                    type: 'text',
-                    rows: 2,
-                },
-                {
-                    name: 'collection',
-                    title: 'Collection',
+                    name: 'navigation',
+                    title: 'Navigation',
                     type: 'reference',
-                    description: 'Collection products displayed on this page',
-                    weak: true,
-                    to: [
-                        {
-                            name: 'collection',
-                            type: 'collection',
-                        },
-                    ],
+                    to: { type: 'navigation' },
                 },
             ],
+            validation: (Rule) => Rule.max(4),
+            group: 'footer',
+        },
+        {
+            name: 'footerBottomNav',
+            title: 'Footer Bottom Navigation',
+            type: 'reference',
+            to: { type: 'navigation' },
+            group: 'footer',
         },
         // SEO
         {
@@ -301,25 +241,6 @@ export default {
             ],
         },
         {
-            name: 'social',
-            title: "Organization's social profiles",
-            type: 'object',
-            group: 'seo',
-            description: 'Input any profiles on the web that belong to your organization.',
-            options: {
-                collapsed: false,
-                collapsible: true,
-            },
-            fields: [
-                {
-                    name: 'socialProfile',
-                    title: 'Social Profile',
-                    type: 'array',
-                    of: [{ type: 'string' }],
-                },
-            ],
-        },
-        {
             name: 'robots',
             title: 'Search engine visibility',
             type: 'object',
@@ -334,6 +255,72 @@ export default {
                     name: 'noIndex',
                     title: 'Discourage search engines from indexing this site',
                     type: 'boolean',
+                },
+            ],
+        },
+        // Social
+        {
+            name: 'socialProfile',
+            title: "Organization's social profiles",
+            description: 'Input any profiles on the web that belong to your organization.',
+            group: 'social',
+            type: 'array',
+            of: [{ type: 'social' }],
+        },
+        // Contact
+        {
+            name: 'phoneNumber',
+            title: 'Phone number',
+            type: 'string',
+            group: 'contact',
+            validation: (Rule) =>
+                // regex to match phone number pattern: https://ihateregex.io/expr/phone/
+                Rule.regex(/^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/, {
+                    name: 'phone number',
+                }),
+        },
+        {
+            name: 'email',
+            title: 'Email',
+            type: 'string',
+            group: 'contact',
+            validation: (Rule) =>
+                // regex to match email address: https://ihateregex.io/expr/email/
+                Rule.regex(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, {
+                    name: 'email',
+                }),
+        },
+        // Not found page
+        {
+            name: 'notFoundPage',
+            title: '404 page',
+            type: 'object',
+            group: 'notFoundPage',
+            fields: [
+                {
+                    name: 'title',
+                    title: 'Title',
+                    type: 'string',
+                    validation: (Rule) => Rule.required(),
+                },
+                {
+                    name: 'body',
+                    title: 'Body',
+                    type: 'text',
+                    rows: 2,
+                },
+                {
+                    name: 'collection',
+                    title: 'Collection',
+                    type: 'reference',
+                    description: 'Collection products displayed on this page',
+                    weak: true,
+                    to: [
+                        {
+                            name: 'collection',
+                            type: 'collection',
+                        },
+                    ],
                 },
             ],
         },
