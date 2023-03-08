@@ -69,6 +69,7 @@ export interface contentModule extends module {
     marginBottom?: Maybe<Spacing>;
     paddingBottom?: Maybe<Spacing>;
     paddingTop?: Maybe<Spacing>;
+    fullWidth?: Maybe<boolean>;
     body?: PortableTextBlock[];
     buttons?: buttonModule[];
 }

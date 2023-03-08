@@ -10,6 +10,7 @@ export const MODULE_CONTENT = groq`
     marginBottom,
     paddingBottom,
     paddingTop,
+    fullWidth,
     body[] {
         ...,
         ${IMAGE},
