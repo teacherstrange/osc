@@ -15,6 +15,15 @@ import { ReactAriaDialog, ReactAriaPopover } from '../ReactAriaComponents/ReactA
 
 export interface DatePickerProps extends AriaDatePickerProps<DateValue> {
     /**
+     * Sets whether the datepicker should close when clicked
+     * @default true
+     */
+    closeOnSelect?: boolean;
+    /**
+     * Sets the type of datepicker
+     */
+    type?: 'month' | 'year' | 'decade';
+    /**
      * Any error messages - initially set through server validation, but can be updated through client validation
      */
     errors?: string[] | undefined;
@@ -29,8 +38,8 @@ export interface DatePickerProps extends AriaDatePickerProps<DateValue> {
 }
 
 export const DatePicker = (props: DatePickerProps) => {
-    const { errors, schema, setErrors } = props;
-    let state = useDatePickerState({ ...props });
+    const { closeOnSelect = true, errors, schema, setErrors } = props;
+    let state = useDatePickerState({ ...props, shouldCloseOnSelect: closeOnSelect });
     let ref = useRef();
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
         useDatePicker(props, state, ref);

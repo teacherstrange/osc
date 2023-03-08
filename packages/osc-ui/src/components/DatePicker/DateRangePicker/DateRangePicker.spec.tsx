@@ -1,9 +1,8 @@
 import { parseDate } from '@internationalized/date';
-import { render } from 'test-utils';
-
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { SpritesheetProvider } from '../../Icon/Icon';
 import { DateRangePickerContainer } from './DateRangePicker';
 
 const TODAY = 'Today';
@@ -30,7 +29,11 @@ const presets = [
 // });
 
 test('should render the DateField with SpinButtons for a DatePicker, a button for the Calendar and a Label', () => {
-    render(<DateRangePickerContainer label="Date Range" />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" />
+        </SpritesheetProvider>
+    );
     const dateRange = ['Start', 'End'];
 
     expect(screen.getByRole('group', { name: 'Date Range' })).toBeInTheDocument();
@@ -51,7 +54,11 @@ test('should render the DateField with SpinButtons for a DatePicker, a button fo
 test('should open the calendar when the calendar button is clicked', async () => {
     const dates = { start: parseDate('2023-02-04'), end: parseDate('2023-02-20') };
     const user = userEvent.setup();
-    render(<DateRangePickerContainer defaultValue={dates} label="Date Range" />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer defaultValue={dates} label="Date Range" />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
 
@@ -67,12 +74,14 @@ test('should disable out of range dates when min/max values are passed in', asyn
     const maxDate = 29;
 
     render(
-        <DateRangePickerContainer
-            defaultValue={dates}
-            label="Date Range"
-            minValue={parseDate(`2023-01-${minDate}`)}
-            maxValue={parseDate(`2023-01-${maxDate}`)}
-        />
+        <SpritesheetProvider>
+            <DateRangePickerContainer
+                defaultValue={dates}
+                label="Date Range"
+                minValue={parseDate(`2023-01-${minDate}`)}
+                maxValue={parseDate(`2023-01-${maxDate}`)}
+            />
+        </SpritesheetProvider>
     );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
@@ -99,7 +108,11 @@ test('should disable out of range dates when min/max values are passed in', asyn
 test('should render time presets when pass in as a prop', async () => {
     const user = userEvent.setup();
 
-    render(<DateRangePickerContainer label="Date Range" presets={presets} />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" presets={presets} />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
     expect(screen.getByRole('group', { name: 'Time Presets' })).toBeInTheDocument();
@@ -111,7 +124,11 @@ test('should select the correct range when a time present is selected', async ()
     const user = userEvent.setup();
     const today = new Date().toISOString().split('T')[0];
 
-    render(<DateRangePickerContainer label="Date Range" presets={presets} />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" presets={presets} />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
     const timePresetButton = screen.getByRole('button', { name: THREE_DAYS });
@@ -138,7 +155,11 @@ test('should remove hidden class from "Now select end date" prompt when first da
     }));
     const user = userEvent.setup();
 
-    render(<DateRangePickerContainer label="Date Range" />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer label="Date Range" />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
 
@@ -151,7 +172,11 @@ test('should remove hidden class from "Now select end date" prompt when first da
 test('should clear selection if the Clear Selection button is selected', async () => {
     const user = userEvent.setup();
 
-    render(<DateRangePickerContainer label="Date Range" />);
+    render(
+        <SpritesheetProvider>
+            <DateRangePickerContainer closeOnSelect={false} label="Date Range" />
+        </SpritesheetProvider>
+    );
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
 

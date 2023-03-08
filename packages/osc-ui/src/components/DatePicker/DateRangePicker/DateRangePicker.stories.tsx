@@ -45,6 +45,7 @@ const Template: Story = (args) => {
         // required to change the date order to dd-mm-YYYY rather than US mm-dd-YYYY
         <I18nProvider locale="en-GB">
             <DateRangePickerContainer
+                closeOnSelect={args.closeOnSelect}
                 defaultValue={
                     args.defaultValue
                         ? { start: parseDate(todaysDate), end: dates['nextWeek'] }

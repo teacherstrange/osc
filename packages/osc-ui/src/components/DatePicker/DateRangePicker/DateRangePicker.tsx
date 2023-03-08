@@ -26,6 +26,11 @@ import { createTimePresets } from '../utils';
 
 interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateValue> {
     /**
+     * Sets whether the datepicker should close when clicked
+     * @default true
+     */
+    closeOnSelect?: boolean;
+    /**
      * Any error messages - initially set through server validation, but can be updated through client validation
      */
     errors?: string[] | undefined;
@@ -48,7 +53,16 @@ interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateVal
 }
 
 export const DateRangePickerContainer = (props: DateRangePickerContainerProps) => {
-    const { defaultValue, errors, label, presets, schema, setErrors, ...rest } = props;
+    const {
+        closeOnSelect = true,
+        defaultValue,
+        errors,
+        label,
+        presets,
+        schema,
+        setErrors,
+        ...rest
+    } = props;
 
     // Used to set the value of the range calender to a preset or to clear it
     const [value, setValue] = useState<RangeValue<DateValue>>(defaultValue ? defaultValue : null);
@@ -97,6 +111,7 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
         <>
             <DateRangePicker
                 clearSelection={<ClearSelection />}
+                closeOnSelect={closeOnSelect}
                 dateFieldId={dateFieldId}
                 errors={errors}
                 initialDefault={initialDefault}
@@ -195,6 +210,11 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
      */
     clearSelection: ReactNode;
     /**
+     * Sets whether the datepicker should close when clicked
+     * @default true
+     */
+    closeOnSelect?: boolean;
+    /**
      * A unique Id
      */
     dateFieldId: string;
@@ -230,7 +250,7 @@ interface DateRangePickerProps extends AriaDateRangePickerProps<DateValue> {
 }
 
 export const DateRangePicker = (props: DateRangePickerProps) => {
-    let state = useDateRangePickerState({ ...props, shouldCloseOnSelect: false });
+    let state = useDateRangePickerState({ ...props, shouldCloseOnSelect: props.closeOnSelect });
 
     let ref = useRef();
     let {
