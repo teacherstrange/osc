@@ -98,12 +98,12 @@ export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, Switch
                 >
                     <Label htmlFor={id} name={name} />
                     <SwitchPrimitive.Root
+                        {...rest}
                         aria-invalid={errors ? true : false}
                         aria-describedby={errors ? `${id}-error` : undefined}
                         id={id}
                         className={!errors ? classes : `${classes} c-switch--error`}
                         onCheckedChange={setChecked}
-                        {...rest}
                         ref={forwardedRef}
                     >
                         <VisuallyHidden>{description}</VisuallyHidden>
