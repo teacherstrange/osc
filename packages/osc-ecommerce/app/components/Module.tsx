@@ -28,6 +28,7 @@ import type {
     trustpilotModule,
     videoModule,
 } from '~/types/sanity';
+import { getUniqueObjects } from '~/utils/getUniqueObjects';
 import { AccordionModule } from './Accordion/Accordion';
 import { Cards } from './Cards/Cards';
 import { ContentMediaModule } from './ContentMedia/ContentMedia';
@@ -143,7 +144,8 @@ export const getComponentStyles = (data: SanityPage) => {
         }
     }
 
-    return styles;
+    // Dedupe the array of stylesheets based on the href property.
+    return getUniqueObjects(styles, 'href');
 };
 
 interface Props {
