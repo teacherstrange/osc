@@ -1,5 +1,5 @@
 import type { LinkDescriptor } from '@remix-run/node';
-import { Carousel, Content, Image, Trustpilot } from 'osc-ui';
+import { Content, Image, Trustpilot } from 'osc-ui';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
@@ -14,6 +14,7 @@ import textGridStyles from 'osc-ui/dist/src-components-TextGrid-text-grid.css';
 import textInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
 import type {
+    SanityPage,
     accordionModule,
     cardModule,
     carouselModule,
@@ -23,7 +24,6 @@ import type {
     heroModule,
     imageModule,
     module,
-    SanityPage,
     textGridModule,
     trustpilotModule,
     videoModule,
@@ -31,11 +31,12 @@ import type {
 import { getUniqueObjects } from '~/utils/getUniqueObjects';
 import { AccordionModule } from './Accordion/Accordion';
 import { Cards } from './Cards/Cards';
+import { CarouselModule } from './Carousel/Carousel';
 import { ContentMediaModule } from './ContentMedia/ContentMedia';
+import { Forms } from './Forms/Forms';
 import { Hero } from './Hero/Hero';
 import { TextGridModule } from './TextGrid/TextGrid';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
-import { Forms } from './Forms/Forms';
 
 /**
  * Recursively search for all types in a Sanity schema and filter them by type
@@ -179,19 +180,7 @@ export default function Module(props: Props) {
         case 'module.carousel':
             const moduleCarousel = module as carouselModule;
 
-            return (
-                <Carousel
-                    mediaArray={moduleCarousel.mediaArray}
-                    active={moduleCarousel.active} // fine
-                    delay={moduleCarousel.delay} // fine
-                    slidesPerPage={moduleCarousel.slidesPerPage} // fine
-                    slideGap={moduleCarousel.slideGap} // fine
-                    axis={moduleCarousel.axis} // fine
-                    height={moduleCarousel.height} // fine
-                    loop={moduleCarousel.loop} // fine
-                    startIndex={moduleCarousel.startIndex} // fine
-                ></Carousel>
-            );
+            return <CarouselModule module={moduleCarousel} />;
 
         case 'module.content':
             const moduleContent = module as contentModule;
