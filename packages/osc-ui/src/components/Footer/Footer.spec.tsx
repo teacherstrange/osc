@@ -71,7 +71,7 @@ test('renders the footer component', () => {
                         </FooterMenu>
                     </FooterGroup>
 
-                    <FooterBottom>
+                    <FooterBottom siteName="Open Study College">
                         <a href="/">Terms</a>
                         <a href="/">Privacy Policy</a>
                     </FooterBottom>
@@ -98,7 +98,7 @@ test('renders the footer component', () => {
 test('FooterBottom renders the correct date', () => {
     const year = new Date().getFullYear();
 
-    render(<FooterBottom />);
+    render(<FooterBottom siteName="Open Study College" />);
 
     expect(screen.getByText(`© Open Study College ${year}`)).toBeInTheDocument();
 });
