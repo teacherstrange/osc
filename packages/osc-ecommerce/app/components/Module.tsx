@@ -4,6 +4,7 @@ import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion
 import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
+import carouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
 import contentMediaStyles from 'osc-ui/dist/src-components-ContentMedia-content-media.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
@@ -79,10 +80,15 @@ export const getComponentStyles = (data: SanityPage) => {
     // with the same type. Causing multiples of the same stylesheet to be loaded.
     const moduleTypes = [...new Set(getTypes(data))];
 
+    // We then need to add all of the stylesheet dependencies for each module type.
+    // We will dedupe these after they are all pushed into the styles array.
     for (const module of moduleTypes) {
         switch (module) {
             case 'module.accordion':
-                styles.push({ rel: 'stylesheet', href: oscUiAccordionStyles });
+                styles.push(
+                    { rel: 'stylesheet', href: oscUiAccordionStyles },
+                    { rel: 'stylesheet', href: contentStyles }
+                );
                 break;
 
             case 'module.button':
@@ -90,13 +96,21 @@ export const getComponentStyles = (data: SanityPage) => {
                 break;
 
             case 'module.cards':
-                styles.push({ rel: 'stylesheet', href: cardStyles });
-                styles.push({ rel: 'stylesheet', href: popoverStyles });
-                styles.push({ rel: 'stylesheet', href: islandGrid });
+                styles.push(
+                    { rel: 'stylesheet', href: cardStyles },
+                    { rel: 'stylesheet', href: carouselStyles },
+                    { rel: 'stylesheet', href: popoverStyles },
+                    { rel: 'stylesheet', href: islandGrid },
+                    { rel: 'stylesheet', href: contentStyles },
+                    { rel: 'stylesheet', href: buttonStyles }
+                );
                 break;
 
             case 'module.content':
-                styles.push({ rel: 'stylesheet', href: contentStyles });
+                styles.push(
+                    { rel: 'stylesheet', href: contentStyles },
+                    { rel: 'stylesheet', href: buttonStyles }
+                );
                 break;
 
             case 'module.forms':
@@ -104,7 +118,12 @@ export const getComponentStyles = (data: SanityPage) => {
                 styles.push({ rel: 'stylesheet', href: textInputStyles });
                 break;
             case 'module.hero':
-                styles.push({ rel: 'stylesheet', href: heroStyles });
+                styles.push(
+                    { rel: 'stylesheet', href: heroStyles },
+                    { rel: 'stylesheet', href: carouselStyles },
+                    { rel: 'stylesheet', href: contentStyles },
+                    { rel: 'stylesheet', href: buttonStyles }
+                );
                 break;
 
             case 'module.textGrid':
@@ -116,7 +135,10 @@ export const getComponentStyles = (data: SanityPage) => {
                 break;
 
             case 'module.video':
-                styles.push({ rel: 'stylesheet', href: videoStyles });
+                styles.push(
+                    { rel: 'stylesheet', href: videoStyles },
+                    { rel: 'stylesheet', href: contentStyles }
+                );
                 break;
         }
     }
