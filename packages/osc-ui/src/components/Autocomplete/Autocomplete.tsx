@@ -57,7 +57,7 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                 },
                 ...props,
             }),
-        []
+        [props]
     );
     return (
         <div
