@@ -1,3 +1,50 @@
+## [0.51.1](https://github.com/Open-Study-College/osc/compare/v0.53.0...v0.51.1) (2023-03-10)
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **monorepo:** update README ([3cedb8e](https://github.com/Open-Study-College/osc/commit/3cedb8ef7a31670b3f98d984c70917c9050b6474))
+
+
+### ♻️ Refactors
+
+* **academic hub:** add copy fonts script ([deb8ecb](https://github.com/Open-Study-College/osc/commit/deb8ecb567ccb4626da016636e4ba0ed04c928ab))
+* **apis:** update dependency from osc-api from file: to * ([f34b7c4](https://github.com/Open-Study-College/osc/commit/f34b7c42f66244cd94a14356f946fb7c2a273c30))
+* **ecommerce:** add react-router-dom to devDeps for tests ([0361afa](https://github.com/Open-Study-College/osc/commit/0361afae77ac3b8f2d685accda5fd8b3638630bb))
+* **list component:** update children type ([6b1d8e9](https://github.com/Open-Study-College/osc/commit/6b1d8e9e966bbbc40d486ed4354090c8b0574f24))
+* **monorepo:** add clean command to clear out node_modules & lock files if needed ([717a1b7](https://github.com/Open-Study-College/osc/commit/717a1b79a7ef0b959fb04d203e8c74e6a4943159))
+* **monorepo:** add missing remix app dependencies ([38919ce](https://github.com/Open-Study-College/osc/commit/38919ced72486b31e997b1b63170cef1058ca9b5))
+* **monorepo:** add missing ui app dependencies ([1c1df2a](https://github.com/Open-Study-College/osc/commit/1c1df2a7462b26c9dab56fdb1c64a1b374a8191d))
+* **monorepo:** add node_modules to excludes in remix vitest configs ([92d81f6](https://github.com/Open-Study-College/osc/commit/92d81f6002ab02562b6a8e589826f79897c34b37))
+* **monorepo:** add override for react and node-sass ([950780c](https://github.com/Open-Study-College/osc/commit/950780ce8fd854ba9958750479e7bffa1e3be79b))
+* **monorepo:** add react as root dependency ([c9aaff5](https://github.com/Open-Study-College/osc/commit/c9aaff5d7094568f9c664294aa84bf41ad14e8a0))
+* **monorepo:** add typecheck command to packages ([9751593](https://github.com/Open-Study-College/osc/commit/9751593b9e037b966b65ec2ad91655994edc8b4e))
+* **monorepo:** adds no-extraneous-dependencies eslint plugin ([d66b686](https://github.com/Open-Study-College/osc/commit/d66b686e298a9f06f7ee99472d3ba46f4f11b8a7))
+* **monorepo:** remove lerna ([a6bdba0](https://github.com/Open-Study-College/osc/commit/a6bdba0304d5723a6a36d4a2303d05573aaa7fb9))
+* **monorepo:** remove package dependencies from root package.json ([1746f04](https://github.com/Open-Study-College/osc/commit/1746f04abaa0a6ab5e05739a77250a614139f86e))
+* **monorepo:** remove unused prisma files ([87c0c23](https://github.com/Open-Study-College/osc/commit/87c0c239de56961a36074d8531021a15e70fa36d))
+* **monorepo:** replace lerna commands with nx equivalent ([600b7bb](https://github.com/Open-Study-College/osc/commit/600b7bbc055be1b63a30bf0027f1e2dba81eadfb))
+* **monorepo:** update dependencies so they're bound to each package ([1043844](https://github.com/Open-Study-College/osc/commit/1043844c0e16d7801114b75916e1059519af3549))
+* **monorepo:** update ignore files ([5aee7dd](https://github.com/Open-Study-College/osc/commit/5aee7ddb45289c8d20eefaa7ef6daa1e1a3a6126))
+* **monorepo:** update nx config ([b6b6b83](https://github.com/Open-Study-College/osc/commit/b6b6b83d4ecca18841a016d7aa199c27d07b7ba9))
+* **monorepo:** update test scripts for more consistency ([1c9f8a8](https://github.com/Open-Study-College/osc/commit/1c9f8a8e96f0ad111aad94a20e0ee0aa5e00da78))
+* **monorepo:** update tsconfigs to extend from base config file ([52e98e1](https://github.com/Open-Study-College/osc/commit/52e98e1c72e4bb20e0f011c62e68a5d2c16521e2))
+* **studio:** remove lock file ([4fd1fc4](https://github.com/Open-Study-College/osc/commit/4fd1fc40b11519ba7b82968f2b48c16f6c08b030))
+* **studio:** remove sample env files ([8c2013b](https://github.com/Open-Study-College/osc/commit/8c2013b4c3e500a2c05768bf61d0427bae01a88c))
+* **tokens:** export design tokens as package ([1b5e848](https://github.com/Open-Study-College/osc/commit/1b5e848e759d61b51ecb252e7654cf2b26bc417a))
+* **tokens:** update token paths in packages to use package name ([d9eb2a2](https://github.com/Open-Study-College/osc/commit/d9eb2a26a2bc3393aebda7f5955a66b42c5f32f4))
+* **ui:** remove unused import from story ([44cb463](https://github.com/Open-Study-College/osc/commit/44cb4634218669769a72b267d793abf87611ede5))
+* **ui:** update test setup config ([ae4b700](https://github.com/Open-Study-College/osc/commit/ae4b70041cbc76a86987c6a2ad4e8983bab9af06))
+* **ui:** updates rollup config ([56c579a](https://github.com/Open-Study-College/osc/commit/56c579a0a7e12b4c53457c397e76e61beb50c9b5))
+* **workflows:** remove the command to delete packages ([82b541c](https://github.com/Open-Study-College/osc/commit/82b541c08563ab423f38edcdfee51f4d638c3bb4))
+* **workflows:** update package exclusion to ignore ui and design tokens ([cfd2e09](https://github.com/Open-Study-College/osc/commit/cfd2e092eba65073e7a94c9a5ad61259a148db06))
+
+
+### 🧪 Tests
+
+* **ui:** fix broken tests ([692ed68](https://github.com/Open-Study-College/osc/commit/692ed6858841abd233730d0939d831297b6983eb))
+* **ui:** fix footer tests ([6459391](https://github.com/Open-Study-College/osc/commit/645939185c0422a0b24d8bb603103224813503ac))
+
 ## [0.53.0](https://github.com/Open-Study-College/osc/compare/v0.52.0...v0.53.0) (2023-03-08)
 
 
@@ -252,18 +299,4 @@
 * **styles:** adds important to utility so it overrules component styles ([dfb36f7](https://github.com/Open-Study-College/osc/commit/dfb36f7616fe6373c9f66c6a7426f57e6b8ecf67))
 * **styles:** adds important to utility so it overrules component styles ([21a37c1](https://github.com/Open-Study-College/osc/commit/21a37c1c502bca4acca8732cbb8be0dcc2251262))
 * **styles:** adds important to utility so it overrules component styles ([4d8a91c](https://github.com/Open-Study-College/osc/commit/4d8a91c8c10bfb583768634eb6fc8bad718e65af))
-
-## [0.49.0](https://github.com/Open-Study-College/osc/compare/v0.48.0...v0.49.0) (2023-03-01)
-
-
-### ✨ Features
-
-* **ui:** adds render wrapper utility ([c38b217](https://github.com/Open-Study-College/osc/commit/c38b217bc20b87dadc2d91e7bfc14093c2b4dcde))
-* **ui:** configure vitest and typescript paths to utils file ([a8b3807](https://github.com/Open-Study-College/osc/commit/a8b38074d9c568dadf9fd4f44da3c69e3de3e3b7))
-
-
-### ♻️ Refactors
-
-* **ui:** replace memoryrouters with render utility ([4bce5b4](https://github.com/Open-Study-College/osc/commit/4bce5b4d74fb6748a16103560b149df0cf6be5ea))
-* **ui:** replace spritesheet with custom render utility ([995d8f1](https://github.com/Open-Study-College/osc/commit/995d8f1990ed2dfdbbffb0423293349beff1b825))
 
