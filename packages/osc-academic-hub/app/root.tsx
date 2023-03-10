@@ -17,7 +17,6 @@ import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
 import styles from 'osc-ui/dist/src-styles-main.css';
 import React, { useEffect } from 'react';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
-import { getUser } from './session.server';
 import { getColorScheme } from './utils/colorScheme';
 
 let isMount = true;
@@ -61,7 +60,7 @@ export const meta: MetaFunction = () => ({
 });
 
 type LoaderData = {
-    user: Awaited<ReturnType<typeof getUser>>;
+    // user: Awaited<ReturnType<typeof getUser>>;
     colorScheme: string;
 };
 
@@ -71,7 +70,7 @@ export const headers: HeadersFunction = () => ({
 
 export const loader: LoaderFunction = async ({ request }) => {
     return json<LoaderData>({
-        user: await getUser(request),
+        // user: await getUser(request),
         colorScheme: await getColorScheme(request),
     });
 };
