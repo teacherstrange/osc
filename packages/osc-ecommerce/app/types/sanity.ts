@@ -61,6 +61,7 @@ export interface buttonModule extends module {
     slug?: string;
     telephone?: string;
     textToCopy?: string;
+    isInversed?: boolean;
 }
 
 export interface contentModule extends module {
