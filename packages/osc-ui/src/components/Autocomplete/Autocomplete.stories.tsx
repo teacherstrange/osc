@@ -3,7 +3,7 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import { Autocomplete } from './Autocomplete';
-import { AutocompleteItem } from './types/autoComplete';
+import type { AutocompleteItem } from './types/autoComplete';
 
 export default {
     title: 'osc-ui/Autocomplete',
@@ -30,4 +30,5 @@ export const Primary = Template.bind({});
 
 Primary.args = {
     placeholder: 'Search...',
+    openOnFocus: true,
 };
