@@ -1,4 +1,4 @@
-import { Button as OSCButton, CopyButton } from 'osc-ui';
+import { Button as OSCButton, CopyButton, Icon } from 'osc-ui';
 import type { buttonModule } from '~/types/sanity';
 
 type Props = {
@@ -21,6 +21,7 @@ export const Button = (props: Props) => {
         textToCopy,
         isInversed,
         variant,
+        icon,
     } = button;
 
     switch (type) {
@@ -36,6 +37,7 @@ export const Button = (props: Props) => {
                     {...rest}
                 >
                     {label}
+                    {icon && <Icon id={icon} />}
                 </OSCButton>
             ) : null;
 
@@ -50,6 +52,7 @@ export const Button = (props: Props) => {
                     {...rest}
                 >
                     {label}
+                    {icon && <Icon id={icon} />}
                 </OSCButton>
             ) : null;
 
@@ -64,6 +67,7 @@ export const Button = (props: Props) => {
                     {...rest}
                 >
                     {label}
+                    {icon && <Icon id={icon} />}
                 </OSCButton>
             ) : null;
 
@@ -79,6 +83,7 @@ export const Button = (props: Props) => {
                     {...rest}
                 >
                     {label}
+                    {icon && <Icon id={icon} />}
                 </OSCButton>
             ) : null;
 
@@ -93,6 +98,7 @@ export const Button = (props: Props) => {
                     {...rest}
                 >
                     {label}
+                    {icon && <Icon id={icon} />}
                 </OSCButton>
             ) : null;
 
@@ -106,6 +112,7 @@ export const Button = (props: Props) => {
                     {...rest}
                 >
                     {label}
+                    {icon && <Icon id={icon} />}
                 </CopyButton>
             ) : null;
 
@@ -113,6 +120,7 @@ export const Button = (props: Props) => {
             return (
                 <OSCButton key={_key} isInversed={isInversed} variant={variant} {...rest}>
                     {label}
+                    {icon && <Icon id={icon} />}
                 </OSCButton>
             );
     }
