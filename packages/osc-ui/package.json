@@ -19,6 +19,10 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "algoliasearch": "^4.15.0",
+    "@algolia/autocomplete-plugin-algolia-insights": "^1.8.3",
+    "search-insights": "^2.3.0",
+    "@algolia/autocomplete-plugin-recent-searches": "^1.8.3",
     "@internationalized/date": "^3.1.0",
     "@portabletext/react": "^2.0.2",
     "@algolia/autocomplete-core": "^1.8.3",

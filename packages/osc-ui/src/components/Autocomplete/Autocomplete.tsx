@@ -1,16 +1,24 @@
-import type { AutocompleteOptions, AutocompleteState } from '@algolia/autocomplete-core';
+import type {
+    AutocompleteOptions,
+    AutocompleteSource,
+    AutocompleteState,
+} from '@algolia/autocomplete-core';
 import { createAutocomplete } from '@algolia/autocomplete-core';
+import { createAlgoliaInsightsPlugin } from '@algolia/autocomplete-plugin-algolia-insights';
 import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
-import algoliasearch from 'algoliasearch/lite';
 import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import insightsClient from 'search-insights';
 import { TextInput } from '../TextInput/TextInput';
 import './autocomplete.scss';
 import { SearchResultItem } from './components/Templates';
+import { popularCoursesPlugin } from './plugins/popularCoursesPlugin';
+import { recentSearchesPlugin } from './plugins/recentSearchesPlugin';
+import { searchClient } from './searchClient';
 import type { AutocompleteItem } from './types/autoComplete';
+import { debounced } from './utils/debounced';
 
 // TODO - Refactor this out of the component and put credentials into env vars
-const searchClient = algoliasearch('CMEG2XKNP8', '45b007891e2e306b97a88d7da87afac8');
 
 export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem>>) {
     const [autocompleteUiState, setAutocompleteUiState] = useState<
@@ -25,7 +33,13 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
         status: 'idle',
     });
 
-    // TODO - Add Plugins - Popular Searches and Recently Searched
+    insightsClient('init', {
+        appId: 'CMEG2XKNP8',
+        apiKey: '45b007891e2e306b97a88d7da87afac8',
+    });
+    const algoliaInsightsPlugin = createAlgoliaInsightsPlugin({ insightsClient });
+
+    // TODO - Add Plugins - Popular Searches and Recently Searched - done
     // TODO - Add Debouncing and Insights
     // TODO - Create a Close button for the query
     // TODO - Add NoResult and ResultHeader components back into the search results
@@ -42,9 +56,9 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                     setAutocompleteUiState(state);
                 },
                 getSources() {
-                    return [
+                    return debounced([
                         {
-                            sourceId: 'hits',
+                            sourceId: 'Results',
                             getItems({ query }) {
                                 return getAlgoliaResults({
                                     searchClient,
@@ -66,8 +80,9 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                                 return item.title;
                             },
                         },
-                    ];
+                    ]) as Promise<(boolean | AutocompleteSource<AutocompleteItem>)[]>;
                 },
+                plugins: [recentSearchesPlugin, popularCoursesPlugin, algoliaInsightsPlugin],
                 ...props,
             }),
         [props]
@@ -131,29 +146,41 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                     {...autocomplete.getPanelProps({})}
                 >
                     <div className="c-autocomplete__panel--scrollable">
+                        {autocompleteUiState?.collections?.find(
+                            (q) => q.source.sourceId === 'Results'
+                        ).items.length === 0 && <p>Sorry, no results.</p>}
                         {autocompleteUiState?.collections?.map((collection, index) => {
                             const { source, items } = collection;
+                            const { sourceId } = source;
+
                             return (
-                                <section key={`source-${index}`}>
-                                    {items.length > 0 ? (
-                                        <ul {...autocomplete.getListProps()}>
-                                            {items?.map((item) => {
-                                                return (
-                                                    <li
-                                                        className="c-autocomplete__item"
-                                                        key={item.objectID}
-                                                        {...autocomplete.getItemProps({
-                                                            item,
-                                                            source,
-                                                        })}
-                                                    >
-                                                        <SearchResultItem item={item} />
-                                                    </li>
-                                                );
-                                            })}
-                                        </ul>
-                                    ) : null}
-                                </section>
+                                <>
+                                    {items.length > 0 && (
+                                        <p>
+                                            <strong>{sourceId}</strong>
+                                        </p>
+                                    )}
+                                    <section key={`source-${index}`}>
+                                        {items.length > 0 ? (
+                                            <ul {...autocomplete.getListProps()}>
+                                                {items?.map((item) => {
+                                                    return (
+                                                        <li
+                                                            className="c-autocomplete__item"
+                                                            key={item.objectID}
+                                                            {...autocomplete.getItemProps({
+                                                                item,
+                                                                source,
+                                                            })}
+                                                        >
+                                                            <SearchResultItem item={item} />
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                        ) : null}
+                                    </section>
+                                </>
                             );
                         })}
                     </div>

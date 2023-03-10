@@ -4,13 +4,13 @@
 
 @layer components {
     // Panel
-    $panel-max-height: 450px;
+    $panel-max-height: 500px;
     $panel-shadow: $shadow-xl;
     $panel-radius: $rad-xs;
 
     .c-autocomplete {
         &__panel {
-            width: max-content;
+            width: 100%;
             margin: 8px 0 0;
             overflow: hidden;
             border-radius: $panel-radius;

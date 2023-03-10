@@ -11,7 +11,7 @@ type HighlightHitParams<THit> = {
      *
      * You can use the array syntax to reference nested attributes.
      */
-    attribute: keyof THit | string[];
+    attribute: keyof THit | string[] | 'query';
     /**
      * The tag name to use for highlighted parts.
      *
@@ -28,7 +28,7 @@ export function Highlight<THit>({
     return createElement(
         Fragment,
         {},
-        parseAlgoliaHitHighlight<THit>({ hit, attribute }).map(
+        parseAlgoliaHitHighlight<THit>({ hit, attribute: attribute as string[] | keyof THit }).map(
             ({ value, isHighlighted }, index) => {
                 if (isHighlighted) {
                     return createElement(tagName, { key: index }, value);

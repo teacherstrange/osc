@@ -52,6 +52,8 @@ export const SearchResultItem = (props: ItemProps) => {
                 <div className="c-autocomplete__item-content-body">
                     <div className="c-autocomplete__item-title">
                         <Highlight hit={item} attribute="title" />
+                        <Highlight hit={item} attribute="query" />
+                        <Highlight hit={item} attribute="label" />
                     </div>
                     <div className="c-autocomplete__item-description">{item.title}</div>
                 </div>
