@@ -24,6 +24,13 @@
             }
         }
 
+        &__input_clear_button {
+            position: absolute;
+            top: 26px;
+            right: 55px;
+            cursor: pointer;
+        }
+
         &__item {
             display: grid;
             padding: calc($space-2xs - 4px);

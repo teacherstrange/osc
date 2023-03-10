@@ -92,7 +92,7 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
     const formRef = useRef<HTMLFormElement>(null);
     const panelRef = React.useRef<HTMLDivElement>(null);
 
-    const { getEnvironmentProps } = autocomplete;
+    const { getEnvironmentProps, setQuery } = autocomplete;
 
     // TODO - Work out exactly what this is doing..!
     useEffect(() => {
@@ -135,7 +135,17 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                         {...autocomplete.getInputProps({ inputElement: inputRef.current })}
                         // Overriding to type "text" from type "search" as we don't want the styled cancel button
                         type="text"
-                    />
+                    ></TextInput>
+                    {autocomplete.getInputProps({ inputElement: inputRef.current }).value && (
+                        <button
+                            onClick={() => {
+                                setQuery('');
+                            }}
+                            className="aa-ClearButton c-autocomplete__input_clear_button"
+                        >
+                            X
+                        </button>
+                    )}
                 </div>
             </form>
 
