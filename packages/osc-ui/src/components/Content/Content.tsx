@@ -8,6 +8,7 @@ import { useSpacing } from '../../hooks/useSpacing';
 import type { Maybe, Spacing } from '../../types';
 import { classNames } from '../../utils/classNames';
 import { Button, ButtonGroup, CopyButton } from '../Button/Button';
+import { Icon } from '../Icon/Icon';
 import { Image } from '../Image/Image';
 import { List, ListItem } from '../List/List';
 
@@ -37,6 +38,7 @@ export interface ButtonProps {
         | 'primary-gradient'
         | 'secondary-gradient'; // TODO: This and the button component should share this
     isInversed?: boolean;
+    icon?: string;
 }
 
 export interface Props {
@@ -187,6 +189,7 @@ export const Content = (props: Props) => {
                                 textToCopy,
                                 isInversed,
                                 variant,
+                                icon,
                             } = button;
 
                             switch (type) {
@@ -201,6 +204,7 @@ export const Content = (props: Props) => {
                                             variant={variant}
                                         >
                                             {label}
+                                            {icon && <Icon id={icon} />}
                                         </Button>
                                     );
 
@@ -214,6 +218,7 @@ export const Content = (props: Props) => {
                                             variant={variant}
                                         >
                                             {label}
+                                            {icon && <Icon id={icon} />}
                                         </Button>
                                     );
 
@@ -227,6 +232,7 @@ export const Content = (props: Props) => {
                                             variant={variant}
                                         >
                                             {label}
+                                            {icon && <Icon id={icon} />}
                                         </Button>
                                     );
 
@@ -241,6 +247,7 @@ export const Content = (props: Props) => {
                                             variant={variant}
                                         >
                                             {label}
+                                            {icon && <Icon id={icon} />}
                                         </Button>
                                     );
 
@@ -254,6 +261,7 @@ export const Content = (props: Props) => {
                                             variant={variant}
                                         >
                                             {label}
+                                            {icon && <Icon id={icon} />}
                                         </Button>
                                     );
 
@@ -266,6 +274,7 @@ export const Content = (props: Props) => {
                                             variant={variant}
                                         >
                                             {label}
+                                            {icon && <Icon id={icon} />}
                                         </CopyButton>
                                     );
 
@@ -277,6 +286,7 @@ export const Content = (props: Props) => {
                                             variant={variant}
                                         >
                                             {label}
+                                            {icon && <Icon id={icon} />}
                                         </Button>
                                     );
                             }
