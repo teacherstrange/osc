@@ -60,6 +60,9 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                             getItemUrl({ item }) {
                                 return item.url;
                             },
+                            getItemInputValue({ item }) {
+                                return item.title;
+                            },
                         },
                     ];
                 },
