@@ -1,6 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
+import { mediaQueries as breakpoints } from 'osc-design-tokens';
 import React from 'react';
-import breakpoints from '../../../../../tokens/media-queries';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { rem } from '../../utils/rem';
 import { Icon } from '../Icon/Icon';

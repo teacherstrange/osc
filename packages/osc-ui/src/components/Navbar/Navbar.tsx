@@ -1,4 +1,5 @@
 import { NavLink as RemixNavLink } from '@remix-run/react';
+import { mediaQueries as breakpoints } from 'osc-design-tokens';
 import type {
     AnchorHTMLAttributes,
     ButtonHTMLAttributes,
@@ -11,7 +12,6 @@ import type {
     RefAttributes,
 } from 'react';
 import React, { createContext, forwardRef, useContext, useEffect, useRef, useState } from 'react';
-import breakpoints from '../../../../../tokens/media-queries';
 import { useInteractOutside } from '../../hooks/useInteractOutside';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useUniqueId } from '../../hooks/useUniqueId';

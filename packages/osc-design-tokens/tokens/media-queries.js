@@ -18,5 +18,5 @@ module.exports = {
 
     desk: 1024,
     'desk-med': 1280,
-    'desk-lrg': 1440
+    'desk-lrg': 1440,
 };

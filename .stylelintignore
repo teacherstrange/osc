@@ -4,8 +4,8 @@
 /packages/osc-ui/src/styles/elements
 /packages/osc-ui/src/styles/tools
 /packages/osc-ui/src/styles/utilities
-/osc/packages/osc-ui/styles/settings/_tokens.scss
+/packages/osc-ui/styles/settings/_tokens.scss
+/packages/osc-studio/dist/**/*
 
 node_modules
 
-/osc/packages/osc-studio/dist/**/*

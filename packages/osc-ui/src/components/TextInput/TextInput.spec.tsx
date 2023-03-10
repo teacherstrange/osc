@@ -1,8 +1,8 @@
+import { ExclamationTriangleIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { TextInput } from './TextInput';
-import { ExclamationTriangleIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import userEvent from '@testing-library/user-event';
 
 test('should render a text input component and a label', () => {
     render(<TextInput type="text" id="test-input" name="Test Input" />);
@@ -73,7 +73,9 @@ test('should render error message if "wasSubmitted" is true, the field is requir
     expect(screen.getByRole('alert')).toBeInTheDocument();
 });
 
-test('should change focus to second input when using the tab key', () => {
+test('should change focus to second input when using the tab key', async () => {
+    const user = userEvent.setup();
+
     render(
         <>
             <TextInput type="text" id="test-input-1" name="Test Input 1" />
@@ -85,7 +87,7 @@ test('should change focus to second input when using the tab key', () => {
     const input2 = screen.getByRole('textbox', { name: 'Test Input 2' });
 
     input1.focus();
-    userEvent.tab();
+    await user.tab();
 
     expect(input2).toHaveFocus();
 });

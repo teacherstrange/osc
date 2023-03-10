@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx lerna run build:css
+npx nx run-many --target=build:css --projects=osc-ecommerce,osc-academic-hub
 npx lint-staged

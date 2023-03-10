@@ -4,12 +4,9 @@ import PatchEvent, { set, unset } from '@sanity/form-builder/PatchEvent';
 import { SearchIcon } from '@sanity/icons';
 import { Autocomplete, Box, Card, Flex, Text } from '@sanity/ui';
 import { uuid } from '@sanity/uuid';
+import { colors } from 'osc-design-tokens';
 import React from 'react';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
-const colors =
-    process.env.SANITY_STUDIO_CI !== 'true'
-        ? require('../../../../tokens/colors')
-        : require('../../tokens/colors');
 
 interface Props {
     /**

@@ -21,7 +21,7 @@ export type ListTypes = HTMLOListElement | HTMLUListElement;
 
 export interface ListProps<T> extends OlHTMLAttributes<T> {
     variant?: 'ul' | 'ol';
-    children: ReactChildren | ReactNode;
+    children: ReactNode;
     className?: string;
 }
 

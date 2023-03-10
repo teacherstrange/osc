@@ -5,7 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"There is no spoon\" && exit 0",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "typecheck": "tsc -b"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +25,7 @@
     "graphql-middleware": "^6.1.33",
     "graphql-shield": "^7.6.4",
     "graphql-tools": "^8.3.10",
-    "osc-api": "file:packages/osc-api",
+    "osc-api": "*",
     "zod": "^3.19.1"
   },
   "devDependencies": {

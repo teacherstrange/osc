@@ -1,0 +1,15 @@
+{
+  "name": "osc-design-tokens",
+  "version": "1.0.0",
+  "description": "Most of our configurable styles are handled in here by our tokens. Tokens are a way to define a set of variables that can be used across multiple platforms. We use tokens to define our colors, spacing, typography, and more.",
+  "main": "index.js",
+  "scripts": {
+    "generate": "json-to-scss ./tokens/**/*.* ../osc-ui/src/styles/settings/_tokens.scss --tn 2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "json-to-scss": "^1.6.2"
+  }
+}

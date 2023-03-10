@@ -4,7 +4,7 @@ import copy from 'rollup-plugin-copy';
 import dts from 'rollup-plugin-dts';
 import scss from 'rollup-plugin-scss';
 import typescript from 'rollup-plugin-typescript2';
-import createSpritesheet from './bin/rollup-plugin-createSpritesheet';
+import createSpritesheet from './bin/rollup-plugin-createSpritesheet.js';
 
 const transpileCss = require('./bin/utils/helpers');
 const path = require('path');
@@ -29,7 +29,7 @@ export default [
                 targets: [{ src: 'src/fonts', dest: 'dist' }],
             }),
             scss({
-                output: async function (style, styleNodes) {
+                output: async function (_, styleNodes) {
                     Object.entries(styleNodes).map(async (node) => {
                         var file = node[0];
                         var filename = path.relative(process.cwd(), file);
@@ -55,6 +55,6 @@ export default [
         input: 'src/index.tsx',
         output: [{ file: 'dist/index.d.ts', format: 'es' }],
         external: [/\.scss$/, /\.css$/],
-        plugins: [dts()],
+        plugins: [dts.default()], // updated to default to work with --bundleConfigAsCjs
     },
 ];

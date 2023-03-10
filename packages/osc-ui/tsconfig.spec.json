@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
-  "composite": true,
   "compilerOptions": {
+    "composite": true,
     "outDir": "./dist/out-tsc",
     "module": "commonjs",
     "types": ["vitest/globals", "node"],
@@ -9,6 +9,14 @@
       "test-utils": ["./__test__/test-utils"]
     }
   },
-  "include": ["**/*.spec.ts", "**/*.spec.tsx", "**/*.spec.js", "**/*.spec.jsx", "**/*.d.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.spec.js",
+    "**/*.spec.jsx",
+    "**/*.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

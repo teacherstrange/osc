@@ -5,7 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"There is no spoon\" && exit 0",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "typecheck": "tsc -b"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +28,7 @@
     "graphql-shield": "^7.6.4",
     "graphql-tools": "^8.3.10",
     "jsonwebtoken": "^8.5.1",
-    "osc-api": "file:packages/osc-api",
+    "osc-api": "*",
     "shopify-api-node": "^3.11.3",
     "zod": "^3.19.1"
   },
