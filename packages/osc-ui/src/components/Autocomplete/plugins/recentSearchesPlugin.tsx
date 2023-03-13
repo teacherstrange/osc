@@ -5,14 +5,14 @@ import {
 import React from 'react';
 
 export const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
-    key: 'Recent Searches',
+    key: 'Recently Viewed',
     search(params) {
         return search({ ...params, limit: 3 });
     },
     transformSource({ source }) {
         return {
             ...source,
-            sourceId: 'Recent Searches',
+            sourceId: 'Recently Viewed',
             getItemInputValue({ item }) {
                 return item.label;
             },

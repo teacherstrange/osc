@@ -24,6 +24,12 @@
             }
         }
 
+        &__cta {
+            justify-content: center;
+            width: 100%;
+            padding: var(--font-scale-xl);
+        }
+
         &__input_clear_button {
             position: absolute;
             top: 26px;
@@ -35,6 +41,10 @@
             display: grid;
             padding: calc($space-2xs - 4px);
             cursor: pointer;
+
+            &:last-child {
+                margin-bottom: var(--font-scale-xs);
+            }
 
             &-wrapper {
                 display: grid;

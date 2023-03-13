@@ -9,6 +9,7 @@ import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
 import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import insightsClient from 'search-insights';
+import { Button } from '../Button/Button';
 import { TextInput } from '../TextInput/TextInput';
 import './autocomplete.scss';
 import { SearchResultItem } from './components/Templates';
@@ -194,6 +195,7 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                             );
                         })}
                     </div>
+                    <Button className="c-autocomplete__cta">View Detailed Search</Button>
                 </div>
             ) : null}
         </div>
