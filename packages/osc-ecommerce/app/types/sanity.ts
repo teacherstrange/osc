@@ -242,6 +242,19 @@ export interface heroModule extends module {
     slides: heroSlide[];
 }
 
+export interface textGridModule extends module {
+    items?: {
+        _key: string;
+        content?: contentModule;
+        icon?: string;
+    }[];
+    heading?: string;
+    hasInlineHeading?: boolean;
+    marginBottom: Spacing;
+    paddingBottom: Spacing;
+    paddingTop: Spacing;
+}
+
 export interface SanitySEO {
     title?: string;
     description?: string | null;

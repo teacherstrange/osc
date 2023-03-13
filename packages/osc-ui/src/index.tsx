@@ -77,11 +77,13 @@ export { SkipLink } from './components/SkipLink/SkipLink';
 export { Switch } from './components/Switch/Switch';
 export { Tabs } from './components/Tabs/Tabs';
 export { Tag } from './components/Tag/Tag';
+export { TextGrid } from './components/TextGrid/TextGrid';
 export { Trustpilot } from './components/Trustpilot/Trustpilot';
 export { VideoPlayer } from './components/VideoPlayer/VideoPlayer';
 export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
 // Hooks
 export { useMediaQuery } from './hooks/useMediaQuery';
+export { useSpacing } from './hooks/useSpacing';
 // Utils
 export { classNames } from './utils/classNames';
 export { formatDate as transformDate } from './utils/formatDate';

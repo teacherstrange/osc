@@ -1,0 +1,71 @@
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+@layer components {
+    $text-grid-gap: $fs-2xl;
+    /* stylelint-disable-next-line function-no-unknown */
+    $text-grid-icon-size: decimal-round(($base-fs * 2.188px));
+    $text-grid-item-space: $fs-l;
+    $text-grid-item-border: 1px solid var(--color-secondary);
+    $text-grid-heading-offset: calc($fs-2xl * -1);
+
+    .c-text-grid {
+        $self: &;
+
+        font-weight: $fw-light;
+
+        /*
+         * Rather than using gap here we're using margin-inline to set the space between column content.
+         * This is because, when we have an inline heading, we want the first column to not have the gap
+         * so the content doesn't get too narrow.
+         *
+         * [1] Apply half the width of the gap to each side of the cell
+         * [2] Create a negative margin that's the same size as the gap in [1]
+         * to pull the content flush with the container
+        */
+
+        &__items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 32ch), 1fr));
+            row-gap: $text-grid-gap;
+
+            @include mq(mq-token("tab-lrg")) {
+                margin-inline: calc($text-grid-gap / 2 * -1); /* [2] */
+            }
+
+            > #{$self}__item {
+                margin-block-end: 0;
+                padding-block-end: $text-grid-item-space;
+                border-bottom: $text-grid-item-border;
+
+                @include mq(mq-token("tab")) {
+                    margin-inline: calc($text-grid-gap / 2); /* [1] */
+                    border-width: ($base-fs * 0.375px);
+                }
+            }
+        }
+
+        &__heading {
+            font-size: $fs-6xl;
+            line-height: 1;
+
+            @include mq(mq-token("tab")) {
+                font-size: $fs-5xl;
+            }
+
+            .has-inline-heading & {
+                @include mq(mq-token("tab")) {
+                    margin-top: $text-grid-heading-offset;
+                }
+            }
+        }
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        .o-icon {
+            /* stylelint-disable-next-line plugin/selector-bem-pattern */
+            --icon-size: #{$text-grid-icon-size};
+
+            margin-block-end: $fs-2xs;
+        }
+    }
+}
