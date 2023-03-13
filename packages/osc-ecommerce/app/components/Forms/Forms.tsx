@@ -1,3 +1,4 @@
+import { Form as RemixForm } from '@remix-run/react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { formModule, TypesOfForm } from '~/types/sanity';
@@ -9,7 +10,12 @@ import type { ContactFormFieldErrors } from './types';
 
 interface FormProps {
     form: TypesOfForm;
-    setValidationErrors: Dispatch<SetStateAction<unknown>>;
+    formErrors: string[];
+    // TODO - Add formRef for resetting the form on submit
+    // formRef: MutableRefObject<undefined>;
+    // TODO - Add isSubmitting
+    // isSubmitting: boolean;
+    setValidationErrors: Dispatch<SetStateAction<any>>;
     validationErrors: Record<string, any>;
 }
 
@@ -27,21 +33,20 @@ const Form = (props: FormProps) => {
                 SetStateAction<ContactFormFieldErrors | {}>
             >;
             return (
-                <FormContainer variant="slide-out">
-                    <ContactForm
-                        actionText={contactFormData.actionText}
-                        description={description}
-                        // This will need updating to a piece of state - should represent any overall form errors
-                        // as opposed to server validation errors
-                        formErrors={[]}
-                        formInputs={contactFormData.formInputs}
-                        schema={contactFormSchema}
-                        setValidationErrors={setContactValidationErrors}
-                        termsAndConditions={termsAndConditions}
-                        title={title}
-                        validationErrors={contactValidationErrors}
-                    />
-                </FormContainer>
+                <RemixForm method="post" noValidate>
+                    <FormContainer variant="slide-out">
+                        <ContactForm
+                            actionText={contactFormData.actionText}
+                            description={description}
+                            formInputs={contactFormData.formInputs}
+                            schema={contactFormSchema}
+                            setValidationErrors={setContactValidationErrors}
+                            termsAndConditions={termsAndConditions}
+                            title={title}
+                            validationErrors={contactValidationErrors}
+                        />
+                    </FormContainer>
+                </RemixForm>
             );
 
         default:
@@ -49,15 +54,20 @@ const Form = (props: FormProps) => {
     }
 };
 
-export const Forms = (props: { module: formModule; errors: any }) => {
-    const { errors, module } = props;
-    const [validationErrors, setValidationErrors] = useState(errors);
+export const Forms = (props: { module: formModule }) => {
+    const { module } = props;
+    // TODO - validationErrors and formErrors will get pulled in server side with a useActionData and set through a useEffect
+    const [validationErrors, setValidationErrors] = useState([]);
+
+    // TODO - form errors (which will be errors on whole form rather than validation, e.g. hubspot down) will come from server side through useActionData
+    const formErrors: string[] = [];
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
             {module.form.map((form) => (
                 <Form
                     form={form}
+                    formErrors={formErrors}
                     key={form._key}
                     setValidationErrors={setValidationErrors}
                     validationErrors={validationErrors}
