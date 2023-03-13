@@ -2,6 +2,7 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
