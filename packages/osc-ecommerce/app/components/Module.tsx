@@ -121,12 +121,10 @@ export const getComponentStyles = (data: SanityPage) => {
 
 interface Props {
     module: module;
-    // TODO - update type
-    errors: any;
 }
 
 export default function Module(props: Props) {
-    const { errors, module } = props;
+    const { module } = props;
     switch (module._type) {
         case 'module.accordion':
             const moduleAccordion = module as accordionModule;
@@ -190,7 +188,7 @@ export default function Module(props: Props) {
 
         case 'module.forms':
             const moduleform = module as formModule;
-            return <Forms errors={errors} module={moduleform} />;
+            return <Forms module={moduleform} />;
 
         case 'module.hero':
             const moduleHero = module as heroModule;
