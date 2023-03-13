@@ -436,3 +436,14 @@ export interface SanityActionNavSettings {
         };
     };
 }
+
+export interface contactForm extends module {
+    termsAndConditions?: PortableTextBlock[];
+    titleAndDescription?: PortableTextBlock[];
+}
+
+export type TypesOfForm = contactForm;
+
+export interface formModule extends module {
+    form: TypesOfForm[];
+}

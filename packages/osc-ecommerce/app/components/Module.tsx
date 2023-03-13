@@ -1,19 +1,23 @@
 import type { LinkDescriptor } from '@remix-run/node';
 import { Carousel, Content, Image, Trustpilot } from 'osc-ui';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
+import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
+import formStyles from 'osc-ui/dist/src-components-Forms-forms.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
 import textGridStyles from 'osc-ui/dist/src-components-TextGrid-text-grid.css';
+import textInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
 import type {
     accordionModule,
     cardModule,
     carouselModule,
     contentModule,
+    formModule,
     heroModule,
     imageModule,
     module,
@@ -27,6 +31,7 @@ import { Cards } from './Cards/Cards';
 import { Hero } from './Hero/Hero';
 import { TextGridModule } from './TextGrid/TextGrid';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
+import { Forms } from './Forms/Forms';
 
 /**
  * Recursively search for all types in a Sanity schema and filter them by type
@@ -92,6 +97,11 @@ export const getComponentStyles = (data: SanityPage) => {
                 styles.push({ rel: 'stylesheet', href: contentStyles });
                 break;
 
+            case 'module.forms':
+                styles.push({ rel: 'stylesheet', href: alertStyles });
+                styles.push({ rel: 'stylesheet', href: formStyles });
+                styles.push({ rel: 'stylesheet', href: textInputStyles });
+                break;
             case 'module.hero':
                 styles.push({ rel: 'stylesheet', href: heroStyles });
                 break;
@@ -111,11 +121,12 @@ export const getComponentStyles = (data: SanityPage) => {
 
 interface Props {
     module: module;
+    // TODO - update type
+    errors: any;
 }
 
 export default function Module(props: Props) {
-    const { module } = props;
-
+    const { errors, module } = props;
     switch (module._type) {
         case 'module.accordion':
             const moduleAccordion = module as accordionModule;
@@ -136,7 +147,6 @@ export default function Module(props: Props) {
 
         case 'module.cards':
             const moduleCard = module as cardModule;
-
             return <Cards module={moduleCard} />;
 
         case 'module.carousel':
@@ -177,6 +187,10 @@ export default function Module(props: Props) {
                     />
                 </article>
             ) : null;
+
+        case 'module.forms':
+            const moduleform = module as formModule;
+            return <Forms errors={errors} module={moduleform} />;
 
         case 'module.hero':
             const moduleHero = module as heroModule;
