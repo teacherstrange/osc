@@ -12,13 +12,13 @@ interface FormContainerProps {
 export const FormContainer = (props: FormContainerProps) => {
     const { children, variant } = props;
 
-    const variantModifier = useModifier('c-form-container', variant);
-    const classes = classNames('c-form-container', variantModifier);
+    const variantModifier = useModifier('c-form__container', variant);
+    const classes = classNames('c-form__container', variantModifier);
 
     return (
         <div className={classes}>
             {variant === 'slide-out' ? (
-                <span className="c-form-container--slide-out-btn">Contact Us</span>
+                <span className="c-form__container--slide-out-btn">Contact Us</span>
             ) : null}
             {children}
         </div>
