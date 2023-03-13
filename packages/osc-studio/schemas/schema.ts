@@ -45,13 +45,16 @@ import moduleCardPost from './objects/module/cardPost';
 import moduleCards from './objects/module/cards';
 import moduleCardStatic from './objects/module/cardStatic';
 import moduleCarousel from './objects/module/carousel';
+import moduleContactForm from './objects/module/contactForm';
 import moduleContent from './objects/module/content';
+import moduleForms from './objects/module/forms';
 import moduleHero from './objects/module/hero';
 import moduleImage from './objects/module/image';
 import moduleImageMobile from './objects/module/imageMobile';
 import moduleImages from './objects/module/images';
 import moduleImageTablet from './objects/module/imageTablet';
 import moduleTextGrid from './objects/module/textGrid';
+import moduleProspectusForm from './objects/module/prospectusForm';
 import moduleTrustpilot from './objects/module/trustpilot';
 import moduleVideo from './objects/module/video';
 import navigationItem from './objects/navigationItem';
@@ -127,12 +130,15 @@ export default createSchema({
         moduleCardPost,
         moduleCardStatic,
         moduleCards,
+        moduleContactForm,
+        moduleContent,
+        moduleForms,
         moduleHero,
         moduleImage,
         moduleImages,
         moduleImageMobile,
         moduleImageTablet,
-        moduleContent,
+        moduleProspectusForm,
         moduleTrustpilot,
         moduleCarousel,
         moduleTextGrid,

@@ -28,6 +28,7 @@ export const MODULES = [
     { type: 'module.content' },
     { type: 'module.cards' },
     { type: 'module.carousel' },
+    { type: 'module.forms' },
     { type: 'module.hero' },
     { type: 'module.images' },
     { type: 'module.trustpilot' },
