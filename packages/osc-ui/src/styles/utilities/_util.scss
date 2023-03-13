@@ -151,6 +151,16 @@ $osc-config: (
             right,
             left
         )
+    ),
+    align-self: (
+        prefix: "self",
+        values: (
+            baseline,
+            stretch,
+            start,
+            center,
+            end
+        )
     )
 );
 
