@@ -5,14 +5,15 @@
 
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import _ from 'lodash';
 import React from 'react';
 import { render } from 'test-utils';
 import { Autocomplete } from './Autocomplete';
+
 const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID;
 const ALGOLIA_ID_SEARCH_ONLY_API_KEY = process.env.ALGOLIA_ID_SEARCH_ONLY_API_KEY;
 const ALGOLIA_PRIMARY_INDEX_GROUPED = process.env.ALGOLIA_PRIMARY_INDEX_GROUPED;
 const ALGOLIA__QUERY_SUGGESTIONS = process.env.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS;
-debugger;
 test('renders a Autcomplete panel when the input is clicked', async () => {
     const user = userEvent.setup();
     render(
@@ -27,7 +28,8 @@ test('renders a Autcomplete panel when the input is clicked', async () => {
     // await user.type(input, 'G');
     await user.type(input, 'English');
     await waitFor(() => {
-        expect(screen.getByRole('combobox')).toHaveAttribute('aria-expanded', 'true'); // eslint-disable-line
+        // eslint-disable-next-line
+        expect(screen.getByRole('combobox')).toHaveAttribute('aria-expanded', 'true');
     });
 });
 
@@ -42,13 +44,17 @@ test('typing updates autocomplete results', async () => {
         />
     );
     const input = screen.getByRole('textbox', { name: 'Search' });
-    await user.type(input, 'English');
-    const hits =
-        document.querySelectorAll('section')[document.querySelectorAll('section').length - 1];
-    await user.type(input, 'Maths');
-    const newHits =
-        document.querySelectorAll('section')[document.querySelectorAll('section').length - 1];
-    await waitFor(() => expect(hits != newHits));
+    let sections, newSections;
+    user.type(input, 'English').then(() => {
+        sections = screen.queryAllByTestId('hits');
+    });
+
+    user.type(input, 'Math').then(() => {
+        newSections = screen.queryAllByTestId('hits');
+    });
+    await waitFor(() => {
+        expect(_.isEqual(sections, newSections)).toBeFalsy();
+    });
 });
 
 test('clicking the reset button clears the search results', async () => {

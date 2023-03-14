@@ -97,6 +97,7 @@ export function Autocomplete(props: AutocompleteProps) {
                 ],
                 ...props,
             }),
+        // eslint-disable-next-line
         [props]
     );
 
@@ -190,6 +191,7 @@ export function Autocomplete(props: AutocompleteProps) {
                                                 {items?.map((item, index) => {
                                                     return (
                                                         <li
+                                                            data-testid={'hits'}
                                                             className="c-autocomplete__item"
                                                             key={item.objectID + '_' + index}
                                                             {...autocomplete.getItemProps({
