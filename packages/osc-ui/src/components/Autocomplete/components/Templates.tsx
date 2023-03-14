@@ -49,6 +49,19 @@ export const SearchResultItem = (props: ItemProps) => {
                         <img src={item.image} alt={item.title} width="40" height="40" />
                     </div>
                 )}
+                {item['shopify_products_grouped_by_id'] && (
+                    <div className="c-autocomplete__item-image">
+                        <img
+                            src={
+                                item['shopify_products_grouped_by_id'].facets.exact_matches
+                                    .product_image[0].value
+                            }
+                            alt={item.title}
+                            width="40"
+                            height="40"
+                        />
+                    </div>
+                )}
                 <div className="c-autocomplete__item-content-body">
                     <div className="c-autocomplete__item-title">
                         <Highlight hit={item} attribute="title" />

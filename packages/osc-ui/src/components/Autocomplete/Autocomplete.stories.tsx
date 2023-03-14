@@ -3,6 +3,7 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import { Autocomplete } from './Autocomplete';
+import { searchClient } from './searchClient';
 import type { AutocompleteItem } from './types/autoComplete';
 
 export default {
@@ -21,7 +22,7 @@ export default {
 const Template: Story<Partial<AutocompleteOptions<AutocompleteItem>>> = (args) => {
     return (
         <>
-            <Autocomplete {...args} />
+            <Autocomplete searchClient={searchClient} {...args} />
         </>
     );
 };

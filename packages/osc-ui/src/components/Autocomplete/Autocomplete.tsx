@@ -1,8 +1,4 @@
-import type {
-    AutocompleteOptions,
-    AutocompleteSource,
-    AutocompleteState,
-} from '@algolia/autocomplete-core';
+import type { AutocompleteSource, AutocompleteState } from '@algolia/autocomplete-core';
 import { createAutocomplete } from '@algolia/autocomplete-core';
 import { createAlgoliaInsightsPlugin } from '@algolia/autocomplete-plugin-algolia-insights';
 import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
@@ -15,13 +11,12 @@ import './autocomplete.scss';
 import { SearchResultItem } from './components/Templates';
 import { popularCoursesPlugin } from './plugins/popularCoursesPlugin';
 import { recentSearchesPlugin } from './plugins/recentSearchesPlugin';
-import { searchClient } from './searchClient';
-import type { AutocompleteItem } from './types/autoComplete';
+import type { AutocompleteItem, AutocompleteProps } from './types/autoComplete';
 import { debounced } from './utils/debounced';
 
 // TODO - Refactor this out of the component and put credentials into env vars
 
-export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem>>) {
+export function Autocomplete(props: AutocompleteProps) {
     const [autocompleteUiState, setAutocompleteUiState] = useState<
         AutocompleteState<AutocompleteItem>
     >({
@@ -38,6 +33,7 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
         appId: 'CMEG2XKNP8',
         apiKey: '45b007891e2e306b97a88d7da87afac8',
     });
+    const { resultsLimit = 3, searchClient } = props;
     const algoliaInsightsPlugin = createAlgoliaInsightsPlugin({ insightsClient });
 
     // TODO - Add Plugins - Popular Searches and Recently Searched - done
@@ -49,6 +45,8 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
     // TODO - Finish adding all the arg types for AutoComplete into Storybook
     // TODO - Work out how to integrate the reshape function
     // TODO - Look at whether it's useful to add 'Reacting to the Network' stuff in and the mobile experience stuff - see docs- https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-renderer/
+    // TODO - remove static strings - (talk about searchClient.ts
+    // TODO = review pr before submitting to steven
 
     const autocomplete = useMemo(
         () =>
@@ -60,7 +58,7 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                     return debounced([
                         {
                             sourceId: 'Results',
-                            getItems({ query }) {
+                            async getItems({ query }) {
                                 return getAlgoliaResults({
                                     searchClient,
                                     queries: [
@@ -68,7 +66,7 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                                             indexName: 'shopify_products_grouped_by_id',
                                             query,
                                             params: {
-                                                hitsPerPage: 3,
+                                                hitsPerPage: resultsLimit,
                                             },
                                         },
                                     ],
@@ -163,7 +161,6 @@ export function Autocomplete(props: Partial<AutocompleteOptions<AutocompleteItem
                         {autocompleteUiState?.collections?.map((collection, index) => {
                             const { source, items } = collection;
                             const { sourceId } = source;
-
                             return (
                                 <>
                                     {items.length > 0 && (

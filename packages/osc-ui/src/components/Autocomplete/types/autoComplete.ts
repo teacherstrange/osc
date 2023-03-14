@@ -1,3 +1,4 @@
+import type { AutocompleteOptions } from '@algolia/autocomplete-core';
 import type { Hit } from '@algolia/client-search';
 
 export type AutocompleteItem = Hit<{
@@ -9,3 +10,9 @@ export type AutocompleteItem = Hit<{
     title: string;
     url: string;
 }>;
+
+export type AutocompleteProps = Partial<AutocompleteOptions<AutocompleteItem>> & {
+    resultsLimit?: number;
+    // TODO change this
+    searchClient: any;
+};
