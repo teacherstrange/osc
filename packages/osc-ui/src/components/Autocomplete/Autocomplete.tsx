@@ -2,6 +2,7 @@ import type { AutocompleteSource, AutocompleteState } from '@algolia/autocomplet
 import { createAutocomplete } from '@algolia/autocomplete-core';
 import { createAlgoliaInsightsPlugin } from '@algolia/autocomplete-plugin-algolia-insights';
 import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
+import algoliasearch from 'algoliasearch/lite';
 import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import insightsClient from 'search-insights';
@@ -28,25 +29,33 @@ export function Autocomplete(props: AutocompleteProps) {
         query: '',
         status: 'idle',
     });
-
+    const {
+        resultsLimit = 3,
+        ALGOLIA_APP_ID,
+        ALGOLIA_ID_SEARCH_ONLY_API_KEY,
+        ALGOLIA_PRIMARY_INDEX_GROUPED,
+        ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS,
+    } = props;
     insightsClient('init', {
-        appId: 'CMEG2XKNP8',
-        apiKey: '45b007891e2e306b97a88d7da87afac8',
+        appId: ALGOLIA_APP_ID,
+        apiKey: ALGOLIA_ID_SEARCH_ONLY_API_KEY,
     });
-    const { resultsLimit = 3, searchClient } = props;
+    const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ID_SEARCH_ONLY_API_KEY);
     const algoliaInsightsPlugin = createAlgoliaInsightsPlugin({ insightsClient });
 
     // TODO - Add Plugins - Popular Searches and Recently Searched - done
     // TODO - Add Debouncing and Insights
     // TODO - Create a Close button for the query
     // TODO - Add NoResult and ResultHeader components back into the search results
-
-    // TODO - Think about other things to add to autocomplete instance - e.g. Navigator,
-    // TODO - Finish adding all the arg types for AutoComplete into Storybook
-    // TODO - Work out how to integrate the reshape function
-    // TODO - Look at whether it's useful to add 'Reacting to the Network' stuff in and the mobile experience stuff - see docs- https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-renderer/
     // TODO - remove static strings - (talk about searchClient.ts
+    // TODO - Look at whether it's useful to add 'Reacting to the Network' stuff in and the mobile experience stuff - see docs- https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-renderer/
+
+    // TODO - Finish adding all the arg types for AutoComplete into Storybook
     // TODO = review pr before submitting to steven
+
+    // TODO - Think about other things to add to autocomplete instance - e.g. Navigator, --> adding this in a futue pr
+    // TODO - Work out how to integrate the reshape function --> adding useful bits with matt
+    // TODO - try to intergrate recently viewed plugin
 
     const autocomplete = useMemo(
         () =>
@@ -63,7 +72,7 @@ export function Autocomplete(props: AutocompleteProps) {
                                     searchClient,
                                     queries: [
                                         {
-                                            indexName: 'shopify_products_grouped_by_id',
+                                            indexName: ALGOLIA_PRIMARY_INDEX_GROUPED,
                                             query,
                                             params: {
                                                 hitsPerPage: resultsLimit,
@@ -73,7 +82,7 @@ export function Autocomplete(props: AutocompleteProps) {
                                 });
                             },
                             getItemUrl({ item }) {
-                                return item.url;
+                                return `/courses/${item.handle}`;
                             },
                             getItemInputValue({ item }) {
                                 return item.title;
@@ -81,7 +90,11 @@ export function Autocomplete(props: AutocompleteProps) {
                         },
                     ]) as Promise<(boolean | AutocompleteSource<AutocompleteItem>)[]>;
                 },
-                plugins: [recentSearchesPlugin, popularCoursesPlugin, algoliaInsightsPlugin],
+                plugins: [
+                    recentSearchesPlugin,
+                    popularCoursesPlugin(searchClient, ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS),
+                    algoliaInsightsPlugin,
+                ],
                 ...props,
             }),
         [props]
@@ -147,11 +160,14 @@ export function Autocomplete(props: AutocompleteProps) {
                     )}
                 </div>
             </form>
-
             {autocompleteUiState.isOpen ? (
                 <div
-                    className="c-autocomplete__panel"
-                    ref={panelRef}
+                    className={[
+                        'aa-Panel',
+                        autocompleteUiState.status === 'stalled' && 'aa-Panel--stalled',
+                    ]
+                        .filter(Boolean)
+                        .join(' ')}
                     {...autocomplete.getPanelProps({})}
                 >
                     <div className="c-autocomplete__panel--scrollable">
@@ -171,17 +187,24 @@ export function Autocomplete(props: AutocompleteProps) {
                                     <section key={`source-${index}`}>
                                         {items.length > 0 ? (
                                             <ul {...autocomplete.getListProps()}>
-                                                {items?.map((item) => {
+                                                {items?.map((item, index) => {
                                                     return (
                                                         <li
                                                             className="c-autocomplete__item"
-                                                            key={item.objectID}
+                                                            key={item.objectID + '_' + index}
                                                             {...autocomplete.getItemProps({
                                                                 item,
                                                                 source,
                                                             })}
                                                         >
-                                                            <SearchResultItem item={item} />
+                                                            {
+                                                                <SearchResultItem
+                                                                    item={item}
+                                                                    ALGOLIA_PRIMARY_INDEX_GROUPED={
+                                                                        ALGOLIA_PRIMARY_INDEX_GROUPED
+                                                                    }
+                                                                />
+                                                            }
                                                         </li>
                                                     );
                                                 })}

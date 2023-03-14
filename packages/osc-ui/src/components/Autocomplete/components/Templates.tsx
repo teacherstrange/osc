@@ -36,10 +36,11 @@ export const ResultsHeader = (props: ResultsHeaderProps) => {
 
 interface ItemProps {
     item: AutocompleteItemTypes;
+    ALGOLIA_PRIMARY_INDEX_GROUPED: string;
 }
 
 export const SearchResultItem = (props: ItemProps) => {
-    const { item } = props;
+    const { item, ALGOLIA_PRIMARY_INDEX_GROUPED } = props;
 
     return (
         <div className="c-autocomplete__item-wrapper">
@@ -49,11 +50,11 @@ export const SearchResultItem = (props: ItemProps) => {
                         <img src={item.image} alt={item.title} width="40" height="40" />
                     </div>
                 )}
-                {item['shopify_products_grouped_by_id'] && (
+                {item[ALGOLIA_PRIMARY_INDEX_GROUPED] && (
                     <div className="c-autocomplete__item-image">
                         <img
                             src={
-                                item['shopify_products_grouped_by_id'].facets.exact_matches
+                                item[ALGOLIA_PRIMARY_INDEX_GROUPED].facets.exact_matches
                                     .product_image[0].value
                             }
                             alt={item.title}

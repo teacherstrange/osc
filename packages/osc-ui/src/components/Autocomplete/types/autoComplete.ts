@@ -11,8 +11,11 @@ export type AutocompleteItem = Hit<{
     url: string;
 }>;
 
+// TODO - FIGURE OUT WHAT TO REPLACE THIS WITH
 export type AutocompleteProps = Partial<AutocompleteOptions<AutocompleteItem>> & {
     resultsLimit?: number;
-    // TODO change this
-    searchClient: any;
+    ALGOLIA_APP_ID: string;
+    ALGOLIA_ID_SEARCH_ONLY_API_KEY: string;
+    ALGOLIA_PRIMARY_INDEX_GROUPED: string;
+    ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS: string;
 };

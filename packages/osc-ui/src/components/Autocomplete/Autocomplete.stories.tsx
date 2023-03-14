@@ -3,7 +3,6 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import { Autocomplete } from './Autocomplete';
-import { searchClient } from './searchClient';
 import type { AutocompleteItem } from './types/autoComplete';
 
 export default {
@@ -22,7 +21,17 @@ export default {
 const Template: Story<Partial<AutocompleteOptions<AutocompleteItem>>> = (args) => {
     return (
         <>
-            <Autocomplete searchClient={searchClient} {...args} />
+            <Autocomplete
+                ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS={
+                    process.env.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS
+                }
+                ALGOLIA_PRIMARY_INDEX_GROUPED={process.env.ALGOLIA_PRIMARY_INDEX_GROUPED}
+                ALGOLIA_APP_ID={process.env.STORYBOOK_ALGOLIA_APP_ID}
+                ALGOLIA_ID_SEARCH_ONLY_API_KEY={
+                    process.env.STORYBOOK_ALGOLIA_ID_SEARCH_ONLY_API_KEY
+                }
+                {...args}
+            />
         </>
     );
 };
