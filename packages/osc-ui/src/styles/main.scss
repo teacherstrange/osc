@@ -101,6 +101,9 @@
 
 // OUR SCSS COMPONENT STYLES ARE LOADED VIA OUR UI LIBRARY, @OSC-UI //
 
+// TODO - Temporary fix - forms is only in osc-ecommerce but adding the scss there is causing a few issues.
+@include meta.load-css("components/forms");
+
 /* ============================
 // $UTILITIES
 // utilities classes in accordance with DRY mentality.
