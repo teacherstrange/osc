@@ -1,11 +1,13 @@
 import type { Meta, Story } from '@storybook/react';
 import { useState } from 'react';
-import { contactFormData, termsAndConditions } from '../data';
+import { contactFormData } from '../data';
 import { FormContainer } from '../FormContainer';
 import { contactFormSchema } from '../formSchemas';
 import type { ContactFormFieldErrors } from '../types';
-import type { ContactFormProps } from './ContentForm';
-import { ContactForm } from './ContentForm';
+import type { ContactFormProps } from './ContactForm';
+import { ContactForm } from './ContactForm';
+import { SpritesheetProvider } from 'osc-ui';
+import { textContent } from './textContent';
 
 export default {
     title: 'osc-ecommerce/Forms/ContactForm',
@@ -25,21 +27,22 @@ const Template: Story<ContactFormProps> = (args) => {
     );
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '3em 0' }}>
-            <FormContainer variant="slide-out">
-                <ContactForm
-                    actionText={args.actionText}
-                    description={args.description}
-                    formErrors={[]}
-                    formInputs={args.formInputs}
-                    schema={contactFormSchema}
-                    setValidationErrors={setValidationErrors}
-                    termsAndConditions={args.termsAndConditions}
-                    title={args.title}
-                    validationErrors={validationErrors}
-                />
-            </FormContainer>
-        </div>
+        <SpritesheetProvider>
+            <div style={{ display: 'flex', justifyContent: 'center', margin: '3em 0' }}>
+                <FormContainer variant="slide-out">
+                    <ContactForm
+                        actionText={args.actionText}
+                        formErrors={[]}
+                        formInputs={args.formInputs}
+                        schema={contactFormSchema}
+                        setValidationErrors={setValidationErrors}
+                        termsAndConditions={args.termsAndConditions}
+                        titleAndDescription={args.titleAndDescription}
+                        validationErrors={validationErrors}
+                    />
+                </FormContainer>
+            </div>
+        </SpritesheetProvider>
     );
 };
 
@@ -47,11 +50,10 @@ export const Primary = Template.bind({});
 export const Validation = Template.bind({});
 
 Primary.args = {
-    actionText: contactFormData.actionText,
-    description: contactFormData.description,
+    actionText: textContent.actionText,
     formInputs: contactFormData.formInputs,
-    termsAndConditions: termsAndConditions,
-    title: contactFormData.title,
+    termsAndConditions: textContent.termsAndConditions,
+    titleAndDescription: textContent.titleAndDescription,
 };
 
 Validation.args = {
