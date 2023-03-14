@@ -5,7 +5,6 @@ import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
-import formStyles from './Forms/forms.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
@@ -99,7 +98,6 @@ export const getComponentStyles = (data: SanityPage) => {
 
             case 'module.forms':
                 styles.push({ rel: 'stylesheet', href: alertStyles });
-                styles.push({ rel: 'stylesheet', href: formStyles });
                 styles.push({ rel: 'stylesheet', href: textInputStyles });
                 break;
             case 'module.hero':
