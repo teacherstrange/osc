@@ -126,7 +126,9 @@ function getInputType(
                     errors={validationErrors && validationErrors[textInputData.id]}
                     key={index}
                     id={textInputData.id}
+                    inputMode={textInputData.inputMode}
                     name={textInputData.name}
+                    pattern={textInputData.pattern}
                     placeholder={textInputData.placeholder}
                     required={textInputData.required}
                     schema={schema.pick({ [textInputData.id]: true })}

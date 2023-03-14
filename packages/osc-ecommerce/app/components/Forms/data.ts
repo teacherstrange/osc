@@ -28,10 +28,11 @@ export const contactFormData = {
         {
             inputType: 'TEXT_INPUT',
             id: 'phone',
+            inputMode: 'numeric',
             name: 'Telephone number',
+            pattern: '[0-9]*',
             placeholder: 'Your phone number',
             required: true,
-            type: 'number',
         } as TextInputType,
         {
             inputType: 'TEXT_INPUT',

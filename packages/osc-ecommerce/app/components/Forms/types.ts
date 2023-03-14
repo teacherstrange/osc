@@ -4,7 +4,9 @@
 
 export type TextInputType = {
     id: string;
+    inputMode?: string;
     name: string;
+    pattern?: string;
     placeholder?: string;
     required: boolean;
     type?: string;
