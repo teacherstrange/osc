@@ -27,9 +27,8 @@ test('renders a Autcomplete panel when the input is clicked', async () => {
     // await user.type(input, 'G');
     await user.type(input, 'English');
     await waitFor(() => {
-        expect(screen.getByRole('combobox')).toHaveAttribute('aria-expanded', 'true');
+        expect(screen.getByRole('combobox')).toHaveAttribute('aria-expanded', 'true'); // eslint-disable-line
     });
-    screen.debug(undefined, Infinity);
 });
 
 test('typing updates autocomplete results', async () => {
