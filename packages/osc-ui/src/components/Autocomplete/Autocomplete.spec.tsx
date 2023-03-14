@@ -82,7 +82,8 @@ test('clicking the reset button clears the search results', async () => {
     // click clear button
     const clearButton = await screen.findByText('X');
     clearButton.click();
-    await waitFor(() => expect(input).toHaveAttribute('value', ''));
+
+    await waitFor(() => expect(input).toHaveValue(''));
 });
 
 test('limits the amount of results to three', async () => {
