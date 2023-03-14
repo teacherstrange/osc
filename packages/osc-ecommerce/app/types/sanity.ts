@@ -438,9 +438,9 @@ export interface SanityActionNavSettings {
 }
 
 export interface contactForm extends module {
-    description?: PortableTextBlock[];
+    actionText: string;
     termsAndConditions?: PortableTextBlock[];
-    title?: string;
+    titleAndDescription?: PortableTextBlock[];
 }
 
 export type TypesOfForm = contactForm;

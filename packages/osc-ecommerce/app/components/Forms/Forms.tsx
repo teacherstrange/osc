@@ -2,7 +2,7 @@ import { Form as RemixForm } from '@remix-run/react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { formModule, TypesOfForm } from '~/types/sanity';
-import { ContactForm } from './ContactForm/ContentForm';
+import { ContactForm } from './ContactForm/ContactForm';
 import { contactFormData } from './data';
 import { FormContainer } from './FormContainer';
 import { contactFormSchema } from './formSchemas';
@@ -20,29 +20,30 @@ interface FormProps {
 }
 
 const Form = (props: FormProps) => {
-    const { form, setValidationErrors, validationErrors } = props;
+    const { form, formErrors, setValidationErrors, validationErrors } = props;
 
     switch (form._type) {
         case 'form.contactForm':
-            const description = form.description[0].children[0].text;
-            const termsAndConditions = form.termsAndConditions[0].children[0].text;
-            const title = form.title;
+            const titleAndDescription = form.titleAndDescription;
+            const termsAndConditions = form.termsAndConditions;
+            const actionText = form.actionText;
 
             const contactValidationErrors = validationErrors as ContactFormFieldErrors;
             const setContactValidationErrors = setValidationErrors as Dispatch<
                 SetStateAction<ContactFormFieldErrors | {}>
             >;
+
             return (
                 <RemixForm method="post" noValidate>
                     <FormContainer variant="slide-out">
                         <ContactForm
-                            actionText={contactFormData.actionText}
-                            description={description}
+                            actionText={actionText}
+                            formErrors={formErrors}
                             formInputs={contactFormData.formInputs}
                             schema={contactFormSchema}
                             setValidationErrors={setContactValidationErrors}
                             termsAndConditions={termsAndConditions}
-                            title={title}
+                            titleAndDescription={titleAndDescription}
                             validationErrors={contactValidationErrors}
                         />
                     </FormContainer>

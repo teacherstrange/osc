@@ -1,9 +1,7 @@
+import type { PortableTextBlock } from '@portabletext/types';
+import { Alert, Button, Content } from 'osc-ui';
 import type { Dispatch, SetStateAction } from 'react';
-
-import { Alert, Button } from 'osc-ui';
 import type { contactFormSchema } from '../formSchemas';
-
-// import '../forms.scss';
 import { getFormInput } from '../utils';
 
 import type { ContactFormFieldErrors, TextAreaType, TextInputType } from '../types';
@@ -13,12 +11,9 @@ type FormInputs = TextInputType | TextAreaType;
 export interface ContactFormProps {
     /**
      * Sets the text for the form button
+     * @default 'Send Enquiry'
      */
     actionText: string;
-    /**
-     * Sets a description for the form
-     */
-    description?: string;
     /**
      * An array of the Form Inputs
      */
@@ -42,11 +37,11 @@ export interface ContactFormProps {
     /**
      * Terms and conditions for the form
      */
-    termsAndConditions?: string;
+    termsAndConditions?: PortableTextBlock[];
     /**
-     * Title of the form
+     * Title and description for the form
      */
-    title?: string;
+    titleAndDescription?: PortableTextBlock[];
     /**
      * A list of validation errors
      */
@@ -55,23 +50,21 @@ export interface ContactFormProps {
 
 export const ContactForm = (props: ContactFormProps) => {
     const {
-        actionText,
-        description,
+        actionText = 'Send Enquiry',
+        titleAndDescription,
         formInputs,
         formErrors,
         isSubmitting = false,
         schema,
         setValidationErrors,
         termsAndConditions,
-        title,
         validationErrors,
     } = props;
 
     return (
         <div className="c-form c-form__contact">
-            <h3>{title}</h3>
             <div className="c-form__inner-container">
-                <p className="c-form__description">{description}</p>
+                {titleAndDescription ? <Content value={titleAndDescription} /> : null}
                 {formInputs?.map((data, index) => {
                     return getFormInput(data, index, schema, setValidationErrors, validationErrors);
                 })}
@@ -87,13 +80,11 @@ export const ContactForm = (props: ContactFormProps) => {
                 {formErrors && formErrors.length > 0
                     ? formErrors.map((error, index) => (
                           <Alert key={index} status="error">
-                              {' '}
                               {error}
                           </Alert>
                       ))
                     : null}
-
-                <p className="c-form__terms"> {termsAndConditions}</p>
+                {termsAndConditions ? <Content value={termsAndConditions} /> : null}
             </div>
         </div>
     );

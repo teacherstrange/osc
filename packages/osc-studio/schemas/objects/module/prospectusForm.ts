@@ -10,14 +10,8 @@ export default {
     ],
     fields: [
         {
-            name: 'title',
-            title: 'Title',
-            group: 'content',
-            type: 'string',
-        },
-        {
-            name: 'description',
-            title: 'Description',
+            name: 'titleAndDescription',
+            title: 'Title and Description',
             group: 'content',
             type: 'body',
         },
@@ -25,6 +19,12 @@ export default {
             name: 'termsAndConditions',
             title: 'Terms and Conditions',
             type: 'body',
+            group: 'content',
+        },
+        {
+            name: 'actionText',
+            title: 'Action Text',
+            type: 'string',
             group: 'content',
         },
     ],
