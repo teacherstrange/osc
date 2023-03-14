@@ -31,7 +31,6 @@ export {
 } from './components/Card/Card';
 export { Carousel } from './components/Carousel/Carousel';
 export { Checkbox } from './components/Checkbox/Checkbox';
-export { ContactForm } from './components/Forms/ContactForm/ContactForm';
 export { Content } from './components/Content/Content';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export {
