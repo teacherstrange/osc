@@ -23,7 +23,7 @@ test('renders a Autcomplete panel when the input is clicked', async () => {
             ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
         />
     );
-    const input = await screen.getByRole('textbox', { name: 'Search' });
+    const input = screen.getByRole('textbox', { name: 'Search' });
     // await user.type(input, 'G');
     await user.type(input, 'English');
     await waitFor(() => {
@@ -42,7 +42,7 @@ test('typing updates autocomplete results', async () => {
             ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
         />
     );
-    const input = await screen.getByRole('textbox', { name: 'Search' });
+    const input = screen.getByRole('textbox', { name: 'Search' });
     await user.type(input, 'English');
     const hits =
         document.querySelectorAll('section')[document.querySelectorAll('section').length - 1];
@@ -62,7 +62,7 @@ test('clicking the reset button clears the search results', async () => {
             ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
         />
     );
-    const input = await screen.getByRole('textbox', { name: 'Search' });
+    const input = screen.getByRole('textbox', { name: 'Search' });
     await user.type(input, 'English');
 
     // click clear button
@@ -81,7 +81,7 @@ test('limits the amount of results to three', async () => {
             ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
         />
     );
-    const input = await screen.getByRole('textbox', { name: 'Search' });
+    const input = screen.getByRole('textbox', { name: 'Search' });
     await user.type(input, 'English');
     // populate aa panel
     await waitFor(() =>
