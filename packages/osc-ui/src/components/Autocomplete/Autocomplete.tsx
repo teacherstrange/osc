@@ -199,14 +199,20 @@ export function Autocomplete(props: AutocompleteProps) {
                                                                 source,
                                                             })}
                                                         >
-                                                            {
+                                                            <div
+                                                                data-testid={
+                                                                    sourceId === 'Results'
+                                                                        ? 'results'
+                                                                        : ''
+                                                                }
+                                                            >
                                                                 <SearchResultItem
                                                                     item={item}
                                                                     ALGOLIA_PRIMARY_INDEX_GROUPED={
                                                                         ALGOLIA_PRIMARY_INDEX_GROUPED
                                                                     }
                                                                 />
-                                                            }
+                                                            </div>
                                                         </li>
                                                     );
                                                 })}

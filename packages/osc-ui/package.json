@@ -69,6 +69,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "lodash": "^4.17.21",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@portabletext/types": "^2.0.2",
     "@testing-library/jest-dom": "^5.16.5",

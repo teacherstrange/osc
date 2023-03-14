@@ -35,7 +35,7 @@ test('renders a Autcomplete panel when the input is clicked', async () => {
 
 test('typing updates autocomplete results', async () => {
     const user = userEvent.setup();
-    render(
+    const { rerender } = render(
         <Autocomplete
             ALGOLIA_APP_ID={ALGOLIA_APP_ID}
             ALGOLIA_ID_SEARCH_ONLY_API_KEY={ALGOLIA_ID_SEARCH_ONLY_API_KEY}
@@ -43,15 +43,24 @@ test('typing updates autocomplete results', async () => {
             ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
         />
     );
-    const input = screen.getByRole('textbox', { name: 'Search' });
-    let sections, newSections;
-    user.type(input, 'English').then(() => {
-        sections = screen.queryAllByTestId('hits');
-    });
 
-    user.type(input, 'Math').then(() => {
-        newSections = screen.queryAllByTestId('hits');
-    });
+    const input = screen.getByRole('textbox', { name: 'Search' });
+
+    await user.type(input, 'English');
+    const sections = await screen.findAllByTestId('hits');
+
+    rerender(
+        <Autocomplete
+            ALGOLIA_APP_ID={ALGOLIA_APP_ID}
+            ALGOLIA_ID_SEARCH_ONLY_API_KEY={ALGOLIA_ID_SEARCH_ONLY_API_KEY}
+            ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS={ALGOLIA__QUERY_SUGGESTIONS}
+            ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
+        />
+    );
+
+    await user.type(input, 'Geography');
+    const newSections = await screen.findAllByTestId('hits');
+
     await waitFor(() => {
         expect(_.isEqual(sections, newSections)).toBeFalsy();
     });
@@ -80,6 +89,7 @@ test('limits the amount of results to three', async () => {
     const user = userEvent.setup();
     render(
         <Autocomplete
+            resultsLimit={3}
             ALGOLIA_APP_ID={ALGOLIA_APP_ID}
             ALGOLIA_ID_SEARCH_ONLY_API_KEY={ALGOLIA_ID_SEARCH_ONLY_API_KEY}
             ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS={ALGOLIA__QUERY_SUGGESTIONS}
@@ -88,11 +98,9 @@ test('limits the amount of results to three', async () => {
     );
     const input = screen.getByRole('textbox', { name: 'Search' });
     await user.type(input, 'English');
+    const results = await screen.findAllByTestId('results');
     // populate aa panel
-    await waitFor(() =>
-        expect(
-            document.querySelectorAll('section')[document.querySelectorAll('section').length - 1]
-                .children.length === 3
-        )
-    );
+    await waitFor(() => {
+        expect(results.length === 3).toBeTruthy();
+    });
 });
