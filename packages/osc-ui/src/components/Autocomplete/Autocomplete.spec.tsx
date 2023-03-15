@@ -1,8 +1,3 @@
-// 1) render panel open
-// 2) test typing updating results
-// 3) clearing results from searchbox
-// 4) test limit for results
-
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import _ from 'lodash';

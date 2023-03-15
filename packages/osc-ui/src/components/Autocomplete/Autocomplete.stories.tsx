@@ -16,6 +16,18 @@ export default {
             },
         },
     },
+    argTypes: {
+        placeholder: {
+            description: 'The placeholder text to show in the search input when there’s no query.',
+        },
+        openOnFocus: { description: 'Whether to open the panel on focus when there’s no query.' },
+        autoFocus: {
+            description: 'Whether to focus the search input or not when the page is loaded.',
+        },
+        resultsLimit: {
+            description: 'The number of results to show in the panel',
+        },
+    },
 } as Meta;
 
 const Template: Story<Partial<AutocompleteOptions<AutocompleteItem>>> = (args) => {
@@ -41,4 +53,5 @@ export const Primary = Template.bind({});
 Primary.args = {
     placeholder: 'Search...',
     openOnFocus: true,
+    autoFocus: false,
 };

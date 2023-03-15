@@ -44,20 +44,6 @@ export function Autocomplete(props: AutocompleteProps) {
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ID_SEARCH_ONLY_API_KEY);
     const algoliaInsightsPlugin = createAlgoliaInsightsPlugin({ insightsClient });
 
-    // TODO - Add Plugins - Popular Searches and Recently Searched - done
-    // TODO - Add Debouncing and Insights
-    // TODO - Create a Close button for the query
-    // TODO - Add NoResult and ResultHeader components back into the search results
-    // TODO - remove static strings - (talk about searchClient.ts
-    // TODO - Look at whether it's useful to add 'Reacting to the Network' stuff in and the mobile experience stuff - see docs- https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-renderer/
-
-    // TODO - Finish adding all the arg types for AutoComplete into Storybook
-    // TODO = review pr before submitting to steven
-
-    // TODO - Think about other things to add to autocomplete instance - e.g. Navigator, --> adding this in a futue pr
-    // TODO - Work out how to integrate the reshape function --> adding useful bits with matt
-    // TODO - try to intergrate recently viewed plugin
-
     const autocomplete = useMemo(
         () =>
             createAutocomplete<AutocompleteItem, BaseSyntheticEvent, MouseEvent, KeyboardEvent>({
