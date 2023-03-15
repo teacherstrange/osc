@@ -7,6 +7,7 @@ import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import insightsClient from 'search-insights';
 import { Button } from '../Button/Button';
+import { Icon } from '../Icon/Icon';
 import { TextInput } from '../TextInput/TextInput';
 import './autocomplete.scss';
 import { SearchResultItem } from './components/Templates';
@@ -143,7 +144,7 @@ export function Autocomplete(props: AutocompleteProps) {
                             }}
                             className="aa-ClearButton c-autocomplete__input_clear_button"
                         >
-                            X
+                            <Icon id="close" />
                         </button>
                     )}
                 </div>
