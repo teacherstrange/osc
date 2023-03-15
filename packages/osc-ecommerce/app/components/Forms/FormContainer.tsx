@@ -9,11 +9,11 @@ export interface FormContainerProps {
     /**
      * Sets whether the form will slide out and adds the slide out button
      */
-    slideOut: boolean;
+    slideOut?: boolean;
     /**
      * Determines which side the button will be on depending on whether it will slide our from right or left
      */
-    variant: 'slide-left' | 'slide-right';
+    variant?: 'slide-left' | 'slide-right';
 }
 
 export const FormContainer = (props: FormContainerProps) => {
