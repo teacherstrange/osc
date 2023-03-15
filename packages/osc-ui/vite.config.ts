@@ -1,6 +1,5 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
-// import importMetaEnv from '@import-meta-env/unplugin';
 import react from '@vitejs/plugin-react';
 import 'dotenv/config';
 import fs from 'fs';
