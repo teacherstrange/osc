@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from '../../Icon/Icon';
 import type { AutocompleteItem as AutocompleteItemTypes } from '../types/autoComplete';
 import { Highlight } from './Highlight';
 
@@ -42,27 +43,42 @@ interface ItemProps {
 export const SearchResultItem = (props: ItemProps) => {
     const { item, ALGOLIA_PRIMARY_INDEX_GROUPED } = props;
 
-    return (
-        <div className="c-autocomplete__item-wrapper">
-            <div className="c-autocomplete__item-content">
-                {item.image && (
+    const calcItemIcon = () => {
+        if (item.image) {
+            return (
+                item.image && (
                     <div className="c-autocomplete__item-image">
                         <img src={item.image} alt={item.title} width="40" height="40" />
                     </div>
-                )}
-                {item[ALGOLIA_PRIMARY_INDEX_GROUPED] && (
-                    <div className="c-autocomplete__item-image">
-                        <img
-                            src={
-                                item[ALGOLIA_PRIMARY_INDEX_GROUPED].facets.exact_matches
-                                    .product_image[0].value
-                            }
-                            alt={item.title}
-                            width="40"
-                            height="40"
-                        />
-                    </div>
-                )}
+                )
+            );
+        } else if (item[ALGOLIA_PRIMARY_INDEX_GROUPED])
+            return (
+                <div className="c-autocomplete__item-image">
+                    <img
+                        src={
+                            item[ALGOLIA_PRIMARY_INDEX_GROUPED].facets.exact_matches
+                                .product_image[0].value
+                        }
+                        alt={item.title}
+                        width="40"
+                        height="40"
+                    />
+                </div>
+            );
+        else {
+            return (
+                <div className="c-autocomplete__item-image">
+                    <Icon id="magnifying-glass" />
+                </div>
+            );
+        }
+    };
+
+    return (
+        <div className="c-autocomplete__item-wrapper">
+            <div className="c-autocomplete__item-content">
+                {calcItemIcon()}
                 <div className="c-autocomplete__item-content-body">
                     <div className="c-autocomplete__item-title">
                         <Highlight hit={item} attribute="title" />

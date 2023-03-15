@@ -23,11 +23,13 @@ const Template: Story<Partial<AutocompleteOptions<AutocompleteItem>>> = (args) =
         <>
             <Autocomplete
                 ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS={
-                    process.env.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS
+                    process.env.STORYBOOK_ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS
                 }
-                ALGOLIA_PRIMARY_INDEX_GROUPED={process.env.ALGOLIA_PRIMARY_INDEX_GROUPED}
-                ALGOLIA_APP_ID={process.env.ALGOLIA_APP_ID}
-                ALGOLIA_ID_SEARCH_ONLY_API_KEY={process.env.ALGOLIA_ID_SEARCH_ONLY_API_KEY}
+                ALGOLIA_PRIMARY_INDEX_GROUPED={process.env.STORYBOOK_ALGOLIA_PRIMARY_INDEX_GROUPED}
+                ALGOLIA_APP_ID={process.env.STORYBOOK_ALGOLIA_APP_ID}
+                ALGOLIA_ID_SEARCH_ONLY_API_KEY={
+                    process.env.STORYBOOK_ALGOLIA_ID_SEARCH_ONLY_API_KEY
+                }
                 {...args}
             />
         </>

@@ -36,6 +36,7 @@ export function Autocomplete(props: AutocompleteProps) {
         ALGOLIA_PRIMARY_INDEX_GROUPED,
         ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS,
     } = props;
+
     insightsClient('init', {
         appId: ALGOLIA_APP_ID,
         apiKey: ALGOLIA_ID_SEARCH_ONLY_API_KEY,
@@ -223,7 +224,9 @@ export function Autocomplete(props: AutocompleteProps) {
                             );
                         })}
                     </div>
-                    <Button className="c-autocomplete__cta">View Detailed Search</Button>
+                    <div className="c-autocomplete__cta">
+                        <Button isFull>View Detailed Search</Button>
+                    </div>
                 </div>
             ) : null}
         </div>
