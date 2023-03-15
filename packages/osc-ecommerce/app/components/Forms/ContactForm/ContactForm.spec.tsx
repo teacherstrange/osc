@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { ContactForm } from './ContactForm';
-import { contactFormData, termsAndConditions } from '../data';
+import { contactFormData } from '../data';
 import { textContent } from './textContent';
 import { contactFormSchema } from '../formSchemas';
 import { SpritesheetProvider } from 'osc-ui';
@@ -11,7 +11,7 @@ test('should render the Contact form', () => {
             <ContactForm
                 actionText={textContent.actionText}
                 formErrors={[]}
-                formInputs={data.formInputs}
+                formInputs={contactFormData.formInputs}
                 schema={contactFormSchema}
                 setValidationErrors={() => {}}
                 termsAndConditions={textContent.termsAndConditions}
@@ -33,12 +33,12 @@ test('should render validation errors when present', () => {
             <ContactForm
                 actionText={textContent.actionText}
                 formErrors={[]}
-                formInputs={data.formInputs}
+                formInputs={contactFormData.formInputs}
                 schema={contactFormSchema}
                 setValidationErrors={() => {}}
                 termsAndConditions={textContent.termsAndConditions}
                 titleAndDescription={textContent.titleAndDescription}
-                validationErrors={data.validationErrors}
+                validationErrors={contactFormData.validationErrors}
             />
         </SpritesheetProvider>
     );
@@ -48,12 +48,3 @@ test('should render validation errors when present', () => {
     expect(container.querySelector('#email-error')).toBeInTheDocument();
     expect(container.querySelector('#enquiry-error')).toBeInTheDocument();
 });
-
-const data = {
-    actionText: contactFormData.actionText,
-    description: contactFormData.description,
-    formInputs: contactFormData.formInputs,
-    termsAndConditions: termsAndConditions,
-    title: contactFormData.title,
-    validationErrors: contactFormData.validationErrors,
-};
