@@ -1,6 +1,7 @@
 import { I18nProvider } from '@react-aria/i18n';
 import type { Dispatch, SetStateAction } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
+import type { FormInputs } from './ContactForm/ContactForm';
 
 import { datePickerSchema } from './formSchemas';
 
@@ -15,8 +16,7 @@ import type {
 } from './types';
 
 export function getFormInput(
-    // TODO - "data" needs to be typed better
-    data: any,
+    data: FormInputs,
     index: number,
     schema: ZodObject<ZodRawShape>,
     setValidationErrors: Dispatch<SetStateAction<any>>,
@@ -49,8 +49,7 @@ export function getFormInput(
 }
 
 function getInputType(
-    // TODO - "data" needs to be typed better
-    data: any,
+    data: FormInputs,
     index: number,
     schema: ZodObject<ZodRawShape>,
     setValidationErrors: Dispatch<SetStateAction<any>>,

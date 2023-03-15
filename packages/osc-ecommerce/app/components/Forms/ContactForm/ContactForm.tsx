@@ -6,7 +6,7 @@ import { getFormInput } from '../utils';
 
 import type { ContactFormFieldErrors, TextAreaType, TextInputType } from '../types';
 
-type FormInputs = TextInputType | TextAreaType;
+export type FormInputs = Partial<TextInputType | TextAreaType>;
 
 export interface ContactFormProps {
     /**

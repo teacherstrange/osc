@@ -2,38 +2,56 @@
 // Form Input Types
 // ----------------------------------------------
 
-export type TextInputType = {
+export type baseFormType = {
+    classes?: string;
+    layout?: string;
+    inputType: string;
+};
+
+export interface TextInputType extends baseFormType {
     id: string;
-    inputMode?: string;
+    inputMode?:
+        | 'search'
+        | 'text'
+        | 'none'
+        | 'tel'
+        | 'url'
+        | 'email'
+        | 'numeric'
+        | 'decimal'
+        | undefined;
     name: string;
     pattern?: string;
     placeholder?: string;
     required: boolean;
     type?: string;
     variants?: Variants[];
-};
+}
 
-export type TextAreaType = {
+export interface TextAreaType extends baseFormType {
     id: string;
     name: string;
     required: boolean;
-};
+}
 
-export type SelectItems = { name: string; value: string };
+export interface SelectItems extends baseFormType {
+    name: string;
+    value: string;
+}
 
-export type SelectType = {
+export interface SelectType extends baseFormType {
     description?: { label: string };
     name: string;
     placeholder?: string;
     selectItems: SelectItems[];
-};
+}
 
-export type DatePickerType = {
+export interface DatePickerType extends baseFormType {
     name: string;
     label: string;
-};
+}
 
-export type CheckboxType = {
+export interface CheckboxType extends baseFormType {
     description: {
         id: string;
         value: string;
@@ -41,14 +59,19 @@ export type CheckboxType = {
     id: string;
     name: string;
     value: string;
-};
+}
 
-export type TwoXColType = {
-    layout: string;
-    classes: string;
+export interface TwoXColType extends baseFormType {
     description: string;
-    nestedData: (TextInputType | SelectType)[];
-};
+    nestedData: (
+        | TextInputType
+        | TextAreaType
+        | SelectItems
+        | SelectType
+        | DatePickerType
+        | CheckboxType
+    )[];
+}
 
 type Variants = 'secondary' | 'tertiary' | 'quaternary';
 
