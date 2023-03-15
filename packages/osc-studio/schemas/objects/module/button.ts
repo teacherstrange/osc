@@ -56,6 +56,8 @@ export default {
                 layout: 'radio',
                 direction: 'horizontal',
             },
+            initialValue: 'internal',
+            validation: (Rule) => Rule.required(),
         },
         {
             name: 'file',
