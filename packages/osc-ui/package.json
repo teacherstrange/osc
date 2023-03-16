@@ -24,9 +24,10 @@
     "@algolia/autocomplete-plugin-query-suggestions": "^1.8.3",
     "@algolia/autocomplete-plugin-recent-searches": "^1.8.3",
     "@algolia/autocomplete-preset-algolia": "^1.8.3",
+    "@algolia/recommend": "^4.15.0",
+    "@algolia/recommend-react": "^1.8.1",
     "@internationalized/date": "^3.1.0",
     "@portabletext/react": "^2.0.2",
-    "@portabletext/types": "^2.0.0",
     "@radix-ui/react-accessible-icon": "^1.0.1",
     "@radix-ui/react-accordion": "^1.1.0",
     "@radix-ui/react-avatar": "^1.0.1",
@@ -69,7 +70,6 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "lodash": "^4.17.21",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@portabletext/types": "^2.0.2",
     "@testing-library/jest-dom": "^5.16.5",
@@ -83,6 +83,7 @@
     "c8": "^7.13.0",
     "cssnano": "^5.1.15",
     "jsdom": "^19.0.0",
+    "lodash": "^4.17.21",
     "postcss": "^8.4.21",
     "react-router-dom": "^6.8.2",
     "rollup": "^3.17.3",

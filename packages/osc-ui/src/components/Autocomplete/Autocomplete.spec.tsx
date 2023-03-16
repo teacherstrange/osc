@@ -19,11 +19,9 @@ test('renders a Autcomplete panel when the input is clicked', async () => {
             ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
         />
     );
-    const input = screen.getByRole('textbox', { name: 'Search' });
-    // await user.type(input, 'G');
+    const input = screen.getByRole('searchbox', { name: 'Search' });
     await user.type(input, 'English');
     await waitFor(() => {
-        // eslint-disable-next-line
         expect(screen.getByRole('combobox')).toHaveAttribute('aria-expanded', 'true');
     });
 });
@@ -39,10 +37,10 @@ test('typing updates autocomplete results', async () => {
         />
     );
 
-    const input = screen.getByRole('textbox', { name: 'Search' });
+    const input = screen.getByRole('searchbox', { name: 'Search' });
 
     await user.type(input, 'English');
-    const sections = await screen.findAllByTestId('hits');
+    const sections = await screen.findAllByRole('option');
 
     rerender(
         <Autocomplete
@@ -54,14 +52,14 @@ test('typing updates autocomplete results', async () => {
     );
 
     await user.type(input, 'Geography');
-    const newSections = await screen.findAllByTestId('hits');
+    const newSections = await screen.findAllByRole('option');
 
     await waitFor(() => {
         expect(_.isEqual(sections, newSections)).toBeFalsy();
     });
 });
 
-test('clicking the reset button clears the search results', async () => {
+test('Searching for A Level Geography returns A Level Geography as the fist direct result.', async () => {
     const user = userEvent.setup();
     render(
         <Autocomplete
@@ -71,14 +69,12 @@ test('clicking the reset button clears the search results', async () => {
             ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
         />
     );
-    const input = screen.getByRole('textbox', { name: 'Search' });
-    await user.type(input, 'English');
+    const input = screen.getByRole('searchbox', { name: 'Search' });
+    await user.type(input, 'A Level Geography');
 
-    // click clear button
-    const clearButton = await screen.findByText('X');
-    clearButton.click();
-
-    await waitFor(() => expect(input).toHaveValue(''));
+    const results = await screen.findAllByTestId('results');
+    const firstResult = results[0].querySelector('.c-autocomplete__item-title');
+    await waitFor(() => expect(firstResult).toHaveTextContent('A Level Geography'));
 });
 
 test('limits the amount of results to three', async () => {
@@ -92,7 +88,7 @@ test('limits the amount of results to three', async () => {
             ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
         />
     );
-    const input = screen.getByRole('textbox', { name: 'Search' });
+    const input = screen.getByRole('searchbox', { name: 'Search' });
     await user.type(input, 'English');
     const results = await screen.findAllByTestId('results');
     // populate aa panel

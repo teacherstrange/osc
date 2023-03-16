@@ -9,6 +9,14 @@
     $panel-radius: $rad-xs;
 
     .c-autocomplete {
+        /* stylelint-disable selector-class-pattern */
+        .c-input__text::-webkit-search-decoration,
+        .c-input__text::-webkit-search-cancel-button,
+        .c-input__text::-webkit-search-results-button,
+        .c-input__text::-webkit-search-results-decoration {
+            background: var(--color-secondary);
+        }
+        /* stylelint-enable selector-class-pattern */
         &__panel {
             width: 100%;
             margin: 8px 0 0;
@@ -31,17 +39,22 @@
             padding: var(--font-scale-xl);
         }
 
-        &__input_clear_button {
+        &__input-clear-button {
             position: absolute;
-            top: 26px;
-            right: 55px;
+            top: $space-l;
+            right: $space-3xl;
             cursor: pointer;
         }
 
         &__item {
             display: grid;
-            padding: calc($space-2xs - 4px);
+            padding: $fs-2xs;
             cursor: pointer;
+
+            &[aria-selected="true"] {
+                background-color: var(--color-senary);
+                color: var(--color-tertiary);
+            }
 
             &:last-child {
                 margin-bottom: var(--font-scale-xs);
@@ -70,7 +83,7 @@
             &-description {
                 color: #262627;
                 color: rgb(var(--aa-text-color-rgb) var(--aa-text-color-alpha));
-                font-size: calc($fs-s - 2px);
+                font-size: $fs-xs;
             }
         }
     }

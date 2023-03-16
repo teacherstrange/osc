@@ -1,7 +1,6 @@
 import type { AutocompleteOptions } from '@algolia/autocomplete-core';
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-
 import { Autocomplete } from './Autocomplete';
 import type { AutocompleteItem } from './types/autoComplete';
 

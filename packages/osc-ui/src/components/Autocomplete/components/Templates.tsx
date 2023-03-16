@@ -1,18 +1,16 @@
 import React from 'react';
 import { Icon } from '../../Icon/Icon';
-import type { AutocompleteItem as AutocompleteItemTypes } from '../types/autoComplete';
+import type { AutocompleteItem as AutocompleteItemTypes } from '../Autocomplete';
 import { Highlight } from './Highlight';
 
-// TODO - Add No results back in
 //-------------------------------------------------- //
 // No results
 // ------------------------------------------------- //
 
 export const NoResult = () => {
-    return <div>No Results</div>;
+    return <p>Sorry, No Results.</p>;
 };
 
-// TODO - Add Results Header back in
 //-------------------------------------------------- //
 // Results Header
 // ------------------------------------------------- //
@@ -48,7 +46,7 @@ export const SearchResultItem = (props: ItemProps) => {
             return (
                 item.image && (
                     <div className="c-autocomplete__item-image">
-                        <img src={item.image} alt={item.title} width="40" height="40" />
+                        <img src={item.image} alt={item.title ?? ''} width="40" height="40" />
                     </div>
                 )
             );
@@ -60,7 +58,7 @@ export const SearchResultItem = (props: ItemProps) => {
                             item[ALGOLIA_PRIMARY_INDEX_GROUPED].facets.exact_matches
                                 .product_image[0].value
                         }
-                        alt={item.title}
+                        alt={item.title ?? ''}
                         width="40"
                         height="40"
                     />
@@ -69,7 +67,7 @@ export const SearchResultItem = (props: ItemProps) => {
         else {
             return (
                 <div className="c-autocomplete__item-image">
-                    <Icon id="magnifying-glass" />
+                    <Icon id="search" />
                 </div>
             );
         }

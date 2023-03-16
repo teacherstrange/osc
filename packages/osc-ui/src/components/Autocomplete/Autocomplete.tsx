@@ -1,24 +1,52 @@
-import type { AutocompleteSource, AutocompleteState } from '@algolia/autocomplete-core';
+import type {
+    AutocompleteOptions,
+    AutocompleteSource,
+    AutocompleteState,
+} from '@algolia/autocomplete-core';
 import { createAutocomplete } from '@algolia/autocomplete-core';
 import { createAlgoliaInsightsPlugin } from '@algolia/autocomplete-plugin-algolia-insights';
 import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
+import type { Hit } from '@algolia/client-search';
 import algoliasearch from 'algoliasearch/lite';
 import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import insightsClient from 'search-insights';
 import { Button } from '../Button/Button';
-import { Icon } from '../Icon/Icon';
 import { TextInput } from '../TextInput/TextInput';
 import './autocomplete.scss';
-import { SearchResultItem } from './components/Templates';
+import { NoResult, ResultsHeader, SearchResultItem } from './components/Templates';
 import { popularCoursesPlugin } from './plugins/popularCoursesPlugin';
 import { recentSearchesPlugin } from './plugins/recentSearchesPlugin';
 import type { AutocompleteItem, AutocompleteProps } from './types/autoComplete';
 import { debounced } from './utils/debounced';
 
-// TODO - Refactor this out of the component and put credentials into env vars
+export type AutocompleteItem = Hit<{
+    categories: string[];
+    image: string;
+    label: string;
+    name: string;
+    objectID: string;
+    title: string;
+    url: string;
+}>;
 
-export function Autocomplete(props: AutocompleteProps) {
+export type AutocompleteProps = Partial<AutocompleteOptions<AutocompleteItem>> & {
+    resultsLimit?: number;
+    ALGOLIA_APP_ID: string;
+    ALGOLIA_ID_SEARCH_ONLY_API_KEY: string;
+    ALGOLIA_PRIMARY_INDEX_GROUPED: string;
+    ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS: string;
+};
+
+export const Autocomplete = (props: AutocompleteProps) => {
+    const {
+        resultsLimit = 3,
+        ALGOLIA_APP_ID,
+        ALGOLIA_ID_SEARCH_ONLY_API_KEY,
+        ALGOLIA_PRIMARY_INDEX_GROUPED,
+        ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS,
+    } = props;
+
     const [autocompleteUiState, setAutocompleteUiState] = useState<
         AutocompleteState<AutocompleteItem>
     >({
@@ -30,13 +58,6 @@ export function Autocomplete(props: AutocompleteProps) {
         query: '',
         status: 'idle',
     });
-    const {
-        resultsLimit = 3,
-        ALGOLIA_APP_ID,
-        ALGOLIA_ID_SEARCH_ONLY_API_KEY,
-        ALGOLIA_PRIMARY_INDEX_GROUPED,
-        ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS,
-    } = props;
 
     insightsClient('init', {
         appId: ALGOLIA_APP_ID,
@@ -85,17 +106,16 @@ export function Autocomplete(props: AutocompleteProps) {
                 ],
                 ...props,
             }),
-        // eslint-disable-next-line
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [props]
     );
 
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const formRef = useRef<HTMLFormElement>(null);
-    const panelRef = React.useRef<HTMLDivElement>(null);
+    const panelRef = useRef<HTMLDivElement>(null);
 
     const { getEnvironmentProps, setQuery } = autocomplete;
 
-    // TODO - Work out exactly what this is doing..!
     useEffect(() => {
         if (!formRef.current || !panelRef.current || !inputRef.current) {
             return undefined;
@@ -135,22 +155,13 @@ export function Autocomplete(props: AutocompleteProps) {
                         variants={['quaternary']}
                         {...autocomplete.getInputProps({ inputElement: inputRef.current })}
                         // Overriding to type "text" from type "search" as we don't want the styled cancel button
-                        type="text"
+                        type="search"
                     ></TextInput>
-                    {autocomplete.getInputProps({ inputElement: inputRef.current }).value && (
-                        <button
-                            onClick={() => {
-                                setQuery('');
-                            }}
-                            className="aa-ClearButton c-autocomplete__input_clear_button"
-                        >
-                            <Icon id="close" />
-                        </button>
-                    )}
                 </div>
             </form>
             {autocompleteUiState.isOpen ? (
                 <div
+                    ref={panelRef}
                     className={[
                         'aa-Panel',
                         autocompleteUiState.status === 'stalled' && 'aa-Panel--stalled',
@@ -162,24 +173,19 @@ export function Autocomplete(props: AutocompleteProps) {
                     <div className="c-autocomplete__panel--scrollable">
                         {autocompleteUiState?.collections?.find(
                             (q) => q.source.sourceId === 'Results'
-                        ).items.length === 0 && <p>Sorry, no results.</p>}
+                        ).items.length === 0 && <NoResult />}
                         {autocompleteUiState?.collections?.map((collection, index) => {
                             const { source, items } = collection;
                             const { sourceId } = source;
                             return (
                                 <>
-                                    {items.length > 0 && (
-                                        <p>
-                                            <strong>{sourceId}</strong>
-                                        </p>
-                                    )}
+                                    {items.length > 0 && <ResultsHeader title={sourceId} />}
                                     <section key={`source-${index}`}>
                                         {items.length > 0 ? (
                                             <ul {...autocomplete.getListProps()}>
                                                 {items?.map((item, index) => {
                                                     return (
                                                         <li
-                                                            data-testid={'hits'}
                                                             className="c-autocomplete__item"
                                                             key={item.objectID + '_' + index}
                                                             {...autocomplete.getItemProps({
@@ -218,4 +224,4 @@ export function Autocomplete(props: AutocompleteProps) {
             ) : null}
         </div>
     );
-}
+};
