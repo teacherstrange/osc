@@ -26,6 +26,7 @@
     "copy-fonts": "run-s copy-fonts:*"
   },
   "dependencies": {
+    "@hubspot/api-client": "^8.8.0",
     "@prisma/client": "^4.11.0",
     "@radix-ui/react-icons": "^1.2.0",
     "@react-aria/i18n": "^3.7.0",

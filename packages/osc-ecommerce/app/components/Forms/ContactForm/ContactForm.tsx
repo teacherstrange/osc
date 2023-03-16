@@ -21,7 +21,7 @@ export interface ContactFormProps {
     /**
      * Errors on the whole form, such as failure to submit due to network failure
      */
-    formErrors: string[];
+    formErrors: string[] | [];
     /**
      * Transition state when form is being submitted - used to show pending state on submit button
      */
