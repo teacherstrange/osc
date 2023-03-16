@@ -30,13 +30,19 @@
     "@prisma/client": "^4.11.0",
     "@radix-ui/react-icons": "^1.2.0",
     "@react-aria/i18n": "^3.7.0",
-    "@remix-run/node": "^1.13.0",
-    "@remix-run/react": "^1.13.0",
-    "@remix-run/serve": "^1.13.0",
-    "@remix-run/server-runtime": "^1.13.0",
+    "@remix-run/express": "^1.12.0",
+    "@remix-run/node": "^1.12.0",
+    "@remix-run/react": "^1.12.0",
+    "@remix-run/server-runtime": "^1.12.0",
+    "@shopify/hydrogen": "^2023.1.5",
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
     "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
     "groq": "^3.5.1",
+    "morgan": "^1.10.0",
     "node-persist": "^3.1.3",
     "osc-ui": "*",
     "picosanity": "^4.0.0",
@@ -51,12 +57,15 @@
     "@faker-js/faker": "^7.6.0",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@playwright/test": "^1.31.1",
-    "@remix-run/dev": "^1.13.0",
+    "@remix-run/dev": "^1.12.0",
     "@sanity/groq-store": "^2.0.7",
+    "@shopify/remix-oxygen": "^1.0.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/bcryptjs": "^2.4.2",
+    "@types/compression": "^1.7.2",
+    "@types/morgan": "^1.9.4",
     "@types/node": "^18.14.2",
     "@types/node-persist": "^3.1.3",
     "@types/react": "^18.0.28",
@@ -87,5 +96,8 @@
   },
   "browserslist": [
     "last 2 versions, not dead"
-  ]
+  ],
+  "engines": {
+    "node": ">=16"
+  }
 }

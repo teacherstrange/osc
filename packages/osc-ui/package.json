@@ -47,7 +47,7 @@
     "@react-aria/visually-hidden": "^3.6.1",
     "@react-stately/calendar": "^3.0.5",
     "@react-stately/datepicker": "^3.2.1",
-    "@remix-run/react": "^1.13.0",
+    "@remix-run/react": "^1.12.0",
     "dotenv": "^16.0.3",
     "keen-slider": "^6.8.5",
     "lightgallery": "^2.7.1",
