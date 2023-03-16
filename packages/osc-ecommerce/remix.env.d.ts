@@ -22,6 +22,6 @@ declare module '@shopify/remix-oxygen' {
     export interface AppLoadContext {
         session: HydrogenSession;
         storefront: Storefront;
-        env: Env;
+        cache?: Cache;
     }
 }
