@@ -17,8 +17,7 @@
 	6 	$UTILITIES
 */
 
-@layer
-    generics,
+@layer generics,
     theme,
     elements,
     objects,
@@ -102,7 +101,9 @@
 // OUR SCSS COMPONENT STYLES ARE LOADED VIA OUR UI LIBRARY, @OSC-UI //
 
 // TODO - Temporary fix - forms is only in osc-ecommerce but adding the scss there is causing a few issues.
-@include meta.load-css("components/forms");
+@layer components {
+    @include meta.load-css("components/forms");
+}
 
 /* ============================
 // $UTILITIES
