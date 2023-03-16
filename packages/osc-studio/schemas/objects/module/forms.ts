@@ -15,8 +15,8 @@ export default {
             title: 'Content',
         },
         {
-            name: 'custom',
-            title: 'Custom',
+            name: 'settings',
+            title: 'Settings',
         },
     ],
     fields: [
@@ -56,7 +56,7 @@ export default {
             title: 'Slide Out',
             description: 'Whether the form should slide out',
             type: 'boolean',
-            group: 'custom',
+            group: 'settings',
         },
         {
             name: 'slideDirection',
@@ -67,14 +67,14 @@ export default {
                 list: ['slide-right', 'slide-left'],
                 layout: 'dropdown',
             },
-            group: 'custom',
+            group: 'settings',
         },
         {
             name: 'slideOutText',
             title: 'Slide Out Text',
             description: 'Optional text for slide out if selected',
             type: 'string',
-            group: 'custom',
+            group: 'settings',
         },
     ],
     preview: {
