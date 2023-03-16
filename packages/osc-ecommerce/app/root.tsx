@@ -54,6 +54,14 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscUiBurgerStyles },
         { rel: 'stylesheet', href: oscUiAccordionStyles },
         { rel: 'stylesheet', href: oscFooterStyles },
+        {
+            rel: 'preconnect',
+            href: 'https://cdn.shopify.com',
+        },
+        {
+            rel: 'preconnect',
+            href: 'https://shop.app',
+        },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
         { rel: 'apple-touch-icon', sizes: '60x60', href: '/icons/apple-icon-60x60.png' },
