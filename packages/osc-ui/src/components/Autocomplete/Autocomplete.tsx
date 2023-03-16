@@ -13,11 +13,11 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import insightsClient from 'search-insights';
 import { Button } from '../Button/Button';
 import { TextInput } from '../TextInput/TextInput';
+import type { AutocompleteItem, AutocompleteProps } from './Autocomplete';
 import './autocomplete.scss';
 import { NoResult, ResultsHeader, SearchResultItem } from './components/Templates';
 import { popularCoursesPlugin } from './plugins/popularCoursesPlugin';
 import { recentSearchesPlugin } from './plugins/recentSearchesPlugin';
-import type { AutocompleteItem, AutocompleteProps } from './types/autoComplete';
 import { debounced } from './utils/debounced';
 
 export type AutocompleteItem = Hit<{
