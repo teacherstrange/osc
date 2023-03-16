@@ -31,11 +31,9 @@ import { SiteHeader } from './components/Header/Header';
 import { getSettingsData } from './models/sanity.server';
 import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
-import { getUser } from './session.server';
 import type { SanityNavSettings, SanitySocial } from './types/sanity';
 import { getColorScheme } from './utils/colorScheme';
 
-let isMount = true;
 export const links: LinksFunction = () => {
     return [
         // Preload the spritesheet to avoid a flash of unstyled content
@@ -85,7 +83,6 @@ export const links: LinksFunction = () => {
 };
 
 type LoaderData = {
-    user: Awaited<ReturnType<typeof getUser>>;
     colorScheme: string;
     siteSettings: object;
     navSettings: SanityNavSettings;
@@ -137,7 +134,6 @@ export const loader: LoaderFunction = async ({ request }) => {
         }));
 
     return json<LoaderData>({
-        user: await getUser(request),
         colorScheme: await getColorScheme(request),
         siteSettings,
         navSettings,
@@ -234,7 +230,8 @@ export default function App() {
         checkConnectivity(online, offline).then((data) => console.log(data));
     }, []);
 
-    React.useEffect(() => {
+    let isMount = true;
+    useEffect(() => {
         let mounted = isMount;
         isMount = false;
         if ('serviceWorker' in navigator) {
