@@ -58,8 +58,12 @@ app.all('*', async (req, res, next) => {
         const { storefront } = createStorefrontClient({
             /* Cache API instance */
             // cache, // TODO: Pass cache instance here
-            /* Buyer IP address to avoid Storefront API rate limit */
-            buyerIp: req.ip,
+            /* Storefront headers include buyer IP address to avoid Storefront API rate limit */
+            storefrontHeaders: {
+                requestGroupId: req.get('request-id') ?? null,
+                buyerIp: req.ip ?? null,
+                cookie: req.get('cookie') ?? null,
+            },
             /* Public Storefront API token for your store */
             publicStorefrontToken: process.env.PUBLIC_STOREFRONT_API_TOKEN,
             /* Private Storefront API token for your store */
@@ -70,7 +74,6 @@ app.all('*', async (req, res, next) => {
             storefrontApiVersion: process.env.PUBLIC_STOREFRONT_API_VERSION || '2023-01',
             /* Your storefront id */
             storefrontId: process.env.PUBLIC_STOREFRONT_ID,
-            // requestGroupId: request.headers.get('request-id'),
         });
 
         /**
