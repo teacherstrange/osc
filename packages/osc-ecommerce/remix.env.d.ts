@@ -1,5 +1,9 @@
 /// <reference types="@remix-run/dev" />
 /// <reference types="@remix-run/node/globals" />
+/// <reference types="@shopify/remix-oxygen" />
+/// <reference types="@shopify/oxygen-workers-types" />
+
+import type { Storefront } from '@shopify/hydrogen';
 
 interface DocumentEnv {
     readonly SANITY_STUDIO_CI: string;
@@ -9,4 +13,15 @@ interface DocumentEnv {
 
 interface Document {
     readonly env: DocumentEnv;
+}
+
+/**
+ * Declare local additions to `AppLoadContext` to include the session utilities we injected in `server.ts`.
+ */
+declare module '@shopify/remix-oxygen' {
+    export interface AppLoadContext {
+        session: HydrogenSession;
+        storefront: Storefront;
+        env: Env;
+    }
 }
