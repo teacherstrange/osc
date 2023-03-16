@@ -1,7 +1,7 @@
 import { Form as RemixForm } from '@remix-run/react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import type { formModule, TypesOfForm } from '~/types/sanity';
+import type { formModule } from '~/types/sanity';
 import { ContactForm } from './ContactForm/ContactForm';
 import { contactFormData } from './data';
 import { FormContainer } from './FormContainer';
@@ -9,7 +9,7 @@ import { contactFormSchema } from './formSchemas';
 import type { ContactFormFieldErrors } from './types';
 
 interface FormProps {
-    form: TypesOfForm;
+    form: formModule;
     formErrors: string[];
     // TODO - Add formRef for resetting the form on submit
     // formRef: MutableRefObject<undefined>;
@@ -22,12 +22,8 @@ interface FormProps {
 const Form = (props: FormProps) => {
     const { form, formErrors, setValidationErrors, validationErrors } = props;
 
-    switch (form._type) {
-        case 'form.contactForm':
-            const titleAndDescription = form.titleAndDescription;
-            const termsAndConditions = form.termsAndConditions;
-            const actionText = form.actionText;
-
+    switch (form.formId) {
+        case 'Contact Form':
             const contactValidationErrors = validationErrors as ContactFormFieldErrors;
             const setContactValidationErrors = setValidationErrors as Dispatch<
                 SetStateAction<ContactFormFieldErrors | {}>
@@ -35,15 +31,19 @@ const Form = (props: FormProps) => {
 
             return (
                 <RemixForm method="post" noValidate>
-                    <FormContainer variant="slide-out">
+                    <FormContainer
+                        slideOut={form.slideOut}
+                        slideOutText={form.slideOutText}
+                        variant={form.slideDirection}
+                    >
                         <ContactForm
-                            actionText={actionText}
+                            actionText={form.actionText}
                             formErrors={formErrors}
                             formInputs={contactFormData.formInputs}
                             schema={contactFormSchema}
                             setValidationErrors={setContactValidationErrors}
-                            termsAndConditions={termsAndConditions}
-                            titleAndDescription={titleAndDescription}
+                            termsAndConditions={form.termsAndConditions}
+                            titleAndDescription={form.titleAndDescription}
                             validationErrors={contactValidationErrors}
                         />
                     </FormContainer>
@@ -65,15 +65,12 @@ export const Forms = (props: { module: formModule }) => {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {module.form.map((form) => (
-                <Form
-                    form={form}
-                    formErrors={formErrors}
-                    key={form._key}
-                    setValidationErrors={setValidationErrors}
-                    validationErrors={validationErrors}
-                />
-            ))}
+            <Form
+                form={module}
+                formErrors={formErrors}
+                setValidationErrors={setValidationErrors}
+                validationErrors={validationErrors}
+            />
         </div>
     );
 };

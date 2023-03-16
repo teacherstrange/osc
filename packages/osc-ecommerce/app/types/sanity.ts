@@ -437,14 +437,12 @@ export interface SanityActionNavSettings {
     };
 }
 
-export interface contactForm extends module {
-    actionText: string;
-    termsAndConditions?: PortableTextBlock[];
-    titleAndDescription?: PortableTextBlock[];
-}
-
-export type TypesOfForm = contactForm;
-
 export interface formModule extends module {
-    form: TypesOfForm[];
+    actionText: string;
+    formId: 'Contact Form' | 'Prospectus Form';
+    slideDirection?: 'slide-right' | 'slide-left';
+    slideOut?: boolean;
+    slideOutText?: string;
+    termsAndConditions?: PortableTextBlock[];
+    titleAndDescription: PortableTextBlock[];
 }
