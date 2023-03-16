@@ -13,7 +13,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import insightsClient from 'search-insights';
 import { Button } from '../Button/Button';
 import { TextInput } from '../TextInput/TextInput';
-import type { AutocompleteItem, AutocompleteProps } from './Autocomplete';
 import './autocomplete.scss';
 import { NoResult, ResultsHeader, SearchResultItem } from './components/Templates';
 import { popularCoursesPlugin } from './plugins/popularCoursesPlugin';
