@@ -45,13 +45,24 @@ inputs:
   SANITY_STUDIO_API_TOKEN:
     required: true
     description: "sanity api token"
-  HUBSPOT_ACCESS_TOKEN: 
+  HUBSPOT_ACCESS_TOKEN:
     required: true
     description: 'hubspot access token'
   HUBSPOT_PORTAL_ID:
     required: true
     description: 'hubspot portal id'
-  
+  PUBLIC_STOREFRONT_API_TOKEN:
+    required: true
+    description: "public storefront api token"
+  PRIVATE_STOREFRONT_API_TOKEN:
+    required: true
+    description: "private storefront api token"
+  PUBLIC_STOREFRONT_API_VERSION:
+    required: true
+    description: "public storefront api version"
+  PUBLIC_STORE_DOMAIN:
+    required: true
+    description: "public storefront domain"
 runs:
   using: "composite"
   steps:
