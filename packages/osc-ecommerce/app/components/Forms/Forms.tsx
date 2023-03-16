@@ -30,12 +30,12 @@ const Form = (props: FormProps) => {
             >;
 
             return (
-                <RemixForm method="post" noValidate>
-                    <FormContainer
-                        slideOut={form.slideOut}
-                        slideOutText={form.slideOutText}
-                        variant={form.slideDirection}
-                    >
+                <FormContainer
+                    slideOut={form.slideOut}
+                    slideOutText={form.slideOutText}
+                    variant={form.slideDirection}
+                >
+                    <RemixForm method="post" noValidate>
                         <ContactForm
                             actionText={form.actionText}
                             formErrors={formErrors}
@@ -46,8 +46,8 @@ const Form = (props: FormProps) => {
                             titleAndDescription={form.titleAndDescription}
                             validationErrors={contactValidationErrors}
                         />
-                    </FormContainer>
-                </RemixForm>
+                    </RemixForm>
+                </FormContainer>
             );
 
         default:
@@ -64,13 +64,11 @@ export const Forms = (props: { module: formModule }) => {
     const formErrors: string[] = [];
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Form
-                form={module}
-                formErrors={formErrors}
-                setValidationErrors={setValidationErrors}
-                validationErrors={validationErrors}
-            />
-        </div>
+        <Form
+            form={module}
+            formErrors={formErrors}
+            setValidationErrors={setValidationErrors}
+            validationErrors={validationErrors}
+        />
     );
 };
