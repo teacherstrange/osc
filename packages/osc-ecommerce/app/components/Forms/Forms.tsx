@@ -23,7 +23,7 @@ const Form = (props: FormProps) => {
     const { form, formErrors, setValidationErrors, validationErrors } = props;
 
     switch (form.formId) {
-        case 'Contact Form':
+        case 'contact-form':
             const contactValidationErrors = validationErrors as ContactFormFieldErrors;
             const setContactValidationErrors = setValidationErrors as Dispatch<
                 SetStateAction<ContactFormFieldErrors | {}>

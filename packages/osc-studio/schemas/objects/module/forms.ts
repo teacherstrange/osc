@@ -33,7 +33,16 @@ export default {
             type: 'string',
             options: {
                 layout: 'select',
-                list: ['Contact Form', 'Prospectus Form'],
+                list: [
+                    {
+                        title: 'Contact Form',
+                        value: 'contact-form',
+                    },
+                    {
+                        title: 'Prospectus Form',
+                        value: 'prospectus-form',
+                    },
+                ],
             },
             group: 'forms',
         },

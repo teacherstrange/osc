@@ -439,7 +439,7 @@ export interface SanityActionNavSettings {
 
 export interface formModule extends module {
     actionText: string;
-    formId: 'Contact Form' | 'Prospectus Form';
+    formId: 'contact-form' | 'prospectus-form';
     slideDirection?: 'slide-right' | 'slide-left';
     slideOut?: boolean;
     slideOutText?: string;
