@@ -2,12 +2,20 @@ import type { PortableTextBlock } from '@portabletext/types';
 
 interface TextContent {
     actionText: string;
+    formId: string;
+    slideDirection?: 'slide-left' | 'slide-right';
+    slideOut?: boolean;
+    slideOutText?: string;
     termsAndConditions?: PortableTextBlock[];
     titleAndDescription?: PortableTextBlock[];
 }
 
 export const textContent: TextContent = {
-    actionText: 'Send Enquiry',
+    actionText: 'Submit Enquiry',
+    formId: 'Contact Form',
+    slideDirection: 'slide-left',
+    slideOut: true,
+    slideOutText: 'Contact Us',
     termsAndConditions: [
         {
             _key: 'bbcb308f129e',

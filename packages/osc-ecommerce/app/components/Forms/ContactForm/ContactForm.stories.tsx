@@ -42,7 +42,11 @@ const Template: Story<ContactFormProps & FormContainerProps> = (args) => {
     return (
         <SpritesheetProvider>
             <div style={{ display: 'flex', justifyContent: 'center', margin: '3em 0' }}>
-                <FormContainer slideOut={args.slideOut} variant={args.variant}>
+                <FormContainer
+                    slideOut={args.slideOut}
+                    slideOutText={args.slideOutText}
+                    variant={args.variant}
+                >
                     <ContactForm
                         actionText={args.actionText}
                         formErrors={[]}
@@ -65,10 +69,11 @@ export const Validation = Template.bind({});
 Primary.args = {
     actionText: textContent.actionText,
     formInputs: contactFormData.formInputs,
-    slideOut: true,
+    slideOut: textContent.slideOut,
+    slideOutText: textContent.slideOutText,
     termsAndConditions: textContent.termsAndConditions,
     titleAndDescription: textContent.titleAndDescription,
-    variant: 'slide-left',
+    variant: textContent.slideDirection,
 };
 
 Validation.args = {
