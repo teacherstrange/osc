@@ -1,12 +1,16 @@
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData, useParams } from '@remix-run/react';
+import { Link, useLoaderData, useParams } from '@remix-run/react';
+import type { Collection as CollectionType } from '@shopify/hydrogen/storefront-api-types';
+import type { LoaderArgs } from '@shopify/remix-oxygen';
 import { useState } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
+import invariant from 'tiny-invariant';
 import Module, { getComponentStyles } from '~/components/Module';
 import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
-import { COLLECTION_QUERY } from '~/queries/sanity/collection';
+import { COLLECTION_QUERY as SANITY_COLLECTION_QUERY } from '~/queries/sanity/collection';
+import { COLLECTION_QUERY as SHOPIFY_COLLECTION_QUERY } from '~/queries/shopify/collection';
 import type { module, SanityPage } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
@@ -17,17 +21,30 @@ interface PageData {
     isPreview: boolean;
 }
 
-export const loader: LoaderFunction = async ({ request, params }) => {
-    if (!params.slug) throw new Error('Missing slug');
+export const loader = async ({ request, params, context }: LoaderArgs) => {
+    const { slug } = params;
+    const { storefront } = context;
+
+    invariant(slug, 'Missing slug param');
+
+    const { collection } = await storefront.query<{
+        collection: CollectionType;
+    }>(SHOPIFY_COLLECTION_QUERY, {
+        variables: {
+            handle: slug,
+            country: storefront.i18n?.country,
+            language: storefront.i18n?.language,
+        },
+    });
 
     // Query the page data
     const data = await getPageData({
         request,
         params,
-        query: COLLECTION_QUERY,
+        query: SANITY_COLLECTION_QUERY,
     });
 
-    if (!data?.page) {
+    if (!collection || !data?.page) {
         const redirect = await shouldRedirect(request);
 
         if (redirect) {
@@ -37,21 +54,22 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         }
     }
 
-    const { page: collection, isPreview }: PageData = data;
+    const { page, isPreview }: PageData = data;
 
-    const hubspotFormData = await getHubspotForms(collection);
+    const hubspotFormData = await getHubspotForms(page);
 
     const canonicalUrl = buildCanonicalUrl({
-        canonical: collection?.seo?.canonicalUrl,
+        canonical: page?.seo?.canonicalUrl,
         request,
     });
 
     return json({
+        page,
         collection,
         isPreview,
         canonicalUrl,
         hubspotFormData: hubspotFormData ? hubspotFormData : null,
-        query: isPreview ? COLLECTION_QUERY : null,
+        query: isPreview ? SANITY_COLLECTION_QUERY : null,
     });
 };
 
@@ -66,7 +84,7 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
     const globalSeoSettings = parentsData.root.siteSettings.seo;
 
     const meta = buildHtmlMetaTags({
-        pageData: data.collection,
+        pageData: data.page,
         globalData: globalSeoSettings,
         canonicalUrl: data.canonicalUrl,
     });
@@ -74,26 +92,33 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
     return meta;
 };
 
-export default function Index() {
-    const { collection, isPreview, query } = useLoaderData<typeof loader>();
+export default function Collection() {
+    const { page, collection, isPreview, query } = useLoaderData<typeof loader>();
     const params = useParams();
 
     // If `preview` mode is active, its component updates this state for us
-    const [data, setData] = useState<SanityPage>(collection);
+    const [data, setData] = useState<SanityPage>(page);
 
     // Make sure to update the page state if the IDs are different!
-    if (collection?._id !== data?._id) setData(collection);
+    if (page?._id !== data?._id) setData(page);
 
     /**
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
      */
     return (
-        <div>
-            {isPreview ? (
+        <>
+            {isPreview && query ? (
                 <Preview data={data} setData={setData} query={query} queryParams={params} />
             ) : null}
+            <h1>{collection?.title}</h1>
 
-            <h1>{data?.store?.title}</h1>
+            {collection.products.nodes.length > 0
+                ? collection.products.nodes.map((product) => (
+                      <div key={product.id}>
+                          <Link to={`/products/${product.handle}`}>{product.title}</Link>
+                      </div>
+                  ))
+                : null}
 
             {data?.modules && data?.modules.length > 0 ? (
                 <>
@@ -102,6 +127,6 @@ export default function Index() {
                     )}
                 </>
             ) : null}
-        </div>
+        </>
     );
 }
