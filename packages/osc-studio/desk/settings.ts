@@ -1,12 +1,7 @@
-import S from '@sanity/desk-tool/structure-builder';
+import type { StructureBuilder } from 'sanity/desk';
 
-// prettier-ignore
-export const settings = S.listItem()
-  .title('Settings')
-  .schemaType('settings')
-  .child(
-    S.editor()
-      .title('Settings')
-      .schemaType('settings')
-      .documentId('settings')
-  )
+export const settings = (S: StructureBuilder) =>
+    S.listItem()
+        .title('Settings')
+        .schemaType('settings')
+        .child(S.editor().title('Settings').schemaType('settings').documentId('settings'));
