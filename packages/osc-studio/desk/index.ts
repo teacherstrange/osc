@@ -19,21 +19,21 @@
   * https://www.sanity.io/docs/overview-structure-builder
  */
 
-import S from '@sanity/desk-tool/structure-builder';
 import Iframe from 'sanity-plugin-iframe-pane';
-import SeoPane from 'sanity-plugin-seo-pane';
-import { blog } from './desk/blog';
-import { collections } from './desk/collections';
-import { home } from './desk/home';
-import { navigation } from './desk/navigation';
-import { pages } from './desk/pages';
-import { posts } from './desk/posts';
-import { products } from './desk/products';
-import { redirects } from './desk/redirects';
-import { settings } from './desk/settings';
-import { team } from './desk/team';
+import { SeoPane } from 'sanity-plugin-seo-pane';
+import { blog } from './blog';
+import { collections } from './collections';
+import { home } from './home';
+import { navigation } from './navigation';
+import { pages } from './pages';
+import { posts } from './posts';
+import { products } from './products';
+import { redirects } from './redirects';
+import { settings } from './settings';
+import { team } from './team';
 
-import { resolveProductionUrl } from './utils/resolveProductionUrl';
+import type { StructureResolver } from 'sanity/desk';
+import { resolveProductionUrl } from '../utils/resolveProductionUrl';
 
 // If you add document types to desk structure manually, you can add them to this array to prevent duplicates in the root pane
 const DOCUMENT_TYPES_IN_STRUCTURE = [
@@ -58,7 +58,7 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
  * Singletons (i.e. home) or complex documents (i.e. products) will need to add the view directly
  * into the document file.
  */
-export const getDefaultDocumentNode = ({ schemaType }) => {
+export const getDefaultDocumentNode = (S, { schemaType }) => {
     // Don't add the preview or seo pane to the redirect
     if (schemaType === 'redirect' || schemaType === 'navigation' || schemaType === 'team') {
         return;
@@ -90,25 +90,25 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
 };
 
 // Then we export the default list of menu items
-export default () => {
+export const structure: StructureResolver = (S, context) => {
     // prettier-ignore
     return S.list()
         .title('Content')
         .items([
-            home,
-            pages,
+            home(S),
+            pages(S),
             S.divider(),
-            blog,
-            posts,
+            blog(S),
+            posts(S),
             S.divider(),
-            collections,
-            products,
+            collections(S),
+            products(S),
             S.divider(),
-            team,
+            team(S),
             S.divider(),
-            settings,
-            navigation,
-            redirects,
+            settings(S),
+            navigation(S),
+            redirects(S),
             S.divider(),
             // Automatically add new document types to the root pane
             ...S.documentTypeListItems().filter(
