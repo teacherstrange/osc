@@ -4,7 +4,7 @@
  * Learn more: https://www.sanity.io/docs/document-actions
  */
 import { EarthGlobeIcon } from '@sanity/icons';
-import { collectionUrl, productUrl, productVariantUrl } from '../utils/shopifyUrls';
+import { collectionUrl, productUrl, productVariantUrl } from '../../utils/shopifyUrls';
 
 type Props = {
     published: Record<string, any>; // Sanity Document
@@ -45,6 +45,6 @@ export default (props: Props) => {
         onHandle: () => {
             window.open(url);
         },
-        shortcut: 'Ctrl+Alt+E'
+        shortcut: 'Ctrl+Alt+E',
     };
 };
