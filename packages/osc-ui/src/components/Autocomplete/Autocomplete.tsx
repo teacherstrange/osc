@@ -119,7 +119,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
 
     const { getEnvironmentProps, setQuery, setCollections } = autocomplete;
 
-    // see: https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-renderer/#mirroring-a-native-mobile-experience
+    // The use effect helps mirror the native mobile experience, see: https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-renderer/#mirroring-a-native-mobile-experience
     useEffect(() => {
         if (!formRef.current || !panelRef.current || !inputRef.current) {
             return undefined;

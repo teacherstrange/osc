@@ -37,7 +37,23 @@
                 max-height: $panel-max-height;
                 overflow-x: hidden;
                 overflow-y: auto;
+                scrollbar-color: var(--color-primary);
                 padding: $space-xs;
+            }
+
+            &--scrollable::-webkit-scrollbar {
+                width: 12px; /* width of the entire scrollbar */
+            }
+
+            &--scrollable::-webkit-scrollbar-track {
+                background: var(--color-tertiary); /* color of the tracking area */
+            }
+
+            &--scrollable::-webkit-scrollbar-thumb {
+                width: 10px;
+                background-color: var(--color-secondary); /* color of the scroll thumb */
+                border: 3px solid var(--color-secondary); /* creates padding around scroll thumb */
+                border-radius: 40px; /* roundness of the scroll thumb */
             }
         }
 
