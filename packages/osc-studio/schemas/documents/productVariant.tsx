@@ -12,27 +12,29 @@ export default {
         {
             name: 'shopifySync',
             title: 'Shopify sync',
-            icon: ShopifyIcon
-        }
+            icon: ShopifyIcon,
+        },
     ],
     fields: [
         // Product variant hidden status
         {
             name: 'hidden',
             type: 'string',
-            inputComponent: ProductVariantHiddenInput,
+            components: {
+                input: ProductVariantHiddenInput,
+            },
             hidden: ({ parent }) => {
                 const isDeleted = parent?.store?.isDeleted;
 
                 return !isDeleted;
-            }
+            },
         },
         // Title (proxy)
         {
             title: 'Title',
             name: 'titleProxy',
             type: 'proxyString',
-            options: { field: 'store.title' }
+            options: { field: 'store.title' },
         },
         // Shopify product variant
         {

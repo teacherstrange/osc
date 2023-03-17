@@ -34,27 +34,29 @@ export default {
         {
             name: 'hidden',
             type: 'string',
-            inputComponent: ProductHiddenInput,
+            components: {
+                input: ProductHiddenInput,
+            },
             group: GROUPS.map((group) => group.name),
             hidden: ({ parent }) => {
                 const isActive = parent?.store?.status === 'active';
                 const isDeleted = parent?.store?.isDeleted;
                 return isActive && !isDeleted;
-            }
+            },
         },
         // Title (proxy)
         {
             name: 'titleProxy',
             title: 'Title',
             type: 'proxyString',
-            options: { field: 'store.title' }
+            options: { field: 'store.title' },
         },
         // Slug (proxy)
         {
             name: 'slugProxy',
             title: 'Slug',
             type: 'proxyString',
-            options: { field: 'store.slug.current' }
+            options: { field: 'store.slug.current' },
         },
         // Modules
         {

@@ -45,7 +45,9 @@ export default {
                     name: 'headingColor',
                     title: 'Heading Colour',
                     type: 'string',
-                    inputComponent: ColorPicker,
+                    components: {
+                        input: ColorPicker,
+                    },
                 },
             ],
             options: {

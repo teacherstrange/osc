@@ -1,6 +1,5 @@
 import { PackageIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
-import React from 'react';
 import ShopifyIcon from '../../components/icons/Shopify';
 import CollectionHiddenInput from '../../components/inputs/CollectionHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
@@ -34,26 +33,28 @@ export default {
         {
             name: 'hidden',
             type: 'string',
-            inputComponent: CollectionHiddenInput,
+            components: {
+                input: CollectionHiddenInput,
+            },
             group: GROUPS.map((group) => group.name),
             hidden: ({ parent }) => {
                 const isDeleted = parent?.store?.isDeleted;
                 return !isDeleted;
-            }
+            },
         },
         // Title (proxy)
         {
             name: 'titleProxy',
             title: 'Title',
             type: 'proxyString',
-            options: { field: 'store.title' }
+            options: { field: 'store.title' },
         },
         // Slug (proxy)
         {
             name: 'slugProxy',
             title: 'Slug',
             type: 'proxyString',
-            options: { field: 'store.slug.current' }
+            options: { field: 'store.slug.current' },
         },
         // Show hero
         {
