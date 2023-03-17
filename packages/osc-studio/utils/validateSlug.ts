@@ -1,4 +1,4 @@
-const slug = require('slug');
+import slug from 'slug';
 
 const MAX_LENGTH = 96;
 
