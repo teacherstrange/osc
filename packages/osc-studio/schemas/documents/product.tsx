@@ -141,6 +141,7 @@ export default {
             return {
                 media: (
                     <ShopifyDocumentStatus
+                        title={title}
                         isActive={status === 'active'}
                         isDeleted={isDeleted}
                         type="product"
@@ -149,8 +150,8 @@ export default {
                 ),
                 description: description.join(' / '),
                 subtitle,
-                title
+                title,
             };
-        }
-    }
+        },
+    },
 };

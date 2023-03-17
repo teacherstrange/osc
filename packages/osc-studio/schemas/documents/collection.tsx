@@ -78,45 +78,50 @@ export default {
             title: 'Shopify',
             type: 'shopifyCollection',
             description: 'Collection data from Shopify (read-only)',
-            group: 'shopifySync'
+            group: 'shopifySync',
         },
         // SEO
         {
             name: 'seo',
             title: 'SEO',
             type: 'seo.shopify',
-            group: 'seo'
-        }
+            group: 'seo',
+        },
     ],
     orderings: [
         {
             name: 'titleAsc',
             title: 'Title (A-Z)',
-            by: [{ field: 'store.title', direction: 'asc' }]
+            by: [{ field: 'store.title', direction: 'asc' }],
         },
         {
             name: 'titleAsc',
             title: 'Title (Z-A)',
-            by: [{ field: 'store.title', direction: 'desc' }]
-        }
+            by: [{ field: 'store.title', direction: 'desc' }],
+        },
     ],
     preview: {
         select: {
             imageUrl: 'store.imageUrl',
             isDeleted: 'store.isDeleted',
             ruleCount: 'store.rules.length',
-            title: 'store.title'
+            title: 'store.title',
         },
         prepare(selection) {
             const { imageUrl, isDeleted, ruleCount, title } = selection;
             return {
                 media: (
-                    <ShopifyDocumentStatus isDeleted={isDeleted} type="collection" url={imageUrl} />
+                    <ShopifyDocumentStatus
+                        title={title}
+                        isDeleted={isDeleted}
+                        type="collection"
+                        url={imageUrl}
+                    />
                 ),
                 subtitle:
                     ruleCount > 0 ? `Automated (${pluralize('rule', ruleCount, true)})` : 'Manual',
-                title
+                title,
             };
-        }
-    }
+        },
+    },
 };

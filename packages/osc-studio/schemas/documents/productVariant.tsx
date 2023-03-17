@@ -59,6 +59,7 @@ export default {
             return {
                 media: (
                     <ShopifyDocumentStatus
+                        title={title}
                         isActive={status === 'active'}
                         isDeleted={isDeleted}
                         type="productVariant"
@@ -66,8 +67,8 @@ export default {
                     />
                 ),
                 subtitle: sku,
-                title
+                title,
             };
-        }
-    }
+        },
+    },
 };
