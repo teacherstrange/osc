@@ -46,6 +46,10 @@ Make a copy of the `.env.sample` in each workspace, rename it to `.env` and upda
     SANITY_STUDIO_API_TOKEN=""
     HUBSPOT_ACCESS_TOKEN=""
     HUBSPOT_PORTAL_ID=""
+    PUBLIC_STOREFRONT_API_TOKEN=""
+    PRIVATE_STOREFRONT_API_TOKEN=""
+    PUBLIC_STOREFRONT_API_VERSION="2023-01"
+    PUBLIC_STORE_DOMAIN="openstudydev.myshopify.com"
     ```
 
 -   `osc-api-admin`
