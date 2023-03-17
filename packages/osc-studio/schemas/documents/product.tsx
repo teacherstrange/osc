@@ -1,32 +1,29 @@
 import { TagIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
-import React from 'react';
 import ShopifyIcon from '../../components/icons/Shopify';
 import ProductHiddenInput from '../../components/inputs/ProductHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
-import { getPriceRange } from '../../utils/getPriceRange';
 import { MODULES } from '../../constants.js';
+import { getPriceRange } from '../../utils/getPriceRange';
 
 const GROUPS = [
     {
         default: true,
         name: 'editorial',
-        title: 'Editorial'
+        title: 'Editorial',
     },
     {
         name: 'shopifySync',
         title: 'Shopify sync',
-        icon: ShopifyIcon
+        icon: ShopifyIcon,
     },
     {
         name: 'seo',
-        title: 'SEO'
-    }
+        title: 'SEO',
+    },
 ];
 
 export default {
-    // Required to hide 'create new' button in desk structure
-    __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
     name: 'product',
     title: 'Product',
     type: 'document',

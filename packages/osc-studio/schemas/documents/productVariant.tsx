@@ -1,12 +1,9 @@
 import { CopyIcon } from '@sanity/icons';
-import React from 'react';
 import ShopifyIcon from '../../components/icons/Shopify';
 import ProductVariantHiddenInput from '../../components/inputs/ProductVariantHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
 
 export default {
-    // HACK: Required to hide 'create new' button in desk structure
-    __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
     name: 'productVariant',
     title: 'Product variant',
     type: 'document',

@@ -10,22 +10,20 @@ const GROUPS = [
     {
         default: true,
         name: 'editorial',
-        title: 'Editorial'
+        title: 'Editorial',
     },
     {
         name: 'shopifySync',
         title: 'Shopify sync',
-        icon: ShopifyIcon
+        icon: ShopifyIcon,
     },
     {
         name: 'seo',
-        title: 'SEO'
-    }
+        title: 'SEO',
+    },
 ];
 
 export default {
-    // Required to hide 'create new' button in desk structure
-    __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
     name: 'collection',
     title: 'Collection',
     type: 'document',
