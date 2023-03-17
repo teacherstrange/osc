@@ -34,6 +34,7 @@ import { SETTINGS_QUERY } from './queries/sanity/settings';
 import type { SanityNavSettings, SanitySocial } from './types/sanity';
 import { getColorScheme } from './utils/colorScheme';
 
+let isMount = true;
 export const links: LinksFunction = () => {
     return [
         // Preload the spritesheet to avoid a flash of unstyled content
@@ -230,7 +231,6 @@ export default function App() {
         checkConnectivity(online, offline).then((data) => console.log(data));
     }, []);
 
-    let isMount = true;
     useEffect(() => {
         let mounted = isMount;
         isMount = false;
