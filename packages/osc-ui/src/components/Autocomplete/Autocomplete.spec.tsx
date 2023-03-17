@@ -77,6 +77,26 @@ test('Searching for A Level Geography returns A Level Geography as the fist dire
     await waitFor(() => expect(firstResult).toHaveTextContent('A Level Geography'));
 });
 
+test('clicking the reset button clears the search results', async () => {
+    const user = userEvent.setup();
+    render(
+        <Autocomplete
+            ALGOLIA_APP_ID={ALGOLIA_APP_ID}
+            ALGOLIA_ID_SEARCH_ONLY_API_KEY={ALGOLIA_ID_SEARCH_ONLY_API_KEY}
+            ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS={ALGOLIA__QUERY_SUGGESTIONS}
+            ALGOLIA_PRIMARY_INDEX_GROUPED={ALGOLIA_PRIMARY_INDEX_GROUPED}
+        />
+    );
+    const input = screen.getByRole('searchbox', { name: 'Search' });
+    await user.type(input, 'English');
+
+    // click clear button
+    const clearButton = await screen.findByTestId('clearButton');
+    clearButton.click();
+
+    await waitFor(() => expect(input).toHaveValue(''));
+});
+
 test('limits the amount of results to three', async () => {
     const user = userEvent.setup();
     render(

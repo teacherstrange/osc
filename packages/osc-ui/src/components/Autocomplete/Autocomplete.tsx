@@ -12,6 +12,7 @@ import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import insightsClient from 'search-insights';
 import { Button } from '../Button/Button';
+import { Icon } from '../Icon/Icon';
 import { TextInput } from '../TextInput/TextInput';
 import './autocomplete.scss';
 import { NoResult, ResultsHeader, SearchResultItem } from './components/Templates';
@@ -115,6 +116,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
 
     const { getEnvironmentProps, setQuery } = autocomplete;
 
+    // see: https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-renderer/#mirroring-a-native-mobile-experience
     useEffect(() => {
         if (!formRef.current || !panelRef.current || !inputRef.current) {
             return undefined;
@@ -138,7 +140,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
     }, [getEnvironmentProps, autocompleteUiState.isOpen]);
 
     return (
-        <div className="c-autocomplete__container" {...autocomplete.getRootProps({})}>
+        <div className="c-autocomplete" {...autocomplete.getRootProps({})}>
             <form
                 className="c-autocomplete__form"
                 ref={formRef}
@@ -153,18 +155,29 @@ export const Autocomplete = (props: AutocompleteProps) => {
                         ref={inputRef}
                         variants={['quaternary']}
                         {...autocomplete.getInputProps({ inputElement: inputRef.current })}
-                        // Overriding to type "text" from type "search" as we don't want the styled cancel button
                         type="search"
                     ></TextInput>
+                    {autocomplete.getInputProps({ inputElement: inputRef.current }).value && (
+                        <button
+                            data-testid="clearButton"
+                            onClick={() => {
+                                setQuery('');
+                                setAutocompleteUiState((prevState) => ({
+                                    ...prevState,
+                                    isOpen: true,
+                                }));
+                            }}
+                            className="c-autocomplete__input-clear-button"
+                        >
+                            <Icon id="close" />
+                        </button>
+                    )}
                 </div>
             </form>
             {autocompleteUiState.isOpen ? (
                 <div
                     ref={panelRef}
-                    className={[
-                        'aa-Panel',
-                        autocompleteUiState.status === 'stalled' && 'aa-Panel--stalled',
-                    ]
+                    className={['', autocompleteUiState.status === 'stalled' && 'stalled']
                         .filter(Boolean)
                         .join(' ')}
                     {...autocomplete.getPanelProps({})}
@@ -186,7 +199,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
                                                     return (
                                                         <li
                                                             className="c-autocomplete__item"
-                                                            key={item.objectID + '_' + index}
+                                                            key={`${item.objectID}_${index}`}
                                                             {...autocomplete.getItemProps({
                                                                 item,
                                                                 source,

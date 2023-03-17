@@ -10,11 +10,11 @@
 
     .c-autocomplete {
         /* stylelint-disable selector-class-pattern */
-        .c-input__text::-webkit-search-decoration,
-        .c-input__text::-webkit-search-cancel-button,
-        .c-input__text::-webkit-search-results-button,
-        .c-input__text::-webkit-search-results-decoration {
-            background: var(--color-secondary);
+        input[type="search" i]::-webkit-search-decoration,
+        input[type="search" i]::-webkit-search-cancel-button,
+        input[type="search" i]::-webkit-search-results-button,
+        input[type="search" i]::-webkit-search-results-decoration {
+            appearance: none;
         }
         /* stylelint-enable selector-class-pattern */
         &__panel {
@@ -41,7 +41,7 @@
 
         &__input-clear-button {
             position: absolute;
-            top: $space-l;
+            top: calc($space-m + 6px);
             right: $space-3xl;
             cursor: pointer;
         }
@@ -52,8 +52,7 @@
             cursor: pointer;
 
             &[aria-selected="true"] {
-                background-color: var(--color-senary);
-                color: var(--color-tertiary);
+                background-color: var(--color-neutral-200);
             }
 
             &:last-child {
@@ -78,12 +77,6 @@
                     color: var(--color-primary);
                     font-weight: $fw-bold;
                 }
-            }
-
-            &-description {
-                color: #262627;
-                color: rgb(var(--aa-text-color-rgb) var(--aa-text-color-alpha));
-                font-size: $fs-xs;
             }
         }
     }

@@ -23,8 +23,8 @@ export const ResultsHeader = (props: ResultsHeaderProps) => {
     const { title } = props;
     return (
         <>
-            <span className="aa-SourceHeaderTitle">{title}</span>
-            <span className="aa-SourceHeaderLine" />
+            <span>{title}</span>
+            <br />
         </>
     );
 };
