@@ -12,4 +12,4 @@ function debouncePromise(fn, time) {
     };
 }
 
-export const debounced = debouncePromise((items) => Promise.resolve(items), 300);
+export const debounced = debouncePromise((items) => Promise.resolve(items), 0);

@@ -77,6 +77,9 @@ export const Autocomplete = (props: AutocompleteProps) => {
                         {
                             sourceId: 'Results',
                             async getItems({ query }) {
+                                if (!query) {
+                                    return [];
+                                }
                                 return getAlgoliaResults({
                                     searchClient,
                                     queries: [
@@ -114,7 +117,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
     const formRef = useRef<HTMLFormElement>(null);
     const panelRef = useRef<HTMLDivElement>(null);
 
-    const { getEnvironmentProps, setQuery } = autocomplete;
+    const { getEnvironmentProps, setQuery, setCollections } = autocomplete;
 
     // see: https://www.algolia.com/doc/ui-libraries/autocomplete/guides/creating-a-renderer/#mirroring-a-native-mobile-experience
     useEffect(() => {
@@ -161,11 +164,16 @@ export const Autocomplete = (props: AutocompleteProps) => {
                         <button
                             data-testid="clearButton"
                             onClick={() => {
+                                const resultsIndex = autocompleteUiState.collections.findIndex(
+                                    (q) => q.source.sourceId === 'Results'
+                                );
+                                delete autocompleteUiState.collections[resultsIndex];
+                                setCollections(
+                                    [...autocompleteUiState.collections].filter(
+                                        (q) => q !== undefined
+                                    )
+                                );
                                 setQuery('');
-                                setAutocompleteUiState((prevState) => ({
-                                    ...prevState,
-                                    isOpen: true,
-                                }));
                             }}
                             className="c-autocomplete__input-clear-button"
                         >
@@ -183,9 +191,9 @@ export const Autocomplete = (props: AutocompleteProps) => {
                     {...autocomplete.getPanelProps({})}
                 >
                     <div className="c-autocomplete__panel--scrollable">
-                        {autocompleteUiState?.collections?.find(
-                            (q) => q.source.sourceId === 'Results'
-                        ).items.length === 0 && <NoResult />}
+                        {!autocompleteUiState?.collections?.find((q) => q.items.length > 0) && (
+                            <NoResult />
+                        )}
                         {autocompleteUiState?.collections?.map((collection, index) => {
                             const { source, items } = collection;
                             const { sourceId } = source;

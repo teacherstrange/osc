@@ -14,7 +14,16 @@
         input[type="search" i]::-webkit-search-cancel-button,
         input[type="search" i]::-webkit-search-results-button,
         input[type="search" i]::-webkit-search-results-decoration {
-            appearance: none;
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        /* IE10+ */
+        input[type="search" i]::-ms-clear {
+            display: none;
+            width: 0;
+            height: 0;
         }
         /* stylelint-enable selector-class-pattern */
         &__panel {
@@ -41,9 +50,13 @@
 
         &__input-clear-button {
             position: absolute;
-            top: calc($space-m + 6px);
+            top: calc($space-m - 10px);
             right: $space-3xl;
             cursor: pointer;
+        }
+
+        &__input-wrapper {
+            position: relative;
         }
 
         &__item {
