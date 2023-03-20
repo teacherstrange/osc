@@ -1,22 +1,14 @@
 /**
  * Desk structure overrides
  *
- * This file configure how documents are structured in the Studio's desk tool.
- * It works because
-    {
-      "name": "part:@sanity/desk-tool/structure",
-      "path": "./deskStructure.js"
-    },
-  * is added to the `parts` array in `/sanity.json`.
-  *
-  * Sanity Studio automatically lists document types out of the box.
-  * With this custom desk structure we achieve things like showing the `home`
-  * and `settings` document types as singletons, and grouping product details
-  * and variants for easy editorial access.
-  *
-  * You can customize this even further as your schemas progress.
-  * To learn more about structure builder, visit our docs:
-  * https://www.sanity.io/docs/overview-structure-builder
+ * Sanity Studio automatically lists document types out of the box.
+ * With this custom desk structure we achieve things like showing the `home`
+ * and `settings` document types as singletons, and grouping product details
+ * and variants for easy editorial access.
+ *
+ * You can customize this even further as your schemas progress.
+ * To learn more about structure builder, visit our docs:
+ * https://www.sanity.io/docs/overview-structure-builder
  */
 
 import Iframe from 'sanity-plugin-iframe-pane';
