@@ -161,24 +161,26 @@ export const Autocomplete = (props: AutocompleteProps) => {
                         type="search"
                     ></TextInput>
                     {autocomplete.getInputProps({ inputElement: inputRef.current }).value && (
-                        <button
-                            data-testid="clearButton"
-                            onClick={() => {
-                                const resultsIndex = autocompleteUiState.collections.findIndex(
-                                    (q) => q.source.sourceId === 'Results'
-                                );
-                                delete autocompleteUiState.collections[resultsIndex];
-                                setCollections(
-                                    [...autocompleteUiState.collections].filter(
-                                        (q) => q !== undefined
-                                    )
-                                );
-                                setQuery('');
-                            }}
-                            className="c-autocomplete__input-clear-button"
-                        >
-                            <Icon id="close" />
-                        </button>
+                        <div className="c-autocomplete__input-clear-button-wrapper">
+                            <button
+                                className="c-autocomplete__input-clear-button"
+                                data-testid="clearButton"
+                                onClick={() => {
+                                    const resultsIndex = autocompleteUiState.collections.findIndex(
+                                        (q) => q.source.sourceId === 'Results'
+                                    );
+                                    delete autocompleteUiState.collections[resultsIndex];
+                                    setCollections(
+                                        [...autocompleteUiState.collections].filter(
+                                            (q) => q !== undefined
+                                        )
+                                    );
+                                    setQuery('');
+                                }}
+                            >
+                                <Icon id="close" />
+                            </button>
+                        </div>
                     )}
                 </div>
             </form>
