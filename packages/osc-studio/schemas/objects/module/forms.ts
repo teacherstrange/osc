@@ -1,5 +1,10 @@
 import { DocumentIcon } from '@sanity/icons';
 
+const forms = [
+    { name: 'Newsletter Form', id: '9cf24fde-b8c4-4165-bff6-1a151b83259d' },
+    { name: 'Contact Form', id: 'b6aca185-96b6-416f-9b03-9ce8f894ea44' },
+];
+
 export default {
     name: 'module.forms',
     title: 'Forms',
@@ -33,16 +38,7 @@ export default {
             type: 'string',
             options: {
                 layout: 'select',
-                list: [
-                    {
-                        title: 'Contact Form',
-                        value: 'contact-form',
-                    },
-                    {
-                        title: 'Prospectus Form',
-                        value: 'prospectus-form',
-                    },
-                ],
+                list: forms.map((form) => ({ title: form.name, value: form.id })),
             },
             group: 'forms',
         },
