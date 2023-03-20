@@ -38,6 +38,7 @@ export default function createSpritesheet(options = {}) {
                                 name: 'preset-default',
                                 params: {
                                     overrides: {
+                                        removeUselessStrokeAndFill: false, // we want to keep the stroke and stroke-width attribute
                                         removeViewBox: false, // we want to keep the viewBox attribute
                                         cleanupIds: false, // we want to avoid duplicate IDs so will keep them as is
                                     },
