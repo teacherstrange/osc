@@ -1,22 +1,22 @@
 import type { Meta, Story } from '@storybook/react';
+import { SpritesheetProvider } from 'osc-ui';
 import { useState } from 'react';
 import { contactFormData } from '../data';
+import type { FormContainerProps } from '../FormContainer';
 import { FormContainer } from '../FormContainer';
 import { contactFormSchema } from '../formSchemas';
 import type { ContactFormFieldErrors } from '../types';
-import type { ContactFormProps } from './ContactForm';
-import type { FormContainerProps } from '../FormContainer';
-import { ContactForm } from './ContactForm';
-import { SpritesheetProvider } from 'osc-ui';
+import type { HubspotFormProps } from './HubspotForm';
+import { HubspotForm } from './HubspotForm';
 import { textContent } from './textContent';
 
 export default {
-    title: 'osc-ecommerce/Forms/ContactForm',
-    component: ContactForm,
+    title: 'osc-ecommerce/Forms/HubspotForm',
+    component: HubspotForm,
     parameters: {
         docs: {
             description: {
-                component: 'OSC Contact Form',
+                component: 'OSC Hubspot Form',
             },
         },
     },
@@ -34,7 +34,7 @@ export default {
     },
 } as Meta;
 
-const Template: Story<ContactFormProps & FormContainerProps> = (args) => {
+const Template: Story<HubspotFormProps & FormContainerProps> = (args) => {
     const [validationErrors, setValidationErrors] = useState<ContactFormFieldErrors | {}>(
         args.validationErrors
     );
@@ -47,7 +47,7 @@ const Template: Story<ContactFormProps & FormContainerProps> = (args) => {
                     slideOutText={args.slideOutText}
                     variant={args.variant}
                 >
-                    <ContactForm
+                    <HubspotForm
                         actionText={args.actionText}
                         formErrors={[]}
                         formInputs={args.formInputs}

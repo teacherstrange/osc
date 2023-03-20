@@ -1,35 +1,26 @@
 import type { PortableTextBlock } from '@portabletext/types';
 import { Alert, Button, Content } from 'osc-ui';
 import type { Dispatch, SetStateAction } from 'react';
-import type { contactFormSchema } from '../formSchemas';
-import { getFormInput } from '../utils';
+import type { ContactFormFieldErrors, HubspotFormFieldGroups } from '../types';
+import { getFormFields, getInputType, getValidationSchema } from '../utils';
 
-import type { ContactFormFieldErrors, TextAreaType, TextInputType } from '../types';
-
-export type FormInputs = Partial<TextInputType | TextAreaType>;
-
-export interface ContactFormProps {
+export interface HubspotFormProps {
     /**
      * Sets the text for the form button
-     * @default 'Send Enquiry'
      */
     actionText: string;
-    /**
-     * An array of the Form Inputs
-     */
-    formInputs: FormInputs[];
     /**
      * Errors on the whole form, such as failure to submit due to network failure
      */
     formErrors: string[] | [];
     /**
+     * Form fields data from Hubspot, e.g. firstname, email etc...
+     */
+    formFieldGroups: HubspotFormFieldGroups[];
+    /**
      * Transition state when form is being submitted - used to show pending state on submit button
      */
     isSubmitting?: boolean;
-    /**
-     * The schema used for validating the form
-     */
-    schema: typeof contactFormSchema;
     /**
      * Dispatch used for setting errors client side validation errors
      */
@@ -45,35 +36,42 @@ export interface ContactFormProps {
     /**
      * A list of validation errors
      */
-    validationErrors: ContactFormFieldErrors | {};
+    validationErrors: Record<string, any>;
 }
 
-export const ContactForm = (props: ContactFormProps) => {
+export const HubspotForm = (props: HubspotFormProps) => {
     const {
-        actionText = 'Send Enquiry',
-        titleAndDescription,
-        formInputs,
+        actionText,
         formErrors,
+        formFieldGroups,
         isSubmitting = false,
-        schema,
         setValidationErrors,
         termsAndConditions,
+        titleAndDescription,
         validationErrors,
     } = props;
+
+    const validationSchema = getValidationSchema(getFormFields(formFieldGroups));
 
     return (
         <div className="c-form c-form__contact">
             <div className="c-form__inner-container">
                 {titleAndDescription ? <Content value={titleAndDescription} /> : null}
-                {formInputs?.map((data, index) => {
-                    return getFormInput(data, index, schema, setValidationErrors, validationErrors);
+                {formFieldGroups?.map((data, index) => {
+                    return getInputType(
+                        data,
+                        index,
+                        validationSchema,
+                        setValidationErrors,
+                        validationErrors
+                    );
                 })}
                 <Button
                     isLoading={isSubmitting}
                     variant="primary"
                     disabled={isSubmitting}
                     name="_action"
-                    value="create"
+                    value="submitHubspotForm"
                 >
                     {actionText}
                 </Button>

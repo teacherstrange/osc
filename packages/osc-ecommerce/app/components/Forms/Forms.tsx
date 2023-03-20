@@ -1,79 +1,106 @@
-import { Form as RemixForm, useActionData, useTransition } from '@remix-run/react';
-import type { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import { Form as RemixForm, useActionData, useLoaderData, useTransition } from '@remix-run/react';
+import { Alert } from 'osc-ui';
+import type { Dispatch, RefObject, SetStateAction } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import type { z } from 'zod';
 import type { formModule } from '~/types/sanity';
-import { ContactForm } from './ContactForm/ContactForm';
-import { contactFormData } from './data';
+import { HubspotForm } from './ContactForm/HubspotForm';
 import { FormContainer } from './FormContainer';
 import { contactFormSchema } from './formSchemas';
-import type { ContactFormFieldErrors } from './types';
+import type { HubspotFormFieldGroups } from './types';
+import { getFormFields, transitionStates } from './utils';
 
 const schema = contactFormSchema;
 
 type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 interface FormProps {
+    /**
+     * Data from Sanity, e.g. Description, Title etc...
+     */
     form: formModule;
+    /**
+     * Errors on the whole form, such as failure to submit due to network failure
+     */
     formErrors: string[] | [];
-    formRef: MutableRefObject<HTMLFormElement>;
+    /**
+     * Form fields data from Hubspot, e.g. firstname, email etc...
+     */
+    formFieldGroups: HubspotFormFieldGroups[];
+    /**
+     * useRef passed to the Form so it can be reset on successful submission
+     */
+    formRef: RefObject<HTMLFormElement>;
+    /**
+     * Transition state when form is being submitted - used to show pending state on submit button
+     */
     isSubmitting: boolean;
+    /**
+     * Dispatch used for setting errors client side validation errors
+     */
     setValidationErrors: Dispatch<SetStateAction<any>>;
+    /**
+     * Validation errors, initially from server, but that can be updated client side
+     */
     validationErrors: Record<string, any>;
 }
 
 const Form = (props: FormProps) => {
-    const { form, formRef, formErrors, isSubmitting, setValidationErrors, validationErrors } =
-        props;
+    const {
+        form,
+        formFieldGroups,
+        formRef,
+        formErrors,
+        isSubmitting,
+        setValidationErrors,
+        validationErrors,
+    } = props;
 
-    switch (form.formId) {
-        case 'contact-form':
-            const contactValidationErrors = validationErrors as ContactFormFieldErrors;
-            const setContactValidationErrors = setValidationErrors as Dispatch<
-                SetStateAction<ContactFormFieldErrors | {}>
-            >;
+    // Filter out the form fields (formFieldGroups can also contain RichText only entries)
+    const formFields = getFormFields(formFieldGroups);
 
-            return (
-                <FormContainer
-                    slideOut={form.slideOut}
-                    slideOutText={form.slideOutText}
-                    variant={form.slideDirection}
-                >
-                    <RemixForm ref={formRef} method="post" noValidate>
-                        <ContactForm
-                            actionText={form.actionText}
-                            formErrors={formErrors}
-                            formInputs={contactFormData.formInputs}
-                            isSubmitting={isSubmitting}
-                            schema={contactFormSchema}
-                            setValidationErrors={setContactValidationErrors}
-                            termsAndConditions={form.termsAndConditions}
-                            titleAndDescription={form.titleAndDescription}
-                            validationErrors={contactValidationErrors}
-                        />
-                    </RemixForm>
-                </FormContainer>
-            );
-
-        default:
-            return null;
-    }
+    return (
+        <FormContainer
+            slideOut={form.slideOut}
+            slideOutText={form.slideOutText}
+            variant={form.slideDirection}
+        >
+            <RemixForm ref={formRef} method="post" noValidate>
+                {/* Hidden Inputs added in order to get the form ID and hubspot form field data on submission */}
+                <input type="hidden" value={form.formId} name="formId" />
+                <input type="hidden" value={JSON.stringify(formFields)} name="hubspotFieldsData" />
+                <HubspotForm
+                    actionText={form.actionText}
+                    formErrors={formErrors}
+                    formFieldGroups={formFieldGroups}
+                    isSubmitting={isSubmitting}
+                    setValidationErrors={setValidationErrors}
+                    termsAndConditions={form.termsAndConditions}
+                    titleAndDescription={form.titleAndDescription}
+                    validationErrors={validationErrors}
+                />
+            </RemixForm>
+        </FormContainer>
+    );
 };
 
 export const Forms = (props: { module: formModule }) => {
+    // Module data coming from Sanity
     const { module } = props;
+    // Data coming back when the form has been submitted - e.g. transition state and any server errors
     const data = useActionData();
+    // Form field data from hubspot which gets loaded through the route
+    const { formFieldGroups } = useLoaderData();
 
-    const fieldErrors = data?.fieldErrors as FlattenedErrors;
+    const serverValidationErrors = data?.validationErrors?.fieldErrors as FlattenedErrors;
+    const serverErrors = data?.formErrors;
+
     const [validationErrors, setValidationErrors] = useState<FlattenedErrors | {}>([]);
     const [formErrors, setFormErrors] = useState<string[] | []>([]);
 
     const transition = useTransition();
-    const isSubmitting = transition.state === 'submitting';
-    let isAdding =
-        transition.state === 'submitting' &&
-        transition.submission.formData.get('_action') === 'create';
+    const { isAdding, isSubmitting } = transitionStates(transition);
 
-    const formRef = useRef<HTMLFormElement>();
+    const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
         // Reset the form when form has finished submitting there is a success response
@@ -84,18 +111,23 @@ export const Forms = (props: { module: formModule }) => {
 
     useEffect(() => {
         // Set errors when present
-        if (fieldErrors) {
-            setValidationErrors(fieldErrors);
+        if (serverValidationErrors) {
+            setValidationErrors(serverValidationErrors);
         }
-        if (data?.errors) {
-            setFormErrors(() => data.errors?.messages.map((message: string) => message));
+        if (serverErrors) {
+            setFormErrors(() => serverErrors.messages?.map((message: string) => message));
         }
-    }, [fieldErrors, data?.errors]);
+    }, [serverValidationErrors, serverErrors]);
+
+    if (formFieldGroups?.length === 0) {
+        return <Alert status="error">Unable to load form!</Alert>;
+    }
 
     return (
         <Form
             form={module}
             formErrors={formErrors}
+            formFieldGroups={formFieldGroups as HubspotFormFieldGroups[]}
             formRef={formRef}
             isSubmitting={isSubmitting}
             setValidationErrors={setValidationErrors}

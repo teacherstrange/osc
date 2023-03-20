@@ -1,144 +1,113 @@
-import { I18nProvider } from '@react-aria/i18n';
-import type { Dispatch, SetStateAction } from 'react';
+import type { Transition } from '@remix-run/react/dist/transition';
+import { TextArea, TextInput } from 'osc-ui';
+import type { Dispatch, InputHTMLAttributes, SetStateAction, TextareaHTMLAttributes } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
-import type { FormInputs } from './ContactForm/ContactForm';
+import { z } from 'zod';
+import type { HubspotFormFieldGroups, HubspotFormFieldTypes } from './types';
 
-import { datePickerSchema } from './formSchemas';
-
-import { Checkbox, DatePicker, Select, SelectItem, TextArea, TextInput } from 'osc-ui';
-import type {
-    SelectType,
-    CheckboxType,
-    DatePickerType,
-    TextAreaType,
-    TextInputType,
-    TwoXColType,
-} from './types';
-
-export function getFormInput(
-    data: FormInputs,
+export function getInputType(
+    data: HubspotFormFieldGroups,
     index: number,
     schema: ZodObject<ZodRawShape>,
     setValidationErrors: Dispatch<SetStateAction<any>>,
     validationErrors: Record<any, any>
 ) {
-    let input;
-    if (data.layout === '2X_COL') {
-        const inputData = data as TwoXColType;
-        input = (
-            <div className={inputData.classes} key={index}>
-                {inputData.description}
-                <div className="c-form__2x-col">
-                    {inputData.nestedData?.map((mappedData, index) => {
-                        return getInputType(
-                            mappedData,
-                            index,
-                            schema,
-                            setValidationErrors,
-                            validationErrors
-                        );
-                    })}
-                </div>
-            </div>
-        );
-    } else {
-        input = getInputType(data, index, schema, setValidationErrors, validationErrors);
-    }
+    let formInput:
+        | InputHTMLAttributes<HTMLInputElement>
+        | TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-    return input;
-}
+    // TODO - Need to work out the correct type for this!
+    let content: any;
 
-function getInputType(
-    data: FormInputs,
-    index: number,
-    schema: ZodObject<ZodRawShape>,
-    setValidationErrors: Dispatch<SetStateAction<any>>,
-    validationErrors: Record<any, any>
-) {
-    let formInput;
-
-    switch (data.inputType) {
-        case 'CHECKBOX':
-            const checkboxData = data as CheckboxType;
-            formInput = (
-                <Checkbox
-                    description={checkboxData.description}
-                    id={checkboxData.id}
-                    key={index}
-                    name={checkboxData.name}
-                    value={checkboxData.value}
-                />
-            );
-            break;
-        case 'DATE_PICKER':
-            const datePickerData = data as DatePickerType;
-            formInput = (
-                <I18nProvider locale="en-GB" key={index}>
-                    <DatePicker
-                        errors={validationErrors && validationErrors['datePickerData']}
-                        label={datePickerData.label}
-                        // Datepicker Schema imported directly as it is otherwise an ZodObject inside a ZodObject and running schema.pick on two levels doesn't seem to work. Plus it's unlikely to need to customise the datepicker schema on a form by form level.
-                        schema={datePickerSchema.date}
+    // If there are formFields then return correct form input type
+    if (data?.fields?.length > 0) {
+        const hubspotFields = data.fields[0];
+        switch (data.fields[0].fieldType) {
+            case 'textarea':
+                formInput = (
+                    <TextArea
+                        errors={validationErrors && validationErrors[hubspotFields.name]}
+                        id={hubspotFields.name}
+                        key={index}
+                        name={hubspotFields.label}
+                        required={hubspotFields.required}
+                        schema={schema.pick({ [hubspotFields.name]: true })}
                         setErrors={setValidationErrors}
                     />
-                </I18nProvider>
-            );
-            break;
-        case 'SELECT':
-            const selectData = data as SelectType;
-            formInput = (
-                <Select
-                    description={{ label: selectData.description?.label }}
-                    errors={validationErrors && validationErrors[selectData.name]}
-                    key={index}
-                    placeholder={selectData.placeholder}
-                    name={selectData.name}
-                    schema={schema.pick({ [selectData.name]: true })}
-                    setErrors={setValidationErrors}
-                >
-                    {selectData.selectItems?.map((item, index) => (
-                        <SelectItem key={index} value={item.value}>
-                            {item.name}
-                        </SelectItem>
-                    ))}
-                </Select>
-            );
-            break;
-        case 'TEXT_AREA':
-            const textareaData = data as TextAreaType;
-            formInput = (
-                <TextArea
-                    errors={validationErrors && validationErrors[textareaData.id]}
-                    id={textareaData.id}
-                    key={index}
-                    name={textareaData.name}
-                    required={textareaData.required}
-                    schema={schema.pick({ [textareaData.id]: true })}
-                    setErrors={setValidationErrors}
-                />
-            );
-            break;
-        case 'TEXT_INPUT':
-            const textInputData = data as TextInputType;
-            formInput = (
-                <TextInput
-                    errors={validationErrors && validationErrors[textInputData.id]}
-                    key={index}
-                    id={textInputData.id}
-                    inputMode={textInputData.inputMode}
-                    name={textInputData.name}
-                    pattern={textInputData.pattern}
-                    placeholder={textInputData.placeholder}
-                    required={textInputData.required}
-                    schema={schema.pick({ [textInputData.id]: true })}
-                    setErrors={setValidationErrors}
-                    type={textInputData.type}
-                    variants={textInputData.variants}
-                />
-            );
-            break;
-        default:
-            return null;
+                );
+                break;
+            case 'text':
+            case 'phonenumber':
+                formInput = (
+                    <TextInput
+                        errors={validationErrors && validationErrors[hubspotFields.name]}
+                        key={index}
+                        id={hubspotFields.name}
+                        inputMode={hubspotFields.fieldType === 'phonenumber' ? 'numeric' : 'text'}
+                        name={hubspotFields.label}
+                        pattern={hubspotFields.fieldType === 'phonenumber' ? '[0-9]*' : undefined}
+                        placeholder={hubspotFields.placeholder}
+                        required={hubspotFields.required}
+                        schema={schema.pick({ [hubspotFields.name]: true })}
+                        setErrors={setValidationErrors}
+                        type={hubspotFields.fieldType}
+                        // variants={data.variants}
+                    />
+                );
+                break;
+            default:
+                return null;
+        }
+        return formInput;
+    } else if (data?.richText?.content) {
+        content = (
+            <div
+                className="c-content"
+                dangerouslySetInnerHTML={{ __html: data.richText.content }}
+            />
+        );
+        return content;
     }
-    return formInput;
+    return null;
 }
+
+export const getValidationSchema = (formFields: HubspotFormFieldTypes[]) => {
+    const res = formFields.reduce((fields, field) => {
+        let validationField = {};
+        if (field.type === 'string') {
+            if (field.name !== 'email') {
+                validationField = {
+                    [field.name]: field.required
+                        ? z.string().trim().min(1, { message: 'Field is required' })
+                        : z.string(),
+                };
+            } else if (field.name === 'email') {
+                validationField = {
+                    email: z.string().email(),
+                };
+            }
+        }
+
+        return {
+            ...fields,
+            ...validationField,
+        };
+    }, {});
+
+    return z.object(res);
+};
+
+export const transitionStates = (transition: Transition) => {
+    const isSubmitting = transition.state === 'submitting';
+    const isAdding =
+        transition.state === 'submitting' &&
+        transition.submission.formData.get('_action') === 'submitForm';
+
+    return { isSubmitting, isAdding };
+};
+
+// Filter out the form fields (formFieldGroups can also contain RichText only entries)
+export const getFormFields = (formFieldGroups: HubspotFormFieldGroups[]) =>
+    formFieldGroups
+        .filter((formFieldGroup) => formFieldGroup?.fields.length > 0)
+        .map((formField) => formField.fields[0]);

@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
-import { ContactForm } from './ContactForm';
-import { contactFormData } from '../data';
-import { textContent } from './textContent';
-import { contactFormSchema } from '../formSchemas';
 import { SpritesheetProvider } from 'osc-ui';
+import { contactFormData } from '../data';
+import { contactFormSchema } from '../formSchemas';
+import { HubspotForm } from './HubspotForm';
+import { textContent } from './textContent';
 
 test('should render the Contact form', () => {
     render(
         <SpritesheetProvider>
-            <ContactForm
+            <HubspotForm
                 actionText={textContent.actionText}
                 formErrors={[]}
                 formInputs={contactFormData.formInputs}
@@ -30,7 +30,7 @@ test('should render the Contact form', () => {
 test('should render validation errors when present', () => {
     const { container } = render(
         <SpritesheetProvider>
-            <ContactForm
+            <HubspotForm
                 actionText={textContent.actionText}
                 formErrors={[]}
                 formInputs={contactFormData.formInputs}

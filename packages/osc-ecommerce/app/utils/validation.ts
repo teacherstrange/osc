@@ -1,20 +1,19 @@
-import type { ZodObject, ZodError } from 'zod';
+import type { ZodError, ZodObject } from 'zod';
 
-export async function validateAction<ActionInput>({
-    request,
+export async function validateAction({
+    formInputData,
     schema,
 }: {
-    request: Request;
+    formInputData: Record<string, unknown>;
     schema: ZodObject<any>;
 }) {
-    const fields = Object.fromEntries(await request.formData());
     try {
-        const formData = schema.parse(fields) as ActionInput;
-        return { formData, errors: null };
+        const validatedFormInputData = schema.parse(formInputData);
+        return { validatedFormInputData, errors: null };
     } catch (err) {
-        const errors = err as ZodError<ActionInput>;
+        const errors = err as ZodError;
         return {
-            formData: fields,
+            formData: formInputData,
             errors: errors.flatten(),
         };
     }
