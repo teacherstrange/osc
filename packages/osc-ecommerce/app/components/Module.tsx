@@ -185,8 +185,9 @@ export default function Module(props: Props) {
             ) : null;
 
         case 'module.forms':
-            const moduleform = module as formModule;
-            return <Forms module={moduleform} />;
+            const moduleForm = module as formModule;
+
+            return <Forms module={moduleForm} />;
 
         case 'module.hero':
             const moduleHero = module as heroModule;
