@@ -11,8 +11,7 @@ test('should render the Contact form', () => {
             <HubspotForm
                 actionText={textContent.actionText}
                 formErrors={[]}
-                formInputs={contactFormData.formInputs}
-                schema={contactFormSchema}
+                formFieldGroups={contactFormData.formFieldGroups}
                 setValidationErrors={() => {}}
                 termsAndConditions={textContent.termsAndConditions}
                 titleAndDescription={textContent.titleAndDescription}
@@ -20,11 +19,11 @@ test('should render the Contact form', () => {
             />
         </SpritesheetProvider>
     );
-    expect(screen.getByRole('textbox', { name: 'First Name *' })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: 'Last Name *' })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: 'Telephone number *' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: 'First name *' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: 'Last name *' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: 'Phone number *' })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: 'Email *' })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: 'Enquiry *' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: 'Message *' })).toBeInTheDocument();
 });
 
 test('should render validation errors when present', () => {
@@ -33,8 +32,7 @@ test('should render validation errors when present', () => {
             <HubspotForm
                 actionText={textContent.actionText}
                 formErrors={[]}
-                formInputs={contactFormData.formInputs}
-                schema={contactFormSchema}
+                formFieldGroups={contactFormData.formFieldGroups}
                 setValidationErrors={() => {}}
                 termsAndConditions={textContent.termsAndConditions}
                 titleAndDescription={textContent.titleAndDescription}
@@ -42,9 +40,10 @@ test('should render validation errors when present', () => {
             />
         </SpritesheetProvider>
     );
+
     expect(container.querySelector('#firstname-error')).toBeInTheDocument();
     expect(container.querySelector('#lastname-error')).toBeInTheDocument();
     expect(container.querySelector('#phone-error')).toBeInTheDocument();
     expect(container.querySelector('#email-error')).toBeInTheDocument();
-    expect(container.querySelector('#enquiry-error')).toBeInTheDocument();
+    expect(container.querySelector('#message-error')).toBeInTheDocument();
 });

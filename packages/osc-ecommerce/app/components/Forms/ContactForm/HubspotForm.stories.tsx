@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { contactFormData } from '../data';
 import type { FormContainerProps } from '../FormContainer';
 import { FormContainer } from '../FormContainer';
-import { contactFormSchema } from '../formSchemas';
-import type { ContactFormFieldErrors } from '../types';
+
 import type { HubspotFormProps } from './HubspotForm';
 import { HubspotForm } from './HubspotForm';
 import { textContent } from './textContent';
@@ -35,9 +34,7 @@ export default {
 } as Meta;
 
 const Template: Story<HubspotFormProps & FormContainerProps> = (args) => {
-    const [validationErrors, setValidationErrors] = useState<ContactFormFieldErrors | {}>(
-        args.validationErrors
-    );
+    const [validationErrors, setValidationErrors] = useState(args.validationErrors);
 
     return (
         <SpritesheetProvider>
@@ -50,8 +47,7 @@ const Template: Story<HubspotFormProps & FormContainerProps> = (args) => {
                     <HubspotForm
                         actionText={args.actionText}
                         formErrors={[]}
-                        formInputs={args.formInputs}
-                        schema={contactFormSchema}
+                        formFieldGroups={args.formFieldGroups}
                         setValidationErrors={setValidationErrors}
                         termsAndConditions={args.termsAndConditions}
                         titleAndDescription={args.titleAndDescription}
@@ -68,7 +64,7 @@ export const Validation = Template.bind({});
 
 Primary.args = {
     actionText: textContent.actionText,
-    formInputs: contactFormData.formInputs,
+    formFieldGroups: contactFormData.formFieldGroups,
     slideOut: textContent.slideOut,
     slideOutText: textContent.slideOutText,
     termsAndConditions: textContent.termsAndConditions,
