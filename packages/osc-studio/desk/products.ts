@@ -1,6 +1,6 @@
 import { InfoOutlineIcon } from '@sanity/icons';
 import Iframe from 'sanity-plugin-iframe-pane';
-import SeoPane from 'sanity-plugin-seo-pane';
+import { SEOPane } from 'sanity-plugin-seo-pane';
 import type { StructureBuilder } from 'sanity/desk';
 import { resolveProductionUrl } from '../utils/resolveProductionUrl';
 
@@ -38,7 +38,7 @@ export const products = (S: StructureBuilder) =>
                                                 })
                                                 .title('Preview'),
                                             S.view
-                                                .component(SeoPane)
+                                                .component(SEOPane)
                                                 .options({
                                                     // Retrieve the keywords and synonyms at the given dot-notated strings
                                                     keywords: `seo.keywords`,

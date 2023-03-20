@@ -20,7 +20,9 @@
  */
 
 import Iframe from 'sanity-plugin-iframe-pane';
-import { SeoPane } from 'sanity-plugin-seo-pane';
+import { SEOPane } from 'sanity-plugin-seo-pane';
+import type { DefaultDocumentNodeResolver, StructureResolver } from 'sanity/desk';
+import { resolveProductionUrl } from '../utils/resolveProductionUrl';
 import { blog } from './blog';
 import { collections } from './collections';
 import { home } from './home';
@@ -31,9 +33,6 @@ import { products } from './products';
 import { redirects } from './redirects';
 import { settings } from './settings';
 import { team } from './team';
-
-import type { StructureResolver } from 'sanity/desk';
-import { resolveProductionUrl } from '../utils/resolveProductionUrl';
 
 // If you add document types to desk structure manually, you can add them to this array to prevent duplicates in the root pane
 const DOCUMENT_TYPES_IN_STRUCTURE = [
@@ -58,7 +57,7 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
  * Singletons (i.e. home) or complex documents (i.e. products) will need to add the view directly
  * into the document file.
  */
-export const getDefaultDocumentNode = (S, { schemaType }) => {
+export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaType }) => {
     // Don't add the preview or seo pane to the redirect
     if (schemaType === 'redirect' || schemaType === 'navigation' || schemaType === 'team') {
         return;
@@ -78,7 +77,7 @@ export const getDefaultDocumentNode = (S, { schemaType }) => {
             })
             .title('Preview'),
         S.view
-            .component(SeoPane)
+            .component(SEOPane)
             .options({
                 // Retrieve the keywords and synonyms at the given dot-notated strings
                 keywords: `seo.keywords`,

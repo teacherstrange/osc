@@ -7,7 +7,7 @@ import {
 } from 'sanity-plugin-cloudinary';
 import { deskTool } from 'sanity/desk';
 import { LOCKED_DOCUMENT_IDS } from './constants';
-import { structure } from './desk';
+import { getDefaultDocumentNode as defaultDocumentNode, structure } from './desk';
 import { customDocumentActions } from './plugins/customDocumentActions';
 import { schemaTypes } from './schemas/schema';
 
@@ -22,6 +22,7 @@ export default defineConfig({
 
     plugins: [
         deskTool({
+            defaultDocumentNode,
             structure,
         }),
         cloudinaryAssetSourcePlugin(),
