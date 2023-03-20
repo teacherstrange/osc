@@ -23,6 +23,7 @@
     "build:osc-studio": "npx nx run osc-studio:build",
     "build:osc-ecommerce": "npx nx run osc-ecommerce:build",
     "build:osc-academic-hub": "npx nx run osc-academic-hub:build",
+    "build:osc-design-tokens": "npx nx run osc-design-tokens:build",
     "test": "npx nx run-many --target=test --all",
     "test:osc-ui": "npx nx run osc-ui:test",
     "test:osc-ecommerce": "npx nx run osc-ecommerce:test",
