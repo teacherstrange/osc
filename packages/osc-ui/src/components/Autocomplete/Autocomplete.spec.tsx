@@ -97,11 +97,11 @@ test('clicking the reset button clears the search results', async () => {
     await waitFor(() => expect(input).toHaveValue(''));
 });
 
-test('limits the amount of results to three', async () => {
+test('limits the amount of results to 2', async () => {
     const user = userEvent.setup();
     render(
         <Autocomplete
-            resultsLimit={3}
+            resultsLimit={2}
             ALGOLIA_APP_ID={ALGOLIA_APP_ID}
             ALGOLIA_ID_SEARCH_ONLY_API_KEY={ALGOLIA_ID_SEARCH_ONLY_API_KEY}
             ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS={ALGOLIA__QUERY_SUGGESTIONS}
@@ -113,6 +113,6 @@ test('limits the amount of results to three', async () => {
     const results = await screen.findAllByTestId('results');
     // populate aa panel
     await waitFor(() => {
-        expect(results.length === 3).toBeTruthy();
+        expect(results.length === 2).toBeTruthy();
     });
 });

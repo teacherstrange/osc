@@ -40,7 +40,7 @@ export type AutocompleteProps = Partial<AutocompleteOptions<AutocompleteItem>> &
 
 export const Autocomplete = (props: AutocompleteProps) => {
     const {
-        resultsLimit = 3,
+        resultsLimit,
         ALGOLIA_APP_ID,
         ALGOLIA_ID_SEARCH_ONLY_API_KEY,
         ALGOLIA_PRIMARY_INDEX_GROUPED,
@@ -80,15 +80,26 @@ export const Autocomplete = (props: AutocompleteProps) => {
                                 if (!query) {
                                     return [];
                                 }
+                                if (resultsLimit) {
+                                    return getAlgoliaResults({
+                                        searchClient,
+                                        queries: [
+                                            {
+                                                indexName: ALGOLIA_PRIMARY_INDEX_GROUPED,
+                                                query,
+                                                params: {
+                                                    hitsPerPage: resultsLimit,
+                                                },
+                                            },
+                                        ],
+                                    });
+                                }
                                 return getAlgoliaResults({
                                     searchClient,
                                     queries: [
                                         {
                                             indexName: ALGOLIA_PRIMARY_INDEX_GROUPED,
                                             query,
-                                            params: {
-                                                hitsPerPage: resultsLimit,
-                                            },
                                         },
                                     ],
                                 });
@@ -159,12 +170,15 @@ export const Autocomplete = (props: AutocompleteProps) => {
                         variants={['quaternary']}
                         {...autocomplete.getInputProps({ inputElement: inputRef.current })}
                         type="search"
-                    ></TextInput>
+                    />
                     {autocomplete.getInputProps({ inputElement: inputRef.current }).value && (
                         <div className="c-autocomplete__input-clear-button-wrapper">
                             <button
                                 className="c-autocomplete__input-clear-button"
                                 data-testid="clearButton"
+                                onMouseDown={(e) => {
+                                    e.preventDefault();
+                                }}
                                 onClick={() => {
                                     const resultsIndex = autocompleteUiState.collections.findIndex(
                                         (q) => q.source.sourceId === 'Results'
@@ -175,6 +189,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
                                             (q) => q !== undefined
                                         )
                                     );
+                                    // when you click the clear button, the input should clear, this function is destructured from the autocomplete instance
                                     setQuery('');
                                 }}
                             >
