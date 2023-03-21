@@ -35,6 +35,10 @@ interface FormProps {
      */
     setValidationErrors: Dispatch<{} | Record<string, string[]>>;
     /**
+     * Text name for the submit button from Hubspot
+     */
+    submitText: string;
+    /**
      * Validation errors, initially from server, but that can be updated client side
      */
     validationErrors: Record<string, string[]> | {};
@@ -48,6 +52,7 @@ const Form = (props: FormProps) => {
         formErrors,
         isSubmitting,
         setValidationErrors,
+        submitText,
         validationErrors,
     } = props;
 
@@ -65,11 +70,11 @@ const Form = (props: FormProps) => {
                 <input type="hidden" value={form.formId} name="formId" />
                 <input type="hidden" value={JSON.stringify(formFields)} name="hubspotFieldsData" />
                 <HubspotForm
-                    actionText={form.actionText}
                     formErrors={formErrors}
                     formFieldGroups={formFieldGroups}
                     isSubmitting={isSubmitting}
                     setValidationErrors={setValidationErrors}
+                    submitText={submitText}
                     termsAndConditions={form.termsAndConditions}
                     titleAndDescription={form.titleAndDescription}
                     validationErrors={validationErrors}
@@ -85,7 +90,7 @@ export const Forms = (props: { module: formModule }) => {
     // Data coming back when the form has been submitted - e.g. transition state and any server errors
     const data = useActionData();
     // Form field data from hubspot which gets loaded through the route
-    const { formFieldGroups } = useLoaderData();
+    const { hubspotFormData } = useLoaderData();
 
     const serverValidationErrors = data?.validationErrors?.fieldErrors as FlattenedErrors;
     const serverErrors = data?.formErrors;
@@ -115,11 +120,11 @@ export const Forms = (props: { module: formModule }) => {
         }
     }, [serverValidationErrors, serverErrors]);
 
-    if (formFieldGroups?.length === 0) {
+    if (hubspotFormData?.formFieldGroups?.length === 0) {
         return <Alert status="error">Unable to load form!</Alert>;
     }
 
-    const schema = getValidationSchema(formFieldGroups);
+    const schema = getValidationSchema(hubspotFormData.formFieldGroups);
 
     type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 
@@ -127,10 +132,11 @@ export const Forms = (props: { module: formModule }) => {
         <Form
             form={module}
             formErrors={formErrors}
-            formFieldGroups={formFieldGroups as HubspotFormFieldGroups[]}
+            formFieldGroups={hubspotFormData.formFieldGroups as HubspotFormFieldGroups[]}
             formRef={formRef}
             isSubmitting={isSubmitting}
             setValidationErrors={setValidationErrors}
+            submitText={hubspotFormData.submitText}
             validationErrors={validationErrors}
         />
     );

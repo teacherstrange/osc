@@ -45,10 +45,10 @@ const Template: Story<HubspotFormProps & FormContainerProps> = (args) => {
                     variant={args.variant}
                 >
                     <HubspotForm
-                        actionText={args.actionText}
                         formErrors={[]}
                         formFieldGroups={args.formFieldGroups}
                         setValidationErrors={setValidationErrors}
+                        submitText={args.submitText}
                         termsAndConditions={args.termsAndConditions}
                         titleAndDescription={args.titleAndDescription}
                         validationErrors={validationErrors}
@@ -63,10 +63,10 @@ export const Primary = Template.bind({});
 export const Validation = Template.bind({});
 
 Primary.args = {
-    actionText: textContent.actionText,
     formFieldGroups: contactFormData.formFieldGroups,
     slideOut: textContent.slideOut,
     slideOutText: textContent.slideOutText,
+    submitText: textContent.submitText,
     termsAndConditions: textContent.termsAndConditions,
     titleAndDescription: textContent.titleAndDescription,
     variant: textContent.slideDirection,

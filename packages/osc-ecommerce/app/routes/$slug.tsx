@@ -42,10 +42,15 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const { page, isPreview }: PageData = data;
 
     const { formId } = page.modules.find((module) => module._type === 'module.forms') as formModule;
-    let formFieldGroups: HubspotFormFieldGroups[] | [] = [];
+    let hubspotFormData:
+        | { formFieldGroups: HubspotFormFieldGroups[] | []; submitText: string }
+        | {} = {};
     try {
         const formData = (await getHubspotFormData(formId)) as HubspotFormData;
-        formFieldGroups = formData?.formFieldGroups;
+        hubspotFormData = {
+            formFieldGroups: formData?.formFieldGroups,
+            submitText: formData?.submitText,
+        };
     } catch (error) {
         console.error('Unable to load form!');
     }
@@ -60,7 +65,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         canonicalUrl,
         isPreview,
         query: isPreview ? PAGE_QUERY : null,
-        formFieldGroups,
+        hubspotFormData,
     });
 };
 

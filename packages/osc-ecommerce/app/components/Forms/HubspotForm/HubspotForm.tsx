@@ -6,10 +6,6 @@ import { getFormFields, getInputType, getValidationSchema } from '../utils';
 
 export interface HubspotFormProps {
     /**
-     * Sets the text for the form button
-     */
-    actionText: string;
-    /**
      * Errors on the whole form, such as failure to submit due to network failure
      */
     formErrors: string[] | [];
@@ -26,6 +22,10 @@ export interface HubspotFormProps {
      */
     setValidationErrors: Dispatch<SetStateAction<{} | Record<string, string[]>>>;
     /**
+     * Text name for the submit button from Hubspot
+     */
+    submitText: string;
+    /**
      * Terms and conditions for the form
      */
     termsAndConditions?: PortableTextBlock[];
@@ -41,11 +41,11 @@ export interface HubspotFormProps {
 
 export const HubspotForm = (props: HubspotFormProps) => {
     const {
-        actionText,
         formErrors,
         formFieldGroups,
         isSubmitting = false,
         setValidationErrors,
+        submitText,
         termsAndConditions,
         titleAndDescription,
         validationErrors,
@@ -73,7 +73,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
                     name="_action"
                     value="submitHubspotForm"
                 >
-                    {actionText}
+                    {submitText}
                 </Button>
                 {formErrors && formErrors.length > 0
                     ? formErrors.map((error, index) => (

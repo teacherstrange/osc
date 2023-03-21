@@ -8,10 +8,10 @@ test('should render the Contact form', () => {
     render(
         <SpritesheetProvider>
             <HubspotForm
-                actionText={textContent.actionText}
                 formErrors={[]}
                 formFieldGroups={contactFormData.formFieldGroups}
                 setValidationErrors={() => {}}
+                submitText={textContent.submitText}
                 termsAndConditions={textContent.termsAndConditions}
                 titleAndDescription={textContent.titleAndDescription}
                 validationErrors={{}}
@@ -29,10 +29,10 @@ test('should render validation errors when present', () => {
     const { container } = render(
         <SpritesheetProvider>
             <HubspotForm
-                actionText={textContent.actionText}
                 formErrors={[]}
                 formFieldGroups={contactFormData.formFieldGroups}
                 setValidationErrors={() => {}}
+                submitText={textContent.submitText}
                 termsAndConditions={textContent.termsAndConditions}
                 titleAndDescription={textContent.titleAndDescription}
                 validationErrors={contactFormData.validationErrors}
