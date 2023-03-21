@@ -26,6 +26,10 @@ type Action = {
      * The Size of the button
      */
     size?: 'sm' | 'md' | 'lg';
+    /**
+     * The Size of the button
+     */
+    onClick?: () => void;
 };
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -145,12 +149,12 @@ interface InputButtonProps {
 
 const InputButton = (props: InputButtonProps) => {
     const {
-        action: { size, variant },
+        action: { size, variant, onClick },
         id,
     } = props;
 
     return (
-        <Button className="c-input__button" variant={variant} size={size}>
+        <Button onClick={onClick} className="c-input__button" variant={variant} size={size}>
             <VisuallyHidden>{id}</VisuallyHidden>
             <Icon id={id} />
         </Button>

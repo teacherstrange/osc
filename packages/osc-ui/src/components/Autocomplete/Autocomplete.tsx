@@ -10,6 +10,7 @@ import type { Hit } from '@algolia/client-search';
 import algoliasearch from 'algoliasearch/lite';
 import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import insightsClient from 'search-insights';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
@@ -19,7 +20,6 @@ import { NoResult, ResultsHeader, SearchResultItem } from './components/Template
 import { popularCoursesPlugin } from './plugins/popularCoursesPlugin';
 import { recentSearchesPlugin } from './plugins/recentSearchesPlugin';
 import { debounced } from './utils/debounced';
-
 export type AutocompleteItem = Hit<{
     categories: string[];
     image: string;
@@ -65,6 +65,8 @@ export const Autocomplete = (props: AutocompleteProps) => {
     });
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ID_SEARCH_ONLY_API_KEY);
     const algoliaInsightsPlugin = createAlgoliaInsightsPlugin({ insightsClient });
+
+    const navigate = useNavigate();
 
     const autocomplete = useMemo(
         () =>
@@ -163,7 +165,14 @@ export const Autocomplete = (props: AutocompleteProps) => {
             >
                 <div className="c-autocomplete__input-wrapper">
                     <TextInput
-                        action={{ iconId: 'search', size: 'sm', variant: 'quaternary' }}
+                        action={{
+                            iconId: 'search',
+                            size: 'sm',
+                            variant: 'quaternary',
+                            onClick: () => {
+                                navigate(`courses/${inputRef.current.value}`);
+                            },
+                        }}
                         className="c-input c-input__text c-input__text--quaternary"
                         id="search"
                         name="Search"
@@ -240,6 +249,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
                                                             >
                                                                 <SearchResultItem
                                                                     item={item}
+                                                                    sourceId={sourceId}
                                                                     ALGOLIA_PRIMARY_INDEX_GROUPED={
                                                                         ALGOLIA_PRIMARY_INDEX_GROUPED
                                                                     }

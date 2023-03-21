@@ -1,3 +1,4 @@
+import { Link } from '@remix-run/react';
 import React from 'react';
 import { Icon } from '../../Icon/Icon';
 import type { AutocompleteItem as AutocompleteItemTypes } from '../Autocomplete';
@@ -36,10 +37,11 @@ export const ResultsHeader = (props: ResultsHeaderProps) => {
 interface ItemProps {
     item: AutocompleteItemTypes;
     ALGOLIA_PRIMARY_INDEX_GROUPED: string;
+    sourceId: string;
 }
 
 export const SearchResultItem = (props: ItemProps) => {
-    const { item } = props;
+    const { item, sourceId } = props;
 
     const calcItemIcon = () => {
         if (item.image) {
@@ -59,18 +61,35 @@ export const SearchResultItem = (props: ItemProps) => {
         }
     };
 
-    return (
-        <div className="c-autocomplete__item-wrapper">
-            <div className="c-autocomplete__item-content">
-                {calcItemIcon()}
-                <div className="c-autocomplete__item-content-body">
-                    <div className="c-autocomplete__item-title">
-                        <Highlight hit={item} attribute="title" />
-                        <Highlight hit={item} attribute="query" />
-                        <Highlight hit={item} attribute="label" />
+    if (sourceId === 'Results') {
+        return (
+            <Link to={`courses/${item.title}`} className="c-autocomplete__item-wrapper">
+                <div className="c-autocomplete__item-content">
+                    {calcItemIcon()}
+                    <div className="c-autocomplete__item-content-body">
+                        <div className="c-autocomplete__item-title">
+                            <Highlight hit={item} attribute="title" />
+                            <Highlight hit={item} attribute="query" />
+                            <Highlight hit={item} attribute="label" />
+                        </div>
+                    </div>
+                </div>
+            </Link>
+        );
+    } else {
+        return (
+            <div className="c-autocomplete__item-wrapper">
+                <div className="c-autocomplete__item-content">
+                    {calcItemIcon()}
+                    <div className="c-autocomplete__item-content-body">
+                        <div className="c-autocomplete__item-title">
+                            <Highlight hit={item} attribute="title" />
+                            <Highlight hit={item} attribute="query" />
+                            <Highlight hit={item} attribute="label" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 };
