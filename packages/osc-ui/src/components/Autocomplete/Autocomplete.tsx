@@ -74,6 +74,9 @@ export const Autocomplete = (props: AutocompleteProps) => {
                 onStateChange({ state }) {
                     setAutocompleteUiState(state);
                 },
+                onSubmit({ state }) {
+                    navigate(`courses/${state.query}`);
+                },
                 getSources() {
                     return debounced([
                         {
@@ -169,9 +172,6 @@ export const Autocomplete = (props: AutocompleteProps) => {
                             iconId: 'search',
                             size: 'sm',
                             variant: 'quaternary',
-                            onClick: () => {
-                                navigate(`courses/${inputRef.current.value}`);
-                            },
                         }}
                         className="c-input c-input__text c-input__text--quaternary"
                         id="search"
