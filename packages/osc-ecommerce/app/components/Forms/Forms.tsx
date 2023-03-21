@@ -75,8 +75,6 @@ const Form = (props: FormProps) => {
                     isSubmitting={isSubmitting}
                     setValidationErrors={setValidationErrors}
                     submitText={submitText}
-                    termsAndConditions={form.termsAndConditions}
-                    titleAndDescription={form.titleAndDescription}
                     validationErrors={validationErrors}
                 />
             </RemixForm>
@@ -128,16 +126,20 @@ export const Forms = (props: { module: formModule }) => {
 
     type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 
+    const formClassName = module.formName.toLowerCase().split(' ').join('-');
+
     return (
-        <Form
-            form={module}
-            formErrors={formErrors}
-            formFieldGroups={hubspotFormData.formFieldGroups as HubspotFormFieldGroups[]}
-            formRef={formRef}
-            isSubmitting={isSubmitting}
-            setValidationErrors={setValidationErrors}
-            submitText={hubspotFormData.submitText}
-            validationErrors={validationErrors}
-        />
+        <div className={`c-form__${formClassName}`}>
+            <Form
+                form={module}
+                formErrors={formErrors}
+                formFieldGroups={hubspotFormData.formFieldGroups as HubspotFormFieldGroups[]}
+                formRef={formRef}
+                isSubmitting={isSubmitting}
+                setValidationErrors={setValidationErrors}
+                submitText={hubspotFormData.submitText}
+                validationErrors={validationErrors}
+            />
+        </div>
     );
 };

@@ -16,44 +16,24 @@ export default {
             title: 'Form',
         },
         {
-            name: 'content',
-            title: 'Content',
-        },
-        {
             name: 'settings',
             title: 'Settings',
         },
     ],
     fields: [
         {
-            name: 'titleAndDescription',
-            title: 'Title and Description',
-            group: 'content',
-            type: 'body',
-        },
-        {
-            name: 'formId',
+            name: 'formNameAndId',
             title: 'Form',
             description: 'List of forms pulled in from HubSpot',
             type: 'string',
             options: {
                 layout: 'select',
-                list: forms.map((form) => ({ title: form.name, value: form.id })),
+                list: forms.map((form) => ({
+                    title: form.name,
+                    value: `${form.name}, ${form.id}`,
+                })),
             },
             group: 'forms',
-        },
-        {
-            name: 'termsAndConditions',
-            title: 'Terms and Conditions',
-            type: 'body',
-            group: 'content',
-        },
-        {
-            name: 'actionText',
-            title: 'Action Text',
-            description: 'Text for the submit button',
-            type: 'string',
-            group: 'content',
         },
         {
             default: false,
@@ -84,11 +64,12 @@ export default {
     ],
     preview: {
         select: {
-            name: 'formId',
+            name: 'formNameAndId',
         },
         prepare(selection: Record<string, any>) {
+            const title = selection.name.split(', ')[0];
             return {
-                title: selection.name,
+                title: title,
                 subtitle: 'Form',
             };
         },

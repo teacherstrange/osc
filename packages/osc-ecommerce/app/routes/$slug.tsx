@@ -41,7 +41,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     const { page, isPreview }: PageData = data;
 
-    const { formId } = page.modules.find((module) => module._type === 'module.forms') as formModule;
+    const formModule = page.modules.find((module) => module._type === 'module.forms') as formModule;
+    const formId = formModule.formNameAndId.split(', ')[1];
     let hubspotFormData:
         | { formFieldGroups: HubspotFormFieldGroups[] | []; submitText: string }
         | {} = {};
