@@ -28,7 +28,7 @@ export const FormContainer = (props: FormContainerProps) => {
     return (
         <div className={slideOut ? classes : 'c-form__container'}>
             {slideOut ? (
-                <Button variant="quaternary" className="c-form__container--slide-out-btn">
+                <Button variant="quaternary" className="c-form__slide-out-btn">
                     {slideOutText}
                 </Button>
             ) : null}

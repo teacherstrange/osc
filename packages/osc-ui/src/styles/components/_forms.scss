@@ -11,7 +11,7 @@
 
         &--slide-left,
         &--slide-right {
-            .c-form__container--slide-out-btn {
+            .c-form__slide-out-btn {
                 position: absolute;
                 bottom: 100%;
                 left: 50%;
@@ -32,7 +32,7 @@
             }
 
             @include mq($mq-tab) {
-                .c-form__container--slide-out-btn {
+                .c-form__slide-out-btn {
                     top: 0;
                     bottom: unset;
                     left: 2px;
@@ -43,7 +43,7 @@
 
         &--slide-right {
             @include mq($mq-tab) {
-                .c-form__container--slide-out-btn {
+                .c-form__slide-out-btn {
                     top: 0;
                     right: 2px;
                     bottom: unset;
