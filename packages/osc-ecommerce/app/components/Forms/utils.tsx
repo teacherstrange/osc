@@ -64,6 +64,7 @@ export function getInputType(
             <div
                 className="c-content"
                 dangerouslySetInnerHTML={{ __html: data.richText.content }}
+                key={index}
             />
         );
         return content;
