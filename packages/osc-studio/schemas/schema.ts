@@ -53,7 +53,6 @@ import moduleImageMobile from './objects/module/imageMobile';
 import moduleImages from './objects/module/images';
 import moduleImageTablet from './objects/module/imageTablet';
 import moduleTextGrid from './objects/module/textGrid';
-import moduleProspectusForm from './objects/module/prospectusForm';
 import moduleTrustpilot from './objects/module/trustpilot';
 import moduleVideo from './objects/module/video';
 import navigationItem from './objects/navigationItem';
@@ -136,7 +135,6 @@ export default createSchema({
         moduleImages,
         moduleImageMobile,
         moduleImageTablet,
-        moduleProspectusForm,
         moduleTrustpilot,
         moduleCarousel,
         moduleTextGrid,
