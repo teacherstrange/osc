@@ -18,12 +18,17 @@
                 width: max-content;
                 padding: var(--space-scale-s);
                 background: var(--color-secondary);
-                color: #fff;
+                color: var(--color-tertiary);
                 font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;
                 transform: translateX(-50%);
                 cursor: pointer;
+
+                &:hover {
+                    background: var(--color-secondary);
+                    color: var(--color-tertiary);
+                }
             }
 
             @include mq($mq-tab) {
@@ -73,13 +78,13 @@
         font-size: $fs-2xs;
     }
 
-    @include mq($mq-tab) {
-        .c-btn {
-            font-size: $fs-s;
+    &__hubspot {
+        .c-content * {
+            margin: 0;
         }
     }
 
-    &__contact {
+    &__contact-form {
         @include mq($mq-tab) {
             width: 610px;
         }
