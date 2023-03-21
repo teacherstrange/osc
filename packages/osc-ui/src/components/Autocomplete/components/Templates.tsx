@@ -39,7 +39,7 @@ interface ItemProps {
 }
 
 export const SearchResultItem = (props: ItemProps) => {
-    const { item, ALGOLIA_PRIMARY_INDEX_GROUPED } = props;
+    const { item } = props;
 
     const calcItemIcon = () => {
         if (item.image) {
@@ -50,21 +50,7 @@ export const SearchResultItem = (props: ItemProps) => {
                     </div>
                 )
             );
-        } else if (item[ALGOLIA_PRIMARY_INDEX_GROUPED])
-            return (
-                <div className="c-autocomplete__item-image">
-                    <img
-                        src={
-                            item[ALGOLIA_PRIMARY_INDEX_GROUPED].facets.exact_matches
-                                .product_image[0].value
-                        }
-                        alt={item.title ?? ''}
-                        width="40"
-                        height="40"
-                    />
-                </div>
-            );
-        else {
+        } else {
             return (
                 <div className="c-autocomplete__item-image">
                     <Icon id="search" />
