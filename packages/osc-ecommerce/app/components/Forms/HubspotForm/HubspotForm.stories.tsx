@@ -3,10 +3,9 @@ import { SpritesheetProvider } from 'osc-ui';
 import { useState } from 'react';
 import type { FormContainerProps } from '../FormContainer';
 import { FormContainer } from '../FormContainer';
-import { hubspotFormData, validationErrors } from '../mockData';
+import { hubspotFormData, sanityFormData, validationErrors } from '../mockData';
 import type { HubspotFormProps } from './HubspotForm';
 import { HubspotForm } from './HubspotForm';
-import { textContent } from './textContent';
 
 export default {
     title: 'osc-ecommerce/Forms/HubspotForm',
@@ -37,7 +36,7 @@ const Template: Story<HubspotFormProps & FormContainerProps> = (args) => {
 
     return (
         <SpritesheetProvider>
-            <div style={{ display: 'flex', justifyContent: 'center', margin: '3em 0' }}>
+            <div className={`c-form__contact-form`} style={{ margin: '3em 0' }}>
                 <FormContainer
                     slideOut={args.slideOut}
                     slideOutText={args.slideOutText}
@@ -61,14 +60,14 @@ export const Validation = Template.bind({});
 
 Primary.args = {
     formFieldGroups: hubspotFormData.formFieldGroups,
-    slideOut: textContent.slideOut,
-    slideOutText: textContent.slideOutText,
+    slideOut: sanityFormData.slideOut,
+    slideOutText: sanityFormData.slideOutText,
     submitText: hubspotFormData.submitText,
-    variant: textContent.slideDirection,
+    variant: sanityFormData.slideDirection,
 };
 
 Validation.args = {
     ...Primary.args,
-    variant: 'slide-right',
+    variant: 'slide-left',
     validationErrors: validationErrors,
 };
