@@ -10,7 +10,7 @@ import type { Hit } from '@algolia/client-search';
 import algoliasearch from 'algoliasearch/lite';
 import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@remix-run/react';
 import insightsClient from 'search-insights';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
