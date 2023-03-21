@@ -1,5 +1,6 @@
 import { DocumentIcon } from '@sanity/icons';
 
+// TODO - Update so that these are pulled in dynamically on a get request to Hubspot form API. Looks like a proxy needs setting up in order to do this.
 const forms = [
     { name: 'Newsletter Form', id: '9cf24fde-b8c4-4165-bff6-1a151b83259d' },
     { name: 'Contact Form', id: 'b6aca185-96b6-416f-9b03-9ce8f894ea44' },
