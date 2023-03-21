@@ -118,6 +118,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
                     popularCoursesPlugin(searchClient, ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS),
                     algoliaInsightsPlugin,
                 ],
+                // the rest of the props can be found at the createAutocomplete docs: https://www.algolia.com/doc/ui-libraries/autocomplete/api-reference/autocomplete-core/createAutocomplete/
                 ...props,
             }),
         // eslint-disable-next-line react-hooks/exhaustive-deps

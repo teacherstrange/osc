@@ -7,6 +7,8 @@
     $panel-max-height: 500px;
     $panel-shadow: $shadow-xl;
     $panel-radius: $rad-xs;
+    $scrollbar-width: 6px;
+    $scrollbar-thumb-width: 5px;
 
     .c-autocomplete {
 
@@ -39,7 +41,7 @@
             }
 
             &--scrollable::-webkit-scrollbar {
-                width: 12px; /* width of the entire scrollbar */
+                width: $scrollbar-width; /* width of the entire scrollbar */
             }
 
             &--scrollable::-webkit-scrollbar-track {
@@ -47,10 +49,10 @@
             }
 
             &--scrollable::-webkit-scrollbar-thumb {
-                width: 10px;
+                width: $scrollbar-thumb-width;
                 background-color: var(--color-secondary); /* color of the scroll thumb */
                 border: 3px solid var(--color-secondary); /* creates padding around scroll thumb */
-                border-radius: 40px; /* roundness of the scroll thumb */
+                border-radius: $rad-xs; /* roundness of the scroll thumb */
             }
         }
 
@@ -64,19 +66,23 @@
         &__input-clear-button-wrapper {
             position: absolute;
             top: 0;
-            z-index: 1;
+            z-index: 0;
             display: flex;
             align-items: center;
             justify-content: right;
-            width: 100%;
+            width: calc(100% - var(--space-scale-3xl));
             height: 100%;
         }
 
         &__input-clear-button {
-            position: relative;
-            right: $space-3xl;
+            position: absolute;
             z-index: 2;
             cursor: pointer;
+        }
+
+        &__outer-container {
+            position: relative;
+            z-index: 1;
         }
 
         &__input-wrapper {
