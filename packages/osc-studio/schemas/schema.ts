@@ -45,7 +45,6 @@ import moduleCardPost from './objects/module/cardPost';
 import moduleCards from './objects/module/cards';
 import moduleCardStatic from './objects/module/cardStatic';
 import moduleCarousel from './objects/module/carousel';
-import moduleContactForm from './objects/module/contactForm';
 import moduleContent from './objects/module/content';
 import moduleForms from './objects/module/forms';
 import moduleHero from './objects/module/hero';
@@ -130,7 +129,6 @@ export default createSchema({
         moduleCardPost,
         moduleCardStatic,
         moduleCards,
-        moduleContactForm,
         moduleContent,
         moduleForms,
         moduleHero,

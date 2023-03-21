@@ -1,7 +1,7 @@
 import type { PortableTextBlock } from '@portabletext/types';
 import { Alert, Button, Content } from 'osc-ui';
 import type { Dispatch, SetStateAction } from 'react';
-import type { ContactFormFieldErrors, HubspotFormFieldGroups } from '../types';
+import type { HubspotFormFieldGroups } from '../types';
 import { getFormFields, getInputType, getValidationSchema } from '../utils';
 
 export interface HubspotFormProps {
@@ -24,7 +24,7 @@ export interface HubspotFormProps {
     /**
      * Dispatch used for setting errors client side validation errors
      */
-    setValidationErrors: Dispatch<SetStateAction<{} | ContactFormFieldErrors>>;
+    setValidationErrors: Dispatch<SetStateAction<{} | Record<string, string[]>>>;
     /**
      * Terms and conditions for the form
      */
@@ -36,7 +36,7 @@ export interface HubspotFormProps {
     /**
      * A list of validation errors
      */
-    validationErrors: Record<string, any>;
+    validationErrors: Record<string, string[]> | {};
 }
 
 export const HubspotForm = (props: HubspotFormProps) => {

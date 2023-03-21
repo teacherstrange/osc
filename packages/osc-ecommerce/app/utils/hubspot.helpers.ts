@@ -3,7 +3,7 @@ import { getValidationSchema } from '~/components/Forms/utils';
 import { hubspotFormsApiRequest } from '~/utils/server/hubspot.server';
 import { validateAction } from '~/utils/validation';
 
-export const shapeContactFormData = (
+export const shapeHubspotFormData = (
     formFieldsData: Record<any, string>[],
     formData: Record<any, string>
 ) => {
@@ -77,8 +77,8 @@ export const validateAndSubmitHubspotForm = async (formfieldData: FormFieldData)
         return json(errorCases);
     }
 
-    // If validation is passed - shape the contact form data to be submitted to Hubspot
-    const hubspotContactData = shapeContactFormData(hubspotFormFields, validatedFormInputData);
+    // If validation is passed - shape the hubspot form data to be submitted to Hubspot
+    const hubspotContactData = shapeHubspotFormData(hubspotFormFields, validatedFormInputData);
 
     try {
         const response = await hubspotFormsApiRequest(

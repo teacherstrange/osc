@@ -1,18 +1,14 @@
 import { Form as RemixForm, useActionData, useLoaderData, useTransition } from '@remix-run/react';
 import { Alert } from 'osc-ui';
-import type { Dispatch, RefObject, SetStateAction } from 'react';
+import type { Dispatch, RefObject } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import type { z } from 'zod';
 import type { formModule } from '~/types/sanity';
-import { HubspotForm } from './ContactForm/HubspotForm';
 import { FormContainer } from './FormContainer';
-import { contactFormSchema } from './formSchemas';
+import { HubspotForm } from './HubspotForm/HubspotForm';
 import type { HubspotFormFieldGroups } from './types';
-import { getFormFields, transitionStates } from './utils';
+import { getFormFields, getValidationSchema, transitionStates } from './utils';
 
-const schema = contactFormSchema;
-
-type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 interface FormProps {
     /**
      * Data from Sanity, e.g. Description, Title etc...
@@ -37,11 +33,11 @@ interface FormProps {
     /**
      * Dispatch used for setting errors client side validation errors
      */
-    setValidationErrors: Dispatch<SetStateAction<any>>;
+    setValidationErrors: Dispatch<{} | Record<string, string[]>>;
     /**
      * Validation errors, initially from server, but that can be updated client side
      */
-    validationErrors: Record<string, any>;
+    validationErrors: Record<string, string[]> | {};
 }
 
 const Form = (props: FormProps) => {
@@ -122,6 +118,10 @@ export const Forms = (props: { module: formModule }) => {
     if (formFieldGroups?.length === 0) {
         return <Alert status="error">Unable to load form!</Alert>;
     }
+
+    const schema = getValidationSchema(formFieldGroups);
+
+    type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 
     return (
         <Form

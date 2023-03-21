@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { SpritesheetProvider } from 'osc-ui';
 import { contactFormData } from '../data';
-import { contactFormSchema } from '../formSchemas';
 import { HubspotForm } from './HubspotForm';
 import { textContent } from './textContent';
 
