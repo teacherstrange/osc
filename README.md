@@ -44,6 +44,8 @@ Make a copy of the `.env.sample` in each workspace, rename it to `.env` and upda
     SANITY_STUDIO_API_PROJECT_ID=""
     SANITY_STUDIO_API_DATASET="staging"
     SANITY_STUDIO_API_TOKEN=""
+    HUBSPOT_DEV_ACCESS_TOKEN=""
+    CONTACT_PORTAL_ID=""
     ```
 
 -   `osc-api-admin`
