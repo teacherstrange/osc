@@ -16,8 +16,7 @@ export function getInputType(
         | InputHTMLAttributes<HTMLInputElement>
         | TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-    // TODO - Need to work out the correct type for this!
-    let content: any;
+    let content: string;
 
     // If there are formFields then return correct form input type
     if (data?.fields?.length > 0) {
@@ -51,7 +50,6 @@ export function getInputType(
                         schema={schema.pick({ [hubspotFields.name]: true })}
                         setErrors={setValidationErrors}
                         type={hubspotFields.fieldType}
-                        // variants={data.variants}
                     />
                 );
                 break;
