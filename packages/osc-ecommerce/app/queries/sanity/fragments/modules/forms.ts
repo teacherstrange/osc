@@ -7,6 +7,4 @@ export const MODULE_FORMS = groq`
     slideDirection,
     slideOut,
     slideOutText,
-    termsAndConditions,
-    titleAndDescription
 `;

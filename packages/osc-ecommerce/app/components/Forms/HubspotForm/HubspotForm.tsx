@@ -1,5 +1,4 @@
-import type { PortableTextBlock } from '@portabletext/types';
-import { Alert, Button, Content } from 'osc-ui';
+import { Alert, Button } from 'osc-ui';
 import type { Dispatch, SetStateAction } from 'react';
 import type { HubspotFormFieldGroups } from '../types';
 import { getFormFields, getInputType, getValidationSchema } from '../utils';
@@ -26,14 +25,6 @@ export interface HubspotFormProps {
      */
     submitText: string;
     /**
-     * Terms and conditions for the form
-     */
-    termsAndConditions?: PortableTextBlock[];
-    /**
-     * Title and description for the form
-     */
-    titleAndDescription?: PortableTextBlock[];
-    /**
      * A list of validation errors
      */
     validationErrors: Record<string, string[]> | {};
@@ -46,17 +37,14 @@ export const HubspotForm = (props: HubspotFormProps) => {
         isSubmitting = false,
         setValidationErrors,
         submitText,
-        termsAndConditions,
-        titleAndDescription,
         validationErrors,
     } = props;
 
     const validationSchema = getValidationSchema(getFormFields(formFieldGroups));
 
     return (
-        <div className="c-form c-form__contact">
+        <div className="c-form c-form__hubspot">
             <div className="c-form__inner-container">
-                {titleAndDescription ? <Content value={titleAndDescription} /> : null}
                 {formFieldGroups?.map((data, index) => {
                     return getInputType(
                         data,
@@ -82,7 +70,6 @@ export const HubspotForm = (props: HubspotFormProps) => {
                           </Alert>
                       ))
                     : null}
-                {termsAndConditions ? <Content value={termsAndConditions} /> : null}
             </div>
         </div>
     );
