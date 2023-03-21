@@ -1,10 +1,9 @@
 import type { Meta, Story } from '@storybook/react';
 import { SpritesheetProvider } from 'osc-ui';
 import { useState } from 'react';
-import { contactFormData } from '../data';
 import type { FormContainerProps } from '../FormContainer';
 import { FormContainer } from '../FormContainer';
-
+import { hubspotFormData, validationErrors } from '../mockData';
 import type { HubspotFormProps } from './HubspotForm';
 import { HubspotForm } from './HubspotForm';
 import { textContent } from './textContent';
@@ -49,8 +48,6 @@ const Template: Story<HubspotFormProps & FormContainerProps> = (args) => {
                         formFieldGroups={args.formFieldGroups}
                         setValidationErrors={setValidationErrors}
                         submitText={args.submitText}
-                        termsAndConditions={args.termsAndConditions}
-                        titleAndDescription={args.titleAndDescription}
                         validationErrors={validationErrors}
                     />
                 </FormContainer>
@@ -63,17 +60,15 @@ export const Primary = Template.bind({});
 export const Validation = Template.bind({});
 
 Primary.args = {
-    formFieldGroups: contactFormData.formFieldGroups,
+    formFieldGroups: hubspotFormData.formFieldGroups,
     slideOut: textContent.slideOut,
     slideOutText: textContent.slideOutText,
-    submitText: textContent.submitText,
-    termsAndConditions: textContent.termsAndConditions,
-    titleAndDescription: textContent.titleAndDescription,
+    submitText: hubspotFormData.submitText,
     variant: textContent.slideDirection,
 };
 
 Validation.args = {
     ...Primary.args,
     variant: 'slide-right',
-    validationErrors: contactFormData.validationErrors,
+    validationErrors: validationErrors,
 };

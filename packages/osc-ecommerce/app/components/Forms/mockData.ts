@@ -1,7 +1,28 @@
-import type { HubspotFormFieldGroups } from './types';
+import type { HubspotFormData } from './types';
 
-export const contactFormData = {
+export const hubspotFormData = {
     formFieldGroups: [
+        {
+            fields: [],
+            default: true,
+            isSmartGroup: false,
+            richText: {
+                content: '<h3>Contact Us</h3>',
+                type: 'TEXT',
+            },
+            isPageBreak: false,
+        },
+        {
+            fields: [],
+            default: true,
+            isSmartGroup: false,
+            richText: {
+                content:
+                    '<p style="font-size: 16px;">Our student advisors are eager to help - call us now on <a href="tel:0330 8222686" rel="noopener">0330 8222686.</a> Alternatively fill out the form below and we\'ll get back to you.</p>',
+                type: 'TEXT',
+            },
+            isPageBreak: false,
+        },
         {
             fields: [
                 {
@@ -37,7 +58,10 @@ export const contactFormData = {
             ],
             default: true,
             isSmartGroup: false,
-            richText: { content: '', type: 'TEXT' },
+            richText: {
+                content: '',
+                type: 'TEXT',
+            },
             isPageBreak: false,
         },
         {
@@ -75,7 +99,10 @@ export const contactFormData = {
             ],
             default: true,
             isSmartGroup: false,
-            richText: { content: '', type: 'TEXT' },
+            richText: {
+                content: '',
+                type: 'TEXT',
+            },
             isPageBreak: false,
         },
         {
@@ -113,7 +140,10 @@ export const contactFormData = {
             ],
             default: true,
             isSmartGroup: false,
-            richText: { content: '', type: 'TEXT' },
+            richText: {
+                content: '',
+                type: 'TEXT',
+            },
             isPageBreak: false,
         },
         {
@@ -151,7 +181,10 @@ export const contactFormData = {
             ],
             default: true,
             isSmartGroup: false,
-            richText: { content: '', type: 'TEXT' },
+            richText: {
+                content: '',
+                type: 'TEXT',
+            },
             isPageBreak: false,
         },
         {
@@ -189,15 +222,38 @@ export const contactFormData = {
             ],
             default: true,
             isSmartGroup: false,
-            richText: { content: '', type: 'TEXT' },
+            richText: {
+                content: '',
+                type: 'TEXT',
+            },
             isPageBreak: false,
         },
-    ] as HubspotFormFieldGroups[],
-    validationErrors: {
-        email: ['Invalid Email'],
-        firstname: ['Field is required'],
-        lastname: ['Field is required'],
-        phone: ['Field is required'],
-        message: ['Field is required'],
-    },
+        {
+            fields: [],
+            default: true,
+            isSmartGroup: false,
+            richText: {
+                content:
+                    '<p class="p1"><span class="s1">By completing this form you are expressing interest in Open Study College. We will send you information about our courses and any special offers we think will be useful to you. You will be able to unsubscribe at anytime. See <a href="https://www.openstudycollege.com/privacy-policy" rel="noopener">Privacy Policy</a>.</span></p>',
+                type: 'TEXT',
+            },
+            isPageBreak: false,
+        },
+    ],
+    submitText: 'Send Enquiry',
+} as HubspotFormData;
+
+export const validationErrors = {
+    email: ['Invalid Email'],
+    firstname: ['Field is required'],
+    lastname: ['Field is required'],
+    phone: ['Field is required'],
+    message: ['Field is required'],
+};
+
+export const sanityFormData = {
+    formNameAndId: 'Contact Form, b6aca185-96b6-416f-9b03-9ce8f894ea44',
+    slideDirection: 'slide-right',
+    slideOut: true,
+    slideOutText: 'Contact Us',
 };
