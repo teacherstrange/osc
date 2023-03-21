@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import { SpritesheetProvider } from 'osc-ui';
 import { hubspotFormData, validationErrors } from '../mockData';
 import { HubspotForm } from './HubspotForm';
-import { textContent } from './textContent';
 
 test('should render the Contact form', () => {
     render(
@@ -11,7 +10,7 @@ test('should render the Contact form', () => {
                 formErrors={[]}
                 formFieldGroups={hubspotFormData.formFieldGroups}
                 setValidationErrors={() => {}}
-                submitText={textContent.submitText}
+                submitText={hubspotFormData.submitText}
                 validationErrors={{}}
             />
         </SpritesheetProvider>
@@ -40,7 +39,7 @@ test('should render the Contact form', () => {
         )
     ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Privacy Policy/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Submit Enquiry/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Send Enquiry/i })).toBeInTheDocument();
 });
 
 test('should render validation errors when present', () => {
@@ -50,7 +49,7 @@ test('should render validation errors when present', () => {
                 formErrors={[]}
                 formFieldGroups={hubspotFormData.formFieldGroups}
                 setValidationErrors={() => {}}
-                submitText={textContent.submitText}
+                submitText={hubspotFormData.submitText}
                 validationErrors={validationErrors}
             />
         </SpritesheetProvider>
