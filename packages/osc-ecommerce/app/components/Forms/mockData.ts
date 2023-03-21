@@ -251,7 +251,14 @@ export const validationErrors = {
     message: ['Field is required'],
 };
 
-export const sanityFormData = {
+interface SanityFormData {
+    formNameAndId: string;
+    slideDirection?: 'slide-left' | 'slide-right';
+    slideOut?: boolean;
+    slideOutText?: string;
+}
+
+export const sanityFormData: SanityFormData = {
     formNameAndId: 'Contact Form, b6aca185-96b6-416f-9b03-9ce8f894ea44',
     slideDirection: 'slide-right',
     slideOut: true,
