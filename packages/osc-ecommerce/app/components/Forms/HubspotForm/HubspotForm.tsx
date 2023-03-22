@@ -58,6 +58,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
                 </>
                 <Button
                     isLoading={isSubmitting}
+                    loadingText="Submitting"
                     variant="primary"
                     disabled={isSubmitting}
                     name="_action"
