@@ -1,3 +1,19 @@
+## [0.56.5](https://github.com/Open-Study-College/osc/compare/v0.56.4...v0.56.5) (2023-03-22)
+
+
+### 🐛 Bugs
+
+* **types:** update sanity button types ([6ad3e68](https://github.com/Open-Study-College/osc/commit/6ad3e689d622ef6c933083efe12c180efd673e98))
+
+
+### ♻️ Refactors
+
+* **button:** add initial value and validation to button type ([02c5fb9](https://github.com/Open-Study-College/osc/commit/02c5fb9bae33eab8c5f67897c6b594a61b6c9415))
+* **content:** add icon to button within content component ([9f7c4a1](https://github.com/Open-Study-College/osc/commit/9f7c4a12ec1bc5ad6cfc7043709991ebfb312b7c))
+* **ecommerce:** add icon to button component ([eaa0bb1](https://github.com/Open-Study-College/osc/commit/eaa0bb1b6997eb525fae963fa72356b4e7d60324))
+* **ecommerce:** add missin prop to button component ([af2cb43](https://github.com/Open-Study-College/osc/commit/af2cb43e2a0c521becf3fe59c691abb456f72f15))
+* **studio:** add icon picker to button module ([9426057](https://github.com/Open-Study-College/osc/commit/94260574c6843758e5a59b9c2f10f35cd473dbd0))
+
 ## [0.56.4](https://github.com/Open-Study-College/osc/compare/v0.56.3...v0.56.4) (2023-03-22)
 
 
@@ -33,39 +49,4 @@
 ### 🐛 Bugs
 
 * **carousel:** add rem function to wrap dimensions unit ([5bc8d73](https://github.com/Open-Study-College/osc/commit/5bc8d73e89b15c644d7109bcf794c9b00bdfbb16))
-
-## [0.56.0](https://github.com/Open-Study-College/osc/compare/v0.55.0...v0.56.0) (2023-03-22)
-
-
-### ✨ Features
-
-* **content media:** add video to story ([3a651fd](https://github.com/Open-Study-College/osc/commit/3a651fd7f1755ad2a48512330705f58d41117ef2))
-* **content media:** adds carousel stories ([d0485ff](https://github.com/Open-Study-College/osc/commit/d0485ff33b2d0533b26cc561f017fb6ba62d04e9))
-* **content media:** adds form variation ([ea19be9](https://github.com/Open-Study-College/osc/commit/ea19be9ab99a5a41f6e47c20043397a79ccf6b7a))
-* **content media:** adds initial component ([d657fd2](https://github.com/Open-Study-College/osc/commit/d657fd2c60f92f821b63e1e0bd2165008b24dcbf))
-* **content media:** adds specfic sizing to the content ([1c68105](https://github.com/Open-Study-College/osc/commit/1c68105ea60e4840c43cf77ac8055b36f94e97a6))
-* **content media:** adds story descriptions ([443316b](https://github.com/Open-Study-College/osc/commit/443316bcb1f0475a8237ddd75c8613c1cbc6b65a))
-* **content media:** adds trustpilot story ([773b701](https://github.com/Open-Study-College/osc/commit/773b701137063ab7df45fa754aa957a27973d993))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **content media:** tidy up todo comments ([8e038c0](https://github.com/Open-Study-College/osc/commit/8e038c02a0461b8f3ede29378f04141ccc6c63f7))
-* **content media:** update storybook control ([aa1cfdc](https://github.com/Open-Study-College/osc/commit/aa1cfdc0ced8bfb57bc5c060a93e22b73a2b10dd))
-
-
-### ♻️ Refactors
-
-* **carousel:** set carousel height to fill container ([00ad75c](https://github.com/Open-Study-College/osc/commit/00ad75c0307ac44068d65d53a44650f3fff38b39))
-* **content media:** extract content out into external file for better reuse ([fb414d8](https://github.com/Open-Study-College/osc/commit/fb414d82f0f16b23e650c30423603b305298083e))
-* **content media:** replace form container subcomponent with vairant for media block ([decb145](https://github.com/Open-Study-College/osc/commit/decb1452f0463617c15c4c5d7d72c9f762f3731a))
-* **content media:** replace width prop with cols ([5dc726b](https://github.com/Open-Study-College/osc/commit/5dc726bc0187937a70b8acdbba3f0634b3fb6665))
-* **content media:** replaces use with import ([7c56e33](https://github.com/Open-Study-College/osc/commit/7c56e33fc0739c170cd287949a8ec6b15eb2bf2b))
-* **content media:** updates variable to new naming convention ([f5ec04e](https://github.com/Open-Study-College/osc/commit/f5ec04eceee05ad823ba8043136c85a00d7096d0))
-* **content media:** wrap styles in components [@layer](https://github.com/layer) ([9eb5666](https://github.com/Open-Study-College/osc/commit/9eb5666028a651d7d08c4ef3a1c7b22e0464d2f3))
-
-
-### ⚙️ CI/CD Updates
-
-* **actions:** manually bump version to correct versioning issue in release action - [skip ci] ([53e02a2](https://github.com/Open-Study-College/osc/commit/53e02a2722fb7034ff98d7edbacbf38e07927a94))
 
