@@ -8,6 +8,7 @@ import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { BLOG_QUERY } from '~/queries/sanity/blog';
 import type { module, SanityPage } from '~/types/sanity';
+import { getHubspotForm } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 
@@ -34,6 +35,9 @@ export const loader: LoaderFunction = async ({ request }) => {
     }
 
     const { page: blog, isPreview }: PageData = data;
+
+    const hubspotFormData = await getHubspotForm(blog);
+
     const canonicalUrl = buildCanonicalUrl({
         canonical: blog?.seo?.canonicalUrl,
         request,
@@ -43,6 +47,7 @@ export const loader: LoaderFunction = async ({ request }) => {
         blog,
         isPreview,
         canonicalUrl,
+        hubspotFormData: hubspotFormData ? hubspotFormData : null,
         query: isPreview ? BLOG_QUERY : null,
     });
 };

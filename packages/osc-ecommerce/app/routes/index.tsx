@@ -10,6 +10,7 @@ import getPageData from '~/models/sanity.server';
 import { HOME_QUERY } from '~/queries/sanity/home';
 import type { module, SanityPage } from '~/types/sanity';
 import { getColorScheme } from '~/utils/colorScheme';
+import { getHubspotForm } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 import { useOptionalUser } from '~/utils/_tmp_/user';
@@ -33,6 +34,9 @@ export const loader: LoaderFunction = async ({ request }) => {
     }
 
     const { page: home, isPreview }: PageData = data;
+
+    const hubspotFormData = await getHubspotForm(home);
+
     const canonicalUrl = buildCanonicalUrl({
         canonical: home?.seo?.canonicalUrl,
         request,
@@ -41,6 +45,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     return json({
         colorScheme,
         home,
+        hubspotFormData: hubspotFormData ? hubspotFormData : null,
         canonicalUrl,
         isPreview,
         query: isPreview ? HOME_QUERY : null,
