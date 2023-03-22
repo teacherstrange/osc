@@ -1,9 +1,10 @@
 @import "../../styles/settings";
+@import "../../styles/tools";
 
 @layer components {
     $carousel-control-color: var(--color-neutral-400);
-    $carousel-dot-dimensions: ($base-fs * 0.75);
-    $carousel-arrow-dimensions: ($base-fs * 1.875);
+    $carousel-dot-dimensions: ($base-fs * rem(0.75));
+    $carousel-arrow-dimensions: ($base-fs * rem(1.875));
 
     /* stylelint-disable selector-class-pattern */
     .c-carousel {
