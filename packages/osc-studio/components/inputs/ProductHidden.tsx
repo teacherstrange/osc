@@ -1,7 +1,6 @@
 import { WarningOutlineIcon } from '@sanity/icons';
 import { Box, Card, Flex, Stack, Text } from '@sanity/ui';
-import React from 'react';
-import type { StringFieldProps } from 'sanity';
+import type { StringInputProps, StringSchemaType } from 'sanity';
 import { useFormValue } from 'sanity';
 import { productUrl } from '../../utils/shopifyUrls';
 
@@ -11,7 +10,7 @@ type Store = {
     isDeleted: boolean;
 };
 
-export default function ProductHiddenInput(props: StringFieldProps) {
+export default function ProductHiddenInput(props: StringInputProps<StringSchemaType>) {
     const store: Store = useFormValue(['store']) as Store;
 
     let message;

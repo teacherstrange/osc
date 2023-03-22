@@ -1,7 +1,7 @@
 import { SearchIcon } from '@sanity/icons';
 import { Autocomplete, Box, Card, Flex, Text } from '@sanity/ui';
 import { colors } from 'osc-design-tokens';
-import type { StringInputProps } from 'sanity';
+import type { StringInputProps, StringSchemaType } from 'sanity';
 import { set, unset } from 'sanity';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 
@@ -16,7 +16,7 @@ const colorValues: { value: string; payload: { color: string } }[] = colorNames.
     })
 );
 
-export const ColorPicker = (props: StringInputProps) => {
+export const ColorPicker = (props: StringInputProps<StringSchemaType>) => {
     const { elementProps, onChange, value = '' } = props;
 
     const handleChange = (value: string) => {
