@@ -1,3 +1,10 @@
+## [0.56.6](https://github.com/Open-Study-College/osc/compare/v0.56.5...v0.56.6) (2023-03-22)
+
+
+### 🐛 Bugs
+
+* **carousel:** remove full height from carousel ([f990037](https://github.com/Open-Study-College/osc/commit/f990037323b0b1f2add5a67194e29789a37d3a8b))
+
 ## [0.56.5](https://github.com/Open-Study-College/osc/compare/v0.56.4...v0.56.5) (2023-03-22)
 
 
@@ -42,11 +49,4 @@
 * **ecommerce:** move getTypes function into Module component ([0569b85](https://github.com/Open-Study-College/osc/commit/0569b856a6d9876b9fd25405c364562e824e1973))
 * **ecommerce:** remove document type guard from Meta and Links components ([8cfc978](https://github.com/Open-Study-College/osc/commit/8cfc978b35b83121a20a00471de9d1087111c9e2))
 * **ecommerce:** udpate data object passed in routes ([f8a616f](https://github.com/Open-Study-College/osc/commit/f8a616ff6e22f9628005c228aee6593e1ed5168f))
-
-## [0.56.1](https://github.com/Open-Study-College/osc/compare/v0.56.0...v0.56.1) (2023-03-22)
-
-
-### 🐛 Bugs
-
-* **carousel:** add rem function to wrap dimensions unit ([5bc8d73](https://github.com/Open-Study-College/osc/commit/5bc8d73e89b15c644d7109bcf794c9b00bdfbb16))
 
