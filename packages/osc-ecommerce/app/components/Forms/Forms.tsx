@@ -112,15 +112,15 @@ export const Forms = (props: { module: formModule }) => {
         }
     }, [serverValidationErrors, serverErrors]);
 
-    if (!Object.keys(hubspotFormData).length) {
+    if (!hubspotFormData || !Object.keys(hubspotFormData).length) {
         return <Alert status="error">Unable to load form!</Alert>;
     }
 
-    const schema = getValidationSchema(hubspotFormData.formFieldGroups);
+    const schema = getValidationSchema(hubspotFormData[module.formId].formFieldGroups);
 
     type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 
-    const formClassName = module.formName.toLowerCase().split(' ').join('-');
+    const formClassName = module?.formName?.toLowerCase().split(' ').join('-');
 
     return (
         <div className={`c-form__${formClassName}`}>
@@ -128,10 +128,12 @@ export const Forms = (props: { module: formModule }) => {
                 <Form
                     form={module}
                     formErrors={formErrors}
-                    formFieldGroups={hubspotFormData.formFieldGroups as HubspotFormFieldGroups[]}
+                    formFieldGroups={
+                        hubspotFormData[module.formId].formFieldGroups as HubspotFormFieldGroups[]
+                    }
                     isSubmitting={isSubmitting}
                     setValidationErrors={setValidationErrors}
-                    submitText={hubspotFormData.submitText}
+                    submitText={hubspotFormData[module.formId].submitText}
                     validationErrors={validationErrors}
                 />
             </fetcher.Form>

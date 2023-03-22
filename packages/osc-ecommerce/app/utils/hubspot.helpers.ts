@@ -98,27 +98,40 @@ export const validateAndSubmitHubspotForm = async (formfieldData: FormFieldData)
     }
 };
 
-export const getHubspotForm = async (page: any) => {
-    const formModule = page.modules?.find(
+export const getHubspotForms = async (page: any) => {
+    const formModules = page.modules?.filter(
         (module: any) => module._type === 'module.forms'
-    ) as formModule;
+    ) as formModule[];
 
-    if (!formModule) {
+    if (!formModules) {
         return null;
     }
+    // Get all hubspot forms
+    const formData = (await Promise.all(
+        formModules.map(async (formModule) => {
+            const formId = formModule.formNameAndId.split(', ')[1];
+            let formData: HubspotFormData;
+            try {
+                formData = await getHubspotFormData(formId);
+                const hubspotFormData: Partial<HubspotFormData> = {
+                    [formId]: {
+                        formFieldGroups: formData?.formFieldGroups,
+                        submitText: formData?.submitText,
+                    },
+                };
+                return hubspotFormData;
+            } catch (error) {
+                return error;
+            }
+        })
+    )) as formModule[];
 
-    const formId = formModule.formNameAndId.split(', ')[1];
+    // Reshape into object
+    const hubspotForms = formData.reduce((obj, item) => {
+        const key = Object.keys(item)[0];
+        const value = Object.values(item)[0];
+        return { ...obj, ...{ [key]: value } };
+    }, {});
 
-    let formData: HubspotFormData;
-    try {
-        formData = await getHubspotFormData(formId);
-    } catch (error) {
-        return error;
-    }
-
-    const hubspotFormData: Partial<HubspotFormData> = {
-        formFieldGroups: formData?.formFieldGroups,
-        submitText: formData?.submitText,
-    };
-    return hubspotFormData;
+    return hubspotForms;
 };
