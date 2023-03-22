@@ -4,27 +4,27 @@
  * Read more: https://www.sanity.io/docs/customization#f924645007e1
  */
 import { LinkIcon } from '@sanity/icons';
-import React from 'react';
+import { defineField } from 'sanity';
 import { PAGE_REFERENCES } from '../../constants';
 
-export default {
+export default defineField({
     title: 'Internal Link',
     name: 'annotationLinkInternal',
     type: 'object',
-    blockEditor: {
-        icon: () => <LinkIcon />,
-        render: ({ children }) => (
+    icon: () => <LinkIcon />,
+    components: {
+        annotation: (props) => (
             <span>
                 <LinkIcon
                     style={{
                         marginLeft: '0.05em',
                         marginRight: '0.1em',
-                        width: '0.75em'
+                        width: '0.75em',
                     }}
                 />
-                {children}
+                {props.renderDefault(props)}
             </span>
-        )
+        ),
     },
     fields: [
         // Reference
@@ -33,7 +33,7 @@ export default {
             type: 'reference',
             weak: true,
             validation: (Rule) => Rule.required(),
-            to: PAGE_REFERENCES
-        }
-    ]
-};
+            to: PAGE_REFERENCES,
+        },
+    ],
+});
