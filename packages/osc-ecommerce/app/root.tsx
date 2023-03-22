@@ -186,12 +186,10 @@ const Document = ({ children }: DocumentProps) => {
     return (
         <html lang="en">
             <head>
-                {typeof document === 'undefined' && <Meta />}
-                {typeof document === 'undefined' && canonical && (
-                    <link rel="canonical" href={canonical} />
-                )}
-                {typeof document === 'undefined' && <Links />}
-                {typeof document === 'undefined' && <DynamicLinks />}
+                <Meta />
+                {canonical && <link rel="canonical" href={canonical} />}
+                <Links />
+                <DynamicLinks />
             </head>
             <body>
                 {children}

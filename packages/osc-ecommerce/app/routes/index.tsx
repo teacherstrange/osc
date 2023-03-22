@@ -25,7 +25,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     // Query the page data
     const data = await getPageData({
         request,
-        query: HOME_QUERY
+        query: HOME_QUERY,
     });
 
     if (!data?.page) {
@@ -35,7 +35,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     const { page: home, isPreview }: PageData = data;
     const canonicalUrl = buildCanonicalUrl({
         canonical: home?.seo?.canonicalUrl,
-        request
+        request,
     });
 
     return json({
@@ -43,13 +43,13 @@ export const loader: LoaderFunction = async ({ request }) => {
         home,
         canonicalUrl,
         isPreview,
-        query: isPreview ? HOME_QUERY : null
+        query: isPreview ? HOME_QUERY : null,
     });
 };
 
 // https://github.com/sergiodxa/remix-utils#dynamiclinks
 const dynamicLinks: DynamicLinksFunction = ({ data }) => {
-    return getComponentStyles(data.page);
+    return getComponentStyles(data.home);
 };
 
 export const handle = { dynamicLinks };
@@ -60,7 +60,7 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
     const meta = buildHtmlMetaTags({
         pageData: data.home,
         globalData: globalSeoSettings,
-        canonicalUrl: data.canonicalUrl
+        canonicalUrl: data.canonicalUrl,
     });
 
     return meta;
@@ -102,7 +102,7 @@ export default function Index() {
                             formData.set('pathname', location.pathname);
                             submit(formData, {
                                 method: 'post',
-                                action: '/actions/changeTheme'
+                                action: '/actions/changeTheme',
                             });
                         }}
                     />

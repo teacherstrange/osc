@@ -9,7 +9,6 @@ import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
 import textGridStyles from 'osc-ui/dist/src-components-TextGrid-text-grid.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
-import { getTypes } from '~/models/sanity.server';
 import type {
     accordionModule,
     cardModule,
@@ -28,6 +27,37 @@ import { Cards } from './Cards/Cards';
 import { Hero } from './Hero/Hero';
 import { TextGridModule } from './TextGrid/TextGrid';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
+
+/**
+ * Recursively search for all types in a Sanity schema and filter them by type
+ *
+ * @param sanityData - The Sanity data to extract modules from
+ * @return An non unique array of all modules in the Sanity data
+ */
+const getTypes = (sanityData: SanityPage) => {
+    const types: string[] = [];
+
+    const recurse = (obj: SanityPage) => {
+        for (const key in obj) {
+            // Check whether the key exists in our object
+            if (obj.hasOwnProperty(key)) {
+                // IF the key is equal to `_type` push it into the types array
+                // ELSE if the key is an object, recurse into it
+                if (key === '_type') {
+                    types.push(obj[key]);
+                } else if (typeof obj[key as keyof SanityPage] === 'object') {
+                    // @ts-ignore -- we can safely ignore this error because we're already checking the type of the key
+                    recurse(obj[key as keyof SanityPage]);
+                }
+            }
+        }
+    };
+    recurse(sanityData);
+
+    const filteredTypes = types.filter((type) => type.includes('module.'));
+
+    return filteredTypes;
+};
 
 // So we can dynamically add the styles of each component into remix we need to create an array of stylesheet objects.
 // We will then call this function in each of the `route` files where we have a dynamicLinks.

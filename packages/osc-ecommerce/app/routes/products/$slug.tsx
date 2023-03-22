@@ -23,7 +23,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const data = await getPageData({
         request,
         params,
-        query: PRODUCT_QUERY
+        query: PRODUCT_QUERY,
     });
 
     if (!data?.page) {
@@ -39,20 +39,20 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const { page: product, isPreview }: PageData = data;
     const canonicalUrl = buildCanonicalUrl({
         canonical: product?.seo?.canonicalUrl,
-        request
+        request,
     });
 
     return json({
         product,
         isPreview,
         canonicalUrl,
-        query: isPreview ? PRODUCT_QUERY : null
+        query: isPreview ? PRODUCT_QUERY : null,
     });
 };
 
 // https://github.com/sergiodxa/remix-utils#dynamiclinks
 const dynamicLinks: DynamicLinksFunction = ({ data }) => {
-    return getComponentStyles(data.page);
+    return getComponentStyles(data.product);
 };
 
 export const handle = { dynamicLinks };
@@ -63,7 +63,7 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
     const meta = buildHtmlMetaTags({
         pageData: data.product,
         globalData: globalSeoSettings,
-        canonicalUrl: data.canonicalUrl
+        canonicalUrl: data.canonicalUrl,
     });
 
     return meta;
