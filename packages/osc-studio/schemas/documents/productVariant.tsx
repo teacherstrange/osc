@@ -1,9 +1,10 @@
 import { CopyIcon } from '@sanity/icons';
+import { defineField } from 'sanity';
 import ShopifyIcon from '../../components/icons/Shopify';
 import ProductVariantHiddenInput from '../../components/inputs/ProductVariantHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
 
-export default {
+export default defineField({
     name: 'productVariant',
     title: 'Product variant',
     type: 'document',
@@ -17,7 +18,7 @@ export default {
     ],
     fields: [
         // Product variant hidden status
-        {
+        defineField({
             name: 'hidden',
             type: 'string',
             components: {
@@ -28,22 +29,22 @@ export default {
 
                 return !isDeleted;
             },
-        },
+        }),
         // Title (proxy)
-        {
+        defineField({
             title: 'Title',
             name: 'titleProxy',
             type: 'proxyString',
             options: { field: 'store.title' },
-        },
+        }),
         // Shopify product variant
-        {
+        defineField({
             name: 'store',
             title: 'Shopify',
             description: 'Variant data from Shopify (read-only)',
             type: 'shopifyProductVariant',
-            group: 'shopifySync'
-        }
+            group: 'shopifySync',
+        }),
     ],
     preview: {
         select: {
@@ -51,7 +52,7 @@ export default {
             previewImageUrl: 'store.previewImageUrl',
             sku: 'store.sku',
             status: 'store.status',
-            title: 'store.title'
+            title: 'store.title',
         },
         prepare(selection) {
             const { isDeleted, previewImageUrl, sku, status, title } = selection;
@@ -71,4 +72,4 @@ export default {
             };
         },
     },
-};
+});

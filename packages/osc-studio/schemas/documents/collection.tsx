@@ -1,5 +1,6 @@
 import { PackageIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
+import { defineField } from 'sanity';
 import ShopifyIcon from '../../components/icons/Shopify';
 import CollectionHiddenInput from '../../components/inputs/CollectionHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
@@ -22,7 +23,7 @@ const GROUPS = [
     },
 ];
 
-export default {
+export default defineField({
     name: 'collection',
     title: 'Collection',
     type: 'document',
@@ -30,7 +31,7 @@ export default {
     groups: GROUPS,
     fields: [
         // Product hidden status
-        {
+        defineField({
             name: 'hidden',
             type: 'string',
             components: {
@@ -41,52 +42,52 @@ export default {
                 const isDeleted = parent?.store?.isDeleted;
                 return !isDeleted;
             },
-        },
+        }),
         // Title (proxy)
-        {
+        defineField({
             name: 'titleProxy',
             title: 'Title',
             type: 'proxyString',
             options: { field: 'store.title' },
-        },
+        }),
         // Slug (proxy)
-        {
+        defineField({
             name: 'slugProxy',
             title: 'Slug',
             type: 'proxyString',
             options: { field: 'store.slug.current' },
-        },
+        }),
         // Show hero
-        {
+        defineField({
             name: 'showHero',
             title: 'Show hero',
             type: 'boolean',
             description: 'If disabled, page title will be displayed instead',
-            group: 'editorial'
-        },
+            group: 'editorial',
+        }),
         // Modules
-        {
+        defineField({
             name: 'modules',
             title: 'Modules',
             type: 'array',
             of: MODULES,
-            group: 'editorial'
-        },
+            group: 'editorial',
+        }),
         // Shopify collection
-        {
+        defineField({
             name: 'store',
             title: 'Shopify',
             type: 'shopifyCollection',
             description: 'Collection data from Shopify (read-only)',
             group: 'shopifySync',
-        },
+        }),
         // SEO
-        {
+        defineField({
             name: 'seo',
             title: 'SEO',
             type: 'seo.shopify',
             group: 'seo',
-        },
+        }),
     ],
     orderings: [
         {
@@ -124,4 +125,4 @@ export default {
             };
         },
     },
-};
+});

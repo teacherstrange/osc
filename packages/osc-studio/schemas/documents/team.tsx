@@ -1,33 +1,33 @@
 import { UsersIcon } from '@sanity/icons';
-import React from 'react';
+import { defineField } from 'sanity';
 
-export default {
+export default defineField({
     name: 'team',
     title: 'Team',
     type: 'document',
     icon: UsersIcon,
     fields: [
-        {
+        defineField({
             name: 'name',
             title: 'Name',
             type: 'string',
             validation: (Rule) => Rule.required(),
-        },
-        {
+        }),
+        defineField({
             name: 'role',
             title: 'Role',
             type: 'string',
-        },
-        {
+        }),
+        defineField({
             name: 'image',
             title: 'Image',
             type: 'image.desktop',
-        },
-        {
+        }),
+        defineField({
             name: 'bio',
             title: 'Bio',
             type: 'bodyNoHeadings',
-        },
+        }),
     ],
     preview: {
         select: {
@@ -43,4 +43,4 @@ export default {
             };
         },
     },
-};
+});
