@@ -1,4 +1,6 @@
-export default {
+import { defineField } from 'sanity';
+
+export default defineField({
     name: 'bodyNoHeadings',
     title: 'Body no headings',
     type: 'array',
@@ -43,4 +45,4 @@ export default {
             type: 'block',
         },
     ],
-};
+});
