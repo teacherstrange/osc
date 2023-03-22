@@ -1,8 +1,4 @@
-import React from 'react';
-
-// ! Temporary fix: can update this to an import in Sanity V3
-const { colors, fluidScale } = require('osc-design-tokens/dist/index.js');
-const sizes = fluidScale;
+import { colors, fluidScale as sizes } from 'osc-design-tokens';
 
 const excludeColors = (key) =>
     !key.includes('shadow') &&
