@@ -45,6 +45,13 @@ inputs:
   SANITY_STUDIO_API_TOKEN:
     required: true
     description: "sanity api token"
+  HUBSPOT_ACCESS_TOKEN: 
+    required: true
+    description: 'hubspot access token'
+  HUBSPOT_PORTAL_ID:
+    required: true
+    description: 'hubspot portal id'
+  
 runs:
   using: "composite"
   steps:
@@ -134,6 +141,8 @@ runs:
           "SANITY_STUDIO_API_DATASET=${{inputs.SANITY_STUDIO_API_DATASET}}"
           "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
           "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
+          "HUBSPOT_ACCESS_TOKEN=${{inputs.HUBSPOT_ACCESS_TOKEN}}"
+          "HUBSPOT_PORTAL_ID=${{inputs.HUBSPOT_PORTAL_ID}}"
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
@@ -153,6 +162,8 @@ runs:
           "SANITY_STUDIO_API_DATASET=${{inputs.SANITY_STUDIO_API_DATASET}}"
           "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
           "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
+          "HUBSPOT_ACCESS_TOKEN=${{inputs.HUBSPOT_ACCESS_TOKEN}}"
+          "HUBSPOT_PORTAL_ID=${{inputs.HUBSPOT_PORTAL_ID}}"
         file: ./Dockerfiles/Dockerfile.pr
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
@@ -173,6 +184,8 @@ runs:
           "SANITY_STUDIO_API_DATASET=${{inputs.SANITY_STUDIO_API_DATASET}}"
           "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
           "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
+          "HUBSPOT_ACCESS_TOKEN=${{inputs.HUBSPOT_ACCESS_TOKEN}}"
+          "HUBSPOT_PORTAL_ID=${{inputs.HUBSPOT_PORTAL_ID}}"
         file: ./Dockerfiles/Dockerfile.studio
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
