@@ -1,3 +1,10 @@
+## [0.56.1](https://github.com/Open-Study-College/osc/compare/v0.56.0...v0.56.1) (2023-03-22)
+
+
+### 🐛 Bugs
+
+* **carousel:** add rem function to wrap dimensions unit ([5bc8d73](https://github.com/Open-Study-College/osc/commit/5bc8d73e89b15c644d7109bcf794c9b00bdfbb16))
+
 ## [0.56.0](https://github.com/Open-Study-College/osc/compare/v0.55.0...v0.56.0) (2023-03-22)
 
 
@@ -104,40 +111,4 @@
 
 * **ui:** fix broken tests ([692ed68](https://github.com/Open-Study-College/osc/commit/692ed6858841abd233730d0939d831297b6983eb))
 * **ui:** fix footer tests ([6459391](https://github.com/Open-Study-College/osc/commit/645939185c0422a0b24d8bb603103224813503ac))
-
-## [0.53.0](https://github.com/Open-Study-College/osc/compare/v0.52.0...v0.53.0) (2023-03-08)
-
-
-### ✨ Features
-
-* **ecommerce:** add footer dependent stylesheets ([f11d1e2](https://github.com/Open-Study-College/osc/commit/f11d1e2420ac7b755fad5a402da98049588deb81))
-* **ecommerce:** adds footer component to ecommerce ([38ddb29](https://github.com/Open-Study-College/osc/commit/38ddb293aad377e001abdd8a61e151b5d346f7c9))
-* **ecommerce:** update the site settings query ([ad5cbe9](https://github.com/Open-Study-College/osc/commit/ad5cbe943531f0e2f53eb6111e962e6d1fb43f22))
-* **footer:** export footer dependent components ([bfed7ff](https://github.com/Open-Study-College/osc/commit/bfed7ff4f165a016e245f7418ec47eba44a52628))
-* **studio:** add contact details settings ([d2eb370](https://github.com/Open-Study-College/osc/commit/d2eb370849b881a8f104dbc655444f99a3205b03))
-* **studio:** add preview to social settings ([3cb7613](https://github.com/Open-Study-College/osc/commit/3cb7613146a377928aaf79c6519fe9a135b5b25a))
-* **studio:** adds footer settings group ([1be47a4](https://github.com/Open-Study-College/osc/commit/1be47a4bc4153e4858325e69033fc7cfe94325c7))
-* **studio:** adds social icons to icon picker ([b899cc4](https://github.com/Open-Study-College/osc/commit/b899cc4a67a755f35e19563f008cc011eb24052b))
-* **studio:** update file to tsx and add icon to preview ([643e3ba](https://github.com/Open-Study-College/osc/commit/643e3ba50eb79be0ab4a77e446dfbc2c02ef6638))
-* **types:** add footer types ([3f90be6](https://github.com/Open-Study-College/osc/commit/3f90be6af917cb4b0f7a0886fe64ddca3a207e9f))
-
-
-### ♻️ Refactors
-
-* **ecommerce:** add links to social icons in footer ([ef2e8b3](https://github.com/Open-Study-College/osc/commit/ef2e8b3f90c42e608384755c19f267f1b6500523))
-* **ecommerce:** update social seo settings to match new shape from sanity ([4e8c37d](https://github.com/Open-Study-College/osc/commit/4e8c37dc233ffdc6bac73581025601d53b056beb))
-* **footer:** add siteName prop so we can pass value dynamically ([a53195c](https://github.com/Open-Study-College/osc/commit/a53195c813dd9e9f81c27149d87dae3eff7490c7))
-* **footer:** added smaller padding on larger screens ([dedd89a](https://github.com/Open-Study-College/osc/commit/dedd89a9947a38f3a7cf71a7e4f72b357a7465b1))
-* **footer:** reset c-nav__link styles when used in the footer ([73f80ee](https://github.com/Open-Study-College/osc/commit/73f80ee36483f0c16cdcbab0aa2e5a83ea07ab04))
-* **icons:** update icons to use currentColor ([d6aef85](https://github.com/Open-Study-College/osc/commit/d6aef851ad39f9933786af12e915a51fb2e0f284))
-* **studio:** flatten social settings ([0fec0b8](https://github.com/Open-Study-College/osc/commit/0fec0b843344bc06716e890c6681c4bdd8dbce91))
-* **studio:** move 404 settings to the end ([21997d5](https://github.com/Open-Study-College/osc/commit/21997d5eda07ff2ae8e37c33b03d03ef6b6c218c))
-* **studio:** move social settings into it's own group ([d7427be](https://github.com/Open-Study-College/osc/commit/d7427be216fb6cbf887e325d2270443d3996130d))
-* **types:** move social settings into it's own type ([7e78868](https://github.com/Open-Study-College/osc/commit/7e788682ad12ab1b5ca85ef869179e0a2e484cf5))
-* **types:** wrap optional featured and items in Maybe generic ([1d2cf76](https://github.com/Open-Study-College/osc/commit/1d2cf76ea8f08c53f27e4da19c66d98fae8ddb72))
-
-
-### 🧪 Tests
-
-* **ecommerce:** adds tests for footer component ([65eb4ac](https://github.com/Open-Study-College/osc/commit/65eb4ac6b9dceed2b515310cc2af34f705d59163))
 
