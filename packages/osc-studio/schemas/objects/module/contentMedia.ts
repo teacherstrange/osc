@@ -17,10 +17,6 @@ export default {
             title: 'Spacing',
         },
         {
-            name: 'settings',
-            title: 'Settings',
-        },
-        {
             name: 'slides',
             title: 'Slides',
             default: true,
@@ -86,13 +82,13 @@ export default {
                     // if we are not showing the field, or if the field has a value then the validation passes
                     return true;
                 }),
-            group: 'settings',
+            group: 'slides',
         },
         {
             name: 'carouselSettings',
             title: 'Carousel Settings',
             type: 'carouselSettings',
-            group: 'settings',
+            group: 'slides',
             hidden: ({ parent }) => !shouldShow(parent),
         },
     ],
