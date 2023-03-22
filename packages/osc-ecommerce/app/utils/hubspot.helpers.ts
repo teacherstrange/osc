@@ -99,7 +99,7 @@ export const validateAndSubmitHubspotForm = async (formfieldData: FormFieldData)
 };
 
 export const getHubspotForm = async (page: any) => {
-    const formModule = page.modules.find(
+    const formModule = page.modules?.find(
         (module: any) => module._type === 'module.forms'
     ) as formModule;
 
