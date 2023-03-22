@@ -66,6 +66,7 @@ const Form = (props: FormProps) => {
             <HubspotForm
                 formErrors={formErrors}
                 formFieldGroups={formFieldGroups}
+                formId={form.formId}
                 isSubmitting={isSubmitting}
                 setValidationErrors={setValidationErrors}
                 submitText={submitText}

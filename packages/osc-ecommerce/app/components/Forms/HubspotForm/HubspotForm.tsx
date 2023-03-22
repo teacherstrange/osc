@@ -13,6 +13,10 @@ export interface HubspotFormProps {
      */
     formFieldGroups: HubspotFormFieldGroups[];
     /**
+     * Hubspot form Id
+     */
+    formId: string;
+    /**
      * Transition state when form is being submitted - used to show pending state on submit button
      */
     isSubmitting?: boolean;
@@ -34,6 +38,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
     const {
         formErrors,
         formFieldGroups,
+        formId,
         isSubmitting = false,
         setValidationErrors,
         submitText,
@@ -49,6 +54,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
                     {formFieldGroups?.map((data, index) => {
                         return getInputType(
                             data,
+                            formId,
                             index,
                             validationSchema,
                             setValidationErrors,

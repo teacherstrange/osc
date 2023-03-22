@@ -7,6 +7,7 @@ import type { HubspotFormFieldGroups, HubspotFormFieldTypes } from './types';
 
 export function getInputType(
     data: HubspotFormFieldGroups,
+    formId: string,
     index: number,
     schema: ZodObject<ZodRawShape>,
     setValidationErrors: Dispatch<SetStateAction<any>>,
@@ -26,7 +27,7 @@ export function getInputType(
                 formInput = (
                     <TextArea
                         errors={validationErrors && validationErrors[hubspotFields.name]}
-                        id={hubspotFields.name}
+                        id={`${hubspotFields.name}_${formId}`}
                         key={index}
                         name={hubspotFields.label}
                         required={hubspotFields.required}
@@ -41,7 +42,7 @@ export function getInputType(
                     <TextInput
                         errors={validationErrors && validationErrors[hubspotFields.name]}
                         key={index}
-                        id={hubspotFields.name}
+                        id={`${hubspotFields.name}_${formId}`}
                         inputMode={hubspotFields.fieldType === 'phonenumber' ? 'numeric' : 'text'}
                         name={hubspotFields.label}
                         pattern={hubspotFields.fieldType === 'phonenumber' ? '[0-9]*' : undefined}
