@@ -112,7 +112,7 @@ export const Forms = (props: { module: formModule }) => {
         }
     }, [serverValidationErrors, serverErrors]);
 
-    if (hubspotFormData?.formFieldGroups?.length === 0) {
+    if (!Object.keys(hubspotFormData).length) {
         return <Alert status="error">Unable to load form!</Alert>;
     }
 

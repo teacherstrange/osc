@@ -3,15 +3,14 @@ import { json } from '@remix-run/node';
 import { useLoaderData, useParams } from '@remix-run/react';
 import { useState } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
-import type { HubspotFormData, HubspotFormFieldGroups } from '~/components/Forms/types';
 import Module, { getComponentStyles } from '~/components/Module';
 import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PAGE_QUERY } from '~/queries/sanity/page';
-import type { formModule, module, SanityPage } from '~/types/sanity';
+import type { module, SanityPage } from '~/types/sanity';
+import { getHubspotForm } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
-import { getHubspotFormData } from '~/utils/server/hubspot.server';
 
 interface PageData {
     page: SanityPage;
@@ -40,20 +39,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     const { page, isPreview }: PageData = data;
 
-    const formModule = page.modules.find((module) => module._type === 'module.forms') as formModule;
-    const formId = formModule.formNameAndId.split(', ')[1];
-    let hubspotFormData:
-        | { formFieldGroups: HubspotFormFieldGroups[] | []; submitText: string }
-        | {} = {};
-    try {
-        const formData = (await getHubspotFormData(formId)) as HubspotFormData;
-        hubspotFormData = {
-            formFieldGroups: formData?.formFieldGroups,
-            submitText: formData?.submitText,
-        };
-    } catch (error) {
-        console.error('Unable to load form!');
-    }
+    const hubspotFormData = await getHubspotForm(page);
 
     const canonicalUrl = buildCanonicalUrl({
         canonical: page?.seo?.canonicalUrl,
@@ -65,7 +51,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         canonicalUrl,
         isPreview,
         query: isPreview ? PAGE_QUERY : null,
-        hubspotFormData,
+        hubspotFormData: hubspotFormData ? hubspotFormData : null,
     });
 };
 

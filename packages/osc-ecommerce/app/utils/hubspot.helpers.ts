@@ -1,7 +1,9 @@
 import { json } from '@remix-run/node';
 import { getValidationSchema } from '~/components/Forms/utils';
-import { hubspotFormsApiRequest } from '~/utils/server/hubspot.server';
+import { hubspotFormsApiRequest, getHubspotFormData } from '~/utils/server/hubspot.server';
 import { validateAction } from '~/utils/validation';
+import type { formModule } from '~/types/sanity';
+import type { HubspotFormData } from '~/components/Forms/types';
 
 export const shapeHubspotFormData = (
     formFieldsData: Record<any, string>[],
@@ -94,4 +96,29 @@ export const validateAndSubmitHubspotForm = async (formfieldData: FormFieldData)
         errorCases.formErrors = { messages: ['There was a problem, please try again'] };
         return json(errorCases);
     }
+};
+
+export const getHubspotForm = async (page: any) => {
+    const formModule = page.modules.find(
+        (module: any) => module._type === 'module.forms'
+    ) as formModule;
+
+    if (!formModule) {
+        return null;
+    }
+
+    const formId = formModule.formNameAndId.split(', ')[1];
+
+    let formData: HubspotFormData;
+    try {
+        formData = await getHubspotFormData(formId);
+    } catch (error) {
+        return error;
+    }
+
+    const hubspotFormData: Partial<HubspotFormData> = {
+        formFieldGroups: formData?.formFieldGroups,
+        submitText: formData?.submitText,
+    };
+    return hubspotFormData;
 };
