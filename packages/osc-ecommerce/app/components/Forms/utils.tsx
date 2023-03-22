@@ -100,7 +100,7 @@ export const transitionStates = (fetcher: Fetcher) => {
     const isSubmitting = fetcher.state === 'submitting';
     const isAdding =
         fetcher.state === 'submitting' &&
-        fetcher.submission.formData.get('_action') === 'submitForm';
+        fetcher.submission.formData.get('_action') === 'submitHubspotForm';
 
     return { isSubmitting, isAdding };
 };
