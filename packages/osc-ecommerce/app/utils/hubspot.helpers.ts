@@ -7,7 +7,6 @@ export const shapeHubspotFormData = (
     formFieldsData: Record<any, string>[],
     formData: Record<any, string>
 ) => {
-    debugger;
     const shapedData = formFieldsData.map((item) => {
         return {
             objectTypeId: item.objectTypeId,
