@@ -14,6 +14,7 @@
 import Iframe from 'sanity-plugin-iframe-pane';
 import { SEOPane } from 'sanity-plugin-seo-pane';
 import type { DefaultDocumentNodeResolver, StructureResolver } from 'sanity/desk';
+import type { SanityDocumentWithSlug } from '../utils/resolveProductionUrl';
 import { resolveProductionUrl } from '../utils/resolveProductionUrl';
 import { blog } from './blog';
 import { collections } from './collections';
@@ -61,7 +62,7 @@ export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaT
         S.view
             .component(Iframe)
             .options({
-                url: (doc) => resolveProductionUrl(doc),
+                url: (doc: SanityDocumentWithSlug) => resolveProductionUrl(doc),
                 reload: {
                     button: true,
                     revision: true,
@@ -74,7 +75,7 @@ export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaT
                 // Retrieve the keywords and synonyms at the given dot-notated strings
                 keywords: `seo.keywords`,
                 synonyms: `seo.synonyms`,
-                url: (doc) => resolveProductionUrl(doc),
+                url: (doc: SanityDocumentWithSlug) => resolveProductionUrl(doc),
             })
             .title('SEO'),
     ]);
