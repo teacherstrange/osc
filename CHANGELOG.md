@@ -1,3 +1,11 @@
+## [0.56.3](https://github.com/Open-Study-College/osc/compare/v0.56.2...v0.56.3) (2023-03-22)
+
+
+### ♻️ Refactors
+
+* **cards:** adds bottom margin to the inner body ([2823893](https://github.com/Open-Study-College/osc/commit/28238932098e35d36558ca32016fd30a0335029a))
+* **cards:** adds explcit grid to the inner component ([937fbcf](https://github.com/Open-Study-College/osc/commit/937fbcf00d69576535f4d45958bbe8e1bf67e61d))
+
 ## [0.56.2](https://github.com/Open-Study-College/osc/compare/v0.56.1...v0.56.2) (2023-03-22)
 
 
@@ -41,18 +49,13 @@
 * **text-gird:** wrap story in container ([edd1388](https://github.com/Open-Study-College/osc/commit/edd13881c4cbc9b8b4fb43bb43089c9009ef0128))
 * **text-grid:** adds initial component ([257d268](https://github.com/Open-Study-College/osc/commit/257d268886d9f93c1fbbfd5c4ef7fe5cbf74f9f6))
 * **text-grid:** export component ([3674e91](https://github.com/Open-Study-College/osc/commit/3674e917d37cae7993988c3af71131a69e81e6b5))
-* adds basic login functionality ([65a12a4](https://github.com/Open-Study-College/osc/commit/65a12a4fb00a3ea43f153c4d3df077e30aaf6beb))
-* setup initial routes ([2dbfc45](https://github.com/Open-Study-College/osc/commit/2dbfc45cbe834eae5441d2256f348e40586de0c9))
-* setup initial user functions ([f907264](https://github.com/Open-Study-College/osc/commit/f90726413d4573fa36f1bc4ddb0567c60ca92d67))
 
 
 ### 📦 General Housekeeping / Package Updates
 
 * **content media:** tidy up todo comments ([8e038c0](https://github.com/Open-Study-College/osc/commit/8e038c02a0461b8f3ede29378f04141ccc6c63f7))
 * **content media:** update storybook control ([aa1cfdc](https://github.com/Open-Study-College/osc/commit/aa1cfdc0ced8bfb57bc5c060a93e22b73a2b10dd))
-* install apollo client ([ee85009](https://github.com/Open-Study-College/osc/commit/ee85009339a503f5d50fbc2c98e2bacb7baf0a6f))
 * removes console.log ([0f4c6a1](https://github.com/Open-Study-College/osc/commit/0f4c6a13e06c3e484f0d199fead4d8435a95005d))
-* renames join to register ([1aa178e](https://github.com/Open-Study-College/osc/commit/1aa178e15b0c9c353cfd4b9009627c8e52fb4146))
 
 
 ### ♻️ Refactors
