@@ -82,7 +82,7 @@ export const validateAndSubmitHubspotForm = async (formfieldData: FormFieldData)
     try {
         const response = await hubspotFormsApiRequest(
             'post',
-            `https://api.hsforms.com/submissions/v3/integration/secure/submit/${process.env.CONTACT_PORTAL_ID}/${formId}`,
+            `https://api.hsforms.com/submissions/v3/integration/secure/submit/${process.env.HUBSPOT_PORTAL_ID}/${formId}`,
             hubspotContactData
         );
         return response;

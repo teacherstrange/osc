@@ -2,7 +2,7 @@ import { Client } from '@hubspot/api-client';
 
 export const hubspotClient = () => {
     return new Client({
-        accessToken: process.env.HUBSPOT_DEV_ACCESS_TOKEN,
+        accessToken: process.env.HUBSPOT_ACCESS_TOKEN,
     });
 };
 
