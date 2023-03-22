@@ -1,5 +1,6 @@
 import { MasterDetailIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
+import { SPACING } from '../../../constants';
 
 const shouldShow = (parent) => {
     return parent.slides.length > 1;
@@ -11,6 +12,10 @@ export default {
     type: 'object',
     icon: MasterDetailIcon,
     groups: [
+        {
+            name: 'spacing',
+            title: 'Spacing',
+        },
         {
             name: 'settings',
             title: 'Settings',
@@ -28,6 +33,39 @@ export default {
             type: 'array',
             of: [{ type: 'contentMediaSlide' }],
             group: 'slides',
+        },
+        {
+            name: 'marginBottom',
+            title: 'Push Region',
+            type: 'string',
+            description: 'Spacing you would like between this region and the next.',
+            options: {
+                list: SPACING,
+                layout: 'dropdown',
+            },
+            group: 'spacing',
+        },
+        {
+            name: 'paddingTop',
+            title: 'Inner Padding Top',
+            type: 'string',
+            description: 'Inner padding at the top of the region.',
+            options: {
+                list: SPACING,
+                layout: 'dropdown',
+            },
+            group: 'spacing',
+        },
+        {
+            name: 'paddingBottom',
+            title: 'Inner Padding Bottom',
+            type: 'string',
+            description: 'Inner padding at the bottom of the region.',
+            options: {
+                list: SPACING,
+                layout: 'dropdown',
+            },
+            group: 'spacing',
         },
         {
             // To make the name validation only apply when the field is visible we need to move it out of the settings object

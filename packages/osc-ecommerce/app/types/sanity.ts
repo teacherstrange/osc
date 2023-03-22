@@ -101,6 +101,9 @@ export interface contentMediaSlide extends module {
 export interface contentMediaModule extends module {
     carouselName?: string;
     carouselSettings: carouselModuleSettings;
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
     slides: contentMediaSlide[];
 }
 

@@ -6,6 +6,9 @@ export const MODULE_CONTENT_MEDIA = groq`
     _key,
     _type,
     layout,
+    marginBottom,
+    paddingBottom,
+    paddingTop,
     carouselName,
     carouselSettings,
     slides[] {

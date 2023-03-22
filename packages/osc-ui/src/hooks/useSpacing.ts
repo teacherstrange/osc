@@ -1,9 +1,9 @@
-import type { Direction, Spacing } from '../types';
+import type { Direction, Maybe, Spacing } from '../types';
 
 export const useSpacing = (
     boxControl: 'margin' | 'padding',
     direction: Direction,
-    space: Spacing
+    space: Maybe<Spacing>
 ) => {
     const getFirstLetter = (str: string) => str.split('').shift().toLowerCase();
 

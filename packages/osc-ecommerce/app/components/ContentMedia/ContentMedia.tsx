@@ -1,6 +1,15 @@
 import mq from 'osc-design-tokens';
 import type { Columns } from 'osc-ui';
-import { Carousel, Content, ContentMedia, ContentMediaBlock, Image, rem } from 'osc-ui';
+import {
+    Carousel,
+    classNames,
+    Content,
+    ContentMedia,
+    ContentMediaBlock,
+    Image,
+    rem,
+    useSpacing,
+} from 'osc-ui';
 import type { contentMediaModule, contentMediaSlide } from '~/types/sanity';
 
 // TODO: tidy up sanity -- content media previews
@@ -9,42 +18,60 @@ import type { contentMediaModule, contentMediaSlide } from '~/types/sanity';
 const perView = (perView: number | undefined) => (perView ? perView : 1);
 
 export const ContentMediaModule = (props: { module: contentMediaModule }) => {
-    const { carouselName, carouselSettings, slides } = props.module;
+    const { carouselName, carouselSettings, marginBottom, paddingBottom, paddingTop, slides } =
+        props.module;
+
+    const marginBottomClass = useSpacing('margin', 'bottom', marginBottom);
+    const paddingTopClass = useSpacing('padding', 'top', paddingTop);
+    const paddingBottomClass = useSpacing('padding', 'bottom', paddingBottom);
+
+    const classes = classNames(
+        'o-container',
+        marginBottomClass,
+        paddingTopClass,
+        paddingBottomClass
+    );
 
     if (slides.length > 1) {
         return (
-            <Carousel
-                carouselName={carouselName ? carouselName : 'content media carousel'}
-                arrows={carouselSettings?.arrows}
-                dotNav={carouselSettings?.dotNav}
-                loop={carouselSettings?.loop}
-                autoplay={carouselSettings?.autoplay}
-                slidesPerView={perView(carouselSettings?.slidesPerView?.mobile)}
-                startIndex={carouselSettings?.startIndex ? carouselSettings?.startIndex - 1 : 0} // minus 1 so cms users can start at 1
-                breakpoints={{
-                    [`(min-width: ${rem(mq['tab'])}rem)`]: {
-                        slides: {
-                            origin: 'auto',
-                            perView: perView(carouselSettings?.slidesPerView?.tablet),
-                            spacing: 16,
+            <div className={classes}>
+                <Carousel
+                    carouselName={carouselName ? carouselName : 'content media carousel'}
+                    arrows={carouselSettings?.arrows}
+                    dotNav={carouselSettings?.dotNav}
+                    loop={carouselSettings?.loop}
+                    autoplay={carouselSettings?.autoplay}
+                    slidesPerView={perView(carouselSettings?.slidesPerView?.mobile)}
+                    startIndex={carouselSettings?.startIndex ? carouselSettings?.startIndex - 1 : 0} // minus 1 so cms users can start at 1
+                    breakpoints={{
+                        [`(min-width: ${rem(mq['tab'])}rem)`]: {
+                            slides: {
+                                origin: 'auto',
+                                perView: perView(carouselSettings?.slidesPerView?.tablet),
+                                spacing: 16,
+                            },
                         },
-                    },
-                    [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
-                        slides: {
-                            origin: 'auto',
-                            perView: perView(carouselSettings?.slidesPerView?.desktop),
-                            spacing: 16,
+                        [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
+                            slides: {
+                                origin: 'auto',
+                                perView: perView(carouselSettings?.slidesPerView?.desktop),
+                                spacing: 16,
+                            },
                         },
-                    },
-                }}
-            >
-                {slides?.map((slide) => (
-                    <Slide {...slide} key={slide?._key} />
-                ))}
-            </Carousel>
+                    }}
+                >
+                    {slides?.map((slide) => (
+                        <Slide {...slide} key={slide?._key} />
+                    ))}
+                </Carousel>
+            </div>
         );
     } else {
-        return <Slide {...slides[0]} />;
+        return (
+            <div className={classes}>
+                <Slide {...slides[0]} />
+            </div>
+        );
     }
 };
 
