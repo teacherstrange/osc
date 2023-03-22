@@ -12,9 +12,6 @@ import {
 } from 'osc-ui';
 import type { contentMediaModule, contentMediaSlide } from '~/types/sanity';
 
-// TODO: tidy up sanity -- content media previews
-// TODO: tests for this component
-
 const perView = (perView: number | undefined) => (perView ? perView : 1);
 
 export const ContentMediaModule = (props: { module: contentMediaModule }) => {

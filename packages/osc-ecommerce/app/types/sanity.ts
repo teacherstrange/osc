@@ -89,7 +89,7 @@ export interface contentMediaSlide extends module {
     layoutDirection?: 'content-media' | 'media-content';
     layoutGrid?: string;
     media: {
-        carouselName?: string;
+        carouselName: Maybe<string>;
         carouselSettings: carouselModuleSettings;
         mediaType: {
             image?: imageModule<HTMLImageElement>;
@@ -99,8 +99,8 @@ export interface contentMediaSlide extends module {
 }
 
 export interface contentMediaModule extends module {
-    carouselName?: string;
-    carouselSettings: carouselModuleSettings;
+    carouselName: Maybe<string>;
+    carouselSettings: Maybe<carouselModuleSettings>;
     marginBottom?: Maybe<Spacing>;
     paddingBottom?: Maybe<Spacing>;
     paddingTop?: Maybe<Spacing>;
@@ -203,7 +203,7 @@ export interface cardModule extends module {
     paddingBottom?: Spacing | string;
     paddingTop?: Spacing | string;
     layout: string;
-    carouselName?: string;
+    carouselName?: Maybe<string>;
     carouselSettings?: carouselModuleSettings;
     content?: contentModule;
     card: TypesOfCard[];
@@ -222,20 +222,6 @@ export interface trustpilotModule extends module {
     type: 'slider' | 'grid' | 'minicarousel' | 'microstar';
 }
 
-export interface carouselModuleSettings extends module {
-    carouselName: string;
-    arrows?: boolean;
-    dotNav?: boolean;
-    loop?: boolean;
-    autoplay?: false | 'smooth' | 'switch';
-    startIndex?: number;
-    slidesPerView?: {
-        mobile?: number;
-        tablet?: number;
-        desktop?: number;
-    };
-}
-
 export interface carouselModule extends module {
     mediaArray: SanityImage<HTMLImageElement>[];
     active: boolean;
@@ -249,7 +235,7 @@ export interface carouselModule extends module {
 }
 
 export interface carouselModuleSettings extends module {
-    carouselName: string;
+    carouselName: Maybe<string>;
     arrows?: boolean;
     dotNav?: boolean;
     loop?: boolean;
