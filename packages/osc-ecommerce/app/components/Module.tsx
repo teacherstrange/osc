@@ -160,7 +160,7 @@ export default function Module(props: Props) {
             const moduleContent = module as contentModule;
 
             return moduleContent.body ? (
-                <article>
+                <article className="o-container">
                     <Content
                         align={moduleContent.horizontalAlignment}
                         backgroundColor={
@@ -172,6 +172,7 @@ export default function Module(props: Props) {
                         paddingBottom={moduleContent.paddingBottom}
                         paddingTop={moduleContent.paddingTop}
                         value={moduleContent.body}
+                        fullWidth={moduleContent.fullWidth ? moduleContent.fullWidth : undefined}
                         buttons={moduleContent.buttons}
                     />
                 </article>

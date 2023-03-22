@@ -75,6 +75,14 @@ export default {
             group: 'content',
         },
         {
+            name: 'fullWidth',
+            title: 'Full Width',
+            type: 'boolean',
+            description: 'Whether the content should fill the width of the container.',
+            group: 'content',
+            initialValue: false,
+        },
+        {
             name: 'body',
             title: 'Body',
             type: 'body',

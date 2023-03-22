@@ -29,8 +29,7 @@
             flex-direction: column;
             align-items: flex-start;
             width: 100%;
-            max-width: #{$container-xs}px;
-            margin: auto;
+            max-width: 80ch;
 
             // Horizontal Alignments
             &--left {
@@ -54,6 +53,11 @@
 
             &--bottom {
                 align-items: flex-end;
+            }
+
+            // Control width
+            &--full {
+                max-width: 100%;
             }
         }
     }
