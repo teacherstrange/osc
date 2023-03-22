@@ -262,9 +262,9 @@ $osc-config: (
     [data-bg-color="#{$name}"],
     .u-bg-color-#{$name} {
         @if (string.index($name, "gradient")) {
-            background-image: var(--color-#{$name});
+            background-image: var(--color-#{$name}) !important;
         } @else {
-            background-color: var(--color-#{$name});
+            background-color: var(--color-#{$name}) !important;
         }
     }
 }

@@ -158,9 +158,9 @@ h6,
 
     @each $class in $classes {
         .t-font-#{$class} {
-            @if $class == "2xl" or $class == "3xl" or $class == "4xl" or $class == "7xl" {
+            @if $class == "2xl" or $class == "3xl" or $class == "4xl" {
                 @include font-size(var(--font-scale-#{$class}), 1.2);
-            } @else if $class == "6xl" or $class == "5xl" {
+            } @else if $class == "7xl" or $class == "6xl" or $class == "5xl" {
                 @include font-size(var(--font-scale-#{$class}), 1);
             } @else {
                 @include font-size(var(--font-scale-#{$class}), $base-lh);
