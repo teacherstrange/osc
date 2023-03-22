@@ -1,4 +1,4 @@
-import type { ActionArgs, ActionFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData, useParams } from '@remix-run/react';
 import { useState } from 'react';
@@ -9,7 +9,6 @@ import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PAGE_QUERY } from '~/queries/sanity/page';
 import type { formModule, module, SanityPage } from '~/types/sanity';
-import { validateAndSubmitHubspotForm } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 import { getHubspotFormData } from '~/utils/server/hubspot.server';
@@ -68,44 +67,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         query: isPreview ? PAGE_QUERY : null,
         hubspotFormData,
     });
-};
-
-export const action: ActionFunction = async ({ request }: ActionArgs) => {
-    const formfieldData = Object.fromEntries(await request.formData());
-
-    if (formfieldData._action === 'submitHubspotForm') {
-        let response;
-        try {
-            response = await validateAndSubmitHubspotForm(formfieldData);
-        } catch (error) {
-            let message = 'Unknown Error';
-            if (error instanceof Error) message = error.message;
-            return json({ formErrors: { messages: [message] } });
-        }
-
-        if (!response?.ok) {
-            console.error(
-                `Error submitting form! Status: ${response.status}. StatusText: ${response.statusText}`
-            );
-            return {
-                formErrors: {
-                    statusText: response?.statusText,
-                    messages: ['There was a problem, please try again'],
-                    status: response?.status,
-                },
-            };
-        }
-
-        const result = await response.json();
-
-        if (result.validationErrors || result.formErrors) {
-            result.success = false;
-        } else {
-            result.success = true;
-        }
-
-        return result;
-    }
 };
 
 // https://github.com/sergiodxa/remix-utils#dynamiclinks

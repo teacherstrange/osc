@@ -1,6 +1,6 @@
-import { Form as RemixForm, useActionData, useLoaderData, useTransition } from '@remix-run/react';
+import { useFetcher, useLoaderData } from '@remix-run/react';
 import { Alert } from 'osc-ui';
-import type { Dispatch, RefObject } from 'react';
+import type { Dispatch } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import type { z } from 'zod';
 import type { formModule } from '~/types/sanity';
@@ -23,10 +23,6 @@ interface FormProps {
      */
     formFieldGroups: HubspotFormFieldGroups[];
     /**
-     * useRef passed to the Form so it can be reset on successful submission
-     */
-    formRef: RefObject<HTMLFormElement>;
-    /**
      * Transition state when form is being submitted - used to show pending state on submit button
      */
     isSubmitting: boolean;
@@ -48,7 +44,6 @@ const Form = (props: FormProps) => {
     const {
         form,
         formFieldGroups,
-        formRef,
         formErrors,
         isSubmitting,
         setValidationErrors,
@@ -65,19 +60,17 @@ const Form = (props: FormProps) => {
             slideOutText={form.slideOutText}
             variant={form.slideDirection}
         >
-            <RemixForm ref={formRef} method="post" noValidate>
-                {/* Hidden Inputs added in order to get the form ID and hubspot form field data on submission */}
-                <input type="hidden" value={form.formId} name="formId" />
-                <input type="hidden" value={JSON.stringify(formFields)} name="hubspotFieldsData" />
-                <HubspotForm
-                    formErrors={formErrors}
-                    formFieldGroups={formFieldGroups}
-                    isSubmitting={isSubmitting}
-                    setValidationErrors={setValidationErrors}
-                    submitText={submitText}
-                    validationErrors={validationErrors}
-                />
-            </RemixForm>
+            {/* Hidden Inputs added in order to get the form ID and hubspot form field data on submission */}
+            <input type="hidden" value={form.formId} name="formId" />
+            <input type="hidden" value={JSON.stringify(formFields)} name="hubspotFieldsData" />
+            <HubspotForm
+                formErrors={formErrors}
+                formFieldGroups={formFieldGroups}
+                isSubmitting={isSubmitting}
+                setValidationErrors={setValidationErrors}
+                submitText={submitText}
+                validationErrors={validationErrors}
+            />
         </FormContainer>
     );
 };
@@ -86,7 +79,9 @@ export const Forms = (props: { module: formModule }) => {
     // Module data coming from Sanity
     const { module } = props;
     // Data coming back when the form has been submitted - e.g. transition state and any server errors
-    const data = useActionData();
+    const fetcher = useFetcher();
+    const data = fetcher.data;
+
     // Form field data from hubspot which gets loaded through the route
     const { hubspotFormData } = useLoaderData();
 
@@ -96,8 +91,7 @@ export const Forms = (props: { module: formModule }) => {
     const [validationErrors, setValidationErrors] = useState<FlattenedErrors | {}>([]);
     const [formErrors, setFormErrors] = useState<string[] | []>([]);
 
-    const transition = useTransition();
-    const { isAdding, isSubmitting } = transitionStates(transition);
+    const { isAdding, isSubmitting } = transitionStates(fetcher);
 
     const formRef = useRef<HTMLFormElement>(null);
 
@@ -130,16 +124,17 @@ export const Forms = (props: { module: formModule }) => {
 
     return (
         <div className={`c-form__${formClassName}`}>
-            <Form
-                form={module}
-                formErrors={formErrors}
-                formFieldGroups={hubspotFormData.formFieldGroups as HubspotFormFieldGroups[]}
-                formRef={formRef}
-                isSubmitting={isSubmitting}
-                setValidationErrors={setValidationErrors}
-                submitText={hubspotFormData.submitText}
-                validationErrors={validationErrors}
-            />
+            <fetcher.Form action="/actions/hubspot" method="post" ref={formRef} noValidate>
+                <Form
+                    form={module}
+                    formErrors={formErrors}
+                    formFieldGroups={hubspotFormData.formFieldGroups as HubspotFormFieldGroups[]}
+                    isSubmitting={isSubmitting}
+                    setValidationErrors={setValidationErrors}
+                    submitText={hubspotFormData.submitText}
+                    validationErrors={validationErrors}
+                />
+            </fetcher.Form>
         </div>
     );
 };

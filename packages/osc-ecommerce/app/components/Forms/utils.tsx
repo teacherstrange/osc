@@ -1,4 +1,4 @@
-import type { Transition } from '@remix-run/react/dist/transition';
+import type { Fetcher } from '@remix-run/react/dist/transition';
 import { TextArea, TextInput } from 'osc-ui';
 import type { Dispatch, InputHTMLAttributes, SetStateAction, TextareaHTMLAttributes } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
@@ -16,7 +16,7 @@ export function getInputType(
         | InputHTMLAttributes<HTMLInputElement>
         | TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-    let content: string;
+    let content: JSX.Element;
 
     // If there are formFields then return correct form input type
     if (data?.fields?.length > 0) {
@@ -96,11 +96,11 @@ export const getValidationSchema = (formFields: HubspotFormFieldTypes[]) => {
     return z.object(res);
 };
 
-export const transitionStates = (transition: Transition) => {
-    const isSubmitting = transition.state === 'submitting';
+export const transitionStates = (fetcher: Fetcher) => {
+    const isSubmitting = fetcher.state === 'submitting';
     const isAdding =
-        transition.state === 'submitting' &&
-        transition.submission.formData.get('_action') === 'submitForm';
+        fetcher.state === 'submitting' &&
+        fetcher.submission.formData.get('_action') === 'submitForm';
 
     return { isSubmitting, isAdding };
 };
