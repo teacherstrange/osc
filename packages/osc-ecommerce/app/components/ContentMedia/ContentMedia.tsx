@@ -1,7 +1,7 @@
+import mq from 'osc-design-tokens';
 import type { Columns } from 'osc-ui';
 import { Carousel, Content, ContentMedia, ContentMediaBlock, Image, rem } from 'osc-ui';
 import type { contentMediaModule, contentMediaSlide } from '~/types/sanity';
-import mq from '../../../../../tokens/media-queries';
 
 // TODO: tidy up sanity -- content media previews
 // TODO: tests for this component
