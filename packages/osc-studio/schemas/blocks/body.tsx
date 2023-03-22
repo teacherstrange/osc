@@ -1,6 +1,7 @@
 import { colors, fluidScale as sizes } from 'osc-design-tokens';
+import type { ReactNode } from 'react';
 
-const excludeColors = (key) =>
+const excludeColors = (key: string) =>
     !key.includes('shadow') &&
     !key.includes('error') &&
     !key.includes('success') &&
@@ -17,36 +18,35 @@ const setColors = () => {
             return {
                 title: `Colour: ${key}`,
                 value: `span u-color-${key}`,
-                blockEditor: {
-                    icon: () => (
-                        <div
-                            style={{
-                                color: key.includes('gradient') ? 'transparent' : (value as string),
-                                backgroundImage: key.includes('gradient') && (value as string),
-                                backgroundSize: key.includes('gradient') && '100%',
-                                backgroundRepeat: key.includes('gradient') && 'repeat',
-                                backgroundClip: key.includes('gradient') && 'text',
-                                WebkitBackgroundClip: key.includes('gradient') && 'text',
-                            }}
-                        >
-                            <strong>T</strong>
-                        </div>
-                    ),
-                    render: ({ children }) => (
-                        <span
-                            style={{
-                                color: key.includes('gradient') ? 'transparent' : (value as string),
-                                backgroundImage: key.includes('gradient') && (value as string),
-                                backgroundSize: key.includes('gradient') && '100%',
-                                backgroundRepeat: key.includes('gradient') && 'repeat',
-                                backgroundClip: key.includes('gradient') && 'text',
-                                WebkitBackgroundClip: key.includes('gradient') && 'text',
-                            }}
-                        >
-                            {children}
-                        </span>
-                    ),
-                },
+
+                icon: () => (
+                    <div
+                        style={{
+                            color: key.includes('gradient') ? 'transparent' : (value as string),
+                            backgroundImage: key.includes('gradient') ? (value as string) : '',
+                            backgroundSize: key.includes('gradient') ? '100%' : '',
+                            backgroundRepeat: key.includes('gradient') ? 'repeat' : '',
+                            backgroundClip: key.includes('gradient') ? 'text' : '',
+                            WebkitBackgroundClip: key.includes('gradient') ? 'text' : '',
+                        }}
+                    >
+                        <strong>T</strong>
+                    </div>
+                ),
+                component: ({ children }: { children: ReactNode }) => (
+                    <span
+                        style={{
+                            color: key.includes('gradient') ? 'transparent' : (value as string),
+                            backgroundImage: key.includes('gradient') ? (value as string) : '',
+                            backgroundSize: key.includes('gradient') ? '100%' : '',
+                            backgroundRepeat: key.includes('gradient') ? 'repeat' : '',
+                            backgroundClip: key.includes('gradient') ? 'text' : '',
+                            WebkitBackgroundClip: key.includes('gradient') ? 'text' : '',
+                        }}
+                    >
+                        {children}
+                    </span>
+                ),
             };
         });
 
@@ -54,20 +54,20 @@ const setColors = () => {
 };
 
 const setSizes = () => {
-    const sizeList = sizes.steps.map((size) => {
+    const sizeList = sizes.steps.map((size: string) => {
         if (!size) return null;
 
         return {
             title: `Size: ${size}`,
             value: `span t-font-${size}`,
-            blockEditor: {
-                icon: () => (
-                    <div>
-                        <strong>Aa</strong>
-                    </div>
-                ),
-                render: ({ children }) => <span className={`t-font-${size}`}>{children}</span>,
-            },
+            icon: () => (
+                <div>
+                    <strong>Aa</strong>
+                </div>
+            ),
+            component: ({ children }: { children: ReactNode }) => (
+                <span className={`t-font-${size}`}>{children}</span>
+            ),
         };
     });
 
@@ -114,46 +114,40 @@ export default {
                     {
                         title: 'Semi-bold',
                         value: 'strong u-text-med',
-                        blockEditor: {
-                            icon: () => (
-                                <div>
-                                    <strong>SB</strong>
-                                </div>
-                            ),
-                            render: ({ children }) => (
-                                <span style={{ fontWeight: 500 }}>{children}</span>
-                            ),
-                        },
+                        icon: () => (
+                            <div>
+                                <strong>SB</strong>
+                            </div>
+                        ),
+                        component: ({ children }: { children: ReactNode }) => (
+                            <span style={{ fontWeight: 500 }}>{children}</span>
+                        ),
                     },
                     ...setColors(),
                     ...setSizes(),
                     {
                         title: 'Font: Outfit',
                         value: 'span t-font-primary',
-                        blockEditor: {
-                            icon: () => (
-                                <div>
-                                    <strong>F</strong>
-                                </div>
-                            ),
-                            render: ({ children }) => (
-                                <span className={`t-font-primary`}>{children}</span>
-                            ),
-                        },
+                        icon: () => (
+                            <div>
+                                <strong>F</strong>
+                            </div>
+                        ),
+                        component: ({ children }: { children: ReactNode }) => (
+                            <span className={`t-font-primary`}>{children}</span>
+                        ),
                     },
                     {
                         title: 'Font: Judge',
                         value: 'span t-font-secondary',
-                        blockEditor: {
-                            icon: () => (
-                                <div>
-                                    <strong>F</strong>
-                                </div>
-                            ),
-                            render: ({ children }) => (
-                                <span className={`t-font-secondary`}>{children}</span>
-                            ),
-                        },
+                        icon: () => (
+                            <div>
+                                <strong>F</strong>
+                            </div>
+                        ),
+                        component: ({ children }: { children: ReactNode }) => (
+                            <span className={`t-font-secondary`}>{children}</span>
+                        ),
                     },
                 ],
             },
