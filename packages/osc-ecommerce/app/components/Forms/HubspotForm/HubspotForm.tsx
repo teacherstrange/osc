@@ -45,15 +45,17 @@ export const HubspotForm = (props: HubspotFormProps) => {
     return (
         <div className="c-form c-form__hubspot">
             <div className="c-form__inner-container">
-                {formFieldGroups?.map((data, index) => {
-                    return getInputType(
-                        data,
-                        index,
-                        validationSchema,
-                        setValidationErrors,
-                        validationErrors
-                    );
-                })}
+                <>
+                    {formFieldGroups?.map((data, index) => {
+                        return getInputType(
+                            data,
+                            index,
+                            validationSchema,
+                            setValidationErrors,
+                            validationErrors
+                        );
+                    })}
+                </>
                 <Button
                     isLoading={isSubmitting}
                     variant="primary"
