@@ -1,3 +1,14 @@
+## [0.56.4](https://github.com/Open-Study-College/osc/compare/v0.56.3...v0.56.4) (2023-03-22)
+
+
+### ♻️ Refactors
+
+* **content:** add a full width prop ([bbf9066](https://github.com/Open-Study-College/osc/commit/bbf9066c5c7c3d40bc391f3e24315626fec2f3fa))
+* **ecommerce:** integrate the full width control into ecommerce app ([db3755f](https://github.com/Open-Study-College/osc/commit/db3755f2a290dedb58e3d0c2fdd16dafe0f0bbc2))
+* **ecommerce:** wrap content with container class ([8117374](https://github.com/Open-Study-College/osc/commit/8117374e150b7c0f6147c8760a903fe894ae910b))
+* **studio:** add a full width control to studio ([1a17194](https://github.com/Open-Study-College/osc/commit/1a17194001c76b6527ec2a14df96e7f9924478ff))
+* **styles:** set a max width to content and add a full width modifier ([fedc808](https://github.com/Open-Study-College/osc/commit/fedc808c3e1c97022969503a52ee46ef81bf8474))
+
 ## [0.56.3](https://github.com/Open-Study-College/osc/compare/v0.56.2...v0.56.3) (2023-03-22)
 
 
@@ -26,12 +37,6 @@
 ## [0.56.0](https://github.com/Open-Study-College/osc/compare/v0.55.0...v0.56.0) (2023-03-22)
 
 
-### 🐛 Bugs
-
-* **text-grid:** adds missing media-query ([7a3a2e1](https://github.com/Open-Study-College/osc/commit/7a3a2e1e83446e5a1df8369a1459d84e36b25c6b))
-* **text-grid:** fix types ([04a3d42](https://github.com/Open-Study-College/osc/commit/04a3d42780aeee31482b468b57a11a87056337e1))
-
-
 ### ✨ Features
 
 * **content media:** add video to story ([3a651fd](https://github.com/Open-Study-College/osc/commit/3a651fd7f1755ad2a48512330705f58d41117ef2))
@@ -41,21 +46,12 @@
 * **content media:** adds specfic sizing to the content ([1c68105](https://github.com/Open-Study-College/osc/commit/1c68105ea60e4840c43cf77ac8055b36f94e97a6))
 * **content media:** adds story descriptions ([443316b](https://github.com/Open-Study-College/osc/commit/443316bcb1f0475a8237ddd75c8613c1cbc6b65a))
 * **content media:** adds trustpilot story ([773b701](https://github.com/Open-Study-College/osc/commit/773b701137063ab7df45fa754aa957a27973d993))
-* **ecommerce:** add spacing to textGrid module ([6d44939](https://github.com/Open-Study-College/osc/commit/6d449392f0c510c4dda6fa7fa73cc213979bc203))
-* **ecommerce:** adds text grid component ([a219452](https://github.com/Open-Study-College/osc/commit/a219452dc2967bda63ec501f797b11b2c976248a))
-* **ecommerce:** adds text grid queries ([071d6eb](https://github.com/Open-Study-College/osc/commit/071d6ebbd4767cb8526820d452b48a1190f7e865))
-* **studio:** add spacing to textGrid module ([43391cd](https://github.com/Open-Study-College/osc/commit/43391cd4e2904c286735fc3d5d79cd18b3cdbc18))
-* **studio:** adds textGrid to sanity modules ([3743858](https://github.com/Open-Study-College/osc/commit/374385898d341b821bd3cad19abdb24f6267d056))
-* **text-gird:** wrap story in container ([edd1388](https://github.com/Open-Study-College/osc/commit/edd13881c4cbc9b8b4fb43bb43089c9009ef0128))
-* **text-grid:** adds initial component ([257d268](https://github.com/Open-Study-College/osc/commit/257d268886d9f93c1fbbfd5c4ef7fe5cbf74f9f6))
-* **text-grid:** export component ([3674e91](https://github.com/Open-Study-College/osc/commit/3674e917d37cae7993988c3af71131a69e81e6b5))
 
 
 ### 📦 General Housekeeping / Package Updates
 
 * **content media:** tidy up todo comments ([8e038c0](https://github.com/Open-Study-College/osc/commit/8e038c02a0461b8f3ede29378f04141ccc6c63f7))
 * **content media:** update storybook control ([aa1cfdc](https://github.com/Open-Study-College/osc/commit/aa1cfdc0ced8bfb57bc5c060a93e22b73a2b10dd))
-* removes console.log ([0f4c6a1](https://github.com/Open-Study-College/osc/commit/0f4c6a13e06c3e484f0d199fead4d8435a95005d))
 
 
 ### ♻️ Refactors
@@ -67,11 +63,6 @@
 * **content media:** replaces use with import ([7c56e33](https://github.com/Open-Study-College/osc/commit/7c56e33fc0739c170cd287949a8ec6b15eb2bf2b))
 * **content media:** updates variable to new naming convention ([f5ec04e](https://github.com/Open-Study-College/osc/commit/f5ec04eceee05ad823ba8043136c85a00d7096d0))
 * **content media:** wrap styles in components [@layer](https://github.com/layer) ([9eb5666](https://github.com/Open-Study-College/osc/commit/9eb5666028a651d7d08c4ef3a1c7b22e0464d2f3))
-* **ecommerce:** add container to text grid ([ce20d15](https://github.com/Open-Study-College/osc/commit/ce20d152813d0d34b573ca0aa1a324e5ac008cac))
-* **ecommerce:** update text area component name to match other naming convention ([933f7c3](https://github.com/Open-Study-College/osc/commit/933f7c3e84d12a4fc5e85986233d7a4b9e26a14d))
-* **text-content:** apply negative margin to grid item container ([103183c](https://github.com/Open-Study-College/osc/commit/103183cbd516a94698c583bce58c4dd1128f00f9))
-* **text-grid:** update to use new token names ([155910f](https://github.com/Open-Study-College/osc/commit/155910f4b238396032316274b16dd826f199baff))
-* **text-grid:** wrap styles in components [@layer](https://github.com/layer) ([ff01619](https://github.com/Open-Study-College/osc/commit/ff01619684fc741708b8afc674a0846d7296bef0))
 
 
 ### ⚙️ CI/CD Updates
