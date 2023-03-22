@@ -1,4 +1,5 @@
 import { ButtonIcon } from '@radix-ui/react-icons';
+import { IconPicker } from '../../../components/inputs/IconPicker';
 import { PAGE_REFERENCES } from '../../../constants';
 
 export default {
@@ -12,6 +13,13 @@ export default {
             title: 'Label',
             type: 'string',
             validation: (Rule) => Rule.required(),
+        },
+        {
+            name: 'icon',
+            title: 'Icon',
+            type: 'string',
+            inputComponent: IconPicker,
+            placeholder: 'Select an icon...',
         },
         {
             name: 'variant',
@@ -48,6 +56,8 @@ export default {
                 layout: 'radio',
                 direction: 'horizontal',
             },
+            initialValue: 'internal',
+            validation: (Rule) => Rule.required(),
         },
         {
             name: 'file',
