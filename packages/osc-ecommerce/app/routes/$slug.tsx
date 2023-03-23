@@ -3,7 +3,6 @@ import { json } from '@remix-run/node';
 import { useLoaderData, useParams } from '@remix-run/react';
 import { useState } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
-import type { HubspotFormData } from '~/components/Forms/types';
 import Module, { getComponentStyles } from '~/components/Module';
 import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
