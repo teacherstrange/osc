@@ -1,3 +1,18 @@
+## [0.59.0](https://github.com/Open-Study-College/osc/compare/v0.58.0...v0.59.0) (2023-03-23)
+
+
+### ✨ Features
+
+* **design tokens:** add vite config and plugins and setup package.json ([db728ee](https://github.com/Open-Study-College/osc/commit/db728eec43f4b710dba68481d4c558a433039773))
+* **monorepo:** add build command for design tokens ([85003a8](https://github.com/Open-Study-College/osc/commit/85003a85b343b2b48781c58385d4ba9283f1b135))
+
+
+### ♻️ Refactors
+
+* **design tokens:** change default export to named exports ([f2a50d5](https://github.com/Open-Study-College/osc/commit/f2a50d50843787a6585028facee2857d9aa27a1d))
+* **studio:** update tokens import ([62e5131](https://github.com/Open-Study-College/osc/commit/62e51310fdee8090b2dd5282bb3507b38cc79405))
+* **ui:** remove commonjs plugin from rollup ([9004d96](https://github.com/Open-Study-College/osc/commit/9004d96352b50a9b27588655e1b28c4818abcaa9))
+
 ## [0.58.0](https://github.com/Open-Study-College/osc/compare/v0.57.0...v0.58.0) (2023-03-23)
 
 
@@ -176,15 +191,4 @@
 * **ecommerce:** add icon to button component ([eaa0bb1](https://github.com/Open-Study-College/osc/commit/eaa0bb1b6997eb525fae963fa72356b4e7d60324))
 * **ecommerce:** add missin prop to button component ([af2cb43](https://github.com/Open-Study-College/osc/commit/af2cb43e2a0c521becf3fe59c691abb456f72f15))
 * **studio:** add icon picker to button module ([9426057](https://github.com/Open-Study-College/osc/commit/94260574c6843758e5a59b9c2f10f35cd473dbd0))
-
-## [0.56.4](https://github.com/Open-Study-College/osc/compare/v0.56.3...v0.56.4) (2023-03-22)
-
-
-### ♻️ Refactors
-
-* **content:** add a full width prop ([bbf9066](https://github.com/Open-Study-College/osc/commit/bbf9066c5c7c3d40bc391f3e24315626fec2f3fa))
-* **ecommerce:** integrate the full width control into ecommerce app ([db3755f](https://github.com/Open-Study-College/osc/commit/db3755f2a290dedb58e3d0c2fdd16dafe0f0bbc2))
-* **ecommerce:** wrap content with container class ([8117374](https://github.com/Open-Study-College/osc/commit/8117374e150b7c0f6147c8760a903fe894ae910b))
-* **studio:** add a full width control to studio ([1a17194](https://github.com/Open-Study-College/osc/commit/1a17194001c76b6527ec2a14df96e7f9924478ff))
-* **styles:** set a max width to content and add a full width modifier ([fedc808](https://github.com/Open-Study-College/osc/commit/fedc808c3e1c97022969503a52ee46ef81bf8474))
 
