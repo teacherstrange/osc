@@ -104,7 +104,7 @@ export const structure: StructureResolver = (S, context) => {
             S.divider(),
             // Automatically add new document types to the root pane
             ...S.documentTypeListItems().filter(
-                (listItem) => !DOCUMENT_TYPES_IN_STRUCTURE.includes(listItem.getId())
+                (listItem) => !DOCUMENT_TYPES_IN_STRUCTURE.includes(listItem.getId()!)
             )
         ]);
 };
