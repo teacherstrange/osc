@@ -36,7 +36,6 @@ export default defineType({
             type: 'slug',
             options: { source: 'title' },
             validation: validateSlug,
-            initialValue: TITLE.toLowerCase(),
         }),
         // Show hero
         defineField({
