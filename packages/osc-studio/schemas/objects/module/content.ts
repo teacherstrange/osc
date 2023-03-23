@@ -1,9 +1,9 @@
 import { EditIcon } from '@sanity/icons';
-// import VariantPicker from '../../../components/inputs/VariantPicker/VariantPicker';
+import { defineField, defineType } from 'sanity';
 import { ColorPicker } from '../../../components/inputs/ColorPicker';
 import { SPACING } from '../../../constants';
 
-export default {
+export default defineType({
     name: 'module.content',
     title: 'Content',
     type: 'object',
@@ -20,7 +20,7 @@ export default {
         },
     ],
     fields: [
-        {
+        defineField({
             name: 'marginBottom',
             title: 'Push Region',
             type: 'string',
@@ -30,8 +30,8 @@ export default {
                 layout: 'dropdown',
             },
             group: 'spacing',
-        },
-        {
+        }),
+        defineField({
             name: 'paddingTop',
             title: 'Inner Padding Top',
             type: 'string',
@@ -41,8 +41,8 @@ export default {
                 layout: 'dropdown',
             },
             group: 'spacing',
-        },
-        {
+        }),
+        defineField({
             name: 'paddingBottom',
             title: 'Inner Padding Bottom',
             type: 'string',
@@ -52,8 +52,8 @@ export default {
                 layout: 'dropdown',
             },
             group: 'spacing',
-        },
-        {
+        }),
+        defineField({
             name: 'horizontalAlignment',
             title: 'Horizontal Alignment',
             type: 'string',
@@ -66,8 +66,8 @@ export default {
             },
             initialValue: 'left',
             group: 'content',
-        },
-        {
+        }),
+        defineField({
             name: 'backgroundColor',
             title: 'Background Colour',
             type: 'string',
@@ -75,34 +75,34 @@ export default {
                 input: ColorPicker,
             },
             group: 'content',
-        },
-        {
+        }),
+        defineField({
             name: 'fullWidth',
             title: 'Full Width',
             type: 'boolean',
             description: 'Whether the content should fill the width of the container.',
             group: 'content',
             initialValue: false,
-        },
-        {
+        }),
+        defineField({
             name: 'body',
             title: 'Body',
             type: 'body',
             group: 'content',
-        },
-        {
+        }),
+        defineField({
             name: 'buttons',
             title: 'Buttons',
             type: 'array',
             of: [{ type: 'module.button' }],
             group: 'content',
-        },
+        }),
     ],
     preview: {
         select: {
             title: 'body',
         },
-        prepare(selection: Record<string, any>) {
+        prepare(selection) {
             const title = selection.title[0].children[0].text; // display the first item from the body content
 
             return {
@@ -111,4 +111,4 @@ export default {
             };
         },
     },
-};
+});

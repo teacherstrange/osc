@@ -1,23 +1,23 @@
 import { ImageIcon } from '@sanity/icons';
-import React from 'react';
+import { defineField, defineType } from 'sanity';
 
-export default {
+export default defineType({
     name: 'image.mobile',
     title: 'Mobile Image',
     type: 'object',
     icon: ImageIcon,
     fields: [
         // Image
-        {
+        defineField({
             type: 'cloudinary.asset',
             name: 'image',
-            description: 'This asset is served from Cloudinary'
-        }
+            description: 'This asset is served from Cloudinary',
+        }),
     ],
     preview: {
         select: {
             imageName: 'image.public_id',
-            imageUrl: 'image.secure_url'
+            imageUrl: 'image.secure_url',
         },
         prepare(selection) {
             const { imageUrl, imageName } = selection;
@@ -25,8 +25,8 @@ export default {
             return {
                 media: <img src={imageUrl} alt={imageName} />,
                 title: imageName,
-                subtitle: 'Images'
+                subtitle: 'Images',
             };
-        }
-    }
-};
+        },
+    },
+});

@@ -1,7 +1,8 @@
 import { GridIcon } from '@radix-ui/react-icons';
+import { defineField, defineType } from 'sanity';
 import { SPACING } from '../../../constants';
 
-export default {
+export default defineType({
     name: 'module.textGrid',
     title: 'Text Grid',
     type: 'object',
@@ -18,7 +19,7 @@ export default {
         },
     ],
     fields: [
-        {
+        defineField({
             name: 'marginBottom',
             title: 'Push Region',
             type: 'string',
@@ -28,8 +29,8 @@ export default {
                 layout: 'dropdown',
             },
             group: 'spacing',
-        },
-        {
+        }),
+        defineField({
             name: 'paddingTop',
             title: 'Inner Padding Top',
             type: 'string',
@@ -39,8 +40,8 @@ export default {
                 layout: 'dropdown',
             },
             group: 'spacing',
-        },
-        {
+        }),
+        defineField({
             name: 'paddingBottom',
             title: 'Inner Padding Bottom',
             type: 'string',
@@ -50,28 +51,28 @@ export default {
                 layout: 'dropdown',
             },
             group: 'spacing',
-        },
-        {
+        }),
+        defineField({
             name: 'heading',
             title: 'Heading',
             type: 'string',
             group: 'content',
-        },
-        {
+        }),
+        defineField({
             name: 'hasInlineHeading',
             title: 'Inline Heading',
             type: 'boolean',
             initialValue: false,
             description: 'Places the heading into the first cell of the grid',
             group: 'content',
-        },
-        {
+        }),
+        defineField({
             name: 'items',
             title: 'Items',
             type: 'array',
             of: [{ type: 'textGridItem' }],
             group: 'content',
-        },
+        }),
     ],
     preview: {
         select: {
@@ -85,4 +86,4 @@ export default {
             };
         },
     },
-};
+});

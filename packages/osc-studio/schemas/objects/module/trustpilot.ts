@@ -1,13 +1,14 @@
 import { StarIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity';
 import { capitalizeFirstLetter } from '../../../utils/capitalizeFirstLetter';
 
-export default {
+export default defineType({
     name: 'module.trustpilot',
     title: 'Trustpilot',
     type: 'object',
     icon: StarIcon,
     fields: [
-        {
+        defineField({
             name: 'type',
             title: 'Type',
             type: 'string',
@@ -17,19 +18,19 @@ export default {
                     { title: 'Slider', value: 'slider' },
                     { title: 'Grid', value: 'grid' },
                     { title: 'Mini Carousel', value: 'minicarousel' },
-                    { title: 'Micro Star', value: 'microstar' }
-                ]
+                    { title: 'Micro Star', value: 'microstar' },
+                ],
             },
-            validation: (Rule) => Rule.required()
-        },
-        {
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
             name: 'stars',
             title: 'Stars',
             type: 'string',
             initialValue: '4,5',
-            validation: (Rule) => Rule.required()
-        },
-        {
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
             name: 'height',
             title: 'Height',
             type: 'string',
@@ -64,18 +65,18 @@ export default {
                     }
 
                     return true;
-                })
-        }
+                }),
+        }),
     ],
     preview: {
         select: {
-            subtitle: 'type'
+            subtitle: 'type',
         },
-        prepare(selection: Record<string, any>) {
+        prepare(selection) {
             return {
                 title: 'Trustpilot',
-                subtitle: capitalizeFirstLetter(selection.subtitle)
+                subtitle: capitalizeFirstLetter(selection.subtitle),
             };
-        }
-    }
-};
+        },
+    },
+});

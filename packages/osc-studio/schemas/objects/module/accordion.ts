@@ -1,10 +1,11 @@
 import { StackCompactIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
+import { defineField, defineType } from 'sanity';
 import { joinWithAnd } from '../../../utils/joinWithAnd';
 
 const HEADING_LEVELS = ['h2', 'h3', 'h4', 'h5', 'h6'];
 
-export default {
+export default defineType({
     name: 'module.accordion',
     title: 'Accordion',
     type: 'object',
@@ -13,21 +14,21 @@ export default {
         {
             name: 'content',
             title: 'Content',
-            default: true
+            default: true,
         },
         {
             name: 'accordion',
-            title: 'Accordion'
-        }
+            title: 'Accordion',
+        },
     ],
     fields: [
-        {
+        defineField({
             name: 'content',
             title: 'Content',
             type: 'module.content',
-            group: 'content'
-        },
-        {
+            group: 'content',
+        }),
+        defineField({
             name: 'accordionHeadingLevels',
             title: 'Accordion Heading Levels',
             type: 'string',
@@ -36,7 +37,7 @@ export default {
             initialValue: 'h3',
             options: {
                 list: HEADING_LEVELS,
-                layout: 'dropdown'
+                layout: 'dropdown',
             },
             validation: (Rule) =>
                 Rule.required().custom((value, { parent }) => {
@@ -75,9 +76,9 @@ export default {
                     }
 
                     return true;
-                })
-        },
-        {
+                }),
+        }),
+        defineField({
             name: 'accordionItem',
             title: 'Accordion Item',
             type: 'array',
@@ -102,19 +103,19 @@ export default {
                     }
 
                     return true;
-                })
-        }
+                }),
+        }),
     ],
     preview: {
         select: {
-            accordionCount: 'accordionItem.length'
+            accordionCount: 'accordionItem.length',
         },
-        prepare(selection: Record<string, any>) {
+        prepare(selection) {
             const { accordionCount } = selection;
             return {
                 title: 'Accordion',
-                subtitle: accordionCount ? pluralize('item', accordionCount, true) : 'No items'
+                subtitle: accordionCount ? pluralize('item', accordionCount, true) : 'No items',
             };
-        }
-    }
-};
+        },
+    },
+});
