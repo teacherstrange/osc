@@ -24,7 +24,8 @@ export default (props: Props) => {
         return null;
     }
 
-    let url;
+    let url: string | null = null;
+
     if (type === 'collection') {
         url = collectionUrl(published?.store?.id);
     }
@@ -43,7 +44,7 @@ export default (props: Props) => {
         label: 'Edit in Shopify',
         icon: EarthGlobeIcon,
         onHandle: () => {
-            window.open(url);
+            url ? window.open(url) : void 'No URL';
         },
         shortcut: 'Ctrl+Alt+E',
     };
