@@ -18,7 +18,9 @@ export default {
             name: 'icon',
             title: 'Icon',
             type: 'string',
-            inputComponent: IconPicker,
+            components: {
+                input: IconPicker,
+            },
             placeholder: 'Select an icon...',
         },
         {
