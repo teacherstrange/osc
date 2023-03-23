@@ -24,7 +24,7 @@ export default defineType({
                 if (parent?.image?.derived) {
                     const modeRegex = /c_\w+/;
                     const mode = modeRegex.exec(parent?.image?.derived[0]?.raw_transformation);
-                    const isScaled = mode[0] === 'c_scale';
+                    const isScaled = mode && mode[0] === 'c_scale';
 
                     if (!isScaled) {
                         return false;
