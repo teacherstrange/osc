@@ -4,6 +4,7 @@ import { DocumentIcon } from '@sanity/icons';
 const forms = [
     { name: 'Newsletter Form', id: '9cf24fde-b8c4-4165-bff6-1a151b83259d' },
     { name: 'Contact Form', id: 'b6aca185-96b6-416f-9b03-9ce8f894ea44' },
+    { name: 'Prospectus Form', id: 'ec135217-340a-46cf-93b7-59a2ab1e509e' },
 ];
 
 export default {
