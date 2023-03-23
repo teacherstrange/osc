@@ -1,3 +1,12 @@
+## [0.60.1](https://github.com/Open-Study-College/osc/compare/v0.60.0...v0.60.1) (2023-03-23)
+
+
+### ♻️ Refactors
+
+* **blog card:** ensure the footer content doesn't stretch ([48f5a93](https://github.com/Open-Study-College/osc/commit/48f5a9368c755a9cc6d4e676a5f696792ef9d8a5))
+* **island grid:** add classname to manage number of rows ([b7e7dc6](https://github.com/Open-Study-College/osc/commit/b7e7dc685b40349d6a28093b61adbb6e9c7e02a4))
+* **island grid:** update stories to use cards component ([34625b6](https://github.com/Open-Study-College/osc/commit/34625b68f0dc7c2f1eb1fe1b0502822eee513ade))
+
 ## [0.60.0](https://github.com/Open-Study-College/osc/compare/v0.59.0...v0.60.0) (2023-03-23)
 
 
@@ -215,11 +224,4 @@
 * **callout banner:** wrap styles in components layer ([0b32241](https://github.com/Open-Study-College/osc/commit/0b3224191736e971e96c48507e8478accbca9470))
 * **styles:** adds important tag to background colours ([b2d188c](https://github.com/Open-Study-College/osc/commit/b2d188c8f0a3c2a74d516afb971c50873815e018))
 * **styles:** change line height of 7xl font size ([c1c3315](https://github.com/Open-Study-College/osc/commit/c1c3315b2087aef44dd65c2e0d31431f9f07ded2))
-
-## [0.56.6](https://github.com/Open-Study-College/osc/compare/v0.56.5...v0.56.6) (2023-03-22)
-
-
-### 🐛 Bugs
-
-* **carousel:** remove full height from carousel ([f990037](https://github.com/Open-Study-College/osc/commit/f990037323b0b1f2add5a67194e29789a37d3a8b))
 
