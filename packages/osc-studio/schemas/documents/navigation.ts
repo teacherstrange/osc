@@ -1,7 +1,7 @@
 import { PaperPlaneIcon } from '@radix-ui/react-icons';
-import { defineField } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
-export default defineField({
+export default defineType({
     name: 'navigation',
     title: 'Navigation',
     type: 'document',

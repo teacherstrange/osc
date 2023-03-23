@@ -1,6 +1,6 @@
 import { colors, fluidScale as sizes } from 'osc-design-tokens';
 import type { ReactNode } from 'react';
-import { defineField } from 'sanity';
+import { defineType } from 'sanity';
 
 const excludeColors = (key: string) =>
     !key.includes('shadow') &&
@@ -75,7 +75,7 @@ const setSizes = () => {
     return sizeList;
 };
 
-export default defineField({
+export default defineType({
     name: 'body',
     title: 'Body',
     type: 'array',

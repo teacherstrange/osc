@@ -1,8 +1,8 @@
 import { ArrowRightIcon } from '@sanity/icons';
-import { defineField } from 'sanity';
+import { defineField, defineType } from 'sanity';
 import { PAGE_REFERENCES } from '../../constants.js';
 
-export default defineField({
+export default defineType({
     name: 'redirect',
     title: 'Redirect',
     type: 'document',

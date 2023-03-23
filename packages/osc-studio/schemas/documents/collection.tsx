@@ -1,6 +1,6 @@
 import { PackageIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
-import { defineField } from 'sanity';
+import { defineField, defineType } from 'sanity';
 import ShopifyIcon from '../../components/icons/Shopify';
 import CollectionHiddenInput from '../../components/inputs/CollectionHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
@@ -23,7 +23,7 @@ const GROUPS = [
     },
 ];
 
-export default defineField({
+export default defineType({
     name: 'collection',
     title: 'Collection',
     type: 'document',

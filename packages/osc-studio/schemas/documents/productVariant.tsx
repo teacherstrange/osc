@@ -1,10 +1,10 @@
 import { CopyIcon } from '@sanity/icons';
-import { defineField } from 'sanity';
+import { defineField, defineType } from 'sanity';
 import ShopifyIcon from '../../components/icons/Shopify';
 import ProductVariantHiddenInput from '../../components/inputs/ProductVariantHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
 
-export default defineField({
+export default defineType({
     name: 'productVariant',
     title: 'Product variant',
     type: 'document',

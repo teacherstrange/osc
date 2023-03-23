@@ -4,9 +4,9 @@
  * Read more: https://www.sanity.io/docs/customization#f924645007e1
  */
 import { EnvelopeIcon } from '@sanity/icons';
-import { defineField } from 'sanity';
+import { defineType } from 'sanity';
 
-export default defineField({
+export default defineType({
     title: 'Email link',
     name: 'annotationLinkEmail',
     type: 'object',

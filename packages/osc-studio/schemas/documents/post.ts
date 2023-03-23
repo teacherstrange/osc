@@ -1,9 +1,9 @@
 import { DocumentIcon } from '@sanity/icons';
-import { defineField } from 'sanity';
+import { defineField, defineType } from 'sanity';
 import { MODULES } from '../../constants.js';
 import { validateSlug } from '../../utils/validateSlug';
 
-export default defineField({
+export default defineType({
     name: 'post',
     title: 'Post',
     type: 'document',

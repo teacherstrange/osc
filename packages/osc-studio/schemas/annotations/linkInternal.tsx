@@ -4,10 +4,10 @@
  * Read more: https://www.sanity.io/docs/customization#f924645007e1
  */
 import { LinkIcon } from '@sanity/icons';
-import { defineField } from 'sanity';
+import { defineType } from 'sanity';
 import { PAGE_REFERENCES } from '../../constants';
 
-export default defineField({
+export default defineType({
     title: 'Internal Link',
     name: 'annotationLinkInternal',
     type: 'object',

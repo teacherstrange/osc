@@ -1,6 +1,6 @@
 import { TagIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
-import { defineField } from 'sanity';
+import { defineField, defineType } from 'sanity';
 import ShopifyIcon from '../../components/icons/Shopify';
 import ProductHiddenInput from '../../components/inputs/ProductHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
@@ -24,7 +24,7 @@ const GROUPS = [
     },
 ];
 
-export default defineField({
+export default defineType({
     name: 'product',
     title: 'Product',
     type: 'document',
