@@ -1,7 +1,5 @@
 // First, we must import the schema creator
-import createSchema from 'part:@sanity/base/schema-creator';
 // Then import schema types from any plugins that might expose them
-import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 // Rich text annotations used in the block content editor
 import annotationLinkEmail from './annotations/linkEmail';
@@ -27,6 +25,7 @@ import settings from './singletons/settings';
 import body from './blocks/body';
 
 // Object types
+import type { SchemaTypeDefinition } from 'sanity';
 import bodyNoHeadings from './blocks/bodyNoHeadings';
 import accordionItem from './objects/accordionItem';
 import carouselSettings from './objects/carouselSettings';
@@ -46,7 +45,6 @@ import moduleCards from './objects/module/cards';
 import moduleCardStatic from './objects/module/cardStatic';
 import moduleCarousel from './objects/module/carousel';
 import moduleContent from './objects/module/content';
-import moduleForms from './objects/module/forms';
 import moduleHero from './objects/module/hero';
 import moduleImage from './objects/module/image';
 import moduleImageMobile from './objects/module/imageMobile';
@@ -59,7 +57,7 @@ import navigationItem from './objects/navigationItem';
 import navigationLink from './objects/navigationLink';
 import placeholderString from './objects/placeholderString';
 import productOption from './objects/productOption';
-import productWithVariant from './objects/productWithVariant';
+import ProductWithVariant from './objects/productWithVariant';
 import proxyString from './objects/proxyString';
 import seoHome from './objects/seo/home';
 import seoPage from './objects/seo/page';
@@ -71,73 +69,70 @@ import social from './objects/social';
 import textGridItem from './objects/textGridItem';
 
 // Build the schemas and export to the Sanity Studio app
-export default createSchema({
-    // We name our schema
-    name: 'default',
-    // Then proceed to concatenate our document type
-    // to the ones provided by any plugins that are installed
-    types: schemaTypes.concat([
-        // Annotations
-        annotationLinkEmail,
-        annotationLinkExternal,
-        annotationLinkInternal,
-        // Document types
-        collection,
-        navigation,
-        page,
-        post,
-        product,
-        productVariant,
-        redirects,
-        team,
-        // Singleton document types
-        home,
-        blog,
-        settings,
-        // Block content
-        body,
-        bodyNoHeadings,
-        // Objects
-        accordionItem,
-        carouselSettings,
-        heroCarouselSettings,
-        heroSlide,
-        collectionRule,
-        textGridItem,
-        linkExternal,
-        linkInternal,
-        navigationItem,
-        navigationLink,
-        placeholderString,
-        productOption,
-        productWithVariant,
-        proxyString,
-        seoHome,
-        seoPage,
-        seoShopify,
-        social,
-        shopifyCollection,
-        shopifyProduct,
-        shopifyProductVariant,
-        moduleButton,
-        moduleButtons,
-        moduleAccordion,
-        moduleCardBio,
-        moduleCardCourse,
-        moduleCardCollection,
-        moduleCardPost,
-        moduleCardStatic,
-        moduleCards,
-        moduleContent,
-        moduleForms,
-        moduleHero,
-        moduleImage,
-        moduleImages,
-        moduleImageMobile,
-        moduleImageTablet,
-        moduleTrustpilot,
-        moduleCarousel,
-        moduleTextGrid,
-        moduleVideo,
-    ]),
-});
+export const schemaTypes: SchemaTypeDefinition[] = [
+    // Annotations
+    annotationLinkEmail,
+    annotationLinkExternal,
+    annotationLinkInternal,
+
+    // Document types
+    collection,
+    navigation,
+    page,
+    post,
+    product,
+    productVariant,
+    redirects,
+    team,
+
+    // Singleton document types
+    home,
+    blog,
+    settings,
+
+    // Block content
+    body,
+    bodyNoHeadings,
+
+    // Objects
+    accordionItem,
+    carouselSettings,
+    heroCarouselSettings,
+    heroSlide,
+    collectionRule,
+    textGridItem,
+    linkExternal,
+    linkInternal,
+    navigationItem,
+    navigationLink,
+    placeholderString,
+    productOption,
+    ProductWithVariant,
+    proxyString,
+    seoHome,
+    seoPage,
+    seoShopify,
+    social,
+    shopifyCollection,
+    shopifyProduct,
+    shopifyProductVariant,
+    moduleButton,
+    moduleButtons,
+    moduleAccordion,
+    moduleCardBio,
+    moduleCardCourse,
+    moduleCardCollection,
+    moduleCardPost,
+    moduleCardStatic,
+    moduleCards,
+    moduleHero,
+    moduleImage,
+    moduleImages,
+    moduleImageMobile,
+    moduleImageTablet,
+    moduleContent,
+    moduleTrustpilot,
+    moduleCarousel,
+    moduleTextGrid,
+    moduleVideo,
+];

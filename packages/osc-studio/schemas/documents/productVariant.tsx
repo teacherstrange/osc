@@ -1,12 +1,9 @@
 import { CopyIcon } from '@sanity/icons';
-import React from 'react';
 import ShopifyIcon from '../../components/icons/Shopify';
 import ProductVariantHiddenInput from '../../components/inputs/ProductVariantHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
 
 export default {
-    // HACK: Required to hide 'create new' button in desk structure
-    __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
     name: 'productVariant',
     title: 'Product variant',
     type: 'document',
@@ -15,27 +12,29 @@ export default {
         {
             name: 'shopifySync',
             title: 'Shopify sync',
-            icon: ShopifyIcon
-        }
+            icon: ShopifyIcon,
+        },
     ],
     fields: [
         // Product variant hidden status
         {
             name: 'hidden',
             type: 'string',
-            inputComponent: ProductVariantHiddenInput,
+            components: {
+                input: ProductVariantHiddenInput,
+            },
             hidden: ({ parent }) => {
                 const isDeleted = parent?.store?.isDeleted;
 
                 return !isDeleted;
-            }
+            },
         },
         // Title (proxy)
         {
             title: 'Title',
             name: 'titleProxy',
             type: 'proxyString',
-            options: { field: 'store.title' }
+            options: { field: 'store.title' },
         },
         // Shopify product variant
         {
@@ -60,6 +59,7 @@ export default {
             return {
                 media: (
                     <ShopifyDocumentStatus
+                        title={title}
                         isActive={status === 'active'}
                         isDeleted={isDeleted}
                         type="productVariant"
@@ -67,8 +67,8 @@ export default {
                     />
                 ),
                 subtitle: sku,
-                title
+                title,
             };
-        }
-    }
+        },
+    },
 };

@@ -18,7 +18,9 @@ export default {
             name: 'backgroundColor',
             title: 'Background Colour',
             type: 'string',
-            inputComponent: ColorPicker,
+            components: {
+                input: ColorPicker,
+            },
             validation: (Rule) => Rule.required(),
         },
         {

@@ -4,5 +4,7 @@ export default {
     name: 'proxyString',
     title: 'Title',
     type: 'string',
-    inputComponent: ProxyStringInput
+    components: {
+        input: ProxyStringInput,
+    },
 };

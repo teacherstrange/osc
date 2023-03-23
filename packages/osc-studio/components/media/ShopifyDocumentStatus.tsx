@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import { CloseIcon, ImageIcon, LinkRemovedIcon } from '@sanity/icons';
 import React, { forwardRef, useState } from 'react';
 
@@ -7,10 +6,11 @@ type Props = {
     isDeleted: boolean;
     type: 'collection' | 'product' | 'productVariant';
     url: string;
+    title: string;
 };
 
 const ShopifyDocumentStatus = forwardRef<HTMLDivElement, Props>((props, ref) => {
-    const { isActive, isDeleted, type, url } = props;
+    const { isActive, isDeleted, type, url, title } = props;
 
     const [imageVisible, setImageVisible] = useState(true);
 
@@ -27,22 +27,22 @@ const ShopifyDocumentStatus = forwardRef<HTMLDivElement, Props>((props, ref) => 
                 height: '100%',
                 justifyContent: 'center',
                 overflow: 'hidden',
-                width: '100%'
+                width: '100%',
             }}
         >
             {imageVisible && url ? (
                 <img
                     onError={handleImageError}
                     src={`${url}&width=400`}
-                    alt=""
                     style={{
                         height: '100%',
                         left: 0,
                         objectFit: 'contain',
                         position: 'absolute',
                         top: 0,
-                        width: '100%'
+                        width: '100%',
                     }}
+                    alt={`${title} preview`}
                 />
             ) : (
                 <ImageIcon style={{ position: 'absolute' }} />
@@ -56,7 +56,7 @@ const ShopifyDocumentStatus = forwardRef<HTMLDivElement, Props>((props, ref) => 
                         color: 'rgba(255, 255, 255, 0.85)',
                         height: '100%',
                         position: 'relative',
-                        width: '100%'
+                        width: '100%',
                     }}
                 />
             ) : (
@@ -69,7 +69,7 @@ const ShopifyDocumentStatus = forwardRef<HTMLDivElement, Props>((props, ref) => 
                                 color: 'rgba(255, 255, 255, 0.85)',
                                 height: '100%',
                                 position: 'relative',
-                                width: '100%'
+                                width: '100%',
                             }}
                         />
                     )}
@@ -78,5 +78,6 @@ const ShopifyDocumentStatus = forwardRef<HTMLDivElement, Props>((props, ref) => 
         </div>
     );
 });
+ShopifyDocumentStatus.displayName = 'ShopifyDocumentStatus';
 
 export default ShopifyDocumentStatus;

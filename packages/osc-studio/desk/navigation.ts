@@ -1,9 +1,9 @@
 import { PaperPlaneIcon } from '@radix-ui/react-icons';
-import S from '@sanity/desk-tool/structure-builder';
+import type { StructureBuilder } from 'sanity/desk';
 
-// prettier-ignore
-export const navigation = S.listItem()
-    .title('Navigation')
-    .icon(PaperPlaneIcon)
-    .schemaType('navigation')
-    .child(S.documentTypeList('navigation'));
+export const navigation = (S: StructureBuilder) =>
+    S.listItem()
+        .title('Navigation')
+        .icon(PaperPlaneIcon)
+        .schemaType('navigation')
+        .child(S.documentTypeList('navigation'));

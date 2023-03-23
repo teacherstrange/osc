@@ -50,3 +50,5 @@ packages/osc-ui/**/styles/dist/**
 packages/osc-studio/dist
 
 packages/**/.node-persist
+
+packages/**/.sanity/**/*

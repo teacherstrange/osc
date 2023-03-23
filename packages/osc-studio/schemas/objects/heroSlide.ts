@@ -45,7 +45,9 @@ export default {
             title: 'Background Colour',
             type: 'string',
             initialValue: 'gradient-nonary-270',
-            inputComponent: ColorPicker,
+            components: {
+                input: ColorPicker,
+            },
             group: 'settings',
         },
         {
@@ -53,7 +55,9 @@ export default {
             title: 'Title Colour',
             type: 'string',
             initialValue: 'secondary',
-            inputComponent: ColorPicker,
+            components: {
+                input: ColorPicker,
+            },
             group: 'settings',
         },
         {

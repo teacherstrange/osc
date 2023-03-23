@@ -1,32 +1,29 @@
 import { TagIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
-import React from 'react';
 import ShopifyIcon from '../../components/icons/Shopify';
 import ProductHiddenInput from '../../components/inputs/ProductHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
-import { getPriceRange } from '../../utils/getPriceRange';
 import { MODULES } from '../../constants.js';
+import { getPriceRange } from '../../utils/getPriceRange';
 
 const GROUPS = [
     {
         default: true,
         name: 'editorial',
-        title: 'Editorial'
+        title: 'Editorial',
     },
     {
         name: 'shopifySync',
         title: 'Shopify sync',
-        icon: ShopifyIcon
+        icon: ShopifyIcon,
     },
     {
         name: 'seo',
-        title: 'SEO'
-    }
+        title: 'SEO',
+    },
 ];
 
 export default {
-    // Required to hide 'create new' button in desk structure
-    __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
     name: 'product',
     title: 'Product',
     type: 'document',
@@ -37,27 +34,29 @@ export default {
         {
             name: 'hidden',
             type: 'string',
-            inputComponent: ProductHiddenInput,
+            components: {
+                input: ProductHiddenInput,
+            },
             group: GROUPS.map((group) => group.name),
             hidden: ({ parent }) => {
                 const isActive = parent?.store?.status === 'active';
                 const isDeleted = parent?.store?.isDeleted;
                 return isActive && !isDeleted;
-            }
+            },
         },
         // Title (proxy)
         {
             name: 'titleProxy',
             title: 'Title',
             type: 'proxyString',
-            options: { field: 'store.title' }
+            options: { field: 'store.title' },
         },
         // Slug (proxy)
         {
             name: 'slugProxy',
             title: 'Slug',
             type: 'proxyString',
-            options: { field: 'store.slug.current' }
+            options: { field: 'store.slug.current' },
         },
         // Modules
         {
@@ -142,6 +141,7 @@ export default {
             return {
                 media: (
                     <ShopifyDocumentStatus
+                        title={title}
                         isActive={status === 'active'}
                         isDeleted={isDeleted}
                         type="product"
@@ -150,8 +150,8 @@ export default {
                 ),
                 description: description.join(' / '),
                 subtitle,
-                title
+                title,
             };
-        }
-    }
+        },
+    },
 };

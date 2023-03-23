@@ -105,10 +105,5 @@
     "stylelint-prettier": "^2.0.0",
     "stylelint-selector-bem-pattern": "^2.1.1",
     "typescript": "~4.8.2"
-  },
-  "overrides": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "node-sass": "^8"
   }
 }

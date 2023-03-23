@@ -1,39 +1,30 @@
 /**
  * Desk structure overrides
  *
- * This file configure how documents are structured in the Studio's desk tool.
- * It works because
-    {
-      "name": "part:@sanity/desk-tool/structure",
-      "path": "./deskStructure.js"
-    },
-  * is added to the `parts` array in `/sanity.json`.
-  *
-  * Sanity Studio automatically lists document types out of the box.
-  * With this custom desk structure we achieve things like showing the `home`
-  * and `settings` document types as singletons, and grouping product details
-  * and variants for easy editorial access.
-  *
-  * You can customize this even further as your schemas progress.
-  * To learn more about structure builder, visit our docs:
-  * https://www.sanity.io/docs/overview-structure-builder
+ * Sanity Studio automatically lists document types out of the box.
+ * With this custom desk structure we achieve things like showing the `home`
+ * and `settings` document types as singletons, and grouping product details
+ * and variants for easy editorial access.
+ *
+ * You can customize this even further as your schemas progress.
+ * To learn more about structure builder, visit our docs:
+ * https://www.sanity.io/docs/overview-structure-builder
  */
 
-import S from '@sanity/desk-tool/structure-builder';
 import Iframe from 'sanity-plugin-iframe-pane';
-import SeoPane from 'sanity-plugin-seo-pane';
-import { blog } from './desk/blog';
-import { collections } from './desk/collections';
-import { home } from './desk/home';
-import { navigation } from './desk/navigation';
-import { pages } from './desk/pages';
-import { posts } from './desk/posts';
-import { products } from './desk/products';
-import { redirects } from './desk/redirects';
-import { settings } from './desk/settings';
-import { team } from './desk/team';
-
-import { resolveProductionUrl } from './utils/resolveProductionUrl';
+import { SEOPane } from 'sanity-plugin-seo-pane';
+import type { DefaultDocumentNodeResolver, StructureResolver } from 'sanity/desk';
+import { resolveProductionUrl } from '../utils/resolveProductionUrl';
+import { blog } from './blog';
+import { collections } from './collections';
+import { home } from './home';
+import { navigation } from './navigation';
+import { pages } from './pages';
+import { posts } from './posts';
+import { products } from './products';
+import { redirects } from './redirects';
+import { settings } from './settings';
+import { team } from './team';
 
 // If you add document types to desk structure manually, you can add them to this array to prevent duplicates in the root pane
 const DOCUMENT_TYPES_IN_STRUCTURE = [
@@ -58,7 +49,7 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
  * Singletons (i.e. home) or complex documents (i.e. products) will need to add the view directly
  * into the document file.
  */
-export const getDefaultDocumentNode = ({ schemaType }) => {
+export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaType }) => {
     // Don't add the preview or seo pane to the redirect
     if (schemaType === 'redirect' || schemaType === 'navigation' || schemaType === 'team') {
         return;
@@ -78,7 +69,7 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
             })
             .title('Preview'),
         S.view
-            .component(SeoPane)
+            .component(SEOPane)
             .options({
                 // Retrieve the keywords and synonyms at the given dot-notated strings
                 keywords: `seo.keywords`,
@@ -90,25 +81,25 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
 };
 
 // Then we export the default list of menu items
-export default () => {
+export const structure: StructureResolver = (S, context) => {
     // prettier-ignore
     return S.list()
         .title('Content')
         .items([
-            home,
-            pages,
+            home(S),
+            pages(S),
             S.divider(),
-            blog,
-            posts,
+            blog(S),
+            posts(S),
             S.divider(),
-            collections,
-            products,
+            collections(S),
+            products(S),
             S.divider(),
-            team,
+            team(S),
             S.divider(),
-            settings,
-            navigation,
-            redirects,
+            settings(S),
+            navigation(S),
+            redirects(S),
             S.divider(),
             // Automatically add new document types to the root pane
             ...S.documentTypeListItems().filter(

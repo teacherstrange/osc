@@ -117,7 +117,9 @@ export default {
             name: 'backgroundColor',
             title: 'Background Colour',
             type: 'string',
-            inputComponent: ColorPicker,
+            components: {
+                input: ColorPicker,
+            },
             group: 'cards',
         },
         {
