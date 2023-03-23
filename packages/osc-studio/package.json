@@ -37,6 +37,7 @@
     "styled-components": "^5.2.0"
   },
   "devDependencies": {
+    "@portabletext/types": "^2.0.2",
     "@types/lodash.get": "^4.4.7",
     "@types/pluralize": "^0.0.29",
     "@types/slug": "^5.0.3",
