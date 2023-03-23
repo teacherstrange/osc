@@ -34,7 +34,7 @@ export default defineType({
             name: 'slug',
             type: 'slug',
             options: { source: 'title' },
-            readonly: true,
+            readOnly: true,
         }),
         // Show hero
         defineField({
