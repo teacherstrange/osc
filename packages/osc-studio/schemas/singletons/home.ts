@@ -1,9 +1,10 @@
 import { HomeIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity';
 import { MODULES } from '../../constants.js';
 
 const TITLE = 'Home';
 
-export default {
+export default defineType({
     name: 'home',
     title: TITLE,
     type: 'document',
@@ -12,61 +13,61 @@ export default {
         {
             default: true,
             name: 'editorial',
-            title: 'Editorial'
+            title: 'Editorial',
         },
         {
             name: 'seo',
-            title: 'SEO'
-        }
+            title: 'SEO',
+        },
     ],
     fields: [
         // Title
-        {
+        defineField({
             name: 'title',
             title: 'Title',
             type: 'string',
             validation: (Rule) => Rule.required(),
-            initialValue: TITLE
-        },
+            initialValue: TITLE,
+        }),
         // Slug
-        {
+        defineField({
             name: 'slug',
             type: 'slug',
             options: { source: 'title' },
-            readonly: true
-        },
+            readonly: true,
+        }),
         // Show hero
-        {
+        defineField({
             name: 'showHero',
             title: 'Show hero',
             type: 'boolean',
             description: 'If disabled, page title will be displayed instead',
             initialValue: false,
-            group: 'editorial'
-        },
+            group: 'editorial',
+        }),
         // Modules
-        {
+        defineField({
             name: 'modules',
             title: 'Modules',
             type: 'array',
             of: MODULES,
-            group: 'editorial'
-        },
+            group: 'editorial',
+        }),
         // SEO
-        {
+        defineField({
             name: 'seo',
             title: 'SEO',
             type: 'seo.home',
-            group: 'seo'
-        }
+            group: 'seo',
+        }),
     ],
     preview: {
         prepare() {
             return {
                 // media: icon,
                 subtitle: 'Index',
-                title: TITLE
+                title: TITLE,
             };
-        }
-    }
-};
+        },
+    },
+});
