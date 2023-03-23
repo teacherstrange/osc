@@ -16,6 +16,10 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
      */
     id: string;
     /**
+     * The name for the label of the input field
+     */
+    label: string;
+    /**
      * The name of the textarea which is passed to the Label
      */
     name: string;
@@ -35,13 +39,23 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     (props: TextAreaProps, forwardedRef) => {
-        const { disabled, errors, id, name, required, schema, setErrors, variants, ...rest } =
-            props;
+        const {
+            disabled,
+            errors,
+            id,
+            label,
+            name,
+            required,
+            schema,
+            setErrors,
+            variants,
+            ...rest
+        } = props;
         const [value, setValue] = useState('');
 
         useEffect(() => {
             if (errors && errors.length > 0 && schema && setErrors) {
-                clientSideValidation(id, schema, setErrors, value);
+                clientSideValidation(name, schema, setErrors, value);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
         }, [value]);
@@ -61,7 +75,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                         className="c-input  c-textarea"
                         disabled={disabled}
                         id={id}
-                        name={id}
+                        name={name}
                         onChange={(event) => setValue(event.currentTarget.value)}
                         ref={forwardedRef}
                         required={required}
@@ -69,11 +83,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                     />
                     <Label
                         htmlFor={id}
-                        name={name}
+                        name={label}
                         variants={disabled ? ['disabled'] : null}
                         required={required}
                     />
-                    {errors && errors.length > 0 ? <InputError errors={errors} id={id} /> : null}
+                    {errors && errors.length > 0 ? <InputError errors={errors} id={name} /> : null}
                 </div>
             </div>
         );

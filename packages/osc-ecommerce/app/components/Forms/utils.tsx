@@ -28,8 +28,9 @@ export function getInputType(
                     <TextArea
                         errors={validationErrors && validationErrors[hubspotFields.name]}
                         id={`${hubspotFields.name}_${formId}`}
+                        label={hubspotFields.label}
                         key={index}
-                        name={hubspotFields.label}
+                        name={hubspotFields.name}
                         required={hubspotFields.required}
                         schema={schema.pick({ [hubspotFields.name]: true })}
                         setErrors={setValidationErrors}
@@ -43,8 +44,9 @@ export function getInputType(
                         errors={validationErrors && validationErrors[hubspotFields.name]}
                         key={index}
                         id={`${hubspotFields.name}_${formId}`}
+                        label={hubspotFields.label}
                         inputMode={hubspotFields.fieldType === 'phonenumber' ? 'numeric' : 'text'}
-                        name={hubspotFields.label}
+                        name={hubspotFields.name}
                         pattern={hubspotFields.fieldType === 'phonenumber' ? '[0-9]*' : undefined}
                         placeholder={hubspotFields.placeholder}
                         required={hubspotFields.required}

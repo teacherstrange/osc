@@ -52,6 +52,7 @@ const ValidationTemplate: Story = () => {
             <TextArea
                 errors={errors.enquiry}
                 id="enquiry"
+                label="Enquiry"
                 name="Enquiry"
                 required={true}
                 schema={textAreaSchema}
@@ -68,6 +69,7 @@ Primary.args = {
         {
             editor: 'input',
             id: 'enquiry-1',
+            label: 'Enquiry',
             name: 'Enquiry',
             required: 'required',
             type: 'text',
@@ -78,6 +80,7 @@ Primary.args = {
                 'Donec volutpat quis libero eu fringilla. Aenean ultrices, elit ut varius condimentum, libero ligula aliquam lorem, eu volutpat quam purus ut leo. Etiam consectetur viverra augue.',
             editor: 'input',
             id: 'enquiry-2',
+            label: 'Enquiry',
             name: 'Enquiry',
             type: 'text',
             state: 'hasValue',
@@ -87,6 +90,7 @@ Primary.args = {
                 'Donec volutpat quis libero eu fringilla. Aenean ultrices, elit ut varius condimentum, libero ligula aliquam lorem, eu volutpat quam purus ut leo. Etiam consectetur viverra augue.',
             editor: 'input',
             id: 'enquiry-3',
+            label: 'Enquiry',
             name: 'Enquiry',
             ref: true,
             type: 'text',
@@ -98,6 +102,7 @@ Primary.args = {
             disabled: true,
             editor: 'input',
             id: 'enquiry-5',
+            label: 'Enquiry',
             name: 'Enquiry',
             type: 'text',
             state: 'isDisabled',

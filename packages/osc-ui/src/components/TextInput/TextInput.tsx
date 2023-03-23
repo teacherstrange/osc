@@ -46,6 +46,10 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
      */
     id: string;
     /**
+     * The name for the label of the input field
+     */
+    label: string;
+    /**
      * Name for the input field
      */
     name: string;
@@ -70,6 +74,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         errors,
         icon,
         id,
+        label,
         name,
         required,
         schema,
@@ -84,7 +89,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         // Client side error handling - Sets any errors on an input in
         // accordance with the schema validation
         if (errors && errors.length > 0 && schema && setErrors) {
-            clientSideValidation(id, schema, setErrors, value);
+            clientSideValidation(name, schema, setErrors, value);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
     }, [value]);
@@ -114,7 +119,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     className={inputClasses}
                     defaultValue={defaultValue}
                     id={id}
-                    name={id}
+                    name={name}
                     onChange={(event) => setValue(event.currentTarget.value)}
                     ref={forwardedRef}
                     type={type}
@@ -124,7 +129,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     // If Quaternary variation then wrap in VisuallyHidden to hide the label
                     hidden={variants?.some((variant) => variant === 'quaternary')}
                     htmlFor={id}
-                    name={name}
+                    name={label}
                     required={required}
                     variants={value ? ['filled'] : null}
                 />
