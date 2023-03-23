@@ -12,7 +12,7 @@ const CARDS = [
     { type: 'card.static' },
 ];
 
-const shouldShow = (parent) => {
+const shouldShow = (parent: { layout: string }) => {
     return parent.layout === 'carousel';
 };
 
@@ -97,7 +97,9 @@ export default defineType({
             group: 'cards',
             hidden: ({ parent }) => !shouldShow(parent),
             validation: (Rule) =>
-                Rule.custom((currentValue, { parent }) => {
+                Rule.custom((currentValue, context) => {
+                    const { parent } = context as { parent: { layout: string } };
+
                     // in a custom validation rule, check if the field should be shown, and if yes, show an error if the value is not set
                     if (shouldShow(parent) && currentValue === undefined) {
                         return 'An accessible name is needed to describe the carousel for screen readers.';
@@ -130,7 +132,8 @@ export default defineType({
             of: CARDS,
             group: 'cards',
             validation: (Rule) =>
-                Rule.custom((currentValue, { parent }) => {
+                Rule.custom((currentValue, context) => {
+                    const { parent } = context as { parent: { layout: string } };
                     // in a custom validation rule, check if the field should be shown, and if yes, show an error if the value is not set
                     if (!currentValue || currentValue.length === 0) {
                         return 'You must add at least one card.';

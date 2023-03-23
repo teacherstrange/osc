@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from '@portabletext/types';
+
 import { StackCompactIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
 import { defineField, defineType } from 'sanity';
@@ -40,15 +42,21 @@ export default defineType({
                 layout: 'dropdown',
             },
             validation: (Rule) =>
-                Rule.required().custom((value, { parent }) => {
-                    if (typeof value === 'undefined' || !parent.content) {
+                Rule.required().custom((currentValue, context) => {
+                    const { content } = context.parent as {
+                        content: { body: PortableTextBlock[] };
+                    };
+
+                    if (typeof currentValue === 'undefined' || !content) {
                         return true;
                     }
 
-                    const contentBody = parent?.content?.body;
+                    const contentBody = content && content?.body;
 
-                    const findLastHeading = contentBody.findLast((item) =>
-                        HEADING_LEVELS.includes(item.style)
+                    // @ts-ignore -- not actually sure why findLast does not exist?
+                    const findLastHeading = contentBody.findLast(
+                        (item: PortableTextBlock) =>
+                            item.style && HEADING_LEVELS.includes(item.style)
                     );
 
                     // If there are no headings in the content body, pass the validation early
@@ -59,7 +67,8 @@ export default defineType({
 
                     const lastHeading = findLastHeading.style;
 
-                    const getDigit = (string: string) => Number(string.match(/\d+/)[0]);
+                    const getDigit = (string: string) =>
+                        string ? Number(string.match(/\d+/)![0]) : 0;
 
                     const selectLevel = () => {
                         if (getDigit(lastHeading) === 6) {
@@ -69,9 +78,9 @@ export default defineType({
                         return getDigit(lastHeading) + 1;
                     };
 
-                    if (getDigit(value) < getDigit(lastHeading)) {
+                    if (getDigit(currentValue) < getDigit(lastHeading)) {
                         return `Heading levels are out of order. It looks like the last heading you set was a ${lastHeading}; for the document order to be correct please correct your headings in the content section, or select h${selectLevel()} from the dropdown.`;
-                    } else if (getDigit(value) > getDigit(lastHeading) + 1) {
+                    } else if (getDigit(currentValue) > getDigit(lastHeading) + 1) {
                         return `Heading level has been skipped. It looks like the last heading you set was a ${lastHeading}; for the document order to be correct please correct your headings in the content section, or select h${selectLevel()} from the dropdown.`;
                     }
 
@@ -85,7 +94,13 @@ export default defineType({
             of: [{ type: 'accordionItem' }],
             group: 'accordion',
             validation: (Rule) =>
-                Rule.required().custom((accordion) => {
+                Rule.required().custom((currentValue) => {
+                    const accordion = currentValue as {
+                        content: { body: PortableTextBlock[] };
+                        defaultOpen: boolean;
+                        heading: string;
+                    }[];
+
                     if (typeof accordion === 'undefined') {
                         return true;
                     }

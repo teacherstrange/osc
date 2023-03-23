@@ -37,12 +37,18 @@ export default defineType({
             initialValue: '240px',
             description: 'Enter a number with a value `px`. E.g. `240px`',
             validation: (Rule) =>
-                Rule.required().custom((height, context) => {
-                    const { type } = context?.parent;
+                Rule.required().custom((currentValue, context) => {
+                    if (typeof currentValue === 'undefined') {
+                        return true;
+                    }
+
+                    const { type } = context?.parent as {
+                        type: 'slider' | 'grid' | 'minicarousel' | 'microstar';
+                    };
                     const digitRegex = /(\d+)/g;
                     const digitPxRegex = /(\d+px+)/g;
-                    const heightNumber = Number(digitRegex.exec(height)[0]);
-                    const endsInPx = digitPxRegex.test(height);
+                    const heightNumber = Number(digitRegex.exec(currentValue)![0]);
+                    const endsInPx = digitPxRegex.test(currentValue);
 
                     if (!endsInPx) {
                         return 'Must be a number ending with `px`';

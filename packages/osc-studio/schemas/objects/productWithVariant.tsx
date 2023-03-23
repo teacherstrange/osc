@@ -25,7 +25,13 @@ export default defineType({
             description: 'First variant will be selected if left empty',
             options: {
                 filter: ({ parent }) => {
-                    const productId = parent?.product?._ref;
+                    const { product } = parent as {
+                        product: {
+                            _ref: string;
+                        };
+                    };
+
+                    const productId = product?._ref;
                     const shopifyProductId = Number(productId?.replace('shopifyProduct-', ''));
 
                     if (!shopifyProductId) {
@@ -46,8 +52,14 @@ export default defineType({
             },
             validation: (Rule) =>
                 Rule.custom(async (value, { parent, getClient }) => {
+                    const { product } = parent as {
+                        product: {
+                            _ref: string;
+                        };
+                    };
+
                     // Selected product in adjacent `product` field
-                    const productId = parent?.product?._ref;
+                    const productId = product?._ref;
 
                     // Selected product variant
                     const productVariantId = value?._ref;
