@@ -1,5 +1,5 @@
 import type { Fetcher } from '@remix-run/react/dist/transition';
-import { TextArea, TextInput } from 'osc-ui';
+import { Select, SelectItem, TextArea, TextInput } from 'osc-ui';
 import type { Dispatch, InputHTMLAttributes, SetStateAction, TextareaHTMLAttributes } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { z } from 'zod';
