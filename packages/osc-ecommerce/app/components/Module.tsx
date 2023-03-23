@@ -12,6 +12,7 @@ import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
 import textGridStyles from 'osc-ui/dist/src-components-TextGrid-text-grid.css';
 import textInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
+import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
 import type {
     SanityPage,
@@ -118,6 +119,7 @@ export const getComponentStyles = (data: SanityPage) => {
             case 'module.forms':
                 styles.push({ rel: 'stylesheet', href: alertStyles });
                 styles.push({ rel: 'stylesheet', href: textInputStyles });
+                styles.push({ rel: 'stylesheet', href: selectStyles });
                 break;
             case 'module.hero':
                 styles.push(

@@ -178,7 +178,7 @@ export interface HubspotFormFieldTypes {
      * For enumerated fields, this will be a list of Strings representing the available options for the field
      * Will be empty for non-enumerated fields.
      */
-    options: [];
+    options: [] | SelectOptions[];
     /**
      * A set of options controlling the validation for the field
      * NOTE: These options should NOT be modified through the API. Any validation
@@ -241,4 +241,14 @@ export interface HubspotFormFieldTypes {
 export interface HubspotRichText {
     content: string;
     type: string;
+}
+
+interface SelectOptions {
+    label: string;
+    value: string;
+    displayOrder?: number;
+    doubleData?: number;
+    hidden?: boolean;
+    description?: string;
+    readOnly?: boolean;
 }

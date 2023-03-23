@@ -56,6 +56,27 @@ export function getInputType(
                     />
                 );
                 break;
+            case 'select':
+                formInput = (
+                    <Select
+                        description={{ label: hubspotFields.label }}
+                        errors={validationErrors && validationErrors[hubspotFields.name]}
+                        key={index}
+                        required={hubspotFields.required}
+                        // TODO - this should be coming from 'placeholder' attribute, but it's empty and instead unselectedLabel has the placeholder value. According to their API docs this is deprecated 🤷‍♂️ Have raised a ticket with hubspot
+                        placeholder={hubspotFields.unselectedLabel}
+                        name={hubspotFields.name}
+                        schema={schema.pick({ [hubspotFields.name]: true })}
+                        setErrors={setValidationErrors}
+                    >
+                        {hubspotFields.options.map((option, index) => (
+                            <SelectItem key={index} {...option}>
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </Select>
+                );
+                break;
             default:
                 return null;
         }
@@ -88,8 +109,23 @@ export const getValidationSchema = (formFields: HubspotFormFieldTypes[]) => {
                     email: z.string().email(),
                 };
             }
+        } else if (field.type === 'enumeration') {
+            validationField = {
+                [field.name]: field.required
+                    ? z.string().refine(
+                          (val) =>
+                              field.options
+                                  .map((value) => {
+                                      return value.value;
+                                  })
+                                  .includes(val),
+                          {
+                              message: 'Please select an option',
         }
-
+                      )
+                    : z.string(),
+            };
+        }
         return {
             ...fields,
             ...validationField,
