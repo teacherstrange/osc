@@ -1,3 +1,50 @@
+## [0.60.0](https://github.com/Open-Study-College/osc/compare/v0.59.0...v0.60.0) (2023-03-23)
+
+
+### 🐛 Bugs
+
+* **studio:** add title prop to ShopifyDocumentStatus component ([852676c](https://github.com/Open-Study-College/osc/commit/852676ca510472d8b789c0aff7370e0f40110f32))
+
+
+### ✨ Features
+
+* **studio:** add cli config ([7401fc6](https://github.com/Open-Study-College/osc/commit/7401fc6058bec79c5becbbd0af2e9f0839fffb82))
+* **studio:** add shopify document types to constants ([b58bb99](https://github.com/Open-Study-College/osc/commit/b58bb998102c70ce78a9a620d5f1bce5a0aea2a1))
+* **studio:** add type declarations ([4d8c712](https://github.com/Open-Study-College/osc/commit/4d8c7121e5ed638abc60b5e62e7dd116af802ea9))
+* **studio:** remove deprecated packages and install sanity@latest ([3f90ee5](https://github.com/Open-Study-College/osc/commit/3f90ee58413c6c8624c97c47785764ab7ddd809f))
+* **studio:** remove overrides from root package.json ([35b5c8f](https://github.com/Open-Study-College/osc/commit/35b5c8f3c318bbcf8c13e225aed7501dd9ae39dd))
+* **studio:** remove v2 plugin config files ([e51375c](https://github.com/Open-Study-College/osc/commit/e51375ca1d19cb039c86cf45a18d77b5a91009df))
+* **studio:** update config file ([9263b52](https://github.com/Open-Study-College/osc/commit/9263b5241be7112e65398a07942e247b7fa2b5e4))
+* **studio:** update plugins ([1a2acc9](https://github.com/Open-Study-College/osc/commit/1a2acc9a94fa183242fc1526a5d49d3247d3ebc5))
+* **studio:** update seo page to v3 compatible plugin ([b10484a](https://github.com/Open-Study-College/osc/commit/b10484aca9a144de1e3781b0050348b59063c454))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **studio:** add pluralize types ([00484be](https://github.com/Open-Study-College/osc/commit/00484bec1402bb3b01a7423cee8316e5de77957d))
+* **studio:** uninstalls @sanity/uuid package ([51ebe28](https://github.com/Open-Study-College/osc/commit/51ebe280fbb6fb39eb0dd7332d5987a93d478483))
+* **studio:** update comment ([4f7a8af](https://github.com/Open-Study-College/osc/commit/4f7a8afd3f6acc8509f9cdbd0d06b705348ebcf2))
+* update gitignore ([ebbc348](https://github.com/Open-Study-College/osc/commit/ebbc3484edf7deb5873d2456ce8e6f32c1ac1f01))
+
+
+### ♻️ Refactors
+
+* **studio:** move actions into plugins directory and update for v3 ([b010e4b](https://github.com/Open-Study-College/osc/commit/b010e4b03594b9474ba3b50cff1a40e7b25e7b2f))
+* **studio:** move desk structure file and update syntax to v3 ([cb684e7](https://github.com/Open-Study-College/osc/commit/cb684e71e21fd60a77b33ee930831c84414fc831))
+* **studio:** refactor productWithVariant to v3 ([6df08d1](https://github.com/Open-Study-College/osc/commit/6df08d17e517934a8ed6a54ae5d1e06e260cbe17))
+* **studio:** remove __experimental_actions properties ([b48d115](https://github.com/Open-Study-College/osc/commit/b48d1151541c8877108f706340386df7f5618c95))
+* **studio:** update body.tsx to use v3 syntax ([de3017c](https://github.com/Open-Study-College/osc/commit/de3017caf60a0678c2d80b07a18c8a3a9cc44a4b))
+* **studio:** update design token import in body.tsx ([b6b2c93](https://github.com/Open-Study-College/osc/commit/b6b2c93f512ff54760817ca691420aade065b100))
+* **studio:** update desk structure files to v3 syntax ([8d33f47](https://github.com/Open-Study-College/osc/commit/8d33f47cd90bf3edecec437fb51513435d54336d))
+* **studio:** update icon and color pickers to v3 syntax ([f5871c0](https://github.com/Open-Study-College/osc/commit/f5871c09436f483b74dbd5189de533ecca2e474e))
+* **studio:** update inputComponent to v3 components.intpus syntax ([c4f7f23](https://github.com/Open-Study-College/osc/commit/c4f7f23c6627a53d07edcc829407623d4e0555f1))
+* **studio:** update rootDir on server ([d2f93dd](https://github.com/Open-Study-College/osc/commit/d2f93ddcc6e134fc7b5ea67d5b7823f1e3ffe25b))
+* **studio:** update sanity-shopify inputs to v3 syntax ([f2e3207](https://github.com/Open-Study-College/osc/commit/f2e3207e20cac01b17b7c153ee7332ee6cf0e56a))
+* **studio:** update schema.ts to v3 syntax ([4ec4aa0](https://github.com/Open-Study-College/osc/commit/4ec4aa0638c21f56d87f8cdd89b0e9f47a5842ff))
+* **studio:** update slug import ([327a4ea](https://github.com/Open-Study-College/osc/commit/327a4ea36bf16f369b2513ac93a7efec6246e322))
+* **studio:** update tsconfig ([132c201](https://github.com/Open-Study-College/osc/commit/132c201f34f5e3f76ec87bb6de49cc0ff223b15c))
+* **studio:** updates button input component schema ([b77cd92](https://github.com/Open-Study-College/osc/commit/b77cd9268bbe4d9e9c8979a832f338c6dea83b84))
+
 ## [0.59.0](https://github.com/Open-Study-College/osc/compare/v0.58.0...v0.59.0) (2023-03-23)
 
 
@@ -175,20 +222,4 @@
 ### 🐛 Bugs
 
 * **carousel:** remove full height from carousel ([f990037](https://github.com/Open-Study-College/osc/commit/f990037323b0b1f2add5a67194e29789a37d3a8b))
-
-## [0.56.5](https://github.com/Open-Study-College/osc/compare/v0.56.4...v0.56.5) (2023-03-22)
-
-
-### 🐛 Bugs
-
-* **types:** update sanity button types ([6ad3e68](https://github.com/Open-Study-College/osc/commit/6ad3e689d622ef6c933083efe12c180efd673e98))
-
-
-### ♻️ Refactors
-
-* **button:** add initial value and validation to button type ([02c5fb9](https://github.com/Open-Study-College/osc/commit/02c5fb9bae33eab8c5f67897c6b594a61b6c9415))
-* **content:** add icon to button within content component ([9f7c4a1](https://github.com/Open-Study-College/osc/commit/9f7c4a12ec1bc5ad6cfc7043709991ebfb312b7c))
-* **ecommerce:** add icon to button component ([eaa0bb1](https://github.com/Open-Study-College/osc/commit/eaa0bb1b6997eb525fae963fa72356b4e7d60324))
-* **ecommerce:** add missin prop to button component ([af2cb43](https://github.com/Open-Study-College/osc/commit/af2cb43e2a0c521becf3fe59c691abb456f72f15))
-* **studio:** add icon picker to button module ([9426057](https://github.com/Open-Study-College/osc/commit/94260574c6843758e5a59b9c2f10f35cd473dbd0))
 
