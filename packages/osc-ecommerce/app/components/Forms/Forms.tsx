@@ -117,7 +117,9 @@ export const Forms = (props: { module: formModule }) => {
         return <Alert status="error">Unable to load form!</Alert>;
     }
 
-    const schema = getValidationSchema(hubspotFormData[module.formId].formFieldGroups);
+    const schema = getValidationSchema(
+        getFormFields(hubspotFormData[module.formId].formFieldGroups)
+    );
 
     type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 
