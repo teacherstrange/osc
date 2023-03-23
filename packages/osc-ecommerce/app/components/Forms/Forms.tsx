@@ -91,6 +91,7 @@ export const Forms = (props: { module: formModule }) => {
 
     const [validationErrors, setValidationErrors] = useState<FlattenedErrors | {}>([]);
     const [formErrors, setFormErrors] = useState<string[] | []>([]);
+    const [key, setKey] = useState(Date.now());
 
     const { isAdding, isSubmitting } = transitionStates(fetcher);
 
@@ -100,6 +101,7 @@ export const Forms = (props: { module: formModule }) => {
         // Reset the form when form has finished submitting there is a success response
         if (!isAdding && data?.success) {
             formRef.current?.reset();
+            setKey(Date.now());
         }
     }, [isAdding, data?.success]);
 
@@ -135,6 +137,7 @@ export const Forms = (props: { module: formModule }) => {
                         hubspotFormData[module.formId].formFieldGroups as HubspotFormFieldGroups[]
                     }
                     isSubmitting={isSubmitting}
+                    key={key}
                     setValidationErrors={setValidationErrors}
                     submitText={hubspotFormData[module.formId].submitText}
                     validationErrors={validationErrors}
