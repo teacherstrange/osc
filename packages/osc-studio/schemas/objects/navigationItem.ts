@@ -1,11 +1,12 @@
+import { defineArrayMember, defineField, defineType } from 'sanity';
 import { PAGE_REFERENCES } from '../../constants.js';
 
-export default {
+export default defineType({
     name: 'navigation.item',
     type: 'object',
     title: 'Item',
     fields: [
-        {
+        defineField({
             name: 'target',
             type: 'string',
             initialValue: 'Internal',
@@ -14,37 +15,37 @@ export default {
                 layout: 'radio',
                 direction: 'horizontal',
             },
-        },
-        {
+        }),
+        defineField({
             title: 'Navigation Label',
             name: 'navigationLabel',
             type: 'string',
             description:
                 'For internal links this will default to the title of the target if left blank.',
-        },
-        {
+        }),
+        defineField({
             name: 'internalLink',
-            Title: 'Internal Link',
+            title: 'Internal Link',
             type: 'reference',
             weak: true,
             to: PAGE_REFERENCES,
             hidden: ({ parent, value }) => !value && parent?.target !== 'Internal',
-        },
-        {
+        }),
+        defineField({
             name: 'externalLink',
             title: 'External Link',
             type: 'url',
             validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
             hidden: ({ parent, value }) => !value && parent?.target !== 'External',
-        },
-        {
+        }),
+        defineField({
             type: 'array',
             name: 'items',
             title: 'Items',
             description:
                 'Set the position and style of your menu items by selecting either Column or Feature',
             of: [
-                {
+                defineArrayMember({
                     title: 'Column',
                     name: 'column',
                     type: 'object',
@@ -65,8 +66,8 @@ export default {
                             ],
                         },
                     ],
-                },
-                {
+                }),
+                defineArrayMember({
                     title: 'Feature',
                     name: 'feature',
                     type: 'object',
@@ -88,11 +89,11 @@ export default {
                             ],
                         },
                     ],
-                },
+                }),
                 { type: 'navigation.link' },
             ],
             hidden: ({ parent, value }) => !value && parent?.target !== 'Trigger',
-        },
+        }),
     ],
     preview: {
         select: {
@@ -105,4 +106,4 @@ export default {
             title: title || targetTitle || targetStoreTitle || externalLink,
         }),
     },
-};
+});

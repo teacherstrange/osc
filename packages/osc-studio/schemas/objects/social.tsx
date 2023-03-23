@@ -1,31 +1,31 @@
-import React from 'react';
+import { defineField, defineType } from 'sanity';
 import { IconPicker } from '../../components/inputs/IconPicker';
 
-export default {
+export default defineType({
     name: 'social',
     title: 'Social',
     type: 'object',
     fields: [
-        {
+        defineField({
             name: 'icon',
             title: 'Icon',
             type: 'string',
             components: {
                 input: IconPicker,
             },
-        },
-        {
+        }),
+        defineField({
             name: 'socialProfile',
             title: 'Social Profile',
             type: 'url',
-        },
+        }),
     ],
     preview: {
         select: {
             url: 'socialProfile',
             icon: 'icon',
         },
-        prepare(selection: Record<string, any>) {
+        prepare(selection) {
             const { url, icon } = selection;
 
             return {
@@ -44,4 +44,4 @@ export default {
             };
         },
     },
-};
+});

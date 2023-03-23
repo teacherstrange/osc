@@ -1,152 +1,154 @@
-export default {
+import { defineArrayMember, defineField, defineType } from 'sanity';
+
+export default defineType({
     name: 'shopifyProduct',
     title: 'Shopify',
     type: 'object',
     options: {
         collapsed: false,
-        collapsible: true
+        collapsible: true,
     },
     readOnly: true,
     fieldsets: [
         {
             name: 'status',
-            title: 'Status'
+            title: 'Status',
         },
         {
             name: 'organization',
             title: 'Organization',
             options: {
-                columns: 2
-            }
+                columns: 2,
+            },
         },
         {
             name: 'variants',
             title: 'Variants',
             options: {
                 collapsed: true,
-                collapsible: true
-            }
-        }
+                collapsible: true,
+            },
+        },
     ],
     fields: [
         // Created at
-        {
+        defineField({
             fieldset: 'status',
             name: 'createdAt',
             title: 'Created at',
-            type: 'string'
-        },
+            type: 'string',
+        }),
         // Updated at
-        {
+        defineField({
             fieldset: 'status',
             name: 'updatedAt',
             title: 'Last updated at',
-            type: 'string'
-        },
+            type: 'string',
+        }),
         // Product status
-        {
+        defineField({
             fieldset: 'status',
             name: 'status',
             title: 'Product status',
             type: 'string',
             options: {
                 layout: 'dropdown',
-                list: ['active', 'archived', 'draft']
-            }
-        },
+                list: ['active', 'archived', 'draft'],
+            },
+        }),
         // Deleted
-        {
+        defineField({
             fieldset: 'status',
             name: 'isDeleted',
             title: 'Deleted from Shopify?',
-            type: 'boolean'
-        },
+            type: 'boolean',
+        }),
         // Title
-        {
+        defineField({
             name: 'title',
             title: 'Title',
             type: 'string',
-            description: 'Title displayed in both cart and checkout'
-        },
+            description: 'Title displayed in both cart and checkout',
+        }),
         // Product ID
-        {
+        defineField({
             name: 'id',
             title: 'ID',
             type: 'number',
-            description: 'Shopify Product ID'
-        },
+            description: 'Shopify Product ID',
+        }),
         // Product ID
-        {
+        defineField({
             name: 'gid',
             title: 'GID',
             type: 'string',
-            description: 'Shopify Product GID'
-        },
+            description: 'Shopify Product GID',
+        }),
         // Slug
-        {
+        defineField({
             name: 'slug',
             title: 'Slug',
             type: 'slug',
-            description: 'Shopify Product handle'
-        },
+            description: 'Shopify Product handle',
+        }),
         // Description
-        {
+        defineField({
             name: 'descriptionHtml',
             title: 'HTML Description',
             type: 'text',
-            rows: 5
-        },
+            rows: 5,
+        }),
         // Product Type
-        {
+        defineField({
             fieldset: 'organization',
             name: 'productType',
             title: 'Product type',
-            type: 'string'
-        },
+            type: 'string',
+        }),
         // Vendor
-        {
+        defineField({
             fieldset: 'organization',
             name: 'vendor',
             title: 'Vendor',
-            type: 'string'
-        },
+            type: 'string',
+        }),
         // Tags
-        {
+        defineField({
             fieldset: 'organization',
             name: 'tags',
             title: 'Tags',
-            type: 'string'
-        },
+            type: 'string',
+        }),
         // Price range
-        {
+        defineField({
             name: 'priceRange',
             title: 'Price range',
             type: 'object',
             options: {
-                columns: 2
+                columns: 2,
             },
             fields: [
                 {
                     name: 'minVariantPrice',
                     title: 'Min variant price',
-                    type: 'number'
+                    type: 'number',
                 },
                 {
                     name: 'maxVariantPrice',
                     title: 'Max variant price',
-                    type: 'number'
-                }
-            ]
-        },
+                    type: 'number',
+                },
+            ],
+        }),
         // Preview Image URL
-        {
+        defineField({
             name: 'previewImageUrl',
             title: 'Preview Image URL',
             type: 'string',
-            description: 'Image displayed in both cart and checkout'
-        },
+            description: 'Image displayed in both cart and checkout',
+        }),
         // Options
-        {
+        defineField({
             name: 'options',
             title: 'Options',
             type: 'array',
@@ -154,24 +156,24 @@ export default {
                 {
                     name: 'option',
                     title: 'Option',
-                    type: 'productOption'
-                }
-            ]
-        },
+                    type: 'productOption',
+                },
+            ],
+        }),
         // Variants
-        {
+        defineField({
             fieldset: 'variants',
             name: 'variants',
             title: 'Variants',
             type: 'array',
             of: [
-                {
+                defineArrayMember({
                     title: 'Variant',
                     type: 'reference',
                     weak: true,
-                    to: [{ type: 'productVariant' }]
-                }
-            ]
-        }
-    ]
-};
+                    to: [{ type: 'productVariant' }],
+                }),
+            ],
+        }),
+    ],
+});

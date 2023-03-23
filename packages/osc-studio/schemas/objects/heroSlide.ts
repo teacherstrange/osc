@@ -1,7 +1,8 @@
 import { IdCardIcon } from '@radix-ui/react-icons';
+import { defineField, defineType } from 'sanity';
 import { ColorPicker } from '../../components/inputs/ColorPicker';
 
-export default {
+export default defineType({
     name: 'heroSlide',
     title: 'Hero',
     type: 'object',
@@ -22,25 +23,25 @@ export default {
         },
     ],
     fields: [
-        {
+        defineField({
             name: 'title',
             title: 'Title',
             type: 'string',
             group: 'content',
-        },
-        {
+        }),
+        defineField({
             name: 'content',
             title: 'Content',
             type: 'module.content',
             group: 'content',
-        },
-        {
+        }),
+        defineField({
             name: 'image',
             title: 'Image',
             type: 'image.desktop',
             group: 'media',
-        },
-        {
+        }),
+        defineField({
             name: 'backgroundColor',
             title: 'Background Colour',
             type: 'string',
@@ -49,8 +50,8 @@ export default {
                 input: ColorPicker,
             },
             group: 'settings',
-        },
-        {
+        }),
+        defineField({
             name: 'titleColor',
             title: 'Title Colour',
             type: 'string',
@@ -59,8 +60,8 @@ export default {
                 input: ColorPicker,
             },
             group: 'settings',
-        },
-        {
+        }),
+        defineField({
             name: 'variant',
             title: 'Variant',
             type: 'string',
@@ -71,6 +72,6 @@ export default {
             },
             initialValue: 'primary',
             group: 'settings',
-        },
+        }),
     ],
-};
+});

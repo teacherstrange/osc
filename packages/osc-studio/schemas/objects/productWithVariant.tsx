@@ -1,22 +1,23 @@
 import { TagIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
+import { defineField, defineType } from 'sanity';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
 import { SANITY_API_VERSION } from '../../constants';
 import { getPriceRange } from '../../utils/getPriceRange';
 
-export default {
+export default defineType({
     name: 'productWithVariant',
     title: 'Product with variant',
     type: 'object',
     icon: TagIcon,
     fields: [
-        {
+        defineField({
             name: 'product',
             type: 'reference',
             to: [{ type: 'product' }],
             weak: true,
-        },
-        {
+        }),
+        defineField({
             name: 'variant',
             type: 'reference',
             to: [{ type: 'productVariant' }],
@@ -67,7 +68,7 @@ export default {
 
                     return result ? true : 'Invalid product variant';
                 }),
-        },
+        }),
     ],
     preview: {
         select: {
@@ -132,4 +133,4 @@ export default {
             };
         },
     },
-};
+});
