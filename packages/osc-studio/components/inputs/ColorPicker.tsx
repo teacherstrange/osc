@@ -4,9 +4,11 @@ import PatchEvent, { set, unset } from '@sanity/form-builder/PatchEvent';
 import { SearchIcon } from '@sanity/icons';
 import { Autocomplete, Box, Card, Flex, Text } from '@sanity/ui';
 import { uuid } from '@sanity/uuid';
-import { colors } from 'osc-design-tokens';
 import React from 'react';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
+
+// ! Temporary fix: can update this to an import in Sanity V3
+const { colors } = require('osc-design-tokens/dist/index.js');
 
 interface Props {
     /**

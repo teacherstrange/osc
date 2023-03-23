@@ -4,10 +4,8 @@ const fluidScale = require('./tokens/fluid-scale');
 const mediaQueries = require('./tokens/media-queries');
 const typography = require('./tokens/typography');
 
-module.exports = {
-    colors,
-    containers,
-    fluidScale,
-    mediaQueries,
-    typography,
-};
+exports.colors = colors;
+exports.containers = containers;
+exports.fluidScale = fluidScale;
+exports.mediaQueries = mediaQueries;
+exports.typography = typography;

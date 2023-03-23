@@ -1,4 +1,3 @@
-import commonjs from '@rollup/plugin-commonjs';
 import dotenv from 'dotenv';
 import copy from 'rollup-plugin-copy';
 import dts from 'rollup-plugin-dts';
@@ -22,7 +21,6 @@ export default [
             },
         ],
         plugins: [
-            commonjs(),
             typescript({ check: false }),
             // Copy the fonts into our dist folder
             copy({
