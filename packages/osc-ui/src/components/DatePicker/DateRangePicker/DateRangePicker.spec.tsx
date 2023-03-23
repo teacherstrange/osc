@@ -1,9 +1,8 @@
 import { parseDate } from '@internationalized/date';
-import { render } from 'test-utils';
-
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { render } from 'test-utils';
 import { DateRangePickerContainer } from './DateRangePicker';
 
 const TODAY = 'Today';
@@ -151,7 +150,7 @@ test('should remove hidden class from "Now select end date" prompt when first da
 test('should clear selection if the Clear Selection button is selected', async () => {
     const user = userEvent.setup();
 
-    render(<DateRangePickerContainer label="Date Range" />);
+    render(<DateRangePickerContainer closeOnSelect={false} label="Date Range" />);
     const button = screen.getAllByRole('button')[0];
     await user.click(button);
 

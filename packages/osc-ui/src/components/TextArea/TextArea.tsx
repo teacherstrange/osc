@@ -1,21 +1,16 @@
-import type { TextareaHTMLAttributes, ReactNode } from 'react';
-import React, { forwardRef, useState } from 'react';
+import type { Dispatch, SetStateAction, TextareaHTMLAttributes } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
+import type { ZodObject, ZodRawShape } from 'zod';
+import { clientSideValidation } from '../../utils/clientSideValidation';
 import { Label } from '../Label/Label';
-
-import { getFieldError } from '../../utils/getFieldError';
 import './text-area.scss';
-
-type IconType = {
-    content: ReactNode;
-    label: string;
-    type?: string;
-};
+import { InputError } from '../TextInput/TextInput';
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     /**
-     * An object that contains an Icon and a label for accessibility
+     * Any error messages - initially set through server validation, but can be updated through client validation
      */
-    icon?: IconType;
+    errors?: string[] | undefined;
     /**
      * Id used to connect the textarea to the corresponding label
      */
@@ -25,47 +20,48 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
      */
     name: string;
     /**
+     * The Zod Schema used for creating client side validation
+     */
+    schema?: ZodObject<ZodRawShape>;
+    /**
+     * Allows for client side validation once a server side error has been received
+     */
+    setErrors?: Dispatch<SetStateAction<any>>;
+    /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
     variants?: string[];
-    /**
-     * A boolean that alerts when form is submitted for error handling
-     * @default false
-     */
-    wasSubmitted?: boolean;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     (props: TextAreaProps, forwardedRef) => {
-        const { disabled, icon, id, name, required, variants, wasSubmitted, ...rest } = props;
+        const { disabled, errors, id, name, required, schema, setErrors, variants, ...rest } =
+            props;
         const [value, setValue] = useState('');
 
-        const errorMessage = getFieldError(value, required);
-        const displayError = wasSubmitted && errorMessage;
-
-        const InputError = () => (
-            <>
-                <div className="c-input__icon c-input__icon--error">{icon?.content}</div>
-                <span className="c-input__error-message" role="alert" id={`${id}-error`}>
-                    {errorMessage}
-                </span>
-            </>
-        );
+        useEffect(() => {
+            if (errors && errors.length > 0 && schema && setErrors) {
+                clientSideValidation(id, schema, setErrors, value);
+            }
+            // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
+        }, [value]);
 
         return (
             <div className="c-input__outer-container">
                 <div
                     className={
-                        displayError
+                        errors && errors.length > 0
                             ? `c-input__container c-input__container--error`
                             : `c-input__container`
                     }
                 >
                     <textarea
+                        aria-invalid={errors ? true : false}
+                        aria-describedby={errors ? `${id}-error` : undefined}
                         className="c-input  c-textarea"
                         disabled={disabled}
                         id={id}
-                        name={name}
+                        name={id}
                         onChange={(event) => setValue(event.currentTarget.value)}
                         ref={forwardedRef}
                         required={required}
@@ -77,7 +73,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                         variants={disabled ? ['disabled'] : null}
                         required={required}
                     />
-                    {displayError ? <InputError /> : null}
+                    {errors && errors.length > 0 ? <InputError errors={errors} id={id} /> : null}
                 </div>
             </div>
         );

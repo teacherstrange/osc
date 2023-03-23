@@ -30,6 +30,7 @@ export {
     CourseCard,
 } from './components/Card/Card';
 export { Carousel } from './components/Carousel/Carousel';
+export { Checkbox } from './components/Checkbox/Checkbox';
 export { Content } from './components/Content/Content';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export {
@@ -41,6 +42,7 @@ export {
     FooterMenuHeader,
     FooterMenuItem,
 } from './components/Footer/Footer';
+export { DatePicker } from './components/DatePicker/DatePicker/DatePicker';
 export { Header, HeaderActionBar, HeaderNav } from './components/Header/Header';
 export {
     Hero,
@@ -73,17 +75,21 @@ export {
     PopoverContent,
     PopoverTrigger,
 } from './components/Popover/Popover';
+export { Select, SelectItem } from './components/Select/Select';
 export { SkipLink } from './components/SkipLink/SkipLink';
 export { Switch } from './components/Switch/Switch';
 export { Tabs } from './components/Tabs/Tabs';
 export { Tag } from './components/Tag/Tag';
 export { TextGrid } from './components/TextGrid/TextGrid';
+export { TextArea } from './components/TextArea/TextArea';
+export { TextInput } from './components/TextInput/TextInput';
 export { Trustpilot } from './components/Trustpilot/Trustpilot';
 export { VideoPlayer } from './components/VideoPlayer/VideoPlayer';
 export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
 // Hooks
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useSpacing } from './hooks/useSpacing';
+export { useModifier } from './hooks/useModifier';
 // Utils
 export { classNames } from './utils/classNames';
 export { formatDate as transformDate } from './utils/formatDate';

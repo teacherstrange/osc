@@ -1,9 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { TextInput } from './TextInput';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { Icon } from '../Icon/Icon';
+import { textInputSchema } from './mockSchema';
 
 export default {
     title: 'osc-ui/TextInput',
@@ -38,9 +37,6 @@ export default {
         ref: { description: 'A ref that is forwarded to the TextInput component' },
         required: { description: 'Sets a Select as being a required field' },
         variants: { description: 'Sets the custom styles, e.g. "Secondary", "Tertiary"' },
-        wasSubmitted: {
-            description: 'A boolean that alerts when form is submitted for error handling',
-        },
     },
 } as Meta;
 
@@ -72,11 +68,60 @@ const Template: Story = ({ items }) => {
         </div>
     );
 };
+const ValidationTemplate: Story = () => {
+    const [primaryStyleErrors, setFirstnameErrors] = useState({
+        firstname: ['Field is required'],
+    });
+    const [secondaryStyleErrors, setLastnameErrors] = useState({ lastname: ['Field is required'] });
+    const [tertiaryStyleErrors, setEmailErrors] = useState({ email: ['Invalid Email'] });
+
+    return (
+        <div>
+            <div
+                style={{
+                    margin: '1em',
+                    width: '300px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1em',
+                }}
+            >
+                <TextInput
+                    errors={primaryStyleErrors.firstname}
+                    id="firstname"
+                    name="First Name"
+                    setErrors={setFirstnameErrors}
+                    schema={textInputSchema.firstname}
+                    type="text"
+                />
+                <TextInput
+                    errors={secondaryStyleErrors.lastname}
+                    id="lastname"
+                    name="Last Name"
+                    setErrors={setLastnameErrors}
+                    schema={textInputSchema.lastname}
+                    type="text"
+                    variants={['secondary']}
+                />
+                <TextInput
+                    errors={tertiaryStyleErrors.email}
+                    id="email"
+                    name="Email"
+                    setErrors={setEmailErrors}
+                    schema={textInputSchema.email}
+                    type="email"
+                    variants={['tertiary']}
+                />
+            </div>
+        </div>
+    );
+};
 
 export const Primary = Template.bind({});
 export const Secondary = Template.bind({});
 export const Tertiary = Template.bind({});
 export const Quaternary = Template.bind({});
+export const Validation = ValidationTemplate.bind({});
 
 Primary.args = {
     items: [
@@ -105,20 +150,6 @@ Primary.args = {
             required: true,
             type: 'text',
             state: 'hasFocus',
-        },
-        {
-            name: 'Full Name',
-            editor: 'input',
-            icon: {
-                content: <Icon id="exclamation-mark" />,
-                label: 'Exclamation Triangle Icon',
-                type: 'error',
-            },
-            id: 'full-name-4',
-            required: true,
-            type: 'text',
-            state: 'hasValidation',
-            wasSubmitted: true,
         },
         {
             defaultValue: 'Sarah',
@@ -160,21 +191,7 @@ Secondary.args = {
             variants: ['secondary'],
             state: 'hasFocus',
         },
-        {
-            name: 'Full Name',
-            editor: 'input',
-            icon: {
-                content: <Icon id="exclamation-mark" />,
-                label: 'Exclamation Triangle Icon',
-                type: 'error',
-            },
-            id: 'full-name-4',
-            required: true,
-            type: 'text',
-            variants: ['secondary'],
-            state: 'hasValidation',
-            wasSubmitted: true,
-        },
+
         {
             name: 'Full Name',
             disabled: true,
@@ -185,6 +202,14 @@ Secondary.args = {
             state: 'isDisabled',
         },
     ],
+};
+
+Secondary.parameters = {
+    docs: {
+        description: {
+            story: 'Secondary styling for the Text Input',
+        },
+    },
 };
 
 Tertiary.args = {
@@ -217,21 +242,6 @@ Tertiary.args = {
         },
         {
             name: 'Full Name',
-            editor: 'input',
-            icon: {
-                content: <Icon id="exclamation-mark" />,
-                label: 'Exclamation Triangle Icon',
-                type: 'error',
-            },
-            id: 'full-name-4',
-            required: true,
-            state: 'hasValidation',
-            type: 'text',
-            variants: ['tertiary'],
-            wasSubmitted: true,
-        },
-        {
-            name: 'Full Name',
             disabled: true,
             editor: 'input',
             id: 'full-name-5',
@@ -242,15 +252,20 @@ Tertiary.args = {
     ],
 };
 
+Tertiary.parameters = {
+    docs: {
+        description: {
+            story: 'Tertiary styling for the Text Input',
+        },
+    },
+};
+
 Quaternary.args = {
     items: [
         {
             action: {
-                type: 'submit',
-                icon: {
-                    content: <MagnifyingGlassIcon />,
-                    label: 'Magnifying Glass',
-                },
+                iconId: 'search',
+                size: 'sm',
                 variant: 'quaternary',
             },
             editor: 'input',
@@ -262,11 +277,8 @@ Quaternary.args = {
         },
         {
             action: {
-                type: 'submit',
-                icon: {
-                    content: <MagnifyingGlassIcon />,
-                    label: 'Magnifying Glass',
-                },
+                iconId: 'search',
+                size: 'sm',
                 variant: 'quaternary',
             },
             defaultValue: 'GCSE English',
@@ -278,4 +290,20 @@ Quaternary.args = {
             variants: ['quaternary'],
         },
     ],
+};
+
+Quaternary.parameters = {
+    docs: {
+        description: {
+            story: 'Quaternary styling for the Text Input',
+        },
+    },
+};
+
+Validation.parameters = {
+    docs: {
+        description: {
+            story: 'Validation styling for the Text Input',
+        },
+    },
 };

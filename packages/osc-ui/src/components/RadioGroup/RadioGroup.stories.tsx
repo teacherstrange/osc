@@ -1,7 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { RadioGroup, RadioItem } from './RadioGroup';
+import { radioSchema, radioVariants } from './mockData';
 
 export default {
     title: 'osc-ui/RadioGroup',
@@ -60,7 +61,6 @@ const Template: Story = ({ variations }) => {
                     name={variant.name}
                     required={variant.required}
                     variants={variant.variants}
-                    wasSubmitted={variant.wasSubmitted}
                 >
                     {variant.items.map((item, index) => {
                         return (
@@ -79,6 +79,34 @@ const Template: Story = ({ variations }) => {
     });
 };
 
+const ValidationTemplate: Story = (args) => {
+    const [errors, setErrors] = useState({
+        newsletter: ['Please choose an option'],
+    });
+
+    return (
+        <div style={{ margin: '1.5em 1em' }}>
+            <RadioGroup
+                description={{ id: 'receive-newsletter', value: 'Receive Newsletter' }}
+                errors={errors.newsletter}
+                name="newsletter"
+                required={true}
+                setErrors={setErrors}
+                schema={radioSchema.newsletter}
+            >
+                {args.variants.map((variant) => (
+                    <RadioItem
+                        key={variant.id}
+                        id={variant.id}
+                        name={variant.name}
+                        value={variant.value}
+                    />
+                ))}
+            </RadioGroup>
+        </div>
+    );
+};
+
 export const Primary = Template.bind({});
 export const Secondary = Template.bind({});
 
@@ -94,7 +122,7 @@ Primary.args = {
             state: 'default',
         },
         {
-            defaultValue: 'yes-2',
+            defaultValue: 'yes',
             description: { id: 'receive-newsletter-2', value: 'Receive Newsletter' },
             items: [
                 { id: 'r2-yes', name: 'Yes', value: 'yes' },
@@ -104,7 +132,6 @@ Primary.args = {
             state: 'selectedOption',
         },
         {
-            defaultValue: 'yes-3',
             description: { id: 'receive-newsletter-3', value: 'Receive Newsletter' },
             items: [
                 { id: 'r3-yes', name: 'Yes', value: 'yes', ref: true },
@@ -112,17 +139,6 @@ Primary.args = {
             ],
             name: 'newsletter-3',
             state: 'hasFocus',
-        },
-        {
-            description: { id: 'receive-newsletter-4', value: 'Receive Newsletter' },
-            items: [
-                { id: 'r4-yes', name: 'Yes', value: 'yes' },
-                { id: 'r4-no', name: 'No', value: 'no' },
-            ],
-            name: 'newsletter-4',
-            required: true,
-            state: 'hasValidation',
-            wasSubmitted: true,
         },
         {
             description: { id: 'receive-newsletter-5', value: 'Receive Newsletter' },
@@ -149,7 +165,7 @@ Secondary.args = {
             state: 'default',
         },
         {
-            defaultValue: 'yes-2',
+            defaultValue: 'yes',
             description: { id: 'receive-newsletter-2', value: 'Receive Newsletter' },
             items: [
                 { id: 'r2-yes', name: 'Yes', value: 'yes' },
@@ -170,18 +186,6 @@ Secondary.args = {
             state: 'hasFocus',
         },
         {
-            description: { id: 'receive-newsletter-4', value: 'Receive Newsletter' },
-            items: [
-                { id: 'r4-yes', name: 'Yes', value: 'yes' },
-                { id: 'r4-no', name: 'No', value: 'no' },
-            ],
-            name: 'newsletter-4',
-            required: true,
-            state: 'hasValidation',
-            variants: ['secondary'],
-            wasSubmitted: true,
-        },
-        {
             description: { id: 'receive-newsletter-5', value: 'Receive Newsletter' },
             disabled: true,
             items: [
@@ -193,4 +197,18 @@ Secondary.args = {
             state: 'isDisabled',
         },
     ],
+};
+
+export const Validation = ValidationTemplate.bind({});
+
+Validation.args = {
+    variants: radioVariants,
+};
+
+Validation.parameters = {
+    docs: {
+        description: {
+            story: 'Validation styling for the Radio Inputs',
+        },
+    },
 };

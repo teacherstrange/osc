@@ -1,7 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Checkbox } from './Checkbox';
+import { checkboxSchema } from './mockSchema';
 
 export default {
     title: 'osc-ui/Checkbox',
@@ -48,11 +49,31 @@ const Template: Story = ({ variations }) => {
                     required={variation.required}
                     value={variation.value}
                     variants={variation.variants}
-                    wasSubmitted={variation.wasSubmitted}
                 />
             </div>
         );
     });
+};
+
+const ValidationTemplate: Story = () => {
+    const [errors, setErrors] = useState({
+        termsAndConditions: ['Please accept the terms and conditions'],
+    });
+
+    return (
+        <div style={{ margin: '1.5em 1em' }}>
+            <Checkbox
+                defaultChecked={false}
+                errors={errors.termsAndConditions}
+                id="termsAndConditions"
+                name="termsandconditions"
+                required={true}
+                setErrors={setErrors}
+                schema={checkboxSchema.termsAndConditions}
+                value="Accept the terms and conditions"
+            />
+        </div>
+    );
 };
 
 export const Primary = Template.bind({});
@@ -82,7 +103,6 @@ Primary.args = {
             required: true,
             state: 'hasValidation',
             value: 'Call me as soon as possible',
-            wasSubmitted: true,
         },
         {
             disabled: true,
@@ -129,7 +149,6 @@ Secondary.args = {
             state: 'hasValidation',
             value: 'Course replacement cover',
             variants: ['secondary'],
-            wasSubmitted: true,
         },
     ],
 };
@@ -147,4 +166,14 @@ GroupLabel.args = {
             value: 'Call me as soon as possible',
         },
     ],
+};
+
+export const Validation = ValidationTemplate.bind({});
+
+Validation.parameters = {
+    docs: {
+        description: {
+            story: 'Validation styling for the Checkbox',
+        },
+    },
 };

@@ -26,8 +26,10 @@
     "copy-fonts": "run-s copy-fonts:*"
   },
   "dependencies": {
+    "@hubspot/api-client": "^8.8.0",
     "@prisma/client": "^4.11.0",
     "@radix-ui/react-icons": "^1.2.0",
+    "@react-aria/i18n": "^3.7.0",
     "@remix-run/node": "^1.13.0",
     "@remix-run/react": "^1.13.0",
     "@remix-run/serve": "^1.13.0",
@@ -42,7 +44,8 @@
     "react-dom": "^18.2.0",
     "remix-utils": "^6.0.0",
     "tiny-invariant": "^1.3.1",
-    "web-push": "^3.5.0"
+    "web-push": "^3.5.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",

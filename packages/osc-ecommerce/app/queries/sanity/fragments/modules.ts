@@ -3,6 +3,7 @@ import { MODULE_ACCORDION } from './modules/accordion';
 import { MODULE_CARDS } from './modules/card';
 import { MODULE_CAROUSEL } from './modules/carousel';
 import { MODULE_CONTENT } from './modules/content';
+import { MODULE_FORMS } from './modules/forms';
 import { MODULE_HERO } from './modules/hero';
 import { MODULE_IMAGES } from './modules/images';
 import { MODULE_TEXT_GRID } from './modules/textGrid';
@@ -38,6 +39,9 @@ modules[] {
     },
     (_type == "module.video") => {
       ${MODULE_VIDEO}
+    },
+    (_type == "module.forms") => {
+      ${MODULE_FORMS}
     }
 }
 `;

@@ -18,8 +18,7 @@
             align-items: center;
             justify-content: space-between;
             width: inherit;
-            height: $space-2xl;
-            padding: 0 $space-s;
+            padding: $space-2xs;
             background-color: var(--color-tertiary);
             border: 1px solid var(--color-quinary);
             cursor: pointer;
@@ -69,7 +68,7 @@
             display: flex;
             align-items: center;
             min-height: $space-xl;
-            padding: 0 $space-xl 0 $space-xl;
+            padding: calc($space-2xs - 5px) $space-xl;
             user-select: none;
 
             &[data-highlighted] {

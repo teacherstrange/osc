@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { Calendar } from '../Calendar/Calendar';
 import { CalendarCell, CalendarGrid } from '../Calendar/CalendarGridAndCell';
 import { DatePicker } from './DatePicker';
+import { datePickerSchema } from './mockSchema';
 
 export default {
     title: 'osc-ui/DatePicker',
@@ -65,9 +66,35 @@ const Template: Story = ({ minValue, maxValue, ...args }) => {
     );
 };
 
+const ValidationTemplate: Story = ({ minValue, maxValue, ...args }) => {
+    const [errors, setErrors] = useState({
+        date: ['Field is required'],
+    });
+
+    let [date, setDate] = useState<DateValue | undefined>(
+        args.defaultValue ? parseDate(args.defaultValue) : null
+    );
+
+    return (
+        // Passing the 118nProvider because locale was defaulting to en-US - This is
+        // required to change the date order to dd-mm-YYYY rather than US mm-dd-YYYY
+        <I18nProvider locale="en-GB">
+            <DatePicker
+                errors={errors.date}
+                onChange={setDate}
+                setErrors={setErrors}
+                schema={datePickerSchema.date}
+                value={date}
+                {...args}
+            />
+        </I18nProvider>
+    );
+};
+
 export const Primary = Template.bind({});
 export const DefaultDate = Template.bind({});
 export const MinAndMaxDates = Template.bind({});
+export const Validation = ValidationTemplate.bind({});
 
 Primary.args = {
     label: 'Date',
@@ -89,6 +116,16 @@ MinAndMaxDates.args = {
     maxValue: true,
 };
 MinAndMaxDates.parameters = {
+    docs: {
+        description: {
+            story: 'Min and max dates can be set which will limit what the user can select. Dates outside of this will trigger validation requirement.',
+        },
+    },
+};
+Validation.args = {
+    label: 'Date',
+};
+Validation.parameters = {
     docs: {
         description: {
             story: 'Min and max dates can be set which will limit what the user can select. Dates outside of this will trigger validation requirement.',

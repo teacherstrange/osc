@@ -1,7 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Select, SelectItem } from './Select';
+import { courseItems, selectSchema } from './mockData';
 
 export default {
     title: 'osc-ui/Select',
@@ -74,7 +75,6 @@ const Template: Story = ({ selects }) => {
                             ref={select.ref ? selectRef : null}
                             required={select.required}
                             name={select.name}
-                            wasSubmitted={select.wasSubmitted}
                         >
                             {items.map((item, index) => {
                                 return (
@@ -91,45 +91,35 @@ const Template: Story = ({ selects }) => {
     );
 };
 
+const ValidationTemplate: Story = () => {
+    const [errors, setErrors] = useState({
+        courses: ['Please choose a course'],
+    });
+    return (
+        <div style={{ margin: '1.5em 1em', width: '300px' }}>
+            <Select
+                errors={errors.courses}
+                required={true}
+                name="courses"
+                schema={selectSchema.courses}
+                setErrors={setErrors}
+            >
+                {courseItems.map((item, index) => {
+                    return (
+                        <SelectItem key={index} {...item}>
+                            {item.name}
+                        </SelectItem>
+                    );
+                })}
+            </Select>
+        </div>
+    );
+};
+
 export const Primary = Template.bind({});
 export const Secondary = Template.bind({});
 export const Tertiary = Template.bind({});
-
-const courseItems = [
-    {
-        name: 'A Level Psychology',
-        value: 'a-level-psychology',
-        disabled: true,
-    },
-    {
-        name: 'A Level Computer Science',
-        value: 'a-level-computer-science',
-    },
-    { name: 'A Level History', value: 'a-level-history' },
-    {
-        name: 'A Level Sociology',
-        value: 'a-level-sociology',
-        disabled: true,
-    },
-    {
-        name: 'A Level Geography',
-        value: 'a-level-geography',
-    },
-    { name: 'A Level French', value: 'a-level-french' },
-    {
-        name: 'A Level German',
-        value: 'a-level-german',
-    },
-    {
-        name: 'A Level Maths',
-        value: 'a-level-maths',
-    },
-    { name: 'A Level Physics', value: 'a-level-physics' },
-    {
-        name: 'A Level Biology',
-        value: 'a-level-biology',
-    },
-];
+export const Validation = ValidationTemplate.bind({});
 
 Primary.args = {
     selects: [
@@ -319,4 +309,10 @@ Tertiary.args = {
             state: 'inlineIcon',
         },
     ],
+};
+
+Validation.args = {
+    editor: 'select',
+    items: courseItems,
+    name: 'courses',
 };

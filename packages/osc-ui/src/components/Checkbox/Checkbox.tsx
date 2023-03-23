@@ -1,9 +1,10 @@
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import type { ComponentPropsWithRef, ElementRef } from 'react';
-import React, { forwardRef, useState } from 'react';
+import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
-import { getFieldError } from '../../utils/getFieldError';
+import { clientSideValidation } from '../../utils/clientSideValidation';
 import { Icon } from '../Icon/Icon';
 import { Label } from '../Label/Label';
 import './checkbox.scss';
@@ -15,6 +16,10 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
      * An optional description for the checkbox
      */
     description?: { id: string; value: string };
+    /**
+     * Any error messages - initially set through server validation, but can be updated through client validation
+     */
+    errors?: string[] | undefined;
     /**
      * Optional icon that can be placed inside the checkbox
      */
@@ -29,6 +34,14 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
      */
     name: string;
     /**
+     * The Zod Schema object used for validation
+     */
+    schema?: ZodObject<ZodRawShape>;
+    /**
+     * Allows for client side validation once a server side error has been received
+     */
+    setErrors?: Dispatch<SetStateAction<any>>;
+    /**
      * The value given as data when submitted with a name.
      */
     value: string;
@@ -36,11 +49,6 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
     variants?: Variants[];
-    /**
-     * A boolean that alerts when form is submitted for error handling
-     * @default false
-     */
-    wasSubmitted?: boolean;
 }
 
 export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxProps>(
@@ -49,19 +57,27 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
             defaultChecked,
             description,
             disabled,
+            errors,
             icon,
             id,
             name,
             required,
+            schema,
+            setErrors,
             value,
             variants,
-            wasSubmitted = false,
         } = props;
 
         const [checked, setChecked] = useState<string | boolean>(false);
 
-        const errorMessage = getFieldError(checked, required);
-        const displayError = wasSubmitted && errorMessage;
+        useEffect(() => {
+            // Client side error handling - Sets any errors on an input in
+            // accordance with the schema validation
+            if (errors && errors.length > 0 && schema && setErrors) {
+                clientSideValidation(id, schema, setErrors, checked);
+            }
+            // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
+        }, [checked]);
 
         const modifiers = useModifier('c-checkbox__container', variants);
         const checkboxClasses = classNames('c-checkbox__container', modifiers);
@@ -69,7 +85,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
         return (
             <fieldset
                 className={
-                    displayError
+                    errors && errors.length > 0
                         ? `${checkboxClasses} c-checkbox__container--error`
                         : `${checkboxClasses}`
                 }
@@ -94,9 +110,13 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
                 <Label name={value} htmlFor={id} required={required} />
-                {displayError ? (
+                {errors && errors.length > 0 ? (
                     <div className="c-checkbox__error-message" role="alert">
-                        {errorMessage}
+                        {errors.map((error, index) => (
+                            <span key={index} className="u-pr-2xs">
+                                {error}
+                            </span>
+                        ))}
                     </div>
                 ) : null}
             </fieldset>

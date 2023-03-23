@@ -1,13 +1,15 @@
 import { CheckIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import type { ComponentPropsWithRef, ElementRef } from 'react';
-import React, { forwardRef, useState } from 'react';
+import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
-import { getFieldError } from '../../utils/getFieldError';
 import { Icon } from '../Icon/Icon';
 import { Label } from '../Label/Label';
 import './select.scss';
+import { clientSideValidation } from '../../utils/clientSideValidation';
 
 type Description = {
     label?: string;
@@ -21,20 +23,35 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
     /**
      * Description for the Select, can be a Label or an Icon
      */
+    children: ReactNode;
+    /**
+     * Description for the Select, can be a Label or an Icon
+     */
     description?: Description;
+    /**
+     * Any error messages - initially set through server validation, but can be updated through client validation
+     */
+    errors?: string[] | undefined;
     /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
     groupVariants?: GroupVariants[];
     /**
+     * Name of the select, submitted with its owning form as part of a name/pair value
+     */
+    name: string;
+    /**
      * A placeholder value for the Select, e.g. "Please Select"
      */
     placeholder?: string;
     /**
-     * A boolean that alerts when form is submitted for error handling
-     * @default false
+     * The Zod Schema used for validation
      */
-    wasSubmitted?: boolean;
+    schema?: ZodObject<ZodRawShape>;
+    /**
+     * Allows for client side validation once a server side error has been received
+     */
+    setErrors?: Dispatch<SetStateAction<any>>;
 }
 
 export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(
@@ -43,17 +60,25 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             children,
             description,
             disabled,
+            errors,
             groupVariants,
             placeholder,
             required,
             name,
-            wasSubmitted = false,
+            schema,
+            setErrors,
         } = props;
         const [value, setValue] = useState('');
         const [isOpen, setIsOpen] = useState(false);
 
-        const errorMessage = getFieldError(value, required);
-        const displayError = wasSubmitted && errorMessage;
+        useEffect(() => {
+            // Client side error handling - Sets any errors on an input in
+            // accordance with the schema validation
+            if (errors && errors.length > 0 && schema && setErrors) {
+                clientSideValidation(name, schema, setErrors, value);
+            }
+            // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
+        }, [value]);
 
         const modifiers = useModifier('c-select', groupVariants);
         const selectClasses = classNames('c-select', modifiers);
@@ -71,7 +96,11 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             if (desc?.icon) return <Icon id={desc.icon} />;
         };
         return (
-            <div className={displayError ? `${selectClasses} c-select--error` : selectClasses}>
+            <div
+                className={
+                    errors && errors.length > 0 ? `${selectClasses} c-select--error` : selectClasses
+                }
+            >
                 {setDescription(description)}
                 <SelectPrimitive.Root
                     {...props}
@@ -83,6 +112,8 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                     required={required}
                 >
                     <SelectPrimitive.Trigger
+                        aria-invalid={errors ? true : false}
+                        aria-describedby={errors ? `${name}-error` : undefined}
                         className="c-select__trigger"
                         id={name}
                         ref={forwardedRef}
@@ -103,15 +134,26 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                         </SelectPrimitive.ScrollDownButton>
                     </SelectPrimitive.Content>
                 </SelectPrimitive.Root>
-                {displayError ? (
-                    <div className="c-select__error-message">{errorMessage}</div>
+                {errors && errors.length > 0 ? (
+                    <div className="c-select__error-message">
+                        {errors.map((error, index) => (
+                            <span key={index} className="u-pr-2xs">
+                                {error}
+                            </span>
+                        ))}
+                    </div>
                 ) : null}
             </div>
         );
     }
 );
 
-export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.Item> {}
+export interface ItemProps extends ComponentPropsWithRef<typeof SelectPrimitive.Item> {
+    /**
+     * The value given as data when submitted with a name.
+     */
+    value: string;
+}
 
 export const SelectItem = forwardRef<ElementRef<typeof SelectPrimitive.Item>, ItemProps>(
     ({ children, ...props }, forwardedRef) => {

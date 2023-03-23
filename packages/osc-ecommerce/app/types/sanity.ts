@@ -436,3 +436,12 @@ export interface SanityActionNavSettings {
         };
     };
 }
+
+export interface formModule extends module {
+    formNameAndId: string;
+    formId: string;
+    formName: string;
+    slideDirection?: 'slide-right' | 'slide-left';
+    slideOut?: boolean;
+    slideOutText?: string;
+}

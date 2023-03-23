@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Checkbox } from './Checkbox';
+import { checkboxSchema } from './mockSchema';
 
 test('should render a Checkbox item with a label', () => {
     render(<Checkbox id="call" name="contact" value="Call me as soon as possible" />);
@@ -17,13 +18,16 @@ test('should be disabled when passed the disabled prop', () => {
     expect(screen.getByRole('checkbox')).toBeDisabled();
 });
 test('should render an error message when form is submitted and no value is selected', () => {
+    const setErrorsMock = vi.fn();
     render(
         <Checkbox
+            errors={['Field is required']}
             id="call"
             name="contact"
             required={true}
-            value="Call me as soon as possible"
-            wasSubmitted={true}
+            schema={checkboxSchema.termsAndConditions}
+            setErrors={setErrorsMock}
+            value="Please accept the terms and conditions"
         />
     );
     expect(screen.getByRole('alert')).toBeInTheDocument();
@@ -40,7 +44,6 @@ test('should render a description for the Checkbox', () => {
             name="contact"
             required={true}
             value="Call me as soon as possible"
-            wasSubmitted={true}
         />
     );
     expect(

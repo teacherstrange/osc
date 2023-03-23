@@ -1,23 +1,52 @@
 import { CheckIcon } from '@radix-ui/react-icons';
-import type { SwitchProps } from '@radix-ui/react-switch';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
-import type { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, ReactNode } from 'react';
-import React, { forwardRef, useState } from 'react';
+import type {
+    ComponentPropsWithRef,
+    Dispatch,
+    ElementRef,
+    HTMLAttributes,
+    ReactNode,
+    SetStateAction,
+} from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
+import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
-import { getFieldError } from '../../utils/getFieldError';
+import { clientSideValidation } from '../../utils/clientSideValidation';
+import { Label } from '../Label/Label';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import './switch.scss';
-
-export interface Props extends SwitchProps {
+export interface SwitchProps extends ComponentPropsWithRef<typeof SwitchPrimitive.Root> {
     /**
      * Custom class name
      */
     className?: string;
     /**
+     * A required description that is visually hidden for screen readers
+     */
+    description: string;
+    /**
+     * Any error messages - initially set through server validation, but can be updated through client validation
+     */
+    errors?: string[] | undefined;
+    /**
      * Custom id
      *
      */
     id?: string;
+    /**
+     * Optional name to be visually shown alongside the toggle
+     *
+     */
+    name?: string;
+    /**
+     * The Zod Schema used for validation
+     */
+    schema?: ZodObject<ZodRawShape>;
+    /**
+     * Allows for client side validation once a server side error has been received
+     */
+    setErrors?: Dispatch<SetStateAction<any>>;
     /**
      * The size of the switch
      * @default 'large'
@@ -35,53 +64,76 @@ export interface Props extends SwitchProps {
     wasSubmitted?: boolean;
 }
 
-export const Switch = forwardRef<
-    ElementRef<typeof SwitchPrimitive.Root>,
-    ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>
->((props: Props, forwardedRef) => {
-    const [value, setValue] = useState(false);
+export const Switch = forwardRef<ElementRef<typeof SwitchPrimitive.Root>, SwitchProps>(
+    (props: SwitchProps, forwardedRef) => {
+        const { description, errors, name, schema, setErrors, ...rest } = props;
+        const [value, setValue] = useState(false);
 
-    const {
-        className,
-        id,
-        required,
-        size = 'large',
-        variant = 'primary',
-        wasSubmitted = 'false',
-    } = props;
-    const sizeModifier = useModifier('c-switch', size);
-    const variantModifier = useModifier('c-switch', variant);
-    const classes = classNames('c-switch', sizeModifier, variantModifier, className);
+        const { className, id, size = 'large', variant = 'primary' } = props;
+        const sizeModifier = useModifier('c-switch', size);
+        const variantModifier = useModifier('c-switch', variant);
+        const classes = classNames('c-switch', sizeModifier, variantModifier, className);
 
-    const errorMessage = getFieldError(value, required);
-    const displayError = wasSubmitted && errorMessage;
+        const setChecked = () => {
+            setValue(!value);
+        };
 
-    const setChecked = () => {
-        setValue(!value);
-    };
+        useEffect(() => {
+            // Client side error handling - Sets any errors on an input in
+            // accordance with the schema validation
+            if (errors && errors.length > 0 && schema && setErrors) {
+                clientSideValidation(id, schema, setErrors, value);
+            }
+            // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the value changes
+        }, [value]);
 
-    return (
-        <SwitchPrimitive.Root
-            id={id}
-            className={!displayError ? classes : `${classes} c-switch--error`}
-            onCheckedChange={setChecked}
-            {...props}
-            ref={forwardedRef}
-        >
-            <SwitchPrimitive.Thumb className="c-switch__thumb" asChild>
-                <span>
-                    {variant === 'secondary' ? (
-                        <CheckIcon
-                            className="c-switch__thumb-icon"
-                            aria-hidden="true"
-                            focusable="false"
-                        />
-                    ) : null}
-                </span>
-            </SwitchPrimitive.Thumb>
-        </SwitchPrimitive.Root>
-    );
-});
+        return (
+            <>
+                <div
+                    className={
+                        errors && errors.length > 0
+                            ? 'c-switch__container c-switch__container--error'
+                            : 'c-switch__container'
+                    }
+                    data-state={value}
+                >
+                    <Label htmlFor={id} name={name} />
+                    <SwitchPrimitive.Root
+                        {...rest}
+                        aria-invalid={errors && errors.length > 0 ? true : false}
+                        aria-describedby={errors && errors.length > 0 ? `${id}-error` : undefined}
+                        id={id}
+                        className={!errors ? classes : `${classes} c-switch--error`}
+                        onCheckedChange={setChecked}
+                        ref={forwardedRef}
+                    >
+                        <VisuallyHidden>{description}</VisuallyHidden>
+                        <SwitchPrimitive.Thumb className="c-switch__thumb" asChild>
+                            <span>
+                                {variant === 'secondary' ? (
+                                    <CheckIcon
+                                        className="c-switch__thumb-icon"
+                                        aria-hidden="true"
+                                        focusable="false"
+                                    />
+                                ) : null}
+                            </span>
+                        </SwitchPrimitive.Thumb>
+                    </SwitchPrimitive.Root>
+                </div>
+                {errors && errors.length > 0 ? (
+                    <div className="c-switch--error-message" id={`${id}-error`} role="alert">
+                        {errors.map((error, index) => (
+                            <span key={index} className="u-pr-2xs">
+                                {error}
+                            </span>
+                        ))}
+                    </div>
+                ) : null}
+            </>
+        );
+    }
+);
 
 Switch.displayName = 'Switch';
 

@@ -1,9 +1,8 @@
-import { screen } from '@testing-library/react';
-import { render } from 'test-utils';
-
 import { parseDate } from '@internationalized/date';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { render } from 'test-utils';
 import { DatePicker } from './DatePicker';
 
 test('should render the DateField with SpinButtons for a DatePicker, a button for the Calendar and a Label', () => {
@@ -70,7 +69,14 @@ test('should disable out of range dates when min/max values are passed in', asyn
 test('should open the year and decade calendars and set the correct date', async () => {
     const finalSelectedDate = 'Selected Date: December 5, 2024';
     const user = userEvent.setup();
-    render(<DatePicker type="month" label="Date" defaultValue={parseDate('2023-02-01')} />);
+    render(
+        <DatePicker
+            closeOnSelect={false}
+            type="month"
+            label="Date"
+            defaultValue={parseDate('2023-02-01')}
+        />
+    );
 
     const button = screen.getByRole('button');
     await user.click(button);
