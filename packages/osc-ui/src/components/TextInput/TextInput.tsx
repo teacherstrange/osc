@@ -46,6 +46,10 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
      */
     id: string;
     /**
+     * Sets border, font, error message color to be white
+     */
+    isWhite?;
+    /**
      * The name for the label of the input field
      */
     label: string;
@@ -74,6 +78,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         errors,
         icon,
         id,
+        isWhite,
         label,
         name,
         required,
@@ -96,7 +101,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
 
     const element = useElement('c-input', type);
     const variantsModifier = useModifier(element, variants);
-    const inputClasses = classNames('c-input', element, variantsModifier);
+    const inputClasses = classNames('c-input', element, variantsModifier, isWhite && 'is-white');
 
     const containerModifier = useModifier('c-input__container', variants);
     const containerClasses = classNames('c-input__container', containerModifier);

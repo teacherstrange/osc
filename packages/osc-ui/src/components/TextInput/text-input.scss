@@ -93,6 +93,13 @@
                             color: var(--color-neutral-500);
                         }
                     }
+
+                    &__text {
+                        &--is-white {
+                            border-color: var(--color-tertiary);
+                            color: var(--color-tertiary);
+                        }
+                    }
                 }
 
                 .c-input:focus {
@@ -148,6 +155,12 @@
                         border-bottom: solid 0.125em var(--color-error);
                         box-shadow: none;
                     }
+                }
+            }
+
+            &--is-white {
+                .c-input__error-message {
+                    color: var(--color-tertiary);
                 }
             }
         }
