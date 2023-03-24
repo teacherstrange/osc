@@ -5,10 +5,10 @@ import React from 'react';
 import { render } from 'test-utils';
 import { Autocomplete } from './Autocomplete';
 
-const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID;
-const ALGOLIA_ID_SEARCH_ONLY_API_KEY = process.env.ALGOLIA_ID_SEARCH_ONLY_API_KEY;
-const ALGOLIA_PRIMARY_INDEX_GROUPED = process.env.ALGOLIA_PRIMARY_INDEX_GROUPED;
-const ALGOLIA__QUERY_SUGGESTIONS = process.env.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS;
+const ALGOLIA_APP_ID = process.env.VITE_ALGOLIA_APP_ID;
+const ALGOLIA_ID_SEARCH_ONLY_API_KEY = process.env.VITE_ALGOLIA_ID_SEARCH_ONLY_API_KEY;
+const ALGOLIA_PRIMARY_INDEX_GROUPED = process.env.VITE_ALGOLIA_PRIMARY_INDEX_GROUPED;
+const ALGOLIA__QUERY_SUGGESTIONS = process.env.VITE_ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS;
 test('renders a Autcomplete panel when the input is clicked', async () => {
     const user = userEvent.setup();
     render(
@@ -94,7 +94,9 @@ test('clicking the reset button clears the search results', async () => {
     const clearButton = await screen.findByTestId('clearButton');
     clearButton.click();
 
-    await waitFor(() => expect(input).toHaveValue(''));
+    const results = await screen.findAllByTestId('results');
+    const firstResult = results[0].querySelector('.c-autocomplete__item-title');
+    await waitFor(() => expect(firstResult).toHaveTextContent('A Level Geography'));
 });
 
 test('limits the amount of results to 2', async () => {
