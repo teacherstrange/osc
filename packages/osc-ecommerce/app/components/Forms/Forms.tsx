@@ -53,12 +53,15 @@ const Form = (props: FormProps) => {
 
     // Filter out the form fields (formFieldGroups can also contain RichText only entries)
     const formFields = getFormFields(formFieldGroups);
+    const formClassName = form?.formName?.toLowerCase().split(' ').join('-');
+
+    const variants = [formClassName, form.slideDirection].filter((item) => item);
 
     return (
         <FormContainer
             slideOut={form.slideOut}
             slideOutText={form.slideOutText}
-            variant={form.slideDirection}
+            variants={variants}
         >
             {/* Hidden Inputs added in order to get the form ID and hubspot form field data on submission */}
             <input type="hidden" value={form.formId} name="formId" />
@@ -126,10 +129,8 @@ export const Forms = (props: { module: formModule }) => {
 
     type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 
-    const formClassName = module?.formName?.toLowerCase().split(' ').join('-');
-
     return (
-        <div className={`c-form__${formClassName}`}>
+        <div>
             <fetcher.Form action="/actions/hubspot" method="post" ref={formRef} noValidate>
                 <Form
                     form={module}

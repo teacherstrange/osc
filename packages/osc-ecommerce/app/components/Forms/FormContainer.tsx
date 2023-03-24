@@ -15,18 +15,18 @@ export interface FormContainerProps {
      */
     slideOutText?: string;
     /**
-     * Determines which side the button will be on depending on whether it will slide our from right or left
+     * Variants such as the form type (e.g. Newsletter) and whether form should slide out (e.g. slide-right)
      */
-    variant?: 'slide-left' | 'slide-right';
+    variants?: (string | undefined)[];
 }
 
 export const FormContainer = (props: FormContainerProps) => {
-    const { children, slideOut = false, slideOutText, variant } = props;
-    const variantModifier = useModifier('c-form__container', variant);
+    const { children, slideOut = false, slideOutText, variants } = props;
+    const variantModifier = useModifier('c-form__container', variants);
     const classes = classNames('c-form__container', variantModifier);
 
     return (
-        <div className={slideOut ? classes : 'c-form__container'}>
+        <div className={classes}>
             {slideOut ? (
                 <Button variant="quaternary" className="c-form__slide-out-btn">
                     {slideOutText}
