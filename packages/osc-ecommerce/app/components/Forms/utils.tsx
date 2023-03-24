@@ -11,7 +11,9 @@ export function getInputType(
     index: number,
     schema: ZodObject<ZodRawShape>,
     setValidationErrors: Dispatch<SetStateAction<any>>,
-    validationErrors: Record<any, any>
+    validationErrors: Record<any, any>,
+    styles?: Record<string, unknown>,
+    themeName?: string
 ) {
     let formInput:
         | InputHTMLAttributes<HTMLInputElement>
@@ -19,8 +21,10 @@ export function getInputType(
 
     let content: JSX.Element;
 
-    // If there are formFields then return correct form input type
+    const variants = getVariants({ styles, themeName });
+
     if (data?.fields?.length > 0) {
+        // If there are formFields then return correct form input type
         const hubspotFields = data.fields[0];
         switch (data.fields[0].fieldType) {
             case 'textarea':
@@ -53,6 +57,7 @@ export function getInputType(
                         schema={schema.pick({ [hubspotFields.name]: true })}
                         setErrors={setValidationErrors}
                         type={hubspotFields.fieldType}
+                        variants={variants}
                     />
                 );
                 break;
@@ -121,7 +126,7 @@ export const getValidationSchema = (formFields: HubspotFormFieldTypes[]) => {
                                   .includes(val),
                           {
                               message: 'Please select an option',
-        }
+                          }
                       )
                     : z.string(),
             };
@@ -149,3 +154,38 @@ export const getFormFields = (formFieldGroups: HubspotFormFieldGroups[]) =>
     formFieldGroups
         .filter((formFieldGroup) => formFieldGroup?.fields.length > 0)
         .map((formField) => formField.fields[0]);
+
+const getVariants = ({
+    styles,
+    themeName,
+}: {
+    styles?: Record<string, unknown>;
+    themeName?: string;
+}) => {
+    const variants = [];
+    if (styles) {
+        for (const styleName of Object.keys(styles)) {
+            if (styleName === 'labelTextColor' && styles[styleName] === '#FFFFFF') {
+                variants.push('is-white');
+                break;
+            }
+        }
+    }
+    if (themeName === 'linear') variants.push('tertiary');
+
+    return variants;
+};
+
+export const inverseSubmitButton = (styles?: Record<string, unknown>) => {
+    let inverseSubmitButton = false;
+    if (styles) {
+        Object.keys(styles).some((styleName) => {
+            if (styleName === 'submitColor' && styles[styleName] === '#FFFFFF') {
+                inverseSubmitButton = true;
+                return true;
+            }
+            return false;
+        });
+    }
+    return inverseSubmitButton;
+};

@@ -6,7 +6,7 @@ import type { z } from 'zod';
 import type { formModule } from '~/types/sanity';
 import { FormContainer } from './FormContainer';
 import { HubspotForm } from './HubspotForm/HubspotForm';
-import type { HubspotFormFieldGroups } from './types';
+import type { HubspotFormData, HubspotFormFieldGroups } from './types';
 import { getFormFields, getValidationSchema, transitionStates } from './utils';
 
 interface FormProps {
@@ -31,9 +31,17 @@ interface FormProps {
      */
     setValidationErrors: Dispatch<{} | Record<string, string[]>>;
     /**
+     * Parsed list of styles from Hubspot
+     */
+    styles: Record<string, unknown>;
+    /**
      * Text name for the submit button from Hubspot
      */
     submitText: string;
+    /**
+     * Denotes styling options on inputs e.g. Round, Linear, Canvas
+     */
+    themeName: string;
     /**
      * Validation errors, initially from server, but that can be updated client side
      */
@@ -47,7 +55,9 @@ const Form = (props: FormProps) => {
         formErrors,
         isSubmitting,
         setValidationErrors,
+        styles,
         submitText,
+        themeName,
         validationErrors,
     } = props;
 
@@ -72,7 +82,9 @@ const Form = (props: FormProps) => {
                 formId={form.formId}
                 isSubmitting={isSubmitting}
                 setValidationErrors={setValidationErrors}
+                styles={styles}
                 submitText={submitText}
+                themeName={themeName}
                 validationErrors={validationErrors}
             />
         </FormContainer>
@@ -139,7 +151,9 @@ export const Forms = (props: { module: formModule }) => {
                     isSubmitting={isSubmitting}
                     key={key}
                     setValidationErrors={setValidationErrors}
-                    submitText={hubspotFormData[module.formId].submitText}
+                    styles={JSON.parse(formData.style)}
+                    submitText={formData.submitText}
+                    themeName={formData.themeName}
                     validationErrors={validationErrors}
                 />
             </fetcher.Form>

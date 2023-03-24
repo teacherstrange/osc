@@ -113,11 +113,13 @@ export const getHubspotForms = async (page: any) => {
             let formData: HubspotFormData;
             try {
                 formData = await getHubspotFormData(formId);
-                const hubspotFormData: Partial<HubspotFormData> = {
+                const hubspotFormData = {
                     [formId]: {
                         formFieldGroups: formData?.formFieldGroups,
+                        style: formData?.style,
                         submitText: formData?.submitText,
-                    },
+                        themeName: formData?.themeName,
+                    } as Partial<HubspotFormData>,
                 };
                 return hubspotFormData;
             } catch (error) {

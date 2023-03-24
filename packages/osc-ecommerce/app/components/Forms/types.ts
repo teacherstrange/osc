@@ -122,6 +122,14 @@ export interface HubspotFormData {
      * This will effectively always be 0 as deleted forms are not available through the API.
      */
     readonly deletedAt: number;
+    /**
+     * Not in official docs, but returned from v2 Forms API - This denotes styling options on inputs e.g. Round, Linear, Canvas
+     */
+    themeName: string;
+    /**
+     * Not in official docs, but returned from v2 Forms API - Returns styles in a JSON Stringified format
+     */
+    style: string;
 }
 
 export interface HubspotFormFieldGroups {

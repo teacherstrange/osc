@@ -1,7 +1,7 @@
 import { Alert, Button } from 'osc-ui';
 import type { Dispatch, SetStateAction } from 'react';
 import type { HubspotFormFieldGroups } from '../types';
-import { getFormFields, getInputType, getValidationSchema } from '../utils';
+import { getFormFields, getInputType, getValidationSchema, inverseSubmitButton } from '../utils';
 
 export interface HubspotFormProps {
     /**
@@ -25,9 +25,17 @@ export interface HubspotFormProps {
      */
     setValidationErrors: Dispatch<SetStateAction<{} | Record<string, string[]>>>;
     /**
+     * Parsed list of styles from Hubspot
+     */
+    styles?: Record<string, any>;
+    /**
      * Text name for the submit button from Hubspot
      */
     submitText: string;
+    /**
+     * Denotes styling options on inputs e.g. Round, Linear, Canvas
+     */
+    themeName?: string;
     /**
      * A list of validation errors
      */
@@ -41,11 +49,15 @@ export const HubspotForm = (props: HubspotFormProps) => {
         formId,
         isSubmitting = false,
         setValidationErrors,
+        styles,
         submitText,
+        themeName,
         validationErrors,
     } = props;
 
     const validationSchema = getValidationSchema(getFormFields(formFieldGroups));
+
+    const inversedSubmitButton = inverseSubmitButton(styles);
 
     return (
         <div className="c-form c-form__hubspot">
@@ -58,7 +70,9 @@ export const HubspotForm = (props: HubspotFormProps) => {
                             index,
                             validationSchema,
                             setValidationErrors,
-                            validationErrors
+                            validationErrors,
+                            styles,
+                            themeName
                         );
                     })}
                 </>
@@ -69,6 +83,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
                     disabled={isSubmitting}
                     name="_action"
                     value="submitHubspotForm"
+                    isInversed={!!inversedSubmitButton}
                 >
                     {submitText}
                 </Button>
