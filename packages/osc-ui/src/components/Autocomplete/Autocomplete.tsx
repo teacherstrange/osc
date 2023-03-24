@@ -232,8 +232,11 @@ export const Autocomplete = (props: AutocompleteProps) => {
                                 const { sourceId } = source;
                                 return (
                                     <>
-                                        {items.length > 0 && <ResultsHeader title={sourceId} />}
-                                        <section key={`source-${index}`}>
+                                        <section
+                                            className="c-autocomplete__section"
+                                            key={`source-${index}`}
+                                        >
+                                            {items.length > 0 && <ResultsHeader title={sourceId} />}
                                             {items.length > 0 ? (
                                                 <ul {...autocomplete.getListProps()}>
                                                     {items?.map((item, index) => {

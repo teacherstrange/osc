@@ -23,10 +23,9 @@ interface ResultsHeaderProps {
 export const ResultsHeader = (props: ResultsHeaderProps) => {
     const { title } = props;
     return (
-        <>
-            <span className="c-autocomplete__section-title">{title}</span>
-            <br />
-        </>
+        <header>
+            <h3 className="c-autocomplete__section-title t-font-m">{title}</h3>
+        </header>
     );
 };
 

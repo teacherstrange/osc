@@ -15,6 +15,7 @@
         padding: $input-py $input-pr $input-py $input-pl;
         border: solid 1px var(--color-quinary);
         cursor: text;
+        appearance: none;
         grid-column: 1;
         grid-row: 2;
 
