@@ -51,5 +51,6 @@ export const Primary = Template.bind({});
 
 Primary.args = {
     placeholder: 'Search...',
-    autoFocus: true,
+    autoFocus: false,
+    openOnFocus: true,
 };

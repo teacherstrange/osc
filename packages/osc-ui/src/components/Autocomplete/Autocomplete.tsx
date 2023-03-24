@@ -7,10 +7,10 @@ import { createAutocomplete } from '@algolia/autocomplete-core';
 import { createAlgoliaInsightsPlugin } from '@algolia/autocomplete-plugin-algolia-insights';
 import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
 import type { Hit } from '@algolia/client-search';
+import { useNavigate } from '@remix-run/react';
 import algoliasearch from 'algoliasearch/lite';
 import type { BaseSyntheticEvent, KeyboardEvent, MouseEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from '@remix-run/react';
 import insightsClient from 'search-insights';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
@@ -221,49 +221,55 @@ export const Autocomplete = (props: AutocompleteProps) => {
                         {!autocompleteUiState?.collections?.find((q) => q.items.length > 0) && (
                             <NoResult />
                         )}
-                        {autocompleteUiState?.collections?.map((collection, index) => {
-                            const { source, items } = collection;
-                            const { sourceId } = source;
-                            return (
-                                <>
-                                    {items.length > 0 && <ResultsHeader title={sourceId} />}
-                                    <section key={`source-${index}`}>
-                                        {items.length > 0 ? (
-                                            <ul {...autocomplete.getListProps()}>
-                                                {items?.map((item, index) => {
-                                                    return (
-                                                        <li
-                                                            className="c-autocomplete__item"
-                                                            key={`${item.objectID}_${index}`}
-                                                            {...autocomplete.getItemProps({
-                                                                item,
-                                                                source,
-                                                            })}
-                                                        >
-                                                            <div
-                                                                data-testid={
-                                                                    sourceId === 'Results'
-                                                                        ? 'results'
-                                                                        : ''
-                                                                }
+                        {autocompleteUiState?.collections
+                            ?.sort((q) => {
+                                if (q.source.sourceId === 'Results') return -1;
+                                if (q.source.sourceId === 'Popular Searches') return 0;
+                                return 1;
+                            })
+                            .map((collection, index) => {
+                                const { source, items } = collection;
+                                const { sourceId } = source;
+                                return (
+                                    <>
+                                        {items.length > 0 && <ResultsHeader title={sourceId} />}
+                                        <section key={`source-${index}`}>
+                                            {items.length > 0 ? (
+                                                <ul {...autocomplete.getListProps()}>
+                                                    {items?.map((item, index) => {
+                                                        return (
+                                                            <li
+                                                                className="c-autocomplete__item"
+                                                                key={`${item.objectID}_${index}`}
+                                                                {...autocomplete.getItemProps({
+                                                                    item,
+                                                                    source,
+                                                                })}
                                                             >
-                                                                <SearchResultItem
-                                                                    item={item}
-                                                                    sourceId={sourceId}
-                                                                    ALGOLIA_PRIMARY_INDEX_GROUPED={
-                                                                        ALGOLIA_PRIMARY_INDEX_GROUPED
+                                                                <div
+                                                                    data-testid={
+                                                                        sourceId === 'Results'
+                                                                            ? 'results'
+                                                                            : ''
                                                                     }
-                                                                />
-                                                            </div>
-                                                        </li>
-                                                    );
-                                                })}
-                                            </ul>
-                                        ) : null}
-                                    </section>
-                                </>
-                            );
-                        })}
+                                                                >
+                                                                    <SearchResultItem
+                                                                        item={item}
+                                                                        sourceId={sourceId}
+                                                                        ALGOLIA_PRIMARY_INDEX_GROUPED={
+                                                                            ALGOLIA_PRIMARY_INDEX_GROUPED
+                                                                        }
+                                                                    />
+                                                                </div>
+                                                            </li>
+                                                        );
+                                                    })}
+                                                </ul>
+                                            ) : null}
+                                        </section>
+                                    </>
+                                );
+                            })}
                     </div>
                     <div className="c-autocomplete__cta">
                         <Button isFull>View Detailed Search</Button>

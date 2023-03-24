@@ -24,7 +24,7 @@ export const ResultsHeader = (props: ResultsHeaderProps) => {
     const { title } = props;
     return (
         <>
-            <span>{title}</span>
+            <span className="c-autocomplete__section-title">{title}</span>
             <br />
         </>
     );

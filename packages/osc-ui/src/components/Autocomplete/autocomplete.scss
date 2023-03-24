@@ -56,6 +56,11 @@
             }
         }
 
+        &__section-title {
+            font-weight: $fw-bold;
+            text-align: left;
+        }
+
         &__cta {
             display: flex;
             justify-content: center;
