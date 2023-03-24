@@ -3,7 +3,7 @@ import pluralize from 'pluralize';
 import { SPACING } from '../../../constants';
 
 const shouldShow = (parent) => {
-    return parent.slides.length > 1;
+    return parent?.slides?.length > 1;
 };
 
 export default {

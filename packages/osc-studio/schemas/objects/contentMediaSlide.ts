@@ -1,7 +1,7 @@
 import { IdCardIcon } from '@radix-ui/react-icons';
 
 const shouldShow = (parent) => {
-    return parent.mediaType && parent.mediaType.length > 1;
+    return parent?.mediaType && parent?.mediaType?.length > 1;
 };
 
 export default {
