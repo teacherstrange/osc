@@ -1,19 +1,19 @@
 import { ImageIcon } from '@sanity/icons';
-import React from 'react';
+import { defineField, defineType } from 'sanity';
 
-export default {
+export default defineType({
     name: 'image.desktop',
     title: 'Image',
     type: 'object',
     icon: ImageIcon,
     fields: [
         // Image
-        {
+        defineField({
             type: 'cloudinary.asset',
             name: 'image',
-            description: 'This asset is served from Cloudinary'
-        },
-        {
+            description: 'This asset is served from Cloudinary',
+        }),
+        defineField({
             name: 'responsiveImages',
             title: 'Responsive Images',
             description:
@@ -24,7 +24,7 @@ export default {
                 if (parent?.image?.derived) {
                     const modeRegex = /c_\w+/;
                     const mode = modeRegex.exec(parent?.image?.derived[0]?.raw_transformation);
-                    const isScaled = mode[0] === 'c_scale';
+                    const isScaled = mode && mode[0] === 'c_scale';
 
                     if (!isScaled) {
                         return false;
@@ -32,20 +32,20 @@ export default {
                 }
 
                 return true;
-            }
-        },
+            },
+        }),
         // Alt Text
-        {
+        defineField({
             name: 'alt',
             title: 'Alt text',
             type: 'string',
-            validation: (Rule) => Rule.required()
-        }
+            validation: (Rule) => Rule.required(),
+        }),
     ],
     preview: {
         select: {
             imageName: 'image.public_id',
-            imageUrl: 'image.secure_url'
+            imageUrl: 'image.secure_url',
         },
         prepare(selection) {
             const { imageUrl, imageName } = selection;
@@ -53,8 +53,8 @@ export default {
             return {
                 media: <img src={imageUrl} alt={imageName} />,
                 title: imageName,
-                subtitle: 'Images'
+                subtitle: 'Images',
             };
-        }
-    }
-};
+        },
+    },
+});

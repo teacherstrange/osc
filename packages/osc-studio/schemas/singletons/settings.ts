@@ -1,10 +1,11 @@
 import { CogIcon } from '@sanity/icons';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 import { IconPicker } from '../../components/inputs/IconPicker';
 import { PAGE_REFERENCES } from '../../constants.js';
 
 const TITLE = 'Settings';
 
-export default {
+export default defineType({
     name: 'settings',
     title: TITLE,
     type: 'document',
@@ -38,15 +39,15 @@ export default {
     ],
     fields: [
         // Menu
-        {
+        defineField({
             name: 'mainNavigation',
             title: 'Main Navigation',
             description: 'Select the menu for the main nav on the site',
             type: 'reference',
             to: { type: 'navigation' },
             group: 'navigation',
-        },
-        {
+        }),
+        defineField({
             name: 'actionNav',
             title: 'Action bar',
             type: 'object',
@@ -56,7 +57,7 @@ export default {
                 collapsible: true,
             },
             fields: [
-                {
+                defineField({
                     name: 'search',
                     title: 'Search',
                     type: 'object',
@@ -64,7 +65,7 @@ export default {
                         collapsible: true,
                     },
                     fields: [
-                        {
+                        defineField({
                             name: 'icon',
                             title: 'Icon',
                             type: 'string',
@@ -72,15 +73,15 @@ export default {
                                 input: IconPicker,
                             },
                             placeholder: 'Select an icon...',
-                        },
-                        {
+                        }),
+                        defineField({
                             name: 'label',
                             title: 'Label',
                             type: 'string',
-                        },
+                        }),
                     ],
-                },
-                {
+                }),
+                defineField({
                     name: 'account',
                     title: 'Account',
                     type: 'object',
@@ -88,7 +89,7 @@ export default {
                         collapsible: true,
                     },
                     fields: [
-                        {
+                        defineField({
                             name: 'icon',
                             title: 'Icon',
                             type: 'string',
@@ -96,22 +97,22 @@ export default {
                                 input: IconPicker,
                             },
                             placeholder: 'Select an icon...',
-                        },
-                        {
+                        }),
+                        defineField({
                             name: 'label',
                             title: 'Label',
                             type: 'string',
-                        },
-                        {
+                        }),
+                        defineField({
                             name: 'link',
                             title: 'Link',
                             type: 'reference',
                             weak: true,
                             to: PAGE_REFERENCES,
-                        },
+                        }),
                     ],
-                },
-                {
+                }),
+                defineField({
                     name: 'wishlist',
                     title: 'Wishlist',
                     type: 'object',
@@ -119,7 +120,7 @@ export default {
                         collapsible: true,
                     },
                     fields: [
-                        {
+                        defineField({
                             name: 'icon',
                             title: 'Icon',
                             type: 'string',
@@ -127,22 +128,22 @@ export default {
                                 input: IconPicker,
                             },
                             placeholder: 'Select an icon...',
-                        },
-                        {
+                        }),
+                        defineField({
                             name: 'label',
                             title: 'Label',
                             type: 'string',
-                        },
-                        {
+                        }),
+                        defineField({
                             name: 'link',
                             title: 'Link',
                             type: 'reference',
                             weak: true,
                             to: PAGE_REFERENCES,
-                        },
+                        }),
                     ],
-                },
-                {
+                }),
+                defineField({
                     name: 'cart',
                     title: 'Cart',
                     type: 'object',
@@ -150,7 +151,7 @@ export default {
                         collapsible: true,
                     },
                     fields: [
-                        {
+                        defineField({
                             name: 'icon',
                             title: 'Icon',
                             type: 'string',
@@ -158,41 +159,41 @@ export default {
                                 input: IconPicker,
                             },
                             placeholder: 'Select an icon...',
-                        },
-                        {
+                        }),
+                        defineField({
                             name: 'label',
                             title: 'Label',
                             type: 'string',
-                        },
+                        }),
                     ],
-                },
+                }),
             ],
-        },
+        }),
         // Footer
-        {
+        defineField({
             name: 'footerNavigation',
             title: 'Footer Navigation',
             type: 'array',
             of: [
-                {
+                defineArrayMember({
                     name: 'navigation',
                     title: 'Navigation',
                     type: 'reference',
                     to: { type: 'navigation' },
-                },
+                }),
             ],
             validation: (Rule) => Rule.max(4),
             group: 'footer',
-        },
-        {
+        }),
+        defineField({
             name: 'footerBottomNav',
             title: 'Footer Bottom Navigation',
             type: 'reference',
             to: { type: 'navigation' },
             group: 'footer',
-        },
+        }),
         // SEO
-        {
+        defineField({
             name: 'seo',
             title: 'SEO',
             type: 'object',
@@ -203,13 +204,13 @@ export default {
                 collapsible: true,
             },
             fields: [
-                {
+                defineField({
                     name: 'title',
                     title: 'Site title',
                     type: 'string',
                     validation: (Rule) => Rule.required(),
-                },
-                {
+                }),
+                defineField({
                     name: 'titleSeparator',
                     title: 'Title Separator',
                     type: 'string',
@@ -220,11 +221,11 @@ export default {
                         layout: 'radio',
                         direction: 'horizontal',
                     },
-                },
+                }),
             ],
             validation: (Rule) => Rule.required(),
-        },
-        {
+        }),
+        defineField({
             name: 'schema',
             title: 'Knowledge Graph & Schema.org',
             type: 'object',
@@ -247,8 +248,8 @@ export default {
                     type: 'image',
                 },
             ],
-        },
-        {
+        }),
+        defineField({
             name: 'robots',
             title: 'Search engine visibility',
             type: 'object',
@@ -259,24 +260,24 @@ export default {
                 collapsible: true,
             },
             fields: [
-                {
+                defineField({
                     name: 'noIndex',
                     title: 'Discourage search engines from indexing this site',
                     type: 'boolean',
-                },
+                }),
             ],
-        },
+        }),
         // Social
-        {
+        defineField({
             name: 'socialProfile',
             title: "Organization's social profiles",
             description: 'Input any profiles on the web that belong to your organization.',
             group: 'social',
             type: 'array',
             of: [{ type: 'social' }],
-        },
+        }),
         // Contact
-        {
+        defineField({
             name: 'phoneNumber',
             title: 'Phone number',
             type: 'string',
@@ -286,8 +287,8 @@ export default {
                 Rule.regex(/^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/, {
                     name: 'phone number',
                 }),
-        },
-        {
+        }),
+        defineField({
             name: 'email',
             title: 'Email',
             type: 'string',
@@ -297,27 +298,27 @@ export default {
                 Rule.regex(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, {
                     name: 'email',
                 }),
-        },
+        }),
         // Not found page
-        {
+        defineField({
             name: 'notFoundPage',
             title: '404 page',
             type: 'object',
             group: 'notFoundPage',
             fields: [
-                {
+                defineField({
                     name: 'title',
                     title: 'Title',
                     type: 'string',
                     validation: (Rule) => Rule.required(),
-                },
-                {
+                }),
+                defineField({
                     name: 'body',
                     title: 'Body',
                     type: 'text',
                     rows: 2,
-                },
-                {
+                }),
+                defineField({
                     name: 'collection',
                     title: 'Collection',
                     type: 'reference',
@@ -329,9 +330,9 @@ export default {
                             type: 'collection',
                         },
                     ],
-                },
+                }),
             ],
-        },
+        }),
     ],
     preview: {
         prepare() {
@@ -340,4 +341,4 @@ export default {
             };
         },
     },
-};
+});

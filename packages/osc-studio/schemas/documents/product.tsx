@@ -1,5 +1,6 @@
 import { TagIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
+import { defineField, defineType } from 'sanity';
 import ShopifyIcon from '../../components/icons/Shopify';
 import ProductHiddenInput from '../../components/inputs/ProductHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
@@ -23,7 +24,7 @@ const GROUPS = [
     },
 ];
 
-export default {
+export default defineType({
     name: 'product',
     title: 'Product',
     type: 'document',
@@ -31,7 +32,7 @@ export default {
     groups: GROUPS,
     fields: [
         // Product hidden status
-        {
+        defineField({
             name: 'hidden',
             type: 'string',
             components: {
@@ -43,66 +44,66 @@ export default {
                 const isDeleted = parent?.store?.isDeleted;
                 return isActive && !isDeleted;
             },
-        },
+        }),
         // Title (proxy)
-        {
+        defineField({
             name: 'titleProxy',
             title: 'Title',
             type: 'proxyString',
             options: { field: 'store.title' },
-        },
+        }),
         // Slug (proxy)
-        {
+        defineField({
             name: 'slugProxy',
             title: 'Slug',
             type: 'proxyString',
             options: { field: 'store.slug.current' },
-        },
+        }),
         // Modules
-        {
+        defineField({
             name: 'modules',
             title: 'Modules',
             type: 'array',
             of: MODULES,
-            group: 'editorial'
-        },
+            group: 'editorial',
+        }),
         // Shopify product
-        {
+        defineField({
             name: 'store',
             title: 'Shopify',
             type: 'shopifyProduct',
             description: 'Product data from Shopify (read-only)',
-            group: 'shopifySync'
-        },
+            group: 'shopifySync',
+        }),
         // SEO
-        {
+        defineField({
             name: 'seo',
             title: 'SEO',
             type: 'seo.shopify',
-            group: 'seo'
-        }
+            group: 'seo',
+        }),
     ],
     orderings: [
         {
             name: 'titleAsc',
             title: 'Title (A-Z)',
-            by: [{ field: 'store.title', direction: 'asc' }]
+            by: [{ field: 'store.title', direction: 'asc' }],
         },
         {
             name: 'titleAsc',
             title: 'Title (Z-A)',
-            by: [{ field: 'store.title', direction: 'desc' }]
+            by: [{ field: 'store.title', direction: 'desc' }],
         },
         {
             name: 'titleAsc',
             title: 'Price (Highest first)',
-            by: [{ field: 'store.priceRange.minVariantPrice', direction: 'desc' }]
+            by: [{ field: 'store.priceRange.minVariantPrice', direction: 'desc' }],
         },
         {
             name: 'titleAsc',
             title: 'Title (Lowest first)',
-            by: [{ field: 'store.priceRange.minVariantPrice', direction: 'asc' }]
-        }
+            by: [{ field: 'store.priceRange.minVariantPrice', direction: 'asc' }],
+        },
     ],
     preview: {
         select: {
@@ -112,7 +113,7 @@ export default {
             priceRange: 'store.priceRange',
             status: 'store.status',
             title: 'store.title',
-            variantCount: 'store.variants.length'
+            variantCount: 'store.variants.length',
         },
         prepare(selection) {
             const {
@@ -122,12 +123,12 @@ export default {
                 priceRange,
                 status,
                 title,
-                variantCount
+                variantCount,
             } = selection;
 
             let description = [
                 variantCount ? pluralize('variant', variantCount, true) : 'No variants',
-                optionCount ? pluralize('option', optionCount, true) : 'No options'
+                optionCount ? pluralize('option', optionCount, true) : 'No options',
             ];
 
             let subtitle = getPriceRange(priceRange);
@@ -154,4 +155,4 @@ export default {
             };
         },
     },
-};
+});

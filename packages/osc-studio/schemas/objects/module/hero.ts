@@ -1,7 +1,8 @@
 import { IdCardIcon } from '@radix-ui/react-icons';
 import pluralize from 'pluralize';
+import { defineField, defineType } from 'sanity';
 
-export default {
+export default defineType({
     name: 'module.hero',
     title: 'Hero',
     type: 'object',
@@ -18,25 +19,25 @@ export default {
         },
     ],
     fields: [
-        {
+        defineField({
             name: 'slides',
             title: 'Slides',
             type: 'array',
             of: [{ type: 'heroSlide' }],
             group: 'slides',
-        },
-        {
+        }),
+        defineField({
             name: 'carouselSettings',
             title: 'Carousel Settings',
             type: 'heroCarouselSettings',
             group: 'settings',
-        },
+        }),
     ],
     preview: {
         select: {
             slides: 'slides',
         },
-        prepare(selection: Record<string, any>) {
+        prepare(selection) {
             const title = selection.slides[0].title;
             const numberOfSlides = selection.slides.length;
 
@@ -46,4 +47,4 @@ export default {
             };
         },
     },
-};
+});

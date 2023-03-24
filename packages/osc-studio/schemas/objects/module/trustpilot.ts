@@ -1,13 +1,14 @@
 import { StarIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity';
 import { capitalizeFirstLetter } from '../../../utils/capitalizeFirstLetter';
 
-export default {
+export default defineType({
     name: 'module.trustpilot',
     title: 'Trustpilot',
     type: 'object',
     icon: StarIcon,
     fields: [
-        {
+        defineField({
             name: 'type',
             title: 'Type',
             type: 'string',
@@ -17,31 +18,37 @@ export default {
                     { title: 'Slider', value: 'slider' },
                     { title: 'Grid', value: 'grid' },
                     { title: 'Mini Carousel', value: 'minicarousel' },
-                    { title: 'Micro Star', value: 'microstar' }
-                ]
+                    { title: 'Micro Star', value: 'microstar' },
+                ],
             },
-            validation: (Rule) => Rule.required()
-        },
-        {
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
             name: 'stars',
             title: 'Stars',
             type: 'string',
             initialValue: '4,5',
-            validation: (Rule) => Rule.required()
-        },
-        {
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
             name: 'height',
             title: 'Height',
             type: 'string',
             initialValue: '240px',
             description: 'Enter a number with a value `px`. E.g. `240px`',
             validation: (Rule) =>
-                Rule.required().custom((height, context) => {
-                    const { type } = context?.parent;
+                Rule.required().custom((currentValue, context) => {
+                    if (typeof currentValue === 'undefined') {
+                        return true;
+                    }
+
+                    const { type } = context?.parent as {
+                        type: 'slider' | 'grid' | 'minicarousel' | 'microstar';
+                    };
                     const digitRegex = /(\d+)/g;
                     const digitPxRegex = /(\d+px+)/g;
-                    const heightNumber = Number(digitRegex.exec(height)[0]);
-                    const endsInPx = digitPxRegex.test(height);
+                    const heightNumber = Number(digitRegex.exec(currentValue)![0]);
+                    const endsInPx = digitPxRegex.test(currentValue);
 
                     if (!endsInPx) {
                         return 'Must be a number ending with `px`';
@@ -64,18 +71,18 @@ export default {
                     }
 
                     return true;
-                })
-        }
+                }),
+        }),
     ],
     preview: {
         select: {
-            subtitle: 'type'
+            subtitle: 'type',
         },
-        prepare(selection: Record<string, any>) {
+        prepare(selection) {
             return {
                 title: 'Trustpilot',
-                subtitle: capitalizeFirstLetter(selection.subtitle)
+                subtitle: capitalizeFirstLetter(selection.subtitle),
             };
-        }
-    }
-};
+        },
+    },
+});

@@ -1,22 +1,23 @@
 import { TagIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
+import { defineField, defineType } from 'sanity';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
 import { SANITY_API_VERSION } from '../../constants';
 import { getPriceRange } from '../../utils/getPriceRange';
 
-export default {
+export default defineType({
     name: 'productWithVariant',
     title: 'Product with variant',
     type: 'object',
     icon: TagIcon,
     fields: [
-        {
+        defineField({
             name: 'product',
             type: 'reference',
             to: [{ type: 'product' }],
             weak: true,
-        },
-        {
+        }),
+        defineField({
             name: 'variant',
             type: 'reference',
             to: [{ type: 'productVariant' }],
@@ -24,7 +25,13 @@ export default {
             description: 'First variant will be selected if left empty',
             options: {
                 filter: ({ parent }) => {
-                    const productId = parent?.product?._ref;
+                    const { product } = parent as {
+                        product: {
+                            _ref: string;
+                        };
+                    };
+
+                    const productId = product?._ref;
                     const shopifyProductId = Number(productId?.replace('shopifyProduct-', ''));
 
                     if (!shopifyProductId) {
@@ -45,8 +52,14 @@ export default {
             },
             validation: (Rule) =>
                 Rule.custom(async (value, { parent, getClient }) => {
+                    const { product } = parent as {
+                        product: {
+                            _ref: string;
+                        };
+                    };
+
                     // Selected product in adjacent `product` field
-                    const productId = parent?.product?._ref;
+                    const productId = product?._ref;
 
                     // Selected product variant
                     const productVariantId = value?._ref;
@@ -67,7 +80,7 @@ export default {
 
                     return result ? true : 'Invalid product variant';
                 }),
-        },
+        }),
     ],
     preview: {
         select: {
@@ -132,4 +145,4 @@ export default {
             };
         },
     },
-};
+});

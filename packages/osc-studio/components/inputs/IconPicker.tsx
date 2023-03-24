@@ -1,6 +1,6 @@
 import { SearchIcon } from '@sanity/icons';
 import { Autocomplete, Box, Card, Flex, Text } from '@sanity/ui';
-import type { StringInputProps } from 'sanity';
+import type { StringInputProps, StringSchemaType } from 'sanity';
 import { set, unset } from 'sanity';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 
@@ -50,7 +50,7 @@ const icons: { value: string }[] = [
     { value: 'users' },
 ];
 
-export const IconPicker = (props: StringInputProps) => {
+export const IconPicker = (props: StringInputProps<StringSchemaType>) => {
     const { elementProps, onChange, value = '' } = props;
 
     const handleChange = (value: string) => {

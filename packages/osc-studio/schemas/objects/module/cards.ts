@@ -1,5 +1,6 @@
 import { ThLargeIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
+import { defineField, defineType } from 'sanity';
 import { ColorPicker } from '../../../components/inputs/ColorPicker';
 import { SPACING } from '../../../constants';
 
@@ -11,11 +12,11 @@ const CARDS = [
     { type: 'card.static' },
 ];
 
-const shouldShow = (parent) => {
+const shouldShow = (parent: { layout: string }) => {
     return parent.layout === 'carousel';
 };
 
-export default {
+export default defineType({
     name: 'module.cards',
     title: 'Cards',
     type: 'object',
@@ -36,13 +37,13 @@ export default {
         },
     ],
     fields: [
-        {
+        defineField({
             name: 'content',
             title: 'Content',
             type: 'module.content',
             group: 'content',
-        },
-        {
+        }),
+        defineField({
             name: 'marginBottom',
             title: 'Push Region',
             type: 'string',
@@ -52,8 +53,8 @@ export default {
                 layout: 'dropdown',
             },
             group: 'spacing',
-        },
-        {
+        }),
+        defineField({
             name: 'paddingTop',
             title: 'Inner Padding Top',
             type: 'string',
@@ -63,8 +64,8 @@ export default {
                 layout: 'dropdown',
             },
             group: 'spacing',
-        },
-        {
+        }),
+        defineField({
             name: 'paddingBottom',
             title: 'Inner Padding Bottom',
             type: 'string',
@@ -74,8 +75,8 @@ export default {
                 layout: 'dropdown',
             },
             group: 'spacing',
-        },
-        {
+        }),
+        defineField({
             name: 'layout',
             title: 'Layout',
             type: 'string',
@@ -87,8 +88,8 @@ export default {
             },
             validation: (Rule) => Rule.required(),
             group: 'cards',
-        },
-        {
+        }),
+        defineField({
             name: 'carouselName',
             title: 'Carousel Name',
             type: 'string',
@@ -96,7 +97,9 @@ export default {
             group: 'cards',
             hidden: ({ parent }) => !shouldShow(parent),
             validation: (Rule) =>
-                Rule.custom((currentValue, { parent }) => {
+                Rule.custom((currentValue, context) => {
+                    const { parent } = context as { parent: { layout: string } };
+
                     // in a custom validation rule, check if the field should be shown, and if yes, show an error if the value is not set
                     if (shouldShow(parent) && currentValue === undefined) {
                         return 'An accessible name is needed to describe the carousel for screen readers.';
@@ -105,15 +108,15 @@ export default {
                     // if we are not showing the field, or if the field has a value then the validation passes
                     return true;
                 }),
-        },
-        {
+        }),
+        defineField({
             name: 'carouselSettings',
             title: 'Carousel Settings',
             type: 'carouselSettings',
             group: 'cards',
             hidden: ({ parent }) => !shouldShow(parent),
-        },
-        {
+        }),
+        defineField({
             name: 'backgroundColor',
             title: 'Background Colour',
             type: 'string',
@@ -121,15 +124,16 @@ export default {
                 input: ColorPicker,
             },
             group: 'cards',
-        },
-        {
+        }),
+        defineField({
             name: 'card',
             title: 'Card',
             type: 'array',
             of: CARDS,
             group: 'cards',
             validation: (Rule) =>
-                Rule.custom((currentValue, { parent }) => {
+                Rule.custom((currentValue, context) => {
+                    const { parent } = context as { parent: { layout: string } };
                     // in a custom validation rule, check if the field should be shown, and if yes, show an error if the value is not set
                     if (!currentValue || currentValue.length === 0) {
                         return 'You must add at least one card.';
@@ -141,13 +145,13 @@ export default {
 
                     return true;
                 }),
-        },
+        }),
     ],
     preview: {
         select: {
             cardCount: 'card.length',
         },
-        prepare(selection: Record<string, any>) {
+        prepare(selection) {
             const { cardCount } = selection;
 
             return {
@@ -156,4 +160,4 @@ export default {
             };
         },
     },
-};
+});

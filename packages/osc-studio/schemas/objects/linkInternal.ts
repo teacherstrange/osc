@@ -1,28 +1,29 @@
 import { LinkIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity';
 import { PAGE_REFERENCES } from '../../constants';
 import { getPriceRange } from '../../utils/getPriceRange';
 
-export default {
+export default defineType({
     title: 'Internal Link',
     name: 'linkInternal',
     type: 'object',
     icon: LinkIcon,
     fields: [
         // Title
-        {
+        defineField({
             title: 'Title',
             name: 'title',
             type: 'string',
-            validation: (Rule) => Rule.required()
-        },
+            validation: (Rule) => Rule.required(),
+        }),
         // Reference
-        {
+        defineField({
             name: 'reference',
             type: 'reference',
             weak: true,
             validation: (Rule) => Rule.required(),
-            to: PAGE_REFERENCES
-        }
+            to: PAGE_REFERENCES,
+        }),
     ],
     preview: {
         select: {
@@ -31,7 +32,7 @@ export default {
             referenceProductPriceRange: 'reference.store.priceRange',
             referenceTitle: 'reference.title',
             referenceType: 'reference._type',
-            title: 'title'
+            title: 'title',
         },
         prepare(selection) {
             const {
@@ -40,7 +41,7 @@ export default {
                 referenceProductTitle,
                 referenceTitle,
                 referenceType,
-                title
+                title,
             } = selection;
 
             let subtitle = [];
@@ -56,8 +57,8 @@ export default {
             return {
                 // media: image,
                 subtitle: subtitle.join(' '),
-                title
+                title,
             };
-        }
-    }
-};
+        },
+    },
+});

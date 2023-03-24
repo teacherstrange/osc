@@ -1,9 +1,11 @@
-export default {
+import { defineField, defineType } from 'sanity';
+
+export default defineType({
     name: 'card.course',
     title: 'Course Card',
     type: 'object',
     fields: [
-        {
+        defineField({
             name: 'reference',
             type: 'reference',
             weak: true,
@@ -11,13 +13,13 @@ export default {
             options: {
                 disableNew: true,
             },
-        },
+        }),
     ],
     preview: {
         select: {
             title: 'reference.store.title',
         },
-        prepare(selection: Record<string, any>) {
+        prepare(selection) {
             const title = selection.title;
 
             return {
@@ -26,4 +28,4 @@ export default {
             };
         },
     },
-};
+});

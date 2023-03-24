@@ -1,11 +1,12 @@
+import { defineField, defineType } from 'sanity';
 import { IconPicker } from '../../components/inputs/IconPicker';
 
-export default {
+export default defineType({
     name: 'textGridItem',
     title: 'Text Grid Item',
     type: 'object',
     fields: [
-        {
+        defineField({
             name: 'icon',
             title: 'Icon',
             type: 'string',
@@ -13,12 +14,12 @@ export default {
                 input: IconPicker,
             },
             placeholder: 'Select an icon...',
-        },
-        {
+        }),
+        defineField({
             name: 'content',
             title: 'Content',
             type: 'module.content',
-        },
+        }),
     ],
     preview: {
         select: {
@@ -33,4 +34,4 @@ export default {
             };
         },
     },
-};
+});

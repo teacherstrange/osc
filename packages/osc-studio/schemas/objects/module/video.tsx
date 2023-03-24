@@ -1,7 +1,7 @@
 import { VideoIcon } from '@radix-ui/react-icons';
-import React from 'react';
+import { defineField, defineType } from 'sanity';
 
-export default {
+export default defineType({
     name: 'module.video',
     title: 'Video',
     type: 'object',
@@ -18,7 +18,7 @@ export default {
         },
     ],
     fields: [
-        {
+        defineField({
             name: 'videoType',
             title: 'Video Type',
             type: 'string',
@@ -32,38 +32,38 @@ export default {
                 ],
             },
             group: 'video',
-        },
-        {
+        }),
+        defineField({
             name: 'videoUrl',
             title: 'Video URL',
             type: 'url',
             group: 'video',
-        },
-        {
+        }),
+        defineField({
             name: 'videoSettings',
             title: 'Settings',
             type: 'object',
             description: 'Settings for the video.',
             fields: [
-                {
+                defineField({
                     name: 'autoplay',
                     title: 'Autoplay',
                     type: 'boolean',
                     initialValue: false,
-                },
-                {
+                }),
+                defineField({
                     name: 'loop',
                     title: 'Loop Video',
                     type: 'boolean',
                     initialValue: false,
-                },
-                {
+                }),
+                defineField({
                     name: 'preserveContent',
                     title: 'Preserve Content',
                     type: 'boolean',
                     description: 'Preserve the content when the video is playing.',
                     initialValue: false,
-                },
+                }),
             ],
             options: {
                 columns: 2,
@@ -71,8 +71,8 @@ export default {
                 collapsed: false,
             },
             group: 'video',
-        },
-        {
+        }),
+        defineField({
             name: 'videoImage',
             title: 'Preview Image',
             type: 'image.desktop',
@@ -81,13 +81,13 @@ export default {
             },
             validation: (Rule) => Rule.required(),
             group: 'video',
-        },
-        {
+        }),
+        defineField({
             name: 'content',
             title: 'Content',
             type: 'module.content',
             group: 'content',
-        },
+        }),
     ],
     preview: {
         select: {
@@ -105,4 +105,4 @@ export default {
             };
         },
     },
-};
+});

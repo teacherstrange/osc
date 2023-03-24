@@ -2,6 +2,7 @@ import { InfoOutlineIcon } from '@sanity/icons';
 import Iframe from 'sanity-plugin-iframe-pane';
 import { SEOPane } from 'sanity-plugin-seo-pane';
 import type { StructureBuilder } from 'sanity/desk';
+import type { SanityDocumentWithSlug } from '../utils/resolveProductionUrl';
 import { resolveProductionUrl } from '../utils/resolveProductionUrl';
 
 // prettier-ignore
@@ -30,11 +31,12 @@ export const products = (S: StructureBuilder) =>
                                             S.view
                                                 .component(Iframe)
                                                 .options({
-                                                    url: (doc) => resolveProductionUrl(doc),
+                                                    url: (doc: SanityDocumentWithSlug) =>
+                                                        resolveProductionUrl(doc),
                                                     reload: {
                                                         button: true,
-                                                        revision: true
-                                                    }
+                                                        revision: true,
+                                                    },
                                                 })
                                                 .title('Preview'),
                                             S.view
@@ -43,9 +45,10 @@ export const products = (S: StructureBuilder) =>
                                                     // Retrieve the keywords and synonyms at the given dot-notated strings
                                                     keywords: `seo.keywords`,
                                                     synonyms: `seo.synonyms`,
-                                                    url: (doc) => resolveProductionUrl(doc)
+                                                    url: (doc: SanityDocumentWithSlug) =>
+                                                        resolveProductionUrl(doc),
                                                 })
-                                                .title('SEO')
+                                                .title('SEO'),
                                         ])
                                 ),
                             // Product variants
@@ -63,9 +66,9 @@ export const products = (S: StructureBuilder) =>
                         `
                                         )
                                         .params({
-                                            productId: Number(id.replace('shopifyProduct-', ''))
+                                            productId: Number(id.replace('shopifyProduct-', '')),
                                         })
-                                )
+                                ),
                         ])
                 )
         );
