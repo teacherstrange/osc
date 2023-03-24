@@ -45,13 +45,24 @@ inputs:
   SANITY_STUDIO_API_TOKEN:
     required: true
     description: "sanity api token"
-  HUBSPOT_ACCESS_TOKEN: 
+  HUBSPOT_ACCESS_TOKEN:
     required: true
     description: 'hubspot access token'
   HUBSPOT_PORTAL_ID:
     required: true
     description: 'hubspot portal id'
-  
+  PUBLIC_STOREFRONT_API_TOKEN:
+    required: true
+    description: "public storefront api token"
+  PRIVATE_STOREFRONT_API_TOKEN:
+    required: true
+    description: "private storefront api token"
+  PUBLIC_STOREFRONT_API_VERSION:
+    required: true
+    description: "public storefront api version"
+  PUBLIC_STORE_DOMAIN:
+    required: true
+    description: "public storefront domain"
 runs:
   using: "composite"
   steps:
@@ -143,6 +154,10 @@ runs:
           "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
           "HUBSPOT_ACCESS_TOKEN=${{inputs.HUBSPOT_ACCESS_TOKEN}}"
           "HUBSPOT_PORTAL_ID=${{inputs.HUBSPOT_PORTAL_ID}}"
+          "PUBLIC_STOREFRONT_API_TOKEN=${{inputs.PUBLIC_STOREFRONT_API_TOKEN}}"
+          "PRIVATE_STOREFRONT_API_TOKEN=${{inputs.PRIVATE_STOREFRONT_API_TOKEN}}"
+          "PUBLIC_STOREFRONT_API_VERSION=${{inputs.PUBLIC_STOREFRONT_API_VERSION}}"
+          "PUBLIC_STORE_DOMAIN=${{inputs.PUBLIC_STORE_DOMAIN}}"
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
 
@@ -164,6 +179,10 @@ runs:
           "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
           "HUBSPOT_ACCESS_TOKEN=${{inputs.HUBSPOT_ACCESS_TOKEN}}"
           "HUBSPOT_PORTAL_ID=${{inputs.HUBSPOT_PORTAL_ID}}"
+          "PUBLIC_STOREFRONT_API_TOKEN=${{inputs.PUBLIC_STOREFRONT_API_TOKEN}}"
+          "PRIVATE_STOREFRONT_API_TOKEN=${{inputs.PRIVATE_STOREFRONT_API_TOKEN}}"
+          "PUBLIC_STOREFRONT_API_VERSION=${{inputs.PUBLIC_STOREFRONT_API_VERSION}}"
+          "PUBLIC_STORE_DOMAIN=${{inputs.PUBLIC_STORE_DOMAIN}}"
         file: ./Dockerfiles/Dockerfile.pr
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new

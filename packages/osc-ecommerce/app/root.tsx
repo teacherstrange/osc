@@ -31,7 +31,6 @@ import { SiteHeader } from './components/Header/Header';
 import { getSettingsData } from './models/sanity.server';
 import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
-import { getUser } from './session.server';
 import type { SanityNavSettings, SanitySocial } from './types/sanity';
 import { getColorScheme } from './utils/colorScheme';
 
@@ -54,6 +53,14 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscUiBurgerStyles },
         { rel: 'stylesheet', href: oscUiAccordionStyles },
         { rel: 'stylesheet', href: oscFooterStyles },
+        {
+            rel: 'preconnect',
+            href: 'https://cdn.shopify.com',
+        },
+        {
+            rel: 'preconnect',
+            href: 'https://shop.app',
+        },
         { rel: 'manifest', href: '/resources/manifest.webmanifest' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/icons/apple-icon-57x57.png' },
         { rel: 'apple-touch-icon', sizes: '60x60', href: '/icons/apple-icon-60x60.png' },
@@ -77,7 +84,6 @@ export const links: LinksFunction = () => {
 };
 
 type LoaderData = {
-    user: Awaited<ReturnType<typeof getUser>>;
     colorScheme: string;
     siteSettings: object;
     navSettings: SanityNavSettings;
@@ -129,7 +135,6 @@ export const loader: LoaderFunction = async ({ request }) => {
         }));
 
     return json<LoaderData>({
-        user: await getUser(request),
         colorScheme: await getColorScheme(request),
         siteSettings,
         navSettings,
@@ -226,7 +231,7 @@ export default function App() {
         checkConnectivity(online, offline).then((data) => console.log(data));
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         let mounted = isMount;
         isMount = false;
         if ('serviceWorker' in navigator) {
