@@ -30,6 +30,7 @@ import bodyNoHeadings from './blocks/bodyNoHeadings';
 import accordionItem from './objects/accordionItem';
 import carouselSettings from './objects/carouselSettings';
 import collectionRule from './objects/collectionRule';
+import contentMediaImage from './objects/contentMediaImage';
 import contentMediaSlide from './objects/contentMediaSlide';
 import heroCarouselSettings from './objects/heroCarouselSettings';
 import heroSlide from './objects/heroSlide';
@@ -47,6 +48,7 @@ import moduleCardStatic from './objects/module/cardStatic';
 import moduleCarousel from './objects/module/carousel';
 import moduleContent from './objects/module/content';
 import moduleContentMedia from './objects/module/contentMedia';
+import moduleForms from './objects/module/forms';
 import moduleHero from './objects/module/hero';
 import moduleImage from './objects/module/image';
 import moduleImageMobile from './objects/module/imageMobile';
@@ -99,6 +101,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     // Objects
     accordionItem,
     carouselSettings,
+    contentMediaImage,
     contentMediaSlide,
     heroCarouselSettings,
     heroSlide,
@@ -128,13 +131,14 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     moduleCardPost,
     moduleCardStatic,
     moduleCards,
+    moduleContent,
+    moduleContentMedia,
+    moduleForms,
     moduleHero,
     moduleImage,
     moduleImages,
     moduleImageMobile,
     moduleImageTablet,
-    moduleContent,
-    moduleContentMedia,
     moduleTrustpilot,
     moduleCarousel,
     moduleTextGrid,
