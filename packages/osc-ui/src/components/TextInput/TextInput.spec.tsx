@@ -137,56 +137,6 @@ test('should render multiple errors if present, and clear them once valid inputs
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 });
 
-test('should render multiple errors if present, and clear them once valid inputs are correctly validated', async () => {
-    const user = userEvent.setup();
-    render(
-        <SpritesheetProvider>
-            <ControlledInput id="email" name="Email" schema={textInputSchema.email} />
-        </SpritesheetProvider>
-    );
-
-    // Expect two error messages as in accordance with the schema
-    expect(screen.getByRole('alert')).toHaveTextContent('Invalid Email');
-    expect(screen.getByRole('alert')).toHaveTextContent('Please enter an email address');
-
-    const input1 = screen.getByRole('textbox', { name: 'Email *' });
-    await user.type(input1, 'test');
-
-    // Expect only one error once some initial text has been inputted
-    expect(screen.getByRole('alert')).toHaveTextContent('Invalid Email');
-    expect(screen.queryByRole('alert')).not.toHaveTextContent('Please enter an email address');
-
-    await user.type(input1, '@test.com');
-
-    // Expect no errors once a valid email has been inputted
-    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
-});
-
-test('should render multiple errors if present, and clear them once valid inputs are correctly validated', async () => {
-    const user = userEvent.setup();
-    render(
-        <SpritesheetProvider>
-            <ControlledInput id="email" name="Email" schema={textInputSchema.email} />
-        </SpritesheetProvider>
-    );
-
-    // Expect two error messages as in accordance with the schema
-    expect(screen.getByRole('alert')).toHaveTextContent('Invalid Email');
-    expect(screen.getByRole('alert')).toHaveTextContent('Please enter an email address');
-
-    const input1 = screen.getByRole('textbox', { name: 'Email *' });
-    await user.type(input1, 'test');
-
-    // Expect only one error once some initial text has been inputted
-    expect(screen.getByRole('alert')).toHaveTextContent('Invalid Email');
-    expect(screen.queryByRole('alert')).not.toHaveTextContent('Please enter an email address');
-
-    await user.type(input1, '@test.com');
-
-    // Expect no errors once a valid email has been inputted
-    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
-});
-
 test('should change focus to second input when using the tab key', async () => {
     const user = userEvent.setup();
     render(
