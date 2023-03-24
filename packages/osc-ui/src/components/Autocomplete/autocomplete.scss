@@ -19,7 +19,7 @@
             box-shadow: $panel-shadow;
 
             &--scrollable {
-                max-height: 500px;
+                max-height: $panel-max-height;
                 overflow-x: hidden;
                 overflow-y: auto;
                 scrollbar-color: var(--color-primary);
