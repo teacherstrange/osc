@@ -20,8 +20,12 @@ export default {
     title: 'osc-ui/Dialogs/Drawer',
     component: Drawer,
     subcomponents: {
-        DrawerTrigger,
+        DrawerCloseButton,
+        DrawerContainer,
         DrawerContent,
+        DrawerDescription,
+        DrawerTitle,
+        DrawerTrigger,
     },
     parameters: {
         docs: {
@@ -32,6 +36,11 @@ export default {
     },
     argTypes: {
         direction: {
+            control: {
+                type: 'select',
+            },
+        },
+        verticalOffset: {
             control: {
                 type: 'select',
             },
@@ -148,7 +157,7 @@ const FullHeightTemplate: Story<DrawerProps> = (args) => {
 };
 
 const CustomContainerTemplate: Story<DrawerProps> = (args) => {
-    const [container, setContainer] = useState(null);
+    const [portal, setPortal] = useState(null);
 
     return (
         <>
@@ -163,7 +172,7 @@ const CustomContainerTemplate: Story<DrawerProps> = (args) => {
                             <Button>Open Drawer</Button>
                         </DrawerTrigger>
 
-                        <DrawerContent size="sm" isFull container={container}>
+                        <DrawerContent size="sm" isFull container={portal}>
                             <DrawerCloseButton>
                                 <Icon id="arrow" />
                                 <VisuallyHidden>Close</VisuallyHidden>
@@ -183,7 +192,7 @@ const CustomContainerTemplate: Story<DrawerProps> = (args) => {
                     </Drawer>
                 </div>
 
-                <div ref={setContainer} />
+                <div ref={setPortal} />
             </DrawerContainer>
         </>
     );
@@ -210,13 +219,34 @@ export const Narrow = SmallTemplate.bind({});
 Narrow.args = {
     ...Primary.args,
 };
+Narrow.parameters = {
+    docs: {
+        description: {
+            story: 'Changes the default width of the drawer to `sm`.',
+        },
+    },
+};
 
 export const FullHeight = FullHeightTemplate.bind({});
 FullHeight.args = {
     ...Primary.args,
 };
+FullHeight.parameters = {
+    docs: {
+        description: {
+            story: "Makes the drawer fill the height of it's container",
+        },
+    },
+};
 
 export const CustomContainer = CustomContainerTemplate.bind({});
 CustomContainer.args = {
     ...Primary.args,
+};
+CustomContainer.parameters = {
+    docs: {
+        description: {
+            story: "You can set a custom container for the drawer by wrapping the drawer in the optional `DrawerContainer` add adding a sibling element as the `portal` container (see https://www.radix-ui.com/docs/primitives/components/dialog#custom-portal-container).<br>This is useful if you don't want the drawer to cover the entire app.",
+        },
+    },
 };
