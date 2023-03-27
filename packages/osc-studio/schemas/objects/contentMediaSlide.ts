@@ -85,6 +85,7 @@ export default {
                     title: 'Media Type',
                     type: 'array',
                     of: [{ type: 'contentMediaImage' }],
+                    validation: (Rule) => Rule.required(),
                 },
                 {
                     // To make the name validation only apply when the field is visible we need to move it out of the settings object
