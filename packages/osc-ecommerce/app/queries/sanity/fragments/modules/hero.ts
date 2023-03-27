@@ -6,6 +6,7 @@ import { MODULE_IMAGES } from './images';
 export const MODULE_HERO = groq`
     _key,
     _type,
+    carouselName,
     carouselSettings {
         ${CAROUSEL_SETTINGS}
     },

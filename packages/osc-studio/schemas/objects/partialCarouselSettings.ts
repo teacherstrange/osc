@@ -6,14 +6,6 @@ export default defineType({
     type: 'object',
     fields: [
         defineField({
-            name: 'carouselName',
-            title: 'Carousel Name',
-            type: 'string',
-            description:
-                'The accessible name of the Carousel, this will not be visible on the page but is required for accessibility.',
-            validation: (Rule) => Rule.required(),
-        }),
-        defineField({
             name: 'dotNav',
             title: 'Show Dot Navigation',
             type: 'boolean',
