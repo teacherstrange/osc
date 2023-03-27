@@ -1,12 +1,15 @@
 import type { Meta, Story } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../Button/Button';
+import { Header } from '../Header/Header';
 import { Icon } from '../Icon/Icon';
+import { Logo } from '../Logo/Logo';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import type { DrawerProps } from './Drawer';
 import {
     Drawer,
     DrawerCloseButton,
+    DrawerContainer,
     DrawerContent,
     DrawerDescription,
     DrawerTitle,
@@ -144,6 +147,48 @@ const FullHeightTemplate: Story<DrawerProps> = (args) => {
     );
 };
 
+const CustomContainerTemplate: Story<DrawerProps> = (args) => {
+    const [container, setContainer] = useState(null);
+
+    return (
+        <>
+            <Header>
+                <Logo className="c-header__logo" />
+            </Header>
+
+            <DrawerContainer style={{ minHeight: '1000px' }}>
+                <div className="o-container">
+                    <Drawer {...args}>
+                        <DrawerTrigger asChild>
+                            <Button>Open Drawer</Button>
+                        </DrawerTrigger>
+
+                        <DrawerContent size="sm" isFull container={container}>
+                            <DrawerCloseButton>
+                                <Icon id="arrow" />
+                                <VisuallyHidden>Close</VisuallyHidden>
+                            </DrawerCloseButton>
+
+                            <DrawerTitle>
+                                An accessible title to be announced when the dialog is opened.
+                            </DrawerTitle>
+
+                            <DrawerDescription>
+                                An optional accessible description to be announced when the dialog
+                                is opened.
+                            </DrawerDescription>
+
+                            <p>Drawer content</p>
+                        </DrawerContent>
+                    </Drawer>
+                </div>
+
+                <div ref={setContainer} />
+            </DrawerContainer>
+        </>
+    );
+};
+
 export const Primary = Template.bind({});
 Primary.args = {
     direction: 'right',
@@ -168,5 +213,10 @@ Narrow.args = {
 
 export const FullHeight = FullHeightTemplate.bind({});
 FullHeight.args = {
+    ...Primary.args,
+};
+
+export const CustomContainer = CustomContainerTemplate.bind({});
+CustomContainer.args = {
     ...Primary.args,
 };

@@ -1,9 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import type { ComponentPropsWithoutRef, ElementRef } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode } from 'react';
 import React, { createContext, forwardRef, useContext, useEffect, useState } from 'react';
 import useElementSize from '../../hooks/useElementSize';
 import { useModifier } from '../../hooks/useModifier';
-import type { Maybe } from '../../types';
+import type { Maybe, PolymorphicComponentProps } from '../../types';
 import { classNames } from '../../utils/classNames';
 
 import './drawer.scss';
@@ -246,6 +246,30 @@ export const DrawerCloseButton = forwardRef<
     );
 });
 DrawerCloseButton.displayName = 'DrawerCloseButton';
+
+/* -------------------------------------------------------------------------------------------------
+ * Drawer Container
+ * -----------------------------------------------------------------------------------------------*/
+export interface DrawerContainerProps extends SharedDrawerProps {
+    /**
+     * The content of the container
+     */
+    children: ReactNode;
+}
+
+export const DrawerContainer = <C extends ElementType = 'div'>(
+    props: PolymorphicComponentProps<C, DrawerContainerProps>
+) => {
+    const { as, children, className, ...rest } = props;
+    const Component = as || 'div';
+    const classes = classNames('c-drawer__container', className);
+
+    return (
+        <Component className={classes} {...rest}>
+            {children}
+        </Component>
+    );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * useDrawerContext

@@ -11,6 +11,17 @@
     $drawer-offset: calc(var(--drawer-vertical-offset) * 1px);
 
     .c-drawer {
+        /*
+         * Custom container for the drawer
+         *
+         * [1] Setting will-change to transform will allow the fixed position
+         * of the child elements to become relative to this element.
+         */
+        &__container {
+            position: relative;
+            will-change: transform; /* [1] */
+        }
+
         &__content {
             position: fixed;
             max-height: $drawer-max-height;
