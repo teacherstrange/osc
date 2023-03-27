@@ -1,102 +1,161 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { Cross2Icon } from '@radix-ui/react-icons';
-import type { ButtonHTMLAttributes, ComponentPropsWithoutRef, ElementRef, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef } from 'react';
 import React, { forwardRef } from 'react';
 import { classNames } from '../../utils/classNames';
+
+import { useModifier } from '../../hooks/useModifier';
+import type { Maybe } from '../../types';
 import './modal.scss';
 
-interface CloseProps<T> extends ButtonHTMLAttributes<T> {
-    children: ReactNode;
+export interface SharedModalProps {
+    /**
+     * Custom class
+     */
+    className?: string;
 }
 
-const ModalCloseButton = forwardRef<
-    ElementRef<typeof Dialog.Close>,
-    ComponentPropsWithoutRef<typeof Dialog.Close>
->((props: CloseProps<HTMLButtonElement>, forwardedRef) => {
-    const { children, ...attr } = props;
+/* -------------------------------------------------------------------------------------------------
+ * Modal
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalProps
+    extends ComponentPropsWithoutRef<typeof Dialog.Root>,
+        SharedModalProps {}
+
+export const Modal = (props: ModalProps) => {
+    const { children } = props;
 
     return (
-        <Dialog.Close asChild>
-            <button aria-label="Close" {...attr} ref={forwardedRef}>
-                {children}
-            </button>
-        </Dialog.Close>
-    );
-});
-ModalCloseButton.displayName = 'ModalCloseButton';
-
-export interface Props {
-    open?: boolean;
-    onOpenChange?: () => void;
-    ModalButtonText: string;
-    title: string;
-    size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
-    hideHeaderCloseButton: boolean;
-    hideFooterCloseButton: boolean;
-    disableOutsideClick?: boolean;
-    overlayColour: string;
-    primaryActionButton: boolean;
-    primaryActionButtonText: string;
-    onClick: () => void;
-    modalDescription: string;
-    children: ReactNode;
-}
-
-export const Modal = (props: Props) => {
-    const {
-        open,
-        onOpenChange,
-        ModalButtonText,
-        title,
-        size,
-        children,
-        hideHeaderCloseButton,
-        hideFooterCloseButton,
-        disableOutsideClick,
-        primaryActionButton,
-        primaryActionButtonText,
-        onClick,
-        modalDescription,
-    } = props;
-    const width = `c-modal--${size}`;
-    const classes = classNames('c-modal', width);
-
-    return (
-        <Dialog.Root modal open={open} onOpenChange={onOpenChange}>
-            <Dialog.Trigger asChild>
-                <button>{ModalButtonText}</button>
-            </Dialog.Trigger>
-
-            <Dialog.Portal>
-                <Dialog.Overlay className="c-modal__overlay" />
-
-                <Dialog.Content
-                    onPointerDownOutside={disableOutsideClick ? (e) => e.preventDefault() : null}
-                    className={classes}
-                >
-                    <header className="c-modal__header">
-                        <Dialog.Title>{title}</Dialog.Title>
-                        {!hideHeaderCloseButton ? (
-                            <ModalCloseButton>
-                                <Cross2Icon />
-                            </ModalCloseButton>
-                        ) : null}
-                    </header>
-                    <Dialog.Description className="c-modal__description sr-only">
-                        {modalDescription}
-                    </Dialog.Description>
-
-                    <div>{children}</div>
-
-                    <footer className="c-modal__footer">
-                        {!hideFooterCloseButton ? <ModalCloseButton>Close</ModalCloseButton> : null}
-
-                        {primaryActionButton ? (
-                            <button onClick={onClick}>{primaryActionButtonText}</button>
-                        ) : null}
-                    </footer>
-                </Dialog.Content>
-            </Dialog.Portal>
+        <Dialog.Root className="c-modal" {...props}>
+            {children}
         </Dialog.Root>
     );
 };
+Modal.displayName = 'Modal';
+
+/* -------------------------------------------------------------------------------------------------
+ * Modal Trigger
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalTriggerProps
+    extends ComponentPropsWithoutRef<typeof Dialog.Trigger>,
+        SharedModalProps {}
+
+export const ModalTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, ModalTriggerProps>(
+    (props, forwardedRef) => {
+        const { children, className, ...rest } = props;
+        const classes = classNames('c-modal__trigger', className);
+
+        return (
+            <Dialog.Trigger className={classes} {...rest} ref={forwardedRef}>
+                {children}
+            </Dialog.Trigger>
+        );
+    }
+);
+ModalTrigger.displayName = 'ModalTrigger';
+
+/* -------------------------------------------------------------------------------------------------
+ * Modal Content
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalContentProps
+    extends ComponentPropsWithoutRef<typeof Dialog.Content>,
+        SharedModalProps {
+    /**
+     * Customise the element that your alert dialog portals into.
+     * @see: https://www.radix-ui.com/docs/primitives/components/dialog#custom-portal-container
+     * @default undefined
+     */
+    container?: Maybe<HTMLElement>;
+    /**
+     * Whether to display the overlay or not
+     * @default true
+     */
+    showOverlay?: boolean;
+    /**
+     * 'Sets the size of the button'
+     * @default md
+     */
+    size?: 'sm' | 'md' | 'lg' | 'full';
+}
+
+export const ModalContent = forwardRef<ElementRef<typeof Dialog.Content>, ModalContentProps>(
+    (props, forwardedRef) => {
+        const { children, className, container, showOverlay = true, size = 'md', ...rest } = props;
+        const sizeModifier = useModifier('c-modal__content', size);
+        const classes = classNames('c-modal__content', sizeModifier, className);
+
+        return (
+            <Dialog.Portal container={container}>
+                {showOverlay ? <Dialog.Overlay className="c-modal__overlay" /> : null}
+
+                <Dialog.Content className={classes} {...rest} ref={forwardedRef}>
+                    {children}
+                </Dialog.Content>
+            </Dialog.Portal>
+        );
+    }
+);
+ModalContent.displayName = 'ModalContent';
+
+/* -------------------------------------------------------------------------------------------------
+ * Modal Title
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalTitleProps
+    extends ComponentPropsWithoutRef<typeof Dialog.Title>,
+        SharedModalProps {}
+
+export const ModalTitle = forwardRef<ElementRef<typeof Dialog.Title>, ModalTitleProps>(
+    (props, forwardedRef) => {
+        const { children, className, ...rest } = props;
+        const classes = classNames('c-modal__ttl t-font-m u-text-bold', className);
+
+        return (
+            <Dialog.Title className={classes} {...rest} ref={forwardedRef}>
+                {children}
+            </Dialog.Title>
+        );
+    }
+);
+ModalTitle.displayName = 'ModalTitle';
+
+/* -------------------------------------------------------------------------------------------------
+ * Modal Description
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalDescriptionProps
+    extends ComponentPropsWithoutRef<typeof Dialog.Description>,
+        SharedModalProps {}
+
+export const ModalDescription = forwardRef<
+    ElementRef<typeof Dialog.Description>,
+    ModalDescriptionProps
+>((props, forwardedRef) => {
+    const { children, className, ...rest } = props;
+    const classes = classNames('c-modal__desc', className);
+
+    return (
+        <Dialog.Description className={classes} {...rest} ref={forwardedRef}>
+            {children}
+        </Dialog.Description>
+    );
+});
+ModalDescription.displayName = 'ModalTitle';
+
+/* -------------------------------------------------------------------------------------------------
+ * Modal Close Button
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalCloseButtonProps
+    extends ComponentPropsWithoutRef<typeof Dialog.Close>,
+        SharedModalProps {}
+
+export const ModalCloseButton = forwardRef<ElementRef<typeof Dialog.Close>, ModalCloseButtonProps>(
+    (props, forwardedRef) => {
+        const { children, className, ...rest } = props;
+        const classes = classNames('c-modal__close', className);
+
+        return (
+            <Dialog.Close className={classes} {...rest} ref={forwardedRef}>
+                {children}
+            </Dialog.Close>
+        );
+    }
+);
+ModalCloseButton.displayName = 'ModalCloseButton';

@@ -50,6 +50,22 @@ $animations: (
             opacity: 0
         )
     ),
+    "overlay-fade-in": (
+        0%: (
+            opacity: 0
+        ),
+        100%: (
+            opacity: 0.3
+        )
+    ),
+    "overlay-fade-out": (
+        0%: (
+            opacity: 0.3
+        ),
+        100%: (
+            opacity: 0
+        )
+    ),
     "fade-in-up": (
         0%: (
             transform: translate3d(0, 100px, 0),
@@ -131,6 +147,26 @@ $animations: (
         100%: (
             transform: scale(1),
             opacity: 1
+        )
+    ),
+    "modal-scale-in": (
+        0%: (
+            transform: translate(-50%, -50%) scale(0.9),
+            opacity: 0
+        ),
+        100%: (
+            transform: translate(-50%, -50%) scale(1),
+            opacity: 1
+        )
+    ),
+    "modal-scale-out": (
+        0%: (
+            transform: translate(-50%, -50%) scale(1),
+            opacity: 1
+        ),
+        100%: (
+            transform: translate(-50%, -50%) scale(0.9),
+            opacity: 0
         )
     ),
     "jingleBell": (

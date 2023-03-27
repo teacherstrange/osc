@@ -1,183 +1,183 @@
 import type { Meta, Story } from '@storybook/react';
-import React from 'react';
-import type { Props } from './Modal';
-import { Modal } from './Modal';
+import React, { useState } from 'react';
+import { Button } from '../Button/Button';
+import { Icon } from '../Icon/Icon';
+import { TextInput } from '../TextInput/TextInput';
+import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
+import type { ModalProps } from './Modal';
+import {
+    Modal,
+    ModalCloseButton,
+    ModalContent,
+    ModalDescription,
+    ModalTitle,
+    ModalTrigger,
+} from './Modal';
 
 export default {
-    title: 'osc-ui/Modal',
+    title: 'osc-ui/Dialogs/Modal',
     component: Modal,
+    subcomponents: {
+        ModalCloseButton,
+        ModalContent,
+        ModalDescription,
+        ModalTitle,
+        ModalTrigger,
+    },
     parameters: {
         docs: {
             description: {
                 component:
-                    'A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.'
-            }
-        }
+                    'A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.',
+            },
+        },
     },
-    argTypes: {
-        children: {
-            table: {
-                disable: true
-            }
-        },
-        disableOutsideClick: {
-            description: 'Sets whether the user can click outside of the modal to close it',
-            table: {
-                type: {
-                    summary: 'boolean'
-                }
-            }
-        },
-        hideFooterCloseButton: {
-            description:
-                'Sets whether or not to prevent rendering of the close button in the footer',
-            type: { name: 'boolean', required: true },
-            table: {
-                type: {
-                    summary: 'boolean'
-                }
-            }
-        },
-        hideHeaderCloseButton: {
-            description:
-                'Sets whether or not to prevent rendering of the close button in the header',
-            type: { name: 'boolean', required: true },
-            table: {
-                type: {
-                    summary: 'boolean'
-                }
-            }
-        },
-        ModalButtonText: {
-            description: 'Sets the text of the button that opens the modal',
-            type: { name: 'string', required: true },
-            table: {
-                type: {
-                    summary: 'boolean'
-                }
-            }
-        },
-        modalDescription: {
-            description: 'An accessible description to be announced when the dialog is opened',
-            type: { name: 'string', required: true },
-            table: {
-                type: {
-                    summary: 'string'
-                }
-            }
-        },
-        onOpenChange: {
-            description: 'Event handler called when the open state of the dialog changes.',
-            table: {
-                type: {
-                    summary: '(open: boolean) => void'
-                }
-            }
-        },
-        onClick: {
-            description: 'The function that is passed to the primary action button',
-            type: { name: 'function', required: true },
-            table: {
-                type: {
-                    summary: '() => void'
-                }
-            }
-        },
-        overlayColour: {
-            description: 'Colour of the overlay background',
-            type: { name: 'string', required: true },
-            table: {
-                type: {
-                    summary: 'string'
-                }
-            }
-        },
-        primaryActionButton: {
-            description: 'Sets whether the primary action button is visible',
-            type: { name: 'boolean', required: true },
-            table: {
-                type: {
-                    summary: 'boolean'
-                }
-            }
-        },
-        primaryActionButtonText: {
-            description: 'Sets the text of the primary action button',
-            type: { name: 'string', required: true },
-            table: {
-                type: {
-                    summary: 'string'
-                }
-            }
-        },
-        size: {
-            description: 'Sets the size of the modal',
-            control: { type: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl', 'full'] },
-            type: { name: 'string', required: true },
-            table: {
-                type: {
-                    summary: 'string'
-                }
-            }
-        },
-        title: {
-            description: 'Modal heading',
-            type: { name: 'string', required: true },
-            table: {
-                type: {
-                    summary: 'string'
-                }
-            }
-        }
-    }
 } as Meta;
 
-const Template: Story<Props> = (args) => <Modal {...args} />;
+const Template: Story<ModalProps> = (args) => (
+    <Modal {...args}>
+        <ModalTrigger asChild>
+            <Button>Open modal</Button>
+        </ModalTrigger>
+        <ModalContent>
+            <ModalCloseButton>
+                <Icon id="close" />
+                <VisuallyHidden>Close</VisuallyHidden>
+            </ModalCloseButton>
+
+            <ModalTitle>An accessible title to be announced when the dialog is opened.</ModalTitle>
+
+            <ModalDescription>
+                An optional accessible description to be announced when the dialog is opened.
+            </ModalDescription>
+
+            <p>Modal content</p>
+        </ModalContent>
+    </Modal>
+);
+
+const HasNoDescriptionTemplate: Story<ModalProps> = (args) => (
+    <Modal {...args}>
+        <ModalTrigger asChild>
+            <Button>Open modal</Button>
+        </ModalTrigger>
+        <ModalContent aria-describedby={undefined}>
+            <ModalCloseButton>
+                <Icon id="close" />
+                <VisuallyHidden>Close</VisuallyHidden>
+            </ModalCloseButton>
+
+            <ModalTitle>An accessible title to be announced when the dialog is opened.</ModalTitle>
+
+            <p>Modal content</p>
+        </ModalContent>
+    </Modal>
+);
+
+const HasNoOverlayTemplate: Story<ModalProps> = (args) => (
+    <Modal {...args}>
+        <ModalTrigger asChild>
+            <Button>Open modal</Button>
+        </ModalTrigger>
+        <ModalContent aria-describedby={undefined} showOverlay={false}>
+            <ModalCloseButton>
+                <Icon id="close" />
+                <VisuallyHidden>Close</VisuallyHidden>
+            </ModalCloseButton>
+
+            <ModalTitle>An accessible title to be announced when the dialog is opened.</ModalTitle>
+
+            <p>Modal content</p>
+        </ModalContent>
+    </Modal>
+);
+
+const ControlledTemplate: Story<ModalProps> = (args) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
+
+    return (
+        <Modal
+            open={isOpen}
+            onOpenChange={(b: boolean) => {
+                setIsOpen(b);
+                setIsLoading(!b);
+            }}
+            {...args}
+        >
+            <ModalTrigger asChild>
+                <Button>Open modal</Button>
+            </ModalTrigger>
+            <ModalContent>
+                <ModalCloseButton>
+                    <Icon id="close" />
+                    <VisuallyHidden>Close</VisuallyHidden>
+                </ModalCloseButton>
+
+                <ModalTitle>Edit profile</ModalTitle>
+
+                <ModalDescription>
+                    Make changes to your profile here. Click save when you're done.
+                </ModalDescription>
+
+                <form
+                    onSubmit={(event) => {
+                        event.preventDefault();
+                        setIsLoading(true);
+                        wait().then(() => setIsOpen(false));
+                    }}
+                >
+                    <TextInput
+                        name="Full Name"
+                        defaultValue="Sarah"
+                        required
+                        style={{ marginBlockEnd: '1rem' }}
+                    />
+                    <Button isLoading={isLoading} loadingText="Saving">
+                        Save
+                    </Button>
+                </form>
+            </ModalContent>
+        </Modal>
+    );
+};
 
 export const Primary = Template.bind({});
+Primary.args = {};
 
-Primary.args = {
-    children: <p>hello world</p>,
-    ModalButtonText: 'Click to open',
-    title: 'whats up',
-    modalDescription: 'An accessible description to be announced when the dialog is opened',
-    size: 'xs',
-    hideHeaderCloseButton: false,
-    hideFooterCloseButton: false,
-    disableOutsideClick: false,
-    overlayColour: 'grey',
-    primaryActionButton: false,
-    primaryActionButtonText: 'click me',
-    onClick: () => {
-        alert('modal cliked');
-    }
+export const HasNoDescription = HasNoDescriptionTemplate.bind({});
+HasNoDescription.args = {
+    ...Primary.args,
+};
+HasNoDescription.parameters = {
+    docs: {
+        description: {
+            story: 'If you choose to omit the description above, then make sure to pass `aria-describedby={undefined}` to the `ModalContent`',
+        },
+    },
 };
 
-export const Small = Template.bind({});
-Small.args = {
+export const HasNoOverlay = HasNoOverlayTemplate.bind({});
+HasNoOverlay.args = {
     ...Primary.args,
-    size: 'sm'
 };
-export const Medium = Template.bind({});
-Medium.args = {
-    ...Primary.args,
-    size: 'md'
-};
-
-export const Large = Template.bind({});
-Large.args = {
-    ...Primary.args,
-    size: 'lg'
+HasNoOverlay.parameters = {
+    docs: {
+        description: {
+            story: 'Remove the overlay by passing `showOverlay={false}` to the `ModalContent`',
+        },
+    },
 };
 
-export const ExtraLarge = Template.bind({});
-ExtraLarge.args = {
+export const ControlledModal = ControlledTemplate.bind({});
+ControlledModal.args = {
     ...Primary.args,
-    size: 'xl'
 };
-
-export const Full = Template.bind({});
-Full.args = {
-    ...Primary.args,
-    size: 'full'
+ControlledModal.parameters = {
+    docs: {
+        description: {
+            story: 'Can be opened and closed programmatically, i.e when a form submits.',
+        },
+    },
 };
