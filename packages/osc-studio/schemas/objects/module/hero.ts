@@ -29,7 +29,7 @@ export default defineType({
         defineField({
             name: 'carouselSettings',
             title: 'Carousel Settings',
-            type: 'heroCarouselSettings',
+            type: 'partialCarouselSettings',
             group: 'settings',
         }),
     ],

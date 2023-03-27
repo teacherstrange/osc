@@ -32,7 +32,6 @@ import carouselSettings from './objects/carouselSettings';
 import collectionRule from './objects/collectionRule';
 import contentMediaImage from './objects/contentMediaImage';
 import contentMediaSlide from './objects/contentMediaSlide';
-import heroCarouselSettings from './objects/heroCarouselSettings';
 import heroSlide from './objects/heroSlide';
 import linkExternal from './objects/linkExternal';
 import linkInternal from './objects/linkInternal';
@@ -59,6 +58,7 @@ import moduleTrustpilot from './objects/module/trustpilot';
 import moduleVideo from './objects/module/video';
 import navigationItem from './objects/navigationItem';
 import navigationLink from './objects/navigationLink';
+import partialCarouselSettings from './objects/partialCarouselSettings';
 import placeholderString from './objects/placeholderString';
 import productOption from './objects/productOption';
 import ProductWithVariant from './objects/productWithVariant';
@@ -103,7 +103,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     carouselSettings,
     contentMediaImage,
     contentMediaSlide,
-    heroCarouselSettings,
+    partialCarouselSettings,
     heroSlide,
     collectionRule,
     textGridItem,

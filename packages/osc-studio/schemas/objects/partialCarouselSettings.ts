@@ -1,7 +1,7 @@
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
-    name: 'heroCarouselSettings',
+    name: 'partialCarouselSettings',
     title: 'Carousel Settings',
     type: 'object',
     fields: [
