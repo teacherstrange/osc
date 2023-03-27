@@ -1,0 +1,126 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+@import "../../styles/settings";
+@import "../../styles/tools";
+
+@layer components {
+    // Panel
+    $panel-max-height: 500px;
+    $panel-shadow: $shadow-xl;
+    $panel-radius: $rad-xs;
+    $scrollbar-width: 3px;
+    $scrollbar-thumb-width: 5px;
+
+    .c-autocomplete {
+        &__panel {
+            width: 100%;
+            margin: $space-2xs 0 0;
+            overflow: hidden;
+            border-radius: $panel-radius;
+            box-shadow: $panel-shadow;
+
+            &--scrollable {
+                max-height: $panel-max-height;
+                overflow-x: hidden;
+                overflow-y: auto;
+                scrollbar-color: var(--color-primary);
+                padding-block-start: $space-m;
+            }
+
+            &--scrollable::-webkit-scrollbar {
+                width: $scrollbar-width; /* width of the entire scrollbar */
+            }
+
+            &--scrollable::-webkit-scrollbar-track {
+                background: var(--color-tertiary); /* color of the tracking area */
+            }
+
+            &--scrollable::-webkit-scrollbar-thumb {
+                width: $scrollbar-thumb-width;
+                background-color: var(--color-secondary); /* color of the scroll thumb */
+                border: 3px solid var(--color-secondary); /* creates padding around scroll thumb */
+                border-radius: $rad-xs; /* roundness of the scroll thumb */
+            }
+        }
+
+        &__section {
+            margin-block-end: $space-m;
+        }
+
+        &__section-title {
+            margin: 0;
+            font-weight: $fw-bold;
+            text-align: left;
+        }
+
+        &__cta {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding-block: $space-xl;
+        }
+
+        &__input-clear-button-wrapper {
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            width: calc(100% - $space-5xl);
+            height: 100%;
+
+            @include mq($mq-mob-l) {
+                width: calc(100% - $space-4xl);
+            }
+        }
+
+        &__input-clear-button {
+            position: absolute;
+            z-index: 2;
+            font-size: $fs-xs;
+            cursor: pointer;
+        }
+
+        input {
+            position: relative;
+            z-index: 2;
+        }
+
+        &__input-wrapper {
+            position: relative;
+        }
+
+        &__item {
+            display: grid;
+            padding: $fs-2xs 0;
+            cursor: pointer;
+
+            &[aria-selected="true"] {
+                background-color: var(--color-neutral-200);
+            }
+
+            &:last-child {
+                margin-bottom: var(--font-scale-xs);
+            }
+
+            &-wrapper {
+                display: grid;
+                grid-auto-flow: column;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            &-content {
+                display: grid;
+                align-items: center;
+                line-height: 1.25em;
+                gap: $space-xs;
+                grid-auto-flow: column;
+
+                mark {
+                    color: var(--color-primary);
+                    font-weight: $fw-bold;
+                }
+            }
+        }
+    }
+}

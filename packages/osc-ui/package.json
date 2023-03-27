@@ -19,6 +19,13 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "@algolia/autocomplete-core": "^1.8.3",
+    "@algolia/autocomplete-plugin-algolia-insights": "^1.8.3",
+    "@algolia/autocomplete-plugin-query-suggestions": "^1.8.3",
+    "@algolia/autocomplete-plugin-recent-searches": "^1.8.3",
+    "@algolia/autocomplete-preset-algolia": "^1.8.3",
+    "@algolia/recommend": "^4.15.0",
+    "@algolia/recommend-react": "^1.8.1",
     "@internationalized/date": "^3.1.0",
     "@portabletext/react": "^2.0.2",
     "@radix-ui/react-accessible-icon": "^1.0.1",
@@ -47,7 +54,8 @@
     "@react-aria/visually-hidden": "^3.6.1",
     "@react-stately/calendar": "^3.0.5",
     "@react-stately/datepicker": "^3.2.1",
-    "@remix-run/react": "^1.12.0",
+    "@remix-run/react": "^1.13.0",
+    "algoliasearch": "^4.15.0",
     "dotenv": "^16.0.3",
     "keen-slider": "^6.8.5",
     "lightgallery": "^2.7.1",
@@ -56,8 +64,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-player": "^2.11.2",
+    "search-insights": "^2.3.0",
     "string-hash": "^1.1.3",
-    "tinycolor2": "^1.6.0"
+    "tinycolor2": "^1.6.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
@@ -73,6 +83,7 @@
     "c8": "^7.13.0",
     "cssnano": "^5.1.15",
     "jsdom": "^19.0.0",
+    "lodash": "^4.17.21",
     "postcss": "^8.4.21",
     "react-router-dom": "^6.8.2",
     "rollup": "^3.17.3",

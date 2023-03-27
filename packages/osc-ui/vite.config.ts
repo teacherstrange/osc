@@ -1,11 +1,11 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
-
 import react from '@vitejs/plugin-react';
+import 'dotenv/config';
 import fs from 'fs';
-import { resolve } from 'path';
+import path, { resolve } from 'path';
 import type { PluginOption, ResolvedConfig } from 'vite';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 const fileRegex = /\.(css)$/;
@@ -70,19 +70,27 @@ function libInjectCss(): PluginOption {
         },
     };
 }
-export default defineConfig({
-    plugins: [libInjectCss(), react(), tsconfigPaths()],
-    test: {
-        css: true,
-        reporters: ['verbose'],
-        globals: true,
-        environment: 'jsdom',
-        setupFiles: ['./__test__/setup-test-env.ts'],
-        include: ['./src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,css}'],
-    },
-    resolve: {
-        alias: {
-            'test-utils': resolve(__dirname, './__test__/test-utils'),
+
+export default defineConfig(({ mode }) => {
+    // Move back up the directory, out of the package and into the root of the monorepo
+    const root = path.join(__dirname, '..', '..'); // eslint-disable-line
+    // Load env file based on `mode` in the current working directory.
+    process.env = { ...process.env, ...loadEnv(mode, root, '') };
+
+    return {
+        plugins: [libInjectCss(), react(), tsconfigPaths()],
+        test: {
+            css: true,
+            reporters: ['verbose'],
+            globals: true,
+            environment: 'jsdom',
+            setupFiles: ['./__test__/setup-test-env.ts'],
+            include: ['./src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,css}'],
         },
-    },
+        resolve: {
+            alias: {
+                'test-utils': resolve(__dirname, './__test__/test-utils'),
+            },
+        },
+    };
 });

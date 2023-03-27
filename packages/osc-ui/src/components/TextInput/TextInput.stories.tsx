@@ -1,8 +1,8 @@
 import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { TextInput } from './TextInput';
 import { textInputSchema } from './mockSchema';
+import { TextInput } from './TextInput';
 
 export default {
     title: 'osc-ui/TextInput',

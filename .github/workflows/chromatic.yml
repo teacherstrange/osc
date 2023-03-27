@@ -38,3 +38,9 @@ jobs:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitZeroOnChanges: true # 👈 Option to prevent the workflow from failing
+        env:
+          STORYBOOK_ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          STORYBOOK_ALGOLIA_ID_SEARCH_ONLY_API_KEY: ${{ secrets.ALGOLIA_ID_SEARCH_ONLY_API_KEY }}
+          STORYBOOK_ALGOLIA_PRIMARY_INDEX: ${{ secrets.ALGOLIA_PRIMARY_INDEX }}
+          STORYBOOK_ALGOLIA_PRIMARY_INDEX_GROUPED: ${{ secrets.ALGOLIA_PRIMARY_INDEX_GROUPED }}
+          STORYBOOK_ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS: ${{ secrets.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS }}
