@@ -1,0 +1,257 @@
+@import "../../styles/tools";
+@import "../../styles/settings";
+
+@layer components {
+    $drawer-directions: (top, right, bottom, left);
+    $drawer-content-height: var(--drawer-content-height); // Value is generated on the component
+    $drawer-content-width: var(--drawer-content-width); // Value is generated on the component
+    $drawer-width-m: 610px;
+    $drawer-width-s: 370px;
+    $drawer-max-height: 900px;
+    $drawer-offset: calc(var(--drawer-vertical-offset) * 1px);
+
+    .c-drawer {
+        &__content {
+            position: fixed;
+            max-height: $drawer-max-height;
+            overflow-y: auto;
+            padding: $space-l;
+            background-color: var(--color-tertiary);
+
+            @include z-index(modal);
+
+            @include mq($mq-tab) {
+                padding: $space-2xl;
+            }
+
+            @each $dir in $drawer-directions {
+                &--#{$dir} {
+                    #{$dir}: 0;
+
+                    // Prevent bottom animating all the way to the top of the screen
+                    @if $dir != bottom {
+                        top: 0;
+                    }
+
+                    @if $dir == bottom or $dir == top {
+                        left: 50%;
+                    }
+
+                    @if $dir == right or $dir == left {
+                        top: $drawer-offset;
+                    }
+
+                    &[data-state="open"] {
+                        @include animate(drawer-side-in-#{$dir}, $timing-s, $ease-out-sine);
+                    }
+
+                    &[data-state="closed"] {
+                        @include animate(drawer-side-out-#{$dir}, $timing-s, $ease-out-sine);
+                    }
+                }
+            }
+
+            &--sm {
+                max-width: $drawer-width-s;
+            }
+
+            &--md {
+                max-width: $drawer-width-m;
+            }
+
+            &.is-full {
+                top: 0;
+                bottom: 0;
+            }
+        }
+
+        /*
+         * Rotate the trigger and flip the inner text
+         *
+         * [1] position the trigger off the viewport
+         * [2] rotate the trigger by 90deg
+         * [3] set the transform origin to the top left corner to bring it back into the viewport
+         * [4] flip the inner element back 180deg so the content is the right way around
+         *
+         */
+        &__trigger {
+            &.is-pinned {
+                position: fixed; /* [1] */
+
+                @include z-index(modal-trigger);
+
+                // TODO: Make this a modifier for the button
+                &::after {
+                    display: none;
+                }
+            }
+
+            @each $dir in $drawer-directions {
+                &--#{$dir} {
+                    @if $dir == top or $dir == bottom {
+                        #{$dir}: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+
+                        &:hover,
+                        &:active {
+                            // Prevent the inner element from rotating on hover/active states
+                            /* stylelint-disable-next-line selector-class-pattern */
+                            > .c-btn__inner {
+                                transform: translate(0);
+                            }
+                        }
+                    }
+
+                    @if $dir == right {
+                        left: 100%; /* [1] */
+                    }
+
+                    @if $dir == left {
+                        right: 100%; /* [1] */
+                    }
+
+                    @if $dir == right or $dir == left {
+                        top: $drawer-offset;
+                        transform: if($dir == right, rotate(90deg), rotate(270deg)); /* [2] */
+                        transform-origin: if($dir == right, top left, top right); /* [3] */
+
+                        /* stylelint-disable-next-line selector-class-pattern, plugin/selector-bem-pattern */
+                        > .c-btn__inner {
+                            transform: rotate(180deg); /* [4] */
+                        }
+
+                        &:hover,
+                        &:active {
+                            // Prevent the inner element from rotating on hover/active states
+                            /* stylelint-disable-next-line selector-class-pattern */
+                            > .c-btn__inner {
+                                transform: translate(0) rotate(180deg);
+                            }
+                        }
+                    }
+
+                    // Rather than using the @includes animate mixin here we're using the standard animation property
+                    // This is because we need to pass the $drawer-width & content height to the keyframes
+                    &[data-state="open"] {
+                        animation: trigger-slide-in-#{$dir} $timing-s $ease-out-sine both;
+                    }
+
+                    &[data-state="closed"] {
+                        animation: trigger-slide-out-#{$dir} $timing-s $ease-out-sine;
+                    }
+                }
+            }
+        }
+
+        &__close {
+            align-self: end;
+            color: var(--color-neutral-500);
+            cursor: pointer;
+        }
+
+        &__overlay {
+            position: fixed;
+            background-color: var(--color-secondary);
+            inset: 0;
+
+            @include z-index(modal);
+
+            &[data-state="open"] {
+                @include animate(overlay-fade-in, $timing-s, $ease-out-sine);
+            }
+
+            &[data-state="closed"] {
+                @include animate(overlay-fade-out, $timing-s, $ease-out-sine);
+            }
+        }
+    }
+
+    @keyframes trigger-slide-in-top {
+        0% {
+            transform: translate(-50%, 0);
+        }
+
+        100% {
+            // Have to use translateY as we're rotating the button
+            transform: translate(-50%, calc($drawer-content-height * 1px));
+        }
+    }
+
+    @keyframes trigger-slide-out-top {
+        0% {
+            // Have to use translateY as we're rotating the button
+            transform: translate(-50%, calc($drawer-content-height * 1px));
+        }
+
+        100% {
+            transform: translate(-50%, 0);
+        }
+    }
+
+    @keyframes trigger-slide-in-right {
+        0% {
+            transform: rotate(90deg) translateY(0);
+        }
+
+        100% {
+            // Have to use translateY as we're rotating the button
+            transform: rotate(90deg) translateY(calc(var(--drawer-content-width) * 1px));
+        }
+    }
+
+    @keyframes trigger-slide-out-right {
+        0% {
+            // Have to use translateY as we're rotating the button
+            transform: rotate(90deg) translateY(calc(var(--drawer-content-width) * 1px));
+        }
+
+        100% {
+            transform: rotate(90deg) translateY(0);
+        }
+    }
+
+    @keyframes trigger-slide-in-bottom {
+        0% {
+            transform: translate(-50%, 0);
+        }
+
+        100% {
+            // Have to use translateY as we're rotating the button
+            transform: translate(-50%, calc($drawer-content-height * -1px));
+        }
+    }
+
+    @keyframes trigger-slide-out-bottom {
+        0% {
+            // Have to use translateY as we're rotating the button
+            transform: translate(-50%, calc($drawer-content-height * -1px));
+        }
+
+        100% {
+            transform: translate(-50%, 0);
+        }
+    }
+
+    @keyframes trigger-slide-in-left {
+        0% {
+            transform: rotate(270deg) translateY(0);
+        }
+
+        100% {
+            // Have to use translateY as we're rotating the button
+            transform: rotate(270deg) translateY(calc(var(--drawer-content-width) * 1px));
+        }
+    }
+
+    @keyframes trigger-slide-out-left {
+        0% {
+            // Have to use translateY as we're rotating the button
+            transform: rotate(270deg) translateY(calc(var(--drawer-content-width) * 1px));
+        }
+
+        100% {
+            transform: rotate(270deg) translateY(0);
+        }
+    }
+}
