@@ -133,9 +133,10 @@ interface ContentMediaBlockProps extends Pick<contentMediaSlide, 'media'> {
 const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
     const { media, cols } = props;
 
-    const itemHasCover = media?.mediaType.some((media) => media.imageFit === 'cover')
-        ? 'cover'
-        : 'contain';
+    const itemHasCover =
+        media?.mediaType && media?.mediaType.some((media) => media.imageFit === 'cover')
+            ? 'cover'
+            : 'contain';
 
     return (
         <ContentMediaBlock
@@ -144,7 +145,7 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
             variant="media"
             cols={cols}
         >
-            {media?.mediaType.length > 1 ? (
+            {media?.mediaType && media?.mediaType.length > 1 ? (
                 <Carousel
                     carouselName={
                         media?.carouselName ? media?.carouselName : 'content media carousel'
@@ -189,7 +190,7 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
                         ) : null
                     )}
                 </Carousel>
-            ) : media?.mediaType[0]?.image ? (
+            ) : media?.mediaType && media?.mediaType[0]?.image ? (
                 <Image
                     src={media?.mediaType[0]?.image?.src}
                     width={media?.mediaType[0]?.image?.width}
