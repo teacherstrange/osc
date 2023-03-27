@@ -211,7 +211,7 @@ export default function Module(props: Props) {
             const [formName, formId] = moduleForm.formNameAndId.split(', ');
             moduleForm.formId = formId;
             moduleForm.formName = formName;
-            return <Forms module={moduleForm} />;
+            return <Forms module={moduleForm} key={moduleForm._key} />;
 
         case 'module.hero':
             const moduleHero = module as heroModule;

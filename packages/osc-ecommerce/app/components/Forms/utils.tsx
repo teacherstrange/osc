@@ -1,11 +1,11 @@
 import type { Fetcher } from '@remix-run/react/dist/transition';
 import { Select, SelectItem, TextArea, TextInput } from 'osc-ui';
-import type { Dispatch, InputHTMLAttributes, SetStateAction, TextareaHTMLAttributes } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { z } from 'zod';
 import type { HubspotFormFieldGroups, HubspotFormFieldTypes } from './types';
 
-export function getInputType(
+export function getInputOrContent(
     data: HubspotFormFieldGroups,
     formId: string,
     index: number,
@@ -15,77 +15,80 @@ export function getInputType(
     styles?: Record<string, unknown>,
     themeName?: string
 ) {
-    let formInput:
-        | InputHTMLAttributes<HTMLInputElement>
-        | TextareaHTMLAttributes<HTMLTextAreaElement>;
+    let formInput: JSX.Element[] = [];
 
     let content: JSX.Element;
 
     const variants = getVariants({ styles, themeName });
-
     if (data?.fields?.length > 0) {
-        // If there are formFields then return correct form input type
-        const hubspotFields = data.fields[0];
-        switch (data.fields[0].fieldType) {
-            case 'textarea':
-                formInput = (
-                    <TextArea
-                        errors={validationErrors && validationErrors[hubspotFields.name]}
-                        id={`${hubspotFields.name}_${formId}`}
-                        label={hubspotFields.label}
-                        key={index}
-                        name={hubspotFields.name}
-                        required={hubspotFields.required}
-                        schema={schema.pick({ [hubspotFields.name]: true })}
-                        setErrors={setValidationErrors}
-                    />
-                );
-                break;
-            case 'text':
-            case 'phonenumber':
-                formInput = (
-                    <TextInput
-                        errors={validationErrors && validationErrors[hubspotFields.name]}
-                        key={index}
-                        id={`${hubspotFields.name}_${formId}`}
-                        label={hubspotFields.label}
-                        inputMode={hubspotFields.fieldType === 'phonenumber' ? 'numeric' : 'text'}
-                        name={hubspotFields.name}
-                        pattern={hubspotFields.fieldType === 'phonenumber' ? '[0-9]*' : undefined}
-                        placeholder={hubspotFields.placeholder}
-                        required={hubspotFields.required}
-                        schema={schema.pick({ [hubspotFields.name]: true })}
-                        setErrors={setValidationErrors}
-                        type={hubspotFields.fieldType}
-                        variants={variants}
-                    />
-                );
-                break;
-            case 'select':
-                formInput = (
-                    <Select
-                        description={{ label: hubspotFields.label }}
-                        errors={validationErrors && validationErrors[hubspotFields.name]}
-                        key={index}
-                        required={hubspotFields.required}
-                        // TODO - this should be coming from 'placeholder' attribute, but it's empty and instead unselectedLabel has the placeholder value. According to their API docs this is deprecated 🤷‍♂️ Have raised a ticket with hubspot
-                        placeholder={hubspotFields.unselectedLabel}
-                        name={hubspotFields.name}
-                        schema={schema.pick({ [hubspotFields.name]: true })}
-                        setErrors={setValidationErrors}
-                    >
-                        {hubspotFields.options.map((option, index) => (
-                            <SelectItem key={index} {...option}>
-                                {option.label}
-                            </SelectItem>
-                        ))}
-                    </Select>
-                );
-                break;
-            default:
-                return null;
-        }
-        return formInput;
+        const inputs = data.fields.map((hubspotFields) => {
+            // If there are formFields then return correct form input type
+            switch (hubspotFields.fieldType) {
+                case 'textarea':
+                    formInput.push(
+                        <TextArea
+                            errors={validationErrors && validationErrors[hubspotFields.name]}
+                            id={`${hubspotFields.name}_${formId}`}
+                            label={hubspotFields.label}
+                            key={index}
+                            name={hubspotFields.name}
+                            required={hubspotFields.required}
+                            schema={schema.pick({ [hubspotFields.name]: true })}
+                            setErrors={setValidationErrors}
+                        />
+                    );
+                    break;
+                case 'text':
+                case 'phonenumber':
+                    formInput.push(
+                        <TextInput
+                            errors={validationErrors && validationErrors[hubspotFields.name]}
+                            key={index}
+                            id={`${hubspotFields.name}_${formId}`}
+                            label={hubspotFields.label}
+                            inputMode={
+                                hubspotFields.fieldType === 'phonenumber' ? 'numeric' : 'text'
+                            }
+                            name={hubspotFields.name}
+                            pattern={
+                                hubspotFields.fieldType === 'phonenumber' ? '[0-9]*' : undefined
+                            }
+                            placeholder={hubspotFields.placeholder}
+                            required={hubspotFields.required}
+                            schema={schema.pick({ [hubspotFields.name]: true })}
+                            setErrors={setValidationErrors}
+                            type={hubspotFields.fieldType}
+                            variants={variants}
+                        />
+                    );
+                    break;
+                case 'select':
+                    formInput.push(
+                        <Select
+                            description={{ label: hubspotFields.label }}
+                            errors={validationErrors && validationErrors[hubspotFields.name]}
+                            key={index}
+                            required={hubspotFields.required}
+                            // TODO - this should be coming from 'placeholder' attribute, but it's empty and instead unselectedLabel has the placeholder value. According to their API docs this is deprecated 🤷‍♂️ Have raised a ticket with hubspot
+                            placeholder={hubspotFields.unselectedLabel}
+                            name={hubspotFields.name}
+                            schema={schema.pick({ [hubspotFields.name]: true })}
+                            setErrors={setValidationErrors}
+                        >
+                            {hubspotFields.options.map((option, index) => (
+                                <SelectItem key={index} value={option.value}>
+                                    {option.label}
+                                </SelectItem>
+                            ))}
+                        </Select>
+                    );
+                    break;
+                default:
+                    return null;
+            }
+            return formInput;
+        });
+        return inputs[0];
     } else if (data?.richText?.content) {
         content = (
             <div
@@ -136,7 +139,6 @@ export const getValidationSchema = (formFields: HubspotFormFieldTypes[]) => {
             ...validationField,
         };
     }, {});
-
     return z.object(res);
 };
 
@@ -150,10 +152,20 @@ export const transitionStates = (fetcher: Fetcher) => {
 };
 
 // Filter out the form fields (formFieldGroups can also contain RichText only entries)
-export const getFormFields = (formFieldGroups: HubspotFormFieldGroups[]) =>
-    formFieldGroups
+export const getFormFields = (formFieldGroups: HubspotFormFieldGroups[]) => {
+    const formFields = formFieldGroups
         .filter((formFieldGroup) => formFieldGroup?.fields.length > 0)
-        .map((formField) => formField.fields[0]);
+        .map((formField) => {
+            if (formField.fields.length > 1) {
+                return formField.fields.map((field) => field);
+            }
+            return formField.fields[0];
+        });
+    if (Array.isArray(formFields[0])) {
+        return formFields[0] as HubspotFormFieldTypes[];
+    }
+    return formFields as HubspotFormFieldTypes[];
+};
 
 const getVariants = ({
     styles,
