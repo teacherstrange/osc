@@ -8,7 +8,7 @@ import { classNames } from '../../utils/classNames';
 
 import './drawer.scss';
 
-// TODO: pinned animation not working in safari
+// TODO: Sort slide in on load
 
 export interface SharedDrawerProps {
     /**
@@ -162,7 +162,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
     }, [setDrawerContentSize, height, width]);
 
     return (
-        <Dialog.Portal container={container}>
+        <Dialog.Portal container={container} forceMount>
             {showOverlay ? <Dialog.Overlay className="c-drawer__overlay" /> : null}
 
             <Dialog.Content

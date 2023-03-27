@@ -28,6 +28,7 @@
             overflow-y: auto;
             padding: $space-l;
             background-color: var(--color-tertiary);
+            will-change: transform;
 
             @include z-index(modal);
 
@@ -174,6 +175,9 @@
 
             &[data-state="closed"] {
                 @include animate(overlay-fade-out, $timing-s, $ease-out-sine);
+
+                /* stylelint-disable-next-line declaration-no-important */
+                pointer-events: none !important; // Override the inline style added by Radix
             }
         }
     }
