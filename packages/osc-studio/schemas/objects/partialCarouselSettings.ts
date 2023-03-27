@@ -6,6 +6,13 @@ export default defineType({
     type: 'object',
     fields: [
         defineField({
+            name: 'arrows',
+            title: 'Show Arrows',
+            type: 'boolean',
+            description: 'Whether the Carousel should show arrows to navigate between slides',
+            initialValue: false,
+        }),
+        defineField({
             name: 'dotNav',
             title: 'Show Dot Navigation',
             type: 'boolean',
