@@ -129,6 +129,7 @@ const ControlledTemplate: Story<ModalProps> = (args) => {
                     }}
                 >
                     <TextInput
+                        id="fullName"
                         name="Full Name"
                         defaultValue="Sarah"
                         required
