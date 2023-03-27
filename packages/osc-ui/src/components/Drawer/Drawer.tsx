@@ -3,12 +3,12 @@ import type { ComponentPropsWithoutRef, ElementRef } from 'react';
 import React, { createContext, forwardRef, useContext, useEffect, useState } from 'react';
 import useElementSize from '../../hooks/useElementSize';
 import { useModifier } from '../../hooks/useModifier';
+import type { Maybe } from '../../types';
 import { classNames } from '../../utils/classNames';
 
 import './drawer.scss';
 
 // TODO: pinned animation not working in safari
-// TODO: stop it sliding over the page when it loads :S
 
 export interface SharedDrawerProps {
     /**
@@ -112,6 +112,12 @@ export interface DrawerContentProps
     extends ComponentPropsWithoutRef<typeof Dialog.Content>,
         SharedDrawerProps {
     /**
+     * Customise the element that your alert dialog portals into.
+     * @see: https://www.radix-ui.com/docs/primitives/components/dialog#custom-portal-container
+     * @default undefined
+     */
+    container?: Maybe<HTMLElement>;
+    /**
      * Whether to display the overlay or not
      * @default true
      */
@@ -129,7 +135,15 @@ export interface DrawerContentProps
 }
 
 export const DrawerContent = (props: DrawerContentProps) => {
-    const { children, className, showOverlay = true, size = 'md', isFull = false, ...rest } = props;
+    const {
+        children,
+        className,
+        container,
+        showOverlay = true,
+        size = 'md',
+        isFull = false,
+        ...rest
+    } = props;
     const { direction, setDrawerContentSize, verticalOffset } = useDrawerContext();
     const directionModifier = useModifier('c-drawer__content', direction);
     const widthModifier = useModifier('c-drawer__content', size);
@@ -148,7 +162,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
     }, [setDrawerContentSize, height, width]);
 
     return (
-        <Dialog.Portal>
+        <Dialog.Portal container={container}>
             {showOverlay ? <Dialog.Overlay className="c-drawer__overlay" /> : null}
 
             <Dialog.Content
