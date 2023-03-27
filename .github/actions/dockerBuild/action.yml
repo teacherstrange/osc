@@ -45,12 +45,33 @@ inputs:
   SANITY_STUDIO_API_TOKEN:
     required: true
     description: "sanity api token"
+  ALGOLIA_APP_ID:
+    required: true
+    description: "the app id for algolia"
+  ALGOLIA_ID_SEARCH_ONLY_API_KEY:
+    required: true
+    description: "the search only api key for algolia"
+  ALGOLIA_PRIMARY_INDEX:
+    required: true
+    description: "the primary index to query with autcomplete"
+  ALGOLIA_PRIMARY_INDEX_GROUPED:
+    required: true
+    description: "the primary index to query with autcomplete (grouped variants)"
+  ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS:
+    required: true
+    description: "the primary index to query with autcomplete (query suggestions)"
+  INSTANT_SEARCH_INDEX_NAME:
+    required: true
+    description: "the main index name"
+  INSTANT_SEARCH_QUERY_SUGGESTIONS:
+    required: true
+    description: "the query suggestions index name"
   HUBSPOT_ACCESS_TOKEN:
     required: true
-    description: 'hubspot access token'
+    description: "hubspot access token"
   HUBSPOT_PORTAL_ID:
     required: true
-    description: 'hubspot portal id'
+    description: "hubspot portal id"
   PUBLIC_STOREFRONT_API_TOKEN:
     required: true
     description: "public storefront api token"
@@ -144,6 +165,11 @@ runs:
         push: true
         tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
         build-args: |
+          "ALGOLIA_APP_ID=${{inputs.ALGOLIA_APP_ID }}"
+          "ALGOLIA_ID_SEARCH_ONLY_API_KEY=${{ inputs.ALGOLIA_ID_SEARCH_ONLY_API_KEY }}"
+          "ALGOLIA_PRIMARY_INDEX=${{inputs.ALGOLIA_PRIMARY_INDEX }}"
+          "ALGOLIA_PRIMARY_INDEX_GROUPED=${{inputs.ALGOLIA_PRIMARY_INDEX_GROUPED }}"
+          "ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS=${{ inputs.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS }}"
           "VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY }}"
           "VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY }}"
           "COMMIT_SHA=${{ github.sha }}"
@@ -170,6 +196,11 @@ runs:
         push: true
         tags: registry.fly.io/${{ inputs.APP_NAME }}:${{ env.HEAD_REF }}-${{ github.sha }}
         build-args: |
+          "ALGOLIA_APP_ID=${{inputs.ALGOLIA_APP_ID }}"
+          "ALGOLIA_ID_SEARCH_ONLY_API_KEY=${{ inputs.ALGOLIA_ID_SEARCH_ONLY_API_KEY }}"
+          "ALGOLIA_PRIMARY_INDEX=${{inputs.ALGOLIA_PRIMARY_INDEX }}"
+          "ALGOLIA_PRIMARY_INDEX_GROUPED=${{inputs.ALGOLIA_PRIMARY_INDEX_GROUPED }}"
+          "ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS=${{ inputs.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS }}"
           VAPID_PUBLIC_KEY=${{ inputs.VAPID_PUBLIC_KEY}}
           VAPID_PRIVATE_KEY=${{ inputs.VAPID_PRIVATE_KEY}}
           PLANETSCALE_PRISMA_DATABASE_URL_PR=${{ env.MY_DB_URL }}${{ inputs.DB_NAME }}

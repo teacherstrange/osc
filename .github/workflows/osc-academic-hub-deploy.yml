@@ -19,7 +19,7 @@ jobs:
               - '.github/actions/**'
             osc-ui:
               - 'packages/osc-ui/**'
-            osc-api-auth: 
+            osc-api-auth:
               - 'packages/osc-api-auth/**'
             osc-academic-hub:
               - 'packages/osc-academic-hub/**'
@@ -92,6 +92,12 @@ jobs:
     permissions: write-all
     name: ⚡ Vitest
     runs-on: ubuntu-latest
+    env:
+      VITE_ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+      VITE_ALGOLIA_ID_SEARCH_ONLY_API_KEY: ${{ secrets.ALGOLIA_ID_SEARCH_ONLY_API_KEY }}
+      VITE_ALGOLIA_PRIMARY_INDEX: ${{ secrets.ALGOLIA_PRIMARY_INDEX }}
+      VITE_ALGOLIA_PRIMARY_INDEX_GROUPED: ${{ secrets.ALGOLIA_PRIMARY_INDEX_GROUPED }}
+      VITE_ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS: ${{ secrets.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS }}
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -126,6 +132,11 @@ jobs:
   playwright:
     name: 🎭 Playwright
     env:
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+      ALGOLIA_ID_SEARCH_ONLY_API_KEY: ${{ secrets.ALGOLIA_ID_SEARCH_ONLY_API_KEY }}
+      ALGOLIA_PRIMARY_INDEX: ${{ secrets.ALGOLIA_PRIMARY_INDEX }}
+      ALGOLIA_PRIMARY_INDEX_GROUPED: ${{ secrets.ALGOLIA_PRIMARY_INDEX_GROUPED }}
+      ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS: ${{ secrets.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS }}
       VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
       VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
       PLANETSCALE_PRISMA_DATABASE_URL: ${{ secrets.PLANETSCALE_PRISMA_DATABASE_URL_PLAYWRIGHT }}
@@ -248,3 +259,8 @@ jobs:
           PLANETSCALE_SERVICE_TOKEN: ${{ secrets.PLANETSCALE_SERVICE_TOKEN }}
           ORG_NAME: ${{ secrets.ORG_NAME }}
           DB_NAME: ${{ secrets.DB_NAME }}
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_ID_SEARCH_ONLY_API_KEY: ${{ secrets.ALGOLIA_ID_SEARCH_ONLY_API_KEY }}
+          ALGOLIA_PRIMARY_INDEX: ${{ secrets.ALGOLIA_PRIMARY_INDEX }}
+          ALGOLIA_PRIMARY_INDEX_GROUPED: ${{ secrets.ALGOLIA_PRIMARY_INDEX_GROUPED }}
+          ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS: ${{ secrets.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS }}

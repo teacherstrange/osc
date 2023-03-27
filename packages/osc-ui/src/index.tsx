@@ -8,6 +8,7 @@ export {
     AccordionPanel,
 } from './components/Accordion/Accordion';
 export { Alert, AlertDescription, AlertTitle } from './components/Alert/Alert';
+export { Autocomplete } from './components/Autocomplete/Autocomplete';
 export { Avatar } from './components/Avatar/Avatar';
 export { Badge } from './components/Badge/Badge';
 export { Breadcrumb } from './components/Breadcrumb/Breadcrumb';
@@ -33,6 +34,7 @@ export { Carousel } from './components/Carousel/Carousel';
 export { Checkbox } from './components/Checkbox/Checkbox';
 export { Content } from './components/Content/Content';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
+export { DatePicker } from './components/DatePicker/DatePicker/DatePicker';
 export {
     Footer,
     FooterBottom,
@@ -42,7 +44,6 @@ export {
     FooterMenuHeader,
     FooterMenuItem,
 } from './components/Footer/Footer';
-export { DatePicker } from './components/DatePicker/DatePicker/DatePicker';
 export { Header, HeaderActionBar, HeaderNav } from './components/Header/Header';
 export {
     Hero,
@@ -60,13 +61,13 @@ export { List, ListItem } from './components/List/List';
 export { Logo } from './components/Logo/Logo';
 export { Modal } from './components/Modal/Modal';
 export {
-    Navbar,
     NavContent,
     NavItem,
     NavLink,
     NavList,
     NavSubMenu,
     NavTrigger,
+    Navbar,
 } from './components/Navbar/Navbar';
 export {
     Popover,
@@ -80,16 +81,16 @@ export { SkipLink } from './components/SkipLink/SkipLink';
 export { Switch } from './components/Switch/Switch';
 export { Tabs } from './components/Tabs/Tabs';
 export { Tag } from './components/Tag/Tag';
-export { TextGrid } from './components/TextGrid/TextGrid';
 export { TextArea } from './components/TextArea/TextArea';
+export { TextGrid } from './components/TextGrid/TextGrid';
 export { TextInput } from './components/TextInput/TextInput';
 export { Trustpilot } from './components/Trustpilot/Trustpilot';
 export { VideoPlayer } from './components/VideoPlayer/VideoPlayer';
 export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
 // Hooks
 export { useMediaQuery } from './hooks/useMediaQuery';
-export { useSpacing } from './hooks/useSpacing';
 export { useModifier } from './hooks/useModifier';
+export { useSpacing } from './hooks/useSpacing';
 // Utils
 export { classNames } from './utils/classNames';
 export { formatDate as transformDate } from './utils/formatDate';
