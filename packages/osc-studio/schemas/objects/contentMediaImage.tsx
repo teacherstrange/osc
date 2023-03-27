@@ -1,11 +1,11 @@
-import React from 'react';
+import { defineField, defineType } from 'sanity';
 
-export default {
+export default defineType({
     name: 'contentMediaImage',
     title: 'Content Media Image',
     type: 'object',
     fields: [
-        {
+        defineField({
             name: 'imageFit',
             title: 'Image Fit',
             type: 'string',
@@ -15,12 +15,12 @@ export default {
                 layout: 'radio',
                 direction: 'horizontal',
             },
-        },
-        {
+        }),
+        defineField({
             name: 'image',
             title: 'Image',
             type: 'image.desktop',
-        },
+        }),
     ],
     preview: {
         select: {
@@ -38,4 +38,4 @@ export default {
             };
         },
     },
-};
+});
