@@ -54,6 +54,28 @@ export default defineType({
             group: 'spacing',
         }),
         defineField({
+            name: 'paddingLeft',
+            title: 'Inner Padding Left',
+            type: 'string',
+            description: 'Inner padding at the left of the region.',
+            options: {
+                list: SPACING,
+                layout: 'dropdown',
+            },
+            group: 'spacing',
+        }),
+        defineField({
+            name: 'paddingRight',
+            title: 'Inner Padding Right',
+            type: 'string',
+            description: 'Inner padding at the right of the region.',
+            options: {
+                list: SPACING,
+                layout: 'dropdown',
+            },
+            group: 'spacing',
+        }),
+        defineField({
             name: 'horizontalAlignment',
             title: 'Horizontal Alignment',
             type: 'string',
