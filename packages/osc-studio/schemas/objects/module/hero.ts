@@ -17,7 +17,6 @@ export default defineType({
             title: 'Slides',
             type: 'array',
             of: [{ type: 'heroSlide' }],
-            group: 'slides',
         }),
         defineField({
             name: 'carouselName',
