@@ -1,3 +1,10 @@
+## [0.64.2](https://github.com/Open-Study-College/osc/compare/v0.64.1...v0.64.2) (2023-03-28)
+
+
+### 🐛 Bugs
+
+* move concurrency attribute to the root of pr workflows ([f5479d1](https://github.com/Open-Study-College/osc/commit/f5479d1c591161879b375b8d1e576c81a0a0154f))
+
 ## [0.64.1](https://github.com/Open-Study-College/osc/compare/v0.64.0...v0.64.1) (2023-03-28)
 
 
@@ -125,53 +132,4 @@
 * **studio:** adds portabletext/types ([1d45729](https://github.com/Open-Study-College/osc/commit/1d457298ec2521acdfce904a784d667ab1bdc27e))
 * **studio:** install 'slug' types ([e543536](https://github.com/Open-Study-College/osc/commit/e543536f28afb613dcad1f0b6743fff00f40be23))
 * **studio:** remove unused file ([75fb3af](https://github.com/Open-Study-College/osc/commit/75fb3af800feef7d76b4a77c1ab9208169120c79))
-
-## [0.61.0](https://github.com/Open-Study-College/osc/compare/v0.60.1...v0.61.0) (2023-03-24)
-
-
-### ♻️ Refactors
-
-* **ecommerce:** move ts-node back into dev deps ([91c5b69](https://github.com/Open-Study-College/osc/commit/91c5b696cd3d70e2b52e233c2c77c59572a0bec9))
-* **ecommerce:** remove admin route ([232f331](https://github.com/Open-Study-College/osc/commit/232f331a4867307696851b7f01401fd0db806611))
-* **ecommerce:** tidy up index page ([69744f8](https://github.com/Open-Study-College/osc/commit/69744f811c64b93c5302550235b96914d3c04dc3))
-* **ecommerce:** tidy up root.tsx ([064a0e6](https://github.com/Open-Study-College/osc/commit/064a0e6b0d33925a651cd6bb3d7652a8290a1b8b))
-* **hydrogen:** move cross-env and ts-node into deps ([31fd63a](https://github.com/Open-Study-College/osc/commit/31fd63aa3295eaaca4e9582d2ad9f26fb59779b0))
-* **hydrogen:** replace env type with cache ([4fbae4b](https://github.com/Open-Study-College/osc/commit/4fbae4b6fd7d7e760d5415538662314bfa05ef5d))
-* **hydrogen:** update buyerip with new storefrontHeaders object ([801ed2a](https://github.com/Open-Study-College/osc/commit/801ed2a41862fb8510c30eb68428364e9f092398))
-
-
-### ✨ Features
-
-* **ecommerce:** add a server specific tsconfig ([29b8629](https://github.com/Open-Study-College/osc/commit/29b8629ec336aabe6e986ed155cbbb62ea8928c4))
-* **ecommerce:** add build:server script ([4258df0](https://github.com/Open-Study-College/osc/commit/4258df05302cb3424af6cdb2ba0df7b9f3c846ed))
-* **hydrogen:** add all cart route ([bdf1351](https://github.com/Open-Study-College/osc/commit/bdf1351fb9fe11957163434b175e2e3b2ae6d831))
-* **hydrogen:** add all collections route ([c401c47](https://github.com/Open-Study-College/osc/commit/c401c47788854c95406762607918cc31934aae99))
-* **hydrogen:** add express server adapter ([202c035](https://github.com/Open-Study-College/osc/commit/202c035b69d99992f1226051044854f8a44b6227))
-* **hydrogen:** add graphiql dev route ([45dc296](https://github.com/Open-Study-College/osc/commit/45dc296dbb92756382a35a13ec850e6d57b580b5))
-* **hydrogen:** add hydrogen types ([3061433](https://github.com/Open-Study-College/osc/commit/30614333ddbbe9bc0af6a660c358c5cd2fa22c4e))
-* **hydrogen:** add shopify routes to robots.txt ([f5304fb](https://github.com/Open-Study-College/osc/commit/f5304fb078874202e7d342aa6379454e478e0490))
-* **hydrogen:** add ts-node for running server.ts in start command ([e6ab56c](https://github.com/Open-Study-College/osc/commit/e6ab56c7df5e3421ea36e18acce6f1107f27dd9d))
-* **hydrogen:** downgrate remix version and install hydrogen dependencies ([7b25eb5](https://github.com/Open-Study-College/osc/commit/7b25eb5d9e7382b4e205fe1936f52cc6043211fb))
-* **hydrogen:** integrate storefront with collection route ([2a5079c](https://github.com/Open-Study-College/osc/commit/2a5079cf96e057f71e3a88a652c55036db6fd6fd))
-* **hydrogen:** integrate storefront with product route ([cc9154f](https://github.com/Open-Study-College/osc/commit/cc9154f6fd5474e62f97ea767ef2b742911474a3))
-* **hydrogen:** preconnect to shopify cdns ([2b47827](https://github.com/Open-Study-College/osc/commit/2b47827a9cc3753513b6f92ffade9c5ede4799fc))
-* **hydrogen:** update scripts to target server entrypoint ([9330d09](https://github.com/Open-Study-College/osc/commit/9330d09580bad52f860cc9cfef322c3c597398ef))
-* **workflows:** add hydrogen secrets to dockerfiles ([c84286d](https://github.com/Open-Study-College/osc/commit/c84286d46dec1549dc8fd052dd68b328411ae7ce))
-* **workflows:** add hydrogen secrets to workflows and actions ([d2645ec](https://github.com/Open-Study-College/osc/commit/d2645ec77e80ec73654f1a51ee69df6e5ef82398))
-* **workflows:** add missing secrets to actions ([851c37a](https://github.com/Open-Study-College/osc/commit/851c37af938fa3bcf68824d6e3e85417f5366f29))
-
-
-### 🐛 Bugs
-
-* **ecommerce:** restore dev:css script ([1c1d6d5](https://github.com/Open-Study-College/osc/commit/1c1d6d56d7a4d9a4d35ada7da368e31c44448b6a))
-* **ecommerce:** revert move isMount variable ([a25050f](https://github.com/Open-Study-College/osc/commit/a25050fb2800957b9d9fe1f80592933b964de58f))
-* **hydrogen:** remove cross-env from start command ([3e22a73](https://github.com/Open-Study-College/osc/commit/3e22a73f0d8b93398c213ccf3b70fd0bf618af0c))
-* **hydrogen:** update devServerPort to fix websocket issue ([5cfbef0](https://github.com/Open-Study-College/osc/commit/5cfbef00d378266025dfa9d8f5e842fbf37ab7b0))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* restore lock file ([e5d2db2](https://github.com/Open-Study-College/osc/commit/e5d2db22b86c18092a31ce9b29525e43705834b4))
-* restore lock file ([ba28051](https://github.com/Open-Study-College/osc/commit/ba280511ec8d7a01871574917827b97d7c8a86e3))
-* update README with new envs ([df50cd0](https://github.com/Open-Study-College/osc/commit/df50cd09f1adfa50cad2ad48961e54ddfb99dc17))
 
