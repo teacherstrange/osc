@@ -1,19 +1,22 @@
 import { json } from '@remix-run/node';
-import { getValidationSchema } from '~/components/Forms/utils';
+import { getValidationSchema, isJsonString, reshapeDate } from '~/components/Forms/utils';
 import { hubspotFormsApiRequest, getHubspotFormData } from '~/utils/server/hubspot.server';
 import { validateAction } from '~/utils/validation';
 import type { formModule } from '~/types/sanity';
 import type { HubspotFormData } from '~/components/Forms/types';
 
 export const shapeHubspotFormData = (
-    formFieldsData: Record<any, string>[],
-    formData: Record<any, string>
+    formFieldsData: Record<string, string>[],
+    formData: Record<string, any>
 ) => {
     const shapedData = formFieldsData.map((item) => {
         return {
             objectTypeId: item.objectTypeId,
             name: item.name,
-            value: formData[item.name],
+            value:
+                item.type === 'date'
+                    ? reshapeDate(formData[item.name] as Record<string, number>)
+                    : formData[item.name],
         };
     });
     return { fields: shapedData };
@@ -61,7 +64,10 @@ export const validateAndSubmitHubspotForm = async (formfieldData: FormFieldData)
         } else {
             return {
                 ...formFields,
-                [formField]: formfieldData[formField],
+                // If field is JSON string then parse
+                [formField]: isJsonString(formfieldData[formField])
+                    ? JSON.parse(formfieldData[formField] as string)
+                    : formfieldData[formField],
             };
         }
     }, {});

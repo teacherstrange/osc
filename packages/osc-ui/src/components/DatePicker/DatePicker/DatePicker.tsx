@@ -28,6 +28,10 @@ export interface DatePickerProps extends AriaDatePickerProps<DateValue> {
      */
     errors?: string[] | undefined;
     /**
+     * Name of the DatePicker, submitted with its owning form as part of a name/pair value
+     */
+    name: string;
+    /**
      * The Zod Schema used for validation
      */
     schema?: ZodObject<ZodRawShape>;
@@ -38,26 +42,37 @@ export interface DatePickerProps extends AriaDatePickerProps<DateValue> {
 }
 
 export const DatePicker = (props: DatePickerProps) => {
-    const { closeOnSelect = true, errors, granularity, label, schema, setErrors } = props;
+    const {
+        closeOnSelect = true,
+        errors,
+        granularity,
+        label,
+        isRequired,
+        name,
+        schema,
+        setErrors,
+    } = props;
     let state = useDatePickerState({ ...props, shouldCloseOnSelect: closeOnSelect });
     let ref = useRef();
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
         useDatePicker(props, state, ref);
-
     const dateFieldId = useUniqueId('dateField:');
+
     useEffect(() => {
         // Client side error handling - Sets any errors on an input in
         // accordance with the schema validation
         if (errors && errors.length > 0 && schema && setErrors) {
-            validateDatepicker('datePicker', schema, setErrors, state.value as CalendarDate);
+            validateDatepicker('datePicker', schema, setErrors, state.value as CalendarDate, name);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
     }, [state.value]);
+    var uniqueErrors = Array.from(new Set(errors));
 
     return (
         <div className="c-datepicker">
             <label {...labelProps} className="c-label">
                 {label}
+                {isRequired ? <span className="c-label__required">* </span> : null}
             </label>
             <div
                 className="c-datepicker__date-field-container"
@@ -91,9 +106,10 @@ export const DatePicker = (props: DatePickerProps) => {
                     </ReactAriaDialog>
                 </ReactAriaPopover>
             )}
-            {errors && errors.length > 0 ? (
+
+            {uniqueErrors && uniqueErrors.length > 0 ? (
                 <div className="c-date-field__error--text" role="alert" id={`${dateFieldId}-error`}>
-                    {errors.map((error, index) => (
+                    {uniqueErrors.map((error, index) => (
                         <span key={index} className="u-pr-2xs">
                             {error}
                         </span>

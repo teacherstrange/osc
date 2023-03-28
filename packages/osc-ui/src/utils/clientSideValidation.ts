@@ -40,19 +40,21 @@ export const clientSideValidation = (
  * @param schema A validation schema, e.g. Zod
  * @param setErrors A dispatch to set any errors
  * @param dateValue A DateValue object, or an object with two DateValue objects for the dateRangePicker
+ * @param name Name of the DatePicker, submitted with its owning form as part of a name/pair value
  * @returns null
  */
 export const validateDatepicker = (
     type: 'dateRangePicker' | 'datePicker',
     schema: ZodObject<ZodRawShape>,
     setErrors: Dispatch<SetStateAction<any>>,
-    dateValue: CalendarDate | RangeValue<CalendarDate> | null
+    dateValue: CalendarDate | RangeValue<CalendarDate> | null,
+    name: string
 ) => {
     // If value is null then set error
     if (!dateValue) {
         setErrors((prevErrors) => ({
             ...prevErrors,
-            date: ['Please select a date'],
+            [name]: ['Please select a date'],
         }));
         return;
     }
@@ -97,13 +99,14 @@ export const validateDatepicker = (
     } else {
         checkForErrors();
     }
-
     // If no errors, then set date error to null
     if (!isError) {
-        setErrors((prevErrors) => ({
-            ...prevErrors,
-            date: null,
-        }));
+        setErrors((prevErrors) => {
+            return {
+                ...prevErrors,
+                [name]: null,
+            };
+        });
     }
 };
 

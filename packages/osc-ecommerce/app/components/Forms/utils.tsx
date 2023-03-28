@@ -1,6 +1,8 @@
+import type { DateValue } from '@react-types/calendar';
 import type { Fetcher } from '@remix-run/react/dist/transition';
-import { Select, SelectItem, TextArea, TextInput } from 'osc-ui';
+import { DatePicker, Select, SelectItem, TextArea, TextInput } from 'osc-ui';
 import type { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { z } from 'zod';
 import type { HubspotFormFieldGroups, HubspotFormFieldTypes } from './types';
@@ -83,6 +85,31 @@ export function getInputOrContent(
                         </Select>
                     );
                     break;
+                case 'date':
+                    const [date, setDate] = useState<DateValue | null>(null);
+                    formInput.push(
+                        <>
+                            <input
+                                hidden={true}
+                                name={hubspotFields.name}
+                                defaultValue={JSON.stringify({
+                                    year: date?.year ? date.year : 0,
+                                    month: date?.month ? date.month : 0,
+                                    day: date?.day ? date.day : 0,
+                                })}
+                            />
+                            <DatePicker
+                                errors={validationErrors && validationErrors[hubspotFields.name]}
+                                label={hubspotFields.label}
+                                name={hubspotFields.name}
+                                onChange={setDate}
+                                isRequired={hubspotFields.required}
+                                schema={schema.pick({ [hubspotFields.name]: true })}
+                                setErrors={setValidationErrors}
+                            />
+                        </>
+                    );
+                    break;
                 default:
                     return null;
             }
@@ -132,6 +159,44 @@ export const getValidationSchema = (formFields: HubspotFormFieldTypes[]) => {
                           }
                       )
                     : z.string(),
+            };
+        } else if (field.type === 'date') {
+            validationField = {
+                [field.name]: field.required
+                    ? z.object({
+                          year: z
+                              .number({
+                                  invalid_type_error: 'Invalid data',
+                              })
+                              .min(1, {
+                                  message: 'Please select a date',
+                              }),
+                          month: z
+                              .number({
+                                  invalid_type_error: 'Invalid data',
+                              })
+                              .min(1, {
+                                  message: 'Please select a date',
+                              }),
+                          day: z
+                              .number({
+                                  invalid_type_error: 'Invalid data',
+                              })
+                              .min(1, {
+                                  message: 'Please select a date',
+                              }),
+                      })
+                    : z.object({
+                          year: z.number({
+                              invalid_type_error: 'Invalid data',
+                          }),
+                          month: z.number({
+                              invalid_type_error: 'Invalid data',
+                          }),
+                          day: z.number({
+                              invalid_type_error: 'Invalid data',
+                          }),
+                      }),
             };
         }
         return {
@@ -200,4 +265,28 @@ export const inverseSubmitButton = (styles?: Record<string, unknown>) => {
         });
     }
     return inverseSubmitButton;
+};
+
+export const reshapeDate = (dateObj: Record<string, number>) => {
+    const result = [];
+    // Get just the dates - e.g. {year:2022, month:02, day:20} = > [2022,02,20]
+    for (const key of Object.keys(dateObj)) {
+        result.push(dateObj[key]);
+    }
+    // If first item in array is 0 then date has not been set, so return 0
+    if (result[0] === 0) return 0;
+
+    const updateDate = new Date(result.join('-'));
+    // "Date properties will only store the date, and must be set to midnight UTC for the date you want" - https://legacydocs.hubspot.com/docs/faq/how-should-timestamps-be-formatted-for-hubspots-apis
+    updateDate.setUTCHours(0, 0, 0, 0);
+    return updateDate.getTime();
+};
+
+export const isJsonString = (str: any) => {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
 };

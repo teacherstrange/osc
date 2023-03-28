@@ -6,7 +6,7 @@ import { render } from 'test-utils';
 import { DatePicker } from './DatePicker';
 
 test('should render the DateField with SpinButtons for a DatePicker, a button for the Calendar and a Label', () => {
-    render(<DatePicker type="month" label="Date" />);
+    render(<DatePicker type="month" label="Date" name="date" />);
     expect(screen.getByRole('group', { name: 'Date' })).toBeInTheDocument();
     expect(screen.getByRole('presentation')).toBeInTheDocument();
     expect(screen.getByRole('spinbutton', { name: 'Date month' })).toBeInTheDocument();
@@ -16,7 +16,9 @@ test('should render the DateField with SpinButtons for a DatePicker, a button fo
 });
 test('should open the calendar when the calendar button is clicked', async () => {
     const user = userEvent.setup();
-    render(<DatePicker type="month" label="Date" defaultValue={parseDate('2023-02-01')} />);
+    render(
+        <DatePicker type="month" label="Date" defaultValue={parseDate('2023-02-01')} name="date" />
+    );
     const button = screen.getByRole('button');
     await user.click(button);
 
@@ -35,6 +37,7 @@ test('should disable out of range dates when min/max values are passed in', asyn
             label="Date"
             minValue={parseDate(`2023-01-${minDate}`)}
             maxValue={parseDate(`2023-01-${maxDate}`)}
+            name="date"
         />
     );
     const button = screen.getByRole('button');
@@ -75,6 +78,7 @@ test('should open the year and decade calendars and set the correct date', async
             type="month"
             label="Date"
             defaultValue={parseDate('2023-02-01')}
+            name="date"
         />
     );
 

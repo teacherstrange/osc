@@ -39,6 +39,10 @@ interface DateRangePickerContainerProps extends AriaDateRangePickerProps<DateVal
      */
     label: string;
     /**
+     * Name of the DatePicker, submitted with its owning form as part of a name/pair value
+     */
+    name: string;
+    /**
      * Preset time periods a user can select
      */
     presets?: { name: string; length: number }[];
@@ -58,6 +62,7 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
         defaultValue,
         errors,
         label,
+        name,
         presets,
         schema,
         setErrors,
@@ -86,7 +91,8 @@ export const DateRangePickerContainer = (props: DateRangePickerContainerProps) =
                 'dateRangePicker',
                 schema,
                 setErrors,
-                value as RangeValue<CalendarDate>
+                value as RangeValue<CalendarDate>,
+                name
             );
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes

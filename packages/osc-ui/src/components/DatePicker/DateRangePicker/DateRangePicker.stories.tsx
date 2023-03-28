@@ -1,9 +1,8 @@
 import { parseDate } from '@internationalized/date';
 import { I18nProvider } from '@react-aria/i18n';
 import type { Meta, Story } from '@storybook/react';
-import React, { useState } from 'react';
+import React from 'react';
 import { CalendarCell, CalendarGrid } from '../Calendar/CalendarGridAndCell';
-import { datePickerSchema } from '../DatePicker/mockSchema';
 import { RangeCalendar, RangeCalendarContainer } from '../RangeCalendar/RangeCalendar';
 import { DateRangePicker, DateRangePickerContainer } from './DateRangePicker';
 
@@ -52,36 +51,10 @@ const Template: Story = (args) => {
                         : null
                 }
                 label={args.label}
+                name={args.name}
                 presets={args.presets}
                 minValue={dates[args.minValue]}
                 maxValue={dates[args.maxValue]}
-            />
-        </I18nProvider>
-    );
-};
-
-const ValidationTemplate: Story = (args) => {
-    const [errors, setErrors] = useState({
-        date: ['Field is required'],
-    });
-
-    return (
-        // Passing the 118nProvider because locale was defaulting to en-US - This is
-        // required to change the date order to dd-mm-YYYY rather than US mm-dd-YYYY
-        <I18nProvider locale="en-GB">
-            <DateRangePickerContainer
-                defaultValue={
-                    args.defaultValue
-                        ? { start: parseDate(todaysDate), end: dates['nextWeek'] }
-                        : null
-                }
-                errors={errors.date}
-                label={args.label}
-                presets={args.presets}
-                minValue={dates[args.minValue]}
-                maxValue={dates[args.maxValue]}
-                schema={datePickerSchema.date}
-                setErrors={setErrors}
             />
         </I18nProvider>
     );
@@ -92,14 +65,14 @@ export const WithTimePresets = Template.bind({});
 export const DefaultValue = Template.bind({});
 export const MinAndMax = Template.bind({});
 export const InvalidDate = Template.bind({});
-export const InvalidData = ValidationTemplate.bind({});
 
 Primary.args = {
     label: 'Date Range',
+    name: 'date',
 };
 
 WithTimePresets.args = {
-    label: 'Date Range',
+    ...Primary.args,
     presets: [
         {
             name: 'Today',
@@ -136,8 +109,8 @@ WithTimePresets.parameters = {
 };
 
 DefaultValue.args = {
+    ...Primary.args,
     defaultValue: true,
-    label: 'Date Range',
 };
 DefaultValue.parameters = {
     docs: {
@@ -148,8 +121,8 @@ DefaultValue.parameters = {
 };
 
 MinAndMax.args = {
+    ...Primary.args,
     defaultValue: true,
-    label: 'Date Range',
     minValue: 'lastWeek',
     maxValue: 'nextWeek',
 };
@@ -161,8 +134,8 @@ MinAndMax.parameters = {
     },
 };
 InvalidDate.args = {
+    ...Primary.args,
     defaultValue: true,
-    label: 'Date Range',
     minValue: 'threeWeeksAgo',
     maxValue: 'lastWeek',
 };
