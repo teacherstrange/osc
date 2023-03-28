@@ -78,9 +78,35 @@ export interface contentModule extends module {
     marginBottom?: Maybe<Spacing>;
     paddingBottom?: Maybe<Spacing>;
     paddingTop?: Maybe<Spacing>;
+    paddingLeft: Maybe<Spacing>;
+    paddingRight: Maybe<Spacing>;
     fullWidth?: Maybe<boolean>;
     body?: PortableTextBlock[];
     buttons?: buttonModule[];
+}
+
+export interface contentMediaSlide extends module {
+    content: contentModule;
+    contentAlignment?: 'start' | 'center' | 'end';
+    layoutDirection?: 'content-media' | 'media-content';
+    layoutGrid?: string;
+    media: {
+        carouselName: Maybe<string>;
+        carouselSettings: carouselModuleSettings;
+        mediaType: {
+            image?: imageModule<HTMLImageElement>;
+            imageFit?: 'cover' | 'contain';
+        }[];
+    };
+}
+
+export interface contentMediaModule extends module {
+    carouselName: Maybe<string>;
+    carouselSettings: Maybe<carouselModuleSettings>;
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
+    slides: contentMediaSlide[];
 }
 
 export interface accordionModule extends module {
@@ -179,7 +205,7 @@ export interface cardModule extends module {
     paddingBottom?: Spacing | string;
     paddingTop?: Spacing | string;
     layout: string;
-    carouselName?: string;
+    carouselName?: Maybe<string>;
     carouselSettings?: carouselModuleSettings;
     content?: contentModule;
     card: TypesOfCard[];
@@ -198,20 +224,6 @@ export interface trustpilotModule extends module {
     type: 'slider' | 'grid' | 'minicarousel' | 'microstar';
 }
 
-export interface carouselModuleSettings extends module {
-    carouselName: string;
-    arrows?: boolean;
-    dotNav?: boolean;
-    loop?: boolean;
-    autoplay?: false | 'smooth' | 'switch';
-    startIndex?: number;
-    slidesPerView?: {
-        mobile?: number;
-        tablet?: number;
-        desktop?: number;
-    };
-}
-
 export interface carouselModule extends module {
     mediaArray: SanityImage<HTMLImageElement>[];
     active: boolean;
@@ -225,7 +237,7 @@ export interface carouselModule extends module {
 }
 
 export interface carouselModuleSettings extends module {
-    carouselName: string;
+    carouselName: Maybe<string>;
     arrows?: boolean;
     dotNav?: boolean;
     loop?: boolean;
@@ -248,6 +260,7 @@ export interface heroSlide extends module {
 }
 
 export interface heroModule extends module {
+    carouselName: string;
     carouselSettings: carouselModuleSettings;
     slides: heroSlide[];
 }

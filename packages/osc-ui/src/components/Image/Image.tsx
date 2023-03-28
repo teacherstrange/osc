@@ -44,6 +44,11 @@ export const Image = (props: Props<HTMLImageElement>) => {
         ...attr
     } = props;
 
+    if (!src) {
+        console.warn('No `src` provided to `Image`!');
+        return null;
+    }
+
     const transformationString = getTransformationString(src);
 
     // Append our custom width and heights to our transformation part of the url

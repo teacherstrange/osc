@@ -5,6 +5,7 @@ import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
+import contentMediaStyles from 'osc-ui/dist/src-components-ContentMedia-content-media.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
@@ -15,6 +16,7 @@ import type {
     accordionModule,
     cardModule,
     carouselModule,
+    contentMediaModule,
     contentModule,
     formModule,
     heroModule,
@@ -27,6 +29,7 @@ import type {
 } from '~/types/sanity';
 import { AccordionModule } from './Accordion/Accordion';
 import { Cards } from './Cards/Cards';
+import { ContentMediaModule } from './ContentMedia/ContentMedia';
 import { Hero } from './Hero/Hero';
 import { TextGridModule } from './TextGrid/TextGrid';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
@@ -106,6 +109,10 @@ export const getComponentStyles = (data: SanityPage) => {
 
             case 'module.textGrid':
                 styles.push({ rel: 'stylesheet', href: textGridStyles });
+                break;
+
+            case 'module.contentMedia':
+                styles.push({ rel: 'stylesheet', href: contentMediaStyles });
                 break;
 
             case 'module.video':
@@ -195,6 +202,11 @@ export default function Module(props: Props) {
             const moduleHero = module as heroModule;
 
             return <Hero data={moduleHero} key={moduleHero._key} />;
+
+        case 'module.contentMedia':
+            const moduleContentMedia = module as contentMediaModule;
+
+            return <ContentMediaModule module={moduleContentMedia} key={moduleContentMedia._key} />;
 
         case 'module.images':
             const moduleImage = module as imageModule<HTMLImageElement>;

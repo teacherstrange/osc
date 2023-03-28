@@ -30,7 +30,8 @@ import bodyNoHeadings from './blocks/bodyNoHeadings';
 import accordionItem from './objects/accordionItem';
 import carouselSettings from './objects/carouselSettings';
 import collectionRule from './objects/collectionRule';
-import heroCarouselSettings from './objects/heroCarouselSettings';
+import contentMediaImage from './objects/contentMediaImage';
+import contentMediaSlide from './objects/contentMediaSlide';
 import heroSlide from './objects/heroSlide';
 import linkExternal from './objects/linkExternal';
 import linkInternal from './objects/linkInternal';
@@ -45,6 +46,8 @@ import moduleCards from './objects/module/cards';
 import moduleCardStatic from './objects/module/cardStatic';
 import moduleCarousel from './objects/module/carousel';
 import moduleContent from './objects/module/content';
+import moduleContentMedia from './objects/module/contentMedia';
+import moduleForms from './objects/module/forms';
 import moduleHero from './objects/module/hero';
 import moduleImage from './objects/module/image';
 import moduleImageMobile from './objects/module/imageMobile';
@@ -55,6 +58,7 @@ import moduleTrustpilot from './objects/module/trustpilot';
 import moduleVideo from './objects/module/video';
 import navigationItem from './objects/navigationItem';
 import navigationLink from './objects/navigationLink';
+import partialCarouselSettings from './objects/partialCarouselSettings';
 import placeholderString from './objects/placeholderString';
 import productOption from './objects/productOption';
 import ProductWithVariant from './objects/productWithVariant';
@@ -97,7 +101,9 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     // Objects
     accordionItem,
     carouselSettings,
-    heroCarouselSettings,
+    contentMediaImage,
+    contentMediaSlide,
+    partialCarouselSettings,
     heroSlide,
     collectionRule,
     textGridItem,
@@ -125,12 +131,14 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     moduleCardPost,
     moduleCardStatic,
     moduleCards,
+    moduleContent,
+    moduleContentMedia,
+    moduleForms,
     moduleHero,
     moduleImage,
     moduleImages,
     moduleImageMobile,
     moduleImageTablet,
-    moduleContent,
     moduleTrustpilot,
     moduleCarousel,
     moduleTextGrid,

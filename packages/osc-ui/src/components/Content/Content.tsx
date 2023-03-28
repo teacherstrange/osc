@@ -48,6 +48,8 @@ export interface Props {
     marginBottom?: Maybe<Spacing>;
     paddingBottom?: Maybe<Spacing>;
     paddingTop?: Maybe<Spacing>;
+    paddingLeft?: Maybe<Spacing>;
+    paddingRight?: Maybe<Spacing>;
     value: PortableTextBlock[];
     buttons?: ButtonProps[];
     fullWidth?: boolean;
@@ -149,6 +151,8 @@ export const Content = (props: Props) => {
         marginBottom,
         paddingTop,
         paddingBottom,
+        paddingLeft,
+        paddingRight,
         value,
         buttons,
     } = props;
@@ -159,12 +163,16 @@ export const Content = (props: Props) => {
     const marginBottomClass = useSpacing('margin', 'bottom', marginBottom);
     const paddingTopClass = useSpacing('padding', 'top', paddingTop);
     const paddingBottomClass = useSpacing('padding', 'bottom', paddingBottom);
+    const paddingLeftClass = useSpacing('padding', 'left', paddingLeft);
+    const paddingRightClass = useSpacing('padding', 'right', paddingRight);
 
     const classes = classNames(
         'c-content',
         paddingTopClass,
         paddingBottomClass,
         marginBottomClass,
+        paddingLeftClass,
+        paddingRightClass,
         backgroundColor && `u-bg-color-${backgroundColor}`,
         className
     );

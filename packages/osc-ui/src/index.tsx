@@ -33,6 +33,7 @@ export {
 export { Carousel } from './components/Carousel/Carousel';
 export { Checkbox } from './components/Checkbox/Checkbox';
 export { Content } from './components/Content/Content';
+export { ContentMedia, ContentMediaBlock } from './components/ContentMedia/ContentMedia';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export { DatePicker } from './components/DatePicker/DatePicker/DatePicker';
 export {
@@ -61,13 +62,13 @@ export { List, ListItem } from './components/List/List';
 export { Logo } from './components/Logo/Logo';
 export { Modal } from './components/Modal/Modal';
 export {
+    Navbar,
     NavContent,
     NavItem,
     NavLink,
     NavList,
     NavSubMenu,
     NavTrigger,
-    Navbar,
 } from './components/Navbar/Navbar';
 export {
     Popover,
@@ -91,6 +92,8 @@ export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useModifier } from './hooks/useModifier';
 export { useSpacing } from './hooks/useSpacing';
+// Types
+export type { Columns } from './types';
 // Utils
 export { classNames } from './utils/classNames';
 export { formatDate as transformDate } from './utils/formatDate';

@@ -20,14 +20,14 @@ const mq = {
 };
 
 export const Hero = (props: { data: heroModule }) => {
-    const { carouselSettings, slides } = props?.data;
+    const { carouselName, carouselSettings, slides } = props?.data;
 
     const perView = (perView: number | undefined) => (perView ? perView : 1);
 
     if (slides.length > 1) {
         return (
             <Carousel
-                carouselName={carouselSettings.carouselName}
+                carouselName={carouselName}
                 arrows={carouselSettings?.arrows}
                 dotNav={carouselSettings?.dotNav}
                 loop={carouselSettings?.loop}

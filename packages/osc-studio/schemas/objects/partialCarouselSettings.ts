@@ -1,17 +1,16 @@
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
-    name: 'heroCarouselSettings',
+    name: 'partialCarouselSettings',
     title: 'Carousel Settings',
     type: 'object',
     fields: [
         defineField({
-            name: 'carouselName',
-            title: 'Carousel Name',
-            type: 'string',
-            description:
-                'The accessible name of the Carousel, this will not be visible on the page but is required for accessibility.',
-            validation: (Rule) => Rule.required(),
+            name: 'arrows',
+            title: 'Show Arrows',
+            type: 'boolean',
+            description: 'Whether the Carousel should show arrows to navigate between slides',
+            initialValue: false,
         }),
         defineField({
             name: 'dotNav',
