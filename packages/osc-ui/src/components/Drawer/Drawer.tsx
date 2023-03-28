@@ -97,6 +97,11 @@ export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, Drawe
                     ['--drawer-vertical-offset' as string]: verticalOffset,
                     ...rest.style,
                 }}
+                onClick={(event) => {
+                    // Prevent event bubbling/capturing which is causing the drawer to close immediately
+                    // when tapped on on a mobile. This is related to the fact we are forceMounting the drawer
+                    event.stopPropagation();
+                }}
             >
                 {children}
             </Dialog.Trigger>
@@ -162,6 +167,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
     }, [setDrawerContentSize, height, width]);
 
     return (
+        // ForceMount the drawer to keep animation on Safari happy
         <Dialog.Portal container={container} forceMount>
             {showOverlay ? <Dialog.Overlay className="c-drawer__overlay" /> : null}
 
