@@ -91,7 +91,7 @@ const PinnedTemplate: Story<DrawerProps> = (args) => {
             }}
             {...args}
         >
-            <DrawerTrigger asChild isPinned>
+            <DrawerTrigger asChild isPinned className="c-btn--no-shadow">
                 <Button>Contact us</Button>
             </DrawerTrigger>
 

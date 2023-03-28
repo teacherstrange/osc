@@ -110,11 +110,6 @@
                 box-shadow: $shadow-m;
 
                 @include z-index(modal-trigger);
-
-                // TODO: Make this a modifier for the button
-                &::after {
-                    display: none;
-                }
             }
 
             @each $dir in $drawer-directions {
