@@ -32,6 +32,8 @@ import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
 import type { SanityNavSettings, SanitySocial } from './types/sanity';
 import { getColorScheme } from './utils/colorScheme';
+import { SSRProvider } from '@react-aria/ssr';
+import { I18nProvider } from '@react-aria/i18n';
 
 let isMount = true;
 export const links: LinksFunction = () => {
@@ -258,33 +260,38 @@ export default function App() {
     }, [location, matches]);
 
     return (
-        <Document>
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `document.env = ${JSON.stringify({
-                        SANITY_STUDIO_API_PROJECT_ID,
-                        SANITY_STUDIO_API_DATASET,
-                    })}`,
-                }}
-            />
+        <SSRProvider>
+            {/* Recommended to always specify locale to ensure server and client match - https://react-spectrum.adobe.com/react-aria/internationalization.html*/}
+            <I18nProvider locale="en-GB">
+                <Document>
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `document.env = ${JSON.stringify({
+                                SANITY_STUDIO_API_PROJECT_ID,
+                                SANITY_STUDIO_API_DATASET,
+                            })}`,
+                        }}
+                    />
 
-            <SkipLink anchor="main-content">Skip to main content</SkipLink>
+                    <SkipLink anchor="main-content">Skip to main content</SkipLink>
 
-            <div className="o-page">
-                <SiteHeader navSettings={navSettings} actionNav={siteSettings?.actionNav} />
+                    <div className="o-page">
+                        <SiteHeader navSettings={navSettings} actionNav={siteSettings?.actionNav} />
 
-                <main id="main-content" tabIndex={-1}>
-                    <Outlet />
-                </main>
+                        <main id="main-content" tabIndex={-1}>
+                            <Outlet />
+                        </main>
 
-                <SiteFooter
-                    navigationGroups={footerNavSettings}
-                    bottomNavigation={footerBottomNav}
-                    contactDetails={siteSettings?.contactDetails}
-                    socials={siteSettings?.seo?.socials}
-                    siteName={siteSettings?.seo?.siteTile}
-                />
-            </div>
-        </Document>
+                        <SiteFooter
+                            navigationGroups={footerNavSettings}
+                            bottomNavigation={footerBottomNav}
+                            contactDetails={siteSettings?.contactDetails}
+                            socials={siteSettings?.seo?.socials}
+                            siteName={siteSettings?.seo?.siteTile}
+                        />
+                    </div>
+                </Document>
+            </I18nProvider>
+        </SSRProvider>
     );
 }
