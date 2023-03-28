@@ -1,3 +1,10 @@
+## [0.64.1](https://github.com/Open-Study-College/osc/compare/v0.64.0...v0.64.1) (2023-03-28)
+
+
+### 🐛 Bugs
+
+* make destroy and build steps concurrent ([1a8372b](https://github.com/Open-Study-College/osc/commit/1a8372b1ac542148b82781dc433d295dbc53d4e0))
+
 ## [0.64.0](https://github.com/Open-Study-College/osc/compare/v0.63.0...v0.64.0) (2023-03-27)
 
 
@@ -167,13 +174,4 @@
 * restore lock file ([e5d2db2](https://github.com/Open-Study-College/osc/commit/e5d2db22b86c18092a31ce9b29525e43705834b4))
 * restore lock file ([ba28051](https://github.com/Open-Study-College/osc/commit/ba280511ec8d7a01871574917827b97d7c8a86e3))
 * update README with new envs ([df50cd0](https://github.com/Open-Study-College/osc/commit/df50cd09f1adfa50cad2ad48961e54ddfb99dc17))
-
-## [0.60.1](https://github.com/Open-Study-College/osc/compare/v0.60.0...v0.60.1) (2023-03-23)
-
-
-### ♻️ Refactors
-
-* **blog card:** ensure the footer content doesn't stretch ([48f5a93](https://github.com/Open-Study-College/osc/commit/48f5a9368c755a9cc6d4e676a5f696792ef9d8a5))
-* **island grid:** add classname to manage number of rows ([b7e7dc6](https://github.com/Open-Study-College/osc/commit/b7e7dc685b40349d6a28093b61adbb6e9c7e02a4))
-* **island grid:** update stories to use cards component ([34625b6](https://github.com/Open-Study-College/osc/commit/34625b68f0dc7c2f1eb1fe1b0502822eee513ade))
 
