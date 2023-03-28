@@ -6,6 +6,10 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   FLY_REGION: iad
 
+# Only run one deployment at a time per PR.
+concurrency:
+  group: pr-${{ github.event.number }}--studio-pr
+
 jobs:
   pre-check:
     name: check if workflow should run
@@ -80,10 +84,6 @@ jobs:
     needs: build
     name: 🚀 Deploy PR Branch
     runs-on: ubuntu-latest
-
-    # Only run one deployment at a time per PR.
-    concurrency:
-      group: pr-${{ github.event.number }}--studio-pr
 
     # Create a GitHub deployment environment per pr branch app so it shows up
     # in the pull request UI.
