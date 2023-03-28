@@ -7,8 +7,8 @@
     $drawer-content-width: var(--drawer-content-width); // Value is generated on the component
     $drawer-width-m: 610px;
     $drawer-width-s: 370px;
-    $drawer-max-height: 900px;
-    $drawer-offset: calc(var(--drawer-vertical-offset) * 1px);
+    $drawer-max-height: 750px;
+    $drawer-offset: 120px;
     $drawer-transition-timing: $timing-s;
     $drawer-transition-ease: $ease-out-sine;
 
@@ -26,6 +26,8 @@
         }
 
         &__content {
+            $self: &;
+
             position: fixed;
             max-height: $drawer-max-height;
             overflow-y: auto;
@@ -57,8 +59,20 @@
                         left: 50%;
                     }
 
-                    @if $dir == right or $dir == left {
-                        top: $drawer-offset;
+                    &#{$self}--offset {
+                        @if $dir == right or $dir == left {
+                            top: $drawer-offset;
+
+                            // WHEN the viewport is the combined size of the offset and the max-height
+                            // then reset the offset value
+                            @include mq(
+                                strip-unit($drawer-max-height) + strip-unit($drawer-offset),
+                                max,
+                                height
+                            ) {
+                                top: 0;
+                            }
+                        }
                     }
 
                     &[data-state="open"] {
@@ -90,12 +104,24 @@
             //  Sizes
             // *----------------------------------*/
             &--sm {
-                max-width: $drawer-width-s;
+                width: 100%;
                 padding: $space-s $space-m;
+
+                @include mq($mq-tab) {
+                    max-width: $drawer-width-s;
+                }
             }
 
             &--md {
-                max-width: $drawer-width-m;
+                width: 100%;
+
+                @include mq(strip-unit($drawer-max-height), max, height) {
+                    max-height: 500px;
+                }
+
+                @include mq($mq-tab) {
+                    max-width: $drawer-width-m;
+                }
             }
 
             &.is-full {
@@ -114,6 +140,8 @@
          *
          */
         &__trigger {
+            $self: &;
+
             &.is-pinned {
                 position: fixed; /* [1] */
                 box-shadow: $shadow-m;
@@ -155,6 +183,20 @@
                         top: $drawer-offset;
                         transform: if($dir == right, rotate(90deg), rotate(270deg)); /* [2] */
                         transform-origin: if($dir == right, top left, top right); /* [3] */
+
+                        &#{$self}--offset {
+                            top: $drawer-offset;
+
+                            // WHEN the viewport is the combined size of the offset and the max-height
+                            // then reset the offset value
+                            @include mq(
+                                strip-unit($drawer-max-height) + strip-unit($drawer-offset),
+                                max,
+                                height
+                            ) {
+                                top: 0;
+                            }
+                        }
 
                         /* stylelint-disable-next-line selector-class-pattern, plugin/selector-bem-pattern */
                         > .c-btn__inner {

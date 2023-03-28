@@ -1,5 +1,12 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import type { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode } from 'react';
+import type {
+    ComponentPropsWithoutRef,
+    Dispatch,
+    ElementRef,
+    ElementType,
+    ReactNode,
+    SetStateAction,
+} from 'react';
 import React, { createContext, forwardRef, useContext, useEffect, useState } from 'react';
 import useElementSize from '../../hooks/useElementSize';
 import { useModifier } from '../../hooks/useModifier';
@@ -30,15 +37,20 @@ export interface DrawerProps
     direction: 'top' | 'right' | 'bottom' | 'left';
     /**
      * Distance from the top of the screen
-     * @default 120
+     * @default false
      */
-    verticalOffset?: 0 | 120;
+    isOffset?: boolean;
 }
 
-const DrawerContext = createContext(null);
+const DrawerContext = createContext<
+    DrawerProps & {
+        drawerContentSize: { width: number; height: number };
+        setDrawerContentSize: Dispatch<SetStateAction<{ width: number; height: number }>>;
+    }
+>(null);
 
 export const Drawer = (props: DrawerProps) => {
-    const { children, direction, verticalOffset = 120 } = props;
+    const { children, direction, isOffset } = props;
     const [drawerContentSize, setDrawerContentSize] = useState<{ width: number; height: number }>({
         width: 0,
         height: 0,
@@ -50,7 +62,7 @@ export const Drawer = (props: DrawerProps) => {
                 direction,
                 drawerContentSize,
                 setDrawerContentSize,
-                verticalOffset,
+                isOffset,
             }}
         >
             <Dialog.Root className="c-drawer" {...props}>
@@ -76,12 +88,17 @@ export interface DrawerTriggerProps
 export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, DrawerTriggerProps>(
     (props, forwardedRef) => {
         const { children, className, isPinned, ...rest } = props;
-        const { direction, drawerContentSize, verticalOffset } = useDrawerContext();
+        const { direction, drawerContentSize, isOffset } = useDrawerContext();
         const directionModifier = useModifier('c-drawer__trigger', isPinned && direction);
+        const offsetModifier = useModifier(
+            'c-drawer__trigger',
+            isPinned && isOffset ? 'offset' : ''
+        );
 
         const classes = classNames(
             'c-drawer__trigger',
             directionModifier,
+            offsetModifier,
             isPinned ? 'is-pinned' : '',
             className
         );
@@ -94,7 +111,6 @@ export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, Drawe
                 style={{
                     ['--drawer-content-height' as string]: drawerContentSize.height,
                     ['--drawer-content-width' as string]: drawerContentSize.width,
-                    ['--drawer-vertical-offset' as string]: verticalOffset,
                     ...rest.style,
                 }}
                 onClick={(event) => {
@@ -149,14 +165,16 @@ export const DrawerContent = (props: DrawerContentProps) => {
         isFull = false,
         ...rest
     } = props;
-    const { direction, setDrawerContentSize, verticalOffset } = useDrawerContext();
+    const { direction, setDrawerContentSize, isOffset } = useDrawerContext();
     const directionModifier = useModifier('c-drawer__content', direction);
+    const offsetModifier = useModifier('c-drawer__content', isOffset ? 'offset' : '');
     const widthModifier = useModifier('c-drawer__content', size);
     const [contentRef, { height, width }] = useElementSize();
 
     const classes = classNames(
         'c-drawer__content',
         directionModifier,
+        offsetModifier,
         widthModifier,
         isFull && 'is-full',
         className
@@ -178,7 +196,6 @@ export const DrawerContent = (props: DrawerContentProps) => {
                 style={{
                     ['--drawer-content-height' as string]: height,
                     ['--drawer-content-width' as string]: width,
-                    ['--drawer-vertical-offset' as string]: verticalOffset,
                     ...rest.style,
                 }}
             >

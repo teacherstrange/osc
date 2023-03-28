@@ -241,7 +241,7 @@ const CustomContainerTemplate: Story<DrawerProps> = (args) => {
 export const Primary = Template.bind({});
 Primary.args = {
     direction: 'right',
-    verticalOffset: 120,
+    isOffset: true,
 };
 
 export const PinnedTrigger = PinnedTemplate.bind({});
