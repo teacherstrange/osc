@@ -99,6 +99,7 @@
             }
 
             &.is-full {
+                top: 0; // Make sure we always fill the space
                 bottom: 0;
             }
         }
