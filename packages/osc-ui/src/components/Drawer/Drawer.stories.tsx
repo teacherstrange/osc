@@ -126,7 +126,15 @@ const PinnedTemplate: Story<DrawerProps> = (args) => {
                             placeholder="Your phone number"
                         />
                         <TextArea id="message" name="Enquiry" />
-                        <Button isFull isLoading={isLoading} loadingText="Sending">
+                        <Button
+                            isFull
+                            isLoading={isLoading}
+                            loadingText="Sending"
+                            onClick={(event) => {
+                                // Prevent closing the drawer when clicking the button
+                                event.stopPropagation();
+                            }}
+                        >
                             Send Enquiry
                         </Button>
                         <p className="t-font-s">
