@@ -9,6 +9,8 @@
     $drawer-width-s: 370px;
     $drawer-max-height: 900px;
     $drawer-offset: calc(var(--drawer-vertical-offset) * 1px);
+    $drawer-transition-timing: $timing-s;
+    $drawer-transition-ease: $ease-out-sine;
 
     .c-drawer {
         /*
@@ -54,11 +56,26 @@
                     }
 
                     &[data-state="open"] {
-                        @include animate(drawer-side-in-#{$dir}, $timing-s, $ease-out-sine);
+                        visibility: visible;
+
+                        @include animate(
+                            drawer-side-in-#{$dir},
+                            $drawer-transition-timing,
+                            $drawer-transition-ease
+                        );
                     }
 
                     &[data-state="closed"] {
-                        @include animate(drawer-side-out-#{$dir}, $timing-s, $ease-out-sine);
+                        // delay transitioning the visibility so the animation can run first
+                        transition: visibility;
+                        transition-delay: $drawer-transition-timing;
+                        visibility: hidden;
+
+                        @include animate(
+                            drawer-side-out-#{$dir},
+                            $drawer-transition-timing,
+                            $drawer-transition-ease
+                        );
                     }
                 }
             }
@@ -170,103 +187,28 @@
             @include z-index(modal);
 
             &[data-state="open"] {
-                @include animate(overlay-fade-in, $timing-s, $ease-out-sine);
+                @include animate(
+                    overlay-fade-in,
+                    $drawer-transition-timing,
+                    $drawer-transition-ease
+                );
             }
 
             &[data-state="closed"] {
-                @include animate(overlay-fade-out, $timing-s, $ease-out-sine);
+                @include animate(
+                    overlay-fade-out,
+                    $drawer-transition-timing,
+                    $drawer-transition-ease
+                );
 
                 /* stylelint-disable-next-line declaration-no-important */
                 pointer-events: none !important; // Override the inline style added by Radix
+
+                // delay transitioning the visibility so the animation can run first
+                transition: visibility;
+                transition-delay: $drawer-transition-timing;
+                visibility: hidden;
             }
-        }
-    }
-
-    @keyframes trigger-slide-in-top {
-        0% {
-            transform: translate(-50%, 0);
-        }
-
-        100% {
-            // Have to use translateY as we're rotating the button
-            transform: translate(-50%, calc($drawer-content-height * 1px));
-        }
-    }
-
-    @keyframes trigger-slide-out-top {
-        0% {
-            // Have to use translateY as we're rotating the button
-            transform: translate(-50%, calc($drawer-content-height * 1px));
-        }
-
-        100% {
-            transform: translate(-50%, 0);
-        }
-    }
-
-    @keyframes trigger-slide-in-right {
-        0% {
-            transform: rotate(90deg) translateY(0);
-        }
-
-        100% {
-            // Have to use translateY as we're rotating the button
-            transform: rotate(90deg) translateY(calc(var(--drawer-content-width) * 1px));
-        }
-    }
-
-    @keyframes trigger-slide-out-right {
-        0% {
-            // Have to use translateY as we're rotating the button
-            transform: rotate(90deg) translateY(calc(var(--drawer-content-width) * 1px));
-        }
-
-        100% {
-            transform: rotate(90deg) translateY(0);
-        }
-    }
-
-    @keyframes trigger-slide-in-bottom {
-        0% {
-            transform: translate(-50%, 0);
-        }
-
-        100% {
-            // Have to use translateY as we're rotating the button
-            transform: translate(-50%, calc($drawer-content-height * -1px));
-        }
-    }
-
-    @keyframes trigger-slide-out-bottom {
-        0% {
-            // Have to use translateY as we're rotating the button
-            transform: translate(-50%, calc($drawer-content-height * -1px));
-        }
-
-        100% {
-            transform: translate(-50%, 0);
-        }
-    }
-
-    @keyframes trigger-slide-in-left {
-        0% {
-            transform: rotate(270deg) translateY(0);
-        }
-
-        100% {
-            // Have to use translateY as we're rotating the button
-            transform: rotate(270deg) translateY(calc(var(--drawer-content-width) * 1px));
-        }
-    }
-
-    @keyframes trigger-slide-out-left {
-        0% {
-            // Have to use translateY as we're rotating the button
-            transform: rotate(270deg) translateY(calc(var(--drawer-content-width) * 1px));
-        }
-
-        100% {
-            transform: rotate(270deg) translateY(0);
         }
     }
 }
