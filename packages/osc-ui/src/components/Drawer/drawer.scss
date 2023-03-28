@@ -117,6 +117,8 @@
 
             @each $dir in $drawer-directions {
                 &--#{$dir} {
+                    transition: transform $drawer-transition-timing $drawer-transition-ease;
+
                     @if $dir == top or $dir == bottom {
                         #{$dir}: 0;
                         left: 50%;
@@ -160,14 +162,36 @@
                         }
                     }
 
-                    // Rather than using the @includes animate mixin here we're using the standard animation property
-                    // This is because we need to pass the $drawer-width & content height to the keyframes
                     &[data-state="open"] {
-                        animation: trigger-slide-in-#{$dir} $timing-s $ease-out-sine both;
+                        @if $dir == right or $dir == left {
+                            // prettier-ignore
+                            transform:
+                                if($dir == right, rotate(90deg), rotate(270deg))
+                                translateY(calc($drawer-content-width * 1px));
+                        }
+
+                        @if $dir == top or $dir == bottom {
+                            // prettier-ignore
+                            transform:
+                                if(
+                                    $dir == top,
+                                    translate(-50%, calc($drawer-content-height * 1px)),
+                                    translate(-50%, calc($drawer-content-height * -1px))
+                                );
+                        }
                     }
 
                     &[data-state="closed"] {
-                        animation: trigger-slide-out-#{$dir} $timing-s $ease-out-sine;
+                        @if $dir == right or $dir == left {
+                            // prettier-ignore
+                            transform:
+                                if($dir == right, rotate(90deg), rotate(270deg))
+                                translateY(0);
+                        }
+
+                        @if $dir == top or $dir == bottom {
+                            transform: translate(-50%, 0);
+                        }
                     }
                 }
             }
