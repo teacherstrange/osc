@@ -157,7 +157,7 @@
                             // Prevent the inner element from rotating on hover/active states
                             /* stylelint-disable-next-line selector-class-pattern */
                             > .c-btn__inner {
-                                transform: translate(0) rotate(180deg);
+                                transform: rotate(180deg);
                             }
                         }
                     }
