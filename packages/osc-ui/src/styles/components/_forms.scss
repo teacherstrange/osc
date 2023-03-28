@@ -80,5 +80,19 @@
                 margin: 0;
             }
         }
+
+        &__inputs-container {
+            display: flex;
+            flex-direction: column;
+            gap: $space-2xl;
+
+            @include mq($mq-tab) {
+                flex-direction: row;
+            }
+        }
+
+        &__input {
+            width: 100%;
+        }
     }
 }
