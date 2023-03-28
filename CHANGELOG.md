@@ -1,3 +1,11 @@
+## [0.64.3](https://github.com/Open-Study-College/osc/compare/v0.64.2...v0.64.3) (2023-03-28)
+
+
+### 🐛 Bugs
+
+* add concurency to studio ([0d69db4](https://github.com/Open-Study-College/osc/commit/0d69db43c11e55dfedf0b06fd2f726cdc2170ccf))
+* typo in refactor ([b07582b](https://github.com/Open-Study-College/osc/commit/b07582ba64170cbe74c280442fb5aad4b871fbef))
+
 ## [0.64.2](https://github.com/Open-Study-College/osc/compare/v0.64.1...v0.64.2) (2023-03-28)
 
 
@@ -90,46 +98,4 @@
 * use default env variables ([aa11d2c](https://github.com/Open-Study-College/osc/commit/aa11d2cd8dde1def51ad7ff70c838e3e86578fa4))
 * vertically align cross icon ([2ec6eaa](https://github.com/Open-Study-College/osc/commit/2ec6eaac6a91a1cac3434975615ac8bf0a1bd4bd))
 * z-index bugfixing ([f4cb722](https://github.com/Open-Study-College/osc/commit/f4cb722bba07656310a6a704ab4d14822018d176))
-
-## [0.62.0](https://github.com/Open-Study-College/osc/compare/v0.61.0...v0.62.0) (2023-03-24)
-
-
-### ✨ Features
-
-* **studio:** add typescript package ([9414a72](https://github.com/Open-Study-College/osc/commit/9414a720a1e7c09bf6a6e917e7081627d7ced2d8))
-
-
-### ♻️ Refactors
-
-* **studio:** add defineField to blocks for better ts support ([dced983](https://github.com/Open-Study-College/osc/commit/dced983d1f0d98686862a5698f71911f8302a9c5))
-* **studio:** add defineField to documents for better ts support ([9ad242c](https://github.com/Open-Study-College/osc/commit/9ad242ce5b49acd57e797326d3ed2c06a1165e32))
-* **studio:** add defineField to modules for better ts support ([3ea8505](https://github.com/Open-Study-College/osc/commit/3ea850541b12ec64c44493f8e5b4be21104b4434))
-* **studio:** add defineField to objects for better ts support ([f6989c5](https://github.com/Open-Study-College/osc/commit/f6989c58fd0b44756a383d547b8a073cba6836c4))
-* **studio:** add defineField to seo modules for better ts support ([c152535](https://github.com/Open-Study-College/osc/commit/c152535a8a70ddd2c961c3880c48029a8cc6253d))
-* **studio:** add defineField to singletons for better ts support ([174b830](https://github.com/Open-Study-College/osc/commit/174b8307f4b667336b5c12c1d24b1626343d28c0))
-* **studio:** update annotations icons ([6d596cc](https://github.com/Open-Study-College/osc/commit/6d596cc832fc6b1d157664223de4e9cb73a99019))
-* **studio:** update blocks and documents to use the defineType function ([9699e5d](https://github.com/Open-Study-College/osc/commit/9699e5d7cef2ea3045f6e373fbf1a2a7cf2ae1b7))
-* **studio:** updates input prop types ([6d19a63](https://github.com/Open-Study-College/osc/commit/6d19a635e78344bb1c31b7ae937ec46f21e67c51))
-
-
-### 🐛 Bugs
-
-* **studio:** add types for production url doc ([8137095](https://github.com/Open-Study-College/osc/commit/81370953808f1f2a505e853bb9a5301c6c17bed6))
-* **studio:** add types to getPriceRange helper ([8b1aa05](https://github.com/Open-Study-College/osc/commit/8b1aa053ff9f8b503d0aeb1ec2f1e1da29a630f5))
-* **studio:** add types to validateSlug helper ([a2cdaeb](https://github.com/Open-Study-College/osc/commit/a2cdaeb6f3a7741b5d08ef9f7b022f0ff1b2ae6b))
-* **studio:** adds ignore to expected type ([dc299fb](https://github.com/Open-Study-College/osc/commit/dc299fba06e7b42c9c7af3845c4e27ce69adeef6))
-* **studio:** adds typecasting to validation etc. where parent is being used ([2572845](https://github.com/Open-Study-College/osc/commit/2572845a41af9e4b97eaa84485b4ed9046796642))
-* **studio:** adds typeguard ([7291cd5](https://github.com/Open-Study-College/osc/commit/7291cd50f327289a4702cb42b9f1f6c68c5f7a4d))
-* **studio:** adds types for lodash.get ([2d23eb2](https://github.com/Open-Study-College/osc/commit/2d23eb20f2eda8cc7bda7b8a6a44d64e4ae36892))
-* **studio:** assert that id will always be returned ([526d98e](https://github.com/Open-Study-College/osc/commit/526d98e283b16af8913504e0d23b9211187af28b))
-* **studio:** fix typo ([402d21b](https://github.com/Open-Study-College/osc/commit/402d21b7bfd45cbe25ac8407940352c37c2619aa))
-* **studio:** remove initial value ([8a91cbd](https://github.com/Open-Study-College/osc/commit/8a91cbd1982b08261c066e311d239a2a2115d343))
-* **studio:** update url typing ([16d0ac5](https://github.com/Open-Study-College/osc/commit/16d0ac563782027ce0279f584dade8990357ff91))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **studio:** adds portabletext/types ([1d45729](https://github.com/Open-Study-College/osc/commit/1d457298ec2521acdfce904a784d667ab1bdc27e))
-* **studio:** install 'slug' types ([e543536](https://github.com/Open-Study-College/osc/commit/e543536f28afb613dcad1f0b6743fff00f40be23))
-* **studio:** remove unused file ([75fb3af](https://github.com/Open-Study-College/osc/commit/75fb3af800feef7d76b4a77c1ab9208169120c79))
 
