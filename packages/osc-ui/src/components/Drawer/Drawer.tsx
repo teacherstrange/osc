@@ -8,7 +8,7 @@ import { classNames } from '../../utils/classNames';
 
 import './drawer.scss';
 
-// TODO: Sort slide in on load
+// TODO: tests
 
 export interface SharedDrawerProps {
     /**
@@ -192,7 +192,7 @@ export interface DrawerTitleProps
 export const DrawerTitle = forwardRef<ElementRef<typeof Dialog.Title>, DrawerTitleProps>(
     (props, forwardedRef) => {
         const { children, className, ...rest } = props;
-        const classes = classNames('c-drawer__title t-font-m u-text-bold', className);
+        const classes = classNames('c-drawer__title t-font-l u-text-bold', className);
 
         return (
             <Dialog.Title className={classes} {...rest} ref={forwardedRef}>
