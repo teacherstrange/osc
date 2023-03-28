@@ -15,8 +15,6 @@ import { classNames } from '../../utils/classNames';
 
 import './drawer.scss';
 
-// TODO: tests
-
 export interface SharedDrawerProps {
     /**
      * Custom class
