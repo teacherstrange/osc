@@ -9,7 +9,7 @@ env:
 
     # Only run one deployment at a time per PR.
 concurrency:
-  group: pr-${{ github.event.number }}-academic-pr
+  group: pr-${{ github.event.number }}-ecommerce-pr
 
 jobs:
   pre-check:
