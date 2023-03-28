@@ -4,6 +4,8 @@ import { Button } from '../Button/Button';
 import { Header } from '../Header/Header';
 import { Icon } from '../Icon/Icon';
 import { Logo } from '../Logo/Logo';
+import { TextArea } from '../TextArea/TextArea';
+import { TextInput } from '../TextInput/TextInput';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import type { DrawerProps } from './Drawer';
 import {
@@ -76,27 +78,65 @@ const Template: Story<DrawerProps> = (args) => {
 };
 
 const PinnedTemplate: Story<DrawerProps> = (args) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
+
     return (
-        <Drawer {...args}>
+        <Drawer
+            open={isOpen}
+            onOpenChange={(b: boolean) => {
+                setIsOpen(b);
+                setIsLoading(!b);
+            }}
+            {...args}
+        >
             <DrawerTrigger asChild isPinned>
-                <Button>Open Drawer</Button>
+                <Button>Contact us</Button>
             </DrawerTrigger>
 
             <DrawerContent>
-                <DrawerCloseButton>
-                    <Icon id="close" />
-                    <VisuallyHidden>Close</VisuallyHidden>
-                </DrawerCloseButton>
-
-                <DrawerTitle>
-                    An accessible title to be announced when the dialog is opened.
-                </DrawerTitle>
+                <DrawerTitle>Contact us</DrawerTitle>
 
                 <DrawerDescription>
-                    An optional accessible description to be announced when the dialog is opened.
+                    Our student advisors are eager to help - call us now on 0330 822 2686.
+                    Alternatively fill out the form below and we'll get back to you.
                 </DrawerDescription>
 
-                <p>Drawer content</p>
+                <form
+                    className="c-form c-form__hubspot"
+                    onSubmit={(event) => {
+                        event.preventDefault();
+                        setIsLoading(true);
+                        wait().then(() => setIsOpen(false));
+                    }}
+                >
+                    <div className="c-form__inner-container">
+                        <TextInput id="name" name="Full name" placeholder="Your full name" />
+                        <TextInput
+                            id="email"
+                            name="Email"
+                            type="email"
+                            placeholder="Your email address"
+                        />
+                        <TextInput
+                            id="phone"
+                            name="Telephone number"
+                            type="tel"
+                            placeholder="Your phone number"
+                        />
+                        <TextArea id="message" name="Enquiry" />
+                        <Button isFull isLoading={isLoading} loadingText="Sending">
+                            Send Enquiry
+                        </Button>
+                        <p className="t-font-s">
+                            By completing this form you are expressing interest in Open Study
+                            College. We will send you information about our courses and any special
+                            offers we think will be useful to you. You will be able to unsubscribe
+                            at anytime. See our Privacy Policy.
+                        </p>
+                    </div>
+                </form>
             </DrawerContent>
         </Drawer>
     );
@@ -105,7 +145,7 @@ const PinnedTemplate: Story<DrawerProps> = (args) => {
 const SmallTemplate: Story<DrawerProps> = (args) => {
     return (
         <Drawer {...args}>
-            <DrawerTrigger asChild isPinned>
+            <DrawerTrigger asChild>
                 <Button>Open Drawer</Button>
             </DrawerTrigger>
 
@@ -138,7 +178,7 @@ const FullHeightTemplate: Story<DrawerProps> = (args) => {
 
             <DrawerContent size="sm" isFull>
                 <DrawerCloseButton>
-                    <Icon id="arrow" />
+                    <Icon id="arrow" className="o-icon--lg" />
                     <VisuallyHidden>Close</VisuallyHidden>
                 </DrawerCloseButton>
 
@@ -174,7 +214,7 @@ const CustomContainerTemplate: Story<DrawerProps> = (args) => {
 
                         <DrawerContent size="sm" isFull container={portal}>
                             <DrawerCloseButton>
-                                <Icon id="arrow" />
+                                <Icon id="arrow" className="o-icon--lg" />
                                 <VisuallyHidden>Close</VisuallyHidden>
                             </DrawerCloseButton>
 
@@ -201,6 +241,7 @@ const CustomContainerTemplate: Story<DrawerProps> = (args) => {
 export const Primary = Template.bind({});
 Primary.args = {
     direction: 'right',
+    verticalOffset: 120,
 };
 
 export const PinnedTrigger = PinnedTemplate.bind({});
@@ -230,6 +271,7 @@ Narrow.parameters = {
 export const FullHeight = FullHeightTemplate.bind({});
 FullHeight.args = {
     ...Primary.args,
+    verticalOffset: 0,
 };
 FullHeight.parameters = {
     docs: {
@@ -242,6 +284,7 @@ FullHeight.parameters = {
 export const CustomContainer = CustomContainerTemplate.bind({});
 CustomContainer.args = {
     ...Primary.args,
+    verticalOffset: 0,
 };
 CustomContainer.parameters = {
     docs: {
