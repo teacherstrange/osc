@@ -18,6 +18,7 @@
          *
          * [1] Setting will-change to transform will allow the fixed position
          * of the child elements to become relative to this element.
+         * @see: https://developer.mozilla.org/en-US/docs/Web/CSS/position#values
          */
         &__container {
             position: relative;
@@ -39,6 +40,9 @@
                 padding: $space-2xl;
             }
 
+            // *----------------------------------*/
+            //  Direction modifiers
+            // *----------------------------------*/
             @each $dir in $drawer-directions {
                 &--#{$dir} {
                     #{$dir}: 0;
@@ -48,6 +52,7 @@
                         top: 0;
                     }
 
+                    // Move bottom/top variants to the middle, we will transform this back by 50% in the animation
                     @if $dir == bottom or $dir == top {
                         left: 50%;
                     }
@@ -81,6 +86,9 @@
                 }
             }
 
+            // *----------------------------------*/
+            //  Sizes
+            // *----------------------------------*/
             &--sm {
                 max-width: $drawer-width-s;
                 padding: $space-s $space-m;
@@ -112,6 +120,9 @@
                 @include z-index(modal-trigger);
             }
 
+            // *----------------------------------*/
+            //  Direction modifiers
+            // *----------------------------------*/
             @each $dir in $drawer-directions {
                 &--#{$dir} {
                     transition: transform $drawer-transition-timing $drawer-transition-ease;
