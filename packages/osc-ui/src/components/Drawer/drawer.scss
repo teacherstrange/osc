@@ -31,6 +31,7 @@
             padding: $space-l;
             background-color: var(--color-tertiary);
             will-change: transform;
+            box-shadow: $shadow-m;
 
             @include z-index(modal);
 
@@ -82,6 +83,7 @@
 
             &--sm {
                 max-width: $drawer-width-s;
+                padding: $space-s $space-m;
             }
 
             &--md {
@@ -89,7 +91,6 @@
             }
 
             &.is-full {
-                top: 0;
                 bottom: 0;
             }
         }
@@ -106,6 +107,7 @@
         &__trigger {
             &.is-pinned {
                 position: fixed; /* [1] */
+                box-shadow: $shadow-m;
 
                 @include z-index(modal-trigger);
 
@@ -200,7 +202,13 @@
         &__close {
             align-self: end;
             color: var(--color-neutral-500);
+            transition: color $timing-s $ease-in-out;
             cursor: pointer;
+
+            &:hover,
+            &:active {
+                color: var(--color-neutral-600);
+            }
         }
 
         &__overlay {
