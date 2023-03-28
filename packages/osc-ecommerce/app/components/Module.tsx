@@ -7,6 +7,10 @@ import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import carouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
 import contentMediaStyles from 'osc-ui/dist/src-components-ContentMedia-content-media.css';
+import dateFieldStyles from 'osc-ui/dist/src-components-DatePicker-date-field.css';
+import datePickerStyles from 'osc-ui/dist/src-components-DatePicker-date-picker.css';
+import datePickerCalendarStyles from 'osc-ui/dist/src-components-DatePicker-calendar.css';
+import datePickerReactAriaStyles from 'osc-ui/dist/src-components-DatePicker-react-aria-components.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
@@ -120,6 +124,10 @@ export const getComponentStyles = (data: SanityPage) => {
                 styles.push({ rel: 'stylesheet', href: alertStyles });
                 styles.push({ rel: 'stylesheet', href: textInputStyles });
                 styles.push({ rel: 'stylesheet', href: selectStyles });
+                styles.push({ rel: 'stylesheet', href: dateFieldStyles });
+                styles.push({ rel: 'stylesheet', href: datePickerStyles });
+                styles.push({ rel: 'stylesheet', href: datePickerCalendarStyles });
+                styles.push({ rel: 'stylesheet', href: datePickerReactAriaStyles });
                 break;
             case 'module.hero':
                 styles.push(
