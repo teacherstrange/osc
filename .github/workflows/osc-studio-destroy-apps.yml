@@ -9,7 +9,7 @@ env:
 
 # Only run one deployment at a time per PR.
 concurrency:
-  group: pr-${{ github.event.number }}--studio-pr`
+  group: pr-${{ github.event.number }}--studio-pr
 
 jobs:
   pre-check:
