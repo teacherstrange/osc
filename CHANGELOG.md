@@ -1,3 +1,50 @@
+## [0.65.0](https://github.com/Open-Study-College/osc/compare/v0.64.4...v0.65.0) (2023-03-28)
+
+
+### 🧪 Tests
+
+* **ecommerce:** adds test for content media ([053dd7f](https://github.com/Open-Study-College/osc/commit/053dd7f68ddbe43992a66d49989aef2ad34d5548))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* update lock file ([b6a96c8](https://github.com/Open-Study-College/osc/commit/b6a96c889fbf595b518fa7c670b29badb4e5fc54))
+
+
+### ♻️ Refactors
+
+* **content:** adds horizontal padding options to content component ([debbab0](https://github.com/Open-Study-College/osc/commit/debbab07d17c0dc95fe5f5375919d47c49c6842e))
+* **ecommerce:** import osc-design-tokens package ([e87ce9d](https://github.com/Open-Study-College/osc/commit/e87ce9ddb4dd69041059ff823d023cb877b78b4b))
+* **ecommerce:** move perView function into outer scope ([2ef4e45](https://github.com/Open-Study-College/osc/commit/2ef4e4586155e2384f4dda3a0832a977f3da410a))
+* **studio:** add arrows to partialCarouselSettings ([e8cb913](https://github.com/Open-Study-College/osc/commit/e8cb9131fd1490172d3dac7265d6c4ad9b9c4f93))
+* **studio:** add ts support to content media modules ([7928528](https://github.com/Open-Study-College/osc/commit/792852826e520cee8db92903c71c77233fd00097))
+* **studio:** move carouselName out of partial settings ([8f8a308](https://github.com/Open-Study-College/osc/commit/8f8a3083918f8e900962d12190f849dac9a32862))
+* **studio:** moves image into it's own object ([9a036a2](https://github.com/Open-Study-College/osc/commit/9a036a2bcd8adccfde7885f5d009c1125cfe789b))
+* **studio:** remove settings tab from content media ([6cf07fb](https://github.com/Open-Study-College/osc/commit/6cf07fb5ed4430ecbbf90888ce23316aec9a233a))
+* **studio:** renamed heroCarouselSettings to more generic partialCarouselSettings ([b1e5e2b](https://github.com/Open-Study-College/osc/commit/b1e5e2b9804d47c6436d2a91ba542993759c44f6))
+* **studio:** replace carouselSettings with partial on content media images ([2e00b98](https://github.com/Open-Study-College/osc/commit/2e00b98efe43eb7cdd64673967ca0a8ead0781ae))
+* **studio:** update contentMedia carousel settings ([d8fb3ca](https://github.com/Open-Study-College/osc/commit/d8fb3ca1f13102c0e474deb2bbc7feb6646010ce))
+
+
+### ✨ Features
+
+* **ecommerce:** adds carousel option for media ([259bd28](https://github.com/Open-Study-College/osc/commit/259bd2899c32a5cbd0c4850e45dd1d12f719e970))
+* **ecommerce:** adds content media component ([7565597](https://github.com/Open-Study-College/osc/commit/75655975549b3791ecfba337b2ca78008b254d3c))
+* **ecommerce:** adds content media query ([8650c34](https://github.com/Open-Study-College/osc/commit/8650c340ef48ea97044f5ade9667d0b69af403b5))
+* **studio:** add spacing to cms controls ([7650f49](https://github.com/Open-Study-College/osc/commit/7650f49d01be32c847df2eef6b4bae0a4b1f7d50))
+* **studio:** add ts to shouldShow function in hero module ([087482c](https://github.com/Open-Study-College/osc/commit/087482c72732ed6027326714c25af73f325a193e))
+* **studio:** add validation to media fields ([3e6aa03](https://github.com/Open-Study-College/osc/commit/3e6aa0301f366eceb59620dfd1ac11e17263f633))
+* **studio:** adds content media module ([540a624](https://github.com/Open-Study-College/osc/commit/540a6241e94e1eef7430b493dd37bcddd662ea58))
+
+
+### 🐛 Bugs
+
+* **ecommmerce:** add check to make sure media exists in content media ([4c53571](https://github.com/Open-Study-College/osc/commit/4c53571b4ef18d4be5bf749f3a4a893ab330b04e))
+* **Image:** add early return to Image component if no src is provided ([bc44757](https://github.com/Open-Study-College/osc/commit/bc447579f70feb7a0e52108fd9a23da9ae0ac1c8))
+* **studio:** adds optional chaining to shouldShow ([14f591a](https://github.com/Open-Study-College/osc/commit/14f591a0e16e313a5cd07802020457d4facd2034))
+* **studio:** remove unused group ([e9c72ee](https://github.com/Open-Study-College/osc/commit/e9c72ee9a1009ff3144a995c6407798014f8a43e))
+* **studio:** restore imports missed during rebase ([a3e50b6](https://github.com/Open-Study-College/osc/commit/a3e50b62f427f8f594ab0749cbec5903254234e4))
+
 ## [0.64.4](https://github.com/Open-Study-College/osc/compare/v0.64.3...v0.64.4) (2023-03-28)
 
 
@@ -26,18 +73,4 @@
 ### 🐛 Bugs
 
 * make destroy and build steps concurrent ([1a8372b](https://github.com/Open-Study-College/osc/commit/1a8372b1ac542148b82781dc433d295dbc53d4e0))
-
-## [0.64.0](https://github.com/Open-Study-College/osc/compare/v0.63.0...v0.64.0) (2023-03-27)
-
-
-### ✨ Features
-
-* inital commit ([1d94b27](https://github.com/Open-Study-College/osc/commit/1d94b27d1d54561e2cc910249fa15008e304fe9f))
-
-
-### 🐛 Bugs
-
-* error in osc-ui index.tsx and pr changes ([a03ad0f](https://github.com/Open-Study-College/osc/commit/a03ad0f1b0b8e40aa1cd41ce7f60fbc5e73e6adf))
-* remove autocomplete changes ([2a98dea](https://github.com/Open-Study-College/osc/commit/2a98dea206d439476e7ccad07dbad8462053374c))
-* remove duplicate tests ([dbc5163](https://github.com/Open-Study-College/osc/commit/dbc51634787659f233c201a171b8753884cddf0e))
 
