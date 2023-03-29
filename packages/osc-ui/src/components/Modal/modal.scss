@@ -6,12 +6,13 @@
     $modal-overlay-opacity: 0.3;
 
     .c-modal {
+        $self: &;
+
         &__content {
             display: flex;
             flex-direction: column;
             width: 100%;
             max-height: $modal-max-height;
-            padding: $space-m;
             background-color: var(--color-tertiary);
             border-radius: $rad-xs;
             box-shadow: $shadow-m;
@@ -25,6 +26,31 @@
                 @include animate(modal-scale-out, $timing-s, $ease-out-sine);
             }
 
+            // *----------------------------------*/
+            //  Variant modifiers
+            // *----------------------------------*/
+            &--primary {
+                padding: $space-2xl;
+
+                #{$self}__ttl {
+                    font-size: $fs-m;
+                }
+
+                #{$self}__close {
+                    top: $space-m;
+                    right: $space-m;
+                    color: var(--color-neutral-500);
+
+                    &:hover,
+                    &:active {
+                        color: var(--color-neutral-600);
+                    }
+                }
+            }
+
+            // *----------------------------------*/
+            //  Size modifiers
+            // *----------------------------------*/
             &--sm {
                 max-width: #{calc($container-3xs / 2)}px;
             }
@@ -47,15 +73,9 @@
         }
 
         &__close {
-            align-self: end;
-            color: var(--color-neutral-500);
+            position: absolute;
             transition: color $timing-s $ease-in-out;
             cursor: pointer;
-
-            &:hover,
-            &:active {
-                color: var(--color-neutral-600);
-            }
         }
 
         &__overlay {
