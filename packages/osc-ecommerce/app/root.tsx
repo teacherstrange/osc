@@ -15,7 +15,6 @@ import { SkipLink } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import oscUiBurgerStyles from 'osc-ui/dist/src-components-Burger-burger.css';
-import oscUiCarouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import oscFooterStyles from 'osc-ui/dist/src-components-Footer-footer.css';
 import oscHeaderStyles from 'osc-ui/dist/src-components-Header-header.css';
 import oscLogoStyles from 'osc-ui/dist/src-components-Logo-logo.css';
@@ -44,7 +43,6 @@ export const links: LinksFunction = () => {
             as: 'image',
         },
         { rel: 'stylesheet', href: styles },
-        { rel: 'stylesheet', href: oscUiCarouselStyles },
         { rel: 'stylesheet', href: oscUiSwitchStyles },
         { rel: 'stylesheet', href: oscUiSkipLinkStyle },
         { rel: 'stylesheet', href: oscHeaderStyles },
