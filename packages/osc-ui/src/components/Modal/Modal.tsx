@@ -75,11 +75,24 @@ export interface ModalContentProps
      * @default md
      */
     size?: 'sm' | 'md' | 'lg' | 'full';
+    /**
+     * Positions the modal content around it's container
+     * @default center
+     */
+    position?: 'tr' | 'tl' | 'br' | 'bl' | 'c';
 }
 
 export const ModalContent = forwardRef<ElementRef<typeof Dialog.Content>, ModalContentProps>(
     (props, forwardedRef) => {
-        const { children, className, container, showOverlay = true, size = 'md', ...rest } = props;
+        const {
+            children,
+            className,
+            container,
+            position = 'c',
+            showOverlay = true,
+            size = 'md',
+            ...rest
+        } = props;
         const sizeModifier = useModifier('c-modal__content', size);
 
         const classes = classNames('c-modal__content', sizeModifier);
@@ -87,10 +100,16 @@ export const ModalContent = forwardRef<ElementRef<typeof Dialog.Content>, ModalC
         const overlayModifier = useModifier('c-modal__overlay', !showOverlay && 'hidden');
         const overlayClasses = classNames('c-modal__overlay', overlayModifier);
 
+        const positionModifier = useModifier('c-modal__overlay-inner', position);
+        const overlayInnerClasses = classNames(
+            'o-container c-modal__overlay-inner',
+            positionModifier
+        );
+
         return (
             <Dialog.Portal container={container}>
                 <Dialog.Overlay className={overlayClasses}>
-                    <div className="o-container c-modal__overlay-inner">
+                    <div className={overlayInnerClasses}>
                         <Dialog.Content className={classes} {...rest} ref={forwardedRef}>
                             {children}
                         </Dialog.Content>

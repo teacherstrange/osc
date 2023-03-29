@@ -61,7 +61,6 @@
         &__overlay {
             position: fixed;
             display: grid;
-            place-items: center;
             inset: 0;
             overflow-y: auto;
 
@@ -98,8 +97,36 @@
         &__overlay-inner {
             display: grid;
             place-items: center;
+            height: 100%;
 
             @include z-index(modal);
+
+            // *----------------------------------*/
+            //  Position modifiers
+            // *----------------------------------*/
+            &--c {
+                place-items: center;
+            }
+
+            &--tr {
+                align-items: start;
+                justify-items: end;
+            }
+
+            &--tl {
+                align-items: start;
+                justify-items: start;
+            }
+
+            &--br {
+                align-items: end;
+                justify-items: end;
+            }
+
+            &--bl {
+                align-items: end;
+                justify-items: start;
+            }
         }
     }
 }

@@ -1,7 +1,12 @@
 import type { Meta, Story } from '@storybook/react';
 import React, { useState } from 'react';
+import { Burger } from '../Burger/Burger';
 import { Button } from '../Button/Button';
-import { Icon } from '../Icon/Icon';
+import { Header, HeaderActionBar, HeaderNav } from '../Header/Header';
+import { AccessibleIcon, Icon } from '../Icon/Icon';
+import { Logo } from '../Logo/Logo';
+import { Navbar, NavItem, NavLink, NavList } from '../Navbar/Navbar';
+import { simpleNav } from '../Navbar/navContent';
 import { TextInput } from '../TextInput/TextInput';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import type { ModalProps } from './Modal';
@@ -144,6 +149,103 @@ const ControlledTemplate: Story<ModalProps> = (args) => {
     );
 };
 
+const PositionedTemplate: Story<ModalProps> = (args) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [container, setContainer] = useState<HTMLDivElement | null>(null);
+
+    return (
+        <>
+            <Header>
+                <Burger
+                    id="mob-menu-trigger"
+                    label="Open mobile menu"
+                    isOpen={isOpen}
+                    aria-expanded={isOpen}
+                    aria-controls="header-nav"
+                    className="u-hidden-from@desk"
+                    onClick={() => setIsOpen(!isOpen)}
+                />
+
+                <Logo className="c-header__logo" />
+
+                <HeaderActionBar>
+                    <Button variant="quaternary" className="u-hidden-until@desk">
+                        <AccessibleIcon label="Search">
+                            <Icon id="search" />
+                        </AccessibleIcon>
+                    </Button>
+
+                    <a href="/" className="u-hidden-until@desk">
+                        <AccessibleIcon label="My account">
+                            <Icon id="user" />
+                        </AccessibleIcon>
+                    </a>
+
+                    <a href="/" className="u-hidden-until@desk">
+                        <AccessibleIcon label="Wishlist">
+                            <Icon id="heart" />
+                        </AccessibleIcon>
+                    </a>
+
+                    <Modal {...args}>
+                        <ModalTrigger asChild>
+                            <Button variant="quaternary">
+                                <AccessibleIcon label="Bag">
+                                    <Icon id="bag" />
+                                </AccessibleIcon>
+                            </Button>
+                        </ModalTrigger>
+
+                        <ModalContent size="sm" position="tr" container={container}>
+                            <ModalCloseButton>
+                                <Icon id="close" />
+                                <VisuallyHidden>Close</VisuallyHidden>
+                            </ModalCloseButton>
+
+                            <ModalTitle>
+                                Your Bag, <span className="u-text-reg">0 items</span>
+                            </ModalTitle>
+
+                            <p>Your bag is currently empty.</p>
+
+                            <Button variant="secondary">View my bag</Button>
+                        </ModalContent>
+                    </Modal>
+                </HeaderActionBar>
+
+                <HeaderNav
+                    id="header-nav"
+                    aria-labelledby="mob-menu-trigger"
+                    data-state={isOpen ? 'open' : 'closed'}
+                    isOpen={isOpen}
+                >
+                    <Navbar>
+                        <NavList>
+                            {simpleNav.map((item, index) => (
+                                <NavItem key={index}>
+                                    <NavLink href={item.href}>{item.label}</NavLink>
+                                </NavItem>
+                            ))}
+                        </NavList>
+                    </Navbar>
+                </HeaderNav>
+            </Header>
+
+            <div // TODO: Make this a component
+            >
+                <div
+                    style={{
+                        position: 'relative',
+                        willChange: 'transform',
+                        minHeight: '1000px',
+                    }}
+                    ref={setContainer}
+                />
+            </div>
+        </>
+    );
+};
+
 export const Primary = Template.bind({});
 Primary.args = {};
 
@@ -181,4 +283,9 @@ ControlledModal.parameters = {
             story: 'Can be opened and closed programmatically, i.e when a form submits.',
         },
     },
+};
+
+export const PositionedModal = PositionedTemplate.bind({});
+PositionedModal.args = {
+    ...Primary.args,
 };
