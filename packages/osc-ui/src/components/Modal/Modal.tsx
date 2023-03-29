@@ -81,15 +81,21 @@ export const ModalContent = forwardRef<ElementRef<typeof Dialog.Content>, ModalC
     (props, forwardedRef) => {
         const { children, className, container, showOverlay = true, size = 'md', ...rest } = props;
         const sizeModifier = useModifier('c-modal__content', size);
-        const classes = classNames('c-modal__content', sizeModifier, className);
+
+        const classes = classNames('c-modal__content', sizeModifier);
+
+        const overlayModifier = useModifier('c-modal__overlay', !showOverlay && 'hidden');
+        const overlayClasses = classNames('c-modal__overlay', overlayModifier);
 
         return (
             <Dialog.Portal container={container}>
-                {showOverlay ? <Dialog.Overlay className="c-modal__overlay" /> : null}
-
-                <Dialog.Content className={classes} {...rest} ref={forwardedRef}>
-                    {children}
-                </Dialog.Content>
+                <Dialog.Overlay className={overlayClasses}>
+                    <div className="o-container c-modal__overlay-inner">
+                        <Dialog.Content className={classes} {...rest} ref={forwardedRef}>
+                            {children}
+                        </Dialog.Content>
+                    </div>
+                </Dialog.Overlay>
             </Dialog.Portal>
         );
     }

@@ -113,7 +113,7 @@ describe('Modal', () => {
 
         await user.click(screen.getByRole('button', { name: content.open }));
 
-        expect(document.querySelector('.c-modal__overlay')).not.toBeInTheDocument();
+        expect(document.querySelector('.c-modal__overlay')).toHaveClass('c-modal__overlay--hidden');
     });
 });
 

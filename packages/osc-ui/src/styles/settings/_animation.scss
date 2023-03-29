@@ -151,21 +151,21 @@ $animations: (
     ),
     "modal-scale-in": (
         0%: (
-            transform: translate(-50%, -50%) scale(0.9),
+            transform: scale(0.9),
             opacity: 0
         ),
         100%: (
-            transform: translate(-50%, -50%) scale(1),
+            transform: scale(1),
             opacity: 1
         )
     ),
     "modal-scale-out": (
         0%: (
-            transform: translate(-50%, -50%) scale(1),
+            transform: scale(1),
             opacity: 1
         ),
         100%: (
-            transform: translate(-50%, -50%) scale(0.9),
+            transform: scale(0.9),
             opacity: 0
         )
     ),
