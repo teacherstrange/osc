@@ -134,7 +134,7 @@ export interface ModalTitleProps
 export const ModalTitle = forwardRef<ElementRef<typeof Dialog.Title>, ModalTitleProps>(
     (props, forwardedRef) => {
         const { children, className, ...rest } = props;
-        const classes = classNames('c-modal__ttl t-font-m u-text-bold', className);
+        const classes = classNames('c-modal__ttl', className);
 
         return (
             <Dialog.Title className={classes} {...rest} ref={forwardedRef}>
