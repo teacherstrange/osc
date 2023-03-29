@@ -19,16 +19,12 @@ export interface SharedModalProps {
  * -----------------------------------------------------------------------------------------------*/
 export interface ModalProps
     extends ComponentPropsWithoutRef<typeof Dialog.Root>,
-        SharedModalProps {}
+        Omit<SharedModalProps, 'className'> {}
 
 export const Modal = (props: ModalProps) => {
     const { children } = props;
 
-    return (
-        <Dialog.Root className="c-modal" {...props}>
-            {children}
-        </Dialog.Root>
-    );
+    return <Dialog.Root {...props}>{children}</Dialog.Root>;
 };
 Modal.displayName = 'Modal';
 
@@ -80,6 +76,11 @@ export interface ModalContentProps
      * @default center
      */
     position?: 'tr' | 'tl' | 'br' | 'bl' | 'c';
+    /**
+     * Sets the style of the Modal, primary, secondary etc.
+     * @default primary
+     */
+    variant?: 'primary' | 'secondary';
 }
 
 export const ModalContent = forwardRef<ElementRef<typeof Dialog.Content>, ModalContentProps>(
@@ -91,11 +92,13 @@ export const ModalContent = forwardRef<ElementRef<typeof Dialog.Content>, ModalC
             position = 'c',
             showOverlay = true,
             size = 'md',
+            variant = 'primary',
             ...rest
         } = props;
         const sizeModifier = useModifier('c-modal__content', size);
+        const variantModifier = useModifier('c-modal__content', variant);
 
-        const classes = classNames('c-modal__content', sizeModifier);
+        const classes = classNames('c-modal__content', variantModifier, sizeModifier);
 
         const overlayModifier = useModifier('c-modal__overlay', !showOverlay && 'hidden');
         const overlayClasses = classNames('c-modal__overlay', overlayModifier);
