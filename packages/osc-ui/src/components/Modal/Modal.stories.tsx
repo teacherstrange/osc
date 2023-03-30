@@ -26,6 +26,7 @@ export default {
     component: Modal,
     subcomponents: {
         ModalCloseButton,
+        ModalContainer,
         ModalContent,
         ModalDescription,
         ModalInner,

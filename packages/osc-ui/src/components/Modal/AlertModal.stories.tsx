@@ -6,8 +6,10 @@ import {
     AlertModal,
     AlertModalAction,
     AlertModalCancel,
+    AlertModalContainer,
     AlertModalContent,
     AlertModalDescription,
+    AlertModalInner,
     AlertModalTitle,
     AlertModalTrigger,
 } from './AlertModal';
@@ -16,8 +18,10 @@ export default {
     title: 'osc-ui/Dialogs/AlertModal',
     component: AlertModal,
     subcomponents: {
+        AlertModalContainer,
         AlertModalContent,
         AlertModalDescription,
+        AlertModalInner,
         AlertModalTitle,
         AlertModalTrigger,
     },

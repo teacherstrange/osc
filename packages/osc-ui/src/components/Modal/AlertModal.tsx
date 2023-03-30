@@ -1,9 +1,9 @@
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import React, { forwardRef } from 'react';
 
-import type { ComponentPropsWithoutRef, ElementRef } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode } from 'react';
 import { useModifier } from '../../hooks/useModifier';
-import type { Maybe } from '../../types';
+import type { Maybe, PolymorphicComponentProps, PolymorphicRef } from '../../types';
 import { classNames } from '../../utils/classNames';
 
 export interface SharedAlertModalProps {
@@ -75,23 +75,52 @@ export interface ModalContentProps
      * @default md
      */
     size?: 'sm' | 'md' | 'lg' | 'full';
+    /**
+     * Positions the modal content around it's container
+     * @default center
+     */
+    position?: 'tr' | 'tl' | 'br' | 'bl' | 'c';
+    /**
+     * Sets the style of the Modal, primary, secondary etc.
+     * @default primary
+     */
+    variant?: 'primary' | 'secondary';
 }
 
 export const AlertModalContent = forwardRef<
     ElementRef<typeof AlertDialog.Content>,
     ModalContentProps
 >((props, forwardedRef) => {
-    const { children, className, container, showOverlay = true, size = 'md', ...rest } = props;
+    const {
+        children,
+        className,
+        container,
+        position = 'c',
+        showOverlay = true,
+        size = 'md',
+        variant = 'primary',
+        ...rest
+    } = props;
     const sizeModifier = useModifier('c-modal__content', size);
-    const classes = classNames('c-modal__content', sizeModifier, className);
+    const variantModifier = useModifier('c-modal__content', variant);
+
+    const classes = classNames('c-modal__content', variantModifier, sizeModifier);
+
+    const overlayModifier = useModifier('c-modal__overlay', !showOverlay && 'hidden');
+    const overlayClasses = classNames('c-modal__overlay', overlayModifier);
+
+    const positionModifier = useModifier('c-modal__overlay-inner', position);
+    const overlayInnerClasses = classNames('o-container c-modal__overlay-inner', positionModifier);
 
     return (
         <AlertDialog.Portal container={container}>
-            {showOverlay ? <AlertDialog.Overlay className="c-modal__overlay" /> : null}
-
-            <AlertDialog.Content className={classes} {...rest} ref={forwardedRef}>
-                {children}
-            </AlertDialog.Content>
+            <AlertDialog.Overlay className={overlayClasses}>
+                <div className={overlayInnerClasses}>
+                    <AlertDialog.Content className={classes} {...rest} ref={forwardedRef}>
+                        {children}
+                    </AlertDialog.Content>
+                </div>
+            </AlertDialog.Overlay>
         </AlertDialog.Portal>
     );
 });
@@ -140,6 +169,48 @@ export const AlertModalDescription = forwardRef<
     );
 });
 AlertModalDescription.displayName = 'AlertModalTitle';
+
+/* -------------------------------------------------------------------------------------------------
+ * Alert Modal Inner
+ * -----------------------------------------------------------------------------------------------*/
+export interface AlertModalInnerProps extends SharedAlertModalProps {
+    children: ReactNode;
+}
+
+export const AlertModalInner = (props: AlertModalInnerProps) => {
+    const { children, className } = props;
+    const classes = classNames('c-modal__inner', className);
+
+    return <div className={classes}>{children}</div>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertModal Container
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalContainerProps extends SharedAlertModalProps {
+    /**
+     * The content of the container
+     */
+    children: ReactNode;
+}
+
+export const AlertModalContainer = forwardRef(
+    <C extends ElementType = 'div'>(
+        props: PolymorphicComponentProps<C, ModalContainerProps>,
+        forwardedRef: PolymorphicRef<C>
+    ) => {
+        const { as, children, className, ...rest } = props;
+        const Component = as || 'div';
+        const classes = classNames('c-modal__container', className);
+
+        return (
+            <Component className={classes} {...rest} ref={forwardedRef}>
+                {children}
+            </Component>
+        );
+    }
+);
+AlertModalContainer.displayName = 'AlertModalContainer';
 
 /* -------------------------------------------------------------------------------------------------
  * Alert Modal Action
