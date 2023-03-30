@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import type { ComponentPropsWithoutRef, ElementRef } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, ReactNode } from 'react';
 import React, { forwardRef } from 'react';
 import { classNames } from '../../utils/classNames';
 
@@ -166,6 +166,20 @@ export const ModalDescription = forwardRef<
     );
 });
 ModalDescription.displayName = 'ModalTitle';
+
+/* -------------------------------------------------------------------------------------------------
+ * Modal Inner
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalInnerProps extends SharedModalProps {
+    children: ReactNode;
+}
+
+export const ModalInner = (props: ModalInnerProps) => {
+    const { children, className } = props;
+    const classes = classNames('c-modal__inner', className);
+
+    return <div className={classes}>{children}</div>;
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Close Button

@@ -15,6 +15,7 @@ import {
     ModalCloseButton,
     ModalContent,
     ModalDescription,
+    ModalInner,
     ModalTitle,
     ModalTrigger,
 } from './Modal';
@@ -26,6 +27,7 @@ export default {
         ModalCloseButton,
         ModalContent,
         ModalDescription,
+        ModalInner,
         ModalTitle,
         ModalTrigger,
     },
@@ -52,11 +54,37 @@ const Template: Story<ModalProps> = (args) => (
 
             <ModalTitle>An accessible title to be announced when the dialog is opened.</ModalTitle>
 
-            <ModalDescription>
-                An optional accessible description to be announced when the dialog is opened.
-            </ModalDescription>
+            <ModalInner>
+                <ModalDescription>
+                    An optional accessible description to be announced when the dialog is opened.
+                </ModalDescription>
 
-            <p>Modal content</p>
+                <p>Modal content</p>
+            </ModalInner>
+        </ModalContent>
+    </Modal>
+);
+
+const SecondaryTemplate: Story<ModalProps> = (args) => (
+    <Modal {...args}>
+        <ModalTrigger asChild>
+            <Button>Open modal</Button>
+        </ModalTrigger>
+        <ModalContent variant="secondary">
+            <ModalCloseButton>
+                <Icon id="close" />
+                <VisuallyHidden>Close</VisuallyHidden>
+            </ModalCloseButton>
+
+            <ModalTitle>An accessible title to be announced when the dialog is opened.</ModalTitle>
+
+            <ModalInner>
+                <ModalDescription>
+                    An optional accessible description to be announced when the dialog is opened.
+                </ModalDescription>
+
+                <p>Modal content</p>
+            </ModalInner>
         </ModalContent>
     </Modal>
 );
@@ -196,19 +224,28 @@ const PositionedTemplate: Story<ModalProps> = (args) => {
                             </Button>
                         </ModalTrigger>
 
-                        <ModalContent size="sm" position="tr" container={container}>
+                        <ModalContent
+                            size="sm"
+                            position="tr"
+                            variant="secondary"
+                            container={container}
+                        >
                             <ModalCloseButton>
                                 <Icon id="close" />
                                 <VisuallyHidden>Close</VisuallyHidden>
                             </ModalCloseButton>
 
                             <ModalTitle>
-                                Your Bag, <span className="u-text-reg">0 items</span>
+                                Your Bag, <span className="t-font-s u-text-reg">0 items</span>
                             </ModalTitle>
 
-                            <p>Your bag is currently empty.</p>
+                            <ModalInner>
+                                <p>Your bag is currently empty.</p>
 
-                            <Button variant="secondary">View my bag</Button>
+                                <Button variant="secondary" isFull>
+                                    View my bag
+                                </Button>
+                            </ModalInner>
                         </ModalContent>
                     </Modal>
                 </HeaderActionBar>
@@ -247,6 +284,9 @@ const PositionedTemplate: Story<ModalProps> = (args) => {
 };
 
 export const Primary = Template.bind({});
+Primary.args = {};
+
+export const Secondary = SecondaryTemplate.bind({});
 Primary.args = {};
 
 export const HasNoDescription = HasNoDescriptionTemplate.bind({});
