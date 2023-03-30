@@ -14,7 +14,6 @@
             width: 100%;
             max-height: $modal-max-height;
             background-color: var(--color-tertiary);
-            border-radius: $rad-xs;
             box-shadow: $shadow-m;
             overflow-y: auto;
 
@@ -31,8 +30,10 @@
             // *----------------------------------*/
             &--primary {
                 padding: $space-2xl;
+                border-radius: $rad-xs;
 
                 #{$self}__ttl {
+                    margin-block-start: $space-2xs;
                     font-size: $fs-m;
                 }
 
@@ -45,6 +46,30 @@
                     &:active {
                         color: var(--color-neutral-600);
                     }
+                }
+            }
+
+            &--secondary {
+                #{$self}__header {
+                    padding: $space-xs $space-xl;
+                    background-color: var(--color-neutral-200);
+                }
+
+                #{$self}__ttl {
+                    max-width: 38ch;
+                    margin: 0;
+                    font-size: $fs-l;
+                }
+
+                #{$self}__inner {
+                    padding: $space-xl;
+                }
+
+                #{$self}__close {
+                    top: $space-m;
+                    right: $space-l;
+                    color: var(--color-secondary);
+                    font-size: $fs-2xs;
                 }
             }
 
@@ -68,10 +93,6 @@
             }
         }
 
-        &__ttl {
-            margin-block-start: $space-2xs;
-        }
-
         &__close {
             position: absolute;
             transition: color $timing-s $ease-in-out;
@@ -83,6 +104,8 @@
             display: grid;
             inset: 0;
             overflow-y: auto;
+
+            @include z-index(modal);
 
             &::after {
                 content: "";
