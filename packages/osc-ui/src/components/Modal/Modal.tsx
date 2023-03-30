@@ -193,8 +193,6 @@ export interface ModalContainerProps extends SharedModalProps {
     children: ReactNode;
 }
 
-// C extends ElementType = 'div', PolymorphicComponentProps<C, ModalContainerProps>
-
 export const ModalContainer = forwardRef(
     <C extends ElementType = 'div'>(
         props: PolymorphicComponentProps<C, ModalContainerProps>,
