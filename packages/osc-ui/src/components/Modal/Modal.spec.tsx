@@ -19,6 +19,7 @@ import {
     ModalCloseButton,
     ModalContent,
     ModalDescription,
+    ModalInner,
     ModalTitle,
     ModalTrigger,
 } from './Modal';
@@ -114,6 +115,34 @@ describe('Modal', () => {
         await user.click(screen.getByRole('button', { name: content.open }));
 
         expect(document.querySelector('.c-modal__overlay')).toHaveClass('c-modal__overlay--hidden');
+    });
+
+    test('renders the secondary variant of the modal', async () => {
+        const user = userEvent.setup();
+
+        render(
+            <Modal>
+                <ModalTrigger asChild>
+                    <Button>{content.open}</Button>
+                </ModalTrigger>
+                <ModalContent variant="secondary">
+                    <ModalCloseButton>
+                        <Icon id="close" />
+                        <VisuallyHidden>Close</VisuallyHidden>
+                    </ModalCloseButton>
+
+                    <ModalTitle>{content.title}</ModalTitle>
+                    <ModalInner>
+                        <ModalDescription>{content.description}</ModalDescription>
+                        <p>Modal content</p>
+                    </ModalInner>
+                </ModalContent>
+            </Modal>
+        );
+
+        await user.click(screen.getByRole('button', { name: content.open }));
+
+        expect(screen.getByRole('dialog')).toHaveClass('c-modal__content--secondary');
     });
 });
 
