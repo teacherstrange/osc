@@ -1,10 +1,10 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import type { ComponentPropsWithoutRef, ElementRef, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode } from 'react';
 import React, { forwardRef } from 'react';
 import { classNames } from '../../utils/classNames';
 
 import { useModifier } from '../../hooks/useModifier';
-import type { Maybe } from '../../types';
+import type { Maybe, PolymorphicComponentProps, PolymorphicRef } from '../../types';
 import './modal.scss';
 
 export interface SharedModalProps {
@@ -182,6 +182,36 @@ export const ModalInner = (props: ModalInnerProps) => {
 
     return <div className={classes}>{children}</div>;
 };
+
+/* -------------------------------------------------------------------------------------------------
+ * Modal Container
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalContainerProps extends SharedModalProps {
+    /**
+     * The content of the container
+     */
+    children: ReactNode;
+}
+
+// C extends ElementType = 'div', PolymorphicComponentProps<C, ModalContainerProps>
+
+export const ModalContainer = forwardRef(
+    <C extends ElementType = 'div'>(
+        props: PolymorphicComponentProps<C, ModalContainerProps>,
+        forwardedRef: PolymorphicRef<C>
+    ) => {
+        const { as, children, className, ...rest } = props;
+        const Component = as || 'div';
+        const classes = classNames('c-modal__container', className);
+
+        return (
+            <Component className={classes} {...rest} ref={forwardedRef}>
+                {children}
+            </Component>
+        );
+    }
+);
+ModalContainer.displayName = 'ModalContainer';
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Close Button

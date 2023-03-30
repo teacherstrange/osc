@@ -8,6 +8,18 @@
     .c-modal {
         $self: &;
 
+        /*
+         * Custom container for the modal
+         *
+         * [1] Setting will-change to transform will allow the fixed position
+         * of the child elements to become relative to this element.
+         * @see: https://developer.mozilla.org/en-US/docs/Web/CSS/position#values
+         */
+        &__container {
+            position: relative;
+            will-change: transform; /* [1] */
+        }
+
         &__content {
             display: flex;
             flex-direction: column;

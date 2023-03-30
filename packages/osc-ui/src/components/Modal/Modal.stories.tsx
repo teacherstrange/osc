@@ -13,6 +13,7 @@ import type { ModalProps } from './Modal';
 import {
     Modal,
     ModalCloseButton,
+    ModalContainer,
     ModalContent,
     ModalDescription,
     ModalInner,
@@ -268,17 +269,13 @@ const PositionedTemplate: Story<ModalProps> = (args) => {
                 </HeaderNav>
             </Header>
 
-            <div // TODO: Make this a component
-            >
-                <div
-                    style={{
-                        position: 'relative',
-                        willChange: 'transform',
-                        minHeight: '1000px',
-                    }}
-                    ref={setContainer}
-                />
-            </div>
+            <ModalContainer
+                as="section"
+                style={{
+                    minHeight: '500px',
+                }}
+                ref={setContainer}
+            />
         </>
     );
 };
@@ -287,7 +284,16 @@ export const Primary = Template.bind({});
 Primary.args = {};
 
 export const Secondary = SecondaryTemplate.bind({});
-Primary.args = {};
+Secondary.args = {
+    ...Primary.args,
+};
+Secondary.parameters = {
+    docs: {
+        description: {
+            story: 'The secondary variant of the modal. Has a background colour on the header and works best by including the `ModalInner` component which ensures the spacing is consistent.',
+        },
+    },
+};
 
 export const HasNoDescription = HasNoDescriptionTemplate.bind({});
 HasNoDescription.args = {
@@ -328,4 +334,11 @@ ControlledModal.parameters = {
 export const PositionedModal = PositionedTemplate.bind({});
 PositionedModal.args = {
     ...Primary.args,
+};
+PositionedModal.parameters = {
+    docs: {
+        description: {
+            story: "You can position the Modal within it's container by passing the `position` prop to the `ModalContent`. You can use this in conjunction with the `ModalContainer` component to position it within the context of another container, rather than the window. This is useful for creating things like minicarts or other modals positioned against the header.",
+        },
+    },
 };
