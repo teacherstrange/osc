@@ -138,12 +138,14 @@ export const AlertModalTitle = forwardRef<
     AlertModalTitleProps
 >((props, forwardedRef) => {
     const { children, className, ...rest } = props;
-    const classes = classNames('c-modal__ttl t-font-m u-text-bold', className);
+    const classes = classNames('c-modal__ttl', className);
 
     return (
-        <AlertDialog.Title className={classes} {...rest} ref={forwardedRef}>
-            {children}
-        </AlertDialog.Title>
+        <header className="c-modal__header">
+            <AlertDialog.Title className={classes} {...rest} ref={forwardedRef}>
+                {children}
+            </AlertDialog.Title>
+        </header>
     );
 });
 AlertModalTitle.displayName = 'AlertModalTitle';
