@@ -137,9 +137,11 @@ export const ModalTitle = forwardRef<ElementRef<typeof Dialog.Title>, ModalTitle
         const classes = classNames('c-modal__ttl', className);
 
         return (
-            <Dialog.Title className={classes} {...rest} ref={forwardedRef}>
-                {children}
-            </Dialog.Title>
+            <header className="c-modal__header">
+                <Dialog.Title className={classes} {...rest} ref={forwardedRef}>
+                    {children}
+                </Dialog.Title>
+            </header>
         );
     }
 );
