@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { render } from 'test-utils';
 import { Icon } from '../Icon/Icon';
@@ -18,7 +19,9 @@ const content = {
     description: 'An optional accessible description to be announced when the dialog is opened.',
 };
 
-test('renders the drawer component', () => {
+test('renders the drawer component', async () => {
+    const user = userEvent.setup();
+
     render(
         <Drawer direction="right">
             <DrawerTrigger>{content.open}</DrawerTrigger>
@@ -38,6 +41,8 @@ test('renders the drawer component', () => {
         </Drawer>
     );
 
+    await user.click(screen.getByRole('button', { name: content.open }));
+
     expect(screen.getByRole('button', { name: content.open, hidden: true })).toBeVisible();
     expect(document.querySelector('.c-drawer__overlay')).toBeVisible();
     expect(screen.getByRole('dialog')).toBeVisible();
@@ -51,7 +56,9 @@ test('renders the drawer component', () => {
     expect(screen.getByText('Drawer content')).toBeVisible();
 });
 
-test('renders the drawer component without a description', () => {
+test('renders the drawer component without a description', async () => {
+    const user = userEvent.setup();
+
     render(
         <Drawer direction="right">
             <DrawerTrigger>{content.open}</DrawerTrigger>
@@ -69,10 +76,14 @@ test('renders the drawer component without a description', () => {
         </Drawer>
     );
 
+    await user.click(screen.getByRole('button', { name: content.open }));
+
     expect(screen.queryByText(content.description)).not.toBeInTheDocument();
 });
 
-test('renders the drawer without an overlay', () => {
+test('renders the drawer without an overlay', async () => {
+    const user = userEvent.setup();
+
     render(
         <Drawer direction="right">
             <DrawerTrigger>{content.open}</DrawerTrigger>
@@ -143,6 +154,9 @@ test('adds size modifier class', () => {
             </DrawerContent>
         </Drawer>
     );
+
+    await user.click(screen.getByRole('button', { name: content.open }));
+
     expect(screen.getByRole('dialog')).toHaveClass('c-drawer__content--md');
 
     rerender(
@@ -163,10 +177,13 @@ test('adds size modifier class', () => {
             </DrawerContent>
         </Drawer>
     );
+
     expect(screen.getByRole('dialog')).toHaveClass('c-drawer__content--sm');
 });
 
-test('adds full height modifier', () => {
+test('adds full height modifier', async () => {
+    const user = userEvent.setup();
+
     render(
         <Drawer direction="right">
             <DrawerTrigger>{content.open}</DrawerTrigger>
@@ -185,5 +202,8 @@ test('adds full height modifier', () => {
             </DrawerContent>
         </Drawer>
     );
+
+    await user.click(screen.getByRole('button', { name: content.open }));
+
     expect(screen.getByRole('dialog')).toHaveClass('is-full');
 });
