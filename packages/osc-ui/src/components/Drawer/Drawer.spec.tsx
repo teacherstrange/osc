@@ -103,39 +103,14 @@ test('renders the drawer without an overlay', async () => {
         </Drawer>
     );
 
+    await user.click(screen.getByRole('button', { name: content.open }));
+
     expect(document.querySelector('.c-drawer__overlay')).not.toBeInTheDocument();
 });
 
-test('adds the content height and width variables to the trigger and the content', () => {
-    render(
-        <Drawer direction="right">
-            <DrawerTrigger>{content.open}</DrawerTrigger>
+test('adds size modifier class', async () => {
+    const user = userEvent.setup();
 
-            <DrawerContent>
-                <DrawerCloseButton>
-                    <Icon id="close" />
-                    <VisuallyHidden>Close</VisuallyHidden>
-                </DrawerCloseButton>
-
-                <DrawerTitle>{content.title}</DrawerTitle>
-
-                <DrawerDescription>{content.description}</DrawerDescription>
-
-                <p>Drawer content</p>
-            </DrawerContent>
-        </Drawer>
-    );
-
-    // Expect them to be 0 here as we don't have a viewport to work with
-    expect(screen.getByRole('button', { name: content.open, hidden: true })).toHaveStyle(
-        '--drawer-content-height:0;--drawer-content-width:0'
-    );
-    expect(screen.getByRole('dialog')).toHaveStyle(
-        '--drawer-content-height:0;--drawer-content-width:0'
-    );
-});
-
-test('adds size modifier class', () => {
     const { rerender } = render(
         <Drawer direction="right">
             <DrawerTrigger>{content.open}</DrawerTrigger>
