@@ -150,9 +150,12 @@
 
             &.is-pinned {
                 position: fixed; /* [1] */
-                box-shadow: $shadow-m;
 
                 @include z-index(modal-trigger);
+
+                &:not(:focus):not(:focus-visible) {
+                    box-shadow: $shadow-m;
+                }
             }
 
             // *----------------------------------*/
