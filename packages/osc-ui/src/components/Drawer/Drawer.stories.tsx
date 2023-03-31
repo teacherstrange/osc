@@ -96,6 +96,10 @@ const PinnedTemplate: Story<DrawerProps> = (args) => {
             </DrawerTrigger>
 
             <DrawerContent>
+                <DrawerTrigger asChild isPinned isCloseButton className="c-btn--no-shadow">
+                    <Button>Contact us</Button>
+                </DrawerTrigger>
+
                 <DrawerTitle>Contact us</DrawerTitle>
 
                 <DrawerDescription>
@@ -126,15 +130,7 @@ const PinnedTemplate: Story<DrawerProps> = (args) => {
                             placeholder="Your phone number"
                         />
                         <TextArea id="message" name="Enquiry" />
-                        <Button
-                            isFull
-                            isLoading={isLoading}
-                            loadingText="Sending"
-                            onClick={(event) => {
-                                // Prevent closing the drawer when clicking the button
-                                event.stopPropagation();
-                            }}
-                        >
+                        <Button isFull isLoading={isLoading} loadingText="Sending">
                             Send Enquiry
                         </Button>
                         <p className="t-font-s">

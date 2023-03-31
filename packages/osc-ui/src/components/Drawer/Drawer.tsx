@@ -1,14 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import type {
-    ComponentPropsWithoutRef,
-    Dispatch,
-    ElementRef,
-    ElementType,
-    ReactNode,
-    SetStateAction,
-} from 'react';
-import React, { createContext, forwardRef, useContext, useEffect, useState } from 'react';
-import useElementSize from '../../hooks/useElementSize';
+import type { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode } from 'react';
+import React, { createContext, forwardRef, useContext } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import type { Maybe, PolymorphicComponentProps } from '../../types';
 import { classNames } from '../../utils/classNames';
@@ -40,26 +32,15 @@ export interface DrawerProps
     isOffset?: boolean;
 }
 
-const DrawerContext = createContext<
-    DrawerProps & {
-        drawerContentSize: { width: number; height: number };
-        setDrawerContentSize: Dispatch<SetStateAction<{ width: number; height: number }>>;
-    }
->(null);
+const DrawerContext = createContext<DrawerProps>(null);
 
 export const Drawer = (props: DrawerProps) => {
     const { children, direction, isOffset } = props;
-    const [drawerContentSize, setDrawerContentSize] = useState<{ width: number; height: number }>({
-        width: 0,
-        height: 0,
-    });
 
     return (
         <DrawerContext.Provider
             value={{
                 direction,
-                drawerContentSize,
-                setDrawerContentSize,
                 isOffset,
             }}
         >
@@ -81,12 +62,17 @@ export interface DrawerTriggerProps
      * Pins the trigger to the edge of the drawer.
      */
     isPinned?: boolean;
+    /**
+     * Swaps the trigger to a close button.
+     * Useful for patterns like pinning the button to the side of the drawer
+     */
+    isCloseButton?: boolean;
 }
 
 export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, DrawerTriggerProps>(
     (props, forwardedRef) => {
-        const { children, className, isPinned, ...rest } = props;
-        const { direction, drawerContentSize, isOffset } = useDrawerContext();
+        const { children, className, isPinned, isCloseButton, ...rest } = props;
+        const { direction, isOffset } = useDrawerContext();
         const directionModifier = useModifier('c-drawer__trigger', isPinned && direction);
         const offsetModifier = useModifier(
             'c-drawer__trigger',
@@ -96,27 +82,25 @@ export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, Drawe
         const classes = classNames(
             'c-drawer__trigger',
             directionModifier,
-            offsetModifier,
+            !isCloseButton ? offsetModifier : '',
             isPinned ? 'is-pinned' : '',
             className
         );
 
+        if (isCloseButton) {
+            return (
+                <Dialog.Close
+                    className={`${classes} c-drawer__trigger--close`}
+                    {...rest}
+                    ref={forwardedRef}
+                >
+                    {children}
+                </Dialog.Close>
+            );
+        }
+
         return (
-            <Dialog.Trigger
-                className={classes}
-                {...rest}
-                ref={forwardedRef}
-                style={{
-                    ['--drawer-content-height' as string]: drawerContentSize.height,
-                    ['--drawer-content-width' as string]: drawerContentSize.width,
-                    ...rest.style,
-                }}
-                onClick={(event) => {
-                    // Prevent event bubbling/capturing which is causing the drawer to close immediately
-                    // when tapped on on a mobile. This is related to the fact we are forceMounting the drawer
-                    event.stopPropagation();
-                }}
-            >
+            <Dialog.Trigger className={classes} {...rest} ref={forwardedRef}>
                 {children}
             </Dialog.Trigger>
         );
@@ -163,11 +147,10 @@ export const DrawerContent = (props: DrawerContentProps) => {
         isFull = false,
         ...rest
     } = props;
-    const { direction, setDrawerContentSize, isOffset } = useDrawerContext();
+    const { direction, isOffset } = useDrawerContext();
     const directionModifier = useModifier('c-drawer__content', direction);
     const offsetModifier = useModifier('c-drawer__content', isOffset ? 'offset' : '');
     const widthModifier = useModifier('c-drawer__content', size);
-    const [contentRef, { height, width }] = useElementSize();
 
     const classes = classNames(
         'c-drawer__content',
@@ -178,26 +161,12 @@ export const DrawerContent = (props: DrawerContentProps) => {
         className
     );
 
-    useEffect(() => {
-        setDrawerContentSize({ height, width });
-    }, [setDrawerContentSize, height, width]);
-
     return (
-        // ForceMount the drawer to keep animation on Safari happy
-        <Dialog.Portal container={container} forceMount>
+        <Dialog.Portal container={container}>
             {showOverlay ? <Dialog.Overlay className="c-drawer__overlay" /> : null}
 
-            <Dialog.Content
-                className={classes}
-                {...rest}
-                ref={contentRef}
-                style={{
-                    ['--drawer-content-height' as string]: height,
-                    ['--drawer-content-width' as string]: width,
-                    ...rest.style,
-                }}
-            >
-                {children}
+            <Dialog.Content className={classes} {...rest}>
+                <div className="c-drawer__content-inner">{children}</div>
             </Dialog.Content>
         </Dialog.Portal>
     );
