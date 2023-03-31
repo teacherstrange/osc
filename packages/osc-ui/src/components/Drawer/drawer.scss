@@ -293,9 +293,6 @@
                     $drawer-transition-ease
                 );
 
-                /* stylelint-disable-next-line declaration-no-important */
-                pointer-events: none !important; // Override the inline style added by Radix
-
                 // delay transitioning the visibility so the animation can run first
                 transition: visibility;
                 transition-delay: $drawer-transition-timing;
