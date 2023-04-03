@@ -5,6 +5,7 @@ import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import carouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
+import checkboxStyles from 'osc-ui/dist/src-components-Checkbox-checkbox.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
 import contentMediaStyles from 'osc-ui/dist/src-components-ContentMedia-content-media.css';
 import dateFieldStyles from 'osc-ui/dist/src-components-DatePicker-date-field.css';
@@ -13,10 +14,12 @@ import datePickerCalendarStyles from 'osc-ui/dist/src-components-DatePicker-cale
 import datePickerReactAriaStyles from 'osc-ui/dist/src-components-DatePicker-react-aria-components.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
+import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
+import radioGroupStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';
+import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import textGridStyles from 'osc-ui/dist/src-components-TextGrid-text-grid.css';
 import textInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
-import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
 import type {
     SanityPage,
@@ -122,12 +125,15 @@ export const getComponentStyles = (data: SanityPage) => {
 
             case 'module.forms':
                 styles.push({ rel: 'stylesheet', href: alertStyles });
+                styles.push({ rel: 'stylesheet', href: checkboxStyles });
                 styles.push({ rel: 'stylesheet', href: textInputStyles });
                 styles.push({ rel: 'stylesheet', href: selectStyles });
                 styles.push({ rel: 'stylesheet', href: dateFieldStyles });
                 styles.push({ rel: 'stylesheet', href: datePickerStyles });
                 styles.push({ rel: 'stylesheet', href: datePickerCalendarStyles });
                 styles.push({ rel: 'stylesheet', href: datePickerReactAriaStyles });
+                styles.push({ rel: 'stylesheet', href: radioGroupStyles });
+                styles.push({ rel: 'stylesheet', href: labelStyles });
                 break;
             case 'module.hero':
                 styles.push(
