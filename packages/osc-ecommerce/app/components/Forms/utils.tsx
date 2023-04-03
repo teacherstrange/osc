@@ -1,12 +1,36 @@
 import type { DateValue } from '@react-types/calendar';
 import type { Fetcher } from '@remix-run/react/dist/transition';
-import { DatePicker, Select, SelectItem, TextArea, TextInput } from 'osc-ui';
+import {
+    Checkbox,
+    CheckboxGroup,
+    DatePicker,
+    RadioGroup,
+    RadioItem,
+    Select,
+    SelectItem,
+    TextArea,
+    TextInput,
+} from 'osc-ui';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { z } from 'zod';
+import { assignValidationSchema } from '~/utils/validation';
 import type { HubspotFormFieldGroups, HubspotFormFieldTypes } from './types';
 
+/**
+ * Take the hubspot form data and returns the form inputs or rich content
+ *
+ * @param data Hubspot Form data
+ * @param formId The Hubspot form ID
+ * @param index Index of the array map
+ * @param schema The Zod schema
+ * @param setValidationErrors A dispatch for setting validation errors
+ * @param validationErrors An object containing validation errors from the servers
+ * @param styles The styles from hubspot
+ * @param themeName Theme name which comes from hubspot, sets styling of inputs, e.g. linear, rounded etc...
+ * @returns Form Input or Rich Content
+ */
 export function getInputOrContent(
     data: HubspotFormFieldGroups,
     formId: string,
@@ -17,17 +41,12 @@ export function getInputOrContent(
     styles?: Record<string, unknown>,
     themeName?: string
 ) {
-    let formInput: JSX.Element[] = [];
-
-    let content: JSX.Element;
-
     const variants = getVariants({ styles, themeName });
     if (data?.fields?.length > 0) {
         const inputs = data.fields.map((hubspotFields) => {
-            // If there are formFields then return correct form input type
             switch (hubspotFields.fieldType) {
                 case 'textarea':
-                    formInput.push(
+                    return (
                         <TextArea
                             errors={validationErrors && validationErrors[hubspotFields.name]}
                             id={`${hubspotFields.name}_${formId}`}
@@ -39,10 +58,9 @@ export function getInputOrContent(
                             setErrors={setValidationErrors}
                         />
                     );
-                    break;
                 case 'text':
                 case 'phonenumber':
-                    formInput.push(
+                    return (
                         <TextInput
                             errors={validationErrors && validationErrors[hubspotFields.name]}
                             key={index}
@@ -63,15 +81,17 @@ export function getInputOrContent(
                             variants={variants}
                         />
                     );
-                    break;
+
                 case 'select':
-                    formInput.push(
+                    return (
                         <Select
                             description={{ label: hubspotFields.label }}
                             errors={validationErrors && validationErrors[hubspotFields.name]}
                             key={index}
                             required={hubspotFields.required}
-                            // TODO - this should be coming from 'placeholder' attribute, but it's empty and instead unselectedLabel has the placeholder value. According to their API docs this is deprecated 🤷‍♂️ Have raised a ticket with hubspot
+                            // This should be coming from 'placeholder' attribute, but it's empty and instead
+                            // unselectedLabel has the placeholder value. According to Hubspot support the legacy
+                            // API continues to use unselectedLabel until future notice
                             placeholder={hubspotFields.unselectedLabel}
                             name={hubspotFields.name}
                             schema={schema.pick({ [hubspotFields.name]: true })}
@@ -84,19 +104,19 @@ export function getInputOrContent(
                             ))}
                         </Select>
                     );
-                    break;
                 case 'date':
                     const [date, setDate] = useState<DateValue | null>(null);
-                    formInput.push(
+                    return (
                         <>
                             <input
                                 hidden={true}
                                 name={hubspotFields.name}
-                                defaultValue={JSON.stringify({
+                                value={JSON.stringify({
                                     year: date?.year ? date.year : 0,
                                     month: date?.month ? date.month : 0,
                                     day: date?.day ? date.day : 0,
                                 })}
+                                readOnly
                             />
                             <DatePicker
                                 errors={validationErrors && validationErrors[hubspotFields.name]}
@@ -109,22 +129,68 @@ export function getInputOrContent(
                             />
                         </>
                     );
-                    break;
+                case 'radio':
+                    return (
+                        <RadioGroup
+                            description={{ id: hubspotFields.name, value: hubspotFields.label }}
+                            defaultValue={
+                                Array.isArray(hubspotFields.selectedOptions) &&
+                                hubspotFields.selectedOptions[0]
+                            }
+                            errors={validationErrors && validationErrors[hubspotFields.name]}
+                            name={hubspotFields.name}
+                            required={hubspotFields.required}
+                            schema={schema.pick({ [hubspotFields.name]: true })}
+                            setErrors={setValidationErrors}
+                        >
+                            {hubspotFields.options.map((option) => (
+                                <RadioItem
+                                    id={`${option.value}_${formId}`}
+                                    key={`${option.value}_${formId}`}
+                                    name={option.label}
+                                    value={option.value}
+                                />
+                            ))}
+                        </RadioGroup>
+                    );
+                case 'checkbox':
+                    return (
+                        <CheckboxGroup
+                            description={{ value: hubspotFields.label }}
+                            errors={validationErrors && validationErrors[hubspotFields.name]}
+                            required={hubspotFields.required}
+                        >
+                            {hubspotFields.options.map((option) => (
+                                <Checkbox
+                                    key={`${option.value}_${formId}`}
+                                    defaultChecked={hubspotFields.selectedOptions.some(
+                                        (opt) => opt === option.value
+                                    )}
+                                    errors={
+                                        validationErrors && validationErrors[hubspotFields.name]
+                                    }
+                                    id={`${option.value}_${formId}`}
+                                    name={hubspotFields.name}
+                                    setErrors={setValidationErrors}
+                                    schema={schema.pick({ [hubspotFields.name]: true })}
+                                    value={option.value}
+                                />
+                            ))}
+                        </CheckboxGroup>
+                    );
                 default:
                     return null;
             }
-            return formInput;
         });
-        return inputs[0];
+        return inputs;
     } else if (data?.richText?.content) {
-        content = (
+        return (
             <div
                 className="c-content"
                 dangerouslySetInnerHTML={{ __html: data.richText.content }}
                 key={index}
             />
         );
-        return content;
     }
     return null;
 }
