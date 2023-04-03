@@ -93,7 +93,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
         }
         return (
             <div key={index} className="c-form__content-container">
-                <div key={index}>{field}</div>
+                {field}
             </div>
         );
     });
