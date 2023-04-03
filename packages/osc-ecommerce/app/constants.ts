@@ -3,5 +3,5 @@ export const PATHS = {
     HOME: '/',
     BLOG: 'blog',
     COLLECTIONS: 'collections',
-    PRODUCTS: 'products',
+    PRODUCTS: 'courses',
 } as const;
