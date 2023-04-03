@@ -80,7 +80,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
     const hubspotForm = formFields.map((field, index) => {
         if (!field) return null;
         // Inputs will be in an array, but content will not be, so check for array
-        if (Array.isArray(field)) {
+        if (Array.isArray(field) && field.length > 0) {
             return (
                 <div key={index} className="c-form__inputs-container">
                     {field.map((field, fieldIndex) => (
