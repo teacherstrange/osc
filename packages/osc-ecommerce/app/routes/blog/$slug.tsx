@@ -1,11 +1,14 @@
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { PreviewSuspense } from '@sanity/preview-kit';
 import type { DynamicLinksFunction } from 'remix-utils';
-import Module, { getComponentStyles } from '~/components/Module';
+import { getComponentStyles } from '~/components/Module';
+import PageContent, { PagePreview } from '~/components/PageContent';
+import { PreviewBanner } from '~/components/PreviewBanner';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { POST_QUERY } from '~/queries/sanity/post';
-import type { SanityPage, module } from '~/types/sanity';
+import type { SanityPage } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
@@ -50,6 +53,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         canonicalUrl,
         hubspotFormData,
         query: isPreview ? POST_QUERY : null,
+        params: isPreview ? params : null,
+        // Note: This makes the token available to the client if they have an active session
+        // This is useful to show live preview to unauthenticated users
+        // If you would rather not, replace token with `null` and it will rely on your Studio auth
+        // TODO: Get token
+        // token: isPreview ? token : null,
+        token: null,
     });
 };
 
@@ -73,21 +83,23 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { post, isPreview } = useLoaderData<typeof loader>();
+    const { post, isPreview, query, params, token } = useLoaderData<typeof loader>();
 
-    return (
-        <>
-            {isPreview ? <div>Preview Mode</div> : null}
+    if (
+        isPreview &&
+        query &&
+        params
+        // && token
+    ) {
+        return (
+            <>
+                <PreviewBanner />
+                <PreviewSuspense fallback={<PageContent {...post} />}>
+                    <PagePreview query={query} params={params} token={token} />
+                </PreviewSuspense>
+            </>
+        );
+    }
 
-            <h1>{post?.title}</h1>
-
-            {post?.modules && post?.modules.length > 0 ? (
-                <>
-                    {post?.modules.map((module: module) =>
-                        module ? <Module key={module?._key} module={module} /> : null
-                    )}
-                </>
-            ) : null}
-        </>
-    );
+    return <PageContent {...post} />;
 }

@@ -1,11 +1,14 @@
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { PreviewSuspense } from '@sanity/preview-kit';
 import type { DynamicLinksFunction } from 'remix-utils';
-import Module, { getComponentStyles } from '~/components/Module';
+import { getComponentStyles } from '~/components/Module';
+import PageContent, { PagePreview } from '~/components/PageContent';
+import { PreviewBanner } from '~/components/PreviewBanner';
 import getPageData from '~/models/sanity.server';
 import { HOME_QUERY } from '~/queries/sanity/home';
-import type { SanityPage, module } from '~/types/sanity';
+import type { SanityPage } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
@@ -15,7 +18,7 @@ interface PageData {
     isPreview: boolean;
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, params }) => {
     // Query the page data
     const data = await getPageData({
         request,
@@ -41,6 +44,13 @@ export const loader: LoaderFunction = async ({ request }) => {
         canonicalUrl,
         isPreview,
         query: isPreview ? HOME_QUERY : null,
+        params: isPreview ? params : null,
+        // Note: This makes the token available to the client if they have an active session
+        // This is useful to show live preview to unauthenticated users
+        // If you would rather not, replace token with `null` and it will rely on your Studio auth
+        // TODO: Get token
+        // token: isPreview ? token : null,
+        token: null,
     });
 };
 
@@ -64,19 +74,23 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { home, isPreview } = useLoaderData<typeof loader>();
+    const { home, isPreview, query, params, token } = useLoaderData<typeof loader>();
 
-    return (
-        <>
-            {isPreview ? <div>Preview Mode</div> : null}
+    if (
+        isPreview &&
+        query &&
+        params
+        // && token
+    ) {
+        return (
+            <>
+                <PreviewBanner />
+                <PreviewSuspense fallback={<PageContent {...home} />}>
+                    <PagePreview query={query} params={params} token={token} />
+                </PreviewSuspense>
+            </>
+        );
+    }
 
-            {home?.modules && home?.modules.length > 0 ? (
-                <>
-                    {home?.modules.map((module: module) =>
-                        module ? <Module key={module?._key} module={module} /> : null
-                    )}
-                </>
-            ) : null}
-        </>
-    );
+    return <PageContent {...home} />;
 }

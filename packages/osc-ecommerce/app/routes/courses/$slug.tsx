@@ -1,6 +1,7 @@
 import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { PreviewSuspense } from '@sanity/preview-kit';
 import type {
     Product as ProductType,
     ProductVariant,
@@ -15,6 +16,8 @@ import invariant from 'tiny-invariant';
 import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
 import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
 import Module, { getComponentStyles } from '~/components/Module';
+import PageContent, { PagePreview } from '~/components/PageContent';
+import { PreviewBanner } from '~/components/PreviewBanner';
 import priceStyles from '~/components/Price/price.css';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
@@ -102,6 +105,13 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
         canonicalUrl,
         hubspotFormData: hubspotFormData ? hubspotFormData : null,
         query: isPreview ? SANITY_PRODUCT_QUERY : null,
+        params: isPreview ? params : null,
+        // Note: This makes the token available to the client if they have an active session
+        // This is useful to show live preview to unauthenticated users
+        // If you would rather not, replace token with `null` and it will rely on your Studio auth
+        // TODO: Get token
+        // token: isPreview ? token : null,
+        token: null,
     });
 };
 
@@ -125,7 +135,24 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { page, product, isPreview, query } = useLoaderData<typeof loader>();
+    const { page, product, isPreview, query, params, token } = useLoaderData<typeof loader>();
+
+    if (
+        isPreview &&
+        query &&
+        params
+        // && token
+    ) {
+        return (
+            <>
+                <PreviewBanner />
+                <h1>{product.title}</h1>
+                <PreviewSuspense fallback={<PageContent {...page} />}>
+                    <PagePreview query={query} params={params} token={token} />
+                </PreviewSuspense>
+            </>
+        );
+    }
 
     // Due how the data is setup in Shopify there are times where we might return the same SKU multiple times
     // Here we are checking if there are any SKUs and then filtering out duplicates
@@ -173,13 +200,7 @@ export default function Index() {
                 </div>
             </div>
 
-            {page?.modules && page?.modules.length > 0 ? (
-                <>
-                    {page?.modules.map((module: module) =>
-                        module ? <Module key={module?._key} module={module} /> : null
-                    )}
-                </>
-            ) : null}
+            <PageContent {...page} />
         </div>
     );
 }

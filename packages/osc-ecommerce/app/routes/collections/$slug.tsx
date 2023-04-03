@@ -1,16 +1,19 @@
 import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
+import { PreviewSuspense } from '@sanity/preview-kit';
 import type { Collection as CollectionType } from '@shopify/hydrogen/storefront-api-types';
 import type { LoaderArgs } from '@shopify/remix-oxygen';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
-import Module, { getComponentStyles } from '~/components/Module';
+import { getComponentStyles } from '~/components/Module';
+import PageContent, { PagePreview } from '~/components/PageContent';
+import { PreviewBanner } from '~/components/PreviewBanner';
 import { PATHS } from '~/constants';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { COLLECTION_QUERY as SANITY_COLLECTION_QUERY } from '~/queries/sanity/collection';
 import { COLLECTION_QUERY as SHOPIFY_COLLECTION_QUERY } from '~/queries/shopify/collection';
-import type { SanityPage, module } from '~/types/sanity';
+import type { SanityPage } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
@@ -69,6 +72,13 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
         canonicalUrl,
         hubspotFormData: hubspotFormData ? hubspotFormData : null,
         query: isPreview ? SANITY_COLLECTION_QUERY : null,
+        params: isPreview ? params : null,
+        // Note: This makes the token available to the client if they have an active session
+        // This is useful to show live preview to unauthenticated users
+        // If you would rather not, replace token with `null` and it will rely on your Studio auth
+        // TODO: Get token
+        // token: isPreview ? token : null,
+        token: null,
     });
 };
 
@@ -92,13 +102,37 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Collection() {
-    const { page, collection, isPreview, query } = useLoaderData<typeof loader>();
+    const { page, collection, isPreview, query, params, token } = useLoaderData<typeof loader>();
+
+    if (
+        isPreview &&
+        query &&
+        params
+        // && token
+    ) {
+        return (
+            <>
+                <PreviewBanner />
+                <h1>{collection.title}</h1>
+
+                {collection.products.nodes.length > 0
+                    ? collection.products.nodes.map((product) => (
+                          <div key={product.id}>
+                              <Link to={`/products/${product.handle}`}>{product.title}</Link>
+                          </div>
+                      ))
+                    : null}
+
+                <PreviewSuspense fallback={<PageContent {...page} />}>
+                    <PagePreview query={query} params={params} token={token} />
+                </PreviewSuspense>
+            </>
+        );
+    }
 
     return (
         <>
-            {isPreview && query ? <div>Preview Mode</div> : null}
-
-            <h1>{collection?.title}</h1>
+            <h1>{collection.title}</h1>
 
             {collection.products.nodes.length > 0
                 ? collection.products.nodes.map((product) => (
@@ -108,13 +142,7 @@ export default function Collection() {
                   ))
                 : null}
 
-            {page?.modules && page?.modules.length > 0 ? (
-                <>
-                    {page?.modules.map((module: module) =>
-                        module ? <Module key={module?._key} module={module} /> : null
-                    )}
-                </>
-            ) : null}
+            <PageContent {...page} />
         </>
     );
 }
