@@ -472,3 +472,9 @@ export interface formModule extends module {
     paddingBottom?: Maybe<Spacing>;
     paddingTop?: Maybe<Spacing>;
 }
+
+export interface PreviewProps {
+    query: string;
+    params: { [key: string]: string };
+    token: string | null;
+}
