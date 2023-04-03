@@ -115,6 +115,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
                     isInversed={!!inversedSubmitButton}
                     loadingText="Submitting"
                     name="_action"
+                    target={successfulSubmission?.target}
                     value="submitHubspotForm"
                     variant="primary"
                 >

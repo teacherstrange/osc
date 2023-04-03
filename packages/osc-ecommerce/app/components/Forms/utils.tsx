@@ -384,7 +384,12 @@ interface ServerData {
  * @returns An object with populated errorCases object
  */
 export const getSuccessData = (serverData: ServerData) => {
-    const successData: { message: string; as: string; url?: string } = {
+    const successData: {
+        as: 'link' | 'a' | 'button';
+        message: string;
+        target?: string;
+        url?: string;
+    } = {
         message: 'Thanks for your submission',
         as: 'button',
     };
@@ -399,6 +404,7 @@ export const getSuccessData = (serverData: ServerData) => {
         if (linkTag) {
             successData.as = 'a';
             successData.url = linkTag.href;
+            successData.target = linkTag.target;
             successData.message = linkTag.innerHTML;
         } else if (paragraphTag) {
             successData.message = paragraphTag.innerHTML;

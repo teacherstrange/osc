@@ -262,7 +262,8 @@ export interface SelectAndCheckboxOptions {
 }
 
 export interface SuccessfulSubmission {
+    as: 'link' | 'a' | 'button';
     message: string;
-    as: string;
+    target: string;
     url?: string | undefined;
 }
