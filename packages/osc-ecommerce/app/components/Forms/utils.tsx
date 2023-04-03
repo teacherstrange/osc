@@ -1,4 +1,5 @@
 import type { DateValue } from '@react-types/calendar';
+import { json } from '@remix-run/node';
 import type { Fetcher } from '@remix-run/react/dist/transition';
 import {
     Checkbox,
@@ -218,6 +219,12 @@ export const getValidationSchema = (
     return z.object(result);
 };
 
+/**
+ * Sets the transition state when a form is submitted
+ *
+ * @param fetcher Remix Fetcher
+ * @returns The isSubmitting and isAdding state
+ */
 export const transitionStates = (fetcher: Fetcher) => {
     const isSubmitting = fetcher.state === 'submitting';
     const isAdding =
@@ -227,7 +234,12 @@ export const transitionStates = (fetcher: Fetcher) => {
     return { isSubmitting, isAdding };
 };
 
-// Filter out the form fields (formFieldGroups can also contain RichText only entries)
+/**
+ * Gets the form fields from the form field group
+ *
+ * @param formFieldGroups An array of form field groups
+ * @returns An array of form fields
+ */
 export const getFormFields = (formFieldGroups: HubspotFormFieldGroups[]) => {
     const formFields = formFieldGroups
         .filter((formFieldGroup) => formFieldGroup?.fields.length > 0)
@@ -243,6 +255,12 @@ export const getFormFields = (formFieldGroups: HubspotFormFieldGroups[]) => {
     return formFields as HubspotFormFieldTypes[];
 };
 
+/**
+ * Sets a list of variants based on styles from Hubspot
+ *
+ * @param styles An object containing list of styles from hubspot
+ * @returns An array of variants
+ */
 const getVariants = ({
     styles,
     themeName,
@@ -264,6 +282,12 @@ const getVariants = ({
     return variants;
 };
 
+/**
+ * Sets an inverseSubmitButton flag if user has set submitButton to white in Hubspot
+ *
+ * @param styles An object containing list of styles from hubspot
+ * @returns A boolean flag
+ */
 export const inverseSubmitButton = (styles?: Record<string, unknown>) => {
     let inverseSubmitButton = false;
     if (styles) {
@@ -278,6 +302,12 @@ export const inverseSubmitButton = (styles?: Record<string, unknown>) => {
     return inverseSubmitButton;
 };
 
+/**
+ * Date needs reshaping in order to be submitted to Hubspot
+ *
+ * @param dataObj An object containing the date sections as numbers
+ * @returns The Date in a UNIX formatted timestamp in milliseconds
+ */
 export const reshapeDate = (dateObj: Record<string, number>) => {
     const result = [];
     // Get just the dates - e.g. {year:2022, month:02, day:20} = > [2022,02,20]
@@ -300,4 +330,41 @@ export const isJsonString = (str: any) => {
         return false;
     }
     return true;
+};
+
+/**
+ * Spreads nested arrays. This can occur when there are inline formInputs from hubspot
+ *
+ * @param data An array consisting of objects or nested arrays
+ * @returns An array consisting only of objects
+ */
+export const flattenResults = (data: Record<string, any> | [][]) =>
+    data.reduce(
+        (acc: Record<string, any>[], cur: [] | {}) =>
+            Array.isArray(cur) && cur.length > 0 ? [...acc, ...cur] : [...acc, cur],
+        []
+    );
+
+/**
+ * Utility to set form errors and report
+ *
+ * @param errorCases An empty object containing validationErrors and formErrors objects
+ * @param message A message to set against the errors
+ * @returns An object with populated errorCases object
+ */
+export const setFormErrorsAndReport = (
+    errorCases: { validationErrors: {}; formErrors: {} },
+    messages: {
+        loggingMessages?: string[];
+        userMessages?: string[];
+    }
+) => {
+    // TODO - Add in error reporting? e.g. Sentry
+    console.error(
+        'Error submitting form:',
+        messages.loggingMessages?.map((msg) => msg)
+    );
+    errorCases.formErrors = { messages: messages.userMessages?.map((msg) => msg) };
+
+    return json(errorCases);
 };
