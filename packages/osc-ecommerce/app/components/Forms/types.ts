@@ -260,3 +260,9 @@ export interface SelectAndCheckboxOptions {
     description?: string;
     readOnly?: boolean;
 }
+
+export interface SuccessfulSubmission {
+    message: string;
+    as: string;
+    url?: string | undefined;
+}

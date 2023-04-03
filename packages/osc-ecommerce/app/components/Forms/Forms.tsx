@@ -6,8 +6,8 @@ import type { z } from 'zod';
 import type { formModule } from '~/types/sanity';
 import { FormContainer } from './FormContainer';
 import { HubspotForm } from './HubspotForm/HubspotForm';
-import type { HubspotFormData, HubspotFormFieldGroups } from './types';
-import { getFormFields, getValidationSchema, transitionStates } from './utils';
+import type { HubspotFormData, HubspotFormFieldGroups, SuccessfulSubmission } from './types';
+import { getFormFields, getSuccessData, getValidationSchema, transitionStates } from './utils';
 
 interface FormProps {
     /**
@@ -39,6 +39,10 @@ interface FormProps {
      */
     submitText: string;
     /**
+     * Data if submission is successful
+     */
+    successfulSubmission?: SuccessfulSubmission;
+    /**
      * Denotes styling options on inputs e.g. Round, Linear, Canvas
      */
     themeName: string;
@@ -51,12 +55,13 @@ interface FormProps {
 const Form = (props: FormProps) => {
     const {
         form,
-        formFieldGroups,
         formErrors,
+        formFieldGroups,
         isSubmitting,
         setValidationErrors,
         styles,
         submitText,
+        successfulSubmission,
         themeName,
         validationErrors,
     } = props;
@@ -84,6 +89,7 @@ const Form = (props: FormProps) => {
                 setValidationErrors={setValidationErrors}
                 styles={styles}
                 submitText={submitText}
+                successfulSubmission={successfulSubmission}
                 themeName={themeName}
                 validationErrors={validationErrors}
             />
@@ -104,6 +110,10 @@ export const Forms = (props: { module: formModule }) => {
     const serverValidationErrors = data?.validationErrors?.fieldErrors as FlattenedErrors;
     const serverErrors = data?.formErrors;
 
+    const [successfulSubmission, setSuccessfulSubmission] = useState<
+        SuccessfulSubmission | undefined
+    >(undefined);
+
     const [validationErrors, setValidationErrors] = useState<FlattenedErrors | {}>([]);
     const [formErrors, setFormErrors] = useState<string[] | []>([]);
     const [key, setKey] = useState(Date.now());
@@ -115,10 +125,11 @@ export const Forms = (props: { module: formModule }) => {
     useEffect(() => {
         // Reset the form when form has finished submitting there is a success response
         if (!isAdding && data?.success) {
+            setSuccessfulSubmission(getSuccessData(data));
             formRef.current?.reset();
             setKey(Date.now());
         }
-    }, [isAdding, data?.success]);
+    }, [isAdding, data?.success, data]);
 
     useEffect(() => {
         // Set errors when present
@@ -153,6 +164,7 @@ export const Forms = (props: { module: formModule }) => {
                     setValidationErrors={setValidationErrors}
                     styles={JSON.parse(formData.style)}
                     submitText={formData.submitText}
+                    successfulSubmission={successfulSubmission}
                     themeName={formData.themeName}
                     validationErrors={validationErrors}
                 />

@@ -368,3 +368,42 @@ export const setFormErrorsAndReport = (
 
     return json(errorCases);
 };
+
+interface ServerData {
+    validationErrors?: {};
+    formErrors?: {};
+    success?: boolean;
+    inlineMessage: string;
+}
+
+/**
+ * Checks for success message from server and returns if there is one
+ *
+ * @param serverData Data received back from the server
+ * @param message A message to set against the errors
+ * @returns An object with populated errorCases object
+ */
+export const getSuccessData = (serverData: ServerData) => {
+    const successData: { message: string; as: string; url?: string } = {
+        message: 'Thanks for your submission',
+        as: 'button',
+    };
+    if (!serverData?.inlineMessage) {
+        return successData;
+    } else {
+        const parser = new DOMParser();
+        const htmlDoc = parser.parseFromString(serverData.inlineMessage, 'text/html');
+        const paragraphTag = htmlDoc.getElementsByTagName('p')[0];
+        const linkTag = htmlDoc.getElementsByTagName('a')[0];
+
+        if (linkTag) {
+            successData.as = 'a';
+            successData.url = linkTag.href;
+            successData.message = linkTag.innerHTML;
+        } else if (paragraphTag) {
+            successData.message = paragraphTag.innerHTML;
+        }
+
+        return successData;
+    }
+};

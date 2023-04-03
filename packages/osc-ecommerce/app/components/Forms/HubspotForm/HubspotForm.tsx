@@ -1,6 +1,6 @@
 import { Alert, Button } from 'osc-ui';
 import type { Dispatch, SetStateAction } from 'react';
-import type { HubspotFormFieldGroups } from '../types';
+import type { HubspotFormFieldGroups, SuccessfulSubmission } from '../types';
 import {
     getFormFields,
     getInputOrContent,
@@ -38,6 +38,10 @@ export interface HubspotFormProps {
      */
     submitText: string;
     /**
+     * Data if submission is successful
+     */
+    successfulSubmission?: SuccessfulSubmission;
+    /**
      * Denotes styling options on inputs e.g. Round, Linear, Canvas
      */
     themeName?: string;
@@ -56,6 +60,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
         setValidationErrors,
         styles,
         submitText,
+        successfulSubmission,
         themeName,
         validationErrors,
     } = props;
@@ -103,15 +108,17 @@ export const HubspotForm = (props: HubspotFormProps) => {
             <div className="c-form__inner-container">
                 {hubspotForm}
                 <Button
-                    isLoading={isSubmitting}
-                    loadingText="Submitting"
-                    variant="primary"
+                    as={successfulSubmission?.as}
                     disabled={isSubmitting}
+                    href={successfulSubmission?.url}
+                    isLoading={isSubmitting}
+                    isInversed={!!inversedSubmitButton}
+                    loadingText="Submitting"
                     name="_action"
                     value="submitHubspotForm"
-                    isInversed={!!inversedSubmitButton}
+                    variant="primary"
                 >
-                    {submitText}
+                    {successfulSubmission?.message ? successfulSubmission?.message : submitText}
                 </Button>
                 {formErrors && formErrors.length > 0
                     ? formErrors.map((error, index) => (
