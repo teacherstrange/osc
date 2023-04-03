@@ -129,82 +129,27 @@ export function getInputOrContent(
     return null;
 }
 
-export const getValidationSchema = (formFields: HubspotFormFieldTypes[]) => {
-    const res = formFields.reduce((fields, field) => {
-        let validationField = {};
-        if (field.type === 'string') {
-            if (field.name !== 'email') {
-                validationField = {
-                    [field.name]: field.required
-                        ? z.string().trim().min(1, { message: 'Field is required' })
-                        : z.string(),
-                };
-            } else if (field.name === 'email') {
-                validationField = {
-                    email: z.string().email(),
-                };
-            }
-        } else if (field.type === 'enumeration') {
-            validationField = {
-                [field.name]: field.required
-                    ? z.string().refine(
-                          (val) =>
-                              field.options
-                                  .map((value) => {
-                                      return value.value;
-                                  })
-                                  .includes(val),
-                          {
-                              message: 'Please select an option',
-                          }
-                      )
-                    : z.string(),
+/**
+ * Gets the validation schema for the form fields
+ *
+ * @param formFields An array of hubspot form fields
+ * @returns A Zod object with the validation schema
+ */
+export const getValidationSchema = (
+    formFields: Partial<HubspotFormFieldTypes[] | HubspotFormFieldTypes[][]>
+) => {
+    const result = flattenResults(formFields).reduce(
+        (fields: HubspotFormFieldTypes[], field: HubspotFormFieldTypes) => {
+            let validationField = {};
+            validationField = assignValidationSchema(field, validationField);
+            return {
+                ...fields,
+                ...validationField,
             };
-        } else if (field.type === 'date') {
-            validationField = {
-                [field.name]: field.required
-                    ? z.object({
-                          year: z
-                              .number({
-                                  invalid_type_error: 'Invalid data',
-                              })
-                              .min(1, {
-                                  message: 'Please select a date',
-                              }),
-                          month: z
-                              .number({
-                                  invalid_type_error: 'Invalid data',
-                              })
-                              .min(1, {
-                                  message: 'Please select a date',
-                              }),
-                          day: z
-                              .number({
-                                  invalid_type_error: 'Invalid data',
-                              })
-                              .min(1, {
-                                  message: 'Please select a date',
-                              }),
-                      })
-                    : z.object({
-                          year: z.number({
-                              invalid_type_error: 'Invalid data',
-                          }),
-                          month: z.number({
-                              invalid_type_error: 'Invalid data',
-                          }),
-                          day: z.number({
-                              invalid_type_error: 'Invalid data',
-                          }),
-                      }),
-            };
-        }
-        return {
-            ...fields,
-            ...validationField,
-        };
-    }, {});
-    return z.object(res);
+        },
+        {}
+    );
+    return z.object(result);
 };
 
 export const transitionStates = (fetcher: Fetcher) => {
