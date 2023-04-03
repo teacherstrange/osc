@@ -36,13 +36,14 @@ const Template: Story<HubspotFormProps & FormContainerProps> = (args) => {
 
     return (
         <SpritesheetProvider>
-            <div className={`c-form__contact-form`} style={{ margin: '3em 0' }}>
+            <div style={{ margin: '3em 0' }}>
                 <FormContainer
                     slideOut={args.slideOut}
                     slideOutText={args.slideOutText}
-                    variant={args.variant}
+                    variants={args.variants}
                 >
                     <HubspotForm
+                        formId="b6aca185-96b6-416f-9b03-9ce8f894ea44"
                         formErrors={[]}
                         formFieldGroups={args.formFieldGroups}
                         setValidationErrors={setValidationErrors}
@@ -63,11 +64,11 @@ Primary.args = {
     slideOut: sanityFormData.slideOut,
     slideOutText: sanityFormData.slideOutText,
     submitText: hubspotFormData.submitText,
-    variant: sanityFormData.slideDirection,
+    variants: [sanityFormData.slideDirection, 'contact-form'],
 };
 
 Validation.args = {
     ...Primary.args,
-    variant: 'slide-left',
+    variants: ['slide-left', 'contact-form'],
     validationErrors: validationErrors,
 };

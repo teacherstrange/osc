@@ -16,7 +16,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { z } from 'zod';
-import { assignValidationSchema } from '~/utils/validation';
+import { assignValidationSchema } from '../../utils/validation';
 import type { HubspotFormFieldGroups, HubspotFormFieldTypes } from './types';
 
 /**

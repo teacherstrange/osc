@@ -241,7 +241,7 @@ export const hubspotFormData = {
         },
     ],
     submitText: 'Send Enquiry',
-} as HubspotFormData;
+} as Partial<HubspotFormData>;
 
 export const validationErrors = {
     email: ['Invalid Email'],
