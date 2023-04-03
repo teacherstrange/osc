@@ -1,5 +1,6 @@
 import { redirect } from '@remix-run/server-runtime';
 import type { Params } from 'react-router-dom';
+import { PATHS } from '~/constants';
 import { getClient } from '~/lib/sanity/getClient.server';
 import { REDIRECT } from '~/queries/sanity/redirects';
 import type { SanityPage, SanityRedirect, SanitySiteSetting } from '~/types/sanity';
@@ -21,19 +22,19 @@ interface BuildUrlArgs {
 export const buildUrlPath = ({ type, url, slug }: BuildUrlArgs) => {
     switch (type) {
         case 'home':
-            url.pathname = `/`;
+            url.pathname = PATHS.HOME;
             break;
 
         case 'post':
-            url.pathname = `blog/${slug}`;
+            url.pathname = `${PATHS.BLOG}/${slug}`;
             break;
 
         case 'collection':
-            url.pathname = `collections/${slug}`;
+            url.pathname = `${PATHS.COLLECTIONS}/${slug}`;
             break;
 
         case 'product':
-            url.pathname = `products/${slug}`;
+            url.pathname = `${PATHS.PRODUCTS}/${slug}`;
             break;
 
         default:

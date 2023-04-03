@@ -8,10 +8,11 @@ import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import Module, { getComponentStyles } from '~/components/Module';
 import Preview from '~/components/Preview';
+import { PATHS } from '~/constants';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { COLLECTION_QUERY as SANITY_COLLECTION_QUERY } from '~/queries/sanity/collection';
 import { COLLECTION_QUERY as SHOPIFY_COLLECTION_QUERY } from '~/queries/shopify/collection';
-import type { module, SanityPage } from '~/types/sanity';
+import type { SanityPage, module } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
@@ -115,7 +116,7 @@ export default function Collection() {
             {collection.products.nodes.length > 0
                 ? collection.products.nodes.map((product) => (
                       <div key={product.id}>
-                          <Link to={`/products/${product.handle}`}>{product.title}</Link>
+                          <Link to={`/${PATHS.PRODUCTS}/${product.handle}`}>{product.title}</Link>
                       </div>
                   ))
                 : null}

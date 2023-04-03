@@ -3,6 +3,7 @@ import { json } from '@remix-run/server-runtime';
 import type { CollectionConnection } from '@shopify/hydrogen/storefront-api-types';
 import type { LoaderArgs } from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
+import { PATHS } from '~/constants';
 import { COLLECTIONS_QUERY as SHOPIFY_COLLECTIONS_QUERY } from '~/queries/shopify/collections';
 
 export const loader = async ({ request, params, context }: LoaderArgs) => {
@@ -33,7 +34,9 @@ export default function Collections() {
             {collections.nodes.length > 0
                 ? collections.nodes.map((collection) => (
                       <div key={collection.id}>
-                          <Link to={`/collections/${collection.handle}`}>{collection.title}</Link>
+                          <Link to={`/${PATHS.COLLECTIONS}/${collection.handle}`}>
+                              {collection.title}
+                          </Link>
                       </div>
                   ))
                 : null}

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { PATHS } from '~/constants';
 
 test('menu columns are visible', async ({ page, isMobile }) => {
     await page.goto('/');
@@ -74,7 +75,9 @@ test('can navigate to a page nested within the nav', async ({ page, isMobile }) 
             name: 'NCFE CACHE Level 3 Award in Home Based Childcare - Childminder Route',
         })
         .click();
-    await expect(page).toHaveURL('/products/cache-level-3-award-home-childcare-childminder');
+    await expect(page).toHaveURL(
+        `/${PATHS.PRODUCTS}/cache-level-3-award-home-childcare-childminder`
+    );
 });
 
 test('clicking outside of the menu closes it', async ({ page, isMobile }) => {
