@@ -24,6 +24,13 @@
                 }
             }
 
+            &--callback-form,
+            &--contact-form {
+                @include mq($mq-tab) {
+                    width: 610px;
+                }
+            }
+
             &--slide-left,
             &--slide-right {
                 .c-form__slide-out-btn {
