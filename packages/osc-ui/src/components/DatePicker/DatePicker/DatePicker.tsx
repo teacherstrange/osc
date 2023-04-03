@@ -66,7 +66,7 @@ export const DatePicker = (props: DatePickerProps) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
     }, [state.value]);
-    var uniqueErrors = Array.from(new Set(errors));
+    const uniqueErrors = Array.from(new Set(errors));
 
     return (
         <div className="c-datepicker">
