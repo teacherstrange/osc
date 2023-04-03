@@ -1,6 +1,6 @@
 import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData, useParams } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import type {
     Product as ProductType,
     ProductVariant,
@@ -10,13 +10,11 @@ import type { LinksFunction, LoaderArgs } from '@shopify/remix-oxygen';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import radioStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';
-import { useState } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
 import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
 import Module, { getComponentStyles } from '~/components/Module';
-import Preview from '~/components/Preview';
 import priceStyles from '~/components/Price/price.css';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
@@ -128,13 +126,6 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 
 export default function Index() {
     const { page, product, isPreview, query } = useLoaderData<typeof loader>();
-    const params = useParams();
-
-    // If `preview` mode is active, its component updates this state for us
-    const [data, setData] = useState<SanityProduct>(page);
-
-    // Make sure to update the page state if the IDs are different!
-    if (page?._id !== data?._id) setData(page);
 
     // Due how the data is setup in Shopify there are times where we might return the same SKU multiple times
     // Here we are checking if there are any SKUs and then filtering out duplicates
@@ -148,9 +139,7 @@ export default function Index() {
      */
     return (
         <div className="u-pt-l">
-            {isPreview && query ? (
-                <Preview data={data} setData={setData} query={query} queryParams={params} />
-            ) : null}
+            {isPreview && query ? <div>Preview Mode</div> : null}
 
             <div className="o-container o-grid u-mb-l">
                 <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--7@desk-med">
@@ -171,9 +160,9 @@ export default function Index() {
             </div>
 
             <div className="o-container o-grid u-mb-6xl">
-                {data?.upperContent && data?.upperContent.length > 0 ? (
+                {page?.upperContent && page?.upperContent.length > 0 ? (
                     <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--7@desk-med">
-                        {data?.upperContent.map((module: module) =>
+                        {page?.upperContent.map((module: module) =>
                             module ? <Module key={module?._key} module={module} isFlush /> : null
                         )}
                     </div>
@@ -184,9 +173,9 @@ export default function Index() {
                 </div>
             </div>
 
-            {data?.modules && data?.modules.length > 0 ? (
+            {page?.modules && page?.modules.length > 0 ? (
                 <>
-                    {data?.modules.map((module: module) =>
+                    {page?.modules.map((module: module) =>
                         module ? <Module key={module?._key} module={module} /> : null
                     )}
                 </>

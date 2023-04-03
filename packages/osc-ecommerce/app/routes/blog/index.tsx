@@ -1,13 +1,11 @@
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData, useParams } from '@remix-run/react';
-import { useState } from 'react';
+import { useLoaderData } from '@remix-run/react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import Module, { getComponentStyles } from '~/components/Module';
-import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { BLOG_QUERY } from '~/queries/sanity/blog';
-import type { module, SanityPage } from '~/types/sanity';
+import type { SanityPage, module } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
@@ -72,29 +70,17 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { blog, isPreview, query } = useLoaderData<typeof loader>();
-    const params = useParams();
+    const { blog, isPreview } = useLoaderData<typeof loader>();
 
-    // If `preview` mode is active, its component updates this state for us
-    const [data, setData] = useState<SanityPage>(blog);
-
-    // Make sure to update the page state if the IDs are different!
-    if (blog?._id !== data?._id) setData(blog);
-
-    /**
-     * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
-     */
     return (
         <>
-            {isPreview ? (
-                <Preview data={data} setData={setData} query={query} queryParams={params} />
-            ) : null}
+            {isPreview ? <div>Preview Mode</div> : null}
 
-            <h1>{data?.title}</h1>
+            <h1>{blog?.title}</h1>
 
-            {data?.modules && data?.modules.length > 0 ? (
+            {blog?.modules && blog?.modules.length > 0 ? (
                 <>
-                    {data?.modules.map((module: module) =>
+                    {blog?.modules.map((module: module) =>
                         module ? <Module key={module?._key} module={module} /> : null
                     )}
                 </>
