@@ -42,25 +42,25 @@ export const assignValidationSchema = (field: HubspotFormFieldTypes, validationF
             if (field.name === 'email') {
                 return (validationField = {
                     email: field.required
-                        ? z
+                        ? z.coerce
                               .string({
                                   errorMap: (error, _ctx) => errorMap(error, _ctx),
                               })
                               .email()
-                        : z.string({
+                        : z.coerce.string({
                               errorMap: (error, _ctx) => errorMap(error, _ctx),
                           }),
                 });
             } else {
                 return (validationField = {
                     [field.name]: field.required
-                        ? z
+                        ? z.coerce
                               .string({
                                   errorMap: (error, _ctx) => errorMap(error, _ctx),
                               })
                               .trim()
                               .min(1, { message: 'Field is required' })
-                        : z.string({
+                        : z.coerce.string({
                               errorMap: (error, _ctx) => errorMap(error, _ctx),
                           }),
                 });
