@@ -57,6 +57,7 @@ export const DatePicker = (props: DatePickerProps) => {
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
         useDatePicker(props, state, ref);
     const dateFieldId = useUniqueId('dateField:');
+    const dateFieldLabelId = useUniqueId('dateFieldLabel:');
 
     useEffect(() => {
         // Client side error handling - Sets any errors on an input in
@@ -70,7 +71,7 @@ export const DatePicker = (props: DatePickerProps) => {
 
     return (
         <div className="c-datepicker">
-            <label {...labelProps} className="c-label">
+            <label {...labelProps} className="c-label" id={dateFieldLabelId}>
                 {label}
                 {isRequired ? <span className="c-label__required">* </span> : null}
             </label>
@@ -78,6 +79,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 className="c-datepicker__date-field-container"
                 {...groupProps}
                 ref={ref}
+                aria-labelledby={dateFieldLabelId}
                 // Manually setting random ID due to bug on duplicate Ids:
                 // https://github.com/adobe/react-spectrum/issues/3969
                 id={dateFieldId}
