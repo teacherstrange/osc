@@ -181,12 +181,12 @@ export interface HubspotFormFieldTypes {
      * the options that will be selected by default
      */
     //
-    selectedOptions: [];
+    selectedOptions: string[];
     /**
      * For enumerated fields, this will be a list of Strings representing the available options for the field
      * Will be empty for non-enumerated fields.
      */
-    options: [] | SelectOptions[];
+    options: SelectAndCheckboxOptions[];
     /**
      * A set of options controlling the validation for the field
      * NOTE: These options should NOT be modified through the API. Any validation
@@ -251,7 +251,7 @@ export interface HubspotRichText {
     type: string;
 }
 
-interface SelectOptions {
+export interface SelectAndCheckboxOptions {
     label: string;
     value: string;
     displayOrder?: number;
