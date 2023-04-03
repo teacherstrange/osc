@@ -20,6 +20,7 @@
 
         &__description {
             flex: 1 100%;
+            color: var(--color-neutral-700);
             font-size: $fs-s;
         }
 
@@ -31,6 +32,10 @@
             height: #{math.div(1, $checkbox-height)}rem;
             background: var(--color-primary);
             color: var(--color-tertiary);
+        }
+
+        &__group-container {
+            padding: $space-xs 0;
         }
 
         &__container {
@@ -71,6 +76,7 @@
 
             .c-label {
                 padding-left: $space-xs;
+                color: var(--color-secondary);
             }
         }
 

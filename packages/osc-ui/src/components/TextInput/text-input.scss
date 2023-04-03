@@ -98,6 +98,10 @@
                         &--is-white {
                             border-color: var(--color-tertiary);
                             color: var(--color-tertiary);
+
+                            + .c-label {
+                                color: var(--color-tertiary);
+                            }
                         }
                     }
                 }

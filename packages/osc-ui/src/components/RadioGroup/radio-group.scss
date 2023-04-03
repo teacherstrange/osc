@@ -11,10 +11,15 @@
         display: flex;
         flex-direction: column;
         gap: $space-xs;
+        padding: $space-xs 0;
 
         &__item-container {
             display: flex;
             align-items: center;
+        }
+
+        &__description {
+            color: var(--color-neutral-700);
         }
 
         &__item {
@@ -24,6 +29,10 @@
             border: solid 1px var(--color-quinary);
             border-radius: $rad;
             cursor: pointer;
+
+            ~ .c-label {
+                color: var(--color-secondary);
+            }
 
             &:hover {
                 background-color: var(--color-neutral-300);
