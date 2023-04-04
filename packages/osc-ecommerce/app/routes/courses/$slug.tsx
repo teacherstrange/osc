@@ -11,12 +11,13 @@ import type { LinksFunction, LoaderArgs } from '@shopify/remix-oxygen';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import radioStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';
+import { lazy } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
 import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
 import Module, { getComponentStyles } from '~/components/Module';
-import PageContent, { PagePreview } from '~/components/PageContent';
+import PageContent from '~/components/PageContent';
 import { PreviewBanner } from '~/components/PreviewBanner';
 import priceStyles from '~/components/Price/price.css';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
@@ -28,6 +29,8 @@ import { getUniqueObjects } from '~/utils/getUniqueObjects';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
+
+const PagePreview = lazy(() => import('~/components/PagePreview'));
 
 export const links: LinksFunction = () => {
     return [
@@ -42,7 +45,6 @@ export const links: LinksFunction = () => {
 
 // TODO: Hook up SEO settings
 // TODO: Hook up Shopify analytics
-
 interface PageData {
     page: SanityProduct;
     isPreview: boolean;
@@ -155,8 +157,6 @@ export default function Index() {
      */
     return (
         <div className="u-pt-l">
-            {isPreview && query ? <div>Preview Mode</div> : null}
-
             <div className="o-container o-grid u-mb-l">
                 <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--7@desk-med">
                     <h1 className="o-product-title t-font-secondary u-b-bottom u-w-fit">

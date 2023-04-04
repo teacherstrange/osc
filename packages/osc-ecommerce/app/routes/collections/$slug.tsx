@@ -4,10 +4,11 @@ import { Link, useLoaderData } from '@remix-run/react';
 import { PreviewSuspense } from '@sanity/preview-kit';
 import type { Collection as CollectionType } from '@shopify/hydrogen/storefront-api-types';
 import type { LoaderArgs } from '@shopify/remix-oxygen';
+import { lazy } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import { getComponentStyles } from '~/components/Module';
-import PageContent, { PagePreview } from '~/components/PageContent';
+import PageContent from '~/components/PageContent';
 import { PreviewBanner } from '~/components/PreviewBanner';
 import { PATHS } from '~/constants';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
@@ -17,6 +18,8 @@ import type { SanityPage } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
+
+const PagePreview = lazy(() => import('~/components/PagePreview'));
 
 interface PageData {
     page: SanityPage;
