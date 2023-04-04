@@ -5,6 +5,8 @@ import 'dotenv/config';
 import { SpritesheetProvider } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import { renderToString } from 'react-dom/server';
+import { SSRProvider } from '@react-aria/ssr';
+import { I18nProvider } from '@react-aria/i18n';
 
 export default function handleRequest(
     request: Request,
@@ -13,9 +15,14 @@ export default function handleRequest(
     remixContext: EntryContext
 ) {
     const markup = renderToString(
-        <SpritesheetProvider spriteSheetPath={spritesheet}>
-            <RemixServer context={remixContext} url={request.url} />
-        </SpritesheetProvider>
+        <SSRProvider>
+            {/* Recommended to always specify locale to ensure server and client match - https://react-spectrum.adobe.com/react-aria/internationalization.html*/}
+            <I18nProvider locale="en-GB">
+                <SpritesheetProvider spriteSheetPath={spritesheet}>
+                    <RemixServer context={remixContext} url={request.url} />
+                </SpritesheetProvider>
+            </I18nProvider>
+        </SSRProvider>
     );
 
     responseHeaders.set('Content-Type', 'text/html');

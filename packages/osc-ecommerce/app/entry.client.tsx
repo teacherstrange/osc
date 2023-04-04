@@ -3,11 +3,18 @@ import { RemixBrowser } from '@remix-run/react';
 import { SpritesheetProvider } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import { hydrate } from 'react-dom';
+import { SSRProvider } from '@react-aria/ssr';
+import { I18nProvider } from '@react-aria/i18n';
 
 hydrate(
-    <SpritesheetProvider spriteSheetPath={spritesheet}>
-        <RemixBrowser />
-    </SpritesheetProvider>,
+    <SSRProvider>
+        {/* Recommended to always specify locale to ensure server and client match - https://react-spectrum.adobe.com/react-aria/internationalization.html*/}
+        <I18nProvider locale="en-GB">
+            <SpritesheetProvider spriteSheetPath={spritesheet}>
+                <RemixBrowser />
+            </SpritesheetProvider>
+        </I18nProvider>
+    </SSRProvider>,
     document
 );
 
