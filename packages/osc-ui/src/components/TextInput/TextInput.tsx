@@ -68,7 +68,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
     /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
-    variants?: Variants[];
+    variants?: string[];
 }
 
 export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forwardedRef) => {
