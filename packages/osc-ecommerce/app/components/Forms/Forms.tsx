@@ -143,6 +143,7 @@ export const Forms = (props: { module: formModule }) => {
         }
         if (serverErrors) {
             setFormErrors(() => serverErrors.messages?.map((message: string) => message));
+            resetAlert(() => setFormErrors([]), 10000);
         }
     }, [serverValidationErrors, serverErrors]);
 
