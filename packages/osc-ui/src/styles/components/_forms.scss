@@ -7,6 +7,7 @@
     .c-form {
         &__container {
             position: relative;
+            max-width: 100%;
             padding: var(--space-scale-2xl);
             box-shadow: $shadow-l, $shadow-s;
 
@@ -16,19 +17,6 @@
                 background: var(--color-gradient-secondary-270);
                 box-shadow: none;
                 color: var(--color-tertiary);
-            }
-
-            &--prospectus-form {
-                @include mq($mq-tab) {
-                    width: 540px;
-                }
-            }
-
-            &--callback-form,
-            &--contact-form {
-                @include mq($mq-tab) {
-                    width: 610px;
-                }
             }
 
             &--slide-left,

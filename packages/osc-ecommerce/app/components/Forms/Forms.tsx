@@ -153,7 +153,7 @@ export const Forms = (props: { module: formModule }) => {
     type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 
     return (
-        <div>
+        <div className="c-form">
             <fetcher.Form action="/actions/hubspot" method="post" ref={formRef} noValidate>
                 <Form
                     form={module}
