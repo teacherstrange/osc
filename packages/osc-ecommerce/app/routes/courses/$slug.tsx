@@ -17,7 +17,7 @@ import invariant from 'tiny-invariant';
 import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
 import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
 import Module, { getComponentStyles } from '~/components/Module';
-import PageContent from '~/components/PageContent';
+import { PageContent } from '~/components/PageContent';
 import { PreviewBanner } from '~/components/PreviewBanner';
 import priceStyles from '~/components/Price/price.css';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';

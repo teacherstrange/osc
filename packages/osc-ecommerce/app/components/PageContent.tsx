@@ -1,7 +1,7 @@
 import type { module } from '~/types/sanity';
 import Module from './Module';
 
-export default function PageContent(props: { modules: module[] }) {
+export function PageContent(props: { modules: module[] }) {
     const { modules } = props;
 
     return (

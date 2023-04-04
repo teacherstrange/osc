@@ -8,7 +8,7 @@ import { lazy } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import { getComponentStyles } from '~/components/Module';
-import PageContent from '~/components/PageContent';
+import { PageContent } from '~/components/PageContent';
 import { PreviewBanner } from '~/components/PreviewBanner';
 import { PATHS } from '~/constants';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';

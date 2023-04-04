@@ -5,7 +5,7 @@ import { PreviewSuspense } from '@sanity/preview-kit';
 import { lazy } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import { getComponentStyles } from '~/components/Module';
-import PageContent from '~/components/PageContent';
+import { PageContent } from '~/components/PageContent';
 import { PreviewBanner } from '~/components/PreviewBanner';
 import getPageData from '~/models/sanity.server';
 import { HOME_QUERY } from '~/queries/sanity/home';
