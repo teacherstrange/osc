@@ -21,6 +21,9 @@ export function resolveProductionUrl(doc: SanityDocumentWithSlug) {
     }
 
     const url = new URL(baseUrl);
+    const previewPath = '/resources/preview';
+    const param = 'slug';
+    url.pathname = previewPath;
 
     switch (doc._type) {
         case 'home':
@@ -40,11 +43,10 @@ export function resolveProductionUrl(doc: SanityDocumentWithSlug) {
             break;
 
         default:
-            url.pathname = slug;
+            url.search = `?${param}=${slug}`;
+
             break;
     }
-
-    url.searchParams.set(`preview`, `true`);
 
     return url.toString();
 }
