@@ -15,16 +15,11 @@ export const action: ActionFunction = async ({ request }) => {
     // Create errors object
     const errorCases = { validationErrors: {}, formErrors: {} };
 
-    if (!formfieldData.hubspotFieldsData)
+    if (!formfieldData.hubspotFieldsData || !formfieldData.formId)
         return setFormErrorsAndReport(errorCases, {
-            loggingMessages: ['No hubspot field data!'],
-            userMessages: [
-                'Sorry there was an error submitting your form, please try again or contact us directly.',
-            ],
-        });
-    if (!formfieldData.formId)
-        return setFormErrorsAndReport(errorCases, {
-            loggingMessages: ['No form Id!'],
+            loggingMessages: !formfieldData.hubspotFieldsData
+                ? ['No hubspot field data!']
+                : ['No form Id!'],
             userMessages: [
                 'Sorry there was an error submitting your form, please try again or contact us directly.',
             ],
