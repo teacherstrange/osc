@@ -128,7 +128,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
                 ) : null}
                 {formErrors && formErrors.length > 0
                     ? formErrors.map((error, index) => (
-                          <Alert key={index} status="error">
+                          <Alert className="c-form__error-alert" key={index} status="error">
                               {error}
                           </Alert>
                       ))
