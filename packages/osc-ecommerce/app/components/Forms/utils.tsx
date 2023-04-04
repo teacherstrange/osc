@@ -135,8 +135,9 @@ export function getInputOrContent(
                         <RadioGroup
                             description={{ id: hubspotFields.name, value: hubspotFields.label }}
                             defaultValue={
-                                Array.isArray(hubspotFields.selectedOptions) &&
-                                hubspotFields.selectedOptions[0]
+                                Array.isArray(hubspotFields.selectedOptions)
+                                    ? hubspotFields.selectedOptions[0]
+                                    : undefined
                             }
                             errors={validationErrors && validationErrors[hubspotFields.name]}
                             name={hubspotFields.name}
