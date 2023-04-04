@@ -2,8 +2,9 @@ import { redirect } from '@remix-run/server-runtime';
 import type { Params } from 'react-router-dom';
 import { PATHS } from '~/constants';
 import { getClient } from '~/lib/sanity/getClient.server';
+import { getSession } from '~/previewSession.server';
 import { REDIRECT } from '~/queries/sanity/redirects';
-import type { SanityPage, SanityRedirect, SanitySiteSetting } from '~/types/sanity';
+import type { SanityRedirect, SanitySiteSetting } from '~/types/sanity';
 
 /**
  * Exclude items that contain "drafts" in the _id
@@ -54,23 +55,15 @@ interface Args {
 export default async function getPageData({ request, params, query }: Args) {
     if (!request) throw new Error('Request must be passed');
 
-    const requestUrl = new URL(request?.url);
-    const isPreview = requestUrl?.searchParams?.get('preview') ? true : false;
+    const session = await getSession(request.headers.get('Cookie'));
+    const isPreview = Boolean(session.get('preview'));
 
+    // TODO: Secure the preview route, making it check if the slug currently exists in the dataset.
     try {
         const param = params?.slug ? { slug: params.slug } : {};
-
         const querySanityDataset = await getClient(isPreview).fetch(query, param);
 
-        const pageData = querySanityDataset.filter((item: SanityPage) => {
-            // Draft posts are saved with an id of `drafts.<id>`
-            const hasDrafts = item._id.includes('drafts');
-
-            // Only try and fetch the previewClient data if drafts exist in the query response
-            return isPreview && hasDrafts ? hasDrafts : !hasDrafts;
-        })[0];
-
-        return { page: pageData, isPreview };
+        return { page: querySanityDataset[0], isPreview };
     } catch (err) {
         console.error(err);
     }
