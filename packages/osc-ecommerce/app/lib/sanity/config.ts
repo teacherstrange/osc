@@ -35,5 +35,4 @@ export const previewConfig: PreviewConfig = {
     // If your queries are already equipped to handle drafts vs published
     // or you otherwise show UI depending on draft status set this to false
     overlayDrafts: true,
-    onPublicAccessOnly: () => alert('You are not logged in. You will only see public data.'),
 };
