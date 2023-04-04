@@ -73,12 +73,6 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
         hubspotFormData: hubspotFormData ? hubspotFormData : null,
         query: isPreview ? SANITY_COLLECTION_QUERY : null,
         params: isPreview ? params : null,
-        // Note: This makes the token available to the client if they have an active session
-        // This is useful to show live preview to unauthenticated users
-        // If you would rather not, replace token with `null` and it will rely on your Studio auth
-        // TODO: Get token
-        // token: isPreview ? token : null,
-        token: null,
     });
 };
 
@@ -102,14 +96,9 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Collection() {
-    const { page, collection, isPreview, query, params, token } = useLoaderData<typeof loader>();
+    const { page, collection, isPreview, query, params } = useLoaderData<typeof loader>();
 
-    if (
-        isPreview &&
-        query &&
-        params
-        // && token
-    ) {
+    if (isPreview && query && params) {
         return (
             <>
                 <PreviewBanner />
@@ -124,7 +113,7 @@ export default function Collection() {
                     : null}
 
                 <PreviewSuspense fallback={<PageContent {...page} />}>
-                    <PagePreview query={query} params={params} token={token} />
+                    <PagePreview query={query} params={params} />
                 </PreviewSuspense>
             </>
         );

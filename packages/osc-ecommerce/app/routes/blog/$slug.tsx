@@ -54,12 +54,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         hubspotFormData,
         query: isPreview ? POST_QUERY : null,
         params: isPreview ? params : null,
-        // Note: This makes the token available to the client if they have an active session
-        // This is useful to show live preview to unauthenticated users
-        // If you would rather not, replace token with `null` and it will rely on your Studio auth
-        // TODO: Get token
-        // token: isPreview ? token : null,
-        token: null,
     });
 };
 
@@ -83,19 +77,14 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { post, isPreview, query, params, token } = useLoaderData<typeof loader>();
+    const { post, isPreview, query, params } = useLoaderData<typeof loader>();
 
-    if (
-        isPreview &&
-        query &&
-        params
-        // && token
-    ) {
+    if (isPreview && query && params) {
         return (
             <>
                 <PreviewBanner />
                 <PreviewSuspense fallback={<PageContent {...post} />}>
-                    <PagePreview query={query} params={params} token={token} />
+                    <PagePreview query={query} params={params} />
                 </PreviewSuspense>
             </>
         );

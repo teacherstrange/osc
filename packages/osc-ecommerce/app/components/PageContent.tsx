@@ -16,10 +16,10 @@ export default function PageContent(props: { modules: module[] }) {
     );
 }
 
-export function PagePreview(props: PreviewProps) {
-    const { query, params, token } = props;
+export function PagePreview(props: Omit<PreviewProps, 'token'>) {
+    const { query, params } = props;
 
-    const data = usePreview(token, query, params);
+    const data = usePreview(null, query, params);
 
     return <PageContent {...data[0]} />;
 }
