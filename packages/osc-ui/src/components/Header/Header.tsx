@@ -70,7 +70,7 @@ export const HeaderNav = (props: HeaderNavProps) => {
         if (isOpen && !isDesktop) {
             document.body.style.overflowY = 'hidden';
         } else {
-            document.body.style.overflowY = 'auto';
+            document.body.style.overflowY = null;
         }
     }, [isDesktop, isOpen]);
 
