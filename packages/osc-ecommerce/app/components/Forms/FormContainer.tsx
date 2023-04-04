@@ -17,7 +17,7 @@ export interface FormContainerProps {
     /**
      * Variants such as the form type (e.g. Newsletter) and whether form should slide out (e.g. slide-right)
      */
-    variants?: (string | undefined)[];
+    variants?: string[] | undefined;
 }
 
 export const FormContainer = (props: FormContainerProps) => {
