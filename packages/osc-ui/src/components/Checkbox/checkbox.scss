@@ -21,7 +21,6 @@
         &__description {
             flex: 1 100%;
             color: var(--color-neutral-700);
-            font-size: $fs-s;
         }
 
         &__indicator {
@@ -35,7 +34,7 @@
         }
 
         &__group-container {
-            padding: $space-xs 0;
+            padding: 0;
         }
 
         &__container {
@@ -69,7 +68,6 @@
                     flex: 1 100%;
                     padding-top: $space-xs;
                     color: var(--color-error);
-                    font-size: $fs-s;
                 }
             }
 
