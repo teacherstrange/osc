@@ -260,10 +260,3 @@ export interface SelectAndCheckboxOptions {
     description?: string;
     readOnly?: boolean;
 }
-
-export interface SuccessfulSubmission {
-    as: 'link' | 'a' | 'button';
-    message: string;
-    target: string;
-    url?: string | undefined;
-}

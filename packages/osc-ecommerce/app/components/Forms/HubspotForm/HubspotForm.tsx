@@ -1,6 +1,6 @@
 import { Alert, Button } from 'osc-ui';
 import type { Dispatch, SetStateAction } from 'react';
-import type { HubspotFormFieldGroups, SuccessfulSubmission } from '../types';
+import type { HubspotFormFieldGroups } from '../types';
 import {
     getFormFields,
     getInputOrContent,
@@ -38,9 +38,9 @@ export interface HubspotFormProps {
      */
     submitText: string;
     /**
-     * Data if submission is successful
+     * Success content if submission is successful
      */
-    successfulSubmission?: SuccessfulSubmission;
+    successContent?: string;
     /**
      * Denotes styling options on inputs e.g. Round, Linear, Canvas
      */
@@ -60,7 +60,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
         setValidationErrors,
         styles,
         submitText,
-        successfulSubmission,
+        successContent,
         themeName,
         validationErrors,
     } = props;
@@ -108,19 +108,24 @@ export const HubspotForm = (props: HubspotFormProps) => {
             <div className="c-form__inner-container">
                 {hubspotForm}
                 <Button
-                    as={successfulSubmission?.as}
-                    disabled={isSubmitting}
-                    href={successfulSubmission?.url}
+                    isDisabled={isSubmitting}
                     isLoading={isSubmitting}
                     isInversed={!!inversedSubmitButton}
                     loadingText="Submitting"
                     name="_action"
-                    target={successfulSubmission?.target}
                     value="submitHubspotForm"
                     variant="primary"
                 >
-                    {successfulSubmission?.message ? successfulSubmission?.message : submitText}
+                    {submitText}
                 </Button>
+                {successContent ? (
+                    <Alert className="c-form__success-alert" status="success">
+                        <div
+                            className="c-content"
+                            dangerouslySetInnerHTML={{ __html: successContent }}
+                        />
+                    </Alert>
+                ) : null}
                 {formErrors && formErrors.length > 0
                     ? formErrors.map((error, index) => (
                           <Alert key={index} status="error">

@@ -89,5 +89,10 @@
         &__input {
             width: 100%;
         }
+
+        &__success-alert,
+        &__error-alert {
+            color: var(--color-secondary);
+        }
     }
 }
