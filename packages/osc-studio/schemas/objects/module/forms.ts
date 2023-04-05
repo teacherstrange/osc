@@ -1,5 +1,6 @@
 import { DocumentIcon } from '@sanity/icons';
 import { defineField, defineType } from 'sanity';
+import { SPACING } from '../../../constants';
 
 // TODO - Update so that these are pulled in dynamically on a get request to Hubspot form API. Looks like a proxy needs setting up in order to do this.
 const forms = [
@@ -20,8 +21,8 @@ export default defineType({
             title: 'Form',
         },
         {
-            name: 'settings',
-            title: 'Settings',
+            name: 'spacing',
+            title: 'Spacing',
         },
     ],
     fields: [
@@ -38,6 +39,39 @@ export default defineType({
                 })),
             },
             group: 'forms',
+        }),
+        defineField({
+            name: 'marginBottom',
+            title: 'Push Region',
+            type: 'string',
+            description: 'Spacing you would like between this region and the next.',
+            options: {
+                list: SPACING,
+                layout: 'dropdown',
+            },
+            group: 'spacing',
+        }),
+        defineField({
+            name: 'paddingTop',
+            title: 'Inner Padding Top',
+            type: 'string',
+            description: 'Inner padding at the top of the region.',
+            options: {
+                list: SPACING,
+                layout: 'dropdown',
+            },
+            group: 'spacing',
+        }),
+        defineField({
+            name: 'paddingBottom',
+            title: 'Inner Padding Bottom',
+            type: 'string',
+            description: 'Inner padding at the bottom of the region.',
+            options: {
+                list: SPACING,
+                layout: 'dropdown',
+            },
+            group: 'spacing',
         }),
     ],
     preview: {

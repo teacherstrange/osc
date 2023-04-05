@@ -1,5 +1,5 @@
 import { useFetcher, useLoaderData } from '@remix-run/react';
-import { Alert } from 'osc-ui';
+import { Alert, classNames, useSpacing } from 'osc-ui';
 import type { Dispatch } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import type { z } from 'zod';
@@ -116,6 +116,10 @@ export const Forms = (props: { module: formModule }) => {
 
     const formRef = useRef<HTMLFormElement>(null);
 
+    const marginBottomClass = useSpacing('margin', 'bottom', module.marginBottom);
+    const paddingTopClass = useSpacing('padding', 'top', module.paddingTop);
+    const paddingBottomClass = useSpacing('padding', 'bottom', module.paddingBottom);
+
     useEffect(() => {
         // Reset the form when form has finished submitting there is a success response
         if (!isAdding && data?.success) {
@@ -146,15 +150,15 @@ export const Forms = (props: { module: formModule }) => {
         return <Alert status="error">Unable to load form!</Alert>;
     }
 
+    const classes = classNames('c-form', marginBottomClass, paddingTopClass, paddingBottomClass);
     // Get the form data that matches module formId
     const formData = hubspotFormData[module.formId] as HubspotFormData;
 
     const schema = getValidationSchema(getFormFields(formData.formFieldGroups));
-
     type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 
     return (
-        <div className="c-form">
+        <div className={classes}>
             <fetcher.Form action="/actions/hubspot" method="post" ref={formRef} noValidate>
                 <Form
                     form={module}

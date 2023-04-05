@@ -450,4 +450,7 @@ export interface formModule extends module {
     formNameAndId: string;
     formId: string;
     formName: string;
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
 }
