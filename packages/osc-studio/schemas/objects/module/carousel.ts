@@ -1,10 +1,10 @@
 import { StarIcon } from '@sanity/icons';
+import pluralize from 'pluralize';
 import { defineField, defineType } from 'sanity';
-import { capitalizeFirstLetter } from '../../../utils/capitalizeFirstLetter';
 
 export default defineType({
     name: 'module.carousel',
-    title: 'Carousel',
+    title: 'Image Carousel',
     type: 'object',
     icon: StarIcon,
     groups: [
@@ -21,11 +21,19 @@ export default defineType({
     fields: [
         defineField({
             title: 'Images',
-            name: 'mediaArray',
+            name: 'slides',
             type: 'array',
             of: [{ type: 'module.images' }],
             description: 'The images and text within the Carousel',
             group: 'slide',
+        }),
+        defineField({
+            name: 'carouselName',
+            title: 'Carousel Name',
+            type: 'string',
+            description: 'The accessible name of the carousel.',
+            group: 'settings',
+            validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'settings',
@@ -36,12 +44,16 @@ export default defineType({
     ],
     preview: {
         select: {
-            subtitle: 'type',
+            title: 'carouselName',
+            slides: 'slides',
         },
         prepare(selection) {
+            const { title } = selection;
+            const numberOfSlides = selection.slides.length;
+
             return {
-                title: 'Carousel',
-                subtitle: capitalizeFirstLetter(selection.subtitle),
+                title,
+                subtitle: `Carousel: (${numberOfSlides} ${pluralize('slide', numberOfSlides)})`,
             };
         },
     },

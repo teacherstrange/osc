@@ -225,15 +225,11 @@ export interface trustpilotModule extends module {
 }
 
 export interface carouselModule extends module {
-    mediaArray: SanityImage<HTMLImageElement>[];
-    active: boolean;
-    delay: string;
-    slidesPerPage: number;
-    slideGap: number;
-    axis: 'x' | 'y';
-    height: string;
-    loop: boolean;
-    startIndex: number;
+    carouselName?: string;
+    slides?: {
+        image?: imageModule<HTMLImageElement>;
+    }[];
+    settings?: carouselModuleSettings;
 }
 
 export interface carouselModuleSettings extends module {
