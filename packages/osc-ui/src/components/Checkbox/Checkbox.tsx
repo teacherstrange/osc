@@ -13,10 +13,6 @@ type Variants = 'secondary' | 'tertiary';
 
 export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrimitive.Root> {
     /**
-     * An optional description for the checkbox
-     */
-    description?: { id: string; value: string };
-    /**
      * Any error messages - initially set through server validation, but can be updated through client validation
      */
     errors?: string[] | undefined;
@@ -55,7 +51,6 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
     (props, forwardedRef) => {
         const {
             defaultChecked,
-            description,
             disabled,
             errors,
             icon,
@@ -73,7 +68,9 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
             // Client side error handling - Sets any errors on an input in
             // accordance with the schema validation
             if (errors && errors.length > 0 && schema && setErrors) {
-                clientSideValidation(name, schema, setErrors, [value]);
+                // Checkbox schema looks whether there is an array of values, as this is what
+                // gets submitted to the server. On the client, if checked is false then set to empty array
+                clientSideValidation(name, schema, setErrors, checked ? ['true'] : []);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
         }, [checked]);
