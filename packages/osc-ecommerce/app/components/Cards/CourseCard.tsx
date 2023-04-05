@@ -97,7 +97,7 @@ export const CourseCard = (props: Props) => {
                         <p>
                             or from{' '}
                             <span className="u-text-bold">
-                                £{store?.priceRange?.minVariantPrice} in full
+                                <>£{store?.priceRange?.minVariantPrice} in full</>
                             </span>
                         </p>
                     </CardPriceTag>
