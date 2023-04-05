@@ -146,7 +146,7 @@ export const getComponentStyles = (data: SanityPage) => {
     }
 
     // Dedupe the array of stylesheets based on the href property.
-    return getUniqueObjects(styles, 'href');
+    return getUniqueObjects(styles, 'href') as LinkDescriptor[];
 };
 
 interface Props {
