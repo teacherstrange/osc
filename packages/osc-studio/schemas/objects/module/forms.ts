@@ -39,31 +39,6 @@ export default defineType({
             },
             group: 'forms',
         }),
-        defineField({
-            name: 'slideOut',
-            title: 'Slide Out',
-            description: 'Whether the form should slide out',
-            type: 'boolean',
-            group: 'settings',
-        }),
-        defineField({
-            name: 'slideDirection',
-            title: 'Slide Direction',
-            description: 'Whether the form should slide out to the right or the left',
-            type: 'string',
-            options: {
-                list: ['slide-right', 'slide-left'],
-                layout: 'dropdown',
-            },
-            group: 'settings',
-        }),
-        defineField({
-            name: 'slideOutText',
-            title: 'Slide Out Text',
-            description: 'Optional text for slide out if selected',
-            type: 'string',
-            group: 'settings',
-        }),
     ],
     preview: {
         select: {

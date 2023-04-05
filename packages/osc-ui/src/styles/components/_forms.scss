@@ -18,50 +18,6 @@
                 box-shadow: none;
                 color: var(--color-tertiary);
             }
-
-            &--slide-left,
-            &--slide-right {
-                .c-form__slide-out-btn {
-                    position: absolute;
-                    bottom: 100%;
-                    left: 50%;
-                    width: max-content;
-                    padding: var(--space-scale-s);
-                    background: var(--color-secondary);
-                    color: var(--color-tertiary);
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    transform: translateX(-50%);
-                    cursor: pointer;
-
-                    &:hover {
-                        background: var(--color-secondary);
-                        color: var(--color-tertiary);
-                    }
-                }
-
-                @include mq($mq-tab) {
-                    .c-form__slide-out-btn {
-                        top: 0;
-                        bottom: unset;
-                        left: 2px;
-                        transform: translateX(-70%) translateY(85%) rotate(270deg);
-                    }
-                }
-            }
-
-            &--slide-right {
-                @include mq($mq-tab) {
-                    .c-form__slide-out-btn {
-                        top: 0;
-                        right: 2px;
-                        bottom: unset;
-                        left: unset;
-                        transform: translateX(70%) translateY(85%) rotate(270deg);
-                    }
-                }
-            }
         }
 
         &__inner-container {

@@ -71,14 +71,9 @@ const Form = (props: FormProps) => {
     const formClassName = form?.formName?.toLowerCase().split(' ').join('-');
 
     const variants = [formClassName];
-    if (form.slideDirection) variants.push(form.slideDirection);
 
     return (
-        <FormContainer
-            slideOut={form.slideOut}
-            slideOutText={form.slideOutText}
-            variants={variants.length > 0 ? variants : undefined}
-        >
+        <FormContainer variants={variants.length > 0 ? variants : undefined}>
             {/* Hidden Inputs added in order to get the form ID and hubspot form field data on submission */}
             <input type="hidden" value={form.formId} name="formId" />
             <input type="hidden" value={JSON.stringify(formFields)} name="hubspotFieldsData" />
