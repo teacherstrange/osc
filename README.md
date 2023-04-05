@@ -28,19 +28,29 @@ Make a copy of the `.env.sample` in each workspace, rename it to `.env` and upda
 -   `root`
 
     ```
-    PLANETSCALE_PRISMA_DATABASE_URL=''
-    SESSION_SECRET="super-duper-s3cret"
+    # Misc
+    SESSION_SECRET=""
     LOAD_PATH="app/styles"
     PATH_TO_MAIN_SCSS="/app/styles/main.scss"
     PATH_TO_DEST_MAIN_CSS="/app/styles/dest"
     PATH_TO_COMPONENTS="/app/components"
+
+    # GTM
     GA_TRACKING_ID=""
     GTM_TRACKING_ID=""
+
+    # Planetscale
+    PLANETSCALE_PRISMA_DATABASE_URL=''
     VAPID_PUBLIC_KEY=""
     VAPID_PRIVATE_KEY=""
     DATABASE_URL=""
-    ALGOLIA_ID=""
-    ALGOLIA_ID_SEARCH_ONLY=""
+
+    # Sanity
+    SANITY_STUDIO_API_PROJECT_ID=""
+    SANITY_STUDIO_API_DATASET="staging"
+    SANITY_STUDIO_API_TOKEN=""
+
+    # Algolia
     ALGOLIA_APP_ID=""
     ALGOLIA_ID_SEARCH_ONLY_API_KEY=""
     ALGOLIA_PRIMARY_INDEX=""
@@ -53,18 +63,23 @@ Make a copy of the `.env.sample` in each workspace, rename it to `.env` and upda
     STORYBOOK_ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS=""
     VITE_ALGOLIA_APP_ID=""
     VITE_ALGOLIA_ID_SEARCH_ONLY_API_KEY=""
-    VITE_ALGOLIA_PRIMARY_INDEX=shopify_products
+    VITE_ALGOLIA_PRIMARY_INDEX=""
     VITE_ALGOLIA_PRIMARY_INDEX_GROUPED=""
     VITE_ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS=""
-    SANITY_STUDIO_API_PROJECT_ID=""
-    SANITY_STUDIO_API_DATASET="staging"
-    SANITY_STUDIO_API_TOKEN=""
+
+    # OSC API
+    API_GATEWAY_URL=http://localhost:4000
+
+    # Hubspot
     HUBSPOT_ACCESS_TOKEN=""
     HUBSPOT_PORTAL_ID=""
+
+    # Hydrogen
     PUBLIC_STOREFRONT_API_TOKEN=""
     PRIVATE_STOREFRONT_API_TOKEN=""
     PUBLIC_STOREFRONT_API_VERSION="2023-01"
     PUBLIC_STORE_DOMAIN="openstudydev.myshopify.com"
+    SHOPIFY_ADMIN_API_TOKEN=""
     ```
 
 -   `osc-api-admin`
