@@ -1,3 +1,19 @@
+## [0.66.0](https://github.com/Open-Study-College/osc/compare/v0.65.0...v0.66.0) (2023-04-05)
+
+
+### ✨ Features
+
+* **ecommerce:** adds function to create an array of unique objects ([198743b](https://github.com/Open-Study-College/osc/commit/198743b2c43ac67d77f34b90b2988c39da802a64))
+
+
+### ♻️ Refactors
+
+* **carousel:** move ecom carousel into it's own component ([de64a5c](https://github.com/Open-Study-College/osc/commit/de64a5c8ef4c68110f256e8c97736ae7730fdc74))
+* **carousel:** update carousel settings in Sanity ([0f1ee2f](https://github.com/Open-Study-College/osc/commit/0f1ee2f64620ab2b9557b48468af4db0a984188c))
+* **ecommerce:** add stylesheet dependencies to each module in the  loop ([fdf686e](https://github.com/Open-Study-College/osc/commit/fdf686ee3dbb08e118c88957406d4ca60cbc9bc5))
+* **ecommerce:** dedupe stylesheets array ([192adfe](https://github.com/Open-Study-College/osc/commit/192adfe22aff9e1c87a6d10884756d5fcc0e1062))
+* **ecommerce:** remove carousel from root styles ([6d64957](https://github.com/Open-Study-College/osc/commit/6d64957fb2e89f9d2fc0ff173b001daeecac0548))
+
 ## [0.65.0](https://github.com/Open-Study-College/osc/compare/v0.64.4...v0.65.0) (2023-03-28)
 
 
@@ -66,11 +82,4 @@
 ### 🐛 Bugs
 
 * move concurrency attribute to the root of pr workflows ([f5479d1](https://github.com/Open-Study-College/osc/commit/f5479d1c591161879b375b8d1e576c81a0a0154f))
-
-## [0.64.1](https://github.com/Open-Study-College/osc/compare/v0.64.0...v0.64.1) (2023-03-28)
-
-
-### 🐛 Bugs
-
-* make destroy and build steps concurrent ([1a8372b](https://github.com/Open-Study-College/osc/commit/1a8372b1ac542148b82781dc433d295dbc53d4e0))
 
