@@ -16,6 +16,8 @@
      *       coloring the left and right edge
      */
     .c-tabs {
+        max-width: 1030px;
+
         &__list {
             overflow-x: auto;
             overflow-y: hidden;
@@ -94,8 +96,12 @@
 
         &__content {
             margin-block-start: -$tabs-border-width; // Pull content up to overlap borders with the trigger
-            padding: $space-3xl calc($space-5xl + 7px);
+            padding: $space-xl;
             border: $tabs-border;
+
+            @include mq($mq-mob-l) {
+                padding: $space-3xl calc($space-5xl + 7px);
+            }
         }
     }
 }
