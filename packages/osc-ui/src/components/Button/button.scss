@@ -209,7 +209,6 @@
         letter-spacing: normal;
         transition: all $timing-s $ease-in;
         cursor: pointer;
-        pointer-events: auto;
 
         &,
         &__inner {
