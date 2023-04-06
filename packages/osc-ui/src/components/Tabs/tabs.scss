@@ -1,7 +1,111 @@
 @import "../../styles/settings";
+@import "../../styles/tools";
 
 @layer components {
+    $tabs-border-width: 1px;
+    $tabs-scrollbar-width: 3px; // See scrollbar mixin for this value
+    $tabs-border: $tabs-border-width solid var(--color-neutral-500);
+    $tabs-shadow-size: 2%;
+
+    /*
+     * Adds a shadow when the modifier classes are applied to the element
+     *
+     * [1] - When element is scrolled off the screen left add background gradient going from left to right
+     * [2] - When element is scrolled off the screen right add background gradient going from right to left
+     * [3] - When element is scrolled off the screen left but also overflowing right add background gradient
+     *       coloring the left and right edge
+     */
     .c-tabs {
-        background-color: var(--color-tertiary);
+        &__list {
+            overflow-x: auto;
+            overflow-y: hidden;
+            transition: background-image $timing-s $ease-in;
+
+            &--shadow-l {
+                /* [1] */
+                // prettier-ignore
+                background-image:
+                    linear-gradient(
+                        90deg,
+                        var(--color-neutral-200),
+                        transparent $tabs-shadow-size,
+                        transparent,
+                        transparent 100%
+                    );
+            }
+
+            &--shadow-r {
+                /* [2] */
+                // prettier-ignore
+                background-image:
+                    linear-gradient(
+                        90deg,
+                        transparent,
+                        transparent $tabs-shadow-size,
+                        transparent,
+                        transparent calc(100% - $tabs-shadow-size),
+                        var(--color-neutral-200) 100%
+                    );
+            }
+
+            // .c-tabs__list--shadow-r.c-tabs__list--shadow-l
+            /* stylelint-disable-next-line plugin/selector-bem-pattern */
+            &--shadow-r#{&}--shadow-l {
+                /* [3] */
+                // prettier-ignore
+                background-image:
+                    linear-gradient(
+                        90deg,
+                        var(--color-neutral-200),
+                        transparent $tabs-shadow-size,
+                        transparent,
+                        transparent calc(100% - $tabs-shadow-size),
+                        var(--color-neutral-200) 100%
+                    );
+            }
+        }
+
+        &__list-inner {
+            display: flex;
+            width: fit-content;
+            padding-inline: $space-2xl;
+            gap: $space-s;
+        }
+
+        &__trigger {
+            padding: $space-2xs $space-l;
+            border: $tabs-border;
+            font-size: $fs-s;
+            line-height: $base-lh;
+            letter-spacing: $ls-xs;
+            transition: color $timing-s $ease-in;
+            cursor: pointer;
+
+            &:hover,
+            &:active {
+                color: var(--color-quaternary);
+            }
+
+            &[data-state="active"] {
+                border-bottom: $tabs-border-width solid var(--color-tertiary);
+                color: var(--color-quaternary);
+            }
+        }
+
+        &__content {
+            margin-block-start: -$tabs-border-width; // Pull content up to overlap borders with the trigger
+            padding: $space-3xl calc($space-5xl + 7px);
+            border: $tabs-border;
+
+            &[data-state="active"] {
+                display: block;
+            }
+
+            &[data-state="inactive"] {
+                // TODO: Replace with something more like opacity
+                // ? Can we animate?
+                display: none;
+            }
+        }
     }
 }
