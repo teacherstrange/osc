@@ -96,16 +96,6 @@
             margin-block-start: -$tabs-border-width; // Pull content up to overlap borders with the trigger
             padding: $space-3xl calc($space-5xl + 7px);
             border: $tabs-border;
-
-            &[data-state="active"] {
-                display: block;
-            }
-
-            &[data-state="inactive"] {
-                // TODO: Replace with something more like opacity
-                // ? Can we animate?
-                display: none;
-            }
         }
     }
 }

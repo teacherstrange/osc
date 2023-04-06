@@ -131,8 +131,7 @@ export const TabContent = forwardRef<ElementRef<typeof TabPrimitive.Content>, Ta
         const classes = classNames('c-tabs__content', className);
 
         return (
-            // Force mount so content is findable on the page
-            <TabPrimitive.Content className={classes} forceMount {...rest} ref={forwardedRef}>
+            <TabPrimitive.Content className={classes} {...rest} ref={forwardedRef}>
                 {children}
             </TabPrimitive.Content>
         );
