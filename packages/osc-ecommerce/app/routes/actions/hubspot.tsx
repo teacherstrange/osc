@@ -35,7 +35,7 @@ export const action: ActionFunction = async ({ request }) => {
         }
     }
 
-    if (formfieldData._action === 'submitHubspotForm') {
+    if (formfieldData._action === 'submitForm') {
         let response;
         try {
             response = await validateAndSubmitHubspotForm(formfieldData, errorCases);

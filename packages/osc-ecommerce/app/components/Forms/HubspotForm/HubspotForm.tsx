@@ -113,7 +113,7 @@ export const HubspotForm = (props: HubspotFormProps) => {
                     isInversed={!!inversedSubmitButton}
                     loadingText="Submitting"
                     name="_action"
-                    value="submitHubspotForm"
+                    value="submitForm"
                     variant="primary"
                 >
                     {submitText}
