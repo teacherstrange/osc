@@ -131,8 +131,8 @@ export const TabContent = forwardRef<ElementRef<typeof TabPrimitive.Content>, Ta
         const classes = classNames('c-tabs__content', className);
 
         return (
-            <TabPrimitive.Content className={classes} {...rest} ref={forwardedRef}>
-                {children}
+            <TabPrimitive.Content className={classes} asChild {...rest} ref={forwardedRef}>
+                <section>{children}</section>
             </TabPrimitive.Content>
         );
     }
