@@ -1,3 +1,25 @@
+## [0.68.0](https://github.com/Open-Study-College/osc/compare/v0.67.1...v0.68.0) (2023-04-06)
+
+
+### ✨ Features
+
+* **ecommerce:** adds constants file containing route paths ([30803db](https://github.com/Open-Study-College/osc/commit/30803db14e71c25047d978e6e9647f039f45be23))
+* **studio:** adds paths constant object ([2668409](https://github.com/Open-Study-College/osc/commit/2668409c260f7508fbafea7e42d10426ec13d98c))
+
+
+### ♻️ Refactors
+
+* **ecommerce:** renames products route to courses ([df4bafe](https://github.com/Open-Study-College/osc/commit/df4bafe0d189249e990f8787897b393fb299fd4d))
+* **ecommerce:** update hard coded paths to use PATHS constant ([d978476](https://github.com/Open-Study-College/osc/commit/d978476691b8a018f03c84ca5eaf560b5976459f))
+* **ecommerce:** update internal links to use buildUrls helper ([56da2a0](https://github.com/Open-Study-College/osc/commit/56da2a00f260a56165dac2cbf7744dfe1165c6fb))
+* **studio:** update hard coded paths to use PATHS constant ([691e741](https://github.com/Open-Study-College/osc/commit/691e741f5fe3a79e6271df5bd716272c4ca74054))
+
+
+### 🐛 Bugs
+
+* **ecommerce:** cast return of getComponentStyles as LinkDescriptor ([2aad2b5](https://github.com/Open-Study-College/osc/commit/2aad2b5d9aca33d5ccf4e877a75d1ff04d458070))
+* **ecommerce:** wrap string in fragment to fix TS reactnode error ([77ffa51](https://github.com/Open-Study-College/osc/commit/77ffa5137a82ae8651c8abbaf57209df438d08a1))
+
 ## [0.67.1](https://github.com/Open-Study-College/osc/compare/v0.67.0...v0.67.1) (2023-04-06)
 
 
@@ -86,11 +108,4 @@
 * **studio:** adds optional chaining to shouldShow ([14f591a](https://github.com/Open-Study-College/osc/commit/14f591a0e16e313a5cd07802020457d4facd2034))
 * **studio:** remove unused group ([e9c72ee](https://github.com/Open-Study-College/osc/commit/e9c72ee9a1009ff3144a995c6407798014f8a43e))
 * **studio:** restore imports missed during rebase ([a3e50b6](https://github.com/Open-Study-College/osc/commit/a3e50b62f427f8f594ab0749cbec5903254234e4))
-
-## [0.64.4](https://github.com/Open-Study-College/osc/compare/v0.64.3...v0.64.4) (2023-03-28)
-
-
-### 🐛 Bugs
-
-* backtick typo in workflows for studio ([f2c8089](https://github.com/Open-Study-College/osc/commit/f2c8089f40c966851f60a3732d60babfe3bd04ad))
 
