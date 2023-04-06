@@ -1,8 +1,9 @@
 import * as TabPrimitive from '@radix-ui/react-tabs';
 import type { ComponentPropsWithoutRef, ElementRef } from 'react';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { classNames } from '../../utils/classNames';
 
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import './tabs.scss';
 
 export interface SharedTabProps {
@@ -40,19 +41,61 @@ export interface TabListProps
     extends ComponentPropsWithoutRef<typeof TabPrimitive.List>,
         SharedTabProps {}
 
-export const TabList = forwardRef<ElementRef<typeof TabPrimitive.List>, TabListProps>(
-    (props, forwardedRef) => {
-        const { children, className, ...rest } = props;
-        const classes = classNames('c-tabs__list', className);
+export const TabList = (props: TabListProps) => {
+    const { children, className, ...rest } = props;
 
-        return (
-            <TabPrimitive.List className={classes} {...rest} ref={forwardedRef}>
+    const ref = useRef<HTMLDivElement | null>(null);
+    const innerRef = useRef<HTMLDivElement | null>(null);
+    const [scrollStart, setScrollStart] = useState<boolean>(false);
+    const [scrollEnd, setScrollEnd] = useState<boolean>(false);
+
+    const intersection = useIntersectionObserver(innerRef, {
+        root: ref.current,
+        rootMargin: '0px',
+        threshold: 1,
+    });
+
+    const classes = classNames(
+        'c-tabs__list',
+        scrollStart ? 'c-tabs__list--shadow-l' : '',
+        scrollEnd ? 'c-tabs__list--shadow-r' : '',
+        className
+    );
+
+    useEffect(() => {
+        // IF the innerRef is intersecting then set the scroll end state to false
+        setScrollEnd(intersection?.isIntersecting ? false : true);
+    }, [intersection]);
+
+    useEffect(() => {
+        const element = ref.current;
+
+        // Set the scroll state when element is scrolled left or right
+        const handleScroll = () => {
+            const rect = innerRef.current.getBoundingClientRect();
+            const posLeft = rect.left;
+            // Subtract the offset position of the element so we can ignore any padding applied to elements further up the tree; then round down
+            const posRight = Math.floor(rect.right - element.offsetLeft);
+
+            posLeft <= 0 ? setScrollStart(true) : setScrollStart(false);
+            posRight > element.clientWidth ? setScrollEnd(true) : setScrollEnd(false);
+        };
+
+        element.addEventListener('scroll', handleScroll);
+
+        return () => {
+            element.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    return (
+        <div className={classes} ref={ref}>
+            <TabPrimitive.List className="c-tabs__list-inner" {...rest} ref={innerRef}>
                 {children}
             </TabPrimitive.List>
-        );
-    }
-);
-TabList.displayName = 'TabList';
+        </div>
+    );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Tab Trigger
