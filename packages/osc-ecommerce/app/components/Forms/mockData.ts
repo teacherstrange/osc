@@ -642,27 +642,9 @@ export const hubspotFormData = {
                     selectedOptions: [],
                     options: [
                         {
-                            label: 'Call me as soon as possible at any time of the day or on the weekends',
-                            value: 'Call me as soon as possible at any time of the day or on the weekends',
+                            label: 'Call me as soon as possible',
+                            value: 'Call me as soon as possible',
                             displayOrder: 0,
-                            doubleData: 0,
-                            hidden: false,
-                            description: '',
-                            readOnly: false,
-                        },
-                        {
-                            label: 'Call me next week',
-                            value: 'Call me next week',
-                            displayOrder: 1,
-                            doubleData: 0,
-                            hidden: false,
-                            description: '',
-                            readOnly: false,
-                        },
-                        {
-                            label: 'Call me in two weeks',
-                            value: 'Call me in two weeks',
-                            displayOrder: 2,
                             doubleData: 0,
                             hidden: false,
                             description: '',
@@ -700,7 +682,7 @@ export const hubspotFormData = {
                     selectedOptions: [],
                     options: [
                         {
-                            label: 'Yes, I am a current Open Study College student',
+                            label: 'Yes',
                             value: 'Yes',
                             displayOrder: 0,
                             doubleData: 0,
@@ -709,7 +691,7 @@ export const hubspotFormData = {
                             readOnly: false,
                         },
                         {
-                            label: 'No, I am not a current Open Study College student',
+                            label: 'No',
                             value: 'No',
                             displayOrder: 1,
                             doubleData: 0,
@@ -748,7 +730,8 @@ export const hubspotFormData = {
         },
     ],
     submitText: 'Enrol Now',
-} as Partial<HubspotFormData>;
+} as Pick<HubspotFormData, 'formFieldGroups' | 'submitText'>;
+
 
 export const validationErrors = {
     firstname: ['Field is required'],
