@@ -65,4 +65,11 @@ export const action: ActionFunction = async ({ request }) => {
 
         return result;
     }
+    // If action isn't 'submitForm' then return error
+    return setFormErrorsAndReport(errorCases, {
+        loggingMessages: [`"${formfieldData._action}" is an invalid action!`],
+        userMessages: [
+            'Sorry there was an error submitting your form, please try again or contact us directly.',
+        ],
+    });
 };
