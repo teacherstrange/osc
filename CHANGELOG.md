@@ -1,3 +1,22 @@
+## [0.67.0](https://github.com/Open-Study-College/osc/compare/v0.66.0...v0.67.0) (2023-04-06)
+
+
+### ✨ Features
+
+* **modal:** add an alert modal component ([8ae3c0e](https://github.com/Open-Study-College/osc/commit/8ae3c0ef0ac6335333602a9e6e92c75877ea8e4a))
+
+
+### 🐛 Bugs
+
+* **modal:** add id to input in story ([a2cd985](https://github.com/Open-Study-College/osc/commit/a2cd985edffeb9b5e16b1926da34ada5e371a52d))
+
+
+### ♻️ Refactors
+
+* **modal:** extract modal into more composable parts ([c87a902](https://github.com/Open-Study-College/osc/commit/c87a90225c5ed703c14b181a91ff8189b1707ae7))
+* **modal:** update modal styles ([d5a2bef](https://github.com/Open-Study-College/osc/commit/d5a2bef109e9be456f039169b649b379c77411b8))
+* **modal:** update tests to work with new markup ([e9f9fb5](https://github.com/Open-Study-College/osc/commit/e9f9fb53fafa13c3e8fabf0100f86b2f38aa1789))
+
 ## [0.66.0](https://github.com/Open-Study-College/osc/compare/v0.65.0...v0.66.0) (2023-04-05)
 
 
@@ -75,11 +94,4 @@
 
 * add concurency to studio ([0d69db4](https://github.com/Open-Study-College/osc/commit/0d69db43c11e55dfedf0b06fd2f726cdc2170ccf))
 * typo in refactor ([b07582b](https://github.com/Open-Study-College/osc/commit/b07582ba64170cbe74c280442fb5aad4b871fbef))
-
-## [0.64.2](https://github.com/Open-Study-College/osc/compare/v0.64.1...v0.64.2) (2023-03-28)
-
-
-### 🐛 Bugs
-
-* move concurrency attribute to the root of pr workflows ([f5479d1](https://github.com/Open-Study-College/osc/commit/f5479d1c591161879b375b8d1e576c81a0a0154f))
 
