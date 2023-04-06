@@ -1,3 +1,10 @@
+## [0.67.1](https://github.com/Open-Study-College/osc/compare/v0.67.0...v0.67.1) (2023-04-06)
+
+
+### 🧪 Tests
+
+* **content media:** adds tests for content media component ([21e7ebd](https://github.com/Open-Study-College/osc/commit/21e7ebdb1c4e2a52a4a2232427df3f5673bbdb5e))
+
 ## [0.67.0](https://github.com/Open-Study-College/osc/compare/v0.66.0...v0.67.0) (2023-04-06)
 
 
@@ -86,12 +93,4 @@
 ### 🐛 Bugs
 
 * backtick typo in workflows for studio ([f2c8089](https://github.com/Open-Study-College/osc/commit/f2c8089f40c966851f60a3732d60babfe3bd04ad))
-
-## [0.64.3](https://github.com/Open-Study-College/osc/compare/v0.64.2...v0.64.3) (2023-03-28)
-
-
-### 🐛 Bugs
-
-* add concurency to studio ([0d69db4](https://github.com/Open-Study-College/osc/commit/0d69db43c11e55dfedf0b06fd2f726cdc2170ccf))
-* typo in refactor ([b07582b](https://github.com/Open-Study-College/osc/commit/b07582ba64170cbe74c280442fb5aad4b871fbef))
 
