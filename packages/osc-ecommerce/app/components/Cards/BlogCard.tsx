@@ -1,5 +1,4 @@
 import {
-    BlogCard as OSCBlogCard,
     Button,
     CardBody,
     CardFooter,
@@ -8,7 +7,9 @@ import {
     CardInner,
     CardTitle,
     Image,
+    BlogCard as OSCBlogCard,
 } from 'osc-ui';
+import { PATHS } from '~/constants';
 import type { postCardModule } from '~/types/sanity';
 
 interface Props {
@@ -51,7 +52,11 @@ export const BlogCard = (props: Props) => {
                 <CardBody>Lorem ipsum dolor sit amet consectetur adipisicing elit.</CardBody>
 
                 <CardFooter>
-                    <Button variant="quinary" as="link" to={`/blog/${data?.slug?.current}`}>
+                    <Button
+                        variant="quinary"
+                        as="link"
+                        to={`/${PATHS.BLOG}/${data?.slug?.current}`}
+                    >
                         Read more
                     </Button>
                 </CardFooter>

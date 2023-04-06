@@ -1,5 +1,6 @@
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
+import { PATHS } from '~/constants';
 
 test.describe('User login', () => {
     // Skip for now until auth is merged into main
@@ -28,7 +29,7 @@ test.describe('Navigates to a sample of pages without them hanging', () => {
     };
 
     test('successfully navigates to the homepage', async ({ page }) => {
-        await page.goto('/');
+        await page.goto(`${PATHS.HOME}`);
 
         await checkHeading(page);
     });
@@ -40,42 +41,42 @@ test.describe('Navigates to a sample of pages without them hanging', () => {
     });
 
     test('successfully navigates to the a level maths page', async ({ page }) => {
-        await page.goto('/products/a-level-maths');
+        await page.goto(`/${PATHS.PRODUCTS}/a-level-maths`);
 
         await checkHeading(page);
     });
 
     test('successfully navigates to the #10 voucher page', async ({ page }) => {
-        await page.goto('/products/10-pound-gift-voucher');
+        await page.goto(`/${PATHS.PRODUCTS}/10-pound-gift-voucher`);
 
         await checkHeading(page);
     });
 
     test('successfully navigates aat level 2 and 3 accounting page', async ({ page }) => {
-        await page.goto('/products/aat-level-2-and-3-accounting');
+        await page.goto(`/${PATHS.PRODUCTS}/aat-level-2-and-3-accounting`);
 
         await checkHeading(page);
     });
 
     test('successfully navigates sage 50c computerised accounts level 1', async ({ page }) => {
-        await page.goto('/products/sage-50c-computerised-accounts-level-1');
+        await page.goto(`/${PATHS.PRODUCTS}/sage-50c-computerised-accounts-level-1`);
 
         await checkHeading(page);
     });
 
     test('successfully navigates to the accounting collections page', async ({ page }) => {
-        await page.goto('/collections/accounting');
+        await page.goto(`/${PATHS.COLLECTIONS}/accounting`);
 
         await checkHeading(page);
     });
 
     test('successfully navigates to the animal care collections page', async ({ page }) => {
-        await page.goto('/collections/animal-care');
+        await page.goto(`/${PATHS.COLLECTIONS}/animal-care`);
         await checkHeading(page);
     });
 
     test('successfully navigates to the science collections page', async ({ page }) => {
-        await page.goto('/collections/science');
+        await page.goto(`/${PATHS.COLLECTIONS}/science`);
         await checkHeading(page);
     });
 });

@@ -1,15 +1,16 @@
+import { PATHS } from '~/constants';
+import { COLLECTION_QUERY } from '~/queries/sanity/collection';
+import { HOME_QUERY } from '~/queries/sanity/home';
+import { PRODUCT_QUERY } from '~/queries/sanity/product';
 import getPageData, { buildUrlPath, shouldRedirect } from './sanity.server';
 // eslint-disable-next-line jest/no-mocks-import -- no clear way to intercept a request form remix so we want to use this as a function rather than a true mock -- perhaps this could be done better?
 import { mockHomeRequest } from '../../__mocks__/requests';
-import { HOME_QUERY } from '~/queries/sanity/home';
-import { COLLECTION_QUERY } from '~/queries/sanity/collection';
-import { PRODUCT_QUERY } from '~/queries/sanity/product';
 
 describe("Tests that getPageData doesn't hang", () => {
     test('returns data from a query to the homepage', async () => {
         const data = await getPageData({
             request: mockHomeRequest('http://localhost/'),
-            query: HOME_QUERY
+            query: HOME_QUERY,
         });
 
         if (!data) throw Error('Request failed');
@@ -21,9 +22,9 @@ describe("Tests that getPageData doesn't hang", () => {
 
     test('returns store data from a query to a collection', async () => {
         const data = await getPageData({
-            request: mockHomeRequest('http://localhost/collections/accounting'),
+            request: mockHomeRequest(`http://localhost/${PATHS.COLLECTIONS}/accounting`),
             params: { slug: 'accounting' },
-            query: COLLECTION_QUERY
+            query: COLLECTION_QUERY,
         });
 
         if (!data) throw Error('Request failed');
@@ -40,18 +41,18 @@ describe("Tests that getPageData doesn't hang", () => {
                 isDeleted: expect.any(Boolean),
                 slug: {
                     _type: 'slug',
-                    current: 'accounting'
+                    current: 'accounting',
                 },
-                title: expect.any(String)
+                title: expect.any(String),
             })
         );
     });
 
     test('returns store data from a query to a product', async () => {
         const data = await getPageData({
-            request: mockHomeRequest('http://localhost/products/a-level-maths'),
+            request: mockHomeRequest(`http://localhost/${PATHS.PRODUCTS}/a-level-maths`),
             params: { slug: 'a-level-maths' },
-            query: PRODUCT_QUERY
+            query: PRODUCT_QUERY,
         });
 
         if (!data) throw Error('Request failed');
@@ -129,30 +130,30 @@ describe('buildUrlPath()', () => {
         const urlPath = buildUrlPath({
             type: 'post',
             url,
-            slug: 'test-post'
+            slug: 'test-post',
         });
 
-        expect(urlPath).toBe('/blog/test-post');
+        expect(urlPath).toBe(`/${PATHS.BLOG}/test-post`);
     });
 
     test('builds the collection path', () => {
         const urlPath = buildUrlPath({
             type: 'collection',
             url,
-            slug: 'test-collection'
+            slug: 'test-collection',
         });
 
-        expect(urlPath).toBe('/collections/test-collection');
+        expect(urlPath).toBe(`/${PATHS.COLLECTIONS}/test-collection`);
     });
 
     test('builds the product path', () => {
         const urlPath = buildUrlPath({
             type: 'product',
             url,
-            slug: 'test-product'
+            slug: 'test-product',
         });
 
-        expect(urlPath).toBe('/products/test-product');
+        expect(urlPath).toBe(`/${PATHS.PRODUCTS}/test-product`);
     });
 });
 

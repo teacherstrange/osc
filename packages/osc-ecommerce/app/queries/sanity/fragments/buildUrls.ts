@@ -1,11 +1,12 @@
 import groq from 'groq';
+import { PATHS } from '~/constants';
 
 export const buildUrls = groq`
     (_type == "collection") => {
-        "slug": "/collections/" + store.slug.current,
+        "slug": "/${PATHS.COLLECTIONS}/" + store.slug.current,
         },
     (_type == "home") => {
-        "slug": "/",
+        "slug": "${PATHS.HOME}",
     },
     (_type == "blog") => {
         "slug": '/' + slug.current,
@@ -14,9 +15,9 @@ export const buildUrls = groq`
         "slug": '/' + slug.current,
     },
     (_type == "post") => {
-        "slug": "/blog/" + slug.current,
+        "slug": "/${PATHS.BLOG}/" + slug.current,
     },
     (_type == "product") => {
-        "slug": "/products/" + store.slug.current,
+        "slug": "/${PATHS.PRODUCTS}/" + store.slug.current,
     }
 `;

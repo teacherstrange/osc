@@ -1,10 +1,10 @@
-import { SHOPIFY_STORE_ID } from '../constants';
+import { PATHS, SHOPIFY_STORE_ID } from '../constants';
 
 export const collectionUrl = (collectionId: number) => {
     if (!SHOPIFY_STORE_ID) {
         return null;
     }
-    return `https://${SHOPIFY_STORE_ID}/admin/collections/${collectionId}`;
+    return `https://${SHOPIFY_STORE_ID}/admin/${PATHS.COLLECTIONS}/${collectionId}`;
 };
 
 export const productUrl = (productId: number) => {

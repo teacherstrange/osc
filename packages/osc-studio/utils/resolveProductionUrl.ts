@@ -1,4 +1,5 @@
 import type { SanityDocument, Slug } from 'sanity';
+import { PATHS } from '../constants';
 const localUrl = `http://localhost:2000`;
 // TODO: Update this
 const remoteUrl = `https://your-deployed-website.com`;
@@ -23,19 +24,19 @@ export function resolveProductionUrl(doc: SanityDocumentWithSlug) {
 
     switch (doc._type) {
         case 'home':
-            url.pathname = `/`;
+            url.pathname = `${PATHS.HOME}`;
             break;
 
         case 'post':
-            url.pathname = `blog/${slug}`;
+            url.pathname = `${PATHS.BLOG}/${slug}`;
             break;
 
         case 'collection':
-            url.pathname = `collections/${slug}`;
+            url.pathname = `${PATHS.COLLECTIONS}/${slug}`;
             break;
 
         case 'product':
-            url.pathname = `products/${slug}`;
+            url.pathname = `${PATHS.PRODUCTS}/${slug}`;
             break;
 
         default:

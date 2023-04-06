@@ -9,8 +9,8 @@ import {
     CardPriceTag,
     CardTitle,
     CardWishListButton,
-    CourseCard as OSCCourseCard,
     Icon,
+    CourseCard as OSCCourseCard,
     Popover,
     PopoverArrow,
     PopoverClose,
@@ -18,6 +18,7 @@ import {
     PopoverTrigger,
 } from 'osc-ui';
 import { useState } from 'react';
+import { PATHS } from '~/constants';
 import type { courseCardModule } from '~/types/sanity';
 
 interface Props {
@@ -96,12 +97,12 @@ export const CourseCard = (props: Props) => {
                         <p>
                             or from{' '}
                             <span className="u-text-bold">
-                                £{store?.priceRange?.minVariantPrice} in full
+                                <>£{store?.priceRange?.minVariantPrice} in full</>
                             </span>
                         </p>
                     </CardPriceTag>
 
-                    <Button as="link" to={`/products/${store?.slug?.current}`} isFull>
+                    <Button as="link" to={`/${PATHS.PRODUCTS}/${store?.slug?.current}`} isFull>
                         View course
                     </Button>
                 </CardBody>
