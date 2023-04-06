@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('has the default seo settings', async ({ page }) => {
     await page.goto('/seo-defaults');
@@ -13,7 +13,7 @@ test('has the default seo settings', async ({ page }) => {
     const ogType = page.locator('meta[property="og:type"]');
     const ogUrl = page.locator('meta[property="og:url"]');
     const ogSiteName = page.locator('meta[property="og:site_name"]');
-    const aritclePublisher = page.locator('meta[name="article:publisher"]');
+    const articlePublisher = page.locator('meta[property="article:publisher"]');
     const twitterCard = page.locator('meta[name="twitter:card"]');
     const twitterSite = page.locator('meta[name="twitter:site"]');
 
@@ -25,7 +25,7 @@ test('has the default seo settings', async ({ page }) => {
     await expect(ogType).toHaveAttribute('content', 'website');
     await expect(ogUrl).toHaveAttribute('content', currentPage);
     await expect(ogSiteName).toHaveAttribute('content', 'Open Study College');
-    await expect(aritclePublisher).toHaveAttribute(
+    await expect(articlePublisher).toHaveAttribute(
         'content',
         'https://www.facebook.com/openstudycollege'
     );
@@ -33,14 +33,14 @@ test('has the default seo settings', async ({ page }) => {
     await expect(twitterSite).toHaveAttribute('content', 'openstudycoll');
 });
 
-test('has a cutsom title', async ({ page }) => {
+test('has a custom title', async ({ page }) => {
     await page.goto('/seo-custom-settings');
 
     const title = await page.title();
     expect(title).toBe('Custom page title | Open Study College');
 });
 
-test('has a cutsom description', async ({ page }) => {
+test('has a custom description', async ({ page }) => {
     await page.goto('/seo-custom-settings');
 
     const description = page.locator('meta[name="description"]');
@@ -50,14 +50,14 @@ test('has a cutsom description', async ({ page }) => {
     );
 });
 
-test('has a cutsom canonical url', async ({ page }) => {
+test('has a custom canonical url', async ({ page }) => {
     await page.goto('/seo-custom-settings');
 
     const canonical = page.locator('link[rel="canonical"]');
     await expect(canonical).toHaveAttribute('href', 'https://www.openstudycollege.com/');
 });
 
-test('has a cutsom og image', async ({ page }) => {
+test('has a custom og image', async ({ page }) => {
     await page.goto('/seo-custom-settings');
 
     const ogImage = page.locator('meta[property="og:image"]');

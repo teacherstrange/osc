@@ -187,7 +187,7 @@ jobs:
         run: npx prisma generate
 
       - name: 🏃‍♂️ Playwright run
-        run: npm run test:e2e:run
+        run: npm run test:e2e
 
       - name: Report
         uses: actions/upload-artifact@v2
