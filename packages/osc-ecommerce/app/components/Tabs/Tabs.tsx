@@ -16,8 +16,6 @@ import { useEffect, useState } from 'react';
 import type { module, tabsModule } from '~/types/sanity';
 import Module from '../Module';
 
-// TODO: Set inner accordion styles
-
 export const TabsModule = (props: { module: tabsModule }) => {
     const { module } = props;
 
