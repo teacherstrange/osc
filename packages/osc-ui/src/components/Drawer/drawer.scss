@@ -13,6 +13,8 @@
     $drawer-transition-ease: $ease-out-sine;
 
     .c-drawer {
+        $self: &;
+
         /*
          * Custom container for the drawer
          *
@@ -26,9 +28,13 @@
         }
 
         &__content-inner {
-            max-height: $drawer-max-height;
             overflow-y: auto;
             padding: $space-l;
+
+            // Only set the max height when the is-full class is applied
+            #{$self}__content:not(.is-full) & {
+                max-height: $drawer-max-height;
+            }
 
             @include mq($mq-tab) {
                 padding: $space-2xl;
