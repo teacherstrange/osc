@@ -275,6 +275,11 @@ export interface textGridModule extends module {
 }
 
 export interface tabsModule extends module {
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
+    paddingLeft: Maybe<Spacing>;
+    paddingRight: Maybe<Spacing>;
     tabItem: {
         _key: string;
         _type: string;

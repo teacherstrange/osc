@@ -8,6 +8,7 @@ import {
     TabList,
     TabTrigger,
     Tabs,
+    classNames,
     rem,
     useMediaQuery,
 } from 'osc-ui';
@@ -23,6 +24,15 @@ export const TabsModule = (props: { module: tabsModule }) => {
     const isGreaterThanMobL = useMediaQuery(`(min-width: ${rem(mq['mob-lrg'])}rem)`);
     const [showOnGreaterThanMobL, setShowOnGreaterThanMobL] = useState<boolean>(false);
 
+    const classes = classNames(
+        'o-container',
+        module?.marginBottom ? `u-mb-${module.marginBottom}` : '',
+        module?.paddingTop ? `u-mb-${module.paddingTop}` : '',
+        module?.paddingRight ? `u-mb-${module.paddingRight}` : '',
+        module?.paddingBottom ? `u-mb-${module.paddingBottom}` : '',
+        module?.paddingLeft ? `u-mb-${module.paddingLeft}` : ''
+    );
+
     // We need this useEffect to set the showOnTab state only when the window object exists
     // Otherwise we will receive an SSR warning telling us the markup differs from the server
     useEffect(() => {
@@ -30,7 +40,7 @@ export const TabsModule = (props: { module: tabsModule }) => {
     }, [isGreaterThanMobL]);
 
     return module?.tabItem && module?.tabItem?.length > 0 ? (
-        <div className="o-container">
+        <div className={classes}>
             {showOnGreaterThanMobL ? (
                 <Tabs defaultValue={module?.tabItem[0]._key}>
                     <TabList>
