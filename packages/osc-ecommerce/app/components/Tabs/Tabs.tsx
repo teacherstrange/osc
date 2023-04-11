@@ -20,7 +20,7 @@ import Module from '../Module';
 export const TabsModule = (props: { module: tabsModule }) => {
     const { module } = props;
 
-    const isGreaterThanMobL = useMediaQuery(`(min-width: ${rem(mq['mob-lg'])}rem)`);
+    const isGreaterThanMobL = useMediaQuery(`(min-width: ${rem(mq['mob-lrg'])}rem)`);
     const [showOnGreaterThanMobL, setShowOnGreaterThanMobL] = useState<boolean>(false);
 
     // We need this useEffect to set the showOnTab state only when the window object exists
