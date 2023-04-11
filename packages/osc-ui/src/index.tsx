@@ -63,13 +63,13 @@ export { List, ListItem } from './components/List/List';
 export { Logo } from './components/Logo/Logo';
 export { Modal } from './components/Modal/Modal';
 export {
-    Navbar,
     NavContent,
     NavItem,
     NavLink,
     NavList,
     NavSubMenu,
     NavTrigger,
+    Navbar,
 } from './components/Navbar/Navbar';
 export {
     Popover,
@@ -82,7 +82,7 @@ export { RadioGroup, RadioItem } from './components/RadioGroup/RadioGroup';
 export { Select, SelectItem } from './components/Select/Select';
 export { SkipLink } from './components/SkipLink/SkipLink';
 export { Switch } from './components/Switch/Switch';
-export { Tabs } from './components/Tabs/Tabs';
+export { TabContent, TabList, TabTrigger, Tabs } from './components/Tabs/Tabs';
 export { Tag } from './components/Tag/Tag';
 export { TextArea } from './components/TextArea/TextArea';
 export { TextGrid } from './components/TextGrid/TextGrid';
