@@ -15,7 +15,7 @@ export const AccordionModule = (props: Props) => {
     const headingLevel = module.accordionHeadingLevels as 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
     return (
-        <article>
+        <article className="o-container">
             {module.content ? (
                 <Content
                     align={module.content?.horizontalAlignment}
