@@ -61,6 +61,14 @@ export default defineType({
         }),
         // Modules
         defineField({
+            name: 'upperContent',
+            title: 'Upper Page content',
+            description: 'Content that sits next to the add to cart form.',
+            type: 'array',
+            of: MODULES,
+            group: 'editorial',
+        }),
+        defineField({
             name: 'modules',
             title: 'Modules',
             type: 'array',
