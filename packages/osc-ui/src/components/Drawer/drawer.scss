@@ -53,6 +53,12 @@
 
             @include z-index(modal);
 
+            // WHEN the viewport is the same size as the max-height then set the height to 100%
+            // This allows us to continue to scroll when on narrower viewports
+            @include mq(strip-unit($drawer-max-height), max, height) {
+                height: 100%;
+            }
+
             // *----------------------------------*/
             //  Direction modifiers
             // *----------------------------------*/
