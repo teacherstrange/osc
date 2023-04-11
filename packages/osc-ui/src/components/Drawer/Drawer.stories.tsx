@@ -1,5 +1,5 @@
 import type { Meta, Story } from '@storybook/react';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '../Button/Button';
 import { Header } from '../Header/Header';
 import { Icon } from '../Icon/Icon';
@@ -202,40 +202,48 @@ const FullHeightTemplate: Story<DrawerProps> = (args) => {
 
 const CustomContainerTemplate: Story<DrawerProps> = (args) => {
     const [portal, setPortal] = useState(null);
+    const [headerHeight, setHeaderHeight] = useState(0);
+    const headerRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const header = headerRef.current;
+
+        if (header) {
+            setHeaderHeight(header.offsetHeight);
+        }
+    }, []);
 
     return (
         <>
-            <Header>
+            <Header ref={headerRef}>
                 <Logo className="c-header__logo" />
             </Header>
-
-            <DrawerContainer style={{ minHeight: '1000px' }}>
+            {/*
+                // Set height based on the header
+                // ! DEMO only, there's probably a better way to do this, for example using the implicit height of the content
+            */}
+            <DrawerContainer style={{ minHeight: `calc(100vh - ${headerHeight}px)` }}>
                 <div className="o-container">
                     <Drawer {...args}>
                         <DrawerTrigger asChild>
                             <Button>Open Drawer</Button>
                         </DrawerTrigger>
-
                         <DrawerContent size="sm" isFull container={portal}>
                             <DrawerCloseButton>
                                 <Icon id="arrow" className="o-icon--lg" />
                                 <VisuallyHidden>Close</VisuallyHidden>
                             </DrawerCloseButton>
-
                             <DrawerTitle>
                                 An accessible title to be announced when the dialog is opened.
                             </DrawerTitle>
-
                             <DrawerDescription>
                                 An optional accessible description to be announced when the dialog
                                 is opened.
                             </DrawerDescription>
-
                             <p>Drawer content</p>
                         </DrawerContent>
                     </Drawer>
                 </div>
-
                 <div ref={setPortal} />
             </DrawerContainer>
         </>
