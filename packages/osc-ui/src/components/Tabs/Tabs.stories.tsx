@@ -80,7 +80,7 @@ const Template: Story<TabProps> = (args) => {
 
                 {tabs.map((tab) => (
                     <TabContent value={tab.key} key={tab.key}>
-                        {tab.panel}
+                        <div className="o-container">{tab.panel}</div>
                     </TabContent>
                 ))}
             </Tabs>
@@ -105,7 +105,7 @@ const ResponsiveTemplate: Story<TabProps> = (args) => {
 
                     {tabs.map((tab) => (
                         <TabContent value={tab.key} key={tab.key}>
-                            {tab.panel}
+                            <div className="o-container">{tab.panel}</div>
                         </TabContent>
                     ))}
                 </Tabs>
@@ -114,7 +114,9 @@ const ResponsiveTemplate: Story<TabProps> = (args) => {
                     {tabs.map((tab) => (
                         <AccordionItem key={tab.key} value={`${tab.key}`}>
                             <AccordionHeader>{tab.list}</AccordionHeader>
-                            <AccordionPanel>{tab.panel}</AccordionPanel>
+                            <AccordionPanel>
+                                <div className="o-container">{tab.panel}</div>
+                            </AccordionPanel>
                         </AccordionItem>
                     ))}
                 </Accordion>

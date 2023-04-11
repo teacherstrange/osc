@@ -98,11 +98,11 @@
 
         &__content {
             margin-block-start: -$tabs-border-width; // Pull content up to overlap borders with the trigger
-            padding: $space-xl;
+            padding-block: $space-xl;
             border: $tabs-border;
 
             @include mq($mq-mob-l) {
-                padding: $space-3xl calc($space-5xl + 7px);
+                padding-block: $space-3xl;
             }
         }
     }
