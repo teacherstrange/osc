@@ -7,6 +7,8 @@
     $drawer-width-m: 610px;
     $drawer-width-s: 370px;
     $drawer-max-height: 750px;
+    $drawer-max-height-s: 270px;
+    $drawer-max-height-m: 500px;
     $drawer-offset: 120px;
     $drawer-transition-timing: $timing-s;
     $drawer-transition-ease: $ease-out-sine;
@@ -54,7 +56,7 @@
 
             // WHEN the viewport is the same size as the max-height then set the height to 100%
             // This allows us to continue to scroll when on narrower viewports
-            @include mq(strip-unit($drawer-max-height), max, height) {
+            @include mq(strip-unit($drawer-max-height-s), max, height) {
                 height: 100%;
             }
 
@@ -133,7 +135,7 @@
                 width: 100%;
 
                 @include mq(strip-unit($drawer-max-height), max, height) {
-                    max-height: 500px;
+                    max-height: $drawer-max-height-m;
                 }
 
                 @include mq($mq-tab) {
