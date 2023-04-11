@@ -71,6 +71,7 @@ export default defineType({
         defineField({
             name: 'modules',
             title: 'Modules',
+            description: 'Lower page content.',
             type: 'array',
             of: MODULES,
             group: 'editorial',
