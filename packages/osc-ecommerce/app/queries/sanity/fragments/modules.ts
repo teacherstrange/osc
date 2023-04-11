@@ -7,6 +7,7 @@ import { MODULE_CONTENT_MEDIA } from './modules/contentMedia';
 import { MODULE_FORMS } from './modules/forms';
 import { MODULE_HERO } from './modules/hero';
 import { MODULE_IMAGES } from './modules/images';
+import { MODULE_TABS } from './modules/tabs';
 import { MODULE_TEXT_GRID } from './modules/textGrid';
 import { MODULE_TRUSTPILOT } from './modules/trustpilot';
 import { MODULE_VIDEO } from './modules/video';
@@ -46,6 +47,9 @@ modules[] {
     },
     (_type == "module.forms") => {
       ${MODULE_FORMS}
+    },
+    (_type == "module.tabs") => {
+      ${MODULE_TABS}
     }
 }
 `;
