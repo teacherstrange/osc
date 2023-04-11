@@ -25,10 +25,10 @@ export const TabsModule = (props: { module: tabsModule }) => {
     const classes = classNames(
         'o-container',
         module?.marginBottom ? `u-mb-${module.marginBottom}` : '',
-        module?.paddingTop ? `u-mb-${module.paddingTop}` : '',
-        module?.paddingRight ? `u-mb-${module.paddingRight}` : '',
-        module?.paddingBottom ? `u-mb-${module.paddingBottom}` : '',
-        module?.paddingLeft ? `u-mb-${module.paddingLeft}` : ''
+        module?.paddingTop ? `u-pt-${module.paddingTop}` : '',
+        module?.paddingRight ? `u-pr-${module.paddingRight}` : '',
+        module?.paddingBottom ? `u-pb-${module.paddingBottom}` : '',
+        module?.paddingLeft ? `u-pl-${module.paddingLeft}` : ''
     );
 
     // We need this useEffect to set the showOnTab state only when the window object exists
