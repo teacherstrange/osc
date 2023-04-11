@@ -38,6 +38,7 @@ export const MODULES = [
     { type: 'module.forms' },
     { type: 'module.hero' },
     { type: 'module.images' },
+    { type: 'module.tabs' },
     { type: 'module.trustpilot' },
     { type: 'module.textGrid' },
     { type: 'module.video' },

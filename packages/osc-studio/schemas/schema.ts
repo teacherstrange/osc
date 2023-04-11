@@ -1,3 +1,4 @@
+import type { SchemaTypeDefinition } from 'sanity';
 // First, we must import the schema creator
 // Then import schema types from any plugins that might expose them
 
@@ -25,7 +26,6 @@ import settings from './singletons/settings';
 import body from './blocks/body';
 
 // Object types
-import type { SchemaTypeDefinition } from 'sanity';
 import bodyNoHeadings from './blocks/bodyNoHeadings';
 import accordionItem from './objects/accordionItem';
 import carouselSettings from './objects/carouselSettings';
@@ -42,8 +42,8 @@ import moduleCardBio from './objects/module/cardBio';
 import moduleCardCollection from './objects/module/cardCollection';
 import moduleCardCourse from './objects/module/cardCourse';
 import moduleCardPost from './objects/module/cardPost';
-import moduleCards from './objects/module/cards';
 import moduleCardStatic from './objects/module/cardStatic';
+import moduleCards from './objects/module/cards';
 import moduleCarousel from './objects/module/carousel';
 import moduleContent from './objects/module/content';
 import moduleContentMedia from './objects/module/contentMedia';
@@ -51,8 +51,9 @@ import moduleForms from './objects/module/forms';
 import moduleHero from './objects/module/hero';
 import moduleImage from './objects/module/image';
 import moduleImageMobile from './objects/module/imageMobile';
-import moduleImages from './objects/module/images';
 import moduleImageTablet from './objects/module/imageTablet';
+import moduleImages from './objects/module/images';
+import moduleTabs from './objects/module/tabs';
 import moduleTextGrid from './objects/module/textGrid';
 import moduleTrustpilot from './objects/module/trustpilot';
 import moduleVideo from './objects/module/video';
@@ -70,6 +71,7 @@ import shopifyCollection from './objects/shopifyCollection';
 import shopifyProduct from './objects/shopifyProduct';
 import shopifyProductVariant from './objects/shopifyProductVariant';
 import social from './objects/social';
+import tabItem from './objects/tabItem';
 import textGridItem from './objects/textGridItem';
 
 // Build the schemas and export to the Sanity Studio app
@@ -100,6 +102,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
 
     // Objects
     accordionItem,
+    tabItem,
     carouselSettings,
     contentMediaImage,
     contentMediaSlide,
@@ -139,6 +142,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     moduleImages,
     moduleImageMobile,
     moduleImageTablet,
+    moduleTabs,
     moduleTrustpilot,
     moduleCarousel,
     moduleTextGrid,
