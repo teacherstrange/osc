@@ -1,6 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
+import { mergeRefs } from '@react-aria/utils';
 import type { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode } from 'react';
-import React, { createContext, forwardRef, useContext } from 'react';
+import React, { createContext, forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import type { Maybe, PolymorphicComponentProps } from '../../types';
 import { classNames } from '../../utils/classNames';
@@ -32,16 +33,24 @@ export interface DrawerProps
     isOffset?: boolean;
 }
 
-const DrawerContext = createContext<DrawerProps>(null);
+const DrawerContext = createContext<
+    DrawerProps & {
+        triggerHeight: number;
+        setTriggerHeight: (height: number) => void;
+    }
+>(null);
 
 export const Drawer = (props: DrawerProps) => {
     const { children, direction, isOffset } = props;
+    const [triggerHeight, setTriggerHeight] = useState<number>(0);
 
     return (
         <DrawerContext.Provider
             value={{
                 direction,
                 isOffset,
+                triggerHeight,
+                setTriggerHeight,
             }}
         >
             <Dialog.Root className="c-drawer" {...props}>
@@ -72,7 +81,9 @@ export interface DrawerTriggerProps
 export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, DrawerTriggerProps>(
     (props, forwardedRef) => {
         const { children, className, isPinned, isCloseButton, ...rest } = props;
-        const { direction, isOffset } = useDrawerContext();
+        const { direction, isOffset, setTriggerHeight } = useDrawerContext();
+        const triggerRef = useRef<HTMLButtonElement | null>(null);
+
         const directionModifier = useModifier('c-drawer__trigger', isPinned && direction);
         const offsetModifier = useModifier(
             'c-drawer__trigger',
@@ -87,12 +98,20 @@ export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, Drawe
             className
         );
 
+        useEffect(() => {
+            const trigger = triggerRef.current;
+
+            if (isPinned && trigger) {
+                setTriggerHeight(trigger.offsetHeight);
+            }
+        }, [isPinned, setTriggerHeight]);
+
         if (isCloseButton) {
             return (
                 <Dialog.Close
                     className={`${classes} c-drawer__trigger--close`}
                     {...rest}
-                    ref={forwardedRef}
+                    ref={mergeRefs(triggerRef, forwardedRef)}
                 >
                     {children}
                 </Dialog.Close>
@@ -100,7 +119,7 @@ export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, Drawe
         }
 
         return (
-            <Dialog.Trigger className={classes} {...rest} ref={forwardedRef}>
+            <Dialog.Trigger className={classes} {...rest} ref={mergeRefs(triggerRef, forwardedRef)}>
                 {children}
             </Dialog.Trigger>
         );
@@ -147,7 +166,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
         isFull = false,
         ...rest
     } = props;
-    const { direction, isOffset } = useDrawerContext();
+    const { direction, isOffset, triggerHeight } = useDrawerContext();
     const directionModifier = useModifier('c-drawer__content', direction);
     const offsetModifier = useModifier('c-drawer__content', isOffset ? 'offset' : '');
     const widthModifier = useModifier('c-drawer__content', size);
@@ -165,7 +184,14 @@ export const DrawerContent = (props: DrawerContentProps) => {
         <Dialog.Portal container={container}>
             {showOverlay ? <Dialog.Overlay className="c-drawer__overlay" /> : null}
 
-            <Dialog.Content className={classes} {...rest}>
+            <Dialog.Content
+                className={classes}
+                {...rest}
+                style={{
+                    ...rest.style,
+                    ['--drawer-trigger-height' as string]: `${triggerHeight}px`,
+                }}
+            >
                 <div className="c-drawer__content-inner">{children}</div>
             </Dialog.Content>
         </Dialog.Portal>
