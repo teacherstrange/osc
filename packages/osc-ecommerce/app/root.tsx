@@ -27,11 +27,13 @@ import { DynamicLinks } from 'remix-utils';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 import { SiteFooter } from './components/Footer/Footer';
 import { SiteHeader } from './components/Header/Header';
+import { PATHS } from './constants';
 import { getSettingsData } from './models/sanity.server';
 import { NAV_QUERY } from './queries/sanity/navigation';
 import { SETTINGS_QUERY } from './queries/sanity/settings';
 import type { SanityNavSettings, SanitySocial } from './types/sanity';
 import { getColorScheme } from './utils/colorScheme';
+import { getPageType } from './utils/getPageType';
 
 let isMount = true;
 export const links: LinksFunction = () => {
@@ -273,7 +275,13 @@ export default function App() {
             <div className="o-page">
                 <SiteHeader navSettings={navSettings} actionNav={siteSettings?.actionNav} />
 
-                <main id="main-content" tabIndex={-1}>
+                <main
+                    id="main-content"
+                    className={
+                        getPageType(location) === PATHS.PRODUCTS ? 'u-bg-color-neutral-100' : ''
+                    }
+                    tabIndex={-1}
+                >
                     <Outlet />
                 </main>
 
