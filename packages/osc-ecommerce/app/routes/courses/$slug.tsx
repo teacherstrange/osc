@@ -109,12 +109,24 @@ export default function Index() {
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
      */
     return (
-        <>
+        <div className="u-bg-color-neutral-100 u-pt-l">
             {isPreview && query ? (
                 <Preview data={data} setData={setData} query={query} queryParams={params} />
             ) : null}
 
-            <h1>{product.title}</h1>
+            <div className="o-container">
+                <h1 className="t-font-secondary t-font-6xl">{product.title}</h1>
+            </div>
+
+            <div className="o-container o-grid u-mb-6xl">
+                {data?.upperContent && data?.upperContent.length > 0 ? (
+                    <div className="o-grid__col o-grid__col--12 o-grid__col--7@tab">
+                        {data?.upperContent.map((module: module) =>
+                            module ? <Module key={module?._key} module={module} isFlush /> : null
+                        )}
+                    </div>
+                ) : null}
+            </div>
 
             {data?.modules && data?.modules.length > 0 ? (
                 <>
@@ -123,6 +135,6 @@ export default function Index() {
                     )}
                 </>
             ) : null}
-        </>
+        </div>
     );
 }
