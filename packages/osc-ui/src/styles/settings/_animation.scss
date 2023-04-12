@@ -248,5 +248,69 @@ $animations: (
             opacity: 1,
             visibility: visible
         )
+    ),
+    "drawer-side-in-top": (
+        0%: (
+            transform: translate(-50%, -100%)
+        ),
+        100%: (
+            transform: translate(-50%, 0)
+        )
+    ),
+    "drawer-side-out-top": (
+        0%: (
+            transform: translate(-50%, 0)
+        ),
+        100%: (
+            transform: translate(-50%, -100%)
+        )
+    ),
+    "drawer-side-in-right": (
+        0%: (
+            transform: translateX(100%)
+        ),
+        100%: (
+            transform: translateX(0)
+        )
+    ),
+    "drawer-side-out-right": (
+        0%: (
+            transform: translateX(0)
+        ),
+        100%: (
+            transform: translateX(100%)
+        )
+    ),
+    "drawer-side-in-bottom": (
+        0%: (
+            transform: translate(-50%, 100%)
+        ),
+        100%: (
+            transform: translate(-50%, 0)
+        )
+    ),
+    "drawer-side-out-bottom": (
+        0%: (
+            transform: translate(-50%, 0)
+        ),
+        100%: (
+            transform: translate(-50%, 100%)
+        )
+    ),
+    "drawer-side-in-left": (
+        0%: (
+            transform: translateX(-100%)
+        ),
+        100%: (
+            transform: translateX(0)
+        )
+    ),
+    "drawer-side-out-left": (
+        0%: (
+            transform: translateX(0)
+        ),
+        100%: (
+            transform: translateX(-100%)
+        )
     )
 );

@@ -1,7 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
+import { mergeRefs } from '@react-aria/utils';
 import { mediaQueries as breakpoints } from 'osc-design-tokens';
-import type { HTMLAttributes, ReactNode, RefObject } from 'react';
-import React, { Children, useEffect, useRef, useState } from 'react';
+import type { ElementRef, HTMLAttributes, ReactNode, RefObject } from 'react';
+import React, { Children, forwardRef, useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { classNames } from '../../utils/classNames';
 import { rem } from '../../utils/rem';
@@ -24,7 +25,7 @@ export interface SharedNavProps {
  * -----------------------------------------------------------------------------------------------*/
 export interface HeaderProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {}
 
-export const Header = (props: HeaderProps) => {
+export const Header = forwardRef<ElementRef<'header'>, HeaderProps>((props, forwardedRef) => {
     const { className, children, ...attr } = props;
     const ref = useRef<HTMLDivElement>(null);
     const headerHeight = useHeight(ref);
@@ -34,7 +35,7 @@ export const Header = (props: HeaderProps) => {
         <header
             className={classes}
             {...attr}
-            ref={ref}
+            ref={mergeRefs(ref, forwardedRef)}
             style={{
                 ...attr.style,
                 // Set the header height as state so we can use it to help position things such as the nav
@@ -44,7 +45,8 @@ export const Header = (props: HeaderProps) => {
             {children}
         </header>
     );
-};
+});
+Header.displayName = 'Header';
 
 /* -------------------------------------------------------------------------------------------------
  * Header nav

@@ -5,4 +5,8 @@
 
     width: var(--icon-size);
     height: var(--icon-size);
+
+    &--lg {
+        --icon-size: 1.25em;
+    }
 }

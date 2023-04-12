@@ -1,0 +1,321 @@
+@import "../../styles/tools";
+@import "../../styles/settings";
+
+@layer components {
+    $drawer-directions: (top, right, bottom, left);
+    $drawer-trigger-height: var(--drawer-trigger-height); // Value is generated on the component
+    $drawer-width-m: 610px;
+    $drawer-width-s: 370px;
+    $drawer-max-height: 750px;
+    $drawer-max-height-m: 500px;
+    $drawer-offset: 120px;
+    $drawer-transition-timing: $timing-s;
+    $drawer-transition-ease: $ease-out-sine;
+
+    .c-drawer {
+        $self: &;
+
+        /*
+         * Custom container for the drawer
+         *
+         * [1] Setting will-change to transform will allow the fixed position
+         * of the child elements to become relative to this element.
+         * @see: https://developer.mozilla.org/en-US/docs/Web/CSS/position#values
+         */
+        &__container {
+            position: relative;
+            will-change: transform; /* [1] */
+        }
+
+        &__content-inner {
+            overflow-y: auto;
+            padding: $space-l;
+
+            // Only set the max height when the is-full class is applied
+            #{$self}__content:not(.is-full) & {
+                max-height: $drawer-max-height;
+
+                @include mq($mq-tab, max, height) {
+                    max-height: 100vh;
+                }
+            }
+
+            @include mq($mq-tab) {
+                padding: $space-2xl;
+            }
+        }
+
+        &__content {
+            $self: &;
+
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-tertiary);
+            box-shadow: $shadow-m;
+            will-change: transform;
+
+            @include z-index(modal);
+
+            @include mq($mq-tab, max, height) {
+                height: 100%;
+            }
+
+            // *----------------------------------*/
+            //  Direction modifiers
+            // *----------------------------------*/
+            @each $dir in $drawer-directions {
+                &--#{$dir} {
+                    #{$dir}: 0;
+
+                    // Prevent bottom animating all the way to the top of the screen
+                    @if $dir != bottom {
+                        top: 0;
+                    }
+
+                    // Move bottom/top variants to the middle, we will transform this back by 50% in the animation
+                    @if $dir == bottom or $dir == top {
+                        left: 50%;
+                    }
+
+                    &#{$self}--offset {
+                        @if $dir == right or $dir == left {
+                            top: $drawer-offset;
+                            width: calc(100% - #{$drawer-trigger-height});
+
+                            // WHEN the viewport is the combined size of the offset and the max-height
+                            // then reset the offset value
+                            @include mq(
+                                strip-unit($drawer-max-height) + strip-unit($drawer-offset),
+                                max,
+                                height
+                            ) {
+                                top: 0;
+                            }
+                        }
+                    }
+
+                    &[data-state="open"] {
+                        visibility: visible;
+
+                        @include animate(
+                            drawer-side-in-#{$dir},
+                            $drawer-transition-timing,
+                            $drawer-transition-ease
+                        );
+                    }
+
+                    &[data-state="closed"] {
+                        // delay transitioning the visibility so the animation can run first
+                        transition: visibility;
+                        transition-delay: $drawer-transition-timing;
+                        visibility: hidden;
+
+                        @include animate(
+                            drawer-side-out-#{$dir},
+                            $drawer-transition-timing,
+                            $drawer-transition-ease
+                        );
+                    }
+                }
+            }
+
+            // *----------------------------------*/
+            //  Sizes
+            // *----------------------------------*/
+            &--sm {
+                width: 100%;
+                padding: $space-s $space-m;
+
+                @include mq($mq-tab) {
+                    max-width: $drawer-width-s;
+                }
+            }
+
+            &--md {
+                width: 100%;
+
+                @include mq(strip-unit($drawer-max-height), max, height) {
+                    max-height: $drawer-max-height-m;
+                }
+
+                @include mq($mq-tab) {
+                    max-width: $drawer-width-m;
+                }
+            }
+
+            &.is-full {
+                top: 0; // Make sure we always fill the space
+                bottom: 0;
+                max-height: 100%;
+            }
+        }
+
+        /*
+         * Rotate the trigger and flip the inner text
+         *
+         * [1] position the trigger off the viewport
+         * [2] rotate the trigger by 90deg
+         * [3] set the transform origin to the top left corner to bring it back into the viewport
+         * [4] flip the inner element back 180deg so the content is the right way around
+         *
+         */
+        &__trigger {
+            $self: &;
+
+            &.is-pinned {
+                position: fixed; /* [1] */
+
+                @include z-index(modal-trigger);
+
+                &:not(:focus):not(:focus-visible) {
+                    box-shadow: $shadow-m;
+                }
+            }
+
+            // *----------------------------------*/
+            //  Direction modifiers
+            // *----------------------------------*/
+            @each $dir in $drawer-directions {
+                &--#{$dir} {
+                    transition: transform $drawer-transition-timing $drawer-transition-ease;
+
+                    @if $dir == top or $dir == bottom {
+                        #{$dir}: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+
+                        &:hover,
+                        &:active {
+                            // Prevent the inner element from rotating on hover/active states
+                            /* stylelint-disable-next-line selector-class-pattern */
+                            > .c-btn__inner {
+                                transform: translate(0);
+                            }
+                        }
+                    }
+
+                    @if $dir == top {
+                        &#{$self}--close {
+                            top: 100%;
+                        }
+                    }
+
+                    @if $dir == bottom {
+                        &#{$self}--close {
+                            bottom: 100%;
+                        }
+                    }
+
+                    @if $dir == right {
+                        left: 100%; /* [1] */
+
+                        &#{$self}--close {
+                            top: 0;
+                            left: 0;
+                        }
+                    }
+
+                    @if $dir == left {
+                        right: 100%; /* [1] */
+
+                        &#{$self}--close {
+                            top: 0;
+                            right: 0;
+                        }
+                    }
+
+                    @if $dir == right or $dir == left {
+                        top: $drawer-offset;
+                        transform: if($dir == right, rotate(90deg), rotate(270deg)); /* [2] */
+                        transform-origin: if($dir == right, top left, top right); /* [3] */
+
+                        &#{$self}--offset {
+                            top: $drawer-offset;
+
+                            // WHEN the viewport is the combined size of the offset and the max-height
+                            // then reset the offset value
+                            @include mq(
+                                strip-unit($drawer-max-height) + strip-unit($drawer-offset),
+                                max,
+                                height
+                            ) {
+                                top: 0;
+                            }
+                        }
+
+                        /* stylelint-disable-next-line selector-class-pattern, plugin/selector-bem-pattern */
+                        > .c-btn__inner {
+                            transform: rotate(180deg); /* [4] */
+                        }
+
+                        &:hover,
+                        &:active {
+                            // Prevent the inner element from rotating on hover/active states
+                            /* stylelint-disable-next-line selector-class-pattern */
+                            > .c-btn__inner {
+                                transform: rotate(180deg);
+                            }
+                        }
+                    }
+
+                    &[data-state="open"] {
+                        pointer-events: none;
+
+                        @include animate(fade-out, 0s, $drawer-transition-ease);
+                    }
+
+                    &[data-state="closed"] {
+                        @include animate(
+                            fade-in,
+                            0s,
+                            $drawer-transition-ease,
+                            $drawer-transition-timing
+                        );
+                    }
+                }
+            }
+        }
+
+        &__close {
+            align-self: end;
+            color: var(--color-neutral-500);
+            transition: color $timing-s $ease-in-out;
+            cursor: pointer;
+
+            &:hover,
+            &:active {
+                color: var(--color-neutral-600);
+            }
+        }
+
+        &__overlay {
+            position: fixed;
+            background-color: var(--color-secondary);
+            inset: 0;
+
+            @include z-index(modal);
+
+            &[data-state="open"] {
+                @include animate(
+                    overlay-fade-in,
+                    $drawer-transition-timing,
+                    $drawer-transition-ease
+                );
+            }
+
+            &[data-state="closed"] {
+                @include animate(
+                    overlay-fade-out,
+                    $drawer-transition-timing,
+                    $drawer-transition-ease
+                );
+
+                // delay transitioning the visibility so the animation can run first
+                transition: visibility;
+                transition-delay: $drawer-transition-timing;
+                visibility: hidden;
+            }
+        }
+    }
+}
