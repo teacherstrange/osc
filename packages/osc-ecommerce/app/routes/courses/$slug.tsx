@@ -115,7 +115,7 @@ export default function Index() {
             ) : null}
 
             <div className="o-container o-grid u-mb-l">
-                <div className="o-grid__col o-grid__col--12 o-grid__col--8@tab">
+                <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--8@desk-med">
                     <h1 className="t-font-secondary t-font-6xl u-b-bottom u-w-fit">
                         {product.title}
                     </h1>
@@ -136,7 +136,7 @@ export default function Index() {
 
             <div className="o-container o-grid u-mb-6xl">
                 {data?.upperContent && data?.upperContent.length > 0 ? (
-                    <div className="o-grid__col o-grid__col--12 o-grid__col--7@tab">
+                    <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--8@desk-med o-grid__col--7@desk-lrg">
                         {data?.upperContent.map((module: module) =>
                             module ? <Module key={module?._key} module={module} isFlush /> : null
                         )}
