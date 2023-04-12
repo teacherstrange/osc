@@ -13,7 +13,7 @@ export { Avatar } from './components/Avatar/Avatar';
 export { Badge } from './components/Badge/Badge';
 export { Breadcrumb } from './components/Breadcrumb/Breadcrumb';
 export { Burger } from './components/Burger/Burger';
-export { Button, CopyButton } from './components/Button/Button';
+export { Button, ButtonGroup, CopyButton } from './components/Button/Button';
 export {
     BlogCard,
     Card,
