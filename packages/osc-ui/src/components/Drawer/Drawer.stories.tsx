@@ -222,7 +222,7 @@ const CustomContainerTemplate: Story<DrawerProps> = (args) => {
                 // Set height based on the header
                 // ! DEMO only, there's probably a better way to do this, for example using the implicit height of the content
             */}
-            <DrawerContainer style={{ minHeight: `calc(100vh - ${headerHeight}px)` }}>
+            <DrawerContainer style={{ minHeight: `calc(100dvh - ${headerHeight}px)` }}>
                 <div className="o-container">
                     <Drawer {...args}>
                         <DrawerTrigger asChild>
