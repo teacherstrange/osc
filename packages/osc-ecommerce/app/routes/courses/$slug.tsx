@@ -109,13 +109,29 @@ export default function Index() {
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
      */
     return (
-        <div className="u-bg-color-neutral-100 u-pt-l">
+        <div className="u-pt-l">
             {isPreview && query ? (
                 <Preview data={data} setData={setData} query={query} queryParams={params} />
             ) : null}
 
-            <div className="o-container">
-                <h1 className="t-font-secondary t-font-6xl">{product.title}</h1>
+            <div className="o-container o-grid u-mb-l">
+                <div className="o-grid__col o-grid__col--12 o-grid__col--8@tab">
+                    <h1 className="t-font-secondary t-font-6xl u-b-bottom u-w-fit">
+                        {product.title}
+                    </h1>
+
+                    {product.variants.nodes && product.variants.nodes.length > 0
+                        ? product.variants.nodes.map(
+                              (variant: ProductVariant, index, { length }) => (
+                                  <span className="t-font-m" key={variant.id}>
+                                      {variant.sku}
+                                      {/* IF index isn't equal to the length of the array then add a / */}
+                                      {length !== index + 1 && ' / '}
+                                  </span>
+                              )
+                          )
+                        : null}
+                </div>
             </div>
 
             <div className="o-container o-grid u-mb-6xl">
