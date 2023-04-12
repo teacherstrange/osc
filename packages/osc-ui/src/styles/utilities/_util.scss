@@ -93,6 +93,12 @@ $osc-config: (
             scales-map()
         )
     ),
+    border-bottom: (
+        prefix: "b",
+        values: (
+            "bottom": solid 3px currentColor
+        )
+    ),
     border-radius: (
         prefix: "br",
         values: (
@@ -160,6 +166,12 @@ $osc-config: (
             start,
             center,
             end
+        )
+    ),
+    width: (
+        prefix: "w",
+        values: (
+            "fit": fit-content
         )
     )
 );
