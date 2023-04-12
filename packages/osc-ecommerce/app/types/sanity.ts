@@ -338,6 +338,10 @@ export interface SanityPage {
     };
 }
 
+export interface SanityProduct extends SanityPage {
+    upperContent?: module[] | contentModule[];
+}
+
 export interface shopifyProduct {
     id?: string | number;
     title?: string;

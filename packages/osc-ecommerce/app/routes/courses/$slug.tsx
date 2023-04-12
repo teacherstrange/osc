@@ -14,13 +14,13 @@ import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
 import { PRODUCT_QUERY as SHOPIFY_PRODUCT_QUERY } from '~/queries/shopify/product';
-import type { SanityPage, module } from '~/types/sanity';
+import type { SanityProduct, module } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 
 interface PageData {
-    page: SanityPage;
+    page: SanityProduct;
     isPreview: boolean;
 }
 
@@ -100,7 +100,7 @@ export default function Index() {
     const params = useParams();
 
     // If `preview` mode is active, its component updates this state for us
-    const [data, setData] = useState<SanityPage>(page);
+    const [data, setData] = useState<SanityProduct>(page);
 
     // Make sure to update the page state if the IDs are different!
     if (page?._id !== data?._id) setData(page);
