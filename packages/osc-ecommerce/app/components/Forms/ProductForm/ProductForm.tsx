@@ -4,8 +4,9 @@ import type {
     Product as ProductType,
     ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
-import { Button, ButtonGroup, Icon, RadioGroup, RadioItem } from 'osc-ui';
+import { Button, ButtonGroup, RadioGroup, RadioItem } from 'osc-ui';
 import { Fragment, useMemo } from 'react';
+import { SaveForLaterButton } from './SaveForLaterButton';
 
 interface ProductFormProps {
     product: ProductType & { selectedVariant?: ProductVariant };
@@ -97,9 +98,7 @@ export const ProductForm = (props: ProductFormProps) => {
             </RadioGroup>
 
             <div className="o-flex o-flex--between o-flex--v-center">
-                <Button variant="tertiary">
-                    Save for later <Icon id="heart" />
-                </Button>
+                <SaveForLaterButton />
 
                 <div className="o-flex o-flex--stacked">
                     <Money
