@@ -1,14 +1,15 @@
 import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData, useParams, useSearchParams } from '@remix-run/react';
+import { useLoaderData, useParams, useSearchParams, useTransition } from '@remix-run/react';
 import { Money } from '@shopify/hydrogen';
 import type {
     Product as ProductType,
     ProductVariant,
+    SelectedOptionInput,
 } from '@shopify/hydrogen/storefront-api-types';
 import type { LinksFunction, LoaderArgs } from '@shopify/remix-oxygen';
 import { Button, ButtonGroup, Icon, RadioGroup, RadioItem } from 'osc-ui';
-import { useMemo, useState, useTransition } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 // import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
@@ -34,6 +35,9 @@ export const links: LinksFunction = () => {
     ];
 };
 
+// TODO: Hook up SEO settings
+// TODO: Hook up Shopify analytics
+
 interface PageData {
     page: SanityProduct;
     isPreview: boolean;
@@ -45,11 +49,19 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
 
     invariant(slug, 'Missing slug param');
 
+    const searchParams = new URL(request.url).searchParams;
+
+    const selectedOptions: SelectedOptionInput[] = [];
+    searchParams.forEach((value, name) => {
+        selectedOptions.push({ name, value });
+    });
+
     const { product } = await storefront.query<{
         product: ProductType & { selectedVariant?: ProductVariant };
     }>(SHOPIFY_PRODUCT_QUERY, {
         variables: {
             handle: slug,
+            selectedOptions,
             country: storefront.i18n?.country,
             language: storefront.i18n?.language,
         },
@@ -163,6 +175,7 @@ export default function Index() {
                         )}
                     </div>
                 ) : null}
+
                 <div className="o-grid__col o-grid__col--start-8 o-grid__col--5">
                     <ProductForm />
                 </div>
@@ -179,6 +192,7 @@ export default function Index() {
     );
 }
 
+// TODO: Move this into it's own file probably?
 export const ProductForm = () => {
     const { product } = useLoaderData<typeof loader>();
 
@@ -204,7 +218,6 @@ export const ProductForm = () => {
      * options first.
      * By default, the first variant's options are used.
      */
-    // TODO: Hook this up
     const searchParamsWithDefaults = useMemo<URLSearchParams>(() => {
         const clonedParams = new URLSearchParams(searchParams);
 
@@ -229,42 +242,32 @@ export const ProductForm = () => {
         selectedVariant?.compareAtPrice?.amount &&
         selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
 
-    const courseOptions =
-        product.options &&
-        product.options.length > 0 &&
-        product.options.filter((option) => option.name === 'Format')[0];
-
-    const studyOptions =
-        product.options &&
-        product.options.length > 0 &&
-        product.options.filter((option) => option.name === 'Study-method')[0];
-
     return (
         <div className="c-product-form">
-            <h2 className="t-font-l u-text-bold">Course Options</h2>
-            <p>Please choose a course option to see prices</p>
-            {courseOptions ? (
-                <RadioGroup
-                    description={{ id: 'course-options', value: 'Course Options' }}
-                    name="course-options"
-                >
-                    {courseOptions.values.map((value, index) => (
-                        <RadioItem key={index} id={value} name={value} value={value} />
-                    ))}
-                </RadioGroup>
-            ) : null}
-
-            <h2 className="t-font-l u-text-bold">Study Options</h2>
-            {studyOptions ? (
-                <RadioGroup
-                    description={{ id: 'course-options', value: 'Course Options' }}
-                    name="course-options"
-                >
-                    {studyOptions.values.map((value, index) => (
-                        <RadioItem key={index} id={value} name={value} value={value} />
-                    ))}
-                </RadioGroup>
-            ) : null}
+            {product.options && product.options.length > 0
+                ? product.options.map((option, index) => (
+                      <Fragment key={`option-${index}-${option.name}`}>
+                          {/* // TODO: When user changes radio button then the url needs to update the urls params E.g. ?Study-method=Study%20Pack&Format=Course%20Material%20%2B%20Exams */}
+                          <RadioGroup
+                              // TODO: Could we update the data in Shopify so the name values reflect the name on the FE?
+                              // TODO: Can we change the order in the CMS?
+                              description={{ id: `option-${option.name}`, value: option.name }}
+                              name={`option-${option.name}`}
+                              defaultValue={searchParamsWithDefaults.get(option.name)!}
+                              className="c-product-form__radio-group"
+                          >
+                              {option.values.map((value) => (
+                                  <RadioItem
+                                      key={`option-${option.name}-${value}`}
+                                      id={`option-${option.name}-${value}`}
+                                      name={value}
+                                      value={value}
+                                  />
+                              ))}
+                          </RadioGroup>
+                      </Fragment>
+                  ))
+                : null}
 
             <div className="o-flex o-flex--between">
                 <Button variant="tertiary">
@@ -279,6 +282,7 @@ export const ProductForm = () => {
                         className="o-price u-color-primary t-font-l u-text-bold"
                     />
                     {isOnSale ? (
+                        // TODO: Need to test this and see what changes in styles we can make
                         <Money
                             withoutTrailingZeros
                             data={selectedVariant?.compareAtPrice!}

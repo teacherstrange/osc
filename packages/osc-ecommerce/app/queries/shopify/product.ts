@@ -40,7 +40,7 @@ export const PRODUCT_QUERY = `#graphql
     $country: CountryCode
     $language: LanguageCode
     $handle: String!
-    # $selectedOptions: [SelectedOptionInput!]!
+    $selectedOptions: [SelectedOptionInput!]!
   ) @inContext(country: $country, language: $language) {
     product(handle: $handle) {
         id
@@ -51,9 +51,9 @@ export const PRODUCT_QUERY = `#graphql
             name
             values
         }
-        # selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions) {
-        #     ...ProductVariantFragment
-        # }
+        selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions) {
+            ...ProductVariantFragment
+        }
         variants(first: 10) {
             nodes {
                 ...ProductVariantFragment
