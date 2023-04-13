@@ -17,7 +17,9 @@
 // <div class="u-mt-xl"></div>
 
 @function scales-map($scale: "fixed") {
-    $map: ();
+    $map: (
+        "0": 0
+    );
 
     @each $step in scale-token("steps") {
         @if ($scale == "relative") {
