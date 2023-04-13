@@ -86,7 +86,17 @@ export const ProductForm = (props: ProductFormProps) => {
                   ))
                 : null}
 
-            <div className="o-flex o-flex--between">
+            {/* // TODO: This needs to come from Shopify once we have the setup */}
+            <RadioGroup
+                description={{ id: 'payment-options', value: 'Payment Options' }}
+                name="payment-options"
+                defaultValue="Pay upfront"
+                className="c-product-form__radio-group"
+            >
+                <RadioItem id="payment-option-pay-upfront" name="Pay upfront" value="Pay upfront" />
+            </RadioGroup>
+
+            <div className="o-flex o-flex--between o-flex--v-center">
                 <Button variant="tertiary">
                     Save for later <Icon id="heart" />
                 </Button>
