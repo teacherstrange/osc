@@ -31,9 +31,6 @@ Make a copy of the `.env.sample` in each workspace, rename it to `.env` and upda
     # Misc
     SESSION_SECRET=""
     LOAD_PATH="app/styles"
-    PATH_TO_MAIN_SCSS="/app/styles/main.scss"
-    PATH_TO_DEST_MAIN_CSS="/app/styles/dest"
-    PATH_TO_COMPONENTS="/app/components"
 
     # GTM
     GA_TRACKING_ID=""
