@@ -1,12 +1,11 @@
 import { useSearchParams, useTransition } from '@remix-run/react';
-import { Money } from '@shopify/hydrogen';
 import type {
     Product as ProductType,
     ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
 import { Button, ButtonGroup, RadioGroup, RadioItem } from 'osc-ui';
 import { Fragment, useMemo } from 'react';
-import { SaveForLaterButton } from './SaveForLaterButton';
+import { Price } from '~/components/Price/Price';
 
 interface ProductFormProps {
     product: ProductType & { selectedVariant?: ProductVariant };
@@ -55,11 +54,6 @@ export const ProductForm = (props: ProductFormProps) => {
     const selectedVariant = product.selectedVariant ?? firstVariant;
     const isOutOfStock = !selectedVariant?.availableForSale;
 
-    const isOnSale =
-        selectedVariant?.price?.amount &&
-        selectedVariant?.compareAtPrice?.amount &&
-        selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
-
     return (
         <div className="c-product-form">
             {product.options && product.options.length > 0
@@ -97,27 +91,11 @@ export const ProductForm = (props: ProductFormProps) => {
                 <RadioItem id="payment-option-pay-upfront" name="Pay upfront" value="Pay upfront" />
             </RadioGroup>
 
-            <div className="o-flex o-flex--between o-flex--wrap o-flex--v-center">
-                <SaveForLaterButton />
+            <div className="o-flex o-flex--end o-flex--wrap o-flex--v-center">
+                {/* // TODO: add this back in once Wishlist is ready  */}
+                {/* <SaveForLaterButton /> */}
 
-                <div className="o-flex o-flex--stacked o-flex--v-bottom">
-                    {/* // TODO: Should be a component as it's reused */}
-                    <Money
-                        withoutTrailingZeros
-                        data={selectedVariant?.price!}
-                        as="span"
-                        className="t-font-xl u-text-bold u-color-primary u-mb-0"
-                    />
-                    {isOnSale ? (
-                        // TODO: Need to test this and see what changes in styles we can make
-                        <Money
-                            withoutTrailingZeros
-                            data={selectedVariant?.compareAtPrice!}
-                            as="span"
-                        />
-                    ) : null}
-                    <span>Course code: {selectedVariant.sku}</span>
-                </div>
+                <Price selectedVariant={selectedVariant} />
             </div>
 
             <ButtonGroup direction="column">
