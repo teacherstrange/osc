@@ -20,6 +20,62 @@
 // <h1 class="t-font-xl"></h1>
 */
 
+@font-face {
+    font-family: Outfit;
+    font-style: normal;
+    font-weight: 100 900;
+    src: url("./fonts/Outfit-VariableFont_wght.woff2") format("woff2-variations");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "F37 Judge";
+    font-style: normal;
+    font-weight: normal;
+
+    // prettier-ignore
+    src:
+        url("./fonts/F37Judge-RegularCompressed.woff2") format("woff2"),
+        url("./fonts/F37Judge-RegularCompressed.woff") format("woff");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "F37 Judge";
+    font-style: normal;
+    font-weight: bold;
+
+    // prettier-ignore
+    src:
+        url("./fonts/F37Judge-BoldCompressed.woff2") format("woff2"),
+        url("./fonts/F37Judge-BoldCompressed.woff") format("woff");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "F37 Judge";
+    font-style: normal;
+    font-weight: normal;
+
+    // prettier-ignore
+    src:
+        url("./fonts/F37Judge-RegularCompressed.woff2") format("woff2"),
+        url("./fonts/F37Judge-RegularCompressed.woff") format("woff");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "F37 Judge";
+    font-style: normal;
+    font-weight: bold;
+
+    // prettier-ignore
+    src:
+        url("./fonts/F37Judge-BoldCompressed.woff2") format("woff2"),
+        url("./fonts/F37Judge-BoldCompressed.woff") format("woff");
+    font-display: swap;
+}
+
 $font-sizes: (
     (
         elements: (
