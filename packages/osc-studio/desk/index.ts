@@ -32,6 +32,7 @@ import { team } from './team';
 const DOCUMENT_TYPES_IN_STRUCTURE = [
     'awardingBody',
     'collection',
+    'faqs',
     'home',
     'media.tag',
     'page',
@@ -46,7 +47,7 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
 ];
 
 // Items that we don't want to enable the preview/seo pane
-const NO_PREVIEW = ['awardingBody', 'redirect', 'navigation', 'team'];
+const NO_PREVIEW = ['awardingBody', 'redirect', 'navigation', 'faqs', 'team'];
 
 /**
  * Here we declare which view panes show up for which schema types
@@ -102,6 +103,7 @@ export const structure: StructureResolver = (S, context) => {
             S.divider(),
             team(S),
             awardingBody(S),
+            faqs(S),
             S.divider(),
             settings(S),
             navigation(S),
