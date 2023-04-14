@@ -97,15 +97,16 @@ export const ProductForm = (props: ProductFormProps) => {
                 <RadioItem id="payment-option-pay-upfront" name="Pay upfront" value="Pay upfront" />
             </RadioGroup>
 
-            <div className="o-flex o-flex--between o-flex--v-center">
+            <div className="o-flex o-flex--between o-flex--wrap o-flex--v-center">
                 <SaveForLaterButton />
 
-                <div className="o-flex o-flex--stacked">
+                <div className="o-flex o-flex--stacked o-flex--v-bottom">
+                    {/* // TODO: Should be a component as it's reused */}
                     <Money
                         withoutTrailingZeros
                         data={selectedVariant?.price!}
                         as="span"
-                        className="o-price u-color-primary t-font-l u-text-bold"
+                        className="t-font-xl u-text-bold u-color-primary u-mb-0"
                     />
                     {isOnSale ? (
                         // TODO: Need to test this and see what changes in styles we can make
