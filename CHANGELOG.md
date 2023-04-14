@@ -1,3 +1,30 @@
+## [0.69.1](https://github.com/Open-Study-College/osc/compare/v0.69.0...v0.69.1) (2023-04-14)
+
+
+### ♻️ Refactors
+
+* **academic hub:** add css maps to gitignore ([740bb97](https://github.com/Open-Study-College/osc/commit/740bb978183003d21a31e1d2e5ec6ec4bcddf051))
+* **academic hub:** move postcss plugins into config file ([a781eca](https://github.com/Open-Study-College/osc/commit/a781eca3c23ac43b045ae89a65091abad51836a3))
+* **academic hub:** replace css scripts with sass and postcss cli ([e04c607](https://github.com/Open-Study-College/osc/commit/e04c607e5b662a25ef4c054edf0a06c1ba6c2e97))
+* **acadmic hub:** remove transpilecss helper scripts ([1c762fc](https://github.com/Open-Study-College/osc/commit/1c762fc127c22ea99b769da688ff08f07f66de4e))
+* **ecommerce:** add css maps to gitignore ([37189a5](https://github.com/Open-Study-College/osc/commit/37189a527321afbd94961c0c3c85d19ecc53f256))
+* **ecommerce:** move postcss plugins into config file ([9d173d5](https://github.com/Open-Study-College/osc/commit/9d173d5fbba1398ec2b00349ed7dd28173082eb3))
+* **ecommerce:** remove transpilecss helper scripts ([afdef6f](https://github.com/Open-Study-College/osc/commit/afdef6fa17b87b92c9e705b8b34f1242c2ed3d14))
+* **ecommerce:** replace css scripts with sass and postcss cli ([30e34d3](https://github.com/Open-Study-College/osc/commit/30e34d3730542b3cc715426f6f3b0272b9da79c2))
+* **ecommerce:** update postcss script to target styles and components directories ([274c629](https://github.com/Open-Study-College/osc/commit/274c629bb74332ffadcab3bb8d2b91854ab00a16))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **academic hub:** remove nodemon dev dependency ([20cd78a](https://github.com/Open-Study-College/osc/commit/20cd78a96e08f20caf2adb62039e46e048320dcb))
+* remove env variables from sample and readme ([1b3169a](https://github.com/Open-Study-College/osc/commit/1b3169af5a0fa0c1d263b0b5a83e23ac2a66c108))
+
+
+### 🐛 Bugs
+
+* **academic hub:** adds empty scss file for postcss command ([0ffac5e](https://github.com/Open-Study-College/osc/commit/0ffac5e725a5d4f67324321c7469fc6ace01aac9))
+* **ecommerce:** adds empty scss file for postcss command ([a9a90cf](https://github.com/Open-Study-College/osc/commit/a9a90cfd16e341fdd28045ea8070c30d0dbd68a6))
+
 ## [0.69.0](https://github.com/Open-Study-College/osc/compare/v0.68.1...v0.69.0) (2023-04-12)
 
 
@@ -97,23 +124,4 @@
 ### 🧪 Tests
 
 * **content media:** adds tests for content media component ([21e7ebd](https://github.com/Open-Study-College/osc/commit/21e7ebdb1c4e2a52a4a2232427df3f5673bbdb5e))
-
-## [0.67.0](https://github.com/Open-Study-College/osc/compare/v0.66.0...v0.67.0) (2023-04-06)
-
-
-### ✨ Features
-
-* **modal:** add an alert modal component ([8ae3c0e](https://github.com/Open-Study-College/osc/commit/8ae3c0ef0ac6335333602a9e6e92c75877ea8e4a))
-
-
-### 🐛 Bugs
-
-* **modal:** add id to input in story ([a2cd985](https://github.com/Open-Study-College/osc/commit/a2cd985edffeb9b5e16b1926da34ada5e371a52d))
-
-
-### ♻️ Refactors
-
-* **modal:** extract modal into more composable parts ([c87a902](https://github.com/Open-Study-College/osc/commit/c87a90225c5ed703c14b181a91ff8189b1707ae7))
-* **modal:** update modal styles ([d5a2bef](https://github.com/Open-Study-College/osc/commit/d5a2bef109e9be456f039169b649b379c77411b8))
-* **modal:** update tests to work with new markup ([e9f9fb5](https://github.com/Open-Study-College/osc/commit/e9f9fb53fafa13c3e8fabf0100f86b2f38aa1789))
 
