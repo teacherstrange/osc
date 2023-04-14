@@ -147,8 +147,8 @@ export default function Index() {
             ) : null}
 
             <div className="o-container o-grid u-mb-l">
-                <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--8@desk-med">
-                    <h1 className="t-font-secondary t-font-6xl u-b-bottom u-w-fit">
+                <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--7@desk-med">
+                    <h1 className="o-product-title t-font-secondary u-b-bottom u-w-fit">
                         {product.title}
                     </h1>
 
@@ -164,17 +164,16 @@ export default function Index() {
                 </div>
             </div>
 
-            <div className="o-container o-container--flush-r o-grid u-mb-6xl">
+            <div className="o-container o-grid u-mb-6xl">
                 {data?.upperContent && data?.upperContent.length > 0 ? (
-                    // TODO: Temporary grid positions -- change these
-                    <div className="o-grid__col o-grid__col--12 o-grid__col--7@tab o-grid__col--7@desk-med o-grid__col--7@desk-lrg">
+                    <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--7@desk-med">
                         {data?.upperContent.map((module: module) =>
                             module ? <Module key={module?._key} module={module} isFlush /> : null
                         )}
                     </div>
                 ) : null}
 
-                <div className="o-grid__col o-grid__col--start-8 o-grid__col--5">
+                <div className="c-product-form__container o-grid__col o-grid__col--12 o-grid__col--start-8@tab o-grid__col--6@tab o-grid__col--start-7@desk o-grid__col--start-8@desk-med">
                     <ProductForm product={product} />
                 </div>
             </div>
