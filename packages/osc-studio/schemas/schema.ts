@@ -10,6 +10,7 @@ import annotationLinkInternal from './annotations/linkInternal';
 // Document types
 import awardingBody from './documents/awardingBody';
 import collection from './documents/collection';
+import faqs from './documents/faqs';
 import navigation from './documents/navigation';
 import page from './documents/page';
 import post from './documents/post';
@@ -85,6 +86,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     // Document types
     awardingBody,
     collection,
+    faqs,
     navigation,
     page,
     post,
