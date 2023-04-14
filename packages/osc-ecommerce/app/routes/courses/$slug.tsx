@@ -15,6 +15,7 @@ import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
 import { PRODUCT_QUERY as SHOPIFY_PRODUCT_QUERY } from '~/queries/shopify/product';
 import type { SanityProduct, module } from '~/types/sanity';
+import { getUniqueObjects } from '~/utils/getUniqueObjects';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
@@ -105,6 +106,13 @@ export default function Index() {
     // Make sure to update the page state if the IDs are different!
     if (page?._id !== data?._id) setData(page);
 
+    // Due how the data is setup in Shopify there are times where we might return the same SKU multiple times
+    // Here we are checking if there are any skus and then filtering out duplicates
+    const uniqueSKUs =
+        product.variants.nodes &&
+        product.variants.nodes.length > 0 &&
+        (getUniqueObjects(product.variants.nodes, 'sku') as typeof product.variants.nodes);
+
     /**
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
      */
@@ -120,16 +128,14 @@ export default function Index() {
                         {product.title}
                     </h1>
 
-                    {product.variants.nodes && product.variants.nodes.length > 0
-                        ? product.variants.nodes.map(
-                              (variant: ProductVariant, index, { length }) => (
-                                  <span className="t-font-m" key={variant.id}>
-                                      {variant.sku}
-                                      {/* IF index isn't equal to the length of the array then add a / */}
-                                      {length !== index + 1 && ' / '}
-                                  </span>
-                              )
-                          )
+                    {uniqueSKUs
+                        ? uniqueSKUs.map((variant: ProductVariant, index, { length }) => (
+                              <span className="t-font-m" key={variant.id}>
+                                  {variant.sku}
+                                  {/* IF index isn't equal to the length of the array then add a / */}
+                                  {length !== index + 1 && ' / '}
+                              </span>
+                          ))
                         : null}
                 </div>
             </div>
