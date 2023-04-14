@@ -1,0 +1,19 @@
+@import "../../../osc-ui/src/styles/settings";
+
+@layer typography {
+    .o-product-title {
+        $product-title-font-size: $fs-5xl;
+        $product-title-font-size-l: $fs-6xl;
+
+        font-size: $product-title-font-size-l;
+        line-height: 1;
+
+        @media screen and (min-width: 768px) {
+            font-size: $product-title-font-size;
+        }
+
+        @media screen and (min-width: 1440px) {
+            font-size: calc($product-title-font-size + 16px);
+        }
+    }
+}
