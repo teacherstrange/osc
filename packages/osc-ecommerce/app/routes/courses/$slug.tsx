@@ -13,12 +13,14 @@ import { useState } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
+import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
 import Module, { getComponentStyles } from '~/components/Module';
 import Preview from '~/components/Preview';
+import priceStyles from '~/components/Price/price.css';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
 import { PRODUCT_QUERY as SHOPIFY_PRODUCT_QUERY } from '~/queries/shopify/product';
-import styles from '~/styles/dest/main.css';
+import productStyles from '~/styles/product.css';
 import type { SanityProduct, module } from '~/types/sanity';
 import { getUniqueObjects } from '~/utils/getUniqueObjects';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
@@ -27,7 +29,9 @@ import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
 
 export const links: LinksFunction = () => {
     return [
-        { rel: 'stylesheet', href: styles },
+        { rel: 'stylesheet', href: productStyles },
+        { rel: 'stylesheet', href: productFormStyles },
+        { rel: 'stylesheet', href: priceStyles },
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: radioStyles },
     ];
