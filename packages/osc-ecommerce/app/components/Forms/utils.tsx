@@ -262,7 +262,7 @@ export const getFormFields = (formFieldGroups: HubspotFormFieldGroups[]) => {
  * @param styles An object containing list of styles from hubspot
  * @returns An array of variants
  */
-const getVariants = ({
+export const getVariants = ({
     styles,
     themeName,
 }: {
