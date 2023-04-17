@@ -45,6 +45,9 @@ inputs:
   SANITY_STUDIO_API_TOKEN:
     required: true
     description: "sanity api token"
+  PREVIEW_SESSION_SECRET:
+    required: true
+    description: "Sanity preview session secret"
   ALGOLIA_APP_ID:
     required: true
     description: "the app id for algolia"
@@ -178,6 +181,7 @@ runs:
           "SANITY_STUDIO_API_DATASET=${{inputs.SANITY_STUDIO_API_DATASET}}"
           "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
           "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
+          "PREVIEW_SESSION_SECRET=${{inputs.PREVIEW_SESSION_SECRET}}"
           "HUBSPOT_ACCESS_TOKEN=${{inputs.HUBSPOT_ACCESS_TOKEN}}"
           "HUBSPOT_PORTAL_ID=${{inputs.HUBSPOT_PORTAL_ID}}"
           "PUBLIC_STOREFRONT_API_TOKEN=${{inputs.PUBLIC_STOREFRONT_API_TOKEN}}"
@@ -208,6 +212,7 @@ runs:
           "SANITY_STUDIO_API_DATASET=${{inputs.SANITY_STUDIO_API_DATASET}}"
           "SANITY_STUDIO_API_PROJECT_ID=${{inputs.SANITY_STUDIO_API_PROJECT_ID}}"
           "SANITY_STUDIO_API_TOKEN=${{inputs.SANITY_STUDIO_API_TOKEN}}"
+          "PREVIEW_SESSION_SECRET=${{inputs.PREVIEW_SESSION_SECRET}}"
           "HUBSPOT_ACCESS_TOKEN=${{inputs.HUBSPOT_ACCESS_TOKEN}}"
           "HUBSPOT_PORTAL_ID=${{inputs.HUBSPOT_PORTAL_ID}}"
           "PUBLIC_STOREFRONT_API_TOKEN=${{inputs.PUBLIC_STOREFRONT_API_TOKEN}}"
