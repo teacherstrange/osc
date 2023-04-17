@@ -8,6 +8,7 @@ import {
     setFormErrorsAndReport,
 } from '~/components/Forms/utils';
 import type { formModule } from '~/types/sanity';
+import type { SanityPage } from '~/types/sanity';
 import { getHubspotFormData, hubspotFormsApiRequest } from '~/utils/server/hubspot.server';
 import { validateAction } from '~/utils/validation';
 
@@ -133,7 +134,13 @@ export const validateAndSubmitHubspotForm = async (
     }
 };
 
-export const getHubspotForms = async (page: any) => {
+/**
+ * Get hubspot forms and reshape
+ *
+ * @param page Sanity Page
+ * @returns An array of hubspot forms for the given page
+ */
+export const getHubspotForms = async (page: SanityPage) => {
     const formModules = page.modules?.filter(
         (module: any) => module._type === 'module.forms'
     ) as formModule[];
