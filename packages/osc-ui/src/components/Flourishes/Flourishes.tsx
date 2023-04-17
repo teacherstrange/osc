@@ -11,15 +11,15 @@ export interface FlourishProps extends ComponentPropsWithoutRef<'span'> {
     /**
      * Width of the flourish as a sixteenth.
      */
-    width: '1/16' | '2/16' | '3/16';
+    width: Widths;
     /**
      * Height of the flourish as a sixteenth.
      */
-    height: '8/16' | '12/16' | '14/16' | '16/16';
+    height: Heights;
     /**
      * Color of the flourish
      */
-    color: Exclude<Themes, 'denary' | 'duodenary'>;
+    color: Colors;
     /**
      * Maximum height of the largest flourish
      * The other sizes are calculated based on this
