@@ -56,7 +56,9 @@ export const DatePicker = (props: DatePickerProps) => {
     let ref = useRef();
     let { buttonProps, calendarProps, dialogProps, fieldProps, groupProps, labelProps } =
         useDatePicker(props, state, ref);
-    const dateFieldId = useUniqueId('dateField:');
+
+    const dateFieldContainerId = useUniqueId('dateFieldContainer:');
+    const dateFieldDescribedById = useUniqueId('dateFieldDescribedById:');
     const dateFieldLabelId = useUniqueId('dateFieldLabel:');
 
     useEffect(() => {
@@ -82,16 +84,17 @@ export const DatePicker = (props: DatePickerProps) => {
                 aria-labelledby={dateFieldLabelId}
                 // Manually setting random ID due to bug on duplicate Ids:
                 // https://github.com/adobe/react-spectrum/issues/3969
-                id={dateFieldId}
+                id={dateFieldContainerId}
                 aria-invalid={errors && errors.length > 0 ? true : false}
+                aria-describedby={dateFieldDescribedById}
             >
                 <DateField
                     {...fieldProps}
-                    dateFieldId={dateFieldId}
+                    dateFieldContainerId={dateFieldContainerId}
                     buttonProps={buttonProps}
                     errors={errors}
                     aria-describedby={
-                        errors && errors.length > 0 ? `${dateFieldId}-error` : undefined
+                        errors && errors.length > 0 ? `${dateFieldContainerId}-error` : undefined
                     }
                     granularity={granularity}
                 />
@@ -110,7 +113,11 @@ export const DatePicker = (props: DatePickerProps) => {
             )}
 
             {uniqueErrors && uniqueErrors.length > 0 ? (
-                <div className="c-date-field__error--text" role="alert" id={`${dateFieldId}-error`}>
+                <div
+                    className="c-date-field__error--text"
+                    role="alert"
+                    id={`${dateFieldContainerId}-error`}
+                >
                     {uniqueErrors.map((error, index) => (
                         <span key={index} className="u-pr-2xs">
                             {error}

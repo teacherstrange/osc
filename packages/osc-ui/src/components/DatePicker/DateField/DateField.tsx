@@ -13,15 +13,17 @@ import { ReactAriaButton } from '../ReactAriaComponents/ReactAriaComponents';
 import { createCalendar } from '../utils';
 interface DateFieldProps extends AriaDateFieldProps<DateValue> {
     buttonProps: AriaButtonProps;
-    dateFieldId: string;
+    dateFieldContainerId: string;
     errors?: string[] | undefined;
 }
 
 export const DateField = (props: DateFieldProps) => {
-    const { dateFieldId, errors } = props;
+    const { dateFieldContainerId, errors } = props;
     let { locale } = useLocale();
 
     const buttonId = useUniqueId('calendarBtn:');
+    const dateFieldId = useUniqueId('dateField:');
+    const buttonLabelledById = useUniqueId('buttonLabelledById:');
 
     let state = useDateFieldState({
         ...props,
@@ -41,7 +43,7 @@ export const DateField = (props: DateFieldProps) => {
                         : `c-date-field__wrapper`
                 }
             >
-                <div {...fieldProps} ref={ref} className="c-date-field">
+                <div {...fieldProps} ref={ref} className="c-date-field" id={dateFieldId}>
                     {state.segments.map((segment, i) => (
                         <DateSegmentComponent key={i} segment={segment} state={state} />
                     ))}
@@ -49,8 +51,9 @@ export const DateField = (props: DateFieldProps) => {
                 <ReactAriaButton
                     {...props.buttonProps}
                     aria-describedby={
-                        errors && errors.length > 0 ? `${dateFieldId}-error` : undefined
+                        errors && errors.length > 0 ? `${dateFieldContainerId}-error` : undefined
                     }
+                    aria-labelledby={buttonLabelledById}
                     id={buttonId}
                 >
                     <Icon id="calendar" />
@@ -71,6 +74,10 @@ interface DateSegmentProps {
 const DateSegmentComponent = (props: DateSegmentProps) => {
     const { segment, state } = props;
 
+    const dateSegmentId = useUniqueId('dateSegment:');
+    const dateSegmentLabelledById = useUniqueId('dateSegmentLabelledById:');
+    const dateSegmentDescribedById = useUniqueId('dateSegmentDescribedById:');
+
     let ref = useRef();
     let { segmentProps } = useDateSegment(segment, state, ref);
 
@@ -81,6 +88,9 @@ const DateSegmentComponent = (props: DateSegmentProps) => {
             className={`c-date-field__segment ${
                 segment.isPlaceholder ? 'c-date-field__placeholder' : ''
             }`}
+            id={dateSegmentId}
+            aria-labelledby={dateSegmentLabelledById}
+            aria-describedby={dateSegmentDescribedById}
         >
             {segment.text}
         </div>
