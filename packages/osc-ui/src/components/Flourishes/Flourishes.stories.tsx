@@ -10,7 +10,31 @@ export default {
     parameters: {
         docs: {
             description: {
-                component: '',
+                component: 'Patterns of the Open Study College graphic elements.',
+            },
+        },
+    },
+    argTypes: {
+        color: {
+            table: {
+                type: {
+                    summary:
+                        'primary | secondary | tertiary | quaternary | quinary | senary | septenary | octonary | nonary',
+                },
+            },
+            options: [
+                'primary',
+                'secondary',
+                'tertiary',
+                'quaternary',
+                'quinary',
+                'senary',
+                'septenary',
+                'octonary',
+                'nonary',
+            ],
+            control: {
+                type: 'select',
             },
         },
     },

@@ -15,6 +15,28 @@ export default {
         },
     },
     argTypes: {
+        color: {
+            table: {
+                type: {
+                    summary:
+                        'primary | secondary | tertiary | quaternary | quinary | senary | septenary | octonary | nonary',
+                },
+            },
+            options: [
+                'primary',
+                'secondary',
+                'tertiary',
+                'quaternary',
+                'quinary',
+                'senary',
+                'septenary',
+                'octonary',
+                'nonary',
+            ],
+            control: {
+                type: 'select',
+            },
+        },
         width: {
             control: {
                 type: 'select',
