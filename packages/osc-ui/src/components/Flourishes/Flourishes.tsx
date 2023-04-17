@@ -58,17 +58,13 @@ export const Flourish = (props: FlourishProps) => {
         <span
             className={classes}
             aria-hidden="true"
+            {...rest}
             style={{
+                ...rest.style,
                 backgroundColor: 'var(--color-primary)',
                 width: calculatedWidth,
                 height: calculatedHeight,
             }}
-            {...rest}
-            // style={{
-            //     transform: `rotate(${flourish.initial.rotate}deg)`,
-            //     top: `${flourish.initial.y}%`,
-            //     left: `${flourish.initial.x}%`,
-            // }}
         />
     );
 };
