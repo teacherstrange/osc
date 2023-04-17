@@ -7,7 +7,6 @@
 
     .c-flourish {
         position: absolute;
-        z-index: -1; //  Make they flourishes are always below the content
         display: block;
         transform-origin: top left;
         transition: transform $flourish-timing $linear;
