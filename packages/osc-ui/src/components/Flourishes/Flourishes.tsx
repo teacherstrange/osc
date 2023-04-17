@@ -1,8 +1,84 @@
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef, MouseEvent, ReactNode } from 'react';
 import React from 'react';
-import type { Themes } from '../../types';
 import { classNames } from '../../utils/classNames';
-import './flourishes.scss';
+import './flourish.scss';
+import type { Colors, Flourish as FlourishObject, Heights, Widths } from './types';
+
+export interface FlourishesProps {
+    /**
+     * The content of the Flourishes
+     */
+    children?: ReactNode;
+    /**
+     * Custom class
+     */
+    className?: string;
+    /**
+     * Color of the flourish
+     */
+    color: Colors;
+    /**
+     * Pattern variant
+     */
+    pattern: FlourishObject[];
+}
+
+export const Flourishes = (props: FlourishesProps) => {
+    const { children, className, color, pattern } = props;
+
+    const classes = classNames('c-flourish__container', className);
+
+    const handleMouseMove = (e: MouseEvent) => {
+        const flourishNodes: NodeListOf<HTMLElement> = document.querySelectorAll('.c-flourish');
+
+        // Store cursor position as variables
+        let curX = e.clientX;
+        let curY = e.clientY;
+
+        flourishNodes.forEach((flourish, i) => {
+            flourish.style.transform = `
+                rotate(${pattern[i].initial.rotate}deg)
+                translate(${curX / -80}px, ${curY / -80}px)
+            `;
+        });
+    };
+
+    const handleMouseLeave = () => {
+        const flourishNodes: NodeListOf<HTMLElement> = document.querySelectorAll('.c-flourish');
+
+        flourishNodes.forEach((flourish, i) => {
+            flourish.style.transform = `rotate(${pattern[i].initial.rotate}deg)`;
+        });
+    };
+
+    return (
+        <>
+            <div
+                className="c-flourish-content"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+            >
+                {children}
+            </div>
+
+            <div className={classes}>
+                {pattern.map((flourish, index) => (
+                    <Flourish
+                        key={index}
+                        width={flourish.size.w}
+                        height={flourish.size.h}
+                        color={color}
+                        style={{
+                            transform: `rotate(${flourish.initial.rotate}deg)`,
+                            top: flourish.initial.y,
+                            left: flourish.initial.x,
+                        }}
+                    />
+                ))}
+            </div>
+        </>
+    );
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Flourish
