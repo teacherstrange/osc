@@ -1,6 +1,7 @@
 import type { CalendarDate } from '@internationalized/date';
 import type { AriaDatePickerProps } from '@react-aria/datepicker';
 import { useDatePicker } from '@react-aria/datepicker';
+import { I18nProvider } from '@react-aria/i18n';
 import { useDatePickerState } from '@react-stately/datepicker';
 import type { DateValue } from '@react-types/calendar';
 import type { Dispatch, SetStateAction } from 'react';
@@ -9,9 +10,9 @@ import type { ZodObject, ZodRawShape } from 'zod';
 import { useUniqueId } from '../../../hooks/useUniqueId';
 import { validateDatepicker } from '../../../utils/clientSideValidation';
 import { CalendarContainer } from '../Calendar/CalendarContainer';
-import '../date-picker.scss';
 import { DateField } from '../DateField/DateField';
 import { ReactAriaDialog, ReactAriaPopover } from '../ReactAriaComponents/ReactAriaComponents';
+import '../date-picker.scss';
 
 export interface DatePickerProps extends AriaDatePickerProps<DateValue> {
     /**
@@ -88,16 +89,20 @@ export const DatePicker = (props: DatePickerProps) => {
                 aria-invalid={errors && errors.length > 0 ? true : false}
                 aria-describedby={dateFieldDescribedById}
             >
-                <DateField
-                    {...fieldProps}
-                    dateFieldContainerId={dateFieldContainerId}
-                    buttonProps={buttonProps}
-                    errors={errors}
-                    aria-describedby={
-                        errors && errors.length > 0 ? `${dateFieldContainerId}-error` : undefined
-                    }
-                    granularity={granularity}
-                />
+                <I18nProvider locale="en-GB">
+                    <DateField
+                        {...fieldProps}
+                        dateFieldContainerId={dateFieldContainerId}
+                        buttonProps={buttonProps}
+                        errors={errors}
+                        aria-describedby={
+                            errors && errors.length > 0
+                                ? `${dateFieldContainerId}-error`
+                                : undefined
+                        }
+                        granularity={granularity}
+                    />
+                </I18nProvider>
             </div>
             {state.isOpen && (
                 <ReactAriaPopover
