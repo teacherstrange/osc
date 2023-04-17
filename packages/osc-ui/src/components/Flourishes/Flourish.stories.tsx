@@ -33,10 +33,34 @@ const Template: Story<FlourishProps> = ({ ...args }) => (
             alignItems: 'flex-end',
         }}
     >
-        <Flourish height="8/16" width={args.width} color={args.color} maxHeight={args.maxHeight} />
-        <Flourish height="12/16" width={args.width} color={args.color} maxHeight={args.maxHeight} />
-        <Flourish height="14/16" width={args.width} color={args.color} maxHeight={args.maxHeight} />
-        <Flourish height="16/16" width={args.width} color={args.color} maxHeight={args.maxHeight} />
+        <Flourish
+            height="4/16"
+            width={args.width}
+            color={args.color}
+            maxHeight={args.maxHeight}
+            style={{ position: 'relative' }}
+        />
+        <Flourish
+            height="8/16"
+            width={args.width}
+            color={args.color}
+            maxHeight={args.maxHeight}
+            style={{ position: 'relative' }}
+        />
+        <Flourish
+            height="12/16"
+            width={args.width}
+            color={args.color}
+            maxHeight={args.maxHeight}
+            style={{ position: 'relative' }}
+        />
+        <Flourish
+            height="16/16"
+            width={args.width}
+            color={args.color}
+            maxHeight={args.maxHeight}
+            style={{ position: 'relative' }}
+        />
     </div>
 );
 
