@@ -1,6 +1,6 @@
-import type { Flourish } from '../types';
+import type { FlourishObject } from '../../../types';
 
-export const secondary: Flourish[] = [
+export const secondary: FlourishObject[] = [
     {
         size: { w: '2/16', h: '8/16' },
         initial: {
