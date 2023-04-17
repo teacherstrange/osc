@@ -6,21 +6,28 @@
     $modal-overlay-opacity: 0.3;
 
     .c-modal {
+        $self: &;
+
+        /*
+         * Custom container for the modal
+         *
+         * [1] Setting will-change to transform will allow the fixed position
+         * of the child elements to become relative to this element.
+         * @see: https://developer.mozilla.org/en-US/docs/Web/CSS/position#values
+         */
+        &__container {
+            position: relative;
+            will-change: transform; /* [1] */
+        }
+
         &__content {
-            position: fixed;
-            top: 50%;
-            left: 50%;
             display: flex;
             flex-direction: column;
             width: 100%;
             max-height: $modal-max-height;
-            padding: $space-m;
             background-color: var(--color-tertiary);
-            border-radius: $rad-xs;
             box-shadow: $shadow-m;
             overflow-y: auto;
-
-            @include z-index(modal);
 
             &[data-state="open"] {
                 @include animate(modal-scale-in, $timing-s, $ease-out-sine);
@@ -30,6 +37,57 @@
                 @include animate(modal-scale-out, $timing-s, $ease-out-sine);
             }
 
+            // *----------------------------------*/
+            //  Variant modifiers
+            // *----------------------------------*/
+            &--primary {
+                padding: $space-2xl;
+                border-radius: $rad-xs;
+
+                #{$self}__ttl {
+                    margin-block-start: $space-2xs;
+                    font-size: $fs-m;
+                }
+
+                #{$self}__close {
+                    top: $space-m;
+                    right: $space-m;
+                    color: var(--color-neutral-500);
+
+                    &:hover,
+                    &:active {
+                        color: var(--color-neutral-600);
+                    }
+                }
+            }
+
+            &--secondary {
+                #{$self}__header {
+                    padding: $space-xs $space-xl;
+                    background-color: var(--color-neutral-200);
+                }
+
+                #{$self}__ttl {
+                    max-width: 38ch;
+                    margin: 0;
+                    font-size: $fs-l;
+                }
+
+                #{$self}__inner {
+                    padding: $space-xl;
+                }
+
+                #{$self}__close {
+                    top: $space-m;
+                    right: $space-l;
+                    color: var(--color-secondary);
+                    font-size: $fs-2xs;
+                }
+            }
+
+            // *----------------------------------*/
+            //  Size modifiers
+            // *----------------------------------*/
             &--sm {
                 max-width: #{calc($container-3xs / 2)}px;
             }
@@ -47,35 +105,82 @@
             }
         }
 
-        &__ttl {
-            margin-block-start: $space-2xs;
-        }
-
         &__close {
-            align-self: end;
-            color: var(--color-neutral-500);
+            position: absolute;
             transition: color $timing-s $ease-in-out;
             cursor: pointer;
-
-            &:hover,
-            &:active {
-                color: var(--color-neutral-600);
-            }
         }
 
         &__overlay {
             position: fixed;
-            background-color: var(--color-secondary);
+            display: grid;
             inset: 0;
+            overflow-y: auto;
 
             @include z-index(modal);
 
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-color: var(--color-secondary);
+            }
+
             &[data-state="open"] {
-                @include animate(overlay-fade-in, $timing-s, $ease-out-sine);
+                @include animate(fade-in, $timing-s, $ease-out-sine);
+
+                &::after {
+                    @include animate(overlay-fade-in, $timing-s, $ease-out-sine);
+                }
             }
 
             &[data-state="closed"] {
-                @include animate(overlay-fade-out, $timing-s, $ease-out-sine);
+                @include animate(fade-out, $timing-s, $ease-out-sine);
+
+                &::after {
+                    @include animate(overlay-fade-out, $timing-s, $ease-out-sine);
+                }
+            }
+
+            &--hidden {
+                &::after {
+                    display: none;
+                }
+            }
+        }
+
+        &__overlay-inner {
+            display: grid;
+            place-items: center;
+            height: 100%;
+
+            @include z-index(modal);
+
+            // *----------------------------------*/
+            //  Position modifiers
+            // *----------------------------------*/
+            &--c {
+                place-items: center;
+            }
+
+            &--tr {
+                align-items: start;
+                justify-items: end;
+            }
+
+            &--tl {
+                align-items: start;
+                justify-items: start;
+            }
+
+            &--br {
+                align-items: end;
+                justify-items: end;
+            }
+
+            &--bl {
+                align-items: end;
+                justify-items: start;
             }
         }
     }

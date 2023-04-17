@@ -6,8 +6,10 @@ import {
     AlertModal,
     AlertModalAction,
     AlertModalCancel,
+    AlertModalContainer,
     AlertModalContent,
     AlertModalDescription,
+    AlertModalInner,
     AlertModalTitle,
     AlertModalTrigger,
 } from './AlertModal';
@@ -16,8 +18,10 @@ export default {
     title: 'osc-ui/Dialogs/AlertModal',
     component: AlertModal,
     subcomponents: {
+        AlertModalContainer,
         AlertModalContent,
         AlertModalDescription,
+        AlertModalInner,
         AlertModalTitle,
         AlertModalTrigger,
     },
@@ -59,6 +63,42 @@ const Template: Story<AlertModalProps> = (args) => (
         </AlertModalContent>
     </AlertModal>
 );
+const SecondaryTemplate: Story<AlertModalProps> = (args) => (
+    <AlertModal {...args}>
+        <AlertModalTrigger asChild>
+            <Button>Open modal</Button>
+        </AlertModalTrigger>
+        <AlertModalContent variant="secondary">
+            <AlertModalTitle>Are you absolutely sure?</AlertModalTitle>
+
+            <AlertModalInner>
+                <AlertModalDescription>
+                    This action cannot be undone. This will permanently delete your account and
+                    remove your data from our servers.
+                </AlertModalDescription>
+
+                <ButtonGroup>
+                    <AlertModalAction asChild>
+                        <Button variant="secondary" size="sm">
+                            Confirm
+                        </Button>
+                    </AlertModalAction>
+
+                    <AlertModalCancel asChild>
+                        <Button variant="tertiary" size="sm">
+                            Cancel
+                        </Button>
+                    </AlertModalCancel>
+                </ButtonGroup>
+            </AlertModalInner>
+        </AlertModalContent>
+    </AlertModal>
+);
 
 export const Primary = Template.bind({});
 Primary.args = {};
+
+export const Secondary = SecondaryTemplate.bind({});
+Secondary.args = {
+    ...Primary.args,
+};

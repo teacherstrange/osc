@@ -1,10 +1,10 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import type { ComponentPropsWithoutRef, ElementRef } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode } from 'react';
 import React, { forwardRef } from 'react';
 import { classNames } from '../../utils/classNames';
 
 import { useModifier } from '../../hooks/useModifier';
-import type { Maybe } from '../../types';
+import type { Maybe, PolymorphicComponentProps, PolymorphicRef } from '../../types';
 import './modal.scss';
 
 export interface SharedModalProps {
@@ -19,16 +19,12 @@ export interface SharedModalProps {
  * -----------------------------------------------------------------------------------------------*/
 export interface ModalProps
     extends ComponentPropsWithoutRef<typeof Dialog.Root>,
-        SharedModalProps {}
+        Omit<SharedModalProps, 'className'> {}
 
 export const Modal = (props: ModalProps) => {
     const { children } = props;
 
-    return (
-        <Dialog.Root className="c-modal" {...props}>
-            {children}
-        </Dialog.Root>
-    );
+    return <Dialog.Root {...props}>{children}</Dialog.Root>;
 };
 Modal.displayName = 'Modal';
 
@@ -75,21 +71,53 @@ export interface ModalContentProps
      * @default md
      */
     size?: 'sm' | 'md' | 'lg' | 'full';
+    /**
+     * Positions the modal content around it's container
+     * @default center
+     */
+    position?: 'tr' | 'tl' | 'br' | 'bl' | 'c';
+    /**
+     * Sets the style of the Modal, primary, secondary etc.
+     * @default primary
+     */
+    variant?: 'primary' | 'secondary';
 }
 
 export const ModalContent = forwardRef<ElementRef<typeof Dialog.Content>, ModalContentProps>(
     (props, forwardedRef) => {
-        const { children, className, container, showOverlay = true, size = 'md', ...rest } = props;
+        const {
+            children,
+            className,
+            container,
+            position = 'c',
+            showOverlay = true,
+            size = 'md',
+            variant = 'primary',
+            ...rest
+        } = props;
         const sizeModifier = useModifier('c-modal__content', size);
-        const classes = classNames('c-modal__content', sizeModifier, className);
+        const variantModifier = useModifier('c-modal__content', variant);
+
+        const classes = classNames('c-modal__content', variantModifier, sizeModifier);
+
+        const overlayModifier = useModifier('c-modal__overlay', !showOverlay && 'hidden');
+        const overlayClasses = classNames('c-modal__overlay', overlayModifier);
+
+        const positionModifier = useModifier('c-modal__overlay-inner', position);
+        const overlayInnerClasses = classNames(
+            'o-container c-modal__overlay-inner',
+            positionModifier
+        );
 
         return (
             <Dialog.Portal container={container}>
-                {showOverlay ? <Dialog.Overlay className="c-modal__overlay" /> : null}
-
-                <Dialog.Content className={classes} {...rest} ref={forwardedRef}>
-                    {children}
-                </Dialog.Content>
+                <Dialog.Overlay className={overlayClasses}>
+                    <div className={overlayInnerClasses}>
+                        <Dialog.Content className={classes} {...rest} ref={forwardedRef}>
+                            {children}
+                        </Dialog.Content>
+                    </div>
+                </Dialog.Overlay>
             </Dialog.Portal>
         );
     }
@@ -106,12 +134,14 @@ export interface ModalTitleProps
 export const ModalTitle = forwardRef<ElementRef<typeof Dialog.Title>, ModalTitleProps>(
     (props, forwardedRef) => {
         const { children, className, ...rest } = props;
-        const classes = classNames('c-modal__ttl t-font-m u-text-bold', className);
+        const classes = classNames('c-modal__ttl', className);
 
         return (
-            <Dialog.Title className={classes} {...rest} ref={forwardedRef}>
-                {children}
-            </Dialog.Title>
+            <header className="c-modal__header">
+                <Dialog.Title className={classes} {...rest} ref={forwardedRef}>
+                    {children}
+                </Dialog.Title>
+            </header>
         );
     }
 );
@@ -138,6 +168,48 @@ export const ModalDescription = forwardRef<
     );
 });
 ModalDescription.displayName = 'ModalTitle';
+
+/* -------------------------------------------------------------------------------------------------
+ * Modal Inner
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalInnerProps extends SharedModalProps {
+    children: ReactNode;
+}
+
+export const ModalInner = (props: ModalInnerProps) => {
+    const { children, className } = props;
+    const classes = classNames('c-modal__inner', className);
+
+    return <div className={classes}>{children}</div>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Modal Container
+ * -----------------------------------------------------------------------------------------------*/
+export interface ModalContainerProps extends SharedModalProps {
+    /**
+     * The content of the container
+     */
+    children: ReactNode;
+}
+
+export const ModalContainer = forwardRef(
+    <C extends ElementType = 'div'>(
+        props: PolymorphicComponentProps<C, ModalContainerProps>,
+        forwardedRef: PolymorphicRef<C>
+    ) => {
+        const { as, children, className, ...rest } = props;
+        const Component = as || 'div';
+        const classes = classNames('c-modal__container', className);
+
+        return (
+            <Component className={classes} {...rest} ref={forwardedRef}>
+                {children}
+            </Component>
+        );
+    }
+);
+ModalContainer.displayName = 'ModalContainer';
 
 /* -------------------------------------------------------------------------------------------------
  * Modal Close Button
