@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, MouseEvent, ReactNode } from 'react';
 import React from 'react';
-import type { FlourishColors, FlourishHeights, FlourishObject, FlourishWidths } from '../../types';
+import type { FlourishHeights, FlourishObject, FlourishWidths } from '../../types';
 import { classNames } from '../../utils/classNames';
 import './flourish.scss';
 
@@ -16,7 +16,7 @@ export interface FlourishesProps {
     /**
      * Color of the flourish
      */
-    color: FlourishColors;
+    color: string;
     /**
      * Pattern variant
      */
@@ -91,7 +91,7 @@ export interface FlourishProps extends ComponentPropsWithoutRef<'span'> {
     /**
      * Color of the flourish
      */
-    color: FlourishColors;
+    color: string;
     /**
      * Maximum height of the largest flourish
      * The other sizes are calculated based on this
@@ -101,7 +101,7 @@ export interface FlourishProps extends ComponentPropsWithoutRef<'span'> {
 
 export const Flourish = (props: FlourishProps) => {
     const { width, height, color, maxHeight = 320, ...rest } = props;
-    const classes = classNames('c-flourish', `u-bg-color-gradient-${color}`);
+    const classes = classNames('c-flourish', `u-bg-color-${color}`);
 
     /**
      * Converts a string fraction to a decimal.

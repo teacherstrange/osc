@@ -16,12 +16,6 @@ export default {
     },
     argTypes: {
         color: {
-            table: {
-                type: {
-                    summary:
-                        'primary | secondary | tertiary | quaternary | quinary | senary | septenary | octonary | nonary',
-                },
-            },
             options: [
                 'primary',
                 'secondary',
@@ -32,6 +26,17 @@ export default {
                 'septenary',
                 'octonary',
                 'nonary',
+                'denary',
+                'duodenary',
+                'gradient-primary',
+                'gradient-secondary',
+                'gradient-tertiary',
+                'gradient-quaternary',
+                'gradient-quinary',
+                'gradient-senary',
+                'gradient-septenary',
+                'gradient-octonary',
+                'gradient-nonary',
             ],
             control: {
                 type: 'select',
@@ -89,7 +94,7 @@ const Template: Story<FlourishProps> = ({ ...args }) => (
 export const Primary = Template.bind({});
 Primary.args = {
     width: '2/16',
-    color: 'primary',
+    color: 'gradient-septenary',
 };
 
 export const Scaleable = Template.bind({});

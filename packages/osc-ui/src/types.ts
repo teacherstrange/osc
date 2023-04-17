@@ -49,7 +49,6 @@ export type Maybe<T> = T | null | undefined;
 // FLourishes
 export type FlourishWidths = '1/16' | '2/16' | '3/16';
 export type FlourishHeights = '4/16' | '8/16' | '12/16' | '16/16';
-export type FlourishColors = Exclude<Themes, 'denary' | 'duodenary'>;
 export type FlourishVariants = 'primary' | 'secondary';
 
 export interface FlourishObject {
