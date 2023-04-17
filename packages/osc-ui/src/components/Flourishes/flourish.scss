@@ -1,0 +1,29 @@
+@use "sass:map";
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+@layer components {
+    $flourish-timing: 0.1s;
+
+    .c-flourish {
+        position: absolute;
+        z-index: -1; //  Make they flourishes are always below the content
+        display: block;
+        transform-origin: top left;
+        transition: transform $flourish-timing $linear;
+        pointer-events: none;
+
+        &__container {
+            position: absolute;
+            display: block;
+            overflow: hidden;
+            inset: 0;
+        }
+    }
+
+    .c-flourish-content {
+        position: relative;
+
+        @include z-index("bg");
+    }
+}
