@@ -1,3 +1,35 @@
+## [0.70.0](https://github.com/Open-Study-College/osc/compare/v0.69.1...v0.70.0) (2023-04-17)
+
+
+### 🧪 Tests
+
+* **modal:** add secondary variant test ([3ae8130](https://github.com/Open-Study-College/osc/commit/3ae81306fd496b3952d288542199318ba4b06b7f))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* remove unused comment ([453c43c](https://github.com/Open-Study-College/osc/commit/453c43cd09616e48f517ff4ba151a9e93a3f7756))
+
+
+### ✨ Features
+
+* **modal:** add position modifiers ([c7a2c55](https://github.com/Open-Study-College/osc/commit/c7a2c55af26df605acd790d485d3ebb1a3d10baf))
+* **modal:** add secondary alert modal story ([81279a4](https://github.com/Open-Study-College/osc/commit/81279a49796a37653bdbb988369771ed44a0f7e7))
+* **modal:** add secondary variant styles ([dc5efd2](https://github.com/Open-Study-College/osc/commit/dc5efd236705778de228e7f6c7d883fc1aaf9a90))
+* **modal:** add variant class modifiers ([3112fdf](https://github.com/Open-Study-College/osc/commit/3112fdf6c48a3e623a5ac7b0a18272e6cadd5a2e))
+* **modal:** adds modal container component ([53e9ca9](https://github.com/Open-Study-College/osc/commit/53e9ca968c0a22d581345577f104ca5fe267d6d7))
+* **modal:** adds optional ModalInner component ([6b08315](https://github.com/Open-Study-College/osc/commit/6b083151a49aed4b41fce7d61728480af007e7c3))
+* **modal:** remove utility classes from title ([f1711c5](https://github.com/Open-Study-College/osc/commit/f1711c5989e68112566c8c7c7af20fe9d19a6179))
+* **modal:** update alert modal to match modal interface ([01c3d85](https://github.com/Open-Study-College/osc/commit/01c3d85ce5a9fc564b96439cc73f15b72e4f3065))
+* **modal:** wrap modal title in header tag ([02244b1](https://github.com/Open-Study-College/osc/commit/02244b1cbcbde0a0408646b847bd29f7bbf6ef52))
+
+
+### ♻️ Refactors
+
+* **button:** remove pointer-events auto ([97e94fe](https://github.com/Open-Study-College/osc/commit/97e94fee55809b613b08fff925ae5a0c265c598d))
+* **modal:** move modal inside overlay component ([14df952](https://github.com/Open-Study-College/osc/commit/14df952dd2f7f1dc9a7454991741684e5d06173e))
+* **modal:** move primary styles into primary modifier class ([d969a9e](https://github.com/Open-Study-College/osc/commit/d969a9e42be6132045679c4ceeb32736799ce6b4))
+
 ## [0.69.1](https://github.com/Open-Study-College/osc/compare/v0.69.0...v0.69.1) (2023-04-14)
 
 
@@ -117,11 +149,4 @@
 
 * **ecommerce:** cast return of getComponentStyles as LinkDescriptor ([2aad2b5](https://github.com/Open-Study-College/osc/commit/2aad2b5d9aca33d5ccf4e877a75d1ff04d458070))
 * **ecommerce:** wrap string in fragment to fix TS reactnode error ([77ffa51](https://github.com/Open-Study-College/osc/commit/77ffa5137a82ae8651c8abbaf57209df438d08a1))
-
-## [0.67.1](https://github.com/Open-Study-College/osc/compare/v0.67.0...v0.67.1) (2023-04-06)
-
-
-### 🧪 Tests
-
-* **content media:** adds tests for content media component ([21e7ebd](https://github.com/Open-Study-College/osc/commit/21e7ebdb1c4e2a52a4a2232427df3f5673bbdb5e))
 
