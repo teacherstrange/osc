@@ -364,56 +364,6 @@ export const hubspotFormData = {
         {
             fields: [
                 {
-                    name: 'preferred_call_back_date',
-                    label: 'Preferred call back date',
-                    type: 'date',
-                    fieldType: 'date',
-                    description: '',
-                    groupName: 'contactinformation',
-                    displayOrder: -1,
-                    required: true,
-                    selectedOptions: [],
-                    options: [],
-                    validation: {
-                        name: '',
-                        message: '',
-                        data: '',
-                        useDefaultBlockList: false,
-                        blockedEmailAddresses: [],
-                    },
-                    enabled: true,
-                    hidden: false,
-                    defaultValue: '',
-                    isSmartField: false,
-                    unselectedLabel: '',
-                    placeholder: '',
-                    dependentFieldFilters: [],
-                    labelHidden: false,
-                    propertyObjectType: 'CONTACT',
-                    metaData: [
-                        {
-                            name: 'format',
-                            value: 'MM-DD-YYYY',
-                        },
-                        {
-                            name: 'separator',
-                            value: '/',
-                        },
-                    ],
-                    objectTypeId: '0-1',
-                },
-            ],
-            default: true,
-            isSmartGroup: false,
-            richText: {
-                content: '',
-                type: 'TEXT',
-            },
-            isPageBreak: false,
-        },
-        {
-            fields: [
-                {
                     name: 'call_back_hour',
                     label: 'Hour',
                     type: 'enumeration',
