@@ -1,8 +1,8 @@
 import type { ComponentPropsWithoutRef, MouseEvent, ReactNode } from 'react';
 import React from 'react';
+import type { FlourishColors, FlourishHeights, FlourishObject, FlourishWidths } from '../../types';
 import { classNames } from '../../utils/classNames';
 import './flourish.scss';
-import type { Colors, Flourish as FlourishObject, Heights, Widths } from './types';
 
 export interface FlourishesProps {
     /**
@@ -16,7 +16,7 @@ export interface FlourishesProps {
     /**
      * Color of the flourish
      */
-    color: Colors;
+    color: FlourishColors;
     /**
      * Pattern variant
      */
@@ -26,7 +26,7 @@ export interface FlourishesProps {
 export const Flourishes = (props: FlourishesProps) => {
     const { children, className, color, pattern } = props;
 
-    const classes = classNames('c-flourish__container', className);
+    const classes = classNames('c-flourish-content', className);
 
     const handleMouseMove = (e: MouseEvent) => {
         const flourishNodes: NodeListOf<HTMLElement> = document.querySelectorAll('.c-flourish');
@@ -53,15 +53,11 @@ export const Flourishes = (props: FlourishesProps) => {
 
     return (
         <>
-            <div
-                className="c-flourish-content"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-            >
+            <div className={classes} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
                 {children}
             </div>
 
-            <div className={classes}>
+            <div className="c-flourish__container">
                 {pattern.map((flourish, index) => (
                     <Flourish
                         key={index}
@@ -87,15 +83,15 @@ export interface FlourishProps extends ComponentPropsWithoutRef<'span'> {
     /**
      * Width of the flourish as a sixteenth.
      */
-    width: Widths;
+    width: FlourishWidths;
     /**
      * Height of the flourish as a sixteenth.
      */
-    height: Heights;
+    height: FlourishHeights;
     /**
      * Color of the flourish
      */
-    color: Colors;
+    color: FlourishColors;
     /**
      * Maximum height of the largest flourish
      * The other sizes are calculated based on this
@@ -137,7 +133,6 @@ export const Flourish = (props: FlourishProps) => {
             {...rest}
             style={{
                 ...rest.style,
-                backgroundColor: 'var(--color-primary)',
                 width: calculatedWidth,
                 height: calculatedHeight,
             }}
