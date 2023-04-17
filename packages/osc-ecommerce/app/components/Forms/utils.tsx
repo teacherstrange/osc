@@ -324,9 +324,10 @@ export const reshapeDate = (dateObj: Record<string, number>) => {
     return updateDate.getTime();
 };
 
-export const isJsonString = (str: any) => {
+export const isJsonString = (input: unknown) => {
+    if (typeof input !== 'string') return false;
     try {
-        JSON.parse(str);
+        JSON.parse(input);
     } catch (e) {
         return false;
     }
