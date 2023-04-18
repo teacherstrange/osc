@@ -4,8 +4,6 @@ import type { FlourishHeights, FlourishObject, FlourishWidths } from '../../type
 import { classNames } from '../../utils/classNames';
 import './flourish.scss';
 
-// TODO: Tests
-
 export interface FlourishesProps {
     /**
      * The content of the Flourishes

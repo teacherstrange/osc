@@ -1,35 +1,54 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import React from 'react';
-import { Flourish } from './Flourishes';
+import { render } from 'test-utils';
+import { Flourish, Flourishes } from './Flourishes';
+import { primary } from './patterns';
 
-test('renders an individual Flourish with defaults', () => {
-    render(<Flourish width="2/16" height="12/16" color="primary" data-testid="flourish" />);
+describe('Singular flourish', () => {
+    test('renders an individual Flourish with defaults', () => {
+        render(<Flourish width="2/16" height="12/16" color="primary" data-testid="flourish" />);
 
-    const flourish = screen.getByTestId('flourish');
+        const flourish = screen.getByTestId('flourish');
 
-    expect(flourish).toHaveAttribute('aria-hidden', 'true');
-    expect(flourish).toHaveStyle({
-        width: '40px',
-        height: '240px',
+        expect(flourish).toHaveAttribute('aria-hidden', 'true');
+        expect(flourish).toHaveStyle({
+            width: '40px',
+            height: '240px',
+        });
+        expect(flourish).toHaveClass('c-flourish c-flourish-color--primary');
     });
-    expect(flourish).toHaveClass('c-flourish u-bg-color-gradient-primary');
+
+    test('scales the width and height based on the maxHeight prop', () => {
+        render(
+            <Flourish
+                width="2/16"
+                height="12/16"
+                color="primary"
+                maxHeight={200}
+                data-testid="flourish"
+            />
+        );
+
+        const flourish = screen.getByTestId('flourish');
+
+        expect(flourish).toHaveStyle({
+            width: '25px',
+            height: '150px',
+        });
+    });
 });
 
-test('scales the width and height based on the maxHeight prop', () => {
-    render(
-        <Flourish
-            width="2/16"
-            height="12/16"
-            color="primary"
-            maxHeight={200}
-            data-testid="flourish"
-        />
-    );
+describe('Flourishes', () => {
+    test('renders the flourishes with correct class names', () => {
+        render(<Flourishes color="multicolor" pattern={primary} variant="primary" />);
 
-    const flourish = screen.getByTestId('flourish');
+        const flourishes = document.querySelectorAll('.c-flourish');
 
-    expect(flourish).toHaveStyle({
-        width: '25px',
-        height: '150px',
+        expect(flourishes).toHaveLength(primary.length);
+        flourishes.forEach((flourish) => {
+            expect(flourish).toHaveClass(
+                'c-flourish c-flourish-color--multicolor c-flourish--primary'
+            );
+        });
     });
 });
