@@ -43,7 +43,7 @@
         pointer-events: none;
 
         @each $name, $value in $colors {
-            &--#{$name} {
+            &--color-#{$name} {
                 @if string.index($name, "gradient") {
                     background-image: var(--color-#{$name});
                 } @else {
