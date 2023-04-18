@@ -34,7 +34,11 @@ export default {
 
 const Template: Story<HeroProps> = ({ ...args }) => (
     <Hero {...args}>
-        <HeroInner flourishColor="tertiary" flourishPattern={heroPrimary}>
+        <HeroInner
+            flourishColor="tertiary"
+            flourishPattern={heroPrimary}
+            flourishVariant="hero-primary"
+        >
             <HeroTitle>Save on your study</HeroTitle>
             <HeroContent>
                 <div className="c-content">
@@ -126,7 +130,11 @@ const CarouselTemplate: Story<HeroProps> = () => (
         autoPlaySpeed={3000}
     >
         <Hero backgroundColor="gradient-nonary-270" variant="primary">
-            <HeroInner flourishColor="tertiary" flourishPattern={heroPrimary}>
+            <HeroInner
+                flourishColor="tertiary"
+                flourishPattern={heroPrimary}
+                flourishVariant="hero-primary"
+            >
                 <HeroTitle>Save on your study</HeroTitle>
                 <HeroContent>
                     <div className="c-content">
@@ -155,7 +163,11 @@ const CarouselTemplate: Story<HeroProps> = () => (
         </Hero>
 
         <Hero backgroundColor="tertiary" variant="secondary" flourishColor="gradient-quaternary-90">
-            <HeroInner flourishColor="multicolor" flourishPattern={heroSecondary}>
+            <HeroInner
+                flourishColor="multicolor"
+                flourishPattern={heroSecondary}
+                flourishVariant="hero-secondary"
+            >
                 <HeroTitle>Prospectus</HeroTitle>
 
                 <HeroContent>

@@ -4,7 +4,7 @@ import type { FlourishHeights, FlourishObject, FlourishWidths } from '../../type
 import { classNames } from '../../utils/classNames';
 import './flourish.scss';
 
-// TODO: Mobile? -- perhaps we need an scss object instead
+// TODO: Tests
 
 export interface FlourishesProps {
     /**
@@ -23,10 +23,14 @@ export interface FlourishesProps {
      * Pattern variant
      */
     pattern: FlourishObject[];
+    /**
+     * Variant of the flourish
+     */
+    variant: string;
 }
 
 export const Flourishes = (props: FlourishesProps) => {
-    const { children, className, color, pattern } = props;
+    const { children, className, color, variant, pattern } = props;
     const containerRef = useRef<HTMLDivElement | null>(null);
 
     const classes = classNames('c-flourish-content', className);
@@ -69,10 +73,9 @@ export const Flourishes = (props: FlourishesProps) => {
                         width={flourish.size.w}
                         height={flourish.size.h}
                         color={color}
+                        className={`c-flourish--${variant}`}
                         style={{
                             transform: `rotate(${flourish.initial.rotate}deg)`,
-                            top: flourish.initial.y,
-                            left: flourish.initial.x,
                         }}
                     />
                 ))}
@@ -85,6 +88,10 @@ export const Flourishes = (props: FlourishesProps) => {
  * Flourish
  * -----------------------------------------------------------------------------------------------*/
 export interface FlourishProps extends ComponentPropsWithoutRef<'span'> {
+    /**
+     * Custom class
+     */
+    className?: string;
     /**
      * Width of the flourish as a sixteenth.
      */
@@ -105,8 +112,8 @@ export interface FlourishProps extends ComponentPropsWithoutRef<'span'> {
 }
 
 export const Flourish = (props: FlourishProps) => {
-    const { width, height, color, maxHeight = 320, ...rest } = props;
-    const classes = classNames('c-flourish', `c-flourish--${color}`);
+    const { width, height, color, maxHeight = 320, className, ...rest } = props;
+    const classes = classNames('c-flourish', `c-flourish--${color}`, className);
 
     /**
      * Converts a string fraction to a decimal.

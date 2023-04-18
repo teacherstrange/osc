@@ -11,6 +11,30 @@
     $colors: color-token("default");
     $gradients: ();
 
+    // Setup mixins to separate out nested loops
+
+    // loop over key value pairs and set them as styles
+    @mixin loop-styles($key, $val) {
+        @each $key, $value in $val {
+            #{$key}: $value;
+        }
+    }
+
+    // Loop over nested styles and setup breakpoints
+    @mixin nested-styles($styles) {
+        @each $key, $value in $styles {
+            @if $key == "breakpoints" {
+                @each $bp, $val in $value {
+                    @include mq(mq-token("#{$bp}")) {
+                        @include loop-styles($key, $val);
+                    }
+                }
+            } @else {
+                #{$key}: $value;
+            }
+        }
+    }
+
     .c-flourish {
         position: absolute;
         display: block;
@@ -41,6 +65,16 @@
 
                     &:nth-child(#{$i}n) {
                         background-image: var(--color-#{$name});
+                    }
+                }
+            }
+        }
+
+        @each $pattern, $properties in $patterns {
+            &--#{$pattern} {
+                @each $n, $property in $properties {
+                    &:nth-child(#{$n}) {
+                        @include nested-styles($property);
                     }
                 }
             }

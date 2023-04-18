@@ -8,8 +8,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: 107.45,
-            x: '36%',
-            y: '58.05px',
         },
     },
     {
@@ -19,8 +17,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: -58.55,
-            x: '50%',
-            y: '2.5%',
         },
     },
     {
@@ -30,8 +26,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: 47.17,
-            x: '97%',
-            y: 0,
         },
     },
     {
@@ -41,8 +35,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: 106.35,
-            x: '70%',
-            y: '332.59px',
         },
     },
     {
@@ -52,8 +44,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: -73.13,
-            x: '88%',
-            y: '366.28px',
         },
     },
     {
@@ -63,8 +53,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: -116,
-            x: '70%',
-            y: '739px',
         },
     },
     {
@@ -74,8 +62,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: 47,
-            x: '97%',
-            y: '845px',
         },
     },
     {
@@ -85,8 +71,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: -58.55,
-            x: '57%',
-            y: '1035px',
         },
     },
     {
@@ -96,8 +80,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: 47.17,
-            x: '105%',
-            y: '1256px',
         },
     },
     {
@@ -107,8 +89,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: -58.55,
-            x: '81.5%',
-            y: '1494px',
         },
     },
     {
@@ -118,8 +98,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: -116,
-            x: '76.5%',
-            y: '2175px',
         },
     },
     {
@@ -129,8 +107,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: -106.26,
-            x: '8%',
-            y: '2006px',
         },
     },
     {
@@ -140,8 +116,6 @@ export const primary: FlourishObject[] = [
         },
         initial: {
             rotate: -70.6,
-            x: 0,
-            y: '1706px',
         },
     },
 ];

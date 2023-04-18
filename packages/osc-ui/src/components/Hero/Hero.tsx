@@ -87,10 +87,14 @@ interface HeroInnerProps extends SharedHeroProps {
      * The colour of the flourish pattern
      */
     flourishColor?: string;
+    /**
+     * Adds the pattern class for the flourishes
+     */
+    flourishVariant?: string;
 }
 
 export const HeroInner = (props: HeroInnerProps) => {
-    const { children, className, flourishPattern, flourishColor } = props;
+    const { children, className, flourishPattern, flourishColor, flourishVariant } = props;
     const classes = classNames(
         'c-hero__inner',
         'o-container',
@@ -99,7 +103,12 @@ export const HeroInner = (props: HeroInnerProps) => {
     );
 
     return flourishPattern ? (
-        <Flourishes color={flourishColor} pattern={flourishPattern} className={classes}>
+        <Flourishes
+            color={flourishColor}
+            pattern={flourishPattern}
+            variant={flourishVariant}
+            className={classes}
+        >
             {children}
         </Flourishes>
     ) : (

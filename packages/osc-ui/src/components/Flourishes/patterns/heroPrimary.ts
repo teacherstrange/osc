@@ -8,8 +8,6 @@ export const heroPrimary: FlourishObject[] = [
         },
         initial: {
             rotate: 45,
-            x: '55%',
-            y: '42px',
         },
     },
     {
@@ -19,8 +17,6 @@ export const heroPrimary: FlourishObject[] = [
         },
         initial: {
             rotate: 45,
-            x: '60%',
-            y: '200px',
         },
     },
     {
@@ -30,8 +26,6 @@ export const heroPrimary: FlourishObject[] = [
         },
         initial: {
             rotate: 5,
-            x: '61%',
-            y: '270px',
         },
     },
     {
@@ -41,8 +35,6 @@ export const heroPrimary: FlourishObject[] = [
         },
         initial: {
             rotate: -45,
-            x: '66%',
-            y: '160px',
         },
     },
     {
@@ -52,8 +44,6 @@ export const heroPrimary: FlourishObject[] = [
         },
         initial: {
             rotate: 70,
-            x: '85%',
-            y: '30px',
         },
     },
     {
@@ -63,8 +53,6 @@ export const heroPrimary: FlourishObject[] = [
         },
         initial: {
             rotate: -40,
-            x: '78%',
-            y: '140px',
         },
     },
     {
@@ -74,8 +62,6 @@ export const heroPrimary: FlourishObject[] = [
         },
         initial: {
             rotate: 65,
-            x: '93%',
-            y: '80px',
         },
     },
     {
@@ -85,8 +71,6 @@ export const heroPrimary: FlourishObject[] = [
         },
         initial: {
             rotate: -40,
-            x: '92%',
-            y: '200px',
         },
     },
 ];

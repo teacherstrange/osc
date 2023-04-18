@@ -58,8 +58,6 @@ export interface FlourishObject {
     };
     initial: {
         rotate: number;
-        x: string | number;
-        y: string | number;
     };
 }
 
