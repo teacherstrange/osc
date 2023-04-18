@@ -8,6 +8,7 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 import type { LinksFunction, LoaderArgs } from '@shopify/remix-oxygen';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
+import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import radioStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';
 import { useState } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
@@ -33,6 +34,7 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: productFormStyles },
         { rel: 'stylesheet', href: priceStyles },
         { rel: 'stylesheet', href: buttonStyles },
+        { rel: 'stylesheet', href: labelStyles },
         { rel: 'stylesheet', href: radioStyles },
     ];
 };
