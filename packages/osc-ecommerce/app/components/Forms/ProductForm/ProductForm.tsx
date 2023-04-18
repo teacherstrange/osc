@@ -63,7 +63,10 @@ export const ProductForm = (props: ProductFormProps) => {
                           <RadioGroup
                               // TODO: Could we update the data in Shopify so the name values reflect the name on the FE?
                               // TODO: Can we change the order in the CMS?
-                              description={{ id: `option-${option.name}`, value: option.name }}
+                              description={{
+                                  id: `option-${option.name}`,
+                                  value: `<h2 class="t-font-l u-text-bold">${option.name}</h2>`,
+                              }}
                               name={`option-${option.name}`}
                               defaultValue={searchParamsWithDefaults.get(option.name)!}
                               className="c-product-form__radio-group"
@@ -83,7 +86,10 @@ export const ProductForm = (props: ProductFormProps) => {
 
             {/* // TODO: This needs to come from Shopify once we have the setup */}
             <RadioGroup
-                description={{ id: 'payment-options', value: 'Payment Options' }}
+                description={{
+                    id: 'payment-options',
+                    value: '<h2 class="t-font-l u-text-bold">Payment Options</h2>',
+                }}
                 name="payment-options"
                 defaultValue="Pay upfront"
                 className="c-product-form__radio-group"
