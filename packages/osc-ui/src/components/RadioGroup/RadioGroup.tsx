@@ -84,10 +84,15 @@ export const RadioGroup = (props: RadioGroupProps) => {
                     : radioGroupClasses
             }
         >
-            <legend className="c-radio-group__description" id={description.id}>
-                {description.value}
-                {required ? <span className="c-label__required">* </span> : null}
-            </legend>
+            <legend
+                className="c-radio-group__description"
+                id={description.id}
+                dangerouslySetInnerHTML={{
+                    __html: `${description.value} ${
+                        required ? '<span className="c-label__required">* </span>' : ''
+                    }`,
+                }}
+            />
             <RadioGroupPrimitive.Root
                 disabled={disabled}
                 defaultValue={defaultValue}
