@@ -52,7 +52,7 @@ export interface Props {
     paddingRight?: Maybe<Spacing>;
     value: PortableTextBlock[];
     buttons?: ButtonProps[];
-    fullWidth?: boolean;
+    fullWidth?: Maybe<boolean>;
 }
 
 // Create the decorator markup
