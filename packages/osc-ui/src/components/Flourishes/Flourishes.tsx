@@ -1,8 +1,10 @@
 import type { ComponentPropsWithoutRef, MouseEvent, ReactNode } from 'react';
-import React from 'react';
+import React, { useRef } from 'react';
 import type { FlourishHeights, FlourishObject, FlourishWidths } from '../../types';
 import { classNames } from '../../utils/classNames';
 import './flourish.scss';
+
+// TODO: Mobile? -- perhaps we need an scss object instead
 
 export interface FlourishesProps {
     /**
@@ -25,11 +27,13 @@ export interface FlourishesProps {
 
 export const Flourishes = (props: FlourishesProps) => {
     const { children, className, color, pattern } = props;
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
     const classes = classNames('c-flourish-content', className);
 
     const handleMouseMove = (e: MouseEvent) => {
-        const flourishNodes: NodeListOf<HTMLElement> = document.querySelectorAll('.c-flourish');
+        const container = containerRef.current;
+        const flourishNodes: NodeListOf<HTMLElement> = container.querySelectorAll('.c-flourish');
 
         // Store cursor position as variables
         let curX = e.clientX;
@@ -44,7 +48,8 @@ export const Flourishes = (props: FlourishesProps) => {
     };
 
     const handleMouseLeave = () => {
-        const flourishNodes: NodeListOf<HTMLElement> = document.querySelectorAll('.c-flourish');
+        const container = containerRef.current;
+        const flourishNodes: NodeListOf<HTMLElement> = container.querySelectorAll('.c-flourish');
 
         flourishNodes.forEach((flourish, i) => {
             flourish.style.transform = `rotate(${pattern[i].initial.rotate}deg)`;
@@ -57,7 +62,7 @@ export const Flourishes = (props: FlourishesProps) => {
                 {children}
             </div>
 
-            <div className="c-flourish__container">
+            <div className="c-flourish__container" ref={containerRef}>
                 {pattern.map((flourish, index) => (
                     <Flourish
                         key={index}
