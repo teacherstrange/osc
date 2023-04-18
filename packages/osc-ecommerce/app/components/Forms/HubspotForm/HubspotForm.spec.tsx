@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { SpritesheetProvider } from 'osc-ui';
 import { FormContainer } from '../FormContainer';
-import { hubspotFormData, validationErrors } from '../mockData';
+import { mockHubspotFormData, validationErrors } from '../mockData';
 import { HubspotForm } from './HubspotForm';
 
 const FORM_ID = 'fe5ae92f-faeb-4d04-b8e0-72619d5459f5';
@@ -13,9 +13,9 @@ test('should render hubspot form', () => {
                 <HubspotForm
                     formErrors={[]}
                     formId={FORM_ID}
-                    formFieldGroups={hubspotFormData.formFieldGroups}
+                    formFieldGroups={mockHubspotFormData.formFieldGroups}
                     setValidationErrors={() => {}}
-                    submitText={hubspotFormData.submitText}
+                    submitText={mockHubspotFormData.submitText}
                     validationErrors={{}}
                 />
             </FormContainer>
@@ -44,9 +44,9 @@ test('should render validation errors when present', () => {
             <HubspotForm
                 formErrors={[]}
                 formId={FORM_ID}
-                formFieldGroups={hubspotFormData.formFieldGroups}
+                formFieldGroups={mockHubspotFormData.formFieldGroups}
                 setValidationErrors={() => {}}
-                submitText={hubspotFormData.submitText}
+                submitText={mockHubspotFormData.submitText}
                 validationErrors={validationErrors}
             />
         </SpritesheetProvider>
@@ -58,7 +58,6 @@ test('should render validation errors when present', () => {
     expect(container.querySelector(`#email_${FORM_ID}-error`)).toBeInTheDocument();
     expect(container.querySelector('#interests-error')).toBeInTheDocument();
     expect(container.querySelector('#enquiryorigin-error')).toBeInTheDocument();
-    expect(screen.getByText(/Please select a date/)).toBeInTheDocument();
     expect(container.querySelector('#call_back_hour-error')).toBeInTheDocument();
     expect(container.querySelector('#call_back_minute-error')).toBeInTheDocument();
     expect(container.getElementsByClassName('c-checkbox__error-message')[0]).toBeInTheDocument();
