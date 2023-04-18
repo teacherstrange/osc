@@ -8,7 +8,8 @@ interface PriceProps {
 export const Price = (props: PriceProps) => {
     const { selectedVariant } = props;
 
-    // IF selectedVariant has a price and a compare at price return the
+    // IF selectedVariant has a price and a compare at price return true if the compare at price is larger than the price
+    // In Shopify setting a higher compare at price is what is used to show a sale
     const isOnSale =
         selectedVariant?.price?.amount &&
         selectedVariant?.compareAtPrice?.amount &&
