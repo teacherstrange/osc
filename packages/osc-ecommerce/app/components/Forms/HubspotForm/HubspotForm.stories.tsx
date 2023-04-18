@@ -3,7 +3,7 @@ import { SpritesheetProvider } from 'osc-ui';
 import { useState } from 'react';
 import type { FormContainerProps } from '../FormContainer';
 import { FormContainer } from '../FormContainer';
-import { hubspotFormData, validationErrors } from '../mockData';
+import { mockHubspotFormData, validationErrors } from '../mockData';
 import type { HubspotFormProps } from './HubspotForm';
 import { HubspotForm } from './HubspotForm';
 
@@ -56,8 +56,8 @@ export const Primary = Template.bind({});
 export const Validation = Template.bind({});
 
 Primary.args = {
-    formFieldGroups: hubspotFormData.formFieldGroups,
-    submitText: hubspotFormData.submitText,
+    formFieldGroups: mockHubspotFormData.formFieldGroups,
+    submitText: mockHubspotFormData.submitText,
     variants: ['callback-form'],
 };
 
