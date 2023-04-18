@@ -1,9 +1,10 @@
 import type { ElementType, ReactNode } from 'react';
 import React, { createContext, useContext } from 'react';
 import { useModifier } from '../../hooks/useModifier';
-import type { PolymorphicComponentProps } from '../../types';
+import type { FlourishObject, PolymorphicComponentProps } from '../../types';
 import { classNames } from '../../utils/classNames';
 
+import { Flourishes } from '../Flourishes/Flourishes';
 import './hero.scss';
 
 /*
@@ -62,6 +63,7 @@ export const Hero = (props: HeroProps) => {
                         backgroundColor ? `u-bg-color-${backgroundColor}` : ''
                     }`}
                 />
+
                 {children}
             </div>
         </HeroProvider>
@@ -77,10 +79,18 @@ interface HeroInnerProps extends SharedHeroProps {
      * @default false
      */
     pullRight?: boolean;
+    /**
+     * Flourish pattern to pass to the hero
+     */
+    flourishPattern?: FlourishObject[];
+    /**
+     * The colour of the flourish pattern
+     */
+    flourishColor?: string;
 }
 
 export const HeroInner = (props: HeroInnerProps) => {
-    const { children, className } = props;
+    const { children, className, flourishPattern, flourishColor } = props;
     const classes = classNames(
         'c-hero__inner',
         'o-container',
@@ -88,7 +98,13 @@ export const HeroInner = (props: HeroInnerProps) => {
         className
     );
 
-    return <div className={classes}>{children}</div>;
+    return flourishPattern ? (
+        <Flourishes color={flourishColor} pattern={flourishPattern} className={classes}>
+            {children}
+        </Flourishes>
+    ) : (
+        <div className={classes}>{children}</div>
+    );
 };
 
 /* -------------------------------------------------------------------------------------------------
