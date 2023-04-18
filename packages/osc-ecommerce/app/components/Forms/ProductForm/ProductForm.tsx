@@ -69,7 +69,8 @@ export const ProductForm = (props: ProductFormProps) => {
                               }}
                               name={`option-${option.name}`}
                               defaultValue={searchParamsWithDefaults.get(option.name)!}
-                              className="c-product-form__radio-group"
+                              direction={option.name === 'Format' ? 'column' : 'row'}
+                              className="c-product-form__radio-group c-radio-group--col-gap-l"
                           >
                               {option.values.map((value) => (
                                   <RadioItem
@@ -92,6 +93,7 @@ export const ProductForm = (props: ProductFormProps) => {
                 }}
                 name="payment-options"
                 defaultValue="Pay upfront"
+                direction="row"
                 className="c-product-form__radio-group"
             >
                 <RadioItem id="payment-option-pay-upfront" name="Pay upfront" value="Pay upfront" />
