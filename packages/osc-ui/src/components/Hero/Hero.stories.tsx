@@ -155,7 +155,7 @@ const CarouselTemplate: Story<HeroProps> = () => (
         </Hero>
 
         <Hero backgroundColor="tertiary" variant="secondary" flourishColor="gradient-quaternary-90">
-            <HeroInner flourishColor="primary" flourishPattern={heroSecondary}>
+            <HeroInner flourishColor="multicolor" flourishPattern={heroSecondary}>
                 <HeroTitle>Prospectus</HeroTitle>
 
                 <HeroContent>

@@ -1,9 +1,15 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable scss/no-global-function-names */
 @use "sass:map";
+@use "sass:string";
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
+@use "./patterns/patterns" as *;
 
 @layer components {
     $flourish-timing: 0.1s;
+    $colors: color-token("default");
+    $gradients: ();
 
     .c-flourish {
         position: absolute;
@@ -11,6 +17,34 @@
         transform-origin: top left;
         transition: transform $flourish-timing $linear;
         pointer-events: none;
+
+        @each $name, $value in $colors {
+            &--#{$name} {
+                @if string.index($name, "gradient") {
+                    background-image: var(--color-#{$name});
+                } @else {
+                    background-color: var(--color-#{$name});
+                }
+            }
+        }
+
+        &--multicolor {
+            @each $name, $value in $colors {
+                // Only get the gradients WITHOUT the directional modifiers
+                // prettier-ignore
+                @if string.index($name, "gradient") and not
+                    string.index($name, "-90") and not
+                    string.index($name, "-180") and not
+                    string.index($name, "-270") {
+                    $gradients: map.set($gradients, $name, $value);
+                    $i: index($gradients, $name $value);
+
+                    &:nth-child(#{$i}n) {
+                        background-image: var(--color-#{$name});
+                    }
+                }
+            }
+        }
 
         &__container {
             position: absolute;

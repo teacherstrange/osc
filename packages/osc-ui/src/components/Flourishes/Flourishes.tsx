@@ -18,7 +18,7 @@ export interface FlourishesProps {
     /**
      * Color of the flourish
      */
-    color: string;
+    color: string | 'multicolor';
     /**
      * Pattern variant
      */
@@ -106,7 +106,7 @@ export interface FlourishProps extends ComponentPropsWithoutRef<'span'> {
 
 export const Flourish = (props: FlourishProps) => {
     const { width, height, color, maxHeight = 320, ...rest } = props;
-    const classes = classNames('c-flourish', `u-bg-color-${color}`);
+    const classes = classNames('c-flourish', `c-flourish--${color}`);
 
     /**
      * Converts a string fraction to a decimal.

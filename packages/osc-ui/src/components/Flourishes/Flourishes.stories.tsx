@@ -37,6 +37,7 @@ export default {
                 'gradient-septenary',
                 'gradient-octonary',
                 'gradient-nonary',
+                'multicolor',
             ],
             control: {
                 type: 'select',
