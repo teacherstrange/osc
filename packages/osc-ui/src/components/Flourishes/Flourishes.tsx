@@ -111,7 +111,7 @@ export interface FlourishProps extends ComponentPropsWithoutRef<'span'> {
 
 export const Flourish = (props: FlourishProps) => {
     const { width, height, color, maxHeight = 320, className, ...rest } = props;
-    const classes = classNames('c-flourish', `c-flourish-color--${color}`, className);
+    const classes = classNames('c-flourish', `c-flourish--color-${color}`, className);
 
     /**
      * Converts a string fraction to a decimal.

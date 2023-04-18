@@ -52,7 +52,7 @@
             }
         }
 
-        &--multicolor {
+        &--color-multicolor {
             @each $name, $value in $colors {
                 // Only get the gradients WITHOUT the directional modifiers
                 // prettier-ignore
