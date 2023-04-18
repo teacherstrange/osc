@@ -145,7 +145,7 @@ export const getHubspotForms = async (page: SanityPage) => {
         (module: any) => module._type === 'module.forms'
     ) as formModule[];
 
-    if (!formModules) {
+    if (!formModules || formModules.length === 0) {
         return null;
     }
     // Get all hubspot forms
