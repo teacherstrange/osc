@@ -57,16 +57,14 @@ export const ColorPickerRestricted = (props: StringInputProps<StringSchemaType>)
                 value ? (
                     <div
                         style={{
-                            backgroundColor:
-                                colors.default[value] && !colors.default[value].includes('gradient')
-                                    ? colors.default[value]
-                                    : colors.default['primary'],
+                            backgroundColor: !colors?.default[value]?.includes('gradient')
+                                ? colors.default[value]
+                                : colors.default['primary'],
                             width: '1.25em',
                             height: '1.25em',
-                            backgroundImage:
-                                colors.default[value] && colors.default[value].includes('gradient')
-                                    ? colors.default[value]
-                                    : colors.default['gradient-primary'],
+                            backgroundImage: colors?.default[value]?.includes('gradient')
+                                ? colors.default[value]
+                                : '',
                         }}
                     ></div>
                 ) : (
