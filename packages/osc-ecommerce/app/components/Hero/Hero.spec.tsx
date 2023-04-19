@@ -28,7 +28,7 @@ beforeEach(() => {
 test('renders a single Hero', () => {
     render(
         <MemoryRouter>
-            <Hero data={heroSingle as heroModule} />
+            <Hero data={heroSingle as unknown as heroModule} />
         </MemoryRouter>
     );
 
@@ -51,7 +51,7 @@ test('renders a single Hero', () => {
 test("renders multiple Hero's in a carousel", () => {
     render(
         <MemoryRouter>
-            <Hero data={heroCarousel as heroModule} />
+            <Hero data={heroCarousel as unknown as heroModule} />
         </MemoryRouter>
     );
 
@@ -65,7 +65,7 @@ test("renders multiple Hero's in a carousel", () => {
 test('sets the title as a h1 on the initial slide', () => {
     render(
         <MemoryRouter>
-            <Hero data={heroCarousel as heroModule} />
+            <Hero data={heroCarousel as unknown as heroModule} />
         </MemoryRouter>
     );
 
