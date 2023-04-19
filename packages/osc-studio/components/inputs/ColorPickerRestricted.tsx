@@ -36,16 +36,12 @@ const colorValues: { value: string; payload: { color: string } }[] = colorNames.
     })
 );
 
-console.log(colorValues);
-
 export const ColorPickerRestricted = (props: StringInputProps<StringSchemaType>) => {
     const { elementProps, onChange, value = '' } = props;
 
     const handleChange = (value: string) => {
         onChange(value ? set(value) : unset());
     };
-    console.log('colors', colors.default);
-    console.log('values', colorValues);
 
     return (
         <Autocomplete
