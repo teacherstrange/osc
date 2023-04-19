@@ -282,6 +282,7 @@ export interface heroSlide extends module {
     backgroundColor?: string;
     titleColor?: string;
     variant: 'primary' | 'secondary' | 'tertiary';
+    flourishes?: flourishSettings;
 }
 
 export interface heroModule extends module {
@@ -515,4 +516,9 @@ export interface PreviewProps {
     query: string;
     params: { [key: string]: string };
     token: string | null;
+}
+
+export interface flourishSettings extends module {
+    color: string | 'multicolor';
+    pattern: Maybe<'flourishHeroPrimary' | 'flourishHeroSecondary' | 'flourishHeroTertiary'>;
 }
