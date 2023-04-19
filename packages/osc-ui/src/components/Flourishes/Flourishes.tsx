@@ -1,7 +1,9 @@
 import type { ComponentPropsWithoutRef, MouseEvent, ReactNode } from 'react';
-import React, { useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import type { FlourishHeights, FlourishObject, FlourishWidths } from '../../types';
 import { classNames } from '../../utils/classNames';
+import { restoreNodePosition, translateNodes } from '../../utils/handleMouseEvents';
+import { mergeEventHandlers } from '../../utils/mergeEventHandlers';
 import './flourish.scss';
 
 export interface FlourishesProps {
@@ -25,42 +27,38 @@ export interface FlourishesProps {
      * Variant of the flourish
      */
     variant: string;
+    /**
+     * Mouse move event to pass to child container
+     */
+    onMouseMove?: (e: MouseEvent) => void;
+    /**
+     * Mouse leave event to pass to child container
+     */
+    onMouseLeave?: (e: MouseEvent) => void;
 }
 
-export const Flourishes = (props: FlourishesProps) => {
-    const { children, className, color, variant, pattern } = props;
+export const Flourishes = forwardRef<HTMLDivElement, FlourishesProps>((props, forwardedRef) => {
+    const { children, className, color, variant, pattern, onMouseMove, onMouseLeave } = props;
     const containerRef = useRef<HTMLDivElement | null>(null);
 
     const classes = classNames('c-flourish-content', className);
 
-    const handleMouseMove = (e: MouseEvent) => {
-        const container = containerRef.current;
-        const flourishNodes: NodeListOf<HTMLElement> = container.querySelectorAll('.c-flourish');
+    const handleMouseMove = mergeEventHandlers<MouseEvent>(onMouseMove, (e) => {
+        translateNodes(e, containerRef, '.c-flourish', pattern);
+    });
 
-        // Store cursor position as variables
-        let curX = e.clientX;
-        let curY = e.clientY;
-
-        flourishNodes.forEach((flourish, i) => {
-            flourish.style.transform = `
-                rotate(${pattern[i].initial.rotate}deg)
-                translate(${curX / -80}px, ${curY / -80}px)
-            `;
-        });
-    };
-
-    const handleMouseLeave = () => {
-        const container = containerRef.current;
-        const flourishNodes: NodeListOf<HTMLElement> = container.querySelectorAll('.c-flourish');
-
-        flourishNodes.forEach((flourish, i) => {
-            flourish.style.transform = `rotate(${pattern[i].initial.rotate}deg)`;
-        });
-    };
+    const handleMouseLeave = mergeEventHandlers<MouseEvent>(onMouseLeave, () => {
+        restoreNodePosition(containerRef, 'c-flourish', pattern);
+    });
 
     return (
         <>
-            <div className={classes} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+            <div
+                className={classes}
+                onMouseMove={handleMouseMove}
+                ref={forwardedRef}
+                onMouseLeave={handleMouseLeave}
+            >
                 {children}
             </div>
 
@@ -80,7 +78,8 @@ export const Flourishes = (props: FlourishesProps) => {
             </div>
         </>
     );
-};
+});
+Flourishes.displayName = 'Flourishes';
 
 /* -------------------------------------------------------------------------------------------------
  * Flourish
