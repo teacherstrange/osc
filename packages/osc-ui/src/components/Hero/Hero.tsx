@@ -1,15 +1,12 @@
 import type { ElementType, ReactNode } from 'react';
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useRef } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import type { FlourishObject, PolymorphicComponentProps } from '../../types';
 import { classNames } from '../../utils/classNames';
 
+import { translateNodes } from '../../utils/handleMouseEvents';
 import { Flourishes } from '../Flourishes/Flourishes';
 import './hero.scss';
-
-/*
-TODO: Add animated flourishes
-*/
 
 export interface SharedHeroProps {
     /**
@@ -95,6 +92,8 @@ interface HeroInnerProps extends SharedHeroProps {
 
 export const HeroInner = (props: HeroInnerProps) => {
     const { children, className, flourishPattern, flourishColor, flourishVariant } = props;
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
     const classes = classNames(
         'c-hero__inner',
         'o-container',
@@ -108,6 +107,8 @@ export const HeroInner = (props: HeroInnerProps) => {
             pattern={flourishPattern}
             variant={flourishVariant}
             className={classes}
+            ref={containerRef}
+            onMouseMove={(e) => translateNodes(e, containerRef, '.c-hero__img')}
         >
             {children}
         </Flourishes>
