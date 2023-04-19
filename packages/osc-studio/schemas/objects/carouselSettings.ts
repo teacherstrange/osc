@@ -35,7 +35,7 @@ export default defineType({
                 list: ['smooth', 'switch'],
             },
             description: 'Whether the Carousel should autoplay',
-            hidden: ({ parent }) => parent.loop !== true,
+            hidden: ({ parent }) => parent?.loop !== true,
         }),
         defineField({
             title: 'Starting slide',
