@@ -48,6 +48,29 @@ test('renders a single Hero', () => {
     expect(image).toBeInTheDocument();
 });
 
+test('renders the hero with the flourishes attached', () => {
+    const clonedData = JSON.parse(JSON.stringify(heroSingle)) as heroModule;
+
+    clonedData.slides[0].flourishes = {
+        pattern: 'flourishHeroPrimary',
+        color: 'tertiary',
+    };
+
+    render(
+        <MemoryRouter>
+            <Hero data={clonedData} />
+        </MemoryRouter>
+    );
+
+    const flourishes = document.querySelectorAll('.c-flourish');
+
+    expect(flourishes).toHaveLength(8);
+
+    flourishes.forEach((flourish) => {
+        expect(flourish).toHaveClass('c-flourish--hero-primary');
+    });
+});
+
 test("renders multiple Hero's in a carousel", () => {
     render(
         <MemoryRouter>
