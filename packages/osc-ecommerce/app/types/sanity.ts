@@ -286,7 +286,6 @@ export interface heroSlide extends module {
 }
 
 export interface heroModule extends module {
-    carouselName: string;
     carouselSettings: carouselModuleSettings;
     slides: heroSlide[];
 }
