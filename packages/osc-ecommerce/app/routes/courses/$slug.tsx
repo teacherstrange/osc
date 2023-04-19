@@ -109,8 +109,8 @@ export default function Index() {
     // Due how the data is setup in Shopify there are times where we might return the same SKU multiple times
     // Here we are checking if there are any SKUs and then filtering out duplicates
     const uniqueSKUs =
-        product?.variants.nodes &&
-        product?.variants.nodes.length > 0 &&
+        product?.variants?.nodes &&
+        product?.variants?.nodes.length > 0 &&
         (getUniqueObjects(product.variants.nodes, 'sku') as typeof product.variants.nodes);
 
     /**
