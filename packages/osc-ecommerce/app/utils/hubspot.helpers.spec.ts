@@ -1,3 +1,4 @@
+// @ts-ignore:next-line - See issue - https://github.com/Open-Study-College/osc/issues/836
 import type { Mock } from 'vitest';
 import {
     getHubspotForms,
