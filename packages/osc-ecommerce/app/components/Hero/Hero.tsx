@@ -11,6 +11,7 @@ import {
     rem,
 } from 'osc-ui';
 import type { heroModule, heroSlide } from '~/types/sanity';
+import { remapFlourishObject } from '~/utils/remapFlourishObject';
 
 // ! TEMPORARY fix for tokens path not matching dev and prod environments
 // ! Once solution in place we can update this to use design token files instead
@@ -83,7 +84,18 @@ interface SlideProps extends heroSlide {
 }
 
 const Slide = (props: SlideProps) => {
-    const { title, titleColor, backgroundColor, content, variant, image, initialSlide } = props;
+    const {
+        title,
+        titleColor,
+        backgroundColor,
+        content,
+        variant,
+        image,
+        initialSlide,
+        flourishes,
+    } = props;
+
+    const copyFlourishes = remapFlourishObject(flourishes);
 
     const Title = () => {
         return title ? (
@@ -101,7 +113,11 @@ const Slide = (props: SlideProps) => {
             backgroundColor={backgroundColor ? backgroundColor : 'tertiary'}
             variant={variant ? variant : 'primary'}
         >
-            <HeroInner>
+            <HeroInner
+                flourishColor={copyFlourishes?.color}
+                flourishPattern={copyFlourishes?.pattern}
+                flourishVariant={copyFlourishes?.variant}
+            >
                 {variant === 'tertiary' ? (
                     <HeroTitleGroup>
                         <Title />

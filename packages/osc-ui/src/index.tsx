@@ -37,6 +37,14 @@ export { Content } from './components/Content/Content';
 export { ContentMedia, ContentMediaBlock } from './components/ContentMedia/ContentMedia';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export { DatePicker } from './components/DatePicker/DatePicker/DatePicker';
+export { Flourishes } from './components/Flourishes/Flourishes';
+export {
+    heroPrimary as flourishHeroPrimary,
+    heroSecondary as flourishHeroSecondary,
+    heroTertiary as flourishHeroTertiary,
+    primary as flourishPrimary,
+    secondary as flourishSecondary,
+} from './components/Flourishes/patterns';
 export {
     Drawer,
     DrawerCloseButton,
