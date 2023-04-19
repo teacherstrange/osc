@@ -308,5 +308,84 @@ $patterns: (
                 )
             )
         )
+    ),
+    hero-tertiary: (
+        1: (
+            transform: rotate(65deg),
+            left: 40%,
+            top: 10px,
+            breakpoints: (
+                tab: (
+                    left: 40%,
+                    top: 10px
+                )
+            )
+        ),
+        2: (
+            transform: rotate(100deg),
+            left: 55%,
+            top: 70px,
+            breakpoints: (
+                tab: (
+                    left: 55%,
+                    top: 70px
+                )
+            )
+        ),
+        3: (
+            transform: rotate(-65deg),
+            left: 46%,
+            top: 290px,
+            breakpoints: (
+                tab: (
+                    left: 46%,
+                    top: 290px
+                )
+            )
+        ),
+        4: (
+            transform: rotate(-10deg),
+            left: 60%,
+            top: 20px,
+            breakpoints: (
+                tab: (
+                    left: 60%,
+                    top: 20px
+                )
+            )
+        ),
+        5: (
+            transform: rotate(50deg),
+            left: 74%,
+            top: 43px,
+            breakpoints: (
+                tab: (
+                    left: 74%,
+                    top: 43px
+                )
+            )
+        ),
+        6: (
+            transform: rotate(80deg),
+            display: none,
+            breakpoints: (
+                tab: (
+                    display: initial,
+                    left: 94%,
+                    top: 150px
+                )
+            )
+        ),
+        7: (
+            transform: rotate(140deg),
+            left: 94%,
+            top: 460px,
+            breakpoints: (
+                tab: (
+                    left: 94%,
+                    top: 460px
+                )
+            )
+        )
     )
 );
