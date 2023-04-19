@@ -367,7 +367,6 @@ export interface SanityPage {
           }
         | undefined;
     seo: SanitySEO;
-    showHero?: boolean;
     modules: module[] | contentModule[];
     store?: {
         title: string;
