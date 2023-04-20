@@ -9,6 +9,10 @@ export const PRODUCT_QUERY = groq`
         _type,
         store,
         upperContent,
+        // Merge theme query into product
+        ...(*[_type == "collection" && store.slug.current == $collection][0] {
+            theme
+        }),
         ${MODULES},
         ${SEO}
     }

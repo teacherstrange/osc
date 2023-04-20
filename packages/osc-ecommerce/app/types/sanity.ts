@@ -9,6 +9,12 @@ export interface SanityLinkItem {
     title: string;
 }
 
+export interface SanityPageTheme {
+    _type: string;
+    color: string;
+    pattern: string;
+}
+
 export interface InternalSanityLinkItem extends SanityLinkItem {
     documentType?: string;
     slug?: string;
@@ -377,7 +383,8 @@ export interface SanityPage {
 }
 
 export interface SanityProduct extends SanityPage {
-    upperContent: module[] | contentModule[];
+    upperContent?: module[] | contentModule[];
+    theme?: SanityPageTheme;
 }
 
 export interface shopifyProduct {

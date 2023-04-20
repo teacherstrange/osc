@@ -21,8 +21,7 @@ import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
 import { getComponentStyles } from '~/components/Module';
 import { PageContent, PageContentUpper } from '~/components/PageContent';
 import { PreviewBanner } from '~/components/PreviewBanner';
-import getPageData, { getSettingsData, shouldRedirect } from '~/models/sanity.server';
-import { COLLECTION_THEME_QUERY } from '~/queries/sanity/collectionTheme';
+import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
 import {
     RECOMMENDED_PRODUCTS_QUERY,
@@ -88,15 +87,11 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
     // Query the page data
     const data = await getPageData({
         request,
-        params,
-        query: SANITY_PRODUCT_QUERY,
-    });
-
-    const themeData = await getSettingsData({
-        query: COLLECTION_THEME_QUERY,
         params: {
-            slug: product.collections.edges[0].node.handle,
+            slug: params.slug,
+            collection: product.collections.edges[0].node.handle,
         },
+        query: SANITY_PRODUCT_QUERY,
     });
 
     if (!product || !data?.page) {
@@ -122,7 +117,6 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
         page,
         product,
         recommendedProducts,
-        themeData,
         isPreview,
         canonicalUrl,
         hubspotFormData: hubspotFormData ? hubspotFormData : null,
@@ -151,10 +145,10 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { page, product, themeData, isPreview, query, params } = useLoaderData<typeof loader>();
+    const { page, product, isPreview, query, params } = useLoaderData<typeof loader>();
     const intersectionRef = useRef<HTMLDivElement>(null);
     const isPreviewMode = isPreview && query && params;
-    const pageThemeColor = themeData?.theme ? themeData.theme.color : 'gradient-primary';
+    const pageThemeColor = page?.theme ? page.theme.color : 'gradient-primary';
 
     const productFormIntersection = useIntersectionObserver(intersectionRef, {
         root: null,
