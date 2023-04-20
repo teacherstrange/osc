@@ -1,3 +1,8 @@
+export { collectionPrimary } from './collectionPrimary';
+export { collectionQuaternary } from './collectionQuaternary';
+export { collectionQuinary } from './collectionQuinary';
+export { collectionSecondary } from './collectionSecondary';
+export { collectionTertiary } from './collectionTertiary';
 export { heroPrimary } from './heroPrimary';
 export { heroSecondary } from './heroSecondary';
 export { heroTertiary } from './heroTertiary';

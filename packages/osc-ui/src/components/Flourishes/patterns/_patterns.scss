@@ -387,5 +387,165 @@ $patterns: (
                 )
             )
         )
+    ),
+    collection-primary: (
+        1: (
+            transform: rotate(-70deg),
+            top: 50px,
+            left: 60%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        2: (
+            transform: rotate(145deg),
+            top: 70%,
+            left: 22%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-125deg),
+            top: 90%,
+            left: 41%,
+            breakpoints: (
+                tab: (
+                    left: 61%
+                )
+            )
+        )
+    ),
+    collection-secondary: (
+        1: (
+            transform: rotate(50deg),
+            top: 10%,
+            left: 90%,
+            breakpoints: (
+                tab: (
+                    left: 60%
+                )
+            )
+        ),
+        2: (
+            transform: rotate(145deg),
+            top: 100%,
+            left: 77%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-125deg),
+            top: 100%,
+            left: 0%,
+            breakpoints: (
+                tab: (
+                    left: 22%
+                )
+            )
+        )
+    ),
+    collection-tertiary: (
+        1: (
+            transform: rotate(70deg),
+            top: 10%,
+            left: 20%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        2: (
+            transform: rotate(115deg),
+            top: 70%,
+            left: 46%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-105deg),
+            top: 18%,
+            left: 72%,
+            breakpoints: (
+                tab: ()
+            )
+        )
+    ),
+    collection-quaternary: (
+        1: (
+            transform: rotate(140deg),
+            top: 93%,
+            left: 20%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        2: (
+            transform: rotate(-55deg),
+            top: 10%,
+            left: 24%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-125deg),
+            top: 108%,
+            left: 42%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        4: (
+            transform: rotate(245deg),
+            top: 40%,
+            left: 57%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        5: (
+            transform: rotate(65deg),
+            top: 60%,
+            left: 106%,
+            breakpoints: (
+                tab: ()
+            )
+        )
+    ),
+    collection-quinary: (
+        1: (
+            transform: rotate(140deg),
+            top: 25%,
+            left: 20%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        2: (
+            transform: rotate(200deg),
+            top: 90%,
+            left: 20%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-225deg),
+            top: 58%,
+            left: 62%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        4: (
+            transform: rotate(-145deg),
+            top: 80%,
+            left: 87%,
+            breakpoints: (
+                tab: ()
+            )
+        )
     )
 );
