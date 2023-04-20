@@ -20,7 +20,7 @@
 
         &__description {
             flex: 1 100%;
-            font-size: $fs-s;
+            color: var(--color-neutral-700);
         }
 
         &__indicator {
@@ -33,9 +33,12 @@
             color: var(--color-tertiary);
         }
 
+        &__group-container {
+            padding: 0;
+        }
+
         &__container {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
 
             &--secondary {
@@ -65,12 +68,13 @@
                     flex: 1 100%;
                     padding-top: $space-xs;
                     color: var(--color-error);
-                    font-size: $fs-s;
                 }
             }
 
             .c-label {
+                flex: 1;
                 padding-left: $space-xs;
+                color: var(--color-secondary);
             }
         }
 

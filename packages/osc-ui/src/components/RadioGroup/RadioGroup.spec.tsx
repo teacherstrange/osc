@@ -23,7 +23,7 @@ test('should render a RadioGroup with three RadioItems', () => {
     );
 
     expect(screen.getByRole('radiogroup')).toBeInTheDocument();
-    expect(screen.getByRole('radiogroup')).toHaveClass('c-radio-group');
+    expect(screen.getByRole('group')).toHaveClass('c-radio-group');
     expect(screen.getAllByRole('radio')).toHaveLength(3);
     screen
         .getAllByRole('radio')

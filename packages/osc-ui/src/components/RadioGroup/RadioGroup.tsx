@@ -77,16 +77,18 @@ export const RadioGroup = (props: RadioGroupProps) => {
     const radioGroupClasses = classNames('c-radio-group', modifiers);
 
     return (
-        <fieldset>
+        <fieldset
+            className={
+                errors && errors.length > 0
+                    ? `${radioGroupClasses} c-radio-group--error`
+                    : radioGroupClasses
+            }
+        >
             <legend className="c-radio-group__description" id={description.id}>
                 {description.value}
+                {required ? <span className="c-label__required">* </span> : null}
             </legend>
             <RadioGroupPrimitive.Root
-                className={
-                    errors && errors.length > 0
-                        ? `${radioGroupClasses} c-radio-group--error`
-                        : radioGroupClasses
-                }
                 disabled={disabled}
                 defaultValue={defaultValue}
                 name={name}

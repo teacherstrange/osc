@@ -5,7 +5,7 @@ import { textAreaSchema } from './mockSchema';
 import { TextArea } from './TextArea';
 
 test('should render a textarea component with a label', () => {
-    render(<TextArea id="enquiry" name="Enquiry" />);
+    render(<TextArea id="enquiry" label="Enquiry" name="Enquiry" />);
 
     expect(screen.getByRole('textbox', { name: 'Enquiry' })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: 'Enquiry' })).toHaveClass('c-textarea');
@@ -13,12 +13,12 @@ test('should render a textarea component with a label', () => {
 });
 
 test('should render an asterisk when input field is required', () => {
-    render(<TextArea id="enquiry" name="Enquiry" required={true} />);
+    render(<TextArea id="enquiry" label="Enquiry" name="Enquiry" required={true} />);
     expect(screen.getByRole('textbox', { name: 'Enquiry *' })).toBeInTheDocument();
 });
 
 test('should disable the input when disabled prop is true', () => {
-    render(<TextArea id="enquiry" name="Enquiry" disabled={true} />);
+    render(<TextArea id="enquiry" label="Enquiry" name="Enquiry" disabled={true} />);
     expect(screen.getByRole('textbox')).toBeDisabled();
 });
 
@@ -27,6 +27,7 @@ test('should render an error message if an error is passed in', () => {
     render(
         <TextArea
             id="enquiry"
+            label="Enquiry"
             name="Enquiry"
             required={true}
             errors={['Field is required']}

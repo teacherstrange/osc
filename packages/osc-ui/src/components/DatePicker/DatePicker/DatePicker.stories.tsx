@@ -45,7 +45,7 @@ export default {
     },
 } as Meta;
 
-const Template: Story = ({ minValue, maxValue, ...args }) => {
+const Template: Story = ({ minValue, maxValue, name, ...args }) => {
     let [date, setDate] = useState<DateValue | undefined>(
         args.defaultValue ? parseDate(args.defaultValue) : null
     );
@@ -58,6 +58,7 @@ const Template: Story = ({ minValue, maxValue, ...args }) => {
                 granularity={args.granularity}
                 minValue={minValue && parseDate('2023-02-03')}
                 maxValue={maxValue && parseDate('2024-04-03')}
+                name={name}
                 onChange={setDate}
                 value={date}
                 {...args}
@@ -66,9 +67,9 @@ const Template: Story = ({ minValue, maxValue, ...args }) => {
     );
 };
 
-const ValidationTemplate: Story = ({ minValue, maxValue, ...args }) => {
+const ValidationTemplate: Story = ({ minValue, maxValue, name, ...args }) => {
     const [errors, setErrors] = useState({
-        date: ['Field is required'],
+        [name]: ['Field is required'],
     });
 
     let [date, setDate] = useState<DateValue | undefined>(
@@ -80,7 +81,8 @@ const ValidationTemplate: Story = ({ minValue, maxValue, ...args }) => {
         // required to change the date order to dd-mm-YYYY rather than US mm-dd-YYYY
         <I18nProvider locale="en-GB">
             <DatePicker
-                errors={errors.date}
+                errors={errors[name]}
+                name={name}
                 onChange={setDate}
                 setErrors={setErrors}
                 schema={datePickerSchema.date}
@@ -98,10 +100,11 @@ export const Validation = ValidationTemplate.bind({});
 
 Primary.args = {
     label: 'Date',
+    name: 'date',
 };
 DefaultDate.args = {
+    ...Primary.args,
     defaultValue: '2022-02-03',
-    label: 'Date',
 };
 DefaultDate.parameters = {
     docs: {
@@ -111,7 +114,7 @@ DefaultDate.parameters = {
     },
 };
 MinAndMaxDates.args = {
-    label: 'Date',
+    ...Primary.args,
     minValue: true,
     maxValue: true,
 };
@@ -123,7 +126,7 @@ MinAndMaxDates.parameters = {
     },
 };
 Validation.args = {
-    label: 'Date',
+    ...Primary.args,
 };
 Validation.parameters = {
     docs: {

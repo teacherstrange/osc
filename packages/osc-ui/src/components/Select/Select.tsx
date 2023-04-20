@@ -135,7 +135,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                     </SelectPrimitive.Content>
                 </SelectPrimitive.Root>
                 {errors && errors.length > 0 ? (
-                    <div className="c-select__error-message">
+                    <div className="c-select__error-messages" id={`${name}-error`}>
                         {errors.map((error, index) => (
                             <span key={index} className="u-pr-2xs">
                                 {error}

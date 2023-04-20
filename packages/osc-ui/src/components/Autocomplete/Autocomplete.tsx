@@ -175,6 +175,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
                         }}
                         className="c-input c-input__text c-input__text--quaternary"
                         id="search"
+                        label="Search"
                         name="Search"
                         ref={inputRef}
                         variants={['quaternary']}

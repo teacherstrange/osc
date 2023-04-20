@@ -32,6 +32,7 @@ export {
 } from './components/Card/Card';
 export { Carousel } from './components/Carousel/Carousel';
 export { Checkbox } from './components/Checkbox/Checkbox';
+export { CheckboxGroup } from './components/Checkbox/CheckboxGroup';
 export { Content } from './components/Content/Content';
 export { ContentMedia, ContentMediaBlock } from './components/ContentMedia/ContentMedia';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
@@ -77,6 +78,7 @@ export {
     PopoverContent,
     PopoverTrigger,
 } from './components/Popover/Popover';
+export { RadioGroup, RadioItem } from './components/RadioGroup/RadioGroup';
 export { Select, SelectItem } from './components/Select/Select';
 export { SkipLink } from './components/SkipLink/SkipLink';
 export { Switch } from './components/Switch/Switch';

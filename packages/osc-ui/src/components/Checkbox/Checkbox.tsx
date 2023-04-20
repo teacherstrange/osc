@@ -13,10 +13,6 @@ type Variants = 'secondary' | 'tertiary';
 
 export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrimitive.Root> {
     /**
-     * An optional description for the checkbox
-     */
-    description?: { id: string; value: string };
-    /**
      * Any error messages - initially set through server validation, but can be updated through client validation
      */
     errors?: string[] | undefined;
@@ -55,7 +51,6 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
     (props, forwardedRef) => {
         const {
             defaultChecked,
-            description,
             disabled,
             errors,
             icon,
@@ -69,12 +64,13 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
         } = props;
 
         const [checked, setChecked] = useState<string | boolean>(false);
-
         useEffect(() => {
             // Client side error handling - Sets any errors on an input in
             // accordance with the schema validation
             if (errors && errors.length > 0 && schema && setErrors) {
-                clientSideValidation(id, schema, setErrors, checked);
+                // Checkbox schema looks whether there is an array of values, as this is what
+                // gets submitted to the server. On the client, if checked is false then set to empty array
+                clientSideValidation(name, schema, setErrors, checked ? ['true'] : []);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
         }, [checked]);
@@ -83,18 +79,16 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
         const checkboxClasses = classNames('c-checkbox__container', modifiers);
 
         return (
-            <fieldset
+            <div
                 className={
                     errors && errors.length > 0
                         ? `${checkboxClasses} c-checkbox__container--error`
                         : `${checkboxClasses}`
                 }
             >
-                {description ? (
-                    <legend className="c-checkbox__description">{description?.value}</legend>
-                ) : null}
                 <CheckboxPrimitive.Root
                     aria-label={value}
+                    aria-describedby={`${id}-error`}
                     className="c-checkbox"
                     defaultChecked={defaultChecked}
                     disabled={disabled}
@@ -109,17 +103,8 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                         {icon ? <Icon id={icon.id} className={icon.className} /> : null}
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
-                <Label name={value} htmlFor={id} required={required} />
-                {errors && errors.length > 0 ? (
-                    <div className="c-checkbox__error-message" role="alert">
-                        {errors.map((error, index) => (
-                            <span key={index} className="u-pr-2xs">
-                                {error}
-                            </span>
-                        ))}
-                    </div>
-                ) : null}
-            </fieldset>
+                <Label name={value} htmlFor={id} />
+            </div>
         );
     }
 );

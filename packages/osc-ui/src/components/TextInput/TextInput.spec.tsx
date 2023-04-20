@@ -6,20 +6,34 @@ import { TextInput } from './TextInput';
 import { textInputSchema } from './mockSchema';
 
 test('should render a text input component and a label', () => {
-    render(<TextInput type="text" id="test-input" name="Test Input" />);
+    render(<TextInput type="text" id="test-input" label="Test Input" name="Test Input" />);
     expect(screen.getByRole('textbox')).toBeInTheDocument();
     expect(screen.getByLabelText('Test Input')).toBeInTheDocument();
 });
 
 test('should render an asterisk when input field is required', () => {
-    render(<TextInput type="text" id="test-input" name="Test Input" required={true} />);
+    render(
+        <TextInput
+            type="text"
+            id="test-input"
+            label="Test Input"
+            name="testInput"
+            required={true}
+        />
+    );
     expect(screen.getByRole('textbox', { name: 'Test Input *' })).toBeInTheDocument();
 });
 
 test('should render an icon when passed as a prop', () => {
     render(
         <SpritesheetProvider>
-            <TextInput type="text" id="test-input" name="Test Input" icon={{ id: 'calendar' }} />
+            <TextInput
+                type="text"
+                id="test-input"
+                label="Test Input"
+                name="testInput"
+                icon={{ id: 'calendar' }}
+            />
         </SpritesheetProvider>
     );
     expect(document.querySelector('use')).toBeInTheDocument();
@@ -32,7 +46,8 @@ test('should render a button with icon if action is set to type "submit" and pas
             <TextInput
                 type="text"
                 id="test-input"
-                name="Test Input"
+                label="Test Input"
+                name="testInput"
                 action={{ iconId: 'search' }}
             />
         </SpritesheetProvider>
@@ -42,12 +57,28 @@ test('should render a button with icon if action is set to type "submit" and pas
 });
 
 test('should disable the input when disabled prop is true', () => {
-    render(<TextInput type="text" id="test-input" name="Test Input" disabled={true} />);
+    render(
+        <TextInput
+            type="text"
+            id="test-input"
+            label="Test Input"
+            name="testInput"
+            disabled={true}
+        />
+    );
     expect(screen.getByRole('textbox')).toBeDisabled();
 });
 
 test('should render correct variant classes', () => {
-    render(<TextInput type="text" id="test-input" name="Test Input" variants={['secondary']} />);
+    render(
+        <TextInput
+            type="text"
+            id="test-input"
+            label="Test Input"
+            name="testInput"
+            variants={['secondary']}
+        />
+    );
     expect(screen.getByLabelText('Test Input')).toHaveClass(
         'c-input__text c-input__text--secondary'
     );
@@ -60,7 +91,8 @@ test('should render error message if an error is passed in', () => {
             <TextInput
                 type="text"
                 id="firstname"
-                name="First Name"
+                label="First Name"
+                name="firstname"
                 errors={['Field is required']}
                 schema={textInputSchema.firstname}
                 required={true}
@@ -73,7 +105,7 @@ test('should render error message if an error is passed in', () => {
     expect(screen.getByRole('alert')).toHaveTextContent('Field is required');
 });
 
-const ControlledInput = ({ id, name, schema }) => {
+const ControlledInput = ({ id, label, name, schema }) => {
     const [errors, setErrors] = useState({
         firstname: ['Field is required'],
         email: ['Invalid Email'],
@@ -83,6 +115,7 @@ const ControlledInput = ({ id, name, schema }) => {
         <TextInput
             type="text"
             id={id}
+            label={label}
             name={name}
             errors={errors[id]}
             schema={schema}
@@ -97,7 +130,8 @@ test('should clear the error messages when a corrected value is passed in', asyn
     render(
         <SpritesheetProvider>
             <ControlledInput
-                name={'First Name'}
+                label="First Name"
+                name="firstname"
                 id="firstname"
                 schema={textInputSchema.firstname}
             />
@@ -105,7 +139,6 @@ test('should clear the error messages when a corrected value is passed in', asyn
     );
 
     expect(screen.getByRole('alert')).toBeInTheDocument();
-
     const input1 = screen.getByRole('textbox', { name: 'First Name *' });
     await user.type(input1, 'test');
 
@@ -116,7 +149,7 @@ test('should render multiple errors if present, and clear them once valid inputs
     const user = userEvent.setup();
     render(
         <SpritesheetProvider>
-            <ControlledInput id="email" name="Email" schema={textInputSchema.email} />
+            <ControlledInput id="email" label="Email" name="email" schema={textInputSchema.email} />
         </SpritesheetProvider>
     );
 
@@ -141,8 +174,8 @@ test('should change focus to second input when using the tab key', async () => {
     const user = userEvent.setup();
     render(
         <>
-            <TextInput type="text" id="test-input-1" name="Test Input 1" />
-            <TextInput type="text" id="test-input-2" name="Test Input 2" />
+            <TextInput type="text" id="test-input-1" label="Test Input 1" name="Test Input 1" />
+            <TextInput type="text" id="test-input-2" label="Test Input 2" name="Test Input 2" />
         </>
     );
 

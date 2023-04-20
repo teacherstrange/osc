@@ -3,7 +3,7 @@ import { SpritesheetProvider } from 'osc-ui';
 import { useState } from 'react';
 import type { FormContainerProps } from '../FormContainer';
 import { FormContainer } from '../FormContainer';
-import { hubspotFormData, sanityFormData, validationErrors } from '../mockData';
+import { mockHubspotFormData, validationErrors } from '../mockData';
 import type { HubspotFormProps } from './HubspotForm';
 import { HubspotForm } from './HubspotForm';
 
@@ -36,13 +36,10 @@ const Template: Story<HubspotFormProps & FormContainerProps> = (args) => {
 
     return (
         <SpritesheetProvider>
-            <div className={`c-form__contact-form`} style={{ margin: '3em 0' }}>
-                <FormContainer
-                    slideOut={args.slideOut}
-                    slideOutText={args.slideOutText}
-                    variant={args.variant}
-                >
+            <div style={{ margin: '3em 0' }}>
+                <FormContainer variants={args.variants}>
                     <HubspotForm
+                        formId="fe5ae92f-faeb-4d04-b8e0-72619d5459f5"
                         formErrors={[]}
                         formFieldGroups={args.formFieldGroups}
                         setValidationErrors={setValidationErrors}
@@ -59,15 +56,13 @@ export const Primary = Template.bind({});
 export const Validation = Template.bind({});
 
 Primary.args = {
-    formFieldGroups: hubspotFormData.formFieldGroups,
-    slideOut: sanityFormData.slideOut,
-    slideOutText: sanityFormData.slideOutText,
-    submitText: hubspotFormData.submitText,
-    variant: sanityFormData.slideDirection,
+    formFieldGroups: mockHubspotFormData.formFieldGroups,
+    submitText: mockHubspotFormData.submitText,
+    variants: ['callback-form'],
 };
 
 Validation.args = {
     ...Primary.args,
-    variant: 'slide-left',
+    variants: ['callback-form'],
     validationErrors: validationErrors,
 };

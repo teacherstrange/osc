@@ -1,85 +1,119 @@
 import { json } from '@remix-run/node';
-import { getValidationSchema } from '~/components/Forms/utils';
-import { hubspotFormsApiRequest, getHubspotFormData } from '~/utils/server/hubspot.server';
-import { validateAction } from '~/utils/validation';
+import type { HubspotFormData, HubspotFormFieldTypes } from '~/components/Forms/types';
+import {
+    flattenResults,
+    getValidationSchema,
+    isJsonString,
+    reshapeDate,
+    setFormErrorsAndReport,
+} from '~/components/Forms/utils';
 import type { formModule } from '~/types/sanity';
-import type { HubspotFormData } from '~/components/Forms/types';
+import type { SanityPage } from '~/types/sanity';
+import { getHubspotFormData, hubspotFormsApiRequest } from '~/utils/server/hubspot.server';
+import { validateAction } from '~/utils/validation';
 
+/**
+ * Shapes form data into the shape required for their API - https://legacydocs.hubspot.com/docs/methods/forms/submit_form_v3_authentication
+ *
+ * @param formFieldsData An array consisting of objects or nested arrays
+ * @param formData The submitted form data
+ * @returns An array of shaped objects to be submitted to Hubspot
+ */
 export const shapeHubspotFormData = (
-    formFieldsData: Record<any, string>[],
-    formData: Record<any, string>
+    formFieldsData: Partial<HubspotFormFieldTypes[] | HubspotFormFieldTypes[][]>,
+    formData: Record<string, string | number | [] | {}>
 ) => {
-    const shapedData = formFieldsData.map((item) => {
+    const shapedData = flattenResults(formFieldsData).map((item: HubspotFormFieldTypes) => {
+        if (Array.isArray(formData[item.name])) {
+            const formDataNestedArray = formData[item.name] as string[] | number[];
+            // If there is an array of data, e.g. for a checkbox, create separate entry for each
+            return formDataNestedArray.map((value) => ({
+                objectTypeId: item.objectTypeId,
+                name: item.name,
+                value: value,
+            }));
+        }
+
         return {
             objectTypeId: item.objectTypeId,
             name: item.name,
-            value: formData[item.name],
+            value:
+                item.type === 'date'
+                    ? reshapeDate(formData[item.name] as Record<string, number>)
+                    : formData[item.name],
         };
     });
-    return { fields: shapedData };
+
+    return { fields: flattenResults(shapedData) };
 };
 
 interface FormFieldData {
-    [key: string]: FormDataEntryValue;
+    [key: string]: string | number | string[];
 }
 
 /**
  * Validate and submit Hubspot Form
  *
  * @param formfieldData All form field data
- * @returns Response from Hubspot or error(s)
+ * @param errorCases An error object for validation and form errors
+ * @returns Either a success response from hubspot or an error object
  */
-export const validateAndSubmitHubspotForm = async (formfieldData: FormFieldData) => {
-    // Create errors object
-    let errorCases = { validationErrors: {}, formErrors: {} };
+export const validateAndSubmitHubspotForm = async (
+    formfieldData: FormFieldData,
+    errorCases: { validationErrors: {}; formErrors: {} }
+) => {
+    // Get the hubspot field data [1], form Id [2] and form input data [3]
+    const hubspotFormFields: Partial<HubspotFormFieldTypes[] | HubspotFormFieldTypes[][]> =
+        JSON.parse(formfieldData.hubspotFieldsData as string); // [1]
 
-    // Return if there is no hubspot field data, or a formId
-    if (!formfieldData.hubspotFieldsData) {
-        // TODO - Add in error reporting? e.g. Sentry
-        console.error('No hubspot field data!');
-        errorCases.formErrors = { messages: ['There was a problem, please try again'] };
-        return json(errorCases);
-    }
-    if (!formfieldData.formId) {
-        // TODO - Add in error reporting? e.g. Sentry
-        console.error('No form Id!');
-        errorCases.formErrors = { messages: ['There was a problem, please try again'] };
-        return json(errorCases);
-    }
+    const formId = formfieldData.formId; // [2]
 
-    // Get the hubspot field data, form Id and the form input data
-    const hubspotFormFields = JSON.parse(formfieldData.hubspotFieldsData as string);
-    const formId = formfieldData.formId;
-    // All other fields (apart from formId, hubsportFieldsdata and _action) should be form input data
-    const formInputData = Object.keys(formfieldData).reduce((formFields, formField) => {
-        if (
-            formField === 'formId' ||
-            formField === 'hubspotFieldsData' ||
-            formField === '_action'
-        ) {
-            return { ...formFields };
-        } else {
-            return {
-                ...formFields,
-                [formField]: formfieldData[formField],
-            };
-        }
-    }, {});
+    const formInputData: Record<string, any> = Object.keys(formfieldData).reduce(
+        (formFields, formField) => {
+            // Exclude following fields as they aren't formInput data
+            if (
+                formField === 'formId' ||
+                formField === 'hubspotFieldsData' ||
+                formField === '_action'
+            ) {
+                return { ...formFields };
+            } else {
+                return {
+                    ...formFields,
+                    // If field is JSON string then parse
+                    [formField]: isJsonString(formfieldData[formField])
+                        ? JSON.parse(formfieldData[formField] as string)
+                        : formfieldData[formField],
+                };
+            }
+        },
+        {}
+    ); // [3]
 
     // Create the validation schema
     const schema = getValidationSchema(hubspotFormFields);
 
-    // Validate the form with Zod
-    const { validatedFormInputData, errors } = await validateAction({ formInputData, schema });
+    // Small utility - When radio button isn't selected it doesn't create a formData entry. This loops over hubspot
+    // formfields to check if there are any entries for don't exist on the form data and creates an entry of an empty
+    // string for validation purposes if so.
+    flattenResults(hubspotFormFields).forEach((result: HubspotFormFieldTypes) => {
+        for (const data of Object.keys(formInputData)) {
+            if (result.name === data) return;
+        }
+        formInputData[result.name] = '';
+    });
 
-    // If any errors then return
+    // Validate the form with Zod
+    const { errors } = await validateAction({ formInputData, schema });
+
+    // If any Zod errors then return
     if (errors) {
         errorCases.validationErrors = errors;
         return json(errorCases);
     }
 
     // If validation is passed - shape the hubspot form data to be submitted to Hubspot
-    const hubspotContactData = shapeHubspotFormData(hubspotFormFields, validatedFormInputData);
+    const hubspotContactData = shapeHubspotFormData(hubspotFormFields, formInputData);
 
     try {
         const response = await hubspotFormsApiRequest(
@@ -89,21 +123,29 @@ export const validateAndSubmitHubspotForm = async (formfieldData: FormFieldData)
         );
         return response;
     } catch (error: unknown) {
-        // TODO - Add in error reporting? e.g. Sentry
         let message = 'Unknown Error';
         if (error instanceof Error) message = error.message;
-        console.error('Error submitting form:', message);
-        errorCases.formErrors = { messages: ['There was a problem, please try again'] };
-        return json(errorCases);
+        return setFormErrorsAndReport(errorCases, {
+            loggingMessages: [message],
+            userMessages: [
+                'Sorry there was an error submitting your form, please try again or contact us directly.',
+            ],
+        });
     }
 };
 
-export const getHubspotForms = async (page: any) => {
+/**
+ * Get hubspot forms and reshape
+ *
+ * @param page Sanity Page
+ * @returns An array of hubspot forms for the given page
+ */
+export const getHubspotForms = async (page: SanityPage) => {
     const formModules = page.modules?.filter(
         (module: any) => module._type === 'module.forms'
     ) as formModule[];
 
-    if (!formModules) {
+    if (!formModules || formModules.length === 0) {
         return null;
     }
     // Get all hubspot forms
@@ -113,11 +155,13 @@ export const getHubspotForms = async (page: any) => {
             let formData: HubspotFormData;
             try {
                 formData = await getHubspotFormData(formId);
-                const hubspotFormData: Partial<HubspotFormData> = {
+                const hubspotFormData = {
                     [formId]: {
                         formFieldGroups: formData?.formFieldGroups,
+                        style: formData?.style,
                         submitText: formData?.submitText,
-                    },
+                        themeName: formData?.themeName,
+                    } as Partial<HubspotFormData>,
                 };
                 return hubspotFormData;
             } catch (error) {

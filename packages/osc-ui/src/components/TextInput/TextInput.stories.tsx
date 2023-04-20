@@ -89,7 +89,8 @@ const ValidationTemplate: Story = () => {
                 <TextInput
                     errors={primaryStyleErrors.firstname}
                     id="firstname"
-                    name="First Name"
+                    label="First Name"
+                    name="firstname"
                     setErrors={setFirstnameErrors}
                     schema={textInputSchema.firstname}
                     type="text"
@@ -97,7 +98,8 @@ const ValidationTemplate: Story = () => {
                 <TextInput
                     errors={secondaryStyleErrors.lastname}
                     id="lastname"
-                    name="Last Name"
+                    label="Last Name"
+                    name="lastname"
                     setErrors={setLastnameErrors}
                     schema={textInputSchema.lastname}
                     type="text"
@@ -106,7 +108,8 @@ const ValidationTemplate: Story = () => {
                 <TextInput
                     errors={tertiaryStyleErrors.email}
                     id="email"
-                    name="Email"
+                    label="Email"
+                    name="email"
                     setErrors={setEmailErrors}
                     schema={textInputSchema.email}
                     type="email"
@@ -126,26 +129,29 @@ export const Validation = ValidationTemplate.bind({});
 Primary.args = {
     items: [
         {
-            name: 'Full Name',
             editor: 'input',
             id: 'full-name-1',
+            label: 'Full Name',
+            name: 'fullname',
             required: true,
             type: 'text',
             state: 'default',
         },
         {
             defaultValue: 'Sarah',
-            name: 'Full Name',
+            name: 'fullname',
             editor: 'input',
             id: 'full-name-2',
+            label: 'Full Name',
             required: true,
             type: 'text',
             state: 'hasValue',
         },
         {
-            name: 'Full Name',
+            name: 'fullname',
             editor: 'input',
             id: 'full-name-3',
+            label: 'Full Name',
             ref: true,
             required: true,
             type: 'text',
@@ -153,10 +159,11 @@ Primary.args = {
         },
         {
             defaultValue: 'Sarah',
-            name: 'Full Name',
+            name: 'fullname',
             disabled: true,
             editor: 'input',
             id: 'full-name-5',
+            label: 'Full Name',
             type: 'text',
             state: 'isDisabled',
         },
@@ -166,26 +173,29 @@ Primary.args = {
 Secondary.args = {
     items: [
         {
-            name: 'Full Name',
+            name: 'fullname',
             editor: 'input',
             id: 'full-name-1',
+            label: 'Full Name',
             type: 'text',
             variants: ['secondary'],
             state: 'default',
         },
         {
             defaultValue: 'Sarah',
-            name: 'Full Name',
+            name: 'fullname',
             editor: 'input',
             id: 'full-name-2',
+            label: 'Full Name',
             type: 'text',
             variants: ['secondary'],
             state: 'hasValue',
         },
         {
-            name: 'Full Name',
+            name: 'fullname',
             editor: 'input',
             id: 'full-name-3',
+            label: 'Full Name',
             ref: true,
             type: 'text',
             variants: ['secondary'],
@@ -193,10 +203,11 @@ Secondary.args = {
         },
 
         {
-            name: 'Full Name',
+            name: 'fullname',
             disabled: true,
             editor: 'input',
             id: 'full-name-5',
+            label: 'Full Name',
             type: 'text',
             variants: ['secondary'],
             state: 'isDisabled',
@@ -215,36 +226,40 @@ Secondary.parameters = {
 Tertiary.args = {
     items: [
         {
-            name: 'Full Name',
+            name: 'fullname',
             editor: 'input',
             id: 'full-name-1',
+            label: 'Full Name',
             state: 'default',
             type: 'text',
             variants: ['tertiary'],
         },
         {
             defaultValue: 'Sarah',
-            name: 'Full Name',
+            name: 'fullname',
             editor: 'input',
             id: 'full-name-2',
+            label: 'Full Name',
             state: 'hasValue',
             type: 'text',
             variants: ['tertiary'],
         },
         {
-            name: 'Full Name',
+            name: 'fullname',
             editor: 'input',
             id: 'full-name-3',
+            label: 'Full Name',
             ref: true,
             state: 'hasFocus',
             type: 'text',
             variants: ['tertiary'],
         },
         {
-            name: 'Full Name',
+            name: 'fullname',
             disabled: true,
             editor: 'input',
             id: 'full-name-5',
+            label: 'Full Name',
             state: 'isDisabled',
             type: 'text',
             variants: ['tertiary'],
@@ -270,7 +285,8 @@ Quaternary.args = {
             },
             editor: 'input',
             id: 'search',
-            name: 'Search',
+            label: 'Search',
+            name: 'search',
             state: 'default',
             type: 'text',
             variants: ['quaternary'],
@@ -284,7 +300,8 @@ Quaternary.args = {
             defaultValue: 'GCSE English',
             editor: 'input',
             id: 'search-1',
-            name: 'Search',
+            label: 'Search',
+            name: 'search',
             state: 'hasValue',
             type: 'text',
             variants: ['quaternary'],

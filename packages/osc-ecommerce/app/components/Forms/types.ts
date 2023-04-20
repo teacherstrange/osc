@@ -122,6 +122,14 @@ export interface HubspotFormData {
      * This will effectively always be 0 as deleted forms are not available through the API.
      */
     readonly deletedAt: number;
+    /**
+     * Not in official docs, but returned from v2 Forms API - This denotes styling options on inputs e.g. Round, Linear, Canvas
+     */
+    themeName: string;
+    /**
+     * Not in official docs, but returned from v2 Forms API - Returns styles in a JSON Stringified format
+     */
+    style: string;
 }
 
 export interface HubspotFormFieldGroups {
@@ -173,12 +181,12 @@ export interface HubspotFormFieldTypes {
      * the options that will be selected by default
      */
     //
-    selectedOptions: [];
+    selectedOptions: string[];
     /**
      * For enumerated fields, this will be a list of Strings representing the available options for the field
      * Will be empty for non-enumerated fields.
      */
-    options: [];
+    options: SelectAndCheckboxOptions[];
     /**
      * A set of options controlling the validation for the field
      * NOTE: These options should NOT be modified through the API. Any validation
@@ -241,4 +249,14 @@ export interface HubspotFormFieldTypes {
 export interface HubspotRichText {
     content: string;
     type: string;
+}
+
+export interface SelectAndCheckboxOptions {
+    label: string;
+    value: string;
+    displayOrder?: number;
+    doubleData?: number;
+    hidden?: boolean;
+    description?: string;
+    readOnly?: boolean;
 }

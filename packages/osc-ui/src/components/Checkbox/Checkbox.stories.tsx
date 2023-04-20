@@ -2,6 +2,7 @@ import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Checkbox } from './Checkbox';
+import { CheckboxGroup } from './CheckboxGroup';
 import { checkboxSchema } from './mockSchema';
 
 export default {
@@ -37,19 +38,22 @@ const Template: Story = ({ variations }) => {
         return (
             <div key={index} style={{ margin: '1.5em 1em' }}>
                 <p style={{ fontWeight: '700' }}>{states[variation.state]}</p>
-                <Checkbox
-                    defaultChecked={variation.defaultChecked}
+                <CheckboxGroup
                     description={variation.description}
                     disabled={variation.disabled}
-                    icon={variation.icon}
-                    id={variation.id}
-                    key={index}
-                    name={variation.name}
-                    ref={variation.ref ? selectRef : null}
                     required={variation.required}
-                    value={variation.value}
-                    variants={variation.variants}
-                />
+                >
+                    <Checkbox
+                        defaultChecked={variation.defaultChecked}
+                        icon={variation.icon}
+                        id={variation.id}
+                        key={index}
+                        name={variation.name}
+                        ref={variation.ref ? selectRef : null}
+                        value={variation.value}
+                        variants={variation.variants}
+                    />
+                </CheckboxGroup>
             </div>
         );
     });
@@ -62,16 +66,25 @@ const ValidationTemplate: Story = () => {
 
     return (
         <div style={{ margin: '1.5em 1em' }}>
-            <Checkbox
-                defaultChecked={false}
+            <CheckboxGroup
                 errors={errors.termsAndConditions}
-                id="termsAndConditions"
-                name="termsandconditions"
+                description={{
+                    id: 'contact-soon',
+                    value: "If you'd rather we call you sooner, check the box below",
+                }}
                 required={true}
-                setErrors={setErrors}
-                schema={checkboxSchema.termsAndConditions}
-                value="Accept the terms and conditions"
-            />
+            >
+                <Checkbox
+                    defaultChecked={false}
+                    errors={errors.termsAndConditions}
+                    id="termsAndConditions"
+                    name="termsAndConditions"
+                    required={true}
+                    setErrors={setErrors}
+                    schema={checkboxSchema.termsAndConditions}
+                    value="Accept the terms and conditions"
+                />
+            </CheckboxGroup>
         </div>
     );
 };
