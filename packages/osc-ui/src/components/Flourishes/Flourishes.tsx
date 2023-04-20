@@ -28,6 +28,14 @@ export interface FlourishesProps {
      */
     variant: string;
     /**
+     * Sets a modifier to increase the z-index of the pattern
+     */
+    isAboveContent?: boolean;
+    /**
+     * Set the size the flourishes will calculate against
+     */
+    size?: number;
+    /**
      * Mouse move event to pass to child container
      */
     onMouseMove?: (e: MouseEvent) => void;
@@ -38,7 +46,17 @@ export interface FlourishesProps {
 }
 
 export const Flourishes = forwardRef<HTMLDivElement, FlourishesProps>((props, forwardedRef) => {
-    const { children, className, color, variant, pattern, onMouseMove, onMouseLeave } = props;
+    const {
+        children,
+        className,
+        color,
+        variant,
+        pattern,
+        isAboveContent,
+        size,
+        onMouseMove,
+        onMouseLeave,
+    } = props;
     const containerRef = useRef<HTMLDivElement | null>(null);
 
     const classes = classNames('c-flourish-content', className);
@@ -62,13 +80,19 @@ export const Flourishes = forwardRef<HTMLDivElement, FlourishesProps>((props, fo
                 {children}
             </div>
 
-            <div className="c-flourish__container" ref={containerRef}>
+            <div
+                className={`c-flourish__container ${
+                    isAboveContent ? 'c-flourish__container--above' : ''
+                } o-container`}
+                ref={containerRef}
+            >
                 {pattern.map((flourish, index) => (
                     <Flourish
                         key={index}
                         width={flourish.size.w}
                         height={flourish.size.h}
                         color={color}
+                        maxHeight={size}
                         className={`c-flourish--${variant}`}
                         style={{
                             transform: `rotate(${flourish.initial.rotate}deg)`,
