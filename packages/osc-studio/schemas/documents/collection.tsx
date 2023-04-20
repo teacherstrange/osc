@@ -88,7 +88,7 @@ export default defineType({
         defineField({
             name: 'theme',
             title: 'Theme',
-            type: 'theme',
+            type: 'flourishes',
             group: 'settings',
         }),
         defineField({
