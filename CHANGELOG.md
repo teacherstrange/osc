@@ -1,3 +1,89 @@
+## [0.71.0](https://github.com/Open-Study-College/osc/compare/v0.70.0...v0.71.0) (2023-04-20)
+
+
+### 🐛 Bugs
+
+* add Label prop to textInput and textArea to differentiate name and id props ([a445a7c](https://github.com/Open-Study-College/osc/commit/a445a7c43faa04abd9793c31fc0d1ee3a8103100))
+
+
+### ✨ Features
+
+* add prospectus form id ([8e9ed0a](https://github.com/Open-Study-College/osc/commit/8e9ed0a89b815402655933b89a4496d48807db86))
+* add select component and select validation ([2116650](https://github.com/Open-Study-College/osc/commit/21166503de6fb14bca9503ac5cfcf0c1904f7dc5))
+
+
+### ♻️ Refactors
+
+* add "Search" label to TextInput in Autocomplete ([a017521](https://github.com/Open-Study-College/osc/commit/a017521864795405ffce92719e9cc2ed46828761))
+* add a reset for form error alerts ([0c9e0f0](https://github.com/Open-Study-College/osc/commit/0c9e0f0ac013c7ba970631e8250e08e293ef0dfd))
+* add additional check ([aede703](https://github.com/Open-Study-College/osc/commit/aede703f65f309f37b3e2c4892f7c20bf8e44414))
+* add additional uniqueIds to resolve server/client id mismatches ([e71ceed](https://github.com/Open-Study-College/osc/commit/e71ceed9dc9623eb2dcc30e70821d1e4766a9782))
+* add check no array length ([0d60813](https://github.com/Open-Study-College/osc/commit/0d60813197c6781a43166e099294dcc75227ae5e))
+* add checkbox group, move error handling & update arguments passed to clientSideValidation ([dd77d22](https://github.com/Open-Study-College/osc/commit/dd77d22abc3ac1c9815171dfddb30c7d210617a4))
+* add checkbox, label and radio styles ([c1f6746](https://github.com/Open-Study-College/osc/commit/c1f6746a7eedf87946ba21dd54ccf8c9e252deca))
+* add datepicker stylesheets ([aca4d14](https://github.com/Open-Study-College/osc/commit/aca4d14222884d690862974b96abcfabde32d71f))
+* add datepicker to utils, update validation, add "name" prop and update components/tests ([f244c25](https://github.com/Open-Study-College/osc/commit/f244c2576a417a9eadf4d4cc256e118d0520e622))
+* add error-alert class ([b846d9d](https://github.com/Open-Study-College/osc/commit/b846d9dce52b595a5ad5b44586c04a59f6d123bd))
+* add exports for Checkbox and Radio components ([7afaf60](https://github.com/Open-Study-College/osc/commit/7afaf60577b7ddf8c81c15453ca451585bc8c42c))
+* add functionality for successful submission ([d1f2f63](https://github.com/Open-Study-College/osc/commit/d1f2f635a31650c08710d6dd4ab1cd4d73b52efa))
+* add getFormFields to validation function ([23c9a55](https://github.com/Open-Study-College/osc/commit/23c9a55ab6703725df54cd8ca7134d95aa5dc2a7))
+* add hubspot helper tests ([2f7a66d](https://github.com/Open-Study-College/osc/commit/2f7a66d6dab4520e78bcc2754aa5d27c34ad4e37))
+* add inline styling for form inputs ([22674a4](https://github.com/Open-Study-College/osc/commit/22674a45c6e3109dc731e8e3d722e4cb0633787a))
+* add isWhite prop and styles ([3bd0ecb](https://github.com/Open-Study-College/osc/commit/3bd0ecbf0e3ffcd9ddfdf7d4c218a4936c9c31f9))
+* add JSDocs and correct function argument type ([ad2b8d0](https://github.com/Open-Study-College/osc/commit/ad2b8d06c6ea0a3813ed124f73fbaa43fa9d07a9))
+* add key to Form to ensure that the Select component gets reset when the form is submitted ([b2cc010](https://github.com/Open-Study-College/osc/commit/b2cc0109c30dc94b79df316e2fa36a17ac16250b))
+* add layer component, restructure and remove redundant css ([b07bca4](https://github.com/Open-Study-College/osc/commit/b07bca4758897df616fcdda776c727b8f69bc8fa))
+* add radio and checkbox, and just return results instead of assigning/pushing into array ([4475c8f](https://github.com/Open-Study-College/osc/commit/4475c8fee5b33223b89fc46b72ef700dca4c4c6d))
+* add required and group error styling/classes ([4378f23](https://github.com/Open-Study-College/osc/commit/4378f230589a7328fcc97f4576c1a9d1ddafac27))
+* add Select and SelectItem component imports ([d787953](https://github.com/Open-Study-College/osc/commit/d787953a0b22bb9f4d0e94b316da6e8625c4a5fb))
+* add spacing in Sanity ([ffc20ba](https://github.com/Open-Study-College/osc/commit/ffc20ba4788db7282c361507d50b6ccd430646c1))
+* add SSR Provider and I18n Provider ([d840a6a](https://github.com/Open-Study-College/osc/commit/d840a6ac98216f686fad30fd544112565c746785))
+* add styling for contact-form ([acb4dd0](https://github.com/Open-Study-College/osc/commit/acb4dd032f5e991c97b96ee1de1830afb618e580))
+* add target ([4a8f5aa](https://github.com/Open-Study-College/osc/commit/4a8f5aa6e134e4257ef6a17e70767642909ca007))
+* add tests for utils ([1e636af](https://github.com/Open-Study-College/osc/commit/1e636af497b7103854c518fa3c1daa9abf8f1c37))
+* add ts-ignore next-line ([f113302](https://github.com/Open-Study-College/osc/commit/f113302ef9ca8e16cfdfbe203275e48d217b8403))
+* add uniqueId for label ([ff3d220](https://github.com/Open-Study-College/osc/commit/ff3d2202c47d80dac603999c0dae9cdbaf31abcf))
+* add utils and jsdocs ([4cd1d70](https://github.com/Open-Study-College/osc/commit/4cd1d709572b2c96e05021bdac0b08a21adae712))
+* coerce entries to string ([dd1c679](https://github.com/Open-Study-College/osc/commit/dd1c679e1eb2cc73ca48b41571dcdb01cfbc7d2e))
+* consolidate form errors ([8ea7a6f](https://github.com/Open-Study-College/osc/commit/8ea7a6ffb399a1fad312347bbba9a815c70c6b65))
+* correct classname ([0878584](https://github.com/Open-Study-College/osc/commit/0878584cb81cd4aaabf3b8071750a1a796f1cdaf))
+* correct import name ([80da579](https://github.com/Open-Study-College/osc/commit/80da579e7f2b2218f8233ea1e75f5246162ac2f1))
+* correct styling for when label text overflows onto multiple lines ([9831311](https://github.com/Open-Study-College/osc/commit/98313111cb35964d2137cea54a5fd195953121bd))
+* create formData const for clarity ([aaddc5d](https://github.com/Open-Study-College/osc/commit/aaddc5d8298a43fd3b0dab47d12e4ce77a26b7b2))
+* css tweaks ([211129a](https://github.com/Open-Study-College/osc/commit/211129a6e4b70610bffb520841a2d25ef9d58b73))
+* fix "variants" ts error ([6c063b4](https://github.com/Open-Study-College/osc/commit/6c063b42c948144eb899a80c3fa245c33e22bf6c))
+* fix display issue when datepicker modal is active ([d5ca54a](https://github.com/Open-Study-College/osc/commit/d5ca54a15da0daa57ef8ccf00b539df74f106959))
+* fix form in storybook and create relative route to utils/validation to fix storybook error ([16ea39c](https://github.com/Open-Study-College/osc/commit/16ea39cb270ae548bdd0a6be10bd3b0ff45c14b7))
+* fix module.forms and add Callback Form Id ([5a3d945](https://github.com/Open-Study-College/osc/commit/5a3d945a8f82c21a23dd2ff55cf2367df5ff4946))
+* fix tests ([2252c53](https://github.com/Open-Study-College/osc/commit/2252c5307ff257f7ef4ec7a7ca3dfa22dcaed52a))
+* fix ts error ([6e3908c](https://github.com/Open-Study-College/osc/commit/6e3908c12ffd307644d65da5e234bf8642042231))
+* make spacing and sizing is consistent between all form components ([93a3087](https://github.com/Open-Study-College/osc/commit/93a3087e7dd3de3f6a195ee03f737bd8404d2641))
+* make variants prop for TextInput more generic ([35f5bd4](https://github.com/Open-Study-College/osc/commit/35f5bd4182afce90f3854ce1761e93de14313b94))
+* more form name variant into the formContainer classes ([343e1c4](https://github.com/Open-Study-College/osc/commit/343e1c4065d78b227f9ac5a1d9d4e16d495ef584))
+* move SSR provider from root.tsx to entry.client.tsx and entry.server.tsx ([2a796e1](https://github.com/Open-Study-College/osc/commit/2a796e1234b70ca0664081dc10d567e301a00f59))
+* pull in styles and themeName from hubspot to allow for more conditional styling ([6569663](https://github.com/Open-Study-College/osc/commit/656966336cd28f0216a85572126963072d16951b))
+* refactor successful submission content and use Alert component ([7cfa1d4](https://github.com/Open-Study-College/osc/commit/7cfa1d4e469d450e005b506031f131db4b4fcb9d))
+* refactor to enable multiple inline input fields from hubspot ([2709ba6](https://github.com/Open-Study-College/osc/commit/2709ba61a781eb10b0e5cbba750a4459c4e06575))
+* remove datepicker from mockdata ([3a71a56](https://github.com/Open-Study-College/osc/commit/3a71a5661816e159f6ebbfc3dba4e02363769047))
+* remove description and update Checkbox client validation parameters ([29a1891](https://github.com/Open-Study-College/osc/commit/29a1891a2896a0a39e254eda3b298e893cb0595e))
+* remove form widths, add max-width to the form-container, and add c-form class to root div ([dfee3d3](https://github.com/Open-Study-College/osc/commit/dfee3d3ca93ed7b75c545fb77d818396b75f751e))
+* remove redundant key ([44b64e2](https://github.com/Open-Study-College/osc/commit/44b64e2b715765764be20f47cc5e6d7c72e1d5af))
+* remove slide-out code ([2b03123](https://github.com/Open-Study-College/osc/commit/2b0312316e1143463a4a055279297acbcab28034))
+* rename form submission value to be more generic ([0efe85c](https://github.com/Open-Study-College/osc/commit/0efe85cf5371de6fb2ae5775dcd2e5872be180a2))
+* return error if action is not submitting a form ([d8c0bf9](https://github.com/Open-Study-College/osc/commit/d8c0bf98a00be14a867ac160ae111cb9ead93e35))
+* temporarily disable test ([a970177](https://github.com/Open-Study-College/osc/commit/a9701778ed026a647dc2daa39b653e20cd522450))
+* tidy up and add some additional checks ([a5b3529](https://github.com/Open-Study-College/osc/commit/a5b352934960ec0cc380f4fcf1f60940d69b1579))
+* update Checkbox stories to include CheckboxGroup wrapper ([d510dd7](https://github.com/Open-Study-College/osc/commit/d510dd74064f4baed674d2e4df379398b23dd39f))
+* update failing tests ([b25d73e](https://github.com/Open-Study-College/osc/commit/b25d73e5f82bd16449f89d3d98e0d81e1eba46bd))
+* update Hubspot form tests ([229a079](https://github.com/Open-Study-College/osc/commit/229a0794d23ae50a4ac05aedc50d9265b0e567df))
+* update storybook to the callback form ([4f54edc](https://github.com/Open-Study-College/osc/commit/4f54edc29c31f3d6b27d94971c23e3330a02f95e))
+* update type and check input is string ([cbdb097](https://github.com/Open-Study-College/osc/commit/cbdb097919f201489de0b94f9d7953bab0f2fa57))
+* update types ([94f5bb4](https://github.com/Open-Study-College/osc/commit/94f5bb4f380edcd251836f4e08ded2ae94d94428))
+* update user error messages ([929adbc](https://github.com/Open-Study-College/osc/commit/929adbc86f600fdb595a867d7d16da2e88df29b4))
+* update validateAction function and move adding schema validation function ([46a3de3](https://github.com/Open-Study-College/osc/commit/46a3de3987f78daf913a6de8de228a352e9c6523))
+* update var to const ([ee12500](https://github.com/Open-Study-College/osc/commit/ee12500d69c630c9fdf0ba89d6ff86aca848a60d))
+* wrap DateField component in i18nProvider to ensure correct locale ([d2b3005](https://github.com/Open-Study-College/osc/commit/d2b30052d167ded9fbb3371fbc7dd119aebd6e13))
+
 ## [0.70.0](https://github.com/Open-Study-College/osc/compare/v0.69.1...v0.70.0) (2023-04-17)
 
 
@@ -127,26 +213,4 @@
 ### 📦 General Housekeeping / Package Updates
 
 * update env samples ([1363b17](https://github.com/Open-Study-College/osc/commit/1363b1724ce340a428c24cae9aebc5655c6735ed))
-
-## [0.68.0](https://github.com/Open-Study-College/osc/compare/v0.67.1...v0.68.0) (2023-04-06)
-
-
-### ✨ Features
-
-* **ecommerce:** adds constants file containing route paths ([30803db](https://github.com/Open-Study-College/osc/commit/30803db14e71c25047d978e6e9647f039f45be23))
-* **studio:** adds paths constant object ([2668409](https://github.com/Open-Study-College/osc/commit/2668409c260f7508fbafea7e42d10426ec13d98c))
-
-
-### ♻️ Refactors
-
-* **ecommerce:** renames products route to courses ([df4bafe](https://github.com/Open-Study-College/osc/commit/df4bafe0d189249e990f8787897b393fb299fd4d))
-* **ecommerce:** update hard coded paths to use PATHS constant ([d978476](https://github.com/Open-Study-College/osc/commit/d978476691b8a018f03c84ca5eaf560b5976459f))
-* **ecommerce:** update internal links to use buildUrls helper ([56da2a0](https://github.com/Open-Study-College/osc/commit/56da2a00f260a56165dac2cbf7744dfe1165c6fb))
-* **studio:** update hard coded paths to use PATHS constant ([691e741](https://github.com/Open-Study-College/osc/commit/691e741f5fe3a79e6271df5bd716272c4ca74054))
-
-
-### 🐛 Bugs
-
-* **ecommerce:** cast return of getComponentStyles as LinkDescriptor ([2aad2b5](https://github.com/Open-Study-College/osc/commit/2aad2b5d9aca33d5ccf4e877a75d1ff04d458070))
-* **ecommerce:** wrap string in fragment to fix TS reactnode error ([77ffa51](https://github.com/Open-Study-College/osc/commit/77ffa5137a82ae8651c8abbaf57209df438d08a1))
 
