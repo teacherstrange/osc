@@ -4,21 +4,43 @@ import { useLoaderData, useParams } from '@remix-run/react';
 import type {
     Product as ProductType,
     ProductVariant,
+    SelectedOptionInput,
 } from '@shopify/hydrogen/storefront-api-types';
-import type { LoaderArgs } from '@shopify/remix-oxygen';
+import type { LinksFunction, LoaderArgs } from '@shopify/remix-oxygen';
+import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
+import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
+import radioStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';
 import { useState } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
+import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
+import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
 import Module, { getComponentStyles } from '~/components/Module';
 import Preview from '~/components/Preview';
+import priceStyles from '~/components/Price/price.css';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
 import { PRODUCT_QUERY as SHOPIFY_PRODUCT_QUERY } from '~/queries/shopify/product';
+import productStyles from '~/styles/product.css';
 import type { SanityProduct, module } from '~/types/sanity';
 import { getUniqueObjects } from '~/utils/getUniqueObjects';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
+
+export const links: LinksFunction = () => {
+    return [
+        { rel: 'stylesheet', href: productStyles },
+        { rel: 'stylesheet', href: productFormStyles },
+        { rel: 'stylesheet', href: priceStyles },
+        { rel: 'stylesheet', href: buttonStyles },
+        { rel: 'stylesheet', href: labelStyles },
+        { rel: 'stylesheet', href: radioStyles },
+    ];
+};
+
+// TODO: Hook up SEO settings
+// TODO: Hook up Shopify analytics
 
 interface PageData {
     page: SanityProduct;
@@ -31,11 +53,19 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
 
     invariant(slug, 'Missing slug param');
 
+    const searchParams = new URL(request.url).searchParams;
+
+    const selectedOptions: SelectedOptionInput[] = [];
+    searchParams.forEach((value, name) => {
+        selectedOptions.push({ name, value });
+    });
+
     const { product } = await storefront.query<{
         product: ProductType & { selectedVariant?: ProductVariant };
     }>(SHOPIFY_PRODUCT_QUERY, {
         variables: {
             handle: slug,
+            selectedOptions,
             country: storefront.i18n?.country,
             language: storefront.i18n?.language,
         },
@@ -123,8 +153,8 @@ export default function Index() {
             ) : null}
 
             <div className="o-container o-grid u-mb-l">
-                <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--8@desk-med">
-                    <h1 className="t-font-secondary t-font-6xl u-b-bottom u-w-fit">
+                <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--7@desk-med">
+                    <h1 className="o-product-title t-font-secondary u-b-bottom u-w-fit">
                         {product.title}
                     </h1>
 
@@ -142,12 +172,16 @@ export default function Index() {
 
             <div className="o-container o-grid u-mb-6xl">
                 {data?.upperContent && data?.upperContent.length > 0 ? (
-                    <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--8@desk-med o-grid__col--7@desk-lrg">
+                    <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--7@desk-med">
                         {data?.upperContent.map((module: module) =>
                             module ? <Module key={module?._key} module={module} isFlush /> : null
                         )}
                     </div>
                 ) : null}
+
+                <div className="c-product-form__container o-grid__col o-grid__col--12 o-grid__col--start-8@tab o-grid__col--6@tab o-grid__col--start-7@desk o-grid__col--start-8@desk-med">
+                    <ProductForm product={product} />
+                </div>
             </div>
 
             {data?.modules && data?.modules.length > 0 ? (

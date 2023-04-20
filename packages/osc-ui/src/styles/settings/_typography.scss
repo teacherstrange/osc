@@ -13,50 +13,6 @@
 //
 //\*----------------------------------*/
 
-@font-face {
-    font-family: "Outfit";
-    src: url("./fonts/Outfit-VariableFont_wght.woff2") format("woff2-variations");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "F37 Judge";
-    src: url("./fonts/F37Judge-RegularCompressed.woff2") format("woff2"),
-        url("./fonts/F37Judge-RegularCompressed.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "F37 Judge";
-    src: url("./fonts/F37Judge-BoldCompressed.woff2") format("woff2"),
-        url("./fonts/F37Judge-BoldCompressed.woff") format("woff");
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "F37 Judge";
-    src: url("./fonts/F37Judge-RegularCompressed.woff2") format("woff2"),
-        url("./fonts/F37Judge-RegularCompressed.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "F37 Judge";
-    src: url("./fonts/F37Judge-BoldCompressed.woff2") format("woff2"),
-        url("./fonts/F37Judge-BoldCompressed.woff") format("woff");
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
 // Base Sizes
 $base-fs: scale-token("base-font-size");
 $base-lh: scale-token("max-viewport.scale");

@@ -19,6 +19,10 @@ type Variants = 'secondary' | 'tertiary';
 
 export interface RadioGroupProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {
     /**
+     * Radio group class
+     */
+    className?: string;
+    /**
      * The Radio Items
      */
     children: ReactNode;
@@ -46,11 +50,17 @@ export interface RadioGroupProps extends ComponentPropsWithoutRef<typeof RadioGr
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
     variants?: Variants[];
+    /**
+     * Sets the direction of the items in the radio group
+     * @default column
+     */
+    direction?: 'row' | 'column';
 }
 
 export const RadioGroup = (props: RadioGroupProps) => {
     const {
         children,
+        className,
         defaultValue,
         description,
         disabled,
@@ -60,6 +70,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
         schema,
         setErrors,
         variants,
+        direction = 'column',
     } = props;
 
     const [value, setValue] = useState('');
@@ -74,7 +85,8 @@ export const RadioGroup = (props: RadioGroupProps) => {
     }, [value]);
 
     const modifiers = useModifier('c-radio-group', variants);
-    const radioGroupClasses = classNames('c-radio-group', modifiers);
+    const directionModifier = useModifier('c-radio-group', direction);
+    const radioGroupClasses = classNames('c-radio-group', modifiers, directionModifier, className);
 
     return (
         <fieldset
@@ -84,10 +96,15 @@ export const RadioGroup = (props: RadioGroupProps) => {
                     : radioGroupClasses
             }
         >
-            <legend className="c-radio-group__description" id={description.id}>
-                {description.value}
-                {required ? <span className="c-label__required">* </span> : null}
-            </legend>
+            <legend
+                className="c-radio-group__description"
+                id={description.id}
+                dangerouslySetInnerHTML={{
+                    __html: `${description.value} ${
+                        required ? '<span className="c-label__required">* </span>' : ''
+                    }`,
+                }}
+            />
             <RadioGroupPrimitive.Root
                 disabled={disabled}
                 defaultValue={defaultValue}

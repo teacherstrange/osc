@@ -1,7 +1,20 @@
+/*
+ * Here we are preventing the page from overflowing on the x-axis while still allowing
+ * things like position: sticky to work further down the page.
+ *
+ * [1] Use the new property overflow-x: clip; which works like overflow-x: hidden;
+ *     however clips based on the overflow-clip-margin property, which is default 0px.
+ * [2] For backwards compatibility, we use the new property overflow-x: hidden;
+ *     to allow the property to still be used on older browsers.
+ *     The tradeoff here is that some instances of position: sticky will not work
+ *     but I think having the overflow controlled is a higher priority.
+ */
+
 .o-page {
     display: grid;
     min-height: 100vh; // fallback if dvh is not supported
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
-    overflow-x: hidden;
+    overflow-x: hidden; /* [2] */
+    overflow-x: clip; /* [1] */
 }

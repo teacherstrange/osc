@@ -1,0 +1,65 @@
+@import "../../../../../osc-ui/src/styles/settings";
+@import "../../../../../osc-ui/src/styles/tools";
+
+@layer components {
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    .c-product-form {
+        /*
+         * Some elements/modifiers of the form are themeable. This is handled by the --form-theme-color custom property
+         *
+         * [1] Set the color to the --form-theme-color and fallback to the primary color if it doesn't exist
+         * [2] Set the gradient to the --form-theme-gradient and fallback to the primary gradient if it doesn't exist
+         */
+        $product-form-bg-color: hsl(0deg 0% 100% / 90%);
+        $product-form-color: var(--form-theme-color, var(--color-primary)); /* [1] */
+        $product-form-gradient: var(--form-theme-gradient, var(--color-gradient-primary-270));
+        $product-form-width: 566px;
+        $product-form-border-width: 6px;
+        $product-form-mq-l: $mq-desk-l + 1;
+
+        display: flex;
+        flex-direction: column;
+        gap: $space-l;
+        width: 100%;
+        max-width: $product-form-width;
+        padding-inline: $space-xl;
+        padding-block: $space-xl $space-5xl;
+        background-color: $product-form-bg-color;
+        border: $product-form-border-width solid;
+        border-image-slice: 1;
+        border-image-source: $product-form-gradient;
+        border-right: none;
+
+        @include mq($mq-tab) {
+            position: sticky;
+            top: $space-m;
+            padding: $space-2xl $space-4xl $space-2xl $space-2xl;
+        }
+
+        @include mq(($mq-mob-l, $mq-tab)) {
+            border-right: $product-form-border-width solid;
+        }
+
+        @include mq($product-form-mq-l) {
+            border-right: $product-form-border-width solid;
+        }
+
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        fieldset {
+            padding: 0;
+        }
+
+        &__container {
+            margin-inline-end: calc($space-l * -1);
+
+            @include mq($mq-tab, max) {
+                order: -1;
+            }
+
+            @include mq($mq-desk) {
+                margin-inline-end: calc(($space-5xl + 4px) * -1);
+                margin-inline-start: 50px;
+            }
+        }
+    }
+}
