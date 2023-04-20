@@ -43,6 +43,26 @@ export default defineType({
                         title: 'Hero - Tertiary',
                         value: 'flourishHeroTertiary',
                     },
+                    {
+                        title: 'Collection - Primary',
+                        value: 'flourishCollectionPrimary',
+                    },
+                    {
+                        title: 'Collection - Secondary',
+                        value: 'flourishCollectionSecondary',
+                    },
+                    {
+                        title: 'Collection - Tertiary',
+                        value: 'flourishCollectionTertiary',
+                    },
+                    {
+                        title: 'Collection - Quaternary',
+                        value: 'flourishCollectionQuaternary',
+                    },
+                    {
+                        title: 'Collection - Quinary',
+                        value: 'flourishCollectionQuinary',
+                    },
                 ],
             },
         }),

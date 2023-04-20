@@ -1,4 +1,9 @@
 import {
+    flourishCollectionPrimary,
+    flourishCollectionQuaternary,
+    flourishCollectionQuinary,
+    flourishCollectionSecondary,
+    flourishCollectionTertiary,
     flourishHeroPrimary,
     flourishHeroSecondary,
     flourishHeroTertiary,
@@ -40,6 +45,27 @@ export const remapFlourishObject = (flourishes: Maybe<flourishSettings>) => {
             pattern = flourishHeroTertiary;
             variant = 'hero-tertiary';
             break;
+        case 'flourishCollectionPrimary':
+            pattern = flourishCollectionPrimary;
+            variant = 'collection-primary';
+            break;
+        case 'flourishCollectionSecondary':
+            pattern = flourishCollectionSecondary;
+            variant = 'collection-secondary';
+            break;
+        case 'flourishCollectionTertiary':
+            pattern = flourishCollectionTertiary;
+            variant = 'collection-tertiary';
+            break;
+        case 'flourishCollectionQuaternary':
+            pattern = flourishCollectionQuaternary;
+            variant = 'collection-quaternary';
+            break;
+        case 'flourishCollectionQuinary':
+            pattern = flourishCollectionQuinary;
+            variant = 'collection-quinary';
+            break;
+
         default:
             pattern = undefined;
             variant = undefined;

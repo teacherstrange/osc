@@ -48,6 +48,11 @@ export {
 } from './components/Drawer/Drawer';
 export { Flourishes } from './components/Flourishes/Flourishes';
 export {
+    collectionPrimary as flourishCollectionPrimary,
+    collectionQuaternary as flourishCollectionQuaternary,
+    collectionQuinary as flourishCollectionQuinary,
+    collectionSecondary as flourishCollectionSecondary,
+    collectionTertiary as flourishCollectionTertiary,
     heroPrimary as flourishHeroPrimary,
     heroSecondary as flourishHeroSecondary,
     heroTertiary as flourishHeroTertiary,

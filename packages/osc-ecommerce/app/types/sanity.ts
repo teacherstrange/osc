@@ -531,5 +531,10 @@ export interface flourishSettings extends module {
         | 'flourishHeroPrimary'
         | 'flourishHeroSecondary'
         | 'flourishHeroTertiary'
+        | 'flourishCollectionPrimary'
+        | 'flourishCollectionSecondary'
+        | 'flourishCollectionTertiary'
+        | 'flourishCollectionQuaternary'
+        | 'flourishCollectionQuinary'
     >;
 }
