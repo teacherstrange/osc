@@ -1,3 +1,36 @@
+## [0.74.0](https://github.com/Open-Study-College/osc/compare/v0.73.0...v0.74.0) (2023-04-20)
+
+
+### ✨ Features
+
+* **accordion:** add container to accordion module ([1c6ddf5](https://github.com/Open-Study-College/osc/commit/1c6ddf5350eb823bdaf8b46376b64690276848c7))
+* **tabs:** add spacing controls to tabs on ecommerce ([f996bdd](https://github.com/Open-Study-College/osc/commit/f996bdd9533a1c4f60de26b47e3cc0445a761a14))
+* **tabs:** add tabs query ([6b01142](https://github.com/Open-Study-College/osc/commit/6b01142a21d59d987e447f2e8ee357d974ace45f))
+* **tabs:** add tabs type ([6881852](https://github.com/Open-Study-College/osc/commit/68818522cf465c5872c55ff52c483f5d66268fd8))
+* **tabs:** adds tab component to osc-ecommerce ([db98527](https://github.com/Open-Study-College/osc/commit/db98527cd60d916e021055dc374204a5909ecbcc))
+* **tabs:** adds tabs module to sanity ([5c3d846](https://github.com/Open-Study-College/osc/commit/5c3d846e8d17fa1cf229d98f78c9925fa774ebb2))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* remove todo ([7f4de56](https://github.com/Open-Study-College/osc/commit/7f4de566c5d7f8ab9a280c3b5d77f25f99d377de))
+* **tabs:** export tabs from osc-ui ([a8968df](https://github.com/Open-Study-College/osc/commit/a8968df4f9c128c7caa4991da5c85c9b4021cd52))
+
+
+### 🧪 Tests
+
+* **tabs:** adds tests for ecommerce tabs component ([09e93ea](https://github.com/Open-Study-College/osc/commit/09e93ea583a098e760656ce140c1dae0cecfc6f9))
+
+
+### 🐛 Bugs
+
+* **accordion:** fixes accordion count in the preview ([05e70b5](https://github.com/Open-Study-College/osc/commit/05e70b52312aa273eb0dd4da5e0d94ac3273aed9))
+* **ecommerce:** move design token declaration into it's own file ([d5594dc](https://github.com/Open-Study-College/osc/commit/d5594dca16895f8c70280ae06646ba55ff1ee523))
+* **products page:** fixes typo in returned dynamic links data ([c94a963](https://github.com/Open-Study-College/osc/commit/c94a963c28643241c5b71adb013504a29b80ef63))
+* **tabs:** fix typo ([92f6884](https://github.com/Open-Study-College/osc/commit/92f6884a24a160845956e89e0245657d877ee2c6))
+* **tabs:** fix typo in media query ([18b4a11](https://github.com/Open-Study-College/osc/commit/18b4a113aac12be4c7c162e59fe9b6b2780ea282))
+* **tabs:** move child modules into own fragment so we can reference correctly inside tabs ([a441073](https://github.com/Open-Study-College/osc/commit/a441073b17fca13071f0d2908d951baeda2680c0))
+
 ## [0.73.0](https://github.com/Open-Study-College/osc/compare/v0.72.0...v0.73.0) (2023-04-20)
 
 
@@ -157,31 +190,4 @@
 * **button:** remove pointer-events auto ([97e94fe](https://github.com/Open-Study-College/osc/commit/97e94fee55809b613b08fff925ae5a0c265c598d))
 * **modal:** move modal inside overlay component ([14df952](https://github.com/Open-Study-College/osc/commit/14df952dd2f7f1dc9a7454991741684e5d06173e))
 * **modal:** move primary styles into primary modifier class ([d969a9e](https://github.com/Open-Study-College/osc/commit/d969a9e42be6132045679c4ceeb32736799ce6b4))
-
-## [0.69.1](https://github.com/Open-Study-College/osc/compare/v0.69.0...v0.69.1) (2023-04-14)
-
-
-### ♻️ Refactors
-
-* **academic hub:** add css maps to gitignore ([740bb97](https://github.com/Open-Study-College/osc/commit/740bb978183003d21a31e1d2e5ec6ec4bcddf051))
-* **academic hub:** move postcss plugins into config file ([a781eca](https://github.com/Open-Study-College/osc/commit/a781eca3c23ac43b045ae89a65091abad51836a3))
-* **academic hub:** replace css scripts with sass and postcss cli ([e04c607](https://github.com/Open-Study-College/osc/commit/e04c607e5b662a25ef4c054edf0a06c1ba6c2e97))
-* **acadmic hub:** remove transpilecss helper scripts ([1c762fc](https://github.com/Open-Study-College/osc/commit/1c762fc127c22ea99b769da688ff08f07f66de4e))
-* **ecommerce:** add css maps to gitignore ([37189a5](https://github.com/Open-Study-College/osc/commit/37189a527321afbd94961c0c3c85d19ecc53f256))
-* **ecommerce:** move postcss plugins into config file ([9d173d5](https://github.com/Open-Study-College/osc/commit/9d173d5fbba1398ec2b00349ed7dd28173082eb3))
-* **ecommerce:** remove transpilecss helper scripts ([afdef6f](https://github.com/Open-Study-College/osc/commit/afdef6fa17b87b92c9e705b8b34f1242c2ed3d14))
-* **ecommerce:** replace css scripts with sass and postcss cli ([30e34d3](https://github.com/Open-Study-College/osc/commit/30e34d3730542b3cc715426f6f3b0272b9da79c2))
-* **ecommerce:** update postcss script to target styles and components directories ([274c629](https://github.com/Open-Study-College/osc/commit/274c629bb74332ffadcab3bb8d2b91854ab00a16))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **academic hub:** remove nodemon dev dependency ([20cd78a](https://github.com/Open-Study-College/osc/commit/20cd78a96e08f20caf2adb62039e46e048320dcb))
-* remove env variables from sample and readme ([1b3169a](https://github.com/Open-Study-College/osc/commit/1b3169af5a0fa0c1d263b0b5a83e23ac2a66c108))
-
-
-### 🐛 Bugs
-
-* **academic hub:** adds empty scss file for postcss command ([0ffac5e](https://github.com/Open-Study-College/osc/commit/0ffac5e725a5d4f67324321c7469fc6ace01aac9))
-* **ecommerce:** adds empty scss file for postcss command ([a9a90cf](https://github.com/Open-Study-College/osc/commit/a9a90cfd16e341fdd28045ea8070c30d0dbd68a6))
 
