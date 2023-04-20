@@ -1,3 +1,20 @@
+## [0.73.0](https://github.com/Open-Study-College/osc/compare/v0.72.0...v0.73.0) (2023-04-20)
+
+
+### ✨ Features
+
+* **courses page:** adds above the fold content section to Sanity ([d4e8858](https://github.com/Open-Study-College/osc/commit/d4e88586ba08f54e07cac10e50e1bfe40fabb0d6))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **courses page:** adds description to modules section ([b8cbc9c](https://github.com/Open-Study-College/osc/commit/b8cbc9ce2b9ff6fc07bfa67cf60b071de37e6247))
+
+
+### 🐛 Bugs
+
+* **saity:** add optional chaining to prevent error when loop is undefined ([2a8c70b](https://github.com/Open-Study-College/osc/commit/2a8c70b00d1da5a087cdf54a7ab3a83feb38ea0a))
+
 ## [0.72.0](https://github.com/Open-Study-College/osc/compare/v0.71.0...v0.72.0) (2023-04-20)
 
 
@@ -167,60 +184,4 @@
 
 * **academic hub:** adds empty scss file for postcss command ([0ffac5e](https://github.com/Open-Study-College/osc/commit/0ffac5e725a5d4f67324321c7469fc6ace01aac9))
 * **ecommerce:** adds empty scss file for postcss command ([a9a90cf](https://github.com/Open-Study-College/osc/commit/a9a90cfd16e341fdd28045ea8070c30d0dbd68a6))
-
-## [0.69.0](https://github.com/Open-Study-College/osc/compare/v0.68.1...v0.69.0) (2023-04-12)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **drawer:** update comments ([b15aaa6](https://github.com/Open-Study-College/osc/commit/b15aaa6d2c54741dda47e499bd1edc14adfcde7f))
-* install radix dialog primitive ([1a47c13](https://github.com/Open-Study-College/osc/commit/1a47c1328d803c94f477a2304a8156f5d58acf48))
-
-
-### ✨ Features
-
-* **button:** add no-shadow modifier class ([b209f8f](https://github.com/Open-Study-College/osc/commit/b209f8f795ff3e7ba5c23464502c64ae01881c7b))
-* **drawer:** add custom container target ([da40485](https://github.com/Open-Study-College/osc/commit/da404853750b9162d265ebdec1229f85c3682d8b))
-* **drawer:** add drawer component and initial styles ([71b25d6](https://github.com/Open-Study-College/osc/commit/71b25d67f793860fed7eed281203f972ea4df3c6))
-* **drawer:** add primary styles ([02f38ad](https://github.com/Open-Study-College/osc/commit/02f38ad28b47803f453733b4ff86ae55967e6b82))
-* **drawer:** add stopPropogation to prevent bubbling on trigger click ([d42bb15](https://github.com/Open-Study-College/osc/commit/d42bb151ac075bcc4b786e343ed429c99e2e503a))
-* **drawer:** adds container component ([a09b95c](https://github.com/Open-Study-College/osc/commit/a09b95cf0be4e332d694de189fb725731380d4ec))
-* **drawer:** ensure the is-full modifier always fills the height of the screen ([1d1e3ec](https://github.com/Open-Study-College/osc/commit/1d1e3ec5e3ae93d45daac52d1ee90ebc0fb99b30))
-* **drawer:** set vertical media queries so we can access drawer on shorter screens ([f249c46](https://github.com/Open-Study-College/osc/commit/f249c46d0c4e8c267262fd45cc24a9c7399ec628))
-* **drawer:** update stories ([77d9989](https://github.com/Open-Study-College/osc/commit/77d9989fae654bec9f23894a58337e2010e0149a))
-* **drawer:** update stories ([faff85b](https://github.com/Open-Study-College/osc/commit/faff85b143808f8ceefc478d4c2f88ff620d9034))
-* **icon:** add large modifier class to icon ([aab1525](https://github.com/Open-Study-College/osc/commit/aab1525f0b1e1e85c968eaf6a37402ce347ef93c))
-
-
-### 🧪 Tests
-
-* **drawer:** adds tests for drawer ([45c5fd4](https://github.com/Open-Study-College/osc/commit/45c5fd40d92d16dee8a89494701665231ce55cd5))
-* **drawer:** remove test for css custom properties ([794d6a0](https://github.com/Open-Study-College/osc/commit/794d6a0b8ad032b5f3e1f6d5dee906505a4b1a3f))
-* **drawer:** update tests to include click event ([735f8ce](https://github.com/Open-Study-College/osc/commit/735f8cef95f6a420540d9a2750938081df9bb44f))
-
-
-### 🐛 Bugs
-
-* **drawer:** add mq to allow us to scroll on narrow screens ([a953189](https://github.com/Open-Study-College/osc/commit/a953189315661c929885bb23f989785f9573c1af))
-* **drawer:** add not wrapper around the pinned trigger to allow focus styles ([1ca0196](https://github.com/Open-Study-College/osc/commit/1ca0196720f99de5019a04b7848da709ac2ebdaf))
-* **drawer:** allow overflow on full height drawer ([76a2194](https://github.com/Open-Study-College/osc/commit/76a219457c2d2c69cbbe04111d1d474318124a74))
-* **drawer:** get height of the button and remove it from the width of pinned drawer ([b18ef05](https://github.com/Open-Study-College/osc/commit/b18ef057e049fda216f8c1c03b7bfef5e8b168db))
-* **drawer:** update minHeight to use dvh over vh to account for virtual searchbar on mob ([bcc3edb](https://github.com/Open-Study-College/osc/commit/bcc3edbf42beac5983a71eeeb6d2c11cf6c4609e))
-
-
-### ♻️ Refactors
-
-* **drawer:** add initial visibility property ([4c7dc75](https://github.com/Open-Study-College/osc/commit/4c7dc75e60f1defc60f90c04035b706a2d50e5c0))
-* **drawer:** add stopPropgation to drawer story ([4c12725](https://github.com/Open-Study-College/osc/commit/4c127251db978312e7aa8cf0999e390170203671))
-* **drawer:** ensure fill height variant has no max-height ([08e159a](https://github.com/Open-Study-College/osc/commit/08e159a168dc7ab5207e962126ad1defae11a07a))
-* **drawer:** forceMount the portal so Safari is happy ([3360c17](https://github.com/Open-Study-College/osc/commit/3360c1780762ca0a92274457c0f31f4a5f7a4ea7))
-* **drawer:** move heights into variables ([bc60919](https://github.com/Open-Study-College/osc/commit/bc6091957d46feb4af8b008a1243cba0bb924029))
-* **drawer:** remove max height from full height variant ([c163d6e](https://github.com/Open-Study-College/osc/commit/c163d6ee6299b00f36e8a5158be31172c5f11930))
-* **drawer:** remove pointer-events rule ([8472922](https://github.com/Open-Study-College/osc/commit/847292283e0c31b2efacb3550ce243ef530c7b80))
-* **drawer:** remove translation from inner btn ([73674dc](https://github.com/Open-Study-College/osc/commit/73674dce20a7fae4719b5eae8829fce126b60d08))
-* **drawer:** replace trigger animations with transitions ([e95b5b7](https://github.com/Open-Study-College/osc/commit/e95b5b7188645efb4b00440e326406d3a7cf7c8e))
-* **drawer:** simplify breakpoints ([54b530a](https://github.com/Open-Study-College/osc/commit/54b530a97a953e8b76fa04264fe6951c2bb0a12b))
-* **drawer:** update heading font-size ([8d298ba](https://github.com/Open-Study-College/osc/commit/8d298ba05a85d9769d891e1e95cb7bded806e4f0))
-* **drawer:** update trigger so we can open/close without needing to forceMount ([79470f8](https://github.com/Open-Study-College/osc/commit/79470f830b2afa9a25acaba4598cd62cc79c39f1))
-* **header:** merges ref and forwardedRef ([e877fe5](https://github.com/Open-Study-College/osc/commit/e877fe5022a5b5907ef326db72ae55bdc794f717))
 
