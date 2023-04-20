@@ -1,3 +1,28 @@
+## [0.72.0](https://github.com/Open-Study-College/osc/compare/v0.71.0...v0.72.0) (2023-04-20)
+
+
+### 🧪 Tests
+
+* **tabs:** adds tabs test ([93a7788](https://github.com/Open-Study-College/osc/commit/93a77888fa9567cbbb7f97e844e739beb944c9dc))
+
+
+### ✨ Features
+
+* **tabs:** add classnames based on scroll position of overflowing triggers ([51d32bc](https://github.com/Open-Study-College/osc/commit/51d32bc499d3b1aaacff076e461ce93e672845a4))
+* **tabs:** add styles ([64ffe2a](https://github.com/Open-Study-College/osc/commit/64ffe2a490b51ec4588abb4f9b24116c706194de))
+* **tabs:** adds responsive styles ([b922dbf](https://github.com/Open-Study-College/osc/commit/b922dbff507ea01d6e76a54caa0562483908c962))
+* **tabs:** adds semantic tags ([adc25b2](https://github.com/Open-Study-College/osc/commit/adc25b2bb4adfd67ae623f5dff6c5d9e954f144d))
+* **tabs:** center tabs ([1bdbb87](https://github.com/Open-Study-College/osc/commit/1bdbb876897dc1ded69ebc9684a0e72ab6a66f04))
+* **tabs:** centers trigger text ([0473eea](https://github.com/Open-Study-College/osc/commit/0473eead079c0f510de7fb77cd4050c8c95f2262))
+* **tabs:** updates stories ([44affa5](https://github.com/Open-Study-College/osc/commit/44affa5dd81c71c17783c5df608d1a69c2b1be99))
+
+
+### ♻️ Refactors
+
+* **tabs:** remove block padding ([2ea2a68](https://github.com/Open-Study-College/osc/commit/2ea2a6807d663b8e1620c7063e6a25df5ddb14ba))
+* **tabs:** remove forceMount ([be7b2c1](https://github.com/Open-Study-College/osc/commit/be7b2c1a267ca2e1c9024e1a60021765b30e47ab))
+* **tabs:** update tabs to be composable ([607b32c](https://github.com/Open-Study-College/osc/commit/607b32cd25db1a044eb38d1128cc71a702cc84dd))
+
 ## [0.71.0](https://github.com/Open-Study-College/osc/compare/v0.70.0...v0.71.0) (2023-04-20)
 
 
@@ -198,19 +223,4 @@
 * **drawer:** update heading font-size ([8d298ba](https://github.com/Open-Study-College/osc/commit/8d298ba05a85d9769d891e1e95cb7bded806e4f0))
 * **drawer:** update trigger so we can open/close without needing to forceMount ([79470f8](https://github.com/Open-Study-College/osc/commit/79470f830b2afa9a25acaba4598cd62cc79c39f1))
 * **header:** merges ref and forwardedRef ([e877fe5](https://github.com/Open-Study-College/osc/commit/e877fe5022a5b5907ef326db72ae55bdc794f717))
-
-## [0.68.1](https://github.com/Open-Study-College/osc/compare/v0.68.0...v0.68.1) (2023-04-06)
-
-
-### 🐛 Bugs
-
-* **e2e tests:** fix incorrect port number in academic hub test command ([d73b552](https://github.com/Open-Study-College/osc/commit/d73b552bc8fef0e059584a48fedc7af5606b96f4))
-* **e2e tests:** fixes typo in locator ([b79e3de](https://github.com/Open-Study-College/osc/commit/b79e3def2b4c246bcb7272e90eceff9a239c0b4a))
-* **e2e tests:** updates ecommerce test locators to make them more specific ([7042a50](https://github.com/Open-Study-College/osc/commit/7042a50ada7b75e14d9bcd0a7955b38d1efa56d0))
-* **workflows:** fix typo in e2e test command ([15c46bb](https://github.com/Open-Study-College/osc/commit/15c46bba3b116db421ea61fa68155cefeaf0d9dc))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* update env samples ([1363b17](https://github.com/Open-Study-College/osc/commit/1363b1724ce340a428c24cae9aebc5655c6735ed))
 
