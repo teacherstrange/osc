@@ -2,6 +2,7 @@
 @import "../../styles/tools";
 
 @layer components {
+    $tabs-bg-color: var(--color-tertiary);
     $tabs-border-width: 1px;
     $tabs-scrollbar-width: 3px; // See scrollbar mixin for this value
     $tabs-border: $tabs-border-width solid var(--color-neutral-500);
@@ -77,6 +78,7 @@
 
         &__trigger {
             padding: $space-2xs $space-l;
+            background-color: $tabs-bg-color;
             border: $tabs-border;
             font-size: $fs-s;
             line-height: $base-lh;
@@ -97,6 +99,7 @@
         }
 
         &__content {
+            background-color: $tabs-bg-color;
             margin-block-start: -$tabs-border-width; // Pull content up to overlap borders with the trigger
             padding-block: $space-xl;
             border: $tabs-border;

@@ -14,9 +14,10 @@ import type { contentMediaModule, contentMediaSlide } from '~/types/sanity';
 
 const perView = (perView: number | undefined) => (perView ? perView : 1);
 
-export const ContentMediaModule = (props: { module: contentMediaModule }) => {
+export const ContentMediaModule = (props: { module: contentMediaModule; isFlush?: boolean }) => {
     const { carouselName, carouselSettings, marginBottom, paddingBottom, paddingTop, slides } =
         props.module;
+    const { isFlush } = props;
 
     const marginBottomClass = useSpacing('margin', 'bottom', marginBottom);
     const paddingTopClass = useSpacing('padding', 'top', paddingTop);
@@ -24,6 +25,7 @@ export const ContentMediaModule = (props: { module: contentMediaModule }) => {
 
     const classes = classNames(
         'o-container',
+        isFlush ? 'o-container--flush' : '',
         marginBottomClass,
         paddingTopClass,
         paddingBottomClass

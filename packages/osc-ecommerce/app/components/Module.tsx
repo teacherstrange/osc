@@ -178,10 +178,15 @@ export const getComponentStyles = (data: SanityPage) => {
 
 interface Props {
     module: module;
+    /**
+     * Applies the flush container to the children of the module
+     */
+    isFlush?: boolean;
 }
 
 export default function Module(props: Props) {
-    const { module } = props;
+    const { module, isFlush } = props;
+
     switch (module._type) {
         case 'module.accordion':
             const moduleAccordion = module as accordionModule;
@@ -213,7 +218,7 @@ export default function Module(props: Props) {
             const moduleContent = module as contentModule;
 
             return moduleContent.body ? (
-                <article className="o-container">
+                <article className={`o-container ${isFlush ? 'o-container--flush' : ''}`}>
                     <Content
                         align={moduleContent.horizontalAlignment}
                         backgroundColor={
@@ -246,7 +251,13 @@ export default function Module(props: Props) {
         case 'module.contentMedia':
             const moduleContentMedia = module as contentMediaModule;
 
-            return <ContentMediaModule module={moduleContentMedia} key={moduleContentMedia._key} />;
+            return (
+                <ContentMediaModule
+                    module={moduleContentMedia}
+                    isFlush={isFlush}
+                    key={moduleContentMedia._key}
+                />
+            );
 
         case 'module.images':
             const moduleImage = module as imageModule<HTMLImageElement>;
@@ -267,7 +278,9 @@ export default function Module(props: Props) {
         case 'module.textGrid':
             const moduleTextGrid = module as textGridModule;
 
-            return <TextGridModule data={moduleTextGrid} key={moduleTextGrid._key} />;
+            return (
+                <TextGridModule data={moduleTextGrid} isFlush={isFlush} key={moduleTextGrid._key} />
+            );
 
         case 'module.video':
             const moduleVideo = module as videoModule;

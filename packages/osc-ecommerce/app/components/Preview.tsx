@@ -1,11 +1,11 @@
 import type { Params } from '@remix-run/react';
 import React, { useEffect } from 'react';
 import { usePreviewSubscription } from '~/hooks/usePreviewSubscription';
-import type { SanityPage } from '~/types/sanity';
+import type { SanityPage, SanityProduct } from '~/types/sanity';
 
 interface Props {
-    data: SanityPage;
-    setData: React.Dispatch<React.SetStateAction<SanityPage>>;
+    data: SanityPage | SanityProduct;
+    setData: React.Dispatch<React.SetStateAction<SanityPage | SanityProduct>>;
     query: string;
     queryParams: Readonly<Params<string>>;
 }
@@ -13,7 +13,7 @@ interface Props {
 export default function Preview({ data, setData, query, queryParams }: Props) {
     const { data: previewData } = usePreviewSubscription(query, {
         params: queryParams,
-        initialData: data
+        initialData: data,
     });
 
     useEffect(() => {

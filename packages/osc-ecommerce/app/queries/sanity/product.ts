@@ -8,6 +8,7 @@ export const PRODUCT_QUERY = groq`
         _rev,
         _type,
         store,
+        upperContent,
         ${MODULES},
         ${SEO}
     }
