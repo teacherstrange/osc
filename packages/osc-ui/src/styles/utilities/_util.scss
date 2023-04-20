@@ -177,6 +177,12 @@ $osc-config: (
             "full": 100%,
             "max": max-content
         )
+    ),
+    position: (
+        prefix: "pos",
+        values: (
+            "rel": relative
+        )
     )
 );
 
