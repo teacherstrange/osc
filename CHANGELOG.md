@@ -1,3 +1,31 @@
+## [0.75.0](https://github.com/Open-Study-College/osc/compare/v0.74.0...v0.75.0) (2023-04-20)
+
+
+### ✨ Features
+
+* **ecommerce:** adds background colour to the main element on product pages ([b38b9bf](https://github.com/Open-Study-College/osc/commit/b38b9bfccfadd3dd12168cc58463e04db6b6fc05))
+* **ecommerce:** adds utility function to get the page type ([1a6e3f2](https://github.com/Open-Study-College/osc/commit/1a6e3f2f2c6c494079edab5f0c307609025fccf9))
+* **modules:** adds an isFlush prop through to modules ([01754d2](https://github.com/Open-Study-College/osc/commit/01754d2d84cefbf1f1d408314a38ee8a3ca36715))
+* **product page:** adds initial layout styles ([b285254](https://github.com/Open-Study-College/osc/commit/b285254a0b6a5b87847e53ff6779b8dce44c731a))
+* **product page:** adds varaint sku to query ([a306eba](https://github.com/Open-Study-College/osc/commit/a306ebad8dd605b2e46bca07b9ff004fa930650b))
+* **product page:** adjusts breakpoints for upper content grid ([4478607](https://github.com/Open-Study-College/osc/commit/4478607bda6ea2e291c699d4224dedb3a6581808))
+* **product page:** extend SanityProduct type from SanityPage ([b1d7c17](https://github.com/Open-Study-College/osc/commit/b1d7c178435231cf4fbd1eb98a43014aef98055d))
+* **product page:** filter out duplicate skus ([5565d83](https://github.com/Open-Study-College/osc/commit/5565d8336a8d91901fcc3d7c91dea0af0eb7fce6))
+* **styles:** adds new utility classes ([8120ed0](https://github.com/Open-Study-College/osc/commit/8120ed05d4992bfa918599be95e787efd7e06b9f))
+
+
+### 🐛 Bugs
+
+* **product page:** add optional chaining to variants.nodes ([0fadc1a](https://github.com/Open-Study-College/osc/commit/0fadc1a288c02387a65b8485bc0acc4c68af85d5))
+* **typescript:** add Maybe generic to content fullWidth prop ([cccee2b](https://github.com/Open-Study-College/osc/commit/cccee2bfa61a2f9dbc0ddce7796952ca2e47c787))
+* **typescript:** add osc-design-tokens declaration file ([0660715](https://github.com/Open-Study-College/osc/commit/066071598b8200c644177c5c4b12828cdb0064fd))
+
+
+### ♻️ Refactors
+
+* **product page:** adds optional chaining to variants check ([35a98b8](https://github.com/Open-Study-College/osc/commit/35a98b891f014e66bc48b49147145ffafa7fd553))
+* **tabs:** add background color ([b759f61](https://github.com/Open-Study-College/osc/commit/b759f6171a8b1230b34679ed1921208821b18c9e))
+
 ## [0.74.0](https://github.com/Open-Study-College/osc/compare/v0.73.0...v0.74.0) (2023-04-20)
 
 
@@ -158,36 +186,4 @@
 * update validateAction function and move adding schema validation function ([46a3de3](https://github.com/Open-Study-College/osc/commit/46a3de3987f78daf913a6de8de228a352e9c6523))
 * update var to const ([ee12500](https://github.com/Open-Study-College/osc/commit/ee12500d69c630c9fdf0ba89d6ff86aca848a60d))
 * wrap DateField component in i18nProvider to ensure correct locale ([d2b3005](https://github.com/Open-Study-College/osc/commit/d2b30052d167ded9fbb3371fbc7dd119aebd6e13))
-
-## [0.70.0](https://github.com/Open-Study-College/osc/compare/v0.69.1...v0.70.0) (2023-04-17)
-
-
-### 🧪 Tests
-
-* **modal:** add secondary variant test ([3ae8130](https://github.com/Open-Study-College/osc/commit/3ae81306fd496b3952d288542199318ba4b06b7f))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* remove unused comment ([453c43c](https://github.com/Open-Study-College/osc/commit/453c43cd09616e48f517ff4ba151a9e93a3f7756))
-
-
-### ✨ Features
-
-* **modal:** add position modifiers ([c7a2c55](https://github.com/Open-Study-College/osc/commit/c7a2c55af26df605acd790d485d3ebb1a3d10baf))
-* **modal:** add secondary alert modal story ([81279a4](https://github.com/Open-Study-College/osc/commit/81279a49796a37653bdbb988369771ed44a0f7e7))
-* **modal:** add secondary variant styles ([dc5efd2](https://github.com/Open-Study-College/osc/commit/dc5efd236705778de228e7f6c7d883fc1aaf9a90))
-* **modal:** add variant class modifiers ([3112fdf](https://github.com/Open-Study-College/osc/commit/3112fdf6c48a3e623a5ac7b0a18272e6cadd5a2e))
-* **modal:** adds modal container component ([53e9ca9](https://github.com/Open-Study-College/osc/commit/53e9ca968c0a22d581345577f104ca5fe267d6d7))
-* **modal:** adds optional ModalInner component ([6b08315](https://github.com/Open-Study-College/osc/commit/6b083151a49aed4b41fce7d61728480af007e7c3))
-* **modal:** remove utility classes from title ([f1711c5](https://github.com/Open-Study-College/osc/commit/f1711c5989e68112566c8c7c7af20fe9d19a6179))
-* **modal:** update alert modal to match modal interface ([01c3d85](https://github.com/Open-Study-College/osc/commit/01c3d85ce5a9fc564b96439cc73f15b72e4f3065))
-* **modal:** wrap modal title in header tag ([02244b1](https://github.com/Open-Study-College/osc/commit/02244b1cbcbde0a0408646b847bd29f7bbf6ef52))
-
-
-### ♻️ Refactors
-
-* **button:** remove pointer-events auto ([97e94fe](https://github.com/Open-Study-College/osc/commit/97e94fee55809b613b08fff925ae5a0c265c598d))
-* **modal:** move modal inside overlay component ([14df952](https://github.com/Open-Study-College/osc/commit/14df952dd2f7f1dc9a7454991741684e5d06173e))
-* **modal:** move primary styles into primary modifier class ([d969a9e](https://github.com/Open-Study-College/osc/commit/d969a9e42be6132045679c4ceeb32736799ce6b4))
 
