@@ -65,7 +65,7 @@ export const ProductForm = (props: ProductFormProps) => {
                               // TODO: Can we change the order in the CMS?
                               description={{
                                   id: `option-${option.name}`,
-                                  value: `<h2 class="t-font-l u-text-bold">${option.name}</h2>`,
+                                  value: `<h2 class="t-font-l u-text-bold u-color-secondary">${option.name}</h2>`,
                               }}
                               name={`option-${option.name}`}
                               defaultValue={searchParamsWithDefaults.get(option.name)!}
@@ -89,7 +89,7 @@ export const ProductForm = (props: ProductFormProps) => {
             <RadioGroup
                 description={{
                     id: 'payment-options',
-                    value: '<h2 class="t-font-l u-text-bold">Payment Options</h2>',
+                    value: '<h2 class="t-font-l u-text-bold u-color-secondary">Payment Options</h2>',
                 }}
                 name="payment-options"
                 defaultValue="Pay upfront"
