@@ -60,6 +60,9 @@ $card-fs-3xl: $fs-3xl;
         }
 
         &__img {
+            position: relative;
+            height: 100%;
+
             .o-img {
                 width: 100%;
                 height: 100%;
