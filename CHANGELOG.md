@@ -1,3 +1,11 @@
+## [0.77.0](https://github.com/Open-Study-College/osc/compare/v0.76.0...v0.77.0) (2023-04-20)
+
+
+### ✨ Features
+
+* **faqs:** adds faqs document type to Sanity ([7a671ba](https://github.com/Open-Study-College/osc/commit/7a671ba1cfdfcfb773e174beca8bfc99b68b834d))
+* **faqs:** adds faqs document type to the studio desk ([0238577](https://github.com/Open-Study-College/osc/commit/02385775bfc7c405d6b6bcaab785adad0a1766da))
+
 ## [0.76.0](https://github.com/Open-Study-College/osc/compare/v0.75.0...v0.76.0) (2023-04-20)
 
 
@@ -83,29 +91,4 @@
 ### 🐛 Bugs
 
 * **saity:** add optional chaining to prevent error when loop is undefined ([2a8c70b](https://github.com/Open-Study-College/osc/commit/2a8c70b00d1da5a087cdf54a7ab3a83feb38ea0a))
-
-## [0.72.0](https://github.com/Open-Study-College/osc/compare/v0.71.0...v0.72.0) (2023-04-20)
-
-
-### 🧪 Tests
-
-* **tabs:** adds tabs test ([93a7788](https://github.com/Open-Study-College/osc/commit/93a77888fa9567cbbb7f97e844e739beb944c9dc))
-
-
-### ✨ Features
-
-* **tabs:** add classnames based on scroll position of overflowing triggers ([51d32bc](https://github.com/Open-Study-College/osc/commit/51d32bc499d3b1aaacff076e461ce93e672845a4))
-* **tabs:** add styles ([64ffe2a](https://github.com/Open-Study-College/osc/commit/64ffe2a490b51ec4588abb4f9b24116c706194de))
-* **tabs:** adds responsive styles ([b922dbf](https://github.com/Open-Study-College/osc/commit/b922dbff507ea01d6e76a54caa0562483908c962))
-* **tabs:** adds semantic tags ([adc25b2](https://github.com/Open-Study-College/osc/commit/adc25b2bb4adfd67ae623f5dff6c5d9e954f144d))
-* **tabs:** center tabs ([1bdbb87](https://github.com/Open-Study-College/osc/commit/1bdbb876897dc1ded69ebc9684a0e72ab6a66f04))
-* **tabs:** centers trigger text ([0473eea](https://github.com/Open-Study-College/osc/commit/0473eead079c0f510de7fb77cd4050c8c95f2262))
-* **tabs:** updates stories ([44affa5](https://github.com/Open-Study-College/osc/commit/44affa5dd81c71c17783c5df608d1a69c2b1be99))
-
-
-### ♻️ Refactors
-
-* **tabs:** remove block padding ([2ea2a68](https://github.com/Open-Study-College/osc/commit/2ea2a6807d663b8e1620c7063e6a25df5ddb14ba))
-* **tabs:** remove forceMount ([be7b2c1](https://github.com/Open-Study-College/osc/commit/be7b2c1a267ca2e1c9024e1a60021765b30e47ab))
-* **tabs:** update tabs to be composable ([607b32c](https://github.com/Open-Study-College/osc/commit/607b32cd25db1a044eb38d1128cc71a702cc84dd))
 
