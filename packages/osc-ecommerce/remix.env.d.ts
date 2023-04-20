@@ -5,8 +5,6 @@
 
 import type { Storefront } from '@shopify/hydrogen';
 
-declare module 'osc-design-tokens';
-
 interface DocumentEnv {
     readonly SANITY_STUDIO_CI: string;
     readonly SANITY_STUDIO_API_PROJECT_ID: string;

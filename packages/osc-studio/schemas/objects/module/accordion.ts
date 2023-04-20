@@ -123,10 +123,13 @@ export default defineType({
     ],
     preview: {
         select: {
-            accordionCount: 'accordionItem.length',
+            accordionItem: 'accordionItem',
         },
+
         prepare(selection) {
-            const { accordionCount } = selection;
+            const { accordionItem } = selection;
+            const accordionCount = accordionItem?.length;
+
             return {
                 title: 'Accordion',
                 subtitle: accordionCount ? pluralize('item', accordionCount, true) : 'No items',

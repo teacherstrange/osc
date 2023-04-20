@@ -274,6 +274,20 @@ export interface textGridModule extends module {
     paddingTop: Spacing;
 }
 
+export interface tabsModule extends module {
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
+    paddingLeft: Maybe<Spacing>;
+    paddingRight: Maybe<Spacing>;
+    tabItem: {
+        _key: string;
+        _type: string;
+        modules: module[] | contentModule[];
+        title: string;
+    }[];
+}
+
 export interface SanitySEO {
     title?: string;
     description?: string | null;

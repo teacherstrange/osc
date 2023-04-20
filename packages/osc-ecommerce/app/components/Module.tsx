@@ -8,9 +8,9 @@ import carouselStyles from 'osc-ui/dist/src-components-Carousel-carousel.css';
 import checkboxStyles from 'osc-ui/dist/src-components-Checkbox-checkbox.css';
 import contentStyles from 'osc-ui/dist/src-components-Content-content.css';
 import contentMediaStyles from 'osc-ui/dist/src-components-ContentMedia-content-media.css';
+import datePickerCalendarStyles from 'osc-ui/dist/src-components-DatePicker-calendar.css';
 import dateFieldStyles from 'osc-ui/dist/src-components-DatePicker-date-field.css';
 import datePickerStyles from 'osc-ui/dist/src-components-DatePicker-date-picker.css';
-import datePickerCalendarStyles from 'osc-ui/dist/src-components-DatePicker-calendar.css';
 import datePickerReactAriaStyles from 'osc-ui/dist/src-components-DatePicker-react-aria-components.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
@@ -18,6 +18,7 @@ import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import popoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
 import radioGroupStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';
 import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
+import tabStyles from 'osc-ui/dist/src-components-Tabs-tabs.css';
 import textGridStyles from 'osc-ui/dist/src-components-TextGrid-text-grid.css';
 import textInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
 import videoStyles from 'osc-ui/dist/src-components-VideoPlayer-video-player.css';
@@ -32,6 +33,7 @@ import type {
     heroModule,
     imageModule,
     module,
+    tabsModule,
     textGridModule,
     trustpilotModule,
     videoModule,
@@ -43,6 +45,7 @@ import { CarouselModule } from './Carousel/Carousel';
 import { ContentMediaModule } from './ContentMedia/ContentMedia';
 import { Forms } from './Forms/Forms';
 import { Hero } from './Hero/Hero';
+import { TabsModule } from './Tabs/Tabs';
 import { TextGridModule } from './TextGrid/TextGrid';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
 
@@ -158,6 +161,14 @@ export const getComponentStyles = (data: SanityPage) => {
                     { rel: 'stylesheet', href: contentStyles }
                 );
                 break;
+
+            case 'module.tabs':
+                styles.push(
+                    { rel: 'stylesheet', href: tabStyles },
+                    // We want to toggle over to an accordion on smaller screen so need the stylesheet
+                    { rel: 'stylesheet', href: oscUiAccordionStyles }
+                );
+                break;
         }
     }
 
@@ -262,6 +273,11 @@ export default function Module(props: Props) {
             const moduleVideo = module as videoModule;
 
             return <VideoPlayerModule module={moduleVideo} key={moduleVideo._key} />;
+
+        case 'module.tabs':
+            const moduleTabs = module as tabsModule;
+
+            return <TabsModule module={moduleTabs} key={moduleTabs._key} />;
 
         default:
             return null;

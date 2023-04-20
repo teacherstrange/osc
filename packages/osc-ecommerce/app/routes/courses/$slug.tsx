@@ -14,7 +14,7 @@ import Preview from '~/components/Preview';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
 import { PRODUCT_QUERY as SHOPIFY_PRODUCT_QUERY } from '~/queries/shopify/product';
-import type { module, SanityPage } from '~/types/sanity';
+import type { SanityPage, module } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
@@ -78,7 +78,7 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
 
 // https://github.com/sergiodxa/remix-utils#dynamiclinks
 const dynamicLinks: DynamicLinksFunction = ({ data }) => {
-    return getComponentStyles(data.product);
+    return getComponentStyles(data.page);
 };
 
 export const handle = { dynamicLinks };
