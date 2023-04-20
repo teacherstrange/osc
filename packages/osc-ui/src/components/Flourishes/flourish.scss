@@ -85,6 +85,12 @@
             display: block;
             overflow: hidden;
             inset: 0;
+            pointer-events: none;
+
+            &--above {
+                z-index: 2;
+                mix-blend-mode: multiply;
+            }
         }
     }
 
