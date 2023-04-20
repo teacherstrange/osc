@@ -77,6 +77,13 @@ export const PRODUCT_QUERY = `#graphql
                 ...ProductVariantFragment
             }
         }
+        collections(first: 1) {
+            edges {
+                node {
+                    handle
+                }
+            }
+        }
     }
   }
 `;
