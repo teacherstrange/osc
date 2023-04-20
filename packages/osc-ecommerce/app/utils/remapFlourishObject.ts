@@ -1,4 +1,10 @@
-import { flourishHeroPrimary, flourishHeroSecondary, flourishHeroTertiary } from 'osc-ui';
+import {
+    flourishHeroPrimary,
+    flourishHeroSecondary,
+    flourishHeroTertiary,
+    flourishPrimary,
+    flourishSecondary,
+} from 'osc-ui';
 import type { Maybe } from 'osc-ui/src/types';
 import type { flourishSettings } from '~/types/sanity';
 
@@ -14,6 +20,14 @@ export const remapFlourishObject = (flourishes: Maybe<flourishSettings>) => {
     let pattern;
     let variant;
     switch (flourishes.pattern) {
+        case 'flourishPrimary':
+            pattern = flourishPrimary;
+            variant = 'primary';
+            break;
+        case 'flourishSecondary':
+            pattern = flourishSecondary;
+            variant = 'secondary';
+            break;
         case 'flourishHeroPrimary':
             pattern = flourishHeroPrimary;
             variant = 'hero-primary';

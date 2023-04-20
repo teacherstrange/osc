@@ -19,20 +19,28 @@ export default defineType({
             name: 'pattern',
             title: 'Pattern',
             type: 'string',
-            initialValue: 'flourishHeroPrimary',
+            initialValue: '',
             options: {
                 layout: 'dropdown',
                 list: [
                     {
-                        title: 'Primary',
+                        title: 'Page - Primary',
+                        value: 'flourishPrimary',
+                    },
+                    {
+                        title: 'Page - Secondary',
+                        value: 'flourishSecondary',
+                    },
+                    {
+                        title: 'Hero - Primary',
                         value: 'flourishHeroPrimary',
                     },
                     {
-                        title: 'Secondary',
+                        title: 'Hero - Secondary',
                         value: 'flourishHeroSecondary',
                     },
                     {
-                        title: 'Tertiary',
+                        title: 'Hero - Tertiary',
                         value: 'flourishHeroTertiary',
                     },
                 ],

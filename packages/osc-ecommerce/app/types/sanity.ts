@@ -518,10 +518,11 @@ export interface PreviewProps {
 
 export interface flourishSettings extends module {
     color: string | 'multicolor';
-    pattern: Maybe<'flourishHeroPrimary' | 'flourishHeroSecondary' | 'flourishHeroTertiary'>;
-}
-
-export interface flourishSettings extends module {
-    color: string | 'multicolor';
-    pattern: Maybe<'flourishHeroPrimary' | 'flourishHeroSecondary' | 'flourishHeroTertiary'>;
+    pattern: Maybe<
+        | 'flourishPrimary'
+        | 'flourishSecondary'
+        | 'flourishHeroPrimary'
+        | 'flourishHeroSecondary'
+        | 'flourishHeroTertiary'
+    >;
 }
