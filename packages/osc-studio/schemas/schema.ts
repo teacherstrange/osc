@@ -8,6 +8,7 @@ import annotationLinkExternal from './annotations/linkExternal';
 import annotationLinkInternal from './annotations/linkInternal';
 
 // Document types
+import awardingBody from './documents/awardingBody';
 import collection from './documents/collection';
 import navigation from './documents/navigation';
 import page from './documents/page';
@@ -82,6 +83,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     annotationLinkInternal,
 
     // Document types
+    awardingBody,
     collection,
     navigation,
     page,

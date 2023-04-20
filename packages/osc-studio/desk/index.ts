@@ -16,6 +16,7 @@ import { SEOPane } from 'sanity-plugin-seo-pane';
 import type { DefaultDocumentNodeResolver, StructureResolver } from 'sanity/desk';
 import type { SanityDocumentWithSlug } from '../utils/resolveProductionUrl';
 import { resolveProductionUrl } from '../utils/resolveProductionUrl';
+import { awardingBody } from './awardingBody';
 import { blog } from './blog';
 import { collections } from './collections';
 import { home } from './home';
@@ -29,6 +30,7 @@ import { team } from './team';
 
 // If you add document types to desk structure manually, you can add them to this array to prevent duplicates in the root pane
 const DOCUMENT_TYPES_IN_STRUCTURE = [
+    'awardingBody',
     'collection',
     'home',
     'media.tag',
@@ -43,6 +45,9 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
     'team',
 ];
 
+// Items that we don't want to enable the preview/seo pane
+const NO_PREVIEW = ['awardingBody', 'redirect', 'navigation', 'team'];
+
 /**
  * Here we declare which view panes show up for which schema types
  *
@@ -51,8 +56,7 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
  * into the document file.
  */
 export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaType }) => {
-    // Don't add the preview or seo pane to the redirect
-    if (schemaType === 'redirect' || schemaType === 'navigation' || schemaType === 'team') {
+    if (NO_PREVIEW.includes(schemaType)) {
         return;
     }
 
@@ -97,6 +101,7 @@ export const structure: StructureResolver = (S, context) => {
             products(S),
             S.divider(),
             team(S),
+            awardingBody(S),
             S.divider(),
             settings(S),
             navigation(S),
@@ -105,6 +110,6 @@ export const structure: StructureResolver = (S, context) => {
             // Automatically add new document types to the root pane
             ...S.documentTypeListItems().filter(
                 (listItem) => !DOCUMENT_TYPES_IN_STRUCTURE.includes(listItem.getId()!)
-            )
+            ),
         ]);
 };
