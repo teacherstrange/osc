@@ -90,7 +90,7 @@ export default function Index() {
 
             {isPreviewMode ? (
                 <PreviewSuspense fallback={<PageContent {...post} />}>
-                    <PagePreview query={query} params={params} />
+                    <PagePreview query={query} params={params} Component={PageContent} />
                 </PreviewSuspense>
             ) : (
                 <PageContent {...post} />
