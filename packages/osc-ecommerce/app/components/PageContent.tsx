@@ -12,3 +12,15 @@ export function PageContent(props: { modules: module[] }) {
         </>
     );
 }
+
+export const PageContentUpper = (props: { upperContent: module[] }) => {
+    const { upperContent } = props;
+
+    return (
+        <>
+            {upperContent?.map((module: module) =>
+                module ? <Module key={module?._key} module={module} isFlush /> : null
+            )}
+        </>
+    );
+};
