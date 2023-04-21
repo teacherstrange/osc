@@ -19,6 +19,7 @@ import { resolveProductionUrl } from '../utils/resolveProductionUrl';
 import { awardingBody } from './awardingBody';
 import { blog } from './blog';
 import { collections } from './collections';
+import { faqs } from './faqs';
 import { home } from './home';
 import { navigation } from './navigation';
 import { pages } from './pages';
