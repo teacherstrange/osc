@@ -66,6 +66,8 @@ export const ProductForm = (props: ProductFormProps) => {
     const selectedVariant = product.selectedVariant ?? firstVariant;
     const isOutOfStock = !selectedVariant?.availableForSale;
 
+    const transitionIsNotIdle = transition.state !== 'idle' ? true : false;
+
     return (
         <div className="c-product-form">
             <Form onChange={handleSubmit} className="c-product-form__form">
@@ -121,13 +123,25 @@ export const ProductForm = (props: ProductFormProps) => {
                 {/* // TODO: add this back in once Wishlist is ready  */}
                 {/* <SaveForLaterButton /> */}
 
-                <Price selectedVariant={selectedVariant} />
+                <Price selectedVariant={selectedVariant} isLoading={transitionIsNotIdle} />
             </div>
 
             <ButtonGroup direction="column">
-                {isOutOfStock ? <></> : <Button isFull>Add to bag</Button>}
+                {isOutOfStock ? (
+                    <></>
+                ) : (
+                    <Button isFull isDisabled={transitionIsNotIdle}>
+                        Add to bag
+                    </Button>
+                )}
 
-                <Button variant="tertiary" isFull as="link" to="/contact">
+                <Button
+                    variant="tertiary"
+                    isFull
+                    as="link"
+                    to="/contact"
+                    isDisabled={transitionIsNotIdle}
+                >
                     Request a callback
                 </Button>
             </ButtonGroup>

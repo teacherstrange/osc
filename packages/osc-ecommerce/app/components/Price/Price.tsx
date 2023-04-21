@@ -1,12 +1,14 @@
 import { Money } from '@shopify/hydrogen';
 import type { ProductVariant } from '@shopify/hydrogen/storefront-api-types';
+import { classNames } from 'osc-ui';
 
 interface PriceProps {
     selectedVariant: ProductVariant;
+    isLoading?: boolean;
 }
 
 export const Price = (props: PriceProps) => {
-    const { selectedVariant } = props;
+    const { selectedVariant, isLoading } = props;
 
     // IF selectedVariant has a price and a compare at price return true if the compare at price is larger than the price
     // In Shopify setting a higher compare at price is what is used to show a sale
@@ -15,8 +17,14 @@ export const Price = (props: PriceProps) => {
         selectedVariant?.compareAtPrice?.amount &&
         selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
 
+    const classes = classNames(
+        'c-price__container',
+        isOnSale ? 'has-sale-price' : '',
+        isLoading ? 'is-loading' : ''
+    );
+
     return (
-        <div className={`c-price__container ${isOnSale ? 'has-sale-price' : ''}`}>
+        <div className={classes}>
             <div className="o-flex">
                 {selectedVariant ? (
                     <span className="c-price t-font-xl u-text-bold u-color-primary u-mb-0">
