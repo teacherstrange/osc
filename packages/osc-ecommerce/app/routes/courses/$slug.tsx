@@ -16,15 +16,15 @@ import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
 import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
-import Module, { getComponentStyles } from '~/components/Module';
-import { PageContent } from '~/components/PageContent';
+import { getComponentStyles } from '~/components/Module';
+import { PageContent, PageContentUpper } from '~/components/PageContent';
 import { PreviewBanner } from '~/components/PreviewBanner';
 import priceStyles from '~/components/Price/price.css';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
 import { PRODUCT_QUERY as SHOPIFY_PRODUCT_QUERY } from '~/queries/shopify/product';
 import productStyles from '~/styles/product.css';
-import type { SanityProduct, module } from '~/types/sanity';
+import type { SanityProduct } from '~/types/sanity';
 import { getUniqueObjects } from '~/utils/getUniqueObjects';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
@@ -145,48 +145,58 @@ export default function Index() {
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
      */
     return (
-        <div className="u-pt-l">
+        <>
             {isPreviewMode ? <PreviewBanner /> : null}
 
-            <div className="o-container o-grid u-mb-l">
-                <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--7@desk-med">
-                    <h1 className="o-product-title t-font-secondary u-b-bottom u-w-fit">
-                        {product.title}
-                    </h1>
+            <div className="u-pt-l">
+                <div className="o-container o-grid u-mb-l">
+                    <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--7@desk-med">
+                        <h1 className="o-product-title t-font-secondary u-b-bottom u-w-fit">
+                            {product.title}
+                        </h1>
 
-                    {uniqueSKUs
-                        ? uniqueSKUs.map((variant: ProductVariant, index, { length }) => (
-                              <span className="t-font-m" key={variant.id}>
-                                  {variant.sku}
-                                  {/* IF index isn't equal to the length of the array then add a / */}
-                                  {length !== index + 1 && ' / '}
-                              </span>
-                          ))
-                        : null}
-                </div>
-            </div>
-
-            <div className="o-container o-grid u-mb-6xl">
-                {page?.upperContent && page?.upperContent.length > 0 ? (
-                    <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--7@desk-med">
-                        {page?.upperContent.map((module: module) =>
-                            module ? <Module key={module?._key} module={module} isFlush /> : null
-                        )}
+                        {uniqueSKUs
+                            ? uniqueSKUs.map((variant: ProductVariant, index, { length }) => (
+                                  <span className="t-font-m" key={variant.id}>
+                                      {variant.sku}
+                                      {/* IF index isn't equal to the length of the array then add a / */}
+                                      {length !== index + 1 && ' / '}
+                                  </span>
+                              ))
+                            : null}
                     </div>
-                ) : null}
-
-                <div className="c-product-form__container o-grid__col o-grid__col--12 o-grid__col--start-8@tab o-grid__col--6@tab o-grid__col--start-7@desk o-grid__col--start-8@desk-med">
-                    <ProductForm product={product} />
                 </div>
-            </div>
 
-            {isPreviewMode ? (
-                <PreviewSuspense fallback={<PageContent {...page} />}>
-                    <PagePreview query={query} params={params} />
-                </PreviewSuspense>
-            ) : (
-                <PageContent {...page} />
-            )}
-        </div>
+                <div className="o-container o-grid u-mb-6xl">
+                    {page?.upperContent && page?.upperContent.length > 0 ? (
+                        <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--7@desk-med">
+                            {isPreviewMode ? (
+                                <PreviewSuspense fallback={<PageContentUpper {...page} />}>
+                                    <PagePreview
+                                        query={query}
+                                        params={params}
+                                        Component={PageContentUpper}
+                                    />
+                                </PreviewSuspense>
+                            ) : (
+                                <PageContentUpper {...page} />
+                            )}
+                        </div>
+                    ) : null}
+
+                    <div className="c-product-form__container o-grid__col o-grid__col--12 o-grid__col--start-8@tab o-grid__col--6@tab o-grid__col--start-7@desk o-grid__col--start-8@desk-med">
+                        <ProductForm product={product} />
+                    </div>
+                </div>
+
+                {isPreviewMode ? (
+                    <PreviewSuspense fallback={<PageContent {...page} />}>
+                        <PagePreview query={query} params={params} Component={PageContent} />
+                    </PreviewSuspense>
+                ) : (
+                    <PageContent {...page} />
+                )}
+            </div>
+        </>
     );
 }
