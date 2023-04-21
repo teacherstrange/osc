@@ -339,7 +339,7 @@ export interface SanityPage {
 }
 
 export interface SanityProduct extends SanityPage {
-    upperContent?: module[] | contentModule[];
+    upperContent: module[] | contentModule[];
 }
 
 export interface shopifyProduct {
