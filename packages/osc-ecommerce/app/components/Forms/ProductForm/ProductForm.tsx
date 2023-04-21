@@ -1,9 +1,10 @@
-import { useSearchParams, useTransition } from '@remix-run/react';
+import { Form, useNavigation, useSearchParams, useSubmit } from '@remix-run/react';
 import type {
     Product as ProductType,
     ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
 import { Button, ButtonGroup, RadioGroup, RadioItem } from 'osc-ui';
+import type { FormEvent } from 'react';
 import { Fragment, useMemo } from 'react';
 import { Price } from '~/components/Price/Price';
 
@@ -12,9 +13,20 @@ interface ProductFormProps {
 }
 export const ProductForm = (props: ProductFormProps) => {
     const { product } = props;
-
     const [currentSearchParams] = useSearchParams();
-    const transition = useTransition();
+    const transition = useNavigation();
+    const submit = useSubmit();
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        submit(e.currentTarget, {
+            // Replace history stack so users can go back without having to revisit every selected option
+            replace: true,
+            // As we're using a 'get' method we want to make sure the page doesn't move around when the form is submitted
+            preventScrollReset: true,
+        });
+    };
 
     /**
      * We update `searchParams` with in-flight request data from `transition` (if available)
@@ -56,36 +68,42 @@ export const ProductForm = (props: ProductFormProps) => {
 
     return (
         <div className="c-product-form">
-            {product.options && product.options.length > 0
-                ? product.options.map((option, index) => (
-                      <Fragment key={`option-${index}-${option.name}`}>
-                          {/* // TODO: When user changes radio button then the url needs to update the urls params E.g. ?Study-method=Study%20Pack&Format=Course%20Material%20%2B%20Exams */}
-                          <RadioGroup
-                              // TODO: Could we update the data in Shopify so the name values reflect the name on the FE?
-                              // TODO: Can we change the order in the CMS?
-                              description={{
-                                  id: `option-${option.name}`,
-                                  value: `<h2 class="t-font-l u-text-bold u-color-secondary">${option.name}</h2>`,
-                              }}
-                              name={`option-${option.name}`}
-                              defaultValue={searchParamsWithDefaults.get(option.name)!}
-                              direction={option.name === 'Format' ? 'column' : 'row'}
-                              className="c-product-form__radio-group c-radio-group--col-gap-l"
-                          >
-                              {option.values.map((value) => (
-                                  <RadioItem
-                                      key={`option-${option.name}-${value}`}
-                                      id={`option-${option.name}-${value}`}
-                                      name={value}
-                                      value={value}
-                                  />
-                              ))}
-                          </RadioGroup>
-                      </Fragment>
-                  ))
-                : null}
+            <Form onChange={handleSubmit} className="c-product-form__form">
+                {product.options && product.options.length > 0
+                    ? product.options.map((option, index) => {
+                          return (
+                              <Fragment key={`option-${index}-${option.name}`}>
+                                  <RadioGroup
+                                      // TODO: Could we update the data in Shopify so the name values reflect the name on the FE?
+                                      // TODO: Can we change the order in the CMS?
+                                      description={{
+                                          id: option.name,
+                                          value: `<h2 class="t-font-l u-text-bold u-color-secondary">${option.name}</h2>`,
+                                      }}
+                                      name={option.name}
+                                      defaultValue={searchParamsWithDefaults.get(option.name)!}
+                                      direction={option.name === 'Format' ? 'column' : 'row'}
+                                      className="c-product-form__radio-group c-radio-group--col-gap-l"
+                                  >
+                                      {option.values.map((value) => (
+                                          <RadioItem
+                                              key={`${option.name}-${value}`}
+                                              id={`${option.name}-${value}`}
+                                              name={value}
+                                              value={value}
+                                          />
+                                      ))}
+                                  </RadioGroup>
+                              </Fragment>
+                          );
+                      })
+                    : null}
+            </Form>
 
-            {/* // TODO: This needs to come from Shopify once we have the setup */}
+            {/*
+                // TODO: This needs to come from Shopify once we have the setup
+                // TODO: Add to above form when this is available in Shopify, currently causes form to fail to submit correctly as the options are not available
+            */}
             <RadioGroup
                 description={{
                     id: 'payment-options',
@@ -109,7 +127,7 @@ export const ProductForm = (props: ProductFormProps) => {
             <ButtonGroup direction="column">
                 {isOutOfStock ? <></> : <Button isFull>Add to bag</Button>}
 
-                <Button variant="tertiary" isFull>
+                <Button variant="tertiary" isFull as="link" to="/contact">
                     Request a callback
                 </Button>
             </ButtonGroup>
