@@ -1,3 +1,10 @@
+## [0.78.1](https://github.com/Open-Study-College/osc/compare/v0.78.0...v0.78.1) (2023-04-21)
+
+
+### 🐛 Bugs
+
+* **studio:** adds missing faqs import file ([00d5336](https://github.com/Open-Study-College/osc/commit/00d533661241a0380f1d3c6cdcf26b98a96a92ac))
+
 ## [0.78.0](https://github.com/Open-Study-College/osc/compare/v0.77.0...v0.78.0) (2023-04-20)
 
 
@@ -86,37 +93,4 @@
 
 * **product page:** adds optional chaining to variants check ([35a98b8](https://github.com/Open-Study-College/osc/commit/35a98b891f014e66bc48b49147145ffafa7fd553))
 * **tabs:** add background color ([b759f61](https://github.com/Open-Study-College/osc/commit/b759f6171a8b1230b34679ed1921208821b18c9e))
-
-## [0.74.0](https://github.com/Open-Study-College/osc/compare/v0.73.0...v0.74.0) (2023-04-20)
-
-
-### ✨ Features
-
-* **accordion:** add container to accordion module ([1c6ddf5](https://github.com/Open-Study-College/osc/commit/1c6ddf5350eb823bdaf8b46376b64690276848c7))
-* **tabs:** add spacing controls to tabs on ecommerce ([f996bdd](https://github.com/Open-Study-College/osc/commit/f996bdd9533a1c4f60de26b47e3cc0445a761a14))
-* **tabs:** add tabs query ([6b01142](https://github.com/Open-Study-College/osc/commit/6b01142a21d59d987e447f2e8ee357d974ace45f))
-* **tabs:** add tabs type ([6881852](https://github.com/Open-Study-College/osc/commit/68818522cf465c5872c55ff52c483f5d66268fd8))
-* **tabs:** adds tab component to osc-ecommerce ([db98527](https://github.com/Open-Study-College/osc/commit/db98527cd60d916e021055dc374204a5909ecbcc))
-* **tabs:** adds tabs module to sanity ([5c3d846](https://github.com/Open-Study-College/osc/commit/5c3d846e8d17fa1cf229d98f78c9925fa774ebb2))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* remove todo ([7f4de56](https://github.com/Open-Study-College/osc/commit/7f4de566c5d7f8ab9a280c3b5d77f25f99d377de))
-* **tabs:** export tabs from osc-ui ([a8968df](https://github.com/Open-Study-College/osc/commit/a8968df4f9c128c7caa4991da5c85c9b4021cd52))
-
-
-### 🧪 Tests
-
-* **tabs:** adds tests for ecommerce tabs component ([09e93ea](https://github.com/Open-Study-College/osc/commit/09e93ea583a098e760656ce140c1dae0cecfc6f9))
-
-
-### 🐛 Bugs
-
-* **accordion:** fixes accordion count in the preview ([05e70b5](https://github.com/Open-Study-College/osc/commit/05e70b52312aa273eb0dd4da5e0d94ac3273aed9))
-* **ecommerce:** move design token declaration into it's own file ([d5594dc](https://github.com/Open-Study-College/osc/commit/d5594dca16895f8c70280ae06646ba55ff1ee523))
-* **products page:** fixes typo in returned dynamic links data ([c94a963](https://github.com/Open-Study-College/osc/commit/c94a963c28643241c5b71adb013504a29b80ef63))
-* **tabs:** fix typo ([92f6884](https://github.com/Open-Study-College/osc/commit/92f6884a24a160845956e89e0245657d877ee2c6))
-* **tabs:** fix typo in media query ([18b4a11](https://github.com/Open-Study-College/osc/commit/18b4a113aac12be4c7c162e59fe9b6b2780ea282))
-* **tabs:** move child modules into own fragment so we can reference correctly inside tabs ([a441073](https://github.com/Open-Study-College/osc/commit/a441073b17fca13071f0d2908d951baeda2680c0))
 
