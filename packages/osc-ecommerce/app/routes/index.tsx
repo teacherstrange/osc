@@ -72,17 +72,19 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 
 export default function Index() {
     const { home, isPreview, query, params } = useLoaderData<typeof loader>();
+    const isPreviewMode = isPreview && query && params;
 
-    if (isPreview && query && params) {
-        return (
-            <>
-                <PreviewBanner />
+    return (
+        <>
+            {isPreviewMode ? <PreviewBanner /> : null}
+
+            {isPreviewMode ? (
                 <PreviewSuspense fallback={<PageContent {...home} />}>
                     <PagePreview query={query} params={params} />
                 </PreviewSuspense>
-            </>
-        );
-    }
-
-    return <PageContent {...home} />;
+            ) : (
+                <PageContent {...home} />
+            )}
+        </>
+    );
 }

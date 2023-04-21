@@ -100,30 +100,12 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 
 export default function Collection() {
     const { page, collection, isPreview, query, params } = useLoaderData<typeof loader>();
-
-    if (isPreview && query && params) {
-        return (
-            <>
-                <PreviewBanner />
-                <h1>{collection.title}</h1>
-
-                {collection.products.nodes.length > 0
-                    ? collection.products.nodes.map((product) => (
-                          <div key={product.id}>
-                              <Link to={`/products/${product.handle}`}>{product.title}</Link>
-                          </div>
-                      ))
-                    : null}
-
-                <PreviewSuspense fallback={<PageContent {...page} />}>
-                    <PagePreview query={query} params={params} />
-                </PreviewSuspense>
-            </>
-        );
-    }
+    const isPreviewMode = isPreview && query && params;
 
     return (
         <>
+            {isPreviewMode ? <PreviewBanner /> : null}
+
             <h1>{collection.title}</h1>
 
             {collection.products.nodes.length > 0
@@ -134,7 +116,13 @@ export default function Collection() {
                   ))
                 : null}
 
-            <PageContent {...page} />
+            {isPreviewMode ? (
+                <PreviewSuspense fallback={<PageContent {...page} />}>
+                    <PagePreview query={query} params={params} />
+                </PreviewSuspense>
+            ) : (
+                <PageContent {...page} />
+            )}
         </>
     );
 }

@@ -132,18 +132,7 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 
 export default function Index() {
     const { page, product, isPreview, query, params } = useLoaderData<typeof loader>();
-
-    if (isPreview && query && params) {
-        return (
-            <>
-                <PreviewBanner />
-                <h1>{product.title}</h1>
-                <PreviewSuspense fallback={<PageContent {...page} />}>
-                    <PagePreview query={query} params={params} />
-                </PreviewSuspense>
-            </>
-        );
-    }
+    const isPreviewMode = isPreview && query && params;
 
     // Due how the data is setup in Shopify there are times where we might return the same SKU multiple times
     // Here we are checking if there are any SKUs and then filtering out duplicates
@@ -157,6 +146,8 @@ export default function Index() {
      */
     return (
         <div className="u-pt-l">
+            {isPreviewMode ? <PreviewBanner /> : null}
+
             <div className="o-container o-grid u-mb-l">
                 <div className="o-grid__col o-grid__col--12 o-grid__col--9@tab o-grid__col--7@desk-med">
                     <h1 className="o-product-title t-font-secondary u-b-bottom u-w-fit">
@@ -189,7 +180,13 @@ export default function Index() {
                 </div>
             </div>
 
-            <PageContent {...page} />
+            {isPreviewMode ? (
+                <PreviewSuspense fallback={<PageContent {...page} />}>
+                    <PagePreview query={query} params={params} />
+                </PreviewSuspense>
+            ) : (
+                <PageContent {...page} />
+            )}
         </div>
     );
 }
