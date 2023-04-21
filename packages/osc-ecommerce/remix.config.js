@@ -10,4 +10,7 @@ module.exports = {
     serverDependenciesToBundle: [
         /^osc-ui\/dist\/.*\.svg$/, // match svg files in dist folder, this prevents the unhandled token error being thrown
     ],
+    future: {
+        v2_normalizeFormMethod: true,
+    },
 };
