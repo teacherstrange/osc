@@ -66,10 +66,10 @@ export const ProductForm = (props: ProductFormProps) => {
     const selectedVariant = product.selectedVariant ?? firstVariant;
     const isOutOfStock = !selectedVariant?.availableForSale;
 
-    const transitionIsNotIdle = transition.state !== 'idle' ? true : false;
+    const transitionIsNotIdle = transition.state !== 'idle' && transition.formAction ? true : false;
 
     return (
-        <div className="c-product-form">
+        <div className={`c-product-form ${transitionIsNotIdle ? 'is-loading' : ''}`}>
             <Form onChange={handleSubmit} className="c-product-form__form">
                 {product.options && product.options.length > 0
                     ? product.options.map((option, index) => {
@@ -123,7 +123,7 @@ export const ProductForm = (props: ProductFormProps) => {
                 {/* // TODO: add this back in once Wishlist is ready  */}
                 {/* <SaveForLaterButton /> */}
 
-                <Price selectedVariant={selectedVariant} isLoading={transitionIsNotIdle} />
+                <Price selectedVariant={selectedVariant} />
             </div>
 
             <ButtonGroup direction="column">
