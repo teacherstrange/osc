@@ -18,6 +18,7 @@ import product from './documents/product';
 import productVariant from './documents/productVariant';
 import redirects from './documents/redirects';
 import team from './documents/team';
+import testimonials from './documents/testimonials';
 
 // Singleton document types
 import blog from './singletons/blog';
@@ -94,6 +95,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     productVariant,
     redirects,
     team,
+    testimonials,
 
     // Singleton document types
     home,

@@ -28,6 +28,7 @@ import { products } from './products';
 import { redirects } from './redirects';
 import { settings } from './settings';
 import { team } from './team';
+import { testimonials } from './testimonials';
 
 // If you add document types to desk structure manually, you can add them to this array to prevent duplicates in the root pane
 const DOCUMENT_TYPES_IN_STRUCTURE = [
@@ -45,10 +46,11 @@ const DOCUMENT_TYPES_IN_STRUCTURE = [
     'redirect',
     'navigation',
     'team',
+    'testimonials',
 ];
 
 // Items that we don't want to enable the preview/seo pane
-const NO_PREVIEW = ['awardingBody', 'redirect', 'navigation', 'faqs', 'team'];
+const NO_PREVIEW = ['awardingBody', 'redirect', 'navigation', 'faqs', 'team', 'testimonials'];
 
 /**
  * Here we declare which view panes show up for which schema types
@@ -105,6 +107,7 @@ export const structure: StructureResolver = (S, context) => {
             team(S),
             awardingBody(S),
             faqs(S),
+            testimonials(S),
             S.divider(),
             settings(S),
             navigation(S),
