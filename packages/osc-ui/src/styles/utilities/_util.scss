@@ -173,7 +173,8 @@ $osc-config: (
     width: (
         prefix: "w",
         values: (
-            "fit": fit-content
+            "fit": fit-content,
+            "full": 100%
         )
     )
 );
