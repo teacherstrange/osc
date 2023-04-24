@@ -1,3 +1,10 @@
+## [0.79.0](https://github.com/Open-Study-College/osc/compare/v0.78.1...v0.79.0) (2023-04-24)
+
+
+### ✨ Features
+
+* add testimonials document to sanity ([50c182b](https://github.com/Open-Study-College/osc/commit/50c182b403a95570176b91a54aa73a8463234a51))
+
 ## [0.78.1](https://github.com/Open-Study-College/osc/compare/v0.78.0...v0.78.1) (2023-04-21)
 
 
@@ -65,32 +72,4 @@
 
 * **awarding body:** adds awarding body document type to Sanity ([8409cfb](https://github.com/Open-Study-College/osc/commit/8409cfb76252e5e3cae14eb2c0fd053cf20a1f3a))
 * **awarding body:** adds awarding body document type to the studio desk ([36805e0](https://github.com/Open-Study-College/osc/commit/36805e08354298ca0ce29c36262cef091a6888ca))
-
-## [0.75.0](https://github.com/Open-Study-College/osc/compare/v0.74.0...v0.75.0) (2023-04-20)
-
-
-### ✨ Features
-
-* **ecommerce:** adds background colour to the main element on product pages ([b38b9bf](https://github.com/Open-Study-College/osc/commit/b38b9bfccfadd3dd12168cc58463e04db6b6fc05))
-* **ecommerce:** adds utility function to get the page type ([1a6e3f2](https://github.com/Open-Study-College/osc/commit/1a6e3f2f2c6c494079edab5f0c307609025fccf9))
-* **modules:** adds an isFlush prop through to modules ([01754d2](https://github.com/Open-Study-College/osc/commit/01754d2d84cefbf1f1d408314a38ee8a3ca36715))
-* **product page:** adds initial layout styles ([b285254](https://github.com/Open-Study-College/osc/commit/b285254a0b6a5b87847e53ff6779b8dce44c731a))
-* **product page:** adds varaint sku to query ([a306eba](https://github.com/Open-Study-College/osc/commit/a306ebad8dd605b2e46bca07b9ff004fa930650b))
-* **product page:** adjusts breakpoints for upper content grid ([4478607](https://github.com/Open-Study-College/osc/commit/4478607bda6ea2e291c699d4224dedb3a6581808))
-* **product page:** extend SanityProduct type from SanityPage ([b1d7c17](https://github.com/Open-Study-College/osc/commit/b1d7c178435231cf4fbd1eb98a43014aef98055d))
-* **product page:** filter out duplicate skus ([5565d83](https://github.com/Open-Study-College/osc/commit/5565d8336a8d91901fcc3d7c91dea0af0eb7fce6))
-* **styles:** adds new utility classes ([8120ed0](https://github.com/Open-Study-College/osc/commit/8120ed05d4992bfa918599be95e787efd7e06b9f))
-
-
-### 🐛 Bugs
-
-* **product page:** add optional chaining to variants.nodes ([0fadc1a](https://github.com/Open-Study-College/osc/commit/0fadc1a288c02387a65b8485bc0acc4c68af85d5))
-* **typescript:** add Maybe generic to content fullWidth prop ([cccee2b](https://github.com/Open-Study-College/osc/commit/cccee2bfa61a2f9dbc0ddce7796952ca2e47c787))
-* **typescript:** add osc-design-tokens declaration file ([0660715](https://github.com/Open-Study-College/osc/commit/066071598b8200c644177c5c4b12828cdb0064fd))
-
-
-### ♻️ Refactors
-
-* **product page:** adds optional chaining to variants check ([35a98b8](https://github.com/Open-Study-College/osc/commit/35a98b891f014e66bc48b49147145ffafa7fd553))
-* **tabs:** add background color ([b759f61](https://github.com/Open-Study-College/osc/commit/b759f6171a8b1230b34679ed1921208821b18c9e))
 
