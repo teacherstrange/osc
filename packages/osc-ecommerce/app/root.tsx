@@ -25,7 +25,7 @@ import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
 import styles from 'osc-ui/dist/src-styles-main.css';
 import React, { useEffect } from 'react';
 import { DynamicLinks } from 'remix-utils';
-import { getCart } from '~/utils/cart/getCart';
+import { getCart } from '~/utils/cart.helpers';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 import { SiteFooter } from './components/Footer/Footer';
 import { SiteHeader } from './components/Header/Header';

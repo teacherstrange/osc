@@ -3,6 +3,9 @@ import type { AppLoadContext } from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 import { CART_QUERY } from '~/queries/shopify/cart';
 
+/* -------------------------------------------------------------------------------------------------
+ * Query Cart
+ * -----------------------------------------------------------------------------------------------*/
 /**
  * Retrieve a cart object by ID from a Storefront instance.
  *
