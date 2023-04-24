@@ -113,7 +113,9 @@ export default function CartRoute() {
             <ul>
                 {cartLines.map((line) => (
                     <div key={line.id}>
-                        <h2>{line?.merchandise?.title}</h2>
+                        <h2>
+                            {line?.merchandise?.product?.title} - {line?.merchandise?.title}
+                        </h2>
                     </div>
                 ))}
             </ul>
