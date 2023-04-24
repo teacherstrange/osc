@@ -7,6 +7,7 @@ import { Button, ButtonGroup, RadioGroup, RadioItem } from 'osc-ui';
 import type { FormEvent } from 'react';
 import { Fragment, useMemo } from 'react';
 import { Price } from '~/components/Price/Price';
+import { AddToCart } from '../AddToCart/AddToCart';
 
 interface ProductFormProps {
     product: ProductType & { selectedVariant?: ProductVariant };
@@ -127,21 +128,20 @@ export const ProductForm = (props: ProductFormProps) => {
             </div>
 
             <ButtonGroup direction="column">
-                {isOutOfStock ? (
-                    <></>
+                {!isOutOfStock ? (
+                    <AddToCart
+                        lines={[
+                            {
+                                merchandiseId: selectedVariant.id,
+                                quantity: 1,
+                            },
+                        ]}
+                    />
                 ) : (
-                    <Button isFull isDisabled={transitionIsNotIdle}>
-                        Add to bag
-                    </Button>
+                    <></>
                 )}
 
-                <Button
-                    variant="tertiary"
-                    isFull
-                    as="link"
-                    to="/contact"
-                    isDisabled={transitionIsNotIdle}
-                >
+                <Button variant="tertiary" isFull as="link" to="/contact">
                     Request a callback
                 </Button>
             </ButtonGroup>
