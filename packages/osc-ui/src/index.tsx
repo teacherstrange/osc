@@ -100,6 +100,7 @@ export { Trustpilot } from './components/Trustpilot/Trustpilot';
 export { VideoPlayer } from './components/VideoPlayer/VideoPlayer';
 export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
 // Hooks
+export { useIntersectionObserver } from './hooks/useIntersectionObserver';
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useModifier } from './hooks/useModifier';
 export { useSpacing } from './hooks/useSpacing';
