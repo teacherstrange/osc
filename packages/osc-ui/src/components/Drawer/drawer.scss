@@ -4,7 +4,8 @@
 @layer components {
     $drawer-directions: (top, right, bottom, left);
     $drawer-trigger-height: var(--drawer-trigger-height); // Value is generated on the component
-    $drawer-width-m: 610px;
+    $drawer-width-l: 610px;
+    $drawer-width-m: 566px;
     $drawer-width-s: 370px;
     $drawer-max-height: 750px;
     $drawer-max-height-m: 500px;
@@ -123,8 +124,20 @@
             // *----------------------------------*/
             //  Sizes
             // *----------------------------------*/
-            &--sm {
+            &--sm,
+            &--md,
+            &--lg {
                 width: 100%;
+            }
+
+            &--md,
+            &--lg {
+                @include mq(strip-unit($drawer-max-height), max, height) {
+                    max-height: $drawer-max-height-m;
+                }
+            }
+
+            &--sm {
                 padding: $space-s $space-m;
 
                 @include mq($mq-tab) {
@@ -133,14 +146,14 @@
             }
 
             &--md {
-                width: 100%;
-
-                @include mq(strip-unit($drawer-max-height), max, height) {
-                    max-height: $drawer-max-height-m;
-                }
-
                 @include mq($mq-tab) {
                     max-width: $drawer-width-m;
+                }
+            }
+
+            &--lg {
+                @include mq($mq-tab) {
+                    max-width: $drawer-width-l;
                 }
             }
 
