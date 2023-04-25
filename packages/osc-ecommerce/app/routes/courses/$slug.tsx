@@ -131,8 +131,23 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { page, product, isPreview, query, params } = useLoaderData<typeof loader>();
+    const { page, product, isPreview, query } = useLoaderData<typeof loader>();
+    const params = useParams();
+    const intersectionRef = useRef<HTMLDivElement>(null);
     const isPreviewMode = isPreview && query && params;
+
+    const productFormIntersection = useIntersectionObserver(intersectionRef, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0,
+    });
+    const formIsIntersecting = productFormIntersection?.isIntersecting;
+
+    // If `preview` mode is active, its component updates this state for us
+    const [data, setData] = useState<SanityProduct>(page);
+
+    // Make sure to update the page state if the IDs are different!
+    if (page?._id !== data?._id) setData(page);
 
     // Due how the data is setup in Shopify there are times where we might return the same SKU multiple times
     // Here we are checking if there are any SKUs and then filtering out duplicates
@@ -185,8 +200,9 @@ export default function Index() {
                     ) : null}
 
                     <div className="c-product-form__container o-grid__col o-grid__col--12 o-grid__col--start-8@tab o-grid__col--6@tab o-grid__col--start-7@desk o-grid__col--start-8@desk-med">
-                        <ProductForm />
-                        <ProductFormDrawer />
+                        <ProductForm ref={intersectionRef} />
+
+                        <ProductFormDrawer hideTrigger={formIsIntersecting} />
                     </div>
 
                     {isPreviewMode ? (
