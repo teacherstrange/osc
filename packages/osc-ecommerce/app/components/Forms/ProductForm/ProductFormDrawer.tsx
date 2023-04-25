@@ -20,7 +20,7 @@ export const ProductFormDrawer = (props: ProductFormDrawerProps) => {
     const { hideTrigger } = props;
 
     const isGreaterThanTab = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
-    const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState(false);
+    const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState<boolean>(false);
 
     const BUTTON_TEXT = 'Enrol now';
 
@@ -32,11 +32,11 @@ export const ProductFormDrawer = (props: ProductFormDrawerProps) => {
 
     return (
         <Drawer direction={showOnGreaterThanTab ? 'right' : 'bottom'} isOffset={true}>
-            <DrawerTrigger asChild isPinned>
+            <DrawerTrigger asChild isPinned className={`${hideTrigger ? 'is-hidden' : ''}`}>
                 <Button
                     variant="senary"
-                    className={`${showOnGreaterThanTab ? 'c-btn--flush-r' : 'c-btn--flush-b'} ${
-                        hideTrigger ? 'is-hidden' : 'is-active'
+                    className={`${
+                        showOnGreaterThanTab ? 'c-btn--flush-r' : 'c-btn--flush-b'
                     } u-w-max`}
                 >
                     {BUTTON_TEXT} <Icon id={showOnGreaterThanTab ? 'chevron-left' : 'chevron-up'} />
@@ -46,7 +46,9 @@ export const ProductFormDrawer = (props: ProductFormDrawerProps) => {
                 <DrawerTrigger asChild isPinned isCloseButton>
                     <Button
                         variant="senary"
-                        className={`${showOnGreaterThanTab ? 'c-btn--flush-r' : 'c-btn--flush-b'}`}
+                        className={`${
+                            showOnGreaterThanTab ? 'c-btn--flush-r' : 'c-btn--flush-b'
+                        } c-btn--b-img-none`}
                     >
                         {BUTTON_TEXT}{' '}
                         <Icon id={showOnGreaterThanTab ? 'chevron-right' : 'chevron-down'} />
@@ -57,7 +59,7 @@ export const ProductFormDrawer = (props: ProductFormDrawerProps) => {
                     <DrawerTitle>{BUTTON_TEXT}</DrawerTitle>
                 </VisuallyHidden>
 
-                <ProductForm />
+                <ProductForm direction={showOnGreaterThanTab ? 'right' : 'bottom'} />
             </DrawerContent>
         </Drawer>
     );

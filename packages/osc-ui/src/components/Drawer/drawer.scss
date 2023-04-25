@@ -209,12 +209,20 @@
                     }
 
                     @if $dir == top {
+                        &.is-hidden {
+                            transform: translate(-50%, -100%);
+                        }
+
                         &#{$self}--close {
                             top: 100%;
                         }
                     }
 
                     @if $dir == bottom {
+                        &.is-hidden {
+                            transform: translate(-50%, 100%);
+                        }
+
                         &#{$self}--close {
                             bottom: 100%;
                         }
@@ -223,6 +231,10 @@
                     @if $dir == right {
                         left: 100%; /* [1] */
                         transform: translateX(-100%);
+
+                        &.is-hidden {
+                            transform: translateX(100%);
+                        }
 
                         &#{$self}--close {
                             top: 0;
@@ -233,6 +245,10 @@
                     @if $dir == left {
                         right: 100%; /* [1] */
                         transform: translateX(100%);
+
+                        &.is-hidden {
+                            transform: translateX(-100%);
+                        }
 
                         &#{$self}--close {
                             top: 0;
