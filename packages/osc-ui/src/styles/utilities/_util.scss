@@ -174,7 +174,8 @@ $osc-config: (
         prefix: "w",
         values: (
             "fit": fit-content,
-            "full": 100%
+            "full": 100%,
+            "max": max-content
         )
     )
 );
