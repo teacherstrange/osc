@@ -1,3 +1,4 @@
+import { mediaQueries as mq } from 'osc-design-tokens';
 import {
     Button,
     Drawer,
@@ -6,26 +7,54 @@ import {
     DrawerTrigger,
     Icon,
     VisuallyHidden,
+    rem,
+    useMediaQuery,
 } from 'osc-ui';
+import { useEffect, useState } from 'react';
 import { ProductForm } from './ProductForm';
 
-export const ProductFormDrawer = () => {
+interface ProductFormDrawerProps {
+    hideTrigger?: boolean;
+}
+export const ProductFormDrawer = (props: ProductFormDrawerProps) => {
+    const { hideTrigger } = props;
+
+    const isGreaterThanTab = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
+    const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState(false);
+
+    const BUTTON_TEXT = 'Enrol now';
+
+    // We need this useEffect to set the showOnTab state only when the window object exists
+    // Otherwise we will receive an SSR warning telling us the markup differs from the server
+    useEffect(() => {
+        setShowOnGreaterThanTab(isGreaterThanTab);
+    }, [isGreaterThanTab]);
+
     return (
-        <Drawer direction="right" isOffset={true}>
+        <Drawer direction={showOnGreaterThanTab ? 'right' : 'bottom'} isOffset={true}>
             <DrawerTrigger asChild isPinned>
-                <Button variant="senary" className="c-btn--flush-r">
-                    Enrol now <Icon id="chevron-left" />
+                <Button
+                    variant="senary"
+                    className={`${showOnGreaterThanTab ? 'c-btn--flush-r' : 'c-btn--flush-b'} ${
+                        hideTrigger ? 'is-hidden' : 'is-active'
+                    } u-w-max`}
+                >
+                    {BUTTON_TEXT} <Icon id={showOnGreaterThanTab ? 'chevron-left' : 'chevron-up'} />
                 </Button>
             </DrawerTrigger>
             <DrawerContent innerClassName="u-pt-0 u-pr-0 u-pb-0 u-pl-0">
                 <DrawerTrigger asChild isPinned isCloseButton>
-                    <Button variant="senary" className="c-btn--flush-r">
-                        Enrol now <Icon id="chevron-right" />
+                    <Button
+                        variant="senary"
+                        className={`${showOnGreaterThanTab ? 'c-btn--flush-r' : 'c-btn--flush-b'}`}
+                    >
+                        {BUTTON_TEXT}{' '}
+                        <Icon id={showOnGreaterThanTab ? 'chevron-right' : 'chevron-down'} />
                     </Button>
                 </DrawerTrigger>
 
                 <VisuallyHidden>
-                    <DrawerTitle>Enrol now</DrawerTitle>
+                    <DrawerTitle>{BUTTON_TEXT}</DrawerTitle>
                 </VisuallyHidden>
 
                 <ProductForm />
