@@ -25,7 +25,6 @@
         border: $product-form-border-width solid;
         border-image-slice: 1;
         border-image-source: $product-form-gradient;
-        border-right: none;
 
         @include mq($mq-tab) {
             position: sticky;
@@ -33,12 +32,25 @@
             padding: $space-2xl $space-4xl $space-2xl $space-2xl;
         }
 
-        @include mq(($mq-mob-l, $mq-tab)) {
+        &--right {
+            border-right: none;
+        }
+
+        &--bottom {
+            border-bottom: none;
+        }
+
+        @include mq(($mq-mob-l, $mq-tab - 1)) {
             border-right: $product-form-border-width solid;
         }
 
         @include mq($product-form-mq-l) {
             border-right: $product-form-border-width solid;
+
+            /* stylelint-disable-next-line plugin/selector-bem-pattern, selector-class-pattern */
+            .c-drawer__content & {
+                border-right: none;
+            }
         }
 
         &.is-loading {
