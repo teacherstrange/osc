@@ -1,4 +1,4 @@
-import { Form, useNavigation, useSearchParams, useSubmit } from '@remix-run/react';
+import { Form, useLoaderData, useNavigation, useSearchParams, useSubmit } from '@remix-run/react';
 import type {
     Product as ProductType,
     ProductVariant,
@@ -9,11 +9,13 @@ import { Fragment, useMemo } from 'react';
 import { Price } from '~/components/Price/Price';
 import { AddToCart } from '../AddToCart/AddToCart';
 
-interface ProductFormProps {
+interface Product {
     product: ProductType & { selectedVariant?: ProductVariant };
 }
-export const ProductForm = (props: ProductFormProps) => {
-    const { product } = props;
+
+export const ProductForm = () => {
+    const { product } = useLoaderData<Product>();
+
     const [currentSearchParams] = useSearchParams();
     const transition = useNavigation();
     const submit = useSubmit();

@@ -184,9 +184,8 @@ export default function Index() {
                     ) : null}
 
                     <div className="c-product-form__container o-grid__col o-grid__col--12 o-grid__col--start-8@tab o-grid__col--6@tab o-grid__col--start-7@desk o-grid__col--start-8@desk-med">
-                        <ProductForm product={product} />
+                        <ProductForm />
                     </div>
-                </div>
 
                 {isPreviewMode ? (
                     <PreviewSuspense fallback={<PageContent {...page} />}>
