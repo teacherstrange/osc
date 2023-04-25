@@ -4,8 +4,8 @@ import type {
     ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
 import { Button, ButtonGroup, RadioGroup, RadioItem } from 'osc-ui';
-import type { FormEvent } from 'react';
-import { Fragment, useMemo } from 'react';
+import type { ElementRef, FormEvent } from 'react';
+import { Fragment, forwardRef, useMemo } from 'react';
 import { Price } from '~/components/Price/Price';
 import { AddToCart } from '../AddToCart/AddToCart';
 
@@ -13,7 +13,7 @@ interface Product {
     product: ProductType & { selectedVariant?: ProductVariant };
 }
 
-export const ProductForm = () => {
+export const ProductForm = forwardRef<ElementRef<'div'>>((_, forwardedRef) => {
     const { product } = useLoaderData<Product>();
 
     const [currentSearchParams] = useSearchParams();
@@ -149,4 +149,5 @@ export const ProductForm = () => {
             </ButtonGroup>
         </div>
     );
-};
+});
+ProductForm.displayName = 'ProductForm';
