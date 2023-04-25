@@ -91,12 +91,18 @@ const PinnedTemplate: Story<DrawerProps> = (args) => {
             }}
             {...args}
         >
-            <DrawerTrigger asChild isPinned className="c-btn--no-shadow">
+            <DrawerTrigger asChild isPinned isRotated className="c-btn--no-shadow">
                 <Button>Contact us</Button>
             </DrawerTrigger>
 
             <DrawerContent>
-                <DrawerTrigger asChild isPinned isCloseButton className="c-btn--no-shadow">
+                <DrawerTrigger
+                    asChild
+                    isPinned
+                    isRotated
+                    isCloseButton
+                    className="c-btn--no-shadow"
+                >
                     <Button>Contact us</Button>
                 </DrawerTrigger>
 
@@ -263,7 +269,7 @@ PinnedTrigger.args = {
 PinnedTrigger.parameters = {
     docs: {
         description: {
-            story: 'Pins the trigger to the edge of the drawer.',
+            story: "Pins the trigger to the edge of the drawer. Pair the `isPinned` prop with `isRotated` to rotate the trigger on the left or right.<br>Note that `isRotated` will not do anything on it's own.",
         },
     },
 };
