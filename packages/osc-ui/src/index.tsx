@@ -38,6 +38,15 @@ export { ContentMedia, ContentMediaBlock } from './components/ContentMedia/Conte
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export { DatePicker } from './components/DatePicker/DatePicker/DatePicker';
 export {
+    Drawer,
+    DrawerCloseButton,
+    DrawerContainer,
+    DrawerContent,
+    DrawerDescription,
+    DrawerTitle,
+    DrawerTrigger,
+} from './components/Drawer/Drawer';
+export {
     Footer,
     FooterBottom,
     FooterGroup,
