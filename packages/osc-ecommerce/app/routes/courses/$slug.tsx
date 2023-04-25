@@ -14,6 +14,7 @@ import { lazy } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
+import { ProductFormDrawer } from '~/components/Forms/ProductForm/ProductFormDrawer';
 import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
 import { getComponentStyles } from '~/components/Module';
 import { PageContent, PageContentUpper } from '~/components/PageContent';
@@ -185,15 +186,17 @@ export default function Index() {
 
                     <div className="c-product-form__container o-grid__col o-grid__col--12 o-grid__col--start-8@tab o-grid__col--6@tab o-grid__col--start-7@desk o-grid__col--start-8@desk-med">
                         <ProductForm />
+                        <ProductFormDrawer />
                     </div>
 
-                {isPreviewMode ? (
-                    <PreviewSuspense fallback={<PageContent {...page} />}>
-                        <PagePreview query={query} params={params} Component={PageContent} />
-                    </PreviewSuspense>
-                ) : (
-                    <PageContent {...page} />
-                )}
+                    {isPreviewMode ? (
+                        <PreviewSuspense fallback={<PageContent {...page} />}>
+                            <PagePreview query={query} params={params} Component={PageContent} />
+                        </PreviewSuspense>
+                    ) : (
+                        <PageContent {...page} />
+                    )}
+                </div>
             </div>
         </>
     );
