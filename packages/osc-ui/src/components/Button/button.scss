@@ -4,10 +4,18 @@
 @import "../../styles/settings";
 @import "../../styles/tools";
 
+/*
+ * Some elements/modifiers of the button are themeable. This is handled by the --btn-theme-color custom property
+ *
+ * [1] Set the gradient to the --btn-theme-gradient and fallback to the primary gradient if it doesn't exist
+ *     Only used on the senary variant currently.
+ */
+
 @layer components {
     $btn-primary-border: solid 3px var(--color-secondary);
     $btn-primary-offset: 6px;
     $btn-radius: $rad-l;
+    $btn-border-theme: var(--btn-theme-gradient, var(--color-gradient-primary-270));
     $btn-properties: (
         primary: (
             bg-color: var(--color-secondary),
@@ -141,6 +149,17 @@
                 lg: (
                     padding: $space-m $space-xl,
                     font-size: $fs-m
+                )
+            )
+        ),
+        senary: (
+            bg-color: var(--color-tertiary),
+            fg-color: var(--color-secondary),
+            font-weight: $fw-bold,
+            sizes: (
+                md: (
+                    padding: $space-m $space-2xs $space-m $space-l,
+                    font-size: $fs-l
                 )
             )
         ),
@@ -296,6 +315,16 @@
                     border: map.get($property, border);
                 }
 
+                @if $class == "senary" {
+                    border: 6px solid;
+                    border-image-slice: 1;
+                    border-image-source: $btn-border-theme;
+
+                    svg {
+                        font-size: 1em;
+                    }
+                }
+
                 // If we're on a gradient modifier then set the background image
                 @if string.index($class, "-gradient") {
                     background-color: map.get($property, bg-color);
@@ -443,6 +472,10 @@
                     }
                 }
             }
+        }
+
+        &--flush-r {
+            border-right: 0;
         }
     }
 
