@@ -122,20 +122,27 @@ const PinnedTemplate: Story<DrawerProps> = (args) => {
                     }}
                 >
                     <div className="c-form__inner-container">
-                        <TextInput id="name" name="Full name" placeholder="Your full name" />
+                        <TextInput
+                            id="name"
+                            name="Full name"
+                            label="Full name"
+                            placeholder="Your full name"
+                        />
                         <TextInput
                             id="email"
                             name="Email"
+                            label="Email"
                             type="email"
                             placeholder="Your email address"
                         />
                         <TextInput
                             id="phone"
                             name="Telephone number"
+                            label="Telephone number"
                             type="tel"
                             placeholder="Your phone number"
                         />
-                        <TextArea id="message" name="Enquiry" />
+                        <TextArea id="message" name="Enquiry" label="Enquiry" />
                         <Button isFull isLoading={isLoading} loadingText="Sending">
                             Send Enquiry
                         </Button>
