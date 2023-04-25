@@ -91,7 +91,7 @@
                                 max,
                                 height
                             ) {
-                                top: 0;
+                                top: calc($drawer-offset / 2);
                             }
                         }
                     }
@@ -269,7 +269,7 @@
                                 max,
                                 height
                             ) {
-                                top: 0;
+                                top: calc($drawer-offset / 2);
                             }
                         }
                     }
@@ -303,7 +303,7 @@
                                 max,
                                 height
                             ) {
-                                top: 0;
+                                top: calc($drawer-offset / 2);
                             }
                         }
 
