@@ -474,8 +474,20 @@
             }
         }
 
+        &--flush-t {
+            border-top: 0;
+        }
+
         &--flush-r {
             border-right: 0;
+        }
+
+        &--flush-b {
+            border-bottom: 0;
+        }
+
+        &--flush-l {
+            border-left: 0;
         }
     }
 
