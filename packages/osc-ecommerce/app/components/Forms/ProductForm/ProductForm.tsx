@@ -14,12 +14,13 @@ interface Product {
 }
 
 interface ProductFormProps {
+    id: string;
     direction?: 'right' | 'bottom';
 }
 
 export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
     (props, forwardedRef) => {
-        const { direction } = props;
+        const { id, direction } = props;
         const { product } = useLoaderData<Product>();
 
         const [currentSearchParams] = useSearchParams();
@@ -91,7 +92,7 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                     {product.options && product.options.length > 0
                         ? product.options.map((option, index) => {
                               return (
-                                  <Fragment key={`option-${index}-${option.name}`}>
+                                  <Fragment key={`${id}-${index}-${option.name}`}>
                                       <RadioGroup
                                           // TODO: Could we update the data in Shopify so the name values reflect the name on the FE?
                                           // TODO: Can we change the order in the CMS?
@@ -106,8 +107,8 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                                       >
                                           {option.values.map((value) => (
                                               <RadioItem
-                                                  key={`${option.name}-${value}`}
-                                                  id={`${option.name}-${value}`}
+                                                  key={`${id}-${option.name}-${value}`}
+                                                  id={`${id}-${option.name}-${value}`}
                                                   name={value}
                                                   value={value}
                                               />

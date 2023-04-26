@@ -59,7 +59,7 @@ export const ProductFormDrawer = (props: ProductFormDrawerProps) => {
                     <DrawerTitle>{BUTTON_TEXT}</DrawerTitle>
                 </VisuallyHidden>
 
-                <ProductForm direction={showOnGreaterThanTab ? 'right' : 'bottom'} />
+                <ProductForm id="drawer" direction={showOnGreaterThanTab ? 'right' : 'bottom'} />
             </DrawerContent>
         </Drawer>
     );
