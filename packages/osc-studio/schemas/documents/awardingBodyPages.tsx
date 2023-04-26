@@ -14,6 +14,10 @@ export default defineType({
             name: 'editorial',
             title: 'Editorial',
         },
+        {
+            name: 'seo',
+            title: 'SEO',
+        },
     ],
     fields: [
         // Title
@@ -30,7 +34,6 @@ export default defineType({
             options: { source: 'title' },
             validation: validateSlug,
         }),
-
         // Modules
         defineField({
             name: 'modules',
@@ -38,6 +41,13 @@ export default defineType({
             type: 'array',
             of: MODULES,
             group: 'editorial',
+        }),
+        // SEO
+        defineField({
+            name: 'seo',
+            title: 'SEO',
+            type: 'seo.page',
+            group: 'seo',
         }),
     ],
 });
