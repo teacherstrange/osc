@@ -46,8 +46,11 @@ interface CreateCart {
     storefront: AppLoadContext['storefront'];
 }
 /**
- * Create a cart with line(s) mutation
- * @param input CartInput https://shopify.dev/api/storefront/2022-01/input-objects/CartInput
+ * Creates a new cart using the given input and storefront.
+ *
+ * @param {Object} args - An object containing the input and storefront.
+ * @param args.input - CartInput https://shopify.dev/api/storefront/2022-01/input-objects/CartInput
+ * @param args.storefront - The storefront object used to make the mutation.
  * @see https://shopify.dev/api/storefront/2022-01/mutations/cartcreate
  * @returns result {cart, errors}
  * @preserve
@@ -80,9 +83,12 @@ interface AddLines {
     storefront: AppLoadContext['storefront'];
 }
 /**
- * Storefront API cartLinesAdd mutation
- * @param cartId
- * @param lines [CartLineInput!]! https://shopify.dev/api/storefront/2022-01/input-objects/CartLineInput
+ * Adds a new line to the cart using the cartId and the storefront.
+ *
+ * @param {Object} args - An object containing the cartId, input and storefront.
+ * @param args.cartId - The ID of the cart to retrieve.
+ * @param args.lines - CartLineInput[] https://shopify.dev/api/storefront/2022-01/input-objects/CartLineInput
+ * @param args.storefront - The storefront object used to make the mutation.
  * @see https://shopify.dev/api/storefront/2022-01/mutations/cartLinesAdd
  * @returns result {cart, errors}
  * @preserve
