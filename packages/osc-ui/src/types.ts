@@ -51,13 +51,16 @@ export type FlourishWidths = '1/16' | '2/16' | '3/16';
 export type FlourishHeights = '4/16' | '8/16' | '12/16' | '16/16';
 export type FlourishVariants = 'primary' | 'secondary';
 
-export interface FlourishObject {
+export interface TransformPattern {
+    initial: {
+        rotate: number;
+    };
+}
+
+export interface FlourishObject extends TransformPattern {
     size: {
         w: FlourishWidths;
         h: FlourishHeights;
-    };
-    initial: {
-        rotate: number;
     };
 }
 

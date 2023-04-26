@@ -1,5 +1,5 @@
 import type { MouseEvent, RefObject } from 'react';
-import type { FlourishObject } from '../types';
+import type { TransformPattern } from '../types';
 
 /**
  * Handle mouse move event by updating the transform property of all elements
@@ -16,7 +16,7 @@ export const translateNodes = (
     e: MouseEvent,
     container: RefObject<HTMLElement | null>,
     target: string,
-    pattern?: FlourishObject[]
+    pattern?: TransformPattern[]
 ) => {
     const nodes: NodeListOf<HTMLElement> = container.current.querySelectorAll(target);
 
@@ -44,7 +44,7 @@ export const translateNodes = (
 export const restoreNodePosition = (
     container: RefObject<HTMLElement | null>,
     target: string,
-    pattern?: FlourishObject[]
+    pattern?: TransformPattern[]
 ) => {
     const nodes: NodeListOf<HTMLElement> = container.current.querySelectorAll(target);
 
