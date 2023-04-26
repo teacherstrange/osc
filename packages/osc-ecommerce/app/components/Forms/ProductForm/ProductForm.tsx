@@ -1,11 +1,12 @@
 import { Form, useLoaderData, useNavigation, useSearchParams, useSubmit } from '@remix-run/react';
 import type {
+    ProductOption,
     Product as ProductType,
     ProductVariant,
 } from '@shopify/hydrogen/storefront-api-types';
 import { Button, ButtonGroup, RadioGroup, RadioItem, classNames, useModifier } from 'osc-ui';
 import type { ElementRef, FormEvent } from 'react';
-import { Fragment, forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { Price } from '~/components/Price/Price';
 import { AddToCart } from '../AddToCart/AddToCart';
 
@@ -92,29 +93,16 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                     {product.options && product.options.length > 0
                         ? product.options.map((option, index) => {
                               return (
-                                  <Fragment key={`${id}-${index}-${option.name}`}>
-                                      <RadioGroup
-                                          // TODO: Could we update the data in Shopify so the name values reflect the name on the FE?
-                                          // TODO: Can we change the order in the CMS?
-                                          description={{
-                                              id: option.name,
-                                              value: `<h2 class="t-font-l u-text-bold u-color-secondary">${option.name}</h2>`,
-                                          }}
-                                          name={option.name}
-                                          defaultValue={searchParamsWithDefaults.get(option.name)!}
-                                          direction={option.name === 'Format' ? 'column' : 'row'}
-                                          className="c-product-form__radio-group c-radio-group--col-gap-l"
-                                      >
-                                          {option.values.map((value) => (
-                                              <RadioItem
-                                                  key={`${id}-${option.name}-${value}`}
-                                                  id={`${id}-${option.name}-${value}`}
-                                                  name={value}
-                                                  value={value}
-                                              />
-                                          ))}
-                                      </RadioGroup>
-                                  </Fragment>
+                                  <Options
+                                      // Here we're passing the searchParamsWithDefaults as part of the key so the options remount when searchParams changes
+                                      // This is needed to keep the main form and the drawer forms in sync
+                                      key={`${id}-${index}-${
+                                          option.name
+                                      }-${searchParamsWithDefaults.get(option.name)}`}
+                                      id={id}
+                                      option={option}
+                                      searchParamsWithDefaults={searchParamsWithDefaults}
+                                  />
                               );
                           })
                         : null}
@@ -171,3 +159,39 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
     }
 );
 ProductForm.displayName = 'ProductForm';
+
+/* -------------------------------------------------------------------------------------------------
+ * Product Options
+ * -----------------------------------------------------------------------------------------------*/
+interface OptionsProps {
+    id: string;
+    option: ProductOption;
+    searchParamsWithDefaults: URLSearchParams;
+}
+
+const Options = (props: OptionsProps) => {
+    const { id, option, searchParamsWithDefaults } = props;
+
+    return (
+        <RadioGroup
+            // TODO: Waiting for Tom to update the import so we have the correct option names on the FE
+            description={{
+                id: option.name,
+                value: `<h2 class="t-font-l u-text-bold u-color-secondary">${option.name}</h2>`,
+            }}
+            name={option.name}
+            defaultValue={searchParamsWithDefaults.get(option.name)!}
+            direction={option.name === 'Format' ? 'column' : 'row'}
+            className="c-product-form__radio-group c-radio-group--col-gap-l"
+        >
+            {option.values.map((value) => (
+                <RadioItem
+                    key={`${id}-${option.name}-${value}`}
+                    id={`${id}-${option.name}-${value}`}
+                    name={value}
+                    value={value}
+                />
+            ))}
+        </RadioGroup>
+    );
+};
