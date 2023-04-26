@@ -11,6 +11,7 @@ import {
     useLocation,
     useMatches,
 } from '@remix-run/react';
+import type { Cart } from '@shopify/hydrogen/storefront-api-types';
 import { SkipLink } from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
@@ -24,6 +25,7 @@ import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
 import styles from 'osc-ui/dist/src-styles-main.css';
 import React, { useEffect } from 'react';
 import { DynamicLinks } from 'remix-utils';
+import { getCart } from '~/utils/cart.helpers';
 import { checkConnectivity } from '~/utils/client/pwa-utils.client';
 import { SiteFooter } from './components/Footer/Footer';
 import { SiteHeader } from './components/Header/Header';
@@ -91,16 +93,20 @@ type LoaderData = {
     footerBottomNav: SanityNavSettings;
     SANITY_STUDIO_API_PROJECT_ID: string | undefined;
     SANITY_STUDIO_API_DATASET: string | undefined;
+    cart: Cart | undefined;
 };
 
 export const headers: HeadersFunction = () => ({
     'Accept-CH': 'Sec-CH-Prefers-Color-Scheme',
 });
 
-export const loader: LoaderFunction = async ({ request }) => {
-    const siteSettings = await getSettingsData({
-        query: SETTINGS_QUERY,
-    });
+export const loader: LoaderFunction = async ({ request, context }) => {
+    const [cartId, siteSettings] = await Promise.all([
+        context.session.get('cartId'),
+        getSettingsData({
+            query: SETTINGS_QUERY,
+        }),
+    ]);
 
     // If the mainNavigationId is returned from the settings then run the navigation query
     const navSettings =
@@ -134,6 +140,10 @@ export const loader: LoaderFunction = async ({ request }) => {
             params: { id: siteSettings?.footer?.footerBottomNav },
         }));
 
+    // We want to expose the cart across the whole site so we can access it from anywhere
+    // For example for use in the minicart.
+    const cart = cartId ? await getCart(context, cartId) : undefined;
+
     return json<LoaderData>({
         colorScheme: await getColorScheme(request),
         siteSettings,
@@ -142,6 +152,7 @@ export const loader: LoaderFunction = async ({ request }) => {
         footerBottomNav,
         SANITY_STUDIO_API_PROJECT_ID: process.env.SANITY_STUDIO_API_PROJECT_ID,
         SANITY_STUDIO_API_DATASET: process.env.SANITY_STUDIO_API_DATASET,
+        cart,
     });
 };
 
