@@ -17,9 +17,6 @@
         $product-form-border-width: 6px;
         $product-form-mq-l: $mq-desk-l + 1;
 
-        display: flex;
-        flex-direction: column;
-        gap: $space-l;
         width: 100%;
         max-width: $product-form-width;
         padding-inline: $space-xl;
@@ -47,6 +44,13 @@
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
         fieldset {
             padding: 0;
+        }
+
+        &,
+        &__form {
+            display: flex;
+            flex-direction: column;
+            gap: $space-l;
         }
 
         &__container {
