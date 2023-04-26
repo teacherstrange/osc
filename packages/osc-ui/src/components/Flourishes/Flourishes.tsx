@@ -4,6 +4,7 @@ import type { FlourishHeights, FlourishObject, FlourishWidths } from '../../type
 import { classNames } from '../../utils/classNames';
 import { restoreNodePosition, translateNodes } from '../../utils/handleMouseEvents';
 import { mergeEventHandlers } from '../../utils/mergeEventHandlers';
+import { throttle } from '../../utils/throttle';
 import './flourish.scss';
 
 export interface FlourishesProps {
@@ -58,15 +59,19 @@ export const Flourishes = forwardRef<HTMLDivElement, FlourishesProps>((props, fo
         onMouseLeave,
     } = props;
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const interval = 120;
 
     const classes = classNames('c-flourish-content', className);
 
+    const throttledTranslateNodes = throttle(translateNodes, interval);
+    const throttledRestoreNodePosition = throttle(restoreNodePosition, interval);
+
     const handleMouseMove = mergeEventHandlers<MouseEvent>(onMouseMove, (e) => {
-        translateNodes(e, containerRef, '.c-flourish', pattern);
+        throttledTranslateNodes(e, containerRef, '.c-flourish', pattern);
     });
 
     const handleMouseLeave = mergeEventHandlers<MouseEvent>(onMouseLeave, () => {
-        restoreNodePosition(containerRef, 'c-flourish', pattern);
+        throttledRestoreNodePosition(containerRef, 'c-flourish', pattern);
     });
 
     return (
