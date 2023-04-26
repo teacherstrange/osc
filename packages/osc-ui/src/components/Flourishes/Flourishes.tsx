@@ -37,6 +37,11 @@ export interface FlourishesProps {
      */
     size?: number;
     /**
+     * Throttle the mouse events (in milliseconds)
+     * @default 120
+     */
+    throttleInterval?: number;
+    /**
      * Mouse move event to pass to child container
      */
     onMouseMove?: (e: MouseEvent) => void;
@@ -55,16 +60,16 @@ export const Flourishes = forwardRef<HTMLDivElement, FlourishesProps>((props, fo
         pattern,
         isAboveContent,
         size,
+        throttleInterval,
         onMouseMove,
         onMouseLeave,
     } = props;
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const interval = 120;
 
     const classes = classNames('c-flourish-content', className);
 
-    const throttledTranslateNodes = throttle(translateNodes, interval);
-    const throttledRestoreNodePosition = throttle(restoreNodePosition, interval);
+    const throttledTranslateNodes = throttle(translateNodes, throttleInterval);
+    const throttledRestoreNodePosition = throttle(restoreNodePosition, throttleInterval);
 
     const handleMouseMove = mergeEventHandlers<MouseEvent>(onMouseMove, (e) => {
         throttledTranslateNodes(e, containerRef, '.c-flourish', pattern);
