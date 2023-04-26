@@ -15,12 +15,14 @@ import { ADD_LINES_MUTATION, CART_QUERY, CREATE_CART_MUTATION } from '~/queries/
 /**
  * Retrieve a cart object by ID from a Storefront instance.
  *
- * @param storefront - The Storefront instance to use for the query.
+ * @param context - The app load context containing the storefront client.
  * @param cartId - The ID of the cart to retrieve.
  * @returns A Promise that resolves to the Cart or undefined if it doesn't exist.
  * @throws An error if the storefront is missing or the query fails.
  */
-export const getCart = async ({ storefront }: AppLoadContext, cartId: string) => {
+export const getCart = async (context: AppLoadContext, cartId: string) => {
+    const { storefront } = context;
+
     invariant(storefront, 'missing storefront client in cart query');
 
     const { cart } = await storefront.query<{ cart?: Cart }>(CART_QUERY, {
