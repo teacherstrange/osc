@@ -1,3 +1,21 @@
+## [0.80.0](https://github.com/Open-Study-College/osc/compare/v0.79.0...v0.80.0) (2023-04-26)
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **ecommerce:** enable v2 future flag for replacing useTransition ([1d4c2f5](https://github.com/Open-Study-College/osc/commit/1d4c2f54a534ac4035c37132b52934ab14661d7a))
+
+
+### ♻️ Refactors
+
+* **product form:** add form element styles ([f4412d2](https://github.com/Open-Study-College/osc/commit/f4412d2c8ddbaefcdf98f0a5be5440c59ffa89df))
+
+
+### ✨ Features
+
+* **product form:** add Form component functionality to update selected option ([0552425](https://github.com/Open-Study-College/osc/commit/0552425e2dccae4609da67e0a48fbd1ce24fc365))
+* **product form:** adds loading states ([7880d17](https://github.com/Open-Study-College/osc/commit/7880d17e2488fc16e0f307f8978ecfad579ffa2c))
+
 ## [0.79.0](https://github.com/Open-Study-College/osc/compare/v0.78.1...v0.79.0) (2023-04-24)
 
 
@@ -64,12 +82,4 @@
 
 * **faqs:** adds faqs document type to Sanity ([7a671ba](https://github.com/Open-Study-College/osc/commit/7a671ba1cfdfcfb773e174beca8bfc99b68b834d))
 * **faqs:** adds faqs document type to the studio desk ([0238577](https://github.com/Open-Study-College/osc/commit/02385775bfc7c405d6b6bcaab785adad0a1766da))
-
-## [0.76.0](https://github.com/Open-Study-College/osc/compare/v0.75.0...v0.76.0) (2023-04-20)
-
-
-### ✨ Features
-
-* **awarding body:** adds awarding body document type to Sanity ([8409cfb](https://github.com/Open-Study-College/osc/commit/8409cfb76252e5e3cae14eb2c0fd053cf20a1f3a))
-* **awarding body:** adds awarding body document type to the studio desk ([36805e0](https://github.com/Open-Study-College/osc/commit/36805e08354298ca0ce29c36262cef091a6888ca))
 
