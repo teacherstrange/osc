@@ -20,6 +20,11 @@ export const translateNodes = (
 ) => {
     const nodes: NodeListOf<HTMLElement> = container.current.querySelectorAll(target);
 
+    if (nodes.length === 0) {
+        console.warn(`No flourishes found matching selector: ${target}`);
+        return;
+    }
+
     // Store cursor position as variables
     let curX = e.clientX;
     let curY = e.clientY;
@@ -47,6 +52,11 @@ export const restoreNodePosition = (
     pattern?: TransformPattern[]
 ) => {
     const nodes: NodeListOf<HTMLElement> = container.current.querySelectorAll(target);
+
+    if (nodes.length === 0) {
+        console.warn(`No flourishes found matching selector: ${target}`);
+        return;
+    }
 
     nodes.forEach((node, i) => {
         node.style.transform = `${pattern ? `rotate(${pattern[i].initial.rotate}deg)` : ''}`;
