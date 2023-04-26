@@ -112,6 +112,7 @@ export interface SharedButtonProps {
         | 'tertiary'
         | 'quaternary'
         | 'quinary'
+        | 'senary'
         | 'primary-gradient'
         | 'secondary-gradient';
 }

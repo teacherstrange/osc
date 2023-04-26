@@ -1,6 +1,7 @@
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
+import { Icon } from '../Icon/Icon';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import type { ButtonProps, CopyButtonProps } from './Button';
 import { Button, ButtonGroup, CopyButton } from './Button';
@@ -112,6 +113,22 @@ export const Quinary = Template.bind({});
 Quinary.args = {
     children: 'Button',
     variant: 'quinary',
+};
+export const Senary = Template.bind({});
+Senary.args = {
+    children: (
+        <>
+            Enrol now <Icon id="chevron-down" />
+        </>
+    ),
+    variant: 'senary',
+};
+Senary.parameters = {
+    docs: {
+        description: {
+            story: 'The senary button is themeable by passing the --btn-theme-gradient variable with a value to the style prop of the Card.<br>You can also add the `c-btn--flush-r` classname to remove the border on the right. Useful when using as a trigger with the Drawer.',
+        },
+    },
 };
 export const PrimaryGradient = Template.bind({});
 PrimaryGradient.args = {
