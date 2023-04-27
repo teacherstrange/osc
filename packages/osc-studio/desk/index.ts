@@ -17,6 +17,7 @@ import type { DefaultDocumentNodeResolver, StructureResolver } from 'sanity/desk
 import type { SanityDocumentWithSlug } from '../utils/resolveProductionUrl';
 import { resolveProductionUrl } from '../utils/resolveProductionUrl';
 import { awardingBody } from './awardingBody';
+import { awardingBodyPages } from './awardingBodyPages';
 import { blog } from './blog';
 import { collections } from './collections';
 import { faqs } from './faqs';
@@ -33,6 +34,7 @@ import { testimonials } from './testimonials';
 // If you add document types to desk structure manually, you can add them to this array to prevent duplicates in the root pane
 const DOCUMENT_TYPES_IN_STRUCTURE = [
     'awardingBody',
+    'awardingBodyPages',
     'collection',
     'faqs',
     'home',
@@ -97,6 +99,7 @@ export const structure: StructureResolver = (S, context) => {
         .items([
             home(S),
             pages(S),
+            awardingBodyPages(S),
             S.divider(),
             blog(S),
             posts(S),
