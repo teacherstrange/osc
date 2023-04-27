@@ -168,6 +168,15 @@
 
                 @include z-index(modal-trigger);
 
+                &:hover,
+                &:active {
+                    // Prevent the inner element from rotating on hover/active states
+                    /* stylelint-disable-next-line selector-class-pattern */
+                    > .c-btn__inner {
+                        transform: translate(0);
+                    }
+                }
+
                 &:not(:focus):not(:focus-visible) {
                     box-shadow: $shadow-m;
                 }
@@ -184,15 +193,6 @@
                         #{$dir}: 0;
                         left: 50%;
                         transform: translateX(-50%);
-
-                        &:hover,
-                        &:active {
-                            // Prevent the inner element from rotating on hover/active states
-                            /* stylelint-disable-next-line selector-class-pattern */
-                            > .c-btn__inner {
-                                transform: translate(0);
-                            }
-                        }
                     }
 
                     @if $dir == top {
@@ -209,6 +209,7 @@
 
                     @if $dir == right {
                         left: 100%; /* [1] */
+                        transform: translateX(-100%);
 
                         &#{$self}--close {
                             top: 0;
@@ -218,6 +219,7 @@
 
                     @if $dir == left {
                         right: 100%; /* [1] */
+                        transform: translateX(100%);
 
                         &#{$self}--close {
                             top: 0;
@@ -227,12 +229,44 @@
 
                     @if $dir == right or $dir == left {
                         top: $drawer-offset;
-                        transform: if($dir == right, rotate(90deg), rotate(270deg)); /* [2] */
-                        transform-origin: if($dir == right, top left, top right); /* [3] */
 
                         &#{$self}--offset {
                             top: $drawer-offset;
 
+                            // WHEN the viewport is the combined size of the offset and the max-height
+                            // then reset the offset value
+                            @include mq(
+                                strip-unit($drawer-max-height) + strip-unit($drawer-offset),
+                                max,
+                                height
+                            ) {
+                                top: 0;
+                            }
+                        }
+                    }
+
+                    &[data-state="open"] {
+                        pointer-events: none;
+
+                        @include animate(fade-out, 0s, $drawer-transition-ease);
+                    }
+
+                    &[data-state="closed"] {
+                        @include animate(
+                            fade-in,
+                            0s,
+                            $drawer-transition-ease,
+                            $drawer-transition-timing
+                        );
+                    }
+                }
+
+                &--#{$dir}#{&}--rotated {
+                    @if $dir == right or $dir == left {
+                        transform: if($dir == right, rotate(90deg), rotate(270deg)); /* [2] */
+                        transform-origin: if($dir == right, top left, top right); /* [3] */
+
+                        &#{$self}--offset {
                             // WHEN the viewport is the combined size of the offset and the max-height
                             // then reset the offset value
                             @include mq(
@@ -257,21 +291,6 @@
                                 transform: rotate(180deg);
                             }
                         }
-                    }
-
-                    &[data-state="open"] {
-                        pointer-events: none;
-
-                        @include animate(fade-out, 0s, $drawer-transition-ease);
-                    }
-
-                    &[data-state="closed"] {
-                        @include animate(
-                            fade-in,
-                            0s,
-                            $drawer-transition-ease,
-                            $drawer-transition-timing
-                        );
                     }
                 }
             }

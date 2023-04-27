@@ -76,11 +76,15 @@ export interface DrawerTriggerProps
      * Useful for patterns like pinning the button to the side of the drawer
      */
     isCloseButton?: boolean;
+    /**
+     * When true will rotate the trigger by 90 degrees. Must be paired with `isPinned`
+     */
+    isRotated?: boolean;
 }
 
 export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, DrawerTriggerProps>(
     (props, forwardedRef) => {
-        const { children, className, isPinned, isCloseButton, ...rest } = props;
+        const { children, className, isPinned, isCloseButton, isRotated, ...rest } = props;
         const { direction, isOffset, setTriggerHeight } = useDrawerContext();
         const triggerRef = useRef<HTMLButtonElement | null>(null);
 
@@ -95,6 +99,7 @@ export const DrawerTrigger = forwardRef<ElementRef<typeof Dialog.Trigger>, Drawe
             directionModifier,
             !isCloseButton ? offsetModifier : '',
             isPinned ? 'is-pinned' : '',
+            isRotated ? 'c-drawer__trigger--rotated' : '',
             className
         );
 
