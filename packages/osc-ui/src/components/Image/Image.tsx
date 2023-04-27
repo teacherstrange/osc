@@ -1,5 +1,6 @@
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
+import { classNames } from '../../utils/classNames';
 import {
     addAutoTransformations,
     buildCloudinaryUrl,
@@ -28,6 +29,9 @@ export interface Props<T> extends ImageData<T> {
     loading?: 'eager' | 'lazy';
     responsiveWidths?: number[];
     sizes?: string | undefined;
+    overlayColor?: string;
+    isGrayScale?: boolean;
+    hasTransparency?: boolean;
 }
 
 export const Image = (props: Props<HTMLImageElement>) => {
@@ -41,6 +45,9 @@ export const Image = (props: Props<HTMLImageElement>) => {
         responsiveWidths = [640, 768, 1024, 1366, 1600, 1920],
         sizes,
         width,
+        overlayColor,
+        isGrayScale = false,
+        hasTransparency = false,
         ...attr
     } = props;
 
@@ -68,19 +75,33 @@ export const Image = (props: Props<HTMLImageElement>) => {
     const cloudinarySrc = buildCloudinaryUrl(src, alteredTransformationString);
     const srcsets = buildSrcSets(src, alteredTransformationString, responsiveWidths);
 
+    const maskClasses = classNames(
+        'o-img',
+        overlayColor ? `o-img--bg u-bg-color-${overlayColor}` : '',
+        hasTransparency ? 'o-img--opacity' : ''
+    );
+    const imgClasses = classNames(
+        'o-img__img',
+        className ? className : '',
+        isGrayScale ? 'o-img__img--grayscale' : '',
+        overlayColor ? 'o-img__img--overlay' : ''
+    );
+
     // Set default image
     let image = (
-        <img
-            src={cloudinarySrc}
-            srcSet={srcsets}
-            sizes={sizes}
-            alt={alt ? alt : ''}
-            width={width}
-            height={height}
-            loading={loading}
-            className={`o-img ${className ? className : ''}`}
-            {...attr}
-        />
+        <div className={maskClasses}>
+            <img
+                src={cloudinarySrc}
+                srcSet={srcsets}
+                sizes={sizes}
+                alt={alt ? alt : ''}
+                width={width}
+                height={height}
+                loading={loading}
+                className={imgClasses}
+                {...attr}
+            />
+        </div>
     );
 
     // Create a <picture> alternative if art directed images have been set
@@ -90,7 +111,7 @@ export const Image = (props: Props<HTMLImageElement>) => {
         const sources = buildSources(src, artDirectedImages);
 
         image = (
-            <picture>
+            <picture className={maskClasses}>
                 {sources}
                 <img
                     src={cloudinarySrc}
@@ -98,7 +119,7 @@ export const Image = (props: Props<HTMLImageElement>) => {
                     width={width}
                     height={height}
                     loading={loading}
-                    className={`o-img ${className ? className : ''}`}
+                    className={imgClasses}
                     {...attr}
                 />
             </picture>

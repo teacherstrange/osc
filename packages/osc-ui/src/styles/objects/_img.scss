@@ -1,4 +1,5 @@
-@use "../tools" as t;
+@use "../settings" as *;
+@use "../tools" as *;
 
 /* ============================
 // $IMAGE OBJECT
@@ -12,47 +13,57 @@
 */
 
 .o-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    transition: opacity 0.3s ease-in;
+    position: relative;
 
-    // opacity: 0;
-
-    // &:not([src]):not([srcset]) {
-    //     opacity: 0;
-    // }
-
-    &.is-loaded,
-    &.lazyloaded,
-    &.flickity-lazyloaded {
-        opacity: 1;
+    &--blend {
+        mix-blend-mode: multiply;
     }
 
-    &.is-hidden {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
+    &--bg {
+        background: no-repeat top center;
     }
 
-    &--cover {
-        @include t.object-fit(cover, center);
+    &--isolate {
+        isolation: isolate;
+    }
 
-        &-right {
-            @include t.object-fit(cover, right);
+    &--opacity {
+        opacity: 0.8;
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.3s ease-in;
+
+        &--cover {
+            @include object-fit(cover, center);
+
+            &-right {
+                @include object-fit(cover, right);
+            }
+
+            &-left {
+                @include object-fit(cover, left);
+            }
         }
 
-        &-left {
-            @include t.object-fit(cover, left);
+        &--overlay {
+            mix-blend-mode: overlay;
         }
-    }
 
-    &--contain {
-        @include t.object-fit(contain, center);
-    }
+        &--grayscale {
+            filter: grayscale(1);
+        }
 
-    &--auto {
-        width: auto;
-        height: auto;
+        &--contain {
+            @include object-fit(contain, center);
+        }
+
+        &--auto {
+            width: auto;
+            height: auto;
+        }
     }
 }
