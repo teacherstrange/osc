@@ -94,6 +94,9 @@ export default {
         hasTransparency: {
             description: 'Toggles a transparency effect on the image',
         },
+        fit: {
+            description: "Sets the image to either cover or contain it's parent",
+        },
     },
 } as Meta;
 

@@ -32,6 +32,7 @@ export interface Props<T> extends ImageData<T> {
     overlayColor?: string;
     isGrayScale?: boolean;
     hasTransparency?: boolean;
+    fit?: 'cover' | 'contain';
 }
 
 export const Image = (props: Props<HTMLImageElement>) => {
@@ -48,6 +49,7 @@ export const Image = (props: Props<HTMLImageElement>) => {
         overlayColor,
         isGrayScale = false,
         hasTransparency = false,
+        fit = 'contain',
         ...attr
     } = props;
 
@@ -98,9 +100,10 @@ export const Image = (props: Props<HTMLImageElement>) => {
     );
     const imgClasses = classNames(
         'o-img__img',
-        className ? className : '',
         isGrayScale ? 'o-img__img--grayscale' : '',
-        overlayColor ? 'o-img__img--overlay' : ''
+        overlayColor ? 'o-img__img--overlay' : '',
+        `o-img__img--${fit}`,
+        className ? className : ''
     );
 
     // Set default image
@@ -108,8 +111,8 @@ export const Image = (props: Props<HTMLImageElement>) => {
         <div
             className={maskClasses}
             style={{
-                mask: overlayColor ? `url(${maskSrc}) no-repeat center / contain` : '',
-                WebkitMask: overlayColor ? `url(${maskSrc}) no-repeat center / contain` : '',
+                mask: overlayColor ? `url(${maskSrc}) no-repeat center / ${fit}` : '',
+                WebkitMask: overlayColor ? `url(${maskSrc}) no-repeat center / ${fit}` : '',
             }}
         >
             <img
