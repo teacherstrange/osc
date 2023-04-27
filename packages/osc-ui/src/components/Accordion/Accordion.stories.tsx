@@ -162,9 +162,20 @@ const NestedTemplate: Story<AccordionProps> = ({ children, ...args }) => (
                           {child.title}
                       </AccordionHeader>
                       <AccordionPanel>
-                          <Accordion type="single" variant="tertiary">
-                              <AccordionItem value="child">
-                                  <AccordionHeader icon="chevron" asChild={true} as="h3">
+                          <Accordion type="single" defaultValue="child-0" collapsible>
+                              <AccordionItem value="child-0">
+                                  <AccordionHeader icon="plusMinus" asChild={true} as="h3">
+                                      Heading
+                                  </AccordionHeader>
+                                  <AccordionPanel>
+                                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt
+                                      ipsam temporibus et veniam eveniet dolorum? Eaque alias
+                                      voluptate quis perferendis repellat omnis temporibus maiores
+                                      dolores ad, amet, rerum sed nesciunt!
+                                  </AccordionPanel>
+                              </AccordionItem>
+                              <AccordionItem value="child-1">
+                                  <AccordionHeader icon="plusMinus" asChild={true} as="h3">
                                       Heading
                                   </AccordionHeader>
                                   <AccordionPanel>
