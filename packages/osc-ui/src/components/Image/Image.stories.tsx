@@ -139,6 +139,10 @@ HasNoTransformations.parameters = {
 export const CSSTransformations = Template.bind({});
 CSSTransformations.args = {
     ...Primary.args,
+    src: 'https://res.cloudinary.com/de2iu8gkv/image/upload/q_20/v1680684786/Shopify_website_image_-_primary_hero_2_loa7mu.png',
+    alt: '',
+    width: 1137,
+    height: 1000,
     isGrayScale: true,
     overlayColor: 'gradient-quaternary',
     hasTransparency: true,

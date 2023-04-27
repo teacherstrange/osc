@@ -60,7 +60,6 @@ export const Image = (props: Props<HTMLImageElement>) => {
 
     // Append our custom width and heights to our transformation part of the url
     let alteredTransformationString: string = transformationString;
-
     if (transformationString) {
         alteredTransformationString = replaceSizeTransformation(alteredTransformationString, width);
         alteredTransformationString = addAutoTransformations(alteredTransformationString, [
@@ -72,8 +71,25 @@ export const Image = (props: Props<HTMLImageElement>) => {
         alteredTransformationString = `${CONSTANTS.F_AUTO},${CONSTANTS.Q_AUTO},w_${width},h_${height}`;
     }
 
+    let alteredTransformationStringMask: string = transformationString;
+    if (transformationString && overlayColor) {
+        alteredTransformationStringMask = replaceSizeTransformation(
+            alteredTransformationStringMask,
+            width
+        );
+        alteredTransformationStringMask = addAutoTransformations(alteredTransformationStringMask, [
+            CONSTANTS.F_AUTO,
+            CONSTANTS.Q_S,
+        ]);
+    } else {
+        alteredTransformationStringMask = `${CONSTANTS.F_AUTO},${CONSTANTS.Q_S},w_${width},h_${height}`;
+    }
+
     const cloudinarySrc = buildCloudinaryUrl(src, alteredTransformationString);
     const srcsets = buildSrcSets(src, alteredTransformationString, responsiveWidths);
+    // Generate a tiny image we can use as a mask.
+    // As we need to load two images if we are applying a css transform we are making the quality as low as possible to reduce the size of the second image.
+    const maskSrc = buildCloudinaryUrl(src, alteredTransformationStringMask);
 
     const maskClasses = classNames(
         'o-img',
@@ -89,7 +105,13 @@ export const Image = (props: Props<HTMLImageElement>) => {
 
     // Set default image
     let image = (
-        <div className={maskClasses}>
+        <div
+            className={maskClasses}
+            style={{
+                mask: overlayColor ? `url(${maskSrc}) no-repeat center / contain` : '',
+                WebkitMask: overlayColor ? `url(${maskSrc}) no-repeat center / contain` : '',
+            }}
+        >
             <img
                 src={cloudinarySrc}
                 srcSet={srcsets}
@@ -111,7 +133,13 @@ export const Image = (props: Props<HTMLImageElement>) => {
         const sources = buildSources(src, artDirectedImages);
 
         image = (
-            <picture className={maskClasses}>
+            <picture
+                className={maskClasses}
+                style={{
+                    mask: overlayColor ? `url(${maskSrc}) no-repeat center / contain` : '',
+                    WebkitMask: overlayColor ? `url(${maskSrc}) no-repeat center / contain` : '',
+                }}
+            >
                 {sources}
                 <img
                     src={cloudinarySrc}

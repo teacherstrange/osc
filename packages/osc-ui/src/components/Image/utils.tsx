@@ -6,7 +6,8 @@ export const CONSTANTS = {
     MAX_TABLET_WIDTH: '834px',
     MAX_IMG_WIDTH: 1600,
     F_AUTO: 'f_auto',
-    Q_AUTO: 'q_auto'
+    Q_AUTO: 'q_auto',
+    Q_S: 'q_20',
 };
 
 export const getTransformationString = (cloudinaryUrl: string) => {
@@ -50,7 +51,7 @@ export const buildCloudinaryUrl = (src: string, transformationString: string) =>
 export const replaceTransformation = ({
     regex,
     target,
-    transformationString
+    transformationString,
 }: {
     regex: RegExp;
     target: string;
@@ -85,7 +86,7 @@ export const replaceSizeTransformation = (transformationString: string, width: n
             alteredTransformation = replaceTransformation({
                 regex: widthRegex,
                 transformationString: alteredTransformation,
-                target: `w_${width}`
+                target: `w_${width}`,
             });
         }
     } else {
@@ -126,7 +127,7 @@ export const buildSrcSets = (
                 alteredTransformationString = replaceTransformation({
                     transformationString: alteredTransformationString,
                     regex: widthRegex,
-                    target: `w_${size}`
+                    target: `w_${size}`,
                 });
             } else {
                 alteredTransformationString = `${CONSTANTS.F_AUTO},${CONSTANTS.Q_AUTO},w_${size}`;
@@ -157,7 +158,7 @@ export const buildSources = (
 
             alteredTransformationString = addAutoTransformations(alteredTransformationString, [
                 CONSTANTS.F_AUTO,
-                CONSTANTS.Q_AUTO
+                CONSTANTS.Q_AUTO,
             ]);
 
             responsiveImageSrc = buildCloudinaryUrl(src, alteredTransformationString);
