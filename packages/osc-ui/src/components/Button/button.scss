@@ -321,6 +321,11 @@
                     border: 6px solid $btn-color-theme;
                     border-image-slice: 1;
                     border-image-source: $btn-border-theme;
+                    transition: border-image $timing-m $ease-in-out;
+
+                    &:hover {
+                        border-image-slice: 1 100;
+                    }
 
                     svg {
                         font-size: 1em;
