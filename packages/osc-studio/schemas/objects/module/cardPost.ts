@@ -1,5 +1,4 @@
 import { defineField, defineType } from 'sanity';
-import { ColorPicker } from '../../../components/inputs/ColorPicker';
 
 export default defineType({
     name: 'card.post',
@@ -14,15 +13,6 @@ export default defineType({
             options: {
                 disableNew: true,
             },
-        }),
-        defineField({
-            name: 'backgroundColor',
-            title: 'Background Colour',
-            type: 'string',
-            components: {
-                input: ColorPicker,
-            },
-            validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'fullWidth',
