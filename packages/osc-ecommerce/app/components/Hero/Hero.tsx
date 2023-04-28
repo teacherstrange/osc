@@ -1,13 +1,13 @@
 import {
     Carousel,
     Content,
-    Hero as OSCHero,
     HeroContent,
     HeroImage,
     HeroInner,
     HeroTitle,
     HeroTitleGroup,
     Image,
+    Hero as OSCHero,
     rem,
 } from 'osc-ui';
 import type { heroModule, heroSlide } from '~/types/sanity';
@@ -130,6 +130,9 @@ const Slide = (props: SlideProps) => {
                             artDirectedImages={
                                 image?.responsiveImages ? image?.responsiveImages : undefined
                             }
+                            overlayColor={image?.imageStyles?.overlayColor}
+                            isGrayScale={image?.imageStyles?.grayscale}
+                            hasTransparency={image?.imageStyles?.opacity}
                         />
                     </HeroImage>
                 ) : null}
