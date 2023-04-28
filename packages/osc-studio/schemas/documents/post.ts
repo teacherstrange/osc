@@ -10,13 +10,13 @@ export default defineType({
     icon: DocumentIcon,
     groups: [
         {
-            name: 'theme',
-            title: 'Theme',
-        },
-        {
             default: true,
             name: 'editorial',
             title: 'Editorial',
+        },
+        {
+            name: 'settings',
+            title: 'Settings',
         },
         {
             name: 'seo',
@@ -61,6 +61,13 @@ export default defineType({
             title: 'SEO',
             type: 'seo.page',
             group: 'seo',
+        }),
+        // SETTINGS
+        defineField({
+            name: 'theme',
+            title: 'Theme',
+            type: 'theme',
+            group: 'settings',
         }),
     ],
     preview: {
