@@ -98,13 +98,14 @@ export interface contentMediaSlide extends module {
     media: {
         carouselName: Maybe<string>;
         carouselSettings: carouselModuleSettings;
+        imageFit?: 'cover' | 'contain';
         mediaType: {
-            image?: imageModule<HTMLImageElement>;
-            imageFit?: 'cover' | 'contain';
             _key?: string;
             _type?: string;
             formId?: string;
             formName?: string;
+            imageFit?: 'cover' | 'contain';
+            image?: imageModule<HTMLImageElement>;
         }[];
     };
 }
