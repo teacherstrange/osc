@@ -223,7 +223,7 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
                     width={media?.mediaType[0]?.image?.width}
                     height={media?.mediaType[0]?.image?.height}
                     alt={media?.mediaType[0]?.image?.alt}
-                    fit={media?.imageFit}
+                    fit={media?.mediaType[0]?.imageFit}
                     overlayColor={media?.mediaType[0]?.image?.imageStyles?.overlayColor}
                     isGrayScale={media?.mediaType[0]?.image?.imageStyles?.grayscale}
                     hasTransparency={media?.mediaType[0]?.image?.imageStyles?.opacity}
