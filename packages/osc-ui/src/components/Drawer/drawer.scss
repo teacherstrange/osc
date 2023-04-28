@@ -58,10 +58,6 @@
 
             @include z-index(modal);
 
-            @include mq($mq-tab, max, height) {
-                height: 100%;
-            }
-
             // *----------------------------------*/
             //  Direction modifiers
             // *----------------------------------*/
