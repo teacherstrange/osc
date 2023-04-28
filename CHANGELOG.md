@@ -1,3 +1,22 @@
+## [0.83.0](https://github.com/Open-Study-College/osc/compare/v0.82.0...v0.83.0) (2023-04-28)
+
+
+### 🐛 Bugs
+
+* **drawer:** fixes missin input props in story ([a931c07](https://github.com/Open-Study-College/osc/commit/a931c07747745a164056ea82f96ef6b08569213a))
+
+
+### ✨ Features
+
+* add awardingBodyPages into Sanity ([49cbf32](https://github.com/Open-Study-College/osc/commit/49cbf32aee16094044d7b4992935a2af88196a27))
+* **drawer:** adds isRotated prop to drawer trigger ([81daea6](https://github.com/Open-Study-College/osc/commit/81daea61cc260a8531d8e8e7ba0a6cf8aa4fd24e))
+
+
+### ♻️ Refactors
+
+* add seo fields ([627f828](https://github.com/Open-Study-College/osc/commit/627f8281a9352d9f7061fd84efdf344653f0dee5))
+* **drawer:** refactors styles by moving rotated styles into the --roated modifier ([4d84826](https://github.com/Open-Study-College/osc/commit/4d84826e2d460d737ade3a21653c6dd7bcf38525))
+
 ## [0.82.0](https://github.com/Open-Study-College/osc/compare/v0.81.0...v0.82.0) (2023-04-26)
 
 
@@ -54,11 +73,4 @@
 ### ✨ Features
 
 * add testimonials document to sanity ([50c182b](https://github.com/Open-Study-College/osc/commit/50c182b403a95570176b91a54aa73a8463234a51))
-
-## [0.78.1](https://github.com/Open-Study-College/osc/compare/v0.78.0...v0.78.1) (2023-04-21)
-
-
-### 🐛 Bugs
-
-* **studio:** adds missing faqs import file ([00d5336](https://github.com/Open-Study-College/osc/commit/00d533661241a0380f1d3c6cdcf26b98a96a92ac))
 
