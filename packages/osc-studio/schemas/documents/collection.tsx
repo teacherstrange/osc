@@ -3,7 +3,6 @@ import pluralize from 'pluralize';
 import { defineField, defineType } from 'sanity';
 import ShopifyIcon from '../../components/icons/Shopify';
 import CollectionHiddenInput from '../../components/inputs/CollectionHidden';
-import { ColorPicker } from '../../components/inputs/ColorPicker';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
 import { MODULES } from '../../constants.js';
 
@@ -85,21 +84,11 @@ export default defineType({
             type: 'seo.shopify',
             group: 'seo',
         }),
+        // SETTINGS
         defineField({
             name: 'theme',
             title: 'Theme',
-            type: 'object',
-            fields: [
-                defineField({
-                    name: 'color',
-                    title: 'Colour',
-                    type: 'string',
-                    initialValue: 'tertiary',
-                    components: {
-                        input: ColorPicker,
-                    },
-                }),
-            ],
+            type: 'theme',
             group: 'settings',
         }),
         defineField({

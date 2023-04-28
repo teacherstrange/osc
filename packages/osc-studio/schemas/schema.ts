@@ -77,6 +77,7 @@ import shopifyProductVariant from './objects/shopifyProductVariant';
 import social from './objects/social';
 import tabItem from './objects/tabItem';
 import textGridItem from './objects/textGridItem';
+import theme from './objects/theme';
 
 // Build the schemas and export to the Sanity Studio app
 export const schemaTypes: SchemaTypeDefinition[] = [
@@ -133,6 +134,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     shopifyCollection,
     shopifyProduct,
     shopifyProductVariant,
+    theme,
     moduleButton,
     moduleButtons,
     moduleAccordion,
