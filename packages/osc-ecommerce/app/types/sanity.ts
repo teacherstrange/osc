@@ -37,6 +37,11 @@ export interface imageModule<T> extends SanityImage<T> {
     }[];
     secure_url?: string;
     sizes?: string | undefined;
+    imageStyles?: {
+        overlayColor?: string;
+        grayscale?: boolean;
+        opacity?: boolean;
+    };
 }
 
 export interface module {

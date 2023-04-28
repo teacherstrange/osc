@@ -13,5 +13,6 @@ export const MODULE_IMAGES = groq`
         "src": coalesce(image.derived[0].secure_url, image.secure_url),
         "width": image.width,
         "height": image.height,
-    }
+    },
+    "imageStyles": image.imageStyles
 `;

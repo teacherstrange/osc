@@ -1,5 +1,6 @@
 import { ImageIcon } from '@sanity/icons';
 import { defineField, defineType } from 'sanity';
+import { ColorPicker } from '../../../components/inputs/ColorPicker';
 
 export default defineType({
     name: 'image.desktop',
@@ -40,6 +41,37 @@ export default defineType({
             title: 'Alt text',
             type: 'string',
             validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+            name: 'imageStyles',
+            title: 'Image Styles',
+            description: 'Apply some art directed styles to your image.',
+            type: 'object',
+            fields: [
+                defineField({
+                    name: 'grayscale',
+                    title: 'Grayscale',
+                    type: 'boolean',
+                    initialValue: false,
+                }),
+                defineField({
+                    name: 'opacity',
+                    title: 'Opacity',
+                    type: 'boolean',
+                    initialValue: false,
+                }),
+                defineField({
+                    name: 'overlayColor',
+                    title: 'Overlay Color',
+                    type: 'string',
+                    components: {
+                        input: ColorPicker,
+                    },
+                }),
+            ],
+            options: {
+                columns: 2,
+            },
         }),
     ],
     preview: {
