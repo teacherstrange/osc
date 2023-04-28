@@ -167,8 +167,13 @@ export interface courseCardModule extends module {
 }
 
 export interface collectionCardModule extends module {
-    reference?: {
+    reference: {
         store?: shopifyCollection;
+        theme?: {
+            color?: string;
+        };
+        featuredImage?: imageModule<HTMLImageElement>;
+        slug: string;
     };
     variant?: 'sm' | 'md' | 'lg';
 }
