@@ -196,6 +196,11 @@ export interface staticCardModule extends module {
     image?: {
         alt: string;
         image?: Omit<imageModule<HTMLImageElement>, 'alt' | 'src'>;
+        imageStyles?: {
+            overlayColor?: string;
+            grayscale?: boolean;
+            opacity?: boolean;
+        };
     };
     showFooter?: boolean;
     showSubHeading?: boolean;
