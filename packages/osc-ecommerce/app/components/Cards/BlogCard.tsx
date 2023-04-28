@@ -9,7 +9,6 @@ import {
     Image,
     BlogCard as OSCBlogCard,
 } from 'osc-ui';
-import { PATHS } from '~/constants';
 import type { postCardModule } from '~/types/sanity';
 
 interface Props {
@@ -17,30 +16,44 @@ interface Props {
 }
 
 export const BlogCard = (props: Props) => {
-    const data = props?.data?.reference;
+    const { data } = props;
+    const { theme } = data?.reference;
+    const heroData = data?.reference?.modules && data?.reference?.modules[0].slides;
+
+    if (!heroData) {
+        console.warn(`No hero set on post ${data?.reference?.title}`);
+    }
 
     return (
         <OSCBlogCard
             variant="featured"
             blockLink
-            isFull={props?.data?.fullWidth}
-            className={
-                props?.data?.backgroundColor ? `u-bg-color-${props?.data?.backgroundColor}` : ''
-            }
+            isFull={data?.fullWidth}
+            className={`${
+                heroData?.backgroundColor ? `u-bg-color-${heroData?.backgroundColor}` : ''
+            } ${heroData?.titleColor ? `u-color-${heroData?.titleColor}` : ''}`}
         >
             {/* // TODO: This data should come from the CMS */}
             <CardImage>
                 <Image
-                    src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1674744069/db8cdf9db0ec39f88706516410a64ed7_kxoiou.png"
-                    alt=""
-                    width={400}
-                    height={460}
+                    src={heroData?.image?.src ? heroData?.image?.src : ''}
+                    alt={heroData?.image?.alt ? heroData?.image?.alt : ''}
+                    width={heroData?.image?.width ? heroData?.image?.width : 0}
+                    height={heroData?.image?.height ? heroData?.image?.height : 0}
+                    fit="cover"
+                    overlayColor={
+                        heroData?.image?.imageStyles?.overlayColor
+                            ? heroData?.image?.imageStyles?.overlayColor
+                            : theme?.color
+                    }
+                    isGrayScale={heroData?.image?.imageStyles?.grayscale}
+                    hasTransparency={heroData?.image?.imageStyles?.opacity}
                 />
             </CardImage>
 
             <CardInner>
                 <CardHeader>
-                    <CardTitle>{data?.title}</CardTitle>
+                    <CardTitle>{data?.reference?.title}</CardTitle>
 
                     {/* // TODO: This data should come from the CMS */}
                     <CardTitle as="h3" subtitle>
@@ -52,13 +65,11 @@ export const BlogCard = (props: Props) => {
                 <CardBody>Lorem ipsum dolor sit amet consectetur adipisicing elit.</CardBody>
 
                 <CardFooter>
-                    <Button
-                        variant="quinary"
-                        as="link"
-                        to={`/${PATHS.BLOG}/${data?.slug?.current}`}
-                    >
-                        Read more
-                    </Button>
+                    {data?.reference?.slug ? (
+                        <Button variant="quinary" as="link" to={data?.reference?.slug}>
+                            Read more
+                        </Button>
+                    ) : null}
                 </CardFooter>
             </CardInner>
         </OSCBlogCard>

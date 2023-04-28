@@ -38,7 +38,27 @@ export const MODULE_CARDS = groq`
           _type,
           backgroundColor,
           fullWidth,
-          reference->
+          reference->{
+            title,
+            theme {
+                color
+            },
+            "featuredImage": {
+                ${MODULE_IMAGES}
+            },
+            modules[] {
+                (_type == "module.hero") => {
+                    slides[0] {
+                        titleColor,
+                        backgroundColor,
+                        "image": {
+                            ${MODULE_IMAGES}
+                        }
+                    }
+                }
+            },
+            "slug": "/${PATHS.BLOG}/" + slug.current,
+          },
         },
         _type == 'card.static' => {
             _key,

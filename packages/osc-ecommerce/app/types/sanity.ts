@@ -181,10 +181,18 @@ export interface collectionCardModule extends module {
 export interface postCardModule extends module {
     fullWidth?: boolean;
     backgroundColor?: string;
-    reference?: {
-        slug?: {
-            current: string;
+    reference: {
+        theme?: {
+            color?: string;
         };
+        modules?: {
+            slides?: {
+                backgroundColor?: string;
+                titleColor?: string;
+                image?: imageModule<HTMLImageElement>;
+            };
+        }[];
+        slug: string;
         title?: string;
     };
 }
