@@ -3,6 +3,7 @@ import pluralize from 'pluralize';
 import { defineField, defineType } from 'sanity';
 import ShopifyIcon from '../../components/icons/Shopify';
 import CollectionHiddenInput from '../../components/inputs/CollectionHidden';
+import { ColorPicker } from '../../components/inputs/ColorPicker';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
 import { MODULES } from '../../constants.js';
 
@@ -11,6 +12,10 @@ const GROUPS = [
         default: true,
         name: 'editorial',
         title: 'Editorial',
+    },
+    {
+        name: 'settings',
+        title: 'Settings',
     },
     {
         name: 'shopifySync',
@@ -57,14 +62,6 @@ export default defineType({
             type: 'proxyString',
             options: { field: 'store.slug.current' },
         }),
-        // Show hero
-        defineField({
-            name: 'showHero',
-            title: 'Show hero',
-            type: 'boolean',
-            description: 'If disabled, page title will be displayed instead',
-            group: 'editorial',
-        }),
         // Modules
         defineField({
             name: 'modules',
@@ -87,6 +84,29 @@ export default defineType({
             title: 'SEO',
             type: 'seo.shopify',
             group: 'seo',
+        }),
+        defineField({
+            name: 'theme',
+            title: 'Theme',
+            type: 'object',
+            fields: [
+                defineField({
+                    name: 'color',
+                    title: 'Colour',
+                    type: 'string',
+                    initialValue: 'tertiary',
+                    components: {
+                        input: ColorPicker,
+                    },
+                }),
+            ],
+            group: 'settings',
+        }),
+        defineField({
+            name: 'image',
+            title: 'Featured Image',
+            type: 'image.desktop',
+            group: 'settings',
         }),
     ],
     orderings: [
