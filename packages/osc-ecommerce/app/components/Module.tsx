@@ -276,6 +276,9 @@ export default function Module(props: Props) {
                     alt={moduleImage.alt}
                     width={moduleImage.width}
                     height={moduleImage.height}
+                    overlayColor={moduleImage?.imageStyles?.overlayColor}
+                    isGrayScale={moduleImage?.imageStyles?.grayscale}
+                    hasTransparency={moduleImage?.imageStyles?.opacity}
                 />
             );
 
