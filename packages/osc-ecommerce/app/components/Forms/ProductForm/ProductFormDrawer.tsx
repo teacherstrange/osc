@@ -36,7 +36,9 @@ export const ProductFormDrawer = (props: ProductFormDrawerProps) => {
                 <Button
                     variant="senary"
                     className={`${
-                        showOnGreaterThanTab ? 'c-btn--flush-r' : 'c-btn--flush-b'
+                        showOnGreaterThanTab
+                            ? 'c-btn--flush-r c-btn--anim-icon-l'
+                            : 'c-btn--flush-b'
                     } u-w-max`}
                 >
                     {BUTTON_TEXT} <Icon id={showOnGreaterThanTab ? 'chevron-left' : 'chevron-up'} />
@@ -47,7 +49,9 @@ export const ProductFormDrawer = (props: ProductFormDrawerProps) => {
                     <Button
                         variant="senary"
                         className={`${
-                            showOnGreaterThanTab ? 'c-btn--flush-r' : 'c-btn--flush-b'
+                            showOnGreaterThanTab
+                                ? 'c-btn--flush-r c-btn--anim-icon-r'
+                                : 'c-btn--flush-b'
                         } c-btn--b-img-none`}
                     >
                         {BUTTON_TEXT}{' '}

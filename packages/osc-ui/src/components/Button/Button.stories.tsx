@@ -118,10 +118,11 @@ export const Senary = Template.bind({});
 Senary.args = {
     children: (
         <>
-            Enrol now <Icon id="chevron-down" />
+            Enrol now <Icon id="chevron-left" />
         </>
     ),
     variant: 'senary',
+    className: 'c-btn--flush-r c-btn--anim-icon-l',
 };
 Senary.parameters = {
     docs: {

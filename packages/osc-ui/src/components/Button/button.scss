@@ -18,6 +18,7 @@
     $btn-radius: $rad-l;
     $btn-color-theme: var(--btn-theme-color, var(--color-primary)); /* [1] */
     $btn-border-theme: var(--btn-theme-gradient, var(--color-gradient-primary-270)); /* [2] */
+    $btn-icon-transition-distance: 0.2em;
     $btn-properties: (
         primary: (
             bg-color: var(--color-secondary),
@@ -251,6 +252,7 @@
             width: 1em; // Make sure svg scales with the font-size
             height: 1em; // Make sure svg scales with the font-size
             font-size: 1.4em;
+            transition: transform $timing-s $ease-in-out;
         }
 
         &--no-shadow {
@@ -322,10 +324,6 @@
                     border-image-slice: 1;
                     border-image-source: $btn-border-theme;
                     transition: border-image $timing-m $ease-in-out;
-
-                    &:hover {
-                        border-image-slice: 1 100;
-                    }
 
                     svg {
                         font-size: 1em;
@@ -499,6 +497,24 @@
 
         &--b-img-none {
             border-image-source: none;
+        }
+
+        &--anim-icon-l {
+            &:hover,
+            &:active {
+                svg {
+                    transform: translateX(-$btn-icon-transition-distance);
+                }
+            }
+        }
+
+        &--anim-icon-r {
+            &:hover,
+            &:active {
+                svg {
+                    transform: translateX($btn-icon-transition-distance);
+                }
+            }
         }
     }
 
