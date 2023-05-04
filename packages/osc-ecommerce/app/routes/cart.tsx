@@ -24,11 +24,11 @@ export async function action({ request, context }: ActionArgs) {
         // In Hydrogen demo store this is used when updating the buyer identity
         // Leaving this here for now, I'll add the buyer identity function in the future
         // TODO: Remove this comment when buyer identity function is added in future sprint
-        customerAccessToken,
+        // customerAccessToken,
     ] = await Promise.all([
         request.formData(),
         session.get('cartId'),
-        session.get('customerAccessToken'),
+        // session.get('customerAccessToken'),
     ]);
 
     let cartId = storedCartId;
