@@ -1,21 +1,25 @@
 import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Link, useLoaderData, useParams } from '@remix-run/react';
+import { Link, useLoaderData } from '@remix-run/react';
+import { PreviewSuspense } from '@sanity/preview-kit';
 import type { Collection as CollectionType } from '@shopify/hydrogen/storefront-api-types';
 import type { LoaderArgs } from '@shopify/remix-oxygen';
-import { useState } from 'react';
+import { lazy } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
-import Module, { getComponentStyles } from '~/components/Module';
-import Preview from '~/components/Preview';
+import { getComponentStyles } from '~/components/Module';
+import { PageContent } from '~/components/PageContent';
+import { PreviewBanner } from '~/components/PreviewBanner';
 import { PATHS } from '~/constants';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { COLLECTION_QUERY as SANITY_COLLECTION_QUERY } from '~/queries/sanity/collection';
 import { COLLECTION_QUERY as SHOPIFY_COLLECTION_QUERY } from '~/queries/shopify/collection';
-import type { SanityPage, module } from '~/types/sanity';
+import type { SanityPage } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
+
+const PagePreview = lazy(() => import('~/components/PagePreview'));
 
 interface PageData {
     page: SanityPage;
@@ -71,6 +75,7 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
         canonicalUrl,
         hubspotFormData: hubspotFormData ? hubspotFormData : null,
         query: isPreview ? SANITY_COLLECTION_QUERY : null,
+        params: isPreview ? params : null,
     });
 };
 
@@ -94,24 +99,14 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Collection() {
-    const { page, collection, isPreview, query } = useLoaderData<typeof loader>();
-    const params = useParams();
+    const { page, collection, isPreview, query, params } = useLoaderData<typeof loader>();
+    const isPreviewMode = isPreview && query && params;
 
-    // If `preview` mode is active, its component updates this state for us
-    const [data, setData] = useState<SanityPage>(page);
-
-    // Make sure to update the page state if the IDs are different!
-    if (page?._id !== data?._id) setData(page);
-
-    /**
-     * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
-     */
     return (
         <>
-            {isPreview && query ? (
-                <Preview data={data} setData={setData} query={query} queryParams={params} />
-            ) : null}
-            <h1>{collection?.title}</h1>
+            {isPreviewMode ? <PreviewBanner /> : null}
+
+            <h1>{collection.title}</h1>
 
             {collection.products.nodes.length > 0
                 ? collection.products.nodes.map((product) => (
@@ -121,13 +116,13 @@ export default function Collection() {
                   ))
                 : null}
 
-            {data?.modules && data?.modules.length > 0 ? (
-                <>
-                    {data?.modules.map((module: module) =>
-                        module ? <Module key={module?._key} module={module} /> : null
-                    )}
-                </>
-            ) : null}
+            {isPreviewMode ? (
+                <PreviewSuspense fallback={<PageContent {...page} />}>
+                    <PagePreview query={query} params={params} Component={PageContent} />
+                </PreviewSuspense>
+            ) : (
+                <PageContent {...page} />
+            )}
         </>
     );
 }

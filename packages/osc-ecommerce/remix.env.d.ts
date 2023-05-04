@@ -11,8 +11,10 @@ interface DocumentEnv {
     readonly SANITY_STUDIO_API_DATASET: string;
 }
 
-interface Document {
-    readonly env: DocumentEnv;
+declare global {
+    interface Document {
+        readonly env: DocumentEnv;
+    }
 }
 
 /**

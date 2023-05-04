@@ -339,7 +339,7 @@ export interface SanityPage {
 }
 
 export interface SanityProduct extends SanityPage {
-    upperContent?: module[] | contentModule[];
+    upperContent: module[] | contentModule[];
 }
 
 export interface shopifyProduct {
@@ -471,4 +471,10 @@ export interface formModule extends module {
     marginBottom?: Maybe<Spacing>;
     paddingBottom?: Maybe<Spacing>;
     paddingTop?: Maybe<Spacing>;
+}
+
+export interface PreviewProps {
+    query: string;
+    params: { [key: string]: string };
+    token: string | null;
 }

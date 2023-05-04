@@ -18,6 +18,7 @@ Disallow: /checkouts/
 Disallow: /checkout
 Disallow: /carts
 Disallow: /account
+Disallow: /resources/preview
 Sitemap: ${protocol}//${host}/sitemap.xml
 
 # Google adsbot ignores robots.txt unless specifically named!

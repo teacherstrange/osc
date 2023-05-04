@@ -1,16 +1,20 @@
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData, useParams } from '@remix-run/react';
-import { useState } from 'react';
+import { useLoaderData } from '@remix-run/react';
+import { PreviewSuspense } from '@sanity/preview-kit';
+import { lazy } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
-import Module, { getComponentStyles } from '~/components/Module';
-import Preview from '~/components/Preview';
+import { getComponentStyles } from '~/components/Module';
+import { PageContent } from '~/components/PageContent';
+import { PreviewBanner } from '~/components/PreviewBanner';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PAGE_QUERY } from '~/queries/sanity/page';
-import type { module, SanityPage } from '~/types/sanity';
+import type { SanityPage } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
 import { buildHtmlMetaTags } from '~/utils/metaTags/buildHtmlMetaTags';
+
+const PagePreview = lazy(() => import('~/components/PagePreview'));
 
 interface PageData {
     page: SanityPage;
@@ -50,8 +54,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         page,
         canonicalUrl,
         isPreview,
-        query: isPreview ? PAGE_QUERY : null,
         hubspotFormData: hubspotFormData ? hubspotFormData : null,
+        query: isPreview ? PAGE_QUERY : null,
+        params: isPreview ? params : null,
     });
 };
 
@@ -75,31 +80,20 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { page, isPreview, query } = useLoaderData<typeof loader>();
-    const params = useParams();
+    const { page, isPreview, query, params } = useLoaderData<typeof loader>();
+    const isPreviewMode = isPreview && query && params;
 
-    // If `preview` mode is active, its component updates this state for us
-    const [data, setData] = useState<SanityPage>(page);
-
-    // Make sure to update the page state if the IDs are different!
-    if (page?._id !== data?._id) setData(page);
-
-    /**
-     * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
-     */
     return (
         <>
-            {isPreview ? (
-                <Preview data={data} setData={setData} query={query} queryParams={params} />
-            ) : null}
+            {isPreviewMode ? <PreviewBanner /> : null}
 
-            {data?.modules && data?.modules.length > 0 ? (
-                <>
-                    {data?.modules.map((module: module) =>
-                        module ? <Module key={module?._key} module={module} /> : null
-                    )}
-                </>
-            ) : null}
+            {isPreviewMode ? (
+                <PreviewSuspense fallback={<PageContent {...page} />}>
+                    <PagePreview query={query} params={params} Component={PageContent} />
+                </PreviewSuspense>
+            ) : (
+                <PageContent {...page} />
+            )}
         </>
     );
 }

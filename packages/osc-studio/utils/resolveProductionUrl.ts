@@ -1,9 +1,21 @@
 import type { SanityDocument, Slug } from 'sanity';
 import { PATHS } from '../constants';
-const localUrl = `http://localhost:2000`;
-// TODO: Update this
-const remoteUrl = `https://your-deployed-website.com`;
-const baseUrl = window?.location?.hostname === 'localhost' ? localUrl : remoteUrl;
+
+const requestUrl = new URL(window?.location?.origin);
+const prefixRegex = /((pr-)\d+)/g; // This bit of regex finds any text that matches "pr-<n>" e.g. pr-123
+
+let remoteUrl;
+
+// Check if the current request Url contains a preview prefix
+if (requestUrl.hostname.match(prefixRegex)) {
+    const urlPrefix = requestUrl.hostname.match(prefixRegex)?.join('');
+
+    remoteUrl = `https://${urlPrefix}-osc-ecommerce.fly.dev`;
+} else {
+    remoteUrl = `https://osc-ecommerce.fly.dev`;
+}
+
+const baseUrl = window?.location?.hostname === 'localhost' ? 'http://localhost:2000' : remoteUrl;
 
 export type SanityDocumentWithSlug = SanityDocument & {
     slug: Slug;
@@ -21,6 +33,9 @@ export function resolveProductionUrl(doc: SanityDocumentWithSlug) {
     }
 
     const url = new URL(baseUrl);
+    const previewPath = '/resources/preview';
+    const param = 'slug';
+    url.pathname = previewPath;
 
     switch (doc._type) {
         case 'home':
@@ -40,11 +55,10 @@ export function resolveProductionUrl(doc: SanityDocumentWithSlug) {
             break;
 
         default:
-            url.pathname = slug;
+            url.search = `?${param}=${slug}`;
+
             break;
     }
-
-    url.searchParams.set(`preview`, `true`);
 
     return url.toString();
 }

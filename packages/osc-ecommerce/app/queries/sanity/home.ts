@@ -3,7 +3,7 @@ import { MODULES } from './fragments/modules';
 import { SEO } from './fragments/seo';
 
 export const HOME_QUERY = groq`
-    *[ _type == "home" ] {
+    *[ _type == "home" && !(_id in path("drafts.**")) ] {
         _id,
         _rev,
         _type,
