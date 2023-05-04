@@ -1,3 +1,33 @@
+## [0.85.0](https://github.com/Open-Study-College/osc/compare/v0.84.0...v0.85.0) (2023-05-04)
+
+
+### 🧪 Tests
+
+* **img:** add test to check for css transform classes ([784c417](https://github.com/Open-Study-College/osc/commit/784c4179e7d4b8aae14080b09a4a313a46f3f53e))
+
+
+### ✨ Features
+
+* **img:** adds css transform props/modifiers ([9206a3e](https://github.com/Open-Study-College/osc/commit/9206a3e78cbd4efe609e3106c753c57990b8b9b1))
+* **img:** adds fit prop to position image fit ([fb75049](https://github.com/Open-Study-College/osc/commit/fb75049ffd8cc8a4bc0bd4b170abafd48ab70586))
+* **img:** apply image mask to image when overlay is selected ([e62e3f9](https://github.com/Open-Study-College/osc/commit/e62e3f90c2e5f62a86efb29a9222f5b03c814635))
+* **img:** update storybook ([4ae397b](https://github.com/Open-Study-College/osc/commit/4ae397b26889025cd66f836eca45771841a15efd))
+
+
+### ♻️ Refactors
+
+* **callout banner:** adjust o-img selector ([09d1c15](https://github.com/Open-Study-College/osc/commit/09d1c152c0e38830abf29390e104d01050443e54))
+* **cards:** re-do card image selectors ([5619de2](https://github.com/Open-Study-College/osc/commit/5619de20e6e21550c16a341467403e000bba7577))
+* **cards:** update img references in cards scss ([41f2c2f](https://github.com/Open-Study-College/osc/commit/41f2c2fd6a98c5c4bf57a0361311d764a71aec5a))
+* **hero:** adjust o-img selector ([eb66e02](https://github.com/Open-Study-College/osc/commit/eb66e0289d4e16d990252558d5c7ad36ee7525b4))
+* **video:** adjust o-img selector ([5ec32f8](https://github.com/Open-Study-College/osc/commit/5ec32f81db068cc5346d1a314e94b027e46a0e83))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* remove unused variable ([bbd3fda](https://github.com/Open-Study-College/osc/commit/bbd3fdaef3d6058743395f52bdfd378b8671db0a))
+* replace remix-oxygen imports with remix-node ([2d16cfd](https://github.com/Open-Study-College/osc/commit/2d16cfdb85e4dcc422eb931f3b9f6fbfe22d56fa))
+
 ## [0.84.0](https://github.com/Open-Study-College/osc/compare/v0.83.0...v0.84.0) (2023-05-04)
 
 
@@ -93,22 +123,4 @@
 ### 📦 General Housekeeping / Package Updates
 
 * update docstrings ([3f6f304](https://github.com/Open-Study-College/osc/commit/3f6f304a80046fb400d3a9defd3fa272ee7f9b31))
-
-## [0.80.0](https://github.com/Open-Study-College/osc/compare/v0.79.0...v0.80.0) (2023-04-26)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **ecommerce:** enable v2 future flag for replacing useTransition ([1d4c2f5](https://github.com/Open-Study-College/osc/commit/1d4c2f54a534ac4035c37132b52934ab14661d7a))
-
-
-### ♻️ Refactors
-
-* **product form:** add form element styles ([f4412d2](https://github.com/Open-Study-College/osc/commit/f4412d2c8ddbaefcdf98f0a5be5440c59ffa89df))
-
-
-### ✨ Features
-
-* **product form:** add Form component functionality to update selected option ([0552425](https://github.com/Open-Study-College/osc/commit/0552425e2dccae4609da67e0a48fbd1ce24fc365))
-* **product form:** adds loading states ([7880d17](https://github.com/Open-Study-College/osc/commit/7880d17e2488fc16e0f307f8978ecfad579ffa2c))
 
