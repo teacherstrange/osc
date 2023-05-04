@@ -1,3 +1,37 @@
+## [0.86.0](https://github.com/Open-Study-College/osc/compare/v0.85.0...v0.86.0) (2023-05-04)
+
+
+### 🐛 Bugs
+
+* **drawer:** remove height property ([0045fdc](https://github.com/Open-Study-College/osc/commit/0045fdce003189adadcf741b6c7dea0c93dc372a))
+
+
+### ✨ Features
+
+* **button:** add hover styles to senary button ([1baaefc](https://github.com/Open-Study-College/osc/commit/1baaefc1da73057636394bf94005c8c6879b8565))
+* **button:** add modifier to remove the gradient from the senary button ([321b3a5](https://github.com/Open-Study-College/osc/commit/321b3a5b9663b41f5b1ac801262ea8fb16b1bfeb))
+* **drawer:** add innerClass prop to drawer content ([397f87a](https://github.com/Open-Study-College/osc/commit/397f87a0163d940e5686e8490ef9fe6f29e5d47a))
+* **drawer:** export drawer from osc-ui ([8e9c8b8](https://github.com/Open-Study-College/osc/commit/8e9c8b89707a421c7221b78f28b19ddbe77b0a80))
+* **ecommerce:** add ProductFormDrawer component ([1f76e65](https://github.com/Open-Study-College/osc/commit/1f76e65a4d317fd74efeb2442d11953db117480a))
+* **ecommerce:** import drawer styles ([9174cd8](https://github.com/Open-Study-College/osc/commit/9174cd857e7f08e23126d8704bec4aa2d3d15f28))
+* **product drawer:** add breakpoints ([a89d247](https://github.com/Open-Study-College/osc/commit/a89d24765acfa2272f2c73ba6a8bc490a0defe3d))
+* **product drawer:** add classes to hide drawer trigger ([af2b38c](https://github.com/Open-Study-College/osc/commit/af2b38ca8dd1f2f65ef4c63ac116f912d5d1ef4d))
+* **product form:** add ID prop so we can have two on a page ([39e1941](https://github.com/Open-Study-College/osc/commit/39e1941f49265e4e113d80c5e484ac31e774398d))
+* **product form:** wrap form in forwardRef ([c0e13b5](https://github.com/Open-Study-College/osc/commit/c0e13b5ada310cede6c8b32db35a99aab90221a5))
+* **product page:** add intersection observer and hide drawer when form is out of view ([86fcb48](https://github.com/Open-Study-College/osc/commit/86fcb48d41e07ec7731b4a1dd62069c6d1c2d3b0))
+* **styles:** adds max-content width utility ([dd36d95](https://github.com/Open-Study-College/osc/commit/dd36d95c134d3c86574d40f4847fc8ac8e8ad14b))
+* **ui:** export useIntersectionObserver hook from osc-ui ([e743704](https://github.com/Open-Study-College/osc/commit/e7437042aedf078d8c2a44c87acf35fcf8ff9947))
+
+
+### ♻️ Refactors
+
+* **button:** swap hover animation over to move icon instead ([2a6c6a8](https://github.com/Open-Study-College/osc/commit/2a6c6a8dde6bef21918ef3bd45c806de244ef5eb))
+* **drawer:** adjust the offset heights ([f764015](https://github.com/Open-Study-College/osc/commit/f7640156cabd971ad3085c841c5eee2fd150e7e8))
+* **drawer:** update size variants ([890f85b](https://github.com/Open-Study-College/osc/commit/890f85bb394d268730264187728702f1703adf9c))
+* **product form:** add props to set the direction of the form border ([299e108](https://github.com/Open-Study-College/osc/commit/299e1083e180ed1ecf2c91e5a3c4f54dd3e19648))
+* **product form:** move the radio group into it's own component and add dynamic key ([b89c0a0](https://github.com/Open-Study-College/osc/commit/b89c0a012036d653e6c1bac00da5bc9166b4b775))
+* **product form:** remove props and extract product data from useLoader ([1868569](https://github.com/Open-Study-College/osc/commit/1868569aa42318907d86e05a71c362431fb7eb25))
+
 ## [0.85.0](https://github.com/Open-Study-College/osc/compare/v0.84.0...v0.85.0) (2023-05-04)
 
 
@@ -99,28 +133,4 @@
 
 * **button:** add modifiers to remove border from certain edges ([95550cd](https://github.com/Open-Study-College/osc/commit/95550cdfb1bbbea8fa3e5974056af62fbb415274))
 * **button:** adds senary button variant ([7c14046](https://github.com/Open-Study-College/osc/commit/7c14046d99ddbb88a1eec93474fb30f4edda879c))
-
-## [0.81.0](https://github.com/Open-Study-College/osc/compare/v0.80.0...v0.81.0) (2023-04-26)
-
-
-### ✨ Features
-
-* **cart:** add useCart hook so we can access cart data on frontend ([a92e4fe](https://github.com/Open-Study-College/osc/commit/a92e4fecaceddb04c2ccc54e7e28202ec49ef8d1))
-* **cart:** adds a basic cart for displaying items ([05a8a84](https://github.com/Open-Study-College/osc/commit/05a8a84f9b7dd8948a66c1077898ad39a8702959))
-* **cart:** adds product name to cart line item ([eb55fcb](https://github.com/Open-Study-College/osc/commit/eb55fcb558bd45603b37f87ef1c008693c88c360))
-* **cart:** export the cart data from the root ([b735263](https://github.com/Open-Study-College/osc/commit/b7352639dce67177e53bc8227646841359c9f68b))
-* **product page:** adds add to cart form ([d8b18b5](https://github.com/Open-Study-College/osc/commit/d8b18b59be79d8c9da6f9c6f0096268030225a4e))
-* **styles:** adds full width utility ([82bad10](https://github.com/Open-Study-College/osc/commit/82bad10ca8c5bdb316f9fb251b1355d6c8c43ce0))
-
-
-### ♻️ Refactors
-
-* **cart:** rename getCart as cart.helpers ([a1faa18](https://github.com/Open-Study-College/osc/commit/a1faa180e3b390f585aefc566acbb67683a672c6))
-* **getcart:** destructure the args into the function body ([616cacc](https://github.com/Open-Study-College/osc/commit/616cacc6699d4193c1567818df2ecc17fbad7930))
-* **prduct form:** move is loading state onto the whole form ([b41677b](https://github.com/Open-Study-College/osc/commit/b41677bb60fba3cb935ee3389b138be9de8755d6))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* update docstrings ([3f6f304](https://github.com/Open-Study-College/osc/commit/3f6f304a80046fb400d3a9defd3fa272ee7f9b31))
 
