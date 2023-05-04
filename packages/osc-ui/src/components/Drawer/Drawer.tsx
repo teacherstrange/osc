@@ -159,12 +159,17 @@ export interface DrawerContentProps
      * @default false
      */
     isFull?: boolean;
+    /**
+     * Custom classes to be passed to the inner div
+     */
+    innerClassName?: string;
 }
 
 export const DrawerContent = (props: DrawerContentProps) => {
     const {
         children,
         className,
+        innerClassName,
         container,
         showOverlay = true,
         size = 'md',
@@ -184,6 +189,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
         isFull && 'is-full',
         className
     );
+    const innerClasses = classNames('c-drawer__content-inner', innerClassName);
 
     return (
         <Dialog.Portal container={container}>
@@ -197,7 +203,7 @@ export const DrawerContent = (props: DrawerContentProps) => {
                     ['--drawer-trigger-height' as string]: `${triggerHeight}px`,
                 }}
             >
-                <div className="c-drawer__content-inner">{children}</div>
+                <div className={innerClasses}>{children}</div>
             </Dialog.Content>
         </Dialog.Portal>
     );

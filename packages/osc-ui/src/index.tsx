@@ -38,6 +38,15 @@ export { ContentMedia, ContentMediaBlock } from './components/ContentMedia/Conte
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export { DatePicker } from './components/DatePicker/DatePicker/DatePicker';
 export {
+    Drawer,
+    DrawerCloseButton,
+    DrawerContainer,
+    DrawerContent,
+    DrawerDescription,
+    DrawerTitle,
+    DrawerTrigger,
+} from './components/Drawer/Drawer';
+export {
     Footer,
     FooterBottom,
     FooterGroup,
@@ -91,6 +100,7 @@ export { Trustpilot } from './components/Trustpilot/Trustpilot';
 export { VideoPlayer } from './components/VideoPlayer/VideoPlayer';
 export { VisuallyHidden } from './components/VisuallyHidden/VisuallyHidden';
 // Hooks
+export { useIntersectionObserver } from './hooks/useIntersectionObserver';
 export { useMediaQuery } from './hooks/useMediaQuery';
 export { useModifier } from './hooks/useModifier';
 export { useSpacing } from './hooks/useSpacing';
