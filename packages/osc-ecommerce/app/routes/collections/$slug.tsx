@@ -1,9 +1,8 @@
-import type { MetaFunction } from '@remix-run/node';
+import type { LoaderArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { PreviewSuspense } from '@sanity/preview-kit';
 import type { Collection as CollectionType } from '@shopify/hydrogen/storefront-api-types';
-import type { LoaderArgs } from '@shopify/remix-oxygen';
 import { lazy } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';

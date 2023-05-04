@@ -88,7 +88,8 @@
                 grid-column: 8 / span 5;
             }
 
-            .o-img {
+            .o-img,
+            .o-img__img {
                 max-height: $hero-height;
             }
         }

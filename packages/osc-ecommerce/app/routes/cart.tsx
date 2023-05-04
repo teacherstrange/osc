@@ -1,3 +1,5 @@
+import type { ActionArgs } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import { flattenConnection } from '@shopify/hydrogen';
 import type {
     CartBuyerIdentityInput,
@@ -6,8 +8,6 @@ import type {
     CartUserError,
     UserError,
 } from '@shopify/hydrogen/storefront-api-types';
-import type { ActionArgs } from '@shopify/remix-oxygen';
-import { json } from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 import { useCart } from '~/hooks/useCart';
 import type { CartActions } from '~/types/shopify';
@@ -24,11 +24,11 @@ export async function action({ request, context }: ActionArgs) {
         // In Hydrogen demo store this is used when updating the buyer identity
         // Leaving this here for now, I'll add the buyer identity function in the future
         // TODO: Remove this comment when buyer identity function is added in future sprint
-        customerAccessToken,
+        // customerAccessToken,
     ] = await Promise.all([
         request.formData(),
         session.get('cartId'),
-        session.get('customerAccessToken'),
+        // session.get('customerAccessToken'),
     ]);
 
     let cartId = storedCartId;

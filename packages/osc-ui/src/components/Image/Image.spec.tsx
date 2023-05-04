@@ -1,7 +1,7 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Image } from './Image';
-import { imageData, largeImageData, noImageWidthData, imageDataNoTransforms } from './imageData';
-import { screen, render } from '@testing-library/react';
+import { imageData, imageDataNoTransforms, largeImageData, noImageWidthData } from './imageData';
 
 test('renders the default image', () => {
     render(
@@ -137,4 +137,27 @@ test('renders picture with alternate source elements', () => {
     expect(img).toHaveAttribute('width');
     expect(img).toHaveAttribute('height');
     expect(img).toHaveAttribute('loading', 'lazy');
+});
+
+test('adds the correct modifier classes when transfomation props are applied', () => {
+    render(
+        <Image
+            src={imageData.src}
+            alt={imageData.alt}
+            width={imageData.width}
+            height={imageData.height}
+            overlayColor="primary"
+            isGrayScale
+            hasTransparency
+        />
+    );
+
+    const imgMask = document.querySelector('.o-img');
+    const img = screen.getByRole('img');
+
+    expect(imgMask).toHaveClass('o-img--bg u-bg-color-primary o-img--opacity');
+    expect(imgMask).toHaveStyle(
+        'mask: url(https://res.cloudinary.com/de2iu8gkv/image/upload/c_scale,e_cartoonify,w_1331,f_auto,q_auto,q_20/v1665669942/cld-sample-5.jpg) no-repeat center / contain;'
+    );
+    expect(img).toHaveClass('o-img__img--grayscale o-img__img--overlay');
 });

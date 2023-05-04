@@ -1,6 +1,6 @@
 /// <reference types="@remix-run/dev" />
 /// <reference types="@remix-run/node/globals" />
-/// <reference types="@shopify/remix-oxygen" />
+/// <reference types="@remix-run/node" />
 /// <reference types="@shopify/oxygen-workers-types" />
 
 import type { Storefront } from '@shopify/hydrogen';
@@ -20,7 +20,7 @@ declare global {
 /**
  * Declare local additions to `AppLoadContext` to include the session utilities we injected in `server.ts`.
  */
-declare module '@shopify/remix-oxygen' {
+declare module '@remix-run/node' {
     export interface AppLoadContext {
         session: HydrogenSession;
         storefront: Storefront;

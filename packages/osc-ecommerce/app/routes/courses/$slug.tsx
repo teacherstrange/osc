@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node';
+import type { LinksFunction, LoaderArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { PreviewSuspense } from '@sanity/preview-kit';
@@ -7,7 +7,6 @@ import type {
     ProductVariant,
     SelectedOptionInput,
 } from '@shopify/hydrogen/storefront-api-types';
-import type { LinksFunction, LoaderArgs } from '@shopify/remix-oxygen';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import radioStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';

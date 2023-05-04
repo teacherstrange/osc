@@ -1,3 +1,4 @@
+import type { AppLoadContext } from '@remix-run/node';
 import type {
     Cart,
     CartInput,
@@ -5,7 +6,6 @@ import type {
     CartUserError,
     UserError,
 } from '@shopify/hydrogen/storefront-api-types';
-import type { AppLoadContext } from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 import { ADD_LINES_MUTATION, CART_QUERY, CREATE_CART_MUTATION } from '~/queries/shopify/cart';
 
