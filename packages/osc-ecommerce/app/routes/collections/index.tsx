@@ -1,7 +1,7 @@
+import type { LoaderArgs } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { json } from '@remix-run/server-runtime';
 import type { CollectionConnection } from '@shopify/hydrogen/storefront-api-types';
-import type { LoaderArgs } from '@shopify/remix-oxygen';
 import invariant from 'tiny-invariant';
 import { PATHS } from '~/constants';
 import { COLLECTIONS_QUERY as SHOPIFY_COLLECTIONS_QUERY } from '~/queries/shopify/collections';

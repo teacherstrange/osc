@@ -1,7 +1,7 @@
 import { createRequestHandler } from '@remix-run/express';
+import type { Session, SessionStorage } from '@remix-run/node';
 import { createCookieSessionStorage } from '@remix-run/node';
 import { createStorefrontClient } from '@shopify/hydrogen';
-import type { Session, SessionStorage } from '@shopify/remix-oxygen';
 import compression from 'compression';
 import type { Request } from 'express';
 import express from 'express';

@@ -1,6 +1,6 @@
+import type { LoaderArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/server-runtime';
 import { graphiqlLoader } from '@shopify/hydrogen';
-import type { LoaderArgs } from '@shopify/remix-oxygen';
 
 /**
  * Because we're not using the Hydrogen CLI we have to add our graphiql page here
