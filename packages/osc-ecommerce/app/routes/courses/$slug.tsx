@@ -1,6 +1,6 @@
 import type { LinksFunction, LoaderArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData, useParams } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { PreviewSuspense } from '@sanity/preview-kit';
 import type {
     Product as ProductType,
@@ -132,8 +132,7 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { page, product, isPreview, query } = useLoaderData<typeof loader>();
-    const params = useParams();
+    const { page, product, isPreview, query, params } = useLoaderData<typeof loader>();
     const intersectionRef = useRef<HTMLDivElement>(null);
     const isPreviewMode = isPreview && query && params;
 
