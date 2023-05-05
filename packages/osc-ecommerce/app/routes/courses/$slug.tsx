@@ -7,10 +7,11 @@ import type {
     ProductVariant,
     SelectedOptionInput,
 } from '@shopify/hydrogen/storefront-api-types';
+import { useIntersectionObserver } from 'osc-ui';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import radioStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';
-import { lazy } from 'react';
+import { lazy, useRef, useState } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
@@ -131,8 +132,7 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
 };
 
 export default function Index() {
-    const { page, product, isPreview, query } = useLoaderData<typeof loader>();
-    const params = useParams();
+    const { page, product, isPreview, query, params } = useLoaderData<typeof loader>();
     const intersectionRef = useRef<HTMLDivElement>(null);
     const isPreviewMode = isPreview && query && params;
 
@@ -204,15 +204,15 @@ export default function Index() {
 
                         <ProductFormDrawer hideTrigger={formIsIntersecting} />
                     </div>
-
-                    {isPreviewMode ? (
-                        <PreviewSuspense fallback={<PageContent {...page} />}>
-                            <PagePreview query={query} params={params} Component={PageContent} />
-                        </PreviewSuspense>
-                    ) : (
-                        <PageContent {...page} />
-                    )}
                 </div>
+
+                {isPreviewMode ? (
+                    <PreviewSuspense fallback={<PageContent {...page} />}>
+                        <PagePreview query={query} params={params} Component={PageContent} />
+                    </PreviewSuspense>
+                ) : (
+                    <PageContent {...page} />
+                )}
             </div>
         </>
     );
