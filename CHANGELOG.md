@@ -1,3 +1,12 @@
+## [0.86.1](https://github.com/Open-Study-College/osc/compare/v0.86.0...v0.86.1) (2023-05-05)
+
+
+### 🐛 Bugs
+
+* **product page:** moves closing div into correct place ([7b66481](https://github.com/Open-Study-College/osc/commit/7b6648161f632b4a6527eac69e38eba08cc5430f))
+* **product page:** remove useParams hook and replace with params from loader ([8e07693](https://github.com/Open-Study-College/osc/commit/8e076933086aaf690cb70c14648ed6dfbce32a80))
+* **product page:** restore missing imports ([fe014c6](https://github.com/Open-Study-College/osc/commit/fe014c6d7db226bc3ee13a93126eb857ef27b04a))
+
 ## [0.86.0](https://github.com/Open-Study-College/osc/compare/v0.85.0...v0.86.0) (2023-05-04)
 
 
@@ -125,12 +134,4 @@
 
 * add seo fields ([627f828](https://github.com/Open-Study-College/osc/commit/627f8281a9352d9f7061fd84efdf344653f0dee5))
 * **drawer:** refactors styles by moving rotated styles into the --roated modifier ([4d84826](https://github.com/Open-Study-College/osc/commit/4d84826e2d460d737ade3a21653c6dd7bcf38525))
-
-## [0.82.0](https://github.com/Open-Study-College/osc/compare/v0.81.0...v0.82.0) (2023-04-26)
-
-
-### ✨ Features
-
-* **button:** add modifiers to remove border from certain edges ([95550cd](https://github.com/Open-Study-College/osc/commit/95550cdfb1bbbea8fa3e5974056af62fbb415274))
-* **button:** adds senary button variant ([7c14046](https://github.com/Open-Study-College/osc/commit/7c14046d99ddbb88a1eec93474fb30f4edda879c))
 
