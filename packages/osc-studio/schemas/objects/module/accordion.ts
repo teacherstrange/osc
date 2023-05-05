@@ -53,6 +53,10 @@ export default defineType({
 
                     const contentBody = content && content?.body;
 
+                    if (!contentBody) {
+                        return true;
+                    }
+
                     // @ts-ignore -- not actually sure why findLast does not exist?
                     const findLastHeading = contentBody.findLast(
                         (item: PortableTextBlock) =>
