@@ -205,15 +205,15 @@ export default function Index() {
 
                         <ProductFormDrawer hideTrigger={formIsIntersecting} />
                     </div>
-
-                    {isPreviewMode ? (
-                        <PreviewSuspense fallback={<PageContent {...page} />}>
-                            <PagePreview query={query} params={params} Component={PageContent} />
-                        </PreviewSuspense>
-                    ) : (
-                        <PageContent {...page} />
-                    )}
                 </div>
+
+                {isPreviewMode ? (
+                    <PreviewSuspense fallback={<PageContent {...page} />}>
+                        <PagePreview query={query} params={params} Component={PageContent} />
+                    </PreviewSuspense>
+                ) : (
+                    <PageContent {...page} />
+                )}
             </div>
         </>
     );
