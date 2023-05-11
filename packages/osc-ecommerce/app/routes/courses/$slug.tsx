@@ -143,12 +143,6 @@ export default function Index() {
     });
     const formIsIntersecting = productFormIntersection?.isIntersecting;
 
-    // If `preview` mode is active, its component updates this state for us
-    const [data, setData] = useState<SanityProduct>(page);
-
-    // Make sure to update the page state if the IDs are different!
-    if (page?._id !== data?._id) setData(page);
-
     // Due how the data is setup in Shopify there are times where we might return the same SKU multiple times
     // Here we are checking if there are any SKUs and then filtering out duplicates
     const uniqueSKUs =
