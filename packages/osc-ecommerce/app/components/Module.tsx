@@ -220,7 +220,9 @@ export default function Module(props: Props) {
             return moduleContent.body ? (
                 <article
                     className={`o-container ${
-                        isFlush || moduleContent.fullWidth ? 'o-container--flush' : ''
+                        isFlush || moduleContent.fullWidth
+                            ? 'o-container--flush o-container--full'
+                            : ''
                     }`}
                 >
                     <Content
