@@ -93,9 +93,9 @@ const Form = (props: FormProps) => {
     );
 };
 
-export const Forms = (props: { module: formModule }) => {
+export const Forms = (props: { module: formModule; addContainer?: boolean }) => {
     // Module data coming from Sanity
-    const { module } = props;
+    const { module, addContainer = false } = props;
     // Data coming back when the form has been submitted - e.g. transition state and any server errors
     const fetcher = useFetcher();
     const data = fetcher.data;
@@ -150,7 +150,12 @@ export const Forms = (props: { module: formModule }) => {
         return <Alert status="error">Unable to load form!</Alert>;
     }
 
-    const classes = classNames('c-form', marginBottomClass, paddingTopClass, paddingBottomClass);
+    const classes = classNames(
+        addContainer ? 'c-form o-container' : 'c-form',
+        marginBottomClass,
+        paddingTopClass,
+        paddingBottomClass
+    );
     // Get the form data that matches module formId
     const formData = hubspotFormData[module.formId] as HubspotFormData;
 
