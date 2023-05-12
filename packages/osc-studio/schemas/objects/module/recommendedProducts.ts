@@ -40,7 +40,7 @@ export default defineType({
                 list: SPACING,
                 layout: 'dropdown',
             },
-            initialValue: '6xl',
+            initialValue: '5xl',
             group: 'spacing',
         }),
         defineField({
@@ -79,6 +79,12 @@ export default defineType({
             type: 'number',
             initialValue: 4,
             validation: (Rule) => Rule.min(1).max(10),
+            group: 'products',
+        }),
+        defineField({
+            name: 'carouselSettings',
+            title: 'Carousel Settings',
+            type: 'carouselSettings',
             group: 'products',
         }),
     ],

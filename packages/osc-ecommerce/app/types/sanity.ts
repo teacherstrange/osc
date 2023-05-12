@@ -317,6 +317,16 @@ export interface tabsModule extends module {
     }[];
 }
 
+export interface recommendedProductsModule extends module {
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
+    backgroundColor?: Themes | string;
+    numberOfProducts: number;
+    heading?: string;
+    carouselSettings?: carouselModuleSettings;
+}
+
 export interface SanitySEO {
     title?: string;
     description?: string | null;
