@@ -44,7 +44,10 @@ export const CourseCard = (props: Props) => {
         return (
             <>
                 {options
-                    .filter((option) => option?.name === 'Format')
+                    .filter(
+                        // Handle both format and course options as both names are being used in Shopify currently
+                        (option) => option?.name === 'Format' || option?.name === 'Course Options'
+                    )
                     .map(
                         (option) =>
                             option?.values &&
