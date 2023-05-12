@@ -96,6 +96,10 @@ export interface contentMediaSlide extends module {
         mediaType: {
             image?: imageModule<HTMLImageElement>;
             imageFit?: 'cover' | 'contain';
+            _key?: string;
+            _type?: string;
+            formId?: string;
+            formName?: string;
         }[];
     };
 }
@@ -465,7 +469,6 @@ export interface SanityActionNavSettings {
 }
 
 export interface formModule extends module {
-    formNameAndId: string;
     formId: string;
     formName: string;
     marginBottom?: Maybe<Spacing>;

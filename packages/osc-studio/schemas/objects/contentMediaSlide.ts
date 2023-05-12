@@ -85,7 +85,7 @@ export default defineType({
                     name: 'mediaType',
                     title: 'Media Type',
                     type: 'array',
-                    of: [{ type: 'contentMediaImage' }],
+                    of: [{ type: 'contentMediaImage' }, { type: 'module.forms' }],
                     validation: (Rule) => Rule.required(),
                 }),
                 defineField({

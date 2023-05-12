@@ -153,6 +153,7 @@ export const getComponentStyles = (data: SanityPage) => {
 
             case 'module.contentMedia':
                 styles.push({ rel: 'stylesheet', href: contentMediaStyles });
+                styles.push({ rel: 'stylesheet', href: buttonStyles });
                 break;
 
             case 'module.video':

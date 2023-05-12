@@ -10,7 +10,8 @@ import {
     rem,
     useSpacing,
 } from 'osc-ui';
-import type { contentMediaModule, contentMediaSlide } from '~/types/sanity';
+import type { contentMediaModule, contentMediaSlide, formModule } from '~/types/sanity';
+import { Forms } from '../Forms/Forms';
 
 const perView = (perView: number | undefined) => (perView ? perView : 1);
 
@@ -140,47 +141,42 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
             ? 'cover'
             : 'contain';
 
-    return (
-        <ContentMediaBlock
-            // IF any item is set to cover then we want to make sure we're stretching the container
-            align={itemHasCover ? 'stretch' : 'center'}
-            variant="media"
-            cols={cols}
-        >
-            {media?.mediaType && media?.mediaType.length > 1 ? (
-                <Carousel
-                    carouselName={
-                        media?.carouselName ? media?.carouselName : 'content media carousel'
-                    }
-                    arrows={media?.carouselSettings?.arrows}
-                    dotNav={media?.carouselSettings?.dotNav}
-                    loop={media?.carouselSettings?.loop}
-                    autoplay={media?.carouselSettings?.autoplay}
-                    slidesPerView={perView(media?.carouselSettings?.slidesPerView?.mobile)}
-                    startIndex={
-                        media?.carouselSettings?.startIndex
-                            ? media?.carouselSettings?.startIndex - 1
-                            : 0
-                    } // minus 1 so cms users can start at 1
-                    breakpoints={{
-                        [`(min-width: ${rem(mq['tab'])}rem)`]: {
-                            slides: {
-                                origin: 'auto',
-                                perView: perView(media?.carouselSettings?.slidesPerView?.tablet),
-                                spacing: 16,
-                            },
+    let mediaBlock = null;
+
+    if (media?.mediaType && media?.mediaType.length > 1) {
+        mediaBlock = (
+            <Carousel
+                carouselName={media?.carouselName ? media?.carouselName : 'content media carousel'}
+                arrows={media?.carouselSettings?.arrows}
+                dotNav={media?.carouselSettings?.dotNav}
+                loop={media?.carouselSettings?.loop}
+                autoplay={media?.carouselSettings?.autoplay}
+                slidesPerView={perView(media?.carouselSettings?.slidesPerView?.mobile)}
+                startIndex={
+                    media?.carouselSettings?.startIndex
+                        ? media?.carouselSettings?.startIndex - 1
+                        : 0
+                } // minus 1 so cms users can start at 1
+                breakpoints={{
+                    [`(min-width: ${rem(mq['tab'])}rem)`]: {
+                        slides: {
+                            origin: 'auto',
+                            perView: perView(media?.carouselSettings?.slidesPerView?.tablet),
+                            spacing: 16,
                         },
-                        [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
-                            slides: {
-                                origin: 'auto',
-                                perView: perView(media?.carouselSettings?.slidesPerView?.desktop),
-                                spacing: 16,
-                            },
+                    },
+                    [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
+                        slides: {
+                            origin: 'auto',
+                            perView: perView(media?.carouselSettings?.slidesPerView?.desktop),
+                            spacing: 16,
                         },
-                    }}
-                >
-                    {media?.mediaType.map((media) =>
-                        media?.image ? (
+                    },
+                }}
+            >
+                {media?.mediaType.map((media) => {
+                    if (media?.image) {
+                        return (
                             <Image
                                 src={media?.image?.src}
                                 width={media?.image?.width}
@@ -189,10 +185,17 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
                                 className={`o-img--${media?.imageFit}`}
                                 key={media?.image?._key}
                             />
-                        ) : null
-                    )}
-                </Carousel>
-            ) : media?.mediaType && media?.mediaType[0]?.image ? (
+                        );
+                    } else if (media?._type === 'module.forms') {
+                        const moduleForm = media as formModule;
+                        mediaBlock = <Forms module={moduleForm} key={moduleForm._key} />;
+                    }
+                })}
+            </Carousel>
+        );
+    } else if (media?.mediaType && media?.mediaType.length === 1) {
+        if (media?.mediaType[0]?.image) {
+            mediaBlock = (
                 <Image
                     src={media?.mediaType[0]?.image?.src}
                     width={media?.mediaType[0]?.image?.width}
@@ -200,7 +203,22 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
                     alt={media?.mediaType[0]?.image?.alt}
                     className={`o-img--${media?.mediaType[0]?.imageFit}`}
                 />
-            ) : null}
+            );
+        } else if (media?.mediaType[0]?._type === 'module.forms') {
+            const moduleForm = media.mediaType[0] as formModule;
+
+            mediaBlock = <Forms module={moduleForm} key={moduleForm._key} />;
+        }
+    }
+
+    return (
+        <ContentMediaBlock
+            // IF any item is set to cover then we want to make sure we're stretching the container
+            align={itemHasCover ? 'stretch' : 'center'}
+            variant="media"
+            cols={cols}
+        >
+            {mediaBlock}
         </ContentMediaBlock>
     );
 };
