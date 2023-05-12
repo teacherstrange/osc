@@ -1,49 +1,75 @@
+import { Money } from '@shopify/hydrogen';
+import type { ProductOption } from '@shopify/hydrogen/storefront-api-types';
 import {
-    AccessibleIcon,
     Button,
     CardBody,
     CardBodyInner,
-    CardCallout,
     CardHeader,
     CardInner,
     CardPriceTag,
     CardTitle,
-    CardWishListButton,
-    Icon,
     CourseCard as OSCCourseCard,
-    Popover,
-    PopoverArrow,
-    PopoverClose,
-    PopoverContent,
-    PopoverTrigger,
 } from 'osc-ui';
-import { useState } from 'react';
 import { PATHS } from '~/constants';
 import type { courseCardModule } from '~/types/sanity';
 
 interface Props {
-    data: courseCardModule;
+    product: courseCardModule;
 }
 
-// TODO: Update this to use Shopify storekit helpers
 export const CourseCard = (props: Props) => {
-    const { data } = props;
-    const store = data?.reference?.store;
-    const [isActive, setIsActive] = useState(false);
+    const { product } = props;
+    const store = product?.reference?.store;
+    // const [isActive, setIsActive] = useState(false);
+
+    const title = store?.title ?? product.title;
+    const slug = store?.slug?.current ?? product.handle;
+
+    const price = store ? (
+        <span className="u-text-bold">£{<>{store?.priceRange?.minVariantPrice}</>}</span>
+    ) : (
+        <Money
+            withoutTrailingZeros
+            data={product.priceRange?.minVariantPrice}
+            as="span"
+            className="u-text-bold"
+        />
+    );
+
+    const Options = (props: { options: ProductOption[] }) => {
+        const { options } = props;
+
+        if (!options) return null;
+
+        return (
+            <>
+                {options
+                    .filter((option) => option?.name === 'Format')
+                    .map(
+                        (option) =>
+                            option?.values &&
+                            option?.values.map((value, index) => (
+                                <li key={value + index}>{value}</li>
+                            ))
+                    )}
+            </>
+        );
+    };
 
     return (
         <OSCCourseCard>
             <CardInner>
                 <CardHeader>
-                    <CardWishListButton
+                    {/* // TODO: Reactivate when wishlist is enabled */}
+                    {/* <CardWishListButton
                         label="Save for later"
                         className={isActive ? 'is-active' : ''}
                         onClick={() => setIsActive(!isActive)}
-                    />
+                    /> */}
 
-                    <CardTitle>{store?.title}</CardTitle>
+                    <CardTitle>{title}</CardTitle>
                     <CardTitle as="h3" subtitle isSmall>
-                        {/* // TODO: This data should come from the CMS */}
+                        {/* // TODO: This data should come from the SHOPIFY/CMS once packages/bundles are sorted */}
                         Single course
                     </CardTitle>
                 </CardHeader>
@@ -51,23 +77,18 @@ export const CourseCard = (props: Props) => {
                 <CardBody>
                     <CardBodyInner>
                         <h4>Course options available</h4>
-                        {store?.options ? (
-                            <ul>
-                                {store?.options
-                                    .filter((option) => option?._key === 'Format')
-                                    .map(
-                                        (option) =>
-                                            option?.values &&
-                                            option?.values.map((value) => (
-                                                <li key={value}>{value}</li>
-                                            ))
-                                    )}
-                            </ul>
-                        ) : null}
+
+                        <ul>
+                            {store?.options ? (
+                                <Options options={store?.options as ProductOption[]} />
+                            ) : (
+                                <Options options={product?.options} />
+                            )}
+                        </ul>
                     </CardBodyInner>
 
-                    <CardCallout>
-                        {/* // TODO: This data should come from the CMS */}
+                    {/* // TODO: This data should come from the CMS once packages/bundles are sorted? */}
+                    {/* <CardCallout>
                         <strong>Save up to £200</strong>
 
                         <Popover>
@@ -87,22 +108,15 @@ export const CourseCard = (props: Props) => {
                                 <p>Interior Design and Heritage Interior Design QLS Level 3 </p>
                             </PopoverContent>
                         </Popover>
-                    </CardCallout>
+                    </CardCallout> */}
 
                     <CardPriceTag>
                         <p>
-                            {/* // TODO: This data should come from the CMS */}
-                            <span className="u-text-bold">From £23</span>/month
-                        </p>
-                        <p>
-                            or from{' '}
-                            <span className="u-text-bold">
-                                <>£{store?.priceRange?.minVariantPrice} in full</>
-                            </span>
+                            From {price} <span className="u-text-bold">in full</span>
                         </p>
                     </CardPriceTag>
 
-                    <Button as="link" to={`/${PATHS.PRODUCTS}/${store?.slug?.current}`} isFull>
+                    <Button as="link" to={`/${PATHS.PRODUCTS}/${slug}`} isFull>
                         View course
                     </Button>
                 </CardBody>
