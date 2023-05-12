@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from '@portabletext/types';
+import type { Product as ProductType } from '@shopify/hydrogen/storefront-api-types';
 import type { Maybe, Spacing, Themes } from 'osc-ui/src/types';
 import type { ImgHTMLAttributes } from 'react';
 
@@ -155,7 +156,7 @@ export interface bioCardModule extends module {
     };
 }
 
-export interface courseCardModule extends module {
+export interface courseCardModule extends module, ProductType {
     reference?: {
         _createdAt: string;
         _id: string;
