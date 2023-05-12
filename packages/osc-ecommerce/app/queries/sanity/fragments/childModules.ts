@@ -7,6 +7,7 @@ import { MODULE_CONTENT_MEDIA } from './modules/contentMedia';
 import { MODULE_FORMS } from './modules/forms';
 import { MODULE_HERO } from './modules/hero';
 import { MODULE_IMAGES } from './modules/images';
+import { MODULE_RECOMMENDED_PRODUCTS } from './modules/recommendedProducts';
 import { MODULE_TEXT_GRID } from './modules/textGrid';
 import { MODULE_TRUSTPILOT } from './modules/trustpilot';
 import { MODULE_VIDEO } from './modules/video';
@@ -45,5 +46,8 @@ export const CHILD_MODULES = groq`
     },
     (_type == "module.forms") => {
       ${MODULE_FORMS}
+    },
+    (_type == "module.recommendedProducts") => {
+        ${MODULE_RECOMMENDED_PRODUCTS}
     }
 `;
