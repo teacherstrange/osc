@@ -57,6 +57,7 @@ import moduleImage from './objects/module/image';
 import moduleImageMobile from './objects/module/imageMobile';
 import moduleImageTablet from './objects/module/imageTablet';
 import moduleImages from './objects/module/images';
+import moduleRecommendedProducts from './objects/module/recommendedProducts';
 import moduleTabs from './objects/module/tabs';
 import moduleTextGrid from './objects/module/textGrid';
 import moduleTrustpilot from './objects/module/trustpilot';
@@ -152,6 +153,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     moduleImages,
     moduleImageMobile,
     moduleImageTablet,
+    moduleRecommendedProducts,
     moduleTabs,
     moduleTrustpilot,
     moduleCarousel,
