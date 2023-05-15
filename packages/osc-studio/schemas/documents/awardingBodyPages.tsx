@@ -5,7 +5,7 @@ import { validateSlug } from '../../utils/validateSlug';
 
 export default defineType({
     name: 'award',
-    title: 'Awarding Body Pages',
+    title: 'Awarding Bodies',
     type: 'document',
     icon: StarIcon,
     groups: [
