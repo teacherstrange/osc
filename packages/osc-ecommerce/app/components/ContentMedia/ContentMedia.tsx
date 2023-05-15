@@ -94,6 +94,14 @@ const Slide = (props: SlideProps) => {
     if (layoutGrid === '60/40') {
         gridCols = [7, 5];
     }
+    if (layoutGrid === '40/50') {
+        gridCols = [5, 6];
+    }
+    if (layoutGrid === '50/40') {
+        gridCols = [6, 5];
+    }
+
+    const itemHasForm = media?.mediaType.some((media) => media._type === 'module.forms');
 
     return (
         <ContentMedia>
@@ -105,6 +113,8 @@ const Slide = (props: SlideProps) => {
                 align={contentAlignment}
                 variant="content"
                 cols={layoutDirection === 'content-media' ? gridCols[0] : gridCols[1]}
+                // When form is present create more space between form and content
+                className={layoutGrid === '50/40' && itemHasForm ? 'o-grid__col--start-8@tab' : ''}
             >
                 {content?.body ? (
                     // Fixed in #691
@@ -120,7 +130,14 @@ const Slide = (props: SlideProps) => {
             </ContentMediaBlock>
 
             {layoutDirection === 'content-media' ? (
-                <ContentMediaBlockModule media={media} cols={gridCols[1]} />
+                <ContentMediaBlockModule
+                    media={media}
+                    cols={gridCols[1]}
+                    // When form is present create more space between form and content
+                    className={
+                        layoutGrid === '40/50' && itemHasForm ? 'o-grid__col--start-7@tab' : ''
+                    }
+                />
             ) : null}
         </ContentMedia>
     );
@@ -131,10 +148,11 @@ const Slide = (props: SlideProps) => {
  * -----------------------------------------------------------------------------------------------*/
 interface ContentMediaBlockProps extends Pick<contentMediaSlide, 'media'> {
     cols: Columns;
+    className?: string;
 }
 
 const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
-    const { media, cols } = props;
+    const { media, cols, className } = props;
 
     const itemHasCover =
         media?.mediaType && media?.mediaType.some((media) => media.imageFit === 'cover')
@@ -218,6 +236,7 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
             align={itemHasCover ? 'stretch' : 'center'}
             variant="media"
             cols={cols}
+            className={className}
         >
             {mediaBlock}
         </ContentMediaBlock>
