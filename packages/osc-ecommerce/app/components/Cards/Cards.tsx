@@ -18,6 +18,8 @@ import { SimpleCard } from './SimpleCard';
 const Card = (props: { card: TypesOfCard }) => {
     const { card } = props;
 
+    if (!card) return;
+
     switch (card._type) {
         case 'card.bio':
             return <BioCard data={card as bioCardModule} key={card._key} />;
