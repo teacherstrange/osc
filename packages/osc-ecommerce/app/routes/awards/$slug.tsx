@@ -8,7 +8,7 @@ import { getComponentStyles } from '~/components/Module';
 import { PageContent } from '~/components/PageContent';
 import { PreviewBanner } from '~/components/PreviewBanner';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
-import { AWARDING_BODIES_QUERY } from '~/queries/sanity/awardingbodies';
+import { AWARD_QUERY } from '~/queries/sanity/award';
 import type { SanityPage } from '~/types/sanity';
 import { getHubspotForms } from '~/utils/hubspot.helpers';
 import { buildCanonicalUrl } from '~/utils/metaTags/buildCanonicalUrl';
@@ -27,7 +27,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const data = await getPageData({
         request,
         params,
-        query: AWARDING_BODIES_QUERY,
+        query: AWARD_QUERY,
     });
 
     if (!data?.page) {
@@ -43,7 +43,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const { page: awardingBody, isPreview }: PageData = data;
 
     const hubspotFormData = await getHubspotForms(awardingBody);
-
     const canonicalUrl = buildCanonicalUrl({
         canonical: awardingBody?.seo?.canonicalUrl,
         request,
@@ -54,7 +53,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         isPreview,
         canonicalUrl,
         hubspotFormData,
-        query: isPreview ? AWARDING_BODIES_QUERY : null,
+        query: isPreview ? AWARD_QUERY : null,
         params: isPreview ? params : null,
     });
 };
