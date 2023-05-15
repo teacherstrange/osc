@@ -188,8 +188,9 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
                         );
                     } else if (media?._type === 'module.forms') {
                         const moduleForm = media as formModule;
-                        mediaBlock = <Forms module={moduleForm} key={moduleForm._key} />;
+                        return <Forms module={moduleForm} key={moduleForm._key} />;
                     }
+                    return null;
                 })}
             </Carousel>
         );
