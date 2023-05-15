@@ -53,6 +53,9 @@ export function resolveProductionUrl(doc: SanityDocumentWithSlug) {
         case 'product':
             url.pathname = `${PATHS.PRODUCTS}/${slug}`;
             break;
+        case 'award':
+            url.pathname = `${PATHS.PRODUCTS}/${slug}`;
+            break;
 
         default:
             url.search = `?${param}=${slug}`;

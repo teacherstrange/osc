@@ -62,4 +62,5 @@ export const PATHS = {
     BLOG: 'blog',
     COLLECTIONS: 'collections',
     PRODUCTS: 'courses',
+    AWARDS: 'awards',
 };
