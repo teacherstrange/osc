@@ -146,7 +146,7 @@ export const getHubspotForms = async (page: SanityPage) => {
     page.modules.forEach((module) => {
         const mod = module as contentMediaModule;
         if (module._type === 'module.contentMedia') {
-            mod.slides[0].media.mediaType.forEach((med) => {
+            mod.slides[0]?.media?.mediaType?.forEach((med) => {
                 if (med._type === 'module.forms') {
                     const module = med as formModule;
                     forms.push(module);
