@@ -1,0 +1,161 @@
+#
+# This workflow takes care of running all tests and linting across the monorepo
+#
+name: Tests CI
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review, closed] 
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  lint:
+    name: 🔬 ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🔬 Lint
+        run: npm run lint
+
+  typecheck:
+      name: ʦ TypeScript
+      runs-on: ubuntu-latest
+      steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Fetch latest changes
+        run: git fetch --no-tags --prune --depth=5 origin main
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🔎 Type check
+        run: npx nx affected --base=origin/main --target=typecheck
+
+  vitest:
+    name: ⚡ Vitest
+    env:
+      VITE_ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+      VITE_ALGOLIA_ID_SEARCH_ONLY_API_KEY: ${{ secrets.ALGOLIA_ID_SEARCH_ONLY_API_KEY }}
+      VITE_ALGOLIA_PRIMARY_INDEX: ${{ secrets.ALGOLIA_PRIMARY_INDEX }}
+      VITE_ALGOLIA_PRIMARY_INDEX_GROUPED: ${{ secrets.ALGOLIA_PRIMARY_INDEX_GROUPED }}
+      VITE_ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS: ${{ secrets.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS }}
+      SANITY_STUDIO_API_DATASET: ${{secrets.SANITY_STUDIO_API_DATASET}}
+      SANITY_STUDIO_API_PROJECT_ID: ${{secrets.SANITY_STUDIO_API_PROJECT_ID}}
+      SANITY_STUDIO_API_TOKEN: ${{secrets.SANITY_STUDIO_API_TOKEN}}
+      HUBSPOT_ACCESS_TOKEN: ${{secrets.HUBSPOT_ACCESS_TOKEN}}
+      HUBSPOT_PORTAL_ID: ${{secrets.HUBSPOT_PORTAL_ID}}
+      PUBLIC_STOREFRONT_API_TOKEN: ${{secrets.PUBLIC_STOREFRONT_API_TOKEN}}
+      PRIVATE_STOREFRONT_API_TOKEN: ${{secrets.PRIVATE_STOREFRONT_API_TOKEN}}
+      PUBLIC_STOREFRONT_API_VERSION: ${{secrets.PUBLIC_STOREFRONT_API_VERSION}}
+      PUBLIC_STORE_DOMAIN: ${{secrets.PUBLIC_STORE_DOMAIN}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Fetch latest changes
+        run: git fetch --no-tags --prune --depth=5 origin main
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: ⚡ Run vitest
+        run: npx nx affected --base=origin/main --target=test
+
+  playwright:
+    name: 🎭 Playwright Tests
+    env:
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+      ALGOLIA_ID_SEARCH_ONLY_API_KEY: ${{ secrets.ALGOLIA_ID_SEARCH_ONLY_API_KEY }}
+      ALGOLIA_PRIMARY_INDEX: ${{ secrets.ALGOLIA_PRIMARY_INDEX }}
+      ALGOLIA_PRIMARY_INDEX_GROUPED: ${{ secrets.ALGOLIA_PRIMARY_INDEX_GROUPED }}
+      ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS: ${{ secrets.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS }}
+      VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
+      VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+      SANITY_STUDIO_API_DATASET: ${{secrets.SANITY_STUDIO_API_DATASET}}
+      SANITY_STUDIO_API_PROJECT_ID: ${{secrets.SANITY_STUDIO_API_PROJECT_ID}}
+      SANITY_STUDIO_API_TOKEN: ${{secrets.SANITY_STUDIO_API_TOKEN}}
+      PUBLIC_STOREFRONT_API_TOKEN: ${{secrets.PUBLIC_STOREFRONT_API_TOKEN}}
+      PRIVATE_STOREFRONT_API_TOKEN: ${{secrets.PRIVATE_STOREFRONT_API_TOKEN}}
+      PUBLIC_STOREFRONT_API_VERSION: ${{secrets.PUBLIC_STOREFRONT_API_VERSION}}
+      PUBLIC_STORE_DOMAIN: ${{secrets.PUBLIC_STORE_DOMAIN}}
+      PLANETSCALE_PRISMA_DATABASE_URL: ${{ secrets.PLANETSCALE_PRISMA_DATABASE_URL_PLAYWRIGHT }}
+      SESSION_SECRET: super-duper-secret
+      HUBSPOT_ACCESS_TOKEN: ${{secrets.HUBSPOT_ACCESS_TOKEN}}
+      HUBSPOT_PORTAL_ID: ${{secrets.HUBSPOT_PORTAL_ID}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Fetch latest changes
+        run: git fetch --no-tags --prune --depth=5 origin main
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Node info
+        run: node -v
+
+      - name: Run Playwright tests
+        run: npx nx affected --base=origin/main --target=test:e2e
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
