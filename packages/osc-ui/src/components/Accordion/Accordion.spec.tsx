@@ -117,6 +117,16 @@ test('changes the icon to a chevron', () => {
 });
 
 test('renders the correct variant classname', () => {
+    const classes = [
+        'c-accordion',
+        'c-accordion__icon',
+        'c-accordion__header',
+        'c-accordion__trigger',
+        'c-accordion__item',
+        'c-accordion__content',
+        'c-accordion__text',
+    ];
+
     const { rerender } = render(
         <Accordion type="single" variant="secondary">
             <AccordionItem value="O">
@@ -131,8 +141,9 @@ test('renders the correct variant classname', () => {
         </Accordion>
     );
 
-    const accordion = document.querySelector('.c-accordion');
-    expect(accordion).toHaveClass('c-accordion--secondary');
+    classes.forEach((className) => {
+        expect(document.querySelector(`.${className}`)).toHaveClass(`${className}--secondary`);
+    });
 
     rerender(
         <Accordion type="single" variant="tertiary">
@@ -148,5 +159,7 @@ test('renders the correct variant classname', () => {
         </Accordion>
     );
 
-    expect(accordion).toHaveClass('c-accordion--tertiary');
+    classes.forEach((className) => {
+        expect(document.querySelector(`.${className}`)).toHaveClass(`${className}--tertiary`);
+    });
 });

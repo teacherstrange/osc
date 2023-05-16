@@ -3,11 +3,11 @@ import type {
     AccordionHeaderProps,
     AccordionItemProps,
     AccordionMultipleProps,
-    AccordionSingleProps
+    AccordionSingleProps,
 } from '@radix-ui/react-accordion';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import type { ComponentPropsWithoutRef, ElementRef, FC, RefAttributes } from 'react';
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { createContext, forwardRef, useContext, useEffect, useRef } from 'react';
 import { useFontSize } from '../../hooks/useFontSize';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -18,21 +18,27 @@ export type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) & {
     variant?: 'primary' | 'secondary' | 'tertiary';
 } & RefAttributes<HTMLDivElement>;
 
+const AccordionContext = createContext<{ variant: AccordionProps['variant'] } | null>(null);
+
 export const Accordion: FC<AccordionProps> = (props: AccordionProps) => {
-    const { children, className, variant } = props;
+    const { children, className, variant = 'primary' } = props;
     const modifierClass = useModifier('c-accordion', variant);
     const classes = classNames('c-accordion', className, modifierClass);
 
     return (
-        <AccordionPrimitive.Root className={classes} {...props}>
-            {children}
-        </AccordionPrimitive.Root>
+        <AccordionContext.Provider value={{ variant }}>
+            <AccordionPrimitive.Root className={classes} {...props}>
+                {children}
+            </AccordionPrimitive.Root>
+        </AccordionContext.Provider>
     );
 };
 
 export const AccordionItem: FC<AccordionItemProps> = (props: AccordionItemProps) => {
     const { children, className } = props;
-    const classes = classNames('c-accordion__item', className);
+    const { variant } = useAccordionContext();
+    const modifierClass = useModifier('c-accordion__item', variant);
+    const classes = classNames('c-accordion__item', modifierClass, className);
 
     return (
         <AccordionPrimitive.Item className={classes} {...props}>
@@ -47,6 +53,10 @@ interface AccordionIconProps {
 
 const AccordionIcon = (props: AccordionIconProps) => {
     const { icon = 'plusMinus' } = props;
+    const { variant } = useAccordionContext();
+    const modifierClass = useModifier('c-accordion__icon', variant);
+    const classes = classNames('c-accordion__icon', modifierClass);
+
     // aria-hidden="true" hides the SVG from screen readers and other assistive technologies
     // focusable="false" addresses the issue that Internet Explorer/Edge make SVGs focusable by default
 
@@ -54,7 +64,7 @@ const AccordionIcon = (props: AccordionIconProps) => {
         return (
             <svg
                 viewBox="0 0 20 22"
-                className="c-accordion__icon c-accordion__icon--chevron"
+                className={`${classes} c-accordion__icon--chevron`}
                 aria-hidden="true"
                 focusable="false"
             >
@@ -66,7 +76,7 @@ const AccordionIcon = (props: AccordionIconProps) => {
     return (
         <svg
             viewBox="0 0 10 10"
-            className="c-accordion__icon c-accordion__icon--plusminus"
+            className={`${classes} c-accordion__icon--plusminus`}
             aria-hidden="true"
             focusable="false"
         >
@@ -93,13 +103,17 @@ export const AccordionHeader: FC<AccordionHeadingProps> = forwardRef<
 >((props: AccordionHeadingProps, forwardedRef) => {
     const { as: Component, asChild, children, className, icon } = props;
     const fontSize = useFontSize('xl');
-    const classes = classNames('c-accordion__header', fontSize, className);
+    const { variant } = useAccordionContext();
+    const modifierClass = useModifier('c-accordion__header', variant);
+    const classes = classNames('c-accordion__header', fontSize, modifierClass, className);
 
     if (asChild && Component) {
         return (
             <AccordionPrimitive.Header asChild className={classes} {...props} ref={forwardedRef}>
                 <Component>
-                    <AccordionPrimitive.Trigger className="c-accordion__trigger">
+                    <AccordionPrimitive.Trigger
+                        className={`c-accordion__trigger c-accordion__trigger--${variant}`}
+                    >
                         <span>{children}</span>
                         <AccordionIcon icon={icon} />
                     </AccordionPrimitive.Trigger>
@@ -110,7 +124,9 @@ export const AccordionHeader: FC<AccordionHeadingProps> = forwardRef<
 
     return (
         <AccordionPrimitive.Header className={classes} {...props}>
-            <AccordionPrimitive.Trigger className="c-accordion__trigger">
+            <AccordionPrimitive.Trigger
+                className={`c-accordion__trigger c-accordion__trigger--${variant}`}
+            >
                 <span>{children}</span>
                 <AccordionIcon icon={icon} />
             </AccordionPrimitive.Trigger>
@@ -122,7 +138,9 @@ AccordionHeader.displayName = 'AccordionHeader';
 export const AccordionPanel: FC<AccordionContentProps> = (props: AccordionContentProps) => {
     const ref = useRef(null);
     const { children, className } = props;
-    const classes = classNames('c-accordion__content', className);
+    const { variant } = useAccordionContext();
+    const modifierClass = useModifier('c-accordion__content', variant);
+    const classes = classNames('c-accordion__content', modifierClass, className);
 
     useEffect(() => {
         // Because we're using the `forceMount` prop on the AccordionPrimitive.Content
@@ -162,7 +180,21 @@ export const AccordionPanel: FC<AccordionContentProps> = (props: AccordionConten
     return (
         // Use `forceMount` to keep the content in the DOM and prevent it from being unmounted when closed.
         <AccordionPrimitive.Content className={classes} {...props} forceMount ref={ref}>
-            <div className="c-accordion__text">{children}</div>
+            <div className={`c-accordion__text c-accordion__text--${variant}`}>{children}</div>
         </AccordionPrimitive.Content>
     );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * useAccordionContext
+ * -----------------------------------------------------------------------------------------------*/
+const useAccordionContext = () => {
+    const context = useContext(AccordionContext);
+
+    // if `undefined`, throw an error
+    if (context === undefined) {
+        throw new Error('useDrawerContext was used outside of its Provider');
+    }
+
+    return context;
 };
