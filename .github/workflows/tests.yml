@@ -47,7 +47,7 @@ jobs:
           fetch-depth: 0
 
       - name: Fetch latest changes
-        run: git fetch --no-tags --prune --depth=5 origin main
+        uses: nrwl/nx-set-shas@v3
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
@@ -89,7 +89,7 @@ jobs:
           fetch-depth: 0
 
       - name: Fetch latest changes
-        run: git fetch --no-tags --prune --depth=5 origin main
+        uses: nrwl/nx-set-shas@v3
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
@@ -135,7 +135,7 @@ jobs:
           fetch-depth: 0
 
       - name: Fetch latest changes
-        run: git fetch --no-tags --prune --depth=5 origin main
+        uses: nrwl/nx-set-shas@v3
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
