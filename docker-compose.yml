@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  osc-academic-hub:
+    build:
+      context: .
+      dockerfile: ./packages/osc-academic-hub/Dockerfile
+    image: 'osc-academic-hub'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+  osc-ecommerce:
+    build:
+      context: .
+      dockerfile: ./packages/osc-ecommerce/Dockerfile
+    image: 'osc-ecommerce'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+  osc-studio:
+    build:
+      context: .
+      dockerfile: ./packages/osc-studio/Dockerfile
+    image: 'osc-studio'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+
+volumes:
+  mono-node-modules: null
