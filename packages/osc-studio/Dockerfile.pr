@@ -1,0 +1,35 @@
+FROM node:17-alpine3.12
+
+WORKDIR /app
+
+RUN apk update
+
+# Install node-gyp dependencies
+RUN apk add --no-cache g++ make py3-pip
+
+# Add main package.json and app dependencies here
+ADD package.json package-lock.json ./
+ADD packages/osc-studio/package.json /app/packages/osc-studio/
+
+# Install all node_modules, including dev dependencies
+RUN npm install
+
+# Add the rest of the files
+ADD . .
+
+ARG SANITY_STUDIO_API_PROJECT_ID
+ARG SANITY_STUDIO_API_TOKEN
+ENV SANITY_STUDIO_API_DATASET=staging
+ENV SANITY_STUDIO_API_PROJECT_ID=${SANITY_STUDIO_API_PROJECT_ID}
+ENV SANITY_STUDIO_API_TOKEN=${SANITY_STUDIO_API_TOKEN}
+
+RUN npm run build:osc-studio
+
+ENV PORT=8080
+ENV NODE_ENV=production
+
+# Run the app
+EXPOSE 3306
+EXPOSE 8080
+
+CMD ["npx", "nx", "run", "osc-studio:start"]
