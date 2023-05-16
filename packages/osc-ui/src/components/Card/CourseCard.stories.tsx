@@ -286,6 +286,7 @@ const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
+    hasShadow: true,
     style: { maxWidth: '400px' },
 };
 export const HasCallout = HasCalloutTemplate.bind({});
@@ -303,6 +304,7 @@ export const IsFullWidth = IsFullWidthTemplate.bind({});
 IsFullWidth.args = {
     ...Primary.args,
     isFull: true,
+    hasShadow: false,
     style: {
         maxWidth: '100%',
     },

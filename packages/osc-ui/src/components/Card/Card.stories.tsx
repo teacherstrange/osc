@@ -161,6 +161,7 @@ const HasBlockLinkTemplate: Story<CardProps> = ({ ...args }) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
+    hasShadow: true,
     style: { maxWidth: '400px' },
 };
 
@@ -192,6 +193,7 @@ export const BlockLink = HasBlockLinkTemplate.bind({});
 BlockLink.args = {
     ...Primary.args,
     blockLink: true,
+    hasShadow: false,
 };
 BlockLink.parameters = {
     docs: {

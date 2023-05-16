@@ -30,15 +30,27 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
      * @default false
      */
     blockLink?: boolean;
+    /**
+     * Whether the card should have a shadow.
+     * @default false
+     */
+    hasShadow?: boolean;
 }
 const CardContext = createContext(null);
 
 export const Card = (props: CardProps) => {
-    const { blockLink, children, className, ...attr } = props;
+    const { blockLink, children, className, hasShadow = false, ...attr } = props;
     const [cardInnerHeight, setCardInnerHeight] = useState<number>(null);
     const cardRef = useRef<HTMLDivElement>(null);
 
-    const classes = classNames('c-card', blockLink && 'is-block-link', className);
+    const shadowModifier = useModifier('c-card', 'shadow');
+
+    const classes = classNames(
+        'c-card',
+        blockLink && 'is-block-link',
+        hasShadow ? shadowModifier : '',
+        className
+    );
 
     const context = {
         cardInnerHeight,
