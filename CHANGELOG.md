@@ -1,3 +1,21 @@
+## [0.88.0](https://github.com/Open-Study-College/osc/compare/v0.87.0...v0.88.0) (2023-05-16)
+
+
+### ✨ Features
+
+* add Forms component into ContentMedia ([2ec9f6a](https://github.com/Open-Study-College/osc/commit/2ec9f6aea79945e900ccd17193dfa2460930c864))
+
+
+### ♻️ Refactors
+
+* add early return if card does not exist ([1db3007](https://github.com/Open-Study-College/osc/commit/1db30071a804ecb5e13a5694d8cd252d81a579d5))
+* add new layout options to ContentMedia in Sanity ([afc23eb](https://github.com/Open-Study-College/osc/commit/afc23eb87eceeb980c7aef00176fbe7871503f86))
+* add o-container to forms conditionally ([00ea814](https://github.com/Open-Study-College/osc/commit/00ea814341a6b3deb92887307548bc6ba631aea6))
+* add optional chaining ([10c9430](https://github.com/Open-Study-College/osc/commit/10c943072eb36b3fdf63c4627b976bbedb722e5e))
+* correct returns from map function ([43425e9](https://github.com/Open-Study-College/osc/commit/43425e9ad4b01c7f10723a2650ea9af053dc287f))
+* create custom spacing when there is a form ([ecd22db](https://github.com/Open-Study-College/osc/commit/ecd22db26d3999777426090c590cfbed9e3790e6))
+* update groq query to split out formName and formId ([e1fcc76](https://github.com/Open-Study-College/osc/commit/e1fcc76c48e0863a43e3d4ba7aed25797352a59d))
+
 ## [0.87.0](https://github.com/Open-Study-College/osc/compare/v0.86.4...v0.87.0) (2023-05-16)
 
 
@@ -52,13 +70,4 @@
 ### 🧪 Tests
 
 * **accordion:** update test to check for all variants ([2bc073f](https://github.com/Open-Study-College/osc/commit/2bc073fc87492dffd43cedd218207946cf0a8f4b))
-
-## [0.86.1](https://github.com/Open-Study-College/osc/compare/v0.86.0...v0.86.1) (2023-05-05)
-
-
-### 🐛 Bugs
-
-* **product page:** moves closing div into correct place ([7b66481](https://github.com/Open-Study-College/osc/commit/7b6648161f632b4a6527eac69e38eba08cc5430f))
-* **product page:** remove useParams hook and replace with params from loader ([8e07693](https://github.com/Open-Study-College/osc/commit/8e076933086aaf690cb70c14648ed6dfbce32a80))
-* **product page:** restore missing imports ([fe014c6](https://github.com/Open-Study-College/osc/commit/fe014c6d7db226bc3ee13a93126eb857ef27b04a))
 
