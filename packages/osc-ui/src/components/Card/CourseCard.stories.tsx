@@ -62,7 +62,7 @@ const Template: Story<CardProps> = ({ ...args }) => {
                         onClick={() => setIsActive(!isActive)}
                     />
 
-                    <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
+                    <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
                     <CardTitle as="h3" subtitle isSmall>
                         Single course
                     </CardTitle>
@@ -107,7 +107,7 @@ const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => {
                         onClick={() => setIsActive(!isActive)}
                     />
 
-                    <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
+                    <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
                     <CardTitle as="h3" subtitle isSmall>
                         Single course
                     </CardTitle>
@@ -177,7 +177,7 @@ const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => {
                             or from <span className="u-text-bold">£849 in full</span>
                         </Price>
                     </CardPriceTag>
-                    <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
+                    <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
                     <CardTitle as="h3" subtitle isSmall>
                         Single course
                     </CardTitle>
@@ -245,7 +245,7 @@ const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
     <CourseCard {...args}>
         <CardInner>
             <CardHeader>
-                <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
+                <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
                 <CardTitle as="h3" subtitle isSmall>
                     Single course
                 </CardTitle>

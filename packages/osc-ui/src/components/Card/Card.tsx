@@ -156,6 +156,10 @@ export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
      */
     as?: Headings;
     /**
+     * Sets the underline style of the title
+     */
+    isUnderlined?: boolean;
+    /**
      * Set the style of the heading element
      * @default false
      */
@@ -168,10 +172,25 @@ export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
 }
 
 export const CardTitle = (props: CardTitleProps) => {
-    const { as: Component = 'h2', children, className, isSmall, subtitle, ...attr } = props;
+    const {
+        as: Component = 'h2',
+        children,
+        className,
+        isSmall,
+        isUnderlined,
+        subtitle,
+        ...attr
+    } = props;
 
     const elementClass = subtitle ? 'c-card__subttl' : 'c-card__ttl';
-    const classes = classNames(elementClass, isSmall && 'is-small', className);
+    const underlined = useModifier('c-card__ttl', 'underlined');
+
+    const classes = classNames(
+        elementClass,
+        isSmall && 'is-small',
+        isUnderlined ? underlined : '',
+        className
+    );
 
     return (
         <Component className={classes} {...attr}>
