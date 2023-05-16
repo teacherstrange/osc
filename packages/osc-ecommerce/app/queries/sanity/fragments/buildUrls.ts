@@ -19,5 +19,8 @@ export const buildUrls = groq`
     },
     (_type == "product") => {
         "slug": "/${PATHS.PRODUCTS}/" + store.slug.current,
+    },
+    (_type == "award") => {
+        "slug": "/${PATHS.AWARDS}/" + slug.current,
     }
 `;

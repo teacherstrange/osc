@@ -26,5 +26,9 @@ export const getPageType = (location: Location) => {
         return PATHS.BLOG;
     }
 
+    if (pathname.includes(PATHS.AWARDS)) {
+        return PATHS.AWARDS;
+    }
+
     return undefined;
 };

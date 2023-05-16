@@ -4,8 +4,8 @@ import { defineField, defineType } from 'sanity';
 import { validateSlug } from '../../utils/validateSlug';
 
 export default defineType({
-    name: 'awardingBodyPages',
-    title: 'Awarding Body Pages',
+    name: 'award',
+    title: 'Awarding Bodies',
     type: 'document',
     icon: StarIcon,
     groups: [

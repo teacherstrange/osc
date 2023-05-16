@@ -29,7 +29,7 @@ export const previewConfig: PreviewConfig = {
     // It's 3000 by default, increase or decrease as needed and use `includeTypes` to further optimize the performance
     documentLimit: 3000,
     // Optional allow list filter for document types. You can use this to limit the amount of documents by declaring the types you want to sync. Note that since you're fetching a subset of your dataset, queries that works against your Content Lake might not work against the local groq-store.
-    includeTypes: ['home', 'blog', 'collection', 'page', 'post', 'product'],
+    includeTypes: ['home', 'blog', 'collection', 'page', 'post', 'product', 'award'],
     // By default documents that are "draft" are overlayed with their published counterparts.
     // This lets you simulate what your app will look like after the drafts are published.
     // If your queries are already equipped to handle drafts vs published
