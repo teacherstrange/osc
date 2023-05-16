@@ -22,38 +22,40 @@ export const CollectionCard = (props: Props) => {
     const store = data?.reference?.store;
 
     if (data?.variant === 'sm') {
-        <OSCCollectionCard size={data?.variant}>
-            <CardImage>
-                {/* // TODO: This data should come from the CMS */}
-                <Image
-                    src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1674577946/cat-img_rwumo5.png"
-                    alt=""
-                    width={610}
-                    height={557}
-                />
-            </CardImage>
-            <CardInner>
-                <CardHeader>
-                    <CardTitle>{store?.title}</CardTitle>
-                </CardHeader>
-
-                <CardBody>
+        return (
+            <OSCCollectionCard size={data?.variant}>
+                <CardImage>
                     {/* // TODO: This data should come from the CMS */}
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra duis
-                        vehicula justo, sagittis quam nam nisi.
-                    </p>
-                </CardBody>
+                    <Image
+                        src="https://res.cloudinary.com/de2iu8gkv/image/upload/v1674577946/cat-img_rwumo5.png"
+                        alt=""
+                        width={610}
+                        height={557}
+                    />
+                </CardImage>
+                <CardInner>
+                    <CardHeader>
+                        <CardTitle>{store?.title}</CardTitle>
+                    </CardHeader>
 
-                <CardFooter>
-                    <span className="u-text-bold">23 courses</span>
-                    <Button variant="quaternary">
-                        Find our more
-                        <Icon id="chevron-right" />
-                    </Button>
-                </CardFooter>
-            </CardInner>
-        </OSCCollectionCard>;
+                    <CardBody>
+                        {/* // TODO: This data should come from the CMS */}
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra duis
+                            vehicula justo, sagittis quam nam nisi.
+                        </p>
+                    </CardBody>
+
+                    <CardFooter>
+                        <span className="u-text-bold">23 courses</span>
+                        <Button variant="quaternary">
+                            Find our more
+                            <Icon id="chevron-right" />
+                        </Button>
+                    </CardFooter>
+                </CardInner>
+            </OSCCollectionCard>
+        );
     }
 
     return (

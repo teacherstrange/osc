@@ -218,7 +218,13 @@ export default function Module(props: Props) {
             const moduleContent = module as contentModule;
 
             return moduleContent.body ? (
-                <article className={`o-container ${isFlush ? 'o-container--flush' : ''}`}>
+                <article
+                    className={`o-container ${
+                        isFlush || moduleContent.fullWidth
+                            ? 'o-container--flush o-container--full'
+                            : ''
+                    }`}
+                >
                     <Content
                         align={moduleContent.horizontalAlignment}
                         backgroundColor={
