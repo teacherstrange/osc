@@ -1,3 +1,17 @@
+## [0.86.4](https://github.com/Open-Study-College/osc/compare/v0.86.3...v0.86.4) (2023-05-16)
+
+
+### 🐛 Bugs
+
+* add return statement ([fca68f9](https://github.com/Open-Study-College/osc/commit/fca68f99c86e3fda30dcaa70a187c856e445377c))
+* return true from validation when contentBody is undefined ([2b25b29](https://github.com/Open-Study-College/osc/commit/2b25b29251c774f42fc4c2fca3055c1d654764f0))
+
+
+### ♻️ Refactors
+
+* add 'o-container--full' class ([8d8323e](https://github.com/Open-Study-College/osc/commit/8d8323e5f07bf71bd229edd10d38fe717d48cfc6))
+* set "flush" class when fullWidth is set to true ([031d36a](https://github.com/Open-Study-College/osc/commit/031d36a15c4ba876b41897f56825aa97f7c0cb9c))
+
 ## [0.86.3](https://github.com/Open-Study-College/osc/compare/v0.86.2...v0.86.3) (2023-05-16)
 
 
@@ -65,34 +79,4 @@
 * **product form:** add props to set the direction of the form border ([299e108](https://github.com/Open-Study-College/osc/commit/299e1083e180ed1ecf2c91e5a3c4f54dd3e19648))
 * **product form:** move the radio group into it's own component and add dynamic key ([b89c0a0](https://github.com/Open-Study-College/osc/commit/b89c0a012036d653e6c1bac00da5bc9166b4b775))
 * **product form:** remove props and extract product data from useLoader ([1868569](https://github.com/Open-Study-College/osc/commit/1868569aa42318907d86e05a71c362431fb7eb25))
-
-## [0.85.0](https://github.com/Open-Study-College/osc/compare/v0.84.0...v0.85.0) (2023-05-04)
-
-
-### 🧪 Tests
-
-* **img:** add test to check for css transform classes ([784c417](https://github.com/Open-Study-College/osc/commit/784c4179e7d4b8aae14080b09a4a313a46f3f53e))
-
-
-### ✨ Features
-
-* **img:** adds css transform props/modifiers ([9206a3e](https://github.com/Open-Study-College/osc/commit/9206a3e78cbd4efe609e3106c753c57990b8b9b1))
-* **img:** adds fit prop to position image fit ([fb75049](https://github.com/Open-Study-College/osc/commit/fb75049ffd8cc8a4bc0bd4b170abafd48ab70586))
-* **img:** apply image mask to image when overlay is selected ([e62e3f9](https://github.com/Open-Study-College/osc/commit/e62e3f90c2e5f62a86efb29a9222f5b03c814635))
-* **img:** update storybook ([4ae397b](https://github.com/Open-Study-College/osc/commit/4ae397b26889025cd66f836eca45771841a15efd))
-
-
-### ♻️ Refactors
-
-* **callout banner:** adjust o-img selector ([09d1c15](https://github.com/Open-Study-College/osc/commit/09d1c152c0e38830abf29390e104d01050443e54))
-* **cards:** re-do card image selectors ([5619de2](https://github.com/Open-Study-College/osc/commit/5619de20e6e21550c16a341467403e000bba7577))
-* **cards:** update img references in cards scss ([41f2c2f](https://github.com/Open-Study-College/osc/commit/41f2c2fd6a98c5c4bf57a0361311d764a71aec5a))
-* **hero:** adjust o-img selector ([eb66e02](https://github.com/Open-Study-College/osc/commit/eb66e0289d4e16d990252558d5c7ad36ee7525b4))
-* **video:** adjust o-img selector ([5ec32f8](https://github.com/Open-Study-College/osc/commit/5ec32f81db068cc5346d1a314e94b027e46a0e83))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* remove unused variable ([bbd3fda](https://github.com/Open-Study-College/osc/commit/bbd3fdaef3d6058743395f52bdfd378b8671db0a))
-* replace remix-oxygen imports with remix-node ([2d16cfd](https://github.com/Open-Study-College/osc/commit/2d16cfdb85e4dcc422eb931f3b9f6fbfe22d56fa))
 
