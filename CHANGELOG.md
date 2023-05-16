@@ -1,3 +1,21 @@
+## [0.86.2](https://github.com/Open-Study-College/osc/compare/v0.86.1...v0.86.2) (2023-05-16)
+
+
+### ♻️ Refactors
+
+* **accordion:** adds accordionContext to allow us to pass variant prop through ([72aa68e](https://github.com/Open-Study-College/osc/commit/72aa68e4e465d80c0f9e5a540590bcc09da5e260))
+* **accordion:** update styles so every element has a variant modifier ([b4928cc](https://github.com/Open-Study-College/osc/commit/b4928cc20573abf7dad7980ebf8cf16e2fad1405))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **accordion story:** update storybook to showcase nested primary ([ad891ec](https://github.com/Open-Study-College/osc/commit/ad891ec7a629d11f81c5e197b1bf76164f02f46e))
+
+
+### 🧪 Tests
+
+* **accordion:** update test to check for all variants ([2bc073f](https://github.com/Open-Study-College/osc/commit/2bc073fc87492dffd43cedd218207946cf0a8f4b))
+
 ## [0.86.1](https://github.com/Open-Study-College/osc/compare/v0.86.0...v0.86.1) (2023-05-05)
 
 
@@ -115,23 +133,4 @@
 
 * **ecommerce:** declare env as a global ([760724a](https://github.com/Open-Study-College/osc/commit/760724a202f2f53cf0ff5ae2abd180088d03e575))
 * **ecommerce:** pass page content to preview ([cccc2b7](https://github.com/Open-Study-College/osc/commit/cccc2b744dec5be5b88207e29a169969867ff057))
-
-## [0.83.0](https://github.com/Open-Study-College/osc/compare/v0.82.0...v0.83.0) (2023-04-28)
-
-
-### 🐛 Bugs
-
-* **drawer:** fixes missin input props in story ([a931c07](https://github.com/Open-Study-College/osc/commit/a931c07747745a164056ea82f96ef6b08569213a))
-
-
-### ✨ Features
-
-* add awardingBodyPages into Sanity ([49cbf32](https://github.com/Open-Study-College/osc/commit/49cbf32aee16094044d7b4992935a2af88196a27))
-* **drawer:** adds isRotated prop to drawer trigger ([81daea6](https://github.com/Open-Study-College/osc/commit/81daea61cc260a8531d8e8e7ba0a6cf8aa4fd24e))
-
-
-### ♻️ Refactors
-
-* add seo fields ([627f828](https://github.com/Open-Study-College/osc/commit/627f8281a9352d9f7061fd84efdf344653f0dee5))
-* **drawer:** refactors styles by moving rotated styles into the --roated modifier ([4d84826](https://github.com/Open-Study-College/osc/commit/4d84826e2d460d737ade3a21653c6dd7bcf38525))
 
