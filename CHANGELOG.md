@@ -1,3 +1,10 @@
+## [0.86.3](https://github.com/Open-Study-College/osc/compare/v0.86.2...v0.86.3) (2023-05-16)
+
+
+### 🐛 Bugs
+
+* add ternary to ensure textToCopy always has text ([75434c0](https://github.com/Open-Study-College/osc/commit/75434c0f48cf0438503bc66d9cfc1e93fbdd894f))
+
 ## [0.86.2](https://github.com/Open-Study-College/osc/compare/v0.86.1...v0.86.2) (2023-05-16)
 
 
@@ -88,49 +95,4 @@
 
 * remove unused variable ([bbd3fda](https://github.com/Open-Study-College/osc/commit/bbd3fdaef3d6058743395f52bdfd378b8671db0a))
 * replace remix-oxygen imports with remix-node ([2d16cfd](https://github.com/Open-Study-College/osc/commit/2d16cfdb85e4dcc422eb931f3b9f6fbfe22d56fa))
-
-## [0.84.0](https://github.com/Open-Study-College/osc/compare/v0.83.0...v0.84.0) (2023-05-04)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* add PREVIEW_SESSION_SECRET example to README and env.sample ([9920e45](https://github.com/Open-Study-College/osc/commit/9920e4531b6c5a9f3be5ea0620e456d8bd7169fc))
-* **ecommerce:** add /resources/preview to disallow list ([bc24464](https://github.com/Open-Study-College/osc/commit/bc244640ef914b7abfd28e5d6a496c6b8fb6e5c8))
-
-
-### ♻️ Refactors
-
-* **ecommerce:** move preview into it's own file and import using react.lazy ([8fa7d99](https://github.com/Open-Study-College/osc/commit/8fa7d99586fe9d92e2e90372fe82932e507fd7e9))
-* **ecommerce:** remove custom preview components ([f0016d2](https://github.com/Open-Study-College/osc/commit/f0016d2e5a0fcc6070beda5f00908d5bca866854))
-* **ecommerce:** remove groq-store and install preview-kit ([da17a98](https://github.com/Open-Study-College/osc/commit/da17a98b87deac10d84a6f880d924c66406928a9))
-* **ecommerce:** remove need for token to be passed into preview ([3575259](https://github.com/Open-Study-College/osc/commit/35752595b660ea64c86e52ed09a2d82328d4e694))
-* **ecommerce:** remove publicAccess property from config ([1af875a](https://github.com/Open-Study-College/osc/commit/1af875a79efe3590e6d9ae633e1fd587cd9b87c9))
-* **ecommerce:** replace secret string with secret from env ([eaa64b7](https://github.com/Open-Study-College/osc/commit/eaa64b77e8dafda0ab7fa094d63c022d8f92c9c0))
-* **ecommerce:** update getPageData to set preview based on session rather than url param ([6ec7d07](https://github.com/Open-Study-College/osc/commit/6ec7d070491b47ae988194617b7547a217e3d88c))
-* **ecommerce:** update page preview component to allow more flexibility in returned component ([33ff548](https://github.com/Open-Study-College/osc/commit/33ff5481f467a45139ab9c1faa1e5fea13b281f4))
-* **ecommerce:** update PageContent to named export ([ce813de](https://github.com/Open-Study-College/osc/commit/ce813deab7fc2fffc9a75432ad51f2fec76f168b))
-* **ecommerce:** update preview mode checks to run as ternaries ([230bcc1](https://github.com/Open-Study-College/osc/commit/230bcc1677dd7dd5cc099e3569090212733c4077))
-* **ecommerce:** update queries to remove drafts from request ([990f197](https://github.com/Open-Study-College/osc/commit/990f197a828d11b9391c415f4dced3acc1ba28d0))
-* **ecommerce:** update route content to use page content and preview components ([aa27262](https://github.com/Open-Study-College/osc/commit/aa27262d3ba183292fa1a28a8d44c281db39bebe))
-* **studio:** update resolveProductionUrl to point at preview resource route ([e38e7b3](https://github.com/Open-Study-College/osc/commit/e38e7b36b0c310ab70e60c9293ca5c25a79d1bf2))
-* **types:** make upperContent of SanityProduct requried ([f7afbf2](https://github.com/Open-Study-College/osc/commit/f7afbf2c7aacaad7445e3bb7977dcdf1f9bbd312))
-
-
-### ✨ Features
-
-* **ecommerce:** add page upper content component ([9a5a317](https://github.com/Open-Study-College/osc/commit/9a5a317de527c24d94653a4e234bb10c6f3852d1))
-* **ecommerce:** add preview session and resource route ([20ee18c](https://github.com/Open-Study-College/osc/commit/20ee18c31fb1a6c39f75ab867b6ef15d5e950081))
-* **ecommerce:** create page content and setup preview components ([7edff2a](https://github.com/Open-Study-College/osc/commit/7edff2a903adac558e0cc47c8023b004d36baa26))
-* **ecommerce:** create preview banner component ([8f1581c](https://github.com/Open-Study-College/osc/commit/8f1581c370ed9243329d5cd6bc8f2485a6cff2a0))
-* **ecommerce:** setup preview config ([f7e4099](https://github.com/Open-Study-College/osc/commit/f7e4099a2c49a669d13a5ba793b18a84b9952392))
-* **ecommerce:** styles the preview banner ([d0b48fb](https://github.com/Open-Study-College/osc/commit/d0b48fb539de84fb71cb7c6c81b1ea0c8aac27cf))
-* **product page:** add page preview to upper page content ([2730032](https://github.com/Open-Study-College/osc/commit/2730032f37e2dd856fc36930e33bef98b1b89c77))
-* **studio:** add script to generate the previewable url when site is hosted ([19937f2](https://github.com/Open-Study-College/osc/commit/19937f2b4514b83d2fb55283c5dcdc7f44f2a5b2))
-* **workflows:** add PREVIEW_SESSION_SECRET to workflow files ([006d35a](https://github.com/Open-Study-College/osc/commit/006d35a7d882321a6f2b9af9a25ba093bb35265a))
-
-
-### 🐛 Bugs
-
-* **ecommerce:** declare env as a global ([760724a](https://github.com/Open-Study-College/osc/commit/760724a202f2f53cf0ff5ae2abd180088d03e575))
-* **ecommerce:** pass page content to preview ([cccc2b7](https://github.com/Open-Study-College/osc/commit/cccc2b744dec5be5b88207e29a169969867ff057))
 
