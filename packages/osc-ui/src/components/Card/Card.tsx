@@ -35,20 +35,27 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
      * @default false
      */
     hasShadow?: boolean;
+    /**
+     * Whether the card should have a border.
+     * @default false
+     */
+    hasBorder?: boolean;
 }
 const CardContext = createContext(null);
 
 export const Card = (props: CardProps) => {
-    const { blockLink, children, className, hasShadow = false, ...attr } = props;
+    const { blockLink, children, className, hasShadow = false, hasBorder = false, ...attr } = props;
     const [cardInnerHeight, setCardInnerHeight] = useState<number>(null);
     const cardRef = useRef<HTMLDivElement>(null);
 
     const shadowModifier = useModifier('c-card', 'shadow');
+    const borderModifier = useModifier('c-card', 'bordered');
 
     const classes = classNames(
         'c-card',
         blockLink && 'is-block-link',
         hasShadow ? shadowModifier : '',
+        hasBorder ? borderModifier : '',
         className
     );
 

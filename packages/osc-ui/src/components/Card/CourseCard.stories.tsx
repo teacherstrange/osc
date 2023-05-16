@@ -305,6 +305,7 @@ IsFullWidth.args = {
     ...Primary.args,
     isFull: true,
     hasShadow: false,
+    hasBorder: true,
     style: {
         maxWidth: '100%',
     },

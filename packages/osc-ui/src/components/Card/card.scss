@@ -56,6 +56,10 @@ $card-fs-3xl: $fs-3xl;
             box-shadow: $card-shadow;
         }
 
+        &--bordered {
+            border: $card-border;
+        }
+
         &,
         &__inner,
         &__header {
@@ -587,8 +591,6 @@ $card-fs-3xl: $fs-3xl;
             }
 
             &.is-full {
-                border: 1px solid var(--color-neutral-400);
-
                 #{$self}__header {
                     #{$self}__ttl,
                     #{$self}__price-tag {
