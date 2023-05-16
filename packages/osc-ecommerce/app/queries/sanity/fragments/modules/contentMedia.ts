@@ -29,7 +29,16 @@ export const MODULE_CONTENT_MEDIA = groq`
                     "image": {
                         ${MODULE_IMAGES}
                     }
-                }
+                },
+                (_type == 'module.forms') => {
+                    _key,
+                    _type,
+                    "formName": string::split(formNameAndId, ", ")[0],
+                    "formId": string::split(formNameAndId, ", ")[1],
+                    marginBottom,
+                    paddingBottom,
+                    paddingTop,
+                },
             }
         }
     }

@@ -10,7 +10,8 @@ import {
     rem,
     useSpacing,
 } from 'osc-ui';
-import type { contentMediaModule, contentMediaSlide } from '~/types/sanity';
+import type { contentMediaModule, contentMediaSlide, formModule } from '~/types/sanity';
+import { Forms } from '../Forms/Forms';
 
 const perView = (perView: number | undefined) => (perView ? perView : 1);
 
@@ -93,6 +94,14 @@ const Slide = (props: SlideProps) => {
     if (layoutGrid === '60/40') {
         gridCols = [7, 5];
     }
+    if (layoutGrid === '40/50') {
+        gridCols = [5, 6];
+    }
+    if (layoutGrid === '50/40') {
+        gridCols = [6, 5];
+    }
+
+    const itemHasForm = media?.mediaType.some((media) => media._type === 'module.forms');
 
     return (
         <ContentMedia>
@@ -104,6 +113,8 @@ const Slide = (props: SlideProps) => {
                 align={contentAlignment}
                 variant="content"
                 cols={layoutDirection === 'content-media' ? gridCols[0] : gridCols[1]}
+                // When form is present create more space between form and content
+                className={layoutGrid === '50/40' && itemHasForm ? 'o-grid__col--start-8@tab' : ''}
             >
                 {content?.body ? (
                     // Fixed in #691
@@ -119,7 +130,14 @@ const Slide = (props: SlideProps) => {
             </ContentMediaBlock>
 
             {layoutDirection === 'content-media' ? (
-                <ContentMediaBlockModule media={media} cols={gridCols[1]} />
+                <ContentMediaBlockModule
+                    media={media}
+                    cols={gridCols[1]}
+                    // When form is present create more space between form and content
+                    className={
+                        layoutGrid === '40/50' && itemHasForm ? 'o-grid__col--start-7@tab' : ''
+                    }
+                />
             ) : null}
         </ContentMedia>
     );
@@ -130,57 +148,53 @@ const Slide = (props: SlideProps) => {
  * -----------------------------------------------------------------------------------------------*/
 interface ContentMediaBlockProps extends Pick<contentMediaSlide, 'media'> {
     cols: Columns;
+    className?: string;
 }
 
 const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
-    const { media, cols } = props;
+    const { media, cols, className } = props;
 
     const itemHasCover =
         media?.mediaType && media?.mediaType.some((media) => media.imageFit === 'cover')
             ? 'cover'
             : 'contain';
 
-    return (
-        <ContentMediaBlock
-            // IF any item is set to cover then we want to make sure we're stretching the container
-            align={itemHasCover ? 'stretch' : 'center'}
-            variant="media"
-            cols={cols}
-        >
-            {media?.mediaType && media?.mediaType.length > 1 ? (
-                <Carousel
-                    carouselName={
-                        media?.carouselName ? media?.carouselName : 'content media carousel'
-                    }
-                    arrows={media?.carouselSettings?.arrows}
-                    dotNav={media?.carouselSettings?.dotNav}
-                    loop={media?.carouselSettings?.loop}
-                    autoplay={media?.carouselSettings?.autoplay}
-                    slidesPerView={perView(media?.carouselSettings?.slidesPerView?.mobile)}
-                    startIndex={
-                        media?.carouselSettings?.startIndex
-                            ? media?.carouselSettings?.startIndex - 1
-                            : 0
-                    } // minus 1 so cms users can start at 1
-                    breakpoints={{
-                        [`(min-width: ${rem(mq['tab'])}rem)`]: {
-                            slides: {
-                                origin: 'auto',
-                                perView: perView(media?.carouselSettings?.slidesPerView?.tablet),
-                                spacing: 16,
-                            },
+    let mediaBlock = null;
+
+    if (media?.mediaType && media?.mediaType.length > 1) {
+        mediaBlock = (
+            <Carousel
+                carouselName={media?.carouselName ? media?.carouselName : 'content media carousel'}
+                arrows={media?.carouselSettings?.arrows}
+                dotNav={media?.carouselSettings?.dotNav}
+                loop={media?.carouselSettings?.loop}
+                autoplay={media?.carouselSettings?.autoplay}
+                slidesPerView={perView(media?.carouselSettings?.slidesPerView?.mobile)}
+                startIndex={
+                    media?.carouselSettings?.startIndex
+                        ? media?.carouselSettings?.startIndex - 1
+                        : 0
+                } // minus 1 so cms users can start at 1
+                breakpoints={{
+                    [`(min-width: ${rem(mq['tab'])}rem)`]: {
+                        slides: {
+                            origin: 'auto',
+                            perView: perView(media?.carouselSettings?.slidesPerView?.tablet),
+                            spacing: 16,
                         },
-                        [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
-                            slides: {
-                                origin: 'auto',
-                                perView: perView(media?.carouselSettings?.slidesPerView?.desktop),
-                                spacing: 16,
-                            },
+                    },
+                    [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
+                        slides: {
+                            origin: 'auto',
+                            perView: perView(media?.carouselSettings?.slidesPerView?.desktop),
+                            spacing: 16,
                         },
-                    }}
-                >
-                    {media?.mediaType.map((media) =>
-                        media?.image ? (
+                    },
+                }}
+            >
+                {media?.mediaType.map((media) => {
+                    if (media?.image) {
+                        return (
                             <Image
                                 src={media?.image?.src}
                                 width={media?.image?.width}
@@ -189,10 +203,18 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
                                 className={`o-img--${media?.imageFit}`}
                                 key={media?.image?._key}
                             />
-                        ) : null
-                    )}
-                </Carousel>
-            ) : media?.mediaType && media?.mediaType[0]?.image ? (
+                        );
+                    } else if (media?._type === 'module.forms') {
+                        const moduleForm = media as formModule;
+                        return <Forms module={moduleForm} key={moduleForm._key} />;
+                    }
+                    return null;
+                })}
+            </Carousel>
+        );
+    } else if (media?.mediaType && media?.mediaType.length === 1) {
+        if (media?.mediaType[0]?.image) {
+            mediaBlock = (
                 <Image
                     src={media?.mediaType[0]?.image?.src}
                     width={media?.mediaType[0]?.image?.width}
@@ -200,7 +222,23 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
                     alt={media?.mediaType[0]?.image?.alt}
                     className={`o-img--${media?.mediaType[0]?.imageFit}`}
                 />
-            ) : null}
+            );
+        } else if (media?.mediaType[0]?._type === 'module.forms') {
+            const moduleForm = media.mediaType[0] as formModule;
+
+            mediaBlock = <Forms module={moduleForm} key={moduleForm._key} />;
+        }
+    }
+
+    return (
+        <ContentMediaBlock
+            // IF any item is set to cover then we want to make sure we're stretching the container
+            align={itemHasCover ? 'stretch' : 'center'}
+            variant="media"
+            cols={cols}
+            className={className}
+        >
+            {mediaBlock}
         </ContentMediaBlock>
     );
 };

@@ -63,7 +63,7 @@ export default defineType({
             type: 'string',
             initialValue: '50/50',
             options: {
-                list: ['50/50', '60/40', '40/60'],
+                list: ['50/50', '60/40', '40/60', '50/40', '40/50'],
                 layout: 'radio',
                 direction: 'horizontal',
             },
@@ -85,7 +85,7 @@ export default defineType({
                     name: 'mediaType',
                     title: 'Media Type',
                     type: 'array',
-                    of: [{ type: 'contentMediaImage' }],
+                    of: [{ type: 'contentMediaImage' }, { type: 'module.forms' }],
                     validation: (Rule) => Rule.required(),
                 }),
                 defineField({

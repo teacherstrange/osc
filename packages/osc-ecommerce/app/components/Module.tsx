@@ -153,6 +153,7 @@ export const getComponentStyles = (data: SanityPage) => {
 
             case 'module.contentMedia':
                 styles.push({ rel: 'stylesheet', href: contentMediaStyles });
+                styles.push({ rel: 'stylesheet', href: buttonStyles });
                 break;
 
             case 'module.video':
@@ -244,10 +245,7 @@ export default function Module(props: Props) {
 
         case 'module.forms':
             const moduleForm = module as formModule;
-            const [formName, formId] = moduleForm.formNameAndId.split(', ');
-            moduleForm.formId = formId;
-            moduleForm.formName = formName;
-            return <Forms module={moduleForm} key={moduleForm._key} />;
+            return <Forms addContainer={true} module={moduleForm} key={moduleForm._key} />;
 
         case 'module.hero':
             const moduleHero = module as heroModule;

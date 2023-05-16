@@ -7,8 +7,7 @@ import {
     reshapeDate,
     setFormErrorsAndReport,
 } from '~/components/Forms/utils';
-import type { formModule } from '~/types/sanity';
-import type { SanityPage } from '~/types/sanity';
+import type { SanityPage, contentMediaModule, formModule } from '~/types/sanity';
 import { getHubspotFormData, hubspotFormsApiRequest } from '~/utils/server/hubspot.server';
 import { validateAction } from '~/utils/validation';
 
@@ -141,9 +140,30 @@ export const validateAndSubmitHubspotForm = async (
  * @returns An array of hubspot forms for the given page
  */
 export const getHubspotForms = async (page: SanityPage) => {
+    let forms: formModule[] = [];
+
+    // If contentMedia has any forms then push them to forms array
+    page.modules.forEach((module) => {
+        const mod = module as contentMediaModule;
+        if (module._type === 'module.contentMedia') {
+            mod.slides[0]?.media?.mediaType?.forEach((med) => {
+                if (med._type === 'module.forms') {
+                    const module = med as formModule;
+                    forms.push(module);
+                }
+            });
+        }
+    });
+
     const formModules = page.modules?.filter(
         (module: any) => module._type === 'module.forms'
     ) as formModule[];
+
+    // If there are any forms from contentMedia (that have been pushed into "forms" array)
+    // then add to formModules
+    if (forms) {
+        formModules.push(...forms);
+    }
 
     if (!formModules || formModules.length === 0) {
         return null;
@@ -151,12 +171,11 @@ export const getHubspotForms = async (page: SanityPage) => {
     // Get all hubspot forms
     const formData = (await Promise.all(
         formModules.map(async (formModule) => {
-            const formId = formModule.formNameAndId.split(', ')[1];
             let formData: HubspotFormData;
             try {
-                formData = await getHubspotFormData(formId);
+                formData = await getHubspotFormData(formModule.formId);
                 const hubspotFormData = {
-                    [formId]: {
+                    [formModule.formId]: {
                         formFieldGroups: formData?.formFieldGroups,
                         style: formData?.style,
                         submitText: formData?.submitText,
