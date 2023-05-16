@@ -103,10 +103,12 @@ export const Button = (props: Props) => {
             ) : null;
 
         case 'copy to clipboard':
-            return textToCopy ? (
+            const text = textToCopy ? textToCopy : label;
+
+            return text ? (
                 <CopyButton
                     key={_key}
-                    textToCopy={textToCopy}
+                    textToCopy={text}
                     isInversed={isInversed}
                     variant={variant}
                     {...rest}
