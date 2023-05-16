@@ -1,0 +1,41 @@
+#
+# This workflow takes care of destorying the preview apps in Fly.io when a PR is closed
+#
+
+name: 🔥 Destroy preview apps
+
+on:
+  workflow_call:
+    inputs:
+      app_name:
+        required: true
+        type: string
+
+permissions:
+  actions: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  destroy_staging_app:
+    name: 🔥 Destroy preview app
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🪰 setup-flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.0.0
+        id: app_name
+        with:
+          file: "./packages/${{inputs.app_name}}/fly.toml"
+          field: "app"
+        
+      - name: 🪰 Destroy app
+        continue-on-error: true
+        run: flyctl apps destroy pr-${{ github.event.number }}-${{ steps.app_name.outputs.value }} -y
+        env: 
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
