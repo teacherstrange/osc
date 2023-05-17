@@ -24,22 +24,25 @@ export const CollectionCard = (props: Props) => {
 
     return (
         <OSCCollectionCard size={data?.variant}>
-            <CardImage>
-                <Image
-                    src={featuredImage?.src ? featuredImage?.src : ''}
-                    alt={featuredImage?.alt ? featuredImage?.alt : ''}
-                    width={610}
-                    height={557}
-                    fit="cover"
-                    overlayColor={
-                        featuredImage?.imageStyles?.overlayColor
-                            ? featuredImage?.imageStyles?.overlayColor
-                            : theme?.color
-                    }
-                    isGrayScale={featuredImage?.imageStyles?.grayscale}
-                    hasTransparency={featuredImage?.imageStyles?.opacity}
-                />
-            </CardImage>
+            {featuredImage?.src ? (
+                <CardImage>
+                    <Image
+                        src={featuredImage?.src ? featuredImage?.src : ''}
+                        alt={featuredImage?.alt ? featuredImage?.alt : ''}
+                        width={610}
+                        height={432}
+                        fit="cover"
+                        overlayColor={
+                            featuredImage?.imageStyles?.overlayColor
+                                ? featuredImage?.imageStyles?.overlayColor
+                                : theme?.color
+                        }
+                        isGrayScale={featuredImage?.imageStyles?.grayscale}
+                        hasTransparency={featuredImage?.imageStyles?.opacity}
+                    />
+                </CardImage>
+            ) : null}
+
             <CardInner>
                 <CardHeader>
                     <CardTitle>{store?.title}</CardTitle>

@@ -33,23 +33,24 @@ export const BlogCard = (props: Props) => {
                 heroData?.backgroundColor ? `u-bg-color-${heroData?.backgroundColor}` : ''
             } ${heroData?.titleColor ? `u-color-${heroData?.titleColor}` : ''}`}
         >
-            {/* // TODO: This data should come from the CMS */}
-            <CardImage>
-                <Image
-                    src={heroData?.image?.src ? heroData?.image?.src : ''}
-                    alt={heroData?.image?.alt ? heroData?.image?.alt : ''}
-                    width={heroData?.image?.width ? heroData?.image?.width : 0}
-                    height={heroData?.image?.height ? heroData?.image?.height : 0}
-                    fit="cover"
-                    overlayColor={
-                        heroData?.image?.imageStyles?.overlayColor
-                            ? heroData?.image?.imageStyles?.overlayColor
-                            : theme?.color
-                    }
-                    isGrayScale={heroData?.image?.imageStyles?.grayscale}
-                    hasTransparency={heroData?.image?.imageStyles?.opacity}
-                />
-            </CardImage>
+            {heroData?.image?.src ? (
+                <CardImage>
+                    <Image
+                        src={heroData?.image?.src ? heroData?.image?.src : ''}
+                        alt={heroData?.image?.alt ? heroData?.image?.alt : ''}
+                        width={heroData?.image?.width ? heroData?.image?.width : 0}
+                        height={heroData?.image?.height ? heroData?.image?.height : 0}
+                        fit="cover"
+                        overlayColor={
+                            heroData?.image?.imageStyles?.overlayColor
+                                ? heroData?.image?.imageStyles?.overlayColor
+                                : theme?.color
+                        }
+                        isGrayScale={heroData?.image?.imageStyles?.grayscale}
+                        hasTransparency={heroData?.image?.imageStyles?.opacity}
+                    />
+                </CardImage>
+            ) : null}
 
             <CardInner>
                 <CardHeader>
