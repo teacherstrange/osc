@@ -76,23 +76,14 @@ export const login: LoginFn = async (input) => {
     }
 
     // Compare input password to hashed password
-    if (user.password != null) {
-        const passwordMatch = await password.compare(input.password, user.password);
-        if (!passwordMatch) {
-            await wait(3000);
-            return new Error('No matching user found.');
-        }
-    } else {
+    if (user.password == null) {
         return new Error('No matching user found.');
     }
-    // const passwordMatch = await password.compare(input.password, user.password);
-
-    // If passwords dont match throw error
-    // We'll hide this behind the same text as no matching user for now to prevent identifying used emails
-    // if (!passwordMatch) {
-    //     await wait(3000);
-    //     return new Error('No matching user found.');
-    // }
+    const passwordMatch = await password.compare(input.password, user.password);
+    if (!passwordMatch) {
+        await wait(3000);
+        return new Error('No matching user found.');
+    }
 
     // Generate tokens - this is what will be used to access restricted areas, and refresh an expired token
     const accessToken = token.access(user.id);
