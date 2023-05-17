@@ -217,11 +217,13 @@ export const CardTitle = (props: CardTitleProps) => {
     } = props;
 
     const elementClass = subtitle ? 'c-card__subttl' : 'c-card__ttl';
-    const underlined = useModifier('c-card__ttl', 'underlined');
+
+    const underlined = useModifier(elementClass, 'underlined');
+    const small = useModifier(elementClass, 'small');
 
     const classes = classNames(
         elementClass,
-        isSmall && 'is-small',
+        isSmall ? small : '',
         isUnderlined ? underlined : '',
         className
     );

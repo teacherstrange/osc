@@ -120,7 +120,7 @@ $card-fs-3xl: $fs-3xl;
                 margin-block-end: 0.2em;
             }
 
-            &.is-small {
+            &--small {
                 font-size: $card-fs-m;
                 font-weight: $fw-reg;
             }
@@ -131,7 +131,7 @@ $card-fs-3xl: $fs-3xl;
             font-size: var(--font-scale-base);
             grid-row: 1;
 
-            &.is-small {
+            &--small {
                 font-weight: $fw-reg;
             }
         }
