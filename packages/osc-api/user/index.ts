@@ -8,34 +8,37 @@ const prisma = new PrismaClient();
 
 export const hubspotClient = () => {
     return new Client({
-        accessToken: process.env.HUBSPOT_ACCESS_TOKEN,
+        accessToken: "pat-eu1-851eec57-2705-402e-8a9c-bc407aa77dc2",
     });
 };
 
 export const sendEmail = async (token: string, email: string) => {
     const hubspot = hubspotClient();
     const message = {
-        "from": "email_from",
-        "to": email,
-        "sendId": "sendId",
+        "from": "jonathan.hall@openstudycollege.com",
+        "to": "jonathan.hall@openstudycollege.com",
+        "sendId": "testsend",
         "replyTo": [
-            "replyTo"
+            "jonathan.hall@openstudycollege.com"
         ],
         "cc": [
-            "cc"
+            "jonathan.hall@openstudycollege.com"
         ],
         "bcc": [
-            "bcc"
+            "jonathan.hall@openstudycollege.com"
         ]
     }
+    const url = 'https://openstudycollege.com/signin/' + token;
     const customProperties = {
         "name": email,
-        "token": token
+        "token": token,
+        "url": url
     }
+    console.log('next step');
     // To Do - Match token to a url link for magic key and add it to the body of the email
-    const PublicSignleSendRequestEgg = { emailId: 69147599060, message, customProperties };
+    const PublicSingleSendRequestEgg = { emailId: 69147599060, message, customProperties };
     try {
-        const apiResponse = await hubspot.marketing.transactional.singleSendApi.sendEmail(PublicSignleSendRequestEgg);
+        const apiResponse = await hubspot.marketing.transactional.singleSendApi.sendEmail(PublicSingleSendRequestEgg);
         console.log(JSON.stringify(apiResponse, null, 2));
         return apiResponse;
     } catch (error: unknown) {
