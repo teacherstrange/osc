@@ -191,6 +191,7 @@ export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
     as?: Headings;
     /**
      * Sets the underline style of the title
+     * @default false
      */
     isUnderlined?: boolean;
     /**
@@ -203,6 +204,16 @@ export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
      * @default false
      */
     isSmall?: boolean;
+    /**
+     * Sets the position of the title, only works when subtitle is true
+     * @default top
+     */
+    position?: 'top' | 'bottom';
+    /**
+     * Changes the default colour and sets the themeable modifier
+     * @default false
+     */
+    isThemeable?: boolean;
 }
 
 export const CardTitle = (props: CardTitleProps) => {
@@ -210,9 +221,11 @@ export const CardTitle = (props: CardTitleProps) => {
         as: Component = 'h2',
         children,
         className,
-        isSmall,
-        isUnderlined,
-        subtitle,
+        subtitle = false,
+        position = 'top',
+        isSmall = false,
+        isUnderlined = false,
+        isThemeable = false,
         ...attr
     } = props;
 
@@ -220,11 +233,15 @@ export const CardTitle = (props: CardTitleProps) => {
 
     const underlined = useModifier(elementClass, 'underlined');
     const small = useModifier(elementClass, 'small');
+    const positionModifier = useModifier(elementClass, position);
+    const themeModifier = useModifier(elementClass, 'themeable');
 
     const classes = classNames(
         elementClass,
         isSmall ? small : '',
         isUnderlined ? underlined : '',
+        subtitle && position ? positionModifier : '',
+        isThemeable ? themeModifier : '',
         className
     );
 

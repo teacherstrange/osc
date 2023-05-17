@@ -63,7 +63,7 @@ const Template: Story<CardProps> = ({ ...args }) => {
                     />
 
                     <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
-                    <CardTitle as="h3" subtitle isSmall>
+                    <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                         Single course
                     </CardTitle>
                 </CardHeader>
@@ -108,7 +108,7 @@ const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => {
                     />
 
                     <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
-                    <CardTitle as="h3" subtitle isSmall>
+                    <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                         Single course
                     </CardTitle>
                 </CardHeader>
@@ -178,7 +178,7 @@ const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => {
                         </Price>
                     </CardPriceTag>
                     <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
-                    <CardTitle as="h3" subtitle isSmall>
+                    <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                         Single course
                     </CardTitle>
                 </CardHeader>
@@ -246,7 +246,7 @@ const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
         <CardInner>
             <CardHeader>
                 <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
-                <CardTitle as="h3" subtitle isSmall>
+                <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                     Single course
                 </CardTitle>
             </CardHeader>

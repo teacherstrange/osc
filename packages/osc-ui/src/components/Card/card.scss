@@ -124,15 +124,30 @@ $card-fs-3xl: $fs-3xl;
                 font-size: $card-fs-m;
                 font-weight: $fw-reg;
             }
+
+            &--themeable {
+                color: $card-color;
+            }
         }
 
         &__subttl {
             color: var(--color-neutral-700);
             font-size: var(--font-scale-base);
-            grid-row: 1;
 
             &--small {
                 font-weight: $fw-reg;
+            }
+
+            &--top {
+                grid-row: 1;
+            }
+
+            &--bottom {
+                grid-row: auto;
+            }
+
+            &--themeable {
+                color: $card-color;
             }
         }
 
@@ -573,11 +588,6 @@ $card-fs-3xl: $fs-3xl;
                 button {
                     justify-self: end;
                 }
-            }
-
-            #{$self}__subttl {
-                grid-row: auto;
-                color: $card-color;
             }
 
             #{$self}__body {
