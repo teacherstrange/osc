@@ -16,6 +16,10 @@
             font-weight: $fw-bold;
         }
 
+        &--dark {
+            color: var(--color-secondary);
+        }
+
         &--m {
             font-weight: $fw-reg;
         }
