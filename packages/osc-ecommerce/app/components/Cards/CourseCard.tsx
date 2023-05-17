@@ -71,7 +71,7 @@ export const CourseCard = (props: Props) => {
                     /> */}
 
                     <CardTitle isUnderlined>{title}</CardTitle>
-                    <CardTitle as="h3" subtitle isSmall>
+                    <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                         {/* // TODO: This data should come from the SHOPIFY/CMS once packages/bundles are sorted */}
                         Single course
                     </CardTitle>
