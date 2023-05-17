@@ -293,7 +293,10 @@ export default function App() {
                 <main
                     id="main-content"
                     className={`${
-                        getPageType(location) === PATHS.PRODUCTS ? 'u-bg-color-neutral-100' : ''
+                        getPageType(location) === PATHS.PRODUCTS ||
+                        getPageType(location) === PATHS.CART
+                            ? 'u-bg-color-neutral-100'
+                            : ''
                     } u-pos-rel`}
                     tabIndex={-1}
                 >
