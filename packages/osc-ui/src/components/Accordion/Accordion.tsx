@@ -15,7 +15,7 @@ import { classNames } from '../../utils/classNames';
 import './accordion.scss';
 
 export type AccordionProps = (AccordionSingleProps | AccordionMultipleProps) & {
-    variant?: 'primary' | 'secondary' | 'tertiary';
+    variant?: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
 } & RefAttributes<HTMLDivElement>;
 
 const AccordionContext = createContext<{ variant: AccordionProps['variant'] } | null>(null);

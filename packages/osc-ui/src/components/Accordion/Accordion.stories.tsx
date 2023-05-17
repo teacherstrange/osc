@@ -242,6 +242,12 @@ Tertiary.args = {
     variant: 'tertiary',
 };
 
+export const Quaternary = Template.bind({});
+Quaternary.args = {
+    ...Primary.args,
+    variant: 'quaternary',
+};
+
 export const AllowMultiple = Template.bind({});
 AllowMultiple.args = {
     ...Primary.args,
