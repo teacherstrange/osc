@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { getUserByEmail, getUserById, wait } from 'osc-api';
+import { getUserByEmail, getUserById, wait, sendEmail } from 'osc-api';
 import type {
     CreateUserFn,
     CrmTokensFn,
@@ -12,6 +12,8 @@ import type {
     UserPermissionsFn,
     UserProfileFn,
     UserRolesFn,
+    CreateUserSetupFn
+
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import * as password from '~/utils/password';
@@ -41,6 +43,27 @@ export const create: CreateUserFn = async (input) => {
         },
     });
 };
+export const createSetup: CreateUserSetupFn = async (input) => {
+    const existingUser = await getUserByEmail(input.email);
+
+    // If user already exists, throw error
+    if (existingUser) {
+        return new Error('An account already exists for the specified email.');
+    }
+    // Create user record
+    const userCreate = await prisma.user.create({
+        data: {
+            firstName: input.firstName,
+            lastName: input.lastName,
+            email: input.email,
+        },
+    });
+    // Generate magic key token
+    const userToken = await token.magicKey(userCreate.id);
+    // Send email via hubspot api
+    await sendEmail(userToken, userCreate.email);
+    return userCreate;
+}
 
 export const login: LoginFn = async (input) => {
     // Find matching user
@@ -49,18 +72,27 @@ export const login: LoginFn = async (input) => {
     // If no matching user, throw error
     if (!user) {
         await wait(3000);
-        return new Error('No matching user found.');
+        return new Error('No matching active user found.');
     }
 
     // Compare input password to hashed password
-    const passwordMatch = await password.compare(input.password, user.password);
+    if (user.password != null) {
+        const passwordMatch = await password.compare(input.password, user.password);
+        if (!passwordMatch) {
+            await wait(3000);
+            return new Error('No matching user found.');
+        }
+    } else {
+        return new Error('No matching user found.');
+    }
+    // const passwordMatch = await password.compare(input.password, user.password);
 
     // If passwords dont match throw error
     // We'll hide this behind the same text as no matching user for now to prevent identifying used emails
-    if (!passwordMatch) {
-        await wait(3000);
-        return new Error('No matching user found.');
-    }
+    // if (!passwordMatch) {
+    //     await wait(3000);
+    //     return new Error('No matching user found.');
+    // }
 
     // Generate tokens - this is what will be used to access restricted areas, and refresh an expired token
     const accessToken = token.access(user.id);

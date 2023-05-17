@@ -4,7 +4,8 @@ import type {
     getUserArgs,
     getUsersArgs,
     loginArgs,
-    refreshAccessArgs
+    refreshAccessArgs,
+    createUserSetupArgs
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
@@ -32,6 +33,9 @@ export const resolvers = {
         },
         refreshAccess: async (_: undefined, { refreshToken }: refreshAccessArgs) => {
             return account.refreshAccess(refreshToken);
+        },
+        createUserSetup: async (_: undefined, { input }: createUserSetupArgs) => {
+            return account.createSetup(input);
         }
     }
 };

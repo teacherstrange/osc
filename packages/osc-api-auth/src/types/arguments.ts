@@ -22,6 +22,16 @@ export type createUserArgs = {
     readonly input: createUserInput;
 };
 
+export type createUserSetupInput = {
+    readonly firstName: string;
+    readonly lastName: string;
+    readonly email: string;
+}
+
+export type createUserSetupArgs = {
+    readonly input: createUserSetupInput;
+}
+
 export type loginArgsInput = {
     readonly email: string;
     readonly password: string;

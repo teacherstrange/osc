@@ -2,11 +2,25 @@ import { PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql/error';
 import jwt from 'jsonwebtoken';
 import { env } from '~/types/environment';
-import type { AccessTokenFn, RefreshAccessFn, RefreshTokenFn } from '~/types/functions';
+import type { AccessTokenFn, RefreshAccessFn, RefreshTokenFn, MagicKeyTokenFn } from '~/types/functions';
 import type { RefreshToken } from '~/types/interfaces';
 import { permissions } from './account';
 
 const prisma = new PrismaClient();
+
+
+export const magicKey: MagicKeyTokenFn = async (userId) => {
+    const payload = {
+        user: { id: userId, permissions: await permissions(userId) }
+    };
+    // Magic key token set to expire after 1h
+    return jwt.sign(payload, env.JWT_SECRET!, {
+        algorithm: 'HS256',
+        audience: env.JWT_AUDIENCE,
+        expiresIn: 3600
+    });
+}
+
 
 export const access: AccessTokenFn = async (userId) => {
     const payload = {

@@ -103,14 +103,22 @@ export const typeDefs = gql`
         password: String! @constraint(minLength: 12)
     }
 
+    input createUserSetupInput {
+        firstName: String! @constraint(maxLength: 128)
+        lastName: String! @constraint(maxLength: 128)
+        email: String! @constraint(format: "email", maxLength: 255)
+    }
+
     input loginInput {
         email: String! @constraint(format: email)
         password: String!
     }
 
+
     type Mutation {
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
         refreshAccess(refreshToken: String!): refreshAccess
+        createUserSetup(input: createUserSetupInput!): User
     }
 `;
