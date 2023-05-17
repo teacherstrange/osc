@@ -60,6 +60,10 @@ $card-fs-3xl: $fs-3xl;
             border: $card-border;
         }
 
+        &--transparent {
+            background-color: transparent;
+        }
+
         &,
         &__inner,
         &__header {
