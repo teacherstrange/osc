@@ -64,7 +64,7 @@ export const Price = (props: PriceProps) => {
                 </span>
             </div>
 
-            {sku ? <span>Course code: {sku}</span> : null}
+            {sku ? <span className="c-price__sku">Course code: {sku}</span> : null}
         </div>
     );
 };

@@ -37,5 +37,10 @@ $price-fs-s: $fs-m;
                 text-decoration: line-through;
             }
         }
+
+        &__sku {
+            color: var(--color-secondary);
+            font-size: 1rem;
+        }
     }
 }
