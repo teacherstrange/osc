@@ -26,6 +26,6 @@ test('renders the Price component with a compare at price', () => {
     expect(screen.getByText('£1,149 in full')).toBeInTheDocument();
     expect(screen.getByText('£1600')).toBeInTheDocument();
     expect(screen.getByText('£1600')).toHaveClass(
-        'c-price--strike u-text-reg u-color-neutral-600 u-mb-0'
+        'c-price__item c-price__item--strike u-color-neutral-600'
     );
 });
