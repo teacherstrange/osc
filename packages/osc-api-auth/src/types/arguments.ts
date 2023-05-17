@@ -22,26 +22,15 @@ export type completeRegistration = {
     readonly email: string;
     readonly password: string;
     readonly magicKey: string;
-}
+};
 
 export type completeRegistrationArgs = {
     readonly input: completeRegistration;
-}
+};
 
 export type createUserArgs = {
     readonly input: createUserInput;
 };
-
-export type createUserSetupInput = {
-    readonly firstName: string;
-    readonly lastName: string;
-    readonly email: string;
-    readonly courses: [];
-}
-
-export type createUserSetupArgs = {
-    readonly input: createUserSetupInput;
-}
 
 export type loginArgsInput = {
     readonly email: string;
@@ -58,4 +47,4 @@ export type refreshAccessArgs = {
 
 export type magicKeyArgs = {
     readonly magicKeyToken: string;
-}
+};
