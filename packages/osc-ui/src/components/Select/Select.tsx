@@ -15,7 +15,7 @@ type Description = {
     icon?: string;
 };
 
-type GroupVariants = 'secondary' | 'tertiary' | 'inline' | 'bold';
+type GroupVariants = 'secondary' | 'tertiary' | 'inline' | 'inline-wrap' | 'bold';
 
 // type Ex1 = GroupVariants<{ firstName: string }>;
 export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root> {

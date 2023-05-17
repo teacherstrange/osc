@@ -42,7 +42,9 @@
             }
 
             &--70 {
-                max-width: 70%;
+                @include mq($mq-tab) {
+                    max-width: 70%;
+                }
             }
         }
 
@@ -93,10 +95,16 @@
             }
         }
 
+        &--inline-wrap,
         &--inline {
             display: flex;
             align-items: center;
             gap: $space-s;
+        }
+
+        &--inline-wrap {
+            flex-wrap: wrap;
+            gap: calc($space-xs / 2);
         }
 
         &--bold {
