@@ -40,6 +40,10 @@
                 color: var(--color-neutral-500);
                 pointer-events: none;
             }
+
+            &--70 {
+                max-width: 70%;
+            }
         }
 
         &__content {
