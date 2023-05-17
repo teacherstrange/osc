@@ -18,7 +18,7 @@ interface Props {
 export const BlogCard = (props: Props) => {
     const { data } = props;
     const { theme } = data?.reference;
-    const heroData = data?.reference?.modules && data?.reference?.modules[0].slides;
+    const heroData = data?.reference?.modules && data?.reference?.modules[0]?.slides;
 
     if (!heroData) {
         console.warn(`No hero set on post ${data?.reference?.title}`);
