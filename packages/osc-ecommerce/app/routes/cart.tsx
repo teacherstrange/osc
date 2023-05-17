@@ -1,4 +1,4 @@
-import type { ActionArgs } from '@remix-run/node';
+import type { ActionArgs, LinksFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { flattenConnection } from '@shopify/hydrogen';
 import type {
@@ -8,11 +8,22 @@ import type {
     CartUserError,
     UserError,
 } from '@shopify/hydrogen/storefront-api-types';
+import { Button, Card, CardBody, CardFooter, CardTitle, Icon } from 'osc-ui';
+import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
+import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import invariant from 'tiny-invariant';
+import { PATHS } from '~/constants';
 import { useCart } from '~/hooks/useCart';
 import type { CartActions } from '~/types/shopify';
 import { CartAction } from '~/types/shopify';
 import { addLinesToCart, createCart } from '~/utils/cart.helpers';
+
+export const links: LinksFunction = () => {
+    return [
+        { rel: 'stylesheet', href: buttonStyles },
+        { rel: 'stylesheet', href: cardStyles },
+    ];
+};
 
 export async function action({ request, context }: ActionArgs) {
     const { session, storefront } = context;
@@ -101,24 +112,69 @@ export async function action({ request, context }: ActionArgs) {
 export default function CartRoute() {
     const cart = useCart();
     const linesCount = Boolean(cart?.lines?.edges?.length || 0);
+    console.log(cart);
 
-    if (!linesCount) {
-        return <p>Looks like you haven't added anything to your cart.</p>;
-    }
-    const cartLines = cart?.lines ? flattenConnection(cart?.lines) : [];
+    const cartLines = linesCount && cart?.lines ? flattenConnection(cart?.lines) : [];
 
     return (
         <>
-            <h1>Cart</h1>
-            <ul>
-                {cartLines.map((line) => (
-                    <div key={line.id}>
-                        <h2>
-                            {line?.merchandise?.product?.title} - {line?.merchandise?.title}
-                        </h2>
+            <header className="o-container o-grid">
+                <div className="o-grid__col o-grid__col--11 o-grid__col--start-2">
+                    <h1 className="t-font-secondary t-font-5xl u-pt-2xl">
+                        Your bag {linesCount ? '' : <>is empty</>}
+                    </h1>
+                </div>
+            </header>
+
+            <div className="o-container o-grid u-pb-6xl">
+                <div className="o-grid__col o-grid__col--6 o-grid__col--start-2">
+                    {linesCount ? (
+                        <ul>
+                            {cartLines.map((line) => (
+                                <div key={line.id}>
+                                    <p>
+                                        {line?.merchandise?.product?.title} -{' '}
+                                        {line?.merchandise?.title}
+                                    </p>
+                                </div>
+                            ))}
+                        </ul>
+                    ) : (
+                        // TODO: Can make this text CMS editable
+                        <p>
+                            We have more than 750 courses and qualifications to choose from,
+                            continue browsing and join our family of over 110,000 students today.
+                        </p>
+                    )}
+
+                    <Button as="link" to={`/${PATHS.WISHLIST}`} variant="tertiary">
+                        View Wishlist <Icon id="heart" />
+                    </Button>
+                </div>
+
+                {linesCount ? (
+                    <div className="o-grid__col o-grid__col--4">
+                        <Card hasShadow className="u-pt-xl u-pr-xl u-pl-xl u-pb-2xl">
+                            <CardTitle isUnderlined>Total</CardTitle>
+                            <CardBody>
+                                <ul>
+                                    {cartLines.map((line) => (
+                                        <div key={line.id}>
+                                            <p>
+                                                {line?.merchandise?.product?.title} -{' '}
+                                                {line?.merchandise?.title}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </ul>
+                            </CardBody>
+                            <CardFooter>
+                                <Button isFull>Enrol now</Button>
+                            </CardFooter>
+                        </Card>
                     </div>
-                ))}
-            </ul>
+                ) : null}
+            </div>
         </>
     );
 }
