@@ -87,6 +87,7 @@ export {
     PopoverContent,
     PopoverTrigger,
 } from './components/Popover/Popover';
+export { Price } from './components/Price/Price';
 export { RadioGroup, RadioItem } from './components/RadioGroup/RadioGroup';
 export { Select, SelectItem } from './components/Select/Select';
 export { SkipLink } from './components/SkipLink/SkipLink';

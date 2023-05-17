@@ -1,0 +1,34 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+$price-fs-l: $fs-xl;
+$price-fs-m: $fs-l;
+
+@layer components {
+    .c-price {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+
+        &--on-sale {
+            @include mq($mq-tab, $mq-desk) {
+                align-items: start;
+            }
+        }
+
+        &__item {
+            font-size: $price-fs-l;
+
+            @include mq($mq-tab) {
+                font-size: $price-fs-m;
+            }
+
+            &--strike {
+                margin-inline-end: calc($space-2xs / 2);
+                text-decoration: line-through;
+            }
+        }
+    }
+}
