@@ -4,6 +4,7 @@
 
 $price-fs-l: $fs-xl;
 $price-fs-m: $fs-l;
+$price-fs-s: $fs-m;
 
 @layer components {
     .c-price {
@@ -19,10 +20,16 @@ $price-fs-m: $fs-l;
         }
 
         &__item {
-            font-size: $price-fs-l;
+            &--sm {
+                font-size: $price-fs-s;
+            }
 
-            @include mq($mq-tab) {
-                font-size: $price-fs-m;
+            &--md {
+                font-size: $price-fs-l;
+
+                @include mq($mq-tab) {
+                    font-size: $price-fs-m;
+                }
             }
 
             &--strike {

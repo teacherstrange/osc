@@ -20,13 +20,23 @@ const Template: Story<PriceProps> = ({ ...args }) => <Price {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-    children: <span>£1,149 in full</span>,
+    children: (
+        <>
+            <span className="u-text-bold">£1,149</span> in full
+        </>
+    ),
     sku: 'AAT056',
+    className: 'u-color-primary',
 };
 
 export const HasSalePrice = Template.bind({});
 HasSalePrice.args = {
-    children: <span>£1,149 in full</span>,
-    sku: 'AAT056',
+    ...Primary.args,
     compareAtPrice: <span>£1600</span>,
+};
+
+export const Small = Template.bind({});
+Small.args = {
+    ...Primary.args,
+    size: 'sm',
 };

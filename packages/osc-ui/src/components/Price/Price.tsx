@@ -27,13 +27,21 @@ export interface PriceProps {
      * @default undefined
      */
     compareAtPrice?: ReactNode;
+    /**
+     * Sets the overall font size of the component
+     * @default md
+     */
+    size?: 'sm' | 'md';
 }
 
 export const Price = (props: PriceProps) => {
-    const { children, className, compareAtPrice, sku } = props;
+    const { children, className, compareAtPrice, sku, size = 'md' } = props;
 
     const saleModifier = useModifier('c-price', 'on-sale');
     const classes = classNames('c-price', compareAtPrice ? saleModifier : '', className);
+
+    const sizeModifier = useModifier('c-price__item', size);
+    const itemClasses = classNames('c-price__item', sizeModifier, 'u-mb-0');
 
     // Here we're creating a slot for the compareAtPrice element to sit in.
     // This helps us to keep the amount of nested elements to a minimum
@@ -43,9 +51,11 @@ export const Price = (props: PriceProps) => {
     return (
         <div className={classes}>
             <div className="o-flex">
-                <span className="c-price__item t-font-xl u-text-bold u-color-primary u-mb-0">
+                <span className={itemClasses}>
                     {compareAtPrice ? (
-                        <SaleComponent className="c-price__item c-price--strike u-text-reg u-color-neutral-600 u-mb-0">
+                        <SaleComponent
+                            className={`${itemClasses} c-price__item--strike u-color-neutral-600`}
+                        >
                             {compareAtPrice}
                         </SaleComponent>
                     ) : null}
