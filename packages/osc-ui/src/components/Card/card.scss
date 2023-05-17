@@ -160,6 +160,10 @@ $card-fs-3xl: $fs-3xl;
             &-inner {
                 margin-block-end: auto;
             }
+
+            &--narrow {
+                max-width: 44ch;
+            }
         }
 
         &__footer {

@@ -255,11 +255,20 @@ export const CardTitle = (props: CardTitleProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Card Body
  * -----------------------------------------------------------------------------------------------*/
-export interface CardBodyProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {}
+export interface CardBodyProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Narrows the width of the card body to 44ch
+     * @default false
+     */
+    isNarrow?: boolean;
+}
 
 export const CardBody = (props: CardBodyProps) => {
-    const { children, className, ...attr } = props;
-    const classes = classNames('c-card__body', className);
+    const { children, className, isNarrow = false, ...attr } = props;
+
+    const widthModifier = useModifier('c-card__body', 'narrow');
+
+    const classes = classNames('c-card__body', isNarrow ? widthModifier : '', className);
 
     return (
         <div className={classes} {...attr}>
