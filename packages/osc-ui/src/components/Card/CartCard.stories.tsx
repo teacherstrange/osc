@@ -101,7 +101,9 @@ const Template: Story<CardProps> = ({ ...args }) => (
                 </ButtonGroup>
 
                 <CardPriceTag className="u-self-end u-mt-0">
-                    <Price sku="OSC1279">£23/month</Price>
+                    <Price sku="OSC1279">
+                        <span className="u-text-bold">£23</span>/month
+                    </Price>
                 </CardPriceTag>
             </CardFooter>
         </CardInner>
