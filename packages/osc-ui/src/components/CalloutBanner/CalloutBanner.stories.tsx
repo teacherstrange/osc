@@ -1,6 +1,7 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { Button } from '../Button/Button';
+import { Checkbox } from '../Checkbox/Checkbox';
 import { Image } from '../Image/Image';
 import type { CalloutBannerProps } from './CalloutBanner';
 import {
@@ -41,6 +42,35 @@ const Template: Story<CalloutBannerProps> = ({ ...args }) => (
                     </div>
                 </div>
             </CalloutContentGroup>
+        </CalloutBanner>
+    </div>
+);
+
+const TemplateSecondary: Story<CalloutBannerProps> = ({ ...args }) => (
+    <div className="o-container">
+        <CalloutBanner {...args}>
+            <CalloutContentGroup>
+                <Checkbox
+                    id="career-kickstart"
+                    name="Add career kickstart package"
+                    value="Add career kickstart package"
+                    size="xl"
+                />
+            </CalloutContentGroup>
+            <CalloutContentGroup className="t-font-l u-text-bold" willShrink>
+                £29.99
+            </CalloutContentGroup>
+
+            <CalloutFooter asChild>
+                <div className="c-content">
+                    <div className="c-content__inner c-content__inner--left">
+                        <p>
+                            For the smartest way to get your career off the ground.{' '}
+                            <a href="#">Read more</a>
+                        </p>
+                    </div>
+                </div>
+            </CalloutFooter>
         </CalloutBanner>
     </div>
 );
@@ -129,6 +159,12 @@ const HasFooterTemplate: Story<CalloutBannerProps> = ({ ...args }) => (
 
 export const Primary = Template.bind({});
 Primary.args = {};
+
+export const Secondary = TemplateSecondary.bind({});
+Secondary.args = {
+    ...Primary.args,
+    variant: 'secondary',
+};
 
 export const HasButton = TemplateHasButton.bind({});
 HasButton.args = {
