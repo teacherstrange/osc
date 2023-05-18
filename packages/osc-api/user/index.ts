@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { Client } from '@hubspot/api-client';
 
-import type { GetUserByEmailFn, GetUserByIdFn } from './types';
+import type { GetEmailData, GetUserByEmailFn, GetUserByIdFn } from './types';
 export * from './types';
 
 const prisma = new PrismaClient();
@@ -12,12 +12,12 @@ export const hubspotClient = () => {
     });
 };
 
-export const sendEmail = async (token: string, email: string) => {
+export const sendEmail: GetEmailData = async (emailData) => {
     const hubspot = hubspotClient();
     const message = {
-        "from": "jonathan.hall@openstudycollege.com",
-        "to": "jonathan.hall@openstudycollege.com",
-        "sendId": "testsend",
+        // "from": "jonathan.hall@openstudycollege.com",
+        "to": emailData.to,
+        "sendId": emailData.sendId,
         "replyTo": [
             "jonathan.hall@openstudycollege.com"
         ],
@@ -28,19 +28,17 @@ export const sendEmail = async (token: string, email: string) => {
             "jonathan.hall@openstudycollege.com"
         ]
     }
-    const url = 'https://openstudycollege.com/signin/' + token;
     const customProperties = {
-        "name": email,
-        "token": token,
-        "url": url
+        "name": emailData.to,
+        "token": emailData.token,
+        "url": emailData.url
     }
-    console.log('next step');
-    // To Do - Match token to a url link for magic key and add it to the body of the email
-    const PublicSingleSendRequestEgg = { emailId: 69147599060, message, customProperties };
+    // To Do - Format cod eto allow email function to be reusable 
+    const PublicSingleSendRequestEgg = { emailId: emailData.emailId, message, customProperties };
     try {
         const apiResponse = await hubspot.marketing.transactional.singleSendApi.sendEmail(PublicSingleSendRequestEgg);
         console.log(JSON.stringify(apiResponse, null, 2));
-        return apiResponse;
+        return 'Email request sent to HubSpot';
     } catch (error: unknown) {
         console.error('Error in transactionEmailRequest', error);
         let message = 'Uknown Error';
