@@ -4,7 +4,7 @@ import { defineField, defineType } from 'sanity';
 import ShopifyIcon from '../../components/icons/Shopify';
 import ProductHiddenInput from '../../components/inputs/ProductHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
-import { MODULES } from '../../constants.js';
+import { PRODUCT_MODULES } from '../../constants.js';
 import { getPriceRange } from '../../utils/getPriceRange';
 
 const GROUPS = [
@@ -65,7 +65,7 @@ export default defineType({
             title: 'Upper Page content',
             description: 'Content that sits next to the add to cart form.',
             type: 'array',
-            of: MODULES,
+            of: PRODUCT_MODULES,
             group: 'editorial',
         }),
         defineField({
@@ -73,7 +73,7 @@ export default defineType({
             title: 'Modules',
             description: 'Lower page content.',
             type: 'array',
-            of: MODULES,
+            of: PRODUCT_MODULES,
             group: 'editorial',
         }),
         // Shopify product

@@ -6,13 +6,6 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
       name
       value
     }
-    image {
-      id
-      url
-      altText
-      width
-      height
-    }
     price {
       amount
       currencyCode
@@ -30,6 +23,31 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
     product {
       title
       handle
+    }
+  }
+`;
+
+const PRODUCT_CARD_FRAGMENT = `#graphql
+  ${PRODUCT_VARIANT_FRAGMENT}
+  fragment ProductCard on Product {
+    id
+    title
+    publishedAt
+    handle
+    options {
+      name
+      values
+    }
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    variants(first: 1) {
+      nodes {
+        ...ProductVariantFragment
+      }
     }
   }
 `;
@@ -60,5 +78,18 @@ export const PRODUCT_QUERY = `#graphql
             }
         }
     }
+  }
+`;
+
+export const RECOMMENDED_PRODUCTS_QUERY = `#graphql
+    ${PRODUCT_CARD_FRAGMENT}
+    query productRecommendations(
+        $productId: ID!
+        $country: CountryCode
+        $language: LanguageCode
+    ) @inContext(country: $country, language: $language) {
+        recommended: productRecommendations(productId: $productId) {
+            ...ProductCard
+        }
   }
 `;

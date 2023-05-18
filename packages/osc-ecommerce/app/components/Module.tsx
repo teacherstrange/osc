@@ -33,6 +33,7 @@ import type {
     heroModule,
     imageModule,
     module,
+    recommendedProductsModule,
     tabsModule,
     textGridModule,
     trustpilotModule,
@@ -45,6 +46,7 @@ import { CarouselModule } from './Carousel/Carousel';
 import { ContentMediaModule } from './ContentMedia/ContentMedia';
 import { Forms } from './Forms/Forms';
 import { Hero } from './Hero/Hero';
+import { RecommendedProducts } from './RecommendedProducts/RecommendedProducts';
 import { TabsModule } from './Tabs/Tabs';
 import { TextGridModule } from './TextGrid/TextGrid';
 import { VideoPlayerModule } from './VideoPlayer/VideoPlayer';
@@ -109,6 +111,7 @@ export const getComponentStyles = (data: SanityPage) => {
                 break;
 
             case 'module.cards':
+            case 'module.recommendedProducts':
                 styles.push(
                     { rel: 'stylesheet', href: cardStyles },
                     { rel: 'stylesheet', href: carouselStyles },
@@ -298,6 +301,16 @@ export default function Module(props: Props) {
             const moduleTabs = module as tabsModule;
 
             return <TabsModule module={moduleTabs} key={moduleTabs._key} />;
+
+        case 'module.recommendedProducts':
+            const moduleRecommendedProducts = module as recommendedProductsModule;
+
+            return (
+                <RecommendedProducts
+                    module={moduleRecommendedProducts}
+                    key={moduleRecommendedProducts._key}
+                />
+            );
 
         default:
             return null;

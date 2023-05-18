@@ -11,7 +11,7 @@ import { useIntersectionObserver } from 'osc-ui';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import radioStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';
-import { lazy, useRef, useState } from 'react';
+import { lazy, useRef } from 'react';
 import type { DynamicLinksFunction } from 'remix-utils';
 import invariant from 'tiny-invariant';
 import { ProductForm } from '~/components/Forms/ProductForm/ProductForm';
@@ -23,7 +23,10 @@ import { PreviewBanner } from '~/components/PreviewBanner';
 import priceStyles from '~/components/Price/price.css';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
-import { PRODUCT_QUERY as SHOPIFY_PRODUCT_QUERY } from '~/queries/shopify/product';
+import {
+    RECOMMENDED_PRODUCTS_QUERY,
+    PRODUCT_QUERY as SHOPIFY_PRODUCT_QUERY,
+} from '~/queries/shopify/product';
 import productStyles from '~/styles/product.css';
 import type { SanityProduct } from '~/types/sanity';
 import { getUniqueObjects } from '~/utils/getUniqueObjects';
@@ -75,6 +78,12 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
         },
     });
 
+    const recommendedProducts = await storefront.query<{
+        recommended: ProductType[];
+    }>(RECOMMENDED_PRODUCTS_QUERY, {
+        variables: { productId: product.id },
+    });
+
     // Query the page data
     const data = await getPageData({
         request,
@@ -104,6 +113,7 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
     return json({
         page,
         product,
+        recommendedProducts,
         isPreview,
         canonicalUrl,
         hubspotFormData: hubspotFormData ? hubspotFormData : null,
@@ -142,12 +152,6 @@ export default function Index() {
         threshold: 0,
     });
     const formIsIntersecting = productFormIntersection?.isIntersecting;
-
-    // If `preview` mode is active, its component updates this state for us
-    const [data, setData] = useState<SanityProduct>(page);
-
-    // Make sure to update the page state if the IDs are different!
-    if (page?._id !== data?._id) setData(page);
 
     // Due how the data is setup in Shopify there are times where we might return the same SKU multiple times
     // Here we are checking if there are any SKUs and then filtering out duplicates

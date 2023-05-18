@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from '@portabletext/types';
+import type { Product as ProductType } from '@shopify/hydrogen/storefront-api-types';
 import type { Maybe, Spacing, Themes } from 'osc-ui/src/types';
 import type { ImgHTMLAttributes } from 'react';
 
@@ -155,7 +156,7 @@ export interface bioCardModule extends module {
     };
 }
 
-export interface courseCardModule extends module {
+export interface courseCardModule extends module, ProductType {
     reference?: {
         _createdAt: string;
         _id: string;
@@ -314,6 +315,16 @@ export interface tabsModule extends module {
         modules: module[] | contentModule[];
         title: string;
     }[];
+}
+
+export interface recommendedProductsModule extends module {
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
+    backgroundColor?: Themes | string;
+    numberOfProducts: number;
+    heading?: string;
+    carouselSettings?: carouselModuleSettings;
 }
 
 export interface SanitySEO {

@@ -25,7 +25,7 @@ const Card = (props: { card: TypesOfCard }) => {
             return <BioCard data={card as bioCardModule} key={card._key} />;
 
         case 'card.course':
-            return <CourseCard data={card as courseCardModule} key={card._key} />;
+            return <CourseCard product={card as courseCardModule} key={card._key} />;
 
         case 'card.collection':
             return <CollectionCard data={card as collectionCardModule} key={card._key} />;

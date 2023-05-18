@@ -44,6 +44,9 @@ export const MODULES = [
     { type: 'module.video' },
 ];
 
+// References to include in 'modules' array in product documents
+export const PRODUCT_MODULES = [...MODULES, { type: 'module.recommendedProducts' }];
+
 // Space values to use in the 'spacing' field type
 export const SPACING = ['2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'];
 
