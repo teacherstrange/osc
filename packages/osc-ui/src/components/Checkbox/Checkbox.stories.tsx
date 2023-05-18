@@ -52,6 +52,7 @@ const Template: Story = ({ variations }) => {
                         ref={variation.ref ? selectRef : null}
                         value={variation.value}
                         variants={variation.variants}
+                        size={variation.size}
                     />
                 </CheckboxGroup>
             </div>
@@ -189,4 +190,48 @@ Validation.parameters = {
             story: 'Validation styling for the Checkbox',
         },
     },
+};
+
+XL.args = {
+    variations: [
+        {
+            id: 'call-1',
+            name: 'contact',
+            state: 'default',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+        {
+            defaultChecked: true,
+            id: 'call-2',
+            name: 'contact',
+            state: 'selectedOption',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+        {
+            id: 'call-3',
+            name: 'contact',
+            ref: true,
+            state: 'hasFocus',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+        {
+            id: 'call-4',
+            name: 'contact',
+            required: true,
+            state: 'hasValidation',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+        {
+            disabled: true,
+            id: 'call-5',
+            name: 'contact',
+            state: 'isDisabled',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+    ],
 };

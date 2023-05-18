@@ -1,22 +1,33 @@
 /* stylelint-disable selector-class-pattern */
 @use "sass:math";
 @use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
 @layer components {
     // Sizes
     $checkbox-width: 1.25;
     $checkbox-height: 1.25;
+    $checkbox-width-xl: 2;
+    $checkbox-height-xl: 2;
 
     .c-checkbox {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: #{$checkbox-width}rem;
-        height: #{$checkbox-height}rem;
         background-color: var(--color-tertiary);
         border: 1px solid var(--color-quinary);
         cursor: pointer;
+
+        &--m {
+            width: #{$checkbox-width}rem;
+            height: #{$checkbox-height}rem;
+        }
+
+        &--xl {
+            width: #{$checkbox-width-xl}rem;
+            height: #{$checkbox-height-xl}rem;
+        }
 
         &__description {
             flex: 1 100%;
@@ -27,10 +38,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: #{math.div(1, $checkbox-width)}rem;
-            height: #{math.div(1, $checkbox-height)}rem;
             background: var(--color-primary);
             color: var(--color-tertiary);
+
+            &--m {
+                width: #{math.div(1, $checkbox-width)}rem;
+                height: #{math.div(1, $checkbox-height)}rem;
+            }
+
+            &--xl {
+                width: #{math.div($checkbox-width-xl, 1.45)}rem;
+                height: #{math.div($checkbox-height-xl, 1.45)}rem;
+            }
         }
 
         &__group-container {
@@ -68,6 +87,12 @@
                     flex: 1 100%;
                     padding-top: $space-xs;
                     color: var(--color-error);
+                }
+            }
+
+            &--xl {
+                @include mq($mq-mob-l, max) {
+                    align-items: flex-start;
                 }
             }
 
