@@ -1,3 +1,36 @@
+## [0.90.0](https://github.com/Open-Study-College/osc/compare/v0.89.0...v0.90.0) (2023-05-18)
+
+
+### ♻️ Refactors
+
+* **carousel:** set default slides per page ([5101f3a](https://github.com/Open-Study-College/osc/commit/5101f3adcf0ccf4a09b1149dfa55a48f6bcac58d))
+* **course cards:** update cards to take data from Shopify as well as Sanity ([946e8b2](https://github.com/Open-Study-College/osc/commit/946e8b22db842eaaba25c7ccebe4e142d4410916))
+* **types:** extend course card from product type ([9147dac](https://github.com/Open-Study-College/osc/commit/9147dac1fbe38c0d19ab858b5d8ef5211f4634b6))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* remove unused code ([5d88c73](https://github.com/Open-Study-College/osc/commit/5d88c7332161617647f3e3050d625807c0d75e06))
+* update comment on useRecommendedProducts ([dd95eb0](https://github.com/Open-Study-College/osc/commit/dd95eb0a4ea6dedaba0594c341a2032e11b863d1))
+
+
+### ✨ Features
+
+* **products:** adds query for recommended products ([40b7244](https://github.com/Open-Study-College/osc/commit/40b7244ef0274af076b205443a7798564209af22))
+* **products page:** adds recommended products query ([fdef248](https://github.com/Open-Study-College/osc/commit/fdef2487e0a2bab1f5c90e1da53b55386de73e6f))
+* **recommended products:** adds carousel settings to sanity object ([b3b47c1](https://github.com/Open-Study-College/osc/commit/b3b47c1ce855172cf1dd0d8926f1516e58388a4f))
+* **recommended products:** adds rec products object to studio ([314ac0e](https://github.com/Open-Study-College/osc/commit/314ac0ea9c928d4e65c58031cc613c739fecf949))
+* **recommended products:** adds recommended products component ([39ccdbc](https://github.com/Open-Study-College/osc/commit/39ccdbcde308a115b21ca591322fcd41ebd57b27))
+* **recommended products:** adds tests for recommended products component ([b5cac3e](https://github.com/Open-Study-College/osc/commit/b5cac3ec321250a2c373f1978611380c871cd0b7))
+* **recommended products:** adds useRecommendedProducts hook ([13272f5](https://github.com/Open-Study-College/osc/commit/13272f577305605616b58fd2e08ad142e30476c9))
+* **recommended products:** update filter to handle course options option ([51f5a10](https://github.com/Open-Study-College/osc/commit/51f5a109577ff0d0c12e31048cb31cfc4f4809f1))
+* **sanity:** adds a PRODUCT_MODULES constant ([cf58371](https://github.com/Open-Study-College/osc/commit/cf5837196edbcf294c380953ba7d5dcc8f7ca515))
+
+
+### 🧪 Tests
+
+* improve test cases ([74d33d8](https://github.com/Open-Study-College/osc/commit/74d33d8bced6a5fe8f39a8761983650dc47a0b8f))
+
 ## [0.89.0](https://github.com/Open-Study-College/osc/compare/v0.88.0...v0.89.0) (2023-05-18)
 
 
@@ -76,11 +109,4 @@
 
 * add 'o-container--full' class ([8d8323e](https://github.com/Open-Study-College/osc/commit/8d8323e5f07bf71bd229edd10d38fe717d48cfc6))
 * set "flush" class when fullWidth is set to true ([031d36a](https://github.com/Open-Study-College/osc/commit/031d36a15c4ba876b41897f56825aa97f7c0cb9c))
-
-## [0.86.3](https://github.com/Open-Study-College/osc/compare/v0.86.2...v0.86.3) (2023-05-16)
-
-
-### 🐛 Bugs
-
-* add ternary to ensure textToCopy always has text ([75434c0](https://github.com/Open-Study-College/osc/commit/75434c0f48cf0438503bc66d9cfc1e93fbdd894f))
 
