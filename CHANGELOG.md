@@ -1,3 +1,34 @@
+## [0.89.0](https://github.com/Open-Study-College/osc/compare/v0.88.0...v0.89.0) (2023-05-18)
+
+
+### 🐛 Bugs
+
+* **content media:** add missing property to image ([d790199](https://github.com/Open-Study-College/osc/commit/d790199f9bf95cf4d8bd32d4d9b094eba07a8af5))
+
+
+### ✨ Features
+
+* **card:** adds image styles ([f63c853](https://github.com/Open-Study-College/osc/commit/f63c8535f0054e4e761d266397570c3efe0dbc50))
+* **cards:** add data from post hero into blog card ([fa2a7ab](https://github.com/Open-Study-College/osc/commit/fa2a7ab8d9376731b084dc7c7b0ded128fccc5fa))
+* **carousel:** adds image styles ([95cb242](https://github.com/Open-Study-College/osc/commit/95cb2423b29f3c2fd18b883153a68197ac03b454))
+* **collection:** add theme and featured image to collection settings ([8ce7bc5](https://github.com/Open-Study-College/osc/commit/8ce7bc527c60721ba435c630bc1ec247b7316276))
+* **collection card:** pull image settings from Sanity ([2488257](https://github.com/Open-Study-College/osc/commit/24882572c1c0bcb596af5e1241ebb71530e60951))
+* **content media:** adds image styles ([4a788b7](https://github.com/Open-Study-College/osc/commit/4a788b754ed8cb0bbb489cdfd5d00b85c469f8dd))
+* **hero:** adds image styles ([e1d3113](https://github.com/Open-Study-College/osc/commit/e1d311336281b75c2b0c628594120be7cc8063d7))
+* **image:** adds image styles to Image Modules ([bd0f15b](https://github.com/Open-Study-College/osc/commit/bd0f15bc4535faf900a1cff53ff32938c89de049))
+* **studio:** add theme controls to post ([321adf4](https://github.com/Open-Study-College/osc/commit/321adf42108b4d53b1327187482648ff0722092b))
+* **studio:** adds css image controls to image object in Sanity ([c302e8f](https://github.com/Open-Study-College/osc/commit/c302e8fc72b9972813ffaeb5c63c35c329a4e83f))
+* **video:** add image styles to video player preview image ([afd4c80](https://github.com/Open-Study-College/osc/commit/afd4c80472f5e334f96afab80bb9704e912cd569))
+
+
+### ♻️ Refactors
+
+* **cards:** add condition to only load image if image src is truthy ([c039b17](https://github.com/Open-Study-College/osc/commit/c039b17e3fd9943b85376fe762b605ed7f6160f7))
+* **cards:** adds optional chain to heroData ([5cdb45e](https://github.com/Open-Study-College/osc/commit/5cdb45e222f607d219866dceb0b1f3c52b51b30e))
+* **cards:** apply mix-blend-mode to featured card ([28782d9](https://github.com/Open-Study-College/osc/commit/28782d9818ec2cc15197cfc0d798334e31f209a9))
+* **studio:** move theme into it's own object ([336ba05](https://github.com/Open-Study-College/osc/commit/336ba05af483111b2db963e6a3f95a022eaa592c))
+* **studio:** remove background colour option from card ([bdb1f98](https://github.com/Open-Study-College/osc/commit/bdb1f985f6c1529f84dab38f1d96ee55ca3a30c3))
+
 ## [0.88.0](https://github.com/Open-Study-College/osc/compare/v0.87.0...v0.88.0) (2023-05-16)
 
 
@@ -52,22 +83,4 @@
 ### 🐛 Bugs
 
 * add ternary to ensure textToCopy always has text ([75434c0](https://github.com/Open-Study-College/osc/commit/75434c0f48cf0438503bc66d9cfc1e93fbdd894f))
-
-## [0.86.2](https://github.com/Open-Study-College/osc/compare/v0.86.1...v0.86.2) (2023-05-16)
-
-
-### ♻️ Refactors
-
-* **accordion:** adds accordionContext to allow us to pass variant prop through ([72aa68e](https://github.com/Open-Study-College/osc/commit/72aa68e4e465d80c0f9e5a540590bcc09da5e260))
-* **accordion:** update styles so every element has a variant modifier ([b4928cc](https://github.com/Open-Study-College/osc/commit/b4928cc20573abf7dad7980ebf8cf16e2fad1405))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **accordion story:** update storybook to showcase nested primary ([ad891ec](https://github.com/Open-Study-College/osc/commit/ad891ec7a629d11f81c5e197b1bf76164f02f46e))
-
-
-### 🧪 Tests
-
-* **accordion:** update test to check for all variants ([2bc073f](https://github.com/Open-Study-College/osc/commit/2bc073fc87492dffd43cedd218207946cf0a8f4b))
 
