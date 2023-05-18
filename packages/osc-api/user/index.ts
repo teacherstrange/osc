@@ -15,18 +15,8 @@ export const hubspotClient = () => {
 export const sendEmail: GetEmailData = async (emailData) => {
     const hubspot = hubspotClient();
     const message = {
-        // "from": "jonathan.hall@openstudycollege.com",
         "to": emailData.to,
         "sendId": emailData.sendId,
-        "replyTo": [
-            "jonathan.hall@openstudycollege.com"
-        ],
-        "cc": [
-            "jonathan.hall@openstudycollege.com"
-        ],
-        "bcc": [
-            "jonathan.hall@openstudycollege.com"
-        ]
     }
     const customProperties = {
         "name": emailData.to,
