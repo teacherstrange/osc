@@ -1,0 +1,20 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+@layer components {
+    $line-item-spacing: $space-m;
+
+    .c-line-item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: solid 1px var(--color-neutral-400);
+        margin-block-start: $line-item-spacing;
+        padding-block-end: $line-item-spacing;
+
+        &__header {
+            font-size: $fs-m;
+            line-height: 1;
+        }
+    }
+}
