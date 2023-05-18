@@ -1,6 +1,8 @@
 import groq from 'groq';
+import { PATHS } from '~/constants';
 import { LINK_EXTERNAL } from '../linkExternal';
 import { LINK_INTERNAL } from '../linkInternal';
+import { MODULE_IMAGES } from './images';
 
 export const MODULE_CARDS = groq`
     ...,
@@ -19,14 +21,44 @@ export const MODULE_CARDS = groq`
           _key,
           _type,
           variant,
-          reference->
+          reference->{
+            store,
+            theme {
+                color,
+                pattern,
+            },
+            "featuredImage": {
+                ${MODULE_IMAGES}
+            },
+            "slug": "/${PATHS.COLLECTIONS}/" + store.slug.current,
+          }
         },
         _type == 'card.post' => {
           _key,
           _type,
           backgroundColor,
           fullWidth,
-          reference->
+          reference->{
+            title,
+            theme {
+                color
+            },
+            "featuredImage": {
+                ${MODULE_IMAGES}
+            },
+            modules[] {
+                (_type == "module.hero") => {
+                    slides[0] {
+                        titleColor,
+                        backgroundColor,
+                        "image": {
+                            ${MODULE_IMAGES}
+                        }
+                    }
+                }
+            },
+            "slug": "/${PATHS.BLOG}/" + slug.current,
+          },
         },
         _type == 'card.static' => {
             _key,

@@ -14,7 +14,8 @@ export const MODULE_VIDEO = groq`
             "src": coalesce(derived[0].secure_url, secure_url),
             "width": width,
             "height": height,
-        }
+        },
+        imageStyles
     },
     videoSettings,
     videoType,

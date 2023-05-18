@@ -284,10 +284,15 @@ $card-fs-3xl: $fs-3xl;
                 color: var(--color-septenary);
                 grid-template-rows: 1fr;
 
+                &:not(.is-full) {
+                    min-height: 460px;
+                }
+
                 #{$self}__img {
                     grid-row: 1;
                     grid-column: 1;
                     align-self: stretch;
+                    mix-blend-mode: multiply;
 
                     &,
                     .o-img {
@@ -328,7 +333,7 @@ $card-fs-3xl: $fs-3xl;
                 }
 
                 #{$self}__subttl {
-                    color: var(--color-septenary);
+                    color: inherit;
                 }
 
                 #{$self}__footer {

@@ -33,6 +33,10 @@ export const SimpleCard = (props: Props) => {
                             alt={data?.image?.alt}
                             width={data?.image?.image?.width}
                             height={data?.image?.image?.height}
+                            fit="cover"
+                            overlayColor={data?.image?.imageStyles?.overlayColor}
+                            isGrayScale={data?.image?.imageStyles?.grayscale}
+                            hasTransparency={data?.image?.imageStyles?.opacity}
                         />
                     ) : null}
                 </CardImage>

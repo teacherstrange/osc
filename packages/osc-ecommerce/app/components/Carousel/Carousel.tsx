@@ -52,6 +52,9 @@ export const CarouselModule = (props: { module: carouselModule }) => {
                                 ? slide?.image?.responsiveImages
                                 : undefined
                         }
+                        overlayColor={slide?.image?.imageStyles?.overlayColor}
+                        isGrayScale={slide?.image?.imageStyles?.grayscale}
+                        hasTransparency={slide?.image?.imageStyles?.opacity}
                         className="o-img--contain"
                     />
                 ) : null

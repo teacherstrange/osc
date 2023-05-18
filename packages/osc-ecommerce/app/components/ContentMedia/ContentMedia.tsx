@@ -200,7 +200,10 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
                                 width={media?.image?.width}
                                 height={media?.image?.height}
                                 alt={media?.image?.alt}
-                                className={`o-img--${media?.imageFit}`}
+                                fit={media?.imageFit}
+                                overlayColor={media?.image?.imageStyles?.overlayColor}
+                                isGrayScale={media?.image?.imageStyles?.grayscale}
+                                hasTransparency={media?.image?.imageStyles?.opacity}
                                 key={media?.image?._key}
                             />
                         );
@@ -220,7 +223,10 @@ const ContentMediaBlockModule = (props: ContentMediaBlockProps) => {
                     width={media?.mediaType[0]?.image?.width}
                     height={media?.mediaType[0]?.image?.height}
                     alt={media?.mediaType[0]?.image?.alt}
-                    className={`o-img--${media?.mediaType[0]?.imageFit}`}
+                    fit={media?.mediaType[0]?.imageFit}
+                    overlayColor={media?.mediaType[0]?.image?.imageStyles?.overlayColor}
+                    isGrayScale={media?.mediaType[0]?.image?.imageStyles?.grayscale}
+                    hasTransparency={media?.mediaType[0]?.image?.imageStyles?.opacity}
                 />
             );
         } else if (media?.mediaType[0]?._type === 'module.forms') {

@@ -13,6 +13,10 @@ const GROUPS = [
         title: 'Editorial',
     },
     {
+        name: 'settings',
+        title: 'Settings',
+    },
+    {
         name: 'shopifySync',
         title: 'Shopify sync',
         icon: ShopifyIcon,
@@ -57,14 +61,6 @@ export default defineType({
             type: 'proxyString',
             options: { field: 'store.slug.current' },
         }),
-        // Show hero
-        defineField({
-            name: 'showHero',
-            title: 'Show hero',
-            type: 'boolean',
-            description: 'If disabled, page title will be displayed instead',
-            group: 'editorial',
-        }),
         // Modules
         defineField({
             name: 'modules',
@@ -87,6 +83,19 @@ export default defineType({
             title: 'SEO',
             type: 'seo.shopify',
             group: 'seo',
+        }),
+        // SETTINGS
+        defineField({
+            name: 'theme',
+            title: 'Theme',
+            type: 'theme',
+            group: 'settings',
+        }),
+        defineField({
+            name: 'image',
+            title: 'Featured Image',
+            type: 'image.desktop',
+            group: 'settings',
         }),
     ],
     orderings: [

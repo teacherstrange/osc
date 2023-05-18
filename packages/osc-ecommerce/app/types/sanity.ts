@@ -37,6 +37,11 @@ export interface imageModule<T> extends SanityImage<T> {
     }[];
     secure_url?: string;
     sizes?: string | undefined;
+    imageStyles?: {
+        overlayColor?: string;
+        grayscale?: boolean;
+        opacity?: boolean;
+    };
 }
 
 export interface module {
@@ -93,13 +98,14 @@ export interface contentMediaSlide extends module {
     media: {
         carouselName: Maybe<string>;
         carouselSettings: carouselModuleSettings;
+        imageFit?: 'cover' | 'contain';
         mediaType: {
-            image?: imageModule<HTMLImageElement>;
-            imageFit?: 'cover' | 'contain';
             _key?: string;
             _type?: string;
             formId?: string;
             formName?: string;
+            imageFit?: 'cover' | 'contain';
+            image?: imageModule<HTMLImageElement>;
         }[];
     };
 }
@@ -161,8 +167,13 @@ export interface courseCardModule extends module {
 }
 
 export interface collectionCardModule extends module {
-    reference?: {
+    reference: {
         store?: shopifyCollection;
+        theme?: {
+            color?: string;
+        };
+        featuredImage?: imageModule<HTMLImageElement>;
+        slug: string;
     };
     variant?: 'sm' | 'md' | 'lg';
 }
@@ -170,10 +181,18 @@ export interface collectionCardModule extends module {
 export interface postCardModule extends module {
     fullWidth?: boolean;
     backgroundColor?: string;
-    reference?: {
-        slug?: {
-            current: string;
+    reference: {
+        theme?: {
+            color?: string;
         };
+        modules?: {
+            slides?: {
+                backgroundColor?: string;
+                titleColor?: string;
+                image?: imageModule<HTMLImageElement>;
+            };
+        }[];
+        slug: string;
         title?: string;
     };
 }
@@ -190,6 +209,11 @@ export interface staticCardModule extends module {
     image?: {
         alt: string;
         image?: Omit<imageModule<HTMLImageElement>, 'alt' | 'src'>;
+        imageStyles?: {
+            overlayColor?: string;
+            grayscale?: boolean;
+            opacity?: boolean;
+        };
     };
     showFooter?: boolean;
     showSubHeading?: boolean;

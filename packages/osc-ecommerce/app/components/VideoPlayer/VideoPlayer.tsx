@@ -21,10 +21,17 @@ export const VideoPlayerModule = (props: Props) => {
                 module?.videoImage?.src ? (
                     <Image
                         src={module?.videoImage?.src}
-                        artDirectedImages={module?.videoImage?.responsiveImages}
+                        artDirectedImages={
+                            module?.videoImage?.responsiveImages
+                                ? module?.videoImage?.responsiveImages
+                                : undefined
+                        }
                         alt={module?.videoImage?.alt}
                         width={module?.videoImage?.width}
                         height={module?.videoImage?.height}
+                        overlayColor={module?.videoImage?.imageStyles?.overlayColor}
+                        isGrayScale={module?.videoImage?.imageStyles?.grayscale}
+                        hasTransparency={module?.videoImage?.imageStyles?.opacity}
                     />
                 ) : undefined
             }
