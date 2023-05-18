@@ -12,7 +12,8 @@ import type {
     UserPermissionsFn,
     UserProfileFn,
     UserRolesFn,
-    CreateUserSetupFn
+    CreateUserSetupFn,
+    VerifyLinkFn
 
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
@@ -60,9 +61,24 @@ export const createSetup: CreateUserSetupFn = async (input) => {
     });
     // Generate magic key token
     const userToken = await token.magicKey(userCreate.id);
+    const url = `https://openstudycollege.com/signin?token = ${userToken}`;
+    const sendId = Date.now().toString();
     // Send email via hubspot api
-    await sendEmail(userToken, userCreate.email);
+    const emailData = { 'token': userToken, 'to': "jonathan.hall@openstudycollege.com", 'from': "jonathan.hall@openstudycollege.com", 'emailId': 69285064430, 'url': url, 'sendId': sendId }
+    await sendEmail(emailData);
     return userCreate;
+}
+
+export const verifyLink: VerifyLinkFn = async (magicKeyToken) => {
+    // Verfiy the incoming token
+    const tokenCheck = await token.verifyToken(magicKeyToken);
+    if (tokenCheck === 0) {
+        return new Error('No valid login link');
+    }
+    // Get user details for pre pop
+    const userDet = await get(tokenCheck);
+    return userDet;
+
 }
 
 export const login: LoginFn = async (input) => {

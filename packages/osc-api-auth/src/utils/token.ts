@@ -2,12 +2,11 @@ import { PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql/error';
 import jwt from 'jsonwebtoken';
 import { env } from '~/types/environment';
-import type { AccessTokenFn, RefreshAccessFn, RefreshTokenFn, MagicKeyTokenFn } from '~/types/functions';
-import type { RefreshToken } from '~/types/interfaces';
+import type { AccessTokenFn, RefreshAccessFn, RefreshTokenFn, MagicKeyTokenFn, VerifyFn } from '~/types/functions';
+import type { RefreshToken, MagicToken } from '~/types/interfaces';
 import { permissions } from './account';
 
 const prisma = new PrismaClient();
-
 
 export const magicKey: MagicKeyTokenFn = async (userId) => {
     const payload = {
@@ -17,10 +16,9 @@ export const magicKey: MagicKeyTokenFn = async (userId) => {
     return jwt.sign(payload, env.JWT_SECRET!, {
         algorithm: 'HS256',
         audience: env.JWT_AUDIENCE,
-        expiresIn: 3600
+        expiresIn: 10800
     });
 }
-
 
 export const access: AccessTokenFn = async (userId) => {
     const payload = {
@@ -89,3 +87,21 @@ export const refreshAccess: RefreshAccessFn = async (refreshToken) => {
         return new Error(`Invalid token: ${error}`);
     }
 };
+
+export const verifyToken: VerifyFn = async (magicKeyToken) => {
+    try {
+        const decoded = jwt.verify(magicKeyToken, env.JWT_SECRET!, {
+            algorithms: ['HS256'],
+            audience: env.JWT_AUDIENCE
+        }) as MagicToken
+
+        if (decoded == undefined) {
+            return 0;
+        }
+        const { user } = decoded;
+        return user.id;
+
+    } catch (error) {
+        return 0;
+    }
+}

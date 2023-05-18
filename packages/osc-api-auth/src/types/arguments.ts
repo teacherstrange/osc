@@ -44,3 +44,7 @@ export type loginArgs = {
 export type refreshAccessArgs = {
     readonly refreshToken: string;
 };
+
+export type magicKeyArgs = {
+    readonly magicKeyToken: string;
+}

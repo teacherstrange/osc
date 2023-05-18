@@ -15,3 +15,9 @@ export interface RefreshToken extends JwtPayload {
         readonly id: number;
     };
 }
+
+export interface MagicToken extends JwtPayload {
+    readonly user: {
+        readonly id: number;
+    }
+}

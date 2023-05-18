@@ -16,6 +16,8 @@ export type RefreshAccessFn = (refreshToken: string) => Promise<{ accessToken: s
 export type AccessTokenFn = (userId: number) => Promise<string>;
 export type RefreshTokenFn = (userId: number) => Promise<string>;
 export type MagicKeyTokenFn = (userId: number) => Promise<string>;
+export type VerifyFn = (magicKeyToken: string) => Promise<number>;
+export type VerifyLinkFn = (magicKeyToken: string) => Promise<User | Error | null>;
 
 export type UserProfileFn = (userId: number) => Promise<{
     avatar: UserAvatar | null;
