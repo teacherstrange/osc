@@ -7,7 +7,7 @@ import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 /* -------------------------------------------------------------------------------------------------
  * Row
  * A structural element that allows containerisation of objects and components while also
- * applying vertical rhythym of said components. Grid elements can be used within the row object.
+ * applying vertical rhythm of said components. Grid elements can be used within the row object.
  * -----------------------------------------------------------------------------------------------*/
 
 interface RowProps extends ComponentPropsWithoutRef<'div'> {
