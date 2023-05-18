@@ -26,6 +26,7 @@ export type createUserSetupInput = {
     readonly firstName: string;
     readonly lastName: string;
     readonly email: string;
+    readonly courses: [];
 }
 
 export type createUserSetupArgs = {

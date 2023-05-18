@@ -107,6 +107,7 @@ export const typeDefs = gql`
         firstName: String! @constraint(maxLength: 128)
         lastName: String! @constraint(maxLength: 128)
         email: String! @constraint(format: "email", maxLength: 255)
+        courses: [Int]
     }
 
     input loginInput {

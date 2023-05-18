@@ -66,6 +66,16 @@ export const createSetup: CreateUserSetupFn = async (input) => {
     // Send email via hubspot api
     const emailData = { 'token': userToken, 'to': "jonathan.hall@openstudycollege.com", 'from': "jonathan.hall@openstudycollege.com", 'emailId': 69285064430, 'url': url, 'sendId': sendId }
     await sendEmail(emailData);
+    if (input.courses) {
+        for (var i = 0; i < input.courses.length; i++) {
+            await prisma.userCourseInterest.create({
+                data: {
+                    userId: userCreate.id,
+                    courseId: (input.courses[i])
+                }
+            })
+        }
+    }
     return userCreate;
 }
 
