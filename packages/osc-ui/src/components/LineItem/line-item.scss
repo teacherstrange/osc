@@ -7,14 +7,30 @@
 
     .c-line-item {
         display: flex;
-        justify-content: space-between;
-        border-bottom: solid 1px var(--color-neutral-400);
         margin-block-start: $line-item-spacing;
         padding-block-end: $line-item-spacing;
+        border-bottom: solid 1px var(--color-neutral-400);
+
+        &--primary {
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
+
+        &--secondary {
+            flex-direction: column;
+        }
 
         &__header {
-            font-size: $fs-m;
-            line-height: 1;
+            &--primary {
+                font-size: $fs-m;
+                line-height: 1;
+            }
+
+            &--secondary {
+                color: var(--color-neutral-700);
+                font-size: $fs-s;
+                font-weight: $fw-bold;
+            }
         }
     }
 }
