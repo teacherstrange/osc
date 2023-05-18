@@ -1,5 +1,5 @@
 import type { LinkDescriptor } from '@remix-run/node';
-import { Content, Image, Trustpilot } from 'osc-ui';
+import { Image, Trustpilot } from 'osc-ui';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
@@ -44,6 +44,7 @@ import { getUniqueObjects } from '~/utils/getUniqueObjects';
 import { AccordionModule } from './Accordion/Accordion';
 import { Cards } from './Cards/Cards';
 import { CarouselModule } from './Carousel/Carousel';
+import { ContentModule } from './Content/Content';
 import { ContentMediaModule } from './ContentMedia/ContentMedia';
 import { Forms } from './Forms/Forms';
 import { Hero } from './Hero/Hero';
@@ -224,30 +225,7 @@ export default function Module(props: Props) {
         case 'module.content':
             const moduleContent = module as contentModule;
 
-            return moduleContent.body ? (
-                <article
-                    className={`o-container ${
-                        isFlush || moduleContent.fullWidth
-                            ? 'o-container--flush o-container--full'
-                            : ''
-                    }`}
-                >
-                    <Content
-                        align={moduleContent.horizontalAlignment}
-                        backgroundColor={
-                            moduleContent.backgroundColor
-                                ? moduleContent.backgroundColor
-                                : undefined
-                        }
-                        marginBottom={moduleContent.marginBottom}
-                        paddingBottom={moduleContent.paddingBottom}
-                        paddingTop={moduleContent.paddingTop}
-                        value={moduleContent.body}
-                        fullWidth={moduleContent.fullWidth ? moduleContent.fullWidth : undefined}
-                        buttons={moduleContent.buttons}
-                    />
-                </article>
-            ) : null;
+            return <ContentModule module={moduleContent} isFlush={isFlush} />;
 
         case 'module.forms':
             const moduleForm = module as formModule;
