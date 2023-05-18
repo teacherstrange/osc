@@ -117,9 +117,23 @@ Secondary.args = {
     ...Primary.args,
     variant: 'secondary',
 };
+Secondary.parameters = {
+    docs: {
+        description: {
+            story: 'The secondary variant changes the direction of the children into a single column and makes the header smaller.',
+        },
+    },
+};
 
 export const Tertiary = TemplateTertiary.bind({});
 Tertiary.args = {
     ...Primary.args,
     variant: 'tertiary',
+};
+Tertiary.parameters = {
+    docs: {
+        description: {
+            story: 'Tertiary is a similar variant to primary, but simplifies some of the styles. This is better used in conjunction with utility classes to refine the look.',
+        },
+    },
 };
