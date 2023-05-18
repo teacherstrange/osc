@@ -21,7 +21,7 @@ export interface LineItemProps extends SharedLineItemProps, ComponentPropsWithou
      *  Sets the variant modifier for the header
      * @default primary
      */
-    variant?: 'primary' | 'secondary';
+    variant?: 'primary' | 'secondary' | 'tertiary';
 }
 
 const LineItemContext = createContext(null);

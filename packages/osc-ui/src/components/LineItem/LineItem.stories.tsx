@@ -74,6 +74,31 @@ const TemplateSecondary: Story<LineItemProps> = ({ ...args }) => (
     </div>
 );
 
+const TemplateTertiary: Story<LineItemProps> = ({ ...args }) => (
+    <div style={{ maxWidth: '340px' }}>
+        <LineItem {...args}>
+            <LineItemHeader className="t-font-m u-mb-0 u-color-neutral-700 u-text-reg">
+                Delivery
+            </LineItemHeader>
+
+            <LineItemPrice asChild>
+                <Price>
+                    <span className="t-font-m u-text-bold u-color-neutral-700">Free</span>
+                </Price>
+            </LineItemPrice>
+        </LineItem>
+        <LineItem {...args}>
+            <LineItemHeader className="t-font-l u-text-bold u-mb-0">Total</LineItemHeader>
+
+            <LineItemPrice asChild>
+                <Price>
+                    <span className="t-font-l u-text-bold">£59.99</span>
+                </Price>
+            </LineItemPrice>
+        </LineItem>
+    </div>
+);
+
 export const Primary = Template.bind({});
 Primary.args = {
     variant: 'primary',
@@ -83,4 +108,10 @@ export const Secondary = TemplateSecondary.bind({});
 Secondary.args = {
     ...Primary.args,
     variant: 'secondary',
+};
+
+export const Tertiary = TemplateTertiary.bind({});
+Tertiary.args = {
+    ...Primary.args,
+    variant: 'tertiary',
 };
