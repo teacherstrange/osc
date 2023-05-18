@@ -3,36 +3,56 @@
 
 @layer components {
     $banner-bg: var(--color-neutral-300);
+    $banner-bg-secondary: var(--color-tertiary);
     $banner-fg: var(--color-nonary);
+    $banner-fg-secondary: var(--color-secondary);
     $banner-py: $space-xl;
     $banner-py-s: $space-s;
     $banner-px: $space-m;
+    $banner-px-s: $space-s;
     $banner-px-l: $space-xl;
     $banner-content-max-w: 40ch;
     $banner-breakpoint: 1137;
     $banner-img-width: 330px; // Set a fixed width so the image doesn't cause the banner to resize when loading
+    $banner-border-width: 6px;
+    $banner-gradient: var(--color-gradient-quaternary-90);
 
     .c-callout-banner {
         display: flex;
-        flex-direction: column;
         max-width: 100%;
-        padding: $banner-py $banner-px;
-        background-color: $banner-bg;
-        color: $banner-fg;
         margin-inline: auto;
         gap: $space-m;
-
-        @include mq($mq-tab-l) {
-            flex-flow: row wrap;
-            align-items: center;
-            width: fit-content; // make sure banner is constrained to the width of it's children
-            padding: $banner-py-s $banner-px-l;
-        }
 
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
         p,
         li {
             margin-block-end: 0;
+        }
+
+        &--primary {
+            flex-direction: column;
+            padding: $banner-py $banner-px;
+            background-color: $banner-bg;
+            color: $banner-fg;
+
+            @include mq($mq-tab-l) {
+                flex-flow: row wrap;
+                align-items: center;
+                width: fit-content; // make sure banner is constrained to the width of it's children
+                padding: $banner-py-s $banner-px-l;
+            }
+        }
+
+        &--secondary {
+            flex-wrap: wrap;
+            align-items: center;
+            row-gap: 0;
+            padding: $banner-py-s $banner-px-s;
+            background-color: $banner-bg-secondary;
+            border: $banner-border-width solid;
+            color: $banner-fg-secondary;
+            border-image-slice: 1;
+            border-image-source: $banner-gradient;
         }
 
         &__ttl {
@@ -77,12 +97,15 @@
         }
 
         &__footer {
-            margin-block-start: $space-xs;
             flex: 100%;
             font-size: $fs-s;
 
-            @include mq($mq-tab-l) {
-                text-align: right;
+            &--primary {
+                margin-block-start: $space-xs;
+
+                @include mq($mq-tab-l) {
+                    text-align: right;
+                }
             }
         }
 
