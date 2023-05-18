@@ -72,10 +72,10 @@ export const createSetup: CreateUserSetupFn = async (input) => {
 export const verifyLink: VerifyLinkFn = async (magicKeyToken) => {
     // Verfiy the incoming token
     const tokenCheck = await token.verifyToken(magicKeyToken);
-    if (tokenCheck === 0) {
-        return new Error('No valid login link');
-    }
     // Get user details for pre pop
+    if (tokenCheck == 'Fail') {
+        return new Error('No valid login link')
+    }
     const userDet = await get(tokenCheck);
     return userDet;
 

@@ -96,12 +96,12 @@ export const verifyToken: VerifyFn = async (magicKeyToken) => {
         }) as MagicToken
 
         if (decoded == undefined) {
-            return 0;
+            return 'Fail';
         }
         const { user } = decoded;
         return user.id;
 
     } catch (error) {
-        return 0;
+        return 'Fail';
     }
 }
