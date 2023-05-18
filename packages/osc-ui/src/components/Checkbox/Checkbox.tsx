@@ -120,7 +120,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                         {icon ? <Icon id={icon.id} className={icon.className} /> : null}
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
-                <Label name={value} htmlFor={id} />
+                <Label name={value} htmlFor={id} size={size} />
             </div>
         );
     }

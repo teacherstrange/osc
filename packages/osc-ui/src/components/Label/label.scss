@@ -6,7 +6,6 @@
 @layer components {
     .c-label {
         color: var(--color-neutral-700);
-        font-weight: $fw-reg;
         cursor: pointer;
 
         &__required {
@@ -14,6 +13,15 @@
         }
 
         &--bold {
+            font-weight: $fw-bold;
+        }
+
+        &--m {
+            font-weight: $fw-reg;
+        }
+
+        &--xl {
+            font-size: $fs-l;
             font-weight: $fw-bold;
         }
     }
