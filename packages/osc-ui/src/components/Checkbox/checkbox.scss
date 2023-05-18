@@ -61,6 +61,10 @@
             align-items: center;
 
             &--secondary {
+                .c-label {
+                    font-weight: $fw-bold;
+                }
+
                 .c-checkbox {
                     &[data-state="checked"] {
                         border: none;
@@ -73,6 +77,12 @@
                     &__indicator {
                         width: 100%;
                         height: 100%;
+                    }
+
+                    &[data-state="unchecked"] {
+                        + .c-label {
+                            color: var(--color-neutral-700);
+                        }
                     }
                 }
             }
@@ -96,6 +106,7 @@
                 }
             }
 
+            /* stylelint-disable-next-line no-descending-specificity */
             .c-label {
                 flex: 1;
                 padding-left: $space-xs;
@@ -115,6 +126,7 @@
             background-color: var(--color-quinary);
             pointer-events: none;
 
+            /* stylelint-disable-next-line no-descending-specificity */
             + .c-label {
                 color: var(--color-neutral-500);
                 pointer-events: none;
