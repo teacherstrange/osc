@@ -1,6 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import type { ComponentPropsWithoutRef } from 'react';
 import React from 'react';
+import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 
 import './callout-banner.scss';
@@ -49,11 +50,25 @@ export interface CalloutContentGroupProps extends SharedProps, ComponentPropsWit
      * Merges its props onto its immediate child
      */
     asChild?: boolean;
+    /**
+     * Sets the flex property to auto
+     * By default it's fixed to 1 so it doesn't shrink, setting this to true will allow it to shrink if needed
+     * @default false
+     */
+    willShrink?: boolean;
 }
 
 export const CalloutContentGroup = (props: CalloutContentGroupProps) => {
-    const { asChild, children, className } = props;
-    const classes = classNames('c-callout-banner__content-group', className);
+    const { asChild, children, willShrink = false, className } = props;
+
+    const flexModifier = useModifier('c-callout-banner__content-group', 'shrink');
+
+    const classes = classNames(
+        'c-callout-banner__content-group',
+        willShrink ? flexModifier : '',
+        className
+    );
+
     const Component = asChild ? Slot : 'div';
 
     return <Component className={classes}>{children}</Component>;

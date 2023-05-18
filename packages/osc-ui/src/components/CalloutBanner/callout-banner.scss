@@ -57,9 +57,14 @@
 
         &__content-group {
             flex: 1;
+            margin-block-end: 0;
 
             @include mq($mq-desk-m) {
                 max-width: $banner-content-max-w;
+            }
+
+            &--shrink {
+                flex: 0;
             }
         }
 
