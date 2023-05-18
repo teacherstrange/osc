@@ -120,14 +120,25 @@ export interface CalloutFooterProps extends SharedProps, ComponentPropsWithoutRe
      * Merges its props onto its immediate child
      */
     asChild?: boolean;
+    /**
+     * Offsets the footer to the right
+     * @default false
+     */
+    isOffset?: boolean;
 }
 
 export const CalloutFooter = (props: CalloutFooterProps) => {
-    const { asChild, children, className } = props;
+    const { asChild, children, isOffset, className } = props;
     const { variant } = useBannerContext();
 
+    const offsetModifier = useModifier('c-callout-banner__footer', 'offset');
     const variantModifier = useModifier('c-callout-banner__footer', variant);
-    const classes = classNames('c-callout-banner__footer', variantModifier, className);
+    const classes = classNames(
+        'c-callout-banner__footer',
+        variantModifier,
+        isOffset ? offsetModifier : '',
+        className
+    );
 
     const Component = asChild ? Slot : 'div';
 

@@ -16,6 +16,7 @@
     $banner-img-width: 330px; // Set a fixed width so the image doesn't cause the banner to resize when loading
     $banner-border-width: 6px;
     $banner-gradient: var(--color-gradient-quaternary-90);
+    $banner-footer-offset: 44px;
 
     .c-callout-banner {
         display: flex;
@@ -106,6 +107,10 @@
                 @include mq($mq-tab-l) {
                     text-align: right;
                 }
+            }
+
+            &--offset {
+                padding-inline-start: $banner-footer-offset;
             }
         }
 
