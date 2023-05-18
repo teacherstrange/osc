@@ -142,6 +142,8 @@ export const validateAndSubmitHubspotForm = async (
 export const getHubspotForms = async (page: SanityPage) => {
     let forms: formModule[] = [];
 
+    if (!page.modules) return;
+
     // If contentMedia has any forms then push them to forms array
     page.modules.forEach((module) => {
         const mod = module as contentMediaModule;
