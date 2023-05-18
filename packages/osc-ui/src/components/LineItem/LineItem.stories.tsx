@@ -4,16 +4,24 @@ import { Button } from '../Button/Button';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Price } from '../Price/Price';
 import type { LineItemProps } from './LineItem';
-import { LineItem, LineItemHeader, LineItemPrice } from './LineItem';
+import { LineItem, LineItemGroup, LineItemHeader, LineItemPrice } from './LineItem';
 
 export default {
-    title: 'osc-ui/Cart/LineItem',
+    title: 'osc-ui/Cart/Line Item',
     component: LineItem,
-    subcomponents: { LineItemHeader, LineItemPrice },
+    subcomponents: { LineItemGroup, LineItemHeader, LineItemPrice },
     parameters: {
         docs: {
             description: {
-                component: '',
+                component:
+                    'The Line Item component is used to display an item in the cart or the deliver and total price.',
+            },
+        },
+    },
+    argTypes: {
+        variant: {
+            control: {
+                type: 'select',
             },
         },
     },
@@ -22,12 +30,12 @@ export default {
 const Template: Story<LineItemProps> = ({ ...args }) => (
     <div style={{ maxWidth: '340px' }}>
         <LineItem {...args}>
-            <div>
+            <LineItemGroup>
                 <LineItemHeader className="u-mb-0">A level Biology</LineItemHeader>
                 <Button variant="quaternary" className="u-text-underline">
                     Remove
                 </Button>
-            </div>
+            </LineItemGroup>
 
             <LineItemPrice asChild>
                 <Price>
@@ -44,7 +52,7 @@ const TemplateSecondary: Story<LineItemProps> = ({ ...args }) => (
         <LineItem {...args}>
             <LineItemHeader>Additional options</LineItemHeader>
 
-            <div className="o-flex o-flex--between">
+            <LineItemGroup className="o-flex o-flex--between">
                 <Checkbox
                     id="checkbox-1"
                     name="Career kickstart package"
@@ -56,9 +64,9 @@ const TemplateSecondary: Story<LineItemProps> = ({ ...args }) => (
                 <Price>
                     <span className="t-font-m">£29.99</span>
                 </Price>
-            </div>
+            </LineItemGroup>
 
-            <div className="o-flex o-flex--between">
+            <LineItemGroup className="o-flex o-flex--between">
                 <Checkbox
                     id="checkbox-2"
                     name="Course replacement cover"
@@ -69,7 +77,7 @@ const TemplateSecondary: Story<LineItemProps> = ({ ...args }) => (
                 <Price>
                     <span className="t-font-m">£29.99</span>
                 </Price>
-            </div>
+            </LineItemGroup>
         </LineItem>
     </div>
 );

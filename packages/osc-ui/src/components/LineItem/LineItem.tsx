@@ -45,12 +45,13 @@ export const LineItem = (props: LineItemProps) => {
 export interface LineItemHeaderProps extends SharedLineItemProps, ComponentPropsWithoutRef<'h3'> {
     /**
      * Merges its props onto its immediate child
+     * @default false
      */
     asChild?: boolean;
 }
 
 export const LineItemHeader = (props: LineItemHeaderProps) => {
-    const { asChild, children, className } = props;
+    const { asChild = false, children, className } = props;
     const { variant } = useLineItemContext();
 
     const variantModifier = useModifier('c-line-item__header', variant);
@@ -62,17 +63,41 @@ export const LineItemHeader = (props: LineItemHeaderProps) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
+ * Line Item Group
+ * -----------------------------------------------------------------------------------------------*/
+export interface LineItemGroupProps extends SharedLineItemProps, ComponentPropsWithoutRef<'div'> {
+    /**
+     * Merges its props onto its immediate child
+     * @default false
+     */
+    asChild?: boolean;
+}
+
+export const LineItemGroup = (props: LineItemGroupProps) => {
+    const { asChild = false, children, className } = props;
+    const { variant } = useLineItemContext();
+
+    const variantModifier = useModifier('c-line-item__group', variant);
+    const classes = classNames('c-line-item__group', variantModifier, className);
+
+    const Component = asChild ? Slot : 'div';
+
+    return <Component className={classes}>{children}</Component>;
+};
+
+/* -------------------------------------------------------------------------------------------------
  * Line Item Price
  * -----------------------------------------------------------------------------------------------*/
 export interface LineItemPriceProps extends SharedLineItemProps, ComponentPropsWithoutRef<'div'> {
     /**
      * Merges its props onto its immediate child
+     * @default false
      */
     asChild?: boolean;
 }
 
 export const LineItemPrice = (props: LineItemPriceProps) => {
-    const { asChild, children, className } = props;
+    const { asChild = false, children, className } = props;
     const { variant } = useLineItemContext();
 
     const variantModifier = useModifier('c-line-item__price', variant);
