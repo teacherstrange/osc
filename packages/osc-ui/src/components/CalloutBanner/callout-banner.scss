@@ -16,7 +16,7 @@
     $banner-img-width: 330px; // Set a fixed width so the image doesn't cause the banner to resize when loading
     $banner-border-width: 6px;
     $banner-gradient: var(--color-gradient-quaternary-90);
-    $banner-footer-offset: 44px;
+    $banner-offset: 44px;
 
     .c-callout-banner {
         display: flex;
@@ -45,15 +45,20 @@
         }
 
         &--secondary {
-            flex-wrap: wrap;
-            align-items: center;
-            row-gap: 0;
+            flex-direction: column;
+            gap: $space-2xs;
             padding: $banner-py-s $banner-px-s;
             background-color: $banner-bg-secondary;
             border: $banner-border-width solid;
             color: $banner-fg-secondary;
             border-image-slice: 1;
             border-image-source: $banner-gradient;
+
+            @include mq($mq-mob-m) {
+                flex-flow: row wrap;
+                align-items: center;
+                gap: 0;
+            }
         }
 
         &__ttl {
@@ -80,12 +85,18 @@
             flex: 1;
             margin-block-end: 0;
 
-            @include mq($mq-desk-m) {
-                max-width: $banner-content-max-w;
+            &--primary {
+                @include mq($mq-desk-m) {
+                    max-width: $banner-content-max-w;
+                }
             }
 
             &--shrink {
                 flex: 0;
+            }
+
+            &--offset {
+                padding-inline-start: $banner-offset;
             }
         }
 
@@ -110,7 +121,7 @@
             }
 
             &--offset {
-                padding-inline-start: $banner-footer-offset;
+                padding-inline-start: $banner-offset;
             }
         }
 

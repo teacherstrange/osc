@@ -57,16 +57,16 @@ const TemplateSecondary: Story<CalloutBannerProps> = ({ ...args }) => (
                     size="xl"
                 />
             </CalloutContentGroup>
-            <CalloutContentGroup className="t-font-l u-text-bold" willShrink>
+            <CalloutContentGroup className="t-font-l u-text-bold" willShrink isOffset>
                 £29.99
             </CalloutContentGroup>
 
-            <CalloutFooter asChild>
+            <CalloutFooter asChild isOffset>
                 <div className="c-content">
                     <div className="c-content__inner c-content__inner--left">
                         <p>
                             For the smartest way to get your career off the ground.{' '}
-                            <a href="#">Read more</a>
+                            <a href="/">Read more</a>
                         </p>
                     </div>
                 </div>

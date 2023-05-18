@@ -76,18 +76,25 @@ export interface CalloutContentGroupProps extends SharedProps, ComponentPropsWit
      * @default false
      */
     willShrink?: boolean;
+    /**
+     * Offsets the footer to the right
+     * @default false
+     */
+    isOffset?: boolean;
 }
 
 export const CalloutContentGroup = (props: CalloutContentGroupProps) => {
-    const { asChild, children, willShrink = false, className } = props;
+    const { asChild, children, willShrink = false, isOffset = false, className } = props;
     const { variant } = useBannerContext();
 
+    const offsetModifier = useModifier('c-callout-banner__content-group', 'offset');
     const variantModifier = useModifier('c-callout-banner__content-group', variant);
     const flexModifier = useModifier('c-callout-banner__content-group', 'shrink');
 
     const classes = classNames(
         'c-callout-banner__content-group',
         willShrink ? flexModifier : '',
+        isOffset ? offsetModifier : '',
         variantModifier,
         className
     );
@@ -128,7 +135,7 @@ export interface CalloutFooterProps extends SharedProps, ComponentPropsWithoutRe
 }
 
 export const CalloutFooter = (props: CalloutFooterProps) => {
-    const { asChild, children, isOffset, className } = props;
+    const { asChild, children, isOffset = false, className } = props;
     const { variant } = useBannerContext();
 
     const offsetModifier = useModifier('c-callout-banner__footer', 'offset');
