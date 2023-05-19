@@ -2,6 +2,7 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { Button } from '../Button/Button';
 import { Carousel } from '../Carousel/Carousel';
+import { heroPrimary, heroSecondary } from '../Flourishes/patterns';
 import { Image } from '../Image/Image';
 import type { HeroProps } from './Hero';
 import { Hero, HeroContent, HeroImage, HeroInner, HeroTitle, HeroTitleGroup } from './Hero';
@@ -33,7 +34,11 @@ export default {
 
 const Template: Story<HeroProps> = ({ ...args }) => (
     <Hero {...args}>
-        <HeroInner>
+        <HeroInner
+            flourishColor="tertiary"
+            flourishPattern={heroPrimary}
+            flourishVariant="hero-primary"
+        >
             <HeroTitle>Save on your study</HeroTitle>
             <HeroContent>
                 <div className="c-content">
@@ -125,7 +130,11 @@ const CarouselTemplate: Story<HeroProps> = () => (
         autoPlaySpeed={3000}
     >
         <Hero backgroundColor="gradient-nonary-270" variant="primary">
-            <HeroInner>
+            <HeroInner
+                flourishColor="tertiary"
+                flourishPattern={heroPrimary}
+                flourishVariant="hero-primary"
+            >
                 <HeroTitle>Save on your study</HeroTitle>
                 <HeroContent>
                     <div className="c-content">
@@ -154,7 +163,11 @@ const CarouselTemplate: Story<HeroProps> = () => (
         </Hero>
 
         <Hero backgroundColor="tertiary" variant="secondary" flourishColor="gradient-quaternary-90">
-            <HeroInner>
+            <HeroInner
+                flourishColor="multicolor"
+                flourishPattern={heroSecondary}
+                flourishVariant="hero-secondary"
+            >
                 <HeroTitle>Prospectus</HeroTitle>
 
                 <HeroContent>

@@ -12,7 +12,7 @@
     $hero-space-m: calc($space-m * 2);
     $hero-space-l: $space-5xl;
     $hero-ttl-border: 3px solid currentcolor;
-    $hero-content-border: 3px solid;
+    $hero-content-border: 3px solid var(--color-tertiary);
     $hero-grid-outer: clamp(16px, 2.5vw, 40px);
     $hero-inner-grid-cols: repeat(12, 1fr);
     $hero-inner-grid-rows: 2;
@@ -28,17 +28,6 @@
 
         @include mq($mq-mob-l) {
             grid-template-rows: $hero-grid-outer 1fr $hero-grid-outer;
-        }
-
-        @each $name, $value in color-token("default") {
-            &#{$self}__flourish--#{$name} &__content {
-                @if string.index($name, "gradient") {
-                    border-image-slice: 1;
-                    border-image-source: var(--color-#{$name});
-                } @else {
-                    border-color: var(--color-#{$name});
-                }
-            }
         }
 
         &__background {

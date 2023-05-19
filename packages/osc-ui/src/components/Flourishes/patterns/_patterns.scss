@@ -1,0 +1,551 @@
+/*
+ * Positioning object for the primary pattern
+ */
+
+$patterns: (
+    primary: (
+        1: (
+            top: 58.05px,
+            left: 36%,
+            transform: rotate(107.45deg)
+        ),
+        2: (
+            top: 2.5%,
+            left: 50%,
+            transform: rotate(-58.55deg)
+        ),
+        3: (
+            top: 0,
+            left: 97%,
+            transform: rotate(47.17deg)
+        ),
+        4: (
+            top: 332.59px,
+            left: 70%,
+            transform: rotate(106.35deg)
+        ),
+        5: (
+            top: 366.28px,
+            left: 88%,
+            transform: rotate(-73.13deg)
+        ),
+        6: (
+            top: 739px,
+            left: 70%,
+            transform: rotate(-116deg)
+        ),
+        7: (
+            top: 845px,
+            left: 97%,
+            transform: rotate(47deg)
+        ),
+        8: (
+            top: 1035px,
+            left: 57%,
+            transform: rotate(-58.55deg)
+        ),
+        9: (
+            top: 1256px,
+            left: 105%,
+            transform: rotate(47.17deg)
+        ),
+        10: (
+            top: 1494px,
+            left: 81.5%,
+            transform: rotate(-58.55deg)
+        ),
+        11: (
+            top: 2175px,
+            left: 76.5%,
+            transform: rotate(-116deg)
+        ),
+        12: (
+            top: 2006px,
+            left: 8%,
+            transform: rotate(-106deg)
+        ),
+        13: (
+            top: 1706px,
+            left: 0,
+            transform: rotate(-70.6deg)
+        )
+    ),
+    secondary: (
+        1: (
+            transform: rotate(105deg),
+            left: 10%,
+            top: 78.56px
+        ),
+        2: (
+            transform: rotate(-136.58deg),
+            left: 48%,
+            top: 157px
+        ),
+        3: (
+            transform: rotate(-132.83deg),
+            left: 90%,
+            top: 222px
+        ),
+        4: (
+            transform: rotate(-60.43deg),
+            left: 80%,
+            top: 441px
+        ),
+        5: (
+            transform: rotate(-60.43deg),
+            left: 33%,
+            top: 421px
+        ),
+        6: (
+            transform: rotate(-136.58deg),
+            left: 4.5%,
+            top: 777px
+        ),
+        7: (
+            transform: rotate(-106.68deg),
+            left: 9.5%,
+            top: 974px
+        ),
+        8: (
+            transform: rotate(116.63deg),
+            left: 57.5%,
+            top: 847px
+        ),
+        9: (
+            transform: rotate(121.45deg),
+            left: 61.5%,
+            top: 1163px
+        ),
+        10: (
+            transform: rotate(61.34deg),
+            left: 102%,
+            top: 960px
+        )
+    ),
+    hero-primary: (
+        1: (
+            transform: rotate(45deg),
+            top: 92px,
+            left: 41%,
+            breakpoints: (
+                tab: (
+                    top: 42px,
+                    left: 55%
+                )
+            )
+        ),
+        2: (
+            transform: rotate(45deg),
+            display: none,
+            breakpoints: (
+                tab: (
+                    display: initial,
+                    top: 200px,
+                    left: 60%
+                )
+            )
+        ),
+        3: (
+            transform: rotate(5deg),
+            display: none,
+            breakpoints: (
+                tab: (
+                    display: initial,
+                    top: 270px,
+                    left: 61%
+                )
+            )
+        ),
+        4: (
+            transform: rotate(-45deg),
+            top: 70px,
+            left: 46%,
+            breakpoints: (
+                tab: (
+                    top: 160px,
+                    left: 66%
+                )
+            )
+        ),
+        5: (
+            transform: rotate(70deg),
+            top: 0,
+            left: 45%,
+            breakpoints: (
+                tab: (
+                    top: 30px,
+                    left: 85%
+                )
+            )
+        ),
+        6: (
+            transform: rotate(-40deg),
+            top: 140px,
+            left: 78%,
+            breakpoints: (
+                tab: (
+                    top: 140px,
+                    left: 78%
+                )
+            )
+        ),
+        7: (
+            transform: rotate(65deg),
+            top: 0,
+            left: 93%,
+            breakpoints: (
+                tab: (
+                    top: 80px,
+                    left: 93%
+                )
+            )
+        ),
+        8: (
+            transform: rotate(-40deg),
+            top: 200px,
+            left: 92%,
+            breakpoints: (
+                tab: (
+                    top: 200px,
+                    left: 92%
+                )
+            )
+        )
+    ),
+    hero-secondary: (
+        1: (
+            transform: rotate(45deg),
+            display: none,
+            breakpoints: (
+                tab: (
+                    display: initial,
+                    left: 60%,
+                    top: 50px
+                )
+            )
+        ),
+        2: (
+            transform: rotate(-60deg),
+            display: none,
+            breakpoints: (
+                tab: (
+                    display: initial,
+                    left: 63%,
+                    top: 120px
+                )
+            )
+        ),
+        3: (
+            transform: rotate(60deg),
+            top: 0,
+            left: 100%,
+            breakpoints: (
+                tab: (
+                    left: 90%,
+                    top: 110px
+                )
+            )
+        ),
+        4: (
+            transform: rotate(-65deg),
+            left: 80%,
+            top: 100px,
+            breakpoints: (
+                tab: (
+                    left: 71%,
+                    top: 320px
+                )
+            )
+        ),
+        5: (
+            transform: rotate(-50deg),
+            breakpoints: (
+                tab: (
+                    left: 64%,
+                    top: 313px
+                )
+            )
+        ),
+        6: (
+            transform: rotate(50deg),
+            top: 100px,
+            left: 20%,
+            breakpoints: (
+                tab: (
+                    left: 37%,
+                    top: 250px
+                )
+            )
+        ),
+        7: (
+            transform: rotate(75deg),
+            top: 70px,
+            left: 14%,
+            breakpoints: (
+                tab: (
+                    left: 24%,
+                    top: 250px
+                )
+            )
+        ),
+        8: (
+            transform: rotate(100deg),
+            left: 140%,
+            top: 160px,
+            breakpoints: (
+                tab: (
+                    left: 24%,
+                    top: 180px
+                )
+            )
+        ),
+        9: (
+            transform: rotate(124deg),
+            breakpoints: (
+                tab: (
+                    left: 38%,
+                    top: 180px
+                )
+            )
+        )
+    ),
+    hero-tertiary: (
+        1: (
+            transform: rotate(65deg),
+            left: 40%,
+            top: 10px,
+            breakpoints: (
+                tab: (
+                    left: 40%,
+                    top: 10px
+                )
+            )
+        ),
+        2: (
+            transform: rotate(100deg),
+            left: 55%,
+            top: 70px,
+            breakpoints: (
+                tab: (
+                    left: 55%,
+                    top: 70px
+                )
+            )
+        ),
+        3: (
+            transform: rotate(-65deg),
+            left: 46%,
+            top: 290px,
+            breakpoints: (
+                tab: (
+                    left: 46%,
+                    top: 290px
+                )
+            )
+        ),
+        4: (
+            transform: rotate(-10deg),
+            left: 60%,
+            top: 20px,
+            breakpoints: (
+                tab: (
+                    left: 60%,
+                    top: 20px
+                )
+            )
+        ),
+        5: (
+            transform: rotate(50deg),
+            left: 74%,
+            top: 43px,
+            breakpoints: (
+                tab: (
+                    left: 74%,
+                    top: 43px
+                )
+            )
+        ),
+        6: (
+            transform: rotate(80deg),
+            display: none,
+            breakpoints: (
+                tab: (
+                    display: initial,
+                    left: 94%,
+                    top: 150px
+                )
+            )
+        ),
+        7: (
+            transform: rotate(140deg),
+            left: 94%,
+            top: 460px,
+            breakpoints: (
+                tab: (
+                    left: 94%,
+                    top: 460px
+                )
+            )
+        )
+    ),
+    collection-primary: (
+        1: (
+            transform: rotate(-70deg),
+            top: 50px,
+            left: 60%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        2: (
+            transform: rotate(145deg),
+            top: 70%,
+            left: 22%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-125deg),
+            top: 90%,
+            left: 41%,
+            breakpoints: (
+                tab: (
+                    left: 61%
+                )
+            )
+        )
+    ),
+    collection-secondary: (
+        1: (
+            transform: rotate(50deg),
+            top: 10%,
+            left: 90%,
+            breakpoints: (
+                tab: (
+                    left: 60%
+                )
+            )
+        ),
+        2: (
+            transform: rotate(145deg),
+            top: 100%,
+            left: 77%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-125deg),
+            top: 100%,
+            left: 0%,
+            breakpoints: (
+                tab: (
+                    left: 22%
+                )
+            )
+        )
+    ),
+    collection-tertiary: (
+        1: (
+            transform: rotate(70deg),
+            top: 10%,
+            left: 20%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        2: (
+            transform: rotate(115deg),
+            top: 70%,
+            left: 46%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-105deg),
+            top: 18%,
+            left: 72%,
+            breakpoints: (
+                tab: ()
+            )
+        )
+    ),
+    collection-quaternary: (
+        1: (
+            transform: rotate(140deg),
+            top: 93%,
+            left: 20%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        2: (
+            transform: rotate(-55deg),
+            top: 10%,
+            left: 24%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-125deg),
+            top: 108%,
+            left: 42%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        4: (
+            transform: rotate(245deg),
+            top: 40%,
+            left: 57%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        5: (
+            transform: rotate(65deg),
+            top: 60%,
+            left: 106%,
+            breakpoints: (
+                tab: ()
+            )
+        )
+    ),
+    collection-quinary: (
+        1: (
+            transform: rotate(140deg),
+            top: 25%,
+            left: 20%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        2: (
+            transform: rotate(200deg),
+            top: 90%,
+            left: 20%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        3: (
+            transform: rotate(-225deg),
+            top: 58%,
+            left: 62%,
+            breakpoints: (
+                tab: ()
+            )
+        ),
+        4: (
+            transform: rotate(-145deg),
+            top: 80%,
+            left: 87%,
+            breakpoints: (
+                tab: ()
+            )
+        )
+    )
+);

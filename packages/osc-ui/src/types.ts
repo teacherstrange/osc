@@ -46,6 +46,24 @@ export type Columns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 export type Maybe<T> = T | null | undefined;
 
+// FLourishes
+export type FlourishWidths = '1/16' | '2/16' | '3/16';
+export type FlourishHeights = '4/16' | '8/16' | '12/16' | '16/16';
+export type FlourishVariants = 'primary' | 'secondary';
+
+export interface TransformPattern {
+    initial: {
+        rotate: number;
+    };
+}
+
+export interface FlourishObject extends TransformPattern {
+    size: {
+        w: FlourishWidths;
+        h: FlourishHeights;
+    };
+}
+
 // StrictUnion type allows us to set up props that are mutually exclusive
 // For example if you have a prop called isSuccess and isError, you can't have both
 // Using this helper you can set up the type to only allow one of the two at a time

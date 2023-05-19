@@ -2,6 +2,8 @@ import type { Meta, Story } from '@storybook/react';
 import React from 'react';
 import { truncate } from '../../utils/truncate';
 import { Button } from '../Button/Button';
+import { Flourishes } from '../Flourishes/Flourishes';
+import { collectionQuinary, collectionTertiary } from '../Flourishes/patterns';
 import { Icon } from '../Icon/Icon';
 import { Image } from '../Image/Image';
 import type { CardProps } from './Card';
@@ -33,12 +35,20 @@ export default {
 const SmallTemplate: Story<CardProps> = ({ ...args }) => (
     <CollectionCard {...args}>
         <CardImage>
-            <Image
-                src={collectionCardDataSml.image.secure_url}
-                alt={collectionCardDataSml.image.alt}
-                width={collectionCardDataSml.image.width}
-                height={collectionCardDataSml.image.height}
-            />
+            <Flourishes
+                color="gradient-quinary"
+                pattern={collectionQuinary}
+                variant="collection-quinary"
+                isAboveContent
+                size={120}
+            >
+                <Image
+                    src={collectionCardDataSml.image.secure_url}
+                    alt={collectionCardDataSml.image.alt}
+                    width={collectionCardDataSml.image.width}
+                    height={collectionCardDataSml.image.height}
+                />
+            </Flourishes>
         </CardImage>
         <CardInner>
             <CardHeader>
@@ -85,12 +95,19 @@ const MediumTemplate: Story<CardProps> = ({ ...args }) => (
 const LargeTemplate: Story<CardProps> = ({ ...args }) => (
     <CollectionCard {...args}>
         <CardImage>
-            <Image
-                src={collectionCardData.image.secure_url}
-                alt={collectionCardData.image.alt}
-                width={collectionCardData.image.width}
-                height={collectionCardData.image.height}
-            />
+            <Flourishes
+                color="gradient-primary"
+                pattern={collectionTertiary}
+                variant="collection-tertiary"
+                isAboveContent
+            >
+                <Image
+                    src={collectionCardData.image.secure_url}
+                    alt={collectionCardData.image.alt}
+                    width={collectionCardData.image.width}
+                    height={collectionCardData.image.height}
+                />
+            </Flourishes>
         </CardImage>
         <CardInner>
             <CardHeader>

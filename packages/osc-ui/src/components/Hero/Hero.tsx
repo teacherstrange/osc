@@ -1,14 +1,12 @@
 import type { ElementType, ReactNode } from 'react';
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useRef } from 'react';
 import { useModifier } from '../../hooks/useModifier';
-import type { PolymorphicComponentProps } from '../../types';
+import type { FlourishObject, PolymorphicComponentProps } from '../../types';
 import { classNames } from '../../utils/classNames';
 
+import { translateNodes } from '../../utils/handleMouseEvents';
+import { Flourishes } from '../Flourishes/Flourishes';
 import './hero.scss';
-
-/*
-TODO: Add animated flourishes
-*/
 
 export interface SharedHeroProps {
     /**
@@ -34,25 +32,13 @@ export interface HeroProps extends SharedHeroProps {
      * @default primary
      */
     variant?: 'primary' | 'secondary' | 'tertiary';
-    /**
-     * Sets the colour of the flourishes and the border details on mobile
-     * @default tertiary
-     */
-    flourishColor?: string;
 }
 
 export const Hero = (props: HeroProps) => {
-    const {
-        backgroundColor,
-        children,
-        className,
-        variant = 'primary',
-        flourishColor = 'tertiary',
-    } = props;
+    const { backgroundColor, children, className, variant = 'primary' } = props;
     const variantModifier = useModifier('c-hero', variant);
-    const flourishModifier = useModifier('c-hero__flourish', flourishColor);
 
-    const classes = classNames('c-hero', variantModifier, flourishModifier, className);
+    const classes = classNames('c-hero', variantModifier, className);
 
     return (
         <HeroProvider variant={variant}>
@@ -62,6 +48,7 @@ export const Hero = (props: HeroProps) => {
                         backgroundColor ? `u-bg-color-${backgroundColor}` : ''
                     }`}
                 />
+
                 {children}
             </div>
         </HeroProvider>
@@ -77,10 +64,24 @@ interface HeroInnerProps extends SharedHeroProps {
      * @default false
      */
     pullRight?: boolean;
+    /**
+     * Flourish pattern to pass to the hero
+     */
+    flourishPattern?: FlourishObject[];
+    /**
+     * The colour of the flourish pattern
+     */
+    flourishColor?: string;
+    /**
+     * Adds the pattern class for the flourishes
+     */
+    flourishVariant?: string;
 }
 
 export const HeroInner = (props: HeroInnerProps) => {
-    const { children, className } = props;
+    const { children, className, flourishPattern, flourishColor, flourishVariant } = props;
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
     const classes = classNames(
         'c-hero__inner',
         'o-container',
@@ -88,7 +89,20 @@ export const HeroInner = (props: HeroInnerProps) => {
         className
     );
 
-    return <div className={classes}>{children}</div>;
+    return flourishPattern ? (
+        <Flourishes
+            color={flourishColor}
+            pattern={flourishPattern}
+            variant={flourishVariant}
+            className={classes}
+            ref={containerRef}
+            onMouseMove={(e) => translateNodes(e, containerRef, '.c-hero__img')}
+        >
+            {children}
+        </Flourishes>
+    ) : (
+        <div className={classes}>{children}</div>
+    );
 };
 
 /* -------------------------------------------------------------------------------------------------

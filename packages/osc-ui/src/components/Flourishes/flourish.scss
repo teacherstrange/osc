@@ -1,0 +1,102 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable scss/no-global-function-names */
+@use "sass:map";
+@use "sass:string";
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+@use "./patterns/patterns" as *;
+
+@layer components {
+    $flourish-timing: 0.1s;
+    $colors: color-token("default");
+    $gradients: ();
+
+    // Setup mixins to separate out nested loops
+
+    // loop over key value pairs and set them as styles
+    @mixin loop-styles($key, $val) {
+        @each $key, $value in $val {
+            #{$key}: $value;
+        }
+    }
+
+    // Loop over nested styles and setup breakpoints
+    @mixin nested-styles($styles) {
+        @each $key, $value in $styles {
+            @if $key == "breakpoints" {
+                @each $bp, $val in $value {
+                    @include mq(mq-token("#{$bp}")) {
+                        @include loop-styles($key, $val);
+                    }
+                }
+            } @else {
+                #{$key}: $value;
+            }
+        }
+    }
+
+    .c-flourish {
+        position: absolute;
+        display: block;
+        transform-origin: top left;
+        transition: transform $flourish-timing $linear;
+        pointer-events: none;
+
+        @each $name, $value in $colors {
+            &--color-#{$name} {
+                @if string.index($name, "gradient") {
+                    background-image: var(--color-#{$name});
+                } @else {
+                    background-color: var(--color-#{$name});
+                }
+            }
+        }
+
+        &--color-multicolor {
+            @each $name, $value in $colors {
+                // Only get the gradients WITHOUT the directional modifiers
+                // prettier-ignore
+                @if string.index($name, "gradient") and not
+                    string.index($name, "-90") and not
+                    string.index($name, "-180") and not
+                    string.index($name, "-270") {
+                    $gradients: map.set($gradients, $name, $value);
+                    $i: index($gradients, $name $value);
+
+                    &:nth-child(#{$i}n) {
+                        background-image: var(--color-#{$name});
+                    }
+                }
+            }
+        }
+
+        @each $pattern, $properties in $patterns {
+            &--#{$pattern} {
+                @each $n, $property in $properties {
+                    &:nth-child(#{$n}) {
+                        @include nested-styles($property);
+                    }
+                }
+            }
+        }
+
+        &__container {
+            position: absolute;
+            display: block;
+            overflow: hidden;
+            inset: 0;
+            pointer-events: none;
+
+            &--above {
+                z-index: 2;
+                mix-blend-mode: multiply;
+            }
+        }
+    }
+
+    .c-flourish-content {
+        position: relative;
+
+        @include z-index("bg");
+    }
+}
