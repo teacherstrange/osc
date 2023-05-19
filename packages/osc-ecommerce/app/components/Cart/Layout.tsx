@@ -30,16 +30,16 @@ export const CartLayout = () => {
             <header className="o-container o-grid">
                 <div className="o-grid__col o-grid__col--11 o-grid__col--start-2@tab">
                     <h1 className="t-font-secondary t-font-5xl u-pt-2xl">
-                        Your bag {linesCount ? '' : <>is empty</>}
+                        Your bag {!linesCount ? <>is empty</> : ''}
                     </h1>
                 </div>
             </header>
 
             <div className="o-container o-grid u-pb-6xl">
-                <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--start-2@tab u-hidden-until@tab">
+                <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--start-2@tab">
                     {!linesCount ? (
-                        // TODO: Can make this text CMS editable
-                        <p>
+                        // TODO: Make this text CMS editable
+                        <p className="t-font-m u-mb-0">
                             We have more than 750 courses and qualifications to choose from,
                             continue browsing and join our family of over 110,000 students today.
                         </p>
@@ -57,14 +57,25 @@ export const CartLayout = () => {
                         </>
                     ) : null}
 
-                    <Button
-                        as="link"
-                        to={`/${PATHS.WISHLIST}`}
-                        variant="tertiary"
-                        className="u-mt-m"
-                    >
-                        View Wishlist <Icon id="heart" />
-                    </Button>
+                    {linesCount ? (
+                        <Button
+                            as="link"
+                            to={`/${PATHS.WISHLIST}`}
+                            variant="tertiary"
+                            className="u-mt-m u-hidden-until@tab"
+                        >
+                            View Wishlist <Icon id="heart" />
+                        </Button>
+                    ) : (
+                        <Button
+                            as="link"
+                            to={`/${PATHS.COLLECTIONS}`}
+                            variant="secondary"
+                            className="u-mt-m u-hidden-until@tab"
+                        >
+                            Browse our courses
+                        </Button>
+                    )}
                 </div>
 
                 {linesCount ? (
@@ -87,7 +98,7 @@ export const CartLayout = () => {
                                 <CartTotal cost={cart.cost} />
                             </CardBody>
 
-                            <CardFooter>
+                            <CardFooter className="u-pt-xl">
                                 <Button as="a" href={cart.checkoutUrl} isFull>
                                     Enrol now
                                 </Button>
@@ -95,6 +106,18 @@ export const CartLayout = () => {
                         </Card>
                     </div>
                 ) : null}
+
+                <div className="o-grid__col o-grid__col--12 u-hidden-from@tab">
+                    <Button
+                        as="link"
+                        to={`/${PATHS.COLLECTIONS}`}
+                        variant="tertiary"
+                        isFull
+                        className="u-mt-l"
+                    >
+                        Add more courses <Icon id="plus" />
+                    </Button>
+                </div>
             </div>
         </>
     );

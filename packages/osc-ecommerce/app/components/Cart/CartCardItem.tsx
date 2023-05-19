@@ -1,6 +1,11 @@
 import { Link } from '@remix-run/react';
 import type { CartLine } from '@shopify/hydrogen/storefront-api-types';
+import { mediaQueries as mq } from 'osc-design-tokens';
 import {
+    Accordion,
+    AccordionHeader,
+    AccordionItem,
+    AccordionPanel,
     Button,
     ButtonGroup,
     Card,
@@ -12,7 +17,10 @@ import {
     CardTitle,
     Select,
     SelectItem,
+    rem,
+    useMediaQuery,
 } from 'osc-ui';
+import { useEffect, useState } from 'react';
 import { Price } from '~/components/Price/Price';
 import { PATHS } from '~/constants';
 
@@ -23,10 +31,19 @@ interface CartCardItemProps {
 export const CartCardItem = (props: CartCardItemProps) => {
     const { line } = props;
 
+    const isGreaterThanTab = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
+    const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState(false);
+
+    // We need this useEffect to set the showOnTab state only when the window object exists
+    // Otherwise we will receive an SSR warning telling us the markup differs from the server
+    useEffect(() => {
+        setShowOnGreaterThanTab(isGreaterThanTab);
+    }, [isGreaterThanTab]);
+
     if (typeof line.quantity === 'undefined' || !line.merchandise?.product) return null;
 
     return (
-        <li>
+        <li className={showOnGreaterThanTab ? '' : 'u-mt-2xl'}>
             <Card hasBorder isTransparent>
                 <CardInner>
                     <CardHeader>
@@ -41,13 +58,26 @@ export const CartCardItem = (props: CartCardItemProps) => {
                     </CardHeader>
 
                     <CardBody isNarrow>
-                        <p className="u-mb-l">
+                        <p className="u-mb-l u-hidden-until@tab">
                             {/* // TODO: Pull from Sanity probs */}
                             Offer information Lorem ipsum dolor sit amet, consectetur. Offer
                             information Lorem ipsum dolor sit amet, consectetur.
                         </p>
 
-                        <Options merchandise={line?.merchandise} />
+                        {showOnGreaterThanTab ? (
+                            <Options merchandise={line?.merchandise} />
+                        ) : (
+                            <Accordion collapsible type="single" variant="quaternary">
+                                <AccordionItem value="0">
+                                    <AccordionHeader asChild as="h2" icon="chevron">
+                                        View options
+                                    </AccordionHeader>
+                                    <AccordionPanel>
+                                        <Options merchandise={line?.merchandise} />
+                                    </AccordionPanel>
+                                </AccordionItem>
+                            </Accordion>
+                        )}
                     </CardBody>
 
                     <CardFooter className="u-pt-xl">
