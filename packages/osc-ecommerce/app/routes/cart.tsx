@@ -12,7 +12,9 @@ import { Button, Card, CardBody, CardFooter, CardTitle, Icon } from 'osc-ui';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import lineItemStyles from 'osc-ui/dist/src-components-LineItem-line-item.css';
+import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import invariant from 'tiny-invariant';
+import { CartCardItem } from '~/components/Cart/CartCardItem';
 import { CartTotal } from '~/components/Cart/CartTotal';
 import { CartLineItem } from '~/components/Cart/LineItem';
 import { PATHS } from '~/constants';
@@ -26,6 +28,7 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: cardStyles },
         { rel: 'stylesheet', href: lineItemStyles },
+        { rel: 'stylesheet', href: selectStyles },
     ];
 };
 
@@ -133,14 +136,11 @@ export default function CartRoute() {
                 <div className="o-grid__col o-grid__col--6 o-grid__col--start-2">
                     {linesCount ? (
                         <ul>
-                            {cartLines.map((line) => (
-                                <div key={line.id}>
-                                    <p>
-                                        {line?.merchandise?.product?.title} -{' '}
-                                        {line?.merchandise?.title}
-                                    </p>
-                                </div>
-                            ))}
+                            {cartLines.map((line) => {
+                                if (!line.id) return null;
+
+                                return <CartCardItem line={line} key={line.id} />;
+                            })}
                         </ul>
                     ) : (
                         // TODO: Can make this text CMS editable
