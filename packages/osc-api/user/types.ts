@@ -17,12 +17,9 @@ type UserObject = User & {
 };
 
 type emailData = {
-    token: string
     to: string
-    from: string
     emailId: number
     url: string
-    sendId: string
 }
 
 export type GetUserByIdFn = (id: number) => Promise<UserObject | null>;

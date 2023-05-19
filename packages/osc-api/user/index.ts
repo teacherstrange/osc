@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { Client } from '@hubspot/api-client';
+import { v4 as uuidv4 } from 'uuid';
 
 import type { GetEmailData, GetUserByEmailFn, GetUserByIdFn } from './types';
 export * from './types';
@@ -16,11 +17,10 @@ export const sendEmail: GetEmailData = async (emailData) => {
     const hubspot = hubspotClient();
     const message = {
         "to": emailData.to,
-        "sendId": emailData.sendId,
+        "sendId": uuidv4(),
     }
     const customProperties = {
         "name": emailData.to,
-        "token": emailData.token,
         "url": emailData.url
     }
     // To Do - Format cod eto allow email function to be reusable 
