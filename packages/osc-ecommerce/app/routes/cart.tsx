@@ -11,7 +11,10 @@ import type {
 import { Button, Card, CardBody, CardFooter, CardTitle, Icon } from 'osc-ui';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
+import lineItemStyles from 'osc-ui/dist/src-components-LineItem-line-item.css';
 import invariant from 'tiny-invariant';
+import { CartTotal } from '~/components/Cart/CartTotal';
+import { CartLineItem } from '~/components/Cart/LineItem';
 import { PATHS } from '~/constants';
 import { useCart } from '~/hooks/useCart';
 import type { CartActions } from '~/types/shopify';
@@ -22,6 +25,7 @@ export const links: LinksFunction = () => {
     return [
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: cardStyles },
+        { rel: 'stylesheet', href: lineItemStyles },
     ];
 };
 
@@ -112,7 +116,6 @@ export async function action({ request, context }: ActionArgs) {
 export default function CartRoute() {
     const cart = useCart();
     const linesCount = Boolean(cart?.lines?.edges?.length || 0);
-    console.log(cart);
 
     const cartLines = linesCount && cart?.lines ? flattenConnection(cart?.lines) : [];
 
@@ -154,20 +157,20 @@ export default function CartRoute() {
 
                 {linesCount ? (
                     <div className="o-grid__col o-grid__col--4">
-                        <Card hasShadow className="u-pt-xl u-pr-xl u-pl-xl u-pb-2xl">
+                        <Card hasShadow className="u-pt-l u-pr-l u-pl-l u-pb-2xl">
                             <CardTitle isUnderlined>Total</CardTitle>
                             <CardBody>
                                 <ul>
-                                    {cartLines.map((line) => (
-                                        <div key={line.id}>
-                                            <p>
-                                                {line?.merchandise?.product?.title} -{' '}
-                                                {line?.merchandise?.title}
-                                            </p>
-                                        </div>
-                                    ))}
+                                    {cartLines.map((line) => {
+                                        if (!line.id) return null;
+
+                                        return <CartLineItem line={line} key={line.id} />;
+                                    })}
                                 </ul>
+
+                                <CartTotal cost={cart.cost} />
                             </CardBody>
+
                             <CardFooter>
                                 <Button isFull>Enrol now</Button>
                             </CardFooter>
