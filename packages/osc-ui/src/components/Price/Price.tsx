@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import type { ReactNode } from 'react';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import type { Maybe } from '../../types';
 import { classNames } from '../../utils/classNames';
@@ -34,7 +34,7 @@ export interface PriceProps {
     size?: 'sm' | 'md';
 }
 
-export const Price = (props: PriceProps) => {
+export const Price = forwardRef<HTMLDivElement, PriceProps>((props, forwardedRef) => {
     const { children, className, compareAtPrice, sku, size = 'md' } = props;
 
     const saleModifier = useModifier('c-price', 'on-sale');
@@ -44,7 +44,7 @@ export const Price = (props: PriceProps) => {
     const itemClasses = classNames('c-price__item', sizeModifier, 'u-mb-0');
 
     return (
-        <div className={classes}>
+        <div className={classes} ref={forwardedRef}>
             <div className="o-flex">
                 <span className={itemClasses}>
                     {compareAtPrice ? (
@@ -65,4 +65,5 @@ export const Price = (props: PriceProps) => {
             {sku ? <span className="c-price__sku">Course code: {sku}</span> : null}
         </div>
     );
-};
+});
+Price.displayName = 'Price';
