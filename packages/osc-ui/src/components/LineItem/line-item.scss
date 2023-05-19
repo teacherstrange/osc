@@ -17,6 +17,11 @@
         &--tertiary {
             flex-flow: row wrap;
             justify-content: space-between;
+            column-gap: $fs-s;
+
+            @include mq($mq-mob-l) {
+                flex-wrap: nowrap;
+            }
         }
 
         &--secondary {
@@ -43,6 +48,10 @@
             &--tertiary {
                 line-height: 1;
             }
+        }
+
+        &__price {
+            flex-shrink: 0;
         }
     }
 }
