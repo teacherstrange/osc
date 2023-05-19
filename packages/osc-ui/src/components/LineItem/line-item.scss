@@ -24,6 +24,10 @@
             }
         }
 
+        &--primary {
+            align-items: flex-start;
+        }
+
         &--secondary {
             flex-direction: column;
         }
