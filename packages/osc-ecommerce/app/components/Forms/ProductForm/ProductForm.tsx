@@ -11,7 +11,7 @@ import { AlreadyInCartMessage } from '~/components/Cart/AlreadyInCartMessage';
 import { Price } from '~/components/Price/Price';
 import { useCart } from '~/hooks/useCart';
 import { isGiftVoucher } from '~/utils/storefront.helpers';
-import { AddToCart } from '../AddToCart/AddToCart';
+import { AddToCart } from '../CartActions/AddToCart';
 
 interface Product {
     product: ProductType & { selectedVariant?: ProductVariant };
