@@ -157,7 +157,7 @@ export default function CartRoute() {
 
                 {linesCount ? (
                     <div className="o-grid__col o-grid__col--4">
-                        <Card hasShadow className="u-pt-l u-pr-l u-pl-l u-pb-2xl">
+                        <Card hasShadow className="u-pt-m u-pr-l u-pl-l u-pb-2xl u-h-auto">
                             <CardTitle isUnderlined>Total</CardTitle>
                             <CardBody>
                                 <ul>

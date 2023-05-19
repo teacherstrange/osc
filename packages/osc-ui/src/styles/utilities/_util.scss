@@ -189,6 +189,12 @@ $osc-config: (
         values: (
             "rel": relative
         )
+    ),
+    height: (
+        prefix: "h",
+        values: (
+            "auto": auto
+        )
     )
 );
 
