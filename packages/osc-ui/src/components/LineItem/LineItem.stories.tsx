@@ -39,8 +39,8 @@ const Template: Story<LineItemProps> = ({ ...args }) => (
 
             <LineItemPrice asChild>
                 <Price>
-                    <p className="t-font-m u-mb-0">£15.00</p>
-                    <p className="t-font-s u-color-neutral-700 u-mb-0">Pay monthly</p>
+                    <p className="t-font-m u-mb-0 u-text-right">£15.00</p>
+                    <p className="t-font-s u-color-neutral-700 u-mb-0 u-text-right">Pay monthly</p>
                 </Price>
             </LineItemPrice>
         </LineItem>
@@ -107,6 +107,49 @@ const TemplateTertiary: Story<LineItemProps> = ({ ...args }) => (
     </div>
 );
 
+const AsChildTemplate: Story<LineItemProps> = ({ ...args }) => (
+    <ul style={{ maxWidth: '340px' }}>
+        <LineItem asChild {...args}>
+            <li>
+                <LineItemGroup>
+                    <LineItemHeader className="u-mb-0">A level Biology</LineItemHeader>
+                    <Button variant="quaternary" className="u-text-underline">
+                        Remove
+                    </Button>
+                </LineItemGroup>
+
+                <LineItemPrice asChild>
+                    <Price>
+                        <p className="t-font-m u-mb-0 u-text-right">£15.00</p>
+                        <p className="t-font-s u-color-neutral-700 u-mb-0 u-text-right">
+                            Pay monthly
+                        </p>
+                    </Price>
+                </LineItemPrice>
+            </li>
+        </LineItem>
+        <LineItem asChild {...args}>
+            <li>
+                <LineItemGroup>
+                    <LineItemHeader className="u-mb-0">AAT Level 2 and 3 Accounting</LineItemHeader>
+                    <Button variant="quaternary" className="u-text-underline">
+                        Remove
+                    </Button>
+                </LineItemGroup>
+
+                <LineItemPrice asChild>
+                    <Price>
+                        <p className="t-font-m u-mb-0 u-text-right">£1,149.00</p>
+                        <p className="t-font-s u-color-neutral-700 u-mb-0 u-text-right">
+                            Pay in full
+                        </p>
+                    </Price>
+                </LineItemPrice>
+            </li>
+        </LineItem>
+    </ul>
+);
+
 export const Primary = Template.bind({});
 Primary.args = {
     variant: 'primary',
@@ -134,6 +177,18 @@ Tertiary.parameters = {
     docs: {
         description: {
             story: 'Tertiary is a similar variant to primary, but simplifies some of the styles. This is better used in conjunction with utility classes to refine the look.',
+        },
+    },
+};
+
+export const AsListItem = AsChildTemplate.bind({});
+AsListItem.args = {
+    ...Primary.args,
+};
+AsListItem.parameters = {
+    docs: {
+        description: {
+            story: 'Each component can use the `asChild` prop to change it into a different element type. For example, add a `li` as child and pass the `asChild` prop to convert it into a list item. This helps to reduce the amount of markup generated.',
         },
     },
 };

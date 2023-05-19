@@ -22,19 +22,26 @@ export interface LineItemProps extends SharedLineItemProps, ComponentPropsWithou
      * @default primary
      */
     variant?: 'primary' | 'secondary' | 'tertiary';
+    /**
+     * Merges its props onto its immediate child
+     * @default false
+     */
+    asChild?: boolean;
 }
 
 const LineItemContext = createContext(null);
 
 export const LineItem = (props: LineItemProps) => {
-    const { children, className, variant = 'primary' } = props;
+    const { asChild = false, children, className, variant = 'primary' } = props;
 
     const variantModifier = useModifier('c-line-item', variant);
     const classes = classNames('c-line-item', variantModifier, className);
 
+    const Component = asChild ? Slot : 'div';
+
     return (
         <LineItemContext.Provider value={{ variant }}>
-            <div className={classes}>{children}</div>
+            <Component className={classes}>{children}</Component>
         </LineItemContext.Provider>
     );
 };
