@@ -81,6 +81,12 @@ export { AccessibleIcon, Icon, SpritesheetProvider } from './components/Icon/Ico
 export { Image } from './components/Image/Image';
 export { ImageGallery } from './components/ImageGallery/ImageGallery';
 export { IslandGrid } from './components/IslandGrid/IslandGrid';
+export {
+    LineItem,
+    LineItemGroup,
+    LineItemHeader,
+    LineItemPrice,
+} from './components/LineItem/LineItem';
 export { List, ListItem } from './components/List/List';
 export { Logo } from './components/Logo/Logo';
 export { Modal } from './components/Modal/Modal';
