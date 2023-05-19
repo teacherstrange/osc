@@ -95,13 +95,13 @@ const Options = (props: OptionsProps) => {
                     hasDarkLabel
                     triggerWidth="70"
                     className={`u-justify-between ${i > 0 ? 'u-pt-xs' : ''}`}
-                    key={option.id}
+                    key={`${i}-${option.name}`}
                 >
                     {option.values.map((value) => (
                         <SelectItem
                             value={value}
-                            id={`${option.name}-${value}`}
-                            key={`${option.name}-${value}`}
+                            id={`${i}-${option.name}-${value}`}
+                            key={`${i}-${option.name}-${value}`}
                         >
                             {value}
                         </SelectItem>
