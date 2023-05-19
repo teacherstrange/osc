@@ -1,8 +1,9 @@
 import { Link } from '@remix-run/react';
 import { Money } from '@shopify/hydrogen';
 import type { CartLine } from '@shopify/hydrogen/storefront-api-types';
-import { Button, LineItem, LineItemGroup, LineItemHeader, LineItemPrice, Price } from 'osc-ui';
+import { LineItem, LineItemGroup, LineItemHeader, LineItemPrice, Price } from 'osc-ui';
 import { PATHS } from '~/constants';
+import { RemoveFromCart } from '../Forms/CartActions/RemoveFromCart';
 
 interface CartLineItemProps {
     line: CartLine;
@@ -22,9 +23,8 @@ export const CartLineItem = (props: CartLineItemProps) => {
                             {line?.merchandise?.product?.title}
                         </Link>
                     </LineItemHeader>
-                    <Button variant="quaternary" className="u-text-underline">
-                        Remove
-                    </Button>
+
+                    <RemoveFromCart lineIds={[line?.id]} />
                 </LineItemGroup>
 
                 <CartLineItemPrice line={line} />

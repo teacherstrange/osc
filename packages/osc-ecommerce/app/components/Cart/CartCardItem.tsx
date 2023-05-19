@@ -6,7 +6,6 @@ import {
     AccordionHeader,
     AccordionItem,
     AccordionPanel,
-    Button,
     ButtonGroup,
     Card,
     CardBody,
@@ -26,6 +25,7 @@ import { Price } from '~/components/Price/Price';
 import { PATHS } from '~/constants';
 import type { CartLineWithSanityData } from '~/types/shopify';
 import { stripMarks } from '~/utils/storefront.helpers';
+import { RemoveFromCart } from '../Forms/CartActions/RemoveFromCart';
 
 interface CartCardItemProps {
     line: CartLineWithSanityData;
@@ -94,9 +94,7 @@ export const CartCardItem = (props: CartCardItemProps) => {
                                 Save for later <Icon id="heart" />
                             </Button> */}
 
-                            <Button variant="quaternary" className="u-text-underline">
-                                Remove
-                            </Button>
+                            <RemoveFromCart lineIds={[line?.id]} />
                         </ButtonGroup>
 
                         <CardPriceTag className="u-self-end u-mt-0 u-ml-auto">
