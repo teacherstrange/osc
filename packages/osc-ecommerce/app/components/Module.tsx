@@ -199,7 +199,7 @@ export default function Module(props: Props) {
         case 'module.accordion':
             const moduleAccordion = module as accordionModule;
 
-            return <AccordionModule module={moduleAccordion} />;
+            return <AccordionModule module={moduleAccordion} isFlush={isFlush} />;
 
         case 'module.trustpilot':
             const moduleTrustpilot = module as trustpilotModule;
