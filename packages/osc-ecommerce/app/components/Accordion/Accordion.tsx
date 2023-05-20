@@ -1,21 +1,30 @@
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, Content } from 'osc-ui';
 import type { accordionModule } from '~/types/sanity';
+import { Row } from '../Row';
 
 interface Props {
     module: accordionModule;
+    isFlush?: boolean;
 }
 
 export const AccordionModule = (props: Props) => {
-    const { module } = props;
+    const { module, isFlush } = props;
 
     const defaultIndex = module.accordionItem
         ? module.accordionItem.map((accordionItem) => accordionItem.defaultOpen).indexOf(true)
         : undefined;
 
     const headingLevel = module.accordionHeadingLevels as 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    const containerIsFull = module.settings?.container === 'full';
 
     return (
-        <article className="o-container">
+        <Row
+            backgroundColor={module.settings?.backgroundColor}
+            marginBottom={module.settings?.marginBottom}
+            paddingBottom={module.settings?.paddingBottom}
+            paddingTop={module.settings?.paddingTop}
+            container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
+        >
             {module.content ? (
                 <Content
                     align={module.content?.horizontalAlignment}
@@ -59,6 +68,6 @@ export const AccordionModule = (props: Props) => {
                       })
                     : null}
             </Accordion>
-        </article>
+        </Row>
     );
 };
