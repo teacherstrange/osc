@@ -14,6 +14,10 @@ export default defineType({
     icon: StackCompactIcon,
     groups: [
         {
+            name: 'settings',
+            title: 'Settings',
+        },
+        {
             name: 'content',
             title: 'Content',
             default: true,
@@ -24,6 +28,12 @@ export default defineType({
         },
     ],
     fields: [
+        defineField({
+            name: 'settings',
+            title: 'Settings',
+            type: 'moduleSettings',
+            group: 'settings',
+        }),
         defineField({
             name: 'content',
             title: 'Content',
