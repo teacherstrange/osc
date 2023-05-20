@@ -56,6 +56,14 @@ export interface module {
     _key?: Maybe<string>;
 }
 
+export interface rowSettings extends module {
+    backgroundColor?: Maybe<Themes>;
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
+    container?: Maybe<'default' | 'full'>;
+}
+
 export interface buttonModule extends module {
     _key: string;
     _type: string;
@@ -136,6 +144,7 @@ export interface accordionModule extends module {
         heading: string;
     }[];
     content?: contentModule;
+    settings: rowSettings;
 }
 
 export interface videoModule extends module {
