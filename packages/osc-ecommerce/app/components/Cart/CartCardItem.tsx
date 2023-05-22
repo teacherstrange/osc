@@ -62,7 +62,7 @@ export const CartCardItem = (props: CartCardItemProps) => {
 
                     <CardBody isNarrow>
                         {line?.sanityData?.description ? (
-                            <div className="u-mb-l u-hidden-until@tab">
+                            <div className="u-mb-m u-hidden-until@tab">
                                 <Content
                                     value={[stripMarks(line?.sanityData?.description?.body)]}
                                 />
