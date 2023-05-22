@@ -8,6 +8,7 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 import invariant from 'tiny-invariant';
 import { getClient } from '~/lib/sanity/getClient.server';
+import { LINE_ITEM_QUERY } from '~/queries/sanity/lineItemData';
 import { ADD_LINES_MUTATION, CART_QUERY, CREATE_CART_MUTATION } from '~/queries/shopify/cart';
 import type { SanityProduct } from '~/types/sanity';
 import type { CartLineWithSanityData } from '~/types/shopify';
@@ -22,6 +23,8 @@ import { createSanityProductID, extractIdFromGid } from './storefront.helpers';
  * @throws An error if the query fails.
  */
 export const insertSanityDataIntoLineItem = async (cart: Cart) => {
+    invariant(cart, 'Cart object not passed to `insertSanityDataIntoLineItem`');
+
     // Push the product ids into an array so we can query them in Sanity
     const ids = [];
     for (const line of cart.lines.edges) {
@@ -33,10 +36,7 @@ export const insertSanityDataIntoLineItem = async (cart: Cart) => {
 
     // Query Sanity for the products in the cart
     const querySanityDataset = await getClient()
-        .fetch(
-            '*[_id in $ids] { _id, "gid": store.gid, "description": upperContent[0] { (_type == "module.content") => { body[0] } } }',
-            { ids }
-        )
+        .fetch(LINE_ITEM_QUERY, { ids })
         .catch((error) => {
             throw new Response(error, {
                 status: 500,
