@@ -1,4 +1,3 @@
-import type { PortableTextBlock } from '@portabletext/types';
 import type { Storefront as HydrogenStorefront } from '@shopify/hydrogen';
 import type {
     CartLine,
@@ -6,6 +5,7 @@ import type {
     CurrencyCode,
     LanguageCode,
 } from '@shopify/hydrogen/storefront-api-types';
+import type { SanityProductExcerpt } from './sanity';
 
 export type Locale = {
     language: LanguageCode;
@@ -32,9 +32,5 @@ export enum CartAction {
 export type CartActions = keyof typeof CartAction;
 
 export type CartLineWithSanityData = CartLine & {
-    sanityData?: {
-        description: {
-            body: PortableTextBlock[];
-        };
-    };
+    sanityData?: SanityProductExcerpt;
 };

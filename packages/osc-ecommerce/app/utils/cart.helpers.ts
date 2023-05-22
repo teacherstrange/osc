@@ -10,7 +10,7 @@ import invariant from 'tiny-invariant';
 import { getClient } from '~/lib/sanity/getClient.server';
 import { LINE_ITEM_QUERY } from '~/queries/sanity/lineItemData';
 import { ADD_LINES_MUTATION, CART_QUERY, CREATE_CART_MUTATION } from '~/queries/shopify/cart';
-import type { SanityProduct } from '~/types/sanity';
+import type { SanityProduct, SanityProductExcerpt } from '~/types/sanity';
 import type { CartLineWithSanityData } from '~/types/shopify';
 import { createSanityProductID, extractIdFromGid } from './storefront.helpers';
 
@@ -50,7 +50,7 @@ export const insertSanityDataIntoLineItem = async (cart: Cart) => {
         // Find matching sanity product data
         const sanityProductData = querySanityDataset.find(
             (product: SanityProduct) => product.gid === productID
-        );
+        ) as SanityProductExcerpt;
 
         // Insert description if sanity product data exists
         if (sanityProductData && sanityProductData.description) {

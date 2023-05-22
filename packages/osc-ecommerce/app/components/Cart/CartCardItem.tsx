@@ -25,6 +25,7 @@ import { useEffect, useState } from 'react';
 import { Price } from '~/components/Price/Price';
 import { PATHS } from '~/constants';
 import type { CartLineWithSanityData } from '~/types/shopify';
+import { stripMarks } from '~/utils/storefront.helpers';
 
 interface CartCardItemProps {
     line: CartLineWithSanityData;
@@ -62,7 +63,9 @@ export const CartCardItem = (props: CartCardItemProps) => {
                     <CardBody isNarrow>
                         {line?.sanityData?.description ? (
                             <div className="u-mb-l u-hidden-until@tab">
-                                <Content value={line?.sanityData?.description?.body} />
+                                <Content
+                                    value={[stripMarks(line?.sanityData?.description?.body)]}
+                                />
                             </div>
                         ) : (
                             ''

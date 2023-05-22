@@ -388,6 +388,12 @@ export interface SanityProduct extends SanityPage {
     theme?: SanityPageTheme;
 }
 
+export interface SanityProductExcerpt {
+    description: {
+        body: PortableTextBlock;
+    };
+}
+
 export interface shopifyProduct {
     id?: string | number;
     title?: string;
