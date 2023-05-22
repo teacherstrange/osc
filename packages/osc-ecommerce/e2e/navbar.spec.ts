@@ -93,7 +93,7 @@ test('clicking outside of the menu closes it', async ({ page, isMobile }) => {
 
         await expect(menu).toBeVisible();
 
-        await page.click('body');
+        await page.locator('.c-header').click();
 
         await expect(menu).not.toBeVisible();
     }
