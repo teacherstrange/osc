@@ -15,6 +15,7 @@ import {
     CardInner,
     CardPriceTag,
     CardTitle,
+    Content,
     Select,
     SelectItem,
     rem,
@@ -23,9 +24,10 @@ import {
 import { useEffect, useState } from 'react';
 import { Price } from '~/components/Price/Price';
 import { PATHS } from '~/constants';
+import type { CartLineWithSanityData } from '~/types/shopify';
 
 interface CartCardItemProps {
-    line: CartLine;
+    line: CartLineWithSanityData;
 }
 
 export const CartCardItem = (props: CartCardItemProps) => {
@@ -58,11 +60,13 @@ export const CartCardItem = (props: CartCardItemProps) => {
                     </CardHeader>
 
                     <CardBody isNarrow>
-                        <p className="u-mb-l u-hidden-until@tab">
-                            {/* // TODO: Pull from Sanity probs */}
-                            Offer information Lorem ipsum dolor sit amet, consectetur. Offer
-                            information Lorem ipsum dolor sit amet, consectetur.
-                        </p>
+                        {line?.sanityData?.description ? (
+                            <div className="u-mb-l u-hidden-until@tab">
+                                <Content value={line?.sanityData?.description?.body} />
+                            </div>
+                        ) : (
+                            ''
+                        )}
 
                         {showOnGreaterThanTab ? (
                             <Options merchandise={line?.merchandise} />
