@@ -1,35 +1,165 @@
+import type { ObjectWithObjectID } from '@algolia/client-search';
 import { useLoaderData } from '@remix-run/react';
 import type { LinksFunction, LoaderFunction } from '@remix-run/server-runtime';
 import { json } from '@remix-run/server-runtime';
-import { Autocomplete } from 'osc-ui';
+import algoliasearch from 'algoliasearch';
 import oscUiAutcompleteStyles from 'osc-ui/dist/src-components-Autocomplete-autocomplete.css';
 import oscUiButtonStyles from 'osc-ui/dist/src-components-Button-button.css';
+import oscUiCardStyles from 'osc-ui/dist/src-components-Card-card.css';
+import oscUiCheckboxStyles from 'osc-ui/dist/src-components-Checkbox-checkbox.css';
+import oscUiLabelStyles from 'osc-ui/dist/src-components-Label-label.css';
+import oscUiPopoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
 import oscUiTextInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
+import { renderToString } from 'react-dom/server';
+import { getServerState } from 'react-instantsearch-hooks-server';
+import type { InstantSearchServerState } from 'react-instantsearch-hooks-web';
+import {
+    Index,
+    InstantSearch,
+    InstantSearchSSRProvider,
+    SearchBox,
+} from 'react-instantsearch-hooks-web';
+import { Configure } from '~/components/InstantSearch/Widgets/Configure';
+import { Hits } from '../../components/InstantSearch/Widgets/Hits/Hits';
 
 export const links: LinksFunction = () => {
     return [
         { rel: 'stylesheet', href: oscUiAutcompleteStyles },
         { rel: 'stylesheet', href: oscUiButtonStyles },
+        { rel: 'stylesheet', href: oscUiCheckboxStyles },
+        { rel: 'stylesheet', href: oscUiLabelStyles },
         { rel: 'stylesheet', href: oscUiTextInputStyles },
+        { rel: 'stylesheet', href: oscUiCardStyles },
+        { rel: 'stylesheet', href: oscUiPopoverStyles },
     ];
 };
 
-export const loader: LoaderFunction = async () => {
+const HITS_PER_PAGE = 20;
+
+export type AllHitsWithVariantTitle = Partial<
+    {
+        id: number;
+        variant_title: string;
+        objectId: string;
+    } & ObjectWithObjectID
+>;
+
+export const loader: LoaderFunction = async ({ request }) => {
+    const adminClient = algoliasearch(
+        process.env.ALGOLIA_APP_ID!,
+        process.env.ALGOLIA_API_KEY_ADMIN!
+    );
+
+    const serverUrl = request.url;
+
+    const serverState = await getServerState(
+        <Search
+            hitsPerPage={HITS_PER_PAGE}
+            env={{
+                ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID!,
+                ALGOLIA_API_KEY_SEARCH: process.env.ALGOLIA_API_KEY_SEARCH!,
+                ALGOLIA_API_KEY_ADMIN: process.env.ALGOLIA_API_KEY_ADMIN!,
+                ALGOLIA_PRIMARY_INDEX: process.env.ALGOLIA_PRIMARY_INDEX!,
+                ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID:
+                    process.env.ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID!,
+            }}
+            serverUrl={serverUrl}
+        />,
+        {
+            renderToString,
+        }
+    );
+
+    const index = await adminClient.initIndex(process.env.ALGOLIA_PRIMARY_INDEX!);
+
+    let allHitsWithVariantTitle: AllHitsWithVariantTitle[] = [];
+
+    try {
+        await index.browseObjects({
+            attributesToRetrieve: ['id', 'variant_title'],
+            batch: (batch) => {
+                allHitsWithVariantTitle = allHitsWithVariantTitle.concat(batch);
+            },
+        });
+    } catch (error) {
+        // TODO - Add in error logging
+        console.log('Error retrieving variants', error);
+    }
+
     return json({
-        ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID!,
-        ALGOLIA_ID_SEARCH_ONLY_API_KEY: process.env.ALGOLIA_ID_SEARCH_ONLY_API_KEY!,
-        ALGOLIA_PRIMARY_INDEX: process.env.ALGOLIA_PRIMARY_INDEX,
-        ALGOLIA_PRIMARY_INDEX_GROUPED: process.env.ALGOLIA_PRIMARY_INDEX_GROUPED!,
-        ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS:
-            process.env.ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS!,
+        allHitsWithVariantTitle,
+        serverState,
+        serverUrl,
+        ENV: {
+            ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID!,
+            ALGOLIA_API_KEY_SEARCH: process.env.ALGOLIA_API_KEY_SEARCH!,
+            ALGOLIA_API_KEY_ADMIN: process.env.ALGOLIA_API_KEY_ADMIN!,
+            ALGOLIA_PRIMARY_INDEX: process.env.ALGOLIA_PRIMARY_INDEX!,
+            ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID: process.env.ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID!,
+        },
     });
 };
 
-export default function Search() {
-    const data = useLoaderData();
+type SearchProps = {
+    allHitsWithVariantTitle?: AllHitsWithVariantTitle[];
+    env?: {
+        ALGOLIA_APP_ID: string;
+        ALGOLIA_API_KEY_SEARCH: string;
+        ALGOLIA_API_KEY_ADMIN: string;
+        ALGOLIA_PRIMARY_INDEX: string;
+        ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID: string;
+    };
+    hitsPerPage?: number;
+    serverState?: InstantSearchServerState;
+    serverUrl?: string;
+};
+
+// I tried putting this in it's own file, but it causes the app to get stuck in a cycle of errors 🤷‍♂️
+const Search = (props: SearchProps) => {
+    const { allHitsWithVariantTitle, env, hitsPerPage, serverState, serverUrl } = props;
+
+    const searchClient = algoliasearch(env!.ALGOLIA_APP_ID, env!.ALGOLIA_API_KEY_SEARCH);
+
     return (
-        <div className="o-container o-container--2xs">
-            <Autocomplete {...data} />
-        </div>
+        <InstantSearchSSRProvider {...serverState}>
+            <InstantSearch searchClient={searchClient} indexName={env!.ALGOLIA_PRIMARY_INDEX}>
+                <SearchBox />
+
+                <div className="o-grid o-container c-instant-search__container">
+                    <div className="o-grid__col--12  o-grid__col--3@tab">
+                        <div>PANEL FOR REFINEMENT LISTS</div>
+                    </div>
+                    <div className="o-grid o-grid__col--12 o-grid__col--9@tab">
+                        {/* Use Flex */}
+                        <div>
+                            <div>SELECTS</div>
+                        </div>
+                        {/* Use Grid */}
+                        <div className="o-grid o-grid__col--12">
+                            <div className="o-grid__col--6">COLLECTION 1</div>
+                            <div className="o-grid__col--6">COLLECTION 2</div>
+                        </div>
+                        <Index indexName={env!.ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID}>
+                            <Configure hitsPerPage={hitsPerPage} />
+                            <Hits allHitsWithVariantTitle={allHitsWithVariantTitle} />
+                        </Index>
+                    </div>
+                </div>
+            </InstantSearch>
+        </InstantSearchSSRProvider>
+    );
+};
+
+export default function SearchPage() {
+    const { allHitsWithVariantTitle, ENV, serverState, serverUrl } = useLoaderData();
+
+    return (
+        <Search
+            allHitsWithVariantTitle={allHitsWithVariantTitle}
+            env={ENV}
+            hitsPerPage={HITS_PER_PAGE}
+            serverState={serverState}
+            serverUrl={serverUrl}
+        />
     );
 }
