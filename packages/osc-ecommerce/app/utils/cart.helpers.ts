@@ -7,7 +7,61 @@ import type {
     UserError,
 } from '@shopify/hydrogen/storefront-api-types';
 import invariant from 'tiny-invariant';
+import { getClient } from '~/lib/sanity/getClient.server';
 import { ADD_LINES_MUTATION, CART_QUERY, CREATE_CART_MUTATION } from '~/queries/shopify/cart';
+import type { SanityProduct } from '~/types/sanity';
+import type { CartLineWithSanityData } from '~/types/shopify';
+import { createSanityProductID, extractIdFromGid } from './storefront.helpers';
+
+/* -------------------------------------------------------------------------------------------------
+ * Insert Sanity data into line item
+ * -----------------------------------------------------------------------------------------------*/
+/**
+ * Insert the description from Sanity into the cart line item.
+ * @param cart - The cart object to insert the description into.
+ * @throws An error if the query fails.
+ */
+export const insertSanityDataIntoLineItem = async (cart: Cart) => {
+    // Push the product ids into an array so we can query them in Sanity
+    const ids = [];
+    for (const line of cart.lines.edges) {
+        const id = extractIdFromGid(line.node.merchandise.product.id);
+        if (!id) continue;
+
+        ids.push(createSanityProductID(id));
+    }
+
+    // Query Sanity for the products in the cart
+    const querySanityDataset = await getClient()
+        .fetch(
+            '*[_id in $ids] { _id, "gid": store.gid, "description": upperContent[0] { (_type == "module.content") => { body[0] } } }',
+            { ids }
+        )
+        .catch((error) => {
+            throw new Response(error, {
+                status: 500,
+            });
+        });
+
+    // Find the matching product id and insert the description into the cart line
+    for (const line of cart.lines.edges) {
+        const productID = line.node.merchandise.product.id;
+
+        // Find matching sanity product data
+        const sanityProductData = querySanityDataset.find(
+            (product: SanityProduct) => product.gid === productID
+        );
+
+        // Insert description if sanity product data exists
+        if (sanityProductData && sanityProductData.description) {
+            const node = line.node as CartLineWithSanityData;
+
+            node.sanityData = { description: sanityProductData.description };
+        }
+    }
+
+    return cart;
+};
 
 /* -------------------------------------------------------------------------------------------------
  * Query Cart
@@ -35,7 +89,11 @@ export const getCart = async (context: AppLoadContext, cartId: string) => {
         // cache: storefront.CacheNone(),
     });
 
-    return cart;
+    if (!cart) return;
+
+    const cartWithSanityData = await insertSanityDataIntoLineItem(cart);
+
+    return cartWithSanityData;
 };
 
 /* -------------------------------------------------------------------------------------------------

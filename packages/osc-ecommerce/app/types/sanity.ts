@@ -383,6 +383,7 @@ export interface SanityPage {
 }
 
 export interface SanityProduct extends SanityPage {
+    gid: string;
     upperContent: module[] | contentModule[];
     theme?: SanityPageTheme;
 }

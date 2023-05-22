@@ -1,5 +1,7 @@
+import type { PortableTextBlock } from '@portabletext/types';
 import type { Storefront as HydrogenStorefront } from '@shopify/hydrogen';
 import type {
+    CartLine,
     CountryCode,
     CurrencyCode,
     LanguageCode,
@@ -28,3 +30,11 @@ export enum CartAction {
     UPDATE_BUYER_IDENTITY = 'UPDATE_BUYER_IDENTITY',
 }
 export type CartActions = keyof typeof CartAction;
+
+export type CartLineWithSanityData = CartLine & {
+    sanityData?: {
+        description: {
+            body: PortableTextBlock[];
+        };
+    };
+};
