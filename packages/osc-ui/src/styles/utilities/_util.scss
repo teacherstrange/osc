@@ -384,5 +384,12 @@ $osc-config: (
 
 .is-sticky {
     position: sticky;
-    top: 0;
+    top: $space-m;
+
+    &-from\@tab {
+        @include mq($mq-tab) {
+            position: sticky;
+            top: $space-m;
+        }
+    }
 }

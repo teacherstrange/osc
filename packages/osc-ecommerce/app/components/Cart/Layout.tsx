@@ -80,30 +80,41 @@ export const CartLayout = () => {
 
                 {linesCount ? (
                     <div className="o-grid__col o-grid__col--12 o-grid__col--4@tab">
-                        <Card hasShadow className="u-pt-m u-pr-l u-pl-l u-pb-2xl u-h-auto">
-                            <CardTitle isUnderlined>Total</CardTitle>
-                            <CardBody>
-                                <ul>
-                                    {cartLines.map((line) => {
-                                        if (!line.id) return null;
+                        <div className="is-sticky-from@tab">
+                            <Card hasShadow className="u-pt-m u-pr-l u-pl-l u-pb-2xl u-h-auto">
+                                <CardTitle isUnderlined>Total</CardTitle>
+                                <CardBody>
+                                    <ul>
+                                        {cartLines.map((line) => {
+                                            if (!line.id) return null;
 
-                                        return showOnGreaterThanTab ? (
-                                            <CartLineItem line={line} key={line.id} />
-                                        ) : (
-                                            <CartCardItem line={line} key={line.id} />
-                                        );
-                                    })}
-                                </ul>
+                                            return showOnGreaterThanTab ? (
+                                                <CartLineItem line={line} key={line.id} />
+                                            ) : (
+                                                <CartCardItem line={line} key={line.id} />
+                                            );
+                                        })}
+                                    </ul>
 
-                                <CartTotal cost={cart.cost} />
-                            </CardBody>
+                                    <CartTotal cost={cart.cost} />
+                                </CardBody>
 
-                            <CardFooter className="u-pt-xl">
-                                <Button as="a" href={cart.checkoutUrl} isFull>
-                                    Enrol now
-                                </Button>
-                            </CardFooter>
-                        </Card>
+                                <CardFooter className="u-pt-xl">
+                                    <Button as="a" href={cart.checkoutUrl} isFull>
+                                        Enrol now
+                                    </Button>
+                                </CardFooter>
+                            </Card>
+
+                            <Button
+                                as="link"
+                                to={`/${PATHS.COLLECTIONS}`}
+                                variant="tertiary"
+                                className="u-mt-m u-hidden-until@tab"
+                            >
+                                Add more courses
+                            </Button>
+                        </div>
                     </div>
                 ) : null}
 
