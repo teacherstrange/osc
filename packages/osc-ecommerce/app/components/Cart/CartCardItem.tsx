@@ -92,7 +92,7 @@ export const CartCardItem = (props: CartCardItemProps) => {
                             </Button>
                         </ButtonGroup>
 
-                        <CardPriceTag className="u-self-end u-mt-0">
+                        <CardPriceTag className="u-self-end u-mt-0 u-ml-auto">
                             <Price selectedVariant={line?.merchandise} />
                         </CardPriceTag>
                     </CardFooter>

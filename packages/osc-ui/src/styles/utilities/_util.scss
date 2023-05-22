@@ -18,7 +18,8 @@
 
 @function scales-map($scale: "fixed") {
     $map: (
-        "0": 0
+        "0": 0,
+        "auto": auto
     );
 
     @each $step in scale-token("steps") {
