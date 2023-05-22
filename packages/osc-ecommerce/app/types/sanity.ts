@@ -394,6 +394,12 @@ export interface SanityProductExcerpt {
     };
 }
 
+export interface SanityProductExcerpt {
+    description: {
+        body: PortableTextBlock;
+    };
+}
+
 export interface shopifyProduct {
     id?: string | number;
     title?: string;
