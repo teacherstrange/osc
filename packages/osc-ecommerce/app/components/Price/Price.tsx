@@ -17,7 +17,7 @@ export const Price = (props: PriceProps) => {
         selectedVariant?.compareAtPrice?.amount &&
         selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
 
-    const classes = classNames(isLoading ? 'is-loading' : '');
+    const classes = classNames('u-color-primary', isLoading ? 'is-loading' : '');
 
     return (
         <OSCPrice
@@ -30,7 +30,13 @@ export const Price = (props: PriceProps) => {
             }
         >
             {/* // TODO: This "in full" text will need to be dynamic once we have the option to offer monthly payments */}
-            <Money withoutTrailingZeros data={selectedVariant?.price!} as="span" /> in full
+            <Money
+                withoutTrailingZeros
+                data={selectedVariant?.price!}
+                as="span"
+                className="u-text-bold"
+            />{' '}
+            in full
         </OSCPrice>
     );
 };
