@@ -1,8 +1,6 @@
 import { ThLargeIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
 import { defineField, defineType } from 'sanity';
-import { ColorPicker } from '../../../components/inputs/ColorPicker';
-import { SPACING } from '../../../constants';
 
 const CARDS = [
     { type: 'card.bio' },
@@ -23,13 +21,13 @@ export default defineType({
     icon: ThLargeIcon,
     groups: [
         {
-            default: true,
-            name: 'spacing',
-            title: 'Spacing',
+            name: 'settings',
+            title: 'Settings',
         },
         {
             name: 'content',
             title: 'Content',
+            default: true,
         },
         {
             name: 'cards',
@@ -38,43 +36,16 @@ export default defineType({
     ],
     fields: [
         defineField({
+            name: 'settings',
+            title: 'Settings',
+            type: 'moduleSettings',
+            group: 'settings',
+        }),
+        defineField({
             name: 'content',
             title: 'Content',
             type: 'module.content',
             group: 'content',
-        }),
-        defineField({
-            name: 'marginBottom',
-            title: 'Push Region',
-            type: 'string',
-            description: 'Spacing you would like between this region and the next.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingTop',
-            title: 'Inner Padding Top',
-            type: 'string',
-            description: 'Inner padding at the top of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingBottom',
-            title: 'Inner Padding Bottom',
-            type: 'string',
-            description: 'Inner padding at the bottom of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
         }),
         defineField({
             name: 'layout',
@@ -115,15 +86,6 @@ export default defineType({
             type: 'carouselSettings',
             group: 'cards',
             hidden: ({ parent }) => !shouldShow(parent),
-        }),
-        defineField({
-            name: 'backgroundColor',
-            title: 'Background Colour',
-            type: 'string',
-            components: {
-                input: ColorPicker,
-            },
-            group: 'cards',
         }),
         defineField({
             name: 'card',

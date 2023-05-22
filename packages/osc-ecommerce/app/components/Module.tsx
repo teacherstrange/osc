@@ -215,7 +215,7 @@ export default function Module(props: Props) {
 
         case 'module.cards':
             const moduleCard = module as cardModule;
-            return <Cards module={moduleCard} />;
+            return <Cards module={moduleCard} isFlush={isFlush} />;
 
         case 'module.carousel':
             const moduleCarousel = module as carouselModule;

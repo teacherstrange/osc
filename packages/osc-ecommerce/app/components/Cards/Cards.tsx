@@ -9,6 +9,7 @@ import type {
     staticCardModule,
     TypesOfCard,
 } from '~/types/sanity';
+import { Row } from '../Row';
 import { BioCard } from './BioCard';
 import { BlogCard } from './BlogCard';
 import { CollectionCard } from './CollectionCard';
@@ -18,7 +19,7 @@ import { SimpleCard } from './SimpleCard';
 const Card = (props: { card: TypesOfCard }) => {
     const { card } = props;
 
-    if (!card) return;
+    if (!card) return null;
 
     switch (card._type) {
         case 'card.bio':
@@ -41,8 +42,16 @@ const Card = (props: { card: TypesOfCard }) => {
     }
 };
 
-export const Cards = (props: { module: cardModule }) => {
-    const { module } = props;
+interface CardsProps {
+    module: cardModule;
+    isFlush?: boolean;
+}
+
+export const Cards = (props: CardsProps) => {
+    const { module, isFlush } = props;
+
+    const containerIsFull = module.settings?.container === 'full';
+
     // ! TEMPORARY fix for tokens path not matching dev and prod environments
     // ! Once solution in place we can update this to use design token files instead
     const mq = {
@@ -59,112 +68,17 @@ export const Cards = (props: { module: cardModule }) => {
         setShowOnSmallerThanTab(isSmallerThanTab);
     }, [isSmallerThanTab]);
 
-    const classes = classNames(
-        module?.backgroundColor ? `u-bg-color-${module?.backgroundColor}` : '',
-        module?.marginBottom ? `u-mb-${module?.marginBottom}` : '',
-        module?.paddingTop ? `u-pt-${module?.paddingTop}` : '',
-        module?.paddingBottom ? `u-pb-${module?.paddingBottom}` : ''
-    );
-
     const perView = (perView: number | undefined) => (perView ? perView : 1);
 
     if (module?.layout === 'carousel') {
         return (
-            <article className={classes}>
-                <div className="o-container">
-                    {module.content?.body ? (
-                        <Content
-                            align={module.content.horizontalAlignment}
-                            backgroundColor={
-                                module.content.backgroundColor
-                                    ? module.content.backgroundColor
-                                    : undefined
-                            }
-                            marginBottom={module.content.marginBottom}
-                            paddingBottom={module.content.paddingBottom}
-                            paddingTop={module.content.paddingTop}
-                            value={module.content.body}
-                            buttons={module.content.buttons}
-                        />
-                    ) : null}
-
-                    <Carousel
-                        carouselName={module?.carouselName ? module?.carouselName : ''}
-                        arrows={module?.carouselSettings?.arrows}
-                        dotNav={module?.carouselSettings?.dotNav}
-                        loop={module?.carouselSettings?.loop}
-                        autoplay={module?.carouselSettings?.autoplay}
-                        slidesPerView={perView(module?.carouselSettings?.slidesPerView?.mobile)}
-                        startIndex={
-                            module?.carouselSettings?.startIndex
-                                ? module?.carouselSettings?.startIndex - 1
-                                : 0
-                        } // minus 1 so cms users can start at 1
-                        breakpoints={{
-                            [`(min-width: ${rem(mq['tab'])}rem)`]: {
-                                slides: {
-                                    origin: 'auto',
-                                    perView: perView(
-                                        module?.carouselSettings?.slidesPerView?.tablet
-                                    ),
-                                    spacing: 16,
-                                },
-                            },
-                            [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
-                                slides: {
-                                    origin: 'auto',
-                                    perView: perView(
-                                        module?.carouselSettings?.slidesPerView?.desktop
-                                    ),
-                                    spacing: 16,
-                                },
-                            },
-                        }}
-                        adaptiveHeight
-                    >
-                        {module.card.map((card) => (
-                            <Card card={card} key={card?._key} />
-                        ))}
-                    </Carousel>
-                </div>
-            </article>
-        );
-    }
-
-    if (module.layout === 'island grid') {
-        return (
-            <article className={classes}>
-                <div className="o-container">
-                    {module.content?.body ? (
-                        <Content
-                            align={module.content.horizontalAlignment}
-                            backgroundColor={
-                                module.content.backgroundColor
-                                    ? module.content.backgroundColor
-                                    : undefined
-                            }
-                            marginBottom={module.content.marginBottom}
-                            paddingBottom={module.content.paddingBottom}
-                            paddingTop={module.content.paddingTop}
-                            value={module.content.body}
-                            buttons={module.content.buttons}
-                        />
-                    ) : null}
-
-                    <IslandGrid>
-                        {module.card.map((card) => (
-                            <Card card={card} key={card?._key} />
-                        ))}
-                    </IslandGrid>
-                </div>
-            </article>
-        );
-    }
-
-    // Return grid layout by default
-    return (
-        <article className={classes}>
-            <div className="o-container">
+            <Row
+                backgroundColor={module.settings?.backgroundColor || module?.backgroundColor}
+                marginBottom={module.settings?.marginBottom || module?.marginBottom}
+                paddingBottom={module.settings?.paddingBottom || module?.paddingTop}
+                paddingTop={module.settings?.paddingTop || module?.paddingBottom}
+                container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
+            >
                 {module.content?.body ? (
                     <Content
                         align={module.content.horizontalAlignment}
@@ -181,37 +95,131 @@ export const Cards = (props: { module: cardModule }) => {
                     />
                 ) : null}
 
-                {/* Only become a carousel on mobile and small tablets AND when the number of cards is greater than three */}
-                {showOnSmallerThanTab && module?.card.length > 3 ? (
-                    <Carousel
-                        carouselName={module?.carouselName ? module?.carouselName : ''}
-                        slidesPerView={1.2} // Set to 1.2 to peek the next card in the carousel
-                    >
-                        {module.card.map((card) => (
-                            <Card card={card} key={card?._key} />
-                        ))}
-                    </Carousel>
-                ) : (
-                    <ul className="o-grid">
-                        {module.card.map((card) => {
-                            const postCard = card as postCardModule;
-                            const isFullWidth = postCard?.fullWidth;
+                <Carousel
+                    carouselName={module?.carouselName ? module?.carouselName : ''}
+                    arrows={module?.carouselSettings?.arrows}
+                    dotNav={module?.carouselSettings?.dotNav}
+                    loop={module?.carouselSettings?.loop}
+                    autoplay={module?.carouselSettings?.autoplay}
+                    slidesPerView={perView(module?.carouselSettings?.slidesPerView?.mobile)}
+                    startIndex={
+                        module?.carouselSettings?.startIndex
+                            ? module?.carouselSettings?.startIndex - 1
+                            : 0
+                    } // minus 1 so cms users can start at 1
+                    breakpoints={{
+                        [`(min-width: ${rem(mq['tab'])}rem)`]: {
+                            slides: {
+                                origin: 'auto',
+                                perView: perView(module?.carouselSettings?.slidesPerView?.tablet),
+                                spacing: 16,
+                            },
+                        },
+                        [`(min-width: ${rem(mq['desk-lrg'])}rem)`]: {
+                            slides: {
+                                origin: 'auto',
+                                perView: perView(module?.carouselSettings?.slidesPerView?.desktop),
+                                spacing: 16,
+                            },
+                        },
+                    }}
+                    adaptiveHeight
+                >
+                    {module.card.map((card) => (
+                        <Card card={card} key={card?._key} />
+                    ))}
+                </Carousel>
+            </Row>
+        );
+    }
 
-                            const classes = classNames(
-                                'o-grid__col--12',
-                                isFullWidth ? '' : 'o-grid__col--6@tab',
-                                isFullWidth ? '' : 'o-grid__col--4@desk'
-                            );
+    if (module.layout === 'island grid') {
+        return (
+            <Row
+                backgroundColor={module.settings?.backgroundColor || module?.backgroundColor}
+                marginBottom={module.settings?.marginBottom || module?.marginBottom}
+                paddingBottom={module.settings?.paddingBottom || module?.paddingTop}
+                paddingTop={module.settings?.paddingTop || module?.paddingBottom}
+                container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
+            >
+                {module.content?.body ? (
+                    <Content
+                        align={module.content.horizontalAlignment}
+                        backgroundColor={
+                            module.content.backgroundColor
+                                ? module.content.backgroundColor
+                                : undefined
+                        }
+                        marginBottom={module.content.marginBottom}
+                        paddingBottom={module.content.paddingBottom}
+                        paddingTop={module.content.paddingTop}
+                        value={module.content.body}
+                        buttons={module.content.buttons}
+                    />
+                ) : null}
 
-                            return (
-                                <li className={classes} key={card?._key}>
-                                    <Card card={card} />
-                                </li>
-                            );
-                        })}
-                    </ul>
-                )}
-            </div>
-        </article>
+                <IslandGrid>
+                    {module.card.map((card) => (
+                        <Card card={card} key={card?._key} />
+                    ))}
+                </IslandGrid>
+            </Row>
+        );
+    }
+
+    // Return grid layout by default
+    return (
+        <Row
+            backgroundColor={module.settings?.backgroundColor || module?.backgroundColor}
+            marginBottom={module.settings?.marginBottom || module?.marginBottom}
+            paddingBottom={module.settings?.paddingBottom || module?.paddingTop}
+            paddingTop={module.settings?.paddingTop || module?.paddingBottom}
+            container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
+        >
+            {module.content?.body ? (
+                <Content
+                    align={module.content.horizontalAlignment}
+                    backgroundColor={
+                        module.content.backgroundColor ? module.content.backgroundColor : undefined
+                    }
+                    marginBottom={module.content.marginBottom}
+                    paddingBottom={module.content.paddingBottom}
+                    paddingTop={module.content.paddingTop}
+                    value={module.content.body}
+                    buttons={module.content.buttons}
+                />
+            ) : null}
+
+            {/* Only become a carousel on mobile and small tablets AND when the number of cards is greater than three */}
+            {showOnSmallerThanTab && module?.card.length > 3 ? (
+                <Carousel
+                    carouselName={module?.carouselName ? module?.carouselName : ''}
+                    slidesPerView={1.2} // Set to 1.2 to peek the next card in the carousel
+                >
+                    {module.card.map((card) => (
+                        <Card card={card} key={card?._key} />
+                    ))}
+                </Carousel>
+            ) : (
+                <ul className="o-grid">
+                    {module.card.map((card) => {
+                        const postCard = card as postCardModule;
+                        const isFullWidth = postCard?.fullWidth;
+
+                        const classes = classNames(
+                            'o-grid__col--12',
+                            isFullWidth ? '' : 'o-grid__col--6@tab',
+                            isFullWidth ? '' : 'o-grid__col--4@desk'
+                        );
+
+                        return (
+                            <li className={classes} key={card?._key}>
+                                <Card card={card} />
+                            </li>
+                        );
+                    })}
+                </ul>
+            )}
+        </Row>
     );
 };

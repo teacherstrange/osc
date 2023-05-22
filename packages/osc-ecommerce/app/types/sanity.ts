@@ -244,15 +244,28 @@ export type TypesOfCard =
     | staticCardModule;
 
 export interface cardModule extends module {
-    backgroundColor?: Themes | string;
-    marginBottom?: Spacing | string;
-    paddingBottom?: Spacing | string;
-    paddingTop?: Spacing | string;
+    /**
+     * @deprecated in favour of rowSettings
+     */
+    backgroundColor?: Themes;
+    /**
+     * @deprecated in favour of rowSettings
+     */
+    marginBottom?: Spacing;
+    /**
+     * @deprecated in favour of rowSettings
+     */
+    paddingBottom?: Spacing;
+    /**
+     * @deprecated in favour of rowSettings
+     */
+    paddingTop?: Spacing;
     layout: string;
     carouselName?: Maybe<string>;
     carouselSettings?: carouselModuleSettings;
     content?: contentModule;
     card: TypesOfCard[];
+    settings?: rowSettings;
 }
 
 export interface mediaTextModule extends module {

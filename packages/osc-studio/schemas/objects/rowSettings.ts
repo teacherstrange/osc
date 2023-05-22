@@ -70,6 +70,7 @@ export default defineType({
             title: 'Container',
             type: 'string',
             description: 'Sets the width of the component',
+            initialValue: 'default',
             group: 'container',
             options: {
                 list: ['default', 'full'],
