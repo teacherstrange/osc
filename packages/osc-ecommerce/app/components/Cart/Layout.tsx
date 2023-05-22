@@ -62,7 +62,7 @@ export const CartLayout = () => {
                             as="link"
                             to={`/${PATHS.WISHLIST}`}
                             variant="tertiary"
-                            className="u-mt-m u-hidden-until@tab"
+                            className="u-hidden-until@tab"
                         >
                             View Wishlist <Icon id="heart" />
                         </Button>

@@ -46,7 +46,7 @@ export const CartCardItem = (props: CartCardItemProps) => {
     if (typeof line.quantity === 'undefined' || !line.merchandise?.product) return null;
 
     return (
-        <li className={showOnGreaterThanTab ? '' : 'u-mt-2xl'}>
+        <li className={showOnGreaterThanTab ? 'u-mb-m' : 'u-mt-2xl'}>
             <Card hasBorder isTransparent>
                 <CardInner>
                     <CardHeader>
