@@ -1,7 +1,7 @@
 import groq from 'groq';
 
 export const ROW_SETTINGS = groq`
-    settings {
+    rowSettings {
         _type,
         backgroundColor,
         paddingBottom,

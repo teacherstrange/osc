@@ -15,14 +15,14 @@ export const AccordionModule = (props: Props) => {
         : undefined;
 
     const headingLevel = module.accordionHeadingLevels as 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-    const containerIsFull = module.settings?.container === 'full';
+    const containerIsFull = module.rowSettings?.container === 'full';
 
     return (
         <Row
-            backgroundColor={module.settings?.backgroundColor}
-            marginBottom={module.settings?.marginBottom}
-            paddingBottom={module.settings?.paddingBottom}
-            paddingTop={module.settings?.paddingTop}
+            backgroundColor={module.rowSettings?.backgroundColor}
+            marginBottom={module.rowSettings?.marginBottom}
+            paddingBottom={module.rowSettings?.paddingBottom}
+            paddingTop={module.rowSettings?.paddingTop}
             container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
         >
             {module.content ? (

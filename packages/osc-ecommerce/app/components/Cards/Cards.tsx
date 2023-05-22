@@ -50,7 +50,7 @@ interface CardsProps {
 export const Cards = (props: CardsProps) => {
     const { module, isFlush } = props;
 
-    const containerIsFull = module.settings?.container === 'full';
+    const containerIsFull = module.rowSettings?.container === 'full';
 
     // ! TEMPORARY fix for tokens path not matching dev and prod environments
     // ! Once solution in place we can update this to use design token files instead
@@ -73,10 +73,10 @@ export const Cards = (props: CardsProps) => {
     if (module?.layout === 'carousel') {
         return (
             <Row
-                backgroundColor={module.settings?.backgroundColor || module?.backgroundColor}
-                marginBottom={module.settings?.marginBottom || module?.marginBottom}
-                paddingBottom={module.settings?.paddingBottom || module?.paddingTop}
-                paddingTop={module.settings?.paddingTop || module?.paddingBottom}
+                backgroundColor={module.rowSettings?.backgroundColor || module?.backgroundColor}
+                marginBottom={module.rowSettings?.marginBottom || module?.marginBottom}
+                paddingBottom={module.rowSettings?.paddingBottom || module?.paddingTop}
+                paddingTop={module.rowSettings?.paddingTop || module?.paddingBottom}
                 container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
             >
                 {module.content?.body ? (
@@ -136,10 +136,10 @@ export const Cards = (props: CardsProps) => {
     if (module.layout === 'island grid') {
         return (
             <Row
-                backgroundColor={module.settings?.backgroundColor || module?.backgroundColor}
-                marginBottom={module.settings?.marginBottom || module?.marginBottom}
-                paddingBottom={module.settings?.paddingBottom || module?.paddingTop}
-                paddingTop={module.settings?.paddingTop || module?.paddingBottom}
+                backgroundColor={module.rowSettings?.backgroundColor || module?.backgroundColor}
+                marginBottom={module.rowSettings?.marginBottom || module?.marginBottom}
+                paddingBottom={module.rowSettings?.paddingBottom || module?.paddingTop}
+                paddingTop={module.rowSettings?.paddingTop || module?.paddingBottom}
                 container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
             >
                 {module.content?.body ? (
@@ -170,10 +170,10 @@ export const Cards = (props: CardsProps) => {
     // Return grid layout by default
     return (
         <Row
-            backgroundColor={module.settings?.backgroundColor || module?.backgroundColor}
-            marginBottom={module.settings?.marginBottom || module?.marginBottom}
-            paddingBottom={module.settings?.paddingBottom || module?.paddingTop}
-            paddingTop={module.settings?.paddingTop || module?.paddingBottom}
+            backgroundColor={module.rowSettings?.backgroundColor || module?.backgroundColor}
+            marginBottom={module.rowSettings?.marginBottom || module?.marginBottom}
+            paddingBottom={module.rowSettings?.paddingBottom || module?.paddingTop}
+            paddingTop={module.rowSettings?.paddingTop || module?.paddingBottom}
             container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
         >
             {module.content?.body ? (

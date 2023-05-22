@@ -21,8 +21,8 @@ export default defineType({
     icon: ThLargeIcon,
     groups: [
         {
-            name: 'settings',
-            title: 'Settings',
+            name: 'row',
+            title: 'Row',
         },
         {
             name: 'content',
@@ -36,10 +36,10 @@ export default defineType({
     ],
     fields: [
         defineField({
-            name: 'settings',
+            name: 'rowSettings',
             title: 'Settings',
-            type: 'moduleSettings',
-            group: 'settings',
+            type: 'rowSettings',
+            group: 'row',
         }),
         defineField({
             name: 'content',

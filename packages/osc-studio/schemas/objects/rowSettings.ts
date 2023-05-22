@@ -3,7 +3,7 @@ import { ColorPicker } from '../../components/inputs/ColorPicker';
 import { SPACING } from '../../constants';
 
 export default defineType({
-    name: 'moduleSettings',
+    name: 'rowSettings',
     title: 'Settings',
     type: 'object',
     groups: [

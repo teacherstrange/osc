@@ -144,7 +144,7 @@ export interface accordionModule extends module {
         heading: string;
     }[];
     content?: contentModule;
-    settings: rowSettings;
+    rowSettings: rowSettings;
 }
 
 export interface videoModule extends module {
@@ -265,7 +265,7 @@ export interface cardModule extends module {
     carouselSettings?: carouselModuleSettings;
     content?: contentModule;
     card: TypesOfCard[];
-    settings?: rowSettings;
+    rowSettings?: rowSettings;
 }
 
 export interface mediaTextModule extends module {
