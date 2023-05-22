@@ -265,7 +265,7 @@ export interface cardModule extends module {
     carouselSettings?: carouselModuleSettings;
     content?: contentModule;
     card: TypesOfCard[];
-    rowSettings?: rowSettings;
+    rowSettings: rowSettings;
 }
 
 export interface mediaTextModule extends module {
@@ -287,6 +287,7 @@ export interface carouselModule extends module {
         image?: imageModule<HTMLImageElement>;
     }[];
     settings?: carouselModuleSettings;
+    rowSettings: rowSettings;
 }
 
 export interface carouselModuleSettings extends module {

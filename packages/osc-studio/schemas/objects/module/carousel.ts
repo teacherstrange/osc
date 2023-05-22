@@ -9,6 +9,10 @@ export default defineType({
     icon: StarIcon,
     groups: [
         {
+            name: 'row',
+            title: 'Row',
+        },
+        {
             name: 'settings',
             title: 'Settings',
         },
@@ -40,6 +44,12 @@ export default defineType({
             title: 'Settings',
             type: 'carouselSettings',
             group: 'settings',
+        }),
+        defineField({
+            name: 'rowSettings',
+            title: 'Settings',
+            type: 'rowSettings',
+            group: 'row',
         }),
     ],
     preview: {
