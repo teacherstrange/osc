@@ -43,21 +43,19 @@ export const Price = (props: PriceProps) => {
     const sizeModifier = useModifier('c-price__item', size);
     const itemClasses = classNames('c-price__item', sizeModifier, 'u-mb-0');
 
-    // Here we're creating a slot for the compareAtPrice element to sit in.
-    // This helps us to keep the amount of nested elements to a minimum
-    // as well as merge the required classes.
-    const SaleComponent = compareAtPrice ? Slot : 'span';
-
     return (
         <div className={classes}>
             <div className="o-flex">
                 <span className={itemClasses}>
                     {compareAtPrice ? (
-                        <SaleComponent
+                        // Here we're creating a slot for the compareAtPrice element to sit in.
+                        // This helps us to keep the amount of nested elements to a minimum
+                        // as well as merge the required classes.
+                        <Slot
                             className={`${itemClasses} c-price__item--strike u-color-neutral-600`}
                         >
                             {compareAtPrice}
-                        </SaleComponent>
+                        </Slot>
                     ) : null}
 
                     {children}
