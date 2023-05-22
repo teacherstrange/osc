@@ -220,7 +220,7 @@ export default function Module(props: Props) {
         case 'module.carousel':
             const moduleCarousel = module as carouselModule;
 
-            return <CarouselModule module={moduleCarousel} />;
+            return <CarouselModule module={moduleCarousel} isFlush={isFlush} />;
 
         case 'module.content':
             const moduleContent = module as contentModule;

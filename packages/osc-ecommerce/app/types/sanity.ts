@@ -132,6 +132,7 @@ export interface contentMediaModule extends module {
     paddingBottom?: Maybe<Spacing>;
     paddingTop?: Maybe<Spacing>;
     slides: contentMediaSlide[];
+    rowSettings: rowSettings;
 }
 
 export interface accordionModule extends module {

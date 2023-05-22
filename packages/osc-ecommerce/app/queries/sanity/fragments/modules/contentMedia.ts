@@ -1,6 +1,7 @@
 import groq from 'groq';
 import { MODULE_CONTENT } from './content';
 import { MODULE_IMAGES } from './images';
+import { ROW_SETTINGS } from './rowSettings';
 
 export const MODULE_CONTENT_MEDIA = groq`
     _key,
@@ -41,5 +42,6 @@ export const MODULE_CONTENT_MEDIA = groq`
                 },
             }
         }
-    }
+    },
+    ${ROW_SETTINGS}
 `;
