@@ -328,9 +328,19 @@ export interface textGridModule extends module {
     }[];
     heading?: string;
     hasInlineHeading?: boolean;
+    /**
+     * @deprecated in favour of rowSettings
+     */
     marginBottom: Spacing;
+    /**
+     * @deprecated in favour of rowSettings
+     */
     paddingBottom: Spacing;
+    /**
+     * @deprecated in favour of rowSettings
+     */
     paddingTop: Spacing;
+    rowSettings: rowSettings;
 }
 
 export interface tabsModule extends module {

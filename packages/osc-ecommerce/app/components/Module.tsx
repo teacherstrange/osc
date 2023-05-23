@@ -270,7 +270,11 @@ export default function Module(props: Props) {
             const moduleTextGrid = module as textGridModule;
 
             return (
-                <TextGridModule data={moduleTextGrid} isFlush={isFlush} key={moduleTextGrid._key} />
+                <TextGridModule
+                    module={moduleTextGrid}
+                    isFlush={isFlush}
+                    key={moduleTextGrid._key}
+                />
             );
 
         case 'module.video':

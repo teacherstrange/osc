@@ -1,6 +1,5 @@
 import { GridIcon } from '@radix-ui/react-icons';
 import { defineField, defineType } from 'sanity';
-import { SPACING } from '../../../constants';
 
 export default defineType({
     name: 'module.textGrid',
@@ -9,8 +8,8 @@ export default defineType({
     icon: GridIcon,
     groups: [
         {
-            name: 'spacing',
-            title: 'Spacing',
+            name: 'row',
+            title: 'Row',
         },
         {
             name: 'content',
@@ -20,37 +19,10 @@ export default defineType({
     ],
     fields: [
         defineField({
-            name: 'marginBottom',
-            title: 'Push Region',
-            type: 'string',
-            description: 'Spacing you would like between this region and the next.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingTop',
-            title: 'Inner Padding Top',
-            type: 'string',
-            description: 'Inner padding at the top of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingBottom',
-            title: 'Inner Padding Bottom',
-            type: 'string',
-            description: 'Inner padding at the bottom of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
+            name: 'rowSettings',
+            title: 'Settings',
+            type: 'rowSettings',
+            group: 'row',
         }),
         defineField({
             name: 'heading',
