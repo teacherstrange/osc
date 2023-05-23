@@ -34,7 +34,6 @@ export const Hit = (props: HitProps) => {
     const { className, courseVariants, hit, sendEvent } = props;
 
     const [isActive, setIsActive] = useState(false);
-    console.log('ACTIVE', isActive);
 
     return (
         <CourseCard key={`search_${hit.id}`} isFull className={className}>
