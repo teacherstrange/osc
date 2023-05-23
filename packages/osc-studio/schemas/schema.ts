@@ -36,6 +36,7 @@ import carouselSettings from './objects/carouselSettings';
 import collectionRule from './objects/collectionRule';
 import contentMediaImage from './objects/contentMediaImage';
 import contentMediaSlide from './objects/contentMediaSlide';
+import flourishes from './objects/flourishes';
 import heroSlide from './objects/heroSlide';
 import linkExternal from './objects/linkExternal';
 import linkInternal from './objects/linkInternal';
@@ -119,6 +120,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     partialCarouselSettings,
     heroSlide,
     collectionRule,
+    flourishes,
     textGridItem,
     linkExternal,
     linkInternal,

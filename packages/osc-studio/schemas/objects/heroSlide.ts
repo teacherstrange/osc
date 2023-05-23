@@ -73,5 +73,19 @@ export default defineType({
             initialValue: 'primary',
             group: 'settings',
         }),
+        defineField({
+            name: 'showFlourishes',
+            title: 'Show Flourishes',
+            type: 'boolean',
+            initialValue: false,
+            group: 'settings',
+        }),
+        defineField({
+            name: 'flourishes',
+            title: 'Flourishes',
+            type: 'flourishes',
+            group: 'settings',
+            hidden: ({ parent }) => parent?.showFlourishes !== true,
+        }),
     ],
 });

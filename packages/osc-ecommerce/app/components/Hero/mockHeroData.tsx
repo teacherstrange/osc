@@ -70,6 +70,7 @@ export const heroCarousel = {
             title: 'Save on your study',
             titleColor: null,
             variant: 'primary',
+            flourishes: undefined,
         },
         {
             _key: '917bca21578d',
@@ -127,6 +128,7 @@ export const heroCarousel = {
             title: 'Black Friday',
             titleColor: 'tertiary',
             variant: 'secondary',
+            flourishes: undefined,
         },
     ],
 };
@@ -208,6 +210,7 @@ export const heroSingle = {
             title: 'Save on your study',
             titleColor: null,
             variant: 'primary',
+            flourishes: undefined,
         },
     ],
 };

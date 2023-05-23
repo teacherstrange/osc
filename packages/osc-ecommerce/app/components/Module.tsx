@@ -12,6 +12,7 @@ import datePickerCalendarStyles from 'osc-ui/dist/src-components-DatePicker-cale
 import dateFieldStyles from 'osc-ui/dist/src-components-DatePicker-date-field.css';
 import datePickerStyles from 'osc-ui/dist/src-components-DatePicker-date-picker.css';
 import datePickerReactAriaStyles from 'osc-ui/dist/src-components-DatePicker-react-aria-components.css';
+import flourishStyles from 'osc-ui/dist/src-components-Flourishes-flourish.css';
 import heroStyles from 'osc-ui/dist/src-components-Hero-hero.css';
 import islandGrid from 'osc-ui/dist/src-components-IslandGrid-island-grid.css';
 import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
@@ -141,12 +142,14 @@ export const getComponentStyles = (data: SanityPage) => {
                 styles.push({ rel: 'stylesheet', href: radioGroupStyles });
                 styles.push({ rel: 'stylesheet', href: labelStyles });
                 break;
+
             case 'module.hero':
                 styles.push(
                     { rel: 'stylesheet', href: heroStyles },
                     { rel: 'stylesheet', href: carouselStyles },
                     { rel: 'stylesheet', href: contentStyles },
-                    { rel: 'stylesheet', href: buttonStyles }
+                    { rel: 'stylesheet', href: buttonStyles },
+                    { rel: 'stylesheet', href: flourishStyles }
                 );
                 break;
 

@@ -22,6 +22,7 @@ export const MODULE_HERO = groq`
         },
         title,
         titleColor,
-        variant
+        variant,
+        flourishes
     }
 `;
