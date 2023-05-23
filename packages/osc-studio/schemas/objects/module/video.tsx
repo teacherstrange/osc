@@ -8,6 +8,10 @@ export default defineType({
     icon: VideoIcon,
     groups: [
         {
+            name: 'row',
+            title: 'Row',
+        },
+        {
             default: true,
             name: 'video',
             title: 'Video',
@@ -18,6 +22,12 @@ export default defineType({
         },
     ],
     fields: [
+        defineField({
+            name: 'rowSettings',
+            title: 'Settings',
+            type: 'rowSettings',
+            group: 'row',
+        }),
         defineField({
             name: 'videoType',
             title: 'Video Type',

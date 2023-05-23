@@ -1,4 +1,5 @@
 import groq from 'groq';
+import { ROW_SETTINGS } from './rowSettings';
 
 export const MODULE_VIDEO = groq`
     _key,
@@ -20,5 +21,6 @@ export const MODULE_VIDEO = groq`
     videoSettings,
     videoType,
     videoUrl,
-    content
+    content,
+    ${ROW_SETTINGS}
 `;

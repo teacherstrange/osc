@@ -158,6 +158,7 @@ export interface videoModule extends module {
     };
     videoImage?: imageModule<HTMLImageElement>;
     content?: contentModule;
+    rowSettings: rowSettings;
 }
 
 export interface bioCardModule extends module {

@@ -280,7 +280,9 @@ export default function Module(props: Props) {
         case 'module.video':
             const moduleVideo = module as videoModule;
 
-            return <VideoPlayerModule module={moduleVideo} key={moduleVideo._key} />;
+            return (
+                <VideoPlayerModule module={moduleVideo} isFlush={isFlush} key={moduleVideo._key} />
+            );
 
         case 'module.tabs':
             const moduleTabs = module as tabsModule;
