@@ -1,3 +1,27 @@
+## [0.92.0](https://github.com/Open-Study-College/osc/compare/v0.91.0...v0.92.0) (2023-05-23)
+
+
+### 🧪 Tests
+
+* **price:** update test to match new classes ([67f7ccf](https://github.com/Open-Study-College/osc/commit/67f7ccfd7cf6ad615a5b5bf89bb5be4da204aa3c))
+
+
+### ♻️ Refactors
+
+* **card:** update card price type to allow react nodes ([d9ad0cc](https://github.com/Open-Study-College/osc/commit/d9ad0cc1d1e2dfcdb7be258b5846ceb1a45ca600))
+* **price:** extract price component out of osc-ecommerce and move it into osc-ui as a wrapper ([cb2b54d](https://github.com/Open-Study-College/osc/commit/cb2b54dc4cf1755efe4b68d5a360c899c30765df))
+* **price:** remove ternary with inaccessible false statement ([3c8aa3e](https://github.com/Open-Study-College/osc/commit/3c8aa3e8b2c19e5df5e8e5d71f74c2b7728d4faa))
+* **product page:** remove price stylesheet ([dbcd24f](https://github.com/Open-Study-College/osc/commit/dbcd24fa75b283d6acd7ecc3675c135fef49652b))
+
+
+### ✨ Features
+
+* **cards:** adds price component to course cards ([dda7417](https://github.com/Open-Study-College/osc/commit/dda7417da7b50f0899f1e46779dc85b0bd24006e))
+* **price:** add missing utilitiy classes to price in ecommerce ([37db4e3](https://github.com/Open-Study-College/osc/commit/37db4e36ef6ea983bb9927e3c79d6737329cce2d))
+* **price:** adds size modifier ([4d671a6](https://github.com/Open-Study-College/osc/commit/4d671a670f3241f38135124a32cdb16573df14f7))
+* **price:** adds sku element class ([95388c3](https://github.com/Open-Study-College/osc/commit/95388c3bcd315b25626f0fb81bd2e7877ef36c87))
+* add price stylesheet to root ([2fbd9b7](https://github.com/Open-Study-College/osc/commit/2fbd9b72aad377b5e49a7d80e623671b0d87caa4))
+
 ## [0.91.0](https://github.com/Open-Study-College/osc/compare/v0.90.1...v0.91.0) (2023-05-19)
 
 
@@ -130,22 +154,4 @@
 * **cards:** apply mix-blend-mode to featured card ([28782d9](https://github.com/Open-Study-College/osc/commit/28782d9818ec2cc15197cfc0d798334e31f209a9))
 * **studio:** move theme into it's own object ([336ba05](https://github.com/Open-Study-College/osc/commit/336ba05af483111b2db963e6a3f95a022eaa592c))
 * **studio:** remove background colour option from card ([bdb1f98](https://github.com/Open-Study-College/osc/commit/bdb1f985f6c1529f84dab38f1d96ee55ca3a30c3))
-
-## [0.88.0](https://github.com/Open-Study-College/osc/compare/v0.87.0...v0.88.0) (2023-05-16)
-
-
-### ✨ Features
-
-* add Forms component into ContentMedia ([2ec9f6a](https://github.com/Open-Study-College/osc/commit/2ec9f6aea79945e900ccd17193dfa2460930c864))
-
-
-### ♻️ Refactors
-
-* add early return if card does not exist ([1db3007](https://github.com/Open-Study-College/osc/commit/1db30071a804ecb5e13a5694d8cd252d81a579d5))
-* add new layout options to ContentMedia in Sanity ([afc23eb](https://github.com/Open-Study-College/osc/commit/afc23eb87eceeb980c7aef00176fbe7871503f86))
-* add o-container to forms conditionally ([00ea814](https://github.com/Open-Study-College/osc/commit/00ea814341a6b3deb92887307548bc6ba631aea6))
-* add optional chaining ([10c9430](https://github.com/Open-Study-College/osc/commit/10c943072eb36b3fdf63c4627b976bbedb722e5e))
-* correct returns from map function ([43425e9](https://github.com/Open-Study-College/osc/commit/43425e9ad4b01c7f10723a2650ea9af053dc287f))
-* create custom spacing when there is a form ([ecd22db](https://github.com/Open-Study-College/osc/commit/ecd22db26d3999777426090c590cfbed9e3790e6))
-* update groq query to split out formName and formId ([e1fcc76](https://github.com/Open-Study-College/osc/commit/e1fcc76c48e0863a43e3d4ba7aed25797352a59d))
 
