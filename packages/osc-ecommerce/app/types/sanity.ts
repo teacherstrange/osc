@@ -9,6 +9,12 @@ export interface SanityLinkItem {
     title: string;
 }
 
+export interface SanityPageTheme {
+    _type: string;
+    color: string;
+    pattern: string;
+}
+
 export interface InternalSanityLinkItem extends SanityLinkItem {
     documentType?: string;
     slug?: string;
@@ -367,7 +373,6 @@ export interface SanityPage {
           }
         | undefined;
     seo: SanitySEO;
-    showHero?: boolean;
     modules: module[] | contentModule[];
     store?: {
         title: string;
@@ -379,6 +384,7 @@ export interface SanityPage {
 
 export interface SanityProduct extends SanityPage {
     upperContent: module[] | contentModule[];
+    theme?: SanityPageTheme;
 }
 
 export interface shopifyProduct {
@@ -519,5 +525,16 @@ export interface PreviewProps {
 
 export interface flourishSettings extends module {
     color: string | 'multicolor';
-    pattern: Maybe<'flourishHeroPrimary' | 'flourishHeroSecondary' | 'flourishHeroTertiary'>;
+    pattern: Maybe<
+        | 'flourishPrimary'
+        | 'flourishSecondary'
+        | 'flourishHeroPrimary'
+        | 'flourishHeroSecondary'
+        | 'flourishHeroTertiary'
+        | 'flourishCollectionPrimary'
+        | 'flourishCollectionSecondary'
+        | 'flourishCollectionTertiary'
+        | 'flourishCollectionQuaternary'
+        | 'flourishCollectionQuinary'
+    >;
 }

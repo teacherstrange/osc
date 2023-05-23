@@ -292,9 +292,9 @@ export default function App() {
 
                 <main
                     id="main-content"
-                    className={
+                    className={`${
                         getPageType(location) === PATHS.PRODUCTS ? 'u-bg-color-neutral-100' : ''
-                    }
+                    } u-pos-rel`}
                     tabIndex={-1}
                 >
                     <Outlet />

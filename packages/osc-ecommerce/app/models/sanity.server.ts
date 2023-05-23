@@ -60,7 +60,8 @@ export default async function getPageData({ request, params, query }: Args) {
 
     // TODO: Secure the preview route, making it check if the slug currently exists in the dataset.
     try {
-        const param = params?.slug ? { slug: params.slug } : {};
+        const param = params?.slug ? params : {};
+
         const querySanityDataset = await getClient(isPreview).fetch(query, param);
 
         return { page: querySanityDataset[0], isPreview };

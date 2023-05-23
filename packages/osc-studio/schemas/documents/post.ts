@@ -38,15 +38,6 @@ export default defineType({
             options: { source: 'title' },
             validation: validateSlug,
         }),
-        // Show hero
-        defineField({
-            name: 'showHero',
-            title: 'Show hero',
-            type: 'boolean',
-            description: 'If disabled, page title will be displayed instead',
-            initialValue: false,
-            group: 'editorial',
-        }),
         // Modules
         defineField({
             name: 'modules',

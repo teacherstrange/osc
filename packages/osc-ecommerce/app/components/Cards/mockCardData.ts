@@ -183,7 +183,6 @@ export const mockCardData = {
                 _rev: 'tV53p2YgFcEKyJnroJERpz',
                 _type: 'post',
                 _updatedAt: '2022-09-29T14:00:35Z',
-                showHero: false,
                 slug: {
                     _type: 'slug',
                     current: 'test-post',

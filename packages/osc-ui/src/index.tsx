@@ -37,14 +37,6 @@ export { Content } from './components/Content/Content';
 export { ContentMedia, ContentMediaBlock } from './components/ContentMedia/ContentMedia';
 export { CountdownClock } from './components/CountdownClock/CountdownClock';
 export { DatePicker } from './components/DatePicker/DatePicker/DatePicker';
-export { Flourishes } from './components/Flourishes/Flourishes';
-export {
-    heroPrimary as flourishHeroPrimary,
-    heroSecondary as flourishHeroSecondary,
-    heroTertiary as flourishHeroTertiary,
-    primary as flourishPrimary,
-    secondary as flourishSecondary,
-} from './components/Flourishes/patterns';
 export {
     Drawer,
     DrawerCloseButton,
@@ -54,6 +46,19 @@ export {
     DrawerTitle,
     DrawerTrigger,
 } from './components/Drawer/Drawer';
+export { Flourishes } from './components/Flourishes/Flourishes';
+export {
+    collectionPrimary as flourishCollectionPrimary,
+    collectionQuaternary as flourishCollectionQuaternary,
+    collectionQuinary as flourishCollectionQuinary,
+    collectionSecondary as flourishCollectionSecondary,
+    collectionTertiary as flourishCollectionTertiary,
+    heroPrimary as flourishHeroPrimary,
+    heroSecondary as flourishHeroSecondary,
+    heroTertiary as flourishHeroTertiary,
+    primary as flourishPrimary,
+    secondary as flourishSecondary,
+} from './components/Flourishes/patterns';
 export {
     Footer,
     FooterBottom,

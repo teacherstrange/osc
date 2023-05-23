@@ -7,8 +7,9 @@ import type {
     ProductVariant,
     SelectedOptionInput,
 } from '@shopify/hydrogen/storefront-api-types';
-import { useIntersectionObserver } from 'osc-ui';
+import { Flourishes, flourishPrimary, useIntersectionObserver } from 'osc-ui';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
+import flourishStyles from 'osc-ui/dist/src-components-Flourishes-flourish.css';
 import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import radioStyles from 'osc-ui/dist/src-components-RadioGroup-radio-group.css';
 import { lazy, useRef } from 'react';
@@ -42,6 +43,7 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: labelStyles },
         { rel: 'stylesheet', href: radioStyles },
+        { rel: 'stylesheet', href: flourishStyles },
     ];
 };
 
@@ -85,7 +87,10 @@ export const loader = async ({ request, params, context }: LoaderArgs) => {
     // Query the page data
     const data = await getPageData({
         request,
-        params,
+        params: {
+            slug: params.slug,
+            collection: product.collections.edges[0].node.handle,
+        },
         query: SANITY_PRODUCT_QUERY,
     });
 
@@ -143,6 +148,7 @@ export default function Index() {
     const { page, product, isPreview, query, params } = useLoaderData<typeof loader>();
     const intersectionRef = useRef<HTMLDivElement>(null);
     const isPreviewMode = isPreview && query && params;
+    const pageThemeColor = page?.theme ? page.theme.color : 'gradient-primary';
 
     const productFormIntersection = useIntersectionObserver(intersectionRef, {
         root: null,
@@ -162,7 +168,7 @@ export default function Index() {
      * NOTE: For preview mode to work when working with draft content, optionally chain _everything_
      */
     return (
-        <>
+        <Flourishes color={pageThemeColor} pattern={flourishPrimary} variant={'primary'}>
             {isPreviewMode ? <PreviewBanner /> : null}
 
             <div className="u-pt-l">
@@ -216,6 +222,6 @@ export default function Index() {
                     <PageContent {...page} />
                 )}
             </div>
-        </>
+        </Flourishes>
     );
 }
