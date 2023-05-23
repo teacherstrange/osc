@@ -49,6 +49,7 @@ export interface imageModule<T> extends SanityImage<T> {
         grayscale?: boolean;
         opacity?: boolean;
     };
+    rowSettings?: rowSettings;
 }
 
 export interface module {
