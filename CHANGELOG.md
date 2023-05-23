@@ -1,3 +1,32 @@
+## [0.93.0](https://github.com/Open-Study-College/osc/compare/v0.92.0...v0.93.0) (2023-05-23)
+
+
+### ✨ Features
+
+* **ecommerce:** adds flourishes to hero query ([f432784](https://github.com/Open-Study-College/osc/commit/f43278489857b4cf66324b808864e54986cc3adf))
+* **ecommerce:** adds utility to map santity settings to flourish patten object ([3c53e2d](https://github.com/Open-Study-College/osc/commit/3c53e2df3791383f016a863691e236d66c7373fc))
+* **hero:** add flourishes to hero component in ecommerce ([cd6f546](https://github.com/Open-Study-College/osc/commit/cd6f54614e76144c9fc38c7c31833b7ca3e54c71))
+* **studio:** adds a colorpicker variant that is restricted to certain colors ([911ccad](https://github.com/Open-Study-College/osc/commit/911ccad61bd494dd3178815f1732e4ce371e4035))
+* **studio:** adds flourish settings to hero modules ([dae4758](https://github.com/Open-Study-College/osc/commit/dae4758fa74f6937ca6051c3477f394aeca5e5dc))
+* **types:** adds flourish settings type to ecommerce ([77f00b2](https://github.com/Open-Study-College/osc/commit/77f00b2dd87007fec5d175c06c68461037848d70))
+
+
+### 🧪 Tests
+
+* **hero:** adds test to hero to check flourishes get applied as expected ([8c70002](https://github.com/Open-Study-College/osc/commit/8c70002b9fb01f624932823fc440feab79b4b605))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* remove console.log ([08659da](https://github.com/Open-Study-College/osc/commit/08659da46323937c0c3467d66c8877e52caa53ba))
+
+
+### 🐛 Bugs
+
+* **hero:** fixes hero carousel name not passing through ([2137ccf](https://github.com/Open-Study-College/osc/commit/2137ccf5b9bebdfc54bfe71f326bec7e01630b13))
+* **studio:** remove fallback gradient to prevent it overriding everything ([ea9fc79](https://github.com/Open-Study-College/osc/commit/ea9fc792c903ec5731cea4444ebdba9558d20c49))
+* **types:** fix ts error in test file ([1935acf](https://github.com/Open-Study-College/osc/commit/1935acfadbd2df1e3d5076589df893bf10e7f2c4))
+
 ## [0.92.0](https://github.com/Open-Study-College/osc/compare/v0.91.0...v0.92.0) (2023-05-23)
 
 
@@ -123,35 +152,4 @@
 ### 🧪 Tests
 
 * improve test cases ([74d33d8](https://github.com/Open-Study-College/osc/commit/74d33d8bced6a5fe8f39a8761983650dc47a0b8f))
-
-## [0.89.0](https://github.com/Open-Study-College/osc/compare/v0.88.0...v0.89.0) (2023-05-18)
-
-
-### 🐛 Bugs
-
-* **content media:** add missing property to image ([d790199](https://github.com/Open-Study-College/osc/commit/d790199f9bf95cf4d8bd32d4d9b094eba07a8af5))
-
-
-### ✨ Features
-
-* **card:** adds image styles ([f63c853](https://github.com/Open-Study-College/osc/commit/f63c8535f0054e4e761d266397570c3efe0dbc50))
-* **cards:** add data from post hero into blog card ([fa2a7ab](https://github.com/Open-Study-College/osc/commit/fa2a7ab8d9376731b084dc7c7b0ded128fccc5fa))
-* **carousel:** adds image styles ([95cb242](https://github.com/Open-Study-College/osc/commit/95cb2423b29f3c2fd18b883153a68197ac03b454))
-* **collection:** add theme and featured image to collection settings ([8ce7bc5](https://github.com/Open-Study-College/osc/commit/8ce7bc527c60721ba435c630bc1ec247b7316276))
-* **collection card:** pull image settings from Sanity ([2488257](https://github.com/Open-Study-College/osc/commit/24882572c1c0bcb596af5e1241ebb71530e60951))
-* **content media:** adds image styles ([4a788b7](https://github.com/Open-Study-College/osc/commit/4a788b754ed8cb0bbb489cdfd5d00b85c469f8dd))
-* **hero:** adds image styles ([e1d3113](https://github.com/Open-Study-College/osc/commit/e1d311336281b75c2b0c628594120be7cc8063d7))
-* **image:** adds image styles to Image Modules ([bd0f15b](https://github.com/Open-Study-College/osc/commit/bd0f15bc4535faf900a1cff53ff32938c89de049))
-* **studio:** add theme controls to post ([321adf4](https://github.com/Open-Study-College/osc/commit/321adf42108b4d53b1327187482648ff0722092b))
-* **studio:** adds css image controls to image object in Sanity ([c302e8f](https://github.com/Open-Study-College/osc/commit/c302e8fc72b9972813ffaeb5c63c35c329a4e83f))
-* **video:** add image styles to video player preview image ([afd4c80](https://github.com/Open-Study-College/osc/commit/afd4c80472f5e334f96afab80bb9704e912cd569))
-
-
-### ♻️ Refactors
-
-* **cards:** add condition to only load image if image src is truthy ([c039b17](https://github.com/Open-Study-College/osc/commit/c039b17e3fd9943b85376fe762b605ed7f6160f7))
-* **cards:** adds optional chain to heroData ([5cdb45e](https://github.com/Open-Study-College/osc/commit/5cdb45e222f607d219866dceb0b1f3c52b51b30e))
-* **cards:** apply mix-blend-mode to featured card ([28782d9](https://github.com/Open-Study-College/osc/commit/28782d9818ec2cc15197cfc0d798334e31f209a9))
-* **studio:** move theme into it's own object ([336ba05](https://github.com/Open-Study-College/osc/commit/336ba05af483111b2db963e6a3f95a022eaa592c))
-* **studio:** remove background colour option from card ([bdb1f98](https://github.com/Open-Study-College/osc/commit/bdb1f985f6c1529f84dab38f1d96ee55ca3a30c3))
 
