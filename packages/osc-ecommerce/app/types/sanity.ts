@@ -334,17 +334,25 @@ export interface textGridModule extends module {
 }
 
 export interface tabsModule extends module {
+    /**
+     * @deprecated in favour of rowSettings
+     */
     marginBottom?: Maybe<Spacing>;
+    /**
+     * @deprecated in favour of rowSettings
+     */
     paddingBottom?: Maybe<Spacing>;
+    /**
+     * @deprecated in favour of rowSettings
+     */
     paddingTop?: Maybe<Spacing>;
-    paddingLeft: Maybe<Spacing>;
-    paddingRight: Maybe<Spacing>;
     tabItem: {
         _key: string;
         _type: string;
         modules: module[] | contentModule[];
         title: string;
     }[];
+    rowSettings: rowSettings;
 }
 
 export interface recommendedProductsModule extends module {

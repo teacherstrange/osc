@@ -1,5 +1,6 @@
 import groq from 'groq';
 import { CHILD_MODULES } from '../childModules';
+import { ROW_SETTINGS } from './rowSettings';
 
 export const MODULE_TABS = groq`
     _key,
@@ -8,8 +9,6 @@ export const MODULE_TABS = groq`
     marginBottom,
     paddingBottom,
     paddingTop,
-    paddingLeft,
-    paddingRight,
     tabItem[] {
         _type,
         _key,
@@ -18,5 +17,6 @@ export const MODULE_TABS = groq`
             _type,
             ${CHILD_MODULES}
         }
-    }
+    },
+    ${ROW_SETTINGS}
 `;
