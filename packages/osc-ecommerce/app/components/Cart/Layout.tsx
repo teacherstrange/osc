@@ -15,8 +15,6 @@ export const CartLayout = () => {
 
     const cartLines = linesCount && cart?.lines ? flattenConnection(cart?.lines) : [];
 
-    console.log('cart', cart);
-
     const isGreaterThanTab = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
     const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState(false);
 
