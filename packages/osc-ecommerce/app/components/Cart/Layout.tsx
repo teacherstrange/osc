@@ -7,6 +7,7 @@ import { CartTotal } from '~/components/Cart/CartTotal';
 import { CartLineItem } from '~/components/Cart/LineItem';
 import { PATHS } from '~/constants';
 import { useCart } from '~/hooks/useCart';
+import { EmptyCartMessage } from './EmptyCartMessage';
 
 export const CartLayout = () => {
     const cart = useCart();
@@ -37,13 +38,7 @@ export const CartLayout = () => {
 
             <div className="o-container o-grid u-pb-6xl">
                 <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--start-2@tab">
-                    {!linesCount ? (
-                        // TODO: Make this text CMS editable
-                        <p className="t-font-m u-mb-0">
-                            We have more than 750 courses and qualifications to choose from,
-                            continue browsing and join our family of over 110,000 students today.
-                        </p>
-                    ) : null}
+                    {!linesCount ? <EmptyCartMessage /> : null}
 
                     {linesCount && showOnGreaterThanTab ? (
                         <>
@@ -66,16 +61,7 @@ export const CartLayout = () => {
                         >
                             View Wishlist <Icon id="heart" />
                         </Button>
-                    ) : (
-                        <Button
-                            as="link"
-                            to={`/${PATHS.COLLECTIONS}`}
-                            variant="secondary"
-                            className="u-mt-m u-hidden-until@tab"
-                        >
-                            Browse our courses
-                        </Button>
-                    )}
+                    ) : null}
                 </div>
 
                 {linesCount ? (

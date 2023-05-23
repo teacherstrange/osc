@@ -1,4 +1,5 @@
-import type { ActionArgs, LinksFunction } from '@remix-run/node';
+import type { PortableTextBlock } from '@portabletext/types';
+import type { ActionArgs, ActionFunction, LinksFunction, LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import type {
     CartBuyerIdentityInput,
@@ -14,6 +15,8 @@ import lineItemStyles from 'osc-ui/dist/src-components-LineItem-line-item.css';
 import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import invariant from 'tiny-invariant';
 import { CartLayout } from '~/components/Cart/Layout';
+import { getSettingsData } from '~/models/sanity.server';
+import { CART_QUERY } from '~/queries/sanity/cart';
 
 import type { CartActions } from '~/types/shopify';
 import { CartAction } from '~/types/shopify';
@@ -29,7 +32,19 @@ export const links: LinksFunction = () => {
     ];
 };
 
-export async function action({ request, context }: ActionArgs) {
+export type LoaderData = {
+    emptyCartMessage: PortableTextBlock[];
+};
+
+export const loader: LoaderFunction = async () => {
+    const emptyCartMessage = await getSettingsData({
+        query: CART_QUERY,
+    });
+
+    return json<LoaderData>(emptyCartMessage);
+};
+
+export const action: ActionFunction = async ({ request, context }: ActionArgs) => {
     const { session, storefront } = context;
     const headers = new Headers();
 
@@ -111,7 +126,7 @@ export async function action({ request, context }: ActionArgs) {
         },
         { status, headers }
     );
-}
+};
 
 export default function CartRoute() {
     return <CartLayout />;
