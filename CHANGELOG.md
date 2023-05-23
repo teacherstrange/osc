@@ -1,3 +1,30 @@
+## [0.94.0](https://github.com/Open-Study-College/osc/compare/v0.93.0...v0.94.0) (2023-05-23)
+
+
+### ♻️ Refactors
+
+* **ecommerce:** move theme query into product query ([d84e0a3](https://github.com/Open-Study-College/osc/commit/d84e0a34ae1269c77bfea21b2e17fc6cd333785f))
+* **ecommerce:** update getPageData to allow more flexible params ([a50ec89](https://github.com/Open-Study-College/osc/commit/a50ec8922f9a348907fbabab2052d988c96ed01e))
+* **studio:** remove showHero schema ([fd52aeb](https://github.com/Open-Study-College/osc/commit/fd52aeb8b1d67eb344f35792f4f0c6d1308ca58e))
+
+
+### ✨ Features
+
+* **collections:** adds theme settings to collections ([3cc8726](https://github.com/Open-Study-College/osc/commit/3cc872651ccdd006ddb57425e60de02652ca72c3))
+* **ecommerce:** add relative position to main element ([875b205](https://github.com/Open-Study-College/osc/commit/875b205d89086019e6e18a4c6007fcda56caec02))
+* **flourishes:** adds page flourishes to pattern dropdown ([3fdbeba](https://github.com/Open-Study-College/osc/commit/3fdbeba7144552bab6438074cc6b281c1e42691f))
+* **flourishes:** bring collection flourishes into ecommerce ([6d105a2](https://github.com/Open-Study-College/osc/commit/6d105a2afc607c89d730bebf1a49f00f83ef568f))
+* **hero:** add flourishes to hero component in ecommerce ([11781da](https://github.com/Open-Study-College/osc/commit/11781da1d5ca0333e9bb2e4b922d62e6f6765850))
+* **product page:** adds flourishes to product page ([d14d628](https://github.com/Open-Study-College/osc/commit/d14d628974e60ea1e68a46436cc95939bac3a019))
+* **products:** adds collections to products query ([2cab426](https://github.com/Open-Study-College/osc/commit/2cab426257ae6d51bdd8840a3d668d79e768b663))
+* **styles:** adds utility class to apply position ([c75afb3](https://github.com/Open-Study-College/osc/commit/c75afb39285b1156049c2e606c615bdc15c85748))
+* **types:** adds flourish settings type to ecommerce ([9a562dd](https://github.com/Open-Study-College/osc/commit/9a562ddfea512f759a18fa5d21eb75c192e2c265))
+
+
+### 🐛 Bugs
+
+* **product page:** set upperContent type to be required to fix ts error ([c80c9b4](https://github.com/Open-Study-College/osc/commit/c80c9b488d86a91202892e1954b85dfafd017cc3))
+
 ## [0.93.0](https://github.com/Open-Study-College/osc/compare/v0.92.0...v0.93.0) (2023-05-23)
 
 
@@ -119,37 +146,4 @@
 ### 📦 General Housekeeping / Package Updates
 
 * move comment ([b0bf4e0](https://github.com/Open-Study-College/osc/commit/b0bf4e0591e32a2ffe4a01641769c8b1012d97fd))
-
-## [0.90.0](https://github.com/Open-Study-College/osc/compare/v0.89.0...v0.90.0) (2023-05-18)
-
-
-### ♻️ Refactors
-
-* **carousel:** set default slides per page ([5101f3a](https://github.com/Open-Study-College/osc/commit/5101f3adcf0ccf4a09b1149dfa55a48f6bcac58d))
-* **course cards:** update cards to take data from Shopify as well as Sanity ([946e8b2](https://github.com/Open-Study-College/osc/commit/946e8b22db842eaaba25c7ccebe4e142d4410916))
-* **types:** extend course card from product type ([9147dac](https://github.com/Open-Study-College/osc/commit/9147dac1fbe38c0d19ab858b5d8ef5211f4634b6))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* remove unused code ([5d88c73](https://github.com/Open-Study-College/osc/commit/5d88c7332161617647f3e3050d625807c0d75e06))
-* update comment on useRecommendedProducts ([dd95eb0](https://github.com/Open-Study-College/osc/commit/dd95eb0a4ea6dedaba0594c341a2032e11b863d1))
-
-
-### ✨ Features
-
-* **products:** adds query for recommended products ([40b7244](https://github.com/Open-Study-College/osc/commit/40b7244ef0274af076b205443a7798564209af22))
-* **products page:** adds recommended products query ([fdef248](https://github.com/Open-Study-College/osc/commit/fdef2487e0a2bab1f5c90e1da53b55386de73e6f))
-* **recommended products:** adds carousel settings to sanity object ([b3b47c1](https://github.com/Open-Study-College/osc/commit/b3b47c1ce855172cf1dd0d8926f1516e58388a4f))
-* **recommended products:** adds rec products object to studio ([314ac0e](https://github.com/Open-Study-College/osc/commit/314ac0ea9c928d4e65c58031cc613c739fecf949))
-* **recommended products:** adds recommended products component ([39ccdbc](https://github.com/Open-Study-College/osc/commit/39ccdbcde308a115b21ca591322fcd41ebd57b27))
-* **recommended products:** adds tests for recommended products component ([b5cac3e](https://github.com/Open-Study-College/osc/commit/b5cac3ec321250a2c373f1978611380c871cd0b7))
-* **recommended products:** adds useRecommendedProducts hook ([13272f5](https://github.com/Open-Study-College/osc/commit/13272f577305605616b58fd2e08ad142e30476c9))
-* **recommended products:** update filter to handle course options option ([51f5a10](https://github.com/Open-Study-College/osc/commit/51f5a109577ff0d0c12e31048cb31cfc4f4809f1))
-* **sanity:** adds a PRODUCT_MODULES constant ([cf58371](https://github.com/Open-Study-College/osc/commit/cf5837196edbcf294c380953ba7d5dcc8f7ca515))
-
-
-### 🧪 Tests
-
-* improve test cases ([74d33d8](https://github.com/Open-Study-College/osc/commit/74d33d8bced6a5fe8f39a8761983650dc47a0b8f))
 
