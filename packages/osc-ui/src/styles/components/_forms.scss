@@ -9,6 +9,7 @@
             position: relative;
             max-width: 100%;
             padding: var(--space-scale-2xl);
+            background: var(--color-tertiary);
             box-shadow: $shadow-l, $shadow-s;
 
             &--newsletter-form {
