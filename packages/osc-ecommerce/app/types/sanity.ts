@@ -549,9 +549,19 @@ export interface SanityActionNavSettings {
 export interface formModule extends module {
     formId: string;
     formName: string;
+    /**
+     * @deprecated in favour of rowSettings
+     */
     marginBottom?: Maybe<Spacing>;
+    /**
+     * @deprecated in favour of rowSettings
+     */
     paddingBottom?: Maybe<Spacing>;
+    /**
+     * @deprecated in favour of rowSettings
+     */
     paddingTop?: Maybe<Spacing>;
+    rowSettings: rowSettings;
 }
 
 export interface PreviewProps {
