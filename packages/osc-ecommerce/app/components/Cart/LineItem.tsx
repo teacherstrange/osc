@@ -35,7 +35,6 @@ export const CartLineItem = (props: CartLineItemProps) => {
 
 interface CartLineItemPriceProps {
     line: CartLine;
-    priceType?: 'regular' | 'compareAt';
 }
 
 const CartLineItemPrice = (props: CartLineItemPriceProps) => {
