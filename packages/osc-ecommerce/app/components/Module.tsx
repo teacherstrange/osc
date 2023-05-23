@@ -281,7 +281,7 @@ export default function Module(props: Props) {
         case 'module.tabs':
             const moduleTabs = module as tabsModule;
 
-            return <TabsModule module={moduleTabs} key={moduleTabs._key} />;
+            return <TabsModule module={moduleTabs} isFlush={isFlush} key={moduleTabs._key} />;
 
         case 'module.recommendedProducts':
             const moduleRecommendedProducts = module as recommendedProductsModule;
