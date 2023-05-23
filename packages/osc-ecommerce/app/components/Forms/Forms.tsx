@@ -1,5 +1,5 @@
 import { useFetcher, useLoaderData } from '@remix-run/react';
-import { Alert, classNames, useSpacing } from 'osc-ui';
+import { Alert } from 'osc-ui';
 import type { Dispatch } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import type { z } from 'zod';
@@ -93,9 +93,9 @@ const Form = (props: FormProps) => {
     );
 };
 
-export const Forms = (props: { module: formModule; addContainer?: boolean }) => {
+export const Forms = (props: { module: formModule }) => {
     // Module data coming from Sanity
-    const { module, addContainer = false } = props;
+    const { module } = props;
     // Data coming back when the form has been submitted - e.g. transition state and any server errors
     const fetcher = useFetcher();
     const data = fetcher.data;
@@ -115,10 +115,6 @@ export const Forms = (props: { module: formModule; addContainer?: boolean }) => 
     const { isAdding, isSubmitting } = transitionStates(fetcher);
 
     const formRef = useRef<HTMLFormElement>(null);
-
-    const marginBottomClass = useSpacing('margin', 'bottom', module.marginBottom);
-    const paddingTopClass = useSpacing('padding', 'top', module.paddingTop);
-    const paddingBottomClass = useSpacing('padding', 'bottom', module.paddingBottom);
 
     useEffect(() => {
         // Reset the form when form has finished submitting there is a success response
@@ -150,12 +146,6 @@ export const Forms = (props: { module: formModule; addContainer?: boolean }) => 
         return <Alert status="error">Unable to load form!</Alert>;
     }
 
-    const classes = classNames(
-        addContainer ? 'c-form o-container' : 'c-form',
-        marginBottomClass,
-        paddingTopClass,
-        paddingBottomClass
-    );
     // Get the form data that matches module formId
     const formData = hubspotFormData[module.formId] as HubspotFormData;
 
@@ -163,22 +153,20 @@ export const Forms = (props: { module: formModule; addContainer?: boolean }) => 
     type FlattenedErrors = z.inferFlattenedErrors<typeof schema>;
 
     return (
-        <div className={classes}>
-            <fetcher.Form action="/actions/hubspot" method="post" ref={formRef} noValidate>
-                <Form
-                    form={module}
-                    formErrors={formErrors}
-                    formFieldGroups={formData.formFieldGroups}
-                    isSubmitting={isSubmitting}
-                    key={key}
-                    setValidationErrors={setValidationErrors}
-                    styles={JSON.parse(formData.style)}
-                    submitText={formData.submitText}
-                    successContent={successContent}
-                    themeName={formData.themeName}
-                    validationErrors={validationErrors}
-                />
-            </fetcher.Form>
-        </div>
+        <fetcher.Form action="/actions/hubspot" method="post" ref={formRef} noValidate>
+            <Form
+                form={module}
+                formErrors={formErrors}
+                formFieldGroups={formData.formFieldGroups}
+                isSubmitting={isSubmitting}
+                key={key}
+                setValidationErrors={setValidationErrors}
+                styles={JSON.parse(formData.style)}
+                submitText={formData.submitText}
+                successContent={successContent}
+                themeName={formData.themeName}
+                validationErrors={validationErrors}
+            />
+        </fetcher.Form>
     );
 };

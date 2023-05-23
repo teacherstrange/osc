@@ -46,7 +46,7 @@ import { Cards } from './Cards/Cards';
 import { CarouselModule } from './Carousel/Carousel';
 import { ContentModule } from './Content/Content';
 import { ContentMediaModule } from './ContentMedia/ContentMedia';
-import { Forms } from './Forms/Forms';
+import { FormsModule } from './Forms/FormsModule';
 import { Hero } from './Hero/Hero';
 import { RecommendedProducts } from './RecommendedProducts/RecommendedProducts';
 import { TabsModule } from './Tabs/Tabs';
@@ -229,7 +229,7 @@ export default function Module(props: Props) {
 
         case 'module.forms':
             const moduleForm = module as formModule;
-            return <Forms addContainer={true} module={moduleForm} key={moduleForm._key} />;
+            return <FormsModule module={moduleForm} isFlush={isFlush} key={moduleForm._key} />;
 
         case 'module.hero':
             const moduleHero = module as heroModule;
