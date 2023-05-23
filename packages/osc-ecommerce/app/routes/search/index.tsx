@@ -3,6 +3,7 @@ import { useLoaderData } from '@remix-run/react';
 import type { LinksFunction, LoaderFunction } from '@remix-run/server-runtime';
 import { json } from '@remix-run/server-runtime';
 import algoliasearch from 'algoliasearch';
+import { Accordion } from 'osc-ui';
 import oscUiAutcompleteStyles from 'osc-ui/dist/src-components-Autocomplete-autocomplete.css';
 import oscUiButtonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import oscUiCardStyles from 'osc-ui/dist/src-components-Card-card.css';
@@ -19,7 +20,9 @@ import {
     InstantSearchSSRProvider,
     SearchBox,
 } from 'react-instantsearch-hooks-web';
+import { ClearRefinements } from '~/components/InstantSearch/Widgets/ClearRefinements';
 import { Configure } from '~/components/InstantSearch/Widgets/Configure';
+import { RefinementList } from '~/components/InstantSearch/Widgets/RefinementList';
 import { Hits } from '../../components/InstantSearch/Widgets/Hits/Hits';
 
 export const links: LinksFunction = () => {
@@ -124,10 +127,53 @@ const Search = (props: SearchProps) => {
         <InstantSearchSSRProvider {...serverState}>
             <InstantSearch searchClient={searchClient} indexName={env!.ALGOLIA_PRIMARY_INDEX}>
                 <SearchBox />
-
                 <div className="o-grid o-container c-instant-search__container">
-                    <div className="o-grid__col--12  o-grid__col--3@tab">
-                        <div>PANEL FOR REFINEMENT LISTS</div>
+                    <div className="o-grid__col--12  o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced">
+                        <Accordion type="multiple">
+                            <RefinementList
+                                attribute={'tbc'}
+                                sortBy={['name:asc']}
+                                accordionItem={true}
+                                title="Filter by Result type"
+                                value="TO BE CREATED"
+                            />
+                            <RefinementList
+                                attribute={'tbc'}
+                                sortBy={['name:asc']}
+                                accordionItem={true}
+                                title="Filter by Monthly Payments"
+                                value="TO BE CREATED"
+                            />
+                            <RefinementList
+                                attribute={'tbc'}
+                                sortBy={['name:asc']}
+                                accordionItem={true}
+                                title="Filter by Price"
+                                value="TO BE CREATED"
+                            />
+                            <RefinementList
+                                attribute={'meta.osc.award'}
+                                sortBy={['name:asc']}
+                                accordionItem={true}
+                                title="Filter by award"
+                                value="award"
+                            />
+                            <RefinementList
+                                attribute={'meta.osc.awarding_body'}
+                                sortBy={['name:asc']}
+                                accordionItem={true}
+                                title="Filter by awarding body"
+                                value="awarding_body"
+                            />
+                            <RefinementList
+                                attribute={'options.study-method'}
+                                sortBy={['name:asc']}
+                                accordionItem={true}
+                                title="Filter by study method"
+                                value="study_method"
+                            />
+                        </Accordion>
+                        <ClearRefinements />
                     </div>
                     <div className="o-grid o-grid__col--12 o-grid__col--9@tab">
                         {/* Use Flex */}
