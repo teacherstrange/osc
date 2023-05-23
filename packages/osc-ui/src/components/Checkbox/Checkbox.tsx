@@ -121,6 +121,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
                 <Label name={value} htmlFor={uniqueId + id} size={size} />
+                {count ? <span className="c-checkbox__count">({count})</span> : null}
             </div>
         );
     }

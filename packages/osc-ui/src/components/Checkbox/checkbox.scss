@@ -56,6 +56,11 @@
             padding: 0;
         }
 
+        &__count {
+            padding-left: $space-2xs;
+            color: var(--color-neutral-500);
+        }
+
         &__container {
             display: flex;
             align-items: center;
@@ -109,6 +114,7 @@
             /* stylelint-disable-next-line no-descending-specificity */
             .c-label {
                 flex: 1;
+                max-width: max-content;
                 padding-left: $space-xs;
                 color: var(--color-secondary);
             }
