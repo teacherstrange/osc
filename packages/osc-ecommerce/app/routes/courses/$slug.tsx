@@ -20,7 +20,6 @@ import productFormStyles from '~/components/Forms/ProductForm/product-form.css';
 import { getComponentStyles } from '~/components/Module';
 import { PageContent, PageContentUpper } from '~/components/PageContent';
 import { PreviewBanner } from '~/components/PreviewBanner';
-import priceStyles from '~/components/Price/price.css';
 import getPageData, { shouldRedirect } from '~/models/sanity.server';
 import { PRODUCT_QUERY as SANITY_PRODUCT_QUERY } from '~/queries/sanity/product';
 import {
@@ -40,7 +39,6 @@ export const links: LinksFunction = () => {
     return [
         { rel: 'stylesheet', href: productStyles },
         { rel: 'stylesheet', href: productFormStyles },
-        { rel: 'stylesheet', href: priceStyles },
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: labelStyles },
         { rel: 'stylesheet', href: radioStyles },

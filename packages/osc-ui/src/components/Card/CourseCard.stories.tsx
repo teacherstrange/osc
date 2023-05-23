@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Button, ButtonGroup } from '../Button/Button';
 import { AccessibleIcon, Icon } from '../Icon/Icon';
 import { PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from '../Popover/Popover';
+import { Price } from '../Price/Price';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import type { CardProps } from './Card';
 import {
@@ -75,12 +76,12 @@ const Template: Story<CardProps> = ({ ...args }) => {
                     </ul>
 
                     <CardPriceTag>
-                        <p>
+                        <Price size="sm">
                             <span className="u-text-bold">From £23</span>/month
-                        </p>
-                        <p>
+                        </Price>
+                        <Price size="sm">
                             or from <span className="u-text-bold">£849 in full</span>
-                        </p>
+                        </Price>
                     </CardPriceTag>
 
                     <Button as="link" to="/courses/aat-level-3-diploma-in-accounting" isFull>
@@ -143,12 +144,12 @@ const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => {
                     </CardCallout>
 
                     <CardPriceTag>
-                        <p>
+                        <Price size="sm">
                             <span className="u-text-bold">From £23</span>/month
-                        </p>
-                        <p>
+                        </Price>
+                        <Price size="sm">
                             or from <span className="u-text-bold">£849 in full</span>
-                        </p>
+                        </Price>
                     </CardPriceTag>
 
                     <Button as="link" to="/courses/aat-level-3-diploma-in-accounting" isFull>
@@ -169,12 +170,12 @@ const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => {
             <CardInner>
                 <CardHeader>
                     <CardPriceTag className="u-hidden-until@tab">
-                        <p>
+                        <Price size="sm">
                             <span className="u-text-bold">From £23</span>/month
-                        </p>
-                        <p>
+                        </Price>
+                        <Price size="sm">
                             or from <span className="u-text-bold">£849 in full</span>
-                        </p>
+                        </Price>
                     </CardPriceTag>
                     <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
                     <CardTitle as="h3" subtitle isSmall>
@@ -213,12 +214,12 @@ const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => {
                     </CardCallout>
 
                     <CardPriceTag className="u-hidden-from@tab">
-                        <p>
+                        <Price size="sm">
                             <span className="u-text-bold">From £23</span>/month
-                        </p>
-                        <p>
+                        </Price>
+                        <Price size="sm">
                             or from <span className="u-text-bold">£849 in full</span>
-                        </p>
+                        </Price>
                     </CardPriceTag>
 
                     <ButtonGroup>
@@ -259,12 +260,12 @@ const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
                 </ul>
 
                 <CardPriceTag>
-                    <p>
+                    <Price size="sm">
                         <span className="u-text-bold">From £23</span>/month
-                    </p>
-                    <p>
+                    </Price>
+                    <Price size="sm">
                         or from <span className="u-text-bold">£849 in full</span>
-                    </p>
+                    </Price>
                 </CardPriceTag>
 
                 <Button isFull>Add to bag</Button>

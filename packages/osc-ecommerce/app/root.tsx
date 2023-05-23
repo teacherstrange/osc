@@ -21,6 +21,7 @@ import oscFooterStyles from 'osc-ui/dist/src-components-Footer-footer.css';
 import oscHeaderStyles from 'osc-ui/dist/src-components-Header-header.css';
 import oscLogoStyles from 'osc-ui/dist/src-components-Logo-logo.css';
 import oscNavStyles from 'osc-ui/dist/src-components-Navbar-navbar.css';
+import oscUiPriceStyles from 'osc-ui/dist/src-components-Price-price.css';
 import oscUiSkipLinkStyle from 'osc-ui/dist/src-components-SkipLink-skip-link.css';
 import oscUiSwitchStyles from 'osc-ui/dist/src-components-Switch-switch.css';
 import styles from 'osc-ui/dist/src-styles-main.css';
@@ -57,6 +58,7 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscUiAccordionStyles },
         { rel: 'stylesheet', href: oscFooterStyles },
         { rel: 'stylesheet', href: oscUiDrawerStyles },
+        { rel: 'stylesheet', href: oscUiPriceStyles },
         {
             rel: 'preconnect',
             href: 'https://cdn.shopify.com',

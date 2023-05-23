@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, HTMLAttributes, ReactElement, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import useElementSize from '../../hooks/useElementSize';
 import { useModifier } from '../../hooks/useModifier';
@@ -249,12 +249,9 @@ export const CardCallout = (props: CardCalloutProps) => {
  * -----------------------------------------------------------------------------------------------*/
 export interface CardPriceTagProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {
     /**
-     * The content of the component,
-     * this component accepts up to two children & they must be an element.
+     * The content of the component
      */
-    children:
-        | ReactElement<HTMLParagraphElement>
-        | [ReactElement<HTMLParagraphElement>, ReactElement<HTMLParagraphElement>];
+    children: ReactNode;
 }
 
 export const CardPriceTag = (props: CardPriceTagProps) => {
