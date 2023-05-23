@@ -1,5 +1,5 @@
 import type { LinkDescriptor } from '@remix-run/node';
-import { Image, Trustpilot } from 'osc-ui';
+import { Trustpilot } from 'osc-ui';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
@@ -48,6 +48,7 @@ import { ContentModule } from './Content/Content';
 import { ContentMediaModule } from './ContentMedia/ContentMedia';
 import { FormsModule } from './Forms/FormsModule';
 import { Hero } from './Hero/Hero';
+import { ImageModule } from './Image/Image';
 import { RecommendedProducts } from './RecommendedProducts/RecommendedProducts';
 import { TabsModule } from './Tabs/Tabs';
 import { TextGridModule } from './TextGrid/TextGrid';
@@ -250,21 +251,7 @@ export default function Module(props: Props) {
         case 'module.images':
             const moduleImage = module as imageModule<HTMLImageElement>;
 
-            return (
-                <Image
-                    key={moduleImage._key}
-                    src={moduleImage.src}
-                    artDirectedImages={
-                        moduleImage.responsiveImages ? moduleImage.responsiveImages : undefined
-                    }
-                    alt={moduleImage.alt}
-                    width={moduleImage.width}
-                    height={moduleImage.height}
-                    overlayColor={moduleImage?.imageStyles?.overlayColor}
-                    isGrayScale={moduleImage?.imageStyles?.grayscale}
-                    hasTransparency={moduleImage?.imageStyles?.opacity}
-                />
-            );
+            return <ImageModule module={moduleImage} isFlush={isFlush} key={moduleImage._key} />;
 
         case 'module.textGrid':
             const moduleTextGrid = module as textGridModule;
