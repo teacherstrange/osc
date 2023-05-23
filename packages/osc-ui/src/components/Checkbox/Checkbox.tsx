@@ -1,6 +1,6 @@
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useId, useState } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -69,7 +69,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
             variants,
         } = props;
 
-        const [checked, setChecked] = useState<string | boolean>(false);
+        const uniqueId = useId();
         useEffect(() => {
             // Client side error handling - Sets any errors on an input in
             // accordance with the schema validation
@@ -109,7 +109,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     className={checkboxClasses}
                     defaultChecked={defaultChecked}
                     disabled={disabled}
-                    id={id}
+                    id={uniqueId + id}
                     name={name}
                     onCheckedChange={(checked) => setChecked(checked)}
                     ref={forwardedRef}
@@ -120,7 +120,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                         {icon ? <Icon id={icon.id} className={icon.className} /> : null}
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
-                <Label name={value} htmlFor={id} size={size} />
+                <Label name={value} htmlFor={uniqueId + id} size={size} />
             </div>
         );
     }
