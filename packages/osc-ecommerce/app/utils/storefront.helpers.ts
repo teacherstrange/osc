@@ -79,3 +79,19 @@ export const isGiftVoucher = (selectedVariant: ProductVariant) => {
 
     return hasMatchingSku || hasMatchingProductType;
 };
+
+/* -------------------------------------------------------------------------------------------------
+ * Check if fetcher is pending
+ * -----------------------------------------------------------------------------------------------*/
+/**
+ * Return a true or false value depending on whether the fetcher is in a pending state
+ *
+ * @param fetcher Fetcher form
+ * @returns Boolean
+ */
+export const fetcherIsPending = (fetcher: { state: string; data: any }) => {
+    return (
+        fetcher.state === 'submitting' ||
+        (fetcher.state === 'loading' && fetcher.data?.errors?.length === 0)
+    );
+};
