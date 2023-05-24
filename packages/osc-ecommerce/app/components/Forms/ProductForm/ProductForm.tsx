@@ -102,7 +102,11 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
         );
 
         return (
-            <div className={classes} ref={forwardedRef}>
+            <div
+                className={classes}
+                ref={forwardedRef}
+                data-anim={transitionIsNotIdle ? 'shimmer' : ''}
+            >
                 <Form onChange={handleSubmit} className="c-product-form__form">
                     {product.options && product.options.length > 0
                         ? product.options.map((option, index) => {
