@@ -11,6 +11,7 @@ import type {
 import accordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
+import flourishStyles from 'osc-ui/dist/src-components-Flourishes-flourish.css';
 import lineItemStyles from 'osc-ui/dist/src-components-LineItem-line-item.css';
 import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import invariant from 'tiny-invariant';
@@ -27,6 +28,7 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: accordionStyles },
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: cardStyles },
+        { rel: 'stylesheet', href: flourishStyles },
         { rel: 'stylesheet', href: lineItemStyles },
         { rel: 'stylesheet', href: selectStyles },
     ];

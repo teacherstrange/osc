@@ -1,6 +1,17 @@
 import { flattenConnection } from '@shopify/hydrogen';
 import { mediaQueries as mq } from 'osc-design-tokens';
-import { Button, Card, CardBody, CardFooter, CardTitle, Icon, rem, useMediaQuery } from 'osc-ui';
+import {
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    CardTitle,
+    Flourishes,
+    Icon,
+    flourishPrimary,
+    rem,
+    useMediaQuery,
+} from 'osc-ui';
 import { useEffect, useState } from 'react';
 import { CartCardItem } from '~/components/Cart/CartCardItem';
 import { CartTotal } from '~/components/Cart/CartTotal';
@@ -25,7 +36,7 @@ export const CartLayout = () => {
     }, [isGreaterThanTab]);
 
     return (
-        <>
+        <Flourishes color="gradient-senary" pattern={flourishPrimary} variant={'primary'}>
             <header className="o-container o-grid">
                 <div className="o-grid__col o-grid__col--11 o-grid__col--start-2@tab">
                     <h1 className="t-font-secondary t-font-5xl u-pt-2xl">
@@ -114,6 +125,6 @@ export const CartLayout = () => {
                     </Button>
                 </div>
             </div>
-        </>
+        </Flourishes>
     );
 };
