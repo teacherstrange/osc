@@ -29,10 +29,11 @@ import { RemoveFromCart } from '../Forms/CartActions/RemoveFromCart';
 
 interface CartCardItemProps {
     line: CartLineWithSanityData;
+    isLoading?: boolean;
 }
 
 export const CartCardItem = (props: CartCardItemProps) => {
-    const { line } = props;
+    const { line, isLoading } = props;
 
     const isGreaterThanTab = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
     const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState(false);
@@ -46,7 +47,10 @@ export const CartCardItem = (props: CartCardItemProps) => {
     if (typeof line.quantity === 'undefined' || !line.merchandise?.product) return null;
 
     return (
-        <li className={showOnGreaterThanTab ? 'u-mb-m' : 'u-mt-2xl'}>
+        <li
+            className={showOnGreaterThanTab ? 'u-mb-m' : 'u-mt-2xl'}
+            data-anim={isLoading ? 'shimmer' : ''}
+        >
             <Card hasBorder isTransparent>
                 <CardInner>
                     <CardHeader>

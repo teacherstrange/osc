@@ -7,16 +7,17 @@ import { RemoveFromCart } from '../Forms/CartActions/RemoveFromCart';
 
 interface CartLineItemProps {
     line: CartLine;
+    isLoading?: boolean;
 }
 
 export const CartLineItem = (props: CartLineItemProps) => {
-    const { line } = props;
+    const { line, isLoading } = props;
 
     if (typeof line.quantity === 'undefined' || !line.merchandise?.product) return null;
 
     return (
         <LineItem variant="primary" asChild>
-            <li>
+            <li data-anim={isLoading ? 'shimmer' : ''}>
                 <LineItemGroup>
                     <LineItemHeader className="u-mb-0">
                         <Link to={`/${PATHS.PRODUCTS}/${line?.merchandise?.product?.handle}`}>
