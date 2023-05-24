@@ -95,3 +95,16 @@ export const fetcherIsPending = (fetcher: { state: string; data: any }) => {
         (fetcher.state === 'loading' && fetcher.data?.errors?.length === 0)
     );
 };
+
+/* -------------------------------------------------------------------------------------------------
+ * Check if fetcher returns data with errors
+ * -----------------------------------------------------------------------------------------------*/
+/**
+ * Return a true or false value depending on whether the fetcher has returned with errors
+ *
+ * @param fetcher Fetcher form
+ * @returns Boolean
+ */
+export const fetcherHasError = (fetcher: { state: string; data: any }) => {
+    return fetcher.data?.errors?.length > 0;
+};
