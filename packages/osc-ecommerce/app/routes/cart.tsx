@@ -9,6 +9,7 @@ import type {
     UserError,
 } from '@shopify/hydrogen/storefront-api-types';
 import accordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
+import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import flourishStyles from 'osc-ui/dist/src-components-Flourishes-flourish.css';
@@ -18,7 +19,6 @@ import invariant from 'tiny-invariant';
 import { CartLayout } from '~/components/Cart/Layout';
 import { getSettingsData } from '~/models/sanity.server';
 import { CART_QUERY } from '~/queries/sanity/cart';
-
 import type { CartActions } from '~/types/shopify';
 import { CartAction } from '~/types/shopify';
 import { addLinesToCart, createCart, removeLinesFromCart } from '~/utils/cart.helpers';
@@ -26,6 +26,7 @@ import { addLinesToCart, createCart, removeLinesFromCart } from '~/utils/cart.he
 export const links: LinksFunction = () => {
     return [
         { rel: 'stylesheet', href: accordionStyles },
+        { rel: 'stylesheet', href: alertStyles },
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: cardStyles },
         { rel: 'stylesheet', href: flourishStyles },

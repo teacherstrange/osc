@@ -16,15 +16,23 @@ import {
 import { useEffect, useState } from 'react';
 import { CartCardItem } from '~/components/Cart/CartCardItem';
 import { CartTotal } from '~/components/Cart/CartTotal';
+import { EmptyCartMessage } from '~/components/Cart/EmptyCartMessage';
 import { CartLineItem } from '~/components/Cart/LineItem';
+import { ErrorAlert } from '~/components/ErrorAlert/ErrorAlert';
 import { PATHS } from '~/constants';
 import { useCart } from '~/hooks/useCart';
 import { CartAction } from '~/types/shopify';
-import { fetcherIsPending } from '~/utils/storefront.helpers';
-import { EmptyCartMessage } from './EmptyCartMessage';
+import { fetcherHasError, fetcherIsPending } from '~/utils/storefront.helpers';
 
 export const CartLayout = () => {
     const cart = useCart();
+    const isGreaterThanTab = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
+    const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState(false);
+    // We need this useEffect to set the showOnTab state only when the window object exists
+    // Otherwise we will receive an SSR warning telling us the markup differs from the server
+    useEffect(() => {
+        setShowOnGreaterThanTab(isGreaterThanTab);
+    }, [isGreaterThanTab]);
 
     // Get the number of lines in the cart from the cart object
     const linesCount = Boolean(cart?.lines?.edges?.length || 0);
@@ -41,20 +49,13 @@ export const CartLayout = () => {
     const pendingLineIds = removeFromCartFetchers.map(
         (f) => JSON.parse(String(f.submission?.formData.get('linesIds')) || '[]')[0]
     );
+    // Get any fetchers that have errors
+    const fetchersWithErrors = allFetchers.filter((f) => fetcherHasError(f));
 
     const lineIsPending = (line: string) => pendingLineIds.includes(line);
     const linesArePending = () => pendingLineIds.length > 0;
 
     const cartLines = linesCount && cart?.lines ? flattenConnection(cart?.lines) : [];
-
-    const isGreaterThanTab = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
-    const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState(false);
-
-    // We need this useEffect to set the showOnTab state only when the window object exists
-    // Otherwise we will receive an SSR warning telling us the markup differs from the server
-    useEffect(() => {
-        setShowOnGreaterThanTab(isGreaterThanTab);
-    }, [isGreaterThanTab]);
 
     return (
         <Flourishes color="gradient-senary" pattern={flourishPrimary} variant="primary">
@@ -67,6 +68,12 @@ export const CartLayout = () => {
             </header>
 
             <div className="o-container o-grid u-pb-6xl">
+                {fetchersWithErrors.length > 0 ? (
+                    <div className="o-grid__col o-grid__col--12 o-grid__col--10@tab o-grid__col--start-2@tab">
+                        <ErrorAlert />
+                    </div>
+                ) : null}
+
                 <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--start-2@tab">
                     {!linesCount ? <EmptyCartMessage /> : null}
 
