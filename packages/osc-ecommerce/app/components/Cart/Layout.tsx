@@ -49,11 +49,11 @@ export const CartLayout = () => {
     const pendingLineIds = removeFromCartFetchers.map(
         (f) => JSON.parse(String(f.submission?.formData.get('linesIds')) || '[]')[0]
     );
-    // Get any fetchers that have errors
-    const fetchersWithErrors = allFetchers.filter((f) => fetcherHasError(f));
-
     const lineIsPending = (line: string) => pendingLineIds.includes(line);
     const linesArePending = () => pendingLineIds.length > 0;
+
+    // Get any fetchers that have errors
+    const fetchersWithErrors = allFetchers.filter((f) => fetcherHasError(f));
 
     const cartLines = linesCount && cart?.lines ? flattenConnection(cart?.lines) : [];
 
