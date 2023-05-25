@@ -17,15 +17,16 @@ export const RefinementList = (props: RefinementListProps) => {
     const handleCheckboxChange = (name: string) => refine(name);
 
     const FacetListItems = items.map((item) => (
-        <Checkbox
-            count={item.count}
-            key={`${item.value}_${item.isRefined}`}
-            id={`refinement-${item.value}`}
-            name={item.label}
-            value={item.value}
-            checked={item.isRefined}
-            onValueChange={() => handleCheckboxChange(item.label)}
-        />
+        <div className="o-flex" key={`${item.value}_${item.isRefined}`}>
+            <Checkbox
+                id={`refinement-${item.value}`}
+                name={item.label}
+                value={item.value}
+                checked={item.isRefined}
+                onValueChange={() => handleCheckboxChange(item.label)}
+            />
+            <span className="u-pl-2xs u-color-neutral-500">({item.count})</span>
+        </div>
     ));
 
     if (accordionItem) {

@@ -17,10 +17,6 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
      */
     checked?: boolean;
     /**
-     * Optional count that can be passed in to give users additional information
-     */
-    count?: number;
-    /**
      * Any error messages - initially set through server validation, but can be updated through client validation
      */
     errors?: string[] | undefined;
@@ -68,7 +64,6 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
     (props, forwardedRef) => {
         const {
             checked = false,
-            count,
             defaultChecked,
             disabled,
             errors,
@@ -143,7 +138,6 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
                 <Label name={value} htmlFor={uniqueId + id} size={size} />
-                {count ? <span className="c-checkbox__count">({count})</span> : null}
             </div>
         );
     }
