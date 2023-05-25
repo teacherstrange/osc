@@ -10,6 +10,7 @@ import oscUiCardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import oscUiCheckboxStyles from 'osc-ui/dist/src-components-Checkbox-checkbox.css';
 import oscUiLabelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import oscUiPopoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
+import oscUiSliderStyles from 'osc-ui/dist/src-components-Slider-slider.css';
 import oscUiTextInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
 import { renderToString } from 'react-dom/server';
 import { getServerState } from 'react-instantsearch-hooks-server';
@@ -24,6 +25,7 @@ import { ClearRefinements } from '~/components/InstantSearch/Widgets/ClearRefine
 import { Configure } from '~/components/InstantSearch/Widgets/Configure';
 import { RefinementList } from '~/components/InstantSearch/Widgets/RefinementList';
 import { Hits } from '../../components/InstantSearch/Widgets/Hits/Hits';
+import { RefinementSlider } from '~/components/InstantSearch/Widgets/Refinements/RefinementSlider';
 
 export const links: LinksFunction = () => {
     return [
@@ -34,6 +36,7 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscUiTextInputStyles },
         { rel: 'stylesheet', href: oscUiCardStyles },
         { rel: 'stylesheet', href: oscUiPopoverStyles },
+        { rel: 'stylesheet', href: oscUiSliderStyles },
     ];
 };
 
@@ -144,13 +147,8 @@ const Search = (props: SearchProps) => {
                                 title="Filter by Monthly Payments"
                                 value="TO BE CREATED"
                             />
-                            <RefinementList
-                                attribute={'tbc'}
-                                sortBy={['name:asc']}
-                                accordionItem={true}
-                                title="Filter by Price"
-                                value="TO BE CREATED"
-                            />
+                            <RefinementSlider attribute="price" start={[100, 200]} />
+
                             <RefinementList
                                 attribute={'meta.osc.award'}
                                 sortBy={['name:asc']}
