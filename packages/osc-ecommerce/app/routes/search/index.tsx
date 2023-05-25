@@ -21,11 +21,11 @@ import {
     InstantSearchSSRProvider,
     SearchBox,
 } from 'react-instantsearch-hooks-web';
-import { ClearRefinements } from '~/components/InstantSearch/Widgets/Refinements/ClearRefinements';
 import { Configure } from '~/components/InstantSearch/Widgets/Configure';
+import { ClearRefinements } from '~/components/InstantSearch/Widgets/Refinements/ClearRefinements';
 import { RefinementList } from '~/components/InstantSearch/Widgets/Refinements/RefinementList';
-import { Hits } from '../../components/InstantSearch/Widgets/Hits/Hits';
 import { RefinementSlider } from '~/components/InstantSearch/Widgets/Refinements/RefinementSlider';
+import { Hits } from '../../components/InstantSearch/Widgets/Hits/Hits';
 
 export const links: LinksFunction = () => {
     return [
@@ -147,8 +147,14 @@ const Search = (props: SearchProps) => {
                                 title="Filter by Monthly Payments"
                                 value="TO BE CREATED"
                             />
-                            <RefinementSlider attribute="price" start={[100, 200]} />
-
+                            <RefinementSlider
+                                accordionItem={true}
+                                accordionValue="price"
+                                attribute="price"
+                                prefix="£"
+                                start={[100, 200]}
+                                title="Filter by Price"
+                            />
                             <RefinementList
                                 attribute={'meta.osc.award'}
                                 sortBy={['name:asc']}
