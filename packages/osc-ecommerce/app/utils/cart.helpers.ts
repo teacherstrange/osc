@@ -3,7 +3,11 @@ import type {
     Cart,
     CartInput,
     CartLineInput,
+    CartLineUpdateInput,
     CartUserError,
+    Product,
+    ProductVariant,
+    SelectedOptionInput,
     UserError,
 } from '@shopify/hydrogen/storefront-api-types';
 import invariant from 'tiny-invariant';
@@ -13,8 +17,10 @@ import {
     ADD_LINES_MUTATION,
     CART_QUERY,
     CREATE_CART_MUTATION,
+    LINES_UPDATE_MUTATION,
     REMOVE_LINE_ITEMS_MUTATION,
 } from '~/queries/shopify/cart';
+import { SELECTED_PRODUCT_VARIANT_ID } from '~/queries/shopify/product';
 import type { SanityProduct, SanityProductExcerpt } from '~/types/sanity';
 import type { CartLineWithSanityData } from '~/types/shopify';
 import { createSanityProductID, extractIdFromGid, isGiftVoucher } from './storefront.helpers';
@@ -226,4 +232,58 @@ export async function removeLinesFromCart(args: RemoveLines) {
     invariant(cartLinesRemove, 'No data returned from remove lines mutation');
 
     return cartLinesRemove;
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Update lines in cart
+ * -----------------------------------------------------------------------------------------------*/
+interface UpdateLine {
+    cartId: string;
+    linesIds: Cart['id'][];
+    productId: Product['id'];
+    selectedOptions: SelectedOptionInput[];
+    storefront: AppLoadContext['storefront'];
+}
+
+/**
+ * Update cart line(s) mutation
+ *
+ * @param cartId the current cart id
+ * @param lineIds [ID!]! an array of cart line ids to update
+ * @param productId [Product['id']] the product id to update
+ * @param selectedOptions [SelectedOptionInput!]! an array of selected options
+ * @param storefront the storefront object used to make the mutation
+ * @see https://shopify.dev/api/storefront/2022-07/mutations/cartlinesremove
+ * @returns mutated cart
+ * @preserve
+ */
+export async function updateLinesInCart(args: UpdateLine) {
+    const { cartId, linesIds, productId, selectedOptions, storefront } = args;
+    const lines: CartLineUpdateInput[] = [{ id: linesIds[0] }];
+
+    // In order to get the updated product variant id we first need to query the product variant id from the product
+    const { product } = await storefront.query<{
+        product: Product & { selectedVariant?: ProductVariant };
+    }>(SELECTED_PRODUCT_VARIANT_ID, {
+        variables: {
+            productId,
+            selectedOptions,
+        },
+    });
+
+    // Pass the updated product variant id to the lines array
+    lines[0].merchandiseId = product?.selectedVariant?.id;
+
+    const { cartLinesUpdate } = await storefront.mutate<{
+        cartLinesUpdate: {
+            cart: Cart;
+            errors: UserError[];
+        };
+    }>(LINES_UPDATE_MUTATION, {
+        variables: { cartId, lines },
+    });
+
+    invariant(cartLinesUpdate, 'No data returned from update lines items mutation');
+
+    return cartLinesUpdate;
 }
