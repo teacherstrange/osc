@@ -45,12 +45,16 @@ export const CartLayout = () => {
     // and filtering them down to the ones that are submitting
     const allFetchers = useFetchers();
     const pendingFetchers = allFetchers.filter((f) => fetcherIsPending(f));
-    // Filter down the pending fetchers to the ones that are removing items from the cart
-    const removeFromCartFetchers = pendingFetchers.filter(
-        (f) => f.formData?.get('cartAction') === CartAction.REMOVE_FROM_CART
+
+    // We only want to show the loading state for the fetchers that are removing or updating lines
+    const cartActionFetchers = pendingFetchers.filter(
+        (f) =>
+            f.formData?.get('cartAction') === CartAction.REMOVE_FROM_CART ||
+            f.formData?.get('cartAction') === CartAction.UPDATE_CART
     );
+
     // Create an array of line ids that are currently being removed from the cart
-    const pendingLineIds = removeFromCartFetchers.map(
+    const pendingLineIds = cartActionFetchers.map(
         (f) => JSON.parse(String(f.submission?.formData.get('linesIds')) || '[]')[0]
     );
     const lineIsPending = (line: string) => pendingLineIds.includes(line);
