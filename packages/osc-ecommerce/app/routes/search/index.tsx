@@ -21,9 +21,9 @@ import {
     InstantSearchSSRProvider,
     SearchBox,
 } from 'react-instantsearch-hooks-web';
-import { ClearRefinements } from '~/components/InstantSearch/Widgets/ClearRefinements';
+import { ClearRefinements } from '~/components/InstantSearch/Widgets/Refinements/ClearRefinements';
 import { Configure } from '~/components/InstantSearch/Widgets/Configure';
-import { RefinementList } from '~/components/InstantSearch/Widgets/RefinementList';
+import { RefinementList } from '~/components/InstantSearch/Widgets/Refinements/RefinementList';
 import { Hits } from '../../components/InstantSearch/Widgets/Hits/Hits';
 import { RefinementSlider } from '~/components/InstantSearch/Widgets/Refinements/RefinementSlider';
 
