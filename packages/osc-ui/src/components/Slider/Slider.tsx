@@ -41,11 +41,11 @@ export interface SliderProps extends ComponentPropsWithRef<typeof SliderPrimitiv
 
 export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, SliderProps>(
     (props: SliderProps, forwardedRef) => {
-        const { name, prefix, setValue, variants, ...rest } = props;
+        const { className, name, prefix, setValue, variants, ...rest } = props;
         const value = props.value || props.defaultValue;
 
         const modifier = useModifier('c-slider', variants);
-        const sliderClasses = classNames('c-slider', modifier);
+        const sliderClasses = classNames(`c-slider`, modifier, className);
 
         return (
             <SliderPrimitive.Slider
