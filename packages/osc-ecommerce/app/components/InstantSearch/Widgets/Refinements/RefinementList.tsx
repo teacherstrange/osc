@@ -4,9 +4,9 @@ import type { UseRefinementListProps } from 'react-instantsearch-hooks-web';
 import { AccordionHeader, AccordionItem, AccordionPanel } from 'osc-ui';
 
 interface RefinementListProps extends UseRefinementListProps {
-    accordionItem: boolean;
-    title: string;
-    value: string;
+    accordionItem?: boolean;
+    title?: string;
+    value?: string;
 }
 
 export const RefinementList = (props: RefinementListProps) => {
@@ -30,6 +30,10 @@ export const RefinementList = (props: RefinementListProps) => {
     ));
 
     if (accordionItem) {
+        if (!value) {
+            console.error('Value required for accordion');
+            return null;
+        }
         return (
             <div>
                 <AccordionItem value={value}>
