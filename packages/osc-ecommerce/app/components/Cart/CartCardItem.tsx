@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react';
+import { Link, useFetcher } from '@remix-run/react';
 import type { CartLine } from '@shopify/hydrogen/storefront-api-types';
 import { mediaQueries as mq } from 'osc-design-tokens';
 import {
@@ -20,10 +20,12 @@ import {
     rem,
     useMediaQuery,
 } from 'osc-ui';
+import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { Price } from '~/components/Price/Price';
 import { PATHS } from '~/constants';
 import type { CartLineWithSanityData } from '~/types/shopify';
+import { CartAction } from '~/types/shopify';
 import { stripMarks } from '~/utils/storefront.helpers';
 import { RemoveFromCart } from '../Forms/CartActions/RemoveFromCart';
 
@@ -76,7 +78,7 @@ export const CartCardItem = (props: CartCardItemProps) => {
                         )}
 
                         {showOnGreaterThanTab ? (
-                            <Options merchandise={line?.merchandise} />
+                            <Options line={line} />
                         ) : (
                             <Accordion collapsible type="single" variant="quaternary">
                                 <AccordionItem value="0">
@@ -84,7 +86,7 @@ export const CartCardItem = (props: CartCardItemProps) => {
                                         View options
                                     </AccordionHeader>
                                     <AccordionPanel>
-                                        <Options merchandise={line?.merchandise} />
+                                        <Options line={line} />
                                     </AccordionPanel>
                                 </AccordionItem>
                             </Accordion>
@@ -112,19 +114,51 @@ export const CartCardItem = (props: CartCardItemProps) => {
 };
 
 interface OptionsProps {
-    merchandise: CartLine['merchandise'];
+    line: CartLine;
 }
 
 const Options = (props: OptionsProps) => {
-    const { merchandise } = props;
+    const { line } = props;
+    const merchandise = line?.merchandise;
+    const fetcher = useFetcher();
+    const [selectedOptions, setSelectedOptions] = useState<
+        CartLine['merchandise']['selectedOptions']
+    >(merchandise?.selectedOptions);
 
     if (!merchandise?.product?.options || !merchandise?.selectedOptions) return null;
 
-    const { selectedOptions } = merchandise;
     const { options } = merchandise?.product;
 
+    const handleSubmitOnChange = (e: ChangeEvent<HTMLFormElement>) => {
+        // Map over selected options and replace the value of the option that has changed
+        const updatedOptions = selectedOptions.map((option) => {
+            if (option.name === e.target.name) {
+                return { ...option, value: e.target.value };
+            }
+            return option;
+        });
+
+        setSelectedOptions(updatedOptions);
+
+        // Rather than using the hidden fields in the form we are passing the data to the submit method.
+        // This allows us to submit when the updatedOptions value changes, if we use the hidden fields then the state will
+        // change after the form has been submitted.
+        fetcher.submit(
+            {
+                cartAction: CartAction.UPDATE_CART,
+                linesIds: JSON.stringify([line.id]),
+                productId: merchandise.product.id,
+                selectedOptions: JSON.stringify(updatedOptions),
+            },
+            {
+                method: 'post',
+                action: '/cart',
+            }
+        );
+    };
+
     return (
-        <>
+        <fetcher.Form action="/cart" method="post" onChange={handleSubmitOnChange}>
             {options.map((option, i) => (
                 <Select
                     description={{ label: option.name }}
@@ -147,6 +181,6 @@ const Options = (props: OptionsProps) => {
                     ))}
                 </Select>
             ))}
-        </>
+        </fetcher.Form>
     );
 };
