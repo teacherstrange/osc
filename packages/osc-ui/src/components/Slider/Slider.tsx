@@ -1,6 +1,6 @@
 import * as SliderPrimitive from '@radix-ui/react-slider';
-import type { ComponentPropsWithRef, ElementRef } from 'react';
-import React, { forwardRef, useState } from 'react';
+import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
+import React, { forwardRef } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 import './slider.scss';
@@ -14,21 +14,25 @@ export interface SliderProps extends ComponentPropsWithRef<typeof SliderPrimitiv
     /**
      * The value of the slider when initially rendered.
      */
-    defaultValue: number[];
+    defaultValue?: number[];
     /**
     /**
      * The minimum value for the range.
      */
-    min: number;
+    min?: number;
     /**
      * The maximum value for the range.
      */
-    max: number;
+    max?: number;
     /**
      * The name of the slider. Submitted with its owning form
      * as part of a name/value pair.
      */
-    name: string;
+    name?: string;
+    /**
+     * A prefix that can be optionally passed to the slider value
+     */
+    setValue?: Dispatch<SetStateAction<number[]>>;
     /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
@@ -36,15 +40,9 @@ export interface SliderProps extends ComponentPropsWithRef<typeof SliderPrimitiv
 }
 
 export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, SliderProps>(
-    (props, forwardedRef) => {
-        const { name, prefix, variants, ...rest } = props;
-
+    (props: SliderProps, forwardedRef) => {
+        const { name, prefix, setValue, variants, ...rest } = props;
         const value = props.value || props.defaultValue;
-        const [sliderValues, setSliderValues] = useState(value);
-
-        const onHandleChange = (event: number[]) => {
-            setSliderValues(event);
-        };
 
         const modifier = useModifier('c-slider', variants);
         const sliderClasses = classNames('c-slider', modifier);
@@ -54,7 +52,7 @@ export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, Slider
                 aria-label={name}
                 className={sliderClasses}
                 name={name}
-                onValueChange={(event) => onHandleChange(event)}
+                onValueChange={(event) => setValue(event)}
                 ref={forwardedRef}
                 {...rest}
             >
@@ -66,7 +64,7 @@ export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, Slider
                         <div className="c-slider__value-container">
                             <div className="c-slider__value">
                                 {prefix}
-                                {sliderValues[i]}
+                                {value[i]}
                                 <div className="c-slider__value--arrow"></div>
                             </div>
                         </div>
