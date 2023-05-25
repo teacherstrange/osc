@@ -7,11 +7,6 @@ import './slider.scss';
 
 export interface SliderProps extends ComponentPropsWithRef<typeof SliderPrimitive.Root> {
     /**
-     * A prefix that can be optionally passed to the slider value
-     */
-    prefix?: string;
-    /**
-    /**
      * The value of the slider when initially rendered.
      */
     defaultValue?: number[];
@@ -31,6 +26,10 @@ export interface SliderProps extends ComponentPropsWithRef<typeof SliderPrimitiv
     name?: string;
     /**
      * A prefix that can be optionally passed to the slider value
+     */
+    prefix?: string;
+    /**
+     * A dispatch that can be used to set externally set the value
      */
     setValue?: Dispatch<SetStateAction<number[]>>;
     /**
