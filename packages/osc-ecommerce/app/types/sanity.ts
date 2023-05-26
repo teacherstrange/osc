@@ -94,16 +94,11 @@ export interface buttonModule extends module {
 }
 
 export interface contentModule extends module {
-    backgroundColor?: Maybe<Themes>;
     horizontalAlignment?: 'left' | 'centre' | 'right';
-    marginBottom?: Maybe<Spacing>;
-    paddingBottom?: Maybe<Spacing>;
-    paddingTop?: Maybe<Spacing>;
-    paddingLeft: Maybe<Spacing>;
-    paddingRight: Maybe<Spacing>;
     fullWidth?: Maybe<boolean>;
     body?: PortableTextBlock[];
     buttons?: buttonModule[];
+    rowSettings: rowSettings;
 }
 
 export interface contentMediaSlide extends module {

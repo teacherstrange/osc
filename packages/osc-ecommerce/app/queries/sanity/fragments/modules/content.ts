@@ -2,16 +2,11 @@ import groq from 'groq';
 import { IMAGE } from '../image';
 import { LINK_EXTERNAL } from '../linkExternal';
 import { LINK_INTERNAL } from '../linkInternal';
+import { ROW_SETTINGS } from './rowSettings';
 
 export const MODULE_CONTENT = groq`
     _key,
-    backgroundColor,
     horizontalAlignment,
-    marginBottom,
-    paddingBottom,
-    paddingTop,
-    paddingLeft,
-    paddingRight,
     fullWidth,
     body[] {
         ...,
@@ -37,5 +32,6 @@ export const MODULE_CONTENT = groq`
         (type == "external") => {
             ${LINK_EXTERNAL}
         }
-    }
+    },
+    ${ROW_SETTINGS}
 `;

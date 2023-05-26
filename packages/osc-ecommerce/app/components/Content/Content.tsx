@@ -4,14 +4,15 @@ import { Row } from '../Row';
 
 export const ContentModule = (props: { module: contentModule; isFlush?: boolean }) => {
     const { module, isFlush } = props;
+    const containerIsFull = module.rowSettings?.container === 'full';
 
     return module.body ? (
         <Row
-            backgroundColor={module.backgroundColor}
-            marginBottom={module.marginBottom}
-            paddingBottom={module.paddingBottom}
-            paddingTop={module.paddingTop}
-            container={isFlush || module.fullWidth ? 'o-container--flush o-container--full' : ''}
+            backgroundColor={module.rowSettings?.backgroundColor}
+            marginBottom={module.rowSettings?.marginBottom}
+            paddingBottom={module.rowSettings?.paddingBottom}
+            paddingTop={module.rowSettings?.paddingTop}
+            container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
             asChild
         >
             <Content
