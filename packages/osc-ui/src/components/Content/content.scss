@@ -1,4 +1,5 @@
 @import "../../styles/settings";
+@import "../../styles/tools";
 
 @layer components {
     .c-content {
@@ -9,6 +10,10 @@
         flex-grow: 1;
         flex-direction: column;
         width: 100%;
+
+        @include mq($mq-mob, max) {
+            hyphens: auto; // Allow the browser to hyphenate words when needed
+        }
 
         // Ensure the links are underlined unless they are buttons or has been specifically reset
         /* stylelint-disable-next-line plugin/selector-bem-pattern */
