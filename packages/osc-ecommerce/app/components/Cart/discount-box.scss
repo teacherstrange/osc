@@ -1,0 +1,37 @@
+@import "../../../../osc-ui/src/styles/settings";
+@import "../../../../osc-ui/src/styles/tools";
+
+@layer components {
+    $discount-box-ttl-size: rem($base-fs);
+    $discount-box-desc-size: rem(14);
+
+    .c-discount-box {
+        margin-block-start: $space-m;
+        padding: $space-s $space-m;
+        background-color: var(--color-neutral-300);
+
+        &__ttl {
+            color: var(--color-primary);
+            font-size: $discount-box-ttl-size;
+        }
+
+        &__desc {
+            font-size: $discount-box-desc-size;
+            font-weight: $fw-reg;
+        }
+
+        &__form {
+            display: flex;
+            align-items: flex-start;
+            gap: $space-xs;
+
+            @include mq($mq-mob, max) {
+                flex-direction: column;
+            }
+
+            @include mq(($mq-tab, $mq-tab-l)) {
+                flex-direction: column;
+            }
+        }
+    }
+}
