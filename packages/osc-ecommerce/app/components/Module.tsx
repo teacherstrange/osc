@@ -200,7 +200,13 @@ export default function Module(props: Props) {
         case 'module.accordion':
             const moduleAccordion = module as accordionModule;
 
-            return <AccordionModule module={moduleAccordion} isFlush={isFlush} />;
+            return (
+                <AccordionModule
+                    module={moduleAccordion}
+                    isFlush={isFlush}
+                    key={moduleAccordion._key}
+                />
+            );
 
         case 'module.trustpilot':
             const moduleTrustpilot = module as trustpilotModule;
@@ -216,17 +222,26 @@ export default function Module(props: Props) {
 
         case 'module.cards':
             const moduleCard = module as cardModule;
-            return <Cards module={moduleCard} isFlush={isFlush} />;
+
+            return <Cards module={moduleCard} isFlush={isFlush} key={moduleCard._key} />;
 
         case 'module.carousel':
             const moduleCarousel = module as carouselModule;
 
-            return <CarouselModule module={moduleCarousel} isFlush={isFlush} />;
+            return (
+                <CarouselModule
+                    module={moduleCarousel}
+                    isFlush={isFlush}
+                    key={moduleCarousel._key}
+                />
+            );
 
         case 'module.content':
             const moduleContent = module as contentModule;
 
-            return <ContentModule module={moduleContent} isFlush={isFlush} />;
+            return (
+                <ContentModule module={moduleContent} isFlush={isFlush} key={moduleContent._key} />
+            );
 
         case 'module.forms':
             const moduleForm = module as formModule;
