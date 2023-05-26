@@ -1,10 +1,10 @@
-import React from 'react';
-import type { FC } from 'react';
 import * as RadixLabel from '@radix-ui/react-label';
-import './label.scss';
+import type { FC } from 'react';
+import React from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
+import './label.scss';
 export interface Props {
     onClickHandler?: () => void;
     htmlFor: string;
@@ -12,12 +12,16 @@ export interface Props {
     name: string;
     required?: boolean;
     variants?: string[];
+    size?: 'm' | 'xl';
 }
 
 export const Label: FC<Props> = (props: Props) => {
-    const { hidden, htmlFor, onClickHandler, name, required = false, variants } = props;
+    const { hidden, htmlFor, onClickHandler, name, required = false, size = 'm', variants } = props;
+
     const modifier = useModifier('c-label', variants);
-    const classes = classNames('c-label', modifier);
+    const sizeModifier = useModifier('c-label', size);
+
+    const classes = classNames('c-label', sizeModifier, modifier);
 
     if (hidden) {
         return (

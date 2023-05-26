@@ -38,6 +38,11 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
      */
     setErrors?: Dispatch<SetStateAction<any>>;
     /**
+     * Sets the size of the checkbox and the label
+     * @default m
+     */
+    size?: 'm' | 'xl';
+    /**
      * The value given as data when submitted with a name.
      */
     value: string;
@@ -59,6 +64,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
             required,
             schema,
             setErrors,
+            size = 'm',
             value,
             variants,
         } = props;
@@ -76,20 +82,31 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
         }, [checked]);
 
         const modifiers = useModifier('c-checkbox__container', variants);
-        const checkboxClasses = classNames('c-checkbox__container', modifiers);
+        const containerSizeModifier = useModifier('c-checkbox__container', size);
+        const checkboxContainerClasses = classNames(
+            'c-checkbox__container',
+            containerSizeModifier,
+            modifiers
+        );
+
+        const checkboxSizeModifier = useModifier('c-checkbox', size);
+        const checkboxClasses = classNames('c-checkbox', checkboxSizeModifier);
+
+        const indicatorSizeModifier = useModifier('c-checkbox__indicator', size);
+        const indicatorClasses = classNames('c-checkbox__indicator', indicatorSizeModifier);
 
         return (
             <div
                 className={
                     errors && errors.length > 0
-                        ? `${checkboxClasses} c-checkbox__container--error`
-                        : `${checkboxClasses}`
+                        ? `${checkboxContainerClasses} c-checkbox__container--error`
+                        : `${checkboxContainerClasses}`
                 }
             >
                 <CheckboxPrimitive.Root
                     aria-label={value}
                     aria-describedby={`${id}-error`}
-                    className="c-checkbox"
+                    className={checkboxClasses}
                     defaultChecked={defaultChecked}
                     disabled={disabled}
                     id={id}
@@ -99,11 +116,11 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     required={required}
                     value={value}
                 >
-                    <CheckboxPrimitive.Indicator className="c-checkbox__indicator">
+                    <CheckboxPrimitive.Indicator className={indicatorClasses}>
                         {icon ? <Icon id={icon.id} className={icon.className} /> : null}
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
-                <Label name={value} htmlFor={id} />
+                <Label name={value} htmlFor={id} size={size} />
             </div>
         );
     }

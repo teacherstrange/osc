@@ -52,6 +52,7 @@ const Template: Story = ({ variations }) => {
                         ref={variation.ref ? selectRef : null}
                         value={variation.value}
                         variants={variation.variants}
+                        size={variation.size}
                     />
                 </CheckboxGroup>
             </div>
@@ -92,16 +93,24 @@ const ValidationTemplate: Story = () => {
 export const Primary = Template.bind({});
 export const Secondary = Template.bind({});
 export const GroupLabel = Template.bind({});
+export const XL = Template.bind({});
 
 Primary.args = {
     variations: [
-        { id: 'call-1', name: 'contact', state: 'default', value: 'Call me as soon as possible' },
+        {
+            id: 'call-1',
+            name: 'contact',
+            state: 'default',
+            value: 'Call me as soon as possible',
+            size: 'm',
+        },
         {
             defaultChecked: true,
             id: 'call-2',
             name: 'contact',
             state: 'selectedOption',
             value: 'Call me as soon as possible',
+            size: 'm',
         },
         {
             id: 'call-3',
@@ -109,6 +118,7 @@ Primary.args = {
             ref: true,
             state: 'hasFocus',
             value: 'Call me as soon as possible',
+            size: 'm',
         },
         {
             id: 'call-4',
@@ -116,6 +126,7 @@ Primary.args = {
             required: true,
             state: 'hasValidation',
             value: 'Call me as soon as possible',
+            size: 'm',
         },
         {
             disabled: true,
@@ -123,6 +134,7 @@ Primary.args = {
             name: 'contact',
             state: 'isDisabled',
             value: 'Call me as soon as possible',
+            size: 'm',
         },
     ],
 };
@@ -135,6 +147,7 @@ Secondary.args = {
             state: 'default',
             value: 'Course replacement cover',
             variants: ['secondary'],
+            size: 'm',
         },
         {
             defaultChecked: true,
@@ -144,6 +157,7 @@ Secondary.args = {
             state: 'selectedOption',
             value: 'Course replacement cover',
             variants: ['secondary'],
+            size: 'm',
         },
         {
             icon: { id: 'check', className: 'is-checked' },
@@ -153,6 +167,7 @@ Secondary.args = {
             state: 'hasFocus',
             value: 'Course replacement cover',
             variants: ['secondary'],
+            size: 'm',
         },
         {
             icon: { id: 'check', className: 'is-checked' },
@@ -162,6 +177,7 @@ Secondary.args = {
             state: 'hasValidation',
             value: 'Course replacement cover',
             variants: ['secondary'],
+            size: 'm',
         },
     ],
 };
@@ -177,6 +193,7 @@ GroupLabel.args = {
             name: 'contact',
             state: 'groupLabel',
             value: 'Call me as soon as possible',
+            size: 'm',
         },
     ],
 };
@@ -189,4 +206,48 @@ Validation.parameters = {
             story: 'Validation styling for the Checkbox',
         },
     },
+};
+
+XL.args = {
+    variations: [
+        {
+            id: 'call-1',
+            name: 'contact',
+            state: 'default',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+        {
+            defaultChecked: true,
+            id: 'call-2',
+            name: 'contact',
+            state: 'selectedOption',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+        {
+            id: 'call-3',
+            name: 'contact',
+            ref: true,
+            state: 'hasFocus',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+        {
+            id: 'call-4',
+            name: 'contact',
+            required: true,
+            state: 'hasValidation',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+        {
+            disabled: true,
+            id: 'call-5',
+            name: 'contact',
+            state: 'isDisabled',
+            value: 'Call me as soon as possible',
+            size: 'xl',
+        },
+    ],
 };
