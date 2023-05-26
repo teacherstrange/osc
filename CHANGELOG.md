@@ -1,3 +1,34 @@
+## [0.97.0](https://github.com/Open-Study-College/osc/compare/v0.96.0...v0.97.0) (2023-05-26)
+
+
+### ♻️ Refactors
+
+* **card styles:** move border styles into modifier class ([6da41d9](https://github.com/Open-Study-College/osc/commit/6da41d9b6a285222b1406e33a7ed3238d8d6b25a))
+* **card styles:** move shadow styles into modifier class ([4e2096f](https://github.com/Open-Study-College/osc/commit/4e2096fb1f12abbc52d09f68579bc433e7392d1f))
+* **card styles:** move underline styles into own modifier ([0f4d828](https://github.com/Open-Study-College/osc/commit/0f4d8287f35e97643e7f28c4d99c8ed0646fcc55))
+* **cards:** replace is-small class with --small modifier ([8484b71](https://github.com/Open-Study-College/osc/commit/8484b717da581cde07159cbeafbde0824d60306c))
+* **cards:** update title and subtitle styles to be handled by modifier classes ([7de6a09](https://github.com/Open-Study-College/osc/commit/7de6a098d2782e49467babf51bc45e09fe58a1a8))
+
+
+### ✨ Features
+
+* **accordion:** adds quaternary accordion style ([4a7ccbe](https://github.com/Open-Study-College/osc/commit/4a7ccbe3a79d40336d3005abfcdad84f0bc3bf33))
+* **cards:** add bold utility to price ([9e1ddb6](https://github.com/Open-Study-College/osc/commit/9e1ddb686ad660da016dcfccba73f49f51241cdd))
+* **cards:** adds body width modifier ([acea449](https://github.com/Open-Study-College/osc/commit/acea4493d8ba7fc1e05d7accb23da5361b38a547))
+* **cards:** adds cart card story ([83d25e3](https://github.com/Open-Study-College/osc/commit/83d25e3ee50e7640fb8bdf1c48f5a56bd620470a))
+* **cards:** adds responsive accordion story ([bad7eb7](https://github.com/Open-Study-College/osc/commit/bad7eb7b1bc992963070afd4d080609ae0d48d56))
+* **cards:** adds transparency modifier ([0ccb6b4](https://github.com/Open-Study-College/osc/commit/0ccb6b470a3878a21de165905037d18df5777dce))
+* **label:** add dark colour modifier ([99b270e](https://github.com/Open-Study-College/osc/commit/99b270e24501bdfe43df6a285e25ad789949228f))
+* **select:** add inline-wrap variant ([f6774d0](https://github.com/Open-Study-College/osc/commit/f6774d0c57af326b35c516e6890da28814b30b0d))
+* **select:** add modifier classes and props ([59c639a](https://github.com/Open-Study-College/osc/commit/59c639aee32f231f9991960d68a828c4bd0493e3))
+* **styles:** add justify content utility class ([021bc9d](https://github.com/Open-Study-College/osc/commit/021bc9d1334471e6e3a166609cfb12bde07b4f23))
+
+
+### 🐛 Bugs
+
+* **button:** udpate fg colour for better contrast ([4a16ac0](https://github.com/Open-Study-College/osc/commit/4a16ac05360a4863ea5e07762076dd650d7692f5))
+* **cards:** update course card in ecommerce to use new props ([b8916a4](https://github.com/Open-Study-College/osc/commit/b8916a43e3995a604337f6c204fc5ced87e43936))
+
 ## [0.96.0](https://github.com/Open-Study-College/osc/compare/v0.95.0...v0.96.0) (2023-05-26)
 
 
@@ -83,28 +114,4 @@
 * **hero:** fixes hero carousel name not passing through ([2137ccf](https://github.com/Open-Study-College/osc/commit/2137ccf5b9bebdfc54bfe71f326bec7e01630b13))
 * **studio:** remove fallback gradient to prevent it overriding everything ([ea9fc79](https://github.com/Open-Study-College/osc/commit/ea9fc792c903ec5731cea4444ebdba9558d20c49))
 * **types:** fix ts error in test file ([1935acf](https://github.com/Open-Study-College/osc/commit/1935acfadbd2df1e3d5076589df893bf10e7f2c4))
-
-## [0.92.0](https://github.com/Open-Study-College/osc/compare/v0.91.0...v0.92.0) (2023-05-23)
-
-
-### 🧪 Tests
-
-* **price:** update test to match new classes ([67f7ccf](https://github.com/Open-Study-College/osc/commit/67f7ccfd7cf6ad615a5b5bf89bb5be4da204aa3c))
-
-
-### ♻️ Refactors
-
-* **card:** update card price type to allow react nodes ([d9ad0cc](https://github.com/Open-Study-College/osc/commit/d9ad0cc1d1e2dfcdb7be258b5846ceb1a45ca600))
-* **price:** extract price component out of osc-ecommerce and move it into osc-ui as a wrapper ([cb2b54d](https://github.com/Open-Study-College/osc/commit/cb2b54dc4cf1755efe4b68d5a360c899c30765df))
-* **price:** remove ternary with inaccessible false statement ([3c8aa3e](https://github.com/Open-Study-College/osc/commit/3c8aa3e8b2c19e5df5e8e5d71f74c2b7728d4faa))
-* **product page:** remove price stylesheet ([dbcd24f](https://github.com/Open-Study-College/osc/commit/dbcd24fa75b283d6acd7ecc3675c135fef49652b))
-
-
-### ✨ Features
-
-* **cards:** adds price component to course cards ([dda7417](https://github.com/Open-Study-College/osc/commit/dda7417da7b50f0899f1e46779dc85b0bd24006e))
-* **price:** add missing utilitiy classes to price in ecommerce ([37db4e3](https://github.com/Open-Study-College/osc/commit/37db4e36ef6ea983bb9927e3c79d6737329cce2d))
-* **price:** adds size modifier ([4d671a6](https://github.com/Open-Study-College/osc/commit/4d671a670f3241f38135124a32cdb16573df14f7))
-* **price:** adds sku element class ([95388c3](https://github.com/Open-Study-College/osc/commit/95388c3bcd315b25626f0fb81bd2e7877ef36c87))
-* add price stylesheet to root ([2fbd9b7](https://github.com/Open-Study-College/osc/commit/2fbd9b72aad377b5e49a7d80e623671b0d87caa4))
 
