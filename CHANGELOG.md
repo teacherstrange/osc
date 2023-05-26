@@ -1,3 +1,24 @@
+## [0.98.0](https://github.com/Open-Study-College/osc/compare/v0.97.0...v0.98.0) (2023-05-26)
+
+
+### ♻️ Refactors
+
+* **line item:** replace divs with group component ([6fc26bb](https://github.com/Open-Study-College/osc/commit/6fc26bb5e03660ae1d30de368aa717251f61b066))
+* **price:** wrap component in forwardRef to fix error when used in a Slot ([323bca6](https://github.com/Open-Study-College/osc/commit/323bca6a05056e0500ddbb2499fe701936e68c1e))
+
+
+### ✨ Features
+
+* **checkbox:** add secondary styles to label ([475ceff](https://github.com/Open-Study-College/osc/commit/475ceffae7c8294d1d4aba5c024ecb0b0265e85b))
+* **line item:** add asChild prop to help reduce markup ([46320b8](https://github.com/Open-Study-College/osc/commit/46320b8875a6d67cf9a988605727921d20356fc9))
+* **line item:** add line item tests ([bd32eca](https://github.com/Open-Study-College/osc/commit/bd32eca8edcc5726b34b05910dd11997d59192da))
+* **line item:** adds initial line item component ([63dd328](https://github.com/Open-Study-College/osc/commit/63dd328b17e77626dbc61f1d461303a730029977))
+* **line item:** adds tertiary variant ([7917827](https://github.com/Open-Study-College/osc/commit/7917827497750c0f414501a1a9c8ee40a6fafed3))
+* **line item:** adds variant support ([5e3e24a](https://github.com/Open-Study-College/osc/commit/5e3e24a9c5d75be682ff097b0b6f13fcd5731887))
+* **line item:** align primary items to the top ([255f6d4](https://github.com/Open-Study-College/osc/commit/255f6d41a07cb943333b8ccdbd31e14e0e7aa942))
+* **line item:** update storybook docs ([841408c](https://github.com/Open-Study-College/osc/commit/841408c903985ea493413686f434b710cffe2acc))
+* **line item:** update styles so price won't wrap ([f451a76](https://github.com/Open-Study-College/osc/commit/f451a76d9adfb4f9c98acba104bab7d05d4c0e74))
+
 ## [0.97.0](https://github.com/Open-Study-College/osc/compare/v0.96.0...v0.97.0) (2023-05-26)
 
 
@@ -85,33 +106,4 @@
 ### 🐛 Bugs
 
 * **product page:** set upperContent type to be required to fix ts error ([c80c9b4](https://github.com/Open-Study-College/osc/commit/c80c9b488d86a91202892e1954b85dfafd017cc3))
-
-## [0.93.0](https://github.com/Open-Study-College/osc/compare/v0.92.0...v0.93.0) (2023-05-23)
-
-
-### ✨ Features
-
-* **ecommerce:** adds flourishes to hero query ([f432784](https://github.com/Open-Study-College/osc/commit/f43278489857b4cf66324b808864e54986cc3adf))
-* **ecommerce:** adds utility to map santity settings to flourish patten object ([3c53e2d](https://github.com/Open-Study-College/osc/commit/3c53e2df3791383f016a863691e236d66c7373fc))
-* **hero:** add flourishes to hero component in ecommerce ([cd6f546](https://github.com/Open-Study-College/osc/commit/cd6f54614e76144c9fc38c7c31833b7ca3e54c71))
-* **studio:** adds a colorpicker variant that is restricted to certain colors ([911ccad](https://github.com/Open-Study-College/osc/commit/911ccad61bd494dd3178815f1732e4ce371e4035))
-* **studio:** adds flourish settings to hero modules ([dae4758](https://github.com/Open-Study-College/osc/commit/dae4758fa74f6937ca6051c3477f394aeca5e5dc))
-* **types:** adds flourish settings type to ecommerce ([77f00b2](https://github.com/Open-Study-College/osc/commit/77f00b2dd87007fec5d175c06c68461037848d70))
-
-
-### 🧪 Tests
-
-* **hero:** adds test to hero to check flourishes get applied as expected ([8c70002](https://github.com/Open-Study-College/osc/commit/8c70002b9fb01f624932823fc440feab79b4b605))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* remove console.log ([08659da](https://github.com/Open-Study-College/osc/commit/08659da46323937c0c3467d66c8877e52caa53ba))
-
-
-### 🐛 Bugs
-
-* **hero:** fixes hero carousel name not passing through ([2137ccf](https://github.com/Open-Study-College/osc/commit/2137ccf5b9bebdfc54bfe71f326bec7e01630b13))
-* **studio:** remove fallback gradient to prevent it overriding everything ([ea9fc79](https://github.com/Open-Study-College/osc/commit/ea9fc792c903ec5731cea4444ebdba9558d20c49))
-* **types:** fix ts error in test file ([1935acf](https://github.com/Open-Study-College/osc/commit/1935acfadbd2df1e3d5076589df893bf10e7f2c4))
 
