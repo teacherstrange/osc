@@ -1,0 +1,61 @@
+/* stylelint-disable selector-class-pattern */
+@use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
+
+@layer components {
+    $line-item-spacing: $space-m;
+    $line-item-fs: $fs-m;
+    $line-item-fs-s: $fs-s;
+
+    .c-line-item {
+        display: flex;
+        margin-block-start: $line-item-spacing;
+        padding-block-end: $line-item-spacing;
+        border-bottom: solid 1px var(--color-neutral-400);
+
+        &--primary,
+        &--tertiary {
+            flex-flow: row wrap;
+            justify-content: space-between;
+            column-gap: $fs-s;
+
+            @include mq($mq-mob-l) {
+                flex-wrap: nowrap;
+            }
+        }
+
+        &--primary {
+            align-items: flex-start;
+        }
+
+        &--secondary {
+            flex-direction: column;
+        }
+
+        &--tertiary {
+            align-items: center;
+            border-bottom: solid 1px var(--color-secondary);
+        }
+
+        &__header {
+            &--primary {
+                font-size: $line-item-fs;
+                line-height: 1;
+            }
+
+            &--secondary {
+                color: var(--color-neutral-700);
+                font-size: $line-item-fs-s;
+                font-weight: $fw-bold;
+            }
+
+            &--tertiary {
+                line-height: 1;
+            }
+        }
+
+        &__price {
+            flex-shrink: 0;
+        }
+    }
+}
