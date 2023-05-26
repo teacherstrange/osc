@@ -21,6 +21,7 @@ import {
     InstantSearchSSRProvider,
     SearchBox,
 } from 'react-instantsearch-hooks-web';
+import { CollectionCards } from '~/components/InstantSearch/Widgets/CollectionCards';
 import { Configure } from '~/components/InstantSearch/Widgets/Configure';
 import { ClearRefinements } from '~/components/InstantSearch/Widgets/Refinements/ClearRefinements';
 import { RefinementList } from '~/components/InstantSearch/Widgets/Refinements/RefinementList';
@@ -45,8 +46,8 @@ const HITS_PER_PAGE = 20;
 export type AllHitsWithVariantTitle = Partial<
     {
         id: number;
-        variant_title: string;
         objectId: string;
+        variant_title: string;
     } & ObjectWithObjectID
 >;
 
@@ -65,9 +66,10 @@ export const loader: LoaderFunction = async ({ request }) => {
                 ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID!,
                 ALGOLIA_API_KEY_SEARCH: process.env.ALGOLIA_API_KEY_SEARCH!,
                 ALGOLIA_API_KEY_ADMIN: process.env.ALGOLIA_API_KEY_ADMIN!,
-                ALGOLIA_PRIMARY_INDEX: process.env.ALGOLIA_PRIMARY_INDEX!,
-                ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID:
-                    process.env.ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID!,
+                ALGOLIA_PRIMARY_PRODUCTS_INDEX: process.env.ALGOLIA_PRIMARY_PRODUCTS_INDEX!,
+                ALGOLIA_PRIMARY_COLLECTIONS_INDEX: process.env.ALGOLIA_PRIMARY_COLLECTIONS_INDEX!,
+                ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID:
+                    process.env.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID!,
             }}
             serverUrl={serverUrl}
         />,
@@ -76,7 +78,7 @@ export const loader: LoaderFunction = async ({ request }) => {
         }
     );
 
-    const index = await adminClient.initIndex(process.env.ALGOLIA_PRIMARY_INDEX!);
+    const index = await adminClient.initIndex(process.env.ALGOLIA_PRIMARY_PRODUCTS_INDEX!);
 
     let allHitsWithVariantTitle: AllHitsWithVariantTitle[] = [];
 
@@ -100,8 +102,9 @@ export const loader: LoaderFunction = async ({ request }) => {
             ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID!,
             ALGOLIA_API_KEY_SEARCH: process.env.ALGOLIA_API_KEY_SEARCH!,
             ALGOLIA_API_KEY_ADMIN: process.env.ALGOLIA_API_KEY_ADMIN!,
-            ALGOLIA_PRIMARY_INDEX: process.env.ALGOLIA_PRIMARY_INDEX!,
-            ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID: process.env.ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID!,
+            ALGOLIA_PRIMARY_PRODUCTS_INDEX: process.env.ALGOLIA_PRIMARY_PRODUCTS_INDEX!,
+            ALGOLIA_PRIMARY_COLLECTIONS_INDEX: process.env.ALGOLIA_PRIMARY_COLLECTIONS_INDEX,
+            ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID: process.env.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID!,
         },
     });
 };
@@ -112,8 +115,9 @@ type SearchProps = {
         ALGOLIA_APP_ID: string;
         ALGOLIA_API_KEY_SEARCH: string;
         ALGOLIA_API_KEY_ADMIN: string;
-        ALGOLIA_PRIMARY_INDEX: string;
-        ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID: string;
+        ALGOLIA_PRIMARY_PRODUCTS_INDEX: string;
+        ALGOLIA_PRIMARY_COLLECTIONS_INDEX: string;
+        ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID: string;
     };
     hitsPerPage?: number;
     serverState?: InstantSearchServerState;
@@ -128,7 +132,10 @@ const Search = (props: SearchProps) => {
 
     return (
         <InstantSearchSSRProvider {...serverState}>
-            <InstantSearch searchClient={searchClient} indexName={env!.ALGOLIA_PRIMARY_INDEX}>
+            <InstantSearch
+                searchClient={searchClient}
+                indexName={env!.ALGOLIA_PRIMARY_PRODUCTS_INDEX}
+            >
                 <SearchBox />
                 <div className="o-grid o-container c-instant-search__container">
                     <div className="o-grid__col--12  o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced">
@@ -189,7 +196,11 @@ const Search = (props: SearchProps) => {
                             <div className="o-grid__col--6">COLLECTION 1</div>
                             <div className="o-grid__col--6">COLLECTION 2</div>
                         </div>
-                        <Index indexName={env!.ALGOLIA_PRIMARY_INDEX_GROUPED_BY_ID}>
+                        <Index indexName={env!.ALGOLIA_PRIMARY_COLLECTIONS_INDEX}>
+                            <Configure hitsPerPage={100} />
+                            <CollectionCards />
+                        </Index>
+                        <Index indexName={env!.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID}>
                             <Configure hitsPerPage={hitsPerPage} />
                             <Hits allHitsWithVariantTitle={allHitsWithVariantTitle} />
                         </Index>
