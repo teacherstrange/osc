@@ -125,15 +125,18 @@ const LargeTemplate: Story<CardProps> = ({ ...args }) => (
 export const Large = LargeTemplate.bind({});
 Large.args = {
     size: 'lg',
+    hasShadow: true,
     style: { maxWidth: '610px' },
 };
 export const Medium = MediumTemplate.bind({});
 Medium.args = {
     size: 'md',
+    hasShadow: true,
     style: { maxWidth: '610px' },
 };
 export const Small = SmallTemplate.bind({});
 Small.args = {
     size: 'sm',
+    hasShadow: true,
     style: { maxWidth: '452px' },
 };

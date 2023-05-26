@@ -24,7 +24,7 @@ export const SimpleCard = (props: Props) => {
         : data?.image?.image?.secure_url;
 
     return (
-        <Card>
+        <Card hasShadow>
             {data.image ? (
                 <CardImage>
                     {src && data?.image?.image ? (

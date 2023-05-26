@@ -160,6 +160,17 @@
                     grid-column: 1 / 2;
                 }
             }
+
+            &--quaternary {
+                --accordion-trigger-font-size: #{rem($base-fs)};
+
+                padding: $space-2xs $space-l;
+                font-weight: $fw-light;
+
+                &:hover {
+                    color: var(--color-secondary);
+                }
+            }
         }
 
         &__item {
@@ -170,7 +181,8 @@
                 }
             }
 
-            &--secondary {
+            &--secondary,
+            &--quaternary {
                 border: $accordion-item-border;
 
                 &:not(:last-child) {
@@ -221,6 +233,10 @@
 
             &--tertiary {
                 padding: $space-2xl;
+            }
+
+            &--quaternary {
+                padding: $space-2xs;
             }
         }
     }

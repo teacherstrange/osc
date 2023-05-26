@@ -30,15 +30,49 @@ export interface CardProps extends SharedCardProps, HTMLAttributes<HTMLDivElemen
      * @default false
      */
     blockLink?: boolean;
+    /**
+     * Whether the card should have a shadow.
+     * @default false
+     */
+    hasShadow?: boolean;
+    /**
+     * Whether the card should have a border.
+     * @default false
+     */
+    hasBorder?: boolean;
+    /**
+     * Whether the card should be transparent.
+     * @default false
+     */
+    isTransparent?: boolean;
 }
 const CardContext = createContext(null);
 
 export const Card = (props: CardProps) => {
-    const { blockLink, children, className, ...attr } = props;
+    const {
+        blockLink,
+        children,
+        className,
+        hasShadow = false,
+        hasBorder = false,
+        isTransparent = false,
+        ...attr
+    } = props;
     const [cardInnerHeight, setCardInnerHeight] = useState<number>(null);
     const cardRef = useRef<HTMLDivElement>(null);
 
-    const classes = classNames('c-card', blockLink && 'is-block-link', className);
+    const shadowModifier = useModifier('c-card', 'shadow');
+    const borderModifier = useModifier('c-card', 'bordered');
+    const transparentModifier = useModifier('c-card', 'transparent');
+
+    const classes = classNames(
+        'c-card',
+        blockLink && 'is-block-link',
+        hasShadow ? shadowModifier : '',
+        hasBorder ? borderModifier : '',
+        isTransparent ? transparentModifier : '',
+        className
+    );
 
     const context = {
         cardInnerHeight,
@@ -156,6 +190,11 @@ export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
      */
     as?: Headings;
     /**
+     * Sets the underline style of the title
+     * @default false
+     */
+    isUnderlined?: boolean;
+    /**
      * Set the style of the heading element
      * @default false
      */
@@ -165,13 +204,46 @@ export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
      * @default false
      */
     isSmall?: boolean;
+    /**
+     * Sets the position of the title, only works when subtitle is true
+     * @default top
+     */
+    position?: 'top' | 'bottom';
+    /**
+     * Changes the default colour and sets the themeable modifier
+     * @default false
+     */
+    isThemeable?: boolean;
 }
 
 export const CardTitle = (props: CardTitleProps) => {
-    const { as: Component = 'h2', children, className, isSmall, subtitle, ...attr } = props;
+    const {
+        as: Component = 'h2',
+        children,
+        className,
+        subtitle = false,
+        position = 'top',
+        isSmall = false,
+        isUnderlined = false,
+        isThemeable = false,
+        ...attr
+    } = props;
 
     const elementClass = subtitle ? 'c-card__subttl' : 'c-card__ttl';
-    const classes = classNames(elementClass, isSmall && 'is-small', className);
+
+    const underlined = useModifier(elementClass, 'underlined');
+    const small = useModifier(elementClass, 'small');
+    const positionModifier = useModifier(elementClass, position);
+    const themeModifier = useModifier(elementClass, 'themeable');
+
+    const classes = classNames(
+        elementClass,
+        isSmall ? small : '',
+        isUnderlined ? underlined : '',
+        subtitle && position ? positionModifier : '',
+        isThemeable ? themeModifier : '',
+        className
+    );
 
     return (
         <Component className={classes} {...attr}>
@@ -183,11 +255,20 @@ export const CardTitle = (props: CardTitleProps) => {
 /* -------------------------------------------------------------------------------------------------
  * Card Body
  * -----------------------------------------------------------------------------------------------*/
-export interface CardBodyProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {}
+export interface CardBodyProps extends SharedCardProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Narrows the width of the card body to 44ch
+     * @default false
+     */
+    isNarrow?: boolean;
+}
 
 export const CardBody = (props: CardBodyProps) => {
-    const { children, className, ...attr } = props;
-    const classes = classNames('c-card__body', className);
+    const { children, className, isNarrow = false, ...attr } = props;
+
+    const widthModifier = useModifier('c-card__body', 'narrow');
+
+    const classes = classNames('c-card__body', isNarrow ? widthModifier : '', className);
 
     return (
         <div className={classes} {...attr}>

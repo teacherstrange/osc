@@ -62,8 +62,8 @@ const Template: Story<CardProps> = ({ ...args }) => {
                         onClick={() => setIsActive(!isActive)}
                     />
 
-                    <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
-                    <CardTitle as="h3" subtitle isSmall>
+                    <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
+                    <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                         Single course
                     </CardTitle>
                 </CardHeader>
@@ -107,8 +107,8 @@ const HasCalloutTemplate: Story<CardProps> = ({ ...args }) => {
                         onClick={() => setIsActive(!isActive)}
                     />
 
-                    <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
-                    <CardTitle as="h3" subtitle isSmall>
+                    <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
+                    <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                         Single course
                     </CardTitle>
                 </CardHeader>
@@ -177,8 +177,8 @@ const IsFullWidthTemplate: Story<CardProps> = ({ ...args }) => {
                             or from <span className="u-text-bold">£849 in full</span>
                         </Price>
                     </CardPriceTag>
-                    <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
-                    <CardTitle as="h3" subtitle isSmall>
+                    <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
+                    <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                         Single course
                     </CardTitle>
                 </CardHeader>
@@ -245,8 +245,8 @@ const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
     <CourseCard {...args}>
         <CardInner>
             <CardHeader>
-                <CardTitle>AAT Level 3 Diploma in Accounting</CardTitle>
-                <CardTitle as="h3" subtitle isSmall>
+                <CardTitle isUnderlined>AAT Level 3 Diploma in Accounting</CardTitle>
+                <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                     Single course
                 </CardTitle>
             </CardHeader>
@@ -286,6 +286,7 @@ const HasFooterTemplate: Story<CardProps> = ({ ...args }) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
+    hasShadow: true,
     style: { maxWidth: '400px' },
 };
 export const HasCallout = HasCalloutTemplate.bind({});
@@ -303,6 +304,8 @@ export const IsFullWidth = IsFullWidthTemplate.bind({});
 IsFullWidth.args = {
     ...Primary.args,
     isFull: true,
+    hasShadow: false,
+    hasBorder: true,
     style: {
         maxWidth: '100%',
     },

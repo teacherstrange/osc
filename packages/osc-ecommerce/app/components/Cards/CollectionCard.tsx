@@ -23,7 +23,7 @@ export const CollectionCard = (props: Props) => {
     const { theme, featuredImage } = data?.reference;
 
     return (
-        <OSCCollectionCard size={data?.variant}>
+        <OSCCollectionCard size={data?.variant} hasShadow>
             {featuredImage?.src ? (
                 <CardImage>
                     <Image

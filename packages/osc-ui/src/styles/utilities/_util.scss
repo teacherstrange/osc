@@ -170,6 +170,12 @@ $osc-config: (
             end
         )
     ),
+    justify-content: (
+        prefix: "justify",
+        values: (
+            "between": space-between
+        )
+    ),
     width: (
         prefix: "w",
         values: (

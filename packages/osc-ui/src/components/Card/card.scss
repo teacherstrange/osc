@@ -48,10 +48,21 @@ $card-fs-3xl: $fs-3xl;
         height: 100%;
         overflow: hidden;
         background-color: var(--color-tertiary);
-        box-shadow: $card-shadow;
         font-size: var(--font-scale-base);
         font-weight: $fw-light;
         line-height: 1.4;
+
+        &--shadow {
+            box-shadow: $card-shadow;
+        }
+
+        &--bordered {
+            border: $card-border;
+        }
+
+        &--transparent {
+            background-color: transparent;
+        }
 
         &,
         &__inner,
@@ -103,19 +114,40 @@ $card-fs-3xl: $fs-3xl;
         &__ttl {
             font-size: $card-fs-l;
 
-            &.is-small {
+            &--underlined {
+                border-bottom: 1px solid var(--color-secondary);
+                padding-block-end: 0.2em;
+                margin-block-end: 0.2em;
+            }
+
+            &--small {
                 font-size: $card-fs-m;
                 font-weight: $fw-reg;
+            }
+
+            &--themeable {
+                color: $card-color;
             }
         }
 
         &__subttl {
             color: var(--color-neutral-700);
             font-size: var(--font-scale-base);
-            grid-row: 1;
 
-            &.is-small {
+            &--small {
                 font-weight: $fw-reg;
+            }
+
+            &--top {
+                grid-row: 1;
+            }
+
+            &--bottom {
+                grid-row: auto;
+            }
+
+            &--themeable {
+                color: $card-color;
             }
         }
 
@@ -127,6 +159,10 @@ $card-fs-3xl: $fs-3xl;
 
             &-inner {
                 margin-block-end: auto;
+            }
+
+            &--narrow {
+                max-width: 44ch;
             }
         }
 
@@ -214,7 +250,6 @@ $card-fs-3xl: $fs-3xl;
         // *----------------------------------*/
         &--blog {
             border-bottom: var(--card-border);
-            box-shadow: none;
             color: var(--color-secondary);
 
             #{$self}__inner {
@@ -559,17 +594,6 @@ $card-fs-3xl: $fs-3xl;
                 }
             }
 
-            #{$self}__ttl {
-                border-bottom: 1px solid var(--color-secondary);
-                padding-block-end: 0.2em;
-                margin-block-end: 0.2em;
-            }
-
-            #{$self}__subttl {
-                grid-row: auto;
-                color: $card-color;
-            }
-
             #{$self}__body {
                 h4,
                 h5,
@@ -585,9 +609,6 @@ $card-fs-3xl: $fs-3xl;
             }
 
             &.is-full {
-                border: 1px solid var(--color-neutral-400);
-                box-shadow: none;
-
                 #{$self}__header {
                     #{$self}__ttl,
                     #{$self}__price-tag {

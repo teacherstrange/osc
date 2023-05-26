@@ -60,7 +60,7 @@ export const CourseCard = (props: Props) => {
     };
 
     return (
-        <OSCCourseCard>
+        <OSCCourseCard hasShadow>
             <CardInner>
                 <CardHeader>
                     {/* // TODO: Reactivate when wishlist is enabled */}
@@ -70,8 +70,8 @@ export const CourseCard = (props: Props) => {
                         onClick={() => setIsActive(!isActive)}
                     /> */}
 
-                    <CardTitle>{title}</CardTitle>
-                    <CardTitle as="h3" subtitle isSmall>
+                    <CardTitle isUnderlined>{title}</CardTitle>
+                    <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                         {/* // TODO: This data should come from the SHOPIFY/CMS once packages/bundles are sorted */}
                         Single course
                     </CardTitle>

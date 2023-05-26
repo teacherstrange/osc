@@ -1,22 +1,21 @@
 import { CheckIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
+import type { ComponentPropsWithRef, Dispatch, ElementRef, ReactNode, SetStateAction } from 'react';
 import React, { forwardRef, useEffect, useState } from 'react';
-import type { ReactNode } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
+import { clientSideValidation } from '../../utils/clientSideValidation';
 import { Icon } from '../Icon/Icon';
 import { Label } from '../Label/Label';
 import './select.scss';
-import { clientSideValidation } from '../../utils/clientSideValidation';
 
 type Description = {
     label?: string;
     icon?: string;
 };
 
-type GroupVariants = 'secondary' | 'tertiary' | 'inline' | 'bold';
+type GroupVariants = 'secondary' | 'tertiary' | 'inline' | 'inline-wrap' | 'bold';
 
 // type Ex1 = GroupVariants<{ firstName: string }>;
 export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root> {
@@ -24,6 +23,10 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
      * Description for the Select, can be a Label or an Icon
      */
     children: ReactNode;
+    /**
+     * Custom class
+     */
+    className?: string;
     /**
      * Description for the Select, can be a Label or an Icon
      */
@@ -52,6 +55,15 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
      * Allows for client side validation once a server side error has been received
      */
     setErrors?: Dispatch<SetStateAction<any>>;
+    /**
+     * Sets the label to use the secondary colour
+     * @default false
+     */
+    hasDarkLabel?: boolean;
+    /**
+     * Sets the width of the trigger in %
+     */
+    triggerWidth?: '70';
 }
 
 export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(
@@ -67,6 +79,9 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             name,
             schema,
             setErrors,
+            hasDarkLabel = false,
+            triggerWidth,
+            className,
         } = props;
         const [value, setValue] = useState('');
         const [isOpen, setIsOpen] = useState(false);
@@ -81,7 +96,13 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
         }, [value]);
 
         const modifiers = useModifier('c-select', groupVariants);
-        const selectClasses = classNames('c-select', modifiers);
+        const selectClasses = classNames('c-select', modifiers, className);
+
+        const triggerWidthModifier = useModifier('c-select__trigger', triggerWidth);
+        const triggerClasses = classNames(
+            'c-select__trigger',
+            triggerWidth ? triggerWidthModifier : ''
+        );
 
         const setDescription = (desc: Description) => {
             if (desc?.label)
@@ -91,6 +112,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                         name={desc.label}
                         onClickHandler={() => setIsOpen(!isOpen)}
                         required={required}
+                        isDark={hasDarkLabel}
                     />
                 );
             if (desc?.icon) return <Icon id={desc.icon} />;
@@ -114,7 +136,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                     <SelectPrimitive.Trigger
                         aria-invalid={errors ? true : false}
                         aria-describedby={errors ? `${name}-error` : undefined}
-                        className="c-select__trigger"
+                        className={triggerClasses}
                         id={name}
                         ref={forwardedRef}
                         aria-label={name}

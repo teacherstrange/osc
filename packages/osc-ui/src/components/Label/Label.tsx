@@ -13,15 +13,28 @@ export interface Props {
     required?: boolean;
     variants?: string[];
     size?: 'm' | 'xl';
+    /**
+     * Sets the label to use the secondary colour
+     * @default false
+     */
+    isDark?: boolean;
 }
-
 export const Label: FC<Props> = (props: Props) => {
-    const { hidden, htmlFor, onClickHandler, name, required = false, size = 'm', variants } = props;
+    const {
+        hidden,
+        htmlFor,
+        onClickHandler,
+        name,
+        required = false,
+        variants,
+        size = 'm',
+        isDark = false,
+    } = props;
 
     const modifier = useModifier('c-label', variants);
     const sizeModifier = useModifier('c-label', size);
-
-    const classes = classNames('c-label', sizeModifier, modifier);
+    const colourModifier = useModifier('c-label', 'dark');
+    const classes = classNames('c-label', sizeModifier, modifier, isDark ? colourModifier : '');
 
     if (hidden) {
         return (

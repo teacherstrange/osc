@@ -22,7 +22,7 @@ export const BioCard = (props: Props) => {
         : data?.image?.image?.secure_url;
 
     return (
-        <Card>
+        <Card hasShadow>
             {data?.image ? (
                 <CardImage isRounded>
                     {src && data?.image?.image ? (
