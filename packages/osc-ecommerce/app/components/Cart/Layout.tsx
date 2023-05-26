@@ -17,6 +17,7 @@ import {
 import { useEffect, useState } from 'react';
 import { CartCardItem } from '~/components/Cart/CartCardItem';
 import { CartTotal } from '~/components/Cart/CartTotal';
+import { DiscountBox } from '~/components/Cart/DiscountBox';
 import { EmptyCartMessage } from '~/components/Cart/EmptyCartMessage';
 import { CartLineItem } from '~/components/Cart/LineItem';
 import { ErrorAlert } from '~/components/ErrorAlert/ErrorAlert';
@@ -161,6 +162,11 @@ export const CartLayout = () => {
                                             );
                                         })}
                                     </ul>
+
+                                    <DiscountBox
+                                        title="Have a discount code?"
+                                        description="Please note: We only publish discount codes online via official Open Study College channels."
+                                    />
 
                                     <CartTotal cost={cart.cost} isLoading={linesArePending()} />
                                 </CardBody>
