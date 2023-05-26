@@ -15,8 +15,10 @@ import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import flourishStyles from 'osc-ui/dist/src-components-Flourishes-flourish.css';
 import lineItemStyles from 'osc-ui/dist/src-components-LineItem-line-item.css';
 import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
+import textInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
 import invariant from 'tiny-invariant';
 import { CartLayout } from '~/components/Cart/Layout';
+import discountBoxStyles from '~/components/Cart/discount-box.css';
 import { getSettingsData } from '~/models/sanity.server';
 import { CART_QUERY } from '~/queries/sanity/cart';
 import type { CartActions } from '~/types/shopify';
@@ -34,9 +36,11 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: alertStyles },
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: cardStyles },
+        { rel: 'stylesheet', href: discountBoxStyles },
         { rel: 'stylesheet', href: flourishStyles },
         { rel: 'stylesheet', href: lineItemStyles },
         { rel: 'stylesheet', href: selectStyles },
+        { rel: 'stylesheet', href: textInputStyles },
     ];
 };
 
