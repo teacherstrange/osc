@@ -1,3 +1,12 @@
+## [0.95.0](https://github.com/Open-Study-College/osc/compare/v0.94.0...v0.95.0) (2023-05-26)
+
+
+### ✨ Features
+
+* **checkbox:** adds size prop/modifier to checkbox ([444a18a](https://github.com/Open-Study-College/osc/commit/444a18a2a5042c6800f4c50025bcac641abd0f41))
+* **checkbox:** set default sizes to stories ([1d410b5](https://github.com/Open-Study-College/osc/commit/1d410b5e65da857ef59204c1edc580c09949729a))
+* **label:** adds size modifier to label ([07b094f](https://github.com/Open-Study-College/osc/commit/07b094fc9085441cc4a0994439b62f2645a5bff6))
+
 ## [0.94.0](https://github.com/Open-Study-College/osc/compare/v0.93.0...v0.94.0) (2023-05-23)
 
 
@@ -134,16 +143,4 @@
 * **handleMouseEvents:** add check for nodes length ([52ae6c9](https://github.com/Open-Study-College/osc/commit/52ae6c9406d095612898d5a6c0e2ba4ff36cd0a4))
 * **hero:** remove flourish controls from main hero ([7455ed9](https://github.com/Open-Study-College/osc/commit/7455ed9da43afc49ae0de0a8cf43eeb46b7c5a66))
 * **types:** extract TransformPattern out of FlourishObject ([2c774ef](https://github.com/Open-Study-College/osc/commit/2c774ef3fe1c0e33d1e1988a143d2d9213e22087))
-
-## [0.90.1](https://github.com/Open-Study-College/osc/compare/v0.90.0...v0.90.1) (2023-05-18)
-
-
-### 🐛 Bugs
-
-* adds early return to getHubspoForms method so empty pages don't crash ([f7358a0](https://github.com/Open-Study-College/osc/commit/f7358a062722307ad829e68731c8f42de74fed6d))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* move comment ([b0bf4e0](https://github.com/Open-Study-College/osc/commit/b0bf4e0591e32a2ffe4a01641769c8b1012d97fd))
 
