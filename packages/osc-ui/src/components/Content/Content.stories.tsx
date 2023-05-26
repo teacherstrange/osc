@@ -7,7 +7,6 @@ import {
     textContentFonts,
     textContentHasButtons,
     textContentSizes,
-    textContentWithBackgroundColor,
     textContentWithTextColor,
 } from './textContent';
 
@@ -43,23 +42,8 @@ export default {
                 },
             },
         },
-        backgroundColor: {
-            description: 'Sets the background colour of the content',
-        },
         className: {
             description: 'Custom class',
-        },
-        marginBottom: {
-            description: 'Sets the bottom margin of the content',
-            control: 'select',
-        },
-        paddingBottom: {
-            description: 'Sets the bottom padding of the content',
-            control: 'select',
-        },
-        paddingTop: {
-            description: 'Sets the top padding of the content',
-            control: 'select',
         },
         textColor: {
             description: 'Sets the text colour of the content',
@@ -77,14 +61,6 @@ Primary.args = {
 export const TextColour = Template.bind({});
 TextColour.args = {
     value: textContentWithTextColor.body,
-};
-
-export const BackgroundColour = Template.bind({});
-BackgroundColour.args = {
-    backgroundColor: textContentWithBackgroundColor.backgroundColor,
-    value: textContentWithBackgroundColor.body,
-    paddingTop: textContentWithBackgroundColor.paddingTop,
-    paddingBottom: textContentWithBackgroundColor.paddingBottom,
 };
 
 export const TextSizes = Template.bind({});

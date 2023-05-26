@@ -13,12 +13,10 @@ export const ContentModule = (props: { module: contentModule; isFlush?: boolean 
             paddingBottom={module.rowSettings?.paddingBottom}
             paddingTop={module.rowSettings?.paddingTop}
             container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
-            asChild
         >
             <Content
                 align={module.horizontalAlignment}
                 value={module.body}
-                fullWidth={module.fullWidth ? module.fullWidth : undefined}
                 buttons={module.buttons}
             />
         </Row>
