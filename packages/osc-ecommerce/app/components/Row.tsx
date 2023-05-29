@@ -59,10 +59,10 @@ export const Row = (props: RowProps) => {
 
     const classes = classNames(
         'o-row',
+        marginBottom ? `o-row--${marginBottom}` : '',
+        paddingTop ? `u-pt-${paddingTop}` : 'u-pt-2xl',
+        paddingBottom ? `u-pb-${paddingBottom}` : 'u-pb-2xl',
         backgroundColor ? `u-bg-color-${backgroundColor}` : '',
-        paddingTop ? `u-pt-${paddingTop}` : '',
-        paddingBottom ? `u-pb-${paddingBottom}` : '',
-        marginBottom ? `u-mb-${marginBottom}` : '',
         className
     );
 

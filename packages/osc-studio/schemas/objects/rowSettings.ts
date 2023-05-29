@@ -29,7 +29,6 @@ export default defineType({
             title: 'Push Region',
             type: 'string',
             description: 'Spacing you would like between this region and the next.',
-            initialValue: 'l',
             options: {
                 list: SPACING,
                 layout: 'dropdown',
@@ -41,6 +40,7 @@ export default defineType({
             title: 'Inner Padding Top',
             type: 'string',
             description: 'Inner padding at the top of the region.',
+            initialValue: '2xl',
             options: {
                 list: SPACING,
                 layout: 'dropdown',
@@ -52,6 +52,7 @@ export default defineType({
             title: 'Inner Padding Bottom',
             type: 'string',
             description: 'Inner padding at the bottom of the region.',
+            initialValue: '2xl',
             options: {
                 list: SPACING,
                 layout: 'dropdown',
