@@ -278,7 +278,11 @@ export const mockCardData = {
     ],
     carouselName: 'List of test cards',
     layout: 'grid',
-    marginBottom: 'milli',
-    paddingBottom: 'beta',
-    paddingTop: 'beta',
+    rowSettings: {
+        backgroundColor: 'neutral-200',
+        marginBottom: '',
+        paddingBottom: '',
+        paddingTop: '',
+        container: 'default',
+    },
 };

@@ -1,11 +1,13 @@
 export const mockTabData = {
     _key: '82737e907e7c',
     _type: 'module.tabs',
-    marginBottom: '6xl',
-    paddingBottom: null,
-    paddingLeft: null,
-    paddingRight: null,
-    paddingTop: null,
+    rowSettings: {
+        backgroundColor: undefined,
+        marginBottom: undefined,
+        paddingBottom: undefined,
+        paddingTop: undefined,
+        container: 'default',
+    },
     tabItem: [
         {
             _key: '04cb18ee7027',

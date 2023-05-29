@@ -10,7 +10,7 @@ const setup = () => {
     return (
         <MemoryRouter>
             <SpritesheetProvider>
-                <TabsModule module={mockTabData as tabsModule} />
+                <TabsModule module={mockTabData as unknown as tabsModule} />
             </SpritesheetProvider>
         </MemoryRouter>
     );

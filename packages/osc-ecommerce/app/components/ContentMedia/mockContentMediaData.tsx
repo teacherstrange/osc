@@ -5,6 +5,7 @@ export const contentMediaData: contentMediaModule = {
     _type: 'module.contentMedia',
     carouselName: 'Content media carousel',
     carouselSettings: {
+        carouselName: 'Content media carousel',
         _type: 'carouselSettings',
         arrows: false,
         dotNav: true,
@@ -16,17 +17,19 @@ export const contentMediaData: contentMediaModule = {
         },
         startIndex: 1,
     },
-    layout: null,
-    marginBottom: 'l',
-    paddingBottom: null,
-    paddingTop: null,
+    rowSettings: {
+        backgroundColor: undefined,
+        marginBottom: undefined,
+        paddingBottom: undefined,
+        paddingTop: undefined,
+        container: 'default',
+    },
     slides: [
         {
             _key: '9c0a7176365c',
             _type: 'contentMediaSlide',
             content: {
                 _key: null,
-                backgroundColor: null,
                 body: [
                     {
                         _key: '00074647ee36',
@@ -219,11 +222,14 @@ export const contentMediaData: contentMediaModule = {
                         variant: 'secondary',
                     },
                 ],
-                fullWidth: false,
                 horizontalAlignment: 'left',
-                marginBottom: null,
-                paddingBottom: null,
-                paddingTop: null,
+                rowSettings: {
+                    backgroundColor: undefined,
+                    marginBottom: undefined,
+                    paddingBottom: undefined,
+                    paddingTop: undefined,
+                    container: 'default',
+                },
             },
             contentAlignment: 'center',
             layoutDirection: 'content-media',
@@ -231,6 +237,7 @@ export const contentMediaData: contentMediaModule = {
             media: {
                 carouselName: null,
                 carouselSettings: {
+                    carouselName: null,
                     _type: 'carouselSettings',
                     arrows: false,
                     dotNav: true,
@@ -263,7 +270,6 @@ export const contentMediaData: contentMediaModule = {
             _type: 'contentMediaSlide',
             content: {
                 _key: null,
-                backgroundColor: null,
                 body: [
                     {
                         _key: '00074647ee36',
@@ -456,11 +462,14 @@ export const contentMediaData: contentMediaModule = {
                         variant: 'secondary',
                     },
                 ],
-                fullWidth: false,
                 horizontalAlignment: 'left',
-                marginBottom: null,
-                paddingBottom: null,
-                paddingTop: null,
+                rowSettings: {
+                    backgroundColor: undefined,
+                    marginBottom: undefined,
+                    paddingBottom: undefined,
+                    paddingTop: undefined,
+                    container: 'default',
+                },
             },
             contentAlignment: 'center',
             layoutDirection: 'content-media',
@@ -468,6 +477,7 @@ export const contentMediaData: contentMediaModule = {
             media: {
                 carouselName: null,
                 carouselSettings: {
+                    carouselName: null,
                     _type: 'carouselSettings',
                     arrows: false,
                     dotNav: true,
@@ -503,6 +513,7 @@ export const contentMediaDataSingle: contentMediaModule = {
     _type: 'module.contentMedia',
     carouselName: 'Content media test',
     carouselSettings: {
+        carouselName: 'Content media test',
         _type: 'carouselSettings',
         arrows: false,
         dotNav: true,
@@ -514,17 +525,19 @@ export const contentMediaDataSingle: contentMediaModule = {
         },
         startIndex: 1,
     },
-    layout: null,
-    marginBottom: 'l',
-    paddingBottom: null,
-    paddingTop: null,
+    rowSettings: {
+        backgroundColor: undefined,
+        marginBottom: undefined,
+        paddingBottom: undefined,
+        paddingTop: undefined,
+        container: 'default',
+    },
     slides: [
         {
             _key: '9c0a7176365c',
             _type: 'contentMediaSlide',
             content: {
                 _key: null,
-                backgroundColor: null,
                 body: [
                     {
                         _key: '00074647ee36',
@@ -717,11 +730,14 @@ export const contentMediaDataSingle: contentMediaModule = {
                         variant: 'secondary',
                     },
                 ],
-                fullWidth: false,
                 horizontalAlignment: 'left',
-                marginBottom: null,
-                paddingBottom: null,
-                paddingTop: null,
+                rowSettings: {
+                    backgroundColor: undefined,
+                    marginBottom: undefined,
+                    paddingBottom: undefined,
+                    paddingTop: undefined,
+                    container: 'default',
+                },
             },
             contentAlignment: 'center',
             layoutDirection: 'content-media',
@@ -729,6 +745,7 @@ export const contentMediaDataSingle: contentMediaModule = {
             media: {
                 carouselName: null,
                 carouselSettings: {
+                    carouselName: null,
                     _type: 'carouselSettings',
                     arrows: false,
                     dotNav: true,
