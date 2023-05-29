@@ -8,7 +8,7 @@ import { mockProductData } from './mockProductData';
 const module: recommendedProductsModule = {
     heading: 'You may also like',
     rowSettings: {
-        backgroundColor: undefined,
+        backgroundColor: 'neutral-300',
         marginBottom: 'l',
         paddingBottom: 'l',
         paddingTop: 'l',

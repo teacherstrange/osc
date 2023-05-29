@@ -234,23 +234,25 @@ describe('Card types', () => {
             </MemoryRouter>
         );
 
-        const title = screen.getByRole('heading', {
-            level: 2,
-            name: courseCard?.reference?.store?.title,
-        });
-        const courseOptions = screen.getAllByRole('listitem');
-        const minPrice = screen.getByText(/£469 in full/);
-        const wishlistButton = screen.getByRole('button', {
-            name: 'Save for later',
-        });
+        expect(
+            screen.getByRole('heading', {
+                level: 2,
+                name: courseCard?.reference?.store?.title,
+            })
+        ).toBeInTheDocument();
 
-        expect(title).toBeInTheDocument();
-        expect(courseOptions).toHaveLength(2);
-        expect(minPrice).toBeInTheDocument();
+        expect(screen.getAllByRole('listitem')).toHaveLength(2);
 
-        await user.click(wishlistButton);
+        expect(document.querySelector('.c-card__price-tag')).toHaveTextContent(/£469 in full/);
 
-        expect(wishlistButton).toHaveClass('is-active');
+        // TODO: Add back in with wishlist functionality
+        // const wishlistButton = screen.getByRole('button', {
+        //     name: 'Save for later',
+        // });
+
+        // await user.click(wishlistButton);
+
+        // expect(wishlistButton).toHaveClass('is-active');
     });
 
     test('renders the content of the collection card', () => {
