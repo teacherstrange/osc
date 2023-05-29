@@ -159,6 +159,11 @@ export interface videoModule extends module {
 
 export interface bioCardModule extends module {
     reference?: {
+        _createdAt: string;
+        _id: string;
+        _rev: string;
+        _type: 'team';
+        _updatedAt: string;
         bio?: PortableTextBlock[];
         image?: {
             alt: string;
@@ -174,7 +179,7 @@ export interface courseCardModule extends module, ProductType {
         _createdAt: string;
         _id: string;
         _rev: string;
-        _type: string;
+        _type: 'product';
         _updatedAt: string;
         store?: shopifyProduct;
     };
@@ -182,6 +187,11 @@ export interface courseCardModule extends module, ProductType {
 
 export interface collectionCardModule extends module {
     reference: {
+        _createdAt: string;
+        _id: string;
+        _rev: string;
+        _type: 'collection';
+        _updatedAt: string;
         store?: shopifyCollection;
         theme?: {
             color?: string;
@@ -196,6 +206,11 @@ export interface postCardModule extends module {
     fullWidth?: boolean;
     backgroundColor?: string;
     reference: {
+        _createdAt: string;
+        _id: string;
+        _rev: string;
+        _type: 'post';
+        _updatedAt: string;
         theme?: {
             color?: string;
         };
@@ -242,22 +257,6 @@ export type TypesOfCard =
     | staticCardModule;
 
 export interface cardModule extends module {
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    backgroundColor?: Themes;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    marginBottom?: Spacing;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    paddingBottom?: Spacing;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    paddingTop?: Spacing;
     layout: string;
     carouselName?: Maybe<string>;
     carouselSettings?: carouselModuleSettings;
@@ -325,34 +324,10 @@ export interface textGridModule extends module {
     }[];
     heading?: string;
     hasInlineHeading?: boolean;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    marginBottom: Spacing;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    paddingBottom: Spacing;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    paddingTop: Spacing;
     rowSettings: rowSettings;
 }
 
 export interface tabsModule extends module {
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    marginBottom?: Maybe<Spacing>;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    paddingBottom?: Maybe<Spacing>;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    paddingTop?: Maybe<Spacing>;
     tabItem: {
         _key: string;
         _type: string;
@@ -561,18 +536,6 @@ export interface SanityActionNavSettings {
 export interface formModule extends module {
     formId: string;
     formName: string;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    marginBottom?: Maybe<Spacing>;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    paddingBottom?: Maybe<Spacing>;
-    /**
-     * @deprecated in favour of rowSettings
-     */
-    paddingTop?: Maybe<Spacing>;
     rowSettings: rowSettings;
 }
 
