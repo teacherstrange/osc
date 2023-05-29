@@ -15,9 +15,9 @@ export const TextGridModule = (props: TextGridModuleProps) => {
     return (
         <Row
             backgroundColor={module.rowSettings?.backgroundColor}
-            marginBottom={module.rowSettings?.marginBottom || module?.marginBottom}
-            paddingBottom={module.rowSettings?.paddingBottom || module?.paddingTop}
-            paddingTop={module.rowSettings?.paddingTop || module?.paddingBottom}
+            marginBottom={module.rowSettings?.marginBottom}
+            paddingBottom={module.rowSettings?.paddingBottom}
+            paddingTop={module.rowSettings?.paddingTop}
             container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
         >
             <TextGrid heading={module?.heading} hasInlineHeading={module?.hasInlineHeading}>
@@ -25,16 +25,11 @@ export const TextGridModule = (props: TextGridModuleProps) => {
                     <Fragment key={item?._key}>
                         {item?.icon ? <Icon id={item?.icon} /> : null}
 
-                        {item?.content?.body ? (
+                        {item.content?.body ? (
                             <Content
-                                value={item?.content?.body}
-                                align={item?.content?.horizontalAlignment}
-                                backgroundColor={
-                                    item?.content?.backgroundColor
-                                        ? item?.content?.backgroundColor
-                                        : undefined
-                                }
-                                {...item?.content}
+                                align={item.content?.horizontalAlignment}
+                                value={item.content?.body}
+                                buttons={item.content?.buttons}
                             />
                         ) : null}
                     </Fragment>

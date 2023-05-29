@@ -14,9 +14,9 @@ export const FormsModule = (props: FormsModuleProps) => {
     return (
         <Row
             backgroundColor={module.rowSettings?.backgroundColor}
-            marginBottom={module.rowSettings?.marginBottom || module?.marginBottom}
-            paddingBottom={module.rowSettings?.paddingBottom || module?.paddingTop}
-            paddingTop={module.rowSettings?.paddingTop || module?.paddingBottom}
+            marginBottom={module.rowSettings?.marginBottom}
+            paddingBottom={module.rowSettings?.paddingBottom}
+            paddingTop={module.rowSettings?.paddingTop}
             container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
         >
             <Forms module={module} />

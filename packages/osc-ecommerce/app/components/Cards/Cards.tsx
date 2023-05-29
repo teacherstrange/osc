@@ -73,25 +73,17 @@ export const Cards = (props: CardsProps) => {
     if (module?.layout === 'carousel') {
         return (
             <Row
-                backgroundColor={module.rowSettings?.backgroundColor || module?.backgroundColor}
-                marginBottom={module.rowSettings?.marginBottom || module?.marginBottom}
-                paddingBottom={module.rowSettings?.paddingBottom || module?.paddingTop}
-                paddingTop={module.rowSettings?.paddingTop || module?.paddingBottom}
+                backgroundColor={module.rowSettings?.backgroundColor}
+                marginBottom={module.rowSettings?.marginBottom}
+                paddingBottom={module.rowSettings?.paddingBottom}
+                paddingTop={module.rowSettings?.paddingTop}
                 container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
             >
                 {module.content?.body ? (
                     <Content
-                        align={module.content.horizontalAlignment}
-                        backgroundColor={
-                            module.content.backgroundColor
-                                ? module.content.backgroundColor
-                                : undefined
-                        }
-                        marginBottom={module.content.marginBottom}
-                        paddingBottom={module.content.paddingBottom}
-                        paddingTop={module.content.paddingTop}
-                        value={module.content.body}
-                        buttons={module.content.buttons}
+                        align={module.content?.horizontalAlignment}
+                        value={module.content?.body}
+                        buttons={module.content?.buttons}
                     />
                 ) : null}
 
@@ -136,25 +128,17 @@ export const Cards = (props: CardsProps) => {
     if (module.layout === 'island grid') {
         return (
             <Row
-                backgroundColor={module.rowSettings?.backgroundColor || module?.backgroundColor}
-                marginBottom={module.rowSettings?.marginBottom || module?.marginBottom}
-                paddingBottom={module.rowSettings?.paddingBottom || module?.paddingTop}
-                paddingTop={module.rowSettings?.paddingTop || module?.paddingBottom}
+                backgroundColor={module.rowSettings?.backgroundColor}
+                marginBottom={module.rowSettings?.marginBottom}
+                paddingBottom={module.rowSettings?.paddingBottom}
+                paddingTop={module.rowSettings?.paddingTop}
                 container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
             >
                 {module.content?.body ? (
                     <Content
-                        align={module.content.horizontalAlignment}
-                        backgroundColor={
-                            module.content.backgroundColor
-                                ? module.content.backgroundColor
-                                : undefined
-                        }
-                        marginBottom={module.content.marginBottom}
-                        paddingBottom={module.content.paddingBottom}
-                        paddingTop={module.content.paddingTop}
-                        value={module.content.body}
-                        buttons={module.content.buttons}
+                        align={module.content?.horizontalAlignment}
+                        value={module.content?.body}
+                        buttons={module.content?.buttons}
                     />
                 ) : null}
 
@@ -170,23 +154,17 @@ export const Cards = (props: CardsProps) => {
     // Return grid layout by default
     return (
         <Row
-            backgroundColor={module.rowSettings?.backgroundColor || module?.backgroundColor}
-            marginBottom={module.rowSettings?.marginBottom || module?.marginBottom}
-            paddingBottom={module.rowSettings?.paddingBottom || module?.paddingTop}
-            paddingTop={module.rowSettings?.paddingTop || module?.paddingBottom}
+            backgroundColor={module.rowSettings?.backgroundColor}
+            marginBottom={module.rowSettings?.marginBottom}
+            paddingBottom={module.rowSettings?.paddingBottom}
+            paddingTop={module.rowSettings?.paddingTop}
             container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
         >
             {module.content?.body ? (
                 <Content
-                    align={module.content.horizontalAlignment}
-                    backgroundColor={
-                        module.content.backgroundColor ? module.content.backgroundColor : undefined
-                    }
-                    marginBottom={module.content.marginBottom}
-                    paddingBottom={module.content.paddingBottom}
-                    paddingTop={module.content.paddingTop}
-                    value={module.content.body}
-                    buttons={module.content.buttons}
+                    align={module.content?.horizontalAlignment}
+                    value={module.content?.body}
+                    buttons={module.content?.buttons}
                 />
             ) : null}
 

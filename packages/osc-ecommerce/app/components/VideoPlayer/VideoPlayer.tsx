@@ -47,14 +47,11 @@ export const VideoPlayerModule = (props: Props) => {
                 }
                 iconPath={spritesheet}
             >
-                {module?.content?.body ? (
+                {module.content?.body ? (
                     <Content
-                        align={module?.content?.horizontalAlignment}
-                        backgroundColor={module?.content?.backgroundColor}
-                        marginBottom={module?.content?.marginBottom}
-                        paddingBottom={module?.content?.paddingBottom}
-                        paddingTop={module?.content?.paddingTop}
-                        value={module?.content?.body}
+                        align={module.content?.horizontalAlignment}
+                        value={module.content?.body}
+                        buttons={module.content?.buttons}
                     />
                 ) : null}
             </VideoPlayer>

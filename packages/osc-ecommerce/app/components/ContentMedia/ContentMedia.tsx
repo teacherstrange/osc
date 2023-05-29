@@ -109,14 +109,10 @@ const Slide = (props: SlideProps) => {
                 className={layoutGrid === '50/40' && itemHasForm ? 'o-grid__col--start-8@tab' : ''}
             >
                 {content?.body ? (
-                    // Fixed in #691
                     <Content
-                        value={content?.body}
                         align={content?.horizontalAlignment}
-                        backgroundColor={
-                            content?.backgroundColor ? content?.backgroundColor : undefined
-                        }
-                        {...content}
+                        value={content?.body}
+                        buttons={content?.buttons}
                     />
                 ) : null}
             </ContentMediaBlock>

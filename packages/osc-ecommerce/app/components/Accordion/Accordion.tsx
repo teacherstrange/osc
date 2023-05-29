@@ -25,15 +25,11 @@ export const AccordionModule = (props: Props) => {
             paddingTop={module.rowSettings?.paddingTop}
             container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
         >
-            {module.content ? (
+            {module.content?.body ? (
                 <Content
                     align={module.content?.horizontalAlignment}
-                    backgroundColor={module.content?.backgroundColor}
-                    marginBottom={module.content?.marginBottom}
-                    paddingBottom={module.content?.paddingBottom}
-                    paddingTop={module.content?.paddingTop}
-                    textColor={module.content?.textColor}
                     value={module.content?.body}
+                    buttons={module.content?.buttons}
                 />
             ) : null}
 
@@ -49,17 +45,11 @@ export const AccordionModule = (props: Props) => {
                                       {accordionItem?.heading}
                                   </AccordionHeader>
                                   <AccordionPanel>
-                                      {accordionItem.content ? (
+                                      {accordionItem.content?.body ? (
                                           <Content
                                               align={accordionItem.content?.horizontalAlignment}
-                                              backgroundColor={
-                                                  accordionItem.content?.backgroundColor
-                                              }
-                                              marginBottom={accordionItem.content?.marginBottom}
-                                              paddingBottom={accordionItem.content?.paddingBottom}
-                                              paddingTop={accordionItem.content?.paddingTop}
-                                              textColor={accordionItem.content?.textColor}
                                               value={accordionItem.content?.body}
+                                              buttons={accordionItem.content?.buttons}
                                           />
                                       ) : null}
                                   </AccordionPanel>
