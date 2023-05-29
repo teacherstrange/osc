@@ -6,6 +6,8 @@ export default defineType({
     name: 'rowSettings',
     title: 'Settings',
     type: 'object',
+    description:
+        'Settings for the row. Note: These settings will only apply to the top level module.',
     groups: [
         {
             name: 'spacing',
