@@ -74,7 +74,7 @@ const SecondaryTemplate: Story<HeroProps> = ({ ...args }) => (
 
             <HeroContent>
                 <div className="c-content">
-                    <div className="c-content__inner c-content__inner--centre">
+                    <div className="c-content__inner">
                         <p className="t-font-l u-color-tertiary">
                             Get £75 off when you spend over £400 on your enrolment
                         </p>
@@ -172,7 +172,7 @@ const CarouselTemplate: Story<HeroProps> = () => (
 
                 <HeroContent>
                     <div className="c-content">
-                        <div className="c-content__inner c-content__inner--centre">
+                        <div className="c-content__inner">
                             <p className="t-font-l">
                                 Download our <strong>new 2023 prospectus</strong> today
                             </p>
@@ -192,7 +192,7 @@ const CarouselTemplate: Story<HeroProps> = () => (
 
                 <HeroContent>
                     <div className="c-content">
-                        <div className="c-content__inner c-content__inner--centre">
+                        <div className="c-content__inner">
                             <p className="t-font-l u-color-tertiary">
                                 Get £75 off when you spend over £400 on your enrolment
                             </p>

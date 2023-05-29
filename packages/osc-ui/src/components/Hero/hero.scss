@@ -189,6 +189,7 @@
                     align-items: center;
                     justify-content: center;
                     gap: $space-2xs;
+                    max-width: 100%;
 
                     @include mq($mq-tab-m) {
                         flex-direction: row;
