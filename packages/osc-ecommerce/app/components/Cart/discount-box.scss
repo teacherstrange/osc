@@ -16,6 +16,7 @@
         }
 
         &__desc {
+            margin-block-end: $space-s;
             font-size: $discount-box-desc-size;
             font-weight: $fw-reg;
         }
@@ -31,6 +32,30 @@
 
             @include mq(($mq-tab, $mq-tab-l)) {
                 flex-direction: column;
+            }
+        }
+
+        &__list {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid var(--color-neutral-400);
+            margin-block: $space-m 0;
+            padding-block-start: $space-s;
+        }
+
+        &__term {
+            margin-block-end: $space-s;
+            font-size: $discount-box-ttl-size;
+            font-weight: $fw-bold;
+        }
+
+        &__details {
+            margin-block-start: $space-2xs;
+            padding-inline-start: 0;
+            font-size: $discount-box-desc-size;
+
+            &:first-of-type {
+                margin-block-start: 0;
             }
         }
     }

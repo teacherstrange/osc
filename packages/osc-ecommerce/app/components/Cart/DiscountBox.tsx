@@ -54,12 +54,22 @@ export const DiscountBox = (props: DiscountBoxProps) => {
                     variants={['tertiary']}
                     className="u-w-full"
                     ref={inputRef}
-                    // errors={['Discount code is invalid']}
                 />
                 <Button variant="primary" size="sm">
                     Apply
                 </Button>
             </fetcher.Form>
+
+            {codes && codes.length > 0 ? (
+                <dl className="c-discount-box__list">
+                    <dt className="c-discount-box__term">Discount codes applied:</dt>
+                    {codes.map((code, i) => (
+                        <dd className="c-discount-box__details" key={i + code}>
+                            {code}
+                        </dd>
+                    ))}
+                </dl>
+            ) : null}
         </div>
     );
 };
