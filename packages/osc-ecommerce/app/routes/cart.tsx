@@ -200,8 +200,14 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
         case CartAction.UPDATE_DISCOUNT:
             invariant(cartId, 'Missing cartId');
 
+            const applicableDiscountCodes = formData.get('applicableDiscountCodes')
+                ? JSON.parse(String(formData.get('applicableDiscountCodes')))
+                : ('' as string);
+
             const formDiscountCode = formData.get('discountCode');
-            const discountCodes = ([formDiscountCode] || ['']) as string[];
+            const discountCodes = ([...applicableDiscountCodes, formDiscountCode] || [
+                '',
+            ]) as string[];
 
             result = await updateCartDiscounts({
                 cartId,

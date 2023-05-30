@@ -1,7 +1,7 @@
 import { useFetcher } from '@remix-run/react';
 import type { Cart } from '@shopify/hydrogen/storefront-api-types';
-import { Button, TextInput } from 'osc-ui';
-import { useRef } from 'react';
+import { Alert, Button, Icon, TextInput } from 'osc-ui';
+import { useRef, useState } from 'react';
 import { CartAction } from '~/types/shopify';
 
 interface DiscountBoxProps {
@@ -15,12 +15,13 @@ export const DiscountBox = (props: DiscountBoxProps) => {
     const fetcher = useFetcher();
     const formRef = useRef<HTMLFormElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    console.log(fetcher);
 
-    const codes = discountCodes?.map(({ code }) => code).join(', ') || null;
+    const hasNonApplicableCode = discountCodes?.some(({ applicable, code }) => !applicable && code);
 
-    console.log({ codes });
-    console.log({ discountCodes });
+    // Get the codes that are applicable to the cart and store them in state
+    const applicableCodes =
+        discountCodes?.filter(({ applicable }) => applicable)?.map(({ code }) => code) || null;
+    const [codes, setCodes] = useState<string[]>(applicableCodes);
 
     if (fetcher.state === 'idle' && inputRef.current) {
         formRef.current?.reset();
@@ -33,18 +34,29 @@ export const DiscountBox = (props: DiscountBoxProps) => {
             <h3 className="c-discount-box__ttl">{title}</h3>
             <p className="c-discount-box__desc">{description}</p>
 
-            <p>{codes}</p>
-
             {/* // TODO: clear input on submit */}
-            {/* // TODO: show discounted amount from total? */}
-            {/* // TODO: multiple discount codes */}
             <fetcher.Form
+                id="discountForm"
                 method="post"
                 action="/cart"
                 className="c-discount-box__form"
                 ref={formRef}
+                onSubmit={() => {
+                    // When the form is submitted, we want to push the new value into the codes state
+                    setCodes([...codes, inputRef.current?.value || '']);
+                }}
             >
                 <input type="hidden" name="cartAction" value={CartAction.UPDATE_DISCOUNT} />
+                <input
+                    type="hidden"
+                    name="applicableDiscountCodes"
+                    value={JSON.stringify(
+                        // Filter the codes to only include the ones that are applicable to the cart
+                        // This will allow us to submit the form with only the codes that are applicable
+                        // rather than all of the codes that have been entered.
+                        codes.filter((code) => applicableCodes?.includes(code))
+                    )}
+                />
 
                 <TextInput
                     id="discountCode"
@@ -60,12 +72,26 @@ export const DiscountBox = (props: DiscountBoxProps) => {
                 </Button>
             </fetcher.Form>
 
-            {codes && codes.length > 0 ? (
+            {hasNonApplicableCode ? (
+                <Alert status="info" className="u-mt-m">
+                    A discount code you entered is invalid or not applicable to one or more products
+                    in your basket.
+                </Alert>
+            ) : null}
+
+            {applicableCodes && applicableCodes.length > 0 ? (
                 <dl className="c-discount-box__list">
                     <dt className="c-discount-box__term">Discount codes applied:</dt>
-                    {codes.map((code, i) => (
+                    {applicableCodes.map((code, i) => (
                         <dd className="c-discount-box__details" key={i + code}>
-                            {code}
+                            {code}{' '}
+                            <Button
+                                variant="quaternary"
+                                form="discountForm"
+                                onClick={() => setCodes(codes.filter((c) => c !== code))}
+                            >
+                                <Icon id="close" />
+                            </Button>
                         </dd>
                     ))}
                 </dl>
