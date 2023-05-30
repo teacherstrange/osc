@@ -20,37 +20,58 @@ import {
     VisuallyHidden,
 } from 'osc-ui';
 import { useState } from 'react';
-import type { AllHitsWithVariantTitle } from '~/routes/search';
 import type { AlgoliaHit, SendEventForHits } from '../../types';
 
 type HitProps = {
-    courseVariants?: AllHitsWithVariantTitle[];
     className?: string;
     hit: AlgoliaHit;
     sendEvent?: SendEventForHits;
+    view: 'listview' | 'gridview';
 };
 
 export const Hit = (props: HitProps) => {
-    const { className, courseVariants, hit, sendEvent } = props;
+    const { className, hit, sendEvent, view } = props;
 
     const [isActive, setIsActive] = useState(false);
 
+    const productVariants =
+        hit.meta?.osc?.product_variants && JSON.parse(hit.meta?.osc?.product_variants.trim());
+
+    const uniqueProductVariants = [
+        ...new Set<string>(productVariants?.map((variant: string) => variant.trim().split('/')[0])),
+    ];
+
     return (
-        <CourseCard key={`search_${hit.id}`} isFull className={className}>
+        <CourseCard
+            key={`search_${hit.id}`}
+            isFull={view === 'listview' ? true : false}
+            className={className}
+        >
             <CardInner className={className}>
                 <CardHeader>
-                    <CardPriceTag className="u-hidden-until@tab">
-                        <>
-                            {/* TODO: REPLACE THIS WITH ETIKA DATA */}
-                            <p>
-                                <span className="u-text-bold">DATA FROM ETIKA</span>/month
-                            </p>
-                            <p>
-                                or from{' '}
-                                <span className="u-text-bold">{`£${hit.price} in full`}</span>
-                            </p>
-                        </>
-                    </CardPriceTag>
+                    {view === 'listview' ? (
+                        <CardPriceTag className="u-hidden-until@tab">
+                            <>
+                                {/* TODO: REPLACE THIS WITH ETIKA DATA */}
+                                <p>
+                                    <span className="u-text-bold">DATA FROM ETIKA</span>/month
+                                </p>
+                                <p>
+                                    or from{' '}
+                                    <span className="u-text-bold">{`£${hit.price} in full`}</span>
+                                </p>
+                            </>
+                        </CardPriceTag>
+                    ) : (
+                        <CardWishListButton
+                            label="Save for later"
+                            size="lg"
+                            className={isActive ? 'is-active' : ''}
+                            onClick={() => {
+                                setIsActive(!isActive);
+                            }}
+                        />
+                    )}
                     <CardTitle>{hit.title}</CardTitle>
                     <CardTitle as="h3" subtitle isSmall>
                         {/* TODO: USE FIELD IN ALGOLIA TO DETERMINE IF THIS IS A SINGLE OR PACKAGE COURSE */}
@@ -62,8 +83,8 @@ export const Hit = (props: HitProps) => {
                     <CardBodyInner>
                         <h4>Course options available</h4>
                         <ul>
-                            {courseVariants?.map((variant) => {
-                                return <li key={`${variant.objectID}`}>{variant.variant_title}</li>;
+                            {uniqueProductVariants?.map((variant: string) => {
+                                return <li key={`id-${variant}`}>{variant}</li>;
                             })}
                         </ul>
                     </CardBodyInner>
@@ -89,29 +110,44 @@ export const Hit = (props: HitProps) => {
                         </Popover>
                     </CardCallout>
 
-                    <CardPriceTag className="u-hidden-from@tab">
-                        <p>
-                            <span className="u-text-bold">From £23</span>/month
-                        </p>
-                        <p>
-                            or from <span className="u-text-bold">{`£${hit.price} in full`}</span>
-                        </p>
-                    </CardPriceTag>
-
-                    <ButtonGroup>
-                        <CardWishListButton
-                            label="Save for later"
-                            size="lg"
-                            className={isActive ? 'is-active' : ''}
-                            onClick={() => {
-                                setIsActive(!isActive);
-                            }}
-                        />
-                        <Button as="link" to="/courses/aat-level-3-diploma-in-accounting">
-                            View course
-                            <VisuallyHidden>{hit.title}</VisuallyHidden>
-                        </Button>
-                    </ButtonGroup>
+                    {view === 'listview' ? (
+                        <ButtonGroup>
+                            <CardWishListButton
+                                label="Save for later"
+                                size="lg"
+                                className={isActive ? 'is-active' : ''}
+                                onClick={() => {
+                                    setIsActive(!isActive);
+                                }}
+                            />
+                            <Button as="link" to="/courses/aat-level-3-diploma-in-accounting">
+                                View course
+                                <VisuallyHidden>{hit.title}</VisuallyHidden>
+                            </Button>
+                        </ButtonGroup>
+                    ) : (
+                        <>
+                            <CardPriceTag>
+                                <p>
+                                    <span className="u-text-bold">From £23</span>/month
+                                </p>
+                                <p>
+                                    or from{' '}
+                                    <span className="u-text-bold">{`£${hit.price} in full`}</span>
+                                </p>
+                            </CardPriceTag>
+                            <ButtonGroup>
+                                <Button
+                                    as="link"
+                                    to="/courses/aat-level-3-diploma-in-accounting"
+                                    isFull
+                                >
+                                    View course
+                                    <VisuallyHidden>{hit.title}</VisuallyHidden>
+                                </Button>
+                            </ButtonGroup>
+                        </>
+                    )}
                 </CardBody>
             </CardInner>
         </CourseCard>

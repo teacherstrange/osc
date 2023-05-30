@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
     Button,
     CardBody,
@@ -11,6 +12,7 @@ import {
     Image,
 } from 'osc-ui';
 import { useHits } from 'react-instantsearch-hooks-web';
+import type { AlgoliaHit } from '../types';
 
 // TODO - This info eventually needs to come from Algolia Insights
 const COLLECTION_HIGHLIGHT_ONE = 'A levels';
@@ -58,14 +60,23 @@ interface CollectionCardsProps {}
 export const CollectionCards = (props: CollectionCardsProps) => {
     // TODO - Add events
     const { hits, sendEvent } = useHits();
+    const [collections, setCollections] = useState<AlgoliaHit[]>([]);
 
-    const highlightedCollections = hits.filter(
-        (hit) => hit.title === COLLECTION_HIGHLIGHT_ONE || hit.title === COLLECTION_HIGHLIGHT_TWO
-    );
+    // Save collections in state as we don't want these to change as the refinement lists are updated
+    useEffect(() => {
+        const highlightedCollections = hits.filter(
+            (hit) =>
+                hit.title === COLLECTION_HIGHLIGHT_ONE || hit.title === COLLECTION_HIGHLIGHT_TWO
+        );
+        if (highlightedCollections.length > 0) {
+            setCollections(highlightedCollections);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- We don't want it to update based on changes to refinement lists
+    }, []);
 
     return (
         <>
-            {highlightedCollections.map((collection, i) => (
+            {collections?.map((collection, i) => (
                 <Card
                     // TODO - To come from Sanity
                     body={''}

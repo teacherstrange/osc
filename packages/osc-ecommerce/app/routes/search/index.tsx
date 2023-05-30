@@ -3,15 +3,18 @@ import { useLoaderData } from '@remix-run/react';
 import type { LinksFunction, LoaderFunction } from '@remix-run/server-runtime';
 import { json } from '@remix-run/server-runtime';
 import algoliasearch from 'algoliasearch';
-import { Accordion } from 'osc-ui';
+import { Accordion, Select, SelectItem, SpritesheetProvider } from 'osc-ui';
+import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import oscUiAutcompleteStyles from 'osc-ui/dist/src-components-Autocomplete-autocomplete.css';
 import oscUiButtonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import oscUiCardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import oscUiCheckboxStyles from 'osc-ui/dist/src-components-Checkbox-checkbox.css';
 import oscUiLabelStyles from 'osc-ui/dist/src-components-Label-label.css';
 import oscUiPopoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
+import oscUiSelectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import oscUiSliderStyles from 'osc-ui/dist/src-components-Slider-slider.css';
 import oscUiTextInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
+import { useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { getServerState } from 'react-instantsearch-hooks-server';
 import type { InstantSearchServerState } from 'react-instantsearch-hooks-web';
@@ -26,6 +29,8 @@ import { Configure } from '~/components/InstantSearch/Widgets/Configure';
 import { ClearRefinements } from '~/components/InstantSearch/Widgets/Refinements/ClearRefinements';
 import { RefinementList } from '~/components/InstantSearch/Widgets/Refinements/RefinementList';
 import { RefinementSlider } from '~/components/InstantSearch/Widgets/Refinements/RefinementSlider';
+import { SortBy } from '~/components/InstantSearch/Widgets/Refinements/SortBy';
+import { sortingIndexes } from '~/components/InstantSearch/helpers';
 import { Hits } from '../../components/InstantSearch/Widgets/Hits/Hits';
 
 export const links: LinksFunction = () => {
@@ -37,26 +42,14 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscUiTextInputStyles },
         { rel: 'stylesheet', href: oscUiCardStyles },
         { rel: 'stylesheet', href: oscUiPopoverStyles },
+        { rel: 'stylesheet', href: oscUiSelectStyles },
         { rel: 'stylesheet', href: oscUiSliderStyles },
     ];
 };
 
 const HITS_PER_PAGE = 20;
 
-export type AllHitsWithVariantTitle = Partial<
-    {
-        id: number;
-        objectId: string;
-        variant_title: string;
-    } & ObjectWithObjectID
->;
-
 export const loader: LoaderFunction = async ({ request }) => {
-    const adminClient = algoliasearch(
-        process.env.ALGOLIA_APP_ID!,
-        process.env.ALGOLIA_API_KEY_ADMIN!
-    );
-
     const serverUrl = request.url;
 
     const serverState = await getServerState(
@@ -78,24 +71,7 @@ export const loader: LoaderFunction = async ({ request }) => {
         }
     );
 
-    const index = await adminClient.initIndex(process.env.ALGOLIA_PRIMARY_PRODUCTS_INDEX!);
-
-    let allHitsWithVariantTitle: AllHitsWithVariantTitle[] = [];
-
-    try {
-        await index.browseObjects({
-            attributesToRetrieve: ['id', 'variant_title'],
-            batch: (batch) => {
-                allHitsWithVariantTitle = allHitsWithVariantTitle.concat(batch);
-            },
-        });
-    } catch (error) {
-        // TODO - Add in error logging
-        console.log('Error retrieving variants', error);
-    }
-
     return json({
-        allHitsWithVariantTitle,
         serverState,
         serverUrl,
         ENV: {
@@ -110,31 +86,48 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 type SearchProps = {
-    allHitsWithVariantTitle?: AllHitsWithVariantTitle[];
     env?: {
         ALGOLIA_APP_ID: string;
         ALGOLIA_API_KEY_SEARCH: string;
-        ALGOLIA_API_KEY_ADMIN: string;
-        ALGOLIA_PRIMARY_PRODUCTS_INDEX: string;
-        ALGOLIA_PRIMARY_COLLECTIONS_INDEX: string;
-        ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID: string;
+        ALGOLIA_API_KEY_ADMIN?: string;
+        ALGOLIA_PRIMARY_PRODUCTS_INDEX?: string;
+        ALGOLIA_PRIMARY_COLLECTIONS_INDEX?: string;
+        ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID?: string;
     };
     hitsPerPage?: number;
     serverState?: InstantSearchServerState;
+    serverState2?: InstantSearchServerState;
     serverUrl?: string;
 };
 
 // I tried putting this in it's own file, but it causes the app to get stuck in a cycle of errors 🤷‍♂️
 const Search = (props: SearchProps) => {
-    const { allHitsWithVariantTitle, env, hitsPerPage, serverState, serverUrl } = props;
+    const { env, hitsPerPage, serverState, serverUrl } = props;
 
     const searchClient = algoliasearch(env!.ALGOLIA_APP_ID, env!.ALGOLIA_API_KEY_SEARCH);
+
+    const [view, setView] = useState<'listview' | 'gridview'>('listview');
+
+    const [selects] = useState([
+        {
+            description: { label: 'List View' },
+            value: 'listview',
+            name: 'List View',
+            required: true,
+        },
+        {
+            description: { label: 'Grid View' },
+            value: 'gridview',
+            name: 'Grid View',
+            required: true,
+        },
+    ]);
 
     return (
         <InstantSearchSSRProvider {...serverState}>
             <InstantSearch
                 searchClient={searchClient}
-                indexName={env!.ALGOLIA_PRIMARY_PRODUCTS_INDEX}
+                indexName={env!.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID}
             >
                 <SearchBox />
                 <div className="o-grid o-container c-instant-search__container">
@@ -187,23 +180,35 @@ const Search = (props: SearchProps) => {
                         <ClearRefinements />
                     </div>
                     <div className="o-grid o-grid__col--12 o-grid__col--9@tab">
-                        {/* Use Flex */}
-                        <div>
-                            <div>SELECTS</div>
+                        <div className="o-grid__col--12 o-flex o-flex--end o-flex--spaced">
+                            <Select
+                                defaultValue="listview"
+                                description={{
+                                    icon: view === 'listview' ? 'list' : 'grid',
+                                }}
+                                groupVariants={['inline', 'tertiary']}
+                                name={'view_select'}
+                                setValue={setView}
+                            >
+                                {selects.map((item, index) => (
+                                    <SelectItem key={index} {...item}>
+                                        {item.name}
+                                    </SelectItem>
+                                ))}
+                            </Select>
+                            <SortBy items={sortingIndexes} />
                         </div>
-                        {/* Use Grid */}
                         <div className="o-grid o-grid__col--12">
-                            <div className="o-grid__col--6">COLLECTION 1</div>
-                            <div className="o-grid__col--6">COLLECTION 2</div>
+                            <Index indexName={env!.ALGOLIA_PRIMARY_COLLECTIONS_INDEX!}>
+                                <Configure hitsPerPage={100} />
+                                <CollectionCards />
+                            </Index>
                         </div>
-                        <Index indexName={env!.ALGOLIA_PRIMARY_COLLECTIONS_INDEX}>
-                            <Configure hitsPerPage={100} />
-                            <CollectionCards />
-                        </Index>
-                        <Index indexName={env!.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID}>
+
+                        <div className="o-grid o-grid__col--12">
                             <Configure hitsPerPage={hitsPerPage} />
-                            <Hits allHitsWithVariantTitle={allHitsWithVariantTitle} />
-                        </Index>
+                            <Hits view={view} />
+                        </div>
                     </div>
                 </div>
             </InstantSearch>
@@ -212,11 +217,10 @@ const Search = (props: SearchProps) => {
 };
 
 export default function SearchPage() {
-    const { allHitsWithVariantTitle, ENV, serverState, serverUrl } = useLoaderData();
+    const { ENV, serverState, serverUrl } = useLoaderData();
 
     return (
         <Search
-            allHitsWithVariantTitle={allHitsWithVariantTitle}
             env={ENV}
             hitsPerPage={HITS_PER_PAGE}
             serverState={serverState}

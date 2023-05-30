@@ -2,12 +2,13 @@ import type { Hit, BaseHit } from 'instantsearch.js';
 
 export type AlgoliaHit = Hit<
     BaseHit & {
+        meta?: { osc: { product_variants?: string } };
         id?: string;
         image?: string;
-        subtitle: string;
+        subtitle?: string;
         title?: string;
         tags?: string[];
-        product_image: string;
+        product_image?: string;
     }
 >;
 
