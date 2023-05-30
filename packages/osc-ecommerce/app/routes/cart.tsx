@@ -27,6 +27,7 @@ import {
     addLinesToCart,
     createCart,
     removeLinesFromCart,
+    updateCartDiscounts,
     updateLinesInCart,
 } from '~/utils/cart.helpers';
 
@@ -193,6 +194,22 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
                     ],
                 };
             }
+
+            break;
+
+        case CartAction.UPDATE_DISCOUNT:
+            invariant(cartId, 'Missing cartId');
+
+            const formDiscountCode = formData.get('discountCode');
+            const discountCodes = ([formDiscountCode] || ['']) as string[];
+
+            result = await updateCartDiscounts({
+                cartId,
+                discountCodes,
+                storefront,
+            });
+
+            cartId = result.cart.id;
 
             break;
 
