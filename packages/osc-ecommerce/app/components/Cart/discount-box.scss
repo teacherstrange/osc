@@ -50,9 +50,13 @@
         }
 
         &__details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-block-start: $space-2xs;
             padding-inline-start: 0;
             font-size: $discount-box-desc-size;
+            font-weight: $fw-reg;
 
             &:first-of-type {
                 margin-block-start: 0;

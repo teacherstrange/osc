@@ -84,9 +84,10 @@ export const DiscountBox = (props: DiscountBoxProps) => {
                     <dt className="c-discount-box__term">Discount codes applied:</dt>
                     {applicableCodes.map((code, i) => (
                         <dd className="c-discount-box__details" key={i + code}>
-                            {code}{' '}
+                            <span>{code}</span>
                             <Button
                                 variant="quaternary"
+                                size="sm"
                                 form="discountForm"
                                 onClick={() => setCodes(codes.filter((c) => c !== code))}
                             >
