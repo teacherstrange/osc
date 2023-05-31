@@ -111,6 +111,13 @@ export const typeDefs = gql`
         password: String! @constraint(minLength: 12)
     }
 
+    input createUserSetupInput {
+        firstName: String! @constraint(maxLength: 128)
+        lastName: String! @constraint(maxLength: 128)
+        email: String! @constraint(format: "email", maxLength: 255)
+        courses: [Int]
+    }
+
     input loginInput {
         email: String! @constraint(format: email)
         password: String!
@@ -121,5 +128,7 @@ export const typeDefs = gql`
         login(input: loginInput!): AuthTokens
         refreshAccess(refreshToken: String!): refreshAccess
         createUserSetup(input: createUserSetupInput!): User
+        magicKeyRequest(magicKeyToken: String!): User
+        completeRegistration(input: completeRegistration!): User
     }
 `;
