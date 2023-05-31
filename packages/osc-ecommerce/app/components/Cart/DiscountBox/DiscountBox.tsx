@@ -26,7 +26,6 @@ export const DiscountBox = (props: DiscountBoxProps) => {
     if (fetcher.state === 'idle' && inputRef.current) {
         formRef.current?.reset();
         inputRef.current?.blur();
-        inputRef.current.value = '';
     }
 
     return (
@@ -34,7 +33,6 @@ export const DiscountBox = (props: DiscountBoxProps) => {
             <h3 className="c-discount-box__ttl">{title}</h3>
             <p className="c-discount-box__desc">{description}</p>
 
-            {/* // TODO: clear input on submit */}
             <fetcher.Form
                 id="discountForm"
                 method="post"

@@ -17,7 +17,7 @@ import {
 import { useEffect, useState } from 'react';
 import { CartCardItem } from '~/components/Cart/CartCardItem';
 import { CartTotal } from '~/components/Cart/CartTotal';
-import { DiscountBox } from '~/components/Cart/DiscountBox';
+import { DiscountBox } from '~/components/Cart/DiscountBox/DiscountBox';
 import { EmptyCartMessage } from '~/components/Cart/EmptyCartMessage';
 import { CartLineItem } from '~/components/Cart/LineItem';
 import { ErrorAlert } from '~/components/ErrorAlert/ErrorAlert';
