@@ -1,7 +1,7 @@
 import { useFetcher } from '@remix-run/react';
 import type { Cart } from '@shopify/hydrogen/storefront-api-types';
 import { Alert, Button, Icon, TextInput } from 'osc-ui';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CartAction } from '~/types/shopify';
 
 interface DiscountBoxProps {
@@ -15,6 +15,7 @@ export const DiscountBox = (props: DiscountBoxProps) => {
     const fetcher = useFetcher();
     const formRef = useRef<HTMLFormElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const [inputValue, setInputValue] = useState('');
 
     const hasNonApplicableCode = discountCodes?.some(({ applicable, code }) => !applicable && code);
 
@@ -23,10 +24,13 @@ export const DiscountBox = (props: DiscountBoxProps) => {
         discountCodes?.filter(({ applicable }) => applicable)?.map(({ code }) => code) || null;
     const [codes, setCodes] = useState<string[]>(applicableCodes);
 
-    if (fetcher.state === 'idle' && inputRef.current) {
-        formRef.current?.reset();
-        inputRef.current?.blur();
-    }
+    useEffect(() => {
+        if (fetcher.state === 'idle' && inputRef.current) {
+            formRef.current?.reset();
+            inputRef.current?.blur();
+            setInputValue('');
+        }
+    }, [fetcher.state]);
 
     return (
         <div className="c-discount-box">
@@ -63,6 +67,8 @@ export const DiscountBox = (props: DiscountBoxProps) => {
                     type="text"
                     variants={['tertiary']}
                     className="u-w-full"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
                     ref={inputRef}
                 />
                 <Button variant="primary" size="sm">
