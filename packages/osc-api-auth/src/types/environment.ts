@@ -7,6 +7,7 @@ export const env = z
         JWT_SECRET: z.string(),
         JWT_AUDIENCE: z.string(),
         JWT_DURATION: z.string().regex(/^\d+$/).transform(Number),
-        JWT_REFRESH_DURATION: z.string().regex(/^\d+$/).transform(Number)
+        JWT_REFRESH_DURATION: z.string().regex(/^\d+$/).transform(Number),
+        MAGIC_SECRET: z.string()
     })
     .parse(process.env);

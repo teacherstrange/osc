@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { getUserByEmail, getUserById, wait, sendEmail, getCourseById } from 'osc-api';
+import { getUserByEmail, getUserById, wait, sendEmail, getCourseById, getUserRoleById } from 'osc-api';
 import type {
     CreateUserFn,
     CrmTokensFn,
@@ -13,7 +13,8 @@ import type {
     UserProfileFn,
     UserRolesFn,
     CreateUserSetupFn,
-    VerifyLinkFn
+    VerifyLinkFn,
+    assignRoleFn
 
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
@@ -59,6 +60,9 @@ export const createSetup: CreateUserSetupFn = async (input) => {
             email: input.email,
         },
     });
+
+    // Assign a role of 'Student'
+    await assignRole(userCreate.id, 3);
     // Generate magic key token
     const userToken = await token.magicKey(userCreate.id);
     const url = `https://openstudycollege.com/signin?token = ${userToken}`;
@@ -80,6 +84,32 @@ export const createSetup: CreateUserSetupFn = async (input) => {
         }
     }
     return userCreate;
+}
+
+export const assignRole: assignRoleFn = async (userId, role) => {
+
+    // Check if user exists
+    const existingUser = await getUserById(userId);
+
+    if (!existingUser) {
+        return new Error('An account does not exist for this user');
+    }
+
+    // fetch user role
+    const userRole = await getUserRoleById(role);
+
+    if (!userRole) {
+        return new Error('Role does not exist');
+    }
+    // Assign user role
+    return await prisma.userRole.create({
+        data: {
+            userId: userId,
+            roleId: role,
+            createdBy: userId
+        }
+    })
+
 }
 
 export const verifyLink: VerifyLinkFn = async (magicKeyToken) => {

@@ -13,7 +13,7 @@ export const magicKey: MagicKeyTokenFn = async (userId) => {
         user: { id: userId, permissions: await permissions(userId) }
     };
     // Magic key token set to expire after 1h
-    return jwt.sign(payload, env.JWT_SECRET!, {
+    return jwt.sign(payload, env.MAGIC_SECRET!, {
         algorithm: 'HS256',
         audience: env.JWT_AUDIENCE,
         expiresIn: 10800
@@ -90,7 +90,7 @@ export const refreshAccess: RefreshAccessFn = async (refreshToken) => {
 
 export const verifyToken: VerifyFn = async (magicKeyToken) => {
     try {
-        const decoded = jwt.verify(magicKeyToken, env.JWT_SECRET!, {
+        const decoded = jwt.verify(magicKeyToken, env.MAGIC_SECRET!, {
             algorithms: ['HS256'],
             audience: env.JWT_AUDIENCE
         }) as MagicToken
