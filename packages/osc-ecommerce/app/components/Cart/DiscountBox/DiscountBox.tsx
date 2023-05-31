@@ -22,7 +22,13 @@ export const DiscountBox = (props: DiscountBoxProps) => {
     // Get the codes that are applicable to the cart and store them in state
     const applicableCodes =
         discountCodes?.filter(({ applicable }) => applicable)?.map(({ code }) => code) || null;
-    const [codes, setCodes] = useState<string[]>(applicableCodes);
+
+    // Make sure we're not submitting the same code multiple times
+    // Shopify will handle this on the backend but we want to avoid
+    // displaying the same code multiple times in the UI
+    const uniqueCodes = [...new Set(applicableCodes)];
+
+    const [codes, setCodes] = useState<string[]>(uniqueCodes);
 
     useEffect(() => {
         if (fetcher.state === 'idle' && inputRef.current) {
@@ -56,7 +62,7 @@ export const DiscountBox = (props: DiscountBoxProps) => {
                         // Filter the codes to only include the ones that are applicable to the cart
                         // This will allow us to submit the form with only the codes that are applicable
                         // rather than all of the codes that have been entered.
-                        codes.filter((code) => applicableCodes?.includes(code))
+                        codes.filter((code) => uniqueCodes?.includes(code))
                     )}
                 />
 
@@ -83,10 +89,10 @@ export const DiscountBox = (props: DiscountBoxProps) => {
                 </Alert>
             ) : null}
 
-            {applicableCodes && applicableCodes.length > 0 ? (
+            {uniqueCodes && uniqueCodes.length > 0 ? (
                 <dl className="c-discount-box__list">
                     <dt className="c-discount-box__term">Discount codes applied:</dt>
-                    {applicableCodes.map((code, i) => (
+                    {uniqueCodes.map((code, i) => (
                         <dd className="c-discount-box__details" key={i + code}>
                             <span>{code}</span>
                             <Button
