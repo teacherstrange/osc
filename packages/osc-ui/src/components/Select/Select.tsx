@@ -13,6 +13,7 @@ import './select.scss';
 type Description = {
     label?: string;
     icon?: string;
+    className?: string;
 };
 
 type GroupVariants = 'secondary' | 'tertiary' | 'inline' | 'inline-wrap' | 'bold';
@@ -113,6 +114,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             if (desc?.label)
                 return (
                     <Label
+                        className={desc.className}
                         htmlFor={name}
                         name={desc.label}
                         onClickHandler={() => setIsOpen(!isOpen)}
