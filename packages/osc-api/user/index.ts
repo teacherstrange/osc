@@ -46,7 +46,7 @@ export const getUserById: GetUserByIdFn = async (id) => {
     });
 };
 
-export const getUserRoleById: GetRoleByIdFn = async (id) => {
+export const getRoleById: GetRoleByIdFn = async (id) => {
     return await prisma.role.findUnique({
         where: {
             id,

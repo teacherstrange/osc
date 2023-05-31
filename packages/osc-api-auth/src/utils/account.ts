@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { getUserByEmail, getUserById, wait, sendEmail, getCourseById, getUserRoleById } from 'osc-api';
+import { getUserByEmail, getUserById, wait, sendEmail, getCourseById, getRoleById } from 'osc-api';
 import type {
     CreateUserFn,
     CrmTokensFn,
@@ -96,7 +96,7 @@ export const assignRole: assignRoleFn = async (userId, role) => {
     }
 
     // fetch user role
-    const userRole = await getUserRoleById(role);
+    const userRole = await getRoleById(role);
     if (!userRole) {
         return new Error('Role does not exist');
     }
