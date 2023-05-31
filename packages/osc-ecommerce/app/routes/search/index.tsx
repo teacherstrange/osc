@@ -1,4 +1,3 @@
-import type { ObjectWithObjectID } from '@algolia/client-search';
 import { useLoaderData } from '@remix-run/react';
 import type { LinksFunction, LoaderFunction } from '@remix-run/server-runtime';
 import { json } from '@remix-run/server-runtime';
@@ -124,95 +123,96 @@ const Search = (props: SearchProps) => {
     ]);
 
     return (
-        <InstantSearchSSRProvider {...serverState}>
-            <InstantSearch
-                searchClient={searchClient}
-                indexName={env!.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID}
-            >
-                <SearchBox />
-                <div className="o-grid o-container c-instant-search__container">
-                    <div className="o-grid__col--12  o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced">
-                        <Accordion type="multiple">
-                            <RefinementList
-                                attribute={'tbc'}
-                                sortBy={['name:asc']}
-                                accordionItem={true}
-                                title="Filter by Result type"
-                                value="TO BE CREATED"
-                            />
-                            <RefinementList
-                                attribute={'tbc'}
-                                sortBy={['name:asc']}
-                                accordionItem={true}
-                                title="Filter by Monthly Payments"
-                                value="TO BE CREATED"
-                            />
-                            <RefinementSlider
-                                accordionItem={true}
-                                accordionValue="price"
-                                attribute="price"
-                                prefix="£"
-                                start={[100, 200]}
-                                title="Filter by Price"
-                            />
-                            <RefinementList
-                                attribute={'meta.osc.award'}
-                                sortBy={['name:asc']}
-                                accordionItem={true}
-                                title="Filter by award"
-                                value="award"
-                            />
-                            <RefinementList
-                                attribute={'meta.osc.awarding_body'}
-                                sortBy={['name:asc']}
-                                accordionItem={true}
-                                title="Filter by awarding body"
-                                value="awarding_body"
-                            />
-                            <RefinementList
-                                attribute={'options.study-method'}
-                                sortBy={['name:asc']}
-                                accordionItem={true}
-                                title="Filter by study method"
-                                value="study_method"
-                            />
-                        </Accordion>
-                        <ClearRefinements />
+        <SpritesheetProvider spriteSheetPath={spritesheet}>
+            <InstantSearchSSRProvider {...serverState}>
+                <InstantSearch
+                    searchClient={searchClient}
+                    indexName={env!.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID}
+                >
+                    <SearchBox />
+                    <div className="o-grid o-container c-instant-search__container">
+                        <div className="o-grid__col--12  o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced">
+                            <Accordion type="multiple">
+                                <RefinementList
+                                    attribute={'tbc'}
+                                    sortBy={['name:asc']}
+                                    accordionItem={true}
+                                    title="Filter by Result type"
+                                    value="TO BE CREATED"
+                                />
+                                <RefinementList
+                                    attribute={'tbc'}
+                                    sortBy={['name:asc']}
+                                    accordionItem={true}
+                                    title="Filter by Monthly Payments"
+                                    value="TO BE CREATED"
+                                />
+                                <RefinementSlider
+                                    accordionItem={true}
+                                    accordionValue="price"
+                                    attribute="price"
+                                    prefix="£"
+                                    start={[100, 200]}
+                                    title="Filter by Price"
+                                />
+                                <RefinementList
+                                    attribute={'meta.osc.award'}
+                                    sortBy={['name:asc']}
+                                    accordionItem={true}
+                                    title="Filter by award"
+                                    value="award"
+                                />
+                                <RefinementList
+                                    attribute={'meta.osc.awarding_body'}
+                                    sortBy={['name:asc']}
+                                    accordionItem={true}
+                                    title="Filter by awarding body"
+                                    value="awarding_body"
+                                />
+                                <RefinementList
+                                    attribute={'options.study-method'}
+                                    sortBy={['name:asc']}
+                                    accordionItem={true}
+                                    title="Filter by study method"
+                                    value="study_method"
+                                />
+                            </Accordion>
+                            <ClearRefinements />
+                        </div>
+                        <div className="o-grid o-grid__col--12 o-grid__col--9@tab">
+                            <div className="o-grid__col--12 o-flex o-flex--end o-flex--spaced">
+                                <Select
+                                    defaultValue="listview"
+                                    description={{
+                                        icon: view === 'listview' ? 'list' : 'grid',
+                                    }}
+                                    groupVariants={['inline', 'tertiary']}
+                                    name={'view_select'}
+                                    setExternalValue={setView}
+                                >
+                                    {selects.map((item, index) => (
+                                        <SelectItem key={index} {...item}>
+                                            {item.name}
+                                        </SelectItem>
+                                    ))}
+                                </Select>
+                                <SortBy items={sortingIndexes} />
+                            </div>
+                            <div className="o-grid o-grid__col--12">
+                                <Index indexName={env!.ALGOLIA_PRIMARY_COLLECTIONS_INDEX!}>
+                                    <Configure hitsPerPage={100} />
+                                    <CollectionCards />
+                                </Index>
+                            </div>
+                            <div className="o-grid o-grid__col--12">
+                                <Configure hitsPerPage={hitsPerPage} />
+                                <Hits view={view} />
+                            </div>
+                        </div>
                     </div>
-                    <div className="o-grid o-grid__col--12 o-grid__col--9@tab">
-                        <div className="o-grid__col--12 o-flex o-flex--end o-flex--spaced">
-                            <Select
-                                defaultValue="listview"
-                                description={{
-                                    icon: view === 'listview' ? 'list' : 'grid',
-                                }}
-                                groupVariants={['inline', 'tertiary']}
-                                name={'view_select'}
-                                setExternalValue={setView}
-                            >
-                                {selects.map((item, index) => (
-                                    <SelectItem key={index} {...item}>
-                                        {item.name}
-                                    </SelectItem>
-                                ))}
-                            </Select>
-                            <SortBy items={sortingIndexes} />
-                        </div>
-                        <div className="o-grid o-grid__col--12">
-                            <Index indexName={env!.ALGOLIA_PRIMARY_COLLECTIONS_INDEX!}>
-                                <Configure hitsPerPage={100} />
-                                <CollectionCards />
-                            </Index>
-                        </div>
-
-                        <div className="o-grid o-grid__col--12">
-                            <Configure hitsPerPage={hitsPerPage} />
-                            <Hits view={view} />
-                        </div>
-                    </div>
-                </div>
-            </InstantSearch>
-        </InstantSearchSSRProvider>
+                </InstantSearch>
+            </InstantSearchSSRProvider>
+        </SpritesheetProvider>
     );
 };
 
