@@ -1,4 +1,4 @@
-import type { User, UserRole } from '@prisma/client';
+import type { User, Role } from '@prisma/client';
 
 export type userJWT = {
     readonly id: number;
@@ -23,6 +23,6 @@ type emailData = {
 }
 
 export type GetUserByIdFn = (id: number) => Promise<UserObject | null>;
-export type GetUserRoleByIdFn = (id: number) => Promise<UserRole | null>;
+export type GetRoleByIdFn = (id: number) => Promise<Role | null>;
 export type GetUserByEmailFn = (email: string) => Promise<UserObject | null>;
 export type GetEmailData = (input: emailData) => Promise<String>
