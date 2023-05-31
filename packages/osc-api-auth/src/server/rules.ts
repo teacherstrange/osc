@@ -26,3 +26,24 @@ export const canViewOther = rule()((_: undefined, __: undefined, { user }: AuthC
 export const canCreateUser = rule()((_: undefined, __: undefined, { user }: AuthContext) => {
     return userCan(user!, 'createOtherAccount');
 });
+
+export const canUploadCourseResource = rule()((_: undefined, __: undefined, { user }: AuthContext) => {
+    return userCan(user!, 'canUploadCourseResource');
+});
+
+export const viewAssignedCourses = rule()((_: undefined, __: undefined, { user }: AuthContext) => {
+    return userCan(user!, 'viewAssignedCourses');
+});
+
+export const viewAssessmentsToMark = rule()((_: undefined, __: undefined, { user }: AuthContext) => {
+    return userCan(user!, 'viewAssessmentsToMark');
+});
+
+export const viewInvoices = rule()((_: undefined, __: undefined, { user }: AuthContext) => {
+    return userCan(user!, 'viewinvoices');
+});
+
+export const viewAssignedStudents = rule()((_: undefined, __: undefined, { user }: AuthContext) => {
+    return userCan(user!, 'viewAssignedStudents');
+})
+
