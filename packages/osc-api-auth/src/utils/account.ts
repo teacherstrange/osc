@@ -14,7 +14,8 @@ import type {
     UserRolesFn,
     CreateUserSetupFn,
     VerifyLinkFn,
-    assignRoleFn
+    assignRoleFn,
+    CompleteRegistrationFn
 
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
@@ -90,14 +91,12 @@ export const assignRole: assignRoleFn = async (userId, role) => {
 
     // Check if user exists
     const existingUser = await getUserById(userId);
-
     if (!existingUser) {
         return new Error('An account does not exist for this user');
     }
 
     // fetch user role
     const userRole = await getUserRoleById(role);
-
     if (!userRole) {
         return new Error('Role does not exist');
     }
@@ -122,6 +121,29 @@ export const verifyLink: VerifyLinkFn = async (magicKeyToken) => {
     const userDet = await get(tokenCheck);
     return userDet;
 
+}
+
+export const completeRegistration: CompleteRegistrationFn = async (input) => {
+    const tokenCheck = await token.verifyToken(input.magicKey);
+    if (tokenCheck == 'Fail') {
+        return new Error('No valid login link')
+    }
+    const user = await getUserByEmail(input.email);
+
+    if (!user) {
+        return new Error('No matching active user found');
+    }
+
+    const hashedPassword = await password.hash(input.password);
+
+    return await prisma.user.update({
+        where: {
+            id: user.id,
+        },
+        data: {
+            password: hashedPassword
+        }
+    })
 }
 
 export const login: LoginFn = async (input) => {

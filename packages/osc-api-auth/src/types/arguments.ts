@@ -18,6 +18,16 @@ export type createUserInput = {
     readonly password: string;
 };
 
+export type completeRegistration = {
+    readonly email: string;
+    readonly password: string;
+    readonly magicKey: string;
+}
+
+export type completeRegistrationArgs = {
+    readonly input: completeRegistration;
+}
+
 export type createUserArgs = {
     readonly input: createUserInput;
 };

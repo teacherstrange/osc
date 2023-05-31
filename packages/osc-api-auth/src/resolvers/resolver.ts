@@ -6,7 +6,8 @@ import type {
     loginArgs,
     refreshAccessArgs,
     createUserSetupArgs,
-    magicKeyArgs
+    magicKeyArgs,
+    completeRegistrationArgs
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
@@ -40,6 +41,9 @@ export const resolvers = {
         },
         magicKeyRequest: async (_: undefined, { magicKeyToken }: magicKeyArgs) => {
             return account.verifyLink(magicKeyToken);
+        },
+        completeRegistration: async (_: undefined, { input }: completeRegistrationArgs) => {
+            return account.completeRegistration(input);
         }
     }
 };
