@@ -188,7 +188,7 @@ const Search = (props: SearchProps) => {
                                 }}
                                 groupVariants={['inline', 'tertiary']}
                                 name={'view_select'}
-                                setValue={setView}
+                                setExternalValue={setView}
                             >
                                 {selects.map((item, index) => (
                                     <SelectItem key={index} {...item}>

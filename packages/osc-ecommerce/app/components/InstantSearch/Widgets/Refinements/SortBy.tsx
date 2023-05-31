@@ -31,7 +31,7 @@ export function SortBy(props: SortByProps) {
             <Select
                 description={{ label: 'Sort By: ', className: 'u-text-bold' }}
                 name={'sortBy_select'}
-                setValue={handleCheckboxChange}
+                setExternalValue={handleCheckboxChange}
                 groupVariants={['inline', 'tertiary']}
             >
                 {options.map((item, index) => {
