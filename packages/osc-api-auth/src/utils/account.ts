@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { getUserByEmail, getUserById, wait, sendEmail, getCourseById, getRoleById } from 'osc-api';
+import { getUserByEmail, getUserById, wait, sendEmail, getCourseById, getRoleById, getRoleByTitle } from 'osc-api';
 import type {
     CreateUserFn,
     CrmTokensFn,
@@ -61,14 +61,18 @@ export const createSetup: CreateUserSetupFn = async (input) => {
             email: input.email,
         },
     });
+    // Find role Id
+    const roleId = await getRoleByTitle('Student');
 
     // Assign a role of 'Student'
-    await assignRole(userCreate.id, 3);
+    if (roleId != null) {
+        await assignRole(userCreate.id, roleId.id);
+    }
     // Generate magic key token
     const userToken = await token.magicKey(userCreate.id);
     const url = `https://openstudycollege.com/signin?token = ${userToken}`;
     // Send email via hubspot api
-    const emailData = { 'to': "jonathan.hall@openstudycollege.com", 'emailId': 69285064430, 'url': url }
+    const emailData = { 'to': input.email, 'emailId': 69285064430, 'url': url }
     await sendEmail(emailData);
     if (input.courses) {
         for (var i = 0; i < input.courses.length; i++) {

@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { Client } from '@hubspot/api-client';
 import { v4 as uuidv4 } from 'uuid';
 
-import type { GetEmailData, GetUserByEmailFn, GetUserByIdFn, GetRoleByIdFn } from './types';
+import type { GetEmailData, GetUserByEmailFn, GetUserByIdFn, GetRoleByIdFn, GetRoleByTitleFn } from './types';
 export * from './types';
 
 const prisma = new PrismaClient();
@@ -50,6 +50,14 @@ export const getRoleById: GetRoleByIdFn = async (id) => {
     return await prisma.role.findUnique({
         where: {
             id,
+        }
+    })
+}
+
+export const getRoleByTitle: GetRoleByTitleFn = async (title) => {
+    return await prisma.role.findFirst({
+        where: {
+            title
         }
     })
 }

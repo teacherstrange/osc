@@ -24,5 +24,6 @@ type emailData = {
 
 export type GetUserByIdFn = (id: number) => Promise<UserObject | null>;
 export type GetRoleByIdFn = (id: number) => Promise<Role | null>;
+export type GetRoleByTitleFn = (title: string) => Promise<Role | null>;
 export type GetUserByEmailFn = (email: string) => Promise<UserObject | null>;
 export type GetEmailData = (input: emailData) => Promise<String>

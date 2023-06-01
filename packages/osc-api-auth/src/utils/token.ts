@@ -12,7 +12,7 @@ export const magicKey: MagicKeyTokenFn = async (userId) => {
     const payload = {
         user: { id: userId, permissions: await permissions(userId) }
     };
-    // Magic key token set to expire after 1h
+    // Magic key token set to expire after 3h
     return jwt.sign(payload, env.MAGIC_SECRET!, {
         algorithm: 'HS256',
         audience: env.JWT_AUDIENCE,
