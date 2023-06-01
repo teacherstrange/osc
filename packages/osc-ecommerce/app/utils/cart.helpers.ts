@@ -1,6 +1,7 @@
 import type { AppLoadContext } from '@remix-run/node';
 import type {
     Cart,
+    CartBuyerIdentityInput,
     CartInput,
     CartLineInput,
     CartLineUpdateInput,
@@ -20,6 +21,7 @@ import {
     DISCOUNT_CODES_UPDATE,
     LINES_UPDATE_MUTATION,
     REMOVE_LINE_ITEMS_MUTATION,
+    UPDATE_CART_BUYER_ID,
 } from '~/queries/shopify/cart';
 import { SELECTED_PRODUCT_VARIANT_ID } from '~/queries/shopify/product';
 import type { SanityProduct, SanityProductExcerpt } from '~/types/sanity';
@@ -324,4 +326,42 @@ export async function updateCartDiscounts(args: UpdateCartDiscounts) {
     );
 
     return cartDiscountCodesUpdate;
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Update Buyer Identity
+ * cartBuyerIdentityUpdate is used to associate customer info with a cart and is used to determine international pricing.
+ * -----------------------------------------------------------------------------------------------*/
+/**
+ * Mutation to update a cart buyerIdentity
+ * @param cartId  Cart['id']
+ * @param buyerIdentity CartBuyerIdentityInput
+ * @returns {cart: Cart; errors: UserError[]}
+ * @see API https://shopify.dev/api/storefront/2022-10/mutations/cartBuyerIdentityUpdate
+ * @preserve
+ */
+export async function updateCartBuyerIdentity({
+    cartId,
+    buyerIdentity,
+    storefront,
+}: {
+    cartId: string;
+    buyerIdentity: CartBuyerIdentityInput;
+    storefront: AppLoadContext['storefront'];
+}) {
+    const { cartBuyerIdentityUpdate } = await storefront.mutate<{
+        cartBuyerIdentityUpdate: {
+            cart: Cart;
+            errors: UserError[];
+        };
+    }>(UPDATE_CART_BUYER_ID, {
+        variables: {
+            cartId,
+            buyerIdentity,
+        },
+    });
+
+    invariant(cartBuyerIdentityUpdate, 'No data returned from cart buyer identity update mutation');
+
+    return cartBuyerIdentityUpdate;
 }

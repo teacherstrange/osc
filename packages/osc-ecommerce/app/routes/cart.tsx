@@ -27,6 +27,7 @@ import {
     addLinesToCart,
     createCart,
     removeLinesFromCart,
+    updateCartBuyerIdentity,
     updateCartDiscounts,
     updateLinesInCart,
 } from '~/utils/cart.helpers';
@@ -61,17 +62,10 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
     const { session, storefront } = context;
     const headers = new Headers();
 
-    const [
-        formData,
-        storedCartId,
-        // In Hydrogen demo store this is used when updating the buyer identity
-        // Leaving this here for now, I'll add the buyer identity function in the future
-        // TODO: Remove this comment when buyer identity function is added in future sprint
-        // customerAccessToken,
-    ] = await Promise.all([
+    const [formData, storedCartId, customerAccessToken] = await Promise.all([
         request.formData(),
         session.get('cartId'),
-        // session.get('customerAccessToken'),
+        session.get('customerAccessToken'),
     ]);
 
     let cartId = storedCartId;
@@ -230,6 +224,34 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
                     ],
                 };
             }
+
+            break;
+
+        case CartAction.UPDATE_BUYER_IDENTITY:
+            const buyerIdentity = formData.get('buyerIdentity')
+                ? (JSON.parse(String(formData.get('buyerIdentity'))) as CartBuyerIdentityInput)
+                : ({} as CartBuyerIdentityInput);
+
+            result = cartId
+                ? await updateCartBuyerIdentity({
+                      cartId,
+                      buyerIdentity: {
+                          ...buyerIdentity,
+                          customerAccessToken,
+                      },
+                      storefront,
+                  })
+                : await createCart({
+                      input: {
+                          buyerIdentity: {
+                              ...buyerIdentity,
+                              customerAccessToken,
+                          },
+                      },
+                      storefront,
+                  });
+
+            cartId = result.cart.id;
 
             break;
 
