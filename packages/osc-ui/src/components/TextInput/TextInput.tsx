@@ -44,7 +44,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
     /**
      * An optional icon for the input field
      */
-    icon?: { id: string };
+    icon?: { className: string; id: string };
     /**
      * Id for the input field
      */
@@ -151,7 +151,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     required={required}
                     variants={_value || value ? ['filled'] : null}
                 />
-                {icon ? <Icon className={iconClasses} id={icon.id} /> : null}
+                {icon ? <Icon className={`${iconClasses} ${icon.className}`} id={icon.id} /> : null}
                 {errors && errors.length > 0 ? <InputError errors={errors} id={id} /> : null}
             </div>
             {action ? <InputButton action={action} id={action.iconId} /> : null}

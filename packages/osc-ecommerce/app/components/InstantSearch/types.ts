@@ -1,4 +1,6 @@
 import type { Hit, BaseHit } from 'instantsearch.js';
+import type { SortBy } from 'instantsearch.js';
+import type { SearchResults } from 'algoliasearch-helper';
 
 export type AlgoliaHit = Hit<
     BaseHit & {
@@ -21,3 +23,15 @@ export type BuiltInSendEventForHits = (
 export type CustomSendEventForHits = (customPayload: any) => void;
 
 export type SendEventForHits = BuiltInSendEventForHits & CustomSendEventForHits;
+
+export interface RefinementData {
+    accordionItem: boolean;
+    accordionValue?: string;
+    attribute: string;
+    prefix?: string;
+    sortBy?: SortBy<SearchResults.FacetValue>;
+    start?: number[];
+    title: string;
+    type: string;
+    value?: string;
+}

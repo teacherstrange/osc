@@ -2,7 +2,18 @@ import { useLoaderData } from '@remix-run/react';
 import type { LinksFunction, LoaderFunction } from '@remix-run/server-runtime';
 import { json } from '@remix-run/server-runtime';
 import algoliasearch from 'algoliasearch';
-import { Accordion, Select, SelectItem, SpritesheetProvider } from 'osc-ui';
+import { mediaQueries as mq } from 'osc-design-tokens';
+import {
+    Accordion,
+    AccordionHeader,
+    AccordionItem,
+    AccordionPanel,
+    Select,
+    SelectItem,
+    SpritesheetProvider,
+    rem,
+    useMediaQuery,
+} from 'osc-ui';
 import spritesheet from 'osc-ui/dist/spritesheet.svg';
 import oscUiAutcompleteStyles from 'osc-ui/dist/src-components-Autocomplete-autocomplete.css';
 import oscUiButtonStyles from 'osc-ui/dist/src-components-Button-button.css';
@@ -13,25 +24,22 @@ import oscUiPopoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
 import oscUiSelectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import oscUiSliderStyles from 'osc-ui/dist/src-components-Slider-slider.css';
 import oscUiTextInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { getServerState } from 'react-instantsearch-hooks-server';
 import type { InstantSearchServerState } from 'react-instantsearch-hooks-web';
-import {
-    Index,
-    InstantSearch,
-    InstantSearchSSRProvider,
-    SearchBox,
-} from 'react-instantsearch-hooks-web';
+import { Index, InstantSearch, InstantSearchSSRProvider } from 'react-instantsearch-hooks-web';
+import { ItemCounter } from '~/components/InstantSearch/Components/ItemCounter';
 import { CollectionCards } from '~/components/InstantSearch/Widgets/CollectionCards';
 import { Configure } from '~/components/InstantSearch/Widgets/Configure';
 import { NoResults } from '~/components/InstantSearch/Widgets/NoResults/NoResults';
 import { NoResultsBoundary } from '~/components/InstantSearch/Widgets/NoResults/NoResultsBoundary';
 import { ClearRefinements } from '~/components/InstantSearch/Widgets/Refinements/ClearRefinements';
-import { RefinementList } from '~/components/InstantSearch/Widgets/Refinements/RefinementList';
-import { RefinementSlider } from '~/components/InstantSearch/Widgets/Refinements/RefinementSlider';
 import { SortBy } from '~/components/InstantSearch/Widgets/Refinements/SortBy';
-import { sortingIndexes } from '~/components/InstantSearch/helpers';
+import { REFINEMENT_DATA, SORTING_INDEXES, VIEW_OPTIONS } from '~/components/InstantSearch/data';
+import oscUiInstantSearchStyles from '~/components/InstantSearch/instant-search.css';
+import { getRefinementWidget } from '~/components/InstantSearch/utils/getRefinementWidget';
+import { SearchBox } from '../../components/InstantSearch/Components/SearchBox';
 import { Hits } from '../../components/InstantSearch/Widgets/Hits/Hits';
 
 export const links: LinksFunction = () => {
@@ -40,6 +48,7 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscUiButtonStyles },
         { rel: 'stylesheet', href: oscUiCheckboxStyles },
         { rel: 'stylesheet', href: oscUiLabelStyles },
+        { rel: 'stylesheet', href: oscUiInstantSearchStyles },
         { rel: 'stylesheet', href: oscUiTextInputStyles },
         { rel: 'stylesheet', href: oscUiCardStyles },
         { rel: 'stylesheet', href: oscUiPopoverStyles },
@@ -94,6 +103,7 @@ type SearchProps = {
         ALGOLIA_PRIMARY_PRODUCTS_INDEX?: string;
         ALGOLIA_PRIMARY_COLLECTIONS_INDEX?: string;
         ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID?: string;
+        ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS?: string;
     };
     hitsPerPage?: number;
     serverState?: InstantSearchServerState;
@@ -109,20 +119,19 @@ const Search = (props: SearchProps) => {
 
     const [view, setView] = useState<'listview' | 'gridview'>('listview');
 
-    const [selects] = useState([
-        {
-            description: { label: 'List View' },
-            value: 'listview',
-            name: 'List View',
-            required: true,
-        },
-        {
-            description: { label: 'Grid View' },
-            value: 'gridview',
-            name: 'Grid View',
-            required: true,
-        },
-    ]);
+    // Setting in state as trying directly through 'isGreaterThanTab' throws a strange error related to ResizeObserver
+    const [nestedAccordion, setNestedAccordion] = useState(false);
+
+    const isGreaterThanTab: Boolean = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
+
+    useEffect(() => {
+        if (isGreaterThanTab) {
+            setNestedAccordion(false);
+        } else {
+            setNestedAccordion(true);
+            setView('listview');
+        }
+    }, [isGreaterThanTab]);
 
     return (
         <SpritesheetProvider spriteSheetPath={spritesheet}>
@@ -131,74 +140,73 @@ const Search = (props: SearchProps) => {
                     searchClient={searchClient}
                     indexName={env!.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID}
                 >
-                    <SearchBox />
-                    <div className="o-grid o-container c-instant-search__container">
-                        <div className="o-grid__col--12  o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced">
-                            <Accordion type="multiple">
-                                <RefinementList
-                                    attribute={'tbc'}
-                                    sortBy={['name:asc']}
-                                    accordionItem={true}
-                                    title="Filter by Result type"
-                                    value="TO BE CREATED"
-                                />
-                                <RefinementList
-                                    attribute={'tbc'}
-                                    sortBy={['name:asc']}
-                                    accordionItem={true}
-                                    title="Filter by Monthly Payments"
-                                    value="TO BE CREATED"
-                                />
-                                <RefinementSlider
-                                    accordionItem={true}
-                                    accordionValue="price"
-                                    attribute="price"
-                                    prefix="£"
-                                    start={[100, 200]}
-                                    title="Filter by Price"
-                                />
-                                <RefinementList
-                                    attribute={'meta.osc.award'}
-                                    sortBy={['name:asc']}
-                                    accordionItem={true}
-                                    title="Filter by award"
-                                    value="award"
-                                />
-                                <RefinementList
-                                    attribute={'meta.osc.awarding_body'}
-                                    sortBy={['name:asc']}
-                                    accordionItem={true}
-                                    title="Filter by awarding body"
-                                    value="awarding_body"
-                                />
-                                <RefinementList
-                                    attribute={'options.study-method'}
-                                    sortBy={['name:asc']}
-                                    accordionItem={true}
-                                    title="Filter by study method"
-                                    value="study_method"
-                                />
-                            </Accordion>
-                            <ClearRefinements />
+                    <div
+                        className={`${
+                            !nestedAccordion ? 'u-mb-l' : ''
+                        } u-bg-color-neutral-200 u-pt-5xl u-pb-5xl`}
+                    >
+                        <div className="o-container o-container--4xs">
+                            <ItemCounter />
+                            <SearchBox />
                         </div>
-                        <div className="o-grid o-grid__col--12 o-grid__col--9@tab">
+                    </div>
+
+                    <div className="o-grid u-pb-l c-instant-search">
+                        <div
+                            className={`${
+                                nestedAccordion ? 'c-instant-search__accordion' : ''
+                            } o-grid__col--12 o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced o-container`}
+                        >
+                            <Accordion type="single" collapsible={true}>
+                                {!nestedAccordion ? (
+                                    REFINEMENT_DATA?.map((refinement, index) =>
+                                        getRefinementWidget(refinement, index)
+                                    )
+                                ) : (
+                                    <AccordionItem value="child-0">
+                                        <AccordionHeader icon="plusMinus" asChild={true} as="h2">
+                                            Filters
+                                        </AccordionHeader>
+                                        <AccordionPanel>
+                                            <Accordion type="multiple">
+                                                {REFINEMENT_DATA?.map((refinement, index) =>
+                                                    getRefinementWidget(refinement, index)
+                                                )}
+                                            </Accordion>
+                                            <ClearRefinements
+                                                className={
+                                                    nestedAccordion
+                                                        ? 'o-flex o-flex--end u-pt-s'
+                                                        : ''
+                                                }
+                                            />
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                )}
+                            </Accordion>
+
+                            {!nestedAccordion ? <ClearRefinements /> : null}
+                        </div>
+                        <div className="o-container o-grid o-grid__col--12 o-grid__col--9@tab">
                             <div className="o-grid__col--12 o-flex o-flex--end o-flex--spaced">
-                                <Select
-                                    defaultValue="listview"
-                                    description={{
-                                        icon: view === 'listview' ? 'list' : 'grid',
-                                    }}
-                                    groupVariants={['inline', 'tertiary']}
-                                    name={'view_select'}
-                                    setExternalValue={setView}
-                                >
-                                    {selects.map((item, index) => (
-                                        <SelectItem key={index} {...item}>
-                                            {item.name}
-                                        </SelectItem>
-                                    ))}
-                                </Select>
-                                <SortBy items={sortingIndexes} />
+                                {!nestedAccordion ? (
+                                    <Select
+                                        defaultValue="listview"
+                                        description={{
+                                            icon: view === 'listview' ? 'list' : 'grid',
+                                        }}
+                                        groupVariants={['inline', 'tertiary']}
+                                        name={'view_select'}
+                                        setExternalValue={setView}
+                                    >
+                                        {VIEW_OPTIONS?.map((item, index) => (
+                                            <SelectItem key={index} {...item}>
+                                                {item.name}
+                                            </SelectItem>
+                                        ))}
+                                    </Select>
+                                ) : null}
+                                <SortBy items={SORTING_INDEXES} />
                             </div>
                             <div className="o-grid o-grid__col--12">
                                 <Index indexName={env!.ALGOLIA_PRIMARY_COLLECTIONS_INDEX!}>
