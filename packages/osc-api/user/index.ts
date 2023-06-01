@@ -30,6 +30,14 @@ export const getRoleByTitle: GetRoleByTitleFn = async (title) => {
     });
 };
 
+export const getRoleByTitle: GetRoleByTitleFn = async (title) => {
+    return await prisma.role.findFirst({
+        where: {
+            title,
+        },
+    });
+};
+
 export const getUserByEmail: GetUserByEmailFn = async (email) => {
     return await prisma.user.findUnique({
         where: {
