@@ -151,11 +151,15 @@ const Search = (props: SearchProps) => {
                         </div>
                     </div>
 
-                    <div className="o-grid u-pb-l c-instant-search">
+                    <div
+                        className={`${
+                            !nestedAccordion ? 'o-container' : ''
+                        } o-grid u-pb-l c-instant-search`}
+                    >
                         <div
                             className={`${
-                                nestedAccordion ? 'c-instant-search__accordion' : ''
-                            } o-grid__col--12 o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced o-container`}
+                                nestedAccordion ? 'c-instant-search__accordion o-container' : ''
+                            } o-grid__col--12 o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced`}
                         >
                             <Accordion type="single" collapsible={true}>
                                 {!nestedAccordion ? (
@@ -187,7 +191,11 @@ const Search = (props: SearchProps) => {
 
                             {!nestedAccordion ? <ClearRefinements /> : null}
                         </div>
-                        <div className="o-container o-grid o-grid__col--12 o-grid__col--9@tab">
+                        <div
+                            className={`${
+                                nestedAccordion ? 'o-container' : ''
+                            } o-grid o-grid__col--12 o-grid__col--9@tab`}
+                        >
                             <div className="o-grid__col--12 o-flex o-flex--end o-flex--spaced">
                                 {!nestedAccordion ? (
                                     <Select
