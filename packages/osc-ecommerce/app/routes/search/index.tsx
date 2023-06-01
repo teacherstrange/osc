@@ -25,6 +25,8 @@ import {
 } from 'react-instantsearch-hooks-web';
 import { CollectionCards } from '~/components/InstantSearch/Widgets/CollectionCards';
 import { Configure } from '~/components/InstantSearch/Widgets/Configure';
+import { NoResults } from '~/components/InstantSearch/Widgets/NoResults/NoResults';
+import { NoResultsBoundary } from '~/components/InstantSearch/Widgets/NoResults/NoResultsBoundary';
 import { ClearRefinements } from '~/components/InstantSearch/Widgets/Refinements/ClearRefinements';
 import { RefinementList } from '~/components/InstantSearch/Widgets/Refinements/RefinementList';
 import { RefinementSlider } from '~/components/InstantSearch/Widgets/Refinements/RefinementSlider';
@@ -206,7 +208,9 @@ const Search = (props: SearchProps) => {
                             </div>
                             <div className="o-grid o-grid__col--12">
                                 <Configure hitsPerPage={hitsPerPage} />
-                                <Hits view={view} />
+                                <NoResultsBoundary fallback={<NoResults />}>
+                                    <Hits view={view} />
+                                </NoResultsBoundary>
                             </div>
                         </div>
                     </div>
