@@ -2,7 +2,7 @@ import type { User, Role } from '@prisma/client';
 
 export type userJWT = {
     readonly id: number;
-    readonly permissions: {
+    permissions: {
         read: string[];
         write: string[];
     };
