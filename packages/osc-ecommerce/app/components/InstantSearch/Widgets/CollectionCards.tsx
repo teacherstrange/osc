@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import {
     Button,
     CardBody,
@@ -7,10 +6,12 @@ import {
     CardImage,
     CardInner,
     CardTitle,
-    CollectionCard as OscCollectionCard,
     Icon,
     Image,
+    CollectionCard as OscCollectionCard,
+    truncate,
 } from 'osc-ui';
+import { useEffect, useState } from 'react';
 import { useHits } from 'react-instantsearch-hooks-web';
 import type { AlgoliaHit } from '../types';
 
@@ -19,19 +20,26 @@ const COLLECTION_HIGHLIGHT_ONE = 'A levels';
 const COLLECTION_HIGHLIGHT_TWO = 'GCSEs';
 
 interface CardProps {
-    title?: string;
-    product_image?: string;
     body?: string;
+    className?: string;
     course_count?: number;
-    className: string;
+    image?: { secure_url: string; alt: string; width: number; height: number };
+    size?: 'sm' | 'md' | 'lg';
+    title?: string;
 }
 
-const Card = ({ title, product_image, body, course_count, className }: CardProps) => {
+const Card = (props: CardProps) => {
+    const { body, className, course_count, image, size, title } = props;
     return (
-        <OscCollectionCard className={className}>
-            {product_image ? (
+        <OscCollectionCard className={className} size={size}>
+            {image ? (
                 <CardImage>
-                    <Image src={product_image} alt={title ?? ''} height={200} width={200} />
+                    <Image
+                        src={image.secure_url}
+                        alt={image.alt}
+                        height={image.height}
+                        width={image.width}
+                    />
                 </CardImage>
             ) : null}
             <CardInner>
@@ -39,9 +47,11 @@ const Card = ({ title, product_image, body, course_count, className }: CardProps
                     <CardTitle>{title}</CardTitle>
                 </CardHeader>
 
-                <CardBody>
-                    <p>{body}</p>
-                </CardBody>
+                {body ? (
+                    <CardBody>
+                        <p>{truncate(body)}</p>
+                    </CardBody>
+                ) : null}
 
                 <CardFooter>
                     <span className="u-text-bold">{course_count} Courses</span>
@@ -79,14 +89,21 @@ export const CollectionCards = (props: CollectionCardsProps) => {
             {collections?.map((collection, i) => (
                 <Card
                     // TODO - To come from Sanity
-                    body={''}
+                    body={
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra duis vehicula justo, sagittis quam nam nisi.'
+                    }
                     className={'o-grid__col--12 o-grid__col--6@mob-lrg'}
                     course_count={collection.products_count as number}
                     key={i}
                     // TODO - To come from Sanity
-                    product_image={
-                        'https://res.cloudinary.com/de2iu8gkv/image/upload/c_crop,y_0/v1674823207/cat-img-3_qrlvcq.png'
-                    }
+                    image={{
+                        secure_url:
+                            'https://res.cloudinary.com/de2iu8gkv/image/upload/c_crop,y_0/v1674823207/cat-img-3_qrlvcq.png',
+                        alt: '',
+                        width: 452,
+                        height: 310,
+                    }}
+                    size={'sm'}
                     title={collection.title as string}
                 />
             ))}
