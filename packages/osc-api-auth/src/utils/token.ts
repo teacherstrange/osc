@@ -4,13 +4,12 @@ import jwt from 'jsonwebtoken';
 import { env } from '~/types/environment';
 import type { AccessTokenFn, RefreshAccessFn, RefreshTokenFn, MagicKeyTokenFn, VerifyFn } from '~/types/functions';
 import type { RefreshToken, MagicToken } from '~/types/interfaces';
-import { permissions } from './account';
 
 const prisma = new PrismaClient();
 
 export const magicKey: MagicKeyTokenFn = async (userId) => {
     const payload = {
-        user: { id: userId, permissions: await permissions(userId) }
+        user: { id: userId }
     };
     // Magic key token set to expire after 3h
     return jwt.sign(payload, env.MAGIC_SECRET!, {
@@ -22,7 +21,7 @@ export const magicKey: MagicKeyTokenFn = async (userId) => {
 
 export const access: AccessTokenFn = async (userId) => {
     const payload = {
-        user: { id: userId, permissions: await permissions(userId) }
+        user: { id: userId }
     };
 
     // Create accessToken - this is what will be used to access restricted areas
