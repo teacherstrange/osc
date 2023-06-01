@@ -21,6 +21,7 @@ import {
 } from 'osc-ui';
 import { useState } from 'react';
 import type { AlgoliaHit, SendEventForHits } from '../../types';
+import { Highlight } from 'react-instantsearch-hooks-web';
 
 type HitProps = {
     className?: string;
@@ -72,7 +73,15 @@ export const Hit = (props: HitProps) => {
                             }}
                         />
                     )}
-                    <CardTitle>{hit.title}</CardTitle>
+                    <CardTitle>
+                        <Highlight
+                            hit={hit}
+                            attribute={'title'}
+                            classNames={{
+                                highlighted: 'u-bg-color-primary u-color-tertiary',
+                            }}
+                        />
+                    </CardTitle>
                     <CardTitle as="h3" subtitle isSmall>
                         {/* TODO: USE FIELD IN ALGOLIA TO DETERMINE IF THIS IS A SINGLE OR PACKAGE COURSE */}
                         TO ADD - Single Or Package Course
