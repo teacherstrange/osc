@@ -1,4 +1,5 @@
 import type { PortableTextBlock } from '@portabletext/types';
+import type { ProductVariant } from '@shopify/hydrogen/storefront-api-types';
 
 /* -------------------------------------------------------------------------------------------------
  * Extract ID from Shopify GID string
@@ -55,4 +56,26 @@ export const stripMarks = (portableText: PortableTextBlock) => {
             };
         }),
     };
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Product is gift voucher
+ * -----------------------------------------------------------------------------------------------*/
+/**
+ * Check whether the product variant is a gift voucher.
+ *
+ * @param selectedVariant The product variant to check.
+ * @returns Whether the product is a gift voucher.
+ */
+export const isGiftVoucher = (selectedVariant: ProductVariant) => {
+    const GIFT_CARD_SKU_PREFIX = 'GV';
+    const GIFT_CARD_PRODUCT_TYPE = 'gift voucher';
+
+    const hasMatchingSku =
+        selectedVariant?.sku && selectedVariant.sku.includes(GIFT_CARD_SKU_PREFIX);
+    const hasMatchingProductType =
+        selectedVariant?.product?.productType &&
+        selectedVariant.product.productType.toLowerCase() === GIFT_CARD_PRODUCT_TYPE;
+
+    return hasMatchingSku || hasMatchingProductType;
 };
