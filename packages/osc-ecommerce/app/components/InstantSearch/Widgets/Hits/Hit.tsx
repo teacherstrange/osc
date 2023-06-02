@@ -17,6 +17,7 @@ import {
     PopoverClose,
     PopoverContent,
     PopoverTrigger,
+    Price,
     VisuallyHidden,
 } from 'osc-ui';
 import { useState } from 'react';
@@ -59,12 +60,12 @@ export const Hit = (props: HitProps) => {
         <CardPriceTag>
             <>
                 {/* TODO: REPLACE THIS WITH ETIKA DATA */}
-                <p>
+                <Price>
                     <span className="u-text-bold">DATA FROM ETIKA</span>/month
-                </p>
-                <p>
+                </Price>
+                <Price>
                     or from <span className="u-text-bold">{`£${hit.price} in full`}</span>
-                </p>
+                </Price>
             </>
         </CardPriceTag>
     );
@@ -87,12 +88,14 @@ export const Hit = (props: HitProps) => {
         <CourseCard
             key={`search_${hit.id}`}
             isFull={view === 'listview' ? true : false}
-            className={className}
+            className={`${
+                view === 'listview' ? 'c-card--bordered' : 'c-card--shadow'
+            } ${className}`}
         >
             <CardInner className={className}>
                 <CardHeader>
                     {view === 'listview' ? PriceTag : WishListButton}
-                    <CardTitle>
+                    <CardTitle isUnderlined>
                         <span className="c-instant-search__card-title">
                             <Highlight
                                 hit={hit}
@@ -103,7 +106,7 @@ export const Hit = (props: HitProps) => {
                             />
                         </span>
                     </CardTitle>
-                    <CardTitle as="h3" subtitle isSmall>
+                    <CardTitle as="h3" subtitle isSmall isThemeable position="bottom">
                         {/* TODO: USE FIELD IN ALGOLIA TO DETERMINE IF THIS IS A SINGLE OR PACKAGE COURSE */}
                         TO ADD - Single Or Package Course
                     </CardTitle>
