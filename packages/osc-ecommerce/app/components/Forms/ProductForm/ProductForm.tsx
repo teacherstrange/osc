@@ -8,6 +8,8 @@ import { Button, ButtonGroup, RadioGroup, RadioItem, classNames, useModifier } f
 import type { ElementRef, FormEvent } from 'react';
 import { forwardRef, useMemo } from 'react';
 import { Price } from '~/components/Price/Price';
+import { useCart } from '~/hooks/useCart';
+import { isGiftVoucher } from '~/utils/storefront.helpers';
 import { AddToCart } from '../AddToCart/AddToCart';
 
 interface Product {
@@ -23,6 +25,7 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
     (props, forwardedRef) => {
         const { id, direction } = props;
         const { product } = useLoaderData<Product>();
+        const cart = useCart();
 
         const [currentSearchParams] = useSearchParams();
         const transition = useNavigation();
@@ -87,6 +90,15 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
         const selectedVariant = product.selectedVariant ?? firstVariant;
         const isOutOfStock = !selectedVariant?.availableForSale;
 
+        /**
+         * If variant is already in the cart then we want to prevent the user from adding it a second time
+         * However we do want to allow the user to add a gift voucher to the cart multiple times
+         */
+        const isAlreadyInCart = cart?.lines.edges.some(
+            (line) =>
+                !isGiftVoucher(selectedVariant) && line.node.merchandise?.id === selectedVariant?.id
+        );
+
         return (
             <div className={classes} ref={forwardedRef}>
                 <Form onChange={handleSubmit} className="c-product-form__form">
@@ -143,9 +155,11 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                             lines={[
                                 {
                                     merchandiseId: selectedVariant.id,
-                                    quantity: 1,
+                                    // Don't update the quantity if the item is already in the cart
+                                    quantity: !isAlreadyInCart ? 1 : 0,
                                 },
                             ]}
+                            isDisabled={transitionIsNotIdle}
                         />
                     ) : (
                         <></>
