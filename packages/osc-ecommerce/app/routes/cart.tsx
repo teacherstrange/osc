@@ -85,25 +85,39 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
                 ? (JSON.parse(String(formData.get('lines'))) as CartLineInput[])
                 : ([] as CartLineInput[]);
 
-            invariant(lines.length, 'No lines to add');
+            try {
+                invariant(lines.length, 'No lines to add');
 
-            /**
-             * If no previous cart exists, create one with the lines.
-             */
-            if (!cartId) {
-                result = await createCart({
-                    input: countryCode ? { lines, buyerIdentity: { countryCode } } : { lines },
-                    storefront,
-                });
-            } else {
-                result = await addLinesToCart({
-                    cartId,
-                    lines,
-                    storefront,
-                });
+                /**
+                 * If no previous cart exists, create one with the lines.
+                 */
+                if (!cartId) {
+                    result = await createCart({
+                        input: countryCode ? { lines, buyerIdentity: { countryCode } } : { lines },
+                        storefront,
+                    });
+                } else {
+                    result = await addLinesToCart({
+                        cartId,
+                        lines,
+                        storefront,
+                    });
+                }
+
+                cartId = result.cart.id;
+            } catch (error) {
+                console.error(error);
+
+                result = {
+                    cart: {} as CartType,
+                    errors: [
+                        {
+                            code: 'INVALID',
+                            message: 'No lines to add',
+                        },
+                    ],
+                };
             }
-
-            cartId = result.cart.id;
 
             break;
 
@@ -112,15 +126,29 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
                 ? (JSON.parse(String(formData.get('linesIds'))) as CartType['id'][])
                 : ([] as CartType['id'][]);
 
-            invariant(lineIds.length, 'No lines to remove');
+            try {
+                invariant(lineIds.length, 'No lines to remove');
 
-            result = await removeLinesFromCart({
-                cartId,
-                lineIds,
-                storefront,
-            });
+                result = await removeLinesFromCart({
+                    cartId,
+                    lineIds,
+                    storefront,
+                });
 
-            cartId = result.cart.id;
+                cartId = result.cart.id;
+            } catch (error) {
+                console.error(error);
+
+                result = {
+                    cart: {} as CartType,
+                    errors: [
+                        {
+                            code: 'INVALID',
+                            message: 'No lines to remove',
+                        },
+                    ],
+                };
+            }
 
             break;
 
