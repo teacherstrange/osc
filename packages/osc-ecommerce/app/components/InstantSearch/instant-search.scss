@@ -11,4 +11,12 @@
         display: flex;
         max-width: 30ch;
     }
+
+    &__accordion-header {
+        margin: 0;
+        /* stylelint-disable-next-line plugin/selector-bem-pattern , selector-class-pattern */
+        .c-accordion__trigger {
+            font-size: 26px;
+        }
+    }
 }

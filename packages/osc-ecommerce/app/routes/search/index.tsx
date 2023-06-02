@@ -168,7 +168,12 @@ const Search = (props: SearchProps) => {
                                     )
                                 ) : (
                                     <AccordionItem value="child-0">
-                                        <AccordionHeader icon="plusMinus" asChild={true} as="h2">
+                                        <AccordionHeader
+                                            icon="plusMinus"
+                                            asChild={true}
+                                            as="h2"
+                                            className="c-instant-search__accordion-header"
+                                        >
                                             Filters
                                         </AccordionHeader>
                                         <AccordionPanel>
