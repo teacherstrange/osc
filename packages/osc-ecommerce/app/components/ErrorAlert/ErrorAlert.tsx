@@ -1,7 +1,18 @@
 import { Link } from '@remix-run/react';
 import { Alert } from 'osc-ui';
 
-export const ErrorAlert = () => {
+interface ErrorAlertProps {
+    errors: any[];
+}
+
+export const ErrorAlert = (props: ErrorAlertProps) => {
+    const { errors } = props;
+
+    // Log the error to the browser console
+    for (const error of errors) {
+        console.error(error.data.errors);
+    }
+
     return (
         <Alert status="error">
             Oops, something went wrong! Please try again, if this issue persists{' '}

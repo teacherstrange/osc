@@ -70,7 +70,7 @@ export const CartLayout = () => {
             <div className="o-container o-grid u-pb-6xl">
                 {fetchersWithErrors.length > 0 ? (
                     <div className="o-grid__col o-grid__col--12 o-grid__col--10@tab o-grid__col--start-2@tab">
-                        <ErrorAlert />
+                        <ErrorAlert errors={fetchersWithErrors} />
                     </div>
                 ) : null}
 
