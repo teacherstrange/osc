@@ -47,7 +47,7 @@ export const RefinementSlider = (props: RangeSliderProps) => {
     const RefinementSlider = (
         <div>
             <Slider
-                className="u-pt-2xl"
+                className="u-pt-3xl"
                 min={minValue}
                 max={maxValue}
                 name="price"
