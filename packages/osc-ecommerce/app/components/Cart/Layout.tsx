@@ -109,21 +109,19 @@ export const CartLayout = () => {
                             >
                                 Add more courses
                             </Button>
+
+                            <Button
+                                as="link"
+                                to={`/${PATHS.COLLECTIONS}`}
+                                variant="tertiary"
+                                isFull
+                                className="u-mt-l u-hidden-from@tab"
+                            >
+                                Add more courses <Icon id="plus" />
+                            </Button>
                         </div>
                     </div>
                 ) : null}
-
-                <div className="o-grid__col o-grid__col--12 u-hidden-from@tab">
-                    <Button
-                        as="link"
-                        to={`/${PATHS.COLLECTIONS}`}
-                        variant="tertiary"
-                        isFull
-                        className="u-mt-l"
-                    >
-                        Add more courses <Icon id="plus" />
-                    </Button>
-                </div>
             </div>
         </Flourishes>
     );

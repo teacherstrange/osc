@@ -10,12 +10,7 @@ export const EmptyCartMessage = () => {
         <>
             <Content value={emptyCartMessage} />
 
-            <Button
-                as="link"
-                to={`/${PATHS.COLLECTIONS}`}
-                variant="secondary"
-                className="u-mt-m u-hidden-until@tab"
-            >
+            <Button as="link" to={`/${PATHS.COLLECTIONS}`} variant="secondary" className="u-mt-m">
                 Browse our courses
             </Button>
         </>
