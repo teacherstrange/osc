@@ -10,7 +10,7 @@ export const ErrorAlert = (props: ErrorAlertProps) => {
 
     // Log the error to the browser console
     for (const error of errors) {
-        console.error(error.data.errors);
+        console.error(error.data.errors ? error : error.data.errors);
     }
 
     return (

@@ -1,4 +1,4 @@
-import { useFetchers } from '@remix-run/react';
+import { useActionData, useFetchers } from '@remix-run/react';
 import { flattenConnection } from '@shopify/hydrogen';
 import { mediaQueries as mq } from 'osc-design-tokens';
 import {
@@ -26,6 +26,7 @@ import { fetcherHasError, fetcherIsPending } from '~/utils/storefront.helpers';
 
 export const CartLayout = () => {
     const cart = useCart();
+    const action = useActionData();
     const isGreaterThanTab = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
     const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState(false);
     // We need this useEffect to set the showOnTab state only when the window object exists
@@ -68,9 +69,13 @@ export const CartLayout = () => {
             </header>
 
             <div className="o-container o-grid u-pb-6xl">
-                {fetchersWithErrors.length > 0 ? (
+                {fetchersWithErrors.length > 0 || action?.errors.length > 0 ? (
                     <div className="o-grid__col o-grid__col--12 o-grid__col--10@tab o-grid__col--start-2@tab">
-                        <ErrorAlert errors={fetchersWithErrors} />
+                        <ErrorAlert
+                            errors={
+                                fetchersWithErrors.length > 0 ? fetchersWithErrors : action?.errors
+                            }
+                        />
                     </div>
                 ) : null}
 
