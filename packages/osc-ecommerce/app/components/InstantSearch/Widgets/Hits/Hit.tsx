@@ -31,6 +31,7 @@ type HitProps = {
 };
 
 export const Hit = (props: HitProps) => {
+    // TODO - Set up the sendEvent
     const { className, hit, sendEvent, view } = props;
 
     const [isActive, setIsActive] = useState(false);
@@ -38,6 +39,7 @@ export const Hit = (props: HitProps) => {
     const productVariants =
         hit.meta?.osc?.product_variants && JSON.parse(hit.meta?.osc?.product_variants.trim());
 
+    // We're removing the '/Study Pack' or '/Online' and creating a Set to get unique values only
     const uniqueProductVariants = [
         ...new Set<string>(productVariants?.map((variant: string) => variant.trim().split('/')[0])),
     ];
