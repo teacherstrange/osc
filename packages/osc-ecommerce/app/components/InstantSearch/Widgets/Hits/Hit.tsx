@@ -74,13 +74,15 @@ export const Hit = (props: HitProps) => {
                         />
                     )}
                     <CardTitle>
-                        <Highlight
-                            hit={hit}
-                            attribute={'title'}
-                            classNames={{
-                                highlighted: 'u-bg-color-primary u-color-tertiary',
-                            }}
-                        />
+                        <span className="c-instant-search__card-title">
+                            <Highlight
+                                hit={hit}
+                                attribute={'title'}
+                                classNames={{
+                                    highlighted: 'u-bg-color-primary u-color-tertiary',
+                                }}
+                            />
+                        </span>
                     </CardTitle>
                     <CardTitle as="h3" subtitle isSmall>
                         {/* TODO: USE FIELD IN ALGOLIA TO DETERMINE IF THIS IS A SINGLE OR PACKAGE COURSE */}
