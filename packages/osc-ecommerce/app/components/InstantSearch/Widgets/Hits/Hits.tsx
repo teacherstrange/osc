@@ -17,7 +17,11 @@ export const Hits = (props: UseHitsProps & HitProps) => {
         <>
             {hits.map((hit) => (
                 <Hit
-                    className={view === 'listview' ? 'o-grid__col--12' : 'o-grid__col--6'}
+                    className={
+                        view === 'listview'
+                            ? 'o-grid__col--12'
+                            : 'o-grid__col--6@tab o-grid__col--12'
+                    }
                     hit={hit as AlgoliaHit}
                     key={hit.id as string}
                     sendEvent={sendEvent}
