@@ -107,13 +107,12 @@ type SearchProps = {
     };
     hitsPerPage?: number;
     serverState?: InstantSearchServerState;
-    serverState2?: InstantSearchServerState;
     serverUrl?: string;
 };
 
 // I tried putting this in it's own file, but it causes the app to get stuck in a cycle of errors 🤷‍♂️
 const Search = (props: SearchProps) => {
-    const { env, hitsPerPage, serverState, serverUrl } = props;
+    const { env, hitsPerPage, serverState } = props;
 
     const searchClient = algoliasearch(env!.ALGOLIA_APP_ID, env!.ALGOLIA_API_KEY_SEARCH);
 
