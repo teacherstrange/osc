@@ -159,7 +159,8 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                                     quantity: !isAlreadyInCart ? 1 : 0,
                                 },
                             ]}
-                            isDisabled={transitionIsNotIdle}
+                            isDisabled={transitionIsNotIdle || isAlreadyInCart}
+                            label={isAlreadyInCart ? 'Already in cart' : 'Add to cart'}
                         />
                     ) : (
                         <></>
