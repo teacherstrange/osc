@@ -127,9 +127,10 @@ const Search = (props: SearchProps) => {
     useEffect(() => {
         if (isGreaterThanTab) {
             setNestedAccordion(false);
+            setView('listview');
         } else {
             setNestedAccordion(true);
-            setView('listview');
+            setView('gridview');
         }
     }, [isGreaterThanTab]);
 
