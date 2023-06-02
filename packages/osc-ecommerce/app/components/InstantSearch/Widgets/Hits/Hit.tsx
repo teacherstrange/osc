@@ -44,6 +44,45 @@ export const Hit = (props: HitProps) => {
         ...new Set<string>(productVariants?.map((variant: string) => variant.trim().split('/')[0])),
     ];
 
+    const WishListButton = (
+        <CardWishListButton
+            label="Save for later"
+            size="lg"
+            className={isActive ? 'is-active' : ''}
+            onClick={() => {
+                setIsActive(!isActive);
+            }}
+        />
+    );
+
+    const PriceTag = (
+        <CardPriceTag>
+            <>
+                {/* TODO: REPLACE THIS WITH ETIKA DATA */}
+                <p>
+                    <span className="u-text-bold">DATA FROM ETIKA</span>/month
+                </p>
+                <p>
+                    or from <span className="u-text-bold">{`£${hit.price} in full`}</span>
+                </p>
+            </>
+        </CardPriceTag>
+    );
+
+    const CTAButtons = (
+        <ButtonGroup>
+            <>{view === 'listview' && WishListButton}</>
+            <Button
+                as="link"
+                to="/courses/aat-level-3-diploma-in-accounting"
+                isFull={view === 'gridview' && true}
+            >
+                View course
+                <VisuallyHidden>{hit.title}</VisuallyHidden>
+            </Button>
+        </ButtonGroup>
+    );
+
     return (
         <CourseCard
             key={`search_${hit.id}`}
@@ -52,29 +91,7 @@ export const Hit = (props: HitProps) => {
         >
             <CardInner className={className}>
                 <CardHeader>
-                    {view === 'listview' ? (
-                        <CardPriceTag className="u-hidden-until@tab">
-                            <>
-                                {/* TODO: REPLACE THIS WITH ETIKA DATA */}
-                                <p>
-                                    <span className="u-text-bold">DATA FROM ETIKA</span>/month
-                                </p>
-                                <p>
-                                    or from{' '}
-                                    <span className="u-text-bold">{`£${hit.price} in full`}</span>
-                                </p>
-                            </>
-                        </CardPriceTag>
-                    ) : (
-                        <CardWishListButton
-                            label="Save for later"
-                            size="lg"
-                            className={isActive ? 'is-active' : ''}
-                            onClick={() => {
-                                setIsActive(!isActive);
-                            }}
-                        />
-                    )}
+                    {view === 'listview' ? PriceTag : WishListButton}
                     <CardTitle>
                         <span className="c-instant-search__card-title">
                             <Highlight
@@ -124,41 +141,11 @@ export const Hit = (props: HitProps) => {
                     </CardCallout>
 
                     {view === 'listview' ? (
-                        <ButtonGroup>
-                            <CardWishListButton
-                                label="Save for later"
-                                size="lg"
-                                className={isActive ? 'is-active' : ''}
-                                onClick={() => {
-                                    setIsActive(!isActive);
-                                }}
-                            />
-                            <Button as="link" to="/courses/aat-level-3-diploma-in-accounting">
-                                View course
-                                <VisuallyHidden>{hit.title}</VisuallyHidden>
-                            </Button>
-                        </ButtonGroup>
+                        CTAButtons
                     ) : (
                         <>
-                            <CardPriceTag>
-                                <p>
-                                    <span className="u-text-bold">From £23</span>/month
-                                </p>
-                                <p>
-                                    or from{' '}
-                                    <span className="u-text-bold">{`£${hit.price} in full`}</span>
-                                </p>
-                            </CardPriceTag>
-                            <ButtonGroup>
-                                <Button
-                                    as="link"
-                                    to="/courses/aat-level-3-diploma-in-accounting"
-                                    isFull
-                                >
-                                    View course
-                                    <VisuallyHidden>{hit.title}</VisuallyHidden>
-                                </Button>
-                            </ButtonGroup>
+                            {PriceTag}
+                            {CTAButtons}
                         </>
                     )}
                 </CardBody>
