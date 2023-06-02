@@ -12,7 +12,7 @@ import { LINE_ITEM_QUERY } from '~/queries/sanity/lineItemData';
 import { ADD_LINES_MUTATION, CART_QUERY, CREATE_CART_MUTATION } from '~/queries/shopify/cart';
 import type { SanityProduct, SanityProductExcerpt } from '~/types/sanity';
 import type { CartLineWithSanityData } from '~/types/shopify';
-import { createSanityProductID, extractIdFromGid } from './storefront.helpers';
+import { createSanityProductID, extractIdFromGid, isGiftVoucher } from './storefront.helpers';
 
 /* -------------------------------------------------------------------------------------------------
  * Insert Sanity data into line item
@@ -154,13 +154,33 @@ interface AddLines {
 export async function addLinesToCart(args: AddLines) {
     const { cartId, lines, storefront } = args;
 
+    const cart = await getCart({ storefront } as AppLoadContext, cartId);
+
+    // If the cart already has an item that matches the merchandiseId then return true
+    const hasExistingItem = cart?.lines.edges.some((line) => {
+        if (isGiftVoucher(line.node.merchandise)) return false;
+
+        return line.node.merchandise.id === lines[0].merchandiseId;
+    });
+
     const { cartLinesAdd } = await storefront.mutate<{
         cartLinesAdd: {
             cart: Cart;
             errors: CartUserError[];
         };
     }>(ADD_LINES_MUTATION, {
-        variables: { cartId, lines },
+        variables: {
+            cartId,
+            // Don't update the quantity if the cart already has an item that matches the merchandiseId
+            lines: hasExistingItem
+                ? [
+                      {
+                          ...lines[0],
+                          quantity: 0,
+                      },
+                  ]
+                : lines,
+        },
     });
 
     invariant(cartLinesAdd, 'No data returned from cartLinesAdd mutation');
