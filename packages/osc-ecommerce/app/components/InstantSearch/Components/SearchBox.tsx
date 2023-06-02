@@ -24,7 +24,7 @@ export const SearchBox = (props: UseSearchBoxProps) => {
     return (
         <form onSubmit={onSubmit}>
             <TextInput
-                icon={{ id: 'search', classNames: 't-font-m' }}
+                icon={{ id: 'search', className: 't-font-m' }}
                 className="c-input c-input__text c-input__text--quaternary t-font-l"
                 label="Search"
                 id="search"
