@@ -18,6 +18,8 @@ export const SearchBox = (props: UseSearchBoxProps) => {
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
+        // Nothing to submit as Algolia updates results on each keystroke.
+        // This is simply UX tweak so that when a user hits return it removes focus from text input
         ref.current?.blur();
     };
 
