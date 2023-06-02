@@ -1,4 +1,10 @@
-import { createSanityProductID, extractIdFromGid, stripMarks } from './storefront.helpers';
+import type { ProductVariant } from '@shopify/hydrogen/storefront-api-types';
+import {
+    createSanityProductID,
+    extractIdFromGid,
+    isGiftVoucher,
+    stripMarks,
+} from './storefront.helpers';
 
 describe('extractIdFromGid', () => {
     test('should return the id number from the Shopify id', () => {
@@ -30,5 +36,29 @@ describe('stripMarks', () => {
         };
 
         expect(stripMarks(portableText).children[0].marks).toHaveLength(0);
+    });
+});
+
+describe('isGiftVoucher', () => {
+    test('should return true if the product variant has a sku containing GV', () => {
+        const productVariant = {
+            id: 'gid://shopify/Product/12345',
+            title: 'Gift Voucher',
+            sku: 'GV123',
+        } as ProductVariant;
+
+        expect(isGiftVoucher(productVariant)).toBe(true);
+    });
+
+    test('should return true if the product variant has a product type of Gift Voucher', () => {
+        const productVariant = {
+            id: 'gid://shopify/Product/12345',
+            title: 'Gift Voucher',
+            product: {
+                productType: 'Gift Voucher',
+            },
+        } as ProductVariant;
+
+        expect(isGiftVoucher(productVariant)).toBe(true);
     });
 });
