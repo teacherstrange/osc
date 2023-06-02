@@ -54,7 +54,7 @@ export const RefinementSlider = (props: RangeSliderProps) => {
                 // Refines the range from Algolia
                 onValueCommit={(value: [number, number]) => refine(value)}
                 prefix={'£'}
-                setValue={setValue}
+                setExternalValue={setValue}
                 // This should initially set the value to the min and max range
                 value={value ? value : [range.min, range.max]}
             />

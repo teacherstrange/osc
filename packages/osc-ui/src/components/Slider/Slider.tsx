@@ -1,6 +1,6 @@
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
 import './slider.scss';
@@ -31,7 +31,7 @@ export interface SliderProps extends ComponentPropsWithRef<typeof SliderPrimitiv
     /**
      * A dispatch that can be used to set externally set the value
      */
-    setValue?: Dispatch<SetStateAction<number[]>>;
+    setExternalValue?: Dispatch<SetStateAction<number[]>>;
     /**
      * Sets the custom styles, e.g. "Secondary", "Tertiary"
      */
@@ -40,8 +40,10 @@ export interface SliderProps extends ComponentPropsWithRef<typeof SliderPrimitiv
 
 export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, SliderProps>(
     (props: SliderProps, forwardedRef) => {
-        const { className, name, prefix, setValue, variants, ...rest } = props;
-        const value = props.value || props.defaultValue;
+        const { className, name, prefix, setExternalValue, variants, ...rest } = props;
+        const [value, setValue] = useState<number[]>();
+
+        const sliderValues = value || props.value || props.defaultValue;
 
         const modifier = useModifier('c-slider', variants);
         const sliderClasses = classNames(`c-slider`, modifier, className);
@@ -51,19 +53,22 @@ export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, Slider
                 aria-label={name}
                 className={sliderClasses}
                 name={name}
-                onValueChange={(event) => setValue(event)}
+                onValueChange={(event) => {
+                    setValue(event);
+                    setExternalValue(event);
+                }}
                 ref={forwardedRef}
                 {...rest}
             >
                 <SliderPrimitive.Track className="c-slider__track">
                     <SliderPrimitive.Range className="c-slider__range" />
                 </SliderPrimitive.Track>
-                {value?.map((_, i) => (
+                {sliderValues?.map((_, i) => (
                     <SliderPrimitive.SliderThumb className="c-slider__thumb" key={i}>
                         <div className="c-slider__value-container">
                             <div className="c-slider__value">
                                 {prefix}
-                                {value[i]}
+                                {sliderValues[i]}
                                 <div className="c-slider__value--arrow"></div>
                             </div>
                         </div>
