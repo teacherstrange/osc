@@ -23,6 +23,7 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
     product {
       title
       handle
+      productType
     }
   }
 `;
