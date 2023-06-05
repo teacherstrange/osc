@@ -7,6 +7,7 @@ import type {
 import { Button, ButtonGroup, RadioGroup, RadioItem, classNames, useModifier } from 'osc-ui';
 import type { ElementRef, FormEvent } from 'react';
 import { forwardRef, useMemo } from 'react';
+import { AlreadyInCartMessage } from '~/components/Cart/AlreadyInCartMessage';
 import { Price } from '~/components/Price/Price';
 import { useCart } from '~/hooks/useCart';
 import { isGiftVoucher } from '~/utils/storefront.helpers';
@@ -161,7 +162,7 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                                 },
                             ]}
                             isDisabled={transitionIsNotIdle || isAlreadyInCart}
-                            label={isAlreadyInCart ? 'Already in cart' : 'Add to cart'}
+                            label={isAlreadyInCart ? 'Added to cart' : 'Add to cart'}
                         />
                     ) : (
                         <></>
@@ -177,6 +178,8 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                         Request a callback
                     </Button>
                 </ButtonGroup>
+
+                {isAlreadyInCart ? <AlreadyInCartMessage /> : null}
             </div>
         );
     }
