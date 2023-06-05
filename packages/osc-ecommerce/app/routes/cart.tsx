@@ -164,17 +164,31 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
             const productId = String(formData.get('productId'));
             const selectedOptions = JSON.parse(String(formData.get('selectedOptions')));
 
-            invariant(updateLinesIds.length, 'No lines to update');
+            try {
+                invariant(updateLinesIds.length, 'No lines to update');
 
-            result = await updateLinesInCart({
-                cartId,
-                linesIds: updateLinesIds,
-                productId,
-                selectedOptions,
-                storefront,
-            });
+                result = await updateLinesInCart({
+                    cartId,
+                    linesIds: updateLinesIds,
+                    productId,
+                    selectedOptions,
+                    storefront,
+                });
 
-            cartId = result.cart.id;
+                cartId = result.cart.id;
+            } catch (error) {
+                console.error(error);
+
+                result = {
+                    cart: {} as CartType,
+                    errors: [
+                        {
+                            code: 'INVALID',
+                            message: 'No lines to update',
+                        },
+                    ],
+                };
+            }
 
             break;
 
