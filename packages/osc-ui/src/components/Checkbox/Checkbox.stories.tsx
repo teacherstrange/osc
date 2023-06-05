@@ -93,6 +93,7 @@ const ValidationTemplate: Story = () => {
 export const Primary = Template.bind({});
 export const Secondary = Template.bind({});
 export const GroupLabel = Template.bind({});
+export const S = Template.bind({});
 export const XL = Template.bind({});
 
 Primary.args = {
@@ -208,6 +209,49 @@ Validation.parameters = {
     },
 };
 
+S.args = {
+    variations: [
+        {
+            id: 'call-1',
+            name: 'contact',
+            state: 'default',
+            value: 'Call me as soon as possible',
+            size: 's',
+        },
+        {
+            defaultChecked: true,
+            id: 'call-2',
+            name: 'contact',
+            state: 'selectedOption',
+            value: 'Call me as soon as possible',
+            size: 's',
+        },
+        {
+            id: 'call-3',
+            name: 'contact',
+            ref: true,
+            state: 'hasFocus',
+            value: 'Call me as soon as possible',
+            size: 's',
+        },
+        {
+            id: 'call-4',
+            name: 'contact',
+            required: true,
+            state: 'hasValidation',
+            value: 'Call me as soon as possible',
+            size: 's',
+        },
+        {
+            disabled: true,
+            id: 'call-5',
+            name: 'contact',
+            state: 'isDisabled',
+            value: 'Call me as soon as possible',
+            size: 's',
+        },
+    ],
+};
 XL.args = {
     variations: [
         {
