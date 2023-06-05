@@ -1,5 +1,6 @@
 import { useActionData, useFetchers } from '@remix-run/react';
 import { flattenConnection } from '@shopify/hydrogen';
+import type { CartLine } from '@shopify/hydrogen/storefront-api-types';
 import { mediaQueries as mq } from 'osc-design-tokens';
 import {
     Button,
@@ -22,7 +23,9 @@ import { ErrorAlert } from '~/components/ErrorAlert/ErrorAlert';
 import { PATHS } from '~/constants';
 import { useCart } from '~/hooks/useCart';
 import { CartAction } from '~/types/shopify';
+import { getDifferenceBetweenArrays } from '~/utils/getDifferenceBetweenArrays';
 import { fetcherHasError, fetcherIsPending } from '~/utils/storefront.helpers';
+import { RemovedFromCardMessage } from './RemovedFromCartMessage';
 
 export const CartLayout = () => {
     const cart = useCart();
@@ -57,6 +60,14 @@ export const CartLayout = () => {
     const fetchersWithErrors = allFetchers.filter((f) => fetcherHasError(f));
 
     const cartLines = linesCount && cart?.lines ? flattenConnection(cart?.lines) : [];
+    // Store the cart lines in state so we can compare them to the cart lines in the cart object when the component updates
+    const [cartLineItems] = useState(cartLines);
+    // Compare the cart lines in state to the cart lines in the cart object so we can determine which lines were removed
+    const removedItems = getDifferenceBetweenArrays(
+        cartLineItems as CartLine[],
+        cartLines as CartLine[],
+        'id'
+    );
 
     return (
         <Flourishes color="gradient-senary" pattern={flourishPrimary} variant="primary">
@@ -80,6 +91,14 @@ export const CartLayout = () => {
                 ) : null}
 
                 <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--start-2@tab">
+                    {removedItems && removedItems.length > 0 ? (
+                        <ul>
+                            {removedItems.map((line) => (
+                                <RemovedFromCardMessage line={line} key={line.id} />
+                            ))}
+                        </ul>
+                    ) : null}
+
                     {!linesCount ? <EmptyCartMessage /> : null}
 
                     {linesCount && showOnGreaterThanTab ? (
