@@ -96,7 +96,8 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
          */
         const isAlreadyInCart = cart?.lines.edges.some(
             (line) =>
-                !isGiftVoucher(selectedVariant) && line.node.merchandise?.id === selectedVariant?.id
+                !isGiftVoucher(selectedVariant) &&
+                line.node.merchandise?.product?.id === selectedVariant?.product?.id
         );
 
         return (
