@@ -198,24 +198,38 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
             break;
 
         case CartAction.UPDATE_DISCOUNT:
-            invariant(cartId, 'Missing cartId');
+            try {
+                invariant(cartId, 'Missing cartId');
 
-            const applicableDiscountCodes = formData.get('applicableDiscountCodes')
-                ? JSON.parse(String(formData.get('applicableDiscountCodes')))
-                : ('' as string);
+                const applicableDiscountCodes = formData.get('applicableDiscountCodes')
+                    ? JSON.parse(String(formData.get('applicableDiscountCodes')))
+                    : ('' as string);
 
-            const formDiscountCode = formData.get('discountCode');
-            const discountCodes = ([...applicableDiscountCodes, formDiscountCode] || [
-                '',
-            ]) as string[];
+                const formDiscountCode = formData.get('discountCode');
+                const discountCodes = ([...applicableDiscountCodes, formDiscountCode] || [
+                    '',
+                ]) as string[];
 
-            result = await updateCartDiscounts({
-                cartId,
-                discountCodes,
-                storefront,
-            });
+                result = await updateCartDiscounts({
+                    cartId,
+                    discountCodes,
+                    storefront,
+                });
 
-            cartId = result.cart.id;
+                cartId = result.cart.id;
+            } catch (e) {
+                console.error(e);
+
+                result = {
+                    cart: {} as CartType,
+                    errors: [
+                        {
+                            code: 'INVALID',
+                            message: 'Missing cartId',
+                        },
+                    ],
+                };
+            }
 
             break;
 
