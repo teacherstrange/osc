@@ -57,14 +57,11 @@ export const links: LinksFunction = () => {
     ];
 };
 
-const HITS_PER_PAGE = 20;
-
 export const loader: LoaderFunction = async ({ request }) => {
     const serverUrl = request.url;
 
     const serverState = await getServerState(
         <Search
-            hitsPerPage={HITS_PER_PAGE}
             env={{
                 ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID!,
                 ALGOLIA_API_KEY_SEARCH: process.env.ALGOLIA_API_KEY_SEARCH!,
@@ -73,6 +70,7 @@ export const loader: LoaderFunction = async ({ request }) => {
                 ALGOLIA_PRIMARY_COLLECTIONS_INDEX: process.env.ALGOLIA_PRIMARY_COLLECTIONS_INDEX!,
                 ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID:
                     process.env.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID!,
+                ALGOLIA_HITS_PER_PAGE: +process.env.ALGOLIA_HITS_PER_PAGE!,
             }}
             serverUrl={serverUrl}
         />,
@@ -91,6 +89,7 @@ export const loader: LoaderFunction = async ({ request }) => {
             ALGOLIA_PRIMARY_PRODUCTS_INDEX: process.env.ALGOLIA_PRIMARY_PRODUCTS_INDEX!,
             ALGOLIA_PRIMARY_COLLECTIONS_INDEX: process.env.ALGOLIA_PRIMARY_COLLECTIONS_INDEX,
             ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID: process.env.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID!,
+            ALGOLIA_HITS_PER_PAGE: process.env.ALGOLIA_HITS_PER_PAGE!,
         },
     });
 };
@@ -104,6 +103,7 @@ type SearchProps = {
         ALGOLIA_PRIMARY_COLLECTIONS_INDEX?: string;
         ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID?: string;
         ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS?: string;
+        ALGOLIA_HITS_PER_PAGE?: number;
     };
     hitsPerPage?: number;
     serverState?: InstantSearchServerState;
@@ -112,7 +112,7 @@ type SearchProps = {
 
 // I tried putting this in it's own file, but it causes the app to get stuck in a cycle of errors 🤷‍♂️
 const Search = (props: SearchProps) => {
-    const { env, hitsPerPage, serverState } = props;
+    const { env, serverState } = props;
 
     const searchClient = algoliasearch(env!.ALGOLIA_APP_ID, env!.ALGOLIA_API_KEY_SEARCH);
 
@@ -228,7 +228,7 @@ const Search = (props: SearchProps) => {
                                 </Index>
                             </div>
                             <div className="o-grid o-grid__col--12">
-                                <Configure hitsPerPage={hitsPerPage} />
+                                <Configure hitsPerPage={env!.ALGOLIA_HITS_PER_PAGE!} />
                                 <NoResultsBoundary fallback={<NoResults />}>
                                     <Hits view={view} />
                                 </NoResultsBoundary>
@@ -244,12 +244,5 @@ const Search = (props: SearchProps) => {
 export default function SearchPage() {
     const { ENV, serverState, serverUrl } = useLoaderData();
 
-    return (
-        <Search
-            env={ENV}
-            hitsPerPage={HITS_PER_PAGE}
-            serverState={serverState}
-            serverUrl={serverUrl}
-        />
-    );
+    return <Search env={ENV} serverState={serverState} serverUrl={serverUrl} />;
 }
