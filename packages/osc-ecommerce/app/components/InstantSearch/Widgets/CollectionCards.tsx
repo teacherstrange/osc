@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useHits } from 'react-instantsearch-hooks-web';
 import type { AlgoliaHit } from '../types';
+import { PATHS } from '~/constants';
 
 // TODO - This info eventually needs to come from Algolia Insights
 const COLLECTION_HIGHLIGHT_ONE = 'A levels';
@@ -23,15 +24,17 @@ interface CardProps {
     body?: string;
     className?: string;
     course_count?: number;
+    handle?: string;
     image?: { secure_url: string; alt: string; width: number; height: number };
     size?: 'sm' | 'md' | 'lg';
     title?: string;
 }
 
 const Card = (props: CardProps) => {
-    const { body, className, course_count, image, size, title } = props;
+    const { body, className, course_count, handle, image, size, title } = props;
+
     return (
-        <OscCollectionCard className={className} size={size}>
+        <OscCollectionCard className={className} size={size} hasShadow>
             {image ? (
                 <CardImage>
                     <Image
@@ -55,7 +58,7 @@ const Card = (props: CardProps) => {
 
                 <CardFooter>
                     <span className="u-text-bold">{course_count} Courses</span>
-                    <Button variant="quaternary">
+                    <Button variant="quaternary" as="link" to={`/${PATHS.COLLECTIONS}/${handle}`}>
                         Find our more
                         <Icon id="chevron-right" />
                     </Button>
@@ -94,6 +97,7 @@ export const CollectionCards = (props: CollectionCardsProps) => {
                     }
                     className={'o-grid__col--12 o-grid__col--6@mob-lrg'}
                     course_count={collection.products_count as number}
+                    handle={collection.handle as string}
                     key={i}
                     // TODO - To come from Sanity
                     image={{
