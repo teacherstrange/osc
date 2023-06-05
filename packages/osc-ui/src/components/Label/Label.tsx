@@ -13,7 +13,7 @@ export interface Props {
     name: string;
     required?: boolean;
     variants?: string[];
-    size?: 'm' | 'xl';
+    size?: 's' | 'm' | 'xl';
     /**
      * Sets the label to use the secondary colour
      * @default false

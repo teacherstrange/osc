@@ -1,6 +1,7 @@
 /* stylelint-disable selector-class-pattern */
 @use "sass:math";
 @use "../../styles/settings" as *;
+@use "../../styles/tools" as *;
 /* stylelint-disable plugin/selector-bem-pattern */
 
 @layer components {
@@ -18,6 +19,12 @@
 
         &--dark {
             color: var(--color-secondary);
+        }
+
+        &--s {
+            @include mq($mq-desk) {
+                max-width: 19ch;
+            }
         }
 
         &--m {
