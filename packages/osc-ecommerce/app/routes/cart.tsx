@@ -157,23 +157,6 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
 
             break;
 
-        case CartAction.REMOVE_FROM_CART:
-            const lineIds = formData.get('linesIds')
-                ? (JSON.parse(String(formData.get('linesIds'))) as CartType['id'][])
-                : ([] as CartType['id'][]);
-
-            invariant(lineIds.length, 'No lines to remove');
-
-            result = await removeLinesFromCart({
-                cartId,
-                lineIds,
-                storefront,
-            });
-
-            cartId = result.cart.id;
-
-            break;
-
         case CartAction.UPDATE_CART:
             const updateLinesIds = formData.get('linesIds')
                 ? (JSON.parse(String(formData.get('linesIds'))) as CartType['id'][])
