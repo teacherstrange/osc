@@ -1,6 +1,12 @@
 import type { User, UserAvatar, UserRole } from '@prisma/client';
 import type { CrmTokensAPI, LmsTokensAPI, UserRolesAPI } from '.';
-import type { createUserInput, getUsersArgs, loginArgsInput, createUserSetupInput, completeRegistration } from './arguments';
+import type {
+    createUserInput,
+    getUsersArgs,
+    loginArgsInput,
+    createUserSetupInput,
+    completeRegistration,
+} from './arguments';
 import type { PermissionsProps } from './interfaces';
 
 export type CreateUserFn = (input: createUserInput) => Promise<User | Error>;
@@ -18,7 +24,7 @@ export type RefreshAccessFn = (refreshToken: string) => Promise<{ accessToken: s
 export type AccessTokenFn = (userId: number) => Promise<string>;
 export type RefreshTokenFn = (userId: number) => Promise<string>;
 export type MagicKeyTokenFn = (userId: number) => Promise<string>;
-export type VerifyFn = (magicKeyToken: string) => Promise<number | 'Fail'>;
+export type VerifyFn = (magicKeyToken: string) => Promise<number | false>;
 export type VerifyLinkFn = (magicKeyToken: string) => Promise<User | Error | null>;
 
 export type UserProfileFn = (userId: number) => Promise<{
@@ -38,4 +44,3 @@ export type UserAvatarFn = (userId: number) => Promise<UserAvatar | null>;
 export type CrmTokensFn = (userId: number) => Promise<CrmTokensAPI>;
 
 export type LmsTokensFn = (userId: number) => Promise<LmsTokensAPI>;
-

@@ -2,33 +2,39 @@ import { PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql/error';
 import jwt from 'jsonwebtoken';
 import { env } from '~/types/environment';
-import type { AccessTokenFn, RefreshAccessFn, RefreshTokenFn, MagicKeyTokenFn, VerifyFn } from '~/types/functions';
+import type {
+    AccessTokenFn,
+    RefreshAccessFn,
+    RefreshTokenFn,
+    MagicKeyTokenFn,
+    VerifyFn,
+} from '~/types/functions';
 import type { RefreshToken, MagicToken } from '~/types/interfaces';
 
 const prisma = new PrismaClient();
 
 export const magicKey: MagicKeyTokenFn = async (userId) => {
     const payload = {
-        user: { id: userId }
+        user: { id: userId },
     };
     // Magic key token set to expire after 3h
     return jwt.sign(payload, env.MAGIC_SECRET!, {
         algorithm: 'HS256',
         audience: env.JWT_AUDIENCE,
-        expiresIn: 10800
+        expiresIn: 10800,
     });
-}
+};
 
 export const access: AccessTokenFn = async (userId) => {
     const payload = {
-        user: { id: userId }
+        user: { id: userId },
     };
 
     // Create accessToken - this is what will be used to access restricted areas
     return jwt.sign(payload, env.JWT_SECRET!, {
         algorithm: 'HS256',
         audience: env.JWT_AUDIENCE,
-        expiresIn: Number(env.JWT_DURATION!)
+        expiresIn: Number(env.JWT_DURATION!),
     });
 };
 
@@ -41,7 +47,7 @@ export const refresh: RefreshTokenFn = async (userId) => {
     const refreshToken = jwt.sign(payload, env.JWT_SECRET!, {
         algorithm: 'HS256',
         audience: env.JWT_AUDIENCE,
-        expiresIn: Number(env.JWT_REFRESH_DURATION!)
+        expiresIn: Number(env.JWT_REFRESH_DURATION!),
     });
 
     // Store refreshToken
@@ -49,8 +55,8 @@ export const refresh: RefreshTokenFn = async (userId) => {
         data: {
             userId: userId,
             token: refreshToken,
-            expires: new Date(expires).toJSON()
-        }
+            expires: new Date(expires).toJSON(),
+        },
     });
 
     return refreshToken;
@@ -60,7 +66,7 @@ export const refreshAccess: RefreshAccessFn = async (refreshToken) => {
     try {
         const payload = jwt.verify(refreshToken, env.JWT_SECRET!, {
             algorithms: ['HS256'],
-            audience: env.JWT_AUDIENCE
+            audience: env.JWT_AUDIENCE,
         }) as RefreshToken;
 
         const { user } = payload;
@@ -69,15 +75,15 @@ export const refreshAccess: RefreshAccessFn = async (refreshToken) => {
             where: {
                 userId: user.id,
                 token: refreshToken,
-                expires: { gt: new Date(Date.now()).toJSON() }
-            }
+                expires: { gt: new Date(Date.now()).toJSON() },
+            },
         });
 
         if (!tokenValid) {
             throw new GraphQLError('Invalid token', {
                 extensions: {
-                    code: 'BAD_USER_INPUT'
-                }
+                    code: 'BAD_USER_INPUT',
+                },
             });
         }
 
@@ -91,16 +97,15 @@ export const verifyToken: VerifyFn = async (magicKeyToken) => {
     try {
         const decoded = jwt.verify(magicKeyToken, env.MAGIC_SECRET!, {
             algorithms: ['HS256'],
-            audience: env.JWT_AUDIENCE
-        }) as MagicToken
+            audience: env.JWT_AUDIENCE,
+        }) as MagicToken;
 
         if (decoded == undefined) {
-            return 'Fail';
+            return false;
         }
         const { user } = decoded;
         return user.id;
-
     } catch (error) {
-        return 'Fail';
+        return false;
     }
-}
+};

@@ -2,31 +2,35 @@ import { PrismaClient } from '@prisma/client';
 import { Client } from '@hubspot/api-client';
 import { v4 as uuidv4 } from 'uuid';
 
-import type { GetEmailData, GetUserByEmailFn, GetUserByIdFn, GetRoleByIdFn, GetRoleByTitleFn } from './types';
+import type {
+    GetEmailData,
+    GetUserByEmailFn,
+    GetUserByIdFn,
+    GetRoleByIdFn,
+    GetRoleByTitleFn,
+    GetRegEmailData,
+} from './types';
 export * from './types';
 
 const prisma = new PrismaClient();
 
 export const hubspotClient = () => {
     return new Client({
-        accessToken: "pat-eu1-851eec57-2705-402e-8a9c-bc407aa77dc2",
+        accessToken: 'pat-eu1-851eec57-2705-402e-8a9c-bc407aa77dc2',
     });
 };
 
 export const sendEmail: GetEmailData = async (emailData) => {
     const hubspot = hubspotClient();
-    const message = {
-        "to": emailData.to,
-        "sendId": uuidv4(),
-    }
-    const customProperties = {
-        "name": emailData.to,
-        "url": emailData.url
-    }
-    // To Do - Format cod eto allow email function to be reusable 
-    const PublicSingleSendRequestEgg = { emailId: emailData.emailId, message, customProperties };
+    const PublicSingleSendRequestEgg = {
+        emailId: emailData.emailId,
+        message: emailData.message,
+        customProperties: emailData.customProperties,
+    };
     try {
-        const apiResponse = await hubspot.marketing.transactional.singleSendApi.sendEmail(PublicSingleSendRequestEgg);
+        const apiResponse = await hubspot.marketing.transactional.singleSendApi.sendEmail(
+            PublicSingleSendRequestEgg
+        );
         console.log(JSON.stringify(apiResponse, null, 2));
         return 'Email request sent to HubSpot';
     } catch (error: unknown) {
@@ -35,7 +39,24 @@ export const sendEmail: GetEmailData = async (emailData) => {
         if (error instanceof Error) message = error.message;
         throw new Error(message);
     }
-}
+};
+
+export const sendRegistrationEmail: GetRegEmailData = async (regEmailData) => {
+    const message = {
+        to: regEmailData.to,
+        sendId: uuidv4(),
+    };
+    const customProperties = {
+        name: regEmailData.to,
+        url: regEmailData.url,
+    };
+    const emailData = {
+        emailId: 69285064430,
+        message: message,
+        customProperties: customProperties,
+    };
+    return await sendEmail(emailData);
+};
 
 export const getUserById: GetUserByIdFn = async (id) => {
     return await prisma.user.findUnique({
@@ -50,17 +71,17 @@ export const getRoleById: GetRoleByIdFn = async (id) => {
     return await prisma.role.findUnique({
         where: {
             id,
-        }
-    })
-}
+        },
+    });
+};
 
 export const getRoleByTitle: GetRoleByTitleFn = async (title) => {
     return await prisma.role.findFirst({
         where: {
-            title
-        }
-    })
-}
+            title,
+        },
+    });
+};
 
 export const getUserByEmail: GetUserByEmailFn = async (email) => {
     return await prisma.user.findUnique({

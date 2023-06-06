@@ -1,5 +1,13 @@
 import { PrismaClient } from '@prisma/client';
-import { getUserByEmail, getUserById, wait, sendEmail, getCourseById, getRoleById, getRoleByTitle } from 'osc-api';
+import {
+    getUserByEmail,
+    getUserById,
+    wait,
+    sendRegistrationEmail,
+    getCourseById,
+    getRoleById,
+    getRoleByTitle,
+} from 'osc-api';
 import type {
     CreateUserFn,
     CrmTokensFn,
@@ -15,8 +23,7 @@ import type {
     CreateUserSetupFn,
     VerifyLinkFn,
     assignRoleFn,
-    CompleteRegistrationFn
-
+    CompleteRegistrationFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import * as password from '~/utils/password';
@@ -72,8 +79,9 @@ export const createSetup: CreateUserSetupFn = async (input) => {
     const userToken = await token.magicKey(userCreate.id);
     const url = `https://openstudycollege.com/signin?token = ${userToken}`;
     // Send email via hubspot api
-    const emailData = { 'to': input.email, 'emailId': 69285064430, 'url': url }
-    await sendEmail(emailData);
+    const emailData = { to: input.email, url: url };
+    await sendRegistrationEmail(emailData);
+
     if (input.courses) {
         for (var i = 0; i < input.courses.length; i++) {
             // validation check to make sure course is listed
@@ -82,17 +90,16 @@ export const createSetup: CreateUserSetupFn = async (input) => {
                 await prisma.userCourseInterest.create({
                     data: {
                         userId: userCreate.id,
-                        courseId: (input.courses[i])
-                    }
-                })
+                        courseId: input.courses[i],
+                    },
+                });
             }
         }
     }
     return userCreate;
-}
+};
 
-export const assignRole: assignRoleFn = async (userId, role) => {
-
+export const assignRole: assignRoleFn = async (userId, roleId) => {
     // Check if user exists
     const existingUser = await getUserById(userId);
     if (!existingUser) {
@@ -100,7 +107,7 @@ export const assignRole: assignRoleFn = async (userId, role) => {
     }
 
     // fetch user role
-    const userRole = await getRoleById(role);
+    const userRole = await getRoleById(roleId);
     if (!userRole) {
         return new Error('Role does not exist');
     }
@@ -108,29 +115,27 @@ export const assignRole: assignRoleFn = async (userId, role) => {
     return await prisma.userRole.create({
         data: {
             userId: userId,
-            roleId: role,
-            createdBy: userId
-        }
-    })
-
-}
+            roleId: roleId,
+            createdBy: userId,
+        },
+    });
+};
 
 export const verifyLink: VerifyLinkFn = async (magicKeyToken) => {
     // Verfiy the incoming token
     const tokenCheck = await token.verifyToken(magicKeyToken);
     // Get user details for pre pop
-    if (tokenCheck == 'Fail') {
-        return new Error('No valid login link')
+    if (!tokenCheck) {
+        return new Error('No valid login link');
     }
     const userDet = await get(tokenCheck);
     return userDet;
-
-}
+};
 
 export const completeRegistration: CompleteRegistrationFn = async (input) => {
     const tokenCheck = await token.verifyToken(input.magicKey);
-    if (tokenCheck == 'Fail') {
-        return new Error('No valid login link')
+    if (!tokenCheck) {
+        return new Error('No valid login link');
     }
     const user = await getUserByEmail(input.email);
 
@@ -145,10 +150,10 @@ export const completeRegistration: CompleteRegistrationFn = async (input) => {
             id: user.id,
         },
         data: {
-            password: hashedPassword
-        }
-    })
-}
+            password: hashedPassword,
+        },
+    });
+};
 
 export const login: LoginFn = async (input) => {
     // Find matching user
