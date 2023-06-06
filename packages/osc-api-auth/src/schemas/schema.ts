@@ -128,7 +128,7 @@ export const typeDefs = gql`
         login(input: loginInput!): AuthTokens
         refreshAccess(refreshToken: String!): refreshAccess
         createUserSetup(input: createUserSetupInput!): User
-        magicKeyRequest(magicKeyToken: String!): User
+        validateMagicToken(magicKeyToken: String!): User
         completeRegistration(input: completeRegistration!): User
     }
 `;

@@ -18,8 +18,6 @@ export const getRoleById: GetRoleByIdFn = async (id) => {
     return await prisma.role.findUnique({
         where: {
             id,
-        },
-    });
 };
 
 export const getRoleByTitle: GetRoleByTitleFn = async (title) => {
@@ -29,7 +27,6 @@ export const getRoleByTitle: GetRoleByTitleFn = async (title) => {
         },
     });
 };
-
 export const getRoleByTitle: GetRoleByTitleFn = async (title) => {
     return await prisma.role.findFirst({
         where: {
