@@ -41,6 +41,8 @@ import { SortBy } from '~/components/InstantSearch/Widgets/Refinements/SortBy';
 import { REFINEMENT_DATA, SORTING_INDEXES, VIEW_OPTIONS } from '~/components/InstantSearch/data';
 import oscUiInstantSearchStyles from '~/components/InstantSearch/instant-search.css';
 import { getRefinementWidget } from '~/components/InstantSearch/utils/getRefinementWidget';
+import searchRouting from '~/components/InstantSearch/utils/search-routing';
+import type { UiState } from 'instantsearch.js';
 
 export const links: LinksFunction = () => {
     return [
@@ -100,21 +102,21 @@ type SearchProps = {
         ALGOLIA_APP_ID: string;
         ALGOLIA_API_KEY_SEARCH: string;
         ALGOLIA_API_KEY_ADMIN?: string;
-        ALGOLIA_PRIMARY_PRODUCTS_INDEX?: string;
+        ALGOLIA_PRIMARY_PRODUCTS_INDEX: string;
         ALGOLIA_PRIMARY_COLLECTIONS_INDEX?: string;
-        ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID?: string;
+        ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID: string;
         ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS?: string;
         ALGOLIA_HITS_PER_PAGE?: number;
         SANITY_STUDIO_API_TOKEN?: string;
     };
     hitsPerPage?: number;
     serverState?: InstantSearchServerState;
-    serverUrl?: string;
+    serverUrl: string;
 };
 
 // I tried putting this in it's own file, but it causes the app to get stuck in a cycle of errors 🤷‍♂️
 const Search = (props: SearchProps) => {
-    const { env, serverState } = props;
+    const { env, serverState, serverUrl } = props;
 
     const searchClient = algoliasearch(env!.ALGOLIA_APP_ID, env!.ALGOLIA_API_KEY_SEARCH);
 
@@ -141,6 +143,42 @@ const Search = (props: SearchProps) => {
                 <InstantSearch
                     searchClient={searchClient}
                     indexName={env!.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID}
+                    routing={{
+                        router: searchRouting.router(serverUrl),
+                        stateMapping: {
+                            stateToRoute(uiState) {
+                                const indexUiState =
+                                    uiState[env!.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID];
+                                return {
+                                    award: indexUiState.refinementList?.['meta.osc.award'],
+                                    awarding_body:
+                                        indexUiState.refinementList?.['meta.osc.awarding_body'],
+                                    price: indexUiState.range?.price,
+                                    study_method:
+                                        indexUiState.refinementList?.['options.study-method'],
+                                    query: indexUiState.query,
+                                    sortBy: indexUiState.sortBy,
+                                } as UiState;
+                            },
+                            routeToState(routeState) {
+                                const result = {
+                                    // eslint-disable-next-line camelcase
+                                    [env!.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID]: {
+                                        query: routeState.query,
+                                        refinementList: {
+                                            'meta.osc.award': routeState.award,
+                                            'meta.osc.awarding_body': routeState.awarding_body,
+                                            'options.study-method': routeState.study_method,
+                                        },
+                                        range: { price: (routeState.price as number[]).join(':') },
+                                        sortBy: routeState.sortBy,
+                                    } as UiState,
+                                };
+
+                                return result;
+                            },
+                        },
+                    }}
                 >
                     <div
                         className={`${

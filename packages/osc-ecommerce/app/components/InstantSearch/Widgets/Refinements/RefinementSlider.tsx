@@ -25,7 +25,8 @@ interface RangeSliderProps extends UseRangeSliderProps {
 export const RefinementSlider = (props: RangeSliderProps) => {
     const { accordionItem = false, accordionValue, prefix, title } = props;
     // TODO: send range slider event
-    const { range, refine } = useRangeSlider(props);
+    const { range, refine, start } = useRangeSlider(props);
+
     const [minValue, setMinValue] = useState<number>();
     const [maxValue, setMaxValue] = useState<number>();
     const [value, setValue] = useState<number[]>([]);
@@ -41,6 +42,31 @@ export const RefinementSlider = (props: RangeSliderProps) => {
         setMaxValue(range?.max);
         setValue([range?.min, range?.max]);
     }, [range, minValue, maxValue]);
+
+    useEffect(() => {
+        if (typeof range?.min !== 'number' || typeof range?.max !== 'number') return;
+
+        // Check whether numbers are finite (the defaults are '-Infinity/Infinity' respectively)
+        const START = Number.isFinite(start[0]) && start[0];
+        const END = Number.isFinite(start[1]) && start[1];
+
+        // If END is defined but larger than the max range then set range max.
+        if (END && (END as number) > range.max) {
+            return setValue([START || range.min, range.max]);
+        }
+
+        // Set value in accordance to which values have been set
+        if (START && !END) {
+            return setValue([START, range.max]);
+        }
+        if (!START && END) {
+            return setValue([range.min, END]);
+        }
+        if (START && END) {
+            return setValue([START, END]);
+        }
+        setValue([range?.min, range?.max]);
+    }, [range, start]);
 
     if (typeof range?.min !== 'number' || typeof range?.max !== 'number') return null;
 
