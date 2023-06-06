@@ -23,7 +23,6 @@ export const getRefinementWidget = (refinement: RefinementData, index: number) =
                     accordionValue={refinement?.accordionValue}
                     attribute={refinement.attribute}
                     prefix={refinement.prefix}
-                    start={refinement.start}
                     title={refinement.title}
                 />
             );

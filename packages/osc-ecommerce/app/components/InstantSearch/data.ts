@@ -41,7 +41,6 @@ export const REFINEMENT_DATA: RefinementData[] = [
         accordionValue: 'price',
         attribute: 'price',
         prefix: '£',
-        start: [100, 200],
         type: 'slider',
         title: 'Price',
     },
