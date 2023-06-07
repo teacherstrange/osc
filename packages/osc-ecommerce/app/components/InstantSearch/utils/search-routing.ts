@@ -1,6 +1,7 @@
 import { history } from 'instantsearch.js/es/lib/routers';
 import type { UiState } from 'instantsearch.js';
 import { SORTING_INDEXES } from '../data';
+import type QueryString from 'qs';
 
 interface QueryParameters {
     award: string[];
@@ -83,19 +84,19 @@ const router = (serverUrl: string) => {
                 study_method = [],
             } = qsModule.parse(location.search.slice(1));
 
+            /**
+             * Ensures return value is an array
+             */
+            const asArray = (
+                value: string | string[] | QueryString.ParsedQs | QueryString.ParsedQs[]
+            ) =>
+                Array.isArray(value) ? (value as string[]) : ([value].filter(Boolean) as string[]);
+
             // `qs` does not return an array when there's a single value.
-            const allAwards = Array.isArray(award)
-                ? (award as string[])
-                : ([award].filter(Boolean) as string[]);
-            const awardingBodies = Array.isArray(awarding_body)
-                ? (awarding_body as string[])
-                : ([awarding_body].filter(Boolean) as string[]);
-            const studyMethods = Array.isArray(study_method)
-                ? (study_method as string[])
-                : ([study_method].filter(Boolean) as string[]);
-            const prices = Array.isArray(price)
-                ? (price as string[])
-                : ([price].filter(Boolean) as string[]);
+            const allAwards = asArray(award);
+            const awardingBodies = asArray(awarding_body);
+            const studyMethods = asArray(study_method);
+            const prices = asArray(price);
 
             const res = {
                 award: allAwards.map(decodeURIComponent),
