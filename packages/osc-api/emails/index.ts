@@ -37,7 +37,7 @@ export const sendRegistrationEmail: GetRegEmailData = async (regEmailData) => {
         sendId: uuidv4(),
     };
     const customProperties = {
-        name: regEmailData.to,
+        name: regEmailData.name,
         url: regEmailData.url,
     };
     const emailData = {

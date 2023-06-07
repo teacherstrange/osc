@@ -1,6 +1,7 @@
 type regEmailData = {
     to: string;
     url: string;
+    name: string;
 };
 
 type message = {
