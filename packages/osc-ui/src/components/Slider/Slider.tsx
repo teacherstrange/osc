@@ -55,7 +55,7 @@ export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, Slider
                 name={name}
                 onValueChange={(event) => {
                     setValue(event);
-                    setExternalValue(event);
+                    setExternalValue && setExternalValue(event);
                 }}
                 ref={forwardedRef}
                 {...rest}
