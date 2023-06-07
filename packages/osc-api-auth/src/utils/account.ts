@@ -360,8 +360,8 @@ export const passwordReset: PasswordResetFn = async (input) => {
     }
     // Hash password
     const hashedPassword = await password.hash(input.password);
-    //   save new user password
 
+    //   save new user password
     const update = prisma.user.update({
         where: { id: tokenCheck },
         data: {

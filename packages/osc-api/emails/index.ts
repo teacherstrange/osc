@@ -73,6 +73,5 @@ export const sendForgotPasswordEmail: GetForgotEmailData = async (forgotEmailDat
         contactProperties: contactProperties,
         customProperties: customProperties,
     };
-
     return await sendEmail(emailData);
 };
