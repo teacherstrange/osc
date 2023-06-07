@@ -1,7 +1,7 @@
 import { useFetcher } from '@remix-run/react';
 import type { Cart } from '@shopify/hydrogen/storefront-api-types';
 import { Alert, Button, Icon, TextInput } from 'osc-ui';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { CartAction } from '~/types/shopify';
 
 interface DiscountBoxProps {
@@ -16,6 +16,9 @@ export const DiscountBox = (props: DiscountBoxProps) => {
     const formRef = useRef<HTMLFormElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [inputValue, setInputValue] = useState('');
+    const [active, setActive] = useState(false);
+    const triggerId = useId();
+    const sectionId = useId();
 
     const hasNonApplicableCode = discountCodes?.some(({ applicable, code }) => !applicable && code);
 
@@ -40,73 +43,94 @@ export const DiscountBox = (props: DiscountBoxProps) => {
 
     return (
         <div className="c-discount-box">
-            <h3 className="c-discount-box__ttl">{title}</h3>
+            <h3 className="c-discount-box__ttl">
+                <button
+                    id={triggerId}
+                    className="c-discount-box__tgr"
+                    aria-controls={sectionId}
+                    aria-expanded={active}
+                    onClick={() => setActive(!active)}
+                >
+                    {title}
+                </button>
+            </h3>
             <p className="c-discount-box__desc">{description}</p>
 
-            <fetcher.Form
-                id="discountForm"
-                method="post"
-                action="/cart"
-                className="c-discount-box__form"
-                ref={formRef}
-                onSubmit={() => {
-                    // When the form is submitted, we want to push the new value into the codes state
-                    setCodes([...codes, inputRef.current?.value || '']);
-                }}
+            <div
+                id={sectionId}
+                className="c-discount-box__tggle-box"
+                aria-labelledby={triggerId}
+                data-state={active ? 'open' : 'closed'}
             >
-                <input type="hidden" name="cartAction" value={CartAction.UPDATE_DISCOUNT} />
-                <input
-                    type="hidden"
-                    name="applicableDiscountCodes"
-                    value={JSON.stringify(
-                        // Filter the codes to only include the ones that are applicable to the cart
-                        // This will allow us to submit the form with only the codes that are applicable
-                        // rather than all of the codes that have been entered.
-                        codes.filter((code) => uniqueCodes?.includes(code))
-                    )}
-                />
+                <div className="c-discount-box__tggle-inner">
+                    <fetcher.Form
+                        id="discountForm"
+                        method="post"
+                        action="/cart"
+                        className="c-discount-box__form"
+                        ref={formRef}
+                        onSubmit={() => {
+                            // When the form is submitted, we want to push the new value into the codes state
+                            setCodes([...codes, inputRef.current?.value || '']);
+                        }}
+                    >
+                        <input type="hidden" name="cartAction" value={CartAction.UPDATE_DISCOUNT} />
+                        <input
+                            type="hidden"
+                            name="applicableDiscountCodes"
+                            value={JSON.stringify(
+                                // Filter the codes to only include the ones that are applicable to the cart
+                                // This will allow us to submit the form with only the codes that are applicable
+                                // rather than all of the codes that have been entered.
+                                codes.filter((code) => uniqueCodes?.includes(code))
+                            )}
+                        />
 
-                <TextInput
-                    id="discountCode"
-                    label="Enter your discount code"
-                    name="discountCode"
-                    type="text"
-                    variants={['tertiary']}
-                    className="u-w-full"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    ref={inputRef}
-                />
-                <Button variant="primary" size="sm">
-                    Apply
-                </Button>
-            </fetcher.Form>
+                        <TextInput
+                            id="discountCode"
+                            label="Enter your discount code"
+                            name="discountCode"
+                            type="text"
+                            variants={['tertiary']}
+                            className="u-w-full"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            tabIndex={active ? 0 : -1}
+                            ref={inputRef}
+                        />
+                        <Button variant="primary" size="sm" tabIndex={active ? 0 : -1}>
+                            Apply
+                        </Button>
+                    </fetcher.Form>
 
-            {hasNonApplicableCode ? (
-                <Alert status="info" className="u-mt-m">
-                    A discount code you entered is invalid or not applicable to one or more products
-                    in your basket.
-                </Alert>
-            ) : null}
+                    {hasNonApplicableCode ? (
+                        <Alert status="info" className="u-mt-m">
+                            A discount code you entered is invalid or not applicable to one or more
+                            products in your basket.
+                        </Alert>
+                    ) : null}
 
-            {uniqueCodes && uniqueCodes.length > 0 ? (
-                <dl className="c-discount-box__list">
-                    <dt className="c-discount-box__term">Discount codes applied:</dt>
-                    {uniqueCodes.map((code, i) => (
-                        <dd className="c-discount-box__details" key={i + code}>
-                            <span>{code}</span>
-                            <Button
-                                variant="quaternary"
-                                size="sm"
-                                form="discountForm"
-                                onClick={() => setCodes(codes.filter((c) => c !== code))}
-                            >
-                                <Icon id="close" />
-                            </Button>
-                        </dd>
-                    ))}
-                </dl>
-            ) : null}
+                    {uniqueCodes && uniqueCodes.length > 0 ? (
+                        <dl className="c-discount-box__list">
+                            <dt className="c-discount-box__term">Discount codes applied:</dt>
+                            {uniqueCodes.map((code, i) => (
+                                <dd className="c-discount-box__details" key={i + code}>
+                                    <span>{code}</span>
+                                    <Button
+                                        variant="quaternary"
+                                        size="sm"
+                                        form="discountForm"
+                                        onClick={() => setCodes(codes.filter((c) => c !== code))}
+                                        tabIndex={active ? 0 : -1}
+                                    >
+                                        <Icon id="close" />
+                                    </Button>
+                                </dd>
+                            ))}
+                        </dl>
+                    ) : null}
+                </div>
+            </div>
         </div>
     );
 };

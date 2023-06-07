@@ -15,6 +15,10 @@
             font-size: $discount-box-ttl-size;
         }
 
+        &__tgr {
+            cursor: pointer;
+        }
+
         &__desc {
             margin-block-end: $space-s;
             font-size: $discount-box-desc-size;
@@ -33,6 +37,25 @@
             @include mq(($mq-tab, $mq-tab-l)) {
                 flex-direction: column;
             }
+        }
+
+        &__tggle-box {
+            display: grid;
+            grid-template-rows: 0fr;
+            padding-block-start: $space-2xs; // Account for the space needed when the input is active
+            overflow: hidden;
+            transition: all $timing $ease-in-out;
+
+            &[data-state="open"] {
+                grid-template-rows: 1fr;
+            }
+        }
+
+        &__tggle-inner {
+            min-height: 0;
+
+            // Account for the shadow on the button so it doesn't get cut off by the overflow hidden on the parent
+            padding-inline-end: 6px;
         }
 
         &__list {
