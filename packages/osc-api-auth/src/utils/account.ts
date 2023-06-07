@@ -8,6 +8,7 @@ import {
     getRoleById,
     getRoleByTitle,
     sendForgotPasswordEmail,
+    getOrgById,
 } from 'osc-api';
 import type {
     CreateUserFn,
@@ -27,6 +28,7 @@ import type {
     CompleteRegistrationFn,
     ResetRequestFn,
     PasswordResetFn,
+    AdminCreateUserFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import { env } from '~/types/environment';
@@ -369,4 +371,54 @@ export const passwordReset: PasswordResetFn = async (input) => {
         },
     });
     return update;
+};
+
+export const adminCreateUser: AdminCreateUserFn = async (input) => {
+    // Check for existing user, all emails must be unique
+    const existingUser = await getUserByEmail(input.email);
+
+    // If user already exists, throw error
+    if (existingUser) {
+        return new Error('An account already exists for the specified email.');
+    }
+    // Check role request
+    const role = getRoleById(input.roleId);
+    if (!role) {
+        return new Error('No active role selected');
+    }
+    // Check Extra Permissions - TODO
+
+    // Check organisation exists
+    const org = getOrgById(input.orgId);
+    if (!org) {
+        return new Error('This organisation does not exist');
+    }
+    // Hash password
+    const hashedPassword = await password.hash(input.password);
+
+    // Create user record
+    const user = await prisma.user.create({
+        data: {
+            firstName: input.firstName,
+            lastName: input.lastName,
+            email: input.email,
+            password: hashedPassword,
+        },
+    });
+
+    await prisma.userRole.create({
+        data: {
+            roleId: input.roleId,
+            userId: user.id,
+            createdBy: input.createdById,
+        },
+    });
+
+    await prisma.userOrganisation.create({
+        data: {
+            userId: user.id,
+            organisationId: input.orgId,
+        },
+    });
+    return user;
 };

@@ -134,6 +134,15 @@ export const typeDefs = gql`
         password: String!
     }
 
+    input adminCreateUser {
+        firstName: String! @constraint(maxLength: 128)
+        lastName: String! @constraint(maxLength: 128)
+        email: String! @constraint(format: "email", maxLength: 255)
+        orgId: Int!
+        roleId: Int!
+        password: String!
+    }
+
     type Mutation {
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
@@ -143,5 +152,6 @@ export const typeDefs = gql`
         completeRegistration(input: completeRegistration!): User
         requestResetPassword(email: String!): Boolean!
         completeResetPassword(input: passwordResetInput!): User
+        adminCreateUser(input: adminCreateUser!): User
     }
 `;

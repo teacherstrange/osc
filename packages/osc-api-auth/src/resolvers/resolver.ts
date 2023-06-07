@@ -10,6 +10,7 @@ import type {
     completeRegistrationArgs,
     ResetRequestArgs,
     completeResetPasswordArgs,
+    adminCreateUserArgs,
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
@@ -52,6 +53,9 @@ export const resolvers = {
         },
         completeResetPassword: async (_: undefined, { input }: completeResetPasswordArgs) => {
             return account.passwordReset(input);
+        },
+        adminCreateUser: async (_: undefined, { input }: adminCreateUserArgs) => {
+            return account.adminCreateUser(input);
         },
     },
 };
