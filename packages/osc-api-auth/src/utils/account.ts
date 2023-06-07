@@ -333,18 +333,18 @@ export const lmsTokens: LmsTokensFn = async (userId) => {
 };
 
 export const resetRequest: ResetRequestFn = async (email) => {
-    const userValid = await getUserByEmail(email);
+    const user = await getUserByEmail(email);
 
-    if (!userValid) {
+    if (!user) {
         return new Error('User is not valid');
     }
-    const userToken = await token.magicKey(userValid.id);
+    const userToken = await token.magicKey(user.id);
     const url = `https://openstudycollege.com/reset?token = ${userToken}`;
     const emailData = {
         to: email,
         url: url,
-        firstName: userValid.firstName,
-        lastName: userValid.lastName,
+        firstName: user.firstName,
+        lastName: user.lastName,
         emailId: env.FORGOT_EMAIL,
     };
     await sendForgotPasswordEmail(emailData);
