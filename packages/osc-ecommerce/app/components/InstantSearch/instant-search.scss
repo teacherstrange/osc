@@ -2,21 +2,33 @@
 @import "../../../../osc-ui/src/styles/tools";
 
 .c-instant-search {
+    &__accordion-header {
+        margin: 0;
+        /* stylelint-disable-next-line plugin/selector-bem-pattern , selector-class-pattern */
+        .c-accordion__trigger {
+            font-size: $fs-xl;
+        }
+    }
+
     &__accordion {
-        padding-bottom: $space-l;
-        border-bottom: solid 2px var(--color-neutral-600);
+        .c-accordion {
+            /* stylelint-disable-next-line selector-class-pattern */
+            & > .c-accordion__item:first-of-type {
+                /* stylelint-disable-next-line plugin/selector-bem-pattern , selector-class-pattern */
+                .c-accordion__trigger {
+                    padding: 0;
+                }
+            }
+        }
+
+        &--nested {
+            padding-bottom: $space-l;
+            border-bottom: solid 2px var(--color-neutral-600);
+        }
     }
 
     &__card-title {
         display: flex;
         max-width: 30ch;
-    }
-
-    &__accordion-header {
-        margin: 0;
-        /* stylelint-disable-next-line plugin/selector-bem-pattern , selector-class-pattern */
-        .c-accordion__trigger {
-            font-size: 26px;
-        }
     }
 }
