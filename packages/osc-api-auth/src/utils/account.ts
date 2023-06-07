@@ -405,15 +405,15 @@ export const adminCreateUser: AdminCreateUserFn = async (input) => {
             password: hashedPassword,
         },
     });
-
+    // Create User Role
     await prisma.userRole.create({
         data: {
             roleId: input.roleId,
             userId: user.id,
-            createdBy: input.createdById,
+            createdBy: input.createdBy,
         },
     });
-
+    // Link User to organisation
     await prisma.userOrganisation.create({
         data: {
             userId: user.id,
