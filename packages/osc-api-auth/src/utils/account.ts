@@ -79,8 +79,12 @@ export const createSetup: CreateUserSetupFn = async (input) => {
     const userToken = await token.magicKey(userCreate.id);
     const url = `https://openstudycollege.com/signin?token = ${userToken}`;
     // Send email via hubspot api
-    const name = input.firstName + ' ' + input.lastName;
-    const emailData = { to: input.email, url: url, name: name };
+    const emailData = {
+        to: input.email,
+        url: url,
+        firstName: input.firstName,
+        lastName: input.lastName,
+    };
     await sendRegistrationEmail(emailData);
 
     if (input.courses) {

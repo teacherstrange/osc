@@ -1,7 +1,8 @@
 type regEmailData = {
     to: string;
     url: string;
-    name: string;
+    firstName: string;
+    lastName: string;
 };
 
 type message = {
@@ -14,7 +15,8 @@ type message = {
 };
 
 type contact = {
-    name: string;
+    firstname: string;
+    lastname: string;
 };
 
 type custom = {

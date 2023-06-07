@@ -2,6 +2,7 @@ import { Client } from '@hubspot/api-client';
 import { v4 as uuidv4 } from 'uuid';
 
 import type { GetEmailData, GetRegEmailData } from './types';
+import { env } from '~/types/environment';
 export * from './types';
 
 export const hubspotClient = () => {
@@ -38,14 +39,15 @@ export const sendRegistrationEmail: GetRegEmailData = async (regEmailData) => {
         sendId: uuidv4(),
     };
     const customProperties = {
-        name: regEmailData.name,
+        name: regEmailData.firstName,
         url: regEmailData.url,
     };
     const contactProperties = {
-        name: regEmailData.name,
+        firstname: regEmailData.firstName,
+        lastname: regEmailData.lastName,
     };
     const emailData = {
-        emailId: 69285064430,
+        emailId: env.REG_EMAIL,
         message: message,
         contactProperties: contactProperties,
         customProperties: customProperties,
