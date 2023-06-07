@@ -34,7 +34,7 @@
                 flex-direction: column;
             }
 
-            @include mq(($mq-tab, $mq-tab-l)) {
+            @include mq(($mq-tab, 1328)) {
                 flex-direction: column;
             }
         }
