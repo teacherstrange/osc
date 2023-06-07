@@ -35,12 +35,10 @@ export const RefinementList = (props: RefinementListProps) => {
             return null;
         }
         return (
-            <div>
-                <AccordionItem value={value}>
-                    <AccordionHeader icon="chevron">{title}</AccordionHeader>
-                    <AccordionPanel>{FacetListItems}</AccordionPanel>
-                </AccordionItem>
-            </div>
+            <AccordionItem value={value}>
+                <AccordionHeader icon="chevron">{title}</AccordionHeader>
+                <AccordionPanel>{FacetListItems}</AccordionPanel>
+            </AccordionItem>
         );
     }
 

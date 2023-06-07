@@ -75,12 +75,10 @@ export const RefinementSlider = (props: RangeSliderProps) => {
             return null;
         }
         return (
-            <div>
-                <AccordionItem value={accordionValue}>
-                    <AccordionHeader icon="chevron">{title}</AccordionHeader>
-                    <AccordionPanel className="u-pl-m u-pr-m">{RefinementSlider}</AccordionPanel>
-                </AccordionItem>
-            </div>
+            <AccordionItem value={accordionValue}>
+                <AccordionHeader icon="chevron">{title}</AccordionHeader>
+                <AccordionPanel className="u-pl-m u-pr-m">{RefinementSlider}</AccordionPanel>
+            </AccordionItem>
         );
     }
 
