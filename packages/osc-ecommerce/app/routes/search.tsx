@@ -30,8 +30,10 @@ import { getServerState } from 'react-instantsearch-hooks-server';
 import type { InstantSearchServerState } from 'react-instantsearch-hooks-web';
 import { Index, InstantSearch, InstantSearchSSRProvider } from 'react-instantsearch-hooks-web';
 import { ItemCounter } from '~/components/InstantSearch/Components/ItemCounter';
+import { SearchBox } from '~/components/InstantSearch/Components/SearchBox';
 import { CollectionCards } from '~/components/InstantSearch/Widgets/CollectionCards';
 import { Configure } from '~/components/InstantSearch/Widgets/Configure';
+import { Hits } from '~/components/InstantSearch/Widgets/Hits/Hits';
 import { NoResults } from '~/components/InstantSearch/Widgets/NoResults/NoResults';
 import { NoResultsBoundary } from '~/components/InstantSearch/Widgets/NoResults/NoResultsBoundary';
 import { ClearRefinements } from '~/components/InstantSearch/Widgets/Refinements/ClearRefinements';
@@ -39,8 +41,6 @@ import { SortBy } from '~/components/InstantSearch/Widgets/Refinements/SortBy';
 import { REFINEMENT_DATA, SORTING_INDEXES, VIEW_OPTIONS } from '~/components/InstantSearch/data';
 import oscUiInstantSearchStyles from '~/components/InstantSearch/instant-search.css';
 import { getRefinementWidget } from '~/components/InstantSearch/utils/getRefinementWidget';
-import { SearchBox } from '../../components/InstantSearch/Components/SearchBox';
-import { Hits } from '../../components/InstantSearch/Widgets/Hits/Hits';
 
 export const links: LinksFunction = () => {
     return [
@@ -57,7 +57,7 @@ export const links: LinksFunction = () => {
     ];
 };
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, params }) => {
     const serverUrl = request.url;
 
     const serverState = await getServerState(
@@ -154,12 +154,14 @@ const Search = (props: SearchProps) => {
                     <div
                         className={`${
                             !nestedAccordion ? 'o-container' : ''
-                        } o-grid u-pb-l c-instant-search`}
+                        } o-grid u-pb-l c-instant-search u-pt-3xl`}
                     >
                         <div
                             className={`${
-                                nestedAccordion ? 'c-instant-search__accordion o-container' : ''
-                            } o-grid__col--12 o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced`}
+                                nestedAccordion
+                                    ? 'c-instant-search__accordion--nested o-container'
+                                    : 'c-instant-search__accordion'
+                            } o-grid__col--12 o-grid__col--3@tab o-flex o-flex--stack o-flex--spaced u-pr-xl`}
                         >
                             <Accordion type="single" collapsible={true}>
                                 {!nestedAccordion ? (
@@ -221,7 +223,7 @@ const Search = (props: SearchProps) => {
                                 ) : null}
                                 <SortBy items={SORTING_INDEXES} />
                             </div>
-                            <div className="o-grid o-grid__col--12">
+                            <div className="o-grid o-grid__col--12 u-pt-3xl u-pb-xl">
                                 <Index indexName={env!.ALGOLIA_PRIMARY_COLLECTIONS_INDEX!}>
                                     <Configure hitsPerPage={100} />
                                     <CollectionCards />
