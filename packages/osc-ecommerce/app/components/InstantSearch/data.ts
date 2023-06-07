@@ -82,4 +82,4 @@ export const VIEW_OPTIONS = [
         value: 'gridview',
         name: 'Grid View',
     },
-];
+] as const;
