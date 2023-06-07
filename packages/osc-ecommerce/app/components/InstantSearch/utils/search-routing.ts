@@ -27,7 +27,7 @@ const router = (serverUrl: string) => {
             const urlParts = location.href.match(/^(.*?)\/search/);
             const baseUrl = `${urlParts ? urlParts[1] : ''}/`;
             const queryParameters: Partial<QueryParameters> = {};
-            console.log('RS', qsModule);
+
             if (routeState.query) {
                 queryParameters.query = encodeURIComponent(routeState.query as string);
             }
@@ -37,7 +37,6 @@ const router = (serverUrl: string) => {
                         .filter((q) => q)
                         .map(encodeURIComponent);
                 } else {
-                    console.log('routeState.price', routeState.price);
                     queryParameters.price = (routeState.price as string)
                         .split(':')
                         .map((value) => {
