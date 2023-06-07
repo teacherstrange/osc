@@ -347,9 +347,12 @@ export const resetRequest: ResetRequestFn = async (email) => {
         lastName: user.lastName,
         emailId: env.FORGOT_EMAIL,
     };
-    await sendForgotPasswordEmail(emailData);
-
-    return true;
+    const emailReponse = await sendForgotPasswordEmail(emailData);
+    if (emailReponse === 'Email request sent to HubSpot') {
+        return true;
+    } else {
+        return false;
+    }
 };
 
 export const passwordReset: PasswordResetFn = async (input) => {
