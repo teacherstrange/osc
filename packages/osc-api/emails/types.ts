@@ -13,11 +13,20 @@ type message = {
     replyTo?: string[];
 };
 
+type contact = {
+    name: string;
+};
+
+type custom = {
+    name: string;
+    url: string;
+};
+
 type emailData = {
     emailId: number;
     message: message;
-    contactProperties: {};
-    customProperties: {};
+    contactProperties: contact;
+    customProperties: custom;
 };
 
 export type GetEmailData = (input: emailData) => Promise<String>;
