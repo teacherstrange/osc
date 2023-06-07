@@ -6,6 +6,7 @@ import type {
     loginArgsInput,
     createUserSetupInput,
     completeRegistration,
+    passwordResetInput,
 } from './arguments';
 import type { PermissionsProps } from './interfaces';
 
@@ -26,6 +27,8 @@ export type RefreshTokenFn = (userId: number) => Promise<string>;
 export type MagicKeyTokenFn = (userId: number) => Promise<string>;
 export type VerifyFn = (magicKeyToken: string) => Promise<number | false>;
 export type VerifyLinkFn = (magicKeyToken: string) => Promise<User | Error | null>;
+export type ResetRequestFn = (email: string) => Promise<Boolean | Error>;
+export type PasswordResetFn = (input: passwordResetInput) => Promise<User | Error>;
 
 export type UserProfileFn = (userId: number) => Promise<{
     avatar: UserAvatar | null;

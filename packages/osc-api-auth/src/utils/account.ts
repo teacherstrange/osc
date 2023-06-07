@@ -7,6 +7,7 @@ import {
     getCourseById,
     getRoleById,
     getRoleByTitle,
+    sendForgotPasswordEmail,
 } from 'osc-api';
 import type {
     CreateUserFn,
@@ -24,6 +25,8 @@ import type {
     VerifyLinkFn,
     assignRoleFn,
     CompleteRegistrationFn,
+    ResetRequestFn,
+    PasswordResetFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import { env } from '~/types/environment';
@@ -327,4 +330,43 @@ export const lmsTokens: LmsTokensFn = async (userId) => {
             lmsUser: true,
         },
     });
+};
+
+export const resetRequest: ResetRequestFn = async (email) => {
+    const userValid = await getUserByEmail(email);
+
+    if (!userValid) {
+        return new Error('User is not valid');
+    }
+    const userToken = await token.magicKey(userValid.id);
+    const url = `https://openstudycollege.com/reset?token = ${userToken}`;
+    const emailData = {
+        to: email,
+        url: url,
+        firstName: userValid.firstName,
+        lastName: userValid.lastName,
+        emailId: env.FORGOT_EMAIL,
+    };
+    await sendForgotPasswordEmail(emailData);
+
+    return true;
+};
+
+export const passwordReset: PasswordResetFn = async (input) => {
+    const tokenCheck = await token.verifyToken(input.magicKeyToken);
+
+    if (!tokenCheck) {
+        return new Error('No valid login link');
+    }
+    // Hash password
+    const hashedPassword = await password.hash(input.password);
+    //   save new user password
+
+    const update = prisma.user.update({
+        where: { id: tokenCheck },
+        data: {
+            password: hashedPassword,
+        },
+    });
+    return update;
 };

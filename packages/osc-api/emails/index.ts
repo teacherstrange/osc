@@ -1,7 +1,7 @@
 import { Client } from '@hubspot/api-client';
 import { v4 as uuidv4 } from 'uuid';
 
-import type { GetEmailData, GetRegEmailData } from './types';
+import type { GetEmailData, GetRegEmailData, GetForgotEmailData } from './types';
 export * from './types';
 
 export const hubspotClient = () => {
@@ -51,5 +51,28 @@ export const sendRegistrationEmail: GetRegEmailData = async (regEmailData) => {
         contactProperties: contactProperties,
         customProperties: customProperties,
     };
+    return await sendEmail(emailData);
+};
+
+export const sendForgotPasswordEmail: GetForgotEmailData = async (forgotEmailData) => {
+    const message = {
+        to: forgotEmailData.to,
+        sendId: uuidv4(),
+    };
+    const customProperties = {
+        name: forgotEmailData.firstName,
+        url: forgotEmailData.url,
+    };
+    const contactProperties = {
+        firstname: forgotEmailData.firstName,
+        lastname: forgotEmailData.lastName,
+    };
+    const emailData = {
+        emailId: forgotEmailData.emailId,
+        message: message,
+        contactProperties: contactProperties,
+        customProperties: customProperties,
+    };
+
     return await sendEmail(emailData);
 };
