@@ -16,6 +16,7 @@ type message = {
 type emailData = {
     emailId: number;
     message: message;
+    contactProperties: {};
     customProperties: {};
 };
 

@@ -15,6 +15,7 @@ export const sendEmail: GetEmailData = async (emailData) => {
     const PublicSingleSendRequestEgg = {
         emailId: emailData.emailId,
         message: emailData.message,
+        contactProperties: emailData.contactProperties,
         customProperties: emailData.customProperties,
     };
     try {
@@ -40,9 +41,13 @@ export const sendRegistrationEmail: GetRegEmailData = async (regEmailData) => {
         name: regEmailData.name,
         url: regEmailData.url,
     };
+    const contactProperties = {
+        name: regEmailData.name,
+    };
     const emailData = {
         emailId: 69285064430,
         message: message,
+        contactProperties: contactProperties,
         customProperties: customProperties,
     };
     return await sendEmail(emailData);
