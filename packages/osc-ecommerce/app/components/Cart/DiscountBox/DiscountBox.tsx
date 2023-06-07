@@ -98,7 +98,12 @@ export const DiscountBox = (props: DiscountBoxProps) => {
                             tabIndex={active ? 0 : -1}
                             ref={inputRef}
                         />
-                        <Button variant="primary" size="sm" tabIndex={active ? 0 : -1}>
+                        <Button
+                            variant="primary"
+                            size="sm"
+                            isDisabled={!inputValue ? true : false}
+                            tabIndex={active ? 0 : -1}
+                        >
                             Apply
                         </Button>
                     </fetcher.Form>
