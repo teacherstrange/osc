@@ -3,6 +3,7 @@ import type { Cart } from '@shopify/hydrogen/storefront-api-types';
 import { Alert, Button, Icon, TextInput } from 'osc-ui';
 import { useEffect, useId, useRef, useState } from 'react';
 import { CartAction } from '~/types/shopify';
+import { fetcherIsPending } from '~/utils/storefront.helpers';
 
 interface DiscountBoxProps {
     title: string;
@@ -44,6 +45,8 @@ export const DiscountBox = (props: DiscountBoxProps) => {
             setInputValue('');
         }
     }, [fetcher.state]);
+
+    const pendingFetcher = fetcherIsPending(fetcher);
 
     return (
         <div className="c-discount-box">
@@ -105,7 +108,7 @@ export const DiscountBox = (props: DiscountBoxProps) => {
                         <Button
                             variant="primary"
                             size="sm"
-                            isDisabled={!inputValue ? true : false}
+                            isDisabled={pendingFetcher || !inputValue ? true : false}
                             tabIndex={active ? 0 : -1}
                         >
                             Apply
