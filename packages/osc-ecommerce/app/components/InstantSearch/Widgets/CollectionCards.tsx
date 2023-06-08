@@ -1,88 +1,72 @@
-import {
-    Button,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    CardImage,
-    CardInner,
-    CardTitle,
-    Icon,
-    Image,
-    CollectionCard as OscCollectionCard,
-    truncate,
-} from 'osc-ui';
 import { useEffect, useState } from 'react';
 import { useHits } from 'react-instantsearch-hooks-web';
 import type { AlgoliaHit } from '../types';
-import { PATHS } from '~/constants';
+
+import { CollectionCard } from '~/components/Cards/CollectionCard';
+import { getClient } from '~/lib/sanity/getClient';
+import { HIGHLIGHTED_COLLECTIONS_IMAGES_QUERY } from '~/queries/sanity/collection';
+import type { collectionCardModule } from '~/types/sanity';
 
 // TODO - This info eventually needs to come from Algolia Insights
 const COLLECTION_HIGHLIGHT_ONE = 'A levels';
 const COLLECTION_HIGHLIGHT_TWO = 'GCSEs';
 
-interface CardProps {
-    body?: string;
-    className?: string;
-    course_count?: number;
-    handle?: string;
-    image?: { secure_url: string; alt: string; width: number; height: number };
-    size?: 'sm' | 'md' | 'lg';
-    title?: string;
+interface CollectionCardsProps {
+    env: string;
 }
 
-const Card = (props: CardProps) => {
-    const { body, className, course_count, handle, image, size, title } = props;
-
-    return (
-        <OscCollectionCard className={className} size={size} hasShadow>
-            {image ? (
-                <CardImage>
-                    <Image
-                        src={image.secure_url}
-                        alt={image.alt}
-                        height={image.height}
-                        width={image.width}
-                    />
-                </CardImage>
-            ) : null}
-            <CardInner>
-                <CardHeader>
-                    <CardTitle>{title}</CardTitle>
-                </CardHeader>
-
-                {body ? (
-                    <CardBody>
-                        <p>{truncate(body)}</p>
-                    </CardBody>
-                ) : null}
-
-                <CardFooter>
-                    <span className="u-text-bold">{course_count} Courses</span>
-                    <Button variant="quaternary" as="link" to={`/${PATHS.COLLECTIONS}/${handle}`}>
-                        Find our more
-                        <Icon id="chevron-right" />
-                    </Button>
-                </CardFooter>
-            </CardInner>
-        </OscCollectionCard>
-    );
-};
-
-interface CollectionCardsProps {}
-
 export const CollectionCards = (props: CollectionCardsProps) => {
+    const { env } = props;
     // TODO - Add events
     const { hits, sendEvent } = useHits();
     const [collections, setCollections] = useState<AlgoliaHit[]>([]);
 
     // Save collections in state as we don't want these to change as the refinement lists are updated
     useEffect(() => {
-        const highlightedCollections = hits.filter(
+        // Filter out highlighted collections from Algolia data
+        const algoliaHighlightedCollectionsData = hits.filter(
             (hit) =>
                 hit.title === COLLECTION_HIGHLIGHT_ONE || hit.title === COLLECTION_HIGHLIGHT_TWO
         );
-        if (highlightedCollections.length > 0) {
-            setCollections(highlightedCollections);
+        if (algoliaHighlightedCollectionsData.length > 0) {
+            // Combine Algolia collection data with image data from Sanity
+            const combineCollectionData = async () => {
+                try {
+                    const querySanityDataset = await getClient(env).fetch(
+                        HIGHLIGHTED_COLLECTIONS_IMAGES_QUERY,
+                        {
+                            highlightCategoryOne: algoliaHighlightedCollectionsData[0].handle,
+                            highlightCategoryTwo: algoliaHighlightedCollectionsData[1].handle,
+                        }
+                    );
+                    // console.log('querySanityDataset', querySanityDataset);
+                    if (querySanityDataset) {
+                        setCollections(
+                            algoliaHighlightedCollectionsData.map((collection, index) => {
+                                // Add Sanity data
+                                collection.data = {
+                                    reference: {
+                                        featuredImage: {
+                                            src: querySanityDataset[index].image.secure_url,
+                                            imageStyles:
+                                                querySanityDataset[index].image.imageStyles,
+                                            alt: querySanityDataset[index].alt,
+                                        },
+                                        slug: querySanityDataset[index].slug,
+                                    },
+                                    variant: 'sm',
+                                };
+                                return collection;
+                            })
+                        );
+                    } else {
+                        setCollections(algoliaHighlightedCollectionsData);
+                    }
+                } catch (e) {
+                    console.log('ERROR', e);
+                }
+            };
+            combineCollectionData();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- We don't want it to update based on changes to refinement lists
     }, []);
@@ -90,25 +74,13 @@ export const CollectionCards = (props: CollectionCardsProps) => {
     return (
         <>
             {collections?.map((collection, i) => (
-                <Card
-                    // TODO - To come from Sanity
-                    body={
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra duis vehicula justo, sagittis quam nam nisi.'
-                    }
-                    className={'o-grid__col--12 o-grid__col--6@mob-lrg'}
-                    course_count={collection.products_count as number}
-                    handle={collection.handle as string}
+                <CollectionCard
+                    // TODO - Pass data for body which should come from CMS?
+                    className="o-grid__col--12 o-grid__col--6@mob-lrg"
+                    course_count={collection.products_count}
+                    data={collection.data as collectionCardModule}
                     key={i}
-                    // TODO - To come from Sanity
-                    image={{
-                        secure_url:
-                            'https://res.cloudinary.com/de2iu8gkv/image/upload/c_crop,y_0/v1674823207/cat-img-3_qrlvcq.png',
-                        alt: '',
-                        width: 452,
-                        height: 310,
-                    }}
-                    size={'sm'}
-                    title={collection.title as string}
+                    title={collection.title}
                 />
             ))}
         </>

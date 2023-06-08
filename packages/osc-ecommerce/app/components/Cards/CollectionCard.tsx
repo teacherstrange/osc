@@ -11,41 +11,51 @@ import {
     CollectionCard as OSCCollectionCard,
 } from 'osc-ui';
 import type { collectionCardModule } from '~/types/sanity';
+import { PATHS } from '~/constants';
 
 interface Props {
-    data: collectionCardModule;
+    className: string;
+    course_count?: string;
+    data?: collectionCardModule;
+    title?: string;
 }
 
 // TODO: Update this to use Shopify storekit helpers
 export const CollectionCard = (props: Props) => {
-    const { data } = props;
-    const { store } = data?.reference;
-    const { theme, featuredImage } = data?.reference;
+    const { course_count, className, data, title } = props;
 
     return (
-        <OSCCollectionCard size={data?.variant} hasShadow>
-            {featuredImage?.src ? (
+        <OSCCollectionCard size={data?.variant} hasShadow className={className}>
+            {data?.reference?.featuredImage?.src ? (
                 <CardImage>
                     <Image
-                        src={featuredImage?.src ? featuredImage?.src : ''}
-                        alt={featuredImage?.alt ? featuredImage?.alt : ''}
+                        src={
+                            data?.reference?.featuredImage?.src
+                                ? data?.reference?.featuredImage?.src
+                                : ''
+                        }
+                        alt={
+                            data?.reference?.featuredImage?.alt
+                                ? data?.reference?.featuredImage?.alt
+                                : ''
+                        }
                         width={610}
                         height={432}
                         fit="cover"
                         overlayColor={
-                            featuredImage?.imageStyles?.overlayColor
-                                ? featuredImage?.imageStyles?.overlayColor
-                                : theme?.color
+                            data?.reference?.featuredImage?.imageStyles?.overlayColor
+                                ? data?.reference?.featuredImage?.imageStyles?.overlayColor
+                                : data?.reference?.theme?.color
                         }
-                        isGrayScale={featuredImage?.imageStyles?.grayscale}
-                        hasTransparency={featuredImage?.imageStyles?.opacity}
+                        isGrayScale={data?.reference?.featuredImage?.imageStyles?.grayscale}
+                        hasTransparency={data?.reference?.featuredImage?.imageStyles?.opacity}
                     />
                 </CardImage>
             ) : null}
 
             <CardInner>
                 <CardHeader>
-                    <CardTitle>{store?.title}</CardTitle>
+                    <CardTitle>{data?.reference?.store?.title || title}</CardTitle>
                 </CardHeader>
 
                 <CardBody>
@@ -56,14 +66,18 @@ export const CollectionCard = (props: Props) => {
                     </p>
 
                     {/* TODO: Needs to get number of courses */}
-                    {data?.variant !== 'sm' ? <Button isFull>23 Courses</Button> : null}
+                    {data?.variant !== 'sm' ? <Button isFull>{course_count} Courses</Button> : null}
                 </CardBody>
 
                 {data?.variant === 'sm' ? (
                     <CardFooter>
-                        <span className="u-text-bold">23 courses</span>
+                        <span className="u-text-bold">{course_count} courses</span>
                         {data?.reference?.slug ? (
-                            <Button as="link" to={data?.reference?.slug} variant="quaternary">
+                            <Button
+                                as="link"
+                                to={`/${PATHS.COLLECTIONS}/${data?.reference?.slug}`}
+                                variant="quaternary"
+                            >
                                 Find our more
                                 <Icon id="chevron-right" />
                             </Button>

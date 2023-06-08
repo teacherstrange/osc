@@ -90,6 +90,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             ALGOLIA_PRIMARY_COLLECTIONS_INDEX: process.env.ALGOLIA_PRIMARY_COLLECTIONS_INDEX,
             ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID: process.env.ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID!,
             ALGOLIA_HITS_PER_PAGE: process.env.ALGOLIA_HITS_PER_PAGE!,
+            SANITY_STUDIO_API_TOKEN: process.env.SANITY_STUDIO_API_TOKEN!,
         },
     });
 };
@@ -104,6 +105,7 @@ type SearchProps = {
         ALGOLIA_PRODUCTS_INDEX_GROUPED_BY_ID?: string;
         ALGOLIA_PRIMARY_INDEX_QUERY_SUGGESTIONS?: string;
         ALGOLIA_HITS_PER_PAGE?: number;
+        SANITY_STUDIO_API_TOKEN?: string;
     };
     hitsPerPage?: number;
     serverState?: InstantSearchServerState;
@@ -226,7 +228,7 @@ const Search = (props: SearchProps) => {
                             <div className="o-grid o-grid__col--12 u-pt-3xl u-pb-xl">
                                 <Index indexName={env!.ALGOLIA_PRIMARY_COLLECTIONS_INDEX!}>
                                     <Configure hitsPerPage={100} />
-                                    <CollectionCards />
+                                    <CollectionCards env={env!.SANITY_STUDIO_API_TOKEN!} />
                                 </Index>
                             </div>
                             <div className="o-grid o-grid__col--12">

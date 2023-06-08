@@ -20,3 +20,7 @@ export const COLLECTION_QUERY = groq`
         ${SEO}
     }
 `;
+
+export const HIGHLIGHTED_COLLECTIONS_IMAGES_QUERY = groq`
+    *[ _type == "collection" && store.slug.current == $highlightCategoryOne || store.slug.current == $highlightCategoryTwo] {"alt": image.alt, "image":image.image, "slug": store.slug.current}
+`;

@@ -5,11 +5,13 @@ import type { SearchResults } from 'algoliasearch-helper';
 export type AlgoliaHit = Hit<
     BaseHit & {
         meta?: { osc: { product_variants?: string } };
+        handle?: string;
         id?: string;
         image?: string;
         subtitle?: string;
         title?: string;
         tags?: string[];
+        products_count?: string;
         product_image?: string;
     }
 >;
