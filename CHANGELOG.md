@@ -1,3 +1,37 @@
+## [0.101.0](https://github.com/Open-Study-College/osc/compare/v0.100.0...v0.101.0) (2023-06-08)
+
+
+### ♻️ Refactors
+
+* **add to cart:** move add to cart into cart actions directory ([c43db65](https://github.com/Open-Study-College/osc/commit/c43db6572e6156b43738d28cea96413857bf86e7))
+* **product form:** replace is-loading class with data-anim ([0a97170](https://github.com/Open-Study-College/osc/commit/0a971707e12104d7a3021defad8c574a7f3ea0a0))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **cart:** group pending line functions ([08826b2](https://github.com/Open-Study-College/osc/commit/08826b24bbd039fa7229cc3fbb7fe8fd19c7150c))
+
+
+### ✨ Features
+
+* **alert:** adds an alert component to display a generic error message ([ca511d9](https://github.com/Open-Study-College/osc/commit/ca511d96160b08ee87e97fe6835d5eb36d138376))
+* **cart:** add error log to the ErrorAlert component ([221eab6](https://github.com/Open-Study-College/osc/commit/221eab6c56650ad1de5b4d056a5aef4506c53023))
+* **cart:** add error message if fetcher returns with an error ([fcb1aff](https://github.com/Open-Study-College/osc/commit/fcb1affb97d7139d11a321fcdd70fe2f53e17ff5))
+* **cart:** add fallback errors from action ([26cb635](https://github.com/Open-Study-College/osc/commit/26cb635678fdfd7c8d5b518a6ee4f7b75e0e1006))
+* **cart:** add loading prop to cart components ([a4c9044](https://github.com/Open-Study-College/osc/commit/a4c90449b594990a9669c22c67308ccb59a796e1))
+* **cart:** add pending fetcher states ([d4ed59d](https://github.com/Open-Study-College/osc/commit/d4ed59db71a1c47257051e0425f4c1e50a3dbfbb))
+* **cart:** add remove from cart form ([f7c2a0c](https://github.com/Open-Study-College/osc/commit/f7c2a0c9bc7f1dff8524c866a29e8314a2d1040f))
+* **cart:** add remove from cart function ([ea918b6](https://github.com/Open-Study-College/osc/commit/ea918b6293d9ef62b37f598e7f442d6165e9a6c8))
+* **cart:** add removed from cart message component ([5f430f7](https://github.com/Open-Study-College/osc/commit/5f430f73da51b2c00b39bd31f74ee8439228c335))
+* **cart:** disable remove button when fetcher is running ([e6343a5](https://github.com/Open-Study-College/osc/commit/e6343a5ac2012f5a63c75febc6ca7643639e2b64))
+* **cart:** display remove line item message ([c79d5db](https://github.com/Open-Study-College/osc/commit/c79d5dba6ab48a0eaaebd859704380167aead41f))
+* **cart:** wrap switch steps in try catch ([8ed5f7c](https://github.com/Open-Study-College/osc/commit/8ed5f7cf13ed897198c8a252a6f232b0697b4a48))
+* **ecommerce:** add utility to remove marks from portable text ([df3269b](https://github.com/Open-Study-College/osc/commit/df3269b3e980d3473fc09194791a69299f8acb3c))
+* **styles:** adds shimmer anim styles ([bd284e0](https://github.com/Open-Study-College/osc/commit/bd284e0a4bf86dbccdfa6ee8b22e626989f1c6a9))
+* **util:** add utility function to compare array values ([e1f603a](https://github.com/Open-Study-College/osc/commit/e1f603a8e06a28651d165b1b8c06a894d057a425))
+* **utils:** adds util to check if a fetcher is in a pending state ([65a1047](https://github.com/Open-Study-College/osc/commit/65a10477acf786351db3bedfcd2a78053f7ea822))
+* **utils:** adds utility to check if fetcher returns data with an error ([d917bd4](https://github.com/Open-Study-College/osc/commit/d917bd428d5b5d97adad657f26aea1a1255f92ae))
+
 ## [0.100.0](https://github.com/Open-Study-College/osc/compare/v0.99.0...v0.100.0) (2023-06-08)
 
 
@@ -126,25 +160,4 @@
 
 * **button:** udpate fg colour for better contrast ([4a16ac0](https://github.com/Open-Study-College/osc/commit/4a16ac05360a4863ea5e07762076dd650d7692f5))
 * **cards:** update course card in ecommerce to use new props ([b8916a4](https://github.com/Open-Study-College/osc/commit/b8916a43e3995a604337f6c204fc5ced87e43936))
-
-## [0.96.0](https://github.com/Open-Study-College/osc/compare/v0.95.0...v0.96.0) (2023-05-26)
-
-
-### ♻️ Refactors
-
-* **callout:** separate styles into primay/secondary modifiers ([7a25482](https://github.com/Open-Study-College/osc/commit/7a25482b62d8d0bf4f3a00ed3f86cbed6960ddea))
-
-
-### ✨ Features
-
-* **callout:** add offset prop to content as well ([1595d17](https://github.com/Open-Study-College/osc/commit/1595d177f984046d3af72e47219469dcbea69a03))
-* **callout:** add prop to offset the footer when needed ([cc6c13e](https://github.com/Open-Study-College/osc/commit/cc6c13e0d97862480b9aeec2aa0528dc436181b9))
-* **callout:** add secondary story ([548ab41](https://github.com/Open-Study-College/osc/commit/548ab410e13d4b7032b9a4cf0d0b99f6666cae60))
-* **callout:** add willshrink prop to the content area ([4280d40](https://github.com/Open-Study-College/osc/commit/4280d40e687b7b50f2fe3f7490c71e113c033843))
-* **callout:** adds context to pass variant through sub components ([86eb26e](https://github.com/Open-Study-College/osc/commit/86eb26e4b1eadf1d8c7bddaa2354f436edb030cf))
-
-
-### 🐛 Bugs
-
-* **content:** add hyphens property to c-content on x-small screens to allow long words to wrap ([faed532](https://github.com/Open-Study-College/osc/commit/faed53259572a129306557a9d3164289d175b9ef))
 
