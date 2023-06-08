@@ -1,3 +1,62 @@
+## [0.100.0](https://github.com/Open-Study-College/osc/compare/v0.99.0...v0.100.0) (2023-06-08)
+
+
+### 🐛 Bugs
+
+* **cart:** replace ID with index so key works ([eaf5be6](https://github.com/Open-Study-College/osc/commit/eaf5be6039e18411efd0a2376875db112d80cef5))
+* **cart:** update check so we only try and display content if the body of the description is present ([6340c93](https://github.com/Open-Study-College/osc/commit/6340c939468bafd9713ca41996671797de2d908e))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* **cart:** update variant syntax ([8a05d7a](https://github.com/Open-Study-College/osc/commit/8a05d7add0fbb830092515de62fa6c7ad5754250))
+* remove console log ([36b4682](https://github.com/Open-Study-College/osc/commit/36b468205bda50f54ffbc2a5255e8783e4b4bd05))
+* remove unused type ([2a445d7](https://github.com/Open-Study-College/osc/commit/2a445d7712f2afa88df9c34489dff31403d6a95d))
+
+
+### 🧪 Tests
+
+* **cart:** adds test for isGiftVoucher util ([6b0be13](https://github.com/Open-Study-College/osc/commit/6b0be13eb4affe5e936adaee69b7305dbe310145))
+
+
+### ♻️ Refactors
+
+* **cart:** move cart layout into own component ([5a67d09](https://github.com/Open-Study-College/osc/commit/5a67d09110a1ccbcc6a7b623f398514cb68a9a45))
+* **cart:** move cart query into queries directory ([a061fa2](https://github.com/Open-Study-College/osc/commit/a061fa2d71ce7d96a7a011d15b11fdc6b1ce206f))
+* **cart:** update which buttons are shown/hidden on mobile ([bd94242](https://github.com/Open-Study-College/osc/commit/bd94242d4f565e75a18e82048caaa2e14f2e71bd))
+* **cart:** use smaller spacing class to account for p margin ([cb0c11a](https://github.com/Open-Study-College/osc/commit/cb0c11af3b3e065f3e421ffc7dba1d2d8bc444b4))
+* **product form:** change existing item check to use product id ([fff19dc](https://github.com/Open-Study-College/osc/commit/fff19dce9ca15254b30c6c3a65980a6251f03572))
+
+
+### ✨ Features
+
+* **cart:** add background colour to cart page ([2736152](https://github.com/Open-Study-College/osc/commit/2736152ad69981fe17c5aee365113eb07eccf438))
+* **cart:** add basic layout for the cart ([cee698c](https://github.com/Open-Study-College/osc/commit/cee698cc30473f8718cf1e71fa7fc83e78f0f650))
+* **cart:** add cart cards ([38ee9ba](https://github.com/Open-Study-College/osc/commit/38ee9ba30ac4d9c97d2a0339f48f44d5878d95a6))
+* **cart:** add description from sanity to card ([0d7115f](https://github.com/Open-Study-College/osc/commit/0d7115f7385f50f9df33720480929beb9a4628bb))
+* **cart:** add empty cart message component to cart route ([d545bf3](https://github.com/Open-Study-College/osc/commit/d545bf3e4a7abded5cef525bac154ce5ee738103))
+* **cart:** add empty cart message settings to sanity ([9e9e14d](https://github.com/Open-Study-College/osc/commit/9e9e14d639d111e947f2195eb741b3c9ef764889))
+* **cart:** add flourishes to cart ([101796c](https://github.com/Open-Study-College/osc/commit/101796cf716eb9a6970ba9fe46c6998e2919b700))
+* **cart:** add height auto utility to bring cart cards inline ([8f641a8](https://github.com/Open-Study-College/osc/commit/8f641a82a3696510e235319ae7b2fb858bc735ce))
+* **cart:** add product options and sku to cart query ([4f98500](https://github.com/Open-Study-College/osc/commit/4f985000edead609a44914e6bc74cb2223ef8275))
+* **cart:** add responsive classes and settings ([0eb94ba](https://github.com/Open-Study-College/osc/commit/0eb94baa4ce453fad36be25a91bfc724c64dca6e))
+* **cart:** add spacing class to cards ([07e914c](https://github.com/Open-Study-College/osc/commit/07e914c6e613add7060ac720e4a95e55c60f6f30))
+* **cart:** adds sticky utility class ([2539d87](https://github.com/Open-Study-College/osc/commit/2539d8791a1daeb18511c37ccca3a7bcb04b5902))
+* **cart:** integrate line item commponent with cart ([497b6c8](https://github.com/Open-Study-College/osc/commit/497b6c88ab17dfc0901cec08cd9e6370416b70c4))
+* **cart:** updates addLines function to exclude existing lines when adding to the cart ([be56e25](https://github.com/Open-Study-College/osc/commit/be56e2545c495ff51b9fb87e297932c8ac5568c0))
+* **ecommerce:** add cart and wishlist to paths const ([a7a088a](https://github.com/Open-Study-College/osc/commit/a7a088a6048660cf284d0241a8affa51b66866c1))
+* **ecommerce:** add utility to remove marks from portable text ([b121d86](https://github.com/Open-Study-College/osc/commit/b121d863c3cc581ccf22a95350c7f4b568a22c30))
+* **ecommerce:** adds helper to add Sanity data into cart line item object ([56fc37e](https://github.com/Open-Study-College/osc/commit/56fc37e4473177bbfb2e41c35f49defc7a80c20c))
+* **ecommerce:** adds utilities to get and set shopify ids ([a2b84b5](https://github.com/Open-Study-College/osc/commit/a2b84b59ce050a7912d577aa38be32b326c0e461))
+* **line item:** export component from osc-ui ([11271d5](https://github.com/Open-Study-College/osc/commit/11271d54f76237a45ef74afdae324e3aaf65d77e))
+* **product:** adds functionality to prevent adding multiple of the same courses ([96b566b](https://github.com/Open-Study-College/osc/commit/96b566bce146bf46f169214bbf01985bc89ae53c))
+* **product:** adds product type to variant query fragment ([f48f2f4](https://github.com/Open-Study-College/osc/commit/f48f2f41272fa2cfbade9badbe54b3d618828630))
+* **product:** pass conditional label to add to cart form ([65860ea](https://github.com/Open-Study-College/osc/commit/65860ea808148d674a124d990f696cd3e2f37088))
+* **product form:** add message to form when product already exists in cart ([257439e](https://github.com/Open-Study-College/osc/commit/257439ed7a6cde04825878c3fa4d809bcb8ee009))
+* **product form:** update added to cart message ([f580eb3](https://github.com/Open-Study-College/osc/commit/f580eb379005f3584307a0328b5c54c8f424cad0))
+* **styles:** adds margin auto utility ([4fdf3ac](https://github.com/Open-Study-College/osc/commit/4fdf3ac0ef1fa79e7149864a4204629a7050de51))
+* **utils:** adds helper function to check if product is a gift voucher ([cdda5f7](https://github.com/Open-Study-College/osc/commit/cdda5f71283be3006e52a1aae3cf4dba0d846911))
+
 ## [0.99.0](https://github.com/Open-Study-College/osc/compare/v0.98.0...v0.99.0) (2023-06-08)
 
 
@@ -88,13 +147,4 @@
 ### 🐛 Bugs
 
 * **content:** add hyphens property to c-content on x-small screens to allow long words to wrap ([faed532](https://github.com/Open-Study-College/osc/commit/faed53259572a129306557a9d3164289d175b9ef))
-
-## [0.95.0](https://github.com/Open-Study-College/osc/compare/v0.94.0...v0.95.0) (2023-05-26)
-
-
-### ✨ Features
-
-* **checkbox:** adds size prop/modifier to checkbox ([444a18a](https://github.com/Open-Study-College/osc/commit/444a18a2a5042c6800f4c50025bcac641abd0f41))
-* **checkbox:** set default sizes to stories ([1d410b5](https://github.com/Open-Study-College/osc/commit/1d410b5e65da857ef59204c1edc580c09949729a))
-* **label:** adds size modifier to label ([07b094f](https://github.com/Open-Study-College/osc/commit/07b094fc9085441cc4a0994439b62f2645a5bff6))
 
