@@ -232,26 +232,42 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
                 ? (JSON.parse(String(formData.get('buyerIdentity'))) as CartBuyerIdentityInput)
                 : ({} as CartBuyerIdentityInput);
 
-            result = cartId
-                ? await updateCartBuyerIdentity({
-                      cartId,
-                      buyerIdentity: {
-                          ...buyerIdentity,
-                          customerAccessToken,
-                      },
-                      storefront,
-                  })
-                : await createCart({
-                      input: {
+            try {
+                invariant(buyerIdentity, 'No buyer identity to update');
+
+                result = cartId
+                    ? await updateCartBuyerIdentity({
+                          cartId,
                           buyerIdentity: {
                               ...buyerIdentity,
                               customerAccessToken,
                           },
-                      },
-                      storefront,
-                  });
+                          storefront,
+                      })
+                    : await createCart({
+                          input: {
+                              buyerIdentity: {
+                                  ...buyerIdentity,
+                                  customerAccessToken,
+                              },
+                          },
+                          storefront,
+                      });
 
-            cartId = result.cart.id;
+                cartId = result.cart.id;
+            } catch (error) {
+                console.error(error);
+
+                result = {
+                    cart: {} as CartType,
+                    errors: [
+                        {
+                            code: 'INVALID',
+                            message: 'No buyer identity to update',
+                        },
+                    ],
+                };
+            }
 
             break;
 
