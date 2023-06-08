@@ -24,7 +24,7 @@ export const sendEmail: GetEmailData = async (emailData) => {
             PublicSingleSendRequestEgg
         );
         console.log(JSON.stringify(apiResponse, null, 2));
-        return 'Email request sent to HubSpot';
+        return true;
     } catch (error: unknown) {
         console.error('Error in transactionEmailRequest', error);
         let message = 'Uknown Error';
