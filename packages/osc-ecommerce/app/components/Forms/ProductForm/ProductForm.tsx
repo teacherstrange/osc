@@ -139,6 +139,7 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                 <ButtonGroup direction="column">
                     {!isOutOfStock ? (
                         <AddToCart
+                            isDisabled={transitionIsNotIdle}
                             lines={[
                                 {
                                     merchandiseId: selectedVariant.id,
@@ -150,7 +151,13 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                         <></>
                     )}
 
-                    <Button variant="tertiary" isFull as="link" to="/contact">
+                    <Button
+                        variant="tertiary"
+                        isFull
+                        as="link"
+                        to="/contact"
+                        isDisabled={transitionIsNotIdle}
+                    >
                         Request a callback
                     </Button>
                 </ButtonGroup>

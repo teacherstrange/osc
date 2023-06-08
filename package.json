@@ -34,6 +34,7 @@
     "test:e2e": "npx nx run-many --target=test:e2e --all",
     "test:e2e:osc-ecommerce": "npx nx run osc-ecommerce:test:e2e",
     "test:e2e:osc-academic-hub": "npx nx run osc-academic-hub:test:e2e",
+    "test:e2e:ui:osc-ecommerce": "npx nx run osc-ecommerce:test:e2e:ui",
     "dev": "npx nx run-many --target=dev --all",
     "dev:fe": "npx nx run-many --target=dev --projects=osc-ui,osc-studio,osc-ecommerce,osc-academic-hub",
     "dev:osc-ui": "npx nx run osc-ui:dev",
