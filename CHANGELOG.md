@@ -1,3 +1,21 @@
+## [0.99.0](https://github.com/Open-Study-College/osc/compare/v0.98.0...v0.99.0) (2023-06-08)
+
+
+### 📦 General Housekeeping / Package Updates
+
+* update playwright so we can use UI mode ([f2f19f3](https://github.com/Open-Study-College/osc/commit/f2f19f3bc8cde0964bd3a42980b43018795e637c))
+
+
+### ✨ Features
+
+* **product page:** adds initial e2e tests for the product page flow ([576de83](https://github.com/Open-Study-College/osc/commit/576de83fd4c8557aa48ae4c0df6a2703a4cfe909))
+
+
+### 🐛 Bugs
+
+* **e2e:** update locator for outside click test ([0f8f4a4](https://github.com/Open-Study-College/osc/commit/0f8f4a413bf2e771ba999c116a50af19586f4384))
+* **product form:** add disabled prop to form buttons when transition isn't idle ([79f7c2d](https://github.com/Open-Study-College/osc/commit/79f7c2d7c6d4f25d8133c6b65984e69af9c78577))
+
 ## [0.98.0](https://github.com/Open-Study-College/osc/compare/v0.97.0...v0.98.0) (2023-05-26)
 
 
@@ -79,31 +97,4 @@
 * **checkbox:** adds size prop/modifier to checkbox ([444a18a](https://github.com/Open-Study-College/osc/commit/444a18a2a5042c6800f4c50025bcac641abd0f41))
 * **checkbox:** set default sizes to stories ([1d410b5](https://github.com/Open-Study-College/osc/commit/1d410b5e65da857ef59204c1edc580c09949729a))
 * **label:** adds size modifier to label ([07b094f](https://github.com/Open-Study-College/osc/commit/07b094fc9085441cc4a0994439b62f2645a5bff6))
-
-## [0.94.0](https://github.com/Open-Study-College/osc/compare/v0.93.0...v0.94.0) (2023-05-23)
-
-
-### ♻️ Refactors
-
-* **ecommerce:** move theme query into product query ([d84e0a3](https://github.com/Open-Study-College/osc/commit/d84e0a34ae1269c77bfea21b2e17fc6cd333785f))
-* **ecommerce:** update getPageData to allow more flexible params ([a50ec89](https://github.com/Open-Study-College/osc/commit/a50ec8922f9a348907fbabab2052d988c96ed01e))
-* **studio:** remove showHero schema ([fd52aeb](https://github.com/Open-Study-College/osc/commit/fd52aeb8b1d67eb344f35792f4f0c6d1308ca58e))
-
-
-### ✨ Features
-
-* **collections:** adds theme settings to collections ([3cc8726](https://github.com/Open-Study-College/osc/commit/3cc872651ccdd006ddb57425e60de02652ca72c3))
-* **ecommerce:** add relative position to main element ([875b205](https://github.com/Open-Study-College/osc/commit/875b205d89086019e6e18a4c6007fcda56caec02))
-* **flourishes:** adds page flourishes to pattern dropdown ([3fdbeba](https://github.com/Open-Study-College/osc/commit/3fdbeba7144552bab6438074cc6b281c1e42691f))
-* **flourishes:** bring collection flourishes into ecommerce ([6d105a2](https://github.com/Open-Study-College/osc/commit/6d105a2afc607c89d730bebf1a49f00f83ef568f))
-* **hero:** add flourishes to hero component in ecommerce ([11781da](https://github.com/Open-Study-College/osc/commit/11781da1d5ca0333e9bb2e4b922d62e6f6765850))
-* **product page:** adds flourishes to product page ([d14d628](https://github.com/Open-Study-College/osc/commit/d14d628974e60ea1e68a46436cc95939bac3a019))
-* **products:** adds collections to products query ([2cab426](https://github.com/Open-Study-College/osc/commit/2cab426257ae6d51bdd8840a3d668d79e768b663))
-* **styles:** adds utility class to apply position ([c75afb3](https://github.com/Open-Study-College/osc/commit/c75afb39285b1156049c2e606c615bdc15c85748))
-* **types:** adds flourish settings type to ecommerce ([9a562dd](https://github.com/Open-Study-College/osc/commit/9a562ddfea512f759a18fa5d21eb75c192e2c265))
-
-
-### 🐛 Bugs
-
-* **product page:** set upperContent type to be required to fix ts error ([c80c9b4](https://github.com/Open-Study-College/osc/commit/c80c9b488d86a91202892e1954b85dfafd017cc3))
 
