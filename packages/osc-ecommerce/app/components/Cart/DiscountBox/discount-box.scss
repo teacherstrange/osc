@@ -42,7 +42,7 @@
         &__tggle-box {
             display: grid;
             grid-template-rows: 0fr;
-            padding-block-start: $space-2xs; // Account for the space needed when the input is active
+            padding-block: $space-2xs; // Account for the space needed when the input is active
             overflow: hidden;
             transition: all $timing $ease-in-out;
 
