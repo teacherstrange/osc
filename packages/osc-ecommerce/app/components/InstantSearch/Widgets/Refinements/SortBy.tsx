@@ -17,6 +17,7 @@ export function SortBy(props: SortByProps) {
     return (
         <Select
             description={{ label: 'Sort By: ', className: 'u-text-bold' }}
+            defaultValue="shopify_products_grouped_by_id_alphabetical_asc"
             name={'sortBy_select'}
             setExternalValue={handleCheckboxChange}
             groupVariants={['inline', 'tertiary']}

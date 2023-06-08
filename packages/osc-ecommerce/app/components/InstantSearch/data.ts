@@ -11,11 +11,11 @@ export const SORTING_INDEXES = [
     },
     {
         value: 'shopify_products_grouped_by_id_alphabetical_asc',
-        label: 'A to Z',
+        label: 'Alphabetical - A to Z',
     },
     {
         value: 'shopify_products_grouped_by_id_alphabetical_desc',
-        label: 'Z to A',
+        label: 'Alphabetical - Z to A',
     },
 ];
 
