@@ -24,7 +24,11 @@ export const DiscountBox = (props: DiscountBoxProps) => {
 
     // Get the codes that are applicable to the cart and store them in state
     const applicableCodes =
-        discountCodes?.filter(({ applicable }) => applicable)?.map(({ code }) => code) || null;
+        discountCodes
+            ?.filter(({ applicable }) => applicable)
+            // Discount codes in Shopify appear to be case insensitive so we'll convert them to uppercase here
+            // to make sure we're not submitting multiple cases of the same code.
+            ?.map(({ code }) => code.toUpperCase()) || null;
 
     // Make sure we're not submitting the same code multiple times
     // Shopify will handle this on the backend but we want to avoid
