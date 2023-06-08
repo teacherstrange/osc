@@ -7,8 +7,7 @@
 
     .c-discount-box {
         margin-block-start: $space-m;
-        padding: $space-s $space-m;
-        background-color: var(--color-neutral-300);
+        padding-block: $space-s;
 
         &__ttl {
             color: var(--color-primary);
@@ -30,6 +29,12 @@
             align-items: flex-start;
             gap: $space-xs;
 
+            // Account for the space needed when the input is active
+            padding-block: $space-2xs $space-m;
+
+            // Account for the shadow on the button so it doesn't get cut off by the overflow hidden on the parent
+            padding-inline-end: 6px;
+
             @include mq($mq-mob, max) {
                 flex-direction: column;
             }
@@ -42,7 +47,6 @@
         &__tggle-box {
             display: grid;
             grid-template-rows: 0fr;
-            padding-block: $space-2xs; // Account for the space needed when the input is active
             overflow: hidden;
             transition: all $timing $ease-in-out;
 
@@ -53,17 +57,15 @@
 
         &__tggle-inner {
             min-height: 0;
-
-            // Account for the shadow on the button so it doesn't get cut off by the overflow hidden on the parent
-            padding-inline-end: 6px;
         }
 
         &__list {
             display: flex;
             flex-direction: column;
+            margin-block: 0;
+            padding-block: $space-s;
             border-top: 1px solid var(--color-neutral-400);
-            margin-block: $space-m 0;
-            padding-block-start: $space-s;
+            border-bottom: 1px solid var(--color-neutral-400);
         }
 
         &__term {
