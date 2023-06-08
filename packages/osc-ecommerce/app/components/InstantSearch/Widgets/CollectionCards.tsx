@@ -39,7 +39,7 @@ export const CollectionCards = (props: CollectionCardsProps) => {
                             highlightCategoryTwo: algoliaHighlightedCollectionsData[1].handle,
                         }
                     );
-                    // console.log('querySanityDataset', querySanityDataset);
+
                     if (querySanityDataset) {
                         setCollections(
                             algoliaHighlightedCollectionsData.map((collection, index) => {
@@ -47,9 +47,8 @@ export const CollectionCards = (props: CollectionCardsProps) => {
                                 collection.data = {
                                     reference: {
                                         featuredImage: {
-                                            src: querySanityDataset[index].image.secure_url,
-                                            imageStyles:
-                                                querySanityDataset[index].image.imageStyles,
+                                            src: querySanityDataset[index].src,
+                                            imageStyles: querySanityDataset[index].imageStyles,
                                             alt: querySanityDataset[index].alt,
                                         },
                                         slug: querySanityDataset[index].slug,
