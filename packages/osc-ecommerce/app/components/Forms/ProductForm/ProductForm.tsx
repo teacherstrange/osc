@@ -11,7 +11,7 @@ import { AlreadyInCartMessage } from '~/components/Cart/AlreadyInCartMessage';
 import { Price } from '~/components/Price/Price';
 import { useCart } from '~/hooks/useCart';
 import { isGiftVoucher } from '~/utils/storefront.helpers';
-import { AddToCart } from '../AddToCart/AddToCart';
+import { AddToCart } from '../CartActions/AddToCart';
 
 interface Product {
     product: ProductType & { selectedVariant?: ProductVariant };
@@ -102,7 +102,11 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
         );
 
         return (
-            <div className={classes} ref={forwardedRef}>
+            <div
+                className={classes}
+                ref={forwardedRef}
+                data-anim={transitionIsNotIdle ? 'shimmer' : ''}
+            >
                 <Form onChange={handleSubmit} className="c-product-form__form">
                     {product.options && product.options.length > 0
                         ? product.options.map((option, index) => {

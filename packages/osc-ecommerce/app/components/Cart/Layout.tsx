@@ -1,4 +1,6 @@
+import { useActionData, useFetchers } from '@remix-run/react';
 import { flattenConnection } from '@shopify/hydrogen';
+import type { CartLine } from '@shopify/hydrogen/storefront-api-types';
 import { mediaQueries as mq } from 'osc-design-tokens';
 import {
     Button,
@@ -15,25 +17,57 @@ import {
 import { useEffect, useState } from 'react';
 import { CartCardItem } from '~/components/Cart/CartCardItem';
 import { CartTotal } from '~/components/Cart/CartTotal';
+import { EmptyCartMessage } from '~/components/Cart/EmptyCartMessage';
 import { CartLineItem } from '~/components/Cart/LineItem';
+import { ErrorAlert } from '~/components/ErrorAlert/ErrorAlert';
 import { PATHS } from '~/constants';
 import { useCart } from '~/hooks/useCart';
-import { EmptyCartMessage } from './EmptyCartMessage';
+import { CartAction } from '~/types/shopify';
+import { getDifferenceBetweenArrays } from '~/utils/getDifferenceBetweenArrays';
+import { fetcherHasError, fetcherIsPending } from '~/utils/storefront.helpers';
+import { RemovedFromCardMessage } from './RemovedFromCartMessage';
 
 export const CartLayout = () => {
     const cart = useCart();
-    const linesCount = Boolean(cart?.lines?.edges?.length || 0);
-
-    const cartLines = linesCount && cart?.lines ? flattenConnection(cart?.lines) : [];
-
+    const action = useActionData();
     const isGreaterThanTab = useMediaQuery(`(min-width: ${rem(mq.tab)}rem)`);
     const [showOnGreaterThanTab, setShowOnGreaterThanTab] = useState(false);
-
     // We need this useEffect to set the showOnTab state only when the window object exists
     // Otherwise we will receive an SSR warning telling us the markup differs from the server
     useEffect(() => {
         setShowOnGreaterThanTab(isGreaterThanTab);
     }, [isGreaterThanTab]);
+
+    // Get the number of lines in the cart from the cart object
+    const linesCount = Boolean(cart?.lines?.edges?.length || 0);
+
+    // Here we're grabbing all of the fetchers that are currently firing
+    // and filtering them down to the ones that are submitting
+    const allFetchers = useFetchers();
+    const pendingFetchers = allFetchers.filter((f) => fetcherIsPending(f));
+    // Filter down the pending fetchers to the ones that are removing items from the cart
+    const removeFromCartFetchers = pendingFetchers.filter(
+        (f) => f.formData?.get('cartAction') === CartAction.REMOVE_FROM_CART
+    );
+    // Create an array of line ids that are currently being removed from the cart
+    const pendingLineIds = removeFromCartFetchers.map(
+        (f) => JSON.parse(String(f.submission?.formData.get('linesIds')) || '[]')[0]
+    );
+    const lineIsPending = (line: string) => pendingLineIds.includes(line);
+    const linesArePending = () => pendingLineIds.length > 0;
+
+    // Get any fetchers that have errors
+    const fetchersWithErrors = allFetchers.filter((f) => fetcherHasError(f));
+
+    const cartLines = linesCount && cart?.lines ? flattenConnection(cart?.lines) : [];
+    // Store the cart lines in state so we can compare them to the cart lines in the cart object when the component updates
+    const [cartLineItems] = useState(cartLines);
+    // Compare the cart lines in state to the cart lines in the cart object so we can determine which lines were removed
+    const removedItems = getDifferenceBetweenArrays(
+        cartLineItems as CartLine[],
+        cartLines as CartLine[],
+        'id'
+    );
 
     return (
         <Flourishes color="gradient-senary" pattern={flourishPrimary} variant="primary">
@@ -46,19 +80,41 @@ export const CartLayout = () => {
             </header>
 
             <div className="o-container o-grid u-pb-6xl">
+                {fetchersWithErrors.length > 0 || action?.errors.length > 0 ? (
+                    <div className="o-grid__col o-grid__col--12 o-grid__col--10@tab o-grid__col--start-2@tab">
+                        <ErrorAlert
+                            errors={
+                                fetchersWithErrors.length > 0 ? fetchersWithErrors : action?.errors
+                            }
+                        />
+                    </div>
+                ) : null}
+
                 <div className="o-grid__col o-grid__col--12 o-grid__col--6@tab o-grid__col--start-2@tab">
+                    {removedItems && removedItems.length > 0 ? (
+                        <ul>
+                            {removedItems.map((line) => (
+                                <RemovedFromCardMessage line={line} key={line.id} />
+                            ))}
+                        </ul>
+                    ) : null}
+
                     {!linesCount ? <EmptyCartMessage /> : null}
 
                     {linesCount && showOnGreaterThanTab ? (
-                        <>
-                            <ul>
-                                {cartLines.map((line) => {
-                                    if (!line.id) return null;
+                        <ul hidden={!linesCount}>
+                            {cartLines.map((line) => {
+                                if (!line.id) return null;
 
-                                    return <CartCardItem line={line} key={line.id} />;
-                                })}
-                            </ul>
-                        </>
+                                return (
+                                    <CartCardItem
+                                        line={line}
+                                        key={line.id}
+                                        isLoading={lineIsPending(line.id)}
+                                    />
+                                );
+                            })}
+                        </ul>
                     ) : null}
 
                     {linesCount ? (
@@ -74,7 +130,10 @@ export const CartLayout = () => {
                 </div>
 
                 {linesCount ? (
-                    <div className="o-grid__col o-grid__col--12 o-grid__col--4@tab">
+                    <div
+                        className="o-grid__col o-grid__col--12 o-grid__col--4@tab"
+                        hidden={!linesCount}
+                    >
                         <div className="is-sticky-from@tab">
                             <Card hasShadow className="u-pt-m u-pr-l u-pl-l u-pb-2xl u-h-auto">
                                 <CardTitle isUnderlined>Total</CardTitle>
@@ -84,18 +143,31 @@ export const CartLayout = () => {
                                             if (!line.id) return null;
 
                                             return showOnGreaterThanTab ? (
-                                                <CartLineItem line={line} key={line.id} />
+                                                <CartLineItem
+                                                    line={line}
+                                                    key={line.id}
+                                                    isLoading={lineIsPending(line.id)}
+                                                />
                                             ) : (
-                                                <CartCardItem line={line} key={line.id} />
+                                                <CartCardItem
+                                                    line={line}
+                                                    key={line.id}
+                                                    isLoading={lineIsPending(line.id)}
+                                                />
                                             );
                                         })}
                                     </ul>
 
-                                    <CartTotal cost={cart.cost} />
+                                    <CartTotal cost={cart.cost} isLoading={linesArePending()} />
                                 </CardBody>
 
                                 <CardFooter className="u-pt-xl">
-                                    <Button as="a" href={cart.checkoutUrl} isFull>
+                                    <Button
+                                        as="a"
+                                        href={cart.checkoutUrl}
+                                        isFull
+                                        isDisabled={linesArePending()}
+                                    >
                                         Enrol now
                                     </Button>
                                 </CardFooter>

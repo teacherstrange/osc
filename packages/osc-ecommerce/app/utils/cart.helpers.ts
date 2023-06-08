@@ -9,7 +9,12 @@ import type {
 import invariant from 'tiny-invariant';
 import { getClient } from '~/lib/sanity/getClient.server';
 import { LINE_ITEM_QUERY } from '~/queries/sanity/lineItemData';
-import { ADD_LINES_MUTATION, CART_QUERY, CREATE_CART_MUTATION } from '~/queries/shopify/cart';
+import {
+    ADD_LINES_MUTATION,
+    CART_QUERY,
+    CREATE_CART_MUTATION,
+    REMOVE_LINE_ITEMS_MUTATION,
+} from '~/queries/shopify/cart';
 import type { SanityProduct, SanityProductExcerpt } from '~/types/sanity';
 import type { CartLineWithSanityData } from '~/types/shopify';
 import { createSanityProductID, extractIdFromGid, isGiftVoucher } from './storefront.helpers';
@@ -186,4 +191,39 @@ export async function addLinesToCart(args: AddLines) {
     invariant(cartLinesAdd, 'No data returned from cartLinesAdd mutation');
 
     return cartLinesAdd;
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Remove lines from cart
+ * -----------------------------------------------------------------------------------------------*/
+
+interface RemoveLines {
+    cartId: string;
+    lineIds: Cart['id'][];
+    storefront: AppLoadContext['storefront'];
+}
+
+/**
+ * Create a cart with line(s) mutation
+ * @param cartId the current cart id
+ * @param lineIds [ID!]! an array of cart line ids to remove
+ * @see https://shopify.dev/api/storefront/2022-07/mutations/cartlinesremove
+ * @returns mutated cart
+ * @preserve
+ */
+export async function removeLinesFromCart(args: RemoveLines) {
+    const { cartId, lineIds, storefront } = args;
+
+    const { cartLinesRemove } = await storefront.mutate<{
+        cartLinesRemove: {
+            cart: Cart;
+            errors: UserError[];
+        };
+    }>(REMOVE_LINE_ITEMS_MUTATION, {
+        variables: { cartId, lineIds },
+    });
+
+    invariant(cartLinesRemove, 'No data returned from remove lines mutation');
+
+    return cartLinesRemove;
 }

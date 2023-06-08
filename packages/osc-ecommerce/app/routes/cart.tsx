@@ -9,6 +9,7 @@ import type {
     UserError,
 } from '@shopify/hydrogen/storefront-api-types';
 import accordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
+import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import flourishStyles from 'osc-ui/dist/src-components-Flourishes-flourish.css';
@@ -18,14 +19,14 @@ import invariant from 'tiny-invariant';
 import { CartLayout } from '~/components/Cart/Layout';
 import { getSettingsData } from '~/models/sanity.server';
 import { CART_QUERY } from '~/queries/sanity/cart';
-
 import type { CartActions } from '~/types/shopify';
 import { CartAction } from '~/types/shopify';
-import { addLinesToCart, createCart } from '~/utils/cart.helpers';
+import { addLinesToCart, createCart, removeLinesFromCart } from '~/utils/cart.helpers';
 
 export const links: LinksFunction = () => {
     return [
         { rel: 'stylesheet', href: accordionStyles },
+        { rel: 'stylesheet', href: alertStyles },
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: cardStyles },
         { rel: 'stylesheet', href: flourishStyles },
@@ -84,25 +85,70 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
                 ? (JSON.parse(String(formData.get('lines'))) as CartLineInput[])
                 : ([] as CartLineInput[]);
 
-            invariant(lines.length, 'No lines to add');
+            try {
+                invariant(lines.length, 'No lines to add');
 
-            /**
-             * If no previous cart exists, create one with the lines.
-             */
-            if (!cartId) {
-                result = await createCart({
-                    input: countryCode ? { lines, buyerIdentity: { countryCode } } : { lines },
-                    storefront,
-                });
-            } else {
-                result = await addLinesToCart({
-                    cartId,
-                    lines,
-                    storefront,
-                });
+                /**
+                 * If no previous cart exists, create one with the lines.
+                 */
+                if (!cartId) {
+                    result = await createCart({
+                        input: countryCode ? { lines, buyerIdentity: { countryCode } } : { lines },
+                        storefront,
+                    });
+                } else {
+                    result = await addLinesToCart({
+                        cartId,
+                        lines,
+                        storefront,
+                    });
+                }
+
+                cartId = result.cart.id;
+            } catch (error) {
+                console.error(error);
+
+                result = {
+                    cart: {} as CartType,
+                    errors: [
+                        {
+                            code: 'INVALID',
+                            message: 'No lines to add',
+                        },
+                    ],
+                };
             }
 
-            cartId = result.cart.id;
+            break;
+
+        case CartAction.REMOVE_FROM_CART:
+            const lineIds = formData.get('linesIds')
+                ? (JSON.parse(String(formData.get('linesIds'))) as CartType['id'][])
+                : ([] as CartType['id'][]);
+
+            try {
+                invariant(lineIds.length, 'No lines to remove');
+
+                result = await removeLinesFromCart({
+                    cartId,
+                    lineIds,
+                    storefront,
+                });
+
+                cartId = result.cart.id;
+            } catch (error) {
+                console.error(error);
+
+                result = {
+                    cart: {} as CartType,
+                    errors: [
+                        {
+                            code: 'INVALID',
+                            message: 'No lines to remove',
+                        },
+                    ],
+                };
+            }
 
             break;
 

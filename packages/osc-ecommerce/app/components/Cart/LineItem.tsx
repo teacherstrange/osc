@@ -1,30 +1,31 @@
 import { Link } from '@remix-run/react';
 import { Money } from '@shopify/hydrogen';
 import type { CartLine } from '@shopify/hydrogen/storefront-api-types';
-import { Button, LineItem, LineItemGroup, LineItemHeader, LineItemPrice, Price } from 'osc-ui';
+import { LineItem, LineItemGroup, LineItemHeader, LineItemPrice, Price } from 'osc-ui';
 import { PATHS } from '~/constants';
+import { RemoveFromCart } from '../Forms/CartActions/RemoveFromCart';
 
 interface CartLineItemProps {
     line: CartLine;
+    isLoading?: boolean;
 }
 
 export const CartLineItem = (props: CartLineItemProps) => {
-    const { line } = props;
+    const { line, isLoading } = props;
 
     if (typeof line.quantity === 'undefined' || !line.merchandise?.product) return null;
 
     return (
         <LineItem variant="primary" asChild>
-            <li>
+            <li data-anim={isLoading ? 'shimmer' : ''}>
                 <LineItemGroup>
                     <LineItemHeader className="u-mb-0">
                         <Link to={`/${PATHS.PRODUCTS}/${line?.merchandise?.product?.handle}`}>
                             {line?.merchandise?.product?.title}
                         </Link>
                     </LineItemHeader>
-                    <Button variant="quaternary" className="u-text-underline">
-                        Remove
-                    </Button>
+
+                    <RemoveFromCart lineIds={[line?.id]} />
                 </LineItemGroup>
 
                 <CartLineItemPrice line={line} />
