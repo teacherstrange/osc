@@ -60,10 +60,10 @@ export const Hit = (props: HitProps) => {
         <CardPriceTag>
             <>
                 {/* TODO: REPLACE THIS WITH ETIKA DATA */}
-                <Price>
+                <Price size="sm">
                     <span className="u-text-bold">DATA FROM ETIKA</span>/month
                 </Price>
-                <Price>
+                <Price size="sm">
                     or from <span className="u-text-bold">{`£${hit.price} in full`}</span>
                 </Price>
             </>
