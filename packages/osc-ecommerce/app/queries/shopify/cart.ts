@@ -25,63 +25,68 @@ const CART_QUERY_FRAGMENT = `#graphql
         checkoutUrl
         totalQuantity
         buyerIdentity {
-        countryCode
-        customer {
-            id
+            countryCode
+            customer {
+                id
+                email
+                firstName
+                lastName
+                displayName
+            }
             email
-            firstName
-            lastName
-            displayName
-        }
-        email
-        phone
+            phone
         }
         lines(first: 100) {
         edges {
             node {
-            id
-            quantity
-            attributes {
-                key
-                value
-            }
-            cost {
-                totalAmount {
-                amount
-                currencyCode
-                }
-                amountPerQuantity {
-                amount
-                currencyCode
-                }
-                compareAtAmountPerQuantity {
-                amount
-                currencyCode
-                }
-            }
-            merchandise {
-                ... on ProductVariant {
                 id
-                availableForSale
-                compareAtPrice {
-                    ...MoneyFragment
-                }
-                price {
-                    ...MoneyFragment
-                }
-                requiresShipping
-                title
-                product {
-                    handle
-                    title
-                    id
-                }
-                selectedOptions {
-                    name
+                quantity
+                attributes {
+                    key
                     value
                 }
+                cost {
+                    totalAmount {
+                        amount
+                        currencyCode
+                    }
+                    amountPerQuantity {
+                        amount
+                        currencyCode
+                    }
+                    compareAtAmountPerQuantity {
+                        amount
+                        currencyCode
+                    }
                 }
-            }
+                merchandise {
+                    ... on ProductVariant {
+                        id
+                        availableForSale
+                        compareAtPrice {
+                            ...MoneyFragment
+                        }
+                        price {
+                            ...MoneyFragment
+                        }
+                        requiresShipping
+                        title
+                        product {
+                            handle
+                            title
+                            id
+                            options {
+                                name
+                                values
+                            }
+                        }
+                        selectedOptions {
+                            name
+                            value
+                        }
+                        sku
+                    }
+                }
             }
         }
         }

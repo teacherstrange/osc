@@ -18,7 +18,8 @@
 
 @function scales-map($scale: "fixed") {
     $map: (
-        "0": 0
+        "0": 0,
+        "auto": auto
     );
 
     @each $step in scale-token("steps") {
@@ -188,6 +189,12 @@ $osc-config: (
         prefix: "pos",
         values: (
             "rel": relative
+        )
+    ),
+    height: (
+        prefix: "h",
+        values: (
+            "auto": auto
         )
     )
 );
@@ -377,5 +384,12 @@ $osc-config: (
 
 .is-sticky {
     position: sticky;
-    top: 0;
+    top: $space-m;
+
+    &-from\@tab {
+        @include mq($mq-tab) {
+            position: sticky;
+            top: $space-m;
+        }
+    }
 }

@@ -30,5 +30,13 @@ export const getPageType = (location: Location) => {
         return PATHS.AWARDS;
     }
 
+    if (pathname.includes(PATHS.CART)) {
+        return PATHS.CART;
+    }
+
+    if (pathname.includes(PATHS.WISHLIST)) {
+        return PATHS.WISHLIST;
+    }
+
     return undefined;
 };

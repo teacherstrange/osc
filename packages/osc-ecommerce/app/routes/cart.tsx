@@ -1,6 +1,6 @@
-import type { ActionArgs } from '@remix-run/node';
+import type { PortableTextBlock } from '@portabletext/types';
+import type { ActionArgs, ActionFunction, LinksFunction, LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { flattenConnection } from '@shopify/hydrogen';
 import type {
     CartBuyerIdentityInput,
     CartLineInput,
@@ -8,13 +8,45 @@ import type {
     CartUserError,
     UserError,
 } from '@shopify/hydrogen/storefront-api-types';
+import accordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
+import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
+import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
+import flourishStyles from 'osc-ui/dist/src-components-Flourishes-flourish.css';
+import lineItemStyles from 'osc-ui/dist/src-components-LineItem-line-item.css';
+import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import invariant from 'tiny-invariant';
-import { useCart } from '~/hooks/useCart';
+import { CartLayout } from '~/components/Cart/Layout';
+import { getSettingsData } from '~/models/sanity.server';
+import { CART_QUERY } from '~/queries/sanity/cart';
+
 import type { CartActions } from '~/types/shopify';
 import { CartAction } from '~/types/shopify';
 import { addLinesToCart, createCart } from '~/utils/cart.helpers';
 
-export async function action({ request, context }: ActionArgs) {
+export const links: LinksFunction = () => {
+    return [
+        { rel: 'stylesheet', href: accordionStyles },
+        { rel: 'stylesheet', href: buttonStyles },
+        { rel: 'stylesheet', href: cardStyles },
+        { rel: 'stylesheet', href: flourishStyles },
+        { rel: 'stylesheet', href: lineItemStyles },
+        { rel: 'stylesheet', href: selectStyles },
+    ];
+};
+
+export type LoaderData = {
+    emptyCartMessage: PortableTextBlock[];
+};
+
+export const loader: LoaderFunction = async () => {
+    const emptyCartMessage = await getSettingsData({
+        query: CART_QUERY,
+    });
+
+    return json<LoaderData>(emptyCartMessage);
+};
+
+export const action: ActionFunction = async ({ request, context }: ActionArgs) => {
     const { session, storefront } = context;
     const headers = new Headers();
 
@@ -96,29 +128,8 @@ export async function action({ request, context }: ActionArgs) {
         },
         { status, headers }
     );
-}
+};
 
 export default function CartRoute() {
-    const cart = useCart();
-    const linesCount = Boolean(cart?.lines?.edges?.length || 0);
-
-    if (!linesCount) {
-        return <p>Looks like you haven't added anything to your cart.</p>;
-    }
-    const cartLines = cart?.lines ? flattenConnection(cart?.lines) : [];
-
-    return (
-        <>
-            <h1>Cart</h1>
-            <ul>
-                {cartLines.map((line) => (
-                    <div key={line.id}>
-                        <h2>
-                            {line?.merchandise?.product?.title} - {line?.merchandise?.title}
-                        </h2>
-                    </div>
-                ))}
-            </ul>
-        </>
-    );
+    return <CartLayout />;
 }

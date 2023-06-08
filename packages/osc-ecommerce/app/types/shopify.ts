@@ -1,9 +1,11 @@
 import type { Storefront as HydrogenStorefront } from '@shopify/hydrogen';
 import type {
+    CartLine,
     CountryCode,
     CurrencyCode,
     LanguageCode,
 } from '@shopify/hydrogen/storefront-api-types';
+import type { SanityProductExcerpt } from './sanity';
 
 export type Locale = {
     language: LanguageCode;
@@ -28,3 +30,7 @@ export enum CartAction {
     UPDATE_BUYER_IDENTITY = 'UPDATE_BUYER_IDENTITY',
 }
 export type CartActions = keyof typeof CartAction;
+
+export type CartLineWithSanityData = CartLine & {
+    sanityData?: SanityProductExcerpt;
+};

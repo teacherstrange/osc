@@ -4,12 +4,13 @@ import { Button } from 'osc-ui';
 import { CartAction } from '~/types/shopify';
 
 interface AddToCartFormProps {
+    label: string;
     lines: CartLineInput[];
     isDisabled?: boolean;
     analytics?: unknown;
 }
 export const AddToCart = (props: AddToCartFormProps) => {
-    const { lines, analytics, isDisabled } = props;
+    const { label, lines, analytics, isDisabled } = props;
 
     return (
         <Form action="/cart" method="post" className="u-w-full">
@@ -18,7 +19,7 @@ export const AddToCart = (props: AddToCartFormProps) => {
             <input type="hidden" name="analytics" value={JSON.stringify(analytics)} />
 
             <Button isFull isDisabled={isDisabled}>
-                Add to bag
+                {label}
             </Button>
         </Form>
     );

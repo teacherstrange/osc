@@ -8,6 +8,7 @@ import type {
     SelectedOptionInput,
 } from '@shopify/hydrogen/storefront-api-types';
 import { Flourishes, flourishPrimary, useIntersectionObserver } from 'osc-ui';
+import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import flourishStyles from 'osc-ui/dist/src-components-Flourishes-flourish.css';
 import labelStyles from 'osc-ui/dist/src-components-Label-label.css';
@@ -40,6 +41,7 @@ export const links: LinksFunction = () => {
     return [
         { rel: 'stylesheet', href: productStyles },
         { rel: 'stylesheet', href: productFormStyles },
+        { rel: 'stylesheet', href: alertStyles },
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: labelStyles },
         { rel: 'stylesheet', href: radioStyles },

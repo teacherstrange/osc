@@ -5,4 +5,6 @@ export const PATHS = {
     COLLECTIONS: 'collections',
     PRODUCTS: 'courses',
     AWARDS: 'awards',
+    CART: 'cart',
+    WISHLIST: 'wishlist',
 } as const;

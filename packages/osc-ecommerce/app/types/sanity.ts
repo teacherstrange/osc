@@ -383,8 +383,15 @@ export interface SanityPage {
 }
 
 export interface SanityProduct extends SanityPage {
+    gid: string;
     upperContent: module[] | contentModule[];
     theme?: SanityPageTheme;
+}
+
+export interface SanityProductExcerpt {
+    description: {
+        body: PortableTextBlock;
+    };
 }
 
 export interface shopifyProduct {

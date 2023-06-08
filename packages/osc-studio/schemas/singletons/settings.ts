@@ -33,6 +33,10 @@ export default defineType({
             title: 'Contact details',
         },
         {
+            name: 'cart',
+            title: 'Cart',
+        },
+        {
             name: 'notFoundPage',
             title: '404 page',
         },
@@ -298,6 +302,13 @@ export default defineType({
                 Rule.regex(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, {
                     name: 'email',
                 }),
+        }),
+        // Cart
+        defineField({
+            name: 'emptyCartMessage',
+            title: 'Empty cart message',
+            type: 'body',
+            group: 'cart',
         }),
         // Not found page
         defineField({
