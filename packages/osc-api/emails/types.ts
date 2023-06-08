@@ -31,5 +31,5 @@ type emailData = {
     customProperties: custom;
 };
 
-export type GetEmailData = (input: emailData) => Promise<boolean | Error>;
-export type GetRegEmailData = (input: regEmailData) => Promise<boolean | Error>;
+export type GetEmailData = (input: emailData) => Promise<Boolean | Error>;
+export type GetRegEmailData = (input: regEmailData) => Promise<Boolean | Error>;
