@@ -23,6 +23,7 @@ import {
 import { useState } from 'react';
 import type { AlgoliaHit, SendEventForHits } from '../../types';
 import { Highlight } from 'react-instantsearch-hooks-web';
+import { PATHS } from '~/constants';
 
 type HitProps = {
     className?: string;
@@ -75,7 +76,7 @@ export const Hit = (props: HitProps) => {
             <>{view === 'listview' && WishListButton}</>
             <Button
                 as="link"
-                to="/courses/aat-level-3-diploma-in-accounting"
+                to={`/${PATHS.PRODUCTS}/${hit.handle}`}
                 isFull={view === 'gridview' && true}
             >
                 View course
