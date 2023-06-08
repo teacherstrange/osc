@@ -147,7 +147,11 @@ const Search = (props: SearchProps) => {
                             !nestedAccordion ? 'u-mb-l' : ''
                         } u-bg-color-neutral-200 u-pt-5xl u-pb-5xl`}
                     >
-                        <div className="o-container o-container--4xs">
+                        <div
+                            className={`${
+                                !nestedAccordion ? 'u-pl-7xl u-pr-4xl' : ''
+                            } o-container o-container--3xs`}
+                        >
                             <ItemCounter />
                             <SearchBox />
                         </div>

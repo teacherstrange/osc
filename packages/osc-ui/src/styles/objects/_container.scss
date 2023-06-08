@@ -18,6 +18,7 @@
 $padding: calc($space-5xl + 4px); /* [1] */
 $padding-s: $space-l;
 $container-width-4xs: #{$container-4xs}px;
+$container-width-3xs: #{$container-3xs}px;
 $container-width-2xs: #{$container-2xs}px;
 $container-width-xs: #{$container-xs}px;
 $container-width-s: #{$container-s}px;
@@ -56,6 +57,10 @@ $container-width-l: #{$container-l}px;
 
     &--4xs {
         width: min(100%, $container-width-4xs);
+    }
+
+    &--3xs {
+        width: min(100%, $container-width-3xs);
     }
 
     &--2xs {
