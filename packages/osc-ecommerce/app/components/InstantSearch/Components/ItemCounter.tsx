@@ -7,7 +7,9 @@ export const ItemCounter = (props: UseHitsProps) => {
     return (
         <p className="t-font-xl">
             {results ? (
-                <strong key={`${results?.nbHits}`}>Showing {results?.nbHits} Results for</strong>
+                <strong key={`${results?.nbHits}`}>
+                    Showing {results?.nbHits} Results {results.query ? 'for' : null}
+                </strong>
             ) : null}
         </p>
     );
