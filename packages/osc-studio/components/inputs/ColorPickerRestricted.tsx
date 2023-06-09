@@ -59,7 +59,7 @@ export const ColorPickerRestricted = (props: StringInputProps<StringSchemaType>)
             onChange={handleChange}
             // custom search filter
             filterOption={(query, option) =>
-                option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
+                option.payload.prettyName.toLowerCase().indexOf(query.toLowerCase()) > -1
             }
             icon={
                 value ? (
