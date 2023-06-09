@@ -1,3 +1,26 @@
+## [0.102.0](https://github.com/Open-Study-College/osc/compare/v0.101.0...v0.102.0) (2023-06-09)
+
+
+### ✨ Features
+
+* **cart:** add helper function to update the cart line items ([cc70d13](https://github.com/Open-Study-College/osc/commit/cc70d136ccabfaf146e0db19a17d3b62b64d610b))
+* **cart:** add mutation to update the cart line items ([8c8b027](https://github.com/Open-Study-College/osc/commit/8c8b027800d9f50dd44218b4486cd9d32655ce21))
+* **cart:** add product query to get the selected variant id ([33d00e9](https://github.com/Open-Study-College/osc/commit/33d00e99e55a5b405aab141f5963233e34f46051))
+* **cart:** add remove from cart function ([d4edbd7](https://github.com/Open-Study-College/osc/commit/d4edbd7f393d6cd19681f41d0deb63f1d5aaa57e))
+* **cart:** add update cart action to pending line ids array ([9d76060](https://github.com/Open-Study-College/osc/commit/9d760606248aa367aa76042826818685596a769d))
+* **cart:** adds form to the cart card item options ([d98932d](https://github.com/Open-Study-College/osc/commit/d98932d349a64fa474ba03a60f336dc3bbb8e89c))
+* **cart:** adds update cart function to cart action ([5def8fc](https://github.com/Open-Study-College/osc/commit/5def8fc3c09789ba1f3fb21d7793c1181b6a0c94))
+
+
+### 🐛 Bugs
+
+* **cart:** remove duplicate action ([07e8f7a](https://github.com/Open-Study-College/osc/commit/07e8f7adba753872c4f61e14fb41994b1d13f1cc))
+
+
+### ♻️ Refactors
+
+* **cart:** wrap update action in try catch ([89c6434](https://github.com/Open-Study-College/osc/commit/89c643484ad911fa77bb01fe36aa0b42a4d57e9f))
+
 ## [0.101.0](https://github.com/Open-Study-College/osc/compare/v0.100.0...v0.101.0) (2023-06-08)
 
 
@@ -129,35 +152,4 @@
 * **line item:** align primary items to the top ([255f6d4](https://github.com/Open-Study-College/osc/commit/255f6d41a07cb943333b8ccdbd31e14e0e7aa942))
 * **line item:** update storybook docs ([841408c](https://github.com/Open-Study-College/osc/commit/841408c903985ea493413686f434b710cffe2acc))
 * **line item:** update styles so price won't wrap ([f451a76](https://github.com/Open-Study-College/osc/commit/f451a76d9adfb4f9c98acba104bab7d05d4c0e74))
-
-## [0.97.0](https://github.com/Open-Study-College/osc/compare/v0.96.0...v0.97.0) (2023-05-26)
-
-
-### ♻️ Refactors
-
-* **card styles:** move border styles into modifier class ([6da41d9](https://github.com/Open-Study-College/osc/commit/6da41d9b6a285222b1406e33a7ed3238d8d6b25a))
-* **card styles:** move shadow styles into modifier class ([4e2096f](https://github.com/Open-Study-College/osc/commit/4e2096fb1f12abbc52d09f68579bc433e7392d1f))
-* **card styles:** move underline styles into own modifier ([0f4d828](https://github.com/Open-Study-College/osc/commit/0f4d8287f35e97643e7f28c4d99c8ed0646fcc55))
-* **cards:** replace is-small class with --small modifier ([8484b71](https://github.com/Open-Study-College/osc/commit/8484b717da581cde07159cbeafbde0824d60306c))
-* **cards:** update title and subtitle styles to be handled by modifier classes ([7de6a09](https://github.com/Open-Study-College/osc/commit/7de6a098d2782e49467babf51bc45e09fe58a1a8))
-
-
-### ✨ Features
-
-* **accordion:** adds quaternary accordion style ([4a7ccbe](https://github.com/Open-Study-College/osc/commit/4a7ccbe3a79d40336d3005abfcdad84f0bc3bf33))
-* **cards:** add bold utility to price ([9e1ddb6](https://github.com/Open-Study-College/osc/commit/9e1ddb686ad660da016dcfccba73f49f51241cdd))
-* **cards:** adds body width modifier ([acea449](https://github.com/Open-Study-College/osc/commit/acea4493d8ba7fc1e05d7accb23da5361b38a547))
-* **cards:** adds cart card story ([83d25e3](https://github.com/Open-Study-College/osc/commit/83d25e3ee50e7640fb8bdf1c48f5a56bd620470a))
-* **cards:** adds responsive accordion story ([bad7eb7](https://github.com/Open-Study-College/osc/commit/bad7eb7b1bc992963070afd4d080609ae0d48d56))
-* **cards:** adds transparency modifier ([0ccb6b4](https://github.com/Open-Study-College/osc/commit/0ccb6b470a3878a21de165905037d18df5777dce))
-* **label:** add dark colour modifier ([99b270e](https://github.com/Open-Study-College/osc/commit/99b270e24501bdfe43df6a285e25ad789949228f))
-* **select:** add inline-wrap variant ([f6774d0](https://github.com/Open-Study-College/osc/commit/f6774d0c57af326b35c516e6890da28814b30b0d))
-* **select:** add modifier classes and props ([59c639a](https://github.com/Open-Study-College/osc/commit/59c639aee32f231f9991960d68a828c4bd0493e3))
-* **styles:** add justify content utility class ([021bc9d](https://github.com/Open-Study-College/osc/commit/021bc9d1334471e6e3a166609cfb12bde07b4f23))
-
-
-### 🐛 Bugs
-
-* **button:** udpate fg colour for better contrast ([4a16ac0](https://github.com/Open-Study-College/osc/commit/4a16ac05360a4863ea5e07762076dd650d7692f5))
-* **cards:** update course card in ecommerce to use new props ([b8916a4](https://github.com/Open-Study-College/osc/commit/b8916a43e3995a604337f6c204fc5ced87e43936))
 
