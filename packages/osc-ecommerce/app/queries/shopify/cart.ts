@@ -36,13 +36,7 @@ const CART_QUERY_FRAGMENT = `#graphql
             countryCode
             customer {
                 id
-                email
-                firstName
-                lastName
-                displayName
             }
-            email
-            phone
         }
         lines(first: 100) {
         edges {
@@ -250,4 +244,31 @@ export const DISCOUNT_CODES_UPDATE = `#graphql
   ${LINES_CART_FRAGMENT}
   ${USER_ERROR_FRAGMENT}
   ${DISCOUNT_CODES_FRAGMENT}
+`;
+
+/* -------------------------------------------------------------------------------------------------
+ * Update Buyer Identity
+ * cartBuyerIdentityUpdate is used to associate customer info with a cart and is used to determine international pricing.
+ * -----------------------------------------------------------------------------------------------*/
+export const UPDATE_CART_BUYER_ID = `#graphql
+ mutation(
+   $cartId: ID!
+   $buyerIdentity: CartBuyerIdentityInput!
+   $country: CountryCode = ZZ
+   $language: LanguageCode
+ ) @inContext(country: $country, language: $language) {
+   cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
+     cart {
+       id
+       buyerIdentity {
+         countryCode
+       }
+     }
+     errors: userErrors {
+       message
+       field
+       code
+     }
+   }
+ }
 `;
