@@ -105,7 +105,9 @@ export const ColorPickerRestricted = (props: StringInputProps<StringSchemaType>)
                     </Flex>
                 </Card>
             )}
-            value={capitalizeFirstLetter(value)}
+            renderValue={(value, option) =>
+                capitalizeFirstLetter(option?.payload.prettyName!) || capitalizeFirstLetter(value)
+            }
         />
     );
 };
