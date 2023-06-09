@@ -60,7 +60,9 @@ export const SANITY_API_VERSION = '2021-10-21';
 export const SHOPIFY_STORE_ID = 'openstudydev.myshopify.com';
 
 // The route paths for the different pages in the ecommerce app
-export const PATHS = {
+export const PATHS: {
+    [key: string]: string;
+} = {
     HOME: '/',
     BLOG: 'blog',
     COLLECTIONS: 'collections',
