@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
+import { Button } from '../Button/Button';
 import { SpritesheetProvider } from '../Icon/Icon';
 import { TextInput } from './TextInput';
 import { textInputSchema } from './mockSchema';
@@ -186,4 +187,41 @@ test('should change focus to second input when using the tab key', async () => {
     await user.tab();
 
     expect(input2).toHaveFocus();
+});
+
+const ValueControlledInput = () => {
+    const [inputValue, setInputValue] = useState('');
+
+    return (
+        <div>
+            <TextInput
+                id="name"
+                label="Name"
+                name="name"
+                type="text"
+                variants={['tertiary']}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+            />
+
+            <Button size="sm" onClick={() => setInputValue('')}>
+                Reset
+            </Button>
+        </div>
+    );
+};
+
+test('should clear the input value when the reset button is clicked', async () => {
+    const user = userEvent.setup();
+    render(<ValueControlledInput />);
+
+    const input1 = screen.getByRole('textbox', { name: 'Name' });
+    await user.type(input1, 'test');
+
+    expect(input1).toHaveValue('test');
+
+    const resetButton = screen.getByRole('button', { name: 'Reset' });
+    await user.click(resetButton);
+
+    expect(input1).toHaveValue('');
 });

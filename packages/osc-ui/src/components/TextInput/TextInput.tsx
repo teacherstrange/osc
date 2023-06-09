@@ -91,6 +91,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         type = 'text',
         variants,
         className,
+        value: _value,
         ...rest
     } = props;
     const [value, setValue] = useState(defaultValue ? defaultValue : '');
@@ -139,6 +140,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     onChange={(event) => setValue(event.currentTarget.value)}
                     ref={forwardedRef}
                     type={type}
+                    value={_value || value}
                     {...rest}
                 />
                 <Label
@@ -147,7 +149,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                     htmlFor={id}
                     name={label}
                     required={required}
-                    variants={value ? ['filled'] : null}
+                    variants={_value || value ? ['filled'] : null}
                 />
                 {icon ? <Icon className={iconClasses} id={icon.id} /> : null}
                 {errors && errors.length > 0 ? <InputError errors={errors} id={id} /> : null}

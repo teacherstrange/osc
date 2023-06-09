@@ -1,8 +1,9 @@
 import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { textInputSchema } from './mockSchema';
+import { Button } from '../Button/Button';
 import { TextInput } from './TextInput';
+import { textInputSchema } from './mockSchema';
 
 export default {
     title: 'osc-ui/TextInput',
@@ -120,11 +121,42 @@ const ValidationTemplate: Story = () => {
     );
 };
 
+const ControlledInputTemplate = () => {
+    const [inputValue, setInputValue] = useState('');
+
+    return (
+        <div
+            style={{
+                margin: '1em',
+                width: '300px',
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '1em',
+            }}
+        >
+            <TextInput
+                id="name"
+                label="Name"
+                name="name"
+                type="text"
+                variants={['tertiary']}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+            />
+
+            <Button size="sm" onClick={() => setInputValue('')}>
+                Reset
+            </Button>
+        </div>
+    );
+};
+
 export const Primary = Template.bind({});
 export const Secondary = Template.bind({});
 export const Tertiary = Template.bind({});
 export const Quaternary = Template.bind({});
 export const Validation = ValidationTemplate.bind({});
+export const ControlledInput = ControlledInputTemplate.bind({});
 
 Primary.args = {
     items: [
