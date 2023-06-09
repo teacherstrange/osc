@@ -1,3 +1,15 @@
+## [0.103.1](https://github.com/Open-Study-College/osc/compare/v0.103.0...v0.103.1) (2023-06-09)
+
+
+### ♻️ Refactors
+
+* **textInput:** add value prop to text input ([67cc5a6](https://github.com/Open-Study-College/osc/commit/67cc5a6182047056dcddd33d915dc75c705f3144))
+
+
+### 🧪 Tests
+
+* **textInput:** adds test for controlling the input value ([acaa8eb](https://github.com/Open-Study-College/osc/commit/acaa8eb08ab3a5579752685848fccf0f6a4cd4c5))
+
 ## [0.103.0](https://github.com/Open-Study-College/osc/compare/v0.102.0...v0.103.0) (2023-06-09)
 
 
@@ -151,22 +163,4 @@
 * **product form:** update added to cart message ([f580eb3](https://github.com/Open-Study-College/osc/commit/f580eb379005f3584307a0328b5c54c8f424cad0))
 * **styles:** adds margin auto utility ([4fdf3ac](https://github.com/Open-Study-College/osc/commit/4fdf3ac0ef1fa79e7149864a4204629a7050de51))
 * **utils:** adds helper function to check if product is a gift voucher ([cdda5f7](https://github.com/Open-Study-College/osc/commit/cdda5f71283be3006e52a1aae3cf4dba0d846911))
-
-## [0.99.0](https://github.com/Open-Study-College/osc/compare/v0.98.0...v0.99.0) (2023-06-08)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* update playwright so we can use UI mode ([f2f19f3](https://github.com/Open-Study-College/osc/commit/f2f19f3bc8cde0964bd3a42980b43018795e637c))
-
-
-### ✨ Features
-
-* **product page:** adds initial e2e tests for the product page flow ([576de83](https://github.com/Open-Study-College/osc/commit/576de83fd4c8557aa48ae4c0df6a2703a4cfe909))
-
-
-### 🐛 Bugs
-
-* **e2e:** update locator for outside click test ([0f8f4a4](https://github.com/Open-Study-College/osc/commit/0f8f4a413bf2e771ba999c116a50af19586f4384))
-* **product form:** add disabled prop to form buttons when transition isn't idle ([79f7c2d](https://github.com/Open-Study-College/osc/commit/79f7c2d7c6d4f25d8133c6b65984e69af9c78577))
 
