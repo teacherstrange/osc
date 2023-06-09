@@ -1,4 +1,5 @@
 import groq from 'groq';
+import { ROW_SETTINGS } from './rowSettings';
 
 export const MODULE_IMAGES = groq`
     _key,
@@ -14,5 +15,6 @@ export const MODULE_IMAGES = groq`
         "width": image.width,
         "height": image.height,
     },
-    "imageStyles": image.imageStyles
+    "imageStyles": image.imageStyles,
+    ${ROW_SETTINGS}
 `;

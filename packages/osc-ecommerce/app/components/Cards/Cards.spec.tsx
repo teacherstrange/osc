@@ -5,6 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { mockCardData } from '~/components/Cards/mockCardData';
 import type {
     bioCardModule,
+    cardModule,
     collectionCardModule,
     courseCardModule,
     postCardModule,
@@ -53,7 +54,7 @@ describe('Responsive layout', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <Cards module={mockCardData} />
+                    <Cards module={mockCardData as cardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -78,7 +79,7 @@ describe('Responsive layout', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <Cards module={mockCardData} />
+                    <Cards module={mockCardData as cardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -107,7 +108,7 @@ describe('Responsive layout', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <Cards module={clonedData} />
+                    <Cards module={clonedData as cardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -140,7 +141,7 @@ describe('Controlled layout', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <Cards module={clonedData} />
+                    <Cards module={clonedData as cardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -160,7 +161,7 @@ describe('Controlled layout', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <Cards module={clonedData} />
+                    <Cards module={clonedData as cardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -180,7 +181,7 @@ describe('Controlled layout', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <Cards module={clonedData} />
+                    <Cards module={clonedData as cardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -228,28 +229,30 @@ describe('Card types', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <CourseCard data={courseCard as courseCardModule} />
+                    <CourseCard product={courseCard as unknown as courseCardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
 
-        const title = screen.getByRole('heading', {
-            level: 2,
-            name: courseCard?.reference?.store?.title,
-        });
-        const courseOptions = screen.getAllByRole('listitem');
-        const minPrice = screen.getByText(/£469 in full/);
-        const wishlistButton = screen.getByRole('button', {
-            name: 'Save for later',
-        });
+        expect(
+            screen.getByRole('heading', {
+                level: 2,
+                name: courseCard?.reference?.store?.title,
+            })
+        ).toBeInTheDocument();
 
-        expect(title).toBeInTheDocument();
-        expect(courseOptions).toHaveLength(2);
-        expect(minPrice).toBeInTheDocument();
+        expect(screen.getAllByRole('listitem')).toHaveLength(2);
 
-        await user.click(wishlistButton);
+        expect(document.querySelector('.c-card__price-tag')).toHaveTextContent(/£469 in full/);
 
-        expect(wishlistButton).toHaveClass('is-active');
+        // TODO: Add back in with wishlist functionality
+        // const wishlistButton = screen.getByRole('button', {
+        //     name: 'Save for later',
+        // });
+
+        // await user.click(wishlistButton);
+
+        // expect(wishlistButton).toHaveClass('is-active');
     });
 
     test('renders the content of the collection card', () => {
@@ -259,7 +262,7 @@ describe('Card types', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <CollectionCard data={collectionCard as collectionCardModule} />
+                    <CollectionCard data={collectionCard as unknown as collectionCardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );
@@ -278,7 +281,7 @@ describe('Card types', () => {
         render(
             <MemoryRouter>
                 <SpritesheetProvider>
-                    <BlogCard data={blogCard as postCardModule} />
+                    <BlogCard data={blogCard as unknown as postCardModule} />
                 </SpritesheetProvider>
             </MemoryRouter>
         );

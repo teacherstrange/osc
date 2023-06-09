@@ -18,7 +18,15 @@ export type Themes =
     | 'octonary'
     | 'nonary'
     | 'denary'
-    | 'duodenary';
+    | 'duodenary'
+    | 'neutral-0'
+    | 'neutral-100'
+    | 'neutral-200'
+    | 'neutral-300'
+    | 'neutral-400'
+    | 'neutral-500'
+    | 'neutral-600'
+    | 'neutral-700';
 
 export type Variants = 'outline' | 'subtle';
 

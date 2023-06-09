@@ -1,7 +1,6 @@
 import { MasterDetailIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
 import { defineField, defineType } from 'sanity';
-import { SPACING } from '../../../constants';
 
 const shouldShow = (parent: { slides: {}[] }) => {
     return parent?.slides?.length > 1;
@@ -14,8 +13,8 @@ export default defineType({
     icon: MasterDetailIcon,
     groups: [
         {
-            name: 'spacing',
-            title: 'Spacing',
+            name: 'row',
+            title: 'Row',
         },
         {
             name: 'slides',
@@ -25,44 +24,17 @@ export default defineType({
     ],
     fields: [
         defineField({
+            name: 'rowSettings',
+            title: 'Settings',
+            type: 'rowSettings',
+            group: 'row',
+        }),
+        defineField({
             name: 'slides',
             title: 'Slides',
             type: 'array',
             of: [{ type: 'contentMediaSlide' }],
             group: 'slides',
-        }),
-        defineField({
-            name: 'marginBottom',
-            title: 'Push Region',
-            type: 'string',
-            description: 'Spacing you would like between this region and the next.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingTop',
-            title: 'Inner Padding Top',
-            type: 'string',
-            description: 'Inner padding at the top of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingBottom',
-            title: 'Inner Padding Bottom',
-            type: 'string',
-            description: 'Inner padding at the bottom of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
         }),
         defineField({
             // To make the name validation only apply when the field is visible we need to move it out of the settings object

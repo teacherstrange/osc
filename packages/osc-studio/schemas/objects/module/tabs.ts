@@ -1,7 +1,6 @@
 import { BlockElementIcon } from '@sanity/icons';
 import pluralize from 'pluralize';
 import { defineField, defineType } from 'sanity';
-import { SPACING } from '../../../constants';
 
 export default defineType({
     name: 'module.tabs',
@@ -10,8 +9,8 @@ export default defineType({
     icon: BlockElementIcon,
     groups: [
         {
-            name: 'spacing',
-            title: 'Spacing',
+            name: 'row',
+            title: 'Row',
         },
         {
             name: 'tabs',
@@ -21,59 +20,10 @@ export default defineType({
     ],
     fields: [
         defineField({
-            name: 'marginBottom',
-            title: 'Push Region',
-            type: 'string',
-            description: 'Spacing you would like between this region and the next.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingTop',
-            title: 'Inner Padding Top',
-            type: 'string',
-            description: 'Inner padding at the top of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingBottom',
-            title: 'Inner Padding Bottom',
-            type: 'string',
-            description: 'Inner padding at the bottom of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingLeft',
-            title: 'Inner Padding Left',
-            type: 'string',
-            description: 'Inner padding at the left of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingRight',
-            title: 'Inner Padding Right',
-            type: 'string',
-            description: 'Inner padding at the right of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
+            name: 'rowSettings',
+            title: 'Settings',
+            type: 'rowSettings',
+            group: 'row',
         }),
         defineField({
             name: 'tabItem',

@@ -4,8 +4,6 @@ import type { PortableTextBlock } from '@portabletext/types';
 import { Link } from '@remix-run/react';
 import { colors, fluidScale as sizes, typography } from 'osc-design-tokens';
 import React from 'react';
-import { useSpacing } from '../../hooks/useSpacing';
-import type { Maybe, Spacing } from '../../types';
 import { classNames } from '../../utils/classNames';
 import { Button, ButtonGroup, CopyButton } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
@@ -43,16 +41,9 @@ export interface ButtonProps {
 
 export interface Props {
     align?: 'left' | 'centre' | 'right';
-    backgroundColor?: Maybe<string>;
     className?: string;
-    marginBottom?: Maybe<Spacing>;
-    paddingBottom?: Maybe<Spacing>;
-    paddingTop?: Maybe<Spacing>;
-    paddingLeft?: Maybe<Spacing>;
-    paddingRight?: Maybe<Spacing>;
     value: PortableTextBlock[];
     buttons?: ButtonProps[];
-    fullWidth?: Maybe<boolean>;
 }
 
 // Create the decorator markup
@@ -143,43 +134,16 @@ const portableTextComponents: PortableTextComponents = {
 };
 
 export const Content = (props: Props) => {
-    const {
-        align = 'left',
-        fullWidth = false,
-        backgroundColor,
-        className,
-        marginBottom,
-        paddingTop,
-        paddingBottom,
-        paddingLeft,
-        paddingRight,
-        value,
-        buttons,
-    } = props;
+    const { align = 'left', className, value, buttons } = props;
 
     // ? Perhaps better to simply apply the class and pass them as a value from Sanity?
     const alignClass = align ? `c-content__inner--${align}` : '';
-    const fullWidthClass = fullWidth ? 'c-content__inner--full' : '';
-    const marginBottomClass = useSpacing('margin', 'bottom', marginBottom);
-    const paddingTopClass = useSpacing('padding', 'top', paddingTop);
-    const paddingBottomClass = useSpacing('padding', 'bottom', paddingBottom);
-    const paddingLeftClass = useSpacing('padding', 'left', paddingLeft);
-    const paddingRightClass = useSpacing('padding', 'right', paddingRight);
 
-    const classes = classNames(
-        'c-content',
-        paddingTopClass,
-        paddingBottomClass,
-        marginBottomClass,
-        paddingLeftClass,
-        paddingRightClass,
-        backgroundColor && `u-bg-color-${backgroundColor}`,
-        className
-    );
+    const classes = classNames('c-content', className);
 
     return (
         <div className={classes ? classes : null}>
-            <div className={`c-content__inner ${alignClass} ${fullWidthClass}`}>
+            <div className={`c-content__inner ${alignClass}`}>
                 <ReactPortableText value={value} components={portableTextComponents} />
 
                 {buttons && buttons.length > 0 ? (

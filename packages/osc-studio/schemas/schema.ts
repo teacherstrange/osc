@@ -70,6 +70,7 @@ import placeholderString from './objects/placeholderString';
 import productOption from './objects/productOption';
 import ProductWithVariant from './objects/productWithVariant';
 import proxyString from './objects/proxyString';
+import moduleSettings from './objects/rowSettings';
 import seoHome from './objects/seo/home';
 import seoPage from './objects/seo/page';
 import seoShopify from './objects/seo/shopify';
@@ -112,6 +113,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
     bodyNoHeadings,
 
     // Objects
+    moduleSettings,
     accordionItem,
     tabItem,
     carouselSettings,

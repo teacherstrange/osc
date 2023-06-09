@@ -1,7 +1,5 @@
 import { TagIcon } from '@sanity/icons';
 import { defineField, defineType } from 'sanity';
-import { ColorPicker } from '../../../components/inputs/ColorPicker';
-import { SPACING } from '../../../constants';
 
 export default defineType({
     name: 'module.recommendedProducts',
@@ -10,8 +8,8 @@ export default defineType({
     icon: TagIcon,
     groups: [
         {
-            name: 'spacing',
-            title: 'Spacing',
+            name: 'row',
+            title: 'Row',
         },
         {
             name: 'products',
@@ -21,55 +19,16 @@ export default defineType({
     ],
     fields: [
         defineField({
-            name: 'marginBottom',
-            title: 'Push Region',
-            type: 'string',
-            description: 'Spacing you would like between this region and the next.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingTop',
-            title: 'Inner Padding Top',
-            type: 'string',
-            description: 'Inner padding at the top of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            initialValue: '5xl',
-            group: 'spacing',
-        }),
-        defineField({
-            name: 'paddingBottom',
-            title: 'Inner Padding Bottom',
-            type: 'string',
-            description: 'Inner padding at the bottom of the region.',
-            options: {
-                list: SPACING,
-                layout: 'dropdown',
-            },
-            initialValue: '4xl',
-            group: 'spacing',
+            name: 'rowSettings',
+            title: 'Settings',
+            type: 'rowSettings',
+            group: 'row',
         }),
         defineField({
             name: 'heading',
             title: 'Heading',
             type: 'string',
             initialValue: 'You may also like',
-            group: 'products',
-        }),
-        defineField({
-            name: 'backgroundColor',
-            title: 'Background Colour',
-            type: 'string',
-            components: {
-                input: ColorPicker,
-            },
-            initialValue: 'neutral-300',
             group: 'products',
         }),
         defineField({

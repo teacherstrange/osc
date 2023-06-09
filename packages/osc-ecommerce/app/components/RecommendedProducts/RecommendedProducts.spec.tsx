@@ -7,10 +7,13 @@ import { mockProductData } from './mockProductData';
 
 const module: recommendedProductsModule = {
     heading: 'You may also like',
-    backgroundColor: 'neutral-300',
-    marginBottom: 'l',
-    paddingTop: 'l',
-    paddingBottom: 'l',
+    rowSettings: {
+        backgroundColor: 'neutral-300',
+        marginBottom: 'l',
+        paddingBottom: 'l',
+        paddingTop: 'l',
+        container: 'default',
+    },
     numberOfProducts: 4,
     carouselSettings: {
         carouselName: 'Recommended Products',

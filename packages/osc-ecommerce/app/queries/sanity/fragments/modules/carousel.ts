@@ -1,5 +1,6 @@
 import groq from 'groq';
 import { MODULE_IMAGES } from './images';
+import { ROW_SETTINGS } from './rowSettings';
 
 export const MODULE_CAROUSEL = groq`
     _key,
@@ -10,5 +11,6 @@ export const MODULE_CAROUSEL = groq`
             ${MODULE_IMAGES}
         }
     },
-    settings
+    settings,
+    ${ROW_SETTINGS}
 `;

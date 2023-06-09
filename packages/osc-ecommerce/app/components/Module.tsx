@@ -1,5 +1,5 @@
 import type { LinkDescriptor } from '@remix-run/node';
-import { Content, Image, Trustpilot } from 'osc-ui';
+import { Trustpilot } from 'osc-ui';
 import oscUiAccordionStyles from 'osc-ui/dist/src-components-Accordion-accordion.css';
 import alertStyles from 'osc-ui/dist/src-components-Alert-alert.css';
 import buttonStyles from 'osc-ui/dist/src-components-Button-button.css';
@@ -44,9 +44,11 @@ import { getUniqueObjects } from '~/utils/getUniqueObjects';
 import { AccordionModule } from './Accordion/Accordion';
 import { Cards } from './Cards/Cards';
 import { CarouselModule } from './Carousel/Carousel';
+import { ContentModule } from './Content/Content';
 import { ContentMediaModule } from './ContentMedia/ContentMedia';
-import { Forms } from './Forms/Forms';
+import { FormsModule } from './Forms/FormsModule';
 import { Hero } from './Hero/Hero';
+import { ImageModule } from './Image/Image';
 import { RecommendedProducts } from './RecommendedProducts/RecommendedProducts';
 import { TabsModule } from './Tabs/Tabs';
 import { TextGridModule } from './TextGrid/TextGrid';
@@ -198,7 +200,13 @@ export default function Module(props: Props) {
         case 'module.accordion':
             const moduleAccordion = module as accordionModule;
 
-            return <AccordionModule module={moduleAccordion} />;
+            return (
+                <AccordionModule
+                    module={moduleAccordion}
+                    isFlush={isFlush}
+                    key={moduleAccordion._key}
+                />
+            );
 
         case 'module.trustpilot':
             const moduleTrustpilot = module as trustpilotModule;
@@ -214,44 +222,30 @@ export default function Module(props: Props) {
 
         case 'module.cards':
             const moduleCard = module as cardModule;
-            return <Cards module={moduleCard} />;
+
+            return <Cards module={moduleCard} isFlush={isFlush} key={moduleCard._key} />;
 
         case 'module.carousel':
             const moduleCarousel = module as carouselModule;
 
-            return <CarouselModule module={moduleCarousel} />;
+            return (
+                <CarouselModule
+                    module={moduleCarousel}
+                    isFlush={isFlush}
+                    key={moduleCarousel._key}
+                />
+            );
 
         case 'module.content':
             const moduleContent = module as contentModule;
 
-            return moduleContent.body ? (
-                <article
-                    className={`o-container ${
-                        isFlush || moduleContent.fullWidth
-                            ? 'o-container--flush o-container--full'
-                            : ''
-                    }`}
-                >
-                    <Content
-                        align={moduleContent.horizontalAlignment}
-                        backgroundColor={
-                            moduleContent.backgroundColor
-                                ? moduleContent.backgroundColor
-                                : undefined
-                        }
-                        marginBottom={moduleContent.marginBottom}
-                        paddingBottom={moduleContent.paddingBottom}
-                        paddingTop={moduleContent.paddingTop}
-                        value={moduleContent.body}
-                        fullWidth={moduleContent.fullWidth ? moduleContent.fullWidth : undefined}
-                        buttons={moduleContent.buttons}
-                    />
-                </article>
-            ) : null;
+            return (
+                <ContentModule module={moduleContent} isFlush={isFlush} key={moduleContent._key} />
+            );
 
         case 'module.forms':
             const moduleForm = module as formModule;
-            return <Forms addContainer={true} module={moduleForm} key={moduleForm._key} />;
+            return <FormsModule module={moduleForm} isFlush={isFlush} key={moduleForm._key} />;
 
         case 'module.hero':
             const moduleHero = module as heroModule;
@@ -272,38 +266,30 @@ export default function Module(props: Props) {
         case 'module.images':
             const moduleImage = module as imageModule<HTMLImageElement>;
 
-            return (
-                <Image
-                    key={moduleImage._key}
-                    src={moduleImage.src}
-                    artDirectedImages={
-                        moduleImage.responsiveImages ? moduleImage.responsiveImages : undefined
-                    }
-                    alt={moduleImage.alt}
-                    width={moduleImage.width}
-                    height={moduleImage.height}
-                    overlayColor={moduleImage?.imageStyles?.overlayColor}
-                    isGrayScale={moduleImage?.imageStyles?.grayscale}
-                    hasTransparency={moduleImage?.imageStyles?.opacity}
-                />
-            );
+            return <ImageModule module={moduleImage} isFlush={isFlush} key={moduleImage._key} />;
 
         case 'module.textGrid':
             const moduleTextGrid = module as textGridModule;
 
             return (
-                <TextGridModule data={moduleTextGrid} isFlush={isFlush} key={moduleTextGrid._key} />
+                <TextGridModule
+                    module={moduleTextGrid}
+                    isFlush={isFlush}
+                    key={moduleTextGrid._key}
+                />
             );
 
         case 'module.video':
             const moduleVideo = module as videoModule;
 
-            return <VideoPlayerModule module={moduleVideo} key={moduleVideo._key} />;
+            return (
+                <VideoPlayerModule module={moduleVideo} isFlush={isFlush} key={moduleVideo._key} />
+            );
 
         case 'module.tabs':
             const moduleTabs = module as tabsModule;
 
-            return <TabsModule module={moduleTabs} key={moduleTabs._key} />;
+            return <TabsModule module={moduleTabs} isFlush={isFlush} key={moduleTabs._key} />;
 
         case 'module.recommendedProducts':
             const moduleRecommendedProducts = module as recommendedProductsModule;

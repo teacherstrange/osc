@@ -1,45 +1,40 @@
-import { classNames, Content, Icon, TextGrid, useSpacing } from 'osc-ui';
+import { Content, Icon, TextGrid } from 'osc-ui';
 import { Fragment } from 'react';
 import type { textGridModule } from '~/types/sanity';
+import { Row } from '../Row';
 
-export const TextGridModule = (props: { data: textGridModule; isFlush?: boolean }) => {
-    const { data, isFlush } = props;
-    const marginBottomClass = useSpacing('margin', 'bottom', data?.marginBottom);
-    const paddingTopClass = useSpacing('padding', 'top', data?.paddingTop);
-    const paddingBottomClass = useSpacing('padding', 'bottom', data?.paddingBottom);
+interface TextGridModuleProps {
+    module: textGridModule;
+    isFlush?: boolean;
+}
 
-    const classes = classNames(
-        'o-container',
-        isFlush ? 'o-container--flush' : '',
-        marginBottomClass,
-        paddingTopClass,
-        paddingBottomClass
-    );
+export const TextGridModule = (props: TextGridModuleProps) => {
+    const { module, isFlush } = props;
+    const containerIsFull = module.rowSettings?.container === 'full';
 
     return (
-        <TextGrid
-            heading={data?.heading}
-            hasInlineHeading={data?.hasInlineHeading}
-            className={classes}
+        <Row
+            backgroundColor={module.rowSettings?.backgroundColor}
+            marginBottom={module.rowSettings?.marginBottom}
+            paddingBottom={module.rowSettings?.paddingBottom}
+            paddingTop={module.rowSettings?.paddingTop}
+            container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
         >
-            {data?.items?.map((item) => (
-                <Fragment key={item?._key}>
-                    {item?.icon ? <Icon id={item?.icon} /> : null}
+            <TextGrid heading={module?.heading} hasInlineHeading={module?.hasInlineHeading}>
+                {module?.items?.map((item) => (
+                    <Fragment key={item?._key}>
+                        {item?.icon ? <Icon id={item?.icon} /> : null}
 
-                    {item?.content?.body ? (
-                        <Content
-                            value={item?.content?.body}
-                            align={item?.content?.horizontalAlignment}
-                            backgroundColor={
-                                item?.content?.backgroundColor
-                                    ? item?.content?.backgroundColor
-                                    : undefined
-                            }
-                            {...item?.content}
-                        />
-                    ) : null}
-                </Fragment>
-            ))}
-        </TextGrid>
+                        {item.content?.body ? (
+                            <Content
+                                align={item.content?.horizontalAlignment}
+                                value={item.content?.body}
+                                buttons={item.content?.buttons}
+                            />
+                        ) : null}
+                    </Fragment>
+                ))}
+            </TextGrid>
+        </Row>
     );
 };

@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from 'test-utils';
 import { Content } from './Content';
 import { textContent, textContentHasButtons } from './textContent';
-// TODO: sb - test background color -- think we need theme setup in storybook?
+
 test('renders the correct elements', () => {
     render(<Content value={textContent.body} />);
 
@@ -57,24 +57,6 @@ test('renders a custom classname', () => {
     render(<Content value={textContent.body} className="test-class" />);
     const content = document.querySelector('.c-content');
     expect(content).toHaveClass('test-class');
-});
-
-test('renders the correct padding class', () => {
-    const { rerender } = render(
-        <Content value={textContent.body} paddingTop={10} paddingBottom={10} />
-    );
-    const content = document.querySelector('.c-content');
-    expect(content).toHaveClass('u-pt-10 u-pb-10');
-
-    rerender(<Content value={textContent.body} paddingTop={50} paddingBottom={110} />);
-
-    expect(content).toHaveClass('u-pt-50 u-pb-110');
-});
-
-test('renders the correct margin class', () => {
-    render(<Content value={textContent.body} marginBottom={10} />);
-    const content = document.querySelector('.c-content');
-    expect(content).toHaveClass('u-mb-10');
 });
 
 test('renders the correct buttons', () => {

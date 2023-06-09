@@ -14,6 +14,10 @@ export default defineType({
     icon: StackCompactIcon,
     groups: [
         {
+            name: 'row',
+            title: 'Row',
+        },
+        {
             name: 'content',
             title: 'Content',
             default: true,
@@ -24,6 +28,12 @@ export default defineType({
         },
     ],
     fields: [
+        defineField({
+            name: 'rowSettings',
+            title: 'Settings',
+            type: 'rowSettings',
+            group: 'row',
+        }),
         defineField({
             name: 'content',
             title: 'Content',

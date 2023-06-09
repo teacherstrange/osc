@@ -3,6 +3,7 @@ import { PATHS } from '~/constants';
 import { LINK_EXTERNAL } from '../linkExternal';
 import { LINK_INTERNAL } from '../linkInternal';
 import { MODULE_IMAGES } from './images';
+import { ROW_SETTINGS } from './rowSettings';
 
 export const MODULE_CARDS = groq`
     ...,
@@ -86,6 +87,6 @@ export const MODULE_CARDS = groq`
             showSubHeading,
             subHeading
         },
-    }
-
+    },
+    ${ROW_SETTINGS}
 `;

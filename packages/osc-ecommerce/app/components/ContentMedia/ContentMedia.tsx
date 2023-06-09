@@ -1,40 +1,26 @@
 import mq from 'osc-design-tokens';
 import type { Columns } from 'osc-ui';
-import {
-    Carousel,
-    classNames,
-    Content,
-    ContentMedia,
-    ContentMediaBlock,
-    Image,
-    rem,
-    useSpacing,
-} from 'osc-ui';
+import { Carousel, Content, ContentMedia, ContentMediaBlock, Image, rem } from 'osc-ui';
 import type { contentMediaModule, contentMediaSlide, formModule } from '~/types/sanity';
 import { Forms } from '../Forms/Forms';
+import { Row } from '../Row';
 
 const perView = (perView: number | undefined) => (perView ? perView : 1);
 
 export const ContentMediaModule = (props: { module: contentMediaModule; isFlush?: boolean }) => {
-    const { carouselName, carouselSettings, marginBottom, paddingBottom, paddingTop, slides } =
-        props.module;
+    const { carouselName, carouselSettings, rowSettings, slides } = props.module;
     const { isFlush } = props;
-
-    const marginBottomClass = useSpacing('margin', 'bottom', marginBottom);
-    const paddingTopClass = useSpacing('padding', 'top', paddingTop);
-    const paddingBottomClass = useSpacing('padding', 'bottom', paddingBottom);
-
-    const classes = classNames(
-        'o-container',
-        isFlush ? 'o-container--flush' : '',
-        marginBottomClass,
-        paddingTopClass,
-        paddingBottomClass
-    );
+    const containerIsFull = rowSettings?.container === 'full';
 
     if (slides.length > 1) {
         return (
-            <div className={classes}>
+            <Row
+                backgroundColor={rowSettings?.backgroundColor}
+                marginBottom={rowSettings?.marginBottom}
+                paddingBottom={rowSettings?.paddingBottom}
+                paddingTop={rowSettings?.paddingTop}
+                container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
+            >
                 <Carousel
                     carouselName={carouselName ? carouselName : 'content media carousel'}
                     arrows={carouselSettings?.arrows}
@@ -64,13 +50,19 @@ export const ContentMediaModule = (props: { module: contentMediaModule; isFlush?
                         <Slide {...slide} key={slide?._key} />
                     ))}
                 </Carousel>
-            </div>
+            </Row>
         );
     } else {
         return (
-            <div className={classes}>
+            <Row
+                backgroundColor={rowSettings?.backgroundColor}
+                marginBottom={rowSettings?.marginBottom}
+                paddingBottom={rowSettings?.paddingBottom}
+                paddingTop={rowSettings?.paddingTop}
+                container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
+            >
                 <Slide {...slides[0]} />
-            </div>
+            </Row>
         );
     }
 };
@@ -117,14 +109,10 @@ const Slide = (props: SlideProps) => {
                 className={layoutGrid === '50/40' && itemHasForm ? 'o-grid__col--start-8@tab' : ''}
             >
                 {content?.body ? (
-                    // Fixed in #691
                     <Content
-                        value={content?.body}
                         align={content?.horizontalAlignment}
-                        backgroundColor={
-                            content?.backgroundColor ? content?.backgroundColor : undefined
-                        }
-                        {...content}
+                        value={content?.body}
+                        buttons={content?.buttons}
                     />
                 ) : null}
             </ContentMediaBlock>

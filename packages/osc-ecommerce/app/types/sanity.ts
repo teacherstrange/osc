@@ -49,11 +49,20 @@ export interface imageModule<T> extends SanityImage<T> {
         grayscale?: boolean;
         opacity?: boolean;
     };
+    rowSettings?: rowSettings;
 }
 
 export interface module {
     _type?: Maybe<string>;
     _key?: Maybe<string>;
+}
+
+export interface rowSettings extends module {
+    backgroundColor?: Maybe<Themes>;
+    marginBottom?: Maybe<Spacing>;
+    paddingBottom?: Maybe<Spacing>;
+    paddingTop?: Maybe<Spacing>;
+    container?: Maybe<'default' | 'full'>;
 }
 
 export interface buttonModule extends module {
@@ -85,16 +94,11 @@ export interface buttonModule extends module {
 }
 
 export interface contentModule extends module {
-    backgroundColor?: Maybe<Themes>;
     horizontalAlignment?: 'left' | 'centre' | 'right';
-    marginBottom?: Maybe<Spacing>;
-    paddingBottom?: Maybe<Spacing>;
-    paddingTop?: Maybe<Spacing>;
-    paddingLeft: Maybe<Spacing>;
-    paddingRight: Maybe<Spacing>;
     fullWidth?: Maybe<boolean>;
     body?: PortableTextBlock[];
     buttons?: buttonModule[];
+    rowSettings: rowSettings;
 }
 
 export interface contentMediaSlide extends module {
@@ -124,6 +128,7 @@ export interface contentMediaModule extends module {
     paddingBottom?: Maybe<Spacing>;
     paddingTop?: Maybe<Spacing>;
     slides: contentMediaSlide[];
+    rowSettings: rowSettings;
 }
 
 export interface accordionModule extends module {
@@ -136,6 +141,7 @@ export interface accordionModule extends module {
         heading: string;
     }[];
     content?: contentModule;
+    rowSettings: rowSettings;
 }
 
 export interface videoModule extends module {
@@ -148,10 +154,16 @@ export interface videoModule extends module {
     };
     videoImage?: imageModule<HTMLImageElement>;
     content?: contentModule;
+    rowSettings: rowSettings;
 }
 
 export interface bioCardModule extends module {
     reference?: {
+        _createdAt: string;
+        _id: string;
+        _rev: string;
+        _type: 'team';
+        _updatedAt: string;
         bio?: PortableTextBlock[];
         image?: {
             alt: string;
@@ -167,7 +179,7 @@ export interface courseCardModule extends module, ProductType {
         _createdAt: string;
         _id: string;
         _rev: string;
-        _type: string;
+        _type: 'product';
         _updatedAt: string;
         store?: shopifyProduct;
     };
@@ -175,6 +187,11 @@ export interface courseCardModule extends module, ProductType {
 
 export interface collectionCardModule extends module {
     reference: {
+        _createdAt: string;
+        _id: string;
+        _rev: string;
+        _type: 'collection';
+        _updatedAt: string;
         store?: shopifyCollection;
         theme?: {
             color?: string;
@@ -189,6 +206,11 @@ export interface postCardModule extends module {
     fullWidth?: boolean;
     backgroundColor?: string;
     reference: {
+        _createdAt: string;
+        _id: string;
+        _rev: string;
+        _type: 'post';
+        _updatedAt: string;
         theme?: {
             color?: string;
         };
@@ -235,15 +257,12 @@ export type TypesOfCard =
     | staticCardModule;
 
 export interface cardModule extends module {
-    backgroundColor?: Themes | string;
-    marginBottom?: Spacing | string;
-    paddingBottom?: Spacing | string;
-    paddingTop?: Spacing | string;
     layout: string;
     carouselName?: Maybe<string>;
     carouselSettings?: carouselModuleSettings;
     content?: contentModule;
     card: TypesOfCard[];
+    rowSettings: rowSettings;
 }
 
 export interface mediaTextModule extends module {
@@ -265,6 +284,7 @@ export interface carouselModule extends module {
         image?: imageModule<HTMLImageElement>;
     }[];
     settings?: carouselModuleSettings;
+    rowSettings: rowSettings;
 }
 
 export interface carouselModuleSettings extends module {
@@ -304,33 +324,24 @@ export interface textGridModule extends module {
     }[];
     heading?: string;
     hasInlineHeading?: boolean;
-    marginBottom: Spacing;
-    paddingBottom: Spacing;
-    paddingTop: Spacing;
+    rowSettings: rowSettings;
 }
 
 export interface tabsModule extends module {
-    marginBottom?: Maybe<Spacing>;
-    paddingBottom?: Maybe<Spacing>;
-    paddingTop?: Maybe<Spacing>;
-    paddingLeft: Maybe<Spacing>;
-    paddingRight: Maybe<Spacing>;
     tabItem: {
         _key: string;
         _type: string;
         modules: module[] | contentModule[];
         title: string;
     }[];
+    rowSettings: rowSettings;
 }
 
 export interface recommendedProductsModule extends module {
-    marginBottom?: Maybe<Spacing>;
-    paddingBottom?: Maybe<Spacing>;
-    paddingTop?: Maybe<Spacing>;
-    backgroundColor?: Themes | string;
     numberOfProducts: number;
     heading?: string;
     carouselSettings?: carouselModuleSettings;
+    rowSettings: rowSettings;
 }
 
 export interface SanitySEO {
@@ -525,9 +536,7 @@ export interface SanityActionNavSettings {
 export interface formModule extends module {
     formId: string;
     formName: string;
-    marginBottom?: Maybe<Spacing>;
-    paddingBottom?: Maybe<Spacing>;
-    paddingTop?: Maybe<Spacing>;
+    rowSettings: rowSettings;
 }
 
 export interface PreviewProps {

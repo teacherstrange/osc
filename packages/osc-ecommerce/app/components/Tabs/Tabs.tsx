@@ -8,28 +8,26 @@ import {
     TabList,
     TabTrigger,
     Tabs,
-    classNames,
     rem,
     useMediaQuery,
 } from 'osc-ui';
 import { useEffect, useState } from 'react';
 import type { module, tabsModule } from '~/types/sanity';
 import Module from '../Module';
+import { Row } from '../Row';
 
-export const TabsModule = (props: { module: tabsModule }) => {
-    const { module } = props;
+interface TabsModuleProps {
+    module: tabsModule;
+    isFlush?: boolean;
+}
+
+export const TabsModule = (props: TabsModuleProps) => {
+    const { module, isFlush } = props;
+
+    const containerIsFull = module.rowSettings?.container === 'full';
 
     const isGreaterThanMobL = useMediaQuery(`(min-width: ${rem(mq['mob-lrg'])}rem)`);
     const [showOnGreaterThanMobL, setShowOnGreaterThanMobL] = useState<boolean>(false);
-
-    const classes = classNames(
-        'o-container',
-        module?.marginBottom ? `u-mb-${module.marginBottom}` : '',
-        module?.paddingTop ? `u-pt-${module.paddingTop}` : '',
-        module?.paddingRight ? `u-pr-${module.paddingRight}` : '',
-        module?.paddingBottom ? `u-pb-${module.paddingBottom}` : '',
-        module?.paddingLeft ? `u-pl-${module.paddingLeft}` : ''
-    );
 
     // We need this useEffect to set the showOnTab state only when the window object exists
     // Otherwise we will receive an SSR warning telling us the markup differs from the server
@@ -38,7 +36,13 @@ export const TabsModule = (props: { module: tabsModule }) => {
     }, [isGreaterThanMobL]);
 
     return module?.tabItem && module?.tabItem?.length > 0 ? (
-        <div className={classes}>
+        <Row
+            backgroundColor={module.rowSettings?.backgroundColor}
+            marginBottom={module.rowSettings?.marginBottom}
+            paddingBottom={module.rowSettings?.paddingBottom}
+            paddingTop={module.rowSettings?.paddingTop}
+            container={isFlush || containerIsFull ? 'o-container--flush o-container--full' : ''}
+        >
             {showOnGreaterThanMobL ? (
                 <Tabs defaultValue={module?.tabItem[0]._key}>
                     <TabList>
@@ -71,6 +75,6 @@ export const TabsModule = (props: { module: tabsModule }) => {
                     ))}
                 </Accordion>
             )}
-        </div>
+        </Row>
     ) : null;
 };

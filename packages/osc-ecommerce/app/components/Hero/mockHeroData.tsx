@@ -1,11 +1,11 @@
 export const heroCarousel = {
     _type: 'module.hero',
     _key: '4274e830c3e5',
+    carouselName: 'Hero Carousel',
     carouselSettings: {
         _type: 'carouselSettings',
         arrows: false,
         autoplay: 'switch',
-        carouselName: 'Hero Carousel',
         dotNav: true,
         loop: true,
         slidesPerView: {

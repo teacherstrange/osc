@@ -6,12 +6,30 @@ export default defineType({
     title: 'Image',
     type: 'object',
     icon: ImageIcon,
+    groups: [
+        {
+            name: 'row',
+            title: 'Row',
+        },
+        {
+            name: 'image',
+            title: 'Image',
+            default: true,
+        },
+    ],
     fields: [
+        defineField({
+            name: 'rowSettings',
+            title: 'Settings',
+            type: 'rowSettings',
+            group: 'row',
+        }),
         // Modules (Images)
         defineField({
             name: 'image',
             title: 'Image',
             type: 'image.desktop',
+            group: 'image',
         }),
     ],
     preview: {

@@ -1,13 +1,11 @@
 import groq from 'groq';
+import { ROW_SETTINGS } from './rowSettings';
 
 export const MODULE_RECOMMENDED_PRODUCTS = groq`
     _key,
     _type,
-    backgroundColor,
-    paddingBottom,
-    paddingTop,
-    marginBottom,
     heading,
     numberOfProducts,
-    carouselSettings
+    carouselSettings,
+    ${ROW_SETTINGS}
 `;
