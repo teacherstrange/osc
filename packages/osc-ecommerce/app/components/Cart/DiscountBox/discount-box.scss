@@ -1,0 +1,91 @@
+@import "../../../../../osc-ui/src/styles/settings";
+@import "../../../../../osc-ui/src/styles/tools";
+
+@layer components {
+    $discount-box-ttl-size: rem($base-fs);
+    $discount-box-desc-size: rem(14);
+
+    .c-discount-box {
+        margin-block-start: $space-m;
+        padding-block: $space-s;
+
+        &__ttl {
+            color: var(--color-primary);
+            font-size: $discount-box-ttl-size;
+        }
+
+        &__tgr {
+            cursor: pointer;
+        }
+
+        &__desc {
+            margin-block-end: $space-s;
+            font-size: $discount-box-desc-size;
+            font-weight: $fw-reg;
+        }
+
+        &__form {
+            display: flex;
+            align-items: flex-start;
+            gap: $space-xs;
+
+            // Account for the space needed when the input is active
+            padding-block: $space-2xs $space-m;
+
+            // Account for the shadow on the button so it doesn't get cut off by the overflow hidden on the parent
+            padding-inline-end: 6px;
+
+            @include mq($mq-mob, max) {
+                flex-direction: column;
+            }
+
+            @include mq(($mq-tab, 1328)) {
+                flex-direction: column;
+            }
+        }
+
+        &__tggle-box {
+            display: grid;
+            grid-template-rows: 0fr;
+            overflow: hidden;
+            transition: all $timing $ease-in-out;
+
+            &[data-state="open"] {
+                grid-template-rows: 1fr;
+            }
+        }
+
+        &__tggle-inner {
+            min-height: 0;
+        }
+
+        &__list {
+            display: flex;
+            flex-direction: column;
+            margin-block: 0;
+            padding-block: $space-s;
+            border-top: 1px solid var(--color-neutral-400);
+            border-bottom: 1px solid var(--color-neutral-400);
+        }
+
+        &__term {
+            margin-block-end: $space-s;
+            font-size: $discount-box-ttl-size;
+            font-weight: $fw-bold;
+        }
+
+        &__details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-block-start: $space-2xs;
+            padding-inline-start: 0;
+            font-size: $discount-box-desc-size;
+            font-weight: $fw-reg;
+
+            &:first-of-type {
+                margin-block-start: 0;
+            }
+        }
+    }
+}

@@ -104,7 +104,11 @@ export const CartCardItem = (props: CartCardItemProps) => {
                         </ButtonGroup>
 
                         <CardPriceTag className="u-self-end u-mt-0 u-ml-auto">
-                            <Price selectedVariant={line?.merchandise} />
+                            {/* <Price selectedVariant={line?.merchandise} /> */}
+                            <Price
+                                compareAtPrice={line.cost.amountPerQuantity}
+                                price={line.cost.totalAmount}
+                            />
                         </CardPriceTag>
                     </CardFooter>
                 </CardInner>

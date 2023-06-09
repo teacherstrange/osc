@@ -43,9 +43,21 @@ const CartLineItemPrice = (props: CartLineItemPriceProps) => {
 
     if (!line?.cost?.amountPerQuantity || !line?.cost?.totalAmount) return null;
 
+    console.log(line);
+
+    const { amountPerQuantity, totalAmount } = line?.cost;
+
+    const isOnSale =
+        totalAmount?.amount &&
+        amountPerQuantity?.amount &&
+        totalAmount?.amount < amountPerQuantity?.amount;
+
     return (
         <LineItemPrice asChild>
-            <Price>
+            <Price
+                size="sm"
+                compareAtPrice={isOnSale ? <Money data={amountPerQuantity} as="span" /> : null}
+            >
                 <Money
                     data={line?.cost?.totalAmount}
                     as="span"

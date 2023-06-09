@@ -15,7 +15,9 @@ import cardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import flourishStyles from 'osc-ui/dist/src-components-Flourishes-flourish.css';
 import lineItemStyles from 'osc-ui/dist/src-components-LineItem-line-item.css';
 import selectStyles from 'osc-ui/dist/src-components-Select-select.css';
+import textInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
 import invariant from 'tiny-invariant';
+import discountBoxStyles from '~/components/Cart/DiscountBox/discount-box.css';
 import { CartLayout } from '~/components/Cart/Layout';
 import { getSettingsData } from '~/models/sanity.server';
 import { CART_QUERY } from '~/queries/sanity/cart';
@@ -25,6 +27,7 @@ import {
     addLinesToCart,
     createCart,
     removeLinesFromCart,
+    updateCartDiscounts,
     updateLinesInCart,
 } from '~/utils/cart.helpers';
 
@@ -34,9 +37,11 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: alertStyles },
         { rel: 'stylesheet', href: buttonStyles },
         { rel: 'stylesheet', href: cardStyles },
+        { rel: 'stylesheet', href: discountBoxStyles },
         { rel: 'stylesheet', href: flourishStyles },
         { rel: 'stylesheet', href: lineItemStyles },
         { rel: 'stylesheet', href: selectStyles },
+        { rel: 'stylesheet', href: textInputStyles },
     ];
 };
 
@@ -185,6 +190,42 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
                         {
                             code: 'INVALID',
                             message: 'No lines to update',
+                        },
+                    ],
+                };
+            }
+
+            break;
+
+        case CartAction.UPDATE_DISCOUNT:
+            try {
+                invariant(cartId, 'Missing cartId');
+
+                const applicableDiscountCodes = formData.get('applicableDiscountCodes')
+                    ? JSON.parse(String(formData.get('applicableDiscountCodes')))
+                    : ('' as string);
+
+                const formDiscountCode = formData.get('discountCode');
+                const discountCodes = ([...applicableDiscountCodes, formDiscountCode] || [
+                    '',
+                ]) as string[];
+
+                result = await updateCartDiscounts({
+                    cartId,
+                    discountCodes,
+                    storefront,
+                });
+
+                cartId = result.cart.id;
+            } catch (e) {
+                console.error(e);
+
+                result = {
+                    cart: {} as CartType,
+                    errors: [
+                        {
+                            code: 'INVALID',
+                            message: 'Missing cartId',
                         },
                     ],
                 };

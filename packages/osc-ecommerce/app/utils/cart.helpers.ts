@@ -17,6 +17,7 @@ import {
     ADD_LINES_MUTATION,
     CART_QUERY,
     CREATE_CART_MUTATION,
+    DISCOUNT_CODES_UPDATE,
     LINES_UPDATE_MUTATION,
     REMOVE_LINE_ITEMS_MUTATION,
 } from '~/queries/shopify/cart';
@@ -202,7 +203,6 @@ export async function addLinesToCart(args: AddLines) {
 /* -------------------------------------------------------------------------------------------------
  * Remove lines from cart
  * -----------------------------------------------------------------------------------------------*/
-
 interface RemoveLines {
     cartId: string;
     lineIds: Cart['id'][];
@@ -286,4 +286,42 @@ export async function updateLinesInCart(args: UpdateLine) {
     invariant(cartLinesUpdate, 'No data returned from update lines items mutation');
 
     return cartLinesUpdate;
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * Discounts
+ * -----------------------------------------------------------------------------------------------*/
+interface UpdateCartDiscounts {
+    cartId: string;
+    discountCodes: string[];
+    storefront: AppLoadContext['storefront'];
+}
+
+/**
+ * Mutation that updates the cart discounts
+ * @param discountCodes Array of discount codes
+ * @returns mutated cart
+ * @preserve
+ */
+export async function updateCartDiscounts(args: UpdateCartDiscounts) {
+    const { cartId, discountCodes, storefront } = args;
+
+    const { cartDiscountCodesUpdate } = await storefront.mutate<{
+        cartDiscountCodesUpdate: {
+            cart: Cart;
+            errors: UserError[];
+        };
+    }>(DISCOUNT_CODES_UPDATE, {
+        variables: {
+            cartId,
+            discountCodes,
+        },
+    });
+
+    invariant(
+        cartDiscountCodesUpdate,
+        'No data returned from the cartDiscountCodesUpdate mutation'
+    );
+
+    return cartDiscountCodesUpdate;
 }

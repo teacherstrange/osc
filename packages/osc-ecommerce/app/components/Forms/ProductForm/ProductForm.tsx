@@ -151,7 +151,11 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                     {/* // TODO: add this back in once Wishlist is ready  */}
                     {/* <SaveForLaterButton /> */}
 
-                    <Price selectedVariant={selectedVariant} />
+                    <Price
+                        compareAtPrice={selectedVariant.compareAtPrice}
+                        price={selectedVariant.price}
+                        sku={selectedVariant.sku}
+                    />
                 </div>
 
                 <ButtonGroup direction="column">

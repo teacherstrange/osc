@@ -34,6 +34,10 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
      */
     action?: Action;
     /**
+     * Custom class
+     */
+    className?: string;
+    /**
      * Any error messages - initially set through server validation, but can be updated through client validation
      */
     errors?: string[] | undefined;
@@ -86,6 +90,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
         setErrors,
         type = 'text',
         variants,
+        className,
         ...rest
     } = props;
     const [value, setValue] = useState(defaultValue ? defaultValue : '');
@@ -101,7 +106,13 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
 
     const element = useElement('c-input', type);
     const variantsModifier = useModifier(element, variants);
-    const inputClasses = classNames('c-input', element, variantsModifier, isWhite && 'is-white');
+    const inputClasses = classNames(
+        'c-input',
+        element,
+        variantsModifier,
+        isWhite && 'is-white',
+        className
+    );
 
     const containerModifier = useModifier('c-input__container', variants);
     const containerClasses = classNames('c-input__container', containerModifier);

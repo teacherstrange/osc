@@ -19,6 +19,14 @@ const MONEY_FRAGMENT = `#graphql
         amount
     }
 `;
+
+const DISCOUNT_CODES_FRAGMENT = `#graphql
+    fragment DiscountCodesFragment on CartDiscountCode {
+        applicable
+        code
+    }
+`;
+
 const CART_QUERY_FRAGMENT = `#graphql
     fragment CartFragment on Cart {
         id
@@ -110,9 +118,10 @@ const CART_QUERY_FRAGMENT = `#graphql
             value
         }
         discountCodes {
-            code
+            ...DiscountCodesFragment
         }
     }
+    ${DISCOUNT_CODES_FRAGMENT}
 `;
 
 /* -------------------------------------------------------------------------------------------------
@@ -218,4 +227,27 @@ export const LINES_UPDATE_MUTATION = `#graphql
   }
   ${LINES_CART_FRAGMENT}
   ${USER_ERROR_FRAGMENT}
+`;
+
+/* -------------------------------------------------------------------------------------------------
+ * Update discount code mutation
+ * -----------------------------------------------------------------------------------------------*/
+export const DISCOUNT_CODES_UPDATE = `#graphql
+  mutation cartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!], $country: CountryCode = ZZ)
+    @inContext(country: $country) {
+      cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+        cart {
+          ...CartLinesFragment
+          discountCodes {
+            ...DiscountCodesFragment
+          }
+        }
+        errors: userErrors {
+          ...ErrorFragment
+        }
+      }
+  }
+  ${LINES_CART_FRAGMENT}
+  ${USER_ERROR_FRAGMENT}
+  ${DISCOUNT_CODES_FRAGMENT}
 `;

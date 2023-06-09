@@ -17,6 +17,7 @@ import {
 import { useEffect, useState } from 'react';
 import { CartCardItem } from '~/components/Cart/CartCardItem';
 import { CartTotal } from '~/components/Cart/CartTotal';
+import { DiscountBox } from '~/components/Cart/DiscountBox/DiscountBox';
 import { EmptyCartMessage } from '~/components/Cart/EmptyCartMessage';
 import { CartLineItem } from '~/components/Cart/LineItem';
 import { ErrorAlert } from '~/components/ErrorAlert/ErrorAlert';
@@ -47,18 +48,24 @@ export const CartLayout = () => {
     const pendingFetchers = allFetchers.filter((f) => fetcherIsPending(f));
 
     // We only want to show the loading state for the fetchers that are removing or updating lines
-    const cartActionFetchers = pendingFetchers.filter(
+    const cartLineActionFetchers = pendingFetchers.filter(
         (f) =>
             f.formData?.get('cartAction') === CartAction.REMOVE_FROM_CART ||
             f.formData?.get('cartAction') === CartAction.UPDATE_CART
     );
 
     // Create an array of line ids that are currently being removed from the cart
-    const pendingLineIds = cartActionFetchers.map(
+    const pendingLineIds = cartLineActionFetchers.map(
         (f) => JSON.parse(String(f.submission?.formData.get('linesIds')) || '[]')[0]
     );
     const lineIsPending = (line: string) => pendingLineIds.includes(line);
-    const linesArePending = () => pendingLineIds.length > 0;
+    const linesArePending = pendingLineIds.length > 0;
+
+    // Get the fetchers that are updating the discount code
+    const discountCodeFetchers = pendingFetchers.filter(
+        (f) => f.formData?.get('cartAction') === CartAction.UPDATE_DISCOUNT
+    );
+    const discountCodeIsPending = discountCodeFetchers.length > 0;
 
     // Get any fetchers that have errors
     const fetchersWithErrors = allFetchers.filter((f) => fetcherHasError(f));
@@ -162,7 +169,16 @@ export const CartLayout = () => {
                                         })}
                                     </ul>
 
-                                    <CartTotal cost={cart.cost} isLoading={linesArePending()} />
+                                    <DiscountBox
+                                        title="Have a discount code?"
+                                        description="Please note: We only publish discount codes online via official Open Study College channels."
+                                        discountCodes={cart?.discountCodes}
+                                    />
+
+                                    <CartTotal
+                                        cost={cart.cost}
+                                        isLoading={linesArePending || discountCodeIsPending}
+                                    />
                                 </CardBody>
 
                                 <CardFooter className="u-pt-xl">
@@ -170,7 +186,7 @@ export const CartLayout = () => {
                                         as="a"
                                         href={cart.checkoutUrl}
                                         isFull
-                                        isDisabled={linesArePending()}
+                                        isDisabled={linesArePending || discountCodeIsPending}
                                     >
                                         Enrol now
                                     </Button>
