@@ -28,13 +28,15 @@ interface ColorValue {
     };
 }
 
-const colorValues: ColorValue[] = colorNames.map((colorName) => ({
-    value: colorName,
-    payload: {
-        color: colors.default[colorName],
-        prettyName: COLOR_NAMES_MAP[colorName],
-    },
-}));
+const colorValues: ColorValue[] = colorNames
+    .map((colorName) => ({
+        value: colorName,
+        payload: {
+            color: colors.default[colorName],
+            prettyName: COLOR_NAMES_MAP[colorName],
+        },
+    }))
+    .sort((a, b) => a.payload.prettyName.localeCompare(b.payload.prettyName));
 
 export const ColorPicker = (props: StringInputProps<StringSchemaType>) => {
     const { elementProps, onChange, value = '' } = props;
