@@ -200,3 +200,22 @@ export const REMOVE_LINE_ITEMS_MUTATION = `#graphql
     }
   }
 `;
+
+/* -------------------------------------------------------------------------------------------------
+ * Update lines in cart
+ * -----------------------------------------------------------------------------------------------*/
+export const LINES_UPDATE_MUTATION = `#graphql
+  mutation ($cartId: ID!, $lines: [CartLineUpdateInput!]!, $language: LanguageCode, $country: CountryCode)
+  @inContext(country: $country, language: $language) {
+    cartLinesUpdate(cartId: $cartId, lines: $lines) {
+      cart {
+        ...CartLinesFragment
+      }
+      errors: userErrors {
+        ...ErrorFragment
+      }
+    }
+  }
+  ${LINES_CART_FRAGMENT}
+  ${USER_ERROR_FRAGMENT}
+`;

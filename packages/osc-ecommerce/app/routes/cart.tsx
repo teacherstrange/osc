@@ -21,7 +21,12 @@ import { getSettingsData } from '~/models/sanity.server';
 import { CART_QUERY } from '~/queries/sanity/cart';
 import type { CartActions } from '~/types/shopify';
 import { CartAction } from '~/types/shopify';
-import { addLinesToCart, createCart, removeLinesFromCart } from '~/utils/cart.helpers';
+import {
+    addLinesToCart,
+    createCart,
+    removeLinesFromCart,
+    updateLinesInCart,
+} from '~/utils/cart.helpers';
 
 export const links: LinksFunction = () => {
     return [
@@ -145,6 +150,41 @@ export const action: ActionFunction = async ({ request, context }: ActionArgs) =
                         {
                             code: 'INVALID',
                             message: 'No lines to remove',
+                        },
+                    ],
+                };
+            }
+
+            break;
+
+        case CartAction.UPDATE_CART:
+            const updateLinesIds = formData.get('linesIds')
+                ? (JSON.parse(String(formData.get('linesIds'))) as CartType['id'][])
+                : ([] as CartType['id'][]);
+            const productId = String(formData.get('productId'));
+            const selectedOptions = JSON.parse(String(formData.get('selectedOptions')));
+
+            try {
+                invariant(updateLinesIds.length, 'No lines to update');
+
+                result = await updateLinesInCart({
+                    cartId,
+                    linesIds: updateLinesIds,
+                    productId,
+                    selectedOptions,
+                    storefront,
+                });
+
+                cartId = result.cart.id;
+            } catch (error) {
+                console.error(error);
+
+                result = {
+                    cart: {} as CartType,
+                    errors: [
+                        {
+                            code: 'INVALID',
+                            message: 'No lines to update',
                         },
                     ],
                 };

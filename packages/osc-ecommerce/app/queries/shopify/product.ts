@@ -102,3 +102,18 @@ export const RECOMMENDED_PRODUCTS_QUERY = `#graphql
         }
   }
 `;
+
+export const SELECTED_PRODUCT_VARIANT_ID = `#graphql
+  query productVariant(
+    $productId: ID!,
+    $selectedOptions: [SelectedOptionInput!]!,
+    $country: CountryCode,
+    $language: LanguageCode
+  ) @inContext(country: $country, language: $language) {
+    product(id: $productId) {
+      selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions) {
+        id
+      }
+    }
+  }
+`;
