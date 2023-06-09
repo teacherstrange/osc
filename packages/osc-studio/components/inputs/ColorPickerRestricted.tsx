@@ -3,6 +3,7 @@ import { Autocomplete, Box, Card, Flex, Text } from '@sanity/ui';
 import { colors } from 'osc-design-tokens';
 import type { StringInputProps, StringSchemaType } from 'sanity';
 import { set, unset } from 'sanity';
+import { COLOR_NAMES_MAP } from '../../constants';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 
 const colorNames = Object.keys(colors.default).filter((color) => {
@@ -24,17 +25,24 @@ const colorNames = Object.keys(colors.default).filter((color) => {
 
 colorNames.push('multicolor');
 
-const colorValues: { value: string; payload: { color: string } }[] = colorNames.map(
-    (colorName) => ({
-        value: colorName,
-        payload: {
-            color:
-                colorName === 'multicolor'
-                    ? colors.default['gradient-primary']
-                    : colors.default[colorName],
-        },
-    })
-);
+interface ColorValue {
+    value: string;
+    payload: {
+        color: string;
+        prettyName: string;
+    };
+}
+
+const colorValues: ColorValue[] = colorNames.map((colorName) => ({
+    value: colorName,
+    payload: {
+        color:
+            colorName === 'multicolor'
+                ? colors.default['gradient-primary']
+                : colors.default[colorName],
+        prettyName: COLOR_NAMES_MAP[colorName],
+    },
+}));
 
 export const ColorPickerRestricted = (props: StringInputProps<StringSchemaType>) => {
     const { elementProps, onChange, value = '' } = props;
@@ -92,7 +100,7 @@ export const ColorPickerRestricted = (props: StringInputProps<StringSchemaType>)
                             ></div>
                         </Box>
                         <Box flex={1} padding={3}>
-                            <Text size={2}>{capitalizeFirstLetter(option.value)}</Text>
+                            <Text size={2}>{capitalizeFirstLetter(option.payload.prettyName)}</Text>
                         </Box>
                     </Flex>
                 </Card>
