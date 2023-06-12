@@ -187,6 +187,8 @@ export const CartLayout = () => {
                                         href={cart.checkoutUrl}
                                         isFull
                                         isDisabled={linesArePending || discountCodeIsPending}
+                                        isLoading={linesArePending || discountCodeIsPending}
+                                        loadingText=""
                                     >
                                         Enrol now
                                     </Button>
