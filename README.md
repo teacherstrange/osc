@@ -102,6 +102,7 @@ Make a copy of the `.env.sample` in each workspace, rename it to `.env` and upda
     JWT_AUDIENCE="http://localhost:4000/graphql"
     JWT_DURATION=3600
     JWT_REFRESH_DURATION=86400
+    MAGIC_SECRET=changeme
     ```
 
 -   `osc-api-crm`

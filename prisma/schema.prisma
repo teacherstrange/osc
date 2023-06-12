@@ -14,7 +14,7 @@ model User {
   firstName   String    @db.VarChar(128)
   lastName    String    @db.VarChar(128)
   email       String    @unique @db.VarChar(255)
-  password    String    @db.VarChar(512)
+  password    String?   @db.VarChar(512)
   active      Boolean   @default(false)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
@@ -38,6 +38,7 @@ model User {
   organisations          UserOrganisation[]      @relation("userOrganisation")
   userRefreshToken       UserRefreshToken[]      @relation("userRefreshTokens")
   assignments            AssignmentSubmission[]  @relation("studentDetails")
+  courseInterest         UserCourseInterest[]    @relation("userCourseInterest")
 
   @@map("users")
 }
@@ -93,6 +94,20 @@ model UserRefreshToken {
 
   @@index([userId])
   @@map("users.refreshTokens")
+}
+
+model UserCourseInterest {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  createdAt DateTime @default(now())
+  courseId  Int
+
+  user   User   @relation("userCourseInterest", fields: [userId], references: [id])
+  course Course @relation("courseUserInterest", fields: [courseId], references: [id])
+
+  @@index([userId])
+  @@index([courseId])
+  @@map("users.courseInterest")
 }
 
 model UserRole {
@@ -291,9 +306,10 @@ model Course {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
 
-  tutors      CourseTutor[]   @relation("courseTutorCourse")
-  students    CourseStudent[] @relation("courseStudentCourse")
-  assignments Assignment[]    @relation("courseAssignmentCourse")
+  tutors             CourseTutor[]        @relation("courseTutorCourse")
+  students           CourseStudent[]      @relation("courseStudentCourse")
+  assignments        Assignment[]         @relation("courseAssignmentCourse")
+  UserCourseInterest UserCourseInterest[] @relation("courseUserInterest")
 
   @@map("courses")
 }

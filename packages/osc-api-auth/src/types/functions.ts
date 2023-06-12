@@ -1,11 +1,20 @@
-import type { User, UserAvatar } from '@prisma/client';
+import type { User, UserAvatar, UserRole } from '@prisma/client';
 import type { CrmTokensAPI, LmsTokensAPI, UserRolesAPI } from '.';
-import type { createUserInput, getUsersArgs, loginArgsInput } from './arguments';
+import type {
+    createUserInput,
+    getUsersArgs,
+    loginArgsInput,
+    createUserSetupInput,
+    completeRegistration,
+} from './arguments';
 import type { PermissionsProps } from './interfaces';
 
 export type CreateUserFn = (input: createUserInput) => Promise<User | Error>;
 export type GetUserFn = (userId: number) => Promise<User | null>;
 export type GetMultipleUsersFn = (args: getUsersArgs) => Promise<User[]>;
+export type CreateUserSetupFn = (input: createUserSetupInput) => Promise<User | Error>;
+export type assignRoleFn = (userId: number, roleId: number) => Promise<UserRole | Error>;
+export type CompleteRegistrationFn = (input: completeRegistration) => Promise<User | Error>;
 
 export type LoginFn = (
     input: loginArgsInput
@@ -14,6 +23,9 @@ export type LoginFn = (
 export type RefreshAccessFn = (refreshToken: string) => Promise<{ accessToken: string } | Error>;
 export type AccessTokenFn = (userId: number) => Promise<string>;
 export type RefreshTokenFn = (userId: number) => Promise<string>;
+export type MagicKeyTokenFn = (userId: number) => Promise<string>;
+export type VerifyFn = (magicKeyToken: string) => Promise<number | false>;
+export type VerifyLinkFn = (magicKeyToken: string) => Promise<User | Error | null>;
 
 export type UserProfileFn = (userId: number) => Promise<{
     avatar: UserAvatar | null;

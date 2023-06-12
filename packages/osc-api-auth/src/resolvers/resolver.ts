@@ -4,7 +4,10 @@ import type {
     getUserArgs,
     getUsersArgs,
     loginArgs,
-    refreshAccessArgs
+    refreshAccessArgs,
+    createUserSetupArgs,
+    magicKeyArgs,
+    completeRegistrationArgs,
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
@@ -16,12 +19,12 @@ export const resolvers = {
         },
         user: async (_: undefined, args: getUserArgs, { user }: AuthContext) => {
             return await account.get(args.id ?? user!.id);
-        }
+        },
     },
     User: {
         profile: async ({ id }: User) => {
             return await account.profile(id);
-        }
+        },
     },
     Mutation: {
         createUser: async (_: undefined, { input }: createUserArgs) => {
@@ -32,6 +35,15 @@ export const resolvers = {
         },
         refreshAccess: async (_: undefined, { refreshToken }: refreshAccessArgs) => {
             return account.refreshAccess(refreshToken);
-        }
-    }
+        },
+        createUserSetup: async (_: undefined, { input }: createUserSetupArgs) => {
+            return account.createSetup(input);
+        },
+        validateMagicToken: async (_: undefined, { magicKeyToken }: magicKeyArgs) => {
+            return account.verifyLink(magicKeyToken);
+        },
+        completeRegistration: async (_: undefined, { input }: completeRegistrationArgs) => {
+            return account.completeRegistration(input);
+        },
+    },
 };

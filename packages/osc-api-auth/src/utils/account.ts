@@ -1,5 +1,13 @@
 import { PrismaClient } from '@prisma/client';
-import { getUserByEmail, getUserById, wait } from 'osc-api';
+import {
+    getUserByEmail,
+    getUserById,
+    wait,
+    sendRegistrationEmail,
+    getCourseById,
+    getRoleById,
+    getRoleByTitle,
+} from 'osc-api';
 import type {
     CreateUserFn,
     CrmTokensFn,
@@ -12,8 +20,13 @@ import type {
     UserPermissionsFn,
     UserProfileFn,
     UserRolesFn,
+    CreateUserSetupFn,
+    VerifyLinkFn,
+    assignRoleFn,
+    CompleteRegistrationFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
+import { env } from '~/types/environment';
 import * as password from '~/utils/password';
 import * as token from '~/utils/token';
 
@@ -41,6 +54,113 @@ export const create: CreateUserFn = async (input) => {
         },
     });
 };
+export const createSetup: CreateUserSetupFn = async (input) => {
+    const existingUser = await getUserByEmail(input.email);
+
+    // If user already exists, throw error
+    if (existingUser) {
+        return new Error('An account already exists for the specified email.');
+    }
+    // Create user record
+    const userCreate = await prisma.user.create({
+        data: {
+            firstName: input.firstName,
+            lastName: input.lastName,
+            email: input.email,
+        },
+    });
+    // Find role Id
+    const roleId = await getRoleByTitle('Student');
+
+    // Assign a role of 'Student'
+    if (roleId != null) {
+        await assignRole(userCreate.id, roleId.id);
+    }
+    // Generate magic key token
+    const userToken = await token.magicKey(userCreate.id);
+    const url = `https://openstudycollege.com/signin?token = ${userToken}`;
+    // Send email via hubspot api
+    const emailData = {
+        to: input.email,
+        url: url,
+        firstName: input.firstName,
+        lastName: input.lastName,
+        emailId: env.REG_EMAIL,
+    };
+    await sendRegistrationEmail(emailData);
+
+    if (input.courses) {
+        for (var i = 0; i < input.courses.length; i++) {
+            // validation check to make sure course is listed
+            const courseExists = await getCourseById(input.courses[i]);
+            if (courseExists != null) {
+                await prisma.userCourseInterest.create({
+                    data: {
+                        userId: userCreate.id,
+                        courseId: input.courses[i],
+                    },
+                });
+            }
+        }
+    }
+    return userCreate;
+};
+
+export const assignRole: assignRoleFn = async (userId, roleId) => {
+    // Check if user exists
+    const existingUser = await getUserById(userId);
+    if (!existingUser) {
+        return new Error('An account does not exist for this user');
+    }
+
+    // fetch user role
+    const userRole = await getRoleById(roleId);
+    if (!userRole) {
+        return new Error('Role does not exist');
+    }
+    // Assign user role
+    return await prisma.userRole.create({
+        data: {
+            userId: userId,
+            roleId: roleId,
+            createdBy: userId,
+        },
+    });
+};
+
+export const verifyLink: VerifyLinkFn = async (magicKeyToken) => {
+    // Verfiy the incoming token
+    const tokenCheck = await token.verifyToken(magicKeyToken);
+    // Get user details for pre pop
+    if (!tokenCheck) {
+        return new Error('No valid login link');
+    }
+    const userDet = await get(tokenCheck);
+    return userDet;
+};
+
+export const completeRegistration: CompleteRegistrationFn = async (input) => {
+    const tokenCheck = await token.verifyToken(input.magicKey);
+    if (!tokenCheck) {
+        return new Error('No valid login link');
+    }
+    const user = await getUserByEmail(input.email);
+
+    if (!user) {
+        return new Error('No matching active user found');
+    }
+
+    const hashedPassword = await password.hash(input.password);
+
+    return await prisma.user.update({
+        where: {
+            id: user.id,
+        },
+        data: {
+            password: hashedPassword,
+        },
+    });
+};
 
 export const login: LoginFn = async (input) => {
     // Find matching user
@@ -49,14 +169,14 @@ export const login: LoginFn = async (input) => {
     // If no matching user, throw error
     if (!user) {
         await wait(3000);
-        return new Error('No matching user found.');
+        return new Error('No matching active user found.');
     }
 
     // Compare input password to hashed password
+    if (user.password == null) {
+        return new Error('No matching user found.');
+    }
     const passwordMatch = await password.compare(input.password, user.password);
-
-    // If passwords dont match throw error
-    // We'll hide this behind the same text as no matching user for now to prevent identifying used emails
     if (!passwordMatch) {
         await wait(3000);
         return new Error('No matching user found.');

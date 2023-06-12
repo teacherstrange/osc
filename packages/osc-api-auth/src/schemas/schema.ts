@@ -1,7 +1,8 @@
 import { gql } from 'apollo-server-core';
 
 export const typeDefs = gql`
-    extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key", "@shareable"])
+    extend schema
+        @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key", "@shareable"])
 
     type User {
         id: Int!
@@ -18,7 +19,7 @@ export const typeDefs = gql`
     type Profile {
         avatar: Avatar
         permissions: Permissions
-        roles: [UserRole] 
+        roles: [UserRole]
         crmTokens: [CrmToken]
         lmsTokens: [LmsToken]
     }
@@ -30,7 +31,7 @@ export const typeDefs = gql`
         createdAt: String!
         updatedAt: String
     }
-    
+
     type UserRole {
         id: Int!
         userId: Int!
@@ -40,14 +41,14 @@ export const typeDefs = gql`
 
     type Role {
         id: Int!
-        title: String 
+        title: String
     }
-    
+
     type Permissions {
         read: [String]
         write: [String]
     }
-    
+
     type CrmToken {
         id: Int!
         crmId: Int!
@@ -90,7 +91,14 @@ export const typeDefs = gql`
     }
 
     type Query {
-        users(start: Int, limit: Int, pagination: String, cursor: String, orderBy: String, orderDir: String): [User]
+        users(
+            start: Int
+            limit: Int
+            pagination: String
+            cursor: String
+            orderBy: String
+            orderDir: String
+        ): [User]
         user(id: Int): User
     }
 
@@ -103,6 +111,19 @@ export const typeDefs = gql`
         password: String! @constraint(minLength: 12)
     }
 
+    input createUserSetupInput {
+        firstName: String! @constraint(maxLength: 128)
+        lastName: String! @constraint(maxLength: 128)
+        email: String! @constraint(format: "email", maxLength: 255)
+        courses: [Int]
+    }
+
+    input completeRegistration {
+        email: String! @constraint(format: "email", maxLength: 255)
+        password: String!
+        magicKey: String!
+    }
+
     input loginInput {
         email: String! @constraint(format: email)
         password: String!
@@ -112,5 +133,8 @@ export const typeDefs = gql`
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
         refreshAccess(refreshToken: String!): refreshAccess
+        createUserSetup(input: createUserSetupInput!): User
+        validateMagicToken(magicKeyToken: String!): User
+        completeRegistration(input: completeRegistration!): User
     }
 `;

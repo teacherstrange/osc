@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import type { GetUserByEmailFn, GetUserByIdFn } from './types';
+
+import type { GetUserByEmailFn, GetUserByIdFn, GetRoleByIdFn, GetRoleByTitleFn } from './types';
 export * from './types';
 
 const prisma = new PrismaClient();
@@ -10,6 +11,22 @@ export const getUserById: GetUserByIdFn = async (id) => {
             id,
         },
         include: userInclude(),
+    });
+};
+
+export const getRoleById: GetRoleByIdFn = async (id) => {
+    return await prisma.role.findUnique({
+        where: {
+            id,
+        },
+    });
+};
+
+export const getRoleByTitle: GetRoleByTitleFn = async (title) => {
+    return await prisma.role.findFirst({
+        where: {
+            title,
+        },
     });
 };
 
