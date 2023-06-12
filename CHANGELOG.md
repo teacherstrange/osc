@@ -1,3 +1,77 @@
+## [0.106.0](https://github.com/Open-Study-College/osc/compare/v0.105.0...v0.106.0) (2023-06-12)
+
+
+### 🐛 Bugs
+
+* spread props and pass to Content to stop classNames from getting overridden ([425af24](https://github.com/Open-Study-College/osc/commit/425af245b698f4e2c6c7ed1f9ac2d4c0323d3056))
+
+
+### ✨ Features
+
+* add basic setup and some Widgets ([d687b10](https://github.com/Open-Study-College/osc/commit/d687b102286bd848683fddd63b732fc2cd7c962e))
+* add ClearRefinements widget ([bc83235](https://github.com/Open-Study-College/osc/commit/bc832359d6abc37cc43ed3276e9cd97b32c1078d))
+* create client side getClient file for Sanity requests ([a39c4b6](https://github.com/Open-Study-College/osc/commit/a39c4b6bdcced57f2018b7ffd428524b268aec18))
+
+
+### ♻️ Refactors
+
+* add accordion and slider labels ([a0e2d84](https://github.com/Open-Study-College/osc/commit/a0e2d84a0f7e3a8b29a90cadde53bed24ab74b99))
+* add check on setExternalValue ([7145c29](https://github.com/Open-Study-College/osc/commit/7145c292f751ce40af0217ac7ee4a557eb4d3a35))
+* add className prop to Label component ([1471b94](https://github.com/Open-Study-College/osc/commit/1471b94bf7c6735a6dabaab2cede56160b73602e))
+* add className to description prop and add gap to trigger for tertiary modifier ([5deeb30](https://github.com/Open-Study-College/osc/commit/5deeb300a9ebe57f76fd563e831a7288ab666443))
+* add className to sliderClasses ([84838ec](https://github.com/Open-Study-College/osc/commit/84838ecbeb39287d36cb5fb106c578edc55cad09))
+* add CollectionCards and rename primary/grouped_by indexes ([07350db](https://github.com/Open-Study-College/osc/commit/07350dbab6507d6e0f9ec5002473119d3d64e5f2))
+* add comment ([acd3209](https://github.com/Open-Study-College/osc/commit/acd32091f6b05956b65b9631574e62269578564c))
+* add comment on uniqueProductVariants function ([a577012](https://github.com/Open-Study-College/osc/commit/a57701216facfa45179898c29dcf99382bc439f3))
+* add const assertion ([961cfa3](https://github.com/Open-Study-College/osc/commit/961cfa3a36737c9c3d0f9da041b37c48bb017b4a))
+* add container-width-3xs and update Search component to use this ([cedd479](https://github.com/Open-Study-College/osc/commit/cedd4791ff4a02bfc5f8a53f261e34a1e698d38a))
+* add display count option to Checkbox ([4fa4e59](https://github.com/Open-Study-College/osc/commit/4fa4e591769ef32b0ee4c6eb35ecb99878c9edf4))
+* add Highlight to Hit component ([ac088fe](https://github.com/Open-Study-College/osc/commit/ac088fe317f1754ff213e8ecb26e656e806d7f35))
+* add link for CollectionCards ([20d3c56](https://github.com/Open-Study-College/osc/commit/20d3c5665ee7d010216dd7c1085fcb0fa7f6c9dc))
+* add NoResult component ([218ec3a](https://github.com/Open-Study-College/osc/commit/218ec3a2ac96a2aadc7e8b5721c7da85ea788414))
+* add product hitsPerPage as env_var ([b770cb5](https://github.com/Open-Study-College/osc/commit/b770cb5a55e82283bff87c856d6ce27244b88734))
+* add RefinementList components to search route ([6f730c2](https://github.com/Open-Study-College/osc/commit/6f730c29c39b68700a998b85c8dfc66e8f1916b4))
+* add RefinementSlider ([f9013b9](https://github.com/Open-Study-College/osc/commit/f9013b911de08124fd24c7331d9d64714432b48d))
+* add SearchBox, refactors to tidy up files, and styling adjustments ([acc3408](https://github.com/Open-Study-College/osc/commit/acc3408a4710ebca1489102fed058c3031d638c4))
+* add setExternalValue prop nad pass to onValueChange ([e7602aa](https://github.com/Open-Study-College/osc/commit/e7602aa1239a8b5f30a86dbaee108b241715d3d7))
+* add sortby and listby code, refactor collections to use correct index & remove Browse api ([8e83c41](https://github.com/Open-Study-College/osc/commit/8e83c4115bae2cfb98f06913ee6467ba357bcfab))
+* add SpriteSheetProvider back in and remove redundant type ([f901acf](https://github.com/Open-Study-College/osc/commit/f901acff6e7dd8e0b3409aa8b7cecdd64f679e4e))
+* add styling tweaks ([9222462](https://github.com/Open-Study-College/osc/commit/9222462e2bad7f2c668f771f358cf040d3dcfe95))
+* add tweaks to CourseCard to correct layout ([dbc703c](https://github.com/Open-Study-College/osc/commit/dbc703c6b95990491269234f735fd25b853044b4))
+* add uniqueId for checkbox ids ([6701ec6](https://github.com/Open-Study-College/osc/commit/6701ec6ece839f5c92022ec97222dd73c5c43b26))
+* allow props to be optional ([8797d83](https://github.com/Open-Study-College/osc/commit/8797d83d8cff22834566880e07f6b0f2afa9c8ad))
+* combine sanity/algolia data and integrate into existing CollectionCard component ([5e1c954](https://github.com/Open-Study-College/osc/commit/5e1c954d45d3bfb736baa620f25e559d28122171))
+* correct description of prop ([d6c4dc4](https://github.com/Open-Study-College/osc/commit/d6c4dc4b1fb4ac4242fc5e005849e96612be9cc9))
+* correct name of prop ([22f6861](https://github.com/Open-Study-College/osc/commit/22f68611d398fd5511f1cdcaee27225a181fdab2))
+* correct styling on CollectionCards ([feebe0c](https://github.com/Open-Study-College/osc/commit/feebe0cbc7e839055bf2a055ddf836ce20956887))
+* enable value of checkbox to be set from outside the component and make it controlled ([180db7d](https://github.com/Open-Study-College/osc/commit/180db7d10b9bee06df56760ff56bd43229b93db1))
+* fix slider by adding local state back in and a prop for setting external state ([e436c27](https://github.com/Open-Study-College/osc/commit/e436c27e56dddd70cc2f81da85c8a8763d842a57))
+* if TextInput is quaternary variant, move icon outside of input container div ([e289b15](https://github.com/Open-Study-College/osc/commit/e289b15e6419148c1dfd2d5680b58e3719059c9b))
+* increase icon size ([ecf95b9](https://github.com/Open-Study-College/osc/commit/ecf95b90581f669411288f27d3f6a03ddc32b1b1))
+* increase padding for Slider ([e28ee96](https://github.com/Open-Study-College/osc/commit/e28ee9638e075023d2957f577bc95d0cb64815a3))
+* move components into Refinements folder ([5d006fb](https://github.com/Open-Study-College/osc/commit/5d006fbaaa6558cf9ca564c35df660f58af88732))
+* move Search page route up a level ([f57383f](https://github.com/Open-Study-College/osc/commit/f57383f549790502d81f9803b8a804b8b794e886))
+* refactor out some components to make return JSX  more DRY and clean ([657988f](https://github.com/Open-Study-College/osc/commit/657988f88d2afc29bfffa20d0b65fc97b6466aea))
+* remove "count" out of Checkbox and incorporate directly in RefinementList ([072b5af](https://github.com/Open-Study-College/osc/commit/072b5af095557dca399d08c3f8c6491a778e565a))
+* remove console log ([d15fa35](https://github.com/Open-Study-College/osc/commit/d15fa359666cbf8c9c0af09263145d16a5687708))
+* remove margin and increase size of accordion header ([8c0bfbd](https://github.com/Open-Study-College/osc/commit/8c0bfbd12a30e078fc3d1bc14865e677b2413612))
+* remove onSale code from SortBy component ([cfd340c](https://github.com/Open-Study-College/osc/commit/cfd340c419e70a6a7ab312fe2aca661fea5fa776))
+* remove redundant code ([d732f6a](https://github.com/Open-Study-College/osc/commit/d732f6a2faa705ddd2d99c07a9bd13aee4350cd6))
+* remove wrapping divs ([6a0dd66](https://github.com/Open-Study-College/osc/commit/6a0dd66b1a1b3b5b275a3df8061d5671c64645b6))
+* set gridview to full grid width [@tab](https://github.com/tab) breakpoint ([d9a90e0](https://github.com/Open-Study-College/osc/commit/d9a90e0c9c142e7c6f220407e9a0d3d442935c04))
+* set view to list/grid respectively when isGreaterThanTab is true ([c8f1df5](https://github.com/Open-Study-College/osc/commit/c8f1df53179d1fc766ddc81d426cbac6041c53c1))
+* show "for" conditionally when there is a query ([bcfd6ee](https://github.com/Open-Study-College/osc/commit/bcfd6ee79dee3652546520e7e9d4593cc713a94b))
+* show results list regardless of query ([ccebc6d](https://github.com/Open-Study-College/osc/commit/ccebc6dab9cb1e0fe2f0e7214c2c908c91f6b158))
+* tweak name of sortby options and set a default ([49c25e9](https://github.com/Open-Study-College/osc/commit/49c25e9e5a1d667cb708f2173b147024b8aeeaac))
+* tweaks to media query conditions for o-containers ([489b852](https://github.com/Open-Study-College/osc/commit/489b852e8ec90576091f600a3f9d3cb454a73a14))
+* update button to link to the correct course path ([99694f3](https://github.com/Open-Study-College/osc/commit/99694f3c8d2e83c9f87bc998346485205d4ac5fc))
+* update env.sample ([0420361](https://github.com/Open-Study-College/osc/commit/04203616e62d60a8d114bf152448b7ab9a8d3bb1))
+* update query and resulting image data compilation ([bf7fa21](https://github.com/Open-Study-College/osc/commit/bf7fa21c7b7cc1400549b2ff26b3771f03e32000))
+* update Slider to pass useState into the component ([58dab70](https://github.com/Open-Study-College/osc/commit/58dab70c4de650dc6b55f089361d9d8a01ee4647))
+* update title names for Refinement data ([86aa0bd](https://github.com/Open-Study-College/osc/commit/86aa0bd8eb83416269540c70dfa6e3919aa174b2))
+* use "sm" size variant in Price component ([f987d60](https://github.com/Open-Study-College/osc/commit/f987d60e95624c3824d8abb19aac84821d0ca45c))
+* wrap CardTitle in span and add flex/max-width properties ([e7644a9](https://github.com/Open-Study-College/osc/commit/e7644a9b9a6daae03b6fcc3cc30f34863bc197a5))
+
 ## [0.105.0](https://github.com/Open-Study-College/osc/compare/v0.104.0...v0.105.0) (2023-06-09)
 
 
@@ -108,27 +182,4 @@
 * **cart:** wrap discount action in try catch ([9ddb671](https://github.com/Open-Study-College/osc/commit/9ddb671a85ae7b788d2da770d96d7c7f0e19c224))
 * **line item:** allow line items to wrap ([f711afc](https://github.com/Open-Study-College/osc/commit/f711afc910fec362a2b8ff7b8a2c46e2fda0be8a))
 * **price:** extract selectedVariant into different props ([91e4580](https://github.com/Open-Study-College/osc/commit/91e4580206b11a1612cfcb427f90be51680ec2a5))
-
-## [0.102.0](https://github.com/Open-Study-College/osc/compare/v0.101.0...v0.102.0) (2023-06-09)
-
-
-### ✨ Features
-
-* **cart:** add helper function to update the cart line items ([cc70d13](https://github.com/Open-Study-College/osc/commit/cc70d136ccabfaf146e0db19a17d3b62b64d610b))
-* **cart:** add mutation to update the cart line items ([8c8b027](https://github.com/Open-Study-College/osc/commit/8c8b027800d9f50dd44218b4486cd9d32655ce21))
-* **cart:** add product query to get the selected variant id ([33d00e9](https://github.com/Open-Study-College/osc/commit/33d00e99e55a5b405aab141f5963233e34f46051))
-* **cart:** add remove from cart function ([d4edbd7](https://github.com/Open-Study-College/osc/commit/d4edbd7f393d6cd19681f41d0deb63f1d5aaa57e))
-* **cart:** add update cart action to pending line ids array ([9d76060](https://github.com/Open-Study-College/osc/commit/9d760606248aa367aa76042826818685596a769d))
-* **cart:** adds form to the cart card item options ([d98932d](https://github.com/Open-Study-College/osc/commit/d98932d349a64fa474ba03a60f336dc3bbb8e89c))
-* **cart:** adds update cart function to cart action ([5def8fc](https://github.com/Open-Study-College/osc/commit/5def8fc3c09789ba1f3fb21d7793c1181b6a0c94))
-
-
-### 🐛 Bugs
-
-* **cart:** remove duplicate action ([07e8f7a](https://github.com/Open-Study-College/osc/commit/07e8f7adba753872c4f61e14fb41994b1d13f1cc))
-
-
-### ♻️ Refactors
-
-* **cart:** wrap update action in try catch ([89c6434](https://github.com/Open-Study-College/osc/commit/89c643484ad911fa77bb01fe36aa0b42a4d57e9f))
 
