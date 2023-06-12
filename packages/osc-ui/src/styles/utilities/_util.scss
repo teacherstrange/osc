@@ -196,6 +196,12 @@ $osc-config: (
         values: (
             "auto": auto
         )
+    ),
+    visibility: (
+        prefix: "vis",
+        values: (
+            hidden
+        )
     )
 );
 
