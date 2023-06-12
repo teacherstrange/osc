@@ -93,6 +93,13 @@
             }
         }
 
+        &__labels {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-top: $space-xs;
+        }
+
         &:hover {
             .c-slider__value {
                 transform: scale(1);

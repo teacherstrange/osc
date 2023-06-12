@@ -109,6 +109,7 @@
             /* stylelint-disable-next-line no-descending-specificity */
             .c-label {
                 flex: 1;
+                max-width: max-content;
                 padding-left: $space-xs;
                 color: var(--color-secondary);
             }

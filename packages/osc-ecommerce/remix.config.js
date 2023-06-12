@@ -8,6 +8,7 @@ module.exports = {
     watchPaths: ['../osc-ui/dist/*'],
     devServerPort: 8002,
     serverDependenciesToBundle: [
+        'instantsearch.js/es/connectors',
         /^osc-ui\/dist\/.*\.svg$/, // match svg files in dist folder, this prevents the unhandled token error being thrown
     ],
     future: {

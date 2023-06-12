@@ -13,6 +13,7 @@ import './select.scss';
 type Description = {
     label?: string;
     icon?: string;
+    className?: string;
 };
 
 type GroupVariants = 'secondary' | 'tertiary' | 'inline' | 'inline-wrap' | 'bold';
@@ -64,6 +65,10 @@ export interface Props extends ComponentPropsWithRef<typeof SelectPrimitive.Root
      * Sets the width of the trigger in %
      */
     triggerWidth?: '70';
+    /**
+     * Allows a value to be set externally
+     */
+    setExternalValue: (value) => void;
 }
 
 export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Props>(
@@ -82,6 +87,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             hasDarkLabel = false,
             triggerWidth,
             className,
+            setExternalValue,
         } = props;
         const [value, setValue] = useState('');
         const [isOpen, setIsOpen] = useState(false);
@@ -108,6 +114,7 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
             if (desc?.label)
                 return (
                     <Label
+                        className={desc.className}
                         htmlFor={name}
                         name={desc.label}
                         onClickHandler={() => setIsOpen(!isOpen)}
@@ -129,7 +136,10 @@ export const Select = forwardRef<ElementRef<typeof SelectPrimitive.Trigger>, Pro
                     onOpenChange={() => setIsOpen(!isOpen)}
                     disabled={disabled}
                     name={name}
-                    onValueChange={(value) => setValue(value)}
+                    onValueChange={(value) => {
+                        setValue(value);
+                        setExternalValue && setExternalValue(value);
+                    }}
                     open={isOpen}
                     required={required}
                 >

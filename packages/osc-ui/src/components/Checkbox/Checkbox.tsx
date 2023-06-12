@@ -1,6 +1,6 @@
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import type { ComponentPropsWithRef, Dispatch, ElementRef, SetStateAction } from 'react';
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useId, useState } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { useModifier } from '../../hooks/useModifier';
 import { classNames } from '../../utils/classNames';
@@ -12,6 +12,10 @@ import './checkbox.scss';
 type Variants = 'secondary' | 'tertiary';
 
 export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrimitive.Root> {
+    /**
+     * An external checked value that can be passed in
+     */
+    checked?: boolean;
     /**
      * Any error messages - initially set through server validation, but can be updated through client validation
      */
@@ -29,6 +33,10 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
      * submitted with its owning form as part of a name/value pair.
      */
     name: string;
+    /**
+     * A handler that can be used when the value changes
+     */
+    onValueChange?: () => void;
     /**
      * The Zod Schema object used for validation
      */
@@ -55,12 +63,14 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
 export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxProps>(
     (props, forwardedRef) => {
         const {
+            checked = false,
             defaultChecked,
             disabled,
             errors,
             icon,
             id,
             name,
+            onValueChange,
             required,
             schema,
             setErrors,
@@ -69,17 +79,20 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
             variants,
         } = props;
 
-        const [checked, setChecked] = useState<string | boolean>(false);
+        const [checkedState, setChecked] = useState<boolean | 'indeterminate'>(checked);
+
+        const uniqueId = useId();
+
         useEffect(() => {
             // Client side error handling - Sets any errors on an input in
             // accordance with the schema validation
             if (errors && errors.length > 0 && schema && setErrors) {
                 // Checkbox schema looks whether there is an array of values, as this is what
                 // gets submitted to the server. On the client, if checked is false then set to empty array
-                clientSideValidation(name, schema, setErrors, checked ? ['true'] : []);
+                clientSideValidation(name, schema, setErrors, checkedState ? ['true'] : []);
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps -- should only update when the checked value changes
-        }, [checked]);
+        }, [checkedState]);
 
         const modifiers = useModifier('c-checkbox__container', variants);
         const containerSizeModifier = useModifier('c-checkbox__container', size);
@@ -107,11 +120,15 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                     aria-label={value}
                     aria-describedby={`${id}-error`}
                     className={checkboxClasses}
+                    checked={checkedState}
                     defaultChecked={defaultChecked}
                     disabled={disabled}
-                    id={id}
+                    id={uniqueId + id}
                     name={name}
-                    onCheckedChange={(checked) => setChecked(checked)}
+                    onCheckedChange={(checked) => {
+                        setChecked(checked);
+                        onValueChange();
+                    }}
                     ref={forwardedRef}
                     required={required}
                     value={value}
@@ -120,7 +137,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Ch
                         {icon ? <Icon id={icon.id} className={icon.className} /> : null}
                     </CheckboxPrimitive.Indicator>
                 </CheckboxPrimitive.Root>
-                <Label name={value} htmlFor={id} size={size} />
+                <Label name={value} htmlFor={uniqueId + id} size={size} />
             </div>
         );
     }

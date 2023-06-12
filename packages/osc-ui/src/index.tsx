@@ -110,6 +110,7 @@ export { Price } from './components/Price/Price';
 export { RadioGroup, RadioItem } from './components/RadioGroup/RadioGroup';
 export { Select, SelectItem } from './components/Select/Select';
 export { SkipLink } from './components/SkipLink/SkipLink';
+export { Slider } from './components/Slider/Slider';
 export { Switch } from './components/Switch/Switch';
 export { TabContent, TabList, TabTrigger, Tabs } from './components/Tabs/Tabs';
 export { Tag } from './components/Tag/Tag';

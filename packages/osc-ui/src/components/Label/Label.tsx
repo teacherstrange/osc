@@ -6,6 +6,7 @@ import { classNames } from '../../utils/classNames';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import './label.scss';
 export interface Props {
+    className?: string;
     onClickHandler?: () => void;
     htmlFor: string;
     hidden?: boolean;
@@ -21,6 +22,7 @@ export interface Props {
 }
 export const Label: FC<Props> = (props: Props) => {
     const {
+        className,
         hidden,
         htmlFor,
         onClickHandler,
@@ -34,7 +36,13 @@ export const Label: FC<Props> = (props: Props) => {
     const modifier = useModifier('c-label', variants);
     const sizeModifier = useModifier('c-label', size);
     const colourModifier = useModifier('c-label', 'dark');
-    const classes = classNames('c-label', sizeModifier, modifier, isDark ? colourModifier : '');
+    const classes = classNames(
+        'c-label',
+        sizeModifier,
+        modifier,
+        isDark ? colourModifier : '',
+        className
+    );
 
     if (hidden) {
         return (

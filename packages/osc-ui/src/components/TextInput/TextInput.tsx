@@ -44,7 +44,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
     /**
      * An optional icon for the input field
      */
-    icon?: { id: string };
+    icon?: { className: string; id: string };
     /**
      * Id for the input field
      */
@@ -121,6 +121,8 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
     const iconModifier = useModifier('c-input__icon', variants);
     const iconClasses = classNames('c-input__icon', iconModifier);
 
+    const isQuaternary = variants?.some((variant) => variant === 'quaternary');
+
     return (
         <div className="c-input__outer-container">
             <div
@@ -145,15 +147,20 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, forw
                 />
                 <Label
                     // If Quaternary variation then wrap in VisuallyHidden to hide the label
-                    hidden={variants?.some((variant) => variant === 'quaternary')}
+                    hidden={isQuaternary}
                     htmlFor={id}
                     name={label}
                     required={required}
                     variants={_value || value ? ['filled'] : null}
                 />
-                {icon ? <Icon className={iconClasses} id={icon.id} /> : null}
                 {errors && errors.length > 0 ? <InputError errors={errors} id={id} /> : null}
+                {icon && !isQuaternary ? (
+                    <Icon className={`${iconClasses} ${icon.className}`} id={icon.id} />
+                ) : null}
             </div>
+            {icon && isQuaternary ? (
+                <Icon className={`${iconClasses} ${icon.className}`} id={icon.id} />
+            ) : null}
             {action ? <InputButton action={action} id={action.iconId} /> : null}
         </div>
     );

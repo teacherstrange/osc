@@ -137,7 +137,7 @@ AccordionHeader.displayName = 'AccordionHeader';
 
 export const AccordionPanel: FC<AccordionContentProps> = (props: AccordionContentProps) => {
     const ref = useRef(null);
-    const { children, className } = props;
+    const { children, className, ...rest } = props;
     const { variant } = useAccordionContext();
     const modifierClass = useModifier('c-accordion__content', variant);
     const classes = classNames('c-accordion__content', modifierClass, className);
@@ -179,7 +179,7 @@ export const AccordionPanel: FC<AccordionContentProps> = (props: AccordionConten
 
     return (
         // Use `forceMount` to keep the content in the DOM and prevent it from being unmounted when closed.
-        <AccordionPrimitive.Content className={classes} {...props} forceMount ref={ref}>
+        <AccordionPrimitive.Content className={classes} {...rest} forceMount ref={ref}>
             <div className={`c-accordion__text c-accordion__text--${variant}`}>{children}</div>
         </AccordionPrimitive.Content>
     );
