@@ -137,7 +137,6 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             target,
             ...attr
         } = props;
-
         const sizeModifier = useModifier('c-btn', size);
         const variantModifier = useModifier('c-btn', variant);
         const classes = classNames(
@@ -164,14 +163,17 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
 
         const isBlank = target === '_blank' ? true : false;
 
+        // IF there is loading text then add the spinner in a relative position to the right of it
+        // ELSE there is no loading text absolutely position the spinner in the middle of the button and visually hide the children
         const buttonInner = isLoading ? (
             <span className="c-btn__inner">
                 {loadingText && loadingText}{' '}
-                <span className="c-btn-loader">
+                <span className={`c-btn-loader ${!loadingText ? 'c-btn-loader--absolute' : ''}`}>
                     <span className="c-btn-loader__dot"></span>
                     <span className="c-btn-loader__dot"></span>
                     <span className="c-btn-loader__dot"></span>
                 </span>
+                {!loadingText && <span className="u-vis-hidden">{children}</span>}
             </span>
         ) : (
             <span className="c-btn__inner">{children}</span>

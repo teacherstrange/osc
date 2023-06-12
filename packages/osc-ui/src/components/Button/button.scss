@@ -538,7 +538,12 @@
     // *----------------------------------*/
     .c-btn-loader {
         display: flex;
+        align-items: center;
         gap: 0.25em;
+
+        &--absolute {
+            position: absolute;
+        }
 
         &__dot {
             width: 2px;
