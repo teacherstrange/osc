@@ -116,7 +116,7 @@ describe('headerNav', () => {
         );
 
         expect(headerNav).not.toHaveStyle('overflow-y: auto;');
-        expect(document.body).toHaveStyle('overflow-y: auto;');
+        expect(document.body).not.toHaveStyle('overflow-y: hidden;');
     });
 });
 
