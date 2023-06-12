@@ -3,6 +3,7 @@ type regEmailData = {
     url: string;
     firstName: string;
     lastName: string;
+    emailId: number;
 };
 
 type message = {

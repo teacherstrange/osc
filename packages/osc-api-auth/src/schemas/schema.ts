@@ -118,6 +118,12 @@ export const typeDefs = gql`
         courses: [Int]
     }
 
+    input completeRegistration {
+        email: String! @constraint(format: "email", maxLength: 255)
+        password: String!
+        magicKey: String!
+    }
+
     input loginInput {
         email: String! @constraint(format: email)
         password: String!

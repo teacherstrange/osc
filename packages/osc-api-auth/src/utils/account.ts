@@ -26,6 +26,7 @@ import type {
     CompleteRegistrationFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
+import { env } from '~/types/environment';
 import * as password from '~/utils/password';
 import * as token from '~/utils/token';
 
@@ -84,6 +85,7 @@ export const createSetup: CreateUserSetupFn = async (input) => {
         url: url,
         firstName: input.firstName,
         lastName: input.lastName,
+        emailId: env.REG_EMAIL,
     };
     await sendRegistrationEmail(emailData);
 
