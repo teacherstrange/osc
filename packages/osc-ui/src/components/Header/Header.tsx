@@ -38,7 +38,7 @@ export const Header = forwardRef<ElementRef<'header'>, HeaderProps>((props, forw
     const headerHeight = useHeight(ref);
 
     const stickyModifier = useModifier('c-header', isSticky && 'sticky');
-    const classes = classNames('c-header', 'o-container', stickyModifier, className);
+    const classes = classNames('c-header', stickyModifier, className);
 
     return (
         <header
@@ -51,7 +51,7 @@ export const Header = forwardRef<ElementRef<'header'>, HeaderProps>((props, forw
                 ['--header-height' as string]: `${headerHeight}px`,
             }}
         >
-            {children}
+            <div className="c-header__inner o-container">{children}</div>
         </header>
     );
 });

@@ -9,23 +9,27 @@
     .c-header {
         $self: &;
 
-        position: relative;
-        display: grid;
-        align-items: center;
-        grid-template-columns: repeat(3, auto);
-        padding-block: $space-xl;
+        background-color: var(--color-tertiary);
 
         @include z-index("header");
-
-        @include mq($mq-desk) {
-            grid-template-columns: repeat(2, auto);
-            grid-template-rows: repeat(2, 1fr);
-            gap: $space-2xs;
-        }
 
         &--sticky {
             position: sticky;
             top: 0;
+        }
+
+        &__inner {
+            position: relative;
+            padding-block: $space-xl;
+            display: grid;
+            align-items: center;
+            grid-template-columns: repeat(3, auto);
+
+            @include mq($mq-desk) {
+                grid-template-columns: repeat(2, auto);
+                grid-template-rows: repeat(2, 1fr);
+                gap: $space-2xs;
+            }
         }
 
         &__logo {
