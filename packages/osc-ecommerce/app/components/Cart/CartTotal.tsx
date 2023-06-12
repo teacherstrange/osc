@@ -44,6 +44,7 @@ export const CartTotal = (props: CartTotalProps) => {
                     {totalAmount?.amount ? (
                         <LineItemPrice asChild>
                             <Price
+                                size="sm"
                                 compareAtPrice={
                                     hasCartDiscount ? (
                                         <Money data={subtotalAmount} as="span" />
