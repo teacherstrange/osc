@@ -7,6 +7,7 @@ import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { classNames } from '../../utils/classNames';
 import { rem } from '../../utils/rem';
 
+import { useModifier } from '../../hooks/useModifier';
 import './header.scss';
 
 export interface SharedNavProps {
@@ -23,13 +24,21 @@ export interface SharedNavProps {
 /* -------------------------------------------------------------------------------------------------
  * Header
  * -----------------------------------------------------------------------------------------------*/
-export interface HeaderProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {}
+export interface HeaderProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Sets the header to be sticky
+     * @default false
+     */
+    isSticky?: boolean;
+}
 
 export const Header = forwardRef<ElementRef<'header'>, HeaderProps>((props, forwardedRef) => {
-    const { className, children, ...attr } = props;
+    const { className, children, isSticky, ...attr } = props;
     const ref = useRef<HTMLDivElement>(null);
     const headerHeight = useHeight(ref);
-    const classes = classNames('c-header', 'o-container', className);
+
+    const stickyModifier = useModifier('c-header', isSticky && 'sticky');
+    const classes = classNames('c-header', 'o-container', stickyModifier, className);
 
     return (
         <header

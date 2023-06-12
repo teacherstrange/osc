@@ -41,6 +41,17 @@ describe('header', () => {
         // Will be 0 as we aren't rendering a proper DOM
         expect(header).toHaveStyle('--header-height: 0px;');
     });
+
+    test('sets the c-header--sticky class when isSticky prop is true', () => {
+        render(
+            <Header isSticky={true}>
+                <Logo />
+            </Header>
+        );
+
+        const header = screen.getByRole('banner');
+        expect(header).toHaveClass('c-header--sticky');
+    });
 });
 
 describe('headerNav', () => {

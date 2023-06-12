@@ -23,6 +23,11 @@
             gap: $space-2xs;
         }
 
+        &--sticky {
+            position: sticky;
+            top: 0;
+        }
+
         &__logo {
             margin-inline: auto;
             grid-column: 2 / 3;
