@@ -20,7 +20,9 @@ import oscUiButtonStyles from 'osc-ui/dist/src-components-Button-button.css';
 import oscUiCardStyles from 'osc-ui/dist/src-components-Card-card.css';
 import oscUiCheckboxStyles from 'osc-ui/dist/src-components-Checkbox-checkbox.css';
 import oscUiLabelStyles from 'osc-ui/dist/src-components-Label-label.css';
+import oscUiPaginationStyles from 'osc-ui/dist/src-components-Pagination-pagination.css';
 import oscUiPopoverStyles from 'osc-ui/dist/src-components-Popover-popover.css';
+import oscUiProgressStyles from 'osc-ui/dist/src-components-Progress-progress.css';
 import oscUiSelectStyles from 'osc-ui/dist/src-components-Select-select.css';
 import oscUiSliderStyles from 'osc-ui/dist/src-components-Slider-slider.css';
 import oscUiTextInputStyles from 'osc-ui/dist/src-components-TextInput-text-input.css';
@@ -33,9 +35,7 @@ import { ItemCounter } from '~/components/InstantSearch/Components/ItemCounter';
 import { SearchBox } from '~/components/InstantSearch/Components/SearchBox';
 import { CollectionCards } from '~/components/InstantSearch/Widgets/CollectionCards';
 import { Configure } from '~/components/InstantSearch/Widgets/Configure';
-import { Hits } from '~/components/InstantSearch/Widgets/Hits/Hits';
-import { NoResults } from '~/components/InstantSearch/Widgets/NoResults/NoResults';
-import { NoResultsBoundary } from '~/components/InstantSearch/Widgets/NoResults/NoResultsBoundary';
+import { InfiniteHits } from '~/components/InstantSearch/Widgets/InfiniteHits';
 import { ClearRefinements } from '~/components/InstantSearch/Widgets/Refinements/ClearRefinements';
 import { SortBy } from '~/components/InstantSearch/Widgets/Refinements/SortBy';
 import { REFINEMENT_DATA, SORTING_INDEXES, VIEW_OPTIONS } from '~/components/InstantSearch/data';
@@ -53,7 +53,9 @@ export const links: LinksFunction = () => {
         { rel: 'stylesheet', href: oscUiInstantSearchStyles },
         { rel: 'stylesheet', href: oscUiTextInputStyles },
         { rel: 'stylesheet', href: oscUiCardStyles },
+        { rel: 'stylesheet', href: oscUiPaginationStyles },
         { rel: 'stylesheet', href: oscUiPopoverStyles },
+        { rel: 'stylesheet', href: oscUiProgressStyles },
         { rel: 'stylesheet', href: oscUiSelectStyles },
         { rel: 'stylesheet', href: oscUiSliderStyles },
     ];
@@ -274,10 +276,10 @@ const Search = (props: SearchProps) => {
                                 </Index>
                             </div>
                             <div className="o-grid o-grid__col--12">
-                                <Configure hitsPerPage={env!.ALGOLIA_HITS_PER_PAGE!} />
-                                <NoResultsBoundary fallback={<NoResults />}>
-                                    <Hits view={view} />
-                                </NoResultsBoundary>
+                                <InfiniteHits
+                                    view={view}
+                                    hitsPerPage={env!.ALGOLIA_HITS_PER_PAGE}
+                                />
                             </div>
                         </div>
                     </div>
