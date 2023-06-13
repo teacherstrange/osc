@@ -12,7 +12,7 @@ export const SearchBox = (props: UseSearchBoxProps) => {
         []
     );
 
-    const { refine } = useSearchBox({ ...props, queryHook });
+    const { refine, query } = useSearchBox({ ...props, queryHook });
 
     const ref = useRef<HTMLInputElement>(null);
 
@@ -35,6 +35,7 @@ export const SearchBox = (props: UseSearchBoxProps) => {
                 type="search"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => refine(e.target.value)}
                 ref={ref}
+                value={query}
             />
         </form>
     );
