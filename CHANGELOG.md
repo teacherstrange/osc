@@ -1,3 +1,10 @@
+## [0.106.1](https://github.com/Open-Study-College/osc/compare/v0.106.0...v0.106.1) (2023-06-13)
+
+
+### 🐛 Bugs
+
+* pass the query through as the value for the TextInput ([0f1f42d](https://github.com/Open-Study-College/osc/commit/0f1f42d114eda043d67c91bfc516c0b069ee7e05))
+
 ## [0.106.0](https://github.com/Open-Study-College/osc/compare/v0.105.0...v0.106.0) (2023-06-12)
 
 
@@ -144,42 +151,4 @@
 ### 🧪 Tests
 
 * **textInput:** adds test for controlling the input value ([acaa8eb](https://github.com/Open-Study-College/osc/commit/acaa8eb08ab3a5579752685848fccf0f6a4cd4c5))
-
-## [0.103.0](https://github.com/Open-Study-College/osc/compare/v0.102.0...v0.103.0) (2023-06-09)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **cart:** remove unneeded comment ([97d7318](https://github.com/Open-Study-College/osc/commit/97d73188ca98108b90a074742bbebd2dcdebf34d))
-
-
-### ✨ Features
-
-* **cart:** add discount codes list to discount box ([efcd8b6](https://github.com/Open-Study-College/osc/commit/efcd8b661268c5d55a86539b68121e42fd0200a6))
-* **cart:** add discounted values to cart total ([9f11c1f](https://github.com/Open-Study-College/osc/commit/9f11c1fbc8cfe11858ac1276064ae1efe4c97103))
-* **cart:** add functionality to toggle the discount box open and closed ([05b329d](https://github.com/Open-Study-College/osc/commit/05b329dbc17a95cab9962e08ecb611c870b5b7bc))
-* **cart:** add functionality to use multiple discount codes ([58c2f28](https://github.com/Open-Study-College/osc/commit/58c2f28a9c9bdd561b1ad582ea504007dcbeec17))
-* **cart:** add pending states for discount code updates ([0bdaaae](https://github.com/Open-Study-College/osc/commit/0bdaaaebf09acbc0bd228831a96bdeaca60c7c00))
-* **cart:** add some bottom padding to the discount box to account for button shadow ([ba470c0](https://github.com/Open-Study-College/osc/commit/ba470c02bfb05c8f2d3c51ca468309cd8266c076))
-* **cart:** add styling for discount code list buttons ([964c36b](https://github.com/Open-Study-College/osc/commit/964c36b6bdd3e560fefb1fdf21b1374e93aa9f9d))
-* **cart:** adds function to add a discount code ([2fb1196](https://github.com/Open-Study-College/osc/commit/2fb11960b951db24cbe00581d12943e8cc7799e7))
-* **cart:** disable discount button until a value is added to the input ([5551d57](https://github.com/Open-Study-College/osc/commit/5551d57884a1454e14a80f9ea5207a249717b8a6))
-* **cart:** disable discount button when pending ([9eaa878](https://github.com/Open-Study-College/osc/commit/9eaa878ae685d35cccd70ef55786ca9216512c57))
-* **cart:** ensure we remove duplicate discount codes ([7f1aebe](https://github.com/Open-Study-College/osc/commit/7f1aebe5130c69bc21ee3b289160033da113a8ec))
-* **cart:** import discount box component ([1fd306a](https://github.com/Open-Study-College/osc/commit/1fd306a90ec34a00dff6b1940d589e6326486496))
-* **cart:** import discount box styles and dependant styles ([a33bac4](https://github.com/Open-Study-College/osc/commit/a33bac40c5ca6871c99b91027512cdb48982c2b2))
-* **cart:** move discount box component and styles into own sub directory ([8d42e92](https://github.com/Open-Study-College/osc/commit/8d42e923151a76e40001d4c3bb98eeaeb06f537a))
-* **cart:** transform codes to uppercase to avoid duplication ([5576df3](https://github.com/Open-Study-College/osc/commit/5576df3893afa0505bf9447a477da50117aae611))
-* **cart:** update input to be controlled by state ([1c5da73](https://github.com/Open-Study-College/osc/commit/1c5da739b3ffe555aefb41c158738090732335d3))
-* **discount:** add discount code component ([bae71a5](https://github.com/Open-Study-College/osc/commit/bae71a50bb512c279ca158c95a54088a67525c22))
-* **text input:** allow custom classname prop to pass into input ([da35093](https://github.com/Open-Study-College/osc/commit/da35093a03e8ff890ad9a6cce84fb4d2bb60a427))
-
-
-### ♻️ Refactors
-
-* **cart:** add custom breakpoint to fix form wrapping ([34a0067](https://github.com/Open-Study-College/osc/commit/34a0067a0a4df4e67cb73ed1198739c691e82605))
-* **cart:** update discount box styles to remove background colour ([abfd587](https://github.com/Open-Study-College/osc/commit/abfd587d863ead30ad2afec10898e37a2e316d47))
-* **cart:** wrap discount action in try catch ([9ddb671](https://github.com/Open-Study-College/osc/commit/9ddb671a85ae7b788d2da770d96d7c7f0e19c224))
-* **line item:** allow line items to wrap ([f711afc](https://github.com/Open-Study-College/osc/commit/f711afc910fec362a2b8ff7b8a2c46e2fda0be8a))
-* **price:** extract selectedVariant into different props ([91e4580](https://github.com/Open-Study-College/osc/commit/91e4580206b11a1612cfcb427f90be51680ec2a5))
 
