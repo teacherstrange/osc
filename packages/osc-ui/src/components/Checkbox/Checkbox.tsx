@@ -49,7 +49,7 @@ export interface CheckboxProps extends ComponentPropsWithRef<typeof CheckboxPrim
      * Sets the size of the checkbox and the label
      * @default m
      */
-    size?: 'm' | 'xl';
+    size?: 's' | 'm' | 'xl';
     /**
      * The value given as data when submitted with a name.
      */
