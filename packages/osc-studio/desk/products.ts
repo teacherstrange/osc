@@ -1,6 +1,5 @@
 import { InfoOutlineIcon } from '@sanity/icons';
 import Iframe from 'sanity-plugin-iframe-pane';
-import { SEOPane } from 'sanity-plugin-seo-pane';
 import type { StructureBuilder } from 'sanity/desk';
 import type { SanityDocumentWithSlug } from '../utils/resolveProductionUrl';
 import { resolveProductionUrl } from '../utils/resolveProductionUrl';
@@ -39,16 +38,16 @@ export const products = (S: StructureBuilder) =>
                                                     },
                                                 })
                                                 .title('Preview'),
-                                            S.view
-                                                .component(SEOPane)
-                                                .options({
-                                                    // Retrieve the keywords and synonyms at the given dot-notated strings
-                                                    keywords: `seo.keywords`,
-                                                    synonyms: `seo.synonyms`,
-                                                    url: (doc: SanityDocumentWithSlug) =>
-                                                        resolveProductionUrl(doc),
-                                                })
-                                                .title('SEO'),
+                                            // S.view
+                                            //     .component(SEOPane)
+                                            //     .options({
+                                            //         // Retrieve the keywords and synonyms at the given dot-notated strings
+                                            //         keywords: `seo.keywords`,
+                                            //         synonyms: `seo.synonyms`,
+                                            //         url: (doc: SanityDocumentWithSlug) =>
+                                            //             resolveProductionUrl(doc),
+                                            //     })
+                                            //     .title('SEO'),
                                         ])
                                 ),
                             // Product variants

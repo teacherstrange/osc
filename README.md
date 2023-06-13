@@ -262,6 +262,22 @@ We use [Prettier](https://prettier.io/) for auto-formatting in this project. It'
 
     Typecheck files against the `tsconfig` files
 
-## Deployment
+## CI/CD
 
-We use GitHub Actions for continuous integration and deployment. Anything that gets into the `main` branch will be deployed to production after running tests/build/etc.
+We use GitHub Actions for continuous integration and deployment.
+
+### Deployment previews
+
+We have one workflow for each app (ecommerce, studio and academic hub), these will run when a PR is opened or the branch is merged into main and will run a workflow based on the matching conditions. Using ecommerce as an example
+
+If the PR is open and has the label of build:osc-ecommerce run the deploy preview workflow, which builds the PR app on Fly, this will be found at pr-{number}-osc-ecommerce.fly.dev.
+
+The only one with an extra step at is academic hub which will create the PlanetScale branches/deployment requests alongside building the app.
+
+### Removing deployment previews
+
+If the PR is closed or the related label is removed then the app will be destroyed on Fly.
+
+### Production deployment
+
+If the PR is merged and has the related label then we will deploy the production app to Fly.

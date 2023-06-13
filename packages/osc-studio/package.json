@@ -5,7 +5,7 @@
   "description": "",
   "main": "package.json",
   "scripts": {
-    "start": "sanity start",
+    "start": "node server.js",
     "dev": "sanity dev",
     "build": "sanity build",
     "typecheck": "tsc -b"

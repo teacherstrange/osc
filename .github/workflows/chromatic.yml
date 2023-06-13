@@ -1,39 +1,30 @@
-# .github/workflows/chromatic.yml
+#
+# This workflow takes care of setting up and pushing Storybook to Chromatic
+#
 
-# Workflow name
 name: "Chromatic"
 
-# Event for the workflow
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
 
-# List of jobs
 jobs:
   chromatic-deployment:
-    # Operating System
     runs-on: ubuntu-latest
-    # Job steps
     steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
-
-      - if: github.event.pull_request.draft == true
-        name: Cancel the self CI workflow run
-        run: ./workflow-scripts/cancel.sh
-
-      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: setupBuild
-        uses: ./.github/actions/setupBuild
-        id: setupBuild
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
 
-        # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         uses: chromaui/action@v1
-        # Chromatic GitHub Action options
         with:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

@@ -68,7 +68,7 @@ export const SiteFooter = (props: SiteFooterProps) => {
                     ) : null}
                 </div>
 
-                {socials.length > 0 ? (
+                {socials && socials?.length > 0 ? (
                     <FooterGroup>
                         {socials.map((social) => (
                             <a href={social?.socialProfile} key={social._key}>
@@ -81,7 +81,7 @@ export const SiteFooter = (props: SiteFooterProps) => {
                 ) : null}
             </FooterGroup>
 
-            {navigationGroups.length > 0 ? (
+            {navigationGroups && navigationGroups.length > 0 ? (
                 <FooterGroup>
                     {showOnGreaterThanTab ? (
                         <FooterMenu>
@@ -140,7 +140,7 @@ export const SiteFooter = (props: SiteFooterProps) => {
             ) : null}
 
             <FooterBottom siteName={siteName}>
-                {bottomNavigation?.navigationItem.length > 0
+                {bottomNavigation && bottomNavigation?.navigationItem.length > 0
                     ? bottomNavigation?.navigationItem?.map((item) => (
                           <FooterMenuItem key={item._key}>
                               <NavLink

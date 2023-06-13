@@ -1,0 +1,64 @@
+name: OSC Academic Hub
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - opened
+      - closed
+      - synchronize
+      - reopened
+  push:
+    branches: [main]
+
+jobs:
+  # Build the preview app if the PR is open and the label osc-academic-hub is present
+  call-pr-workflow:
+    name: 🚀 Deploy osc-academic-hub to preview
+    if: ${{ github.event.pull_request.state == 'open' && contains(github.event.pull_request.labels.*.name, 'build:osc-academic-hub') }}
+    uses: ./.github/workflows/deploy-preview-app.yml
+    with:
+      app_name: osc-academic-hub
+      dockerfile: ./packages/osc-academic-hub/Dockerfile.pr
+    # implicitly pass the secrets
+    secrets: inherit
+  
+  call-planetscale--db-branch-workflow:
+    name: 💽 Create Database Branch
+    if: ${{ github.event.pull_request.state == 'open' && contains(github.event.pull_request.labels.*.name, 'build:osc-academic-hub') }}
+    uses: ./.github/workflows/planetscale-create-db-branch.yml
+    with:
+      app_name: osc-academic-hub
+    # implicitly pass the secrets
+    secrets: inherit
+
+  # Destroy the preview app if the PR is closed or the label osc-academic-hub is removed
+  call-destructive-workflow:
+    name: 🔥 Destroy osc-academic-hub preview
+    if: ${{ github.event.action == 'closed' || (github.event.action == 'unlabeled' && contains(github.event.label.name, 'build:osc-academic-hub')) }}
+    uses: ./.github/workflows/destroy-preview-app.yml
+    with:
+      app_name: osc-academic-hub
+    # implicitly pass the secrets
+    secrets: inherit
+
+  # Deploy the production app if the PR is merged and the label osc-academic-hub is present
+  call-production-workflow:
+    name: 🚀 Deploy osc-academic-hub to production
+    if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'build:osc-academic-hub') }}
+    uses: ./.github/workflows/deploy-production-app.yml
+    with: 
+      app_name: osc-academic-hub
+      dockerfile: ./packages/osc-academic-hub/Dockerfile
+    # implicitly pass the secrets
+    secrets: inherit
+  
+  call-planetscale-deployment-request-workflow:
+    name: 💽 Create Deployment Request
+    if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'build:osc-academic-hub') }}
+    uses: ./.github/workflows/planetscale-create-deployment-request.yml
+    with:
+      app_name: osc-academic-hub
+    # implicitly pass the secrets
+    secrets: inherit

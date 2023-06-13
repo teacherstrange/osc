@@ -124,7 +124,10 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 
     // Loop through the footer nav items and query each id
     const footerNavSettings = [];
-    if (siteSettings?.footer?.footerNavigation.length > 0) {
+    if (
+        siteSettings?.footer?.footerNavigation &&
+        siteSettings?.footer?.footerNavigation.length > 0
+    ) {
         for await (const navId of siteSettings?.footer?.footerNavigation) {
             footerNavSettings.push(
                 await getSettingsData({
@@ -163,12 +166,12 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 export const meta: MetaFunction = ({ data }) => {
     const { seo: seoSettings } = data.siteSettings;
 
-    const noindex = seoSettings.robots.noIndex && 'noindex';
-    const { asset: organizationAsset } = seoSettings.schema.organizationLogo;
+    const noindex = seoSettings?.robots?.noIndex && 'noindex';
+    const organizationAsset = seoSettings?.schema?.organizationLogo?.asset;
 
-    const socials = seoSettings.socials as SanitySocial[];
-    const facebook = socials.find((social) => social.socialProfile.includes('facebook'));
-    const twitter = socials.find((social) => social.socialProfile.includes('twitter'));
+    const socials = seoSettings?.socials as SanitySocial[];
+    const facebook = socials && socials.find((social) => social.socialProfile.includes('facebook'));
+    const twitter = socials && socials.find((social) => social.socialProfile.includes('twitter'));
     const twitterHandle =
         twitter && twitter?.socialProfile.substring(twitter?.socialProfile.lastIndexOf('/') + 1);
 

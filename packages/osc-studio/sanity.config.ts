@@ -22,8 +22,8 @@ export default defineConfig({
 
     plugins: [
         deskTool({
-            defaultDocumentNode,
             structure,
+            defaultDocumentNode,
         }),
         cloudinaryAssetSourcePlugin(),
         cloudinarySchemaPlugin(),

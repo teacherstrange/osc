@@ -1,0 +1,46 @@
+name: OSC Studio
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - opened
+      - closed
+      - synchronize
+      - reopened
+  push:
+    branches: [main]
+
+jobs:
+  # Build the preview app if the PR is open and the label osc-studio is present
+  call-pr-workflow:
+    name: 🚀 Deploy osc-studio to preview
+    if: ${{ github.event.pull_request.state == 'open' && contains(github.event.pull_request.labels.*.name, 'build:osc-studio') }}
+    uses: ./.github/workflows/deploy-preview-app.yml
+    with:
+      app_name: osc-studio
+      dockerfile: ./packages/osc-studio/Dockerfile.pr
+    # implicitly pass the secrets
+    secrets: inherit
+
+  # Destroy the preview app if the PR is closed or the label osc-studio is removed
+  call-destructive-workflow:
+    name: 🔥 Destroy osc-studio preview
+    if: ${{ github.event.action == 'closed' || (github.event.action == 'unlabeled' && contains(github.event.label.name, 'build:osc-studio')) }}
+    uses: ./.github/workflows/destroy-preview-app.yml
+    with:
+      app_name: osc-studio
+    # implicitly pass the secrets
+    secrets: inherit
+
+  # Deploy the production app if the PR is merged and the label osc-studio is present
+  call-production-workflow:
+    name: 🚀 Deploy osc-studio to production
+    if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'build:osc-studio') }}
+    uses: ./.github/workflows/deploy-production-app.yml
+    with: 
+      app_name: osc-studio
+      dockerfile: ./packages/osc-studio/Dockerfile
+    # implicitly pass the secrets
+    secrets: inherit
