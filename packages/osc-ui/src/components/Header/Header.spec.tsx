@@ -44,13 +44,24 @@ describe('header', () => {
 
     test('sets the c-header--sticky class when isSticky prop is true', () => {
         render(
-            <Header isSticky={true}>
+            <Header isSticky>
                 <Logo />
             </Header>
         );
 
         const header = screen.getByRole('banner');
         expect(header).toHaveClass('c-header--sticky');
+    });
+
+    test('sets inline height when isSticky prop is true', () => {
+        render(
+            <Header isSticky>
+                <Logo />
+            </Header>
+        );
+
+        const header = screen.getByRole('banner');
+        expect(header).toHaveStyle('height: var(--header-height);');
     });
 });
 

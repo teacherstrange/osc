@@ -8,6 +8,7 @@ import { classNames } from '../../utils/classNames';
 import { rem } from '../../utils/rem';
 
 import { useModifier } from '../../hooks/useModifier';
+import { useScroll } from '../../hooks/useScroll';
 import './header.scss';
 
 export interface SharedNavProps {
@@ -36,9 +37,18 @@ export const Header = forwardRef<ElementRef<'header'>, HeaderProps>((props, forw
     const { className, children, isSticky, ...attr } = props;
     const ref = useRef<HTMLDivElement>(null);
     const headerHeight = useHeight(ref);
+    const scrollPos = useScroll();
+
+    const scrollOffset = 10;
+    const hasTraveledPastOffset = scrollPos > scrollOffset;
 
     const stickyModifier = useModifier('c-header', isSticky && 'sticky');
-    const classes = classNames('c-header', stickyModifier, className);
+    const classes = classNames(
+        'c-header',
+        stickyModifier,
+        isSticky && hasTraveledPastOffset && 'is-scrolled',
+        className
+    );
 
     return (
         <header
