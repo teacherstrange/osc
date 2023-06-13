@@ -345,6 +345,7 @@ export const resetRequest: ResetRequestFn = async (email) => {
         url: url,
         firstName: user.firstName,
         lastName: user.lastName,
+        emailId: env.FORGOT_EMAIL,
     };
     await sendForgotPasswordEmail(emailData);
 
