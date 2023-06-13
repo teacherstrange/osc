@@ -1,0 +1,15 @@
+@import "../../styles/settings";
+@import "../../styles/tools";
+
+.c-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__button {
+        border: solid 1px var(--color-neutral-300);
+        font-weight: $fw-reg;
+        text-transform: unset;
+    }
+}
