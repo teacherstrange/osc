@@ -59,9 +59,13 @@ export const Header = forwardRef<ElementRef<'header'>, HeaderProps>((props, forw
                 ...attr.style,
                 // Set the header height as state so we can use it to help position things such as the nav
                 ['--header-height' as string]: `${headerHeight}px`,
+                // Set a fixed height for the header, this helps us avoid flickering when changing the height when scrolling
+                height: isSticky && headerHeight ? `var(--header-height)` : '',
             }}
         >
-            <div className="c-header__inner o-container">{children}</div>
+            <div className="u-bg-color-tertiary">
+                <div className="c-header__inner o-container">{children}</div>
+            </div>
         </header>
     );
 });
