@@ -99,6 +99,7 @@ export {
     NavTrigger,
     Navbar,
 } from './components/Navbar/Navbar';
+export { Pagination } from './components/Pagination/Pagination';
 export {
     Popover,
     PopoverArrow,
@@ -107,6 +108,7 @@ export {
     PopoverTrigger,
 } from './components/Popover/Popover';
 export { Price } from './components/Price/Price';
+export { Progress } from './components/Progress/Progress';
 export { RadioGroup, RadioItem } from './components/RadioGroup/RadioGroup';
 export { Select, SelectItem } from './components/Select/Select';
 export { SkipLink } from './components/SkipLink/SkipLink';

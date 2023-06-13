@@ -31,4 +31,10 @@
         display: flex;
         max-width: 30ch;
     }
+
+    .c-pagination {
+        @include mq($mq-tab) {
+            padding-inline: $space-7xl;
+        }
+    }
 }
