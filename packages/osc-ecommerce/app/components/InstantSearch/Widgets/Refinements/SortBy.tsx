@@ -10,7 +10,7 @@ interface SortByProps {
 
 export function SortBy(props: SortByProps) {
     const { items } = props;
-    const { options, refine } = useSortBy({ items });
+    const { options, refine, currentRefinement } = useSortBy({ items });
 
     const handleCheckboxChange = (event: string) => refine(event);
 
@@ -21,6 +21,7 @@ export function SortBy(props: SortByProps) {
             name={'sortBy_select'}
             setExternalValue={handleCheckboxChange}
             groupVariants={['inline', 'tertiary']}
+            value={currentRefinement}
         >
             {options.map((item, index) => {
                 return (

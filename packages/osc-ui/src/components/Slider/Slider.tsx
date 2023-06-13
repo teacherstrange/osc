@@ -43,7 +43,7 @@ export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, Slider
         const { className, name, prefix, setExternalValue, variants, ...rest } = props;
         const [value, setValue] = useState<number[]>();
 
-        const sliderValues = value || props.value || props.defaultValue;
+        const sliderValues = props.value || value || props.defaultValue;
 
         const modifier = useModifier('c-slider', variants);
         const sliderClasses = classNames(`c-slider`, modifier, className);
