@@ -1,3 +1,12 @@
+## [0.108.0](https://github.com/Open-Study-College/osc/compare/v0.107.0...v0.108.0) (2023-06-13)
+
+
+### ✨ Features
+
+* **checkbox:** add small modifier story to checkbox storybook ([d92d374](https://github.com/Open-Study-College/osc/commit/d92d3743f0405b0a05c53ac5d6dba368de652ad0))
+* **checkbox:** add small modifier to checkbox ([aafaf42](https://github.com/Open-Study-College/osc/commit/aafaf426bfcb7a479017d77541fad7cc0876c3a5))
+* **label:** add small modifier to label ([5c79cf9](https://github.com/Open-Study-College/osc/commit/5c79cf9cf11a0c57a51f1749cefcba0338e38509))
+
 ## [0.107.0](https://github.com/Open-Study-College/osc/compare/v0.106.1...v0.107.0) (2023-06-13)
 
 
@@ -125,56 +134,4 @@
 * **cart:** adds buyer id mutation to cart ([c60f6cb](https://github.com/Open-Study-College/osc/commit/c60f6cb13656bd71ec11daac97506e308d00d7f4))
 * **cart:** adds function to update buyer id ([4042e4f](https://github.com/Open-Study-College/osc/commit/4042e4fc153305d28ba25dfdf4c6a0b14c6bce2e))
 * **cart:** wrap buyer id in try catch ([91377f4](https://github.com/Open-Study-College/osc/commit/91377f4a3cc075eb97f17907dce1b27f6a67e90a))
-
-## [0.104.0](https://github.com/Open-Study-College/osc/compare/v0.103.1...v0.104.0) (2023-06-09)
-
-
-### 🐛 Bugs
-
-* **ecommerce:** update tests to match new data ([aff4acf](https://github.com/Open-Study-College/osc/commit/aff4acff2cfcee693c02305ed49675926d9e308e))
-* **hero:** make sure content width always fills the space ([c1066d6](https://github.com/Open-Study-College/osc/commit/c1066d60898cea2d2cd43fd35777eb5dd69ca73d))
-* **modules:** adds missing key prop ([0da4600](https://github.com/Open-Study-College/osc/commit/0da4600a2c033f9b6f996abe3e13873b9d177d93))
-* **tests:** update mock test data ([b79e963](https://github.com/Open-Study-College/osc/commit/b79e963032292380faf6955b1dea956142f298e1))
-
-
-### 📦 General Housekeeping / Package Updates
-
-* update theme type ([9095e26](https://github.com/Open-Study-College/osc/commit/9095e263ec87a70565888386065c8dd616945e56))
-* **row:** fix typo ([2cd5ca0](https://github.com/Open-Study-College/osc/commit/2cd5ca0e8c9818f9efb9bef217d800c9f703a6f8))
-* **sanity:** add description to row settings ([28d314c](https://github.com/Open-Study-College/osc/commit/28d314c6962f01d330f0c378bccb225adeec73c2))
-
-
-### ✨ Features
-
-* **accordion:** wrap component in row ([4f7e069](https://github.com/Open-Study-College/osc/commit/4f7e0698209653a320a81c35da4890da5c6da1e4))
-* **carousel:** add row wrapper to carousel ([a570e33](https://github.com/Open-Study-College/osc/commit/a570e336df736c92190012026da80f591d467e20))
-* **row:** add default spacing to row ([3eb0aad](https://github.com/Open-Study-College/osc/commit/3eb0aadd52520141de2618b33309da7ca0b843be))
-* **types:** update sanity types ([380cc82](https://github.com/Open-Study-College/osc/commit/380cc829c2f3ee6c0eb5f431e8c8a315ddb19cbf))
-* remove outdated inner content component props ([dc9f6ac](https://github.com/Open-Study-College/osc/commit/dc9f6ac035a326b0bfa29cde39e8e19de12e14c4))
-* **accordion:** add isFlush prop ([ba03069](https://github.com/Open-Study-College/osc/commit/ba0306910fc8bf4f1a323f167b75461cab8217fe))
-* **accordion:** add row settings to accordion schema ([411b1b4](https://github.com/Open-Study-College/osc/commit/411b1b4e9d104d9494e4b15307dd3488813f1e99))
-* **cards:** add row to cards component ([c838569](https://github.com/Open-Study-College/osc/commit/c838569fecce2c88945345494ba874584ffca569))
-* **content:** adds row settings to content module ([ade4a9c](https://github.com/Open-Study-College/osc/commit/ade4a9c9121c9b8d76955be3323727423914a140))
-* **content:** remove spacing and background colour from component ([31332fb](https://github.com/Open-Study-College/osc/commit/31332fb5787a837f15037ab13a23ae93e715aac3))
-* **content media:** add row wrapper to carousel ([490f691](https://github.com/Open-Study-College/osc/commit/490f6915b3d0ebb41f96b626e27c3acdbbffd623))
-* **forms:** add background colour to form ([c022ec3](https://github.com/Open-Study-College/osc/commit/c022ec3b0e54dbb6e86913c08a8bfdf31b5171b9))
-* **forms:** add row settings to form module in sanity ([78c34f8](https://github.com/Open-Study-College/osc/commit/78c34f89482caa9486a1dd04b1ecc99d888e9824))
-* **image:** add row settings to image ([f504edb](https://github.com/Open-Study-College/osc/commit/f504edb467e1d33f117622c158d629cfb3057311))
-* **recommended products:** add row wrapper to recommended products ([5900efd](https://github.com/Open-Study-College/osc/commit/5900efd7bd48cea26b5c979ca0533409dde64b50))
-* **row:** adds row component ([5495a09](https://github.com/Open-Study-College/osc/commit/5495a094e3769ab1de5fb7acbb201d3f88fab86f))
-* **row:** adds row settings schema to sanity ([5ed0577](https://github.com/Open-Study-College/osc/commit/5ed05777725da3712b11534122b9ecdd13dfdcd5))
-* **row:** adds slot from radix to ecommerce ([2fa49b8](https://github.com/Open-Study-College/osc/commit/2fa49b865ab1e30505e22dd147224a51b145220b))
-* **tabs:** add isFlush prop ([1e5cf43](https://github.com/Open-Study-College/osc/commit/1e5cf43f7115f27c87dd997bbd4af8b93f838bae))
-* **tabs:** add row wrapper to tabs ([fce406c](https://github.com/Open-Study-College/osc/commit/fce406c22f947e4a22c13b77e0d799593c826e50))
-* **text grid:** add row settings to text grid ([03d138d](https://github.com/Open-Study-College/osc/commit/03d138d860185fa91f0e20f52e567d39fe8b0212))
-* **video:** add row settings to video ([559330e](https://github.com/Open-Study-College/osc/commit/559330e1824149e7eb90c88f7205c20329db6007))
-
-
-### ♻️ Refactors
-
-* **content:** move content into own file and wrap with row component ([681f6e8](https://github.com/Open-Study-College/osc/commit/681f6e85ee81bd8e4225a2a9b8f55e1e3f2ee6eb))
-* **forms:** add forms module component ([9ba7b2a](https://github.com/Open-Study-College/osc/commit/9ba7b2aede45dd89643e1a392fc585a21edf4e90))
-* **image:** move image into image module component ([c67bf6c](https://github.com/Open-Study-College/osc/commit/c67bf6c9e935b34ceaccc6a099187998bc9bf64e))
-* **row:** bottom margin from row block selector ([9ee8b8f](https://github.com/Open-Study-College/osc/commit/9ee8b8f19dcd3ca765af9324508e0135b022d822))
-* rename settings to rowSettings to avoid conflicts ([3ce499d](https://github.com/Open-Study-College/osc/commit/3ce499d09ce1b5290a744ccee15af046d7089281))
 
