@@ -31,7 +31,7 @@ export const SiteHeader = (props: SiteHeaderProps) => {
     }, [menuIsOpen]);
 
     return (
-        <Header>
+        <Header isSticky>
             <Burger
                 id="mob-menu-trigger"
                 label="Open mobile menu"
