@@ -4,6 +4,7 @@ import type { GetUserByEmailFn, GetUserByIdFn, GetRoleByIdFn, GetRoleByTitleFn }
 export * from './types';
 
 const prisma = new PrismaClient();
+const varName = 1;
 
 export const getUserById: GetUserByIdFn = async (id) => {
     return await prisma.user.findUnique({
