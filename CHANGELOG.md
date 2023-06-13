@@ -1,3 +1,41 @@
+## [0.107.0](https://github.com/Open-Study-College/osc/compare/v0.106.1...v0.107.0) (2023-06-13)
+
+
+### ✨ Features
+
+* add docker compose file so we can test docker locally ([c63afa1](https://github.com/Open-Study-College/osc/commit/c63afa13b4e6e682943cc9733da3edc547c3b4d6))
+* add reusable workflows to deploy prod and preview apps ([f0706cd](https://github.com/Open-Study-College/osc/commit/f0706cda53edb5ea61da88771ab585dca28dc6d3))
+* add workflow to destroy preview apps ([39cc659](https://github.com/Open-Study-College/osc/commit/39cc659b8c09fcfa5e1209e3eb1eb86f585b8cc3))
+* add workflows to call reusable workflows based on certain conditions ([7cdfe7a](https://github.com/Open-Study-College/osc/commit/7cdfe7a2c8d11b8a5ec5cbfde69221fbbd419be7))
+
+
+### 🐛 Bugs
+
+* disable seo pane ([301f27e](https://github.com/Open-Study-College/osc/commit/301f27e724c5eb187deae70c11bde169c5399aec))
+
+
+### ♻️ Refactors
+
+* add a separate tests workflow ([1e25dbd](https://github.com/Open-Study-College/osc/commit/1e25dbdebec797971edcadaf4abc604ff99bcd62))
+* add correct datasets to ecommerce environments ([5bab8ca](https://github.com/Open-Study-College/osc/commit/5bab8ca848bf9c811765e9e0b2fb11dcbfed544c))
+* add planetscale actions to individual workflows ([ec88733](https://github.com/Open-Study-College/osc/commit/ec8873342b2c25cf0057509d5d035f68cb50db6c))
+* add safety conditions to allow apps to run without menus ([f7cdc93](https://github.com/Open-Study-College/osc/commit/f7cdc9346deeb2c8e0ebab044dd34409c43766ba))
+* move dockerfiles into packages ([c3694f0](https://github.com/Open-Study-College/osc/commit/c3694f0879e61d3dde4a9605621e1011907e58b9))
+* move nx packages into prod deps so we can use to run in docker ([1d89f79](https://github.com/Open-Study-College/osc/commit/1d89f793bf02d47b015f07dfb4d20109cdea9adc))
+* remove composite actions ([dafc85f](https://github.com/Open-Study-College/osc/commit/dafc85f23fc4fe97e243f434442389e4da1006b0))
+* remove pr toml files ([5c1fe77](https://github.com/Open-Study-College/osc/commit/5c1fe7725ad562cebfb6c1ba3b67e00b1f2f5e67))
+* remove workflow files ([0648811](https://github.com/Open-Study-College/osc/commit/0648811ed70498e6211ee255bd485d4bf0036bf9))
+* replace fetch with nx-set-sha action ([b40d9cc](https://github.com/Open-Study-College/osc/commit/b40d9cc1100e24d71350aad52d2c843869286b29))
+* update chromatic workflow to work without actions ([fb044a2](https://github.com/Open-Study-College/osc/commit/fb044a29ad51625dc933e531d0990bc328c215a5))
+* update pr branch name ([f11f63d](https://github.com/Open-Study-College/osc/commit/f11f63d180b9cf7071a0257e3db606df31233656))
+* update studio start script to run the server ([fc16fc4](https://github.com/Open-Study-College/osc/commit/fc16fc4931ba5f1312546ca86810903757e20fa1))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* remove unused cancel script ([aa7a7ad](https://github.com/Open-Study-College/osc/commit/aa7a7ad7808d6767ad579b8cf20f8d6a69a5571d))
+* update README with ci/cd details ([4fc3ff7](https://github.com/Open-Study-College/osc/commit/4fc3ff7e23a99a771504e3a4e8ffd3288e0d476e))
+
 ## [0.106.1](https://github.com/Open-Study-College/osc/compare/v0.106.0...v0.106.1) (2023-06-13)
 
 
@@ -139,16 +177,4 @@
 * **image:** move image into image module component ([c67bf6c](https://github.com/Open-Study-College/osc/commit/c67bf6c9e935b34ceaccc6a099187998bc9bf64e))
 * **row:** bottom margin from row block selector ([9ee8b8f](https://github.com/Open-Study-College/osc/commit/9ee8b8f19dcd3ca765af9324508e0135b022d822))
 * rename settings to rowSettings to avoid conflicts ([3ce499d](https://github.com/Open-Study-College/osc/commit/3ce499d09ce1b5290a744ccee15af046d7089281))
-
-## [0.103.1](https://github.com/Open-Study-College/osc/compare/v0.103.0...v0.103.1) (2023-06-09)
-
-
-### ♻️ Refactors
-
-* **textInput:** add value prop to text input ([67cc5a6](https://github.com/Open-Study-College/osc/commit/67cc5a6182047056dcddd33d915dc75c705f3144))
-
-
-### 🧪 Tests
-
-* **textInput:** adds test for controlling the input value ([acaa8eb](https://github.com/Open-Study-College/osc/commit/acaa8eb08ab3a5579752685848fccf0f6a4cd4c5))
 
