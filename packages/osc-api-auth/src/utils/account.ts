@@ -386,7 +386,6 @@ export const adminCreateUser: AdminCreateUserFn = async (input) => {
     if (!role) {
         return new Error('No active role selected');
     }
-    // Check Extra Permissions - TODO
 
     // Check organisation exists
     const org = getOrgById(input.orgId);
@@ -413,6 +412,17 @@ export const adminCreateUser: AdminCreateUserFn = async (input) => {
             createdBy: input.createdBy,
         },
     });
+    // Check Extra Permissions - TODO
+    // Loop through
+    for (var i = 0; i < input.extraPermissions.length; i++) {
+        await prisma.extraPermission.create({
+            data: {
+                userId: user.id,
+                permissionId: input.extraPermissions[i],
+                createdBy: input.createdBy,
+            },
+        });
+    }
     // Link User to organisation
     await prisma.userOrganisation.create({
         data: {
