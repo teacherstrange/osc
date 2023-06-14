@@ -412,8 +412,7 @@ export const adminCreateUser: AdminCreateUserFn = async (input) => {
             createdBy: input.createdBy,
         },
     });
-    // Check Extra Permissions - TODO
-    // Loop through
+    // Loop through extra permissions
     for (var i = 0; i < input.extraPermissions.length; i++) {
         await prisma.extraPermission.create({
             data: {

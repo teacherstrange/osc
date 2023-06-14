@@ -142,6 +142,7 @@ export const typeDefs = gql`
         roleId: Int!
         password: String!
         createdBy: Int!
+        extraPermissions: [Int]
     }
 
     type Mutation {
