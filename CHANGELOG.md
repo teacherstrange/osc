@@ -1,3 +1,15 @@
+## [0.111.0](https://github.com/Open-Study-College/osc/compare/v0.110.0...v0.111.0) (2023-06-14)
+
+
+### ✨ Features
+
+* **studio:** add pretty colour names to color picker ([0c04883](https://github.com/Open-Study-College/osc/commit/0c04883ae27ae49ab863ddc1e43ffab7b9a1a36a))
+* **studio:** sort the colours alphabetically by their pretty name ([fdfb7d2](https://github.com/Open-Study-College/osc/commit/fdfb7d2633a1b62f1131caceabe76fa855cd6084))
+* **studio:** update colour picker filter logic to check for pretty name ([0f3d162](https://github.com/Open-Study-College/osc/commit/0f3d16292ea5a1a99802c010b02a0fbc77c40b9c))
+* **studio:** update colour picker value to render value ([8461814](https://github.com/Open-Study-College/osc/commit/84618145e9b03fa785fab9de816e38eebd0a4cd8))
+* **studio:** update constants file to use typescript ([a4852a4](https://github.com/Open-Study-College/osc/commit/a4852a4a02a3c6051094b0b97116995f59266a7e))
+* **studio:** update gradient pretty names ([9d7315f](https://github.com/Open-Study-College/osc/commit/9d7315fb70e35a8d41d79dc48caa864c7e93632b))
+
 ## [0.110.0](https://github.com/Open-Study-College/osc/compare/v0.109.0...v0.110.0) (2023-06-14)
 
 
@@ -69,11 +81,4 @@
 
 * remove unused cancel script ([aa7a7ad](https://github.com/Open-Study-College/osc/commit/aa7a7ad7808d6767ad579b8cf20f8d6a69a5571d))
 * update README with ci/cd details ([4fc3ff7](https://github.com/Open-Study-College/osc/commit/4fc3ff7e23a99a771504e3a4e8ffd3288e0d476e))
-
-## [0.106.1](https://github.com/Open-Study-College/osc/compare/v0.106.0...v0.106.1) (2023-06-13)
-
-
-### 🐛 Bugs
-
-* pass the query through as the value for the TextInput ([0f1f42d](https://github.com/Open-Study-College/osc/commit/0f1f42d114eda043d67c91bfc516c0b069ee7e05))
 
