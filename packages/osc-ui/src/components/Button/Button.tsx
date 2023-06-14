@@ -94,7 +94,6 @@ export interface SharedButtonProps {
     isInversed?: boolean;
     /**
      * 'Sets the loading text of the button, used in conjunction with `isLoading`'
-     * @default Loading
      */
     loadingText?: string;
     /**
@@ -131,7 +130,7 @@ export const Button = forwardRef<typeof HTMLElement, ButtonProps>(
             isPill,
             isInversed,
             isFull,
-            loadingText = 'Loading',
+            loadingText,
             size = 'md',
             variant = 'primary',
             target,

@@ -188,7 +188,6 @@ export const CartLayout = () => {
                                         isFull
                                         isDisabled={linesArePending || discountCodeIsPending}
                                         isLoading={linesArePending || discountCodeIsPending}
-                                        loadingText=""
                                     >
                                         Enrol now
                                     </Button>

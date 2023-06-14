@@ -109,7 +109,6 @@ export const DiscountBox = (props: DiscountBoxProps) => {
                             variant="primary"
                             size="sm"
                             isLoading={pendingFetcher}
-                            loadingText=""
                             isDisabled={pendingFetcher || !inputValue ? true : false}
                             tabIndex={active ? 0 : -1}
                         >
