@@ -103,3 +103,6 @@ export type completeTutorCreate = {
     readonly magicKey: string;
     readonly courses: [number, boolean][];
 };
+export type completeTutorArgs = {
+    readonly input: completeTutorCreate;
+};

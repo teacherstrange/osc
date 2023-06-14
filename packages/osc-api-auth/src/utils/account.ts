@@ -429,7 +429,6 @@ export const createTutor: CreateTutorFn = async (input) => {
     }
 
     // Create tutor record
-    // To Do: Mark User as IV
     const user = await prisma.user.create({
         data: {
             firstName: input.firstName,
@@ -477,6 +476,7 @@ export const createTutor: CreateTutorFn = async (input) => {
     // Generate magic link
     const userToken = await token.magicKey(user.id);
     const url = `https://openstudycollege.com/tutorcreate?token = ${userToken}`;
+
     // Send email
     const emailData = {
         to: input.email,
@@ -510,7 +510,6 @@ export const completeTutorCreate: CreateTutorCompleteFn = async (input) => {
                 });
             }
         }
-        // Do they need to confirm IV as well?
     }
     return registration;
 };

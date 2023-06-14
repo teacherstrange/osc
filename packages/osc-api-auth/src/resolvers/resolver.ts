@@ -12,6 +12,7 @@ import type {
     completeResetPasswordArgs,
     getPermissionsArgs,
     createTutorArgs,
+    completeTutorArgs,
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
@@ -59,6 +60,12 @@ export const resolvers = {
         },
         createTutor: async (_: undefined, { input }: createTutorArgs) => {
             return account.createTutor(input);
+        },
+        validateTutor: async (_: undefined, { magicKeyToken }: magicKeyArgs) => {
+            return account.validateTutor(magicKeyToken);
+        },
+        completeTutorCreate: async (_: undefined, { input }: completeTutorArgs) => {
+            return account.completeTutorCreate(input);
         },
     },
 };
