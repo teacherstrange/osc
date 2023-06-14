@@ -95,5 +95,5 @@ export type completeTutorCreate = {
     readonly email: string;
     readonly password: string;
     readonly magicKey: string;
-    readonly courses: number[];
+    readonly courses: [number, boolean][];
 };

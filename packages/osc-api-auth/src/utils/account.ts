@@ -33,6 +33,7 @@ import type {
     GetAllPermissionsFn,
     CreateTutorFn,
     CreateTutorCompleteFn,
+    ValidateTutorFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import { env } from '~/types/environment';
@@ -470,12 +471,36 @@ export const completeTutorCreate: CreateTutorCompleteFn = async (input) => {
     };
 
     const registration = await completeRegistration(complete);
-
-    if (registration) {
-        console.log('reg success');
-        // Look through courses selected by tutor
-        // Can tutor add more course or are they just confirming already selected list
+    const user = await getUserByEmail(input.email);
+    if (user) {
+        for (var i = 0; i < input.courses.length; i++) {
+            if (input.courses[i][1] == false) {
+                // Delete record
+                prisma.courseTutor.deleteMany({
+                    where: {
+                        courseId: input.courses[i][0],
+                        tutorId: user.id,
+                    },
+                });
+            }
+        }
         // Do they need to confirm IV as well?
     }
     return registration;
+};
+
+export const validateTutor: ValidateTutorFn = async (magicKey) => {
+    const verified = await token.verifyToken(magicKey);
+    if (!verified) {
+        return new Error('Tutor not valid');
+    }
+    // Get Courses assigned for tutor to check
+    return await prisma.courseTutor.findMany({
+        where: {
+            tutorId: verified,
+        },
+        include: {
+            course: true,
+        },
+    });
 };

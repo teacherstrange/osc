@@ -1,4 +1,4 @@
-import type { User, UserAvatar, UserRole, Permission } from '@prisma/client';
+import type { User, UserAvatar, UserRole, Permission, CourseTutor, Course } from '@prisma/client';
 import type { CrmTokensAPI, LmsTokensAPI, UserRolesAPI } from '.';
 import type {
     createUserInput,
@@ -23,6 +23,9 @@ export type CompleteRegistrationFn = (input: completeRegistration) => Promise<Us
 
 export type CreateTutorFn = (input: createTutorInput) => Promise<User | Error>;
 export type CreateTutorCompleteFn = (input: completeTutorCreate) => Promise<User | Error>;
+export type ValidateTutorFn = (
+    magicKey: string
+) => Promise<(CourseTutor & { course: Course })[] | Error>;
 
 export type LoginFn = (
     input: loginArgsInput
