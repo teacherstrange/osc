@@ -11,10 +11,10 @@ import type {
     ResetRequestArgs,
     completeResetPasswordArgs,
     getPermissionsArgs,
+    createTutorArgs,
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
-
 export const resolvers = {
     Query: {
         users: async (_: undefined, args: getUsersArgs) => {
@@ -56,6 +56,9 @@ export const resolvers = {
         },
         completeResetPassword: async (_: undefined, { input }: completeResetPasswordArgs) => {
             return account.passwordReset(input);
+        },
+        createTutor: async (_: undefined, { input }: createTutorArgs) => {
+            return account.createTutor(input);
         },
     },
 };

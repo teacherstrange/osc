@@ -144,6 +144,14 @@ export const typeDefs = gql`
         password: String! @constraint(minLength: 12)
     }
 
+    input createTutorInput {
+        email: String! @constraint(format: email)
+        firstName: String!
+        lastName: String!
+        createdBy: Int!
+        course: [Int]
+    }
+
     type Mutation {
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
@@ -153,5 +161,6 @@ export const typeDefs = gql`
         completeRegistration(input: completeRegistration!): User
         requestResetPassword(email: String!): Boolean!
         completeResetPassword(input: passwordResetInput!): User
+        createTutor(input: createTutorInput): User
     }
 `;

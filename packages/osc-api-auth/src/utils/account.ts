@@ -438,6 +438,19 @@ export const createTutor: CreateTutorFn = async (input) => {
         },
     });
 
+    // To Do: Assign tutor user role
+    const tutorRole = await getRoleByTitle('Tutor');
+    if (!tutorRole) {
+        return new Error('Unable to verify role');
+    }
+    await prisma.userRole.create({
+        data: {
+            userId: user.id,
+            roleId: tutorRole.id,
+            createdBy: input.createdBy,
+        },
+    });
+
     // To Do: Validate course id / created by
     for (var i = 0; i < input.course.length; i++) {
         await prisma.courseTutor.create({

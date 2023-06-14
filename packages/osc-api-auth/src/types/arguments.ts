@@ -91,6 +91,10 @@ export type createTutorInput = {
     readonly course: number[];
 };
 
+export type createTutorArgs = {
+    readonly input: createTutorInput;
+};
+
 export type completeTutorCreate = {
     readonly email: string;
     readonly password: string;
