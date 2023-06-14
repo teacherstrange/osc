@@ -437,8 +437,20 @@ export const createTutor: CreateTutorFn = async (input) => {
             email: input.email,
         },
     });
+    if (input.IVUser == true) {
+        const ivRole = await getRoleByTitle('IV');
+        if (ivRole) {
+            await prisma.userRole.create({
+                data: {
+                    userId: user.id,
+                    roleId: ivRole.id,
+                    createdBy: input.createdBy,
+                },
+            });
+        }
+    }
 
-    // To Do: Assign tutor user role
+    //Assign tutor user role
     const tutorRole = await getRoleByTitle('Tutor');
     if (!tutorRole) {
         return new Error('Unable to verify role');
@@ -458,6 +470,7 @@ export const createTutor: CreateTutorFn = async (input) => {
                 tutorId: user.id,
                 courseId: input.course[i],
                 createdBy: input.createdBy,
+                iv: input.IV[i],
             },
         });
     }
@@ -466,7 +479,7 @@ export const createTutor: CreateTutorFn = async (input) => {
     const url = `https://openstudycollege.com/tutorcreate?token = ${userToken}`;
     // Send email
     const emailData = {
-        to: 'test',
+        to: input.email,
         firstName: input.firstName,
         lastName: input.lastName,
         url: url,

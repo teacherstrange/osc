@@ -89,6 +89,8 @@ export type createTutorInput = {
     readonly lastName: string;
     readonly createdBy: number;
     readonly course: number[];
+    readonly IV: boolean[];
+    readonly IVUser: boolean;
 };
 
 export type createTutorArgs = {

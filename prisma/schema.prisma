@@ -362,6 +362,7 @@ model CourseTutor {
   createdBy Int
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  iv        Boolean   @default(false)
 
   course   Course          @relation("courseTutorCourse", fields: [courseId], references: [id])
   profile  User            @relation("courseTutorProfile", fields: [tutorId], references: [id])
