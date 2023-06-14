@@ -11,5 +11,6 @@ export const env = z
         MAGIC_SECRET: z.string(),
         REG_EMAIL: z.string().regex(/^\d+$/).transform(Number),
         FORGOT_EMAIL: z.string().regex(/^\d+$/).transform(Number),
+        TUTOR_CREATE_EMAIL: z.string().regex(/^\d+$/).transform(Number),
     })
     .parse(process.env);

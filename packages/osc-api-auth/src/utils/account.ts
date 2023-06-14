@@ -10,6 +10,7 @@ import {
     sendForgotPasswordEmail,
     getOrgById,
     getAllPermissions,
+    sendTutorCreateEmail,
 } from 'osc-api';
 import type {
     CreateUserFn,
@@ -30,6 +31,8 @@ import type {
     ResetRequestFn,
     PasswordResetFn,
     GetAllPermissionsFn,
+    CreateTutorFn,
+    CreateTutorCompleteFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import { env } from '~/types/environment';
@@ -413,4 +416,66 @@ export const create: CreateUserFn = async (input, userId) => {
 
 export const getAllUserPermissions: GetAllPermissionsFn = async () => {
     return await getAllPermissions();
+};
+
+export const createTutor: CreateTutorFn = async (input) => {
+    // Check for existing user, all emails must be unique
+    const existingUser = await getUserByEmail(input.email);
+
+    // If user already exists, throw error
+    if (existingUser) {
+        return new Error('An account already exists for the specified email.');
+    }
+
+    // Create tutor record
+    // To Do: Mark User as IV
+    const user = await prisma.user.create({
+        data: {
+            firstName: input.firstName,
+            lastName: input.lastName,
+            email: input.email,
+        },
+    });
+
+    // To Do: Validate course id / created by
+    for (var i = 0; i < input.course.length; i++) {
+        await prisma.courseTutor.create({
+            data: {
+                tutorId: user.id,
+                courseId: input.course[i],
+                createdBy: input.createdBy,
+            },
+        });
+    }
+    // Generate magic link
+    const userToken = await token.magicKey(user.id);
+    const url = `https://openstudycollege.com/tutorcreate?token = ${userToken}`;
+    // Send email
+    const emailData = {
+        to: 'test',
+        firstName: input.firstName,
+        lastName: input.lastName,
+        url: url,
+        emailId: env.TUTOR_CREATE_EMAIL,
+    };
+    await sendTutorCreateEmail(emailData);
+    return user;
+};
+
+export const completeTutorCreate: CreateTutorCompleteFn = async (input) => {
+    const complete = {
+        magicKey: input.magicKey,
+        email: input.email,
+        password: input.password,
+    };
+
+    const registration = await completeRegistration(complete);
+
+    if (registration) {
+        console.log('reg success');
+        // Look through courses selected by tutor
+        // Can tutor add more course or are they just confirming already selected list
+        // Do they need to confirm IV as well?
+    }
+    return registration;
 };

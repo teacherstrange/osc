@@ -82,3 +82,18 @@ export type ResetRequestArgs = {
 export type completeResetPasswordArgs = {
     readonly input: passwordResetInput;
 };
+
+export type createTutorInput = {
+    readonly email: string;
+    readonly firstName: string;
+    readonly lastName: string;
+    readonly createdBy: number;
+    readonly course: number[];
+};
+
+export type completeTutorCreate = {
+    readonly email: string;
+    readonly password: string;
+    readonly magicKey: string;
+    readonly courses: number[];
+};
