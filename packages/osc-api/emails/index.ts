@@ -1,7 +1,12 @@
 import { Client } from '@hubspot/api-client';
 import { v4 as uuidv4 } from 'uuid';
 
-import type { GetEmailData, GetRegEmailData, GetForgotEmailData } from './types';
+import type {
+    GetEmailData,
+    GetRegEmailData,
+    GetForgotEmailData,
+    GetTutorCreateEmailData,
+} from './types';
 export * from './types';
 
 export const hubspotClient = () => {
@@ -72,6 +77,28 @@ export const sendForgotPasswordEmail: GetForgotEmailData = async (forgotEmailDat
         message: message,
         contactProperties: contactProperties,
         customProperties: customProperties,
+    };
+    return await sendEmail(emailData);
+};
+
+export const sendTutorCreateEmail: GetTutorCreateEmailData = async (tutorCreateData) => {
+    const message = {
+        to: tutorCreateData.to,
+        sendId: uuidv4(),
+    };
+    const customProperties = {
+        name: tutorCreateData.firstName,
+        url: tutorCreateData.url,
+    };
+    const contactProperties = {
+        firstname: tutorCreateData.firstName,
+        lastname: tutorCreateData.lastName,
+    };
+    const emailData = {
+        emailId: tutorCreateData.emailId,
+        message: message,
+        customProperties: customProperties,
+        contactProperties: contactProperties,
     };
     return await sendEmail(emailData);
 };

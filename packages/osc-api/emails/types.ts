@@ -14,6 +14,14 @@ type forgotEmailData = {
     emailId: number;
 };
 
+type tutorCreateData = {
+    to: string;
+    url: string;
+    firstName: string;
+    lastName: string;
+    emailId: number;
+};
+
 type message = {
     to: string;
     from?: string;
@@ -43,3 +51,4 @@ type emailData = {
 export type GetEmailData = (input: emailData) => Promise<Boolean | Error>;
 export type GetRegEmailData = (input: regEmailData) => Promise<Boolean | Error>;
 export type GetForgotEmailData = (input: forgotEmailData) => Promise<Boolean | Error>;
+export type GetTutorCreateEmailData = (input: tutorCreateData) => Promise<Boolean | Error>;
