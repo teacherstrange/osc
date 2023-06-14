@@ -1,6 +1,5 @@
 import type { Meta, Story } from '@storybook/react';
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import type { ProgressProps } from './Progress';
 import { Progress } from './Progress';
 
@@ -26,9 +25,9 @@ export default {
 } as Meta;
 
 const ProgressTemplate: Story<ProgressProps & { updatedLevel: number }> = (args) => {
-    const [level, setLevel] = React.useState(args.progressLevel);
+    const [level, setLevel] = useState(args.progressLevel);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (args.updatedLevel) {
             const timer = setTimeout(() => {
                 setLevel(args.updatedLevel);
