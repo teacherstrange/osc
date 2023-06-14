@@ -59,3 +59,16 @@ export type refreshAccessArgs = {
 export type magicKeyArgs = {
     readonly magicKeyToken: string;
 };
+
+export type passwordResetInput = {
+    readonly magicKeyToken: string;
+    readonly password: string;
+};
+
+export type ResetRequestArgs = {
+    readonly email: string;
+};
+
+export type completeResetPasswordArgs = {
+    readonly input: passwordResetInput;
+};

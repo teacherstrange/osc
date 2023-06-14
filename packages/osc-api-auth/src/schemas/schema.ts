@@ -129,6 +129,11 @@ export const typeDefs = gql`
         password: String!
     }
 
+    input passwordResetInput {
+        magicKeyToken: String!
+        password: String!
+    }
+
     type Mutation {
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
@@ -136,5 +141,7 @@ export const typeDefs = gql`
         createUserSetup(input: createUserSetupInput!): User
         validateMagicToken(magicKeyToken: String!): User
         completeRegistration(input: completeRegistration!): User
+        requestResetPassword(email: String!): Boolean!
+        completeResetPassword(input: passwordResetInput!): User
     }
 `;

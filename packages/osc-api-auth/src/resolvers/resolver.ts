@@ -8,6 +8,8 @@ import type {
     createUserSetupArgs,
     magicKeyArgs,
     completeRegistrationArgs,
+    ResetRequestArgs,
+    completeResetPasswordArgs,
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
@@ -44,6 +46,12 @@ export const resolvers = {
         },
         completeRegistration: async (_: undefined, { input }: completeRegistrationArgs) => {
             return account.completeRegistration(input);
+        },
+        requestResetPassword: async (_: undefined, { email }: ResetRequestArgs) => {
+            return account.resetRequest(email);
+        },
+        completeResetPassword: async (_: undefined, { input }: completeResetPasswordArgs) => {
+            return account.passwordReset(input);
         },
     },
 };
