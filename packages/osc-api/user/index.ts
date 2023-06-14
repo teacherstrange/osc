@@ -1,6 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 
-import type { GetUserByEmailFn, GetUserByIdFn, GetRoleByIdFn, GetRoleByTitleFn } from './types';
+import type {
+    GetUserByEmailFn,
+    GetUserByIdFn,
+    GetRoleByIdFn,
+    GetRoleByTitleFn,
+    GetAllPermissionsFn,
+} from './types';
 export * from './types';
 
 const prisma = new PrismaClient();
@@ -37,6 +43,10 @@ export const getUserByEmail: GetUserByEmailFn = async (email) => {
         },
         include: userInclude(),
     });
+};
+
+export const getAllPermissions: GetAllPermissionsFn = async () => {
+    return await prisma.permission.findMany({});
 };
 
 const userInclude = () => {

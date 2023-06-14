@@ -7,6 +7,13 @@ export type getUsersArgs = {
     readonly pagination: 'offset' | 'cursor';
 };
 
+export type getPermissionsArgs = {
+    readonly orderBy: 'id' | 'title';
+    readonly orderDir: 'asc' | 'desc';
+    readonly limit: number;
+    readonly pagination: 'offset' | 'cursor';
+};
+
 export type getUserArgs = {
     readonly id?: number;
 };

@@ -49,6 +49,11 @@ export const typeDefs = gql`
         write: [String]
     }
 
+    type Permission {
+        id: Int!
+        title: String!
+    }
+
     type CrmToken {
         id: Int!
         crmId: Int!
@@ -100,6 +105,7 @@ export const typeDefs = gql`
             orderDir: String
         ): [User]
         user(id: Int): User
+        permissions(limit: Int): [Permission]
     }
 
     input createUserInput {

@@ -9,6 +9,7 @@ import {
     getRoleByTitle,
     sendForgotPasswordEmail,
     getOrgById,
+    getAllPermissions,
 } from 'osc-api';
 import type {
     CreateUserFn,
@@ -29,6 +30,7 @@ import type {
     ResetRequestFn,
     PasswordResetFn,
     AdminCreateUserFn,
+    GetAllPermissionsFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import { env } from '~/types/environment';
@@ -430,4 +432,8 @@ export const adminCreateUser: AdminCreateUserFn = async (input) => {
         },
     });
     return user;
+};
+
+export const getAllUserPermissions: GetAllPermissionsFn = async () => {
+    return await getAllPermissions();
 };
