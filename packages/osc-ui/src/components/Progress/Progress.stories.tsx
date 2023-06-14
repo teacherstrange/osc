@@ -25,7 +25,7 @@ export default {
     },
 } as Meta;
 
-const ProgressTemplate: Story = (args) => {
+const ProgressTemplate: Story<ProgressProps & { updatedLevel: number }> = (args) => {
     const [level, setLevel] = React.useState(args.progressLevel);
 
     React.useEffect(() => {
