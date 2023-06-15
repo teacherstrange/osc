@@ -1,22 +1,162 @@
 @use "../../styles/settings" as *;
 @use "../../styles/tools" as *;
 
-.c-progress {
-    position: relative;
-    width: 100%;
-    height: 6px;
-    overflow: hidden;
-    background: var(--color-neutral-400);
+@layer components {
+    .c-progress {
+        --progress-height: var(--thickness);
 
-    /* Fix overflow clipping in Safari */
-
-    /* https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0 */
-    transform: translateZ(0);
-
-    &__indicator {
+        position: relative;
         width: 100%;
-        height: 100%;
-        background-color: var(--color-quaternary);
-        transition: transform 660ms cubic-bezier(0.65, 0, 0.35, 1);
+        height: var(--progress-height);
+        overflow: hidden;
+        background: var(--color-neutral-400);
+
+        /* Fix overflow clipping in Safari */
+
+        /* https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0 */
+        transform: translateZ(0);
+
+        &__indicator {
+            width: 100%;
+            height: 100%;
+            transition: transform 660ms cubic-bezier(0.65, 0, 0.35, 1);
+
+            &--primary {
+                background: var(--color-primary);
+            }
+
+            &--quaternary {
+                background: var(--color-quaternary);
+            }
+
+            &--primary-gradient {
+                background: var(--color-gradient-primary-90);
+            }
+
+            &--quaternary-gradient {
+                background: var(--color-gradient-quaternary-90);
+            }
+        }
+    }
+
+    .c-progress-circular {
+        display: grid;
+        place-items: center;
+        width: max-content;
+
+        &__inner {
+            --progress-inner: calc(70% - var(--thickness));
+            --progress-outer: calc(var(--progress-inner) + 1px); /* fixes aliasing */
+            --progress-conic-gradient-primary:
+                conic-gradient(
+                    hsl(31deg 94% 65%),
+                    hsl(24deg 94% 63%),
+                    hsl(18deg 93% 61%),
+                    hsl(12deg 91% 59%),
+                    hsl(6deg 91% 58%),
+                    hsl(360deg 89% 56%),
+                    hsl(354deg 88% 54%),
+                    hsl(348deg 88% 52%),
+                    hsl(341deg 87% 50%),
+                    hsl(335deg 85% 49%),
+                    var(--progress),
+                    var(--color-neutral-300) 0
+                );
+            --progress-conic-gradient-secondary:
+                conic-gradient(
+                    hsl(179deg 92% 77%),
+                    hsl(187deg 100% 70%),
+                    hsl(190deg 100% 63%),
+                    hsl(196deg 100% 63%),
+                    hsl(207deg 100% 70%),
+                    hsl(231deg 100% 78%),
+                    hsl(267deg 79% 73%),
+                    hsl(304deg 56% 61%),
+                    hsl(325deg 75% 57%),
+                    hsl(335deg 85% 49%),
+                    var(--progress),
+                    var(--color-neutral-300) 0
+                );
+            --progress-conic-gradient-tertiary:
+                conic-gradient(
+                    hsl(56deg 100% 73%),
+                    hsl(67deg 82% 71%),
+                    hsl(79deg 75% 71%),
+                    hsl(93deg 68% 71%),
+                    hsl(111deg 60% 71%),
+                    hsl(132deg 56% 67%),
+                    hsl(148deg 56% 61%),
+                    hsl(159deg 55% 55%),
+                    hsl(168deg 61% 47%),
+                    hsl(175deg 100% 36%),
+                    var(--progress),
+                    var(--color-neutral-300) 0
+                );
+            --progress-conic-gradient-quaternary:
+                conic-gradient(
+                    hsl(237deg 41% 44%),
+                    hsl(256deg 40% 44%),
+                    hsl(272deg 42% 44%),
+                    hsl(287deg 45% 42%),
+                    hsl(301deg 49% 41%),
+                    hsl(313deg 58% 43%),
+                    hsl(320deg 67% 45%),
+                    hsl(326deg 76% 46%),
+                    hsl(330deg 83% 47%),
+                    hsl(335deg 85% 49%),
+                    var(--progress),
+                    var(--color-neutral-300) 0
+                );
+
+            grid-area: 1/1;
+
+            /* hides the inner part of the conic gradient */
+            mask:
+                radial-gradient(
+                    circle,
+                    #0000 var(--progress-inner),
+                    #000 var(--progress-outer)
+                );
+            aspect-ratio: 1;
+            inline-size: 50vmin;
+            border-radius: 50%;
+
+            &--sm {
+                max-width: 65px;
+            }
+
+            &--md {
+                max-width: 150px;
+            }
+
+            &--lg {
+                max-width: 200px;
+            }
+
+            &--primary-gradient {
+                background-image: var(--progress-conic-gradient-primary);
+            }
+
+            &--secondary-gradient {
+                background-image: var(--progress-conic-gradient-secondary);
+            }
+
+            &--tertiary-gradient {
+                background-image: var(--progress-conic-gradient-tertiary);
+            }
+
+            &--quaternary-gradient {
+                background-image: var(--progress-conic-gradient-quaternary);
+            }
+        }
+
+        &__progress-level {
+            grid-area: 1/1;
+            font-variant-numeric: tabular-nums;
+
+            &--sm {
+                font-size: $fs-xs;
+            }
+        }
     }
 }
