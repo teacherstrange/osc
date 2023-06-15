@@ -1,7 +1,7 @@
 import type { Meta, Story } from '@storybook/react';
 import React, { useEffect, useState } from 'react';
 import type { ProgressProps } from './Progress';
-import { Progress } from './Progress';
+import { CircularProgress, Progress } from './Progress';
 
 export default {
     title: 'osc-ui/Progress',
@@ -27,30 +27,54 @@ export default {
 const ProgressTemplate: Story<ProgressProps & { updatedLevel: number }> = (args) => {
     const [level, setLevel] = useState(args.progressLevel);
 
-    useEffect(() => {
-        if (args.updatedLevel) {
-            const timer = setTimeout(() => {
-                setLevel(args.updatedLevel);
-            }, 500);
-
-            return () => clearTimeout(timer);
-        }
-    }, [args.updatedLevel]);
-
-    return (
-        <div style={{ width: '300px' }}>
-            <Progress progressLevel={level} />
-        </div>
-    );
+const CircularProgressTemplate = ({ variations }) => {
+    return variations.map((variation) => (
+        <>
+            <div style={{ margin: '16px', padding: '16px' }}>
+                <p>{variation.variant}</p>
+                <CircularProgress
+                    colorVariant={variation.colorVariant}
+                    progressLevel={variation.progressLevel}
+                    showPercentageIndicator={variation.showPercentageIndicator}
+                    size={variation.size}
+                    width={variation.width}
+                />
+            </div>
+        </>
+    ));
 };
 
 export const Primary = ProgressTemplate.bind({});
-export const UpdatedProgress = ProgressTemplate.bind({});
+export const CircularProgressVariant = CircularProgressTemplate.bind({});
 
 Primary.args = {
     progressLevel: 50,
 };
-UpdatedProgress.args = {
-    progressLevel: 10,
-    updatedLevel: 80,
+
+CircularProgressVariant.args = {
+    variations: [
+        {
+            colorVariant: 'quaternary-gradient',
+            progressLevel: 40,
+            showPercentageIndicator: true,
+            size: 'sm',
+            variant: 'Small',
+            width: 'sm',
+        },
+        {
+            colorVariant: 'secondary-gradient',
+            progressLevel: 60,
+            showPercentageIndicator: true,
+            size: 'md',
+            variant: 'Medium',
+            width: 'md',
+        },
+        {
+            colorVariant: 'primary-gradient',
+            progressLevel: 80,
+            size: 'lg',
+            variant: 'Large, no percentage indicator',
+            width: 'lg',
+        },
+    ],
 };
