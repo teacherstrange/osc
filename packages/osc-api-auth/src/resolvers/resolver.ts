@@ -14,9 +14,13 @@ import type {
     createTutorArgs,
     completeTutorArgs,
     markUserAsIVArgs,
+    socialLoginArgs,
+    socialLoginCreateArgs,
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
+import * as social from '~/utils/social';
+
 export const resolvers = {
     Query: {
         users: async (_: undefined, args: getUsersArgs) => {
@@ -70,6 +74,12 @@ export const resolvers = {
         },
         markUserAsIV: async (_: undefined, { input }: markUserAsIVArgs) => {
             return account.markAsIV(input);
+        },
+        socialLogin: async (_: undefined, { ssoId }: socialLoginArgs) => {
+            return social.loginUserSocial(ssoId);
+        },
+        socialLoginCreate: async (_: undefined, { input }: socialLoginCreateArgs) => {
+            return social.createUserSocial(input);
         },
     },
 };

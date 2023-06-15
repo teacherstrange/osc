@@ -39,6 +39,8 @@ export const loginUserSocial: LoginUserSocialFn = async (ssoId) => {
     if (!userSocial) {
         return new Error('SSO Login failed');
     }
-    const tokens = await token.access(userSocial.userId);
-    return tokens;
+    const accessToken = token.access(userSocial.userId);
+    const refreshToken = token.refresh(userSocial.userId);
+
+    return { accessToken, refreshToken };
 };

@@ -121,3 +121,10 @@ export type createUserSocialInput = {
     readonly name: string;
     readonly ssoId: string;
 };
+
+export type socialLoginCreateArgs = {
+    readonly input: createUserSocialInput;
+};
+export type socialLoginArgs = {
+    readonly ssoId: string;
+};

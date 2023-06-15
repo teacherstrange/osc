@@ -156,7 +156,11 @@ export const typeDefs = gql`
         userId: Int!
         createdBy: Int!
     }
-
+    input socialLoginCreateInput {
+        userId: Int!
+        name: String!
+        ssoId: String!
+    }
     type Mutation {
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
@@ -168,5 +172,7 @@ export const typeDefs = gql`
         completeResetPassword(input: passwordResetInput!): User
         createTutor(input: createTutorInput): User
         markUserAsIV(input: markUserAsIVInput): UserRole
+        socialLogin(ssoId: String!): AuthTokens
+        socialLoginCreate(input: socialLoginCreateInput): Boolean
     }
 `;
