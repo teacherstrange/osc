@@ -11,6 +11,7 @@ import type {
     createTutorInput,
     completeTutorCreate,
     markAsIVInput,
+    createUserSocialInput,
 } from './arguments';
 import type { PermissionsProps } from './interfaces';
 
@@ -59,3 +60,6 @@ export type UserAvatarFn = (userId: number) => Promise<UserAvatar | null>;
 export type CrmTokensFn = (userId: number) => Promise<CrmTokensAPI>;
 
 export type LmsTokensFn = (userId: number) => Promise<LmsTokensAPI>;
+
+export type CreateUserSocialFn = (input: createUserSocialInput) => Promise<Boolean | Error>;
+export type LoginUserSocialFn = (ssoId: number) => Promise<String | Error>;
