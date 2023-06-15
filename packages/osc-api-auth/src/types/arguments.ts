@@ -28,6 +28,17 @@ export type completeRegistrationArgs = {
     readonly input: completeRegistration;
 };
 
+export type createUserInput = {
+    readonly email: string;
+    readonly orgId?: number;
+    readonly roleId: number;
+    readonly firstName: string;
+    readonly lastName: string;
+    readonly password: string;
+    readonly createdBy: number;
+    readonly extraPermissions: number[];
+};
+
 export type createUserArgs = {
     readonly input: createUserInput;
 };
