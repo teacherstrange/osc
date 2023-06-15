@@ -10,9 +10,17 @@ export interface ProgressProps {
      */
     className?: string;
     /**
+     * Color for the progress indicator bar
+     */
+    colorVariant: 'primary' | 'quaternary' | 'primary-gradient' | 'quaternary-gradient';
+    /**
      * The level of progress - must be between 0 and 100
      */
     progressLevel?: number;
+    /**
+     * Thickness of the progress indicator
+     */
+    width?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }
 
 const THICKNESS = {
@@ -24,10 +32,12 @@ const THICKNESS = {
 } as const;
 
 export const Progress = (props: ProgressProps) => {
-    const { className, progressLevel = 0 } = props;
+    const { className, colorVariant = 'primary', progressLevel = 0, width = 'lg' } = props;
     const [progress, setProgress] = useState<number>(progressLevel);
 
+    const variantModifier = useModifier('c-progress__indicator', colorVariant);
     const classes = classNames('c-progress', className);
+    const indicatorClasses = classNames('c-progress__indicator', className, variantModifier);
 
     useEffect(() => {
         if (progressLevel > 100) return;
@@ -41,10 +51,16 @@ export const Progress = (props: ProgressProps) => {
     }
 
     return (
-        <ProgressPrimitive.Root className={classes} value={progress}>
+        <ProgressPrimitive.Root
+            className={classes}
+            style={{ ['--thickness' as string]: `${THICKNESS[width]}px` }}
+            value={progress}
+        >
             <ProgressPrimitive.Indicator
-                className="c-progress__indicator"
-                style={{ transform: `translateX(-${100 - progress}%)` }}
+                className={indicatorClasses}
+                style={{
+                    transform: `translateX(-${100 - progress}%)`,
+                }}
             />
         </ProgressPrimitive.Root>
     );

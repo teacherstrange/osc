@@ -1,6 +1,6 @@
-import type { Meta, Story } from '@storybook/react';
-import React, { useEffect, useState } from 'react';
-import type { ProgressProps } from './Progress';
+import type { Meta } from '@storybook/react';
+import React from 'react';
+
 import { CircularProgress, Progress } from './Progress';
 
 export default {
@@ -24,8 +24,20 @@ export default {
     },
 } as Meta;
 
-const ProgressTemplate: Story<ProgressProps & { updatedLevel: number }> = (args) => {
-    const [level, setLevel] = useState(args.progressLevel);
+const ProgressTemplate = ({ variations }) => {
+    return variations.map((variation) => (
+        <>
+            <p>{variation.variant}</p>
+            <div style={{ width: '300px', margin: '16px', padding: '16px' }}>
+                <Progress
+                    colorVariant={variation.colorVariant}
+                    progressLevel={variation.progressLevel}
+                    width={variation.width}
+                />
+            </div>
+        </>
+    ));
+};
 
 const CircularProgressTemplate = ({ variations }) => {
     return variations.map((variation) => (
@@ -48,7 +60,38 @@ export const Primary = ProgressTemplate.bind({});
 export const CircularProgressVariant = CircularProgressTemplate.bind({});
 
 Primary.args = {
-    progressLevel: 50,
+    variations: [
+        {
+            colorVariant: 'primary',
+            progressLevel: 30,
+            variant: 'Small',
+            width: 'sm',
+        },
+        {
+            colorVariant: 'quaternary',
+            progressLevel: 50,
+            variant: 'Medium',
+            width: 'md',
+        },
+        {
+            colorVariant: 'primary-gradient',
+            progressLevel: 65,
+            variant: 'Large',
+            width: 'lg',
+        },
+        {
+            colorVariant: 'quaternary-gradient',
+            progressLevel: 80,
+            variant: 'Extra Large',
+            width: 'xl',
+        },
+        {
+            colorVariant: 'quaternary-gradient',
+            progressLevel: 95,
+            variant: '2XL',
+            width: '2xl',
+        },
+    ],
 };
 
 CircularProgressVariant.args = {
