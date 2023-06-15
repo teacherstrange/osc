@@ -34,6 +34,7 @@ import type {
     CreateTutorFn,
     CreateTutorCompleteFn,
     ValidateTutorFn,
+    MarkAsIVFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import { env } from '~/types/environment';
@@ -419,6 +420,20 @@ export const getAllUserPermissions: GetAllPermissionsFn = async () => {
     return await getAllPermissions();
 };
 
+export const markAsIV: MarkAsIVFn = async (input) => {
+    const ivRole = await getRoleByTitle('IV');
+    if (!ivRole) {
+        return new Error('Unable to find IV role');
+    }
+    return await prisma.userRole.create({
+        data: {
+            userId: input.userId,
+            roleId: ivRole.id,
+            createdBy: input.createdBy,
+        },
+    });
+};
+
 export const createTutor: CreateTutorFn = async (input) => {
     // Check for existing user, all emails must be unique
     const existingUser = await getUserByEmail(input.email);
@@ -437,16 +452,8 @@ export const createTutor: CreateTutorFn = async (input) => {
         },
     });
     if (input.IVUser == true) {
-        const ivRole = await getRoleByTitle('IV');
-        if (ivRole) {
-            await prisma.userRole.create({
-                data: {
-                    userId: user.id,
-                    roleId: ivRole.id,
-                    createdBy: input.createdBy,
-                },
-            });
-        }
+        const ivData = { userId: user.id, createdBy: input.createdBy };
+        await markAsIV(ivData);
     }
 
     //Assign tutor user role
@@ -463,6 +470,7 @@ export const createTutor: CreateTutorFn = async (input) => {
     });
 
     // To Do: Validate course id / created by
+    // To Do: If user not an IV don't add the iv field
     for (var i = 0; i < input.course.length; i++) {
         await prisma.courseTutor.create({
             data: {

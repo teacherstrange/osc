@@ -18,5 +18,6 @@ export const shieldPermissions = shield({
         createUser: and(isAuthenticated, canCreateUser),
         completeRegistration: and(isAuthenticated, canReadOwnAccount),
         createTutor: and(isAuthenticated, canCreateUser),
+        markUserAsIV: and(isAuthenticated, canCreateUser),
     },
 });

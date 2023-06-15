@@ -13,6 +13,7 @@ import type {
     getPermissionsArgs,
     createTutorArgs,
     completeTutorArgs,
+    markUserAsIVArgs,
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
@@ -66,6 +67,9 @@ export const resolvers = {
         },
         completeTutorCreate: async (_: undefined, { input }: completeTutorArgs) => {
             return account.completeTutorCreate(input);
+        },
+        markUserAsIV: async (_: undefined, { input }: markUserAsIVArgs) => {
+            return account.markAsIV(input);
         },
     },
 };

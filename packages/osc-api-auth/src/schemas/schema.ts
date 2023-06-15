@@ -152,6 +152,11 @@ export const typeDefs = gql`
         course: [Int]
     }
 
+    input markUserAsIVInput {
+        userId: Int!
+        createdBy: Int!
+    }
+
     type Mutation {
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
@@ -162,5 +167,6 @@ export const typeDefs = gql`
         requestResetPassword(email: String!): Boolean!
         completeResetPassword(input: passwordResetInput!): User
         createTutor(input: createTutorInput): User
+        markUserAsIV(input: markUserAsIVInput): UserRole
     }
 `;
