@@ -43,6 +43,7 @@ model User {
   assignments            AssignmentSubmission[]  @relation("studentDetails")
   courseInterest         UserCourseInterest[]    @relation("userCourseInterest")
   User                   User[]                  @relation("userCreator")
+  UserSocial             UserSocial[]
 
   @@index([createdBy])
   @@map("users")
@@ -468,4 +469,23 @@ model Preference {
   UserPreference UserPreference[] @relation("userPreferenceDetails")
 
   @@map("settings.preferences")
+}
+
+model Social {
+  id         Int          @id @default(autoincrement())
+  name       String?      @db.VarChar(32)
+  ssoId      String       @unique @db.VarChar(64)
+  UserSocial UserSocial[]
+}
+
+model UserSocial {
+  id       Int @id @default(autoincrement())
+  userId   Int
+  socialId Int
+
+  User   User   @relation(fields: [userId], references: [id])
+  Social Social @relation(fields: [socialId], references: [id])
+
+  @@index([userId])
+  @@index([socialId])
 }

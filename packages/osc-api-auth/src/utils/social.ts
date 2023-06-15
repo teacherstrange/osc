@@ -4,23 +4,36 @@ import type { CreateUserSocialFn, LoginUserSocialFn } from '~/types/functions';
 const prisma = new PrismaClient();
 
 export const createUserSocial: CreateUserSocialFn = async (input) => {
+    const social = await prisma.social.create({
+        data: {
+            name: input.name,
+            ssoId: input.ssoId,
+        },
+    });
     prisma.userSocial.create({
         data: {
             userId: input.userId,
-            socialId: input.socialId,
-            type: input.type,
+            socialId: social.id,
         },
     });
     return true;
 };
 
-export const loginUserSocial: LoginUserSocialFn = async (socialId) => {
-    const userSocial = await prisma.userSocial.findUnique({
+export const loginUserSocial: LoginUserSocialFn = async (ssoId) => {
+    const social = await prisma.social.findFirst({
         where: {
-            socialId: socialId,
+            ssoId: ssoId,
+        },
+    });
+    if (!social) {
+        return new Error('Unable to log in');
+    }
+    const userSocial = await prisma.userSocial.findFirst({
+        where: {
+            id: social.id,
         },
         include: {
-            user: true,
+            User: true,
         },
     });
     if (!userSocial) {

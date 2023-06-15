@@ -118,6 +118,6 @@ export type markUserAsIVArgs = {
 
 export type createUserSocialInput = {
     readonly userId: number;
-    readonly socialId: number;
-    readonly type: string;
+    readonly name: string;
+    readonly ssoId: string;
 };
