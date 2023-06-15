@@ -108,15 +108,6 @@ export const typeDefs = gql`
         permissions(limit: Int): [Permission]
     }
 
-    input createUserInput {
-        firstName: String! @constraint(maxLength: 128)
-        lastName: String! @constraint(maxLength: 128)
-        email: String! @constraint(format: "email", maxLength: 255)
-        ### Minimum 12 characters for password - length creates greater security than extended charsets or set patterns
-        ### Requiring a set pattern makes it considerably easier to brute force as it narrows the possible range.
-        password: String! @constraint(minLength: 12)
-    }
-
     input createUserSetupInput {
         firstName: String! @constraint(maxLength: 128)
         lastName: String! @constraint(maxLength: 128)
@@ -140,15 +131,17 @@ export const typeDefs = gql`
         password: String!
     }
 
-    input adminCreateUser {
+    input createUserInput {
         firstName: String! @constraint(maxLength: 128)
         lastName: String! @constraint(maxLength: 128)
         email: String! @constraint(format: "email", maxLength: 255)
-        orgId: Int!
+        orgId: Int
         roleId: Int!
-        password: String!
         createdBy: Int!
         extraPermissions: [Int]
+        ### Minimum 12 characters for password - length creates greater security than extended charsets or set patterns
+        ### Requiring a set pattern makes it considerably easier to brute force as it narrows the possible range.
+        password: String! @constraint(minLength: 12)
     }
 
     type Mutation {
@@ -160,6 +153,5 @@ export const typeDefs = gql`
         completeRegistration(input: completeRegistration!): User
         requestResetPassword(email: String!): Boolean!
         completeResetPassword(input: passwordResetInput!): User
-        adminCreateUser(input: adminCreateUser!): User
     }
 `;

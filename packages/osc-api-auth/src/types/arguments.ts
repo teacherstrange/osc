@@ -18,13 +18,6 @@ export type getUserArgs = {
     readonly id?: number;
 };
 
-export type createUserInput = {
-    readonly firstName: string;
-    readonly lastName: string;
-    readonly email: string;
-    readonly password: string;
-};
-
 export type completeRegistration = {
     readonly email: string;
     readonly password: string;

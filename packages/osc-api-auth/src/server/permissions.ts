@@ -17,6 +17,5 @@ export const shieldPermissions = shield({
     Mutation: {
         createUser: and(isAuthenticated, canCreateUser),
         completeRegistration: and(isAuthenticated, canReadOwnAccount),
-        adminCreateUser: and(isAuthenticated, canCreateUser),
     },
 });

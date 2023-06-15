@@ -7,7 +7,6 @@ import type {
     createUserSetupInput,
     completeRegistration,
     passwordResetInput,
-    adminCreateUserInput,
     getPermissionsArgs,
 } from './arguments';
 import type { PermissionsProps } from './interfaces';
@@ -19,7 +18,6 @@ export type GetAllPermissionsFn = (args: getPermissionsArgs) => Promise<Permissi
 export type CreateUserSetupFn = (input: createUserSetupInput) => Promise<User | Error>;
 export type assignRoleFn = (userId: number, roleId: number) => Promise<UserRole | Error>;
 export type CompleteRegistrationFn = (input: completeRegistration) => Promise<User | Error>;
-export type AdminCreateUserFn = (input: adminCreateUserInput) => Promise<User | Error>;
 
 export type LoginFn = (
     input: loginArgsInput

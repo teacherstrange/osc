@@ -29,7 +29,6 @@ import type {
     CompleteRegistrationFn,
     ResetRequestFn,
     PasswordResetFn,
-    AdminCreateUserFn,
     GetAllPermissionsFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
@@ -39,28 +38,6 @@ import * as token from '~/utils/token';
 
 const prisma = new PrismaClient();
 
-export const create: CreateUserFn = async (input) => {
-    // Check for existing user, all emails must be unique
-    const existingUser = await getUserByEmail(input.email);
-
-    // If user already exists, throw error
-    if (existingUser) {
-        return new Error('An account already exists for the specified email.');
-    }
-
-    // Hash password
-    const hashedPassword = await password.hash(input.password);
-
-    // Create user record
-    return await prisma.user.create({
-        data: {
-            firstName: input.firstName,
-            lastName: input.lastName,
-            email: input.email,
-            password: hashedPassword,
-        },
-    });
-};
 export const createSetup: CreateUserSetupFn = async (input) => {
     const existingUser = await getUserByEmail(input.email);
 
@@ -375,7 +352,7 @@ export const passwordReset: PasswordResetFn = async (input) => {
     return update;
 };
 
-export const adminCreateUser: AdminCreateUserFn = async (input) => {
+export const create: CreateUserFn = async (input) => {
     // Check for existing user, all emails must be unique
     const existingUser = await getUserByEmail(input.email);
 
@@ -387,12 +364,6 @@ export const adminCreateUser: AdminCreateUserFn = async (input) => {
     const role = getRoleById(input.roleId);
     if (!role) {
         return new Error('No active role selected');
-    }
-
-    // Check organisation exists
-    const org = getOrgById(input.orgId);
-    if (!org) {
-        return new Error('This organisation does not exist');
     }
     // Hash password
     const hashedPassword = await password.hash(input.password);
@@ -424,13 +395,20 @@ export const adminCreateUser: AdminCreateUserFn = async (input) => {
             },
         });
     }
-    // Link User to organisation
-    await prisma.userOrganisation.create({
-        data: {
-            userId: user.id,
-            organisationId: input.orgId,
-        },
-    });
+    if (input.orgId) {
+        // Check organisation exists
+        const org = getOrgById(input.orgId);
+        if (!org) {
+            return new Error('This organisation does not exist');
+        }
+        // Link User to organisation
+        await prisma.userOrganisation.create({
+            data: {
+                userId: user.id,
+                organisationId: input.orgId,
+            },
+        });
+    }
     return user;
 };
 
