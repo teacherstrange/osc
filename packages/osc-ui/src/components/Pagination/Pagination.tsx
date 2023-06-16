@@ -58,7 +58,9 @@ export const Pagination = (props: PaginationProps) => {
                 total={total}
                 itemTypeDescription={itemTypeDescription}
             />
-            <Progress progressLevel={progressLevel} className="u-mt-m u-mb-m" />
+            <div className="u-mt-m u-mb-m u-w-full">
+                <Progress progressLevel={progressLevel} width="sm" />
+            </div>
             {total !== numberLoaded ? (
                 <Button
                     variant="secondary"
