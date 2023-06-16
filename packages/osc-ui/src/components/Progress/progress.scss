@@ -9,7 +9,7 @@
         width: 100%;
         height: var(--progress-height);
         overflow: hidden;
-        background: var(--color-neutral-400);
+        background: var(--color-neutral-300);
 
         /* Fix overflow clipping in Safari */
 
@@ -111,11 +111,12 @@
             grid-area: 1/1;
 
             /* hides the inner part of the conic gradient */
-            -webkit-mask: radial-gradient(
-                circle,
-                #0000 var(--progress-inner),
-                #000 var(--progress-outer)
-            );
+            mask:
+                radial-gradient(
+                    circle,
+                    #0000 var(--progress-inner),
+                    #000 var(--progress-outer)
+                );
             aspect-ratio: 1;
             inline-size: 50vmin;
             border-radius: 50%;
