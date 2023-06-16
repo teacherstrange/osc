@@ -63,10 +63,11 @@ export const Pagination = (props: PaginationProps) => {
             </div>
             {total !== numberLoaded ? (
                 <Button
-                    variant="secondary"
+                    variant="tertiary"
                     className="c-pagination__button"
                     isLoading={isLoading}
                     onClick={onPaginate}
+                    size="sm"
                 >
                     Load more
                 </Button>
