@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { render } from 'test-utils';
-import { Progress, CircularProgress } from './Progress';
+import { Progress, CircularProgress, ProgressContent } from './Progress';
 
 const PROGRESS_LEVEL = 50;
 const INVALID_PROGRESS_LEVEL = 150;
@@ -27,24 +27,18 @@ test('should render a circular progress bar with specific progress level', () =>
     expect(screen.getByRole('progressbar')).toBeVisible();
     expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '50');
 });
-test('should render a circular progress bar with a percentage indicator', () => {
+test('should render a circular progress bar with inner content', () => {
     render(
-        <CircularProgress
-            colorVariant="primary-gradient"
-            progressLevel={PROGRESS_LEVEL}
-            showPercentageIndicator={true}
-        />
+        <CircularProgress colorVariant="primary-gradient" progressLevel={PROGRESS_LEVEL}>
+            <ProgressContent>
+                <div>{PROGRESS_LEVEL}% Complete</div>
+            </ProgressContent>
+        </CircularProgress>
     );
 
     expect(screen.getByRole('progressbar')).toBeVisible();
     expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '50');
-    expect(
-        screen.getByText(
-            (_, element) =>
-                element.className ===
-                'c-progress__circular-progress-level c-progress__circular-progress-level--sm'
-        )
-    ).toHaveTextContent('50 %');
+    expect(screen.getByText('50% Complete')).toBeInTheDocument();
 });
 test('should return an empty DOM element if the Circular progress level is > 100', () => {
     const { container } = render(

@@ -1,11 +1,12 @@
 import type { Meta } from '@storybook/react';
 import React from 'react';
 
-import { CircularProgress, Progress } from './Progress';
+import { CircularProgress, Progress, ProgressContent } from './Progress';
 
 export default {
     title: 'osc-ui/Progress',
     component: Progress,
+    subcomponents: { ProgressContent },
     parameters: {
         docs: {
             description: {
@@ -18,8 +19,18 @@ export default {
         className: {
             description: 'Custom class',
         },
+        colorVariant: {
+            description: 'Sets the color of the progress indicator',
+        },
         progressLevel: {
             description: 'Sets the level of progress',
+        },
+        size: {
+            description:
+                'Sets the overall width of the progress bar, only applicable on the Circular Progress ',
+        },
+        width: {
+            description: 'Sets the thickness of the progress indicator',
         },
     },
 } as Meta;
@@ -39,25 +50,40 @@ const ProgressTemplate = ({ variations }) => {
     ));
 };
 
-const CircularProgressTemplate = ({ variations }) => {
-    return variations.map((variation) => (
-        <>
-            <div style={{ margin: '16px', padding: '16px' }}>
-                <p>{variation.variant}</p>
-                <CircularProgress
-                    colorVariant={variation.colorVariant}
-                    progressLevel={variation.progressLevel}
-                    showPercentageIndicator={variation.showPercentageIndicator}
-                    size={variation.size}
-                    width={variation.width}
-                />
-            </div>
-        </>
-    ));
+const CircularProgressTemplate = (args) => {
+    return (
+        <div style={{ margin: '16px', padding: '16px', width: '50px' }}>
+            <CircularProgress
+                colorVariant={args.colorVariant}
+                progressLevel={args.progressLevel}
+                width={args.width}
+            >
+                <ProgressContent>
+                    <div>{args.progressLevel}</div>
+                </ProgressContent>
+            </CircularProgress>
+        </div>
+    );
+};
+const CircularProgressTemplateWithContent = (args) => {
+    return (
+        <div style={{ margin: '16px', padding: '16px' }}>
+            <CircularProgress
+                colorVariant={args.colorVariant}
+                progressLevel={args.progressLevel}
+                width={args.width}
+            >
+                <ProgressContent>
+                    <div>{args.progressLevel}% Complete</div>
+                </ProgressContent>
+            </CircularProgress>
+        </div>
+    );
 };
 
 export const Primary = ProgressTemplate.bind({});
 export const CircularProgressVariant = CircularProgressTemplate.bind({});
+export const CircularProgressVariantWithContent = CircularProgressTemplateWithContent.bind({});
 
 Primary.args = {
     variations: [
@@ -95,29 +121,13 @@ Primary.args = {
 };
 
 CircularProgressVariant.args = {
-    variations: [
-        {
-            colorVariant: 'quaternary-gradient',
-            progressLevel: 40,
-            showPercentageIndicator: true,
-            size: 'sm',
-            variant: 'Small',
-            width: 'sm',
-        },
-        {
-            colorVariant: 'secondary-gradient',
-            progressLevel: 60,
-            showPercentageIndicator: true,
-            size: 'md',
-            variant: 'Medium',
-            width: 'md',
-        },
-        {
-            colorVariant: 'primary-gradient',
-            progressLevel: 80,
-            size: 'lg',
-            variant: 'Large, no percentage indicator',
-            width: 'lg',
-        },
-    ],
+    colorVariant: 'quaternary-gradient',
+    progressLevel: 40,
+    width: 'sm',
+};
+
+CircularProgressVariantWithContent.args = {
+    colorVariant: 'secondary-gradient',
+    progressLevel: 60,
+    width: 'md',
 };

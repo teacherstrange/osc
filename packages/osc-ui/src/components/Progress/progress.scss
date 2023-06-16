@@ -121,18 +121,6 @@
             inline-size: 50vmin;
             border-radius: 50%;
 
-            &--sm {
-                max-width: 65px;
-            }
-
-            &--md {
-                max-width: 150px;
-            }
-
-            &--lg {
-                max-width: 200px;
-            }
-
             &--primary-gradient {
                 background-image: var(--progress-conic-gradient-primary);
             }
@@ -150,12 +138,23 @@
             }
         }
 
-        &__progress-level {
+        &__progress-content {
             grid-area: 1/1;
             font-variant-numeric: tabular-nums;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
             &--sm {
                 font-size: $fs-xs;
+            }
+
+            &--md {
+                font-size: $fs-s;
+            }
+
+            &--lg {
+                font-size: $fs-l;
             }
         }
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import * as ProgressPrimitive from '@radix-ui/react-progress';
 import { classNames } from '../../utils/classNames';
 import './progress.scss';
@@ -52,6 +53,7 @@ export const Progress = (props: ProgressProps) => {
 
     return (
         <ProgressPrimitive.Root
+            aria-label="Progress Bar"
             className={classes}
             style={{ ['--thickness' as string]: `${THICKNESS[width]}px` }}
             value={progress}
@@ -68,6 +70,10 @@ export const Progress = (props: ProgressProps) => {
 
 interface CircularProgressProps {
     /**
+     * Inner content of the component
+     */
+    children?: ReactNode;
+    /**
      * Color for the progress indicator bar
      */
     colorVariant?:
@@ -80,39 +86,20 @@ interface CircularProgressProps {
      */
     progressLevel: number;
     /**
-     * Whether to show the percentage
-     */
-    showPercentageIndicator?: boolean;
-    /**
-     * Overall width of the progress bar
-     */
-    size?: 'sm' | 'md' | 'lg';
-    /**
      * Thickness of the progress indicator
      */
     width?: 'sm' | 'md' | 'lg';
 }
 
 export const CircularProgress = (props: CircularProgressProps) => {
-    const {
-        colorVariant = 'quaternary-gradient',
-        progressLevel,
-        showPercentageIndicator = false,
-        size = 'sm',
-        width = 'md',
-    } = props;
+    const { children, colorVariant = 'quaternary-gradient', progressLevel, width = 'md' } = props;
 
     const progressInDegrees = (progressLevel) => Math.round((360 / 100) * progressLevel);
 
     const [progress, setProgress] = useState<number>(progressInDegrees(progressLevel));
 
-    const sizeModifier = useModifier('c-progress-circular__inner', size);
     const colorModifier = useModifier('c-progress-circular__inner', colorVariant);
-    const circularInnerClasses = classNames(
-        'c-progress-circular__inner',
-        colorModifier,
-        sizeModifier
-    );
+    const circularInnerClasses = classNames('c-progress-circular__inner', colorModifier);
 
     useEffect(() => {
         if (progressLevel > 100) return;
@@ -137,6 +124,7 @@ export const CircularProgress = (props: CircularProgressProps) => {
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuetext={`${progressLevel}%`}
+            aria-label="Progress Bar"
         >
             <div
                 className={circularInnerClasses}
@@ -145,14 +133,26 @@ export const CircularProgress = (props: CircularProgressProps) => {
                     ['--thickness' as string]: `${THICKNESS[width]}px`,
                 }}
             ></div>
-
-            {showPercentageIndicator ? (
-                <span
-                    className={`c-progress-circular__progress-level c-progress-circular__progress-level--${size}`}
-                >
-                    {Math.round(progressLevel)} %
-                </span>
-            ) : null}
+            {children}
         </div>
     );
+};
+
+interface ProgressContentProps {
+    /**
+     * The content of the component
+     */
+    children?: ReactNode;
+    /**
+     * Optional class name
+     */
+    className?: string;
+}
+
+export const ProgressContent = (props: ProgressContentProps) => {
+    const { children, className } = props;
+
+    const classes = classNames('c-progress-circular__progress-content', className);
+
+    return <div className={classes}>{children}</div>;
 };
