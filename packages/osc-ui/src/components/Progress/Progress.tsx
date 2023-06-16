@@ -13,7 +13,7 @@ export interface ProgressProps {
     /**
      * Color for the progress indicator bar
      */
-    colorVariant: 'primary' | 'quaternary' | 'primary-gradient' | 'quaternary-gradient';
+    colorVariant?: 'primary' | 'quaternary' | 'primary-gradient' | 'quaternary-gradient';
     /**
      * The level of progress - must be between 0 and 100
      */
