@@ -194,6 +194,7 @@ model UserPreference {
   userId       Int
   preferenceId Int
   value        String    @db.VarChar(255)
+  valueJson    Json
   createdAt    DateTime  @default(now())
   updatedAt    DateTime? @updatedAt
 
@@ -456,9 +457,11 @@ model Permission {
 }
 
 model Preference {
-  id    Int    @id @default(autoincrement())
-  key   String @unique @db.VarChar(32)
-  title String @db.VarChar(64)
+  id          Int    @id @default(autoincrement())
+  key         String @unique @db.VarChar(32)
+  title       String @db.VarChar(64)
+  default     String @db.VarChar(255)
+  defaultJson Json
 
   UserPreference UserPreference[] @relation("userPreferenceDetails")
 

@@ -1,3 +1,6 @@
-export type getUnassignedStudentsArgs = {
-    readonly limit: number;
+export type getUserPreferenceArgs = {
+    readonly key: string;
+};
+export type getUserPreferenceByIdArgs = {
+    readonly id: number;
 };

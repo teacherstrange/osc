@@ -1,8 +1,17 @@
-import type { CourseStudent, User } from '@prisma/client';
+import type { Preference, UserPreference } from '@prisma/client';
 
-type UnassignedStudentsReturn = (CourseStudent & {
-    profile: User & {
-        studying: CourseStudent[];
-    };
-})[];
-export type GetUnassignedStudents = (limit: number) => Promise<UnassignedStudentsReturn>;
+export type userPreferenceFinal = UserPreference & {
+    details: Preference;
+};
+
+export type GetAllPreferencesFn = (userId: number) => Promise<userPreferenceFinal[]>;
+
+export type GetSpecificByKeyFn = (
+    userId: number,
+    key: string
+) => Promise<Error | userPreferenceFinal | null>;
+
+export type GetSpecificByIdFn = (
+    userId: number,
+    preferenceId: number
+) => Promise<userPreferenceFinal | null>;
