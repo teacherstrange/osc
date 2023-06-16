@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { render } from 'test-utils';
@@ -47,4 +48,24 @@ test('should not render a Load More button if numberLoaded is equal to the total
         />
     );
     expect(screen.queryByRole('button', { name: 'Load more' })).not.toBeInTheDocument();
+});
+
+test('should call onPaginate function when the button is clicked', async () => {
+    const user = userEvent.setup();
+
+    const mockOnPaginateFunction = vi.fn();
+
+    render(
+        <Pagination
+            itemTypeDescription={ITEM_TYPE_DESCRIPTION}
+            numberLoaded={NUMBER_LOADED}
+            onPaginate={mockOnPaginateFunction}
+            total={TOTAL}
+        />
+    );
+
+    const button = screen.getByRole('button', { name: 'Load more' });
+    await user.click(button);
+
+    expect(mockOnPaginateFunction).toHaveBeenCalledTimes(1);
 });
