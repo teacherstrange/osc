@@ -58,7 +58,7 @@ export const Pagination = (props: PaginationProps) => {
                 total={total}
                 itemTypeDescription={itemTypeDescription}
             />
-            <Progress progressLevel={progressLevel} />
+            <Progress progressLevel={progressLevel} className="u-mt-m u-mb-m" />
             {total !== numberLoaded ? (
                 <Button
                     variant="secondary"
@@ -84,12 +84,9 @@ const ProgressDetails = (props: ProgressDetailsProps) => {
 
     return (
         <div className="c-pagination__progress-details">
-            <span> You've viewed </span>
-            {''}
             <span>
-                {numberLoaded} of {total}
-            </span>{' '}
-            <span>{itemTypeDescription}</span>
+                You've viewed {numberLoaded} of {total} {itemTypeDescription}
+            </span>
         </div>
     );
 };
