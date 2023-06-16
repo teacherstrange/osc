@@ -17,6 +17,8 @@
 
 $padding: calc($space-5xl + 4px); /* [1] */
 $padding-s: $space-l;
+$container-width-6xs: #{$container-6xs}px;
+$container-width-5xs: #{$container-5xs}px;
 $container-width-4xs: #{$container-4xs}px;
 $container-width-3xs: #{$container-3xs}px;
 $container-width-2xs: #{$container-2xs}px;
@@ -53,6 +55,14 @@ $container-width-l: #{$container-l}px;
 
     &--pull-l {
         padding-inline-start: 0;
+    }
+
+    &--6xs {
+        width: min(100%, $container-width-6xs);
+    }
+
+    &--5xs {
+        width: min(100%, $container-width-5xs);
     }
 
     &--4xs {
