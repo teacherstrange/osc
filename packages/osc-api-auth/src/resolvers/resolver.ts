@@ -33,8 +33,8 @@ export const resolvers = {
         },
     },
     Mutation: {
-        createUser: async (_: undefined, { input }: createUserArgs) => {
-            return account.create(input);
+        createUser: async (_: undefined, { input }: createUserArgs, { user }: AuthContext) => {
+            return account.create(input, user!.id);
         },
         login: async (_: undefined, { input }: loginArgs) => {
             return account.login(input);

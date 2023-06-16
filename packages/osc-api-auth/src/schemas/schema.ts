@@ -136,7 +136,7 @@ export const typeDefs = gql`
         lastName: String! @constraint(maxLength: 128)
         email: String! @constraint(format: "email", maxLength: 255)
         orgId: Int!
-        roleId: Int!
+        roles: [Int]
         createdBy: Int!
         extraPermissions: [Int]
         ### Minimum 12 characters for password - length creates greater security than extended charsets or set patterns

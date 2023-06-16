@@ -11,7 +11,7 @@ import type {
 } from './arguments';
 import type { PermissionsProps } from './interfaces';
 
-export type CreateUserFn = (input: createUserInput) => Promise<User | Error>;
+export type CreateUserFn = (input: createUserInput, userId: number) => Promise<User | Error>;
 export type GetUserFn = (userId: number) => Promise<User | null>;
 export type GetMultipleUsersFn = (args: getUsersArgs) => Promise<User[]>;
 export type GetAllPermissionsFn = (args: getPermissionsArgs) => Promise<Permission[] | null>;

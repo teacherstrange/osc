@@ -352,7 +352,7 @@ export const passwordReset: PasswordResetFn = async (input) => {
     return update;
 };
 
-export const create: CreateUserFn = async (input) => {
+export const create: CreateUserFn = async (input, userId) => {
     // Check for existing user, all enpx primails must be unique
     const existingUser = await getUserByEmail(input.email);
     // If user already exists, throw error
@@ -374,6 +374,7 @@ export const create: CreateUserFn = async (input) => {
             lastName: input.lastName,
             email: input.email,
             password: hashedPassword,
+            createdBy: userId,
         },
     });
     // Link User to organisation
@@ -386,13 +387,13 @@ export const create: CreateUserFn = async (input) => {
     for (var i = 0; i < input.roles.length; i++) {
         // Check role request
         const role = getRoleById(input.roles[i]);
-        if (role == null) {
+        if (role != null) {
             // Create User Role
             await prisma.userRole.create({
                 data: {
                     roleId: input.roles[i],
                     userId: user.id,
-                    createdBy: input.createdBy,
+                    createdBy: userId,
                 },
             });
         }
@@ -403,7 +404,7 @@ export const create: CreateUserFn = async (input) => {
             data: {
                 userId: user.id,
                 permissionId: input.extraPermissions[i],
-                createdBy: input.createdBy,
+                createdBy: userId,
             },
         });
     }

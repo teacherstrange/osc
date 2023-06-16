@@ -35,7 +35,6 @@ export type createUserInput = {
     readonly firstName: string;
     readonly lastName: string;
     readonly password: string;
-    readonly createdBy: number;
     readonly extraPermissions: number[];
 };
 

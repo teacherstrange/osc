@@ -20,6 +20,9 @@ model User {
   updatedAt   DateTime? @updatedAt
   lastLogin   DateTime?
   lockedUntil DateTime?
+  createdBy   Int?
+
+  userCreator User? @relation("userCreator", fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   avatar                 UserAvatar?             @relation("userAvatar")
   registrationTokens     UserRegistrationToken[] @relation("userRegistrationTokens")
@@ -39,7 +42,9 @@ model User {
   userRefreshToken       UserRefreshToken[]      @relation("userRefreshTokens")
   assignments            AssignmentSubmission[]  @relation("studentDetails")
   courseInterest         UserCourseInterest[]    @relation("userCourseInterest")
+  User                   User[]                  @relation("userCreator")
 
+  @@index([createdBy])
   @@map("users")
 }
 
