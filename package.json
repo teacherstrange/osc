@@ -48,6 +48,7 @@
     "api:dev:osc-api-admin": "npx nx run osc-api-admin:dev",
     "api:dev:osc-api-lms": "npx nx run osc-api-lms:dev",
     "api:dev:osc-api-assignments": "npx nx run osc-api-assignments:dev",
+    "api:dev:osc-api-settings": "npx nx run osc-api-settings:dev",
     "api:dev:osc-api-gateway": "npx nx run osc-api-gateway:dev",
     "tokens:generate": "npx nx run osc-design-tokens:generate",
     "copy-fonts:from-ui": "npx nx run-many --target=copy-fonts:from-ui --projects=osc-academic-hub,osc-ecommerce",
