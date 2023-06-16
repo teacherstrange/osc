@@ -135,7 +135,7 @@ export const typeDefs = gql`
         firstName: String! @constraint(maxLength: 128)
         lastName: String! @constraint(maxLength: 128)
         email: String! @constraint(format: "email", maxLength: 255)
-        orgId: Int
+        orgId: Int!
         roleId: Int!
         createdBy: Int!
         extraPermissions: [Int]

@@ -353,21 +353,20 @@ export const passwordReset: PasswordResetFn = async (input) => {
 };
 
 export const create: CreateUserFn = async (input) => {
-    // Check for existing user, all emails must be unique
+    // Check for existing user, all enpx primails must be unique
     const existingUser = await getUserByEmail(input.email);
-
     // If user already exists, throw error
     if (existingUser) {
         return new Error('An account already exists for the specified email.');
     }
-    // Check role request
-    const role = getRoleById(input.roleId);
-    if (!role) {
-        return new Error('No active role selected');
+    // Validate the data - org and roles
+    // Check organisation exists
+    const org = getOrgById(input.orgId);
+    if (!org) {
+        return new Error('This organisation does not exist');
     }
-    // Hash password
-    const hashedPassword = await password.hash(input.password);
 
+    const hashedPassword = await password.hash(input.password);
     // Create user record
     const user = await prisma.user.create({
         data: {
@@ -377,35 +376,34 @@ export const create: CreateUserFn = async (input) => {
             password: hashedPassword,
         },
     });
-    // Create User Role
-    await prisma.userRole.create({
+    // Link User to organisation
+    await prisma.userOrganisation.create({
         data: {
-            roleId: input.roleId,
             userId: user.id,
-            createdBy: input.createdBy,
+            organisationId: input.orgId,
         },
     });
+    for (var i = 0; i < input.roles.length; i++) {
+        // Check role request
+        const role = getRoleById(input.roles[i]);
+        if (role == null) {
+            // Create User Role
+            await prisma.userRole.create({
+                data: {
+                    roleId: input.roles[i],
+                    userId: user.id,
+                    createdBy: input.createdBy,
+                },
+            });
+        }
+    }
     // Loop through extra permissions
-    for (var i = 0; i < input.extraPermissions.length; i++) {
+    for (var j = 0; j < input.extraPermissions.length; j++) {
         await prisma.extraPermission.create({
             data: {
                 userId: user.id,
                 permissionId: input.extraPermissions[i],
                 createdBy: input.createdBy,
-            },
-        });
-    }
-    if (input.orgId) {
-        // Check organisation exists
-        const org = getOrgById(input.orgId);
-        if (!org) {
-            return new Error('This organisation does not exist');
-        }
-        // Link User to organisation
-        await prisma.userOrganisation.create({
-            data: {
-                userId: user.id,
-                organisationId: input.orgId,
             },
         });
     }

@@ -30,8 +30,8 @@ export type completeRegistrationArgs = {
 
 export type createUserInput = {
     readonly email: string;
-    readonly orgId?: number;
-    readonly roleId: number;
+    readonly orgId: number;
+    readonly roles: number[];
     readonly firstName: string;
     readonly lastName: string;
     readonly password: string;
