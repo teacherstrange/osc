@@ -152,10 +152,6 @@ export const typeDefs = gql`
         course: [Int]
     }
 
-    input markUserAsIVInput {
-        userId: Int!
-        createdBy: Int!
-    }
     input socialLoginCreateInput {
         userId: Int!
         name: String!
@@ -171,7 +167,7 @@ export const typeDefs = gql`
         requestResetPassword(email: String!): Boolean!
         completeResetPassword(input: passwordResetInput!): User
         createTutor(input: createTutorInput): User
-        markUserAsIV(input: markUserAsIVInput): UserRole
+        markUserAsIV(userId: Int!): UserRole
         socialLogin(ssoId: String!): AuthTokens
         socialLoginCreate(input: socialLoginCreateInput): Boolean
     }

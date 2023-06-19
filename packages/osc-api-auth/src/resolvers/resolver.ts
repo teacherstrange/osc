@@ -63,8 +63,8 @@ export const resolvers = {
         completeResetPassword: async (_: undefined, { input }: completeResetPasswordArgs) => {
             return account.passwordReset(input);
         },
-        createTutor: async (_: undefined, { input }: createTutorArgs) => {
-            return account.createTutor(input);
+        createTutor: async (_: undefined, { input }: createTutorArgs, { user }: AuthContext) => {
+            return account.createTutor(input, user!.id);
         },
         validateTutor: async (_: undefined, { magicKeyToken }: magicKeyArgs) => {
             return account.validateTutor(magicKeyToken);
@@ -72,8 +72,8 @@ export const resolvers = {
         completeTutorCreate: async (_: undefined, { input }: completeTutorArgs) => {
             return account.completeTutorCreate(input);
         },
-        markUserAsIV: async (_: undefined, { input }: markUserAsIVArgs) => {
-            return account.markAsIV(input);
+        markUserAsIV: async (_: undefined, { userId }: markUserAsIVArgs, { user }: AuthContext) => {
+            return account.markAsIV(userId, user!.id);
         },
         socialLogin: async (_: undefined, { ssoId }: socialLoginArgs) => {
             return social.loginUserSocial(ssoId);

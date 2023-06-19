@@ -10,7 +10,6 @@ import type {
     getPermissionsArgs,
     createTutorInput,
     completeTutorCreate,
-    markAsIVInput,
     createUserSocialInput,
 } from './arguments';
 import type { PermissionsProps } from './interfaces';
@@ -23,8 +22,8 @@ export type CreateUserSetupFn = (input: createUserSetupInput) => Promise<User | 
 export type assignRoleFn = (userId: number, roleId: number) => Promise<UserRole | Error>;
 export type CompleteRegistrationFn = (input: completeRegistration) => Promise<User | Error>;
 
-export type CreateTutorFn = (input: createTutorInput) => Promise<User | Error>;
-export type MarkAsIVFn = (input: markAsIVInput) => Promise<UserRole | Error>;
+export type CreateTutorFn = (input: createTutorInput, createdBy: number) => Promise<User | Error>;
+export type MarkAsIVFn = (userId: number, createdBy: number) => Promise<UserRole | Error>;
 export type CreateTutorCompleteFn = (input: completeTutorCreate) => Promise<User | Error>;
 export type ValidateTutorFn = (
     magicKey: string

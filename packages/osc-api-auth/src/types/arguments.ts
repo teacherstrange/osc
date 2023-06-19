@@ -107,13 +107,8 @@ export type completeTutorArgs = {
     readonly input: completeTutorCreate;
 };
 
-export type markAsIVInput = {
-    readonly userId: number;
-    readonly createdBy: number;
-};
-
 export type markUserAsIVArgs = {
-    readonly input: markAsIVInput;
+    readonly userId: number;
 };
 
 export type createUserSocialInput = {

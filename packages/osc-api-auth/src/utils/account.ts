@@ -420,21 +420,22 @@ export const getAllUserPermissions: GetAllPermissionsFn = async () => {
     return await getAllPermissions();
 };
 
-export const markAsIV: MarkAsIVFn = async (input) => {
+export const markAsIV: MarkAsIVFn = async (userId, createdBy) => {
+    // Checks for IV role
     const ivRole = await getRoleByTitle('IV');
     if (!ivRole) {
         return new Error('Unable to find IV role');
     }
     return await prisma.userRole.create({
         data: {
-            userId: input.userId,
+            userId: userId,
             roleId: ivRole.id,
-            createdBy: input.createdBy,
+            createdBy: createdBy,
         },
     });
 };
 
-export const createTutor: CreateTutorFn = async (input) => {
+export const createTutor: CreateTutorFn = async (input, createdBy) => {
     // Check for existing user, all emails must be unique
     const existingUser = await getUserByEmail(input.email);
 
@@ -452,8 +453,7 @@ export const createTutor: CreateTutorFn = async (input) => {
         },
     });
     if (input.IVUser == true) {
-        const ivData = { userId: user.id, createdBy: input.createdBy };
-        await markAsIV(ivData);
+        await markAsIV(user.id, createdBy);
     }
 
     //Assign tutor user role
@@ -465,7 +465,7 @@ export const createTutor: CreateTutorFn = async (input) => {
         data: {
             userId: user.id,
             roleId: tutorRole.id,
-            createdBy: input.createdBy,
+            createdBy: createdBy,
         },
     });
 
@@ -476,7 +476,7 @@ export const createTutor: CreateTutorFn = async (input) => {
             data: {
                 tutorId: user.id,
                 courseId: input.course[i],
-                createdBy: input.createdBy,
+                createdBy: createdBy,
                 iv: input.IV[i],
             },
         });
