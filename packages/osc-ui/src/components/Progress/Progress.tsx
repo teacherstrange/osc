@@ -86,19 +86,31 @@ interface CircularProgressProps {
      */
     progressLevel: number;
     /**
+     * Overall width of the progress circle
+     */
+    size?: 'sm' | 'md' | 'lg';
+    /**
      * Thickness of the progress indicator
      */
     width?: 'sm' | 'md' | 'lg';
 }
 
 export const CircularProgress = (props: CircularProgressProps) => {
-    const { children, colorVariant = 'quaternary-gradient', progressLevel, width = 'md' } = props;
+    const {
+        children,
+        colorVariant = 'quaternary-gradient',
+        progressLevel,
+        size = 'sm',
+        width = 'md',
+    } = props;
 
     const progressInDegrees = (progressLevel) => Math.round((360 / 100) * progressLevel);
 
     const [progress, setProgress] = useState<number>(progressInDegrees(progressLevel));
 
+    const sizeModifier = useModifier('c-progress-circular', size);
     const colorModifier = useModifier('c-progress-circular__inner', colorVariant);
+    const circularClasses = classNames('c-progress-circular', sizeModifier);
     const circularInnerClasses = classNames('c-progress-circular__inner', colorModifier);
 
     useEffect(() => {
@@ -118,7 +130,7 @@ export const CircularProgress = (props: CircularProgressProps) => {
 
     return (
         <div
-            className="c-progress-circular"
+            className={circularClasses}
             role="progressbar"
             aria-valuenow={progressLevel}
             aria-valuemin={0}

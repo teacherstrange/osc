@@ -52,7 +52,7 @@ const ProgressTemplate = ({ variations }) => {
 
 const CircularProgressTemplate = (args) => {
     return (
-        <div style={{ margin: '16px', padding: '16px', width: '50px' }}>
+        <div style={{ margin: '16px', padding: '16px' }}>
             <CircularProgress
                 colorVariant={args.colorVariant}
                 progressLevel={args.progressLevel}
@@ -71,10 +71,15 @@ const CircularProgressTemplateWithContent = (args) => {
             <CircularProgress
                 colorVariant={args.colorVariant}
                 progressLevel={args.progressLevel}
+                size={args.size}
                 width={args.width}
             >
                 <ProgressContent>
-                    <div>{args.progressLevel}% Complete</div>
+                    <div className="u-text-bold t-font-m">{args.progressLevel}% Complete</div>
+                    <div className="t-font-s u-color-neutral-600">out of</div>
+                    <div className="t-font-m u-color-neutral-600">
+                        {args.weeklyHours} hours/week
+                    </div>
                 </ProgressContent>
             </CircularProgress>
         </div>
@@ -129,5 +134,7 @@ CircularProgressVariant.args = {
 CircularProgressVariantWithContent.args = {
     colorVariant: 'secondary-gradient',
     progressLevel: 60,
-    width: 'md',
+    weeklyHours: 37,
+    size: 'lg',
+    width: 'lg',
 };
