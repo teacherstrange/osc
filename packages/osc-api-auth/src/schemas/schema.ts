@@ -39,6 +39,13 @@ export const typeDefs = gql`
         details: Role
     }
 
+    type CourseTutor {
+        id: Int!
+        courseId: Int!
+        tutorId: Int!
+        iv: Boolean
+    }
+
     type Role {
         id: Int!
         title: String
@@ -156,6 +163,7 @@ export const typeDefs = gql`
         name: String!
         ssoId: String!
     }
+
     type Mutation {
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
@@ -169,5 +177,7 @@ export const typeDefs = gql`
         markUserAsIV(userId: Int!): UserRole
         socialLogin(ssoId: String!): AuthTokens
         socialLoginCreate(input: socialLoginCreateInput): Boolean
+        validateTutor(magicKeyToken: String!): [CourseTutor]
+        completeTutorCreate(input: completeRegistration!): User
     }
 `;
