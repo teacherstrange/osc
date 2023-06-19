@@ -353,7 +353,7 @@ export const passwordReset: PasswordResetFn = async (input) => {
 };
 
 export const create: CreateUserFn = async (input, userId) => {
-    // Check for existing user, all enpx primails must be unique
+    // Check for existing user, all emails must be unique
     const existingUser = await getUserByEmail(input.email);
     // If user already exists, throw error
     if (existingUser) {
