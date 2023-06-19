@@ -112,12 +112,11 @@
             grid-area: 1/1;
 
             /* hides the inner part of the conic gradient */
-            mask:
-                radial-gradient(
-                    circle,
-                    #0000 var(--progress-inner),
-                    #000 var(--progress-outer)
-                );
+            -webkit-mask: radial-gradient(
+                circle,
+                #0000 var(--progress-inner),
+                #000 var(--progress-outer)
+            );
             mask: radial-gradient(circle, #0000 var(--progress-inner), #000 var(--progress-outer));
             aspect-ratio: 1;
             inline-size: 50vmin;
