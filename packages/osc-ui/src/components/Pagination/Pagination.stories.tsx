@@ -35,6 +35,7 @@ const PaginationTemplate: Story<PaginationProps> = (args) => {
     return (
         <div style={{ width: '300px' }}>
             <Pagination
+                colorVariant={args.colorVariant}
                 isLoading={args.isLoading}
                 numberLoaded={args.numberLoaded}
                 total={args.total}
@@ -48,12 +49,13 @@ export const Primary = PaginationTemplate.bind({});
 export const IsLoading = PaginationTemplate.bind({});
 
 Primary.args = {
-    numberLoaded: 10,
+    numberLoaded: 20,
     total: 30,
     itemTypeDescription: 'blog posts',
 };
 IsLoading.args = {
-    numberLoaded: 10,
+    colorVariant: 'quaternary-gradient',
+    numberLoaded: 25,
     total: 30,
     itemTypeDescription: 'courses',
     isLoading: true,

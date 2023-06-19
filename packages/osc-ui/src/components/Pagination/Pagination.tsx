@@ -10,6 +10,10 @@ export interface PaginationProps {
      */
     className?: string;
     /**
+     * Color for the progress indicator bar
+     */
+    colorVariant?: 'primary' | 'quaternary' | 'primary-gradient' | 'quaternary-gradient';
+    /**
      * Determines whether more items are being loaded
      */
     isLoading?: boolean;
@@ -34,6 +38,7 @@ export interface PaginationProps {
 export const Pagination = (props: PaginationProps) => {
     const {
         className,
+        colorVariant,
         isLoading = false,
         itemTypeDescription,
         numberLoaded,
@@ -59,7 +64,7 @@ export const Pagination = (props: PaginationProps) => {
                 itemTypeDescription={itemTypeDescription}
             />
             <div className="u-mt-m u-mb-m u-w-full">
-                <Progress progressLevel={progressLevel} width="sm" />
+                <Progress colorVariant={colorVariant} progressLevel={progressLevel} width="sm" />
             </div>
             {total !== numberLoaded ? (
                 <Button
