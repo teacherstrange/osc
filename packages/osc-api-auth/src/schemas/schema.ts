@@ -148,7 +148,6 @@ export const typeDefs = gql`
         email: String! @constraint(format: email)
         firstName: String!
         lastName: String!
-        createdBy: Int!
         course: [Int]
     }
 
