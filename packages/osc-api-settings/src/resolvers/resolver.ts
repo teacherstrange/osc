@@ -1,13 +1,24 @@
+import type { Preference } from '@prisma/client';
 import type {
+    getPreferenceArgs,
+    getPreferenceByKeyArgs,
     getUserPreferenceByIdArgs,
     getUserPreferenceArgs as getUserPreferenceByKeyArgs,
+    savePreferenceArgs,
+    savePreferenceByKeyArgs,
 } from '~/types/arguments';
-import type { getAllPreferencesReturn } from '~/types/functions';
+import type { userPreferenceFinal } from '~/types/functions';
 import type { SettingsContext } from '~/types/interfaces';
 import * as preferences from '~/utils/preferences';
 
 export const resolvers = {
     Query: {
+        preference: async (_: undefined, { id }: getPreferenceArgs) => {
+            return await preferences.getDetails(id);
+        },
+        preferenceByKey: async (_: undefined, { key }: getPreferenceByKeyArgs) => {
+            return await preferences.getDetailsByKey(key);
+        },
         userPreferences: async (_: undefined, __: undefined, { user }: SettingsContext) => {
             return await preferences.getAll(user.id);
         },
@@ -16,30 +27,42 @@ export const resolvers = {
             { key }: getUserPreferenceByKeyArgs,
             { user }: SettingsContext
         ) => {
-            return await preferences.getSpecificByKey(user.id, key);
+            return await preferences.getByKey(user.id, key);
         },
-        userPreferenceByIdy: async (
+        userPreference: async (
             _: undefined,
             { id }: getUserPreferenceByIdArgs,
             { user }: SettingsContext
         ) => {
-            return await preferences.getSpecificById(user.id, id);
+            return await preferences.get(user.id, id);
+        },
+    },
+    UserPreference: {
+        // Stringify JSON value
+        valueJson: async (preference: userPreferenceFinal) => {
+            return preference.valueJson ? JSON.stringify(preference.valueJson) : '';
         },
     },
     Preference: {
-        // Overriding default in the case of JSON data
-        value: async (preference: getAllPreferencesReturn) => {
-            // Allowing for JSON formatted data here
-            // This will allow for flexibility to store widget data for dashboards
-            return preference.valueJson ? JSON.stringify(preference.valueJson) : preference.value;
-        },
-        default: async (preference: getAllPreferencesReturn) => {
-            // Allowing for JSON formatted data here
-            // This will allow for flexibility to store widget data for dashboards
-            return preference.details.defaultJson
-                ? JSON.stringify(preference.details.defaultJson)
-                : preference.details.default;
+        // Stringify JSON value
+        defaultJson: async (preference: Preference) => {
+            return preference.defaultJson ? JSON.stringify(preference.defaultJson) : '';
         },
     },
-    Mutation: {},
+    Mutation: {
+        savePreference: async (
+            _: undefined,
+            { input }: savePreferenceArgs,
+            { user }: SettingsContext
+        ) => {
+            return await preferences.save(user.id, input.preferenceId, input.value);
+        },
+        savePreferenceByKey: async (
+            _: undefined,
+            { input }: savePreferenceByKeyArgs,
+            { user }: SettingsContext
+        ) => {
+            return await preferences.saveByKey(user.id, input.key, input.value);
+        },
+    },
 };
