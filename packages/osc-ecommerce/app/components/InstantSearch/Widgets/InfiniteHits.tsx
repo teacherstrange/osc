@@ -54,7 +54,7 @@ export const InfiniteHits = (props: InfiniteHitProps) => {
                     numberLoaded={hits.length}
                     onPaginate={onPaginateHandler}
                     isLoading={isLoading}
-                    className="o-grid o-grid__col--12 o-container o-container--6xs u-pt-4xl u-pb-3xl"
+                    className="o-grid__col--12 o-container o-container--flush o-container--6xs u-pt-4xl u-pb-3xl"
                 />
             ) : null}
         </div>
