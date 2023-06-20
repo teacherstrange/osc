@@ -155,6 +155,18 @@ export const typeDefs = gql`
         password: String! @constraint(minLength: 12)
     }
 
+    input courseAccept {
+        courseId: Int!
+        accept: Boolean!
+    }
+
+    input completeTutorCreate {
+        email: String! @constraint(format: "email", maxLength: 255)
+        password: String!
+        magicKey: String!
+        courses: [courseAccept]
+    }
+
     input createTutorInput {
         email: String! @constraint(format: email)
         firstName: String!
@@ -183,6 +195,6 @@ export const typeDefs = gql`
         socialLogin(ssoId: String!): AuthTokens
         socialLoginCreate(input: socialLoginCreateInput): Boolean
         validateTutor(magicKeyToken: String!): [CourseTutor]
-        completeTutorCreate(input: completeRegistration!): User
+        completeTutorCreate(input: completeTutorCreate!): User
     }
 `;

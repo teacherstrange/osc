@@ -100,11 +100,16 @@ export type createTutorArgs = {
     readonly input: createTutorInput;
 };
 
+export type courseAccept = {
+    readonly courseId: number;
+    readonly accept: boolean;
+};
+
 export type completeTutorCreate = {
     readonly email: string;
     readonly password: string;
     readonly magicKey: string;
-    readonly courses: [number, boolean][];
+    readonly courses: [courseAccept];
 };
 export type completeTutorArgs = {
     readonly input: completeTutorCreate;

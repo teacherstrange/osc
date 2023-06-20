@@ -469,8 +469,6 @@ export const createTutor: CreateTutorFn = async (input, createdBy) => {
         },
     });
 
-    // To Do: Validate course id / created by
-    // To Do: If user not an IV don't add the iv field
     for (var i = 0; i < input.course.length; i++) {
         await prisma.courseTutor.create({
             data: {
@@ -508,11 +506,11 @@ export const completeTutorCreate: CreateTutorCompleteFn = async (input) => {
     const user = await getUserByEmail(input.email);
     if (user) {
         for (var i = 0; i < input.courses.length; i++) {
-            if (input.courses[i][1] == false) {
+            if (input.courses[i].accept == false) {
                 // Delete record
                 prisma.courseTutor.deleteMany({
                     where: {
-                        courseId: input.courses[i][0],
+                        courseId: input.courses[i].courseId,
                         tutorId: user.id,
                     },
                 });
