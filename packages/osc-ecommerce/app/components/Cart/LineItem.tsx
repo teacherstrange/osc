@@ -43,8 +43,6 @@ const CartLineItemPrice = (props: CartLineItemPriceProps) => {
 
     if (!line?.cost?.amountPerQuantity || !line?.cost?.totalAmount) return null;
 
-    console.log(line);
-
     const { amountPerQuantity, totalAmount } = line?.cost;
 
     const isOnSale =

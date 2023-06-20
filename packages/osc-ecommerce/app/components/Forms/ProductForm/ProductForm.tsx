@@ -161,7 +161,6 @@ export const ProductForm = forwardRef<ElementRef<'div'>, ProductFormProps>(
                 <ButtonGroup direction="column">
                     {!isOutOfStock ? (
                         <AddToCart
-                            isDisabled={transitionIsNotIdle}
                             lines={[
                                 {
                                     merchandiseId: selectedVariant.id,

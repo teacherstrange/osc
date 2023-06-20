@@ -15,7 +15,7 @@ describe('default button', () => {
         };
 
         return (
-            <Button onClick={handleClick} isLoading={loading}>
+            <Button onClick={handleClick} isLoading={loading} loadingText="Loading">
                 Click me
             </Button>
         );

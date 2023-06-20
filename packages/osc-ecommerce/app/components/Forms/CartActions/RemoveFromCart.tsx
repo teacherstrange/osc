@@ -19,7 +19,13 @@ export const RemoveFromCart = (props: RemoveFromCartProps) => {
             <input type="hidden" name="cartAction" value={CartAction.REMOVE_FROM_CART} />
             <input type="hidden" name="linesIds" value={JSON.stringify(lineIds)} />
 
-            <Button variant="quaternary" isDisabled={isPending} className="u-text-underline">
+            <Button
+                variant="quaternary"
+                isDisabled={isPending}
+                isLoading={isPending}
+                loadingText="Remove"
+                className="u-text-underline"
+            >
                 Remove
             </Button>
         </fetcher.Form>
