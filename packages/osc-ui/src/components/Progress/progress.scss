@@ -112,6 +112,7 @@
             grid-area: 1/1;
 
             /* hides the inner part of the conic gradient */
+            /* stylelint-disable-next-line property-no-vendor-prefix, declaration-colon-newline-after */
             -webkit-mask: radial-gradient(
                 circle,
                 #0000 var(--progress-inner),
@@ -119,7 +120,6 @@
             );
             mask: radial-gradient(circle, #0000 var(--progress-inner), #000 var(--progress-outer));
             aspect-ratio: 1;
-            inline-size: 50vmin;
 
             &--primary-gradient {
                 background-image: var(--progress-conic-gradient-primary);
