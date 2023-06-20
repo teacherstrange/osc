@@ -156,6 +156,8 @@ export const typeDefs = gql`
         firstName: String!
         lastName: String!
         course: [Int]
+        IV: [Boolean]
+        IVUser: Boolean!
     }
 
     input socialLoginCreateInput {
