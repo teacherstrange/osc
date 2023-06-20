@@ -132,6 +132,10 @@ export const typeDefs = gql`
         email: String! @constraint(format: email)
         password: String!
     }
+    input tutorCourseInput {
+        courseId: Int!
+        iv: Boolean
+    }
 
     input passwordResetInput {
         magicKeyToken: String!
@@ -155,8 +159,7 @@ export const typeDefs = gql`
         email: String! @constraint(format: email)
         firstName: String!
         lastName: String!
-        course: [Int]
-        IV: [Boolean]
+        course: [tutorCourseInput]
         IVUser: Boolean!
     }
 

@@ -83,12 +83,16 @@ export type completeResetPasswordArgs = {
     readonly input: passwordResetInput;
 };
 
+export type tutorCourseInput = {
+    readonly courseId: number;
+    readonly iv: boolean;
+};
+
 export type createTutorInput = {
     readonly email: string;
     readonly firstName: string;
     readonly lastName: string;
-    readonly course: number[];
-    readonly IV: boolean[];
+    readonly course: [tutorCourseInput];
     readonly IVUser: boolean;
 };
 

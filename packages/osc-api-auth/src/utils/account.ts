@@ -475,9 +475,9 @@ export const createTutor: CreateTutorFn = async (input, createdBy) => {
         await prisma.courseTutor.create({
             data: {
                 tutorId: user.id,
-                courseId: input.course[i],
+                courseId: input.course[i].courseId,
                 createdBy: createdBy,
-                iv: input.IV[i],
+                iv: input.course[i].iv,
             },
         });
     }
