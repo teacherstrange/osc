@@ -1,3 +1,21 @@
+## [0.115.0](https://github.com/Open-Study-College/osc/compare/v0.114.0...v0.115.0) (2023-06-21)
+
+
+### ✨ Features
+
+* add Pagination component, stories, tests and styling ([740a96e](https://github.com/Open-Study-College/osc/commit/740a96e9d3ebe93d00e8f6bcf7f9850ef3285a88))
+
+
+### ♻️ Refactors
+
+* add colorVariant prop and update story ([a80270c](https://github.com/Open-Study-College/osc/commit/a80270c85c3cb1aa9137b558a3e11b463caf777a))
+* add spacing for the Progress bar ([61e20b1](https://github.com/Open-Study-College/osc/commit/61e20b172ac9f2461256efc00b6d63ca52cee6c1))
+* add test for onPaginate prop ([7a5edf1](https://github.com/Open-Study-College/osc/commit/7a5edf1e95ffbc89d7eea9f367f29b4cf787f16f))
+* add width to Progress component and a container for spacing ([bbf7912](https://github.com/Open-Study-College/osc/commit/bbf79120a9d4595ed734bc8a55d3d891ae2f1bbc))
+* adjustments to pagination styling ([a1f3cd8](https://github.com/Open-Study-College/osc/commit/a1f3cd84dd14925afee64175d408c5d54c478a4c))
+* update button to tertiary and remove button specific styling ([4ea2afb](https://github.com/Open-Study-College/osc/commit/4ea2afb8e2ab8f03e8c141577b1caa2dd4098232))
+* update package-lock file ([ebf0fc4](https://github.com/Open-Study-College/osc/commit/ebf0fc42bc6a228e836da69a7f1729db5b22d4aa))
+
 ## [0.114.0](https://github.com/Open-Study-College/osc/compare/v0.113.0...v0.114.0) (2023-06-21)
 
 
@@ -80,11 +98,4 @@
 * **studio:** update colour picker value to render value ([8461814](https://github.com/Open-Study-College/osc/commit/84618145e9b03fa785fab9de816e38eebd0a4cd8))
 * **studio:** update constants file to use typescript ([a4852a4](https://github.com/Open-Study-College/osc/commit/a4852a4a02a3c6051094b0b97116995f59266a7e))
 * **studio:** update gradient pretty names ([9d7315f](https://github.com/Open-Study-College/osc/commit/9d7315fb70e35a8d41d79dc48caa864c7e93632b))
-
-## [0.110.0](https://github.com/Open-Study-College/osc/compare/v0.109.0...v0.110.0) (2023-06-14)
-
-
-### ✨ Features
-
-* add env var for forgot password ([3eae495](https://github.com/Open-Study-College/osc/commit/3eae495e6a0a81f38bcc005283db4d69ee5529e6))
 
