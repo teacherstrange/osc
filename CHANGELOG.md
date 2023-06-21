@@ -1,3 +1,29 @@
+## [0.114.0](https://github.com/Open-Study-College/osc/compare/v0.113.0...v0.114.0) (2023-06-21)
+
+
+### ✨ Features
+
+* add CircularProgress component, stories and tests ([fe831c1](https://github.com/Open-Study-College/osc/commit/fe831c199d49bc9c2e500c671eba49382749c300))
+* add Progress component, stories, tests and styling ([c2c1451](https://github.com/Open-Study-College/osc/commit/c2c145141bc834fc3bcd598c9e5651ae36d5d782))
+
+
+### ♻️ Refactors
+
+* add color and width variants for progress bar ([9d5e1ea](https://github.com/Open-Study-College/osc/commit/9d5e1eaa298d0dfd562ae10208355dfc58c176e6))
+* add in props to Story type variable ([b351448](https://github.com/Open-Study-College/osc/commit/b351448e55e8ff46f14e9efb100fbf1bb22199ab))
+* add ProgressContent component for passing content into the circular slider ([870cbc3](https://github.com/Open-Study-College/osc/commit/870cbc3304766eea9c0587bfe73c3a8bee1c097b))
+* add size prop and update css to handle circular width/content correctly ([39a081d](https://github.com/Open-Study-College/osc/commit/39a081d100a4f125a98bc1d9cbe21dd5b24547b7))
+* add webkit prefix back in ([c639137](https://github.com/Open-Study-College/osc/commit/c639137f998ada8a6efeaf244e28e6875bcbe3a7))
+* add webkit prefix to the mask ([690a71f](https://github.com/Open-Study-College/osc/commit/690a71f14c4824baa65550d03576aaabac19b272))
+* add webkit prefix to the mask back in ([4fec75f](https://github.com/Open-Study-College/osc/commit/4fec75f95f8223c017fb2c3648348b87ee8d4bda))
+* make colorVariant prop optional ([103f0c3](https://github.com/Open-Study-College/osc/commit/103f0c380e96b84cbd62d9343fba4005078348b8))
+* remove inline-size property and es-lint disable next line for -webkit- prefix ([6a780d2](https://github.com/Open-Study-College/osc/commit/6a780d2da707643996300bfb11f23223b66e955a))
+* remove margin property ([fa2936d](https://github.com/Open-Study-College/osc/commit/fa2936d6d12b1d27a9dce6b9253a26cd6a67673b))
+* update background color for progress indicator ([175977b](https://github.com/Open-Study-College/osc/commit/175977b7baaea7f1ee47bb59a70be28a5efbe222))
+* update package-lock file ([b3ed493](https://github.com/Open-Study-College/osc/commit/b3ed4935c8dca0ebc9b229f562812b8daa497460))
+* update styling and add circular progress styling ([d515ba3](https://github.com/Open-Study-College/osc/commit/d515ba3b3481c4c3b3ac220efe4bf6e88abf50f6))
+* use named imports for useEffect & useState ([6f03841](https://github.com/Open-Study-College/osc/commit/6f03841ef48106d43c21c7fee1916316969b80be))
+
 ## [0.113.0](https://github.com/Open-Study-College/osc/compare/v0.112.0...v0.113.0) (2023-06-21)
 
 
@@ -61,22 +87,4 @@
 ### ✨ Features
 
 * add env var for forgot password ([3eae495](https://github.com/Open-Study-College/osc/commit/3eae495e6a0a81f38bcc005283db4d69ee5529e6))
-
-## [0.109.0](https://github.com/Open-Study-College/osc/compare/v0.108.0...v0.109.0) (2023-06-13)
-
-
-### ✨ Features
-
-* add url param routing ([2c0e628](https://github.com/Open-Study-College/osc/commit/2c0e6286cb95633f20063bb59ede33950b476241))
-
-
-### ♻️ Refactors
-
-* add asArray function ([9b996b6](https://github.com/Open-Study-College/osc/commit/9b996b6b6664658d56cc129f278263fc3e1619a6))
-* add instantsearch routers to remix config ([29b5814](https://github.com/Open-Study-College/osc/commit/29b58144b5b18290b0294bd21dd2730846f7ae88))
-* pass current values through to inputs ([7fb7033](https://github.com/Open-Study-College/osc/commit/7fb70334d6b5eb6a760cbf0eca31003c3d89e9f7))
-* put props.value first ([5830935](https://github.com/Open-Study-College/osc/commit/5830935fa0c7366c7748955efa2fe9855242e8a9))
-* remove "start" parameter ([4875d93](https://github.com/Open-Study-College/osc/commit/4875d931a90b38808215ce70eba925951f66f4d6))
-* remove console logs ([6615c1d](https://github.com/Open-Study-College/osc/commit/6615c1da7e79f7ee90d094c90b9d2f1fc2afb6fd))
-* remove duplicate file ([3ba40ae](https://github.com/Open-Study-College/osc/commit/3ba40aefe01c1618a4738d4a55992bb10ad31624))
 
