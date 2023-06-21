@@ -7,6 +7,8 @@ import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { classNames } from '../../utils/classNames';
 import { rem } from '../../utils/rem';
 
+import { useModifier } from '../../hooks/useModifier';
+import { useScroll } from '../../hooks/useScroll';
 import './header.scss';
 
 export interface SharedNavProps {
@@ -23,13 +25,30 @@ export interface SharedNavProps {
 /* -------------------------------------------------------------------------------------------------
  * Header
  * -----------------------------------------------------------------------------------------------*/
-export interface HeaderProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {}
+export interface HeaderProps extends SharedNavProps, HTMLAttributes<HTMLDivElement> {
+    /**
+     * Sets the header to be sticky
+     * @default false
+     */
+    isSticky?: boolean;
+}
 
 export const Header = forwardRef<ElementRef<'header'>, HeaderProps>((props, forwardedRef) => {
-    const { className, children, ...attr } = props;
+    const { className, children, isSticky, ...attr } = props;
     const ref = useRef<HTMLDivElement>(null);
     const headerHeight = useHeight(ref);
-    const classes = classNames('c-header', 'o-container', className);
+    const scrollPos = useScroll();
+
+    const scrollOffset = 10;
+    const hasTraveledPastOffset = scrollPos > scrollOffset;
+
+    const stickyModifier = useModifier('c-header', isSticky && 'sticky');
+    const classes = classNames(
+        'c-header',
+        stickyModifier,
+        isSticky && hasTraveledPastOffset && 'is-scrolled',
+        className
+    );
 
     return (
         <header
@@ -40,9 +59,13 @@ export const Header = forwardRef<ElementRef<'header'>, HeaderProps>((props, forw
                 ...attr.style,
                 // Set the header height as state so we can use it to help position things such as the nav
                 ['--header-height' as string]: `${headerHeight}px`,
+                // Set a fixed height for the header, this helps us avoid flickering when changing the height when scrolling
+                height: isSticky && headerHeight ? `var(--header-height)` : '',
             }}
         >
-            {children}
+            <div className="u-bg-color-tertiary">
+                <div className="c-header__inner o-container">{children}</div>
+            </div>
         </header>
     );
 });

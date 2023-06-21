@@ -79,16 +79,6 @@
                         @if $dir == right or $dir == left {
                             top: $drawer-offset;
                             width: calc(100% - #{$drawer-trigger-height});
-
-                            // WHEN the viewport is the combined size of the offset and the max-height
-                            // then reset the offset value
-                            @include mq(
-                                strip-unit($drawer-max-height) + strip-unit($drawer-offset),
-                                max,
-                                height
-                            ) {
-                                top: calc($drawer-offset / 2);
-                            }
                         }
                     }
 
@@ -257,16 +247,6 @@
 
                         &#{$self}--offset {
                             top: $drawer-offset;
-
-                            // WHEN the viewport is the combined size of the offset and the max-height
-                            // then reset the offset value
-                            @include mq(
-                                strip-unit($drawer-max-height) + strip-unit($drawer-offset),
-                                max,
-                                height
-                            ) {
-                                top: calc($drawer-offset / 2);
-                            }
                         }
                     }
 
@@ -290,18 +270,6 @@
                     @if $dir == right or $dir == left {
                         transform: if($dir == right, rotate(90deg), rotate(270deg)); /* [2] */
                         transform-origin: if($dir == right, top left, top right); /* [3] */
-
-                        &#{$self}--offset {
-                            // WHEN the viewport is the combined size of the offset and the max-height
-                            // then reset the offset value
-                            @include mq(
-                                strip-unit($drawer-max-height) + strip-unit($drawer-offset),
-                                max,
-                                height
-                            ) {
-                                top: calc($drawer-offset / 2);
-                            }
-                        }
 
                         /* stylelint-disable-next-line selector-class-pattern, plugin/selector-bem-pattern */
                         > .c-btn__inner {

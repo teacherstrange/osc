@@ -5,22 +5,55 @@
 @layer components {
     $logo-size-s: 192px;
     $logo-size-l: 277px;
+    $header-height: var(--header-height, 0);
+    $header-padding: $space-xl;
+    $header-padding-s: $space-s;
+
+    // Calculate the difference of the padding between the header and the nav
+    // Multiply by two as we need to account for the top and bottom padding
+    // As we're using dynamic sizes we're adding 1px to make up for the decimal value
+    $header-padding-diff: calc((calc(#{$header-padding} - #{$header-padding-s}) * 2) + 1px);
 
     .c-header {
         $self: &;
 
         position: relative;
-        display: grid;
-        align-items: center;
-        grid-template-columns: repeat(3, auto);
-        padding-block: $space-xl;
+        pointer-events: none;
 
         @include z-index("header");
 
-        @include mq($mq-desk) {
-            grid-template-columns: repeat(2, auto);
-            grid-template-rows: repeat(2, 1fr);
-            gap: $space-2xs;
+        &--sticky {
+            position: sticky;
+            top: 0;
+        }
+
+        &__inner {
+            position: relative;
+            display: grid;
+            align-items: center;
+            transition: padding-block $timing $ease-out-sine;
+            padding-block: $header-padding;
+            grid-template-columns: repeat(3, auto);
+            pointer-events: auto;
+
+            @include mq($mq-desk) {
+                grid-template-columns: repeat(2, auto);
+                grid-template-rows: repeat(2, 1fr);
+                gap: $space-2xs;
+            }
+
+            .is-scrolled & {
+                @include mq($mq-desk) {
+                    padding-block: $header-padding-s;
+                }
+
+                /* stylelint-disable-next-line selector-class-pattern */
+                .c-nav__content[data-level="0"] {
+                    @include mq($mq-desk) {
+                        top: calc($header-height - $header-padding-diff);
+                    }
+                }
+            }
         }
 
         &__logo {
@@ -55,7 +88,7 @@
      */
         &__nav {
             position: fixed; /* [1] */
-            top: var(--header-height, 0);
+            top: $header-height;
             right: 0;
             bottom: 0;
             left: 0;
@@ -90,12 +123,13 @@
                 }
             }
 
-            /* stylelint-disable-next-line selector-class-pattern */
+            /* stylelint-disable-next-line selector-class-pattern, no-descending-specificity */
             .c-nav__content[data-level="0"] {
                 left: 0;
+                transition: top $timing $ease-out-sine;
 
                 @include mq($mq-desk) {
-                    top: var(--header-height, 0);
+                    top: $header-height;
                 }
             }
         }

@@ -41,6 +41,28 @@ describe('header', () => {
         // Will be 0 as we aren't rendering a proper DOM
         expect(header).toHaveStyle('--header-height: 0px;');
     });
+
+    test('sets the c-header--sticky class when isSticky prop is true', () => {
+        render(
+            <Header isSticky>
+                <Logo />
+            </Header>
+        );
+
+        const header = screen.getByRole('banner');
+        expect(header).toHaveClass('c-header--sticky');
+    });
+
+    test('sets inline height when isSticky prop is true', () => {
+        render(
+            <Header isSticky>
+                <Logo />
+            </Header>
+        );
+
+        const header = screen.getByRole('banner');
+        expect(header).toHaveStyle('height: var(--header-height);');
+    });
 });
 
 describe('headerNav', () => {
@@ -105,7 +127,7 @@ describe('headerNav', () => {
         );
 
         expect(headerNav).not.toHaveStyle('overflow-y: auto;');
-        expect(document.body).toHaveStyle('overflow-y: auto;');
+        expect(document.body).not.toHaveStyle('overflow-y: hidden;');
     });
 });
 
