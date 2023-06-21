@@ -508,7 +508,7 @@ export const completeTutorCreate: CreateTutorCompleteFn = async (input) => {
         for (var i = 0; i < input.courses.length; i++) {
             if (input.courses[i].accept == false) {
                 // Delete record
-                prisma.courseTutor.deleteMany({
+                await prisma.courseTutor.deleteMany({
                     where: {
                         courseId: input.courses[i].courseId,
                         tutorId: user.id,

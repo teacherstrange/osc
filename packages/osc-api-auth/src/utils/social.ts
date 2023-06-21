@@ -10,7 +10,7 @@ export const createUserSocial: CreateUserSocialFn = async (input) => {
             ssoId: input.ssoId,
         },
     });
-    prisma.userSocial.create({
+    await prisma.userSocial.create({
         data: {
             userId: input.userId,
             socialId: social.id,
@@ -30,10 +30,7 @@ export const loginUserSocial: LoginUserSocialFn = async (ssoId) => {
     }
     const userSocial = await prisma.userSocial.findFirst({
         where: {
-            id: social.id,
-        },
-        include: {
-            User: true,
+            socialId: social.id,
         },
     });
     if (!userSocial) {
