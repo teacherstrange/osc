@@ -1,0 +1,10 @@
+@import "../../styles/settings";
+@import "../../styles/tools";
+
+.c-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: $fw-light;
+}
