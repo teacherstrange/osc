@@ -196,5 +196,7 @@ export const typeDefs = gql`
         socialLoginCreate(input: socialLoginCreateInput): Boolean
         validateTutor(magicKeyToken: String!): [CourseTutor]
         completeTutorCreate(input: completeTutorCreate!): User
+        validateFromOrder(magicKeyToken: String!): User
+        updatePasswordFromOrder(input: passwordResetInput!): User
     }
 `;
