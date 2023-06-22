@@ -6,6 +6,8 @@
 //
 // *----------------------------------*/
 module.exports = {
+    'container-size-6xs': 240,
+    'container-size-5xs': 400,
     'container-size-4xs': 610,
     'container-size-3xs': 960,
     'container-size-2xs': 1020,
