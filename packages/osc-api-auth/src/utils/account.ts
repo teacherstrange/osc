@@ -504,18 +504,37 @@ export const completeTutorCreate: CreateTutorCompleteFn = async (input) => {
 
     const registration = await completeRegistration(complete);
     const user = await getUserByEmail(input.email);
+
     if (user) {
-        for (var i = 0; i < input.courses.length; i++) {
-            if (input.courses[i].accept == false) {
-                // Delete record
-                await prisma.courseTutor.deleteMany({
-                    where: {
-                        courseId: input.courses[i].courseId,
-                        tutorId: user.id,
-                    },
-                });
+        const coursesAssigned = await prisma.courseTutor.findMany({
+            where: {
+                tutorId: user.id,
+            },
+        });
+        // Compare coursesAssigned with accepted array
+        const deleteArray: number[] = [];
+
+        for (var i = 0; i < coursesAssigned.length; i++) {
+            let check = 0;
+            for (var j = 0; j < input.courses.length; j++) {
+                if (input.courses[j].courseId === coursesAssigned[i].courseId) {
+                    input.courses.splice(j, 1);
+                    j--;
+                    check = 1;
+                }
+            }
+            if (check == 0) {
+                deleteArray.push(coursesAssigned[i].courseId);
             }
         }
+        await prisma.courseTutor.deleteMany({
+            where: {
+                tutorId: user.id,
+                courseId: {
+                    in: deleteArray,
+                },
+            },
+        });
     }
     return registration;
 };
