@@ -3,26 +3,21 @@ import * as token from '~/utils/token';
 import type { CreateUserSocialFn, LoginUserSocialFn } from '~/types/functions';
 const prisma = new PrismaClient();
 
-export const createUserSocial: CreateUserSocialFn = async (input) => {
-    const social = await prisma.social.create({
-        data: {
-            name: input.name,
-            ssoId: input.ssoId,
-        },
-    });
+export const createUserSocial: CreateUserSocialFn = async (input, userId) => {
     await prisma.userSocial.create({
         data: {
-            userId: input.userId,
-            socialId: social.id,
+            userId: userId,
+            ssoId: input.ssoId,
+            ssoRef: input.ssoRef,
         },
     });
     return true;
 };
 
-export const loginUserSocial: LoginUserSocialFn = async (ssoId) => {
+export const loginUserSocial: LoginUserSocialFn = async (ssoId, ssoRef) => {
     const social = await prisma.social.findFirst({
         where: {
-            ssoId: ssoId,
+            id: ssoId,
         },
     });
     if (!social) {
@@ -30,7 +25,8 @@ export const loginUserSocial: LoginUserSocialFn = async (ssoId) => {
     }
     const userSocial = await prisma.userSocial.findFirst({
         where: {
-            socialId: social.id,
+            ssoRef: ssoRef,
+            ssoId: ssoId,
         },
     });
     if (!userSocial) {

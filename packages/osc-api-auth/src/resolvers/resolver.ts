@@ -75,11 +75,15 @@ export const resolvers = {
         markUserAsIV: async (_: undefined, { userId }: markUserAsIVArgs, { user }: AuthContext) => {
             return account.markAsIV(userId, user!.id);
         },
-        socialLogin: async (_: undefined, { ssoId }: socialLoginArgs) => {
-            return social.loginUserSocial(ssoId);
+        socialLogin: async (_: undefined, { ssoId, ssoRef }: socialLoginArgs) => {
+            return social.loginUserSocial(ssoId, ssoRef);
         },
-        socialLoginCreate: async (_: undefined, { input }: socialLoginCreateArgs) => {
-            return social.createUserSocial(input);
+        socialLoginCreate: async (
+            _: undefined,
+            { input }: socialLoginCreateArgs,
+            { user }: AuthContext
+        ) => {
+            return social.createUserSocial(input, user!.id);
         },
     },
 };

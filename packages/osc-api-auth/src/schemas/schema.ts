@@ -178,9 +178,8 @@ export const typeDefs = gql`
     }
 
     input socialLoginCreateInput {
-        userId: Int!
-        name: String!
-        ssoId: String!
+        ssoId: Int!
+        ssoRef: String!
     }
 
     type Mutation {
@@ -194,7 +193,7 @@ export const typeDefs = gql`
         completeResetPassword(input: passwordResetInput!): User
         createTutor(input: createTutorInput): User
         markUserAsIV(userId: Int!): UserRole
-        socialLogin(ssoId: String!): AuthTokens
+        socialLogin(ssoId: Int!, ssoRef: String!): AuthTokens
         socialLoginCreate(input: socialLoginCreateInput): Boolean
         validateTutor(magicKeyToken: String!): [CourseTutor]
         completeTutorCreate(input: completeTutorCreate!): User

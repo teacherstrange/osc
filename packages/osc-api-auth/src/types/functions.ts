@@ -60,7 +60,11 @@ export type CrmTokensFn = (userId: number) => Promise<CrmTokensAPI>;
 
 export type LmsTokensFn = (userId: number) => Promise<LmsTokensAPI>;
 
-export type CreateUserSocialFn = (input: createUserSocialInput) => Promise<Boolean | Error>;
+export type CreateUserSocialFn = (
+    input: createUserSocialInput,
+    userId: number
+) => Promise<Boolean | Error>;
 export type LoginUserSocialFn = (
-    ssoId: string
+    ssoId: number,
+    ssoRef: string
 ) => Promise<{ accessToken: Promise<string>; refreshToken: Promise<string> } | Error>;

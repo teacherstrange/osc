@@ -474,18 +474,19 @@ model Preference {
 model Social {
   id         Int          @id @default(autoincrement())
   name       String?      @db.VarChar(32)
-  ssoId      String       @unique @db.VarChar(64)
   UserSocial UserSocial[]
 }
 
 model UserSocial {
-  id       Int @id @default(autoincrement())
-  userId   Int
-  socialId Int
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  ssoId     Int
+  ssoRef    String
+  createdAt DateTime @default(now())
 
   User   User   @relation(fields: [userId], references: [id])
-  Social Social @relation(fields: [socialId], references: [id])
+  Social Social @relation(fields: [ssoId], references: [id])
 
   @@index([userId])
-  @@index([socialId])
+  @@index([ssoId])
 }
