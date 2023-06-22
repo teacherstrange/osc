@@ -75,8 +75,8 @@ export const resolvers = {
         markUserAsIV: async (_: undefined, { userId }: markUserAsIVArgs, { user }: AuthContext) => {
             return account.markAsIV(userId, user!.id);
         },
-        socialLogin: async (_: undefined, { ssoId, ssoRef }: socialLoginArgs) => {
-            return social.loginUserSocial(ssoId, ssoRef);
+        socialLogin: async (_: undefined, { socialId, ssoRef }: socialLoginArgs) => {
+            return social.loginUserSocial(socialId, ssoRef);
         },
         socialLoginCreate: async (
             _: undefined,

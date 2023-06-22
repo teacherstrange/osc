@@ -65,6 +65,6 @@ export type CreateUserSocialFn = (
     userId: number
 ) => Promise<Boolean | Error>;
 export type LoginUserSocialFn = (
-    ssoId: number,
+    socialId: number,
     ssoRef: string
 ) => Promise<{ accessToken: Promise<string>; refreshToken: Promise<string> } | Error>;

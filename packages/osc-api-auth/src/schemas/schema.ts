@@ -177,7 +177,7 @@ export const typeDefs = gql`
     }
 
     input socialLoginCreateInput {
-        ssoId: Int!
+        socialId: Int!
         ssoRef: String!
     }
 
@@ -192,7 +192,7 @@ export const typeDefs = gql`
         completeResetPassword(input: passwordResetInput!): User
         createTutor(input: createTutorInput): User
         markUserAsIV(userId: Int!): UserRole
-        socialLogin(ssoId: Int!, ssoRef: String!): AuthTokens
+        socialLogin(socialId: Int!, ssoRef: String!): AuthTokens
         socialLoginCreate(input: socialLoginCreateInput): Boolean
         validateTutor(magicKeyToken: String!): [CourseTutor]
         completeTutorCreate(input: completeTutorCreate!): User

@@ -7,17 +7,17 @@ export const createUserSocial: CreateUserSocialFn = async (input, userId) => {
     await prisma.userSocial.create({
         data: {
             userId: userId,
-            ssoId: input.ssoId,
+            socialId: input.socialId,
             ssoRef: input.ssoRef,
         },
     });
     return true;
 };
 
-export const loginUserSocial: LoginUserSocialFn = async (ssoId, ssoRef) => {
+export const loginUserSocial: LoginUserSocialFn = async (socialId, ssoRef) => {
     const social = await prisma.social.findFirst({
         where: {
-            id: ssoId,
+            id: socialId,
         },
     });
     if (!social) {
@@ -26,7 +26,7 @@ export const loginUserSocial: LoginUserSocialFn = async (ssoId, ssoRef) => {
     const userSocial = await prisma.userSocial.findFirst({
         where: {
             ssoRef: ssoRef,
-            ssoId: ssoId,
+            socialId: socialId,
         },
     });
     if (!userSocial) {

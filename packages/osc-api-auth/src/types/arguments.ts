@@ -122,13 +122,13 @@ export type markUserAsIVArgs = {
 
 export type createUserSocialInput = {
     readonly ssoRef: string;
-    readonly ssoId: number;
+    readonly socialId: number;
 };
 
 export type socialLoginCreateArgs = {
     readonly input: createUserSocialInput;
 };
 export type socialLoginArgs = {
-    readonly ssoId: number;
+    readonly socialId: number;
     readonly ssoRef: string;
 };

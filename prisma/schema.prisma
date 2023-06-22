@@ -480,13 +480,13 @@ model Social {
 model UserSocial {
   id        Int      @id @default(autoincrement())
   userId    Int
-  ssoId     Int
+  socialId  Int
   ssoRef    String
   createdAt DateTime @default(now())
 
   User   User   @relation(fields: [userId], references: [id])
-  Social Social @relation(fields: [ssoId], references: [id])
+  Social Social @relation(fields: [socialId], references: [id])
 
   @@index([userId])
-  @@index([ssoId])
+  @@index([socialId])
 }
