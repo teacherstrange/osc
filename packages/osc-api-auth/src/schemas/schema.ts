@@ -157,7 +157,6 @@ export const typeDefs = gql`
 
     input courseAccept {
         courseId: Int!
-        accept: Boolean!
     }
 
     input completeTutorCreate {
