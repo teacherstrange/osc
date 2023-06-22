@@ -102,7 +102,6 @@ export type createTutorArgs = {
 
 export type courseAccept = {
     readonly courseId: number;
-    readonly accept: boolean;
 };
 
 export type completeTutorCreate = {
