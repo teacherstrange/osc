@@ -443,7 +443,11 @@ export const createTutor: CreateTutorFn = async (input, createdBy) => {
     if (existingUser) {
         return new Error('An account already exists for the specified email.');
     }
-
+    // Check role exists
+    const tutorRole = await getRoleByTitle('Tutor');
+    if (!tutorRole) {
+        return new Error('Unable to verify role');
+    }
     // Create tutor record
     const user = await prisma.user.create({
         data: {
@@ -452,15 +456,7 @@ export const createTutor: CreateTutorFn = async (input, createdBy) => {
             email: input.email,
         },
     });
-    if (input.IVUser == true) {
-        await markAsIV(user.id, createdBy);
-    }
-
     //Assign tutor user role
-    const tutorRole = await getRoleByTitle('Tutor');
-    if (!tutorRole) {
-        return new Error('Unable to verify role');
-    }
     await prisma.userRole.create({
         data: {
             userId: user.id,
@@ -468,14 +464,16 @@ export const createTutor: CreateTutorFn = async (input, createdBy) => {
             createdBy: createdBy,
         },
     });
-
+    if (input.IVUser == true) {
+        await markAsIV(user.id, createdBy);
+    }
     for (var i = 0; i < input.course.length; i++) {
         await prisma.courseTutor.create({
             data: {
                 tutorId: user.id,
                 courseId: input.course[i].courseId,
                 createdBy: createdBy,
-                iv: input.course[i].iv,
+                iv: input.course[i].iv ?? false,
             },
         });
     }
@@ -500,6 +498,8 @@ export const completeTutorCreate: CreateTutorCompleteFn = async (input) => {
         magicKey: input.magicKey,
         email: input.email,
         password: input.password,
+        firstName: input.firstName,
+        lastName: input.lastName,
     };
 
     const registration = await completeRegistration(complete);

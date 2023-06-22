@@ -165,6 +165,8 @@ export const typeDefs = gql`
         password: String!
         magicKey: String!
         courses: [courseAccept]
+        firstName: String!
+        lastName: String!
     }
 
     input createTutorInput {

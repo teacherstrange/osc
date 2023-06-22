@@ -92,7 +92,7 @@ export type createTutorInput = {
     readonly email: string;
     readonly firstName: string;
     readonly lastName: string;
-    readonly course: [tutorCourseInput];
+    readonly course: tutorCourseInput[];
     readonly IVUser: boolean;
 };
 
@@ -109,7 +109,9 @@ export type completeTutorCreate = {
     readonly email: string;
     readonly password: string;
     readonly magicKey: string;
-    readonly courses: [courseAccept];
+    readonly courses: courseAccept[];
+    readonly firstName: string;
+    readonly lastName: string;
 };
 export type completeTutorArgs = {
     readonly input: completeTutorCreate;
