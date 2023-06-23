@@ -1,3 +1,14 @@
+## [0.119.0](https://github.com/Open-Study-College/osc/compare/v0.118.0...v0.119.0) (2023-06-23)
+
+
+### ✨ Features
+
+* **prisma-schema:** made values and defaults optional ([dc2f73a](https://github.com/Open-Study-College/osc/commit/dc2f73aa2e07001061fd1e2f84f71b5072edc6ef))
+* **settings-api:** added shield permission rules ([6861bba](https://github.com/Open-Study-College/osc/commit/6861bbaf4035c28bcc0b947814ec182084cd67c2))
+* **settings-api:** cloned admin API creating settings API ([381d63e](https://github.com/Open-Study-College/osc/commit/381d63e7c3abc31edf425130746634092e11147b))
+* **settings-api:** get all preferences or a specific one for a user ([ff5c653](https://github.com/Open-Study-College/osc/commit/ff5c653ab99a6c7725bc7182d3b758da4ddd83d6))
+* **settings-api:** v1 ability to save and read preferences by both ID and unique key ([bf69138](https://github.com/Open-Study-College/osc/commit/bf6913819f99d2194b5c7ec082f50dcc2f751568))
+
 ## [0.118.0](https://github.com/Open-Study-College/osc/compare/v0.117.0...v0.118.0) (2023-06-23)
 
 
@@ -60,30 +71,4 @@
 * adjustments to pagination styling ([a1f3cd8](https://github.com/Open-Study-College/osc/commit/a1f3cd84dd14925afee64175d408c5d54c478a4c))
 * update button to tertiary and remove button specific styling ([4ea2afb](https://github.com/Open-Study-College/osc/commit/4ea2afb8e2ab8f03e8c141577b1caa2dd4098232))
 * update package-lock file ([ebf0fc4](https://github.com/Open-Study-College/osc/commit/ebf0fc42bc6a228e836da69a7f1729db5b22d4aa))
-
-## [0.114.0](https://github.com/Open-Study-College/osc/compare/v0.113.0...v0.114.0) (2023-06-21)
-
-
-### ✨ Features
-
-* add CircularProgress component, stories and tests ([fe831c1](https://github.com/Open-Study-College/osc/commit/fe831c199d49bc9c2e500c671eba49382749c300))
-* add Progress component, stories, tests and styling ([c2c1451](https://github.com/Open-Study-College/osc/commit/c2c145141bc834fc3bcd598c9e5651ae36d5d782))
-
-
-### ♻️ Refactors
-
-* add color and width variants for progress bar ([9d5e1ea](https://github.com/Open-Study-College/osc/commit/9d5e1eaa298d0dfd562ae10208355dfc58c176e6))
-* add in props to Story type variable ([b351448](https://github.com/Open-Study-College/osc/commit/b351448e55e8ff46f14e9efb100fbf1bb22199ab))
-* add ProgressContent component for passing content into the circular slider ([870cbc3](https://github.com/Open-Study-College/osc/commit/870cbc3304766eea9c0587bfe73c3a8bee1c097b))
-* add size prop and update css to handle circular width/content correctly ([39a081d](https://github.com/Open-Study-College/osc/commit/39a081d100a4f125a98bc1d9cbe21dd5b24547b7))
-* add webkit prefix back in ([c639137](https://github.com/Open-Study-College/osc/commit/c639137f998ada8a6efeaf244e28e6875bcbe3a7))
-* add webkit prefix to the mask ([690a71f](https://github.com/Open-Study-College/osc/commit/690a71f14c4824baa65550d03576aaabac19b272))
-* add webkit prefix to the mask back in ([4fec75f](https://github.com/Open-Study-College/osc/commit/4fec75f95f8223c017fb2c3648348b87ee8d4bda))
-* make colorVariant prop optional ([103f0c3](https://github.com/Open-Study-College/osc/commit/103f0c380e96b84cbd62d9343fba4005078348b8))
-* remove inline-size property and es-lint disable next line for -webkit- prefix ([6a780d2](https://github.com/Open-Study-College/osc/commit/6a780d2da707643996300bfb11f23223b66e955a))
-* remove margin property ([fa2936d](https://github.com/Open-Study-College/osc/commit/fa2936d6d12b1d27a9dce6b9253a26cd6a67673b))
-* update background color for progress indicator ([175977b](https://github.com/Open-Study-College/osc/commit/175977b7baaea7f1ee47bb59a70be28a5efbe222))
-* update package-lock file ([b3ed493](https://github.com/Open-Study-College/osc/commit/b3ed4935c8dca0ebc9b229f562812b8daa497460))
-* update styling and add circular progress styling ([d515ba3](https://github.com/Open-Study-College/osc/commit/d515ba3b3481c4c3b3ac220efe4bf6e88abf50f6))
-* use named imports for useEffect & useState ([6f03841](https://github.com/Open-Study-College/osc/commit/6f03841ef48106d43c21c7fee1916316969b80be))
 
