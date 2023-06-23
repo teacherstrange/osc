@@ -1,3 +1,11 @@
+## [0.117.0](https://github.com/Open-Study-College/osc/compare/v0.116.0...v0.117.0) (2023-06-23)
+
+
+### ✨ Features
+
+* add e2e tests for search route ([f23066d](https://github.com/Open-Study-College/osc/commit/f23066d1aaebae45cb4bd26dd22f588ca55c490e))
+* disable web security to bypass CORS issues ([d39f42d](https://github.com/Open-Study-College/osc/commit/d39f42df18e58d631fc96dbc6e089e6038018a91))
+
 ## [0.116.0](https://github.com/Open-Study-College/osc/compare/v0.115.0...v0.116.0) (2023-06-22)
 
 
@@ -83,26 +91,4 @@
 
 * **drawer:** remove offset reset to account for the sticky header on ecommerce ([22511cf](https://github.com/Open-Study-College/osc/commit/22511cf2b7c68d7da0fe5af5843eb0ac78ca5fc5))
 * **header:** add a header__inner element to allow background colour to span full width ([6890267](https://github.com/Open-Study-College/osc/commit/6890267be004776bf18d42b9641ff54564300dd8))
-
-## [0.112.0](https://github.com/Open-Study-College/osc/compare/v0.111.0...v0.112.0) (2023-06-20)
-
-
-### 📦 General Housekeeping / Package Updates
-
-* **add to cart:** remove duplicated isDisabled prop ([25e8d5b](https://github.com/Open-Study-College/osc/commit/25e8d5bd935e61138846fb737a44ee149178bdf4))
-* **line item:** remove console log ([c46232d](https://github.com/Open-Study-College/osc/commit/c46232dc276a3cb13b970fe2d0aeab535a6fb3bf))
-
-
-### ✨ Features
-
-* **anim:** make shimmer animation more obvious ([3939fc9](https://github.com/Open-Study-College/osc/commit/3939fc95aa298b047e3bf19246de378a68cc21a2))
-* **button:** add condition to position the spinner differently if there is no loading text ([52f787b](https://github.com/Open-Study-College/osc/commit/52f787b3a7d24730837364ee0c6e511a251ab93d))
-* **cart:** add loading spinner to cart forms ([ef4ca38](https://github.com/Open-Study-College/osc/commit/ef4ca388cb521ed11eb622dbc8cd33fd16b1eebc))
-* **cart:** reduce size of discounted value ([ed73d8b](https://github.com/Open-Study-College/osc/commit/ed73d8bdd69aefca4eeb6c2a9644f8ddbe75103b))
-* **styles:** adds visually hidden utility class ([79fc18e](https://github.com/Open-Study-College/osc/commit/79fc18e4cb7845e8f429391173990cad4ce03cbd))
-
-
-### ♻️ Refactors
-
-* **button:** remove default loading text ([45a620b](https://github.com/Open-Study-College/osc/commit/45a620b2194ec052d17d8a1bdd392de307a31959))
 
