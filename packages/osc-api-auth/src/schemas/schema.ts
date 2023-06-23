@@ -39,6 +39,13 @@ export const typeDefs = gql`
         details: Role
     }
 
+    type CourseTutor {
+        id: Int!
+        courseId: Int!
+        tutorId: Int!
+        iv: Boolean
+    }
+
     type Role {
         id: Int!
         title: String
@@ -125,6 +132,10 @@ export const typeDefs = gql`
         email: String! @constraint(format: email)
         password: String!
     }
+    input tutorCourseInput {
+        courseId: Int!
+        iv: Boolean
+    }
 
     input passwordResetInput {
         magicKeyToken: String!
@@ -144,6 +155,32 @@ export const typeDefs = gql`
         password: String! @constraint(minLength: 12)
     }
 
+    input courseAccept {
+        courseId: Int!
+    }
+
+    input completeTutorCreate {
+        email: String! @constraint(format: "email", maxLength: 255)
+        password: String!
+        magicKey: String!
+        courses: [courseAccept]
+        firstName: String!
+        lastName: String!
+    }
+
+    input createTutorInput {
+        email: String! @constraint(format: email)
+        firstName: String!
+        lastName: String!
+        course: [tutorCourseInput]
+        IVUser: Boolean!
+    }
+
+    input socialLoginCreateInput {
+        socialId: Int!
+        ssoRef: String!
+    }
+
     type Mutation {
         createUser(input: createUserInput!): User
         login(input: loginInput!): AuthTokens
@@ -153,5 +190,11 @@ export const typeDefs = gql`
         completeRegistration(input: completeRegistration!): User
         requestResetPassword(email: String!): Boolean!
         completeResetPassword(input: passwordResetInput!): User
+        createTutor(input: createTutorInput): User
+        markUserAsIV(userId: Int!): UserRole
+        socialLogin(socialId: Int!, ssoRef: String!): AuthTokens
+        socialLoginCreate(input: socialLoginCreateInput): Boolean
+        validateTutor(magicKeyToken: String!): [CourseTutor]
+        completeTutorCreate(input: completeTutorCreate!): User
     }
 `;

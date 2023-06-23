@@ -11,9 +11,15 @@ import type {
     ResetRequestArgs,
     completeResetPasswordArgs,
     getPermissionsArgs,
+    createTutorArgs,
+    completeTutorArgs,
+    markUserAsIVArgs,
+    socialLoginArgs,
+    socialLoginCreateArgs,
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
+import * as social from '~/utils/social';
 
 export const resolvers = {
     Query: {
@@ -56,6 +62,28 @@ export const resolvers = {
         },
         completeResetPassword: async (_: undefined, { input }: completeResetPasswordArgs) => {
             return account.passwordReset(input);
+        },
+        createTutor: async (_: undefined, { input }: createTutorArgs, { user }: AuthContext) => {
+            return account.createTutor(input, user!.id);
+        },
+        validateTutor: async (_: undefined, { magicKeyToken }: magicKeyArgs) => {
+            return account.validateTutor(magicKeyToken);
+        },
+        completeTutorCreate: async (_: undefined, { input }: completeTutorArgs) => {
+            return account.completeTutorCreate(input);
+        },
+        markUserAsIV: async (_: undefined, { userId }: markUserAsIVArgs, { user }: AuthContext) => {
+            return account.markAsIV(userId, user!.id);
+        },
+        socialLogin: async (_: undefined, { socialId, ssoRef }: socialLoginArgs) => {
+            return social.loginUserSocial(socialId, ssoRef);
+        },
+        socialLoginCreate: async (
+            _: undefined,
+            { input }: socialLoginCreateArgs,
+            { user }: AuthContext
+        ) => {
+            return social.createUserSocial(input, user!.id);
         },
     },
 };

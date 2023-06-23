@@ -82,3 +82,53 @@ export type ResetRequestArgs = {
 export type completeResetPasswordArgs = {
     readonly input: passwordResetInput;
 };
+
+export type tutorCourseInput = {
+    readonly courseId: number;
+    readonly iv: boolean;
+};
+
+export type createTutorInput = {
+    readonly email: string;
+    readonly firstName: string;
+    readonly lastName: string;
+    readonly course: tutorCourseInput[];
+    readonly IVUser: boolean;
+};
+
+export type createTutorArgs = {
+    readonly input: createTutorInput;
+};
+
+export type courseAccept = {
+    readonly courseId: number;
+};
+
+export type completeTutorCreate = {
+    readonly email: string;
+    readonly password: string;
+    readonly magicKey: string;
+    readonly courses: courseAccept[];
+    readonly firstName: string;
+    readonly lastName: string;
+};
+export type completeTutorArgs = {
+    readonly input: completeTutorCreate;
+};
+
+export type markUserAsIVArgs = {
+    readonly userId: number;
+};
+
+export type createUserSocialInput = {
+    readonly ssoRef: string;
+    readonly socialId: number;
+};
+
+export type socialLoginCreateArgs = {
+    readonly input: createUserSocialInput;
+};
+export type socialLoginArgs = {
+    readonly socialId: number;
+    readonly ssoRef: string;
+};

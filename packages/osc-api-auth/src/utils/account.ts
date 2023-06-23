@@ -10,6 +10,7 @@ import {
     sendForgotPasswordEmail,
     getOrgById,
     getAllPermissions,
+    sendTutorCreateEmail,
 } from 'osc-api';
 import type {
     CreateUserFn,
@@ -30,6 +31,10 @@ import type {
     ResetRequestFn,
     PasswordResetFn,
     GetAllPermissionsFn,
+    CreateTutorFn,
+    CreateTutorCompleteFn,
+    ValidateTutorFn,
+    MarkAsIVFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import { env } from '~/types/environment';
@@ -413,4 +418,139 @@ export const create: CreateUserFn = async (input, userId) => {
 
 export const getAllUserPermissions: GetAllPermissionsFn = async () => {
     return await getAllPermissions();
+};
+
+export const markAsIV: MarkAsIVFn = async (userId, createdBy) => {
+    // Checks for IV role
+    const ivRole = await getRoleByTitle('IV');
+    if (!ivRole) {
+        return new Error('Unable to find IV role');
+    }
+    return await prisma.userRole.create({
+        data: {
+            userId: userId,
+            roleId: ivRole.id,
+            createdBy: createdBy,
+        },
+    });
+};
+
+export const createTutor: CreateTutorFn = async (input, createdBy) => {
+    // Check for existing user, all emails must be unique
+    const existingUser = await getUserByEmail(input.email);
+
+    // If user already exists, throw error
+    if (existingUser) {
+        return new Error('An account already exists for the specified email.');
+    }
+    // Check role exists
+    const tutorRole = await getRoleByTitle('Tutor');
+    if (!tutorRole) {
+        return new Error('Unable to verify role');
+    }
+    // Create tutor record
+    const user = await prisma.user.create({
+        data: {
+            firstName: input.firstName,
+            lastName: input.lastName,
+            email: input.email,
+        },
+    });
+    //Assign tutor user role
+    await prisma.userRole.create({
+        data: {
+            userId: user.id,
+            roleId: tutorRole.id,
+            createdBy: createdBy,
+        },
+    });
+    if (input.IVUser == true) {
+        await markAsIV(user.id, createdBy);
+    }
+    for (var i = 0; i < input.course.length; i++) {
+        await prisma.courseTutor.create({
+            data: {
+                tutorId: user.id,
+                courseId: input.course[i].courseId,
+                createdBy: createdBy,
+                iv: input.course[i].iv ?? false,
+            },
+        });
+    }
+    // Generate magic link
+    const userToken = await token.magicKey(user.id);
+    const url = `https://openstudycollege.com/tutorcreate?token = ${userToken}`;
+
+    // Send email
+    const emailData = {
+        to: input.email,
+        firstName: input.firstName,
+        lastName: input.lastName,
+        url: url,
+        emailId: env.TUTOR_CREATE_EMAIL,
+    };
+    await sendTutorCreateEmail(emailData);
+    return user;
+};
+
+export const completeTutorCreate: CreateTutorCompleteFn = async (input) => {
+    const complete = {
+        magicKey: input.magicKey,
+        email: input.email,
+        password: input.password,
+        firstName: input.firstName,
+        lastName: input.lastName,
+    };
+
+    const registration = await completeRegistration(complete);
+    const user = await getUserByEmail(input.email);
+
+    if (user) {
+        const coursesAssigned = await prisma.courseTutor.findMany({
+            where: {
+                tutorId: user.id,
+            },
+        });
+        // Compare coursesAssigned with accepted array
+        const deleteArray: number[] = [];
+
+        for (var i = 0; i < coursesAssigned.length; i++) {
+            let check = 0;
+            for (var j = 0; j < input.courses.length; j++) {
+                if (input.courses[j].courseId === coursesAssigned[i].courseId) {
+                    input.courses.splice(j, 1);
+                    j--;
+                    check = 1;
+                }
+            }
+            if (check == 0) {
+                deleteArray.push(coursesAssigned[i].courseId);
+            }
+        }
+        await prisma.courseTutor.deleteMany({
+            where: {
+                tutorId: user.id,
+                courseId: {
+                    in: deleteArray,
+                },
+            },
+        });
+    }
+    return registration;
+};
+
+export const validateTutor: ValidateTutorFn = async (magicKey) => {
+    const verified = await token.verifyToken(magicKey);
+    if (!verified) {
+        return new Error('Tutor not valid');
+    }
+    // Get Courses assigned for tutor to check
+    return await prisma.courseTutor.findMany({
+        where: {
+            tutorId: verified,
+        },
+        include: {
+            course: true,
+        },
+    });
 };

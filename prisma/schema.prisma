@@ -43,6 +43,7 @@ model User {
   assignments            AssignmentSubmission[]  @relation("studentDetails")
   courseInterest         UserCourseInterest[]    @relation("userCourseInterest")
   User                   User[]                  @relation("userCreator")
+  UserSocial             UserSocial[]
 
   @@index([createdBy])
   @@map("users")
@@ -362,6 +363,7 @@ model CourseTutor {
   createdBy Int
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  iv        Boolean   @default(false)
 
   course   Course          @relation("courseTutorCourse", fields: [courseId], references: [id])
   profile  User            @relation("courseTutorProfile", fields: [tutorId], references: [id])
@@ -467,4 +469,24 @@ model Preference {
   UserPreference UserPreference[] @relation("userPreferenceDetails")
 
   @@map("settings.preferences")
+}
+
+model Social {
+  id         Int          @id @default(autoincrement())
+  name       String?      @db.VarChar(32)
+  UserSocial UserSocial[]
+}
+
+model UserSocial {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  socialId  Int
+  ssoRef    String
+  createdAt DateTime @default(now())
+
+  User   User   @relation(fields: [userId], references: [id])
+  Social Social @relation(fields: [socialId], references: [id])
+
+  @@index([userId])
+  @@index([socialId])
 }

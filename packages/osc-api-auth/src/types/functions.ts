@@ -1,4 +1,4 @@
-import type { User, UserAvatar, UserRole, Permission } from '@prisma/client';
+import type { User, UserAvatar, UserRole, Permission, CourseTutor, Course } from '@prisma/client';
 import type { CrmTokensAPI, LmsTokensAPI, UserRolesAPI } from '.';
 import type {
     createUserInput,
@@ -8,6 +8,9 @@ import type {
     completeRegistration,
     passwordResetInput,
     getPermissionsArgs,
+    createTutorInput,
+    completeTutorCreate,
+    createUserSocialInput,
 } from './arguments';
 import type { PermissionsProps } from './interfaces';
 
@@ -18,6 +21,13 @@ export type GetAllPermissionsFn = (args: getPermissionsArgs) => Promise<Permissi
 export type CreateUserSetupFn = (input: createUserSetupInput) => Promise<User | Error>;
 export type assignRoleFn = (userId: number, roleId: number) => Promise<UserRole | Error>;
 export type CompleteRegistrationFn = (input: completeRegistration) => Promise<User | Error>;
+
+export type CreateTutorFn = (input: createTutorInput, createdBy: number) => Promise<User | Error>;
+export type MarkAsIVFn = (userId: number, createdBy: number) => Promise<UserRole | Error>;
+export type CreateTutorCompleteFn = (input: completeTutorCreate) => Promise<User | Error>;
+export type ValidateTutorFn = (
+    magicKey: string
+) => Promise<(CourseTutor & { course: Course })[] | Error>;
 
 export type LoginFn = (
     input: loginArgsInput
@@ -49,3 +59,12 @@ export type UserAvatarFn = (userId: number) => Promise<UserAvatar | null>;
 export type CrmTokensFn = (userId: number) => Promise<CrmTokensAPI>;
 
 export type LmsTokensFn = (userId: number) => Promise<LmsTokensAPI>;
+
+export type CreateUserSocialFn = (
+    input: createUserSocialInput,
+    userId: number
+) => Promise<Boolean | Error>;
+export type LoginUserSocialFn = (
+    socialId: number,
+    ssoRef: string
+) => Promise<{ accessToken: Promise<string>; refreshToken: Promise<string> } | Error>;
