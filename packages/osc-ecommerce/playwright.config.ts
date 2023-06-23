@@ -40,6 +40,10 @@ const config: PlaywrightTestConfig = {
         actionTimeout: 0,
         /* Base URL to use in actions like `await page.goto('/')`. */
         baseURL: `http://localhost:${process.env.PORT}`,
+        launchOptions: {
+            // Adding to disbale CORS issue when testing 3rd party APIs, e.g. Algolia
+            args: ['--disable-web-security'],
+        },
         //! storageState: './e2e/storageState.json', Skip for now until auth is merged into main
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
