@@ -1,3 +1,21 @@
+## [0.118.0](https://github.com/Open-Study-College/osc/compare/v0.117.0...v0.118.0) (2023-06-23)
+
+
+### ✨ Features
+
+* add user input ([fd45963](https://github.com/Open-Study-College/osc/commit/fd45963eeba4f3ffe5edba728a788d4852e532fb))
+* added createdBy to admin create ([5ad3c92](https://github.com/Open-Study-College/osc/commit/5ad3c92e8de9335824bbbae5e99a1cdf0fe08c3b))
+* added extra permissions to admin user create ([39a773f](https://github.com/Open-Study-College/osc/commit/39a773f8abe4f927181210c9329ad4b3b614fd11))
+* added extraPermissions to schema ([ef21562](https://github.com/Open-Study-College/osc/commit/ef21562f8d718756189547a0255e49d1cca7eaa5))
+* added query for get all permissions ([a42b72a](https://github.com/Open-Study-College/osc/commit/a42b72a755c9fc596036d93147a8bd272202de0b))
+* made organisation required and multi roles ([a6483f7](https://github.com/Open-Study-College/osc/commit/a6483f73d7af4cfb838bd74642aa3e842f743665))
+* moved user create through 1 endpoint ([8c8cd7e](https://github.com/Open-Study-College/osc/commit/8c8cd7e920466b0712831ae4c035c1850dcb2c1a))
+
+
+### 📦 General Housekeeping / Package Updates
+
+* fixed comment ([3a1752c](https://github.com/Open-Study-College/osc/commit/3a1752c503983178746d090e13a6cf496b23d4a4))
+
 ## [0.117.0](https://github.com/Open-Study-College/osc/compare/v0.116.0...v0.117.0) (2023-06-23)
 
 
@@ -68,27 +86,4 @@
 * update package-lock file ([b3ed493](https://github.com/Open-Study-College/osc/commit/b3ed4935c8dca0ebc9b229f562812b8daa497460))
 * update styling and add circular progress styling ([d515ba3](https://github.com/Open-Study-College/osc/commit/d515ba3b3481c4c3b3ac220efe4bf6e88abf50f6))
 * use named imports for useEffect & useState ([6f03841](https://github.com/Open-Study-College/osc/commit/6f03841ef48106d43c21c7fee1916316969b80be))
-
-## [0.113.0](https://github.com/Open-Study-College/osc/compare/v0.112.0...v0.113.0) (2023-06-21)
-
-
-### 🧪 Tests
-
-* **header:** fix broken header tests ([dcd5be2](https://github.com/Open-Study-College/osc/commit/dcd5be26bd4ad0aaf4259b7faa9e01d0d8656a76))
-
-
-### ✨ Features
-
-* **ecommerce:** add isSticky prop to header on ecommerce site ([5e08854](https://github.com/Open-Study-College/osc/commit/5e088549570576fc8b38e650ff9c5f1306b47cfd))
-* **header:** add is-scrolled class when window is scrolled past the offset value ([09233da](https://github.com/Open-Study-College/osc/commit/09233da0a65a302eeda2300f64f1bb1e2e715b1f))
-* **header:** add sticky modifier class and styles ([b377ad9](https://github.com/Open-Study-College/osc/commit/b377ad9007fd95883dcbf183ec67bc72ba8e7f87))
-* **header:** add useScroll hook to track scroll position ([50d612f](https://github.com/Open-Study-College/osc/commit/50d612f4c7395334c2c8938c2ec6c5cfa856aed6))
-* **header:** adds sticky modifier to header ([0b3e486](https://github.com/Open-Study-College/osc/commit/0b3e4862d70ae3e888770f901091f2c12ebca270))
-* **header:** restructure the header component for better styling when sticky is applied ([30b482c](https://github.com/Open-Study-College/osc/commit/30b482c8e277bf12e7f0b2c7792018e3268ccd1b))
-
-
-### ♻️ Refactors
-
-* **drawer:** remove offset reset to account for the sticky header on ecommerce ([22511cf](https://github.com/Open-Study-College/osc/commit/22511cf2b7c68d7da0fe5af5843eb0ac78ca5fc5))
-* **header:** add a header__inner element to allow background colour to span full width ([6890267](https://github.com/Open-Study-College/osc/commit/6890267be004776bf18d42b9641ff54564300dd8))
 
