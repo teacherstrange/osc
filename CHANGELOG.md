@@ -1,3 +1,10 @@
+## [0.121.0](https://github.com/Open-Study-College/osc/compare/v0.120.0...v0.121.0) (2023-06-23)
+
+
+### ✨ Features
+
+* added validation from order ([1a64347](https://github.com/Open-Study-College/osc/commit/1a64347138ceca0549696d8f5121564f4f10be3e))
+
 ## [0.120.0](https://github.com/Open-Study-College/osc/compare/v0.119.0...v0.120.0) (2023-06-23)
 
 
@@ -69,23 +76,4 @@
 
 * add e2e tests for search route ([f23066d](https://github.com/Open-Study-College/osc/commit/f23066d1aaebae45cb4bd26dd22f588ca55c490e))
 * disable web security to bypass CORS issues ([d39f42d](https://github.com/Open-Study-College/osc/commit/d39f42df18e58d631fc96dbc6e089e6038018a91))
-
-## [0.116.0](https://github.com/Open-Study-College/osc/compare/v0.115.0...v0.116.0) (2023-06-22)
-
-
-### ✨ Features
-
-* create InfiniteHits component and add Pagination component ([6d9c637](https://github.com/Open-Study-College/osc/commit/6d9c637bc9fe8271e674e2c466a290a8c5399581))
-
-
-### ♻️ Refactors
-
-* add [@layer](https://github.com/layer) wrapper ([819d4e3](https://github.com/Open-Study-College/osc/commit/819d4e370da457ef83c3a0f947549e503fcdf45c))
-* add new container sizes ([a368259](https://github.com/Open-Study-College/osc/commit/a368259c5d06b4086f6c2b52f497132ed5727230))
-* add padding and update container size ([a14021b](https://github.com/Open-Study-College/osc/commit/a14021bb2714b1092b71c966f020006ae1917715))
-* remove Hits component ([4ca3e8e](https://github.com/Open-Study-College/osc/commit/4ca3e8ef0ba468c3ecafb181d6d81fddd3043bc9))
-* udpate classes on OSCPagination and remove redundant styling ([8ca2192](https://github.com/Open-Study-College/osc/commit/8ca2192e68749b37530f31062f14a917a7bee687))
-* update package-lock file ([a2da884](https://github.com/Open-Study-College/osc/commit/a2da8843b5aeadeaf14abcaef1d083f20f579b33))
-* update pagination specific styling ([2da7503](https://github.com/Open-Study-College/osc/commit/2da75039eafdd0c70d299f29cbc91149bba9e692))
-* use InfiniteHits component in search route ([c5ed879](https://github.com/Open-Study-College/osc/commit/c5ed8794931c0207c347d9eb86a4a52127d0bcb8))
 
