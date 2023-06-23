@@ -1,6 +1,6 @@
 {
   "name": "osc",
-  "version": "0.119.0",
+  "version": "0.120.0",
   "private": true,
   "workspaces": [
     "packages/**"
