@@ -8,6 +8,8 @@ import {
     getRoleById,
     getRoleByTitle,
     sendForgotPasswordEmail,
+    getOrgById,
+    getAllPermissions,
 } from 'osc-api';
 import type {
     CreateUserFn,
@@ -27,6 +29,7 @@ import type {
     CompleteRegistrationFn,
     ResetRequestFn,
     PasswordResetFn,
+    GetAllPermissionsFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import { env } from '~/types/environment';
@@ -35,28 +38,6 @@ import * as token from '~/utils/token';
 
 const prisma = new PrismaClient();
 
-export const create: CreateUserFn = async (input) => {
-    // Check for existing user, all emails must be unique
-    const existingUser = await getUserByEmail(input.email);
-
-    // If user already exists, throw error
-    if (existingUser) {
-        return new Error('An account already exists for the specified email.');
-    }
-
-    // Hash password
-    const hashedPassword = await password.hash(input.password);
-
-    // Create user record
-    return await prisma.user.create({
-        data: {
-            firstName: input.firstName,
-            lastName: input.lastName,
-            email: input.email,
-            password: hashedPassword,
-        },
-    });
-};
 export const createSetup: CreateUserSetupFn = async (input) => {
     const existingUser = await getUserByEmail(input.email);
 
@@ -369,4 +350,67 @@ export const passwordReset: PasswordResetFn = async (input) => {
         },
     });
     return update;
+};
+
+export const create: CreateUserFn = async (input, userId) => {
+    // Check for existing user, all emails must be unique
+    const existingUser = await getUserByEmail(input.email);
+    // If user already exists, throw error
+    if (existingUser) {
+        return new Error('An account already exists for the specified email.');
+    }
+    // Validate the data - org and roles
+    // Check organisation exists
+    const org = getOrgById(input.orgId);
+    if (!org) {
+        return new Error('This organisation does not exist');
+    }
+
+    const hashedPassword = await password.hash(input.password);
+    // Create user record
+    const user = await prisma.user.create({
+        data: {
+            firstName: input.firstName,
+            lastName: input.lastName,
+            email: input.email,
+            password: hashedPassword,
+            createdBy: userId,
+        },
+    });
+    // Link User to organisation
+    await prisma.userOrganisation.create({
+        data: {
+            userId: user.id,
+            organisationId: input.orgId,
+        },
+    });
+    for (var i = 0; i < input.roles.length; i++) {
+        // Check role request
+        const role = getRoleById(input.roles[i]);
+        if (role != null) {
+            // Create User Role
+            await prisma.userRole.create({
+                data: {
+                    roleId: input.roles[i],
+                    userId: user.id,
+                    createdBy: userId,
+                },
+            });
+        }
+    }
+    // Loop through extra permissions
+    for (var j = 0; j < input.extraPermissions.length; j++) {
+        await prisma.extraPermission.create({
+            data: {
+                userId: user.id,
+                permissionId: input.extraPermissions[i],
+                createdBy: userId,
+            },
+        });
+    }
+    return user;
+};
+
+export const getAllUserPermissions: GetAllPermissionsFn = async () => {
+    return await getAllPermissions();
 };

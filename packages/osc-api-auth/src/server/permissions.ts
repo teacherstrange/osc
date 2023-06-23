@@ -12,6 +12,7 @@ export const shieldPermissions = shield({
     Query: {
         users: and(isAuthenticated, canListOthers),
         user: and(isAuthenticated, or(and(canReadOwnAccount, isReadingOwnAccount), canViewOther)),
+        permissions: and(isAuthenticated, canCreateUser),
     },
     Mutation: {
         createUser: and(isAuthenticated, canCreateUser),

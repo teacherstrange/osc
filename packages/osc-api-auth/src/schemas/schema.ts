@@ -49,6 +49,11 @@ export const typeDefs = gql`
         write: [String]
     }
 
+    type Permission {
+        id: Int!
+        title: String!
+    }
+
     type CrmToken {
         id: Int!
         crmId: Int!
@@ -100,15 +105,7 @@ export const typeDefs = gql`
             orderDir: String
         ): [User]
         user(id: Int): User
-    }
-
-    input createUserInput {
-        firstName: String! @constraint(maxLength: 128)
-        lastName: String! @constraint(maxLength: 128)
-        email: String! @constraint(format: "email", maxLength: 255)
-        ### Minimum 12 characters for password - length creates greater security than extended charsets or set patterns
-        ### Requiring a set pattern makes it considerably easier to brute force as it narrows the possible range.
-        password: String! @constraint(minLength: 12)
+        permissions(limit: Int): [Permission]
     }
 
     input createUserSetupInput {
@@ -132,6 +129,19 @@ export const typeDefs = gql`
     input passwordResetInput {
         magicKeyToken: String!
         password: String!
+    }
+
+    input createUserInput {
+        firstName: String! @constraint(maxLength: 128)
+        lastName: String! @constraint(maxLength: 128)
+        email: String! @constraint(format: "email", maxLength: 255)
+        orgId: Int!
+        roles: [Int]
+        createdBy: Int!
+        extraPermissions: [Int]
+        ### Minimum 12 characters for password - length creates greater security than extended charsets or set patterns
+        ### Requiring a set pattern makes it considerably easier to brute force as it narrows the possible range.
+        password: String! @constraint(minLength: 12)
     }
 
     type Mutation {

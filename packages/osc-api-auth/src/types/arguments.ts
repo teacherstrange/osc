@@ -7,15 +7,15 @@ export type getUsersArgs = {
     readonly pagination: 'offset' | 'cursor';
 };
 
-export type getUserArgs = {
-    readonly id?: number;
+export type getPermissionsArgs = {
+    readonly orderBy: 'id' | 'title';
+    readonly orderDir: 'asc' | 'desc';
+    readonly limit: number;
+    readonly pagination: 'offset' | 'cursor';
 };
 
-export type createUserInput = {
-    readonly firstName: string;
-    readonly lastName: string;
-    readonly email: string;
-    readonly password: string;
+export type getUserArgs = {
+    readonly id?: number;
 };
 
 export type completeRegistration = {
@@ -26,6 +26,16 @@ export type completeRegistration = {
 
 export type completeRegistrationArgs = {
     readonly input: completeRegistration;
+};
+
+export type createUserInput = {
+    readonly email: string;
+    readonly orgId: number;
+    readonly roles: number[];
+    readonly firstName: string;
+    readonly lastName: string;
+    readonly password: string;
+    readonly extraPermissions: number[];
 };
 
 export type createUserArgs = {

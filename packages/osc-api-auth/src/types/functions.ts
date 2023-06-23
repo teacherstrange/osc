@@ -1,4 +1,4 @@
-import type { User, UserAvatar, UserRole } from '@prisma/client';
+import type { User, UserAvatar, UserRole, Permission } from '@prisma/client';
 import type { CrmTokensAPI, LmsTokensAPI, UserRolesAPI } from '.';
 import type {
     createUserInput,
@@ -7,12 +7,14 @@ import type {
     createUserSetupInput,
     completeRegistration,
     passwordResetInput,
+    getPermissionsArgs,
 } from './arguments';
 import type { PermissionsProps } from './interfaces';
 
-export type CreateUserFn = (input: createUserInput) => Promise<User | Error>;
+export type CreateUserFn = (input: createUserInput, userId: number) => Promise<User | Error>;
 export type GetUserFn = (userId: number) => Promise<User | null>;
 export type GetMultipleUsersFn = (args: getUsersArgs) => Promise<User[]>;
+export type GetAllPermissionsFn = (args: getPermissionsArgs) => Promise<Permission[] | null>;
 export type CreateUserSetupFn = (input: createUserSetupInput) => Promise<User | Error>;
 export type assignRoleFn = (userId: number, roleId: number) => Promise<UserRole | Error>;
 export type CompleteRegistrationFn = (input: completeRegistration) => Promise<User | Error>;

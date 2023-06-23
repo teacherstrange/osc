@@ -10,6 +10,7 @@ import type {
     completeRegistrationArgs,
     ResetRequestArgs,
     completeResetPasswordArgs,
+    getPermissionsArgs,
 } from '~/types/arguments';
 import type { AuthContext } from '~/types/interfaces';
 import * as account from '~/utils/account';
@@ -22,6 +23,9 @@ export const resolvers = {
         user: async (_: undefined, args: getUserArgs, { user }: AuthContext) => {
             return await account.get(args.id ?? user!.id);
         },
+        permissions: async (_: undefined, args: getPermissionsArgs) => {
+            return await account.getAllUserPermissions(args);
+        },
     },
     User: {
         profile: async ({ id }: User) => {
@@ -29,8 +33,8 @@ export const resolvers = {
         },
     },
     Mutation: {
-        createUser: async (_: undefined, { input }: createUserArgs) => {
-            return account.create(input);
+        createUser: async (_: undefined, { input }: createUserArgs, { user }: AuthContext) => {
+            return account.create(input, user!.id);
         },
         login: async (_: undefined, { input }: loginArgs) => {
             return account.login(input);
