@@ -85,5 +85,11 @@ export const resolvers = {
         ) => {
             return social.createUserSocial(input, user!.id);
         },
+        validateFromorder: async (_: undefined, { magicKeyToken }: magicKeyArgs) => {
+            return account.validateFromOrder(magicKeyToken);
+        },
+        updatePasswordFromOrder: async (_: undefined, { input }: completeResetPasswordArgs) => {
+            return account.UpdatePasswordFromOrder(input);
+        },
     },
 };

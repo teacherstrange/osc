@@ -35,6 +35,8 @@ import type {
     CreateTutorCompleteFn,
     ValidateTutorFn,
     MarkAsIVFn,
+    UpdatePasswordFn,
+    UpdatePasswordFromOrderFn,
 } from '~/types/functions';
 import type { PermissionsProps } from '~/types/interfaces';
 import { env } from '~/types/environment';
@@ -139,16 +141,8 @@ export const completeRegistration: CompleteRegistrationFn = async (input) => {
         return new Error('No matching active user found');
     }
 
-    const hashedPassword = await password.hash(input.password);
-
-    return await prisma.user.update({
-        where: {
-            id: user.id,
-        },
-        data: {
-            password: hashedPassword,
-        },
-    });
+    const userUpdate = UpdatePassword({ userId: user.id, password: input.password });
+    return userUpdate;
 };
 
 export const login: LoginFn = async (input) => {
@@ -344,12 +338,27 @@ export const passwordReset: PasswordResetFn = async (input) => {
     if (!tokenCheck) {
         return new Error('No valid login link');
     }
-    // Hash password
-    const hashedPassword = await password.hash(input.password);
 
-    //   save new user password
-    const update = prisma.user.update({
-        where: { id: tokenCheck },
+    // Update password
+    const update = await UpdatePassword({ userId: tokenCheck, password: input.password });
+    return update;
+};
+
+export const validateFromOrder: VerifyLinkFn = async (magicKeyToken) => {
+    // Verify the incoming token
+    const tokenCheck = await token.verifyToken(magicKeyToken);
+    if (!tokenCheck) {
+        return new Error('No valid link');
+    }
+    // Send back user details - Will need to add more details at a later date
+    const user = await get(tokenCheck);
+    return user;
+};
+
+export const UpdatePassword: UpdatePasswordFn = async (input) => {
+    const hashedPassword = await password.hash(input.password);
+    const update = await prisma.user.update({
+        where: { id: input.userId },
         data: {
             password: hashedPassword,
         },
@@ -553,4 +562,15 @@ export const validateTutor: ValidateTutorFn = async (magicKey) => {
             course: true,
         },
     });
+};
+
+export const UpdatePasswordFromOrder: UpdatePasswordFromOrderFn = async (input) => {
+    // Verify incoming token
+    const tokenCheck = await token.verifyToken(input.magicKeyToken);
+    if (!tokenCheck) {
+        return new Error('No valid link');
+    }
+    // Update password
+    const user = await UpdatePassword({ userId: tokenCheck, password: input.password });
+    return user;
 };

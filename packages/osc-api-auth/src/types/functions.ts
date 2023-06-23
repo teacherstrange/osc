@@ -11,6 +11,7 @@ import type {
     createTutorInput,
     completeTutorCreate,
     createUserSocialInput,
+    passwordUpdateInput,
 } from './arguments';
 import type { PermissionsProps } from './interfaces';
 
@@ -41,6 +42,8 @@ export type VerifyFn = (magicKeyToken: string) => Promise<number | false>;
 export type VerifyLinkFn = (magicKeyToken: string) => Promise<User | Error | null>;
 export type ResetRequestFn = (email: string) => Promise<Boolean | Error>;
 export type PasswordResetFn = (input: passwordResetInput) => Promise<User | Error>;
+export type UpdatePasswordFn = (input: passwordUpdateInput) => Promise<User | Error>;
+export type UpdatePasswordFromOrderFn = (input: passwordResetInput) => Promise<User | Error>;
 
 export type UserProfileFn = (userId: number) => Promise<{
     avatar: UserAvatar | null;

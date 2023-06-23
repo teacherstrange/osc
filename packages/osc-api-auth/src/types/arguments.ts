@@ -75,6 +75,11 @@ export type passwordResetInput = {
     readonly password: string;
 };
 
+export type passwordUpdateInput = {
+    readonly userId: number;
+    readonly password: string;
+};
+
 export type ResetRequestArgs = {
     readonly email: string;
 };
